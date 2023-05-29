@@ -1,0 +1,159 @@
+# Code Graph Analysis Pipeline - Commands
+
+## Manual Setup
+
+The manual setup is only documented for completeness. It isn't needed since the analysis also covers download, installation and configuration of all needed tools.
+
+If any of the script are not allowed to be executed use `chmod +x ./scripts/` followed by the script file name to grant execution.
+
+### Setup Neo4j Graph Database
+
+Use [setupNeo4j.sh](./scripts/setupNeo4j.sh) to download [Neo4j](https://neo4j.com/download-center) and install the plugins [APOC](https://neo4j.com/labs/apoc/4.4) and [Graph Data Science](https://neo4j.com/product/graph-data-science).
+This script requires the environment variable NEO4J_INITIAL_PASSWORD to be set. It sets the initial password with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
+
+### Start Neo4j Graph Database
+
+Use [startNeo4j.sh](./scripts/startNeo4j.sh) to start the locally installed [Neo4j](https://neo4j.com/download-center) Graph database.
+It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
+
+### Setup jQAssistant Java Code Analyzer
+
+Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.org/get-started).
+
+### Download Maven Artifacts to analyze
+
+Use [downloadMavenArtifact.sh](./scripts/downloadMavenArtifact.sh) with the following mandatory options
+to download a Maven artifact into the artifacts directory:
+
+- `-g <maven group id>`
+- `-a <maven artifact name>`
+- `-v <maven artifact version>`
+- `-t <maven artifact type (optional, defaults to jar)>`
+
+### Reset the database and scan the java artifacts
+
+Use [resetAndScan.sh](./scripts/resetAndScan.sh) to scan the local `artifacts` directory with the previously downloaded Java artifacts and write the data into the local Neo4J Graph database using jQAssistant. It also uses some jQAssistant "concepts" to
+enhance the data further with relationships between artifacts and packages.
+
+Be aware that this script deletes all previous relationships and nodes in the local Neo4j Graph database.
+
+## Database Queries
+
+### Cypher Shell
+
+With `cypher-shell` CLI provided by Neo4j a query based on a file can simply be made with the following command.
+Be sure to replace `path/to/local/neo4j` and `password` with your settings.
+
+```shell
+cat ./cypher/Get_Graph_Data_Science_Library_Version.cypher | path/to/local/neo4j/bin/cypher-shell -u neo4j -p password --format plain
+```
+
+### HTTP API
+
+Use [executeQuery.sh](./scripts/executeQuery.sh) to execute a Cypher query from the file given as an argument.
+It uses `curl` and `jq` to access the HTTP API of Neo4j.
+Here is an example:
+
+```shell
+./scripts/executeQuery.sh ./cypher/Get_Graph_Data_Science_Library_Version.cypher
+```
+
+## Stop Neo4j
+
+Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Graph Database. It does nothing if the database is already stopped. It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
+
+## Jupyter Notebook
+
+### Commands
+
+- Setup environment
+
+  ```shell
+  conda create --name codegraph jupyter numpy matplotlib nbconvert nbconvert-webpdf
+  conda activate codegraph
+  ```
+
+  or by using the environment file [codegraph-environment.yml](./jupyter/codegraph-environment.yml):
+
+  ```shell
+  conda env create --file ./jupyter/codegraph-environment.yml
+  conda activate codegraph
+  ```
+
+- Export full environment.yml
+
+  ```shell
+  conda env export --name codegraph > full-codegraph-environment.yml
+  ```
+
+- Export only explicit environment.yml
+
+  ```shell
+  conda env export --from-history --name codegraph | grep -v "^prefix: " > codegraph-environment.yml
+  ```
+
+- Install pandoc used by nbconvert for LaTeX support (Mac)
+
+  ```shell
+  brew install pandoc mactex
+  ```
+
+- Start Jupyter Notebook
+
+  ```shell
+  jupyter notebook
+  ```
+
+- Create new Notebook with executed cells
+
+  ```shell
+  jupyter nbconvert --to notebook --execute ./jupyter/first-neo4j-tryout.ipynb
+  ```
+
+- Convert Notebook with executed cells to PDF
+
+  ```shell
+  jupyter nbconvert --to pdf ./jupyter/first-neo4j-tryout.nbconvert.ipynb
+  ```
+
+- Shell script to execute and convert a Jupyter notebook file
+  
+  Use [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) like this:
+
+  ```shell
+  ./scripts/executeJupyterNotebook.sh ./jupyter/first-neo4j-tryout.ipynb
+  ```
+
+## References
+
+- [Managing environments with Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+- [Jupyter Notebook - Using as a command line tool](https://nbconvert.readthedocs.io/en/latest/usage.html)
+- [Jupyter Notebook - Installing TeX for PDF conversion](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex)
+- [Integrate Neo4j with Jupyter notebook](https://medium.com/@technologydata25/connect-neo4j-to-jupyter-notebook-c178f716d6d5)
+- [Hello World](https://nicolewhite.github.io/neo4j-jupyter/hello-world.html)
+- [py2neo](https://pypi.org/project/py2neo/)
+- [The Py2neo Handbook](https://py2neo.org/2021.1/)
+- [How to Use Conda With Github Actions](https://autobencoder.com/2020-08-24-conda-actions)
+- [Older database download link (neo4j community)](https://community.neo4j.com/t/older-database-download-link/43334/9)
+
+## Other Commands
+
+### Information about a process that listens to a specific local port
+
+```shell
+ps -p $( lsof -t -i:7474 -sTCP:LISTEN )
+```
+
+### Kill process that listens to a specific local port
+
+```shell
+kill -9 $( lsof -t -i:7474 -sTCP:LISTEN )
+```
+
+### Memory Estimation
+
+Reference: [Neo4j memory estimation](https://neo4j.com/docs/operations-manual/4.4/performance/memory-configuration)
+
+```shell
+NEO4J_HOME=tools/neo4j-community-4.4.20 tools/neo4j-community-4.4.20/bin/neo4j-admin memrec
+```

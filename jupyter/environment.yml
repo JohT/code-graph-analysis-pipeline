@@ -1,0 +1,12 @@
+name: codegraph
+channels:
+  - conda-forge
+dependencies:
+  - jupyter
+  - matplotlib
+  - monotonic
+  - nbconvert
+  - nbconvert-webpdf
+  - numpy
+  - pandas
+  - py2neo
