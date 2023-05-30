@@ -137,10 +137,10 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>0</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
-      <td>[QueryMessage-&gt;ResponseType, GenericStreamingQ...</td>
+      <td>[StreamingQueryMessage-&gt;ResponseType, GenericQ...</td>
       <td>[ConvertingResponseMessage-&gt;QueryResponseMessage]</td>
     </tr>
     <tr>
@@ -150,7 +150,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.857143</td>
       <td>13</td>
       <td>1</td>
-      <td>[SubscribingEventProcessor$Builder-&gt;SpanFactor...</td>
+      <td>[SimpleEventBus$Builder-&gt;SpanFactory, Abstract...</td>
       <td>[NestingSpanFactory-&gt;EventMessage]</td>
     </tr>
     <tr>
@@ -160,8 +160,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
-      <td>[DomainEventMessage-&gt;Message, SubscribingEvent...</td>
-      <td>[Headers-&gt;DomainEventMessage, StreamableMessag...</td>
+      <td>[TimestampParameterResolverFactory$TimestampPa...</td>
+      <td>[Headers-&gt;DomainEventMessage, Headers-&gt;EventMe...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -170,48 +170,48 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.840000</td>
       <td>23</td>
       <td>2</td>
-      <td>[TrackingTokenParameterResolverFactory-&gt;Parame...</td>
+      <td>[TimestampParameterResolverFactory$TimestampPa...</td>
       <td>[SourceIdParameterResolverFactory$SourceIdPara...</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>org.axonframework.queryhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>0.800000</td>
+      <td>9</td>
+      <td>1</td>
+      <td>[SimpleQueryUpdateEmitter-&gt;Span, SimpleQueryUp...</td>
+      <td>[SpanUtils-&gt;QueryMessage]</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>org.axonframework.eventsourcing</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
       <td>0.777778</td>
       <td>16</td>
       <td>2</td>
-      <td>[EventStreamUtils-&gt;DomainEventStream, EventSou...</td>
+      <td>[AbstractSnapshotter$Builder-&gt;EventStore, Aggr...</td>
       <td>[DomainEventStream-&gt;EventStreamUtils, Abstract...</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>org.axonframework.deadline</td>
       <td>org.axonframework.tracing</td>
       <td>0.750000</td>
       <td>7</td>
       <td>1</td>
-      <td>[SimpleDeadlineManager$Builder-&gt;SpanFactory, S...</td>
+      <td>[SimpleDeadlineManager$DeadlineTask-&gt;Span, Sim...</td>
       <td>[SpanUtils-&gt;DeadlineMessage]</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>org.axonframework.commandhandling.callbacks</td>
       <td>org.axonframework.commandhandling</td>
       <td>0.733333</td>
       <td>13</td>
       <td>2</td>
-      <td>[FailureLoggingCallback-&gt;CommandMessage, Failu...</td>
+      <td>[LoggingCallback-&gt;CommandResultMessage, Loggin...</td>
       <td>[SimpleCommandBus$Builder-&gt;LoggingCallback, Si...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>org.axonframework.queryhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>0.714286</td>
-      <td>6</td>
-      <td>1</td>
-      <td>[SimpleQueryBus$Builder-&gt;NoOpSpanFactory, Simp...</td>
-      <td>[SpanUtils-&gt;QueryMessage]</td>
     </tr>
     <tr>
       <th>8</th>
@@ -220,7 +220,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.666667</td>
       <td>5</td>
       <td>1</td>
-      <td>[AsynchronousCommandBus$Builder-&gt;SpanFactory, ...</td>
+      <td>[SimpleCommandBus-&gt;SpanFactory, SimpleCommandB...</td>
       <td>[SpanUtils-&gt;CommandMessage]</td>
     </tr>
     <tr>
@@ -230,8 +230,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.647059</td>
       <td>14</td>
       <td>3</td>
-      <td>[TrackedDomainEventData-&gt;SerializedObject, Abs...</td>
-      <td>[AbstractXStreamSerializer-&gt;GenericEventMessag...</td>
+      <td>[AbstractDomainEventEntry-&gt;Serializer, EventUt...</td>
+      <td>[GapAwareTrackingTokenConverter-&gt;GapAwareTrack...</td>
     </tr>
     <tr>
       <th>10</th>
@@ -240,8 +240,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.647059</td>
       <td>14</td>
       <td>3</td>
-      <td>[CurrentUnitOfWork-&gt;MetaData, AbstractUnitOfWo...</td>
-      <td>[GenericMessage-&gt;CurrentUnitOfWork, DefaultInt...</td>
+      <td>[ExecutionResult-&gt;ResultMessage, CurrentUnitOf...</td>
+      <td>[GenericMessage-&gt;CurrentUnitOfWork, MessageHan...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -250,8 +250,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.538462</td>
       <td>10</td>
       <td>3</td>
-      <td>[PropertySequencingPolicy-&gt;EventMessage, Async...</td>
-      <td>[SimpleEventHandlerInvoker$Builder-&gt;Sequencing...</td>
+      <td>[FullConcurrencyPolicy-&gt;EventMessage, Property...</td>
+      <td>[SimpleEventHandlerInvoker-&gt;SequencingPolicy, ...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -260,48 +260,48 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.454545</td>
       <td>8</td>
       <td>3</td>
-      <td>[ReplayAwareMessageHandlerWrapper-&gt;AllowReplay...</td>
-      <td>[ResetHandler-&gt;ResetContext, AnnotationEventHa...</td>
+      <td>[ReplayParameterResolverFactory$ReplayParamete...</td>
+      <td>[AnnotationEventHandlerAdapter-&gt;GenericResetCo...</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>org.axonframework.queryhandling.registration</td>
-      <td>org.axonframework.queryhandling</td>
-      <td>0.428571</td>
-      <td>5</td>
-      <td>2</td>
-      <td>[DuplicateQueryHandlerResolution-&gt;QuerySubscri...</td>
-      <td>[SimpleQueryBus$Builder-&gt;DuplicateQueryHandler...</td>
-    </tr>
-    <tr>
-      <th>14</th>
       <td>org.axonframework.serialization.upcasting.event</td>
       <td>org.axonframework.eventhandling</td>
       <td>0.333333</td>
       <td>6</td>
       <td>3</td>
       <td>[UpcastedEventRepresentation-&gt;TrackingToken, I...</td>
-      <td>[EventUtils-&gt;IntermediateEventRepresentation, ...</td>
+      <td>[EventUtils-&gt;InitialEventRepresentation, Event...</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
       <td>0.317073</td>
       <td>27</td>
       <td>14</td>
-      <td>[JdbcEventStorageEngine$Builder-&gt;ReadEventData...</td>
-      <td>[DeleteSnapshotsStatementBuilder-&gt;EventSchema,...</td>
+      <td>[JdbcEventStorageEngine-&gt;DeleteSnapshotsStatem...</td>
+      <td>[CreateTailTokenStatementBuilder-&gt;EventSchema,...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>org.axonframework.queryhandling.registration</td>
+      <td>org.axonframework.queryhandling</td>
+      <td>0.250000</td>
+      <td>5</td>
+      <td>3</td>
+      <td>[DuplicateQueryHandlerSubscriptionException-&gt;Q...</td>
+      <td>[SimpleQueryBus$Builder-&gt;DuplicateQueryHandler...</td>
     </tr>
     <tr>
       <th>16</th>
       <td>org.axonframework.messaging</td>
       <td>org.axonframework.serialization</td>
-      <td>0.300000</td>
+      <td>0.238095</td>
       <td>13</td>
-      <td>7</td>
-      <td>[Message-&gt;SerializedObject, Message-&gt;Serialize...</td>
-      <td>[SerializedMessage-&gt;AbstractMessage, Serialize...</td>
+      <td>8</td>
+      <td>[GenericMessage-&gt;SerializedObjectHolder, Gener...</td>
+      <td>[SerializedMetaData-&gt;MetaData, SerializedMessa...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -310,7 +310,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.230769</td>
       <td>8</td>
       <td>5</td>
-      <td>[TrackingEventProcessor$Instruction-&gt;UnableToC...</td>
+      <td>[TrackingEventProcessor$SplitSegmentInstructio...</td>
       <td>[TokenStore-&gt;Segment, GenericTokenEntry-&gt;Track...</td>
     </tr>
     <tr>
@@ -320,8 +320,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.200000</td>
       <td>3</td>
       <td>2</td>
-      <td>[ResultParameterResolverFactory-&gt;ResultHandler...</td>
-      <td>[MessageHandlerInterceptor-&gt;MessageHandler, Re...</td>
+      <td>[MessageHandlerInterceptorDefinition-&gt;ResultHa...</td>
+      <td>[ResultHandler-&gt;HasHandlerAttributes, MessageH...</td>
     </tr>
     <tr>
       <th>19</th>
@@ -330,8 +330,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.172414</td>
       <td>17</td>
       <td>12</td>
-      <td>[AggregateMemberAnnotatedChildEntityMapDefinit...</td>
-      <td>[AbstractRepository$Builder-&gt;AnnotatedAggregat...</td>
+      <td>[AnnotatedAggregate-&gt;AggregateEntityNotFoundEx...</td>
+      <td>[GenericJpaRepository-&gt;AnnotatedAggregate, Loc...</td>
     </tr>
     <tr>
       <th>20</th>
@@ -350,8 +350,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.076923</td>
       <td>7</td>
       <td>6</td>
-      <td>[OrCommandMessageFilter-&gt;CommandMessageFilter,...</td>
-      <td>[CommandMessageFilter-&gt;OrCommandMessageFilter,...</td>
+      <td>[DenyAll-&gt;CommandMessageFilter, AcceptAll-&gt;Com...</td>
+      <td>[DistributedCommandBus-&gt;DenyAll, DistributedCo...</td>
     </tr>
   </tbody>
 </table>
@@ -397,26 +397,26 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>QueryResponseMessage&lt;-ConvertingResponseMessage</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>QueryMessage-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>StreamingQueryMessage-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>2</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>GenericStreamingQueryMessage-&gt;PublisherRespons...</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>GenericQueryMessage-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
@@ -424,120 +424,129 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>GenericStreamingQueryMessage-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>4</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;MultipleInstancesRes...</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>GenericStreamingQueryMessage-&gt;PublisherRespons...</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>5</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;OptionalResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>SimpleQueryUpdateEmitter-&gt;PublisherResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>6</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>SimpleQueryUpdateEmitter-&gt;MultipleInstancesRes...</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>7</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;PublisherResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>SimpleQueryUpdateEmitter-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>8</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>DefaultQueryGateway-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>SimpleQueryUpdateEmitter-&gt;OptionalResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>9</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>QuerySubscription-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>QueryGateway-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>10</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>GenericSubscriptionQueryMessage-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>QueryGateway-&gt;ResponseTypes</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>11</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>QueryGateway-&gt;ResponseTypes</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>DefaultQueryGateway-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>12</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>QueryGateway-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>SimpleQueryBus-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>13</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>GenericQueryMessage-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>SubscriptionQueryMessage-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>14</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SubscriptionQueryMessage-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>GenericSubscriptionQueryMessage-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>15</th>
       <td>org.axonframework.queryhandling</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>StreamingQueryMessage-&gt;ResponseType</td>
-      <td>0.875000</td>
-      <td>15</td>
+      <td>QuerySubscription-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
       <td>1</td>
     </tr>
     <tr>
       <th>16</th>
+      <td>org.axonframework.queryhandling</td>
+      <td>org.axonframework.messaging.responsetypes</td>
+      <td>QueryMessage-&gt;ResponseType</td>
+      <td>0.882353</td>
+      <td>16</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.tracing</td>
       <td>EventMessage&lt;-NestingSpanFactory</td>
@@ -546,88 +555,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>1</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>SubscribingEventProcessor$Builder-&gt;SpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
       <th>18</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventProcessor-&gt;Span</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventProcessor-&gt;SpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventBus$Builder-&gt;SpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventBus$Builder-&gt;NoOpSpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventBus-&gt;Span</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventBus-&gt;SpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>TrackingEventProcessor-&gt;Span</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>TrackingEventProcessor-&gt;SpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>26</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.tracing</td>
       <td>SimpleEventBus$Builder-&gt;SpanFactory</td>
@@ -636,25 +564,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>1</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>TrackingEventProcessor$Builder-&gt;SpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.tracing</td>
-      <td>AbstractEventProcessor$Builder-&gt;NoOpSpanFactory</td>
-      <td>0.857143</td>
-      <td>13</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>29</th>
+      <th>19</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.tracing</td>
       <td>AbstractEventProcessor$Builder-&gt;SpanFactory</td>
@@ -663,19 +573,109 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>1</td>
     </tr>
     <tr>
+      <th>20</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventProcessor$Builder-&gt;NoOpSpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>TrackingEventProcessor-&gt;Span</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>TrackingEventProcessor-&gt;SpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>SubscribingEventProcessor$Builder-&gt;SpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventBus$Builder-&gt;NoOpSpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventBus$Builder-&gt;SpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventBus-&gt;SpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventBus-&gt;Span</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>TrackingEventProcessor$Builder-&gt;SpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>org.axonframework.eventhandling</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventProcessor-&gt;SpanFactory</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
+    </tr>
+    <tr>
       <th>30</th>
       <td>org.axonframework.eventhandling</td>
-      <td>org.axonframework.messaging</td>
-      <td>DomainEventMessage&lt;-Headers</td>
-      <td>0.853659</td>
-      <td>38</td>
-      <td>3</td>
+      <td>org.axonframework.tracing</td>
+      <td>AbstractEventProcessor-&gt;Span</td>
+      <td>0.857143</td>
+      <td>13</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>31</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>TrackingToken&lt;-StreamableMessageSource</td>
+      <td>DomainEventMessage&lt;-Headers</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -693,7 +693,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>33</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>DomainEventMessage-&gt;Message</td>
+      <td>TrackingToken&lt;-StreamableMessageSource</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -702,7 +702,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>34</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>SubscribingEventProcessor$Builder-&gt;Subscribabl...</td>
+      <td>TimestampParameterResolverFactory$TimestampPar...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -711,7 +711,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>35</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>SubscribingEventProcessor-&gt;SubscribableMessage...</td>
+      <td>DomainEventMessage-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -720,7 +720,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>36</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>AbstractEventProcessor-&gt;MessageHandlerInterceptor</td>
+      <td>TrackingTokenParameterResolverFactory$Tracking...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -729,7 +729,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>37</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>AbstractEventProcessor-&gt;DefaultInterceptorChain</td>
+      <td>GenericTrackedDomainEventMessage-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -738,7 +738,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>38</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>AbstractEventProcessor-&gt;ResultMessage</td>
+      <td>MultiStreamableMessageSource$IdentifiedStreama...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -747,7 +747,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>39</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>GenericEventMessage-&gt;GenericMessage</td>
+      <td>EventMessage-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -756,7 +756,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>40</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>GenericEventMessage-&gt;MetaData</td>
+      <td>MultiStreamableMessageSource-&gt;StreamableMessag...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -765,7 +765,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>41</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>GenericEventMessage-&gt;Message</td>
+      <td>AnnotationEventHandlerAdapter-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -774,7 +774,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>42</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>GenericEventMessage-&gt;MessageDecorator</td>
+      <td>GenericTrackedEventMessage-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -783,7 +783,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>43</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>EventMessageHandler-&gt;MessageHandler</td>
+      <td>SequenceNumberParameterResolverFactory$Sequenc...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -792,7 +792,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>44</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>EventMessageHandler-&gt;Message</td>
+      <td>TrackingEventProcessor-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -801,7 +801,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>45</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>EventProcessor-&gt;MessageHandlerInterceptor</td>
+      <td>TrackingEventProcessor-&gt;StreamableMessageSource</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -810,7 +810,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>46</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>EventProcessor-&gt;MessageHandlerInterceptorSupport</td>
+      <td>TrackingEventProcessor-&gt;InterceptorChain</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -819,7 +819,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>47</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>GenericTrackedDomainEventMessage-&gt;Message</td>
+      <td>EventBus-&gt;MessageDispatchInterceptorSupport</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -828,7 +828,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>48</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>ConcludesBatchParameterResolverFactory-&gt;Message</td>
+      <td>EventBus-&gt;SubscribableMessageSource</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -837,7 +837,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>49</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>SequenceNumberParameterResolverFactory$Sequenc...</td>
+      <td>TrackingEventProcessorConfiguration-&gt;Streamabl...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -846,7 +846,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>50</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>TrackingTokenParameterResolverFactory$Tracking...</td>
+      <td>SubscribingEventProcessor$Builder-&gt;Subscribabl...</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -855,7 +855,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>51</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>GenericTrackedEventMessage-&gt;Message</td>
+      <td>ReplayToken-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -864,7 +864,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>52</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>AbstractEventBus-&gt;MessageDispatchInterceptor</td>
+      <td>EventProcessor-&gt;MessageHandlerInterceptor</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -873,7 +873,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>53</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>TrackingEventProcessor-&gt;StreamableMessageSource</td>
+      <td>EventProcessor-&gt;MessageHandlerInterceptorSupport</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -882,7 +882,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>54</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>TrackingEventProcessor-&gt;Message</td>
+      <td>AbstractEventBus-&gt;MessageDispatchInterceptor</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -891,7 +891,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>55</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>TrackingEventProcessor-&gt;InterceptorChain</td>
+      <td>EventMessageHandler-&gt;MessageHandler</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -900,7 +900,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>56</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>StreamingEventProcessor-&gt;StreamableMessageSource</td>
+      <td>EventMessageHandler-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -909,7 +909,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>57</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>EventBus-&gt;SubscribableMessageSource</td>
+      <td>GenericDomainEventMessage-&gt;GenericMessage</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -918,7 +918,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>58</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>EventBus-&gt;MessageDispatchInterceptorSupport</td>
+      <td>GenericDomainEventMessage-&gt;Message</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -927,7 +927,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <th>59</th>
       <td>org.axonframework.eventhandling</td>
       <td>org.axonframework.messaging</td>
-      <td>TrackingEventProcessorConfiguration-&gt;Streamabl...</td>
+      <td>GenericDomainEventMessage-&gt;MetaData</td>
       <td>0.853659</td>
       <td>38</td>
       <td>3</td>
@@ -1024,6 +1024,14 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>4</th>
+      <td>org.axonframework.messaging.Message</td>
+      <td>13</td>
+      <td>[getPayload]</td>
+      <td>1</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>org.axonframework.eventhandling.DomainEventMes...</td>
       <td>13</td>
       <td>[getSequenceNumber, getType, getAggregateIdent...</td>
@@ -1031,7 +1039,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>8</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>org.axonframework.eventhandling.EventMessage</td>
       <td>13</td>
       <td>[getTimestamp, getIdentifier]</td>
@@ -1039,15 +1047,15 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>8</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>org.axonframework.messaging.Message</td>
-      <td>13</td>
-      <td>[getPayload]</td>
-      <td>1</td>
+      <th>7</th>
+      <td>org.axonframework.serialization.Serializer</td>
+      <td>6</td>
+      <td>[deserialize, serialize]</td>
+      <td>2</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>org.axonframework.messaging.unitofwork.UnitOfWork</td>
       <td>33</td>
       <td>[getMessage]</td>
@@ -1055,26 +1063,18 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>7</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>org.axonframework.messaging.ResultMessage</td>
       <td>16</td>
-      <td>[isExceptional, exceptionResult]</td>
+      <td>[exceptionResult, isExceptional]</td>
       <td>2</td>
       <td>7</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>org.axonframework.messaging.Message</td>
       <td>13</td>
       <td>[getMetaData]</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>org.axonframework.messaging.annotation.Message...</td>
-      <td>13</td>
-      <td>[annotationAttributes]</td>
       <td>1</td>
       <td>6</td>
     </tr>
@@ -1088,6 +1088,14 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>12</th>
+      <td>org.axonframework.messaging.annotation.Message...</td>
+      <td>13</td>
+      <td>[annotationAttributes]</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>13</th>
       <td>org.axonframework.deadline.DeadlineMessage</td>
       <td>12</td>
       <td>[getDeadlineName]</td>
@@ -1095,15 +1103,31 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>6</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>org.axonframework.tracing.SpanFactory</td>
-      <td>9</td>
-      <td>[createInternalSpan]</td>
+      <th>14</th>
+      <td>org.axonframework.serialization.Serializer</td>
+      <td>6</td>
+      <td>[serialize]</td>
       <td>1</td>
       <td>6</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>15</th>
+      <td>org.axonframework.messaging.MessageDispatchInt...</td>
+      <td>4</td>
+      <td>[handle]</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.tracing.SpanFactory</td>
+      <td>18</td>
+      <td>[createInternalSpan]</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>17</th>
       <td>org.axonframework.eventhandling.DomainEventMes...</td>
       <td>13</td>
       <td>[getSequenceNumber, getAggregateIdentifier]</td>
@@ -1111,15 +1135,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>5</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>org.axonframework.messaging.Message</td>
-      <td>13</td>
-      <td>[getPayload, getPayloadType]</td>
-      <td>2</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>16</th>
+      <th>18</th>
       <td>org.axonframework.messaging.Message</td>
       <td>13</td>
       <td>[getIdentifier]</td>
@@ -1127,26 +1143,10 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>5</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>4</td>
-      <td>[matches]</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>org.axonframework.common.transaction.Transacti...</td>
-      <td>4</td>
-      <td>[executeInTransaction]</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
       <th>19</th>
-      <td>org.axonframework.messaging.MessageDispatchInt...</td>
-      <td>4</td>
-      <td>[handle]</td>
+      <td>org.axonframework.serialization.Serializer</td>
+      <td>6</td>
+      <td>[deserialize]</td>
       <td>1</td>
       <td>5</td>
     </tr>
@@ -1214,16 +1214,16 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.messaging.MetaData</td>
-      <td>MetaData</td>
-      <td>[Type, File, Java, ByteCode, Class]</td>
+      <td>org.axonframework.eventhandling.EventMessage</td>
+      <td>EventMessage</td>
+      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
       <td>30</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.eventhandling.EventMessage</td>
-      <td>EventMessage</td>
-      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
+      <td>org.axonframework.messaging.MetaData</td>
+      <td>MetaData</td>
+      <td>[Type, File, Java, ByteCode, Class]</td>
       <td>30</td>
     </tr>
     <tr>
@@ -1235,17 +1235,17 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>6</th>
-      <td>org.axonframework.serialization.Serializer</td>
-      <td>Serializer</td>
-      <td>[Type, File, Java, ByteCode, Interface]</td>
+      <td>org.axonframework.common.Assert</td>
+      <td>Assert</td>
+      <td>[Type, File, Java, ByteCode, Class]</td>
       <td>26</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>org.axonframework.common.Assert</td>
-      <td>Assert</td>
-      <td>[Type, File, Java, ByteCode, Class]</td>
-      <td>24</td>
+      <td>org.axonframework.serialization.Serializer</td>
+      <td>Serializer</td>
+      <td>[Type, File, Java, ByteCode, Interface]</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1277,17 +1277,17 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>12</th>
-      <td>org.axonframework.messaging.annotation.Paramet...</td>
-      <td>ParameterResolverFactory</td>
-      <td>[Type, File, Java, ByteCode, Interface]</td>
+      <td>org.axonframework.common.AxonNonTransientExcep...</td>
+      <td>AxonNonTransientException</td>
+      <td>[Type, File, Java, ByteCode, Class]</td>
       <td>18</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>org.axonframework.eventhandling.TrackingToken</td>
-      <td>TrackingToken</td>
+      <td>org.axonframework.messaging.annotation.Paramet...</td>
+      <td>ParameterResolverFactory</td>
       <td>[Type, File, Java, ByteCode, Interface]</td>
-      <td>17</td>
+      <td>18</td>
     </tr>
     <tr>
       <th>14</th>
@@ -1298,9 +1298,9 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>15</th>
-      <td>org.axonframework.common.AxonNonTransientExcep...</td>
-      <td>AxonNonTransientException</td>
-      <td>[Type, File, Java, ByteCode, Class]</td>
+      <td>org.axonframework.eventhandling.TrackingToken</td>
+      <td>TrackingToken</td>
+      <td>[Type, File, Java, ByteCode, Interface]</td>
       <td>17</td>
     </tr>
     <tr>
@@ -1319,17 +1319,17 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.messaging.MessageDispatchInt...</td>
-      <td>MessageDispatchInterceptor</td>
-      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
+      <td>org.axonframework.common.ObjectUtils</td>
+      <td>ObjectUtils</td>
+      <td>[Type, File, Java, ByteCode, Class]</td>
       <td>15</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.axonframework.tracing.SpanFactory</td>
-      <td>SpanFactory</td>
-      <td>[Type, File, Java, ByteCode, Interface]</td>
-      <td>14</td>
+      <td>org.axonframework.messaging.MessageDispatchInt...</td>
+      <td>MessageDispatchInterceptor</td>
+      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
+      <td>15</td>
     </tr>
   </tbody>
 </table>
@@ -1380,8 +1380,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>9</td>
       <td>61</td>
       <td>0.147541</td>
-      <td>[org.axonframework.commandhandling.callbacks, ...</td>
-      <td>[callbacks, monitoring, common, messaging, cac...</td>
+      <td>[org.axonframework.common.caching, org.axonfra...</td>
+      <td>[caching, messaging, common, monitoring, trans...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1390,8 +1390,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>10</td>
       <td>61</td>
       <td>0.163934</td>
-      <td>[org.axonframework.messaging.annotation, org.a...</td>
-      <td>[annotation, common, messaging, commandhandlin...</td>
+      <td>[org.axonframework.eventhandling, org.axonfram...</td>
+      <td>[eventhandling, annotation, common, stream, me...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1410,8 +1410,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>10</td>
       <td>0.200000</td>
-      <td>[org.axonframework.modelling.command.inspectio...</td>
-      <td>[inspection, command]</td>
+      <td>[org.axonframework.modelling.command, org.axon...</td>
+      <td>[command, inspection]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1420,8 +1420,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>9</td>
       <td>0.222222</td>
-      <td>[org.axonframework.eventsourcing, org.axonfram...</td>
-      <td>[eventsourcing, eventstore]</td>
+      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
+      <td>[eventstore, eventsourcing]</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1430,8 +1430,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>9</td>
       <td>0.222222</td>
-      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
-      <td>[eventstore, eventsourcing]</td>
+      <td>[org.axonframework.eventsourcing, org.axonfram...</td>
+      <td>[eventsourcing, eventstore]</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1440,8 +1440,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>18</td>
       <td>61</td>
       <td>0.295082</td>
-      <td>[org.axonframework.serialization, org.axonfram...</td>
-      <td>[serialization, jdbc, xml, common, lock, prope...</td>
+      <td>[org.axonframework.messaging.annotation, org.a...</td>
+      <td>[annotation, common, messaging, property, unit...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1450,8 +1450,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>20</td>
       <td>61</td>
       <td>0.327869</td>
-      <td>[org.axonframework.common, org.axonframework.e...</td>
-      <td>[common, eventhandling, serialization, transac...</td>
+      <td>[org.axonframework.messaging.unitofwork, org.a...</td>
+      <td>[unitofwork, messaging, common, commandhandlin...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1460,8 +1460,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>4</td>
       <td>9</td>
       <td>0.444444</td>
-      <td>[org.axonframework.eventsourcing.eventstore.jp...</td>
-      <td>[jpa, eventstore, snapshotting, eventsourcing]</td>
+      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
+      <td>[eventstore, snapshotting, eventsourcing, jpa]</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1470,8 +1470,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>5</td>
       <td>10</td>
       <td>0.500000</td>
-      <td>[org.axonframework.modelling.saga, org.axonfra...</td>
-      <td>[saga, inmemory, repository, command, inspection]</td>
+      <td>[org.axonframework.modelling.command.inspectio...</td>
+      <td>[inspection, command, saga, inmemory, repository]</td>
     </tr>
     <tr>
       <th>10</th>
@@ -1480,8 +1480,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>34</td>
       <td>61</td>
       <td>0.557377</td>
-      <td>[org.axonframework.messaging, org.axonframewor...</td>
-      <td>[messaging, lifecycle, unitofwork, eventhandli...</td>
+      <td>[org.axonframework.common, org.axonframework.c...</td>
+      <td>[common, caching, annotation, correlation, uni...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -1490,8 +1490,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.saga, org.axonfra...</td>
-      <td>[saga, command, inspection, jpa, inmemory, rep...</td>
+      <td>[org.axonframework.modelling.command.inspectio...</td>
+      <td>[inspection, inmemory, saga, repository, jpa, ...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -1500,8 +1500,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.saga, org.axonfra...</td>
-      <td>[saga, repository, jpa, inspection, command, m...</td>
+      <td>[org.axonframework.modelling.command, org.axon...</td>
+      <td>[command, repository, saga, metamodel, inspect...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1510,8 +1510,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>5</td>
       <td>8</td>
       <td>0.625000</td>
-      <td>[org.axonframework.test, org.axonframework.tes...</td>
-      <td>[test, matchers, deadline, utils, eventscheduler]</td>
+      <td>[org.axonframework.test.matchers, org.axonfram...</td>
+      <td>[matchers, deadline, test, utils, eventscheduler]</td>
     </tr>
     <tr>
       <th>14</th>
@@ -1520,8 +1520,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>40</td>
       <td>61</td>
       <td>0.655738</td>
-      <td>[org.axonframework.common, org.axonframework.c...</td>
-      <td>[common, transaction, unitofwork, correlation,...</td>
+      <td>[org.axonframework.messaging.unitofwork, org.a...</td>
+      <td>[unitofwork, lifecycle, monitoring, io, transa...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -1530,8 +1530,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>7</td>
       <td>9</td>
       <td>0.777778</td>
-      <td>[org.axonframework.eventsourcing.snapshotting,...</td>
-      <td>[snapshotting, eventstore, statements, jdbc, e...</td>
+      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
+      <td>[eventstore, snapshotting, jpa, conflictresolu...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -1650,7 +1650,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>93</td>
       <td>0.021505</td>
-      <td>[org.axonframework.eventhandling.EventMessage,...</td>
+      <td>[org.axonframework.eventhandling.DomainEventMe...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1672,7 +1672,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>93</td>
       <td>0.021505</td>
-      <td>[org.axonframework.eventhandling.DomainEventSe...</td>
+      <td>[org.axonframework.eventhandling.EventBus, org...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1771,7 +1771,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>3</td>
       <td>93</td>
       <td>0.032258</td>
-      <td>[org.axonframework.eventhandling.EventMessage,...</td>
+      <td>[org.axonframework.eventhandling.GenericDomain...</td>
     </tr>
     <tr>
       <th>17</th>
