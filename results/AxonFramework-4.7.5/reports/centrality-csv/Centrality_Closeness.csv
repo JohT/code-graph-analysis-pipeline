@@ -1,9 +1,9 @@
 "fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies"
 "org.axonframework.common","common",0.8440191387559809,872,23
-"org.axonframework.messaging","messaging",0.6328757875787578,8397,133
+"org.axonframework.messaging","messaging",0.6328757875787578,8348,133
 "org.axonframework.eventhandling","eventhandling",0.5864261884904087,4342,1557
 "org.axonframework.messaging.unitofwork","unitofwork",0.5371466768525592,248,123
-"org.axonframework.serialization","serialization",0.5113636363636364,1078,176
+"org.axonframework.serialization","serialization",0.5113636363636364,1073,155
 "org.axonframework.common.transaction","transaction",0.48687580025608196,276,6
 "org.axonframework.messaging.annotation","annotation",0.4770183175033921,1006,290
 "org.axonframework.tracing","tracing",0.4348330241187384,173,122
@@ -24,7 +24,7 @@
 "org.axonframework.messaging.interceptors","interceptors",0.3277972027972028,10,119
 "org.axonframework.common.property","property",0.2853754940711462,23,15
 "org.axonframework.commandhandling.callbacks","callbacks",0.2779150197628459,8,39
-"org.axonframework.messaging.responsetypes","responsetypes",0.26089981447124305,78,65
+"org.axonframework.messaging.responsetypes","responsetypes",0.26089981447124305,73,60
 "org.axonframework.serialization.upcasting","upcasting",0.26046176046176045,11,5
 "org.axonframework.queryhandling.registration","registration",0.2556818181818182,9,13
 "org.axonframework.common.jpa","jpa",0.13187799043062204,16,6
@@ -46,7 +46,7 @@
 "org.axonframework.eventsourcing.conflictresolution","conflictresolution",0.045454545454545456,15,99
 "org.axonframework.messaging.deadletter","deadletter",0.045454545454545456,135,104
 "org.axonframework.modelling.saga.repository.jpa","jpa",0.03409090909090909,12,86
-"org.axonframework.test.matchers","matchers",0.03409090909090909,56,50
+"org.axonframework.test.matchers","matchers",0.03409090909090909,57,51
 "org.axonframework.test.deadline","deadline",0.022727272727272728,9,138
 "org.axonframework.commandhandling.gateway","gateway",0.022727272727272728,101,447
 "org.axonframework.modelling.saga.repository.inmemory","inmemory",0.022727272727272728,5,15

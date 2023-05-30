@@ -142,9 +142,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>0</th>
       <td>org.axonframework.messaging</td>
-      <td>8397</td>
-      <td>33290</td>
-      <td>308</td>
+      <td>8348</td>
+      <td>33095</td>
+      <td>307</td>
       <td>64</td>
       <td>50</td>
       <td>6</td>
@@ -172,9 +172,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>3</th>
       <td>org.axonframework.serialization</td>
-      <td>1078</td>
-      <td>5606</td>
-      <td>126</td>
+      <td>1073</td>
+      <td>5555</td>
+      <td>125</td>
       <td>15</td>
       <td>30</td>
       <td>4</td>
@@ -653,15 +653,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>0</th>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
-      <td>0.015592</td>
-      <td>0.102041</td>
+      <td>0.015682</td>
+      <td>0.102339</td>
       <td>0.189873</td>
       <td>0.107143</td>
       <td>0.142857</td>
       <td>133</td>
-      <td>8397</td>
+      <td>8348</td>
       <td>35</td>
-      <td>308</td>
+      <td>307</td>
       <td>15</td>
       <td>64</td>
       <td>6</td>
@@ -771,6 +771,26 @@ Conversely, high values approaching one indicate high *Instability*. With some o
     </tr>
     <tr>
       <th>6</th>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
+      <td>0.126221</td>
+      <td>0.255952</td>
+      <td>0.318182</td>
+      <td>0.230769</td>
+      <td>0.200000</td>
+      <td>155</td>
+      <td>1073</td>
+      <td>43</td>
+      <td>125</td>
+      <td>7</td>
+      <td>15</td>
+      <td>9</td>
+      <td>30</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>7</th>
       <td>org.axonframework.lifecycle</td>
       <td>lifecycle</td>
       <td>0.138889</td>
@@ -788,26 +808,6 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <td>11</td>
       <td>1</td>
       <td>3</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>0.140351</td>
-      <td>0.267442</td>
-      <td>0.318182</td>
-      <td>0.230769</td>
-      <td>0.200000</td>
-      <td>176</td>
-      <td>1078</td>
-      <td>46</td>
-      <td>126</td>
-      <td>7</td>
-      <td>15</td>
-      <td>9</td>
-      <td>30</td>
-      <td>1</td>
-      <td>4</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1416,22 +1416,22 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr>
       <th>3</th>
       <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
+      <td>0.579661</td>
+      <td>0.294118</td>
+      <td>0.126221</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.monitoring</td>
       <td>monitoring</td>
       <td>0.566667</td>
       <td>0.333333</td>
       <td>0.100000</td>
       <td>6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>0.565531</td>
-      <td>0.294118</td>
-      <td>0.140351</td>
-      <td>34</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1518,9 +1518,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>axon-test-4.7.5</td>
       <td>org.axonframework.test.matchers</td>
       <td>matchers</td>
-      <td>0.403302</td>
+      <td>0.402778</td>
       <td>0.125000</td>
-      <td>0.471698</td>
+      <td>0.472222</td>
       <td>24</td>
     </tr>
     <tr>
@@ -1538,9 +1538,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
-      <td>0.384408</td>
+      <td>0.384318</td>
       <td>0.600000</td>
-      <td>0.015592</td>
+      <td>0.015682</td>
       <td>35</td>
     </tr>
     <tr>

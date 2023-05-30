@@ -1,9 +1,9 @@
 "fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies"
 "org.axonframework.eventhandling","eventhandling",830,4342,1557
-"org.axonframework.messaging","messaging",420.33333333333337,8397,133
+"org.axonframework.messaging","messaging",420.33333333333337,8348,133
 "org.axonframework.tracing","tracing",417.49999999999994,173,122
 "org.axonframework.messaging.annotation","annotation",331,1006,290
-"org.axonframework.serialization","serialization",326.5,1078,176
+"org.axonframework.serialization","serialization",326.5,1073,155
 "org.axonframework.queryhandling","queryhandling",271.6666666666667,175,1108
 "org.axonframework.commandhandling","commandhandling",193.83333333333334,1515,642
 "org.axonframework.lifecycle","lifecycle",123,62,10
@@ -18,12 +18,12 @@
 "org.axonframework.eventhandling.replay","replay",62.666666666666664,12,72
 "org.axonframework.messaging.correlation","correlation",62,25,14
 "org.axonframework.deadline","deadline",59.416666666666664,159,347
-"org.axonframework.messaging.responsetypes","responsetypes",45,78,65
+"org.axonframework.messaging.responsetypes","responsetypes",45,73,60
 "org.axonframework.eventsourcing.snapshotting","snapshotting",43,23,17
 "org.axonframework.eventsourcing","eventsourcing",38,128,976
 "org.axonframework.modelling.command","command",35.08333333333333,241,827
 "org.axonframework.monitoring","monitoring",34.833333333333336,189,21
-"org.axonframework.test.matchers","matchers",22.5,56,50
+"org.axonframework.test.matchers","matchers",22.5,57,51
 "org.axonframework.modelling.saga","saga",22.5,242,386
 "org.axonframework.eventsourcing.conflictresolution","conflictresolution",13.5,15,99
 "org.axonframework.test","test",13.333333333333334,14,13
