@@ -6,7 +6,7 @@ on:
       - main
     # Ignore changes in documentation, general configuration and reports for push events
     paths-ignore: 
-      - 'reports/**'
+      - 'results/**'
       - '**/*.md'
       - '**/*.txt'
       - '**/*.css'
@@ -22,7 +22,7 @@ on:
       - main
     # Ignore changes in documentation, general configuration and reports for pull request events
     paths-ignore: 
-      - 'reports/**'
+      - 'results/**'
       - '**/*.md'
       - '**/*.txt'
       - '**/*.css'
