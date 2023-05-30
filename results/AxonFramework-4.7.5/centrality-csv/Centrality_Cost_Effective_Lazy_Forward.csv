@@ -1,0 +1,8 @@
+"fullQualifiedPackageName","packageName","spread","incomingDependencies","outgoingDependencies"
+"org.axonframework.config","config",10.01,115,7942
+"org.axonframework.test.saga","saga",2.7300000000000004,43,1375
+"org.axonframework.eventsourcing.eventstore.legacyjpa","legacyjpa",2.129999999999999,23,375
+"org.axonframework.test.aggregate","aggregate",1.959999999999999,19,859
+"org.axonframework.commandhandling.distributed","distributed",1.7300000000000004,50,603
+
+"Source Cypher Query:","Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher"
