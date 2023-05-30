@@ -7,4 +7,7 @@ Report | Analysis | Description
 -------|----------|------------
 | [ObjectOrientedDesignMetrics.md](./AxonFramework-4.7.5/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.7.5 | Object Oriented Design Quality Metrics for Java with Neo4j |
 | [PackageDependencies.md](./AxonFramework-4.7.5/package-dependencies/PackageDependencies.md) | AxonFramework-4.7.5 | Package Dependencies for Java with Neo4j |
+| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.7.5/reports/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.7.5 | Object Oriented Design Quality Metrics for Java with Neo4j |
+| [PackageDependencies.md](./AxonFramework-4.7.5/reports/package-dependencies/PackageDependencies.md) | AxonFramework-4.7.5 | Package Dependencies for Java with Neo4j |
+| [VisibilityMetrics.md](./AxonFramework-4.7.5/reports/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.7.5 | Visibility Metrics for Java with Neo4j |
 | [VisibilityMetrics.md](./AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.7.5 | Visibility Metrics for Java with Neo4j |
