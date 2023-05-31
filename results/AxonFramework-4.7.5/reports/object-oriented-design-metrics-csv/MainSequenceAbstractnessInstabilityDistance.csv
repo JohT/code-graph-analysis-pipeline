@@ -2,10 +2,10 @@
 "axon-test-4.7.5","org.axonframework.test.server","server",1,0,0,2
 "axon-messaging-4.7.5","org.axonframework.common.io","io",1,0,0,1
 "axon-eventsourcing-4.7.5","org.axonframework.eventsourcing.eventstore.jdbc.statements","statements",0.7272727272727273,1,0.7272727272727273,15
-"axon-messaging-4.7.5","org.axonframework.serialization","serialization",0.579660854569841,0.29411764705882354,0.1262214983713355,34
 "axon-messaging-4.7.5","org.axonframework.monitoring","monitoring",0.5666666666666667,0.3333333333333333,0.1,6
+"axon-messaging-4.7.5","org.axonframework.serialization","serialization",0.565531475748194,0.29411764705882354,0.14035087719298245,34
+"axon-messaging-4.7.5","org.axonframework.messaging.annotation","annotation",0.5000859993120055,0.2777777777777778,0.22213622291021673,54
 "axon-messaging-4.7.5","org.axonframework.common.digest","digest",0.5,0,0.5,1
-"axon-messaging-4.7.5","org.axonframework.messaging.annotation","annotation",0.4984567901234568,0.2777777777777778,0.22376543209876543,54
 "axon-messaging-4.7.5","org.axonframework.common.transaction","transaction",0.4787234042553191,0.5,0.02127659574468085,4
 "axon-messaging-4.7.5","org.axonframework.common.jpa","jpa",0.4772727272727273,0.25,0.2727272727272727,4
 "axon-messaging-4.7.5","org.axonframework.common.lock","lock",0.4660691421254801,0.18181818181818182,0.352112676056338,11
@@ -14,9 +14,9 @@
 "axon-configuration-4.7.5","org.axonframework.config","config",0.4216241331793027,0.4358974358974359,0.9857266972818667,39
 "axon-test-4.7.5","org.axonframework.test.matchers","matchers",0.4027777777777778,0.125,0.4722222222222222,24
 "axon-messaging-4.7.5","org.axonframework.messaging.correlation","correlation",0.39102564102564097,0.25,0.358974358974359,4
-"axon-messaging-4.7.5","org.axonframework.messaging","messaging",0.3843178870416225,0.6,0.01568211295837755,35
-"axon-messaging-4.7.5","org.axonframework.messaging.unitofwork","unitofwork",0.38274932614555257,0.2857142857142857,0.33153638814016173,14
+"axon-messaging-4.7.5","org.axonframework.messaging","messaging",0.3842473054601445,0.6,0.0157526945398555,35
 "axon-messaging-4.7.5","org.axonframework.serialization.xml","xml",0.37777777777777777,0,0.6222222222222222,7
+"axon-messaging-4.7.5","org.axonframework.messaging.unitofwork","unitofwork",0.37356549267906614,0.2857142857142857,0.3407202216066482,14
 "axon-messaging-4.7.5","org.axonframework.tracing","tracing",0.36421845574387945,0.2222222222222222,0.4135593220338983,18
 "axon-messaging-4.7.5","org.axonframework.eventhandling.tokenstore","tokenstore",0.3359073359073359,0.2857142857142857,0.3783783783783784,7
 "axon-messaging-4.7.5","org.axonframework.util","util",0.33333333333333337,0,0.6666666666666666,3
@@ -49,7 +49,7 @@
 "axon-test-4.7.5","org.axonframework.test.deadline","deadline",0.1887755102040818,0.25,0.9387755102040817,4
 "axon-messaging-4.7.5","org.axonframework.queryhandling","queryhandling",0.18860093530787214,0.325,0.8636009353078722,40
 "axon-messaging-4.7.5","org.axonframework.common.stream","stream",0.18627450980392157,0.6666666666666666,0.14705882352941177,3
-"axon-messaging-4.7.5","org.axonframework.messaging.responsetypes","responsetypes",0.17387218045112784,0.375,0.45112781954887216,8
+"axon-messaging-4.7.5","org.axonframework.messaging.responsetypes","responsetypes",0.17045454545454541,0.375,0.45454545454545453,8
 "axon-messaging-4.7.5","org.axonframework.commandhandling.callbacks","callbacks",0.17021276595744683,0,0.8297872340425532,4
 "axon-eventsourcing-4.7.5","org.axonframework.eventsourcing","eventsourcing",0.16610925306577484,0.28205128205128205,0.8840579710144928,39
 "axon-messaging-4.7.5","org.axonframework.serialization.upcasting","upcasting",0.14583333333333348,0.8333333333333334,0.3125,6
@@ -82,8 +82,8 @@
 "axon-modelling-4.7.5","org.axonframework.modelling.command.legacyjpa","legacyjpa",0.01379310344827589,0,0.9862068965517241,2
 "axon-eventsourcing-4.7.5","org.axonframework.eventsourcing.eventstore.inmemory","inmemory",0.013157894736842146,0,0.9868421052631579,2
 "axon-messaging-4.7.5","org.axonframework.deadline.quartz","quartz",0.010288065843621408,0,0.9897119341563786,4
-"axon-disruptor-4.7.5","org.axonframework.disruptor.commandhandling","commandhandling",0.009786581771017655,0.045454545454545456,0.9643320363164721,22
 "axon-messaging-4.7.5","org.axonframework.queryhandling.registration","registration",0.009090909090909038,0.4,0.5909090909090909,5
+"axon-disruptor-4.7.5","org.axonframework.disruptor.commandhandling","commandhandling",0.008836702578380429,0.045454545454545456,0.9633821571238349,22
 "axon-messaging-4.7.5","org.axonframework.deadline.jobrunr","jobrunr",0.008547008547008517,0,0.9914529914529915,3
 "axon-modelling-4.7.5","org.axonframework.modelling.saga.repository","repository",0.0009840098400983877,0.26666666666666666,0.7343173431734318,15
 "axon-messaging-4.7.5","org.axonframework.tracing.attributes","attributes",0,0,1,6

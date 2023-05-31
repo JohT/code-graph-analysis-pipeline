@@ -142,9 +142,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>0</th>
       <td>org.axonframework.messaging</td>
-      <td>8348</td>
-      <td>33095</td>
-      <td>307</td>
+      <td>8310</td>
+      <td>32998</td>
+      <td>306</td>
       <td>64</td>
       <td>50</td>
       <td>6</td>
@@ -172,9 +172,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>3</th>
       <td>org.axonframework.serialization</td>
-      <td>1073</td>
-      <td>5555</td>
-      <td>125</td>
+      <td>1078</td>
+      <td>5606</td>
+      <td>126</td>
       <td>15</td>
       <td>30</td>
       <td>4</td>
@@ -182,9 +182,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>4</th>
       <td>org.axonframework.messaging.annotation</td>
-      <td>1006</td>
-      <td>5022</td>
-      <td>146</td>
+      <td>1005</td>
+      <td>5021</td>
+      <td>145</td>
       <td>18</td>
       <td>25</td>
       <td>6</td>
@@ -211,16 +211,6 @@ If these packages get changed, the incoming dependencies might be affected by th
     </tr>
     <tr>
       <th>7</th>
-      <td>org.axonframework.messaging.unitofwork</td>
-      <td>248</td>
-      <td>1369</td>
-      <td>80</td>
-      <td>5</td>
-      <td>34</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>8</th>
       <td>org.axonframework.modelling.saga</td>
       <td>242</td>
       <td>1482</td>
@@ -230,7 +220,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>3</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
       <td>org.axonframework.modelling.command</td>
       <td>241</td>
       <td>930</td>
@@ -238,6 +228,16 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>8</td>
       <td>10</td>
       <td>5</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>238</td>
+      <td>1330</td>
+      <td>79</td>
+      <td>5</td>
+      <td>34</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>10</th>
@@ -411,12 +411,12 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
     <tr>
       <th>2</th>
       <td>org.axonframework.disruptor.commandhandling</td>
-      <td>1487</td>
-      <td>85</td>
-      <td>31</td>
+      <td>1447</td>
+      <td>79</td>
+      <td>29</td>
       <td>14</td>
       <td>4</td>
-      <td>7444</td>
+      <td>7300</td>
     </tr>
     <tr>
       <th>3</th>
@@ -653,15 +653,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>0</th>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
-      <td>0.015682</td>
-      <td>0.102339</td>
+      <td>0.015753</td>
+      <td>0.102639</td>
       <td>0.189873</td>
       <td>0.107143</td>
       <td>0.142857</td>
       <td>133</td>
-      <td>8348</td>
+      <td>8310</td>
       <td>35</td>
-      <td>307</td>
+      <td>306</td>
       <td>15</td>
       <td>64</td>
       <td>6</td>
@@ -771,26 +771,6 @@ Conversely, high values approaching one indicate high *Instability*. With some o
     </tr>
     <tr>
       <th>6</th>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>0.126221</td>
-      <td>0.255952</td>
-      <td>0.318182</td>
-      <td>0.230769</td>
-      <td>0.200000</td>
-      <td>155</td>
-      <td>1073</td>
-      <td>43</td>
-      <td>125</td>
-      <td>7</td>
-      <td>15</td>
-      <td>9</td>
-      <td>30</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>7</th>
       <td>org.axonframework.lifecycle</td>
       <td>lifecycle</td>
       <td>0.138889</td>
@@ -808,6 +788,26 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <td>11</td>
       <td>1</td>
       <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
+      <td>0.140351</td>
+      <td>0.267442</td>
+      <td>0.318182</td>
+      <td>0.230769</td>
+      <td>0.200000</td>
+      <td>176</td>
+      <td>1078</td>
+      <td>46</td>
+      <td>126</td>
+      <td>7</td>
+      <td>15</td>
+      <td>9</td>
+      <td>30</td>
+      <td>1</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>8</th>
@@ -833,15 +833,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>9</th>
       <td>org.axonframework.messaging.annotation</td>
       <td>annotation</td>
-      <td>0.223765</td>
-      <td>0.301435</td>
+      <td>0.222136</td>
+      <td>0.302885</td>
       <td>0.419355</td>
       <td>0.218750</td>
       <td>0.142857</td>
-      <td>290</td>
-      <td>1006</td>
+      <td>287</td>
+      <td>1005</td>
       <td>63</td>
-      <td>146</td>
+      <td>145</td>
       <td>13</td>
       <td>18</td>
       <td>7</td>
@@ -953,15 +953,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>15</th>
       <td>org.axonframework.messaging.unitofwork</td>
       <td>unitofwork</td>
-      <td>0.331536</td>
-      <td>0.200000</td>
+      <td>0.340720</td>
+      <td>0.202020</td>
       <td>0.583333</td>
       <td>0.128205</td>
       <td>0.142857</td>
       <td>123</td>
-      <td>248</td>
+      <td>238</td>
       <td>20</td>
-      <td>80</td>
+      <td>79</td>
       <td>7</td>
       <td>5</td>
       <td>5</td>
@@ -1416,16 +1416,6 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr>
       <th>3</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>0.579661</td>
-      <td>0.294118</td>
-      <td>0.126221</td>
-      <td>34</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.monitoring</td>
       <td>monitoring</td>
       <td>0.566667</td>
@@ -1434,7 +1424,27 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>6</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
+      <td>0.565531</td>
+      <td>0.294118</td>
+      <td>0.140351</td>
+      <td>34</td>
+    </tr>
+    <tr>
       <th>5</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
+      <td>0.500086</td>
+      <td>0.277778</td>
+      <td>0.222136</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.digest</td>
       <td>digest</td>
@@ -1442,16 +1452,6 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0.000000</td>
       <td>0.500000</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.annotation</td>
-      <td>annotation</td>
-      <td>0.498457</td>
-      <td>0.277778</td>
-      <td>0.223765</td>
-      <td>54</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1538,23 +1538,13 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
-      <td>0.384318</td>
+      <td>0.384247</td>
       <td>0.600000</td>
-      <td>0.015682</td>
+      <td>0.015753</td>
       <td>35</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.unitofwork</td>
-      <td>unitofwork</td>
-      <td>0.382749</td>
-      <td>0.285714</td>
-      <td>0.331536</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>17</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization.xml</td>
       <td>xml</td>
@@ -1562,6 +1552,16 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0.000000</td>
       <td>0.622222</td>
       <td>7</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>unitofwork</td>
+      <td>0.373565</td>
+      <td>0.285714</td>
+      <td>0.340720</td>
+      <td>14</td>
     </tr>
     <tr>
       <th>18</th>

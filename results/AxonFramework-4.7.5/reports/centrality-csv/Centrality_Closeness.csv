@@ -1,11 +1,11 @@
 "fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies"
 "org.axonframework.common","common",0.8440191387559809,872,23
-"org.axonframework.messaging","messaging",0.6328757875787578,8348,133
+"org.axonframework.messaging","messaging",0.6328757875787578,8310,133
 "org.axonframework.eventhandling","eventhandling",0.5864261884904087,4342,1557
-"org.axonframework.messaging.unitofwork","unitofwork",0.5371466768525592,248,123
-"org.axonframework.serialization","serialization",0.5113636363636364,1073,155
+"org.axonframework.messaging.unitofwork","unitofwork",0.5371466768525592,238,123
+"org.axonframework.serialization","serialization",0.5113636363636364,1078,176
 "org.axonframework.common.transaction","transaction",0.48687580025608196,276,6
-"org.axonframework.messaging.annotation","annotation",0.4770183175033921,1006,290
+"org.axonframework.messaging.annotation","annotation",0.4770183175033921,1005,287
 "org.axonframework.tracing","tracing",0.4348330241187384,173,122
 "org.axonframework.common.stream","stream",0.42074592074592077,29,5
 "org.axonframework.commandhandling","commandhandling",0.4020154373927959,1515,642
@@ -24,7 +24,7 @@
 "org.axonframework.messaging.interceptors","interceptors",0.3277972027972028,10,119
 "org.axonframework.common.property","property",0.2853754940711462,23,15
 "org.axonframework.commandhandling.callbacks","callbacks",0.2779150197628459,8,39
-"org.axonframework.messaging.responsetypes","responsetypes",0.26089981447124305,73,60
+"org.axonframework.messaging.responsetypes","responsetypes",0.26089981447124305,78,65
 "org.axonframework.serialization.upcasting","upcasting",0.26046176046176045,11,5
 "org.axonframework.queryhandling.registration","registration",0.2556818181818182,9,13
 "org.axonframework.common.jpa","jpa",0.13187799043062204,16,6
@@ -55,7 +55,7 @@
 "org.axonframework.common.digest","digest",0.015151515151515152,1,1
 "org.axonframework.queryhandling.annotation","annotation",0.011363636363636364,4,199
 "org.axonframework.commandhandling.distributed.commandfilter","commandfilter",0.011363636363636364,12,34
-"org.axonframework.disruptor.commandhandling","commandhandling",0.011363636363636364,55,1487
+"org.axonframework.disruptor.commandhandling","commandhandling",0.011363636363636364,55,1447
 "org.axonframework.eventhandling.deadletter","deadletter",0.011363636363636364,9,275
 "org.axonframework.commandhandling.distributed","distributed",0.011363636363636364,50,603
 "org.axonframework.test.eventscheduler","eventscheduler",0.011363636363636364,9,38
