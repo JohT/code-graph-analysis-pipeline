@@ -57,39 +57,39 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-eventsourcing-4.7.5.jar</td>
-      <td>9</td>
-      <td>130</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-messaging-4.7.5.jar</td>
-      <td>61</td>
-      <td>729</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>axon-disruptor-4.7.5.jar</td>
-      <td>1</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>3</th>
       <td>axon-test-4.7.5.jar</td>
       <td>8</td>
       <td>85</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>axon-configuration-4.7.5.jar</td>
+      <th>1</th>
+      <td>axon-disruptor-4.7.5.jar</td>
       <td>1</td>
-      <td>39</td>
+      <td>22</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>2</th>
+      <td>axon-eventsourcing-4.7.5.jar</td>
+      <td>9</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-messaging-4.7.5.jar</td>
+      <td>61</td>
+      <td>729</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>axon-modelling-4.7.5.jar</td>
       <td>10</td>
       <td>149</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-configuration-4.7.5.jar</td>
+      <td>1</td>
+      <td>39</td>
     </tr>
   </tbody>
 </table>
@@ -142,9 +142,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>0</th>
       <td>org.axonframework.messaging</td>
-      <td>8310</td>
-      <td>32998</td>
-      <td>306</td>
+      <td>8421</td>
+      <td>33487</td>
+      <td>308</td>
       <td>64</td>
       <td>50</td>
       <td>6</td>
@@ -152,8 +152,8 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>1</th>
       <td>org.axonframework.eventhandling</td>
-      <td>4342</td>
-      <td>27679</td>
+      <td>4380</td>
+      <td>27743</td>
       <td>278</td>
       <td>52</td>
       <td>44</td>
@@ -162,8 +162,8 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>2</th>
       <td>org.axonframework.commandhandling</td>
-      <td>1515</td>
-      <td>7284</td>
+      <td>1524</td>
+      <td>7472</td>
       <td>121</td>
       <td>18</td>
       <td>18</td>
@@ -172,9 +172,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>3</th>
       <td>org.axonframework.serialization</td>
-      <td>1078</td>
-      <td>5606</td>
-      <td>126</td>
+      <td>1070</td>
+      <td>5590</td>
+      <td>125</td>
       <td>15</td>
       <td>30</td>
       <td>4</td>
@@ -182,9 +182,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>4</th>
       <td>org.axonframework.messaging.annotation</td>
-      <td>1005</td>
-      <td>5021</td>
-      <td>145</td>
+      <td>1024</td>
+      <td>5074</td>
+      <td>147</td>
       <td>18</td>
       <td>25</td>
       <td>6</td>
@@ -193,7 +193,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <th>5</th>
       <td>org.axonframework.common</td>
       <td>872</td>
-      <td>2043</td>
+      <td>2048</td>
       <td>311</td>
       <td>12</td>
       <td>74</td>
@@ -202,28 +202,28 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>6</th>
       <td>org.axonframework.common.transaction</td>
-      <td>276</td>
-      <td>1060</td>
-      <td>67</td>
+      <td>272</td>
+      <td>1044</td>
+      <td>66</td>
       <td>5</td>
       <td>24</td>
       <td>4</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>org.axonframework.modelling.saga</td>
-      <td>242</td>
-      <td>1482</td>
-      <td>57</td>
-      <td>11</td>
-      <td>10</td>
-      <td>3</td>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>247</td>
+      <td>1323</td>
+      <td>80</td>
+      <td>5</td>
+      <td>34</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>8</th>
       <td>org.axonframework.modelling.command</td>
-      <td>241</td>
-      <td>930</td>
+      <td>244</td>
+      <td>925</td>
       <td>73</td>
       <td>8</td>
       <td>10</td>
@@ -231,13 +231,13 @@ If these packages get changed, the incoming dependencies might be affected by th
     </tr>
     <tr>
       <th>9</th>
-      <td>org.axonframework.messaging.unitofwork</td>
-      <td>238</td>
-      <td>1330</td>
-      <td>79</td>
-      <td>5</td>
-      <td>34</td>
-      <td>6</td>
+      <td>org.axonframework.modelling.saga</td>
+      <td>242</td>
+      <td>1482</td>
+      <td>57</td>
+      <td>11</td>
+      <td>10</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>10</th>
@@ -272,9 +272,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>13</th>
       <td>org.axonframework.tracing</td>
-      <td>173</td>
-      <td>712</td>
-      <td>65</td>
+      <td>170</td>
+      <td>707</td>
+      <td>64</td>
       <td>4</td>
       <td>16</td>
       <td>4</td>
@@ -282,9 +282,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>14</th>
       <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>166</td>
-      <td>805</td>
-      <td>59</td>
+      <td>169</td>
+      <td>814</td>
+      <td>60</td>
       <td>5</td>
       <td>10</td>
       <td>4</td>
@@ -293,11 +293,11 @@ If these packages get changed, the incoming dependencies might be affected by th
       <th>15</th>
       <td>org.axonframework.deadline</td>
       <td>159</td>
-      <td>1331</td>
+      <td>1361</td>
       <td>32</td>
       <td>8</td>
-      <td>11</td>
-      <td>4</td>
+      <td>10</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>16</th>
@@ -312,9 +312,9 @@ If these packages get changed, the incoming dependencies might be affected by th
     <tr>
       <th>17</th>
       <td>org.axonframework.eventsourcing</td>
-      <td>128</td>
-      <td>630</td>
-      <td>40</td>
+      <td>134</td>
+      <td>657</td>
+      <td>41</td>
       <td>6</td>
       <td>5</td>
       <td>4</td>
@@ -400,26 +400,36 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>1557</td>
-      <td>151</td>
-      <td>54</td>
+      <td>org.axonframework.test.aggregate</td>
+      <td>2223</td>
+      <td>92</td>
+      <td>34</td>
       <td>16</td>
-      <td>1</td>
-      <td>7770</td>
+      <td>4</td>
+      <td>9766</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>1447</td>
-      <td>79</td>
-      <td>29</td>
-      <td>14</td>
-      <td>4</td>
-      <td>7300</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>1551</td>
+      <td>150</td>
+      <td>54</td>
+      <td>16</td>
+      <td>1</td>
+      <td>7754</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>1487</td>
+      <td>85</td>
+      <td>31</td>
+      <td>14</td>
+      <td>4</td>
+      <td>7444</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>org.axonframework.test.saga</td>
       <td>1375</td>
       <td>79</td>
@@ -429,7 +439,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>4837</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>1340</td>
       <td>51</td>
@@ -439,7 +449,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>8129</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>org.axonframework.queryhandling</td>
       <td>1108</td>
       <td>78</td>
@@ -449,7 +459,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>6955</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>org.axonframework.eventhandling.pooled</td>
       <td>1022</td>
       <td>57</td>
@@ -459,7 +469,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>5590</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>org.axonframework.eventsourcing</td>
       <td>976</td>
       <td>91</td>
@@ -469,24 +479,14 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>4142</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>859</td>
-      <td>64</td>
-      <td>33</td>
-      <td>16</td>
-      <td>4</td>
-      <td>3578</td>
-    </tr>
-    <tr>
       <th>9</th>
       <td>org.axonframework.modelling.command</td>
-      <td>827</td>
-      <td>91</td>
-      <td>33</td>
-      <td>15</td>
+      <td>710</td>
+      <td>87</td>
+      <td>32</td>
+      <td>14</td>
       <td>2</td>
-      <td>4151</td>
+      <td>3549</td>
     </tr>
     <tr>
       <th>10</th>
@@ -653,15 +653,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>0</th>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
-      <td>0.015753</td>
-      <td>0.102639</td>
+      <td>0.015548</td>
+      <td>0.102041</td>
       <td>0.189873</td>
       <td>0.107143</td>
       <td>0.142857</td>
       <td>133</td>
-      <td>8310</td>
+      <td>8421</td>
       <td>35</td>
-      <td>306</td>
+      <td>308</td>
       <td>15</td>
       <td>64</td>
       <td>6</td>
@@ -673,15 +673,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>1</th>
       <td>org.axonframework.common.transaction</td>
       <td>transaction</td>
-      <td>0.021277</td>
-      <td>0.056338</td>
+      <td>0.021583</td>
+      <td>0.057143</td>
       <td>0.000000</td>
       <td>0.040000</td>
       <td>0.200000</td>
       <td>6</td>
-      <td>276</td>
+      <td>272</td>
       <td>4</td>
-      <td>67</td>
+      <td>66</td>
       <td>0</td>
       <td>5</td>
       <td>1</td>
@@ -793,15 +793,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>7</th>
       <td>org.axonframework.serialization</td>
       <td>serialization</td>
-      <td>0.140351</td>
-      <td>0.267442</td>
+      <td>0.141252</td>
+      <td>0.269006</td>
       <td>0.318182</td>
       <td>0.230769</td>
       <td>0.200000</td>
       <td>176</td>
-      <td>1078</td>
+      <td>1070</td>
       <td>46</td>
-      <td>126</td>
+      <td>125</td>
       <td>7</td>
       <td>15</td>
       <td>9</td>
@@ -831,17 +831,37 @@ Conversely, high values approaching one indicate high *Instability*. With some o
     </tr>
     <tr>
       <th>9</th>
+      <td>org.axonframework.common.jpa</td>
+      <td>jpa</td>
+      <td>0.210526</td>
+      <td>0.222222</td>
+      <td>1.000000</td>
+      <td>0.300000</td>
+      <td>0.200000</td>
+      <td>4</td>
+      <td>15</td>
+      <td>4</td>
+      <td>14</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>7</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>10</th>
       <td>org.axonframework.messaging.annotation</td>
       <td>annotation</td>
-      <td>0.222136</td>
-      <td>0.302885</td>
+      <td>0.220700</td>
+      <td>0.300000</td>
       <td>0.419355</td>
       <td>0.218750</td>
       <td>0.142857</td>
-      <td>287</td>
-      <td>1005</td>
+      <td>290</td>
+      <td>1024</td>
       <td>63</td>
-      <td>145</td>
+      <td>147</td>
       <td>13</td>
       <td>18</td>
       <td>7</td>
@@ -850,17 +870,17 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <td>6</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>org.axonframework.eventhandling</td>
       <td>eventhandling</td>
-      <td>0.263943</td>
-      <td>0.351981</td>
+      <td>0.261507</td>
+      <td>0.350467</td>
       <td>0.509434</td>
       <td>0.266667</td>
       <td>0.166667</td>
-      <td>1557</td>
-      <td>4342</td>
-      <td>151</td>
+      <td>1551</td>
+      <td>4380</td>
+      <td>150</td>
       <td>278</td>
       <td>54</td>
       <td>52</td>
@@ -870,36 +890,16 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <td>5</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>org.axonframework.common.jpa</td>
-      <td>jpa</td>
-      <td>0.272727</td>
-      <td>0.250000</td>
-      <td>1.000000</td>
-      <td>0.300000</td>
-      <td>0.200000</td>
-      <td>6</td>
-      <td>16</td>
-      <td>5</td>
-      <td>15</td>
-      <td>2</td>
-      <td>0</td>
-      <td>3</td>
-      <td>7</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
       <th>12</th>
       <td>org.axonframework.commandhandling</td>
       <td>commandhandling</td>
-      <td>0.297636</td>
+      <td>0.296399</td>
       <td>0.366492</td>
       <td>0.608696</td>
       <td>0.333333</td>
       <td>0.142857</td>
       <td>642</td>
-      <td>1515</td>
+      <td>1524</td>
       <td>70</td>
       <td>121</td>
       <td>28</td>
@@ -953,15 +953,15 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>15</th>
       <td>org.axonframework.messaging.unitofwork</td>
       <td>unitofwork</td>
-      <td>0.340720</td>
-      <td>0.202020</td>
+      <td>0.332432</td>
+      <td>0.200000</td>
       <td>0.583333</td>
       <td>0.128205</td>
       <td>0.142857</td>
       <td>123</td>
-      <td>238</td>
+      <td>247</td>
       <td>20</td>
-      <td>79</td>
+      <td>80</td>
       <td>7</td>
       <td>5</td>
       <td>5</td>
@@ -1218,6 +1218,14 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>15</th>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>16</th>
       <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1225,7 +1233,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>17</th>
       <td>org.axonframework.eventhandling.tokenstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1233,7 +1241,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>18</th>
       <td>org.axonframework.eventhandling.tokenstore.leg...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1241,17 +1249,9 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>org.axonframework.messaging.interceptors.legac...</td>
       <td>legacyvalidation</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>org.axonframework.test.server</td>
-      <td>server</td>
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
@@ -1428,23 +1428,33 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>serialization</td>
-      <td>0.565531</td>
+      <td>0.564630</td>
       <td>0.294118</td>
-      <td>0.140351</td>
+      <td>0.141252</td>
       <td>34</td>
     </tr>
     <tr>
       <th>5</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.annotation</td>
-      <td>annotation</td>
-      <td>0.500086</td>
-      <td>0.277778</td>
-      <td>0.222136</td>
-      <td>54</td>
+      <td>org.axonframework.common.jpa</td>
+      <td>jpa</td>
+      <td>0.539474</td>
+      <td>0.250000</td>
+      <td>0.210526</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
+      <td>0.501522</td>
+      <td>0.277778</td>
+      <td>0.220700</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>7</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.digest</td>
       <td>digest</td>
@@ -1454,23 +1464,13 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.transaction</td>
       <td>transaction</td>
-      <td>0.478723</td>
+      <td>0.478417</td>
       <td>0.500000</td>
-      <td>0.021277</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.common.jpa</td>
-      <td>jpa</td>
-      <td>0.477273</td>
-      <td>0.250000</td>
-      <td>0.272727</td>
+      <td>0.021583</td>
       <td>4</td>
     </tr>
     <tr>
@@ -1518,9 +1518,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>axon-test-4.7.5</td>
       <td>org.axonframework.test.matchers</td>
       <td>matchers</td>
-      <td>0.402778</td>
+      <td>0.419643</td>
       <td>0.125000</td>
-      <td>0.472222</td>
+      <td>0.455357</td>
       <td>24</td>
     </tr>
     <tr>
@@ -1538,13 +1538,23 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
-      <td>0.384247</td>
+      <td>0.384452</td>
       <td>0.600000</td>
-      <td>0.015753</td>
+      <td>0.015548</td>
       <td>35</td>
     </tr>
     <tr>
       <th>16</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>unitofwork</td>
+      <td>0.381853</td>
+      <td>0.285714</td>
+      <td>0.332432</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>17</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization.xml</td>
       <td>xml</td>
@@ -1554,34 +1564,24 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>7</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.unitofwork</td>
-      <td>unitofwork</td>
-      <td>0.373565</td>
-      <td>0.285714</td>
-      <td>0.340720</td>
-      <td>14</td>
-    </tr>
-    <tr>
       <th>18</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.tracing</td>
       <td>tracing</td>
-      <td>0.364218</td>
+      <td>0.359970</td>
       <td>0.222222</td>
-      <td>0.413559</td>
+      <td>0.417808</td>
       <td>18</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.eventhandling.tokenstore</td>
-      <td>tokenstore</td>
-      <td>0.335907</td>
-      <td>0.285714</td>
-      <td>0.378378</td>
-      <td>7</td>
+      <td>axon-test-4.7.5</td>
+      <td>org.axonframework.test</td>
+      <td>test</td>
+      <td>0.351724</td>
+      <td>0.200000</td>
+      <td>0.448276</td>
+      <td>5</td>
     </tr>
   </tbody>
 </table>

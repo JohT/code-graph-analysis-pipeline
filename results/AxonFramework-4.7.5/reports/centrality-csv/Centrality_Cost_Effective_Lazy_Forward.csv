@@ -1,8 +1,8 @@
 "fullQualifiedPackageName","packageName","spread","incomingDependencies","outgoingDependencies"
-"org.axonframework.config","config",9.54,115,7942
-"org.axonframework.test.aggregate","aggregate",2.360000000000001,19,859
-"org.axonframework.test.saga","saga",2.25,43,1375
-"org.axonframework.eventsourcing.eventstore.legacyjpa","legacyjpa",2.119999999999999,23,375
-"org.axonframework.modelling.command.legacyjpa","legacyjpa",1.740000000000002,2,143
+"org.axonframework.config","config",9.66,115,7942
+"org.axonframework.test.aggregate","aggregate",2.7200000000000006,31,2223
+"org.axonframework.modelling.command.legacyjpa","legacyjpa",2.039999999999999,2,143
+"org.axonframework.eventsourcing.eventstore.legacyjpa","legacyjpa",1.9799999999999986,23,375
+"org.axonframework.test.saga","saga",1.6900000000000013,43,1375
 
 "Source Cypher Query:","Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher"
