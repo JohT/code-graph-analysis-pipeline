@@ -25,13 +25,14 @@
             ELSE cmplx // otherwise keep the object as it was
           END 
         ) AS methodWithMaxCyclomaticComplexity
-RETURN artifactName, fullPackageName, packageName 
-      ,sumEffectiveLinesOfMethodCode
-      ,numberOfMethods
-      ,methodWithMaxLoc.max                          AS maxEffectiveLinesOfCode
-      ,methodWithMaxLoc.method.name                  AS maxEffectiveLinesOfCodeMethod
-      ,methodWithMaxLoc.type.fqn                     AS typeOfMaxEffectiveLinesOfCodeMethod
-      ,methodWithMaxCyclomaticComplexity.max         AS maxCyclomaticComplexity
-      ,methodWithMaxCyclomaticComplexity.method.name AS maxCyclomaticComplexityMethod
-      ,methodWithMaxCyclomaticComplexity.type.fqn    AS typeOfMaxCyclomaticComplexityMethod
-ORDER BY artifactName, fullPackageName
+RETURN artifactName, fullPackageName
+      ,sumEffectiveLinesOfMethodCode                 AS linesInPackage
+      ,numberOfMethods                               AS methodCount
+      ,methodWithMaxLoc.max                          AS maxLinesMethod
+      ,methodWithMaxLoc.type.name                    AS maxLinesMethodType
+      ,methodWithMaxLoc.method.name                  AS maxLinesMethodName
+      ,methodWithMaxCyclomaticComplexity.max         AS maxComplexity
+      ,methodWithMaxCyclomaticComplexity.type.name   AS maxComplexityType
+      ,methodWithMaxCyclomaticComplexity.method.name AS maxComplexityMethod
+      ,packageName 
+ORDER BY sumEffectiveLinesOfMethodCode DESC, artifactName ASC, fullPackageName
