@@ -72,7 +72,7 @@ jobs:
       with:
         path: ~/conda_pkgs_dir
         key:
-          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml') }}
+          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml', '.github/workflows/*.yml') }}
 
     # "Setup Python" can be skipped if jupyter notebook reports aren't needed
     - name: Setup Python ${{ matrix.python }} with Conda package manager Mambaforge
