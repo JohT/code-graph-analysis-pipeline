@@ -4,13 +4,13 @@ channels:
 dependencies:
   - python=3.11.*
   - jupyter=1.0.*
-  - matplotlib=3.7.*
-  - nbconvert=7.3.*
-  - nbconvert-webpdf=7.3.*
-  - numpy=1.24.*
-  - pandas=2.0.*
-  - pip=23.1.*
+  - matplotlib=3.6.*
+  - nbconvert=7.2.*
+  - nbconvert-webpdf=7.2.*
+  - numpy=1.23.*
+  - pandas=1.5.*
+  - pip=22.3.*
   - pip:
-      - monotonic==1.6
+      - monotonic==1.*
       - py2neo==2021.2.*
       - wordcloud==1.9.*
