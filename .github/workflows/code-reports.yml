@@ -113,7 +113,7 @@ jobs:
     - name: Archive results
       uses: actions/upload-artifact@v3
       with:
-        name: AxonFramework-v${{ env.AXON_FRAMEWORK_VERSION }}-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
         path: ./results
         if-no-files-found: error
         retention-days: 5
