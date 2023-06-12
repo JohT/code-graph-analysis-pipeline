@@ -14,17 +14,22 @@ Script | Directory | Description
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [generateCypherReference.sh](./generateCypherReference.sh) |  | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
-| [generateMarkdownReference.sh](./generateMarkdownReference.sh) |  | Generates "REPORTS.md" containing a reference to all Markdown files in this directory and its sub directories. |
+| [generateMarkdownReference.sh](./generateMarkdownReference.sh) |  | Generates "REPORTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [generateScriptReference.sh](./generateScriptReference.sh) |  | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
+| [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports. |
+| [ExternalDependenciesJupyter.sh](./reports/ExternalDependenciesJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics" CSV reports. |
 | [ObjectOrientedDesignMetricsJupyter.sh](./reports/ObjectOrientedDesignMetricsJupyter.sh) | reports | Creates the "object-oriented-design-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "ObjectOrientedDesignMetrics.ipynb". |
+| [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports. |
+| [OverviewJupyter.sh](./reports/OverviewJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [PackageDependenciesCsv.sh](./reports/PackageDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports. |
 | [PackageDependenciesJupyter.sh](./reports/PackageDependenciesJupyter.sh) | reports | Creates the "package-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "PackageDependencies.ipynb". |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics" CSV reports. |
 | [VisibilityMetricsJupyter.sh](./reports/VisibilityMetricsJupyter.sh) | reports | Creates the "visibility-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "VisibilityMetrics.ipynb". |
+| [WordcloudJupyter.sh](./reports/WordcloudJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [AllReports.sh](./reports/compilations/AllReports.sh) | compilations | Runs all report scripts. |
 | [CsvReports.sh](./reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required). |
 | [JupyterReports.sh](./reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts. |
@@ -35,6 +40,4 @@ Script | Directory | Description
 | [setupNeo4jInitialPassword.sh](./setupNeo4jInitialPassword.sh) |  | Sets the initial password for the local Neo4j Graph Database (https://neo4j.com/download-center/#community). |
 | [startNeo4j.sh](./startNeo4j.sh) |  | Starts the local Neo4j Graph Database.  |
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
-| [test.sh](./test.sh) |  | This is just a temporary test script with changing contents. |
-| [testAnother.sh](./testAnother.sh) |  | This is just a temporary test script with changing contents. |
 | [waitForNeo4jHttp.sh](./waitForNeo4jHttp.sh) |  | Waits until the HTTP Transactions API of Neo4j Graph Database is available. |
