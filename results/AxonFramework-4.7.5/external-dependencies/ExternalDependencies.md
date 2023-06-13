@@ -54,41 +54,41 @@
     <tr>
       <th>0</th>
       <td>javax.annotation</td>
-      <td>324</td>
+      <td>320</td>
       <td>1406</td>
-      <td>2503</td>
+      <td>2498</td>
       <td>[Nonnull, Nullable, PreDestroy]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.slf4j</td>
-      <td>190</td>
-      <td>534</td>
-      <td>2503</td>
+      <td>187</td>
+      <td>527</td>
+      <td>2498</td>
       <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>75</td>
-      <td>334</td>
-      <td>2503</td>
-      <td>[Index, Table, Entity, EntityExistsException, ...</td>
+      <td>72</td>
+      <td>324</td>
+      <td>2498</td>
+      <td>[Id, IdClass, MappedSuperclass, Index, Entity,...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>jakarta.persistence</td>
-      <td>66</td>
-      <td>322</td>
-      <td>2503</td>
-      <td>[Index, Table, Entity, EntityExistsException, ...</td>
+      <td>63</td>
+      <td>312</td>
+      <td>2498</td>
+      <td>[Id, IdClass, MappedSuperclass, Entity, Index,...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>org.hamcrest</td>
       <td>61</td>
       <td>498</td>
-      <td>2503</td>
+      <td>2498</td>
       <td>[CoreMatchers, Matcher, Description, StringDes...</td>
     </tr>
     <tr>
@@ -96,39 +96,39 @@
       <td>com.fasterxml.jackson.annotation</td>
       <td>54</td>
       <td>84</td>
-      <td>2503</td>
-      <td>[JsonProperty, JsonGetter, JsonTypeInfo, JsonT...</td>
+      <td>2498</td>
+      <td>[JsonProperty, JsonGetter, JsonTypeInfo$Id, Js...</td>
     </tr>
     <tr>
       <th>6</th>
       <td>org.quartz</td>
       <td>37</td>
       <td>226</td>
-      <td>2503</td>
-      <td>[JobDataMap, Job, SchedulerContext, JobExecuti...</td>
+      <td>2498</td>
+      <td>[JobDataMap, Job, JobExecutionException, JobEx...</td>
     </tr>
     <tr>
       <th>7</th>
       <td>reactor.core.publisher</td>
-      <td>31</td>
-      <td>124</td>
-      <td>2503</td>
-      <td>[Mono, Flux, FluxSink$OverflowStrategy, FluxSi...</td>
+      <td>33</td>
+      <td>149</td>
+      <td>2498</td>
+      <td>[Flux, Mono, FluxSink$OverflowStrategy, FluxSi...</td>
     </tr>
     <tr>
       <th>8</th>
       <td>com.fasterxml.jackson.databind</td>
       <td>15</td>
       <td>73</td>
-      <td>2503</td>
+      <td>2498</td>
       <td>[DeserializationContext, JsonDeserializer, Jso...</td>
     </tr>
     <tr>
       <th>9</th>
       <td>org.reactivestreams</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2503</td>
+      <td>13</td>
+      <td>41</td>
+      <td>2498</td>
       <td>[Publisher]</td>
     </tr>
     <tr>
@@ -136,31 +136,31 @@
       <td>com.thoughtworks.xstream.io</td>
       <td>9</td>
       <td>46</td>
-      <td>2503</td>
-      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
+      <td>2498</td>
+      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
     </tr>
     <tr>
       <th>11</th>
       <td>com.lmax.disruptor</td>
       <td>9</td>
       <td>29</td>
-      <td>2503</td>
-      <td>[RingBuffer, LifecycleAware, EventHandler, Blo...</td>
+      <td>2498</td>
+      <td>[RingBuffer, EventHandler, LifecycleAware, Blo...</td>
     </tr>
     <tr>
       <th>12</th>
       <td>javax.cache.event</td>
       <td>8</td>
       <td>34</td>
-      <td>2503</td>
-      <td>[CacheEntryListener, CacheEntryExpiredListener...</td>
+      <td>2498</td>
+      <td>[CacheEntryEvent, CacheEntryListener, CacheEnt...</td>
     </tr>
     <tr>
       <th>13</th>
       <td>javax.sql</td>
       <td>6</td>
       <td>24</td>
-      <td>2503</td>
+      <td>2498</td>
       <td>[DataSource]</td>
     </tr>
     <tr>
@@ -168,48 +168,48 @@
       <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
       <td>12</td>
-      <td>2503</td>
+      <td>2498</td>
       <td>[MarshallingContext, UnmarshallingContext]</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>jakarta.validation</td>
-      <td>5</td>
-      <td>22</td>
-      <td>2503</td>
-      <td>[ConstraintViolation, Validator, ValidatorFact...</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>5</td>
-      <td>22</td>
-      <td>2503</td>
-      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
-    </tr>
-    <tr>
-      <th>17</th>
       <td>nu.xom</td>
       <td>5</td>
       <td>16</td>
-      <td>2503</td>
-      <td>[Document, Builder, ParsingException]</td>
+      <td>2498</td>
+      <td>[Document, ParsingException, Builder]</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>16</th>
       <td>net.sf.ehcache</td>
       <td>5</td>
       <td>63</td>
-      <td>2503</td>
-      <td>[Ehcache, Element, CacheException]</td>
+      <td>2498</td>
+      <td>[Ehcache, CacheException, Element]</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>17</th>
+      <td>com.lmax.disruptor.dsl</td>
+      <td>5</td>
+      <td>22</td>
+      <td>2498</td>
+      <td>[EventHandlerGroup, Disruptor, ProducerType]</td>
+    </tr>
+    <tr>
+      <th>18</th>
       <td>com.thoughtworks.xstream.mapper</td>
       <td>5</td>
       <td>10</td>
-      <td>2503</td>
+      <td>2498</td>
       <td>[Mapper, CannotResolveClassException]</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>javax.validation</td>
+      <td>5</td>
+      <td>22</td>
+      <td>2498</td>
+      <td>[ValidatorFactory, Validation, ConstraintViola...</td>
     </tr>
   </tbody>
 </table>
@@ -272,32 +272,32 @@
     </tr>
     <tr>
       <th>3</th>
-      <td>org.testcontainers.containers.wait.strategy</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>org.quartz.impl.matchers</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>reactor.core</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>7</th>
       <td>org.junit.runner</td>
       <td>2</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>reactor.core</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>org.testcontainers.containers.wait.strategy</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>com.fasterxml.jackson.datatype.jsr310</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>org.quartz.impl.matchers</td>
+      <td>2</td>
+    </tr>
+    <tr>
       <th>8</th>
-      <td>com.fasterxml.jackson.databind.type</td>
+      <td>org.dom4j.io</td>
       <td>3</td>
     </tr>
     <tr>
@@ -307,17 +307,17 @@
     </tr>
     <tr>
       <th>10</th>
-      <td>com.fasterxml.jackson.databind.module</td>
+      <td>com.fasterxml.jackson.databind.type</td>
       <td>3</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>org.dom4j.io</td>
+      <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>3</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>com.fasterxml.jackson.databind.jsontype</td>
+      <td>com.fasterxml.jackson.databind.module</td>
       <td>3</td>
     </tr>
     <tr>
@@ -337,12 +337,12 @@
     </tr>
     <tr>
       <th>16</th>
-      <td>org.junit.runners.model</td>
+      <td>org.testcontainers.containers</td>
       <td>8</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.testcontainers.containers</td>
+      <td>org.junit.runners.model</td>
       <td>8</td>
     </tr>
     <tr>
@@ -409,7 +409,7 @@
       <td>9</td>
       <td>28</td>
       <td>39</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -427,7 +427,7 @@
       <td>9</td>
       <td>29</td>
       <td>22</td>
-      <td>[LifecycleAware, EventHandler, BlockingWaitStr...</td>
+      <td>[RingBuffer, BlockingWaitStrategy, WaitStrateg...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -541,7 +541,7 @@
       <td>38</td>
       <td>188</td>
       <td>24</td>
-      <td>[Matcher, BaseMatcher, Description, TypeSafeMa...</td>
+      <td>[Matcher, Description, BaseMatcher, TypeSafeMa...</td>
       <td>matchers</td>
     </tr>
     <tr>
@@ -549,10 +549,10 @@
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.queryhandling</td>
       <td>reactor.core.publisher</td>
-      <td>24</td>
-      <td>90</td>
+      <td>26</td>
+      <td>115</td>
       <td>40</td>
-      <td>[Mono, Flux, FluxSink, FluxSink$OverflowStrate...</td>
+      <td>[Flux, Sinks$MulticastReplaySpec, ConnectableF...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -563,7 +563,7 @@
       <td>19</td>
       <td>95</td>
       <td>6</td>
-      <td>[JobExecutionContext, SchedulerContext, JobDet...</td>
+      <td>[SchedulerContext, JobDataMap, Job, JobExecuti...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -574,19 +574,19 @@
       <td>18</td>
       <td>131</td>
       <td>4</td>
-      <td>[JobDataMap, Job, SchedulerContext, JobExecuti...</td>
+      <td>[Scheduler, JobDataMap, JobBuilder, SchedulerC...</td>
       <td>quartz</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>org.slf4j</td>
+      <td>org.axonframework.serialization.json</td>
+      <td>com.fasterxml.jackson.databind</td>
       <td>15</td>
-      <td>55</td>
-      <td>93</td>
-      <td>[Logger, LoggerFactory]</td>
-      <td>eventhandling</td>
+      <td>73</td>
+      <td>7</td>
+      <td>[JsonNode, ObjectMapper, DeserializationContex...</td>
+      <td>json</td>
     </tr>
     <tr>
       <th>...</th>
@@ -707,8 +707,8 @@
       <td>29</td>
       <td>6</td>
       <td>9</td>
-      <td>[com.fasterxml.jackson.databind, com.fasterxml...</td>
-      <td>[com.fasterxml.jackson.databind.ObjectWriter, ...</td>
+      <td>[com.fasterxml.jackson.databind.type, com.fast...</td>
+      <td>[com.fasterxml.jackson.databind.type.TypeFacto...</td>
       <td>json</td>
       <td>org.axonframework.serialization.json.JacksonSe...</td>
     </tr>
@@ -721,7 +721,7 @@
       <td>22</td>
       <td>5</td>
       <td>7</td>
-      <td>[org.dom4j, com.thoughtworks.xstream, com.thou...</td>
+      <td>[org.dom4j, com.thoughtworks.xstream.io.xml, o...</td>
       <td>[org.dom4j.Document, com.thoughtworks.xstream....</td>
       <td>xml</td>
       <td>org.axonframework.serialization.xml.XStreamSer...</td>
@@ -730,13 +730,13 @@
       <th>2</th>
       <td>axon-disruptor-4.7.5</td>
       <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus$DisruptorRepository</td>
+      <td>DisruptorCommandBus</td>
+      <td>6</td>
+      <td>34</td>
       <td>4</td>
-      <td>14</td>
-      <td>4</td>
-      <td>4</td>
-      <td>[javax.annotation, com.lmax.disruptor.dsl, com...</td>
-      <td>[javax.annotation.Nonnull, com.lmax.disruptor....</td>
+      <td>6</td>
+      <td>[com.lmax.disruptor.dsl, com.lmax.disruptor, j...</td>
+      <td>[com.lmax.disruptor.dsl.EventHandlerGroup, com...</td>
       <td>commandhandling</td>
       <td>org.axonframework.disruptor.commandhandling.Di...</td>
     </tr>
@@ -744,11 +744,11 @@
       <th>3</th>
       <td>axon-disruptor-4.7.5</td>
       <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus</td>
-      <td>6</td>
-      <td>34</td>
+      <td>DisruptorCommandBus$DisruptorRepository</td>
       <td>4</td>
-      <td>6</td>
+      <td>14</td>
+      <td>4</td>
+      <td>4</td>
       <td>[com.lmax.disruptor.dsl, org.slf4j, javax.anno...</td>
       <td>[com.lmax.disruptor.dsl.Disruptor, org.slf4j.L...</td>
       <td>commandhandling</td>
@@ -763,8 +763,8 @@
       <td>78</td>
       <td>4</td>
       <td>13</td>
-      <td>[org.quartz, org.quartz.impl.matchers, org.slf...</td>
-      <td>[org.quartz.SchedulerException, org.quartz.Sch...</td>
+      <td>[org.slf4j, org.quartz, javax.annotation, org....</td>
+      <td>[org.slf4j.Logger, org.quartz.JobBuilder, org....</td>
       <td>quartz</td>
       <td>org.axonframework.deadline.quartz.QuartzDeadli...</td>
     </tr>
@@ -778,7 +778,7 @@
       <td>4</td>
       <td>7</td>
       <td>[org.slf4j, com.fasterxml.jackson.annotation, ...</td>
-      <td>[org.slf4j.LoggerFactory, org.slf4j.Logger, co...</td>
+      <td>[org.slf4j.LoggerFactory, com.fasterxml.jackso...</td>
       <td>responsetypes</td>
       <td>org.axonframework.messaging.responsetypes.Mult...</td>
     </tr>
@@ -791,13 +791,27 @@
       <td>33</td>
       <td>4</td>
       <td>13</td>
-      <td>[org.reactivestreams, reactor.core.publisher, ...</td>
-      <td>[org.reactivestreams.Publisher, reactor.core.p...</td>
+      <td>[reactor.core.publisher, org.reactivestreams, ...</td>
+      <td>[reactor.core.publisher.Flux, reactor.core.pub...</td>
       <td>queryhandling</td>
       <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
     </tr>
     <tr>
       <th>7</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.queryhandling</td>
+      <td>SimpleQueryBus</td>
+      <td>6</td>
+      <td>55</td>
+      <td>4</td>
+      <td>6</td>
+      <td>[javax.annotation, org.reactivestreams, org.sl...</td>
+      <td>[javax.annotation.Nonnull, org.reactivestreams...</td>
+      <td>queryhandling</td>
+      <td>org.axonframework.queryhandling.SimpleQueryBus</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>AbstractXStreamSerializer$MetaDataConverter</td>
@@ -805,13 +819,13 @@
       <td>14</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.thoughtworks.xstream.converters, com.thou...</td>
-      <td>[com.thoughtworks.xstream.converters.Marshalli...</td>
+      <td>[com.thoughtworks.xstream.converters.collectio...</td>
+      <td>[com.thoughtworks.xstream.converters.collectio...</td>
       <td>serialization</td>
       <td>org.axonframework.serialization.AbstractXStrea...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
@@ -825,7 +839,7 @@
       <td>org.axonframework.serialization.GapAwareTracki...</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>GapAwareTrackingTokenConverter</td>
@@ -839,7 +853,7 @@
       <td>org.axonframework.serialization.GapAwareTracki...</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization.json</td>
       <td>MetaDataDeserializer</td>
@@ -847,13 +861,13 @@
       <td>21</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.fasterxml.jackson.databind, com.fasterxml...</td>
-      <td>[com.fasterxml.jackson.databind.Deserializatio...</td>
+      <td>[com.fasterxml.jackson.core, com.fasterxml.jac...</td>
+      <td>[com.fasterxml.jackson.core.JacksonException, ...</td>
       <td>json</td>
       <td>org.axonframework.serialization.json.MetaDataD...</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>12</th>
       <td>axon-disruptor-4.7.5</td>
       <td>org.axonframework.disruptor.commandhandling</td>
       <td>DisruptorCommandBus$ExceptionHandler</td>
@@ -861,13 +875,13 @@
       <td>5</td>
       <td>3</td>
       <td>3</td>
-      <td>[org.slf4j, com.lmax.disruptor, com.lmax.disru...</td>
-      <td>[org.slf4j.Logger, com.lmax.disruptor.Exceptio...</td>
+      <td>[com.lmax.disruptor.dsl, org.slf4j, com.lmax.d...</td>
+      <td>[com.lmax.disruptor.dsl.Disruptor, org.slf4j.L...</td>
       <td>commandhandling</td>
       <td>org.axonframework.disruptor.commandhandling.Di...</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>13</th>
       <td>axon-disruptor-4.7.5</td>
       <td>org.axonframework.disruptor.commandhandling</td>
       <td>BlacklistDetectingCallback</td>
@@ -876,23 +890,9 @@
       <td>3</td>
       <td>4</td>
       <td>[javax.annotation, org.slf4j, com.lmax.disruptor]</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.LoggerFac...</td>
+      <td>[javax.annotation.Nonnull, org.slf4j.Logger, c...</td>
       <td>commandhandling</td>
       <td>org.axonframework.disruptor.commandhandling.Bl...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>axon-eventsourcing-4.7.5</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
-      <td>JpaEventStorageEngine</td>
-      <td>6</td>
-      <td>47</td>
-      <td>3</td>
-      <td>6</td>
-      <td>[org.slf4j, javax.annotation, jakarta.persiste...</td>
-      <td>[org.slf4j.LoggerFactory, javax.annotation.Non...</td>
-      <td>jpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -903,24 +903,24 @@
       <td>12</td>
       <td>3</td>
       <td>4</td>
-      <td>[javax.sql, jakarta.persistence, org.slf4j]</td>
-      <td>[javax.sql.DataSource, jakarta.persistence.Ent...</td>
+      <td>[org.slf4j, jakarta.persistence, javax.sql]</td>
+      <td>[org.slf4j.LoggerFactory, jakarta.persistence....</td>
       <td>jpa</td>
       <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
     </tr>
     <tr>
       <th>15</th>
       <td>axon-eventsourcing-4.7.5</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
       <td>JpaEventStorageEngine</td>
       <td>6</td>
       <td>47</td>
       <td>3</td>
       <td>6</td>
-      <td>[javax.persistence, javax.annotation, org.slf4j]</td>
-      <td>[javax.persistence.Query, javax.annotation.Non...</td>
-      <td>legacyjpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>[jakarta.persistence, javax.annotation, org.sl...</td>
+      <td>[jakarta.persistence.EntityManager, jakarta.pe...</td>
+      <td>jpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -931,13 +931,27 @@
       <td>12</td>
       <td>3</td>
       <td>4</td>
-      <td>[org.slf4j, javax.sql, javax.persistence]</td>
-      <td>[org.slf4j.Logger, org.slf4j.LoggerFactory, ja...</td>
+      <td>[javax.sql, javax.persistence, org.slf4j]</td>
+      <td>[javax.sql.DataSource, javax.persistence.Entit...</td>
       <td>legacyjpa</td>
       <td>org.axonframework.eventsourcing.eventstore.leg...</td>
     </tr>
     <tr>
       <th>17</th>
+      <td>axon-eventsourcing-4.7.5</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>JpaEventStorageEngine</td>
+      <td>6</td>
+      <td>47</td>
+      <td>3</td>
+      <td>6</td>
+      <td>[javax.annotation, javax.persistence, org.slf4j]</td>
+      <td>[javax.annotation.Nonnull, javax.persistence.T...</td>
+      <td>legacyjpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+    </tr>
+    <tr>
+      <th>18</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.deadline.jobrunr</td>
       <td>JobRunrDeadlineManager</td>
@@ -946,12 +960,12 @@
       <td>3</td>
       <td>5</td>
       <td>[org.slf4j, javax.annotation, org.jobrunr.sche...</td>
-      <td>[org.slf4j.Logger, javax.annotation.Nullable, ...</td>
+      <td>[org.slf4j.LoggerFactory, javax.annotation.Non...</td>
       <td>jobrunr</td>
       <td>org.axonframework.deadline.jobrunr.JobRunrDead...</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.eventhandling.deadletter.jpa</td>
       <td>JpaSequencedDeadLetterQueue</td>
@@ -959,24 +973,10 @@
       <td>74</td>
       <td>3</td>
       <td>7</td>
-      <td>[org.slf4j, jakarta.persistence, javax.annotat...</td>
-      <td>[org.slf4j.LoggerFactory, org.slf4j.Logger, ja...</td>
+      <td>[jakarta.persistence, org.slf4j, javax.annotat...</td>
+      <td>[jakarta.persistence.NoResultException, jakart...</td>
       <td>jpa</td>
       <td>org.axonframework.eventhandling.deadletter.jpa...</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.eventhandling.deadletter.leg...</td>
-      <td>JpaSequencedDeadLetterQueue</td>
-      <td>7</td>
-      <td>74</td>
-      <td>3</td>
-      <td>7</td>
-      <td>[javax.persistence, org.slf4j, javax.annotation]</td>
-      <td>[javax.persistence.EntityManager, org.slf4j.Lo...</td>
-      <td>legacyjpa</td>
-      <td>org.axonframework.eventhandling.deadletter.leg...</td>
     </tr>
   </tbody>
 </table>
@@ -1055,8 +1055,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-eventsourcing-4.7.5</td>
       <td>130</td>
       <td>1</td>
-      <td>12</td>
-      <td>9.230769</td>
+      <td>9</td>
+      <td>6.923077</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1079,8 +1079,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-messaging-4.7.5</td>
       <td>729</td>
       <td>1</td>
-      <td>100</td>
-      <td>13.717421</td>
+      <td>99</td>
+      <td>13.580247</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1095,8 +1095,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-messaging-4.7.5</td>
       <td>729</td>
       <td>3</td>
-      <td>4</td>
-      <td>0.548697</td>
+      <td>5</td>
+      <td>0.685871</td>
     </tr>
     <tr>
       <th>10</th>
@@ -1119,8 +1119,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-modelling-4.7.5</td>
       <td>149</td>
       <td>1</td>
-      <td>9</td>
-      <td>6.040268</td>
+      <td>10</td>
+      <td>6.711409</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1203,9 +1203,9 @@ Have a look above to find out which types have the highest external package depe
       <th>1</th>
       <td>12.820513</td>
       <td>9.090909</td>
-      <td>9.230769</td>
-      <td>13.717421</td>
-      <td>6.040268</td>
+      <td>6.923077</td>
+      <td>13.580247</td>
+      <td>6.711409</td>
       <td>32.941176</td>
     </tr>
     <tr>
@@ -1222,7 +1222,7 @@ Have a look above to find out which types have the highest external package depe
       <td>0.000000</td>
       <td>13.636364</td>
       <td>1.538462</td>
-      <td>0.548697</td>
+      <td>0.685871</td>
       <td>0.000000</td>
       <td>3.529412</td>
     </tr>
@@ -1300,44 +1300,44 @@ Have a look above to find out which types have the highest external package depe
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
-      <td>javax.inject</td>
-      <td>javax.inject</td>
+      <td>jakarta.persistence</td>
+      <td>jakarta.persistence-api</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>provided</td>
+      <td>default</td>
       <td>False</td>
-      <td>com.google.code.findbugs</td>
-      <td>jsr305</td>
+      <td>${project.groupId}</td>
+      <td>axon-disruptor</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>axon-configuration</td>
-      <td>Axon Framework - Configuration</td>
-      <td>test</td>
-      <td>False</td>
-      <td>org.quartz-scheduler</td>
-      <td>quartz</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-configuration</td>
-      <td>Axon Framework - Configuration</td>
-      <td>default</td>
-      <td>True</td>
-      <td>jakarta.annotation</td>
-      <td>jakarta.annotation-api</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>default</td>
       <td>False</td>
       <td>${project.groupId}</td>
       <td>axon-eventsourcing</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-configuration</td>
+      <td>Axon Framework - Configuration</td>
+      <td>test</td>
+      <td>False</td>
+      <td>org.hibernate</td>
+      <td>hibernate-core-jakarta</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-configuration</td>
+      <td>Axon Framework - Configuration</td>
+      <td>test</td>
+      <td>True</td>
+      <td>io.projectreactor</td>
+      <td>reactor-core</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1352,13 +1352,22 @@ Have a look above to find out which types have the highest external package depe
       <th>104</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>org.testcontainers</td>
-      <td>testcontainers</td>
+      <td>test</td>
+      <td>False</td>
+      <td>javax.inject</td>
+      <td>javax.inject</td>
     </tr>
     <tr>
       <th>105</th>
+      <td>axon-test</td>
+      <td>Axon Framework - Test Fixtures</td>
+      <td>default</td>
+      <td>False</td>
+      <td>org.junit.jupiter</td>
+      <td>junit-jupiter</td>
+    </tr>
+    <tr>
+      <th>106</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
@@ -1367,7 +1376,7 @@ Have a look above to find out which types have the highest external package depe
       <td>hamcrest-library</td>
     </tr>
     <tr>
-      <th>106</th>
+      <th>107</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>test</td>
@@ -1376,22 +1385,13 @@ Have a look above to find out which types have the highest external package depe
       <td>jakarta.persistence-api</td>
     </tr>
     <tr>
-      <th>107</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>org.hamcrest</td>
-      <td>hamcrest</td>
-    </tr>
-    <tr>
       <th>108</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>test</td>
+      <td>default</td>
       <td>False</td>
-      <td>org.springframework</td>
-      <td>spring-beans</td>
+      <td>${project.groupId}</td>
+      <td>axon-eventsourcing</td>
     </tr>
   </tbody>
 </table>
