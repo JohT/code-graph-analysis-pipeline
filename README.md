@@ -56,7 +56,7 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 
 ## 📈 Report Reference
 
-[REPORTS.md](./reports/REPORTS.md) lists all Markdown reports inside the [results](./reports).
+[REPORTS.md](./results/REPORTS.md) lists all Markdown reports inside the [results](./results).
 
 ## ⚙️ Script Reference
 
