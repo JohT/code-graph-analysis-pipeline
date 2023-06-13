@@ -1,8 +1,17 @@
 # Code Graph Analysis Pipeline
 
-<img src="./images/DALL-E-Mini-Graph-Pipeline-Logo.png" align="left" hspace="8" width="180">
+<div style="display: flex;">
+  <div style="flex: 1; margin-right: 10px;">
+    <img src="./images/DALL-E-Mini-Graph-Pipeline-Logo.png" alt="Codegraph Pipeline" width="180">
+  </div>
+  <div style="flex: 4;">
+    <p>
+    Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of <a href="https://jqassistant.org/get-started" rel="nofollow">jQAssistant</a>, its capabilities extend beyond that particular language. The graph database <a href="https://neo4j.com" rel="nofollow">Neo4j</a> serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's <a href="https://neo4j.com/product/graph-data-science" rel="nofollow">Graph Data Science</a> integration maximizes the utilization of its features. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+    </p>
+  </div>
+</div>
 
-Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.org/get-started), its capabilities extend beyond that particular language. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) integration maximizes the utilization of its features. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+---
 
 ## 🚀 Features
 
