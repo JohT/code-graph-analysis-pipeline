@@ -25,10 +25,6 @@ execute_cypher_http() {
 
     # (Neo4j HTTP API Script) Execute the Cyper query contained in the file and print the results as CSV
     source $SCRIPTS_DIR/executeQuery.sh "${cypherFileName}" || exit 1
-
-    # Display the name of the Cypher file without its path at the bottom of the CSV (or console) separated by an empty line
-    echo ""
-    echo "\"Source Cypher Query:\",\"$(basename -- "${cypherFileName}")\""
 }
 
 # Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using Neo4j's HTTP API
@@ -62,8 +58,9 @@ execute_cypher_shell() {
     cat $cypherFileName | NEO4J_HOME="${NEO4J_DIRECTORY}" ${NEO4J_BIN}/cypher-shell -u neo4j -p "${NEO4J_INITIAL_PASSWORD}" --format plain || exit 1
 
     # Display the name of the Cypher file without its path at the bottom of the CSV (or console) separated by an empty line
+    # TODO Find a solution to move the source reference to the last column name
     echo ""
-    echo "\"Source Cypher Query:\",\"$(basename -- "${cypherFileName}")\""
+    echo "\"Source Cypher File:\",\"$(basename -- "${cypherFileName}")\""
 }
 
 # Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using "cypher-shell" provided by Neo4j

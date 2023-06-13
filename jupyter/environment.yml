@@ -2,11 +2,15 @@ name: codegraph
 channels:
   - conda-forge
 dependencies:
-  - jupyter
-  - matplotlib
-  - monotonic
-  - nbconvert
-  - nbconvert-webpdf
-  - numpy
-  - pandas
-  - py2neo
+  - python=3.11.*
+  - jupyter=1.0.*
+  - matplotlib=3.6.*
+  - nbconvert=7.2.*
+  - nbconvert-webpdf=7.2.*
+  - numpy=1.23.*
+  - pandas=1.5.*
+  - pip=22.3.*
+  - pip:
+      - monotonic==1.*
+      - py2neo==2021.2.*
+      - wordcloud==1.9.*

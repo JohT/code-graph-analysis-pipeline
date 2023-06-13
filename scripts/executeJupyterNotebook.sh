@@ -89,7 +89,7 @@ backupCondaEnvironment=$CONDA_DEFAULT_ENV
 if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
     backupCondaEnvironment=$CONDA_DEFAULT_ENV
 
-    if { ${pathToConda}conda env list | grep "$CODEGRAPH_CONDA_ENVIRONMENT"; } >/dev/null 2>&1; then
+    if { ${pathToConda}conda env list | grep "$CODEGRAPH_CONDA_ENVIRONMENT "; } >/dev/null 2>&1; then
         echo "executeJupyterNotebook: Conda environment $CODEGRAPH_CONDA_ENVIRONMENT already created"
     else
         if [ ! -f "${jupyter_notebook_file_path}/environment.yml" ] ; then

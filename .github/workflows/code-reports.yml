@@ -72,7 +72,7 @@ jobs:
       with:
         path: ~/conda_pkgs_dir
         key:
-          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml') }}
+          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml', '.github/workflows/*.yml') }}
 
     # "Setup Python" can be skipped if jupyter notebook reports aren't needed
     - name: Setup Python ${{ matrix.python }} with Conda package manager Mambaforge
@@ -113,7 +113,7 @@ jobs:
     - name: Archive results
       uses: actions/upload-artifact@v3
       with:
-        name: AxonFramework-v${{ env.AXON_FRAMEWORK_VERSION }}-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
         path: ./results
         if-no-files-found: error
         retention-days: 5

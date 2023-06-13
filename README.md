@@ -18,23 +18,41 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ## 🛠 Prerequisites
 
-- Java 11 is required
+- Java 11 is required (June 2023 Neo4j 4.x requirement)
 - Python with a conda package manager is needed for Jupyter Notebook reports
 - Chromium will automatically be downloaded if needed for Jupyter Notebook reports in PDF format.
 
-## 🏗 Pipeline
+## Getting Started
+
+See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md) on how to start
+an analysis on your local machine.
+
+## 🏗 Pipeline and Tools
 
 The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
 
-- Use Linux Runner
-- Setup Java
-- Setup Python
-- Setup Conda package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
+- Use [GitHub Actions](https://docs.github.com/de/actions) Linux Runner
+- [Checkout GIT Repository](https://github.com/actions/checkout)
+- [Setup Java](https://github.com/actions/setup-java)
+- [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.org/get-started) for Java Analysis ([analysis.sh](./scripts/analysis/analyze.sh))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
-- Trigger (Java) artifacts download that contain the code to be analyzed [scripts/artifacts](./scripts/artifacts/)
-- Generate Reports [scripts/reports](./scripts/reports/)
+- Trigger Artifacts download that contain the code to be analyzed [scripts/artifacts](./scripts/artifacts/)
+- Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
+- Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [environment.yml](./jupyter/environment.yml):
+  - [Python](https://www.python.org)
+  - [jupyter](https://jupyter.org)
+  - [matplotlib](https://matplotlib.org)
+  - [nbconvert](https://nbconvert.readthedocs.io)
+  - [numpy](https://numpy.org)
+  - [pandas](https://pandas.pydata.org)
+  - [pip](https://pip.pypa.io/en/stable)
+  - [monotonic](https://github.com/atdt/monotonic)
+  - [py2neo](https://py2neo.org)
+  - [wordcloud](https://github.com/amueller/word_cloud)
+
+**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like these wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list. 
 
 ## 📈 Report Reference
 
@@ -42,13 +60,32 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 
 ## ⚙️ Script Reference
 
-[SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository with a description (first comment line).
+[SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository with a description (first comment line). It can updated as described in [Update Markdown Reference](./COMMANDS.md#update-script-reference) of the [Commands Reference](./COMMANDS.md).
 
 ## 🔎 Cypher Query Reference
 
-[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository with their description (first comment lines).
+[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository with their description (first comment lines). It can updated as described in [Update Cypher Reference](./COMMANDS.md#update-cypher-reference) of the [Commands Reference](./COMMANDS.md).
 > [Cypher](https://neo4j.com/docs/getting-started/cypher-intro) is Neo4j’s graph query language that lets you retrieve data from the graph.
 
 ## 🛠 Command Reference
 
-[COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup. 
+[COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup.
+
+## 🤔 Questions & Answers
+
+- How can i add an CSV report to the pipeline?  
+👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
+👉 Create a new CSV report script in the [scripts/reports](./scripts/reports/) directory. Take for example [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) as a reference.
+👉 The script will automatically be included because of the directory and its name ending with "Csv.sh".
+
+- How can i add an Jupyter Notebook report to the pipeline?  
+👉 Put your new notebook into the [jupyter](./jupyter) directory.  
+👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
+👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
+
+- How can i add another code base to analyze?
+👉 Create an new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take [downloadAxonFramework.](./scripts/artifacts/downloadAxonFramework.sh) as a reference for example.
+👉 The script will be triggered when the [analyze](./scripts/analysis/analyze.sh) command 
+
+- How can i trigger a full rescan of all artifacts?
+👉 Delete the file `artifactsChangeDetectionHash.txt` in the temporary `arctifacts` directory.

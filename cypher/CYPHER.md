@@ -5,7 +5,7 @@ It provides a table listing each Cypher file and its corresponding description f
 
 Script | Directory | Description
 -------|-----------|------------
-| [Adding_the_artifact_name_temporarily_to_a_new_virtual_node_using_APOC.cypher](./Adding_the_artifact_name_temporarily_to_a_new_virtual_node_using_APOC.cypher) |  | Adding the artifact name temporarily to a new virtual node using APOC. Doesn't take all relationships into account and therefore doesn't work yet |
+| [Adding_the_artifact_name_temporarily_to_a_new_virtual_node_using_APOC.cypher](./Adding_the_artifact_name_temporarily_to_a_new_virtual_node_using_APOC.cypher) |  | Adding the artifact name temporarily to a new virtual node using APOC. Doesn't take all relationships into account and therefore doesn't work yet. |
 | [Adding_the_artifact_name_temporarily_to_the_Package_node_using_map_projection.cypher](./Adding_the_artifact_name_temporarily_to_the_Package_node_using_map_projection.cypher) |  | Adding the artifact name temporarily to the Package node using map projection |
 | [Candidates_for_Interface_Segregation.cypher](./Candidates_for_Interface_Segregation.cypher) |  | Candidates for Interface Segregation |
 | [Centrality_0_Delete_Projection.cypher](./Centrality/Centrality_0_Delete_Projection.cypher) | Centrality | Centrality 0 Delete Projection |
@@ -71,10 +71,18 @@ Script | Directory | Description
 | [Cyclic_Dependencies_Concatenated.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_Concatenated.cypher) | Cyclic_Dependencies | Cyclic Dependencies Concatenated |
 | [Cyclic_Dependencies_as_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as List |
 | [Cyclic_Dependencies_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as unwinded List |
+| [External_package_usage_overall.cypher](./External_Dependencies/External_package_usage_overall.cypher) | External_Dependencies | External package usage overall |
+| [External_package_usage_per_artifact.cypher](./External_Dependencies/External_package_usage_per_artifact.cypher) | External_Dependencies | External package usage per artifact |
+| [External_package_usage_per_artifact_and_package.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package.cypher) | External_Dependencies | External package usage per artifact and package |
+| [External_package_usage_per_type.cypher](./External_Dependencies/External_package_usage_per_type.cypher) | External_Dependencies | External package usage per type |
+| [External_package_usage_per_type_distribution.cypher](./External_Dependencies/External_package_usage_per_type_distribution.cypher) | External_Dependencies | External package usage per type distribution |
+| [External_types_per_artifact_using_requires.cypher](./External_Dependencies/External_types_per_artifact_using_requires.cypher) | External_Dependencies | External types per artifact using requires |
+| [Maven_POMs_and_their_declared_dependencies.cypher](./External_Dependencies/Maven_POMs_and_their_declared_dependencies.cypher) | External_Dependencies | Maven POMs and their declared dependencies |
 | [Extract_Custom_Manifest_Entries.cypher](./Extract_Custom_Manifest_Entries.cypher) |  | Extract Custom Manifest Entries |
 | [Get_Awesome_Procedures_On_Cypher_APOC_Version.cypher](./Get_Awesome_Procedures_On_Cypher_APOC_Version.cypher) |  | Get Awesome Procedures On Cypher APOC Version |
 | [Get_Graph_Data_Science_Library_Version.cypher](./Get_Graph_Data_Science_Library_Version.cypher) |  | Get Graph Data Science Library Version |
 | [Get_Graph_Data_Science_System_Information.cypher](./Get_Graph_Data_Science_System_Information.cypher) |  | Get Graph Data Science System Information |
+| [Get_all_declared_and_inherited_methods_of_a_type.cypher](./Get_all_declared_and_inherited_methods_of_a_type.cypher) |  | Get all declared and inherited methods of a type |
 | [Path_Finding_1_Create_Projection.cypher](./Graph_Data_Science_Path_Finding/Path_Finding_1_Create_Projection.cypher) | Graph_Data_Science_Path_Finding | Path Finding 1 Create Projection |
 | [Path_Finding_2_Estimate_Memory.cypher](./Graph_Data_Science_Path_Finding/Path_Finding_2_Estimate_Memory.cypher) | Graph_Data_Science_Path_Finding | Path Finding 2 Estimate Memory |
 | [Path_Finding_3_Depth_First_Search_Path.cypher](./Graph_Data_Science_Path_Finding/Path_Finding_3_Depth_First_Search_Path.cypher) | Graph_Data_Science_Path_Finding | Path Finding 3 Depth First Search Path |
@@ -97,6 +105,13 @@ Script | Directory | Description
 | [Set_Incoming_Package_Method_Call_Dependencies.cypher](./Metrics/Set_Incoming_Package_Method_Call_Dependencies.cypher) | Metrics | Set Incoming Package Method Call Dependencies |
 | [Set_Outgoing_Package_Dependencies.cypher](./Metrics/Set_Outgoing_Package_Dependencies.cypher) | Metrics | Set Outgoing Package Dependencies |
 | [Set_Outgoing_Package_Method_Call_Dependencies.cypher](./Metrics/Set_Outgoing_Package_Method_Call_Dependencies.cypher) | Metrics | Set Outgoing Package Method Call Dependencies |
+| [Cyclomatic_Method_Complexity_Distribution.cypher](./Overview/Cyclomatic_Method_Complexity_Distribution.cypher) | Overview | Cyclomatic Complexity Method Complexity Distribution |
+| [Effective_Method_Line_Count_Distribution.cypher](./Overview/Effective_Method_Line_Count_Distribution.cypher) | Overview | Effective Method Line Count Distribution |
+| [Effective_lines_of_method_code_per_package.cypher](./Overview/Effective_lines_of_method_code_per_package.cypher) | Overview | Effective lines of method code per package |
+| [Effective_lines_of_method_code_per_type.cypher](./Overview/Effective_lines_of_method_code_per_type.cypher) | Overview | Effective lines of method code per type |
+| [Number_of_packages_per_artifact.cypher](./Overview/Number_of_packages_per_artifact.cypher) | Overview | Number of packages per artifact |
+| [Number_of_types_per_artifact.cypher](./Overview/Number_of_types_per_artifact.cypher) | Overview | Number of types per artifact |
+| [Words_for_Wordcloud.cypher](./Overview/Words_for_Wordcloud.cypher) | Overview | Words for Wordcloud |
 | [Add_weight10PercentInterfaces_to_Package_DEPENDS_ON_relationships.cypher](./Package_Relationship_Weights/Add_weight10PercentInterfaces_to_Package_DEPENDS_ON_relationships.cypher) | Package_Relationship_Weights | Add weight10PercentInterfaces to Package DEPENDS_ON relationships |
 | [Add_weight25PercentInterfaces_to_Package_DEPENDS_ON_relationships.cypher](./Package_Relationship_Weights/Add_weight25PercentInterfaces_to_Package_DEPENDS_ON_relationships.cypher) | Package_Relationship_Weights | Add weight25PercentInterfaces to Package DEPENDS_ON relationships |
 | [Add_weight_property_for_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher](./Package_Relationship_Weights/Add_weight_property_for_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher) | Package_Relationship_Weights | Add weight property for Interface Dependencies to Package DEPENDS_ON Relationship |

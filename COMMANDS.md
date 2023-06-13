@@ -1,5 +1,55 @@
 # Code Graph Analysis Pipeline - Commands
 
+## Start an analysis
+
+Use the following commands in the root directory of this repository to start an analysis manually e.g. for [AxonFramework](./scripts/artifacts/downloadAxonFramework.sh).
+
+### Notes
+
+- Be sure to use Java 11 (June 2023 Neo4j 4.x requirement)
+- Use your own initial Neo4j password
+- It uses the script [analyze.sh](./scripts/analysis/analyze.sh)
+- The script file names (without the prefix "download" and without the file extension) in the directory [scripts/artifacts](./scripts/artifacts) provide the possible analysis names.
+
+
+```shell
+export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
+mkdir -p ./temp
+./../scripts/analysis/analyze.sh --name AxonFramework --version 4.7.5 --report All
+```
+
+Have a look at [code-reports.yml](./.github/workflows/code-reports.yml) for all details about setup steps and full automation.
+
+## Generate Markdown References
+
+### Update Cypher Reference
+
+Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/generateCypherReference.sh) with the following command:
+
+```script
+./../scripts/generateCypherReference.sh
+```
+
+### Update Script Reference
+
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/generateScriptReference.sh) with the following command:
+
+```script
+./../scripts/generateScriptReference.sh
+```
+
+### Update Markdown Reference
+
+Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateMarkdownReference.sh](./scripts/generateMarkdownReference.sh) with the following command:
+
+👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
+which is included in the pipeline [code-reports.yml](.github/workflows/code-reports.yml) and doesn't need to be executed manually normally.
+
+
+```script
+./../scripts/generateScriptReference.sh
+```
+
 ## Manual Setup
 
 The manual setup is only documented for completeness. It isn't needed since the analysis also covers download, installation and configuration of all needed tools.

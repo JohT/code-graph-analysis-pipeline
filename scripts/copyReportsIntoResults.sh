@@ -16,13 +16,26 @@ echo "copyReportsIntoResults: SCRIPTS_DIR=$SCRIPTS_DIR"
 RESULTS_DIRECTORY=${RESULTS_DIRECTORY:-"results"}
 echo "copyReportsIntoResults: RESULTS_DIRECTORY=${RESULTS_DIRECTORY}"
 
+REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
+echo "copyReportsIntoResults: REPORTS_DIRECTORY=${REPORTS_DIRECTORY}"
+
+FULL_RESULTS_DIRECTORY="./../${RESULTS_DIRECTORY}"
+echo "copyReportsIntoResults: FULL_RESULTS_DIRECTORY=${FULL_RESULTS_DIRECTORY}"
+
 # Create the results directory if it is missing
-mkdir -p "./../${RESULTS_DIRECTORY}"
+mkdir -p "${FULL_RESULTS_DIRECTORY}"
 
 # Move all reports directories to the results directory preserving their surrounding directory
-for report_source_folder in **/reports; do 
-    reportTargetDirectory="./../${RESULTS_DIRECTORY}/$(dirname -- "${report_source_folder}")"
-    cp -RpPf "${report_source_folder}" "${reportTargetDirectory}"
+for report_source_folder in **/"${REPORTS_DIRECTORY}"; do 
+    reportMainSourceDirectory=$(dirname -- "${report_source_folder}")
+    echo "copyReportsIntoResults: reportMainSourceDirectory=${reportMainSourceDirectory}"
+
+    reportTargetDirectory="${FULL_RESULTS_DIRECTORY}/${reportMainSourceDirectory}"
+    echo "copyReportsIntoResults: report_source_folder=${report_source_folder}"
+    echo "copyReportsIntoResults: Deleting reportTargetDirectory ${reportTargetDirectory} before copying the files..."
+    
+    rm -rf "${reportTargetDirectory}"
+    cp -Rp "${report_source_folder}" "${reportTargetDirectory}"
 done
 
 # Generate REPORTS.md containing a reference to all Markdown Reports in the "results" directory and its subdirectories.
