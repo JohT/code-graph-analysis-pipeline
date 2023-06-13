@@ -103,5 +103,5 @@ if [ "${no_source_reference}" = true ] ; then
 else
   cypher_query_file_basename=$(basename -- "${cypher_query_file_name}")
   sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_basename}"
-  echo -n "${cyper_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [[""], ""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
+  echo -n "${cyper_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
 fi
