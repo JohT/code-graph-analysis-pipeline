@@ -20,15 +20,21 @@
 
 ## External Package Usage
 
+### External Package
+
+A package is categorized as "external" if it is utilized as a dependency, or if any of its enclosed types are used as dependencies, but the code within it has not been analyzed (missing bytecode). This also applies to all build-in Java types, but they are explicitly filtered out here.
+
+### External annotation dependency
+
+The aforementioned classification encompasses external annotation dependencies as well. These dependencies introduce significantly less coupling and are not indispensable for compiling code. Without the external annotation the code would most probably behave differently. Hence, they are included in the first more overall and general tables and then left out in the later more specific ones.
+
 ### Table 1 - Top 20 most used external packages overall
 
-A package is categorized as "external" if it is utilized as a dependency, or if any of its enclosed types are used as dependencies, but the code within it has not been analyzed. This would also applies to all build-in Java types, but they are explicitly filtered out here.
-
-The aforementioned classification encompasses external annotation dependencies as well. These dependencies introduce significantly less interdependency and are not indispensable for compiling code. On the other hand they would also loose their effectiveness. Hence, they are included in the overall view for reference purposes.
-
-The *numberOfExternalTypeCaller* refers to the distinct types that make use of the external package, while the *numberOfExternalTypeCalls* includes every invocation or reference to the types in the package. The *allTypes* column represents the total count of all analyzed types in general.
-
-Lastly, the *externalTypeNames* list enumerates the specific types within the external package that are actually utilized.
+- *externalPackageName* identifies the external package as described above
+- *numberOfExternalTypeCaller* refers to the distinct types that make use of the external package
+- *numberOfExternalTypeCalls* includes every invocation or reference to the types in the external package
+- *allTypes* represents the total count of all analyzed types in general
+- *externalTypeNames* contains a list of actually utilized types of the external package
 
 
 
@@ -62,81 +68,81 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     <tr>
       <th>0</th>
       <td>javax.annotation</td>
-      <td>319</td>
-      <td>1381</td>
-      <td>2489</td>
+      <td>323</td>
+      <td>1404</td>
+      <td>2493</td>
       <td>[Nonnull, Nullable, PreDestroy]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.slf4j</td>
-      <td>191</td>
-      <td>536</td>
-      <td>2489</td>
+      <td>190</td>
+      <td>529</td>
+      <td>2493</td>
       <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>71</td>
-      <td>330</td>
-      <td>2489</td>
-      <td>[IdClass, MappedSuperclass, Id, Entity, Index,...</td>
+      <td>78</td>
+      <td>339</td>
+      <td>2493</td>
+      <td>[IdClass, MappedSuperclass, Id, Table, Index, ...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>jakarta.persistence</td>
-      <td>66</td>
-      <td>324</td>
-      <td>2489</td>
-      <td>[Id, IdClass, MappedSuperclass, Table, Entity,...</td>
+      <td>69</td>
+      <td>327</td>
+      <td>2493</td>
+      <td>[MappedSuperclass, IdClass, Id, EntityExistsEx...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>org.hamcrest</td>
-      <td>61</td>
-      <td>498</td>
-      <td>2489</td>
-      <td>[CoreMatchers, Matcher, Description, StringDes...</td>
+      <td>59</td>
+      <td>490</td>
+      <td>2493</td>
+      <td>[Matcher, StringDescription, CoreMatchers, Des...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>54</td>
       <td>84</td>
-      <td>2489</td>
-      <td>[JsonGetter, JsonProperty, JsonTypeInfo$Id, Js...</td>
+      <td>2493</td>
+      <td>[JsonProperty, JsonGetter, JsonTypeInfo$Id, Js...</td>
     </tr>
     <tr>
       <th>6</th>
       <td>org.quartz</td>
       <td>37</td>
       <td>226</td>
-      <td>2489</td>
-      <td>[JobDataMap, Job, Scheduler, SchedulerContext,...</td>
+      <td>2493</td>
+      <td>[JobDataMap, JobDetail, JobExecutionException,...</td>
     </tr>
     <tr>
       <th>7</th>
       <td>reactor.core.publisher</td>
       <td>33</td>
       <td>149</td>
-      <td>2489</td>
-      <td>[Flux, Mono, FluxSink$OverflowStrategy, FluxSi...</td>
+      <td>2493</td>
+      <td>[Mono, Flux, FluxSink$OverflowStrategy, FluxSi...</td>
     </tr>
     <tr>
       <th>8</th>
       <td>com.fasterxml.jackson.databind</td>
       <td>15</td>
       <td>73</td>
-      <td>2489</td>
-      <td>[DeserializationContext, JsonDeserializer, Jso...</td>
+      <td>2493</td>
+      <td>[JsonDeserializer, DeserializationContext, Obj...</td>
     </tr>
     <tr>
       <th>9</th>
       <td>org.reactivestreams</td>
       <td>13</td>
       <td>41</td>
-      <td>2489</td>
+      <td>2493</td>
       <td>[Publisher]</td>
     </tr>
     <tr>
@@ -144,31 +150,31 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>com.thoughtworks.xstream.io</td>
       <td>9</td>
       <td>46</td>
-      <td>2489</td>
-      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
+      <td>2493</td>
+      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>com.lmax.disruptor</td>
-      <td>9</td>
-      <td>29</td>
-      <td>2489</td>
-      <td>[RingBuffer, LifecycleAware, EventHandler, Wai...</td>
-    </tr>
-    <tr>
-      <th>12</th>
       <td>javax.cache.event</td>
       <td>8</td>
       <td>34</td>
-      <td>2489</td>
-      <td>[CacheEntryEventFilter, CacheEntryListener, Ca...</td>
+      <td>2493</td>
+      <td>[CacheEntryEventFilter, CacheEntryEvent, Cache...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>com.lmax.disruptor</td>
+      <td>8</td>
+      <td>24</td>
+      <td>2493</td>
+      <td>[RingBuffer, EventHandler, LifecycleAware, Wai...</td>
     </tr>
     <tr>
       <th>13</th>
       <td>javax.sql</td>
       <td>6</td>
       <td>24</td>
-      <td>2489</td>
+      <td>2493</td>
       <td>[DataSource]</td>
     </tr>
     <tr>
@@ -176,15 +182,15 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
       <td>12</td>
-      <td>2489</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
+      <td>2493</td>
+      <td>[MarshallingContext, UnmarshallingContext]</td>
     </tr>
     <tr>
       <th>15</th>
       <td>nu.xom</td>
       <td>5</td>
       <td>16</td>
-      <td>2489</td>
+      <td>2493</td>
       <td>[Document, ParsingException, Builder]</td>
     </tr>
     <tr>
@@ -192,32 +198,32 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>net.sf.ehcache</td>
       <td>5</td>
       <td>63</td>
-      <td>2489</td>
-      <td>[Element, Ehcache, CacheException]</td>
+      <td>2493</td>
+      <td>[Ehcache, CacheException, Element]</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>5</td>
-      <td>22</td>
-      <td>2489</td>
-      <td>[EventHandlerGroup, Disruptor, ProducerType]</td>
-    </tr>
-    <tr>
-      <th>18</th>
       <td>com.thoughtworks.xstream.mapper</td>
       <td>5</td>
       <td>10</td>
-      <td>2489</td>
+      <td>2493</td>
       <td>[Mapper, CannotResolveClassException]</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
       <td>javax.validation</td>
       <td>5</td>
       <td>22</td>
-      <td>2489</td>
-      <td>[Validator, Validation, ValidatorFactory, Cons...</td>
+      <td>2493</td>
+      <td>[ValidatorFactory, ConstraintViolation, Valida...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>jakarta.validation</td>
+      <td>5</td>
+      <td>22</td>
+      <td>2493</td>
+      <td>[ValidatorFactory, Validation, ConstraintViola...</td>
     </tr>
   </tbody>
 </table>
@@ -236,6 +242,11 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
 
 
 ### Table 2 - Top 20 least used external packages overall
+
+- *externalPackageName* identifies the external package as described above
+- *numberOfExternalTypeCalls* includes every invocation or reference to the types in the external package
+
+This table identifies external packages that aren't used very often. This could help to find libraries that aren't actually needed or maybe easily replaced. Some of them might be used only in very few spots in the code on purpose and can't be replaced. This needs to be decided on a case-by-case basis.
 
 
 
@@ -280,32 +291,32 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     </tr>
     <tr>
       <th>3</th>
-      <td>org.junit.runner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>reactor.core</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>org.testcontainers.containers.wait.strategy</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>4</th>
       <td>com.fasterxml.jackson.datatype.jsr310</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>5</th>
       <td>org.quartz.impl.matchers</td>
       <td>2</td>
     </tr>
     <tr>
+      <th>6</th>
+      <td>reactor.core</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>org.junit.runner</td>
+      <td>2</td>
+    </tr>
+    <tr>
       <th>8</th>
-      <td>org.dom4j.io</td>
+      <td>com.fasterxml.jackson.databind.type</td>
       <td>3</td>
     </tr>
     <tr>
@@ -315,17 +326,17 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     </tr>
     <tr>
       <th>10</th>
-      <td>com.fasterxml.jackson.databind.type</td>
+      <td>com.fasterxml.jackson.databind.module</td>
       <td>3</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>com.fasterxml.jackson.databind.jsontype</td>
+      <td>org.dom4j.io</td>
       <td>3</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>com.fasterxml.jackson.databind.module</td>
+      <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>3</td>
     </tr>
     <tr>
@@ -345,12 +356,12 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     </tr>
     <tr>
       <th>16</th>
-      <td>org.testcontainers.containers</td>
+      <td>org.junit.runners.model</td>
       <td>8</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.junit.runners.model</td>
+      <td>org.testcontainers.containers</td>
       <td>8</td>
     </tr>
     <tr>
@@ -370,6 +381,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
 
 
 ### Table 3 - External usage per artifact
+
+- *artifactName* is used to group the the external package usage per artifact for a more detailed analysis.
+- *externalPackageName* identifies the external package as described above
+- *numberOfExternalTypeCaller* refers to the distinct types that make use of the external package
+- *numberOfExternalTypeCalls* includes every invocation or reference to the types in the external package
+- *numberOfTypesInArtifact* represents the total count of all analyzed types for the artifact
+- *externalTypeNames* contains a list of actually utilized types of the external package
 
 
 
@@ -417,32 +435,32 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>9</td>
       <td>28</td>
       <td>39</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-disruptor-4.7.5</td>
       <td>org.slf4j</td>
-      <td>12</td>
+      <td>11</td>
+      <td>20</td>
       <td>22</td>
-      <td>22</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-disruptor-4.7.5</td>
       <td>com.lmax.disruptor</td>
-      <td>9</td>
-      <td>29</td>
+      <td>8</td>
+      <td>24</td>
       <td>22</td>
-      <td>[RingBuffer, EventHandler, WaitStrategy, Block...</td>
+      <td>[RingBuffer, EventHandler, LifecycleAware, Exc...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-disruptor-4.7.5</td>
       <td>javax.annotation</td>
-      <td>6</td>
-      <td>23</td>
+      <td>5</td>
+      <td>18</td>
       <td>22</td>
       <td>[Nonnull]</td>
     </tr>
@@ -467,11 +485,11 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     <tr>
       <th>62</th>
       <td>axon-test-4.7.5</td>
-      <td>org.testcontainers.containers</td>
+      <td>org.junit.runners.model</td>
       <td>2</td>
       <td>8</td>
       <td>85</td>
-      <td>[GenericContainer]</td>
+      <td>[Statement]</td>
     </tr>
     <tr>
       <th>63</th>
@@ -546,10 +564,10 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>axon-test-4.7.5</td>
       <td>org.axonframework.test.matchers</td>
       <td>org.hamcrest</td>
-      <td>38</td>
-      <td>188</td>
+      <td>36</td>
+      <td>180</td>
       <td>24</td>
-      <td>[Matcher, Description, TypeSafeMatcher, BaseMa...</td>
+      <td>[Description, Matcher, TypeSafeMatcher, BaseMa...</td>
       <td>matchers</td>
     </tr>
     <tr>
@@ -560,7 +578,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>26</td>
       <td>115</td>
       <td>40</td>
-      <td>[Flux, Mono, FluxSink$OverflowStrategy, MonoSi...</td>
+      <td>[Signal, Flux, Mono, Sinks$Many, FluxSink$Over...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -571,7 +589,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>19</td>
       <td>95</td>
       <td>6</td>
-      <td>[JobDataMap, JobKey, SchedulerException, JobDe...</td>
+      <td>[SchedulerContext, Scheduler, JobDataMap, JobD...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -582,7 +600,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>18</td>
       <td>131</td>
       <td>4</td>
-      <td>[Job, Scheduler, JobDataMap, SchedulerContext,...</td>
+      <td>[JobDataMap, Scheduler, JobDetail, JobExecutio...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -608,7 +626,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>...</td>
     </tr>
     <tr>
-      <th>119</th>
+      <th>118</th>
       <td>axon-modelling-4.7.5</td>
       <td>org.axonframework.modelling.saga.repository.jdbc</td>
       <td>javax.sql</td>
@@ -619,7 +637,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>jdbc</td>
     </tr>
     <tr>
-      <th>120</th>
+      <th>119</th>
       <td>axon-modelling-4.7.5</td>
       <td>org.axonframework.modelling.saga.repository.jpa</td>
       <td>javax.persistence</td>
@@ -630,7 +648,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>jpa</td>
     </tr>
     <tr>
-      <th>121</th>
+      <th>120</th>
       <td>axon-test-4.7.5</td>
       <td>org.axonframework.test.aggregate</td>
       <td>org.junit.rules</td>
@@ -641,7 +659,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>aggregate</td>
     </tr>
     <tr>
-      <th>122</th>
+      <th>121</th>
       <td>axon-test-4.7.5</td>
       <td>org.axonframework.test.aggregate</td>
       <td>org.junit.runner</td>
@@ -652,7 +670,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>aggregate</td>
     </tr>
     <tr>
-      <th>123</th>
+      <th>122</th>
       <td>axon-test-4.7.5</td>
       <td>org.axonframework.test.saga</td>
       <td>org.junit.jupiter.api</td>
@@ -664,7 +682,7 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     </tr>
   </tbody>
 </table>
-<p>124 rows × 8 columns</p>
+<p>123 rows × 8 columns</p>
 </div>
 
 
@@ -715,8 +733,8 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>29</td>
       <td>6</td>
       <td>9</td>
-      <td>[com.fasterxml.jackson.databind, com.fasterxml...</td>
-      <td>[com.fasterxml.jackson.databind.JsonNode, com....</td>
+      <td>[com.fasterxml.jackson.databind.module, javax....</td>
+      <td>[com.fasterxml.jackson.databind.module.SimpleM...</td>
       <td>json</td>
       <td>org.axonframework.serialization.json.JacksonSe...</td>
     </tr>
@@ -729,8 +747,8 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>22</td>
       <td>5</td>
       <td>7</td>
-      <td>[org.dom4j, com.thoughtworks.xstream, org.slf4...</td>
-      <td>[org.dom4j.Document, com.thoughtworks.xstream....</td>
+      <td>[org.slf4j, com.thoughtworks.xstream.io.xml, c...</td>
+      <td>[org.slf4j.Logger, com.thoughtworks.xstream.io...</td>
       <td>xml</td>
       <td>org.axonframework.serialization.xml.XStreamSer...</td>
     </tr>
@@ -738,32 +756,18 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <th>2</th>
       <td>axon-disruptor-4.7.5</td>
       <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus$DisruptorRepository</td>
-      <td>4</td>
-      <td>14</td>
-      <td>4</td>
-      <td>4</td>
-      <td>[com.lmax.disruptor, org.slf4j, com.lmax.disru...</td>
-      <td>[com.lmax.disruptor.RingBuffer, org.slf4j.Logg...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Di...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-disruptor-4.7.5</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
       <td>DisruptorCommandBus</td>
       <td>6</td>
       <td>34</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.lmax.disruptor.dsl, org.slf4j, com.lmax.d...</td>
-      <td>[com.lmax.disruptor.dsl.EventHandlerGroup, org...</td>
+      <td>[org.slf4j, com.lmax.disruptor.dsl, com.lmax.d...</td>
+      <td>[org.slf4j.LoggerFactory, com.lmax.disruptor.d...</td>
       <td>commandhandling</td>
       <td>org.axonframework.disruptor.commandhandling.Di...</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.deadline.quartz</td>
       <td>QuartzDeadlineManager</td>
@@ -771,13 +775,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>78</td>
       <td>4</td>
       <td>13</td>
-      <td>[org.slf4j, org.quartz, javax.annotation, org....</td>
-      <td>[org.slf4j.LoggerFactory, org.quartz.Trigger, ...</td>
+      <td>[org.quartz, org.slf4j, javax.annotation, org....</td>
+      <td>[org.quartz.Scheduler, org.slf4j.Logger, org.q...</td>
       <td>quartz</td>
       <td>org.axonframework.deadline.quartz.QuartzDeadli...</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>MultipleInstancesResponseType</td>
@@ -785,13 +789,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>17</td>
       <td>4</td>
       <td>7</td>
-      <td>[com.fasterxml.jackson.annotation, reactor.cor...</td>
-      <td>[com.fasterxml.jackson.annotation.JsonCreator,...</td>
+      <td>[reactor.core.publisher, com.fasterxml.jackson...</td>
+      <td>[reactor.core.publisher.Mono, com.fasterxml.ja...</td>
       <td>responsetypes</td>
       <td>org.axonframework.messaging.responsetypes.Mult...</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.queryhandling</td>
       <td>SimpleQueryBus</td>
@@ -799,13 +803,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>55</td>
       <td>4</td>
       <td>6</td>
-      <td>[reactor.core.publisher, org.reactivestreams, ...</td>
-      <td>[reactor.core.publisher.Flux, org.reactivestre...</td>
+      <td>[reactor.core.publisher, javax.annotation, org...</td>
+      <td>[reactor.core.publisher.Flux, javax.annotation...</td>
       <td>queryhandling</td>
       <td>org.axonframework.queryhandling.SimpleQueryBus</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.queryhandling</td>
       <td>SimpleQueryUpdateEmitter</td>
@@ -813,13 +817,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>33</td>
       <td>4</td>
       <td>13</td>
-      <td>[org.reactivestreams, javax.annotation, reacto...</td>
-      <td>[org.reactivestreams.Publisher, javax.annotati...</td>
+      <td>[javax.annotation, org.reactivestreams, reacto...</td>
+      <td>[javax.annotation.Nonnull, org.reactivestreams...</td>
       <td>queryhandling</td>
       <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
@@ -827,13 +831,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>25</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.thoughtworks.xstream.io, com.thoughtworks...</td>
-      <td>[com.thoughtworks.xstream.io.HierarchicalStrea...</td>
+      <td>[com.thoughtworks.xstream.converters, com.thou...</td>
+      <td>[com.thoughtworks.xstream.converters.Marshalli...</td>
       <td>serialization</td>
       <td>org.axonframework.serialization.GapAwareTracki...</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>GapAwareTrackingTokenConverter</td>
@@ -841,13 +845,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>25</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.thoughtworks.xstream.converters.collectio...</td>
-      <td>[com.thoughtworks.xstream.converters.collectio...</td>
+      <td>[com.thoughtworks.xstream.converters, com.thou...</td>
+      <td>[com.thoughtworks.xstream.converters.Marshalli...</td>
       <td>serialization</td>
       <td>org.axonframework.serialization.GapAwareTracki...</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization</td>
       <td>AbstractXStreamSerializer$MetaDataConverter</td>
@@ -855,13 +859,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>14</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.thoughtworks.xstream.converters, com.thou...</td>
-      <td>[com.thoughtworks.xstream.converters.Unmarshal...</td>
+      <td>[com.thoughtworks.xstream.io, com.thoughtworks...</td>
+      <td>[com.thoughtworks.xstream.io.HierarchicalStrea...</td>
       <td>serialization</td>
       <td>org.axonframework.serialization.AbstractXStrea...</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.serialization.json</td>
       <td>MetaDataDeserializer</td>
@@ -869,10 +873,24 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>21</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.fasterxml.jackson.core, com.fasterxml.jac...</td>
-      <td>[com.fasterxml.jackson.core.JacksonException, ...</td>
+      <td>[com.fasterxml.jackson.databind.type, com.fast...</td>
+      <td>[com.fasterxml.jackson.databind.type.TypeFacto...</td>
       <td>json</td>
       <td>org.axonframework.serialization.json.MetaDataD...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-disruptor-4.7.5</td>
+      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>BlacklistDetectingCallback</td>
+      <td>4</td>
+      <td>11</td>
+      <td>3</td>
+      <td>4</td>
+      <td>[org.slf4j, com.lmax.disruptor, javax.annotation]</td>
+      <td>[org.slf4j.Logger, com.lmax.disruptor.RingBuff...</td>
+      <td>commandhandling</td>
+      <td>org.axonframework.disruptor.commandhandling.Bl...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -890,17 +908,17 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     </tr>
     <tr>
       <th>13</th>
-      <td>axon-disruptor-4.7.5</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>BlacklistDetectingCallback</td>
-      <td>4</td>
-      <td>11</td>
+      <td>axon-eventsourcing-4.7.5</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
+      <td>JpaEventStorageEngine</td>
+      <td>6</td>
+      <td>47</td>
       <td>3</td>
-      <td>4</td>
-      <td>[javax.annotation, org.slf4j, com.lmax.disruptor]</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.LoggerFac...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Bl...</td>
+      <td>6</td>
+      <td>[jakarta.persistence, org.slf4j, javax.annotat...</td>
+      <td>[jakarta.persistence.Query, jakarta.persistenc...</td>
+      <td>jpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -919,16 +937,16 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
     <tr>
       <th>15</th>
       <td>axon-eventsourcing-4.7.5</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
-      <td>JpaEventStorageEngine</td>
-      <td>6</td>
-      <td>47</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>SQLErrorCodesResolver</td>
+      <td>4</td>
+      <td>12</td>
       <td>3</td>
-      <td>6</td>
-      <td>[jakarta.persistence, org.slf4j, javax.annotat...</td>
-      <td>[jakarta.persistence.EntityManager, org.slf4j....</td>
-      <td>jpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
+      <td>4</td>
+      <td>[javax.sql, javax.persistence, org.slf4j]</td>
+      <td>[javax.sql.DataSource, javax.persistence.Entit...</td>
+      <td>legacyjpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -939,27 +957,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>47</td>
       <td>3</td>
       <td>6</td>
-      <td>[javax.persistence, javax.annotation, org.slf4j]</td>
-      <td>[javax.persistence.TypedQuery, javax.annotatio...</td>
+      <td>[org.slf4j, javax.persistence, javax.annotation]</td>
+      <td>[org.slf4j.LoggerFactory, javax.persistence.En...</td>
       <td>legacyjpa</td>
       <td>org.axonframework.eventsourcing.eventstore.leg...</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>axon-eventsourcing-4.7.5</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
-      <td>SQLErrorCodesResolver</td>
-      <td>4</td>
-      <td>12</td>
-      <td>3</td>
-      <td>4</td>
-      <td>[javax.persistence, org.slf4j, javax.sql]</td>
-      <td>[javax.persistence.EntityExistsException, org....</td>
-      <td>legacyjpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
-    </tr>
-    <tr>
-      <th>18</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.deadline.jobrunr</td>
       <td>JobRunrDeadlineManager</td>
@@ -967,13 +971,13 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>18</td>
       <td>3</td>
       <td>5</td>
-      <td>[org.jobrunr.scheduling, javax.annotation, org...</td>
-      <td>[org.jobrunr.scheduling.JobScheduler, javax.an...</td>
+      <td>[org.slf4j, javax.annotation, org.jobrunr.sche...</td>
+      <td>[org.slf4j.LoggerFactory, javax.annotation.Nul...</td>
       <td>jobrunr</td>
       <td>org.axonframework.deadline.jobrunr.JobRunrDead...</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.eventhandling.deadletter.jpa</td>
       <td>JpaSequencedDeadLetterQueue</td>
@@ -981,10 +985,24 @@ Lastly, the *externalTypeNames* list enumerates the specific types within the ex
       <td>74</td>
       <td>3</td>
       <td>7</td>
-      <td>[org.slf4j, jakarta.persistence, javax.annotat...</td>
-      <td>[org.slf4j.LoggerFactory, jakarta.persistence....</td>
+      <td>[javax.annotation, jakarta.persistence, org.sl...</td>
+      <td>[javax.annotation.Nonnull, jakarta.persistence...</td>
       <td>jpa</td>
       <td>org.axonframework.eventhandling.deadletter.jpa...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.eventhandling.deadletter.leg...</td>
+      <td>JpaSequencedDeadLetterQueue</td>
+      <td>7</td>
+      <td>74</td>
+      <td>3</td>
+      <td>7</td>
+      <td>[org.slf4j, javax.persistence, javax.annotation]</td>
+      <td>[org.slf4j.Logger, javax.persistence.NoResultE...</td>
+      <td>legacyjpa</td>
+      <td>org.axonframework.eventhandling.deadletter.leg...</td>
     </tr>
   </tbody>
 </table>
@@ -1055,8 +1073,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-disruptor-4.7.5</td>
       <td>22</td>
       <td>3</td>
-      <td>3</td>
-      <td>13.636364</td>
+      <td>2</td>
+      <td>9.090909</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1087,8 +1105,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-messaging-4.7.5</td>
       <td>729</td>
       <td>1</td>
-      <td>99</td>
-      <td>13.580247</td>
+      <td>100</td>
+      <td>13.717421</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1143,8 +1161,8 @@ Have a look above to find out which types have the highest external package depe
       <td>axon-test-4.7.5</td>
       <td>85</td>
       <td>1</td>
-      <td>28</td>
-      <td>32.941176</td>
+      <td>26</td>
+      <td>30.588235</td>
     </tr>
     <tr>
       <th>15</th>
@@ -1212,9 +1230,9 @@ Have a look above to find out which types have the highest external package depe
       <td>12.820513</td>
       <td>9.090909</td>
       <td>9.230769</td>
-      <td>13.580247</td>
+      <td>13.717421</td>
       <td>6.711409</td>
-      <td>32.941176</td>
+      <td>30.588235</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1228,7 +1246,7 @@ Have a look above to find out which types have the highest external package depe
     <tr>
       <th>3</th>
       <td>0.000000</td>
-      <td>13.636364</td>
+      <td>9.090909</td>
       <td>1.538462</td>
       <td>0.685871</td>
       <td>0.000000</td>
@@ -1306,10 +1324,10 @@ Have a look above to find out which types have the highest external package depe
       <th>0</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
-      <td>True</td>
-      <td>jakarta.annotation</td>
-      <td>jakarta.annotation-api</td>
+      <td>test</td>
+      <td>False</td>
+      <td>org.quartz-scheduler</td>
+      <td>quartz</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1317,35 +1335,35 @@ Have a look above to find out which types have the highest external package depe
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
-      <td>javax.inject</td>
-      <td>javax.inject</td>
+      <td>jakarta.persistence</td>
+      <td>jakarta.persistence-api</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>test</td>
-      <td>True</td>
-      <td>io.projectreactor</td>
-      <td>reactor-core</td>
+      <td>False</td>
+      <td>org.hibernate</td>
+      <td>hibernate-core-jakarta</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>axon-configuration</td>
+      <td>Axon Framework - Configuration</td>
+      <td>default</td>
+      <td>False</td>
+      <td>${project.groupId}</td>
+      <td>axon-disruptor</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
       <td>org.hsqldb</td>
       <td>hsqldb</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-configuration</td>
-      <td>Axon Framework - Configuration</td>
-      <td>provided</td>
-      <td>False</td>
-      <td>com.google.code.findbugs</td>
-      <td>jsr305</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1360,28 +1378,28 @@ Have a look above to find out which types have the highest external package depe
       <th>104</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
+      <td>provided</td>
       <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-eventsourcing</td>
+      <td>com.google.code.findbugs</td>
+      <td>jsr305</td>
     </tr>
     <tr>
       <th>105</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>org.hamcrest</td>
-      <td>hamcrest</td>
+      <td>test</td>
+      <td>False</td>
+      <td>org.springframework</td>
+      <td>spring-beans</td>
     </tr>
     <tr>
       <th>106</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
-      <td>True</td>
-      <td>junit</td>
-      <td>junit</td>
+      <td>False</td>
+      <td>${project.groupId}</td>
+      <td>axon-eventsourcing</td>
     </tr>
     <tr>
       <th>107</th>
@@ -1398,8 +1416,8 @@ Have a look above to find out which types have the highest external package depe
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
       <td>True</td>
-      <td>org.testcontainers</td>
-      <td>testcontainers</td>
+      <td>org.hamcrest</td>
+      <td>hamcrest</td>
     </tr>
   </tbody>
 </table>

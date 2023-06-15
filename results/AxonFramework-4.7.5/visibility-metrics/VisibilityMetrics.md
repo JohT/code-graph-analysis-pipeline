@@ -55,21 +55,21 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-test-4.7.5.jar</td>
-      <td>8</td>
-      <td>85</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>axon-disruptor-4.7.5.jar</td>
       <td>1</td>
       <td>22</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
       <td>axon-eventsourcing-4.7.5.jar</td>
       <td>9</td>
       <td>130</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>axon-test-4.7.5.jar</td>
+      <td>8</td>
+      <td>85</td>
     </tr>
     <tr>
       <th>3</th>

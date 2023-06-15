@@ -51,45 +51,45 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-test-4.7.5</td>
-      <td>Class</td>
-      <td>69</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-test-4.7.5</td>
-      <td>Interface</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>axon-disruptor-4.7.5</td>
       <td>Class</td>
       <td>22</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>1</th>
       <td>axon-eventsourcing-4.7.5</td>
       <td>Class</td>
       <td>96</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>2</th>
       <td>axon-eventsourcing-4.7.5</td>
       <td>Interface</td>
       <td>31</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>3</th>
+      <td>axon-eventsourcing-4.7.5</td>
+      <td>Annotation</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>axon-eventsourcing-4.7.5</td>
       <td>Enum</td>
       <td>2</td>
     </tr>
     <tr>
+      <th>5</th>
+      <td>axon-test-4.7.5</td>
+      <td>Class</td>
+      <td>69</td>
+    </tr>
+    <tr>
       <th>6</th>
-      <td>axon-eventsourcing-4.7.5</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>axon-test-4.7.5</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>7</th>
@@ -100,8 +100,8 @@
     <tr>
       <th>8</th>
       <td>axon-messaging-4.7.5</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>9</th>
@@ -112,20 +112,20 @@
     <tr>
       <th>10</th>
       <td>axon-messaging-4.7.5</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-modelling-4.7.5</td>
-      <td>Enum</td>
-      <td>3</td>
+      <td>Class</td>
+      <td>108</td>
     </tr>
     <tr>
       <th>12</th>
       <td>axon-modelling-4.7.5</td>
-      <td>Class</td>
-      <td>108</td>
+      <td>Annotation</td>
+      <td>12</td>
     </tr>
     <tr>
       <th>13</th>
@@ -136,8 +136,8 @@
     <tr>
       <th>14</th>
       <td>axon-modelling-4.7.5</td>
-      <td>Annotation</td>
-      <td>12</td>
+      <td>Enum</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>15</th>
@@ -479,65 +479,65 @@ Have a look below to find out which packages and methods have the highest effect
     <tr>
       <th>1</th>
       <td>304</td>
-      <td>84</td>
-      <td>560</td>
-      <td>2477</td>
-      <td>484</td>
-      <td>256</td>
+      <td>81</td>
+      <td>567</td>
+      <td>2493</td>
+      <td>471</td>
+      <td>234</td>
     </tr>
     <tr>
       <th>2</th>
       <td>135</td>
-      <td>31</td>
+      <td>30</td>
       <td>197</td>
-      <td>717</td>
+      <td>726</td>
       <td>134</td>
-      <td>138</td>
+      <td>144</td>
     </tr>
     <tr>
       <th>3</th>
       <td>33</td>
       <td>30</td>
       <td>123</td>
-      <td>549</td>
-      <td>130</td>
-      <td>54</td>
+      <td>558</td>
+      <td>129</td>
+      <td>52</td>
     </tr>
     <tr>
       <th>4</th>
       <td>33</td>
-      <td>8</td>
+      <td>7</td>
       <td>64</td>
-      <td>240</td>
-      <td>55</td>
-      <td>47</td>
+      <td>246</td>
+      <td>54</td>
+      <td>41</td>
     </tr>
     <tr>
       <th>5</th>
       <td>14</td>
-      <td>5</td>
-      <td>39</td>
+      <td>4</td>
+      <td>40</td>
       <td>197</td>
-      <td>44</td>
-      <td>23</td>
+      <td>43</td>
+      <td>20</td>
     </tr>
     <tr>
       <th>6</th>
       <td>16</td>
       <td>6</td>
       <td>33</td>
-      <td>127</td>
+      <td>133</td>
       <td>36</td>
-      <td>17</td>
+      <td>12</td>
     </tr>
     <tr>
       <th>7</th>
       <td>2</td>
       <td>2</td>
       <td>31</td>
-      <td>91</td>
-      <td>24</td>
-      <td>16</td>
+      <td>93</td>
+      <td>23</td>
+      <td>18</td>
     </tr>
     <tr>
       <th>8</th>
@@ -545,15 +545,15 @@ Have a look below to find out which packages and methods have the highest effect
       <td>0</td>
       <td>11</td>
       <td>73</td>
-      <td>10</td>
+      <td>9</td>
       <td>10</td>
     </tr>
     <tr>
       <th>9</th>
       <td>8</td>
-      <td>4</td>
+      <td>3</td>
       <td>17</td>
-      <td>63</td>
+      <td>65</td>
       <td>7</td>
       <td>9</td>
     </tr>
@@ -561,8 +561,8 @@ Have a look below to find out which packages and methods have the highest effect
       <th>10</th>
       <td>4</td>
       <td>3</td>
-      <td>7</td>
-      <td>37</td>
+      <td>8</td>
+      <td>38</td>
       <td>6</td>
       <td>5</td>
     </tr>
@@ -619,92 +619,92 @@ Have a look below to find out which packages and methods have the highest effect
     <tr>
       <th>1</th>
       <td>52.961672</td>
-      <td>45.652174</td>
-      <td>50.269300</td>
-      <td>52.169334</td>
-      <td>50.000000</td>
-      <td>41.693811</td>
+      <td>46.022727</td>
+      <td>50.489760</td>
+      <td>51.937500</td>
+      <td>49.631191</td>
+      <td>40.554593</td>
     </tr>
     <tr>
       <th>2</th>
       <td>23.519164</td>
-      <td>16.847826</td>
-      <td>17.684022</td>
-      <td>15.101095</td>
-      <td>13.842975</td>
-      <td>22.475570</td>
+      <td>17.045455</td>
+      <td>17.542297</td>
+      <td>15.125000</td>
+      <td>14.120126</td>
+      <td>24.956672</td>
     </tr>
     <tr>
       <th>3</th>
       <td>5.749129</td>
-      <td>16.304348</td>
-      <td>11.041293</td>
-      <td>11.562763</td>
-      <td>13.429752</td>
-      <td>8.794788</td>
+      <td>17.045455</td>
+      <td>10.952805</td>
+      <td>11.625000</td>
+      <td>13.593256</td>
+      <td>9.012132</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5.749129</td>
-      <td>4.347826</td>
-      <td>5.745063</td>
-      <td>5.054760</td>
-      <td>5.681818</td>
-      <td>7.654723</td>
+      <td>3.977273</td>
+      <td>5.699020</td>
+      <td>5.125000</td>
+      <td>5.690200</td>
+      <td>7.105719</td>
     </tr>
     <tr>
       <th>5</th>
       <td>2.439024</td>
-      <td>2.717391</td>
-      <td>3.500898</td>
-      <td>4.149115</td>
-      <td>4.545455</td>
-      <td>3.745928</td>
+      <td>2.272727</td>
+      <td>3.561888</td>
+      <td>4.104167</td>
+      <td>4.531085</td>
+      <td>3.466205</td>
     </tr>
     <tr>
       <th>6</th>
       <td>2.787456</td>
-      <td>3.260870</td>
-      <td>2.962298</td>
-      <td>2.674810</td>
-      <td>3.719008</td>
-      <td>2.768730</td>
+      <td>3.409091</td>
+      <td>2.938557</td>
+      <td>2.770833</td>
+      <td>3.793467</td>
+      <td>2.079723</td>
     </tr>
     <tr>
       <th>7</th>
       <td>0.348432</td>
-      <td>1.086957</td>
-      <td>2.782765</td>
-      <td>1.916596</td>
-      <td>2.479339</td>
-      <td>2.605863</td>
+      <td>1.136364</td>
+      <td>2.760463</td>
+      <td>1.937500</td>
+      <td>2.423604</td>
+      <td>3.119584</td>
     </tr>
     <tr>
       <th>8</th>
       <td>1.567944</td>
       <td>0.000000</td>
-      <td>0.987433</td>
-      <td>1.537489</td>
-      <td>1.033058</td>
-      <td>1.628664</td>
+      <td>0.979519</td>
+      <td>1.520833</td>
+      <td>0.948367</td>
+      <td>1.733102</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1.393728</td>
-      <td>2.173913</td>
-      <td>1.526032</td>
-      <td>1.326874</td>
-      <td>0.723140</td>
-      <td>1.465798</td>
+      <td>1.704545</td>
+      <td>1.513802</td>
+      <td>1.354167</td>
+      <td>0.737619</td>
+      <td>1.559792</td>
     </tr>
     <tr>
       <th>10</th>
       <td>0.696864</td>
-      <td>1.630435</td>
-      <td>0.628366</td>
-      <td>0.779275</td>
-      <td>0.619835</td>
-      <td>0.814332</td>
+      <td>1.704545</td>
+      <td>0.712378</td>
+      <td>0.791667</td>
+      <td>0.632244</td>
+      <td>0.866551</td>
     </tr>
   </tbody>
 </table>
@@ -769,46 +769,46 @@ Have a look below to find out which packages and methods have the highest effect
     <tr>
       <th>1</th>
       <td>515</td>
-      <td>146</td>
-      <td>918</td>
-      <td>3802</td>
-      <td>802</td>
-      <td>452</td>
+      <td>143</td>
+      <td>926</td>
+      <td>3831</td>
+      <td>786</td>
+      <td>428</td>
     </tr>
     <tr>
       <th>2</th>
       <td>37</td>
-      <td>20</td>
+      <td>18</td>
       <td>92</td>
-      <td>403</td>
+      <td>409</td>
       <td>71</td>
-      <td>56</td>
+      <td>55</td>
     </tr>
     <tr>
       <th>3</th>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>54</td>
-      <td>259</td>
+      <td>266</td>
       <td>34</td>
-      <td>53</td>
+      <td>44</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>4</td>
       <td>24</td>
-      <td>120</td>
-      <td>25</td>
+      <td>129</td>
+      <td>24</td>
       <td>21</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
-      <td>3</td>
-      <td>8</td>
-      <td>64</td>
-      <td>19</td>
+      <td>2</td>
+      <td>9</td>
+      <td>65</td>
+      <td>18</td>
       <td>11</td>
     </tr>
     <tr>
@@ -817,13 +817,13 @@ Have a look below to find out which packages and methods have the highest effect
       <td>2</td>
       <td>3</td>
       <td>43</td>
-      <td>11</td>
-      <td>8</td>
+      <td>10</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>7</th>
       <td>2</td>
-      <td>2</td>
+      <td>1</td>
       <td>7</td>
       <td>19</td>
       <td>2</td>
@@ -909,92 +909,92 @@ Have a look below to find out which packages and methods have the highest effect
     <tr>
       <th>1</th>
       <td>89.721254</td>
-      <td>79.347826</td>
-      <td>82.405745</td>
-      <td>80.075821</td>
-      <td>82.851240</td>
-      <td>73.615635</td>
+      <td>81.250000</td>
+      <td>82.457703</td>
+      <td>79.812500</td>
+      <td>82.824025</td>
+      <td>74.176776</td>
     </tr>
     <tr>
       <th>2</th>
       <td>6.445993</td>
-      <td>10.869565</td>
-      <td>8.258528</td>
-      <td>8.487784</td>
-      <td>7.334711</td>
-      <td>9.120521</td>
+      <td>10.227273</td>
+      <td>8.192342</td>
+      <td>8.520833</td>
+      <td>7.481560</td>
+      <td>9.532062</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2.264808</td>
-      <td>2.717391</td>
-      <td>4.847397</td>
-      <td>5.454928</td>
-      <td>3.512397</td>
-      <td>8.631922</td>
+      <td>2.272727</td>
+      <td>4.808549</td>
+      <td>5.541667</td>
+      <td>3.582719</td>
+      <td>7.625650</td>
     </tr>
     <tr>
       <th>4</th>
       <td>0.522648</td>
-      <td>2.173913</td>
-      <td>2.154399</td>
-      <td>2.527380</td>
-      <td>2.582645</td>
-      <td>3.420195</td>
+      <td>2.272727</td>
+      <td>2.137133</td>
+      <td>2.687500</td>
+      <td>2.528978</td>
+      <td>3.639515</td>
     </tr>
     <tr>
       <th>5</th>
       <td>0.522648</td>
-      <td>1.630435</td>
-      <td>0.718133</td>
-      <td>1.347936</td>
-      <td>1.962810</td>
-      <td>1.791531</td>
+      <td>1.136364</td>
+      <td>0.801425</td>
+      <td>1.354167</td>
+      <td>1.896733</td>
+      <td>1.906412</td>
     </tr>
     <tr>
       <th>6</th>
       <td>0.174216</td>
-      <td>1.086957</td>
-      <td>0.269300</td>
-      <td>0.905644</td>
       <td>1.136364</td>
-      <td>1.302932</td>
+      <td>0.267142</td>
+      <td>0.895833</td>
+      <td>1.053741</td>
+      <td>1.213172</td>
     </tr>
     <tr>
       <th>7</th>
       <td>0.348432</td>
-      <td>1.086957</td>
-      <td>0.628366</td>
-      <td>0.400168</td>
-      <td>0.206612</td>
-      <td>0.651466</td>
+      <td>0.568182</td>
+      <td>0.623330</td>
+      <td>0.395833</td>
+      <td>0.210748</td>
+      <td>0.693241</td>
     </tr>
     <tr>
       <th>8</th>
       <td>0.000000</td>
-      <td>1.086957</td>
-      <td>0.628366</td>
-      <td>0.189553</td>
-      <td>0.103306</td>
-      <td>0.488599</td>
+      <td>1.136364</td>
+      <td>0.623330</td>
+      <td>0.187500</td>
+      <td>0.105374</td>
+      <td>0.519931</td>
     </tr>
     <tr>
       <th>9</th>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.147430</td>
-      <td>0.206612</td>
-      <td>0.162866</td>
+      <td>0.145833</td>
+      <td>0.210748</td>
+      <td>0.173310</td>
     </tr>
     <tr>
       <th>10</th>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.084246</td>
+      <td>0.083333</td>
       <td>0.000000</td>
-      <td>0.162866</td>
+      <td>0.173310</td>
     </tr>
   </tbody>
 </table>
@@ -1048,8 +1048,8 @@ Have a look below to find out which packages and methods have the highest effect
       <th>0</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.eventhandling</td>
-      <td>2187</td>
-      <td>779</td>
+      <td>2175</td>
+      <td>776</td>
       <td>64</td>
       <td>processBatch</td>
     </tr>
@@ -1073,15 +1073,6 @@ Have a look below to find out which packages and methods have the highest effect
     </tr>
     <tr>
       <th>3</th>
-      <td>axon-test-4.7.5</td>
-      <td>org.axonframework.test.aggregate</td>
-      <td>937</td>
-      <td>249</td>
-      <td>45</td>
-      <td>appendEventOverview</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.queryhandling</td>
       <td>832</td>
@@ -1090,16 +1081,7 @@ Have a look below to find out which packages and methods have the highest effect
       <td>doQuery</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>axon-modelling-4.7.5</td>
-      <td>org.axonframework.modelling.command</td>
-      <td>784</td>
-      <td>315</td>
-      <td>17</td>
-      <td>lambda$initializeHandler$7</td>
-    </tr>
-    <tr>
-      <th>6</th>
+      <th>4</th>
       <td>axon-eventsourcing-4.7.5</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
       <td>709</td>
@@ -1108,22 +1090,40 @@ Have a look below to find out which packages and methods have the highest effect
       <td>peekPrivateStream</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>5</th>
+      <td>axon-modelling-4.7.5</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>702</td>
+      <td>286</td>
+      <td>13</td>
+      <td>doLoadWithLock</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.messaging.annotation</td>
-      <td>659</td>
-      <td>235</td>
+      <td>673</td>
+      <td>239</td>
       <td>23</td>
       <td>&lt;init&gt;</td>
     </tr>
     <tr>
+      <th>7</th>
+      <td>axon-test-4.7.5</td>
+      <td>org.axonframework.test.aggregate</td>
+      <td>633</td>
+      <td>170</td>
+      <td>45</td>
+      <td>appendEventOverview</td>
+    </tr>
+    <tr>
       <th>8</th>
-      <td>axon-disruptor-4.7.5</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>605</td>
-      <td>184</td>
-      <td>32</td>
-      <td>&lt;init&gt;</td>
+      <td>axon-eventsourcing-4.7.5</td>
+      <td>org.axonframework.eventsourcing</td>
+      <td>582</td>
+      <td>236</td>
+      <td>20</td>
+      <td>doScheduleSnapshot</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1205,18 +1205,18 @@ Have a look below to find out which packages and methods have the highest effect
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.deadline.quartz</td>
-      <td>DeadlineJob</td>
-      <td>execute</td>
-      <td>42</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>axon-configuration-4.7.5</td>
       <td>org.axonframework.config</td>
       <td>EventProcessingModule</td>
       <td>&lt;init&gt;</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.deadline.quartz</td>
+      <td>DeadlineJob</td>
+      <td>execute</td>
       <td>42</td>
     </tr>
     <tr>
@@ -1245,10 +1245,10 @@ Have a look below to find out which packages and methods have the highest effect
     </tr>
     <tr>
       <th>9</th>
-      <td>axon-disruptor-4.7.5</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus</td>
-      <td>&lt;init&gt;</td>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>BatchingUnitOfWork</td>
+      <td>executeWithResult</td>
       <td>32</td>
     </tr>
   </tbody>
@@ -1362,11 +1362,11 @@ Have a look below to find out which packages and methods have the highest effect
     </tr>
     <tr>
       <th>9</th>
-      <td>axon-test-4.7.5</td>
-      <td>org.axonframework.test.aggregate</td>
-      <td>AggregateTestFixture</td>
-      <td>ensureValuesEqual</td>
-      <td>13</td>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.common.jdbc</td>
+      <td>ConnectionWrapperFactory</td>
+      <td>lambda$wrap$0</td>
+      <td>12</td>
     </tr>
   </tbody>
 </table>
