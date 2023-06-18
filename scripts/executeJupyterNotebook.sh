@@ -64,6 +64,9 @@ echo "executeJupyterNotebook: jupyter_notebook_output_file_name=$jupyter_noteboo
 jupyter_notebook_output_file="./${jupyter_notebook_file_name}${JUPYTER_OUTPUT_FILE_POSTFIX}.${jupyter_notebook_file_extension}"
 echo "executeJupyterNotebook: jupyter_notebook_output_file=$jupyter_notebook_output_file"
 
+jupyter_notebook_markdown_file="./${jupyter_notebook_file_name}${JUPYTER_OUTPUT_FILE_POSTFIX}.md"
+echo "executeJupyterNotebook: jupyter_notebook_markdown_file=$jupyter_notebook_markdown_file"
+
 if [ ! -f "${jupyter_notebook_file_path}/.env" ] ; then
     echo "executeJupyterNotebook: Creating file ${jupyter_notebook_file_path}.env ..."
     echo "NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD}" > "${jupyter_notebook_file_path}/.env"
@@ -113,6 +116,12 @@ jupyter nbconvert --to notebook \
 
 # Convert the Jupyter Notebook to Markdown 
 jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file" || exit 6
+
+# Remove style blocks from Markdown file
+# The inplace option -i of sed doesn't seem to work at least on Mac in this case.
+# Therefore the temporary file ".nostyle" is created and then moved to overwrite the original markdown file.
+sed -E '/<style( scoped)?>/,/<\/style>/d' "${jupyter_notebook_markdown_file}" > "${jupyter_notebook_markdown_file}.nostyle"
+mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_file}"
 
 # Convert the Jupyter Notebook to PDF 
 jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file" || exit 7
