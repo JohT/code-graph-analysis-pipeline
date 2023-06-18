@@ -21,6 +21,7 @@ NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"}
 NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
 NEO4J_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/neo4j.conf"
+NEO4J_APOC_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/apoc.conf"
 NEO4J_APOC_PLUGIN_ARTIFACT="apoc-${NEO4J_APOC_PLUGIN_VERSION}-all.jar"
 NEO4J_GDS_PLUGIN_ARTIFACT="neo4j-graph-data-science-${NEO4J_GDS_PLUGIN_VERSION}.jar"
 
@@ -147,6 +148,15 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_APOC_PLUGIN_ARTIFACT}
         echo "setupNeo4j: Failed to download and install ${NEO4J_APOC_PLUGIN_ARTIFACT}"
         exit 1
     fi
+
+    # Configure Neo4j Plugin "Awesome Procedures for Neo4j" (APOC)
+    echo "setupNeo4j: Configuring Neo4j Plugin ${NEO4J_APOC_PLUGIN_ARTIFACT} (APOC)"
+    {
+         echo "# Reference: https://neo4j.com/docs/apoc/current/config/#_apoc_export_file_enabled"
+         echo ""
+         echo "# Enables writing local files to disk for file export. Default=false"
+         echo "apoc.export.file.enabled=true"
+    } >> "${NEO4J_APOC_CONFIG}"
 else 
     echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already installed"
 fi

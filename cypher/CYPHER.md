@@ -71,6 +71,7 @@ Script | Directory | Description
 | [Cyclic_Dependencies_Concatenated.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_Concatenated.cypher) | Cyclic_Dependencies | Cyclic Dependencies Concatenated |
 | [Cyclic_Dependencies_as_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as List |
 | [Cyclic_Dependencies_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as unwinded List |
+| [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
 | [External_package_usage_overall.cypher](./External_Dependencies/External_package_usage_overall.cypher) | External_Dependencies | External package usage overall |
 | [External_package_usage_per_artifact.cypher](./External_Dependencies/External_package_usage_per_artifact.cypher) | External_Dependencies | External package usage per artifact |
 | [External_package_usage_per_artifact_and_package.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package.cypher) | External_Dependencies | External package usage per artifact and package |
