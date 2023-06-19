@@ -118,6 +118,15 @@ jobs:
         if-no-files-found: error
         retention-days: 5
 
+    # Upload Database Export
+    - name: Archive exported database
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        path: ./temp/**/import
+        if-no-files-found: error
+        retention-days: 5
+
     # Commit and push the native image agent results
     - name: Display environment variable "github.event_name"
       run: echo "github.event_name=${{ github.event_name }}"
