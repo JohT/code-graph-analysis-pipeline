@@ -13,7 +13,7 @@ NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 # Internal Constants
 NEO4J_DIR="${TOOLS_DIRECTORY}/neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_BIN="${NEO4J_DIR}/bin"
-WAIT_TIMES="1 2 4 8 16"
+WAIT_TIMES="1 2 4 8 16 32"
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -37,7 +37,7 @@ else
 fi
 
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status | grep -q "not" ; then
+if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
     echo "startNeo4j: Starting neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} in ${NEO4J_DIR}"
 
     # Check if there is already a process that listens to the Neo4j HTTP port
@@ -57,7 +57,7 @@ if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status | grep -q "not" ; then
         echo "startNeo4j: Waiting for ${waitTime} second(s)"
         sleep ${waitTime}
 
-        if ! NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status | grep -q "not" ; then
+        if ! NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
             echo "startNeo4j: Successfully started neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
             exit 0
         fi
@@ -67,7 +67,7 @@ else
 fi
 
 # Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status | grep -q "not" ; then
+if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
     echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} still not running. Something went wrong. Details see 'NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status'."
     exit 1
 fi

@@ -30,6 +30,12 @@ JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"} # Version 1.12.2 is
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} 
 NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"}
 NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"}
+NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/data/transaction/commit"} # Neo4j v4: "db/data/transaction/commit", Neo4j v5: "db/neo4j/tx/commit"
+
+# Overrideable environment variables for the Neo4j APOC plugin (optional, defaults also defined in sub scripts where needed)
+# Override them if you want to use Neo4j v5 instead of v4.4
+NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"all"} #Awesome Procedures for Neo4j Plugin Edition (Neo4j v4.4.x "all", Neo4j >= v5 "core")
+NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j-contrib/neo4j-apoc-procedures"} #Awesome Procedures for Neo4j Plugin GitHub User/Repository (Neo4j v4.4.x "neo4j-contrib/neo4j-apoc-procedures", Neo4j >= v5 "neo4j/apoc")
 
 ARTIFACT_SCRIPTS_DIRECTORY=${ARTIFACT_SCRIPTS_DIRECTORY:-"artifacts"}
 REPORTS_SCRIPTS_DIRECTORY=${REPORTS_SCRIPTS_DIRECTORY:-"reports"}

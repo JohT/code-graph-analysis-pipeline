@@ -7,6 +7,8 @@
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (april 2023)
 NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"4.4.0.15"} #Awesome Procedures for Neo4j Plugin Version 4.4.0.x of is compatible with Neo4j 4.4.x
+NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"all"} #Awesome Procedures for Neo4j Plugin Edition (Neo4j v4.4.x "all", Neo4j >= v5 "core")
+NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j-contrib/neo4j-apoc-procedures"} #Awesome Procedures for Neo4j Plugin GitHub User/Repository (Neo4j v4.4.x "neo4j-contrib/neo4j-apoc-procedures", Neo4j >= v5 "neo4j/apoc")
 NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.3.4"} # Graph Data Science Plugin Version 2.3.x of is compatible with Neo4j 4.4.x
 NEO4J_DATA_PATH=${NEO4J_DATA_PATH:-"$( pwd -P )/data"} # Path where Neo4j writes its data to (outside tools dir)
 NEO4J_RUNTIME_PATH=${NEO4J_RUNTIME_PATH:-"$( pwd -P )/runtime"} # Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir)
@@ -22,7 +24,7 @@ NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
 NEO4J_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/neo4j.conf"
 NEO4J_APOC_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/apoc.conf"
-NEO4J_APOC_PLUGIN_ARTIFACT="apoc-${NEO4J_APOC_PLUGIN_VERSION}-all.jar"
+NEO4J_APOC_PLUGIN_ARTIFACT="apoc-${NEO4J_APOC_PLUGIN_VERSION}-${NEO4J_APOC_PLUGIN_EDITION}.jar"
 NEO4J_GDS_PLUGIN_ARTIFACT="neo4j-graph-data-science-${NEO4J_GDS_PLUGIN_VERSION}.jar"
 
 ## Get this "scripts" directory if not already set
@@ -34,7 +36,7 @@ echo "setupNeo4j: SCRIPTS_DIR=$SCRIPTS_DIR"
 
 # Check if TOOLS_DIRECTORY variable is set
 if [ -z "${TOOLS_DIRECTORY}" ]; then
-    echo "setupNeo4j: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
+    echo "setupNeo4j: Error: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
     exit 1
 else
     # Create tools directory if it doesn't exists
@@ -44,12 +46,18 @@ fi
 
 # Check if SHARED_DOWNLOADS_DIRECTORY variable is set
 if [ -z "${SHARED_DOWNLOADS_DIRECTORY}" ]; then
-    echo "setupNeo4j: Requires variable SHARED_DOWNLOADS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
+    echo "setupNeo4j: Error: Requires variable SHARED_DOWNLOADS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
     exit 1
 else
     # Create shared downloads directory if it doesn't exists
     echo "setupNeo4j: Creating shared downloads directory <${SHARED_DOWNLOADS_DIRECTORY}> if neccessary"
     mkdir -p "${SHARED_DOWNLOADS_DIRECTORY}"
+fi
+
+# Check if environment variable is set
+if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
+    echo "setupNeo4j: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your password'."
+    exit 1
 fi
 
 # Download and extract Neo4j
@@ -71,7 +79,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
 
     # Fail if Neo4j hadn't been downloaded successfully
     if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
-        echo "setupNeo4j: Failed to download ${NEO4J_INSTALLATION_NAME} from ${NEO4J_DOWNLOAD_BASE_URL} into ${TOOLS_DIRECTORY}"
+        echo "setupNeo4j: Error: Failed to download ${NEO4J_INSTALLATION_NAME} from ${NEO4J_DOWNLOAD_BASE_URL} into ${TOOLS_DIRECTORY}"
         exit 1
     fi
 
@@ -103,12 +111,12 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
          echo "server.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
          echo ""
          echo "# Ports Configuration (v5)"
-         echo "server.connector.bolt.listen_address=:${NEO4J_BOLT_PORT}"
-         echo "server.connector.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
-         echo "server.connector.http.listen_address=:${NEO4J_HTTP_PORT}"
-         echo "server.connector.http.advertised_address=:${NEO4J_HTTP_PORT}"
-         echo "server.connector.https.listen_address=:${NEO4J_HTTPS_PORT}"
-         echo "server.connector.https.advertised_address=:${NEO4J_HTTPS_PORT}"
+         echo "server.bolt.listen_address=:${NEO4J_BOLT_PORT}"
+         echo "server.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
+         echo "server.http.listen_address=:${NEO4J_HTTP_PORT}"
+         echo "server.http.advertised_address=:${NEO4J_HTTP_PORT}"
+         echo "server.https.listen_address=:${NEO4J_HTTPS_PORT}"
+         echo "server.https.advertised_address=:${NEO4J_HTTPS_PORT}"
 
     } >> "${NEO4J_CONFIG}"
 
@@ -127,15 +135,20 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_APOC_PLUGIN_ARTIFACT}
 
     # Download the Neo4j Plugin "Awesome Procedures for Neo4j"
     if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
-        echo "setupNeo4j: Downloading ${NEO4J_APOC_PLUGIN_ARTIFACT}"
-
         # Download the Neo4j Plugin "Awesome Procedures for Neo4j"
         echo "setupNeo4j: Downloading ${NEO4J_APOC_PLUGIN_ARTIFACT}"
-        curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}" https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/${NEO4J_APOC_PLUGIN_VERSION}/apoc-${NEO4J_APOC_PLUGIN_VERSION}-all.jar  || exit 1
+        curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}" https://github.com/${NEO4J_APOC_PLUGIN_GITHUB}/releases/download/${NEO4J_APOC_PLUGIN_VERSION}/apoc-${NEO4J_APOC_PLUGIN_VERSION}-${NEO4J_APOC_PLUGIN_EDITION}.jar  || exit 1
     else
         echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already downloaded"
     fi
     
+    downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}")
+    if [[ "$downloaded_file_size" -le 100 ]]; then
+        echo "setupNeo4j: Error: Failed to download ${NEO4J_APOC_PLUGIN_ARTIFACT}: Invalid Filesize."
+        rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}"
+        exit 1
+    fi
+
     # Uninstall previously installed Neo4j Plugin "Awesome Procedures for Neo4j" (APOC)
     rm -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/apoc*.jar"
 
@@ -145,7 +158,7 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_APOC_PLUGIN_ARTIFACT}
 
     # Fail if Neo4j Plugin "Awesome Procedures for Neo4j" (APOC) hadn't been downloaded successfully
     if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
-        echo "setupNeo4j: Failed to download and install ${NEO4J_APOC_PLUGIN_ARTIFACT}"
+        echo "setupNeo4j: Error: Failed to download and install ${NEO4J_APOC_PLUGIN_ARTIFACT}"
         exit 1
     fi
 
@@ -172,6 +185,13 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_GDS_PLUGIN_ARTIFACT}"
         echo "setupNeo4j: ${NEO4J_GDS_PLUGIN_ARTIFACT} already downloaded"
     fi
     
+    downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_GDS_PLUGIN_ARTIFACT}" | awk '{print $1}')
+    if [[ "$downloaded_file_size" -le 100 ]]; then
+        echo "setupNeo4j: Error: Failed to download ${NEO4J_GDS_PLUGIN_ARTIFACT}. Invalid Filesize."
+        rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_GDS_PLUGIN_ARTIFACT}"
+        exit 1
+    fi
+
     # Uninstall previously installed Neo4j Plugin "Graph Data Science" (GDS)
     rm -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/neo4j-graph-data-science*.jar"
     
@@ -181,7 +201,7 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_GDS_PLUGIN_ARTIFACT}"
 
     # Fail if Neo4j Plugin "Graph Data Science" (GDS) hadn't been downloaded successfully
     if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_GDS_PLUGIN_ARTIFACT}" ] ; then
-        echo "setupNeo4j: Failed to download and install ${NEO4J_GDS_PLUGIN_ARTIFACT}"
+        echo "setupNeo4j: Error: Failed to download and install ${NEO4J_GDS_PLUGIN_ARTIFACT}"
         exit 1
     fi
 else 
