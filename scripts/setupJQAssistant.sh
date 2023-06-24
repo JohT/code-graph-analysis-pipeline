@@ -14,7 +14,7 @@ SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/
 
 # Check if TOOLS_DIRECTORY variable is set
 if [ -z "${TOOLS_DIRECTORY}" ]; then
-    echo "setupJQAssistant: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
+    echo "setupJQAssistant: Error: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
     exit 1
 else
     # Create tools directory if it doesn't exists
@@ -24,7 +24,7 @@ fi
 
 # Check if SHARED_DOWNLOADS_DIRECTORY variable is set
 if [ -z "${SHARED_DOWNLOADS_DIRECTORY}" ]; then
-    echo "setupJQAssistant: Requires variable SHARED_DOWNLOADS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
+    echo "setupJQAssistant: Error: Requires variable SHARED_DOWNLOADS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
     exit 1
 else
     # Create shared downloads directory if it doesn't exists

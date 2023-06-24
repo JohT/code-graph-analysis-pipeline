@@ -7,6 +7,7 @@
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"} # Version 1.12.2 is the current version (april 2023)
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv3"} #  Neo4j v5: "jqassistant-commandline-distribution", Neo4j v4: "jqassistant-commandline-neo4jv3"
+JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv4-jqassistant.yaml"} #  Neo4j v5: "template-neo4jv5-jqassistant.yaml", Neo4j v4: "template-neo4jv4-jqassistant.yaml"
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (april 2023)
@@ -16,34 +17,49 @@ NEO4J_USER=${NEO4J_USER:-"neo4j"}
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Directory with the Java artifacts to scan and analyze
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+echo "resetAndScan: SCRIPTS_DIR=${SCRIPTS_DIR}"
+
 # Internal constants
-JQASSISTANT_BIN="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}/bin"
-JQASSISTANT_NEO4J_OPTIONS="-storeUri ${NEO4J_BOLT_URI} -storeUsername ${NEO4J_USER} -storePassword ${NEO4J_INITIAL_PASSWORD}"
+JQASSISTANT_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
+JQASSISTANT_BIN="${JQASSISTANT_DIRECTORY}/bin"
+#JQASSISTANT_NEO4J_OPTIONS="-D jqassistant.store.uri=${NEO4J_BOLT_URI} -D jqassistant.store.remote.username=${NEO4J_USER} -D jqassistant.store.remote.password=${NEO4J_INITIAL_PASSWORD}"
+#JQASSISTANT_NEO4J_OPTIONS=-configurationLocations "${JQASSISTANT_CONFIG}/.jqassistant.yaml"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
-    echo "Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your password'."
+    echo "resetAndScan: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your password'."
     exit 1
 fi
 
 # Check if TOOLS_DIRECTORY variable is set
 if [ -z "${TOOLS_DIRECTORY}" ]; then
-    echo "Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
+    echo "resetAndScan: Error: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
     exit 1
 fi
 
 # Check if jQAssistant is installed
 if [ ! -d "${JQASSISTANT_BIN}" ] ; then
-    echo "${JQASSISTANT_BIN} doesnt exist. Please run setupJQAssistant first."
+    echo "resetAndScan: Error: ${JQASSISTANT_BIN} doesnt exist. Please run setupJQAssistant first."
     exit 1
 else
-    echo "Using jQAssistant binary directory ${JQASSISTANT_BIN}"
+    echo "resetAndScan: Using jQAssistant binary directory ${JQASSISTANT_BIN}"
 fi
 
+# Create jQAssistant configuration YAML file by copying a template for it
+mkdir -p "./.jqassistant" || exit 1
+cp "${SCRIPTS_DIR}/templates/${JQASSISTANT_CONFIG_TEMPLATE}" "./.jqassistant/" || exit 1
+
 # Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
-"${JQASSISTANT_BIN}"/jqassistant.sh scan ${JQASSISTANT_NEO4J_OPTIONS} -reset -f ./${ARTIFACTS_DIRECTORY}
+echo "resetAndScan: Scanning ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
+
+"${JQASSISTANT_BIN}"/jqassistant.sh scan -f ./${ARTIFACTS_DIRECTORY} || exit 1
 
 # Use jQAssistant to add dependencies between artifacts, package dependencies, artifact dependencies and the java version to the Neo4j Graph Database
-"${JQASSISTANT_BIN}"/jqassistant.sh analyze ${JQASSISTANT_NEO4J_OPTIONS} \
-                                   -reportDirectory ./runtime/jqassistant/report \
-                                   -concepts classpath:Resolve,dependency:Package,dependency:Artifact,java:JavaVersion
+echo "resetAndScan: Analyzing ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
+
+"${JQASSISTANT_BIN}"/jqassistant.sh analyze
