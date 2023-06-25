@@ -74,8 +74,18 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         echo "setupNeo4j: ${NEO4J_INSTALLATION_NAME} already downloaded"
     fi
 
+    downloaded_neo4j_archive="${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}-unix.tar.gz"
+
+    # Check downloaded file size to be at least 100 bytes
+    downloaded_file_size=$(wc -c "${downloaded_neo4j_archive}")
+    if [[ "$downloaded_file_size" -le 100 ]]; then
+        echo "setupNeo4j: Error: Failed to download ${NEO4J_INSTALLATION_NAME}: Invalid Filesize."
+        rm -f "${downloaded_neo4j_archive}"
+        exit 1
+    fi
+
     # Extract the tar file
-    tar -xf "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}-unix.tar.gz" --directory "${TOOLS_DIRECTORY}"
+    tar -xf "${downloaded_neo4j_archive}" --directory "${TOOLS_DIRECTORY}"
 
     # Fail if Neo4j hadn't been downloaded successfully
     if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
@@ -83,45 +93,59 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         exit 1
     fi
 
+    # Extract the first component of the version number (=major version number)
+    NEO4J_MAJOR_VERSION_NUMBER=$(echo "$NEO4J_VERSION" | cut -d'.' -f1)
+
     # Configure all paths with data that changes (database data, logs, ...) to be in the outside "data" directory
     # instead of inside the neo4j directory
     echo "setupNeo4j: Configuring dynamic settings (data directories, ports, ...)"
-    {
-         echo ""
-         echo "# Paths of data directories in the installation"
-         echo "dbms.directories.data=${NEO4J_DATA_PATH}"
-         echo "dbms.directories.logs=${NEO4J_RUNTIME_PATH}/logs"
-         echo "dbms.directories.dumps.root=${NEO4J_RUNTIME_PATH}/dumps"
-         echo "dbms.directories.run=${NEO4J_RUNTIME_PATH}/run"
-         echo "dbms.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
-         echo ""
-         echo "# Ports Configuration"
-         echo "dbms.connector.bolt.listen_address=:${NEO4J_BOLT_PORT}"
-         echo "dbms.connector.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
-         echo "dbms.connector.http.listen_address=:${NEO4J_HTTP_PORT}"
-         echo "dbms.connector.http.advertised_address=:${NEO4J_HTTP_PORT}"
-         echo "dbms.connector.https.listen_address=:${NEO4J_HTTPS_PORT}"
-         echo "dbms.connector.https.advertised_address=:${NEO4J_HTTPS_PORT}"
-         echo ""
-         echo "# Paths of data directories in the installation (v5)"
-         echo "server.directories.data=${NEO4J_DATA_PATH}"
-         echo "server.directories.logs=${NEO4J_RUNTIME_PATH}/logs"
-         echo "server.directories.dumps.root=${NEO4J_RUNTIME_PATH}/dumps"
-         echo "server.directories.run=${NEO4J_RUNTIME_PATH}/run"
-         echo "server.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
-         echo ""
-         echo "# Ports Configuration (v5)"
-         echo "server.bolt.listen_address=:${NEO4J_BOLT_PORT}"
-         echo "server.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
-         echo "server.http.listen_address=:${NEO4J_HTTP_PORT}"
-         echo "server.http.advertised_address=:${NEO4J_HTTP_PORT}"
-         echo "server.https.listen_address=:${NEO4J_HTTPS_PORT}"
-         echo "server.https.advertised_address=:${NEO4J_HTTPS_PORT}"
 
-    } >> "${NEO4J_CONFIG}"
+    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
+        echo "setupNeo4j: Neo4j v5 or higher detected"
+        {
+            echo ""
+            echo "# Paths of data directories in the installation (v5)"
+            echo "server.directories.data=${NEO4J_DATA_PATH}"
+            echo "server.directories.logs=${NEO4J_RUNTIME_PATH}/logs"
+            echo "server.directories.dumps.root=${NEO4J_RUNTIME_PATH}/dumps"
+            echo "server.directories.run=${NEO4J_RUNTIME_PATH}/run"
+            echo "server.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
+            echo ""
+            echo "# Ports Configuration (v5)"
+            echo "server.bolt.listen_address=:${NEO4J_BOLT_PORT}"
+            echo "server.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
+            echo "server.http.listen_address=:${NEO4J_HTTP_PORT}"
+            echo "server.http.advertised_address=:${NEO4J_HTTP_PORT}"
+            echo "server.https.listen_address=:${NEO4J_HTTPS_PORT}"
+            echo "server.https.advertised_address=:${NEO4J_HTTPS_PORT}"
+        } >> "${NEO4J_CONFIG}"    
+    else
+        echo "setupNeo4j: Neo4j v4 or lower detected"
+        {
+            echo ""
+            echo "# Paths of data directories in the installation"
+            echo "dbms.directories.data=${NEO4J_DATA_PATH}"
+            echo "dbms.directories.logs=${NEO4J_RUNTIME_PATH}/logs"
+            echo "dbms.directories.dumps.root=${NEO4J_RUNTIME_PATH}/dumps"
+            echo "dbms.directories.run=${NEO4J_RUNTIME_PATH}/run"
+            echo "dbms.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
+            echo ""
+            echo "# Ports Configuration"
+            echo "dbms.connector.bolt.listen_address=:${NEO4J_BOLT_PORT}"
+            echo "dbms.connector.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
+            echo "dbms.connector.http.listen_address=:${NEO4J_HTTP_PORT}"
+            echo "dbms.connector.http.advertised_address=:${NEO4J_HTTP_PORT}"
+            echo "dbms.connector.https.listen_address=:${NEO4J_HTTPS_PORT}"
+            echo "dbms.connector.https.advertised_address=:${NEO4J_HTTPS_PORT}"
+        } >> "${NEO4J_CONFIG}"
+    fi
 
     echo "setupNeo4j: Configuring static settings (memory, procedure permittions, ...)"
-    cat "${SCRIPTS_DIR}/templates/template-neo4j.conf" >> "${NEO4J_CONFIG}"
+    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
+        cat "${SCRIPTS_DIR}/templates/template-neo4j.conf" >> "${NEO4J_CONFIG}"
+    else
+        cat "${SCRIPTS_DIR}/templates/template-neo4j-v4.conf" >> "${NEO4J_CONFIG}"
+    fi
 
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).
     # This needs to be done after the configuration changes.
@@ -142,6 +166,7 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_APOC_PLUGIN_ARTIFACT}
         echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already downloaded"
     fi
     
+    # Check downloaded file size to be at least 100 bytes
     downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}")
     if [[ "$downloaded_file_size" -le 100 ]]; then
         echo "setupNeo4j: Error: Failed to download ${NEO4J_APOC_PLUGIN_ARTIFACT}: Invalid Filesize."
@@ -185,6 +210,7 @@ if [ ! -f "${NEO4J_INSTALLATION_DIRECTORY}/plugins/${NEO4J_GDS_PLUGIN_ARTIFACT}"
         echo "setupNeo4j: ${NEO4J_GDS_PLUGIN_ARTIFACT} already downloaded"
     fi
     
+    # Check downloaded file size to be at least 100 bytes
     downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_GDS_PLUGIN_ARTIFACT}" | awk '{print $1}')
     if [[ "$downloaded_file_size" -le 100 ]]; then
         echo "setupNeo4j: Error: Failed to download ${NEO4J_GDS_PLUGIN_ARTIFACT}. Invalid Filesize."
