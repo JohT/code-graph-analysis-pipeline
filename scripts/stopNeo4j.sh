@@ -5,7 +5,7 @@
 # Note: Does nothing if the database is already stopped.
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (april 2023)
+NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 

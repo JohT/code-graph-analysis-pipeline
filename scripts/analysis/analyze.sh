@@ -22,20 +22,22 @@
 
 # Overrideable environment variables (optional, defaults also defined in sub scripts where needed)
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (may 2023)
-JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"} # Version 1.12.2 is the current version (may 2023)
+NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
+JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.3"} # 2.0.3 is the newest version (june 2023) compatible with Neo4j v5
 
 # Overrideable environment variables for ports (optional, defaults also defined in sub scripts where needed)
 # Override them if you need to run multiple neo4j database servers in parallel.
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} 
 NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"}
 NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"}
-NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/data/transaction/commit"} # Neo4j v4: "db/data/transaction/commit", Neo4j v5: "db/neo4j/tx/commit"
+NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit",
 
 # Overrideable environment variables for the Neo4j APOC plugin (optional, defaults also defined in sub scripts where needed)
-# Override them if you want to use Neo4j v5 instead of v4.4
-NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"all"} #Awesome Procedures for Neo4j Plugin Edition (Neo4j v4.4.x "all", Neo4j >= v5 "core")
-NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j-contrib/neo4j-apoc-procedures"} #Awesome Procedures for Neo4j Plugin GitHub User/Repository (Neo4j v4.4.x "neo4j-contrib/neo4j-apoc-procedures", Neo4j >= v5 "neo4j/apoc")
+# Override them if you want to use Neo4j v4 instead of v5
+NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"} #Awesome Procedures for Neo4j Plugin Edition (Neo4j v4.4.x "all", Neo4j >= v5 "core")
+NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"} #Awesome Procedures for Neo4j Plugin GitHub User/Repository (Neo4j v4.4.x "neo4j-contrib/neo4j-apoc-procedures", Neo4j >= v5 "neo4j/apoc")
+
+NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.4.0"} # Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x
 
 ARTIFACT_SCRIPTS_DIRECTORY=${ARTIFACT_SCRIPTS_DIRECTORY:-"artifacts"}
 REPORTS_SCRIPTS_DIRECTORY=${REPORTS_SCRIPTS_DIRECTORY:-"reports"}

@@ -15,7 +15,7 @@
 
 # Overrideable Defaults
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
-NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/data/transaction/commit"} # Neo4j v4: "db/data/transaction/commit", Neo4j v5: "db/neo4j/tx/commit"
+NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit",
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then

@@ -5,7 +5,7 @@
 # Note: The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (april 2023)
+NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 
 # Internal constants

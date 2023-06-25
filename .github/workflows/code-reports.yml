@@ -42,7 +42,7 @@ jobs:
       matrix:
         include:
         - os: ubuntu-latest
-          java: 11
+          java: 17
           python: 3.11
           mambaforge: 23.1.0-1
 
