@@ -39,13 +39,13 @@ SETTINGS_PROFILE_SCRIPTS_DIRECTORY=${SETTINGS_PROFILE_SCRIPTS_DIRECTORY:-"profil
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 --name <name> --version <version> [--report <All (default), Csv, Jupyter,...>] [--profile <default, neo4jv5, neo4jv4,...>]"
+  echo "Usage: $0 --name <name> --version <version> [--report <All (default), Csv, Jupyter,...>] [--profile <Default, Neo4jv5, Neo4jv4,...>]"
   exit 1
 }
 
 # Default values
 analysisReportCompilation="All"
-settingsProfile="default"
+settingsProfile="Default"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
