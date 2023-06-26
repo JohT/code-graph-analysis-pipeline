@@ -16,8 +16,10 @@ Script | Directory | Description
 | [generateCypherReference.sh](./generateCypherReference.sh) |  | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
 | [generateMarkdownReference.sh](./generateMarkdownReference.sh) |  | Generates "REPORTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [generateScriptReference.sh](./generateScriptReference.sh) |  | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
+| [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
+| [DatabaseCsvExport.sh](./reports/DatabaseCsvExport.sh) | reports | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all" |
 | [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports. |
 | [ExternalDependenciesJupyter.sh](./reports/ExternalDependenciesJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics" CSV reports. |
@@ -35,6 +37,7 @@ Script | Directory | Description
 | [JupyterReports.sh](./reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts. |
 | [resetAndScan.sh](./resetAndScan.sh) |  | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph. |
 | [resetAndScanChanged.sh](./resetAndScanChanged.sh) |  | Executes "resetAndScan.sh" only if "detectChangedArtifacts.sh" returns detected changes. |
+| [resetAndScanMemgraph.sh](./resetAndScanMemgraph.sh) |  | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph. |
 | [setupJQAssistant.sh](./setupJQAssistant.sh) |  | Installs (download and unzip) jQAssistant (https://jqassistant.org/get-started). |
 | [setupNeo4j.sh](./setupNeo4j.sh) |  | Installs (download, unpack, get plugins, configure) a local Neo4j Graph Database (https://neo4j.com/download-center/#community). |
 | [setupNeo4jInitialPassword.sh](./setupNeo4jInitialPassword.sh) |  | Sets the initial password for the local Neo4j Graph Database (https://neo4j.com/download-center/#community). |

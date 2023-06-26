@@ -8,14 +8,19 @@
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
 
-# Function to execute a cypher query from the given file (first and only argument) with the default method (HTTP)
+# Function to execute a cypher query from the given file (first argument) with the default method
 execute_cypher() { 
-    execute_cypher_http "${1}"
+    execute_cypher_http "${1}" || exit 1
 }
 
-# Function to execute a cypher query from the given file (first and only argument) with the default method (HTTP)
+# Function to execute a cypher query from the given file (first argument) with the default method and just return the number of results
 execute_cypher_summarized() { 
-   execute_cypher_http_summarized "${1}"
+   execute_cypher_http_summarized "${1}" || exit 1
+}
+
+# Function to execute a cypher query from the given file (first argument) with the default method and fail if there is no result
+execute_cypher_expect_results() { 
+   execute_cypher_http_expect_results "${1}" || exit 1
 }
 
 # Function to execute a cypher query from the given file (first and only argument) using Neo4j's HTTP API
@@ -34,7 +39,20 @@ execute_cypher_http_summarized() {
 
     results=$( execute_cypher_http ${cypherFileName} | wc -l )
     results=$((results - 2))
-    echo "$(basename -- "${cypherFileName}") (http) result lines: ${results}"
+    echo "$(basename -- "${cypherFileName}") (via http) result lines: ${results}"
+}
+
+# Function to execute a cypher query from the given file (first and only argument) that fails on no result using Neo4j's HTTP API
+execute_cypher_http_expect_results() { 
+    # Get the Cypher file name from the first argument
+    cypherFileName="${1}"
+
+    results=$( execute_cypher_http ${cypherFileName} | wc -l )
+    results=$((results - 1))
+    if [[ "$results" -lt 1 ]]; then
+        echo "$(basename -- "${cypherFileName}") (via http) Error: Expected at least one entry but was ${results}"
+        exit 1
+    fi
 }
 
 # Function to execute a cypher query from the given file (first and only argument) using "cypher-shell" provided by Neo4j
@@ -42,15 +60,9 @@ execute_cypher_shell() {
     # Get the Cypher file name from the first argument
     cypherFileName=$1
 
-    # Check if NEO4J_DIRECTORY exists
-    if [ ! -d "${NEO4J_DIRECTORY}" ] ; then
-        echo "Neo4j Installation Directory <${NEO4J_DIRECTORY}> doesn't exist. Please run setupNeo4j.sh first."
-        exit 1
-    fi
-
     # Check if NEO4J_BIN exists
     if [ ! -d "${NEO4J_BIN}" ] ; then
-        echo "Neo4j Binary Directory <${NEO4J_BIN}> doesn't exist. Please run setupNeo4j.sh first."
+        echo "executeQuery: Error: Neo4j Binary Directory <${NEO4J_BIN}> doesn't exist. Please run setupNeo4j.sh first."
         exit 1
     fi
 
@@ -64,11 +76,24 @@ execute_cypher_shell() {
 }
 
 # Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using "cypher-shell" provided by Neo4j
-execute_cypher_summarized_shell() { 
+execute_cypher_shell_summarized() { 
     # Get the Cypher file name from the first argument
     cypherFileName=$1
 
     results=$( execute_cypher_shell ${cypherFileName} | wc -l )
     results=$((results - 2))
-    echo "$(basename -- "${cypherFileName}") (cypher-shell) result lines: ${results}" || exit 1
+    echo "$(basename -- "${cypherFileName}") (via cypher-shell) result lines: ${results}" || exit 1
+}
+
+# Function to execute a cypher query from the given file (first and only argument) that fails on no result using "cypher-shell" provided by Neo4j
+execute_cypher_shell_expect_results() { 
+    # Get the Cypher file name from the first argument
+    cypherFileName=$1
+
+    results=$( execute_cypher_shell ${cypherFileName} | wc -l )
+    results=$((results - 2))
+    if [[ "$results" -lt 1 ]]; then
+        echo "$(basename -- "${cypherFileName}") (via cypher-shell) Error: Expected at least one entry but was ${results}"
+        exit 1
+    fi
 }

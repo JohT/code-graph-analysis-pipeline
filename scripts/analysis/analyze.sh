@@ -147,14 +147,17 @@ source "${DOWNLOAD_SCRIPT}" "${analysisVersion}" || exit 4
 # Scan and analyze artifacts when they were changed
 source "${SCRIPTS_DIR}/resetAndScanChanged.sh" || exit 5
 
+# Prepare and validate graph database before analyzing and creating reports 
+source "${SCRIPTS_DIR}/prepareAnalysis.sh" || exit 6
+
 #########################
 # Create Reports
 #########################
 echo "Creating Reports with ${REPORT_COMPILATION_SCRIPT} ..."
-source "${REPORT_COMPILATION_SCRIPT}" || exit 6
+source "${REPORT_COMPILATION_SCRIPT}" || exit 7
 
 # Stop Neo4j at the end
 source "${SCRIPTS_DIR}/stopNeo4j.sh"
 
 # Change back to the previous directory where the script was started
-popd || exit 7
+popd || exit 8

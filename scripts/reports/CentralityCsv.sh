@@ -3,6 +3,7 @@
 # Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
 # It requires an already running Neo4j graph database with already scanned analyzed artifacts.
 # The reports (csv files) will be written into the sub directory reports/community.
+# Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
@@ -31,19 +32,7 @@ FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
 # Local Constants
-PACKAGE_WEIGHTS_CYPHER_DIR="$CYPHER_DIR/Package_Relationship_Weights"
-PACKAGE_METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
 CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
-
-# Preparation - Add weights to package DEPENDS_ON relationships 
-execute_cypher_summarized "${PACKAGE_WEIGHTS_CYPHER_DIR}/Add_weight_property_for_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher_summarized "${PACKAGE_WEIGHTS_CYPHER_DIR}/Add_weight_property_to_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher_summarized "${PACKAGE_WEIGHTS_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Package_DEPENDS_ON_relationships.cypher"
-execute_cypher_summarized "${PACKAGE_WEIGHTS_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Package_DEPENDS_ON_relationships.cypher"
-
-# Preparation - Add Package node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_summarized "${PACKAGE_METRICS_CYPHER_DIR}/Set_Incoming_Package_Dependencies.cypher"
-execute_cypher_summarized "${PACKAGE_METRICS_CYPHER_DIR}/Set_Outgoing_Package_Dependencies.cypher"
 
 # Preparation for Centrality - Create package dependencies projection
 execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_0_Delete_Projection.cypher"
