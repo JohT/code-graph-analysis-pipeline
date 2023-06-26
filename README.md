@@ -98,21 +98,28 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 ## 🤔 Questions & Answers
 
 - How can i run an analysis locally?  
-👉 See [start-an-analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
+  👉 See [start-an-analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
 
 - How can i add an CSV report to the pipeline?  
-👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
-👉 Create a new CSV report script in the [scripts/reports](./scripts/reports/) directory. Take for example [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) as a reference.
-👉 The script will automatically be included because of the directory and its name ending with "Csv.sh".
+  👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
+  👉 Create a new CSV report script in the [scripts/reports](./scripts/reports/) directory. Take for example [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) as a reference.  
+  👉 The script will automatically be included because of the directory and its name ending with "Csv.sh".
 
 - How can i add an Jupyter Notebook report to the pipeline?  
-👉 Put your new notebook into the [jupyter](./jupyter) directory.  
-👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
-👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
+  👉 Put your new notebook into the [jupyter](./jupyter) directory.  
+  👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
+  👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
 
-- How can i add another code base to analyze?
-👉 Create an new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take [downloadAxonFramework.](./scripts/artifacts/downloadAxonFramework.sh) as a reference for example.
-👉 The script will be triggered when the [analyze](./scripts/analysis/analyze.sh) command 
+- How can i add another code base to analyze?  
+  👉 Create an new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take [downloadAxonFramework.](./scripts/artifacts/downloadAxonFramework.sh) as a reference for example.  
+  👉 The script will be triggered when the [analyze](./scripts/analysis/analyze.sh) command
 
-- How can i trigger a full rescan of all artifacts?
-👉 Delete the file `artifactsChangeDetectionHash.txt` in the temporary `arctifacts` directory.
+- How can i trigger a full rescan of all artifacts?  
+  👉 Delete the file `artifactsChangeDetectionHash.txt` in the temporary `artifacts` directory.
+
+- How can PDF generation be skipped to speed up report generation and not depend on chromium?  
+  👉 Set environment variable `SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  
+
+  ```shell
+  export SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION="true"
+  ```

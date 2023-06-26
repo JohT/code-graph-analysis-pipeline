@@ -19,6 +19,8 @@
 #       It it isn't activated, it will save the currently activated environment, change to codegraph, and restore the original one at the end again.
 #       In cases of an error it might be, that the original conda environment isn't set back. Typically this shouldn't be the case though. 
 
+SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION:-""}
+
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
     echo "executeJupyterNotebook: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your password'."
@@ -123,8 +125,10 @@ jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file" || ex
 sed -E '/<style( scoped)?>/,/<\/style>/d' "${jupyter_notebook_markdown_file}" > "${jupyter_notebook_markdown_file}.nostyle"
 mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_file}"
 
-# Convert the Jupyter Notebook to PDF 
-jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file" || exit 7
+# Convert the Jupyter Notebook to PDF
+if [ -z "${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
+    jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file" || exit 7
+fi
 
 # Restore Conda environment
 if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
