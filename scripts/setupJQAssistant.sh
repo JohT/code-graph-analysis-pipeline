@@ -33,7 +33,7 @@ else
 fi
 
 # Internal constants
-JQASSISTANT_INSTALLATION_NAME="jqassistant-commandline-neo4jv3-${JQASSISTANT_CLI_VERSION}"
+JQASSISTANT_INSTALLATION_NAME="${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_INSTALLATION_NAME}"
 
 # Download and unpack jQAssistant
@@ -46,8 +46,6 @@ if [ ! -d "${JQASSISTANT_INSTALLATION_DIRECTORY}" ] ; then
         
         # Download jQAssistant
         # With the option "-L" a redirection will be followed automatically
-        # old: https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli/jqassistant-commandline-neo4jv3/1.12.2/jqassistant-commandline-neo4jv3-1.12.2-distribution.zip
-        # new: https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli/jqassistant-commandline-distribution/2.0.3/jqassistant-commandline-distribution-2.0.3-bin.zip
         curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${JQASSISTANT_INSTALLATION_NAME}.zip" "${jqassistant_cli_fulldownload_url}"
     else
         echo "setupJQAssistant: ${JQASSISTANT_INSTALLATION_NAME} already downloaded"
@@ -55,7 +53,7 @@ if [ ! -d "${JQASSISTANT_INSTALLATION_DIRECTORY}" ] ; then
 
     downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${JQASSISTANT_INSTALLATION_NAME}.zip" | awk '{print $1}')
     if [[ "${downloaded_file_size}" -le 1000 ]]; then
-        echo "setupJQAssistant: Failed to download ${JQASSISTANT_INSTALLATION_NAME}: Invalid Filesize"
+        echo "setupJQAssistant: Error: Failed to download ${JQASSISTANT_INSTALLATION_NAME}. Invalid Filesize"
         rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${JQASSISTANT_INSTALLATION_NAME}.zip"
         exit 1
     fi

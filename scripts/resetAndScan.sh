@@ -6,6 +6,7 @@
 # Note: The environment variable NEO4J_INITIAL_PASSWORD is required to login to Neo4j.
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"} # Version 1.12.2 is the current version (april 2023)
+JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv3"} #  Neo4j v5: "jqassistant-commandline-distribution", Neo4j v4: "jqassistant-commandline-neo4jv3"
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (april 2023)
@@ -16,7 +17,7 @@ ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Directory with the Jav
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 
 # Internal constants
-JQASSISTANT_BIN="${TOOLS_DIRECTORY}/jqassistant-commandline-neo4jv3-${JQASSISTANT_CLI_VERSION}/bin"
+JQASSISTANT_BIN="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}/bin"
 JQASSISTANT_NEO4J_OPTIONS="-storeUri ${NEO4J_BOLT_URI} -storeUsername ${NEO4J_USER} -storePassword ${NEO4J_INITIAL_PASSWORD}"
 
 # Check if environment variable is set
