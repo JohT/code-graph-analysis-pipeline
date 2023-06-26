@@ -9,14 +9,36 @@ Contained within this repository is a comprehensive and automated code graph ana
 ## 🚀 Features
 
 - Analyze static code structure, dependencies, metrics, ...
-- Fully automated [pipeline](./.github/workflows/code-reports.yml) including tool installation and report generation
+- Fully automated [pipeline](./.github/workflows/code-reports.yml) from tool installation and artifact download to report generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
-- [Object Oriented Design Quality Metrics](./jupyter/ObjectOrientedDesignMetrics.ipynb) report based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8)
-- [Visibility Metrics](./jupyter/VisibilityMetrics.ipynb) reports based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th)
-- [Package Dependencies](./jupyter/PackageDependencies.ipynb) report based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html)
-- [Graph Data Science](https://neo4j.com/product/graph-data-science) reports for [Community Detection](./scripts/reports/CommunityCsv.sh), [Centrality](./scripts/reports/CommunityCsv.sh) and [Similarity](./scripts/reports/SimilarityCsv.sh)
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
 - Example Analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
+
+### 📖 Jupyter Notebook Reports
+
+- [External Dependencies](./jupyter/ExternalDependencies.ipynb) reports with amongst others the most and least used external packages ([Example](./results/AxonFramework-4.7.5/external-dependencies/ExternalDependencies.md))
+- [Object Oriented Design Quality Metrics](./jupyter/ObjectOrientedDesignMetrics.ipynb) report based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Example](./results/AxonFramework-4.7.5/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md))
+- [Overview](./jupyter/Overview.ipynb) reports with the number of Java types and packages, method line count, etc. ([Example](./results/AxonFramework-4.7.5/overview/Overview.md))
+- [Package Dependencies](./jupyter/PackageDependencies.ipynb) report based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) including cyclic dependencies ([Example](./results/AxonFramework-4.7.5/package-dependencies/PackageDependencies.md))
+- [Visibility Metrics](./jupyter/VisibilityMetrics.ipynb) reports based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Example](./results/AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md))
+- [Wordcloud](./jupyter/Wordcloud.ipynb) with a visual representation of Java package and class names ([Example](./results/AxonFramework-4.7.5/wordcloud/Wordcloud.md))
+
+### 📖 Graph Data Science Reports
+
+Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science):
+
+- [Community Detection](./scripts/reports/CommunityCsv.sh) ([Example](./results/AxonFramework-4.7.5/community-csv/Leiden_Communities.csv))
+- [Centrality](./scripts/reports/CommunityCsv.sh) ([Example](./results/AxonFramework-4.7.5/centrality-csv/Centrality_Page_Rank.csv))
+- [Similarity](./scripts/reports/SimilarityCsv.sh) ([Example](./results/AxonFramework-4.7.5/similarity-csv/Similarity_Jaccard.csv))
+
+### 📖 Other Reports
+
+- [External Dependencies (CSV)](./scripts/reports/ExternalDependenciesCsv.sh) ([Example](./results/AxonFramework-4.7.5/external-dependencies-csv/External_package_usage_overall.csv))
+- [Object Oriented Design Metrics (CSV)](./scripts/reports/ObjectOrientedDesignMetricsCsv.sh) ([Example](./results/AxonFramework-4.7.5/object-oriented-design-metrics-csv/MainSequenceAbstractnessInstabilityDistance.csv))
+- [Overview (CSV)](./scripts/reports/OverviewCsv.sh) ([Example](./results/AxonFramework-4.7.5/overview-csv/Cyclomatic_Method_Complexity.csv))
+- [Package Dependencies - Cyclic (CSV)](./scripts/reports/PackageDependenciesCsv.sh) ([Example](./results/AxonFramework-4.7.5/package-dependencies-csv/CyclicDependenciesUnwinded.csv))
+- [Package Dependencies - Interface Segregation (CSV)](./scripts/reports/PackageDependenciesCsv.sh) ([Example](./results/AxonFramework-4.7.5/package-dependencies-csv/InterfaceSegregationCandidates.csv))
+- [Visibility Metrics (CSV)](./scripts/reports/VisibilityMetricsCsv.sh) ([Example](./results/AxonFramework-4.7.5/visibility-metrics-csv/RelativeVisibilityPerArtifact.csv))
 
 ## 🛠 Prerequisites
 
