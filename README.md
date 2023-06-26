@@ -97,6 +97,9 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 
 ## 🤔 Questions & Answers
 
+- How can i run an analysis locally?  
+👉 See [start-an-analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
+
 - How can i add an CSV report to the pipeline?  
 👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
 👉 Create a new CSV report script in the [scripts/reports](./scripts/reports/) directory. Take for example [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) as a reference.

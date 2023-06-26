@@ -15,6 +15,7 @@
 
 # Overrideable Defaults
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
+NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit",
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -85,7 +86,7 @@ cypher_query_for_api="{\"statements\":[{\"statement\":${cypher_query},\"includeS
 # Calls the Neo4j HTTP API using cURL ( https://curl.se )
 cyper_query_result=$(curl --silent -S --fail-with-body -H Accept:application/json -H Content-Type:application/json \
      -u neo4j:"${NEO4J_INITIAL_PASSWORD}" \
-     "http://localhost:${NEO4J_HTTP_PORT}/db/data/transaction/commit" \
+     "http://localhost:${NEO4J_HTTP_PORT}/${NEO4J_HTTP_TRANSACTION_ENDPOINT}" \
      -d "${cypher_query_for_api}")
 #echo "Cypher Query Result: $cyper_query_result"
 

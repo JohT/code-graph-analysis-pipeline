@@ -5,7 +5,7 @@
 # Note: Does nothing if the database is already stopped.
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"4.4.20"} # Version 4.4.x is the current long term support (LTS) version (april 2023)
+NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 
@@ -28,7 +28,7 @@ else
 fi
 
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status | grep -q "not" ; then
+if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
     echo "stopNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} aleady stopped"
     exit 0
 else
@@ -37,7 +37,7 @@ else
 fi
 
 # Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status | grep -q "not" ; then
+if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
     echo "stopNeo4j: Successfully stopped neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 else
     echo "stopNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} still running. Something went wrong. Details see 'NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status'."

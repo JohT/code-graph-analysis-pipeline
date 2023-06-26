@@ -4,19 +4,26 @@
 
 Use the following commands in the root directory of this repository to start an analysis manually e.g. for [AxonFramework](./scripts/artifacts/downloadAxonFramework.sh).
 
-### Notes
-
-- Be sure to use Java 11 (June 2023 Neo4j 4.x requirement)
-- Use your own initial Neo4j password
-- It uses the script [analyze.sh](./scripts/analysis/analyze.sh)
-- The script file names (without the prefix "download" and without the file extension) in the directory [scripts/artifacts](./scripts/artifacts) provide the possible analysis names.
-
-
 ```shell
 export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
 mkdir -p ./temp
-./../scripts/analysis/analyze.sh --name AxonFramework --version 4.7.5 --report All
+cd temp
+./../scripts/analysis/analyze.sh --name AxonFramework --version 4.8.0
 ```
+
+Add the command line argument `--report Csv` to only run the CSV reports when you don't have Python set up
+or want to skip Jupyter Notebooks.
+
+Add the command line argument `--profile Neo4jv4` if you want to use the older long term support (june 2023)
+version v4.4.x of Neo4j and compatible versions of plugins and JQAssistant.
+
+### Notes
+
+- Be sure to use Java 11 (Mai 2023 Neo4j v4 requirement) or Java 17 (June 2023 Neo4j v5 and jQAssistant CLI v2)
+- Use your own initial Neo4j password
+- For more details have a look at the script [analyze.sh](./scripts/analysis/analyze.sh)
+- The script file names (without the prefix "download" and without the file extension) in the directory [scripts/artifacts](./scripts/artifacts) provide all analysis names that are available.
+
 
 Have a look at [code-reports.yml](./.github/workflows/code-reports.yml) for all details about setup steps and full automation.
 
