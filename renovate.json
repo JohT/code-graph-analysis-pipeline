@@ -32,9 +32,9 @@
     },
     {
       "fileMatch": [
-        ".*\/scripts\/profiles\/Neo4jv5\\.sh$",
-        ".*\/scripts\/profiles\/Default\\.sh$",
-        ".*\/scripts\/[^\/]*\\.sh$"
+        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Default\\.sh$",
+        "^scripts\/[^\/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_VERSION:-\\\"?(?<currentValue>5\\..*?)\\\""
@@ -44,9 +44,9 @@
     },
     {
       "fileMatch": [
-        ".*\/scripts\/profiles\/Neo4jv5\\.sh$",
-        ".*\/scripts\/profiles\/Default\\.sh$",
-        ".*\/scripts\/[^\/]*\\.sh$"
+        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Default\\.sh$",
+        "^scripts\/[^\/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_APOC_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -56,9 +56,9 @@
     },
     {
       "fileMatch": [
-        ".*\/scripts\/profiles\/Neo4jv5\\.sh$",
-        ".*\/scripts\/profiles\/Default\\.sh$",
-        ".*\/scripts\/[^\/]*\\.sh$"
+        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Default\\.sh$",
+        "^scripts\/[^\/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -68,9 +68,9 @@
     },
     {
       "fileMatch": [
-        ".*\/scripts\/profiles\/Neo4jv5\\.sh$",
-        ".*\/scripts\/profiles\/Default\\.sh$",
-        ".*\/scripts\/[^\/]*\\.sh$"
+        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Default\\.sh$",
+        "^scripts\/[^\/]*\\.sh$"
       ],
       "matchStrings": [
         "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
