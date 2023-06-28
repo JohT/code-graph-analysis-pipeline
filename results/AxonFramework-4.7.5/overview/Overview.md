@@ -108,14 +108,14 @@
     <tr>
       <th>13</th>
       <td>axon-messaging-4.7.5</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Interface</td>
+      <td>143</td>
     </tr>
     <tr>
       <th>14</th>
       <td>axon-messaging-4.7.5</td>
-      <td>Interface</td>
-      <td>143</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>15</th>
