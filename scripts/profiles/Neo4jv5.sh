@@ -17,7 +17,7 @@ NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"5.9.0"} # Version number
 NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"} # Since Neo4j v5 the core edition is updated with Neo4j
 NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"} # Core edition was moved to "neo4j/apoc" for Neo4j v5
 
-NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.4.0"}  # Version 2.4.0 is the newest version of june 2023 and compatible with Neo4j v5
+NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.4.1"}  # Version 2.4.0 is the newest version of june 2023 and compatible with Neo4j v5
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.3"}  # Version 2.0.3 is the newest version (june 2023) compatible with Neo4j v5
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-distribution"} # Since jQAssistant CLI v2: "jqassistant-commandline-distribution"
