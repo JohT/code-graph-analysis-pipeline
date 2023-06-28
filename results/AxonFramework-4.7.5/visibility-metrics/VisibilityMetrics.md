@@ -39,33 +39,33 @@
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-modelling-4.7.5.jar</td>
-      <td>10</td>
-      <td>149</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>axon-configuration-4.7.5.jar</td>
       <td>1</td>
       <td>39</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>axon-messaging-4.7.5.jar</td>
-      <td>61</td>
-      <td>729</td>
+      <th>2</th>
+      <td>axon-test-4.7.5.jar</td>
+      <td>8</td>
+      <td>85</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>axon-disruptor-4.7.5.jar</td>
       <td>1</td>
       <td>22</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>axon-modelling-4.7.5.jar</td>
+      <td>10</td>
+      <td>149</td>
+    </tr>
+    <tr>
       <th>5</th>
-      <td>axon-test-4.7.5.jar</td>
-      <td>8</td>
-      <td>85</td>
+      <td>axon-messaging-4.7.5.jar</td>
+      <td>61</td>
+      <td>729</td>
     </tr>
   </tbody>
 </table>

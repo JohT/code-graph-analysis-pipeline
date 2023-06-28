@@ -41,33 +41,33 @@
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-modelling-4.7.5.jar</td>
-      <td>10</td>
-      <td>149</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>axon-configuration-4.7.5.jar</td>
       <td>1</td>
       <td>39</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>axon-messaging-4.7.5.jar</td>
-      <td>61</td>
-      <td>729</td>
+      <th>2</th>
+      <td>axon-test-4.7.5.jar</td>
+      <td>8</td>
+      <td>85</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>axon-disruptor-4.7.5.jar</td>
       <td>1</td>
       <td>22</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>axon-modelling-4.7.5.jar</td>
+      <td>10</td>
+      <td>149</td>
+    </tr>
+    <tr>
       <th>5</th>
-      <td>axon-test-4.7.5.jar</td>
-      <td>8</td>
-      <td>85</td>
+      <td>axon-messaging-4.7.5.jar</td>
+      <td>61</td>
+      <td>729</td>
     </tr>
   </tbody>
 </table>
@@ -1152,6 +1152,14 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>16</th>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>17</th>
       <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1159,7 +1167,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>18</th>
       <td>org.axonframework.modelling.saga.repository.in...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1167,7 +1175,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>org.axonframework.eventhandling.tokenstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1175,7 +1183,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>20</th>
       <td>org.axonframework.eventhandling.tokenstore.leg...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1183,17 +1191,9 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>21</th>
       <td>org.axonframework.messaging.interceptors.legac...</td>
       <td>legacyvalidation</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>org.axonframework.test.server</td>
-      <td>server</td>
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
