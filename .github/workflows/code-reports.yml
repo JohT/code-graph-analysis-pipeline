@@ -101,7 +101,7 @@ jobs:
       working-directory: temp
       # Shell type can be skipped if jupyter notebook reports (and therefore conda) aren't needed
       shell: bash -el {0}
-      run: ./../scripts/analysis/analyze.sh --name AxonFramework --version ${{ env.AXON_FRAMEWORK_VERSION }} --report All
+      run: ./../scripts/analysis/analyze.sh --name AxonFramework --version ${{ env.AXON_FRAMEWORK_VERSION }} --report All --profile Neo4jv5
       env:
         NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
 

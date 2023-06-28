@@ -1,6 +1,74 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:base",
+    ":combinePatchMinorReleases",
+    ":ignoreUnstable"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "AXON_FRAMEWORK_VERSION:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "AxonFramework/AxonFramework",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^axon-?(?<version>.*?)$"
+    },
+    {
+      "fileMatch": [
+        "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "mambaforge:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "conda-forge/miniforge",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": [
+        ".*sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "neo4j/neo4j",
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "fileMatch": [
+        ".*sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_APOC_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "neo4j/apoc",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": [
+        ".*sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "neo4j/graph-data-science",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": [
+        ".*sh$"
+      ],
+      "matchStrings": [
+        "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "jQAssistant/jqa-commandline-tool",
+      "datasourceTemplate": "github-tags",
+      "extractVersionTemplate": "^REL-?(?<version>.*?)$"
+    }
   ]
 }
