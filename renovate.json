@@ -3,7 +3,8 @@
   "extends": [
     "config:base",
     ":combinePatchMinorReleases",
-    ":ignoreUnstable"
+    ":ignoreUnstable",
+    "schedule:earlyMondays"
   ],
   "regexManagers": [
     {
@@ -31,17 +32,19 @@
     },
     {
       "fileMatch": [
-        ".*sh$"
+        ".*\/profiles\/Neo4jv5\\.sh$",
+        "^(?!.*\/profiles\/).*\\.sh$"
       ],
       "matchStrings": [
-        "NEO4J_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+        "NEO4J_VERSION:-\\\"?(?<currentValue>5\\..*?)\\\""
       ],
       "depNameTemplate": "neo4j/neo4j",
       "datasourceTemplate": "github-tags"
     },
     {
       "fileMatch": [
-        ".*sh$"
+        ".*\/profiles\/Neo4jv5\\.sh$",
+        "^(?!.*\/profiles\/).*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_APOC_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -51,7 +54,8 @@
     },
     {
       "fileMatch": [
-        ".*sh$"
+        ".*\/profiles\/Neo4jv5\\.sh$",
+        "^(?!.*\/profiles\/).*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -61,7 +65,8 @@
     },
     {
       "fileMatch": [
-        ".*sh$"
+        ".*\/profiles\/Neo4jv5\\.sh$",
+        "^(?!.*\/profiles\/).*\\.sh$"
       ],
       "matchStrings": [
         "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
