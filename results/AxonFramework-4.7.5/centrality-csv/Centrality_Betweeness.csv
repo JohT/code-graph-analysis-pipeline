@@ -2,7 +2,7 @@
 "org.axonframework.eventhandling","eventhandling",833,4409,1557,""
 "org.axonframework.messaging","messaging",427.83333333333337,8507,133,""
 "org.axonframework.tracing","tracing",427.49999999999994,173,122,""
-"org.axonframework.serialization","serialization",325.49999999999994,1078,176,""
+"org.axonframework.serialization","serialization",325.5,1078,176,""
 "org.axonframework.messaging.annotation","annotation",320.99999999999994,1050,301,""
 "org.axonframework.queryhandling","queryhandling",273.1666666666667,175,1108,""
 "org.axonframework.commandhandling","commandhandling",188.33333333333337,1539,642,""
