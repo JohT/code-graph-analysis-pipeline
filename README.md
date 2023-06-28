@@ -76,7 +76,7 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
   - [py2neo](https://py2neo.org)
   - [wordcloud](https://github.com/amueller/word_cloud)
 
-**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like these wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list. 
+**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list. 
 
 ## 📈 Report Reference
 
