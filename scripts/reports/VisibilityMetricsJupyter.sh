@@ -26,5 +26,5 @@ REPORT_NAME="visibility-metrics"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
-# Execute and convert the Jupyter Notebook "PackageDependencies.ipynb" within the given reports directory
+# Execute and convert the Jupyter Notebook "VisibilityMetrics.ipynb" within the given reports directory
 (cd "${FULL_REPORT_DIRECTORY}" && exec ${SCRIPTS_DIR}/executeJupyterNotebook.sh ${JUPYTER_NOTEBOOK_DIRECTORY}/VisibilityMetrics.ipynb) || exit 1
