@@ -36,6 +36,7 @@ PACKAGE_USAGE_CYPHER_DIR="${CYPHER_DIR}/Package_Usage"
 
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_as_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicDependencies.csv"
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicDependenciesUnwinded.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicArtifactDependenciesUnwinded.csv"
 execute_cypher "${CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${FULL_REPORT_DIRECTORY}/InterfaceSegregationCandidates.csv"
 execute_cypher "${PACKAGE_USAGE_CYPHER_DIR}/List_types_that_are_used_by_many_different_packages.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypes.csv"
 execute_cypher "${PACKAGE_USAGE_CYPHER_DIR}/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ArtifactPackageUsage.csv"
