@@ -23,13 +23,13 @@ Script | Directory | Description
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [DatabaseCsvExport.sh](./reports/DatabaseCsvExport.sh) | reports | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all" |
-| [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports. |
+| [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports. |
 | [ExternalDependenciesJupyter.sh](./reports/ExternalDependenciesJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "internal-dependencies" CSV reports. |
 | [InternalDependenciesJupyter.sh](./reports/InternalDependenciesJupyter.sh) | reports | Creates the "internal-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "InternalDependencies.ipynb". |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics" CSV reports. |
 | [ObjectOrientedDesignMetricsJupyter.sh](./reports/ObjectOrientedDesignMetricsJupyter.sh) | reports | Creates the "object-oriented-design-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "ObjectOrientedDesignMetrics.ipynb". |
-| [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports. |
+| [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
 | [OverviewJupyter.sh](./reports/OverviewJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics" CSV reports. |
