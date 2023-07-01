@@ -106,13 +106,13 @@ jobs:
         ./../../scripts/downloader/downloadAxonFramework.sh ${{ env.AXON_FRAMEWORK_VERSION }}
 
     - name: Analyze AxonFramework
-      working-directory: temp
+      working-directory: temp/AxonFramework-${{ env.AXON_FRAMEWORK_VERSION }}
       # Shell type can be skipped if jupyter notebook reports (and therefore conda) aren't needed
       shell: bash -el {0}
       env:
         NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
       run: |
-        ./../scripts/analysis/analyze.sh --report All --profile Neo4jv5
+        ./../../scripts/analysis/analyze.sh --report All --profile Neo4jv5
 
     - name: Move reports from the temp to the results directory preserving their surrounding directory
       working-directory: temp
