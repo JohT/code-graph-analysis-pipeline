@@ -42,14 +42,14 @@
     <tr>
       <th>2</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>4</th>

@@ -6,7 +6,7 @@
 "org.axonframework.serialization","serialization",335.5,1240,176,""
 "org.axonframework.queryhandling","queryhandling",282,182,1116,""
 "org.axonframework.commandhandling","commandhandling",194.5,1539,642,""
-"org.axonframework.lifecycle","lifecycle",163.83333333333331,71,10,""
+"org.axonframework.lifecycle","lifecycle",163.83333333333334,71,10,""
 "org.axonframework.eventsourcing.eventstore","eventstore",146.75,169,603,""
 "org.axonframework.util","util",113.33333333333334,3,6,""
 "org.axonframework.modelling.saga.repository","repository",95.83333333333333,72,231,""
