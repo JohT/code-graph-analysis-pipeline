@@ -20,6 +20,10 @@
 #       This makes it possible to run an analysis with e.g. Neo4j v4 instead of v5. Further profiles might come in future.
 #       Implemented is this as a script in "scripts/profiles" that starts with the settings profile name followed by ".sh".
 
+# Note: The argument "--explore" is optional. It is a switch that is deactivated by default.
+#       It activates "explore" mode where no reports are executed and Neo4j keeps running (skip stop step).
+#       This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
+
 # Note: The script and its sub scripts are designed to be as efficient as possible 
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
@@ -32,13 +36,14 @@ ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--report <All (default), Csv, Jupyter,...>] [--profile <Default, Neo4jv5, Neo4jv4,...>]"
+  echo "Usage: $0 [--report <All (default), Csv, Jupyter,...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--explore]"
   exit 1
 }
 
 # Default values
 analysisReportCompilation="All"
 settingsProfile="Default"
+exploreMode=false
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -50,6 +55,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --profile)
       settingsProfile="$2"
+      shift
+      ;;
+    --explore)
+      exploreMode=true
       shift
       ;;
     *)
@@ -118,10 +127,15 @@ source "${SCRIPTS_DIR}/resetAndScanChanged.sh" || exit 4
 # Prepare and validate graph database before analyzing and creating reports 
 source "${SCRIPTS_DIR}/prepareAnalysis.sh" || exit 5
 
+if ${exploreMode}; then
+  echo "analyze: Explore mode activated. Report generation will be skipped. Neo4j keeps running."
+  exit 0
+fi
+
 #########################
 # Create Reports
 #########################
-echo "Creating Reports with ${REPORT_COMPILATION_SCRIPT} ..."
+echo "analyze: Creating Reports with ${REPORT_COMPILATION_SCRIPT} ..."
 source "${REPORT_COMPILATION_SCRIPT}" || exit 6
 
 # Stop Neo4j at the end

@@ -44,22 +44,25 @@
     ./../../scripts/analysis/analyze.sh
     ```
 
-<span style="font-size:1.8em;">&#128214;</span>
-See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example for all the above steps. See [code-reports Pipeline](./.github/workflows/code-reports.yml) on how to do this within a GitHub Actions Workflow.
+👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
+👉 See [code-reports Pipeline](./.github/workflows/code-reports.yml) on how to do this within a GitHub Actions Workflow.
 
-<span style="font-size:1.6em;">&#9432;</span>
-Add the command line argument `--report Csv` of [analyze.sh](./scripts/analysis/analyze.sh) to only generate CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies.
+### Command Line Options
 
-<span style="font-size:1.6em;">&#9432;</span>
-Add the command line argument `--profile Neo4jv4` of [analyze.sh](./scripts/analysis/analyze.sh) if you want to use the older long term support (june 2023) version v4.4.x of Neo4j and compatible versions of plugins and JQAssistant.
+The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command line options:
+
+- `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports.
+
+- `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. `Neo4jv5` will explicitly select the newest (june 2023) version 5.x of Neo4j. Without setting
+a profile, the newest versions will be used. Profiles are scripts that can be found in the directory [scripts/profiles](./scripts/profiles/).
+
+- `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
 ### Notes
 
 - Be sure to use Java 17 for Neo4j v5 and Java 11 for Neo4j v4
 - Use your own initial Neo4j password
 - For more details have a look at the script [analyze.sh](./scripts/analysis/analyze.sh)
-
-Have a look at [code-reports.yml](./.github/workflows/code-reports.yml) for all details about setup steps and full automation.
 
 ## Generate Markdown References
 
