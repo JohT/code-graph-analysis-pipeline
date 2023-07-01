@@ -11,7 +11,7 @@ echo "prepareAnalysis: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
-    echo "prepareAnalysis: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your password>'."
+    echo "prepareAnalysis: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'."
     exit 1
 fi
 
