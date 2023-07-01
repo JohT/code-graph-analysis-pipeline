@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# Executes "Package_Usage" Cypher queries to get the "package-dependencies" CSV reports.
-# It contains lists of e.g. incoming and outgoing package dependencies,
-# abstractness, instability and the distance to the so called "main sequence".
+# Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports.
+# They list external library package usage like how often a external package is called.
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
