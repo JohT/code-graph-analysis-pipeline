@@ -2,7 +2,7 @@
 
 <img src="./images/DALL-E-Mini-Graph-Pipeline-Logo.png" align="left" hspace="10" width="180">
 
-Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.org/get-started), its capabilities extend beyond that particular language. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) integration maximizes the utilization of its features. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.org/get-started), it is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
 
 ---
 
@@ -16,12 +16,12 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ### 📖 Jupyter Notebook Reports
 
-- [External Dependencies](./jupyter/ExternalDependencies.ipynb) reports with amongst others the most and least used external packages ([Example](./results/AxonFramework-4.7.5/external-dependencies/ExternalDependencies.md))
-- [Object Oriented Design Quality Metrics](./jupyter/ObjectOrientedDesignMetrics.ipynb) report based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Example](./results/AxonFramework-4.7.5/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md))
-- [Overview](./jupyter/Overview.ipynb) reports with the number of Java types and packages, method line count, etc. ([Example](./results/AxonFramework-4.7.5/overview/Overview.md))
-- [Internal Dependencies](./jupyter/InternalDependencies.ipynb) report based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) including cyclic dependencies ([Example](./results/AxonFramework-4.7.5/internal-dependencies/InternalDependencies.md))
-- [Visibility Metrics](./jupyter/VisibilityMetrics.ipynb) reports based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Example](./results/AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md))
-- [Wordcloud](./jupyter/Wordcloud.ipynb) with a visual representation of Java package and class names ([Example](./results/AxonFramework-4.7.5/wordcloud/Wordcloud.md))
+- [External Dependencies](./jupyter/ExternalDependencies.ipynb) contains the most and least used external packages, etc. ([Example](./results/AxonFramework-4.7.5/external-dependencies/ExternalDependencies.md))
+- [Object Oriented Design Quality Metrics](./jupyter/ObjectOrientedDesignMetrics.ipynb) is  based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Example](./results/AxonFramework-4.7.5/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md))
+- [Overview](./jupyter/Overview.ipynb) contains the number of types and packages, method line count, cyclomatic complexity, etc. ([Example](./results/AxonFramework-4.7.5/overview/Overview.md))
+- [Internal Dependencies](./jupyter/InternalDependencies.ipynb) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) including cyclic dependencies ([Example](./results/AxonFramework-4.7.5/internal-dependencies/InternalDependencies.md))
+- [Visibility Metrics](./jupyter/VisibilityMetrics.ipynb) is based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Example](./results/AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md))
+- [Wordcloud](./jupyter/Wordcloud.ipynb) contains a visual representation of package and class names ([Example](./results/AxonFramework-4.7.5/wordcloud/Wordcloud.md))
 
 ### 📖 Graph Data Science Reports
 
@@ -42,14 +42,13 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 
 ## 🛠 Prerequisites
 
-- Java 11 is required (June 2023 Neo4j 4.x requirement)
-- Python with a conda package manager is needed for Jupyter Notebook reports
-- Chromium will automatically be downloaded if needed for Jupyter Notebook reports in PDF format.
+- Java 17 is required (June 2023 Neo4j 5.x requirement)
+- Python and a conda package manager are required for Jupyter Notebook reports
+- Chromium will automatically be downloaded if needed for Jupyter Notebook reports in PDF format
 
 ## Getting Started
 
-See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md) on how to start
-an analysis on your local machine.
+See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md) on how to start an analysis on your local machine.
 
 ## 🏗 Pipeline and Tools
 
