@@ -58,10 +58,10 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 - [Checkout GIT Repository](https://github.com/actions/checkout)
 - [Setup Java](https://github.com/actions/setup-java)
 - [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
+- Download artifacts that contain the code to be analyzed [scripts/artifacts](./scripts/downloader/)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.org/get-started) for Java Analysis ([analysis.sh](./scripts/analysis/analyze.sh))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
-- Trigger Artifacts download that contain the code to be analyzed [scripts/artifacts](./scripts/artifacts/)
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [environment.yml](./jupyter/environment.yml):
   - [Python](https://www.python.org)
@@ -97,7 +97,7 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 ## 🤔 Questions & Answers
 
 - How can i run an analysis locally?  
-  👉 See [start-an-analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
+  👉 See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
 
 - How can i add an CSV report to the pipeline?  
   👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
@@ -109,12 +109,12 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
   👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
   👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
 
-- How can i add another code base to analyze?  
-  👉 Create an new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take [downloadAxonFramework.](./scripts/artifacts/downloadAxonFramework.sh) as a reference for example.  
-  👉 The script will be triggered when the [analyze](./scripts/analysis/analyze.sh) command
+- How can i add another code basis to be analyzed automatically?  
+  👉 Create a new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
+  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/code-reports.yml).
 
 - How can i trigger a full rescan of all artifacts?  
-  👉 Delete the file `artifactsChangeDetectionHash.txt` in the temporary `artifacts` directory.
+  👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
 
 - How can PDF generation be skipped to speed up report generation and not depend on chromium?  
   👉 Set environment variable `SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  

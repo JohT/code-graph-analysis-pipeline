@@ -12,9 +12,10 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 echo "resetAndScanChanged SCRIPTS_DIR=$SCRIPTS_DIR"
 
 # Scan and analyze Artifacts when they were changed
-if [[ $( source $SCRIPTS_DIR/detectChangedArtifacts.sh ) == "0" ]] ; then
-    echo "Artifacts unchanged. Scan skipped."
+changeDetectionReturnCode=$( source "$SCRIPTS_DIR/detectChangedArtifacts.sh" )
+if [[ "${changeDetectionReturnCode}" == "0" ]] ; then
+    echo "resetAndScanChanged: Artifacts unchanged. Scan skipped."
 else
-    echo "Resetting database and scanning artifacts"
+    echo "resetAndScanChanged: Detected change (${changeDetectionReturnCode}). Resetting database and scanning artifacts."
     source "${SCRIPTS_DIR}/resetAndScan.sh"
 fi

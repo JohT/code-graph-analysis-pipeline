@@ -2,30 +2,67 @@
 
 ## Start an analysis
 
-Use the following commands in the root directory of this repository to start an analysis manually e.g. for [AxonFramework](./scripts/artifacts/downloadAxonFramework.sh).
+1. Create a directory for all analysis projects
 
-```shell
-export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
-mkdir -p ./temp
-cd temp
-./../scripts/analysis/analyze.sh --name AxonFramework --version 4.8.0
-```
+    ```shell
+    mkdir temp
+    cd temp
+    ```
 
-Add the command line argument `--report Csv` to only run the CSV reports when you don't have Python set up
-or want to skip Jupyter Notebooks.
+1. Create a working directory for your specific analysis
+  
+    ```shell
+    mkdir MyFirstAnalysis
+    cd MyFirstAnalysis
+    ```
 
-Add the command line argument `--profile Neo4jv4` if you want to use the older long term support (june 2023)
-version v4.4.x of Neo4j and compatible versions of plugins and JQAssistant.
+1. Choose an initial password for Neo4j
+
+    ```shell
+    export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
+    ```
+
+1. Create the `artifacts` directory for the code to be analyzed (without `cd` afterwards)
+
+    ```shell
+    mkdir artifacts
+    ```
+
+1. Move the artifacts you want to analyze into the `artifacts` directory
+
+1. Optionally run a predefined script to download artifacts
+
+    ```shell
+    ./../../scripts/downloader/downloadAxonFramework.sh <version>
+    ```
+
+1. Optionally use a script to download artifacts from Maven ([details](#download-maven-artifacts-to-analyze))
+
+1. Start the analysis
+
+    ```shell
+    ./../../scripts/analysis/analyze.sh
+    ```
+
+👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
+👉 See [code-reports Pipeline](./.github/workflows/code-reports.yml) on how to do this within a GitHub Actions Workflow.
+
+### Command Line Options
+
+The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command line options:
+
+- `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports.
+
+- `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. `Neo4jv5` will explicitly select the newest (june 2023) version 5.x of Neo4j. Without setting
+a profile, the newest versions will be used. Profiles are scripts that can be found in the directory [scripts/profiles](./scripts/profiles/).
+
+- `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
 ### Notes
 
-- Be sure to use Java 11 (Mai 2023 Neo4j v4 requirement) or Java 17 (June 2023 Neo4j v5 and jQAssistant CLI v2)
+- Be sure to use Java 17 for Neo4j v5 and Java 11 for Neo4j v4
 - Use your own initial Neo4j password
 - For more details have a look at the script [analyze.sh](./scripts/analysis/analyze.sh)
-- The script file names (without the prefix "download" and without the file extension) in the directory [scripts/artifacts](./scripts/artifacts) provide all analysis names that are available.
-
-
-Have a look at [code-reports.yml](./.github/workflows/code-reports.yml) for all details about setup steps and full automation.
 
 ## Generate Markdown References
 
