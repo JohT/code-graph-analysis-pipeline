@@ -42,32 +42,32 @@
     <tr>
       <th>2</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Enum</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-messaging-4.8.0</td>
       <td>Annotation</td>
       <td>26</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>axon-modelling-4.8.0</td>
-      <td>Class</td>
-      <td>109</td>
+      <th>3</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>axon-modelling-4.8.0</td>
       <td>Interface</td>
       <td>26</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>axon-modelling-4.8.0</td>
       <td>Annotation</td>
       <td>12</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>Class</td>
+      <td>109</td>
     </tr>
     <tr>
       <th>7</th>
@@ -84,20 +84,20 @@
     <tr>
       <th>9</th>
       <td>axon-eventsourcing-4.8.0</td>
-      <td>Interface</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>axon-eventsourcing-4.8.0</td>
       <td>Enum</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>axon-eventsourcing-4.8.0</td>
       <td>Annotation</td>
       <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>Interface</td>
+      <td>31</td>
     </tr>
     <tr>
       <th>12</th>
@@ -114,26 +114,26 @@
     <tr>
       <th>14</th>
       <td>axon-configuration-4.8.0</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
       <th>15</th>
       <td>axon-configuration-4.8.0</td>
-      <td>Enum</td>
+      <td>Annotation</td>
       <td>1</td>
     </tr>
     <tr>
       <th>16</th>
       <td>axon-test-4.8.0</td>
-      <td>Class</td>
-      <td>71</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>17</th>
       <td>axon-test-4.8.0</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Class</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>18</th>
