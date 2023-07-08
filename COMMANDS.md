@@ -51,7 +51,7 @@
 
 The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command line options:
 
-- `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports.
+- `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports. `DatabaseCsvExport` exports the whole graph database as a CSV file (performance intense, check if there are security concerns first).
 
 - `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. `Neo4jv5` will explicitly select the newest (june 2023) version 5.x of Neo4j. Without setting
 a profile, the newest versions will be used. Profiles are scripts that can be found in the directory [scripts/profiles](./scripts/profiles/).
