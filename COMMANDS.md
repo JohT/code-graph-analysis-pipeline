@@ -123,6 +123,7 @@ to download a Maven artifact into the artifacts directory:
 - `-a <maven artifact name>`
 - `-v <maven artifact version>`
 - `-t <maven artifact type (optional, defaults to jar)>`
+- `-d <target directory for the downloaded file (optional, defaults to "artifacts")>`
 
 ### Reset the database and scan the java artifacts
 
