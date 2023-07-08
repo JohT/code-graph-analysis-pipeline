@@ -112,7 +112,7 @@ jobs:
       env:
         NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
       run: |
-        ./../../scripts/analysis/analyze.sh --report All --profile Neo4jv5
+        ./../../scripts/analysis/analyze.sh
 
     - name: Move reports from the temp to the results directory preserving their surrounding directory
       working-directory: temp
@@ -128,13 +128,15 @@ jobs:
         retention-days: 5
 
     # Upload Database Export
-    - name: Archive exported database
-      uses: actions/upload-artifact@v3
-      with:
-        name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
-        path: ./temp/**/import
-        if-no-files-found: error
-        retention-days: 5
+    # Only possible after an export with "./../../scripts/analysis/analyze.sh --report DatabaseCsvExport"
+    # Won't be done here because of performance and security concerns
+    #- name: Archive exported database
+    #  uses: actions/upload-artifact@v3
+    #  with:
+    #    name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+    #    path: ./temp/**/import
+    #    if-no-files-found: error
+    #    retention-days: 5
 
     # Commit and push the native image agent results
     - name: Display environment variable "github.event_name"
