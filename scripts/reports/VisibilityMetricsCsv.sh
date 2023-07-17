@@ -4,6 +4,8 @@
 # It contains lists of packages with their relative visibility (public types divided by all types)
 # as well as the global statistics for every artifact.
 
+# Requires executeQueryFunctions.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

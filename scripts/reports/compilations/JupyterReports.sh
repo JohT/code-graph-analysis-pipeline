@@ -6,6 +6,8 @@
 # For PDF generation chromium is required additionally.
 # Therefore these reports will take longer and require more ressources than just plain database queries/procedures.
 
+# Requires reports/*.sh
+
 ## Get this "scripts/reports/compilations" directory if not already set.
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.

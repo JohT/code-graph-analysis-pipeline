@@ -3,6 +3,8 @@
 # Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports.
 # They list external library package usage like how often a external package is called.
 
+# Requires executeQueryFunctions.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

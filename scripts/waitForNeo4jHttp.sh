@@ -3,6 +3,8 @@
 # Waits until the HTTP Transactions API of Neo4j Graph Database is available.
 # It queries the number of nodes and relationships to assert the connection.
 
+# Requires executeQueryFunctions.sh
+
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 
 ## Get this "scripts" directory if not already set
@@ -28,7 +30,7 @@ echo "${WAIT_TIMES}" | tr ' ' '\n' | while read -r waitTime; do
     echo "waitForNeo4jHttp: Waiting for ${waitTime} second(s)"
     sleep "${waitTime}"
 
-    # Calls the Neo4j HTTP API using cURL ( https://curl.se )
+    # Queries node and relationship count as a basic validation
     if ! cyper_elements_query_result=$(execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher");
     then
         continue; # query failed -> try again

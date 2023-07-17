@@ -5,6 +5,8 @@
 # how they relate to each other, distribution of Methods and their effective lines of code
 # and how the cyclomatic complexity is distributed across all Methods per artifact.
 
+# Requires executeJupyterNotebook.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

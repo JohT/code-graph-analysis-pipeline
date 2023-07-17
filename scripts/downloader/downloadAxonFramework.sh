@@ -8,6 +8,8 @@
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
 
+# Requires downloadMavenArtifact.sh
+
 # Get the analysis name from the middle part of the current file name (without prefix "download" and without extension)
 SCRIPT_FILE_NAME="$(basename -- "${BASH_SOURCE[0]}")"
 SCRIPT_FILE_NAME_WITHOUT_EXTENSION="${SCRIPT_FILE_NAME%%.*}"

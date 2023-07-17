@@ -4,6 +4,8 @@
 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
+# Requires download.sh,setupNeo4jInitialPassword.sh
+
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
 NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"5.10.1"} #Awesome Procedures for Neo4j Plugin, Version needs to be compatible to Neo4j

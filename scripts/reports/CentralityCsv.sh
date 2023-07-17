@@ -5,6 +5,8 @@
 # The reports (csv files) will be written into the sub directory reports/community.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
+# Requires executeQueryFunctions.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

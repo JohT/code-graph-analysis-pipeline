@@ -7,6 +7,8 @@
 #       The reason for that is that it exports the whole graph database. This should only be done intentionally
 #       and not within a default "AllReports.sh" run because it is performance intense and could raise security concerns.
 
+# Requires repexecuteQueryFunctions.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 
