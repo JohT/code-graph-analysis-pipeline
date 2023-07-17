@@ -8,8 +8,11 @@
 # -t Maven Artifact Type (defaults to jar)
 # -d Target directory for the downloaded file
 
+# Requires download.sh
+
 # Overrideable constants
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
+SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/downloads}"
 
 # Default and initial values for command line options
 groupId=""
@@ -50,6 +53,12 @@ if [[ -z ${groupId} || -z ${artifactId} || -z ${version} || -z ${artifactType} |
   exit 1
 fi
 
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+
 # Internal constants
 BASE_URL="https://repo1.maven.org/maven2"
 ARTIFACT_FILENAME="${artifactId}-${version}.${artifactType}"
@@ -58,22 +67,7 @@ DOWNLOAD_URL="${BASE_URL}/${GROUP_ID_FOR_API}/${artifactId}/${version}/${ARTIFAC
 
 # Download Maven Artifact into the "targetDirectory"
 if [ ! -f "./${targetDirectory}/${ARTIFACT_FILENAME}" ] ; then
-    echo "downloadMavenArtifact: Downloading ${DOWNLOAD_URL} into target directory ${targetDirectory}"
-
-    # Download Maven Artifact
-    if ! curl -L --fail-with-body -O "${DOWNLOAD_URL}"; then
-        echo "downloadMavenArtifact: Error: Failed to download ${ARTIFACT_FILENAME}"
-        rm -f "${ARTIFACT_FILENAME}"
-        exit 1
-    fi
-
-    # Check downloaded file size to be at least 100 bytes
-    downloaded_file_size=$(wc -c "${ARTIFACT_FILENAME}" | awk '{print $1}')
-    if [[ "${downloaded_file_size}" -le 600 ]]; then
-        echo "downloadMavenArtifact: Error: Failed to download ${ARTIFACT_FILENAME}: Invalid Filesize: ${downloaded_file_size} bytes"
-        rm -f "${ARTIFACT_FILENAME}"
-        exit 1
-    fi
+    source ${SCRIPTS_DIR}/download.sh --url "${DOWNLOAD_URL}" || exit 1
 
     # Create artifacts targetDirectory if it doen't exist
     mkdir -p "./${targetDirectory}" || exit 1
@@ -81,8 +75,8 @@ if [ ! -f "./${targetDirectory}/${ARTIFACT_FILENAME}" ] ; then
     # Delete already existing older versions of the artifact
     rm -f "./${targetDirectory}/${artifactId}"* || exit 1
 
-    # Move artifact to artifacts targetDirectory
-    mv "${ARTIFACT_FILENAME}" "./${targetDirectory}" || exit 1
+    # Copy artifact into artifacts targetDirectory
+    cp -R "${SHARED_DOWNLOADS_DIRECTORY}/${ARTIFACT_FILENAME}" "./${targetDirectory}" || exit 1
 else
     echo "downloadMavenArtifact: ${ARTIFACT_FILENAME} already downloaded into target directory ${targetDirectory}"
 fi

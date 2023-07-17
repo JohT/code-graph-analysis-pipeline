@@ -66,29 +66,11 @@ fi
 # Download and extract Neo4j
 if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
 
-    # Download Neo4j 
-    if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}-unix.tar.gz" ] ; then
-        echo "setupNeo4j: Downloading ${NEO4J_INSTALLATION_NAME}"
-
-        # Download Neo4j
-        # With the option "-L" a redirection will be followed automatically
-        curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}-unix.tar.gz" "https://dist.neo4j.org/${NEO4J_INSTALLATION_NAME}-unix.tar.gz" || exit 1
-    else
-        echo "setupNeo4j: ${NEO4J_INSTALLATION_NAME} already downloaded"
-    fi
-
-    downloaded_neo4j_archive="${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}-unix.tar.gz"
-
-    # Check downloaded file size to be at least 100 bytes
-    downloaded_file_size=$(wc -c "${downloaded_neo4j_archive}" | awk '{print $1}')
-    if [[ "$downloaded_file_size" -le 100 ]]; then
-        echo "setupNeo4j: Error: Failed to download ${NEO4J_INSTALLATION_NAME}: Invalid Filesize."
-        rm -f "${downloaded_neo4j_archive}"
-        exit 1
-    fi
+    neo4jDownloadArchiveFileName="${NEO4J_INSTALLATION_NAME}-unix.tar.gz"
+    source ${SCRIPTS_DIR}/download.sh --url "https://dist.neo4j.org/${neo4jDownloadArchiveFileName}" || exit 1
     
     # Extract the tar file
-    tar -xf "${downloaded_neo4j_archive}" --directory "${TOOLS_DIRECTORY}"
+    tar -xf "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jDownloadArchiveFileName}" --directory "${TOOLS_DIRECTORY}" || exit 1
 
     # Fail if Neo4j hadn't been downloaded successfully
     if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
@@ -157,22 +139,7 @@ fi
 # Download and Install the Neo4j Plugin "Awesome Procedures for Neo4j" (APOC)
 if [ ! -f "${NEO4J_PLUGINS}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
 
-    # Download the Neo4j Plugin "Awesome Procedures for Neo4j"
-    if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
-        # Download the Neo4j Plugin "Awesome Procedures for Neo4j"
-        echo "setupNeo4j: Downloading ${NEO4J_APOC_PLUGIN_ARTIFACT}"
-        curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}" https://github.com/${NEO4J_APOC_PLUGIN_GITHUB}/releases/download/${NEO4J_APOC_PLUGIN_VERSION}/apoc-${NEO4J_APOC_PLUGIN_VERSION}-${NEO4J_APOC_PLUGIN_EDITION}.jar  || exit 1
-    else
-        echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already downloaded"
-    fi
-    
-    # Check downloaded file size to be at least 100 bytes
-    downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}" | awk '{print $1}')
-    if [[ "$downloaded_file_size" -le 100 ]]; then
-        echo "setupNeo4j: Error: Failed to download ${NEO4J_APOC_PLUGIN_ARTIFACT}: Invalid Filesize."
-        rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${NEO4J_APOC_PLUGIN_ARTIFACT}"
-        exit 1
-    fi
+    source ${SCRIPTS_DIR}/download.sh --url "https://github.com/${NEO4J_APOC_PLUGIN_GITHUB}/releases/download/${NEO4J_APOC_PLUGIN_VERSION}/${NEO4J_APOC_PLUGIN_ARTIFACT}" || exit 1
 
     # Uninstall previously installed Neo4j Plugin "Awesome Procedures for Neo4j" (APOC)
     rm -f "${NEO4J_PLUGINS}/apoc*.jar"
@@ -183,7 +150,7 @@ if [ ! -f "${NEO4J_PLUGINS}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
 
     # Fail if Neo4j Plugin "Awesome Procedures for Neo4j" (APOC) hadn't been downloaded successfully
     if [ ! -f "${NEO4J_PLUGINS}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
-        echo "setupNeo4j: Error: Failed to download and install ${NEO4J_APOC_PLUGIN_ARTIFACT}"
+        echo "setupNeo4j: Error: Failed to install ${NEO4J_APOC_PLUGIN_ARTIFACT}"
         exit 1
     fi
 
@@ -208,36 +175,18 @@ if [[ ${NEO4J_GDS_PLUGIN_EDITION} == "open" ]]; then
     else
         neo4jGraphDataScienceNeo4jVersion="4.4.23"
     fi
-    neo4jGraphDataScienceReleaseArtifactPrefix="open-graph-data-science"
-    neo4jGraphDataScienceReleaseArtifact="${neo4jGraphDataScienceReleaseArtifactPrefix}-${NEO4J_OPEN_GDS_PLUGIN_VERSION}-for-neo4j-${neo4jGraphDataScienceNeo4jVersion}.jar"
+    neo4jGraphDataScienceReleaseArtifact="open-graph-data-science-${NEO4J_OPEN_GDS_PLUGIN_VERSION}-for-neo4j-${neo4jGraphDataScienceNeo4jVersion}.jar"
 else
     neo4jGraphDataScienceDownloadUrl="https://github.com/neo4j/graph-data-science/releases/download/${NEO4J_GDS_PLUGIN_VERSION}"
-    neo4jGraphDataScienceReleaseArtifactPrefix="neo4j-graph-data-science"
-    neo4jGraphDataScienceReleaseArtifact="${neo4jGraphDataScienceReleaseArtifactPrefix}-${NEO4J_GDS_PLUGIN_VERSION}-${NEO4J_GDS_PLUGIN_EDITION}.jar"
+    neo4jGraphDataScienceReleaseArtifact="neo4j-graph-data-science-${NEO4J_GDS_PLUGIN_VERSION}-${NEO4J_GDS_PLUGIN_EDITION}.jar"
 fi
 
 if [ ! -f "${NEO4J_PLUGINS}/${neo4jGraphDataScienceReleaseArtifact}" ] ; then
     # Download the Neo4j Plugin "Graph Data Science" (GDS)
-    #source ${SCRIPTS_DIR}/download.sh --url "${neo4jGraphDataScienceDownloadUrl}/${neo4jGraphDataScienceReleaseArtifact}"
-
-    # Download the Neo4j Plugin "Graph Data Science" (GDS)
-    if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jGraphDataScienceReleaseArtifact}" ] ; then
-        echo "setupNeo4j: Downloading ${neo4jGraphDataScienceReleaseArtifact} from ${neo4jGraphDataScienceDownloadUrl}/${neo4jGraphDataScienceReleaseArtifact}"
-        curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jGraphDataScienceReleaseArtifact}" ${neo4jGraphDataScienceDownloadUrl}/${neo4jGraphDataScienceReleaseArtifact}  || exit 1
-    else
-        echo "setupNeo4j: ${neo4jGraphDataScienceReleaseArtifact} already downloaded"
-    fi
-    
-    # Check downloaded file size to be at least 100 bytes
-    downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jGraphDataScienceReleaseArtifact}" | awk '{print $1}')
-    if [[ "$downloaded_file_size" -le 100 ]]; then
-        echo "setupNeo4j: Error: Failed to download ${neo4jGraphDataScienceReleaseArtifact}. Invalid Filesize."
-        rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jGraphDataScienceReleaseArtifact}"
-        exit 1
-    fi
+    source ${SCRIPTS_DIR}/download.sh --url "${neo4jGraphDataScienceDownloadUrl}/${neo4jGraphDataScienceReleaseArtifact}" || exit 1
 
     # Uninstall previously installed Neo4j Plugin "Graph Data Science" (GDS)
-    rm -f "${NEO4J_PLUGINS}/${neo4jGraphDataScienceReleaseArtifactPrefix}*.jar"
+    rm -f "${NEO4J_PLUGINS}/*graph-data-science*.jar"
     
     # Install the Neo4j Plugin "Graph Data Science" (GDS)
     echo "setupNeo4j: Installing ${neo4jGraphDataScienceReleaseArtifact}"
