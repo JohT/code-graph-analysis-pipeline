@@ -3,6 +3,8 @@
 # Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 # It contains the numbers of packages, types, methods, cyclic complexity, etc.
 
+# Requires executeQueryFunctions.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

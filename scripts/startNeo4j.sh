@@ -5,6 +5,8 @@
 # Note: Does nothing if the database is already running.
 # Note: It requires Neo4j to be installed in the TOOLS_DIRECTORY.
 
+# Requires waitForNeo4jHttp.sh
+
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")

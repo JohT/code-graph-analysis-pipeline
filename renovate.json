@@ -73,6 +73,18 @@
         "^scripts\/[^\/]*\\.sh$"
       ],
       "matchStrings": [
+        "NEO4J_OPEN_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "JohT/open-graph-data-science-packaging",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": [
+        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Default\\.sh$",
+        "^scripts\/[^\/]*\\.sh$"
+      ],
+      "matchStrings": [
         "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
       ],
       "depNameTemplate": "jQAssistant/jqa-commandline-tool",

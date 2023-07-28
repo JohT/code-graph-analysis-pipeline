@@ -8,8 +8,10 @@ Script | Directory | Description
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory with a text file containing the last hash code of the contents. |
+| [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
 | [downloadMavenArtifact.sh](./downloadMavenArtifact.sh) |  | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central) |
 | [downloadAxonFramework.sh](./downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central. |
+| [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
@@ -22,7 +24,6 @@ Script | Directory | Description
 | [Neo4jv5.sh](./profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [DatabaseCsvExport.sh](./reports/DatabaseCsvExport.sh) | reports | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all" |
 | [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports. |
 | [ExternalDependenciesJupyter.sh](./reports/ExternalDependenciesJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "internal-dependencies" CSV reports. |
@@ -37,6 +38,7 @@ Script | Directory | Description
 | [WordcloudJupyter.sh](./reports/WordcloudJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [AllReports.sh](./reports/compilations/AllReports.sh) | compilations | Runs all report scripts. |
 | [CsvReports.sh](./reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required). |
+| [DatabaseCsvExportReports.sh](./reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all" |
 | [JupyterReports.sh](./reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts. |
 | [resetAndScan.sh](./resetAndScan.sh) |  | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph. |
 | [resetAndScanChanged.sh](./resetAndScanChanged.sh) |  | Executes "resetAndScan.sh" only if "detectChangedArtifacts.sh" returns detected changes. |

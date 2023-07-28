@@ -4,6 +4,8 @@
 # It contains lists of e.g. cyclic dependencies, dependencies that are only used by a few packages,
 # classes that are used by many different packages and some more.
 
+# Requires executeJupyterNotebook.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

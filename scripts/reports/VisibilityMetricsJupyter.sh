@@ -3,6 +3,8 @@
 # Creates the "visibility-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "VisibilityMetrics.ipynb".
 # It contains lists of how many components are visible everywhere in comparison to all (including internal) components.
 
+# Requires executeJupyterNotebook.sh
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 

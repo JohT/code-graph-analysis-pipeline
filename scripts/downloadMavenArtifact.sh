@@ -6,66 +6,83 @@
 # -a Maven Artifact Name
 # -v Maven Artifact Version
 # -t Maven Artifact Type (defaults to jar)
+# -d Target directory for the downloaded file
 
-# Read options
-ARTIFACT_TYPE="jar"
+# Requires download.sh
+
+# Overrideable constants
+ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
+SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/downloads}"
+
+# Default and initial values for command line options
+groupId=""
+artifactId=""
+version=""
+artifactType="jar"
+targetDirectory="${ARTIFACTS_DIRECTORY}"
+
+# Read  command line options
+USAGE="downloadMavenArtifact: Usage: $0 [-g group_id] [-a artifact_id] [-v version] [-t type (default=jar)] [-d targetDirectory (default=${ARTIFACTS_DIRECTORY})]"
 OPTIND=1
-while getopts "g:a:v:t:" opt; do
+while getopts "g:a:v:t:d:" opt; do
   case ${opt} in
     g )
-      GROUP_ID=${OPTARG}
+      groupId=${OPTARG}
       ;;
     a )
-      ARTIFACT_ID=${OPTARG}
+      artifactId=${OPTARG}
       ;;
     v )
-      VERSION=${OPTARG}
+      version=${OPTARG}
       ;;
     t )
-      ARTIFACT_TYPE=${OPTARG}
+      artifactType=${OPTARG}
+      ;;
+    d )
+      targetDirectory=${OPTARG}
       ;;
     \? )
-      echo "Usage: $0 [-g group_id] [-a artifact_id] [-v version] [-t type (default=jar)]"
+      echo "${USAGE}"
       exit 1
       ;;
   esac
 done
 
-if [[ -z ${GROUP_ID} || -z ${ARTIFACT_ID} || -z ${VERSION} || -z ${ARTIFACT_TYPE} ]]; then
-  echo "Usage: $0 [-g group_id] [-a artifact_id] [-v version] [-t type (default=jar)]"
+if [[ -z ${groupId} || -z ${artifactId} || -z ${version} || -z ${artifactType} || -z ${targetDirectory} ]]; then
+  echo "${USAGE}"
   exit 1
 fi
 
-# Overrideable constants
-ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
 
 # Internal constants
 BASE_URL="https://repo1.maven.org/maven2"
-ARTIFACT_FILENAME="${ARTIFACT_ID}-${VERSION}.${ARTIFACT_TYPE}"
-GROUP_ID_FOR_API="$(echo "${GROUP_ID}" | tr '.' '/')"
-DOWNLOAD_URL="${BASE_URL}/${GROUP_ID_FOR_API}/${ARTIFACT_ID}/${VERSION}/${ARTIFACT_FILENAME}"
+ARTIFACT_FILENAME="${artifactId}-${version}.${artifactType}"
+GROUP_ID_FOR_API="$(echo "${groupId}" | tr '.' '/')"
+DOWNLOAD_URL="${BASE_URL}/${GROUP_ID_FOR_API}/${artifactId}/${version}/${ARTIFACT_FILENAME}"
 
-# Download Maven Artifact into the ARTIFACTS_DIRECTORY
-if [ ! -f "${ARTIFACTS_DIRECTORY}/${ARTIFACT_FILENAME}" ] ; then
-    echo "Downloading ${DOWNLOAD_URL}"
+# Download Maven Artifact into the "targetDirectory"
+if [ ! -f "./${targetDirectory}/${ARTIFACT_FILENAME}" ] ; then
+    source ${SCRIPTS_DIR}/download.sh --url "${DOWNLOAD_URL}" || exit 1
 
-    # Download Maven Artifact
-    curl -L --fail-with-body -O "${DOWNLOAD_URL}"
-
-    # Create artifacts directory if it doen't exist
-    mkdir -p "${ARTIFACTS_DIRECTORY}"
+    # Create artifacts targetDirectory if it doen't exist
+    mkdir -p "./${targetDirectory}" || exit 1
 
     # Delete already existing older versions of the artifact
-    rm -f "${ARTIFACTS_DIRECTORY}/${ARTIFACT_ID}"*
+    rm -f "./${targetDirectory}/${artifactId}"* || exit 1
 
-    # Move artifact to artifacts directory
-    mv "${ARTIFACT_FILENAME}" "${ARTIFACTS_DIRECTORY}"
+    # Copy artifact into artifacts targetDirectory
+    cp -R "${SHARED_DOWNLOADS_DIRECTORY}/${ARTIFACT_FILENAME}" "./${targetDirectory}" || exit 1
 else
-    echo "${ARTIFACT_FILENAME} already downloaded"
+    echo "downloadMavenArtifact: ${ARTIFACT_FILENAME} already downloaded into target directory ${targetDirectory}"
 fi
 
 # Fail if Maven Download failed
-if [ ! -f "${ARTIFACTS_DIRECTORY}/${ARTIFACT_FILENAME}" ] ; then
-    echo "Failed to download ${ARTIFACT_FILENAME}"
+if [ ! -f "${targetDirectory}/${ARTIFACT_FILENAME}" ] ; then
+    echo "downloadMavenArtifact: Error: Failed to download ${ARTIFACT_FILENAME}"
     exit 1
 fi
