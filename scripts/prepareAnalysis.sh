@@ -28,6 +28,9 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 PACKAGE_WEIGHTS_CYPHER_DIR="$CYPHER_DIR/Package_Relationship_Weights"
 PACKAGE_METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
 
+# Preparation - Create indizes
+execute_cypher "${CYPHER_DIR}/Create_index_for_full_qualified_type_name.cypher" || exit 1
+
 # Preparation - Create DEPENDS_ON for every DEPENDS_ON_PACKAGE relationship
 execute_cypher_expect_results "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher" || exit 1
 execute_cypher_expect_results "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher" || exit 1
