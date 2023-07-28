@@ -76,7 +76,8 @@
         "NEO4J_OPEN_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
       ],
       "depNameTemplate": "JohT/open-graph-data-science-packaging",
-      "datasourceTemplate": "github-releases"
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.*?)$"
     },
     {
       "fileMatch": [
