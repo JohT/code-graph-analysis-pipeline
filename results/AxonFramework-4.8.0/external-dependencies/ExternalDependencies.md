@@ -61,7 +61,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>201</td>
       <td>579</td>
       <td>2584</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -85,7 +85,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>61</td>
       <td>498</td>
       <td>2584</td>
-      <td>[CoreMatchers, Description, StringDescription,...</td>
+      <td>[Description, CoreMatchers, Matcher, StringDes...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -101,7 +101,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>37</td>
       <td>226</td>
       <td>2584</td>
-      <td>[JobDataMap, JobExecutionContext, SchedulerCon...</td>
+      <td>[JobDataMap, SchedulerException, Scheduler, Tr...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -109,7 +109,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>35</td>
       <td>157</td>
       <td>2584</td>
-      <td>[Flux, Mono, FluxSink$OverflowStrategy, FluxSi...</td>
+      <td>[Mono, Flux, FluxSink$OverflowStrategy, FluxSi...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -117,7 +117,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>15</td>
       <td>73</td>
       <td>2584</td>
-      <td>[DeserializationContext, JsonDeserializer, Obj...</td>
+      <td>[JsonDeserializer, DeserializationContext, Jso...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -133,7 +133,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>10</td>
       <td>50</td>
       <td>2584</td>
-      <td>[TaskWithDataDescriptor, ExecutionContext, Tas...</td>
+      <td>[Task, TaskInstance, TaskWithDataDescriptor, E...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -157,7 +157,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>8</td>
       <td>34</td>
       <td>2584</td>
-      <td>[CacheEntryExpiredListener, CacheEntryCreatedL...</td>
+      <td>[CacheEntryCreatedListener, CacheEntryEventFil...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -165,7 +165,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>8</td>
       <td>33</td>
       <td>2584</td>
-      <td>[EventType, EventFiring, EventOrdering, CacheE...</td>
+      <td>[EventType, CacheEvent, CacheEventListener, Ev...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -201,11 +201,11 @@ Additionally, it shows which types of the external package are actually used. Ex
     </tr>
     <tr>
       <th>19</th>
-      <td>javax.validation</td>
+      <td>com.lmax.disruptor.dsl</td>
       <td>5</td>
       <td>22</td>
       <td>2584</td>
-      <td>[ConstraintViolation, ValidatorFactory, Valida...</td>
+      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
     </tr>
   </tbody>
 </table>
@@ -247,27 +247,27 @@ This table identifies external packages that aren't used very often. This could 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.junit.rules</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>org.junit.jupiter.api</td>
       <td>1</td>
     </tr>
     <tr>
+      <th>1</th>
+      <td>org.junit.rules</td>
+      <td>1</td>
+    </tr>
+    <tr>
       <th>2</th>
-      <td>javax.xml.stream</td>
+      <td>org.jobrunr.jobs</td>
       <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
+      <td>org.ehcache.config</td>
       <td>2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.quartz.impl.matchers</td>
+      <td>org.junit.runner</td>
       <td>2</td>
     </tr>
     <tr>
@@ -277,42 +277,42 @@ This table identifies external packages that aren't used very often. This could 
     </tr>
     <tr>
       <th>6</th>
-      <td>org.junit.runner</td>
+      <td>javax.xml.stream</td>
       <td>2</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>org.ehcache.config</td>
+      <td>com.fasterxml.jackson.datatype.jsr310</td>
       <td>2</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>org.jobrunr.jobs</td>
+      <td>org.quartz.impl.matchers</td>
       <td>2</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>com.fasterxml.jackson.databind.jsontype</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>com.fasterxml.jackson.databind.type</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>reactor.util.concurrent</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>12</th>
       <td>org.dom4j.io</td>
       <td>3</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>10</th>
+      <td>reactor.util.concurrent</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>11</th>
       <td>com.fasterxml.jackson.databind.module</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>com.fasterxml.jackson.databind.type</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>3</td>
     </tr>
     <tr>
@@ -455,11 +455,11 @@ The following table shows the most used external packages separately for each ar
     <tr>
       <th>71</th>
       <td>axon-test-4.8.0</td>
-      <td>org.junit.jupiter.api</td>
+      <td>org.junit.runner</td>
       <td>1</td>
-      <td>1</td>
+      <td>2</td>
       <td>87</td>
-      <td>[Assertions]</td>
+      <td>[Description]</td>
     </tr>
     <tr>
       <th>72</th>
@@ -473,11 +473,11 @@ The following table shows the most used external packages separately for each ar
     <tr>
       <th>73</th>
       <td>axon-test-4.8.0</td>
-      <td>org.junit.runner</td>
+      <td>org.junit.jupiter.api</td>
       <td>1</td>
-      <td>2</td>
+      <td>1</td>
       <td>87</td>
-      <td>[Description]</td>
+      <td>[Assertions]</td>
     </tr>
   </tbody>
 </table>
@@ -538,7 +538,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>28</td>
       <td>123</td>
       <td>42</td>
-      <td>[Mono, Sinks$MulticastReplaySpec, FluxSink$Ove...</td>
+      <td>[Sinks$Many, Sinks$EmitResult, Mono, Flux, Sig...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -549,7 +549,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>19</td>
       <td>95</td>
       <td>6</td>
-      <td>[JobDetail, JobDataMap, JobExecutionContext, S...</td>
+      <td>[JobBuilder, JobDataMap, Scheduler, TriggerBui...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -560,7 +560,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>18</td>
       <td>131</td>
       <td>4</td>
-      <td>[JobExecutionContext, SchedulerContext, Schedu...</td>
+      <td>[JobDataMap, JobDetail, JobExecutionException,...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -582,7 +582,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>15</td>
       <td>73</td>
       <td>7</td>
-      <td>[ObjectMapper, JsonNode, DeserializationContex...</td>
+      <td>[ObjectMapper$DefaultTyping, DeserializationFe...</td>
       <td>json</td>
     </tr>
     <tr>
@@ -615,7 +615,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>9</td>
       <td>28</td>
       <td>39</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>config</td>
     </tr>
     <tr>
@@ -637,7 +637,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>9</td>
       <td>91</td>
       <td>21</td>
-      <td>[Matcher, Description, StringDescription, Core...</td>
+      <td>[StringDescription, Matcher, Description, Core...</td>
       <td>saga</td>
     </tr>
     <tr>
@@ -655,22 +655,22 @@ The next table lists internal packages and the artifacts they belong to that use
       <th>12</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.common.caching</td>
-      <td>org.ehcache.event</td>
+      <td>javax.cache.event</td>
       <td>8</td>
-      <td>33</td>
+      <td>34</td>
       <td>15</td>
-      <td>[EventType, CacheEvent, CacheEventListener, Ev...</td>
+      <td>[CacheEntryCreatedListener, CacheEntryEventFil...</td>
       <td>caching</td>
     </tr>
     <tr>
       <th>13</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.common.caching</td>
-      <td>javax.cache.event</td>
+      <td>org.ehcache.event</td>
       <td>8</td>
-      <td>34</td>
+      <td>33</td>
       <td>15</td>
-      <td>[CacheEntryExpiredListener, CacheEntryCreatedL...</td>
+      <td>[EventType, CacheEvent, CacheEventListener, Ev...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -692,7 +692,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>7</td>
       <td>34</td>
       <td>8</td>
-      <td>[Mono, Flux]</td>
+      <td>[Flux, Mono]</td>
       <td>responsetypes</td>
     </tr>
     <tr>
@@ -725,7 +725,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>7</td>
       <td>136</td>
       <td>19</td>
-      <td>[Matcher, CoreMatchers, Description, StringDes...</td>
+      <td>[Matcher, Description, StringDescription, Core...</td>
       <td>aggregate</td>
     </tr>
     <tr>
@@ -754,22 +754,22 @@ The next table lists internal packages and the artifacts they belong to that use
       <th>21</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.io</td>
+      <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
-      <td>39</td>
+      <td>12</td>
       <td>34</td>
-      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
+      <td>[UnmarshallingContext, MarshallingContext]</td>
       <td>serialization</td>
     </tr>
     <tr>
       <th>22</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.converters</td>
+      <td>com.thoughtworks.xstream.io</td>
       <td>6</td>
-      <td>12</td>
+      <td>39</td>
       <td>34</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
+      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
       <td>serialization</td>
     </tr>
     <tr>
@@ -780,7 +780,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>6</td>
       <td>68</td>
       <td>7</td>
-      <td>[Index, TypedQuery, EntityManager, EntityManag...</td>
+      <td>[Index, TypedQuery, EntityManagerFactory, Enti...</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -813,7 +813,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>5</td>
       <td>15</td>
       <td>28</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>common</td>
     </tr>
     <tr>
@@ -824,7 +824,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>5</td>
       <td>63</td>
       <td>15</td>
-      <td>[Ehcache, Element, CacheException]</td>
+      <td>[Element, CacheException, Ehcache]</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -835,7 +835,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>5</td>
       <td>25</td>
       <td>6</td>
-      <td>[TaskInstanceId, TaskWithDataDescriptor, Execu...</td>
+      <td>[TaskInstanceId, Task, TaskInstance, TaskWithD...</td>
       <td>dbscheduler</td>
     </tr>
     <tr>
@@ -902,8 +902,8 @@ This table lists the internal types that utilize the most different external typ
       <td>29</td>
       <td>6</td>
       <td>9</td>
-      <td>[javax.annotation, com.fasterxml.jackson.datab...</td>
-      <td>[javax.annotation.Nonnull, com.fasterxml.jacks...</td>
+      <td>[com.fasterxml.jackson.databind, com.fasterxml...</td>
+      <td>[com.fasterxml.jackson.databind.ObjectReader, ...</td>
       <td>json</td>
       <td>org.axonframework.serialization.json.JacksonSe...</td>
     </tr>
@@ -917,7 +917,7 @@ This table lists the internal types that utilize the most different external typ
       <td>5</td>
       <td>12</td>
       <td>[com.github.kagkarlsson.scheduler, javax.annot...</td>
-      <td>[com.github.kagkarlsson.scheduler.Scheduler, j...</td>
+      <td>[com.github.kagkarlsson.scheduler.SchedulerSta...</td>
       <td>dbscheduler</td>
       <td>org.axonframework.deadline.dbscheduler.DbSched...</td>
     </tr>
@@ -931,7 +931,7 @@ This table lists the internal types that utilize the most different external typ
       <td>5</td>
       <td>10</td>
       <td>[com.github.kagkarlsson.scheduler, com.github....</td>
-      <td>[com.github.kagkarlsson.scheduler.SchedulerSta...</td>
+      <td>[com.github.kagkarlsson.scheduler.Scheduler, c...</td>
       <td>dbscheduler</td>
       <td>org.axonframework.eventhandling.scheduling.dbs...</td>
     </tr>
@@ -944,8 +944,8 @@ This table lists the internal types that utilize the most different external typ
       <td>22</td>
       <td>5</td>
       <td>7</td>
-      <td>[nu.xom, org.dom4j, com.thoughtworks.xstream, ...</td>
-      <td>[nu.xom.Document, org.dom4j.Document, com.thou...</td>
+      <td>[com.thoughtworks.xstream, com.thoughtworks.xs...</td>
+      <td>[com.thoughtworks.xstream.XStream, com.thought...</td>
       <td>xml</td>
       <td>org.axonframework.serialization.xml.XStreamSer...</td>
     </tr>
@@ -986,8 +986,8 @@ This table lists the internal types that utilize the most different external typ
       <td>28</td>
       <td>4</td>
       <td>7</td>
-      <td>[javax.annotation, org.jobrunr.scheduling, org...</td>
-      <td>[javax.annotation.Nullable, javax.annotation.N...</td>
+      <td>[org.jobrunr.scheduling, org.jobrunr.jobs, jav...</td>
+      <td>[org.jobrunr.scheduling.JobBuilder, org.jobrun...</td>
       <td>jobrunr</td>
       <td>org.axonframework.deadline.jobrunr.JobRunrDead...</td>
     </tr>
@@ -1000,8 +1000,8 @@ This table lists the internal types that utilize the most different external typ
       <td>78</td>
       <td>4</td>
       <td>13</td>
-      <td>[org.quartz, org.slf4j, javax.annotation, org....</td>
-      <td>[org.quartz.JobKey, org.slf4j.LoggerFactory, o...</td>
+      <td>[org.quartz, javax.annotation, org.slf4j, org....</td>
+      <td>[org.quartz.JobDataMap, org.quartz.SchedulerEx...</td>
       <td>quartz</td>
       <td>org.axonframework.deadline.quartz.QuartzDeadli...</td>
     </tr>
@@ -1014,8 +1014,8 @@ This table lists the internal types that utilize the most different external typ
       <td>27</td>
       <td>4</td>
       <td>6</td>
-      <td>[org.jobrunr.scheduling, javax.annotation, org...</td>
-      <td>[org.jobrunr.scheduling.JobBuilder, javax.anno...</td>
+      <td>[org.jobrunr.scheduling, org.slf4j, javax.anno...</td>
+      <td>[org.jobrunr.scheduling.JobBuilder, org.slf4j....</td>
       <td>jobrunr</td>
       <td>org.axonframework.eventhandling.scheduling.job...</td>
     </tr>
@@ -1028,8 +1028,8 @@ This table lists the internal types that utilize the most different external typ
       <td>17</td>
       <td>4</td>
       <td>7</td>
-      <td>[reactor.core.publisher, org.slf4j, org.reacti...</td>
-      <td>[reactor.core.publisher.Flux, org.slf4j.Logger...</td>
+      <td>[reactor.core.publisher, org.slf4j, com.faster...</td>
+      <td>[reactor.core.publisher.Mono, org.slf4j.Logger...</td>
       <td>responsetypes</td>
       <td>org.axonframework.messaging.responsetypes.Mult...</td>
     </tr>
@@ -1037,46 +1037,32 @@ This table lists the internal types that utilize the most different external typ
       <th>10</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.queryhandling</td>
-      <td>SimpleQueryUpdateEmitter</td>
-      <td>13</td>
-      <td>33</td>
-      <td>4</td>
-      <td>13</td>
-      <td>[javax.annotation, org.slf4j, reactor.core.pub...</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.LoggerFac...</td>
-      <td>queryhandling</td>
-      <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.queryhandling</td>
       <td>SimpleQueryBus</td>
       <td>6</td>
       <td>54</td>
       <td>4</td>
       <td>6</td>
-      <td>[reactor.core.publisher, javax.annotation, org...</td>
-      <td>[reactor.core.publisher.Mono, javax.annotation...</td>
+      <td>[org.slf4j, org.reactivestreams, reactor.core....</td>
+      <td>[org.slf4j.LoggerFactory, org.reactivestreams....</td>
       <td>queryhandling</td>
       <td>org.axonframework.queryhandling.SimpleQueryBus</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
-      <td>6</td>
-      <td>25</td>
+      <td>org.axonframework.queryhandling</td>
+      <td>SimpleQueryUpdateEmitter</td>
+      <td>13</td>
+      <td>33</td>
       <td>4</td>
-      <td>6</td>
-      <td>[com.thoughtworks.xstream.io, com.thoughtworks...</td>
-      <td>[com.thoughtworks.xstream.io.HierarchicalStrea...</td>
-      <td>serialization</td>
-      <td>org.axonframework.serialization.GapAwareTracki...</td>
+      <td>13</td>
+      <td>[reactor.core.publisher, org.reactivestreams, ...</td>
+      <td>[reactor.core.publisher.Sinks, org.reactivestr...</td>
+      <td>queryhandling</td>
+      <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
       <td>AbstractXStreamSerializer$MetaDataConverter</td>
@@ -1090,10 +1076,24 @@ This table lists the internal types that utilize the most different external typ
       <td>org.axonframework.serialization.AbstractXStrea...</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
       <td>GapAwareTrackingTokenConverter</td>
+      <td>6</td>
+      <td>25</td>
+      <td>4</td>
+      <td>6</td>
+      <td>[com.thoughtworks.xstream.converters, com.thou...</td>
+      <td>[com.thoughtworks.xstream.converters.Marshalli...</td>
+      <td>serialization</td>
+      <td>org.axonframework.serialization.GapAwareTracki...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.serialization</td>
+      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
       <td>6</td>
       <td>25</td>
       <td>4</td>
@@ -1112,8 +1112,8 @@ This table lists the internal types that utilize the most different external typ
       <td>21</td>
       <td>4</td>
       <td>6</td>
-      <td>[com.fasterxml.jackson.databind, com.fasterxml...</td>
-      <td>[com.fasterxml.jackson.databind.Deserializatio...</td>
+      <td>[com.fasterxml.jackson.core, com.fasterxml.jac...</td>
+      <td>[com.fasterxml.jackson.core.JsonParser, com.fa...</td>
       <td>json</td>
       <td>org.axonframework.serialization.json.MetaDataD...</td>
     </tr>
@@ -1490,45 +1490,45 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>test</td>
-      <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-messaging</td>
+      <td>True</td>
+      <td>io.projectreactor</td>
+      <td>reactor-core</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>provided</td>
-      <td>False</td>
-      <td>com.google.code.findbugs</td>
-      <td>jsr305</td>
+      <td>default</td>
+      <td>True</td>
+      <td>jakarta.annotation</td>
+      <td>jakarta.annotation-api</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>test</td>
+      <td>default</td>
       <td>False</td>
-      <td>org.hibernate</td>
-      <td>hibernate-core-jakarta</td>
+      <td>${project.groupId}</td>
+      <td>axon-eventsourcing</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>org.axonframework</td>
-      <td>axon-messaging</td>
+      <td>javax.inject</td>
+      <td>javax.inject</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>test</td>
-      <td>True</td>
-      <td>io.projectreactor</td>
-      <td>reactor-core</td>
+      <td>False</td>
+      <td>org.hsqldb</td>
+      <td>hsqldb</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1543,22 +1543,13 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>109</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>test</td>
+      <td>provided</td>
       <td>False</td>
-      <td>jakarta.persistence</td>
-      <td>jakarta.persistence-api</td>
+      <td>com.google.code.findbugs</td>
+      <td>jsr305</td>
     </tr>
     <tr>
       <th>110</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>False</td>
-      <td>org.junit.jupiter</td>
-      <td>junit-jupiter</td>
-    </tr>
-    <tr>
-      <th>111</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
@@ -1567,22 +1558,31 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>hamcrest</td>
     </tr>
     <tr>
-      <th>112</th>
+      <th>111</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>test</td>
       <td>False</td>
-      <td>javax.inject</td>
-      <td>javax.inject</td>
+      <td>jakarta.persistence</td>
+      <td>jakarta.persistence-api</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>axon-test</td>
+      <td>Axon Framework - Test Fixtures</td>
+      <td>default</td>
+      <td>False</td>
+      <td>${project.groupId}</td>
+      <td>axon-eventsourcing</td>
     </tr>
     <tr>
       <th>113</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>org.testcontainers</td>
-      <td>testcontainers</td>
+      <td>test</td>
+      <td>False</td>
+      <td>org.springframework</td>
+      <td>spring-beans</td>
     </tr>
   </tbody>
 </table>

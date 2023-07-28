@@ -9,7 +9,7 @@
 "org.axonframework.lifecycle","lifecycle",163.83333333333331,71,10,""
 "org.axonframework.eventsourcing.eventstore","eventstore",146.25,169,603,""
 "org.axonframework.util","util",113.33333333333334,3,6,""
-"org.axonframework.modelling.saga.repository","repository",95.83333333333333,72,231,""
+"org.axonframework.modelling.saga.repository","repository",95.83333333333334,72,231,""
 "org.axonframework.messaging.unitofwork","unitofwork",82,258,123,""
 "org.axonframework.serialization.upcasting.event","event",78,38,188,""
 "org.axonframework.eventhandling.async","async",71.5,41,76,""
