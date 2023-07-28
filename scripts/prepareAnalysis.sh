@@ -27,6 +27,7 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 # Local Constants
 PACKAGE_WEIGHTS_CYPHER_DIR="$CYPHER_DIR/Package_Relationship_Weights"
 PACKAGE_METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
+EXTERNAL_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/External_Dependencies"
 
 # Preparation - Create indizes
 execute_cypher "${CYPHER_DIR}/Create_index_for_full_qualified_type_name.cypher" || exit 1
@@ -44,3 +45,9 @@ execute_cypher_expect_results "${PACKAGE_WEIGHTS_CYPHER_DIR}/Add_weight10Percent
 # Preparation - Add Package node properties "incomingDependencies" and "outgoingDependencies"
 execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Incoming_Package_Dependencies.cypher" || exit 1
 execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Outgoing_Package_Dependencies.cypher" || exit 1
+
+# Preparation - Label external types and annotations
+#               "external" means that there is no byte code available, not a primitive type and not a java type
+#               "annoatation" means that there is a ANNOTATED_BY to that external type
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Remove_external_type_and_annotation_labels.cypher" || exit 1
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher" || exit 1

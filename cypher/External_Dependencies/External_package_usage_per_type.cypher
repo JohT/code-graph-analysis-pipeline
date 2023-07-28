@@ -2,8 +2,7 @@
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
- MATCH (type)-[externalDependency:DEPENDS_ON]->(externalType:Type)
- WHERE externalType.byteCodeVersion IS NULL
+ MATCH (type)-[externalDependency:DEPENDS_ON]->(externalType:ExternalType)
   WITH externalDependency
       ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
       ,package.fqn  AS fullPackageName
@@ -12,12 +11,6 @@
       ,type.name    AS typeName
       ,replace(externalType.fqn, '.' + externalType.name, '') AS externalPackageName
       ,externalType.name                              AS externalTypeName
-      ,(NOT externalType.fqn CONTAINS '.')            AS isPrimitiveType
-      ,(externalType.fqn STARTS WITH 'java.')         AS isJavaType
-      ,exists((externalType)-[:RESOLVES_TO]->(:Type)) AS isAlsoInternalType
- WHERE isPrimitiveType    = false
-   AND isJavaType         = false
-   AND isAlsoInternalType = false
   WITH artifactName
       ,fullPackageName
       ,packageName

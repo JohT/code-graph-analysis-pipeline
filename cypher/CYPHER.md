@@ -67,18 +67,29 @@ Script | Directory | Description
 | [Community_Detection_for_Types_6_Leiden_Delete_Labels.cypher](./Community_Detection_for_Types/Community_Detection_for_Types_6_Leiden_Delete_Labels.cypher) | Community_Detection_for_Types | Community Detection for Types 6 Leiden Delete Labels |
 | [Community_Detection_for_Types_7_Add_LeidenTypeCommunity_Id_label_to_types.cypher](./Community_Detection_for_Types/Community_Detection_for_Types_7_Add_LeidenTypeCommunity_Id_label_to_types.cypher) | Community_Detection_for_Types | Community Detection for Types 7 Add LeidenTypeCommunity+Id label to types with more than one member |
 | [Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher](./Community_Detection_for_Types/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher) | Community_Detection_for_Types | Which type community spans several artifacts and how are the types distributed? |
+| [Count_nodes_and_relationships.cypher](./Count_nodes_and_relationships.cypher) |  | Count nodes and relationships |
+| [Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher](./Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher) |  | Create a DEPENDS_ON relationship for every DEPENDS_ON_ARTIFACT |
+| [Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher](./Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher) |  | Create a DEPENDS_ON relationship for every DEPENDS_ON_PACKAGE |
+| [Create_index_for_full_qualified_type_name.cypher](./Create_index_for_full_qualified_type_name.cypher) |  | Create index for the full qualified type name |
 | [Cyclic_Dependencies.cypher](./Cyclic_Dependencies/Cyclic_Dependencies.cypher) | Cyclic_Dependencies | Cyclic Dependencies |
 | [Cyclic_Dependencies_Concatenated.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_Concatenated.cypher) | Cyclic_Dependencies | Cyclic Dependencies Concatenated |
 | [Cyclic_Dependencies_as_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as List |
 | [Cyclic_Dependencies_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as unwinded List |
+| [Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies between Artifacts as unwinded List |
 | [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
-| [External_package_usage_overall.cypher](./External_Dependencies/External_package_usage_overall.cypher) | External_Dependencies | External package usage overall |
-| [External_package_usage_per_artifact.cypher](./External_Dependencies/External_package_usage_per_artifact.cypher) | External_Dependencies | External package usage per artifact |
+| [External_package_usage_overall.cypher](./External_Dependencies/External_package_usage_overall.cypher) | External_Dependencies | External package usage overall tuned |
+| [External_package_usage_per_artifact.cypher](./External_Dependencies/External_package_usage_per_artifact.cypher) | External_Dependencies | External package usage per artifact tuned |
 | [External_package_usage_per_artifact_and_package.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package.cypher) | External_Dependencies | External package usage per artifact and package |
-| [External_package_usage_per_type.cypher](./External_Dependencies/External_package_usage_per_type.cypher) | External_Dependencies | External package usage per type |
+| [External_package_usage_per_artifact_and_package_tuned.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package_tuned.cypher) | External_Dependencies | External package usage per artifact and package tuned |
+| [External_package_usage_per_artifact_and_package_without_annotations.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package_without_annotations.cypher) | External_Dependencies | External package usage per artifact and package without annotations Note: The exists operation for "isAnnotation" is inefficient for large graphs. |
+| [External_package_usage_per_type.cypher](./External_Dependencies/External_package_usage_per_type.cypher) | External_Dependencies | External package usage per type tuned |
 | [External_package_usage_per_type_distribution.cypher](./External_Dependencies/External_package_usage_per_type_distribution.cypher) | External_Dependencies | External package usage per type distribution |
+| [External_package_usage_per_type_distribution_without_annotations.cypher](./External_Dependencies/External_package_usage_per_type_distribution_without_annotations.cypher) | External_Dependencies | External package usage per type distribution without annotations |
 | [External_types_per_artifact_using_requires.cypher](./External_Dependencies/External_types_per_artifact_using_requires.cypher) | External_Dependencies | External types per artifact using requires |
+| [Label_external_types_and_annotations.cypher](./External_Dependencies/Label_external_types_and_annotations.cypher) | External_Dependencies | Label external types and annotations |
+| [List_external_types_used.cypher](./External_Dependencies/List_external_types_used.cypher) | External_Dependencies | List external types used |
 | [Maven_POMs_and_their_declared_dependencies.cypher](./External_Dependencies/Maven_POMs_and_their_declared_dependencies.cypher) | External_Dependencies | Maven POMs and their declared dependencies |
+| [Remove_external_type_and_annotation_labels.cypher](./External_Dependencies/Remove_external_type_and_annotation_labels.cypher) | External_Dependencies | Remove external type and annotation labels |
 | [Extract_Custom_Manifest_Entries.cypher](./Extract_Custom_Manifest_Entries.cypher) |  | Extract Custom Manifest Entries |
 | [Get_Awesome_Procedures_On_Cypher_APOC_Version.cypher](./Get_Awesome_Procedures_On_Cypher_APOC_Version.cypher) |  | Get Awesome Procedures On Cypher APOC Version |
 | [Get_Graph_Data_Science_Library_Version.cypher](./Get_Graph_Data_Science_Library_Version.cypher) |  | Get Graph Data Science Library Version |

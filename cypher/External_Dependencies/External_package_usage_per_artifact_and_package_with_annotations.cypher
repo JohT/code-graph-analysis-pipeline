@@ -1,4 +1,4 @@
-// External package usage per artifact and package
+// External package usage per artifact and package with external annotations
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
@@ -9,7 +9,6 @@
       ,collect(type) AS typeList
 UNWIND typeList AS type
  MATCH (type)-[externalDependency:DEPENDS_ON]->(externalType:ExternalType)
- WHERE NOT externalType:ExternalAnnotation
   WITH numberOfTypesInPackage
       ,externalDependency
       ,artifactName
