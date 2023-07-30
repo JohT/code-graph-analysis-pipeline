@@ -113,7 +113,7 @@ jupyter nbconvert --to notebook \
                   --execute "${jupyter_notebook_file}" \
                   --output "$jupyter_notebook_output_file_name" \
                   --output-dir="./" \
-                  --ExecutePreprocessor.timeout=120 \
+                  --ExecutePreprocessor.timeout=480 \
                   || exit 5
 
 # Convert the Jupyter Notebook to Markdown 

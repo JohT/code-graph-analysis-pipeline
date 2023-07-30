@@ -1,4 +1,4 @@
-// External package usage per type distribution
+// External package usage per type distribution with external annotations
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(type:Type)
   WITH replace(last(split(artifact.fileName, '/')), '.jar', '')  AS artifactName
@@ -6,7 +6,6 @@
       ,collect(type)                                             AS typeList
 UNWIND typeList AS type
  MATCH (type)-[:DEPENDS_ON]->(externalType:ExternalType)
- WHERE externalType:ExternalAnnotation
   WITH artifactName
       ,artifactTypes
       ,type.fqn                                                  AS fullTypeName

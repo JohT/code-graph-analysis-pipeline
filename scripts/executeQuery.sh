@@ -95,7 +95,7 @@ error_message=$( echo "${cyper_query_result}" | jq -r '.errors[0] // empty' )
 if [[ -n "${error_message}" ]]; then 
   redColor='\033[0;31m'
   noColor='\033[0m' # No Color
-  echo -e "${redColor}${error_message}${noColor}" >&2
+  echo -e "${redColor}${cypher_query_file_name}: ${error_message}${noColor}" >&2
 fi
 
 # Output results in CSV format

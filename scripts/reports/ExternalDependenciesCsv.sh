@@ -34,6 +34,11 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 EXTERNAL_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/External_Dependencies"
 
+if ! execute_cypher_expect_results "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/List_external_types_used.cypher"; then
+    echo "Please execute 'prepareAnalysis.sh' with 'Label_external_types_and_annotations.cypher' first."
+    exit 1
+fi
+
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_overall.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_overall.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_type.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_type.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact.csv"

@@ -4,6 +4,8 @@ MATCH (package:Package)-[:CONTAINS]->(forwardSource:Type)-[:DEPENDS_ON]->(forwar
 MATCH (dependentPackage)-[:CONTAINS]->(backwardSource:Type)-[:DEPENDS_ON]->(backwardTarget:Type)<-[:CONTAINS]-(package)
 MATCH (artifact:Artifact)-[:CONTAINS]->(package)
 MATCH (dependentArtifact:Artifact)-[:CONTAINS]->(dependentPackage)
+WHERE artifact <> dependentArtifact
+  AND package  <> dependentPackage
  WITH artifact
      ,dependentArtifact
      ,package
@@ -19,9 +21,7 @@ MATCH (dependentArtifact:Artifact)-[:CONTAINS]->(dependentPackage)
      ,size(forwardDependencies)  AS numberOfForwardDependencies
      ,size(backwardDependencies) AS numberOfBackwardDependencies
      ,size(forwardDependencies) + size(backwardDependencies) AS numberOfAllCyclicDependencies
-WHERE artifact <> dependentArtifact
-  AND package  <> dependentPackage
-  AND (size(forwardDependencies) > size(backwardDependencies)
+WHERE (size(forwardDependencies) > size(backwardDependencies)
    OR (size(forwardDependencies) = size(backwardDependencies)
   AND  size(package.fqn)    >= size(dependentPackage.fqn)))
 UNWIND (backwardDependencies + forwardDependencies) AS dependency
