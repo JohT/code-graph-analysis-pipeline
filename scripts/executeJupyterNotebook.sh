@@ -19,6 +19,8 @@
 #       It it isn't activated, it will save the currently activated environment, change to codegraph, and restore the original one at the end again.
 #       In cases of an error it might be, that the original conda environment isn't set back. Typically this shouldn't be the case though. 
 
+# Requires juypter nbconvert
+
 SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION:-""}
 
 # Check if environment variable is set

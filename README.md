@@ -8,37 +8,31 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ## 🚀 Features
 
-- Analyze static code structure, dependencies, metrics, ...
-- Fully automated [pipeline](./.github/workflows/code-reports.yml) from tool installation and artifact download to report generation
+- Analyze static code structure as a graph
+- Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
+- Comprehensive reports including dependencies, metrics and graph structure
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
-- Example Analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
+- Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 
 ### 📖 Jupyter Notebook Reports
 
-- [External Dependencies](./jupyter/ExternalDependencies.ipynb) contains the most and least used external packages, etc. ([Example](./results/AxonFramework-4.7.5/external-dependencies/ExternalDependencies.md))
-- [Object Oriented Design Quality Metrics](./jupyter/ObjectOrientedDesignMetrics.ipynb) is  based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Example](./results/AxonFramework-4.7.5/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md))
-- [Overview](./jupyter/Overview.ipynb) contains the number of types and packages, method line count, cyclomatic complexity, etc. ([Example](./results/AxonFramework-4.7.5/overview/Overview.md))
-- [Internal Dependencies](./jupyter/InternalDependencies.ipynb) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) including cyclic dependencies ([Example](./results/AxonFramework-4.7.5/internal-dependencies/InternalDependencies.md))
-- [Visibility Metrics](./jupyter/VisibilityMetrics.ipynb) is based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Example](./results/AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md))
-- [Wordcloud](./jupyter/Wordcloud.ipynb) contains a visual representation of package and class names ([Example](./results/AxonFramework-4.7.5/wordcloud/Wordcloud.md))
+Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org). For a detailed reference see [Jupyter Notebook Report Reference](#📈-jupyter-notebook-report-reference) below.
+
+- [External Dependencies](./results/AxonFramework-4.8.0/external-dependencies/ExternalDependencies.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependencies.ipynb))
+- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.8.0/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) is based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Notebook](./jupyter/ObjectOrientedDesignMetrics.ipynb))
+- [Overview](./results/AxonFramework-4.8.0/overview/Overview.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/Overview.ipynb))
+- [Internal Dependencies](./results/AxonFramework-4.8.0/internal-dependencies/InternalDependencies.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) including cyclic dependencies ([Notebook](./jupyter/InternalDependencies.ipynb))
+- [Visibility Metrics](./results/AxonFramework-4.8.0/visibility-metrics/VisibilityMetrics.md) is based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Notebook](./jupyter/VisibilityMetrics.ipynb))
+- [Wordcloud](./results/AxonFramework-4.8.0/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb))
 
 ### 📖 Graph Data Science Reports
 
 Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science):
 
-- [Community Detection](./scripts/reports/CommunityCsv.sh) ([Example](./results/AxonFramework-4.7.5/community-csv/Leiden_Communities.csv))
-- [Centrality](./scripts/reports/CommunityCsv.sh) ([Example](./results/AxonFramework-4.7.5/centrality-csv/Centrality_Page_Rank.csv))
-- [Similarity](./scripts/reports/SimilarityCsv.sh) ([Example](./results/AxonFramework-4.7.5/similarity-csv/Similarity_Jaccard.csv))
-
-### 📖 Other Reports
-
-- [External Dependencies (CSV)](./scripts/reports/ExternalDependenciesCsv.sh) ([Example](./results/AxonFramework-4.7.5/external-dependencies-csv/External_package_usage_overall.csv))
-- [Object Oriented Design Metrics (CSV)](./scripts/reports/ObjectOrientedDesignMetricsCsv.sh) ([Example](./results/AxonFramework-4.7.5/object-oriented-design-metrics-csv/MainSequenceAbstractnessInstabilityDistance.csv))
-- [Overview (CSV)](./scripts/reports/OverviewCsv.sh) ([Example](./results/AxonFramework-4.7.5/overview-csv/Cyclomatic_Method_Complexity.csv))
-- [Internal Dependencies - Cyclic (CSV)](./scripts/reports/InternalDependenciesCsv.sh) ([Example](./results/AxonFramework-4.7.5/internal-dependencies-csv/CyclicDependenciesUnwinded.csv))
-- [Internal Dependencies - Interface Segregation (CSV)](./scripts/reports/InternalDependenciesCsv.sh) ([Example](./results/AxonFramework-4.7.5/internal-dependencies-csv/InterfaceSegregationCandidates.csv))
-- [Visibility Metrics (CSV)](./scripts/reports/VisibilityMetricsCsv.sh) ([Example](./results/AxonFramework-4.7.5/visibility-metrics-csv/RelativeVisibilityPerArtifact.csv))
+- [Community Detection with Leiden](./results/AxonFramework-4.8.0/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
+- [Centrality with Page Rank](./results/AxonFramework-4.8.0/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
+- [Similarity with Jaccard](./results/AxonFramework-4.8.0/similarity-csv/Similarity_Jaccard.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
 
 ## 🛠 Prerequisites
 
@@ -77,22 +71,22 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 
 **Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list. 
 
+## 🛠 Command Reference
+
+[COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup.
+
 ## 📈 Report Reference
 
 [REPORTS.md](./results/REPORTS.md) lists all Markdown reports inside the [results](./results).
 
 ## ⚙️ Script Reference
 
-[SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository with a description (first comment line). It can updated as described in [Update Markdown Reference](./COMMANDS.md#update-script-reference) of the [Commands Reference](./COMMANDS.md).
+[SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository including their first comment line as a description. It can be generated as described in [Generate Script Reference](./COMMANDS.md#generate-script-reference).
 
 ## 🔎 Cypher Query Reference
 
-[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository with their description (first comment lines). It can updated as described in [Update Cypher Reference](./COMMANDS.md#update-cypher-reference) of the [Commands Reference](./COMMANDS.md).
+[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#update-cypher-reference).
 > [Cypher](https://neo4j.com/docs/getting-started/cypher-intro) is Neo4j’s graph query language that lets you retrieve data from the graph.
-
-## 🛠 Command Reference
-
-[COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup.
 
 ## 🤔 Questions & Answers
 

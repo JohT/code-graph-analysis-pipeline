@@ -168,7 +168,7 @@ else
     echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already installed"
 fi
 
-# Download and Install the Neo4j Plugin "Graph Data Science" (GDS)
+# Download and install the Neo4j plugin "Graph Data Science" (GDS)
 if [[ ${NEO4J_GDS_PLUGIN_EDITION} == "open" ]]; then
     neo4jGraphDataScienceDownloadUrl="https://github.com/JohT/open-graph-data-science-packaging/releases/download/v${NEO4J_OPEN_GDS_PLUGIN_VERSION}"
     # TODO Maybe it would be a better solution to release open graph data science packages just with the major release version

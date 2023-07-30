@@ -102,7 +102,7 @@ without report generation use this command:
 
 ## Generate Markdown References
 
-### Update Cypher Reference
+### Generate Cypher Reference
 
 Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/generateCypherReference.sh) with the following command:
 
@@ -110,7 +110,7 @@ Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then exe
 ./../scripts/generateCypherReference.sh
 ```
 
-### Update Script Reference
+### Generate Script Reference
 
 Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/generateScriptReference.sh) with the following command:
 
@@ -127,7 +127,7 @@ which is included in the pipeline [code-reports.yml](.github/workflows/code-repo
 
 
 ```script
-./../scripts/generateScriptReference.sh
+./../scripts/generateMarkdownReference.sh
 ```
 
 ## Manual Setup
