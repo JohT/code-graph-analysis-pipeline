@@ -11,7 +11,7 @@ NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "waitForNeo4jHttp: SCRIPTS_DIR=$SCRIPTS_DIR"
 
 # Get the "cypher" directory by taking the path of this script and going one directory up and then to "cypher".

@@ -88,6 +88,10 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 [CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#update-cypher-reference).
 > [Cypher](https://neo4j.com/docs/getting-started/cypher-intro) is Neo4j’s graph query language that lets you retrieve data from the graph.
 
+## ⚙️ Environment Variable Reference
+
+[ENVIRONMENT_VARIABLES.md](./scripts/ENVIRONMENT_VARIABLES.md) contains all environment variables that are supported by the scripts including default values and description. It can be generated as described in [Generate Environment Variable Reference](./COMMANDS.md#generate-environment-variable-reference).
+
 ## 🤔 Questions & Answers
 
 - How can i run an analysis locally?  

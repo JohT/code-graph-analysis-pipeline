@@ -17,7 +17,7 @@ REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH
 echo "InternalDependenciesCsv: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 
 # Get the "scripts" directory by taking the path of this script and going one directory up.
-SCRIPTS_DIR=${SCRIPTS_DIR:-"${REPORTS_SCRIPT_DIR}/.."}
+SCRIPTS_DIR=${SCRIPTS_DIR:-"${REPORTS_SCRIPT_DIR}/.."} # Repository directory containing the shell scripts
 echo "InternalDependenciesCsv SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Get the "cypher" directory by taking the path of this script and going two directory up and then to "cypher".

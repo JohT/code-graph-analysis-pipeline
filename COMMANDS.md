@@ -115,7 +115,7 @@ Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then exe
 Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/generateScriptReference.sh) with the following command:
 
 ```script
-./../scripts/generateScriptReference.sh
+./generateScriptReference.sh
 ```
 
 ### Update Markdown Reference
@@ -125,9 +125,16 @@ Change into the [results](./results/) directory e.g. with `cd results` and then 
 👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
 which is included in the pipeline [code-reports.yml](.github/workflows/code-reports.yml) and doesn't need to be executed manually normally.
 
-
 ```script
 ./../scripts/generateMarkdownReference.sh
+```
+
+### Generate Environment Variable Reference
+
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariablesReference.sh](./scripts/generateEnvironmentVariablesReference.sh) with the following command:
+
+```script
+./generateEnvironmentVariablesReference.sh
 ```
 
 ## Manual Setup

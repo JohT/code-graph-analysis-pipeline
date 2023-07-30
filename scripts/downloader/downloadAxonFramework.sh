@@ -36,7 +36,7 @@ DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname --
 echo "download${ANALYSIS_NAME}: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}"
 
 # Get the "scripts" directory by taking the path of this script and going one directory up.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${DOWNLOADER_SCRIPTS_DIR}")}
+SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${DOWNLOADER_SCRIPTS_DIR}")} # Repository directory containing the shell scripts
 echo "download${ANALYSIS_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 ################################################################

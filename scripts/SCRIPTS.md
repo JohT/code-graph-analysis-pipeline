@@ -6,6 +6,7 @@ It provides a table listing each script file and its corresponding description f
 Script | Directory | Description
 -------|-----------|------------
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
+| [appendEnvironmentVariables.sh](./appendEnvironmentVariables.sh) |  | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory with a text file containing the last hash code of the contents. |
 | [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
@@ -16,6 +17,7 @@ Script | Directory | Description
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [generateCypherReference.sh](./generateCypherReference.sh) |  | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
+| [generateEnvironmentVariablesReference.sh](./generateEnvironmentVariablesReference.sh) |  | Runs "appendEnvironmentVariable.sh" for every script file in the current directory and its sub directories. |
 | [generateMarkdownReference.sh](./generateMarkdownReference.sh) |  | Generates "REPORTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [generateScriptReference.sh](./generateScriptReference.sh) |  | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |

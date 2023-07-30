@@ -8,7 +8,7 @@
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "prepareAnalysis: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Check if environment variable is set
@@ -18,7 +18,7 @@ if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
 fi
 
 # Get the "cypher" directory by taking the path of this script, going one directory up and then into "cypher".
-CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"}
+CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"} # Repository directory containing the cypher queries
 echo "prepareAnalysis: CYPHER_DIR=$CYPHER_DIR"
 
 # Define functions to execute a cypher query from within the given file (first and only argument)
