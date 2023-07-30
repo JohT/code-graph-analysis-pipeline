@@ -66,20 +66,20 @@
     <tr>
       <th>6</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Enum</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>axon-messaging-4.8.0</td>
       <td>Interface</td>
       <td>147</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
       <td>axon-messaging-4.8.0</td>
       <td>Annotation</td>
       <td>26</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>9</th>
@@ -126,8 +126,8 @@
     <tr>
       <th>16</th>
       <td>axon-modelling-4.8.0</td>
-      <td>Enum</td>
-      <td>3</td>
+      <td>Interface</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>17</th>
@@ -138,8 +138,8 @@
     <tr>
       <th>18</th>
       <td>axon-modelling-4.8.0</td>
-      <td>Interface</td>
-      <td>26</td>
+      <td>Enum</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
