@@ -64,6 +64,42 @@ a profile, the newest versions will be used. Profiles are scripts that can be fo
 - Use your own initial Neo4j password
 - For more details have a look at the script [analyze.sh](./scripts/analysis/analyze.sh)
 
+### Examples
+
+#### Start an analysis with CSV reports only
+
+If only the CSV reports are needed, that are the result of Cypher queries and don't need any further dependencies (like Python)
+the analysis can be speeded up with:
+
+```shell
+./../../scripts/analysis/analyze.sh --report Csv
+```
+
+#### Start an analysis with Jupyter reports only
+
+If only the Jupyter reports are needed e.g. when the CSV reports had already been generated, the this can be done with:
+
+```shell
+./../../scripts/analysis/analyze.sh --report Jupyter
+```
+
+#### Start an analysis without PDF generation
+
+Generating a PDF from a Jupyter notebook using [nbconvert](https://nbconvert.readthedocs.io) might take a while or even fail due to a timeout error. Here is an example on how to skip PDF generation:
+
+```shell
+SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
+```
+
+#### Setup everything to explore the graph manually
+
+To prepare everything for analysis including installation, configuration and preparation queries to explore the graph manually
+without report generation use this command:
+
+```shell
+./../../scripts/analysis/analyze.sh --explore
+```
+
 ## Generate Markdown References
 
 ### Update Cypher Reference
