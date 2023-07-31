@@ -53,7 +53,7 @@ fi
 
 # Create jQAssistant configuration YAML file by copying a template for it
 mkdir -p "./.jqassistant" || exit 1
-cp "${SCRIPTS_DIR}/templates/${JQASSISTANT_CONFIG_TEMPLATE}" "./.jqassistant/" || exit 1
+cp "${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}" "./.jqassistant/" || exit 1
 
 # Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
 echo "resetAndScan: Scanning ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"

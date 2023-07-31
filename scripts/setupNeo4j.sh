@@ -126,9 +126,9 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
 
     echo "setupNeo4j: Configuring static settings (memory, procedure permittions, ...)"
     if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
-        cat "${SCRIPTS_DIR}/templates/template-neo4j.conf" >> "${NEO4J_CONFIG}"
+        cat "${SCRIPTS_DIR}/configuration/template-neo4j.conf" >> "${NEO4J_CONFIG}"
     else
-        cat "${SCRIPTS_DIR}/templates/template-neo4j-v4.conf" >> "${NEO4J_CONFIG}"
+        cat "${SCRIPTS_DIR}/configuration/template-neo4j-v4.conf" >> "${NEO4J_CONFIG}"
     fi
 
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).

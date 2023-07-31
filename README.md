@@ -46,7 +46,7 @@ See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Refere
 
 ## 🏗 Pipeline and Tools
 
-The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
+The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
 
 - Use [GitHub Actions](https://docs.github.com/de/actions) Linux Runner
 - [Checkout GIT Repository](https://github.com/actions/checkout)
@@ -109,7 +109,7 @@ The [Code Reports Pipeline](./.github/workflows/code-reports.yml) utilizes [GitH
 
 - How can i add another code basis to be analyzed automatically?  
   👉 Create a new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
-  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/code-reports.yml).
+  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/code-structure-analysis.yml).
 
 - How can i trigger a full rescan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
