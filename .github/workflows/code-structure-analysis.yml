@@ -1,4 +1,4 @@
-name: Code Structure Analysis Reports
+name: Code Structure Analysis
 
 on:
   push:
