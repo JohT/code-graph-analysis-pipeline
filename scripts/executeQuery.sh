@@ -80,7 +80,7 @@ cypher_query=$(echo -n "${original_cypher_query}" | jq -Rsa .)
 #echo "Cypher Query: $cypher_query"
 
 # Put the query inside the structure that is expected by the Neo4j HTTP API
-cypher_query_for_api="{\"statements\":[{\"statement\":${cypher_query},\"includeStats\": true}]}"
+cypher_query_for_api="{\"statements\":[{\"statement\":${cypher_query},\"includeStats\": false}]}"
 #echo "Cypher Query for API: ${cypher_query_for_api}"
 
 # Calls the Neo4j HTTP API using cURL ( https://curl.se )
@@ -88,7 +88,7 @@ cyper_query_result=$(curl --silent -S --fail-with-body -H Accept:application/jso
      -u neo4j:"${NEO4J_INITIAL_PASSWORD}" \
      "http://localhost:${NEO4J_HTTP_PORT}/${NEO4J_HTTP_TRANSACTION_ENDPOINT}" \
      -d "${cypher_query_for_api}")
-#echo "Cypher Query Result: $cyper_query_result"
+#echo "executeQuery: Cypher Query Result: ${cyper_query_result}"
 
 # If there is a error message print it to syserr >&2 in red color
 error_message=$( echo "${cyper_query_result}" | jq -r '.errors[0] // empty' )
@@ -102,7 +102,7 @@ fi
 if [ "${no_source_reference}" = true ] ; then
   echo -n "${cyper_query_result}" | jq -r '(.results[0])? | .columns,(.data[].row)? | map(if type == "array" then join(",") else . end) | flatten | @csv'
 else
-  cypher_query_file_basename=$(basename -- "${cypher_query_file_name}")
-  sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_basename}"
+  cypher_query_file_relative_name=${cypher_query_file_name#/**/cypher/}
+  sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_relative_name}"
   echo -n "${cyper_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
 fi

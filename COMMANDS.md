@@ -118,6 +118,17 @@ Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then 
 ./documentation/generateScriptReference.sh
 ```
 
+### Generate CSV Cypher Query Report Reference
+
+Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateCsvReportReference.sh](./scripts/documentation/generateCsvReportReference.sh) with the following command:
+
+👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
+which is included in the pipeline [code-structure-analysis.yml](.github/workflows/code-structure-analysis.yml) and doesn't need to be executed manually normally.
+
+```script
+./../scripts/documentation/generateCsvReportReference.sh
+```
+
 ### Generate Jupyter Notebook Report Reference
 
 Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateJupyterReportsReference.sh](./scripts/documentation/generateJupyterReportsReference.sh) with the following command:

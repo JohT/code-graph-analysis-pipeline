@@ -29,7 +29,7 @@ Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org
 
 ### 📖 Graph Data Science Reports
 
-Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science):
+Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#📃-csv-cypher-query-report-reference) below. 
 
 - [Community Detection with Leiden](./results/AxonFramework-4.8.0/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
 - [Centrality with Page Rank](./results/AxonFramework-4.8.0/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
@@ -75,6 +75,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 ## 🛠 Command Reference
 
 [COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup.
+
+## 📃 CSV Cypher Query Report Reference
+
+[CSV_REPORTS.md](./results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](./results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
 
 ## 📈 Jupyter Notebook Report Reference
 

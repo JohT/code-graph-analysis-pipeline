@@ -40,5 +40,8 @@ for report_source_folder in **/"${REPORTS_DIRECTORY}"; do
     cp -Rp "${report_source_folder}" "${reportTargetDirectory}"
 done
 
-# Generate REPORTS.md containing a reference to all Jupyter Notebook Markdown reports in the "results" directory and its subdirectories.
+# Generate JUPYTER_REPORTS.md containing a reference to all Jupyter Notebook Markdown reports in the "results" directory and its subdirectories.
 (cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateJupyterReportsReference.sh")
+
+# Generate CSV_REPORTS.md containing a reference to all CSV cypher query reports in the "results" directory and its subdirectories.
+(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateCsvReportReference.sh")
