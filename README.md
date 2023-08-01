@@ -11,6 +11,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Analyze static code structure as a graph
 - Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
 - Comprehensive reports including dependencies, metrics and graph structure
+- Automated reference document generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
