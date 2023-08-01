@@ -41,4 +41,4 @@ for report_source_folder in **/"${REPORTS_DIRECTORY}"; do
 done
 
 # Generate REPORTS.md containing a reference to all Jupyter Notebook Markdown reports in the "results" directory and its subdirectories.
-(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/generateJupyterReportReference.sh")
+(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateJupyterReportsReference.sh")

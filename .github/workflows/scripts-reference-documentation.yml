@@ -30,7 +30,7 @@ jobs:
     - name: Generate scripts reference document
       working-directory: scripts
       run: |
-        ./generateScriptReference.sh
+        ./documentation/generateScriptReference.sh
 
     - name: Archive generated scripts reference document
       uses: actions/upload-artifact@v3

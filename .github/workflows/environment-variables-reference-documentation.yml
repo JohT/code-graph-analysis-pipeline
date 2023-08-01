@@ -30,7 +30,7 @@ jobs:
     - name: Generate environment variables reference document
       working-directory: scripts
       run: |
-        ./generateEnvironmentVariablesReference.sh
+        ./documentation/generateEnvironmentVariablesReference.sh
 
     - name: Archive generated environment variables reference document
       uses: actions/upload-artifact@v3

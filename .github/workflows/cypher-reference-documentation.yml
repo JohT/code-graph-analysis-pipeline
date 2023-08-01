@@ -30,7 +30,7 @@ jobs:
     - name: Generate cypher reference document
       working-directory: cypher
       run: |
-        ./../scripts/generateCypherReference.sh
+        ./../scripts/documentation/generateCypherReference.sh
 
     - name: Archive generated cypher reference document
       uses: actions/upload-artifact@v3

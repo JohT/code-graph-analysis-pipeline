@@ -104,37 +104,37 @@ without report generation use this command:
 
 ### Generate Cypher Reference
 
-Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/generateCypherReference.sh) with the following command:
+Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) with the following command:
 
 ```script
-./../scripts/generateCypherReference.sh
+./../scripts/documentation/generateCypherReference.sh
 ```
 
 ### Generate Script Reference
 
-Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/generateScriptReference.sh) with the following command:
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/documentation/generateScriptReference.sh) with the following command:
 
 ```script
-./generateScriptReference.sh
+./documentation/generateScriptReference.sh
 ```
 
 ### Generate Jupyter Notebook Report Reference
 
-Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateJupyterReportsReference.sh](./scripts/generateJupyterReportsReference.sh) with the following command:
+Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateJupyterReportsReference.sh](./scripts/documentation/generateJupyterReportsReference.sh) with the following command:
 
 👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
 which is included in the pipeline [code-structure-analysis.yml](.github/workflows/code-structure-analysis.yml) and doesn't need to be executed manually normally.
 
 ```script
-./../scripts/generateJupyterReportsReference.sh
+./../scripts/documentation/generateJupyterReportsReference.sh
 ```
 
 ### Generate Environment Variable Reference
 
-Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariablesReference.sh](./scripts/generateEnvironmentVariablesReference.sh) with the following command:
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariablesReference.sh](./scripts/documentation/generateEnvironmentVariablesReference.sh) with the following command:
 
 ```script
-./generateEnvironmentVariablesReference.sh
+./documentation/generateEnvironmentVariablesReference.sh
 ```
 
 ## Manual Setup
