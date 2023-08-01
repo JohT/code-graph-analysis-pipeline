@@ -6,7 +6,7 @@
 
 # Notice that this scripts needs to be executed within the "temp" directory.
 
-# Requires generateMarkdownReference.sh
+# Requires generateJupyterReportReference.sh
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -40,5 +40,5 @@ for report_source_folder in **/"${REPORTS_DIRECTORY}"; do
     cp -Rp "${report_source_folder}" "${reportTargetDirectory}"
 done
 
-# Generate REPORTS.md containing a reference to all Markdown Reports in the "results" directory and its subdirectories.
-(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/generateMarkdownReference.sh")
+# Generate REPORTS.md containing a reference to all Jupyter Notebook Markdown reports in the "results" directory and its subdirectories.
+(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/generateJupyterReportReference.sh")

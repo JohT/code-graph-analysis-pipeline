@@ -18,7 +18,7 @@ Script | Directory | Description
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [generateCypherReference.sh](./generateCypherReference.sh) |  | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
 | [generateEnvironmentVariablesReference.sh](./generateEnvironmentVariablesReference.sh) |  | Runs "appendEnvironmentVariable.sh" for every script file in the current directory and its sub directories. |
-| [generateMarkdownReference.sh](./generateMarkdownReference.sh) |  | Generates "REPORTS.md" containing a reference to all scripts in this directory and its subdirectories. |
+| [generateJupyterReportsReference.sh](./generateJupyterReportsReference.sh) |  | Generates "JUPYTER_REPORTS.md" containing a reference to all Jupyter Notebook Markdown reports in this directory and its subdirectories. |
 | [generateScriptReference.sh](./generateScriptReference.sh) |  | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |

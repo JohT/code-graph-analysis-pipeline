@@ -76,9 +76,9 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 [COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup.
 
-## 📈 Report Reference
+## 📈 Jupyter Notebook Report Reference
 
-[REPORTS.md](./results/REPORTS.md) lists all Markdown reports inside the [results](./results).
+[JUPYTER_REPORTS.md](./results/JUPYTER_REPORTS.md) lists all Jupyter Notebook reports inside the [results](./results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-jupyter-notebook-report-reference).
 
 ## ⚙️ Script Reference
 
