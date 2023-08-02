@@ -1,4 +1,4 @@
-"packageName","outgoingDependencies","outgoingDependentTypes","outgoingDependentInterfaces","outgoingDependentPackages","outgoingDependentArtifacts","outgoingDependenciesWeight","Source Cypher File: Set_Outgoing_Package_Dependencies.cypher"
+"packageName","outgoingDependencies","outgoingDependentTypes","outgoingDependentInterfaces","outgoingDependentPackages","outgoingDependentArtifacts","outgoingDependenciesWeight","Source Cypher File: Metrics/Set_Outgoing_Package_Dependencies.cypher"
 "org.axonframework.config",7942,212,84,46,5,34762,""
 "org.axonframework.test.aggregate",2223,92,34,16,4,9766,""
 "org.axonframework.eventhandling",1557,151,54,16,1,7770,""

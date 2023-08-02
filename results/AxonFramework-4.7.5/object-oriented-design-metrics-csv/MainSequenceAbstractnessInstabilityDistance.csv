@@ -1,4 +1,4 @@
-"artifactName","fullQualifiedPackageName","packageName","distance","abstractness","instability","typesInPackage","Source Cypher File: Calculate_distance_between_abstractness_and_instability.cypher"
+"artifactName","fullQualifiedPackageName","packageName","distance","abstractness","instability","typesInPackage","Source Cypher File: Metrics/Calculate_distance_between_abstractness_and_instability.cypher"
 "axon-test-4.7.5","org.axonframework.test.server","server",1,0,0,2,""
 "axon-messaging-4.7.5","org.axonframework.common.io","io",1,0,0,1,""
 "axon-eventsourcing-4.7.5","org.axonframework.eventsourcing.eventstore.jdbc.statements","statements",0.7272727272727273,1,0.7272727272727273,15,""
