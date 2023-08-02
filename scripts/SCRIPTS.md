@@ -2,13 +2,19 @@
 
 This document serves as a reference for all scripts in the current directory and its subdirectories.
 It provides a table listing each script file and its corresponding description found in the first comment line.
+This file was generated with the script [generateScriptReference.sh](./generateScriptReference.sh).
 
 Script | Directory | Description
 -------|-----------|------------
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
-| [appendEnvironmentVariables.sh](./appendEnvironmentVariables.sh) |  | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory with a text file containing the last hash code of the contents. |
+| [appendEnvironmentVariables.sh](./documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
+| [generateCsvReportReference.sh](./documentation/generateCsvReportReference.sh) | documentation | Generates "CSV_REPORTS.md" containing a reference to all CSV cypher query reports in this directory and its subdirectories. |
+| [generateCypherReference.sh](./documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
+| [generateEnvironmentVariablesReference.sh](./documentation/generateEnvironmentVariablesReference.sh) | documentation | Runs "appendEnvironmentVariable.sh" for every script file in the current directory and its sub directories. |
+| [generateJupyterReportsReference.sh](./documentation/generateJupyterReportsReference.sh) | documentation | Generates "JUPYTER_REPORTS.md" containing a reference to all Jupyter Notebook Markdown reports in this directory and its subdirectories. |
+| [generateScriptReference.sh](./documentation/generateScriptReference.sh) | documentation | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
 | [downloadMavenArtifact.sh](./downloadMavenArtifact.sh) |  | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central) |
 | [downloadAxonFramework.sh](./downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central. |
@@ -16,10 +22,6 @@ Script | Directory | Description
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
-| [generateCypherReference.sh](./generateCypherReference.sh) |  | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
-| [generateEnvironmentVariablesReference.sh](./generateEnvironmentVariablesReference.sh) |  | Runs "appendEnvironmentVariable.sh" for every script file in the current directory and its sub directories. |
-| [generateJupyterReportsReference.sh](./generateJupyterReportsReference.sh) |  | Generates "JUPYTER_REPORTS.md" containing a reference to all Jupyter Notebook Markdown reports in this directory and its subdirectories. |
-| [generateScriptReference.sh](./generateScriptReference.sh) |  | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
