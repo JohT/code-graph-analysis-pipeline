@@ -142,10 +142,10 @@ which is included in the pipeline [code-structure-analysis.yml](.github/workflow
 
 ### Generate Environment Variable Reference
 
-Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariablesReference.sh](./scripts/documentation/generateEnvironmentVariablesReference.sh) with the following command:
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariableReference.sh](./scripts/documentation/generateEnvironmentVariableReference.sh) with the following command:
 
 ```script
-./documentation/generateEnvironmentVariablesReference.sh
+./documentation/generateEnvironmentVariableReference.sh
 ```
 
 ## Manual Setup
