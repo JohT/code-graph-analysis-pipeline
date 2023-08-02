@@ -41,7 +41,7 @@ jobs:
         retention-days: 5
 
     - name: Use git to detect changes in the regenerated document and set generated_document_changed
-      run: git diff-index --quiet HEAD || echo "generated_document_changed=true" >> $GITHUB_ENV
+      run: git diff --quiet || echo "generated_document_changed=true" >> $GITHUB_ENV
 
     - name: Display generated_document_changed
       run: echo "generated_document_changed=${{ env.generated_document_changed}}"
