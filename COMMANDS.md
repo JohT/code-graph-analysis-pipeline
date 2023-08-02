@@ -45,7 +45,7 @@
     ```
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
-👉 See [code-reports Pipeline](./.github/workflows/code-reports.yml) on how to do this within a GitHub Actions Workflow.
+👉 See [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) on how to do this within a GitHub Actions Workflow.
 
 ### Command Line Options
 
@@ -102,32 +102,50 @@ without report generation use this command:
 
 ## Generate Markdown References
 
-### Update Cypher Reference
+### Generate Cypher Reference
 
-Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/generateCypherReference.sh) with the following command:
-
-```script
-./../scripts/generateCypherReference.sh
-```
-
-### Update Script Reference
-
-Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/generateScriptReference.sh) with the following command:
+Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) with the following command:
 
 ```script
-./../scripts/generateScriptReference.sh
+./../scripts/documentation/generateCypherReference.sh
 ```
 
-### Update Markdown Reference
+### Generate Script Reference
 
-Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateMarkdownReference.sh](./scripts/generateMarkdownReference.sh) with the following command:
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateScriptReference.sh](./scripts/documentation/generateScriptReference.sh) with the following command:
+
+```script
+./documentation/generateScriptReference.sh
+```
+
+### Generate CSV Cypher Query Report Reference
+
+Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateCsvReportReference.sh](./scripts/documentation/generateCsvReportReference.sh) with the following command:
 
 👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [code-reports.yml](.github/workflows/code-reports.yml) and doesn't need to be executed manually normally.
-
+which is included in the pipeline [code-structure-analysis.yml](.github/workflows/code-structure-analysis.yml) and doesn't need to be executed manually normally.
 
 ```script
-./../scripts/generateScriptReference.sh
+./../scripts/documentation/generateCsvReportReference.sh
+```
+
+### Generate Jupyter Notebook Report Reference
+
+Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateJupyterReportsReference.sh](./scripts/documentation/generateJupyterReportsReference.sh) with the following command:
+
+👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
+which is included in the pipeline [code-structure-analysis.yml](.github/workflows/code-structure-analysis.yml) and doesn't need to be executed manually normally.
+
+```script
+./../scripts/documentation/generateJupyterReportsReference.sh
+```
+
+### Generate Environment Variable Reference
+
+Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariablesReference.sh](./scripts/documentation/generateEnvironmentVariablesReference.sh) with the following command:
+
+```script
+./documentation/generateEnvironmentVariablesReference.sh
 ```
 
 ## Manual Setup

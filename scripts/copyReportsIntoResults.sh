@@ -6,19 +6,19 @@
 
 # Notice that this scripts needs to be executed within the "temp" directory.
 
-# Requires generateMarkdownReference.sh
+# Requires generateJupyterReportReference.sh
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "copyReportsIntoResults: SCRIPTS_DIR=$SCRIPTS_DIR"
 
-RESULTS_DIRECTORY=${RESULTS_DIRECTORY:-"results"}
+RESULTS_DIRECTORY=${RESULTS_DIRECTORY:-"results"} # Repository directory containing the final analysis report results
 echo "copyReportsIntoResults: RESULTS_DIRECTORY=${RESULTS_DIRECTORY}"
 
-REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
+REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"} # Working directory where the analysis reports are written to 
 echo "copyReportsIntoResults: REPORTS_DIRECTORY=${REPORTS_DIRECTORY}"
 
 FULL_RESULTS_DIRECTORY="./../${RESULTS_DIRECTORY}"
@@ -40,5 +40,8 @@ for report_source_folder in **/"${REPORTS_DIRECTORY}"; do
     cp -Rp "${report_source_folder}" "${reportTargetDirectory}"
 done
 
-# Generate REPORTS.md containing a reference to all Markdown Reports in the "results" directory and its subdirectories.
-(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/generateMarkdownReference.sh")
+# Generate JUPYTER_REPORTS.md containing a reference to all Jupyter Notebook Markdown reports in the "results" directory and its subdirectories.
+(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateJupyterReportsReference.sh")
+
+# Generate CSV_REPORTS.md containing a reference to all CSV cypher query reports in the "results" directory and its subdirectories.
+(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateCsvReportReference.sh")

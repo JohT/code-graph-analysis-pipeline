@@ -17,11 +17,11 @@ REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH
 echo "ObjectOrientedDesignMetricsJupyter: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 
 # Get the "scripts" directory by taking the path of this script and going one directory up.
-SCRIPTS_DIR=${SCRIPTS_DIR:-"${REPORTS_SCRIPT_DIR}/.."}
+SCRIPTS_DIR=${SCRIPTS_DIR:-"${REPORTS_SCRIPT_DIR}/.."} # Repository directory containing the shell scripts
 echo "ObjectOrientedDesignMetricsJupyter: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Get the "jupyter" directory by taking the path of this script and going two directory up and then to "jupyter".
-JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY:-"${SCRIPTS_DIR}/../jupyter"}
+JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY:-"${SCRIPTS_DIR}/../jupyter"} # Repository directory containing the Jupyter Notebooks
 echo "ObjectOrientedDesignMetricsJupyter: JUPYTER_NOTEBOOK_DIRECTORY=$JUPYTER_NOTEBOOK_DIRECTORY"
 
 # Create report directory

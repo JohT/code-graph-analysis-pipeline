@@ -8,9 +8,9 @@ NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/data/tran
 
 # Overrideable settings variables for ports (optional, defaults also defined in sub scripts where needed)
 # Override them if you need to run multiple neo4j database servers in parallel.
-NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} 
-NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"}
-NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"}
+NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
+NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"} # Neo4j HTTPS port for encrypted querying
+NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
 
 # Awesome Procedures (APOC) Plugin for Neo4j
 NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"4.4.0.15"} # Version number matches Neo4j version
@@ -23,4 +23,4 @@ NEO4J_GDS_PLUGIN_EDITION=${NEO4J_GDS_PLUGIN_EDITION:-"full"}  # Graph Data Scien
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"}  # Version 1.12.2 is the newest version (may 2023) compatible with Neo4j v4
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv3"} # For Neo4j v3 & 4: "jqassistant-commandline-neo4jv3"
 JQASSISTANT_CLI_DISTRIBUTION=${JQASSISTANT_CLI_DISTRIBUTION:-"distribution.zip"} # Neo4j v3 & 4: "distribution.zip"
-JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv4-jqassistant.yaml"}
+JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv4-jqassistant.yaml"} # Name of the template file for the jqassistant configuration

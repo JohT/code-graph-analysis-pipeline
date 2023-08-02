@@ -11,9 +11,10 @@ JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv5-jqa
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.9.0"}
-NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"}
-NEO4J_BOLT_URI=${NEO4J_BOLT_URI:-"bolt://localhost:${NEO4J_BOLT_PORT}"}
-NEO4J_USER=${NEO4J_USER:-"neo4j"}
+NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
+NEO4J_BOLT_URI=${NEO4J_BOLT_URI:-"bolt://localhost:${NEO4J_BOLT_PORT}"} # Neo4j's own "Bolt Protocol" address
+NEO4J_USER=${NEO4J_USER:-"neo4j"} # Neo4j login user
+NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD:-""} # Neo4j login password that was set to replace the temporary initial password
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Directory with the Java artifacts to scan and analyze
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 
@@ -21,7 +22,7 @@ TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults 
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "resetAndScan: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Internal constants
@@ -52,7 +53,7 @@ fi
 
 # Create jQAssistant configuration YAML file by copying a template for it
 mkdir -p "./.jqassistant" || exit 1
-cp "${SCRIPTS_DIR}/templates/${JQASSISTANT_CONFIG_TEMPLATE}" "./.jqassistant/" || exit 1
+cp "${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}" "./.jqassistant/" || exit 1
 
 # Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
 echo "resetAndScan: Scanning ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"

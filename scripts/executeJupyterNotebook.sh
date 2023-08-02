@@ -19,7 +19,9 @@
 #       It it isn't activated, it will save the currently activated environment, change to codegraph, and restore the original one at the end again.
 #       In cases of an error it might be, that the original conda environment isn't set back. Typically this shouldn't be the case though. 
 
-SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION:-""}
+# Requires juypter nbconvert
+
+SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Skip PDF generation for Jupyter Notebooks if set to a non empty value e.g. "true"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -75,7 +77,7 @@ if [ ! -f "${jupyter_notebook_file_path}/.env" ] ; then
 fi
 
 # Define conda environment to use for code structure analysis. Default "codegraph"
-CODEGRAPH_CONDA_ENVIRONMENT=${CODEGRAPH_CONDA_ENVIRONMENT:-"codegraph"}
+CODEGRAPH_CONDA_ENVIRONMENT=${CODEGRAPH_CONDA_ENVIRONMENT:-"codegraph"} # Name of the conda environment to use for code graph analysis
 echo "executeJupyterNotebook: CODEGRAPH_CONDA_ENVIRONMENT=$CODEGRAPH_CONDA_ENVIRONMENT"
 
 # Determine the path to "conda"
