@@ -46,7 +46,7 @@ if [ ! -f "./${markdownFile}" ] ; then
 fi
 
 # Regular expression that extracts the environment variable name (1st group), its default value (2nd group) and its description (3rd group)
-regular_expression='^[[:space:]]*([A-Za-z_][A-Za-z0-9_]*)=\${[A-Za-z_][A-Za-z0-9_]*:-\"([^\"]*)\"}[[:space:]]*#*[[:space:]]*(.*)'
+regular_expression='^[[:space:]]*([A-Za-z_][A-Za-z0-9_]*)=\$\{[A-Za-z_][A-Za-z0-9_]*:-\"([^\"]*)\"\}[[:space:]]*#*[[:space:]]*(.*)'
 
 environmentVariables=$(\
     # Use grep to find lines with the pattern you specified
