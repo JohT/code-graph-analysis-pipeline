@@ -2,8 +2,18 @@
 
 # Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns.
 
+# Note: If called with "clear" instead of a filename then the generated markdown reference documentation file is deleted.
+#       This is helpful to start over with the generation of a new document.
+
 # Markdown file name
 markdownFile="ENVIRONMENT_VARIABLES.md"
+
+# If the first command line option is "clear" (instead of a filename) then delete the markdown file.
+if [[ "$1" == "clear" ]] ; then
+    echo "findEnvironmentVariables: Clear existing ${markdownFile}..."
+    rm -f "${markdownFile}" || echo "findEnvironmentVariables: Error: Failed to remove ${markdownFile}." || exit 1
+    return 0
+fi
 
 # Get the file to search for environment variables from the first (and only) command line option
 filePath="$1"
@@ -11,13 +21,13 @@ filePath="$1"
 # Check if the given file exists
 if [ -z "${filePath}" ] ; then
     echo "findEnvironmentVariables: Please provide a file name."
-    exit 0
+    exit 1
 fi
 
 # Check if the given file exists
 if [ ! -f "./${filePath}" ] ; then
     echo "findEnvironmentVariables: File ${filePath} doesn't exist."
-    exit 0
+    exit 1
 fi
 
 # Create the markdown file if it doesn't exist with the header of the table
