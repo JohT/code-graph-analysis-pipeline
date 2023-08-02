@@ -53,6 +53,7 @@ jobs:
       run: |
         git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
         git config --global user.email 'joht@users.noreply.github.com'
+        git pull
         git add ./scripts/SCRIPTS.md
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git push
