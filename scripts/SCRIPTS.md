@@ -12,8 +12,8 @@ Script | Directory | Description
 | [appendEnvironmentVariables.sh](./documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
 | [generateCsvReportReference.sh](./documentation/generateCsvReportReference.sh) | documentation | Generates "CSV_REPORTS.md" containing a reference to all CSV cypher query reports in this directory and its subdirectories. |
 | [generateCypherReference.sh](./documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
-| [generateEnvironmentVariablesReference.sh](./documentation/generateEnvironmentVariablesReference.sh) | documentation | Runs "appendEnvironmentVariable.sh" for every script file in the current directory and its sub directories. |
-| [generateJupyterReportsReference.sh](./documentation/generateJupyterReportsReference.sh) | documentation | Generates "JUPYTER_REPORTS.md" containing a reference to all Jupyter Notebook Markdown reports in this directory and its subdirectories. |
+| [generateEnvironmentVariableReference.sh](./documentation/generateEnvironmentVariableReference.sh) | documentation | Runs "appendEnvironmentVariable.sh" for every script file in the current directory and its sub directories. |
+| [generateJupyterReportReference.sh](./documentation/generateJupyterReportReference.sh) | documentation | Generates "JUPYTER_REPORTS.md" containing a reference to all Jupyter Notebook Markdown reports in this directory and its subdirectories. |
 | [generateScriptReference.sh](./documentation/generateScriptReference.sh) | documentation | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
 | [downloadMavenArtifact.sh](./downloadMavenArtifact.sh) |  | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central) |

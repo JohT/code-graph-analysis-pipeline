@@ -1,4 +1,4 @@
-# Visibility Metrics for Java with Neo4j
+# Visibility Metrics
 <br>  
 
 ### References
@@ -33,9 +33,9 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-eventsourcing-4.7.5.jar</td>
-      <td>9</td>
-      <td>130</td>
+      <td>axon-messaging-4.7.5.jar</td>
+      <td>61</td>
+      <td>729</td>
     </tr>
     <tr>
       <th>1</th>
@@ -45,21 +45,21 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>axon-configuration-4.7.5.jar</td>
-      <td>1</td>
-      <td>39</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-messaging-4.7.5.jar</td>
-      <td>61</td>
-      <td>729</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>axon-disruptor-4.7.5.jar</td>
       <td>1</td>
       <td>22</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-eventsourcing-4.7.5.jar</td>
+      <td>9</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-configuration-4.7.5.jar</td>
+      <td>1</td>
+      <td>39</td>
     </tr>
     <tr>
       <th>5</th>
@@ -89,7 +89,7 @@ The relative visibility is between zero (all types are package protected) and on
 
 Non public classes can't be accessed from another package so they can be changed without affecting code in other packages. They clearly indicate functionality that only belongs to one package. This also motivates to use more classes and to split up code into smaller pieces with a single responsibility and reason to change.
 
-### Table 1
+### Table 2
 
 - Show relative visibility statistics aggregated for all packages per artifact 
 
@@ -198,7 +198,7 @@ Non public classes can't be accessed from another package so they can be changed
 
 
 
-### Table 2
+### Table 3
 
 - List the top 40 packages and their artifact with the highest relative visibility
 

@@ -1,4 +1,4 @@
-"packageName","incomingDependencies","incomingDependenciesWeight","incomingDependentTypes","incomingDependentInterfaces","incomingDependentPackages","incomingDependentArtifacts","Source Cypher File: Set_Incoming_Package_Dependencies.cypher"
+"packageName","incomingDependencies","incomingDependenciesWeight","incomingDependentTypes","incomingDependentInterfaces","incomingDependentPackages","incomingDependentArtifacts","Source Cypher File: Metrics/Set_Incoming_Package_Dependencies.cypher"
 "org.axonframework.messaging",8507,33749,310,64,50,6,""
 "org.axonframework.eventhandling",4409,27987,280,52,44,5,""
 "org.axonframework.commandhandling",1539,7503,123,18,18,6,""
