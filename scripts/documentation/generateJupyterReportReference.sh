@@ -7,7 +7,7 @@
 markdown_file="JUPYTER_REPORTS.md"
 
 { 
-  echo "# Markdown Reports Reference" 
+  echo "# Jupyter Notebook Reports Reference" 
   echo ""
   echo "This document serves as a reference for all Jupyter Notebook reports in the current directory and its subdirectories."
   echo "It provides a table listing each file and its corresponding description found in the first header line."
