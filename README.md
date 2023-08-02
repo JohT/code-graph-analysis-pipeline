@@ -32,7 +32,7 @@ Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org
 Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#📃-csv-cypher-query-report-reference) below. 
 
 - [Community Detection with Leiden](./results/AxonFramework-4.8.0/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
-- [Centrality with Page Rank](./results/AxonFramework-4.8.0/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
+- [Centrality with Page Rank](./results/AxonFramework-4.8.0/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
 - [Similarity with Jaccard](./results/AxonFramework-4.8.0/similarity-csv/Similarity_Jaccard.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
 
 ## 🛠 Prerequisites
@@ -78,7 +78,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 ## 📃 CSV Cypher Query Report Reference
 
-[CSV_REPORTS.md](./results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](./results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
+[CSV_REPORTS.md](./results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](./results) directory. It can be generated as described in [Generate CSV Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
 
 ## 📈 Jupyter Notebook Report Reference
 
@@ -90,7 +90,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 ## 🔎 Cypher Query Reference
 
-[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#update-cypher-reference).
+[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#generate-cypher-reference).
 > [Cypher](https://neo4j.com/docs/getting-started/cypher-intro) is Neo4j’s graph query language that lets you retrieve data from the graph.
 
 ## ⚙️ Environment Variable Reference
@@ -102,18 +102,18 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 - How can i run an analysis locally?  
   👉 See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
 
-- How can i add an CSV report to the pipeline?  
+- How can i add a CSV report to the pipeline?  
   👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
   👉 Create a new CSV report script in the [scripts/reports](./scripts/reports/) directory. Take for example [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) as a reference.  
   👉 The script will automatically be included because of the directory and its name ending with "Csv.sh".
 
-- How can i add an Jupyter Notebook report to the pipeline?  
+- How can i add a Jupyter Notebook report to the pipeline?  
   👉 Put your new notebook into the [jupyter](./jupyter) directory.  
   👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
   👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
 
 - How can i add another code basis to be analyzed automatically?  
-  👉 Create a new artifacts download script in the [scripts/artifacts](./scripts/artifacts) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
+  👉 Create a new artifacts download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
   👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/code-structure-analysis.yml).
 
 - How can i trigger a full rescan of all artifacts?  
@@ -124,4 +124,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
   ```shell
   export SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION="true"
+  ```
+
+  👉 Or prepend your command with `SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION="true"` like:  
+  
+  ```shell
+  SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
   ```
