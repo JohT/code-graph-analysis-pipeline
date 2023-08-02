@@ -2,6 +2,7 @@
 
 This document serves as a reference for all Cypher files in the current directory and its subdirectories.
 It provides a table listing each Cypher file and its corresponding description found in the first comment line.
+This file was generated with the script [generateCypherReference.sh](./../scripts/documentation/generateCypherReference.sh).
 
 Script | Directory | Description
 -------|-----------|------------
@@ -77,14 +78,13 @@ Script | Directory | Description
 | [Cyclic_Dependencies_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies as unwinded List |
 | [Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies between Artifacts as unwinded List |
 | [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
-| [External_package_usage_overall.cypher](./External_Dependencies/External_package_usage_overall.cypher) | External_Dependencies | External package usage overall tuned |
-| [External_package_usage_per_artifact.cypher](./External_Dependencies/External_package_usage_per_artifact.cypher) | External_Dependencies | External package usage per artifact tuned |
+| [External_package_usage_overall.cypher](./External_Dependencies/External_package_usage_overall.cypher) | External_Dependencies | External package usage overall |
+| [External_package_usage_per_artifact.cypher](./External_Dependencies/External_package_usage_per_artifact.cypher) | External_Dependencies | External package usage per artifact |
 | [External_package_usage_per_artifact_and_package.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package.cypher) | External_Dependencies | External package usage per artifact and package |
-| [External_package_usage_per_artifact_and_package_tuned.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package_tuned.cypher) | External_Dependencies | External package usage per artifact and package tuned |
-| [External_package_usage_per_artifact_and_package_without_annotations.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package_without_annotations.cypher) | External_Dependencies | External package usage per artifact and package without annotations Note: The exists operation for "isAnnotation" is inefficient for large graphs. |
-| [External_package_usage_per_type.cypher](./External_Dependencies/External_package_usage_per_type.cypher) | External_Dependencies | External package usage per type tuned |
+| [External_package_usage_per_artifact_and_package_with_annotations.cypher](./External_Dependencies/External_package_usage_per_artifact_and_package_with_annotations.cypher) | External_Dependencies | External package usage per artifact and package with external annotations |
+| [External_package_usage_per_type.cypher](./External_Dependencies/External_package_usage_per_type.cypher) | External_Dependencies | External package usage per type |
 | [External_package_usage_per_type_distribution.cypher](./External_Dependencies/External_package_usage_per_type_distribution.cypher) | External_Dependencies | External package usage per type distribution |
-| [External_package_usage_per_type_distribution_without_annotations.cypher](./External_Dependencies/External_package_usage_per_type_distribution_without_annotations.cypher) | External_Dependencies | External package usage per type distribution without annotations |
+| [External_package_usage_per_type_distribution_with_annotations.cypher](./External_Dependencies/External_package_usage_per_type_distribution_with_annotations.cypher) | External_Dependencies | External package usage per type distribution with external annotations |
 | [External_types_per_artifact_using_requires.cypher](./External_Dependencies/External_types_per_artifact_using_requires.cypher) | External_Dependencies | External types per artifact using requires |
 | [Label_external_types_and_annotations.cypher](./External_Dependencies/Label_external_types_and_annotations.cypher) | External_Dependencies | Label external types and annotations |
 | [List_external_types_used.cypher](./External_Dependencies/List_external_types_used.cypher) | External_Dependencies | List external types used |
