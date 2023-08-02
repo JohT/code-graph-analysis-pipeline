@@ -1,4 +1,4 @@
-"fullQualifiedPackageName","packageName","centrality","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality_7a_Harmonic_Closeness_Stream.cypher"
+"fullQualifiedPackageName","packageName","centrality","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_7a_Harmonic_Closeness_Stream.cypher"
 "org.axonframework.common","common",0.8967391304347826,917,23,""
 "org.axonframework.messaging","messaging",0.7065217391304348,8829,133,""
 "org.axonframework.eventhandling","eventhandling",0.6648550724637681,4937,1557,""

@@ -1,4 +1,4 @@
-"fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality_8b_Closeness_Stream.cypher"
+"fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_8b_Closeness_Stream.cypher"
 "org.axonframework.common","common",0.8502415458937198,917,23,""
 "org.axonframework.messaging","messaging",0.6358695652173914,8829,133,""
 "org.axonframework.eventhandling","eventhandling",0.5852250865717583,4937,1557,""

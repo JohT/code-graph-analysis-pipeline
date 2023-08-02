@@ -1,4 +1,4 @@
-"fullQualifiedPackageName","packageName","spread","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher"
+"fullQualifiedPackageName","packageName","spread","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher"
 "org.axonframework.config","config",9.54,115,7974,""
 "org.axonframework.test.aggregate","aggregate",2.380000000000001,31,2223,""
 "org.axonframework.test.saga","saga",2.2699999999999996,43,1375,""

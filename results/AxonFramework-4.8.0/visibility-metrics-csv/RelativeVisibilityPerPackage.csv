@@ -1,4 +1,4 @@
-"artifactName","fullQualifiedPackageName","packageName","publicTypes","allTypes","relativeVisibility","Source Cypher File: Relative_visibility_public_types_to_all_types_per_package.cypher"
+"artifactName","fullQualifiedPackageName","packageName","publicTypes","allTypes","relativeVisibility","Source Cypher File: Visibility/Relative_visibility_public_types_to_all_types_per_package.cypher"
 "axon-modelling-4.8.0","org.axonframework.modelling.saga","saga",30,30,1,""
 "axon-eventsourcing-4.8.0","org.axonframework.eventsourcing.eventstore.jdbc.statements","statements",15,15,1,""
 "axon-messaging-4.8.0","org.axonframework.serialization.upcasting.event","event",12,12,1,""

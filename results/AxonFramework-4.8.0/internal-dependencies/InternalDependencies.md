@@ -78,7 +78,7 @@ Cyclic dependencies occur when one package uses a class of another package and v
 These dependencies can lead to a lot of trouble when one of these packages needs to be changed.
 
 ### Table 2
-- List packages with cyclic dependencies
+- List packages with cyclic dependencies as an overview
 
 
 
@@ -245,8 +245,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.317073</td>
       <td>27</td>
       <td>14</td>
-      <td>[JdbcEventStorageEngine-&gt;AppendSnapshotStateme...</td>
-      <td>[CleanGapsStatementBuilder-&gt;EventSchema, Creat...</td>
+      <td>[JdbcEventStorageEngine-&gt;DeleteSnapshotsStatem...</td>
+      <td>[CreateTailTokenStatementBuilder-&gt;EventSchema,...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -255,7 +255,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.250000</td>
       <td>20</td>
       <td>12</td>
-      <td>[MethodCreationPolicyDefinition$MethodCreation...</td>
+      <td>[CreationPolicyMember-&gt;AggregateCreationPolicy...</td>
       <td>[AggregateAnnotationCommandHandler$Builder-&gt;Ag...</td>
     </tr>
     <tr>
@@ -305,8 +305,8 @@ These dependencies can lead to a lot of trouble when one of these packages needs
       <td>0.142857</td>
       <td>4</td>
       <td>3</td>
-      <td>[AnnotatedSagaManager$Builder-&gt;AnnotationSagaM...</td>
-      <td>[SagaModel-&gt;AssociationValue, AnnotationSagaMe...</td>
+      <td>[AnnotatedSagaManager$Builder-&gt;SagaModel, Anno...</td>
+      <td>[AnnotationSagaMetaModelFactory$InspectedSagaM...</td>
     </tr>
     <tr>
       <th>21</th>
@@ -325,7 +325,7 @@ These dependencies can lead to a lot of trouble when one of these packages needs
 
 
 ### Table 3
-- List packages with cyclic dependencies with every dependency in a separate row sorted by the easiest and most valuable to resolve
+- List packages with cyclic dependencies with every dependency in a separate row sorted by the easiest and most valuable resolvable dependency first
 
 
 
@@ -910,7 +910,7 @@ If just one method of a type is used, especially in many places, then the result
 
 If there are a couple of methods that are used for a distinct purpose, those could be factored out into a separate interface. The original type can extended/implement the new interface so that there are no breaking changes. Then all the callers, that use only this group of methods, can be changed to the new interface.
 
-### Table 3
+### Table 4
 - List top 20 most used combinations of methods of larger Types that might benefit from *Interface Segregation*
 
 
@@ -1099,7 +1099,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
 
 ### Types that are used by multiple packages
 
-#### Table 4
+#### Table 5
 - List the top 20 packages that are used by the highest count of different packages 
 
 
@@ -1265,7 +1265,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
 
 ### Packages that are used by multiple artifacts
 
-#### Table 5
+#### Table 6
 - List the top 20 artifacts that only use a few (compared to all existing) packages of another artifact
 
 
@@ -1293,8 +1293,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>9</td>
       <td>64</td>
       <td>0.140625</td>
-      <td>[org.axonframework.commandhandling.callbacks, ...</td>
-      <td>[callbacks, unitofwork, commandhandling, annot...</td>
+      <td>[org.axonframework.common.caching, org.axonfra...</td>
+      <td>[caching, transaction, messaging, callbacks, c...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1303,8 +1303,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>10</td>
       <td>64</td>
       <td>0.156250</td>
-      <td>[org.axonframework.messaging.annotation, org.a...</td>
-      <td>[annotation, common, messaging, eventhandling,...</td>
+      <td>[org.axonframework.messaging, org.axonframewor...</td>
+      <td>[messaging, common, annotation, commandhandlin...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1323,8 +1323,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>10</td>
       <td>0.200000</td>
-      <td>[org.axonframework.modelling.command.inspectio...</td>
-      <td>[inspection, command]</td>
+      <td>[org.axonframework.modelling.command, org.axon...</td>
+      <td>[command, inspection]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1333,8 +1333,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>9</td>
       <td>0.222222</td>
-      <td>[org.axonframework.eventsourcing, org.axonfram...</td>
-      <td>[eventsourcing, eventstore]</td>
+      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
+      <td>[eventstore, eventsourcing]</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1343,8 +1343,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>2</td>
       <td>9</td>
       <td>0.222222</td>
-      <td>[org.axonframework.eventsourcing, org.axonfram...</td>
-      <td>[eventsourcing, eventstore]</td>
+      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
+      <td>[eventstore, eventsourcing]</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1353,8 +1353,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>18</td>
       <td>64</td>
       <td>0.281250</td>
-      <td>[org.axonframework.common.caching, org.axonfra...</td>
-      <td>[caching, unitofwork, lock, annotation, common...</td>
+      <td>[org.axonframework.messaging.annotation, org.a...</td>
+      <td>[annotation, eventhandling, deadline, intercep...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1363,8 +1363,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>20</td>
       <td>64</td>
       <td>0.312500</td>
-      <td>[org.axonframework.common, org.axonframework.m...</td>
-      <td>[common, annotation, eventhandling, unitofwork...</td>
+      <td>[org.axonframework.messaging.unitofwork, org.a...</td>
+      <td>[unitofwork, annotation, common, eventhandling...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1373,8 +1373,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>4</td>
       <td>9</td>
       <td>0.444444</td>
-      <td>[org.axonframework.eventsourcing.eventstore, o...</td>
-      <td>[eventstore, eventsourcing, jpa, snapshotting]</td>
+      <td>[org.axonframework.eventsourcing, org.axonfram...</td>
+      <td>[eventsourcing, eventstore, snapshotting, jpa]</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1383,8 +1383,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>5</td>
       <td>10</td>
       <td>0.500000</td>
-      <td>[org.axonframework.modelling.command.inspectio...</td>
-      <td>[inspection, command, repository, saga, inmemory]</td>
+      <td>[org.axonframework.modelling.saga, org.axonfra...</td>
+      <td>[saga, repository, inmemory, inspection, command]</td>
     </tr>
     <tr>
       <th>10</th>
@@ -1393,8 +1393,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>34</td>
       <td>64</td>
       <td>0.531250</td>
-      <td>[org.axonframework.eventhandling, org.axonfram...</td>
-      <td>[eventhandling, caching, lifecycle, lock, dead...</td>
+      <td>[org.axonframework.common, org.axonframework.d...</td>
+      <td>[common, deadline, scheduling, correlation, ev...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -1403,8 +1403,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.saga.repository.i...</td>
-      <td>[inmemory, repository, jpa, command, inspectio...</td>
+      <td>[org.axonframework.modelling.saga.repository, ...</td>
+      <td>[repository, inspection, command, jpa, saga, i...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -1413,8 +1413,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.saga.metamodel, o...</td>
-      <td>[metamodel, saga, command, repository, jpa, in...</td>
+      <td>[org.axonframework.modelling.saga, org.axonfra...</td>
+      <td>[saga, inspection, command, repository, jpa, m...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1423,8 +1423,8 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>5</td>
       <td>8</td>
       <td>0.625000</td>
-      <td>[org.axonframework.test.matchers, org.axonfram...</td>
-      <td>[matchers, test, deadline, utils, eventscheduler]</td>
+      <td>[org.axonframework.test.utils, org.axonframewo...</td>
+      <td>[utils, deadline, matchers, test, eventscheduler]</td>
     </tr>
     <tr>
       <th>14</th>
@@ -1434,7 +1434,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>64</td>
       <td>0.640625</td>
       <td>[org.axonframework.messaging.unitofwork, org.a...</td>
-      <td>[unitofwork, annotation, tracing, common, tran...</td>
+      <td>[unitofwork, monitoring, messaging, tracing, t...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -1444,7 +1444,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <td>9</td>
       <td>0.777778</td>
       <td>[org.axonframework.eventsourcing.eventstore, o...</td>
-      <td>[eventstore, jpa, snapshotting, conflictresolu...</td>
+      <td>[eventstore, snapshotting, jpa, conflictresolu...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -1464,7 +1464,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
 
 ### Packages that are used by multiple artifacts
 
-#### Table 6
+#### Table 7
 - List the top 20 packages that only use a few (compared to all existing) types of another package 
 
 
@@ -1611,7 +1611,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <th>11</th>
       <td>axon-test-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.test.matchers</td>
+      <td>org.axonframework.test</td>
       <td>org.axonframework.messaging</td>
       <td>1</td>
       <td>35</td>
@@ -1622,7 +1622,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <th>12</th>
       <td>axon-test-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.test</td>
+      <td>org.axonframework.test.matchers</td>
       <td>org.axonframework.messaging</td>
       <td>1</td>
       <td>35</td>
@@ -1633,7 +1633,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <th>13</th>
       <td>axon-eventsourcing-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -1644,7 +1644,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <th>14</th>
       <td>axon-eventsourcing-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -1655,7 +1655,7 @@ If there are a couple of methods that are used for a distinct purpose, those cou
       <th>15</th>
       <td>axon-eventsourcing-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -1686,9 +1686,9 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>18</th>
-      <td>axon-eventsourcing-4.8.0</td>
+      <td>axon-test-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
+      <td>org.axonframework.test.matchers</td>
       <td>org.axonframework.commandhandling</td>
       <td>1</td>
       <td>29</td>
@@ -1697,9 +1697,9 @@ If there are a couple of methods that are used for a distinct purpose, those cou
     </tr>
     <tr>
       <th>19</th>
-      <td>axon-test-4.8.0</td>
+      <td>axon-eventsourcing-4.8.0</td>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.test.matchers</td>
+      <td>org.axonframework.eventsourcing.conflictresolu...</td>
       <td>org.axonframework.commandhandling</td>
       <td>1</td>
       <td>29</td>

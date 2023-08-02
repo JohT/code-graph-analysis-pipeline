@@ -1,4 +1,4 @@
-"artifactName","numberOfPackages","Source Cypher File: Number_of_packages_per_artifact.cypher"
+"artifactName","numberOfPackages","Source Cypher File: Overview/Number_of_packages_per_artifact.cypher"
 "axon-eventsourcing-4.8.0",9,""
 "axon-disruptor-4.8.0",1,""
 "axon-messaging-4.8.0",64,""

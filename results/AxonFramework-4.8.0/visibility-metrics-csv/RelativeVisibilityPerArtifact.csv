@@ -1,4 +1,4 @@
-"artifact","all","public","min","max","average","percentile25","percentile50","percentile75","percentile90","Source Cypher File: Global_relative_visibility_statistics_for_types.cypher"
+"artifact","all","public","min","max","average","percentile25","percentile50","percentile75","percentile90","Source Cypher File: Visibility/Global_relative_visibility_statistics_for_types.cypher"
 "axon-configuration-4.8.0",39,26,0.6666666666666666,0.6666666666666666,0.6666666666666666,0.6666666666666666,0.6666666666666666,0.6666666666666666,0.6666666666666666,""
 "axon-disruptor-4.8.0",22,9,0.4090909090909091,0.4090909090909091,0.4090909090909091,0.4090909090909091,0.4090909090909091,0.4090909090909091,0.4090909090909091,""
 "axon-eventsourcing-4.8.0",130,95,0.5,1,0.7691585594811401,0.6129032258064516,0.7857142857142857,1,1,""

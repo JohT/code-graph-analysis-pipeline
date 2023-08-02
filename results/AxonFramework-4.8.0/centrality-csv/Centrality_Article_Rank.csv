@@ -1,4 +1,4 @@
-"fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality_4c_Article_Rank_Stream.cypher"
+"fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_4c_Article_Rank_Stream.cypher"
 "org.axonframework.common","common",0.6781860431088189,917,23,""
 "org.axonframework.messaging","messaging",0.5043331941520722,8829,133,""
 "org.axonframework.eventhandling","eventhandling",0.2955288756967051,4937,1557,""

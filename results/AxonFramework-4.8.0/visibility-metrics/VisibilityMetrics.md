@@ -89,7 +89,7 @@ The relative visibility is between zero (all types are package protected) and on
 
 Non public classes can't be accessed from another package so they can be changed without affecting code in other packages. They clearly indicate functionality that only belongs to one package. This also motivates to use more classes and to split up code into smaller pieces with a single responsibility and reason to change.
 
-### Table 1
+### Table 2
 
 - Show relative visibility statistics aggregated for all packages per artifact 
 
@@ -198,7 +198,7 @@ Non public classes can't be accessed from another package so they can be changed
 
 
 
-### Table 2
+### Table 3
 
 - List the top 40 packages and their artifact with the highest relative visibility
 

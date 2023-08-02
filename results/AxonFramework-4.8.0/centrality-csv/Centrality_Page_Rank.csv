@@ -1,4 +1,4 @@
-"fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality_3c_Page_Rank_Stream.cypher"
+"fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_3c_Page_Rank_Stream.cypher"
 "org.axonframework.common","common",0.7348135960897789,917,23,""
 "org.axonframework.messaging","messaging",0.48822640177243554,8829,133,""
 "org.axonframework.serialization","serialization",0.2796583828402817,1240,176,""
