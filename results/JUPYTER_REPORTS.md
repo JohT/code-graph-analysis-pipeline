@@ -18,4 +18,5 @@ Report | Analysis | Description
 | [Overview.md](./AxonFramework-4.8.0/overview/Overview.md) | AxonFramework-4.8.0 | Overview |
 | [VisibilityMetrics.md](./AxonFramework-4.8.0/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.8.0 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.8.0/wordcloud/Wordcloud.md) | AxonFramework-4.8.0 | Wordcloud |
+| [CSV_REPORTS.md](./CSV_REPORTS.md) |  | CSV Cypher Query Reports Reference |
 | [REPORTS.md](./REPORTS.md) |  | Markdown Reports Reference |

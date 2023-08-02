@@ -33,21 +33,21 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-messaging-4.8.0.jar</td>
+      <td>64</td>
+      <td>762</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>axon-eventsourcing-4.8.0.jar</td>
       <td>9</td>
       <td>130</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>axon-disruptor-4.8.0.jar</td>
-      <td>1</td>
-      <td>22</td>
-    </tr>
-    <tr>
       <th>2</th>
-      <td>axon-messaging-4.8.0.jar</td>
-      <td>64</td>
-      <td>762</td>
+      <td>axon-test-4.8.0.jar</td>
+      <td>8</td>
+      <td>87</td>
     </tr>
     <tr>
       <th>3</th>
@@ -57,15 +57,15 @@
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-test-4.8.0.jar</td>
-      <td>8</td>
-      <td>87</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>axon-modelling-4.8.0.jar</td>
       <td>10</td>
       <td>150</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-disruptor-4.8.0.jar</td>
+      <td>1</td>
+      <td>22</td>
     </tr>
   </tbody>
 </table>
