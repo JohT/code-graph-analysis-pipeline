@@ -1,4 +1,4 @@
-# Markdown Reports Reference
+# Jupyter Notebook Reports Reference
 
 This document serves as a reference for all Jupyter Notebook reports in the current directory and its subdirectories.
 It provides a table listing each file and its corresponding description found in the first header line.
