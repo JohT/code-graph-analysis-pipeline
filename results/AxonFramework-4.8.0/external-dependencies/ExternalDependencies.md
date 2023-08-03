@@ -61,7 +61,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>201</td>
       <td>579</td>
       <td>2584</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -85,7 +85,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>61</td>
       <td>498</td>
       <td>2584</td>
-      <td>[StringDescription, Description, Matcher, Core...</td>
+      <td>[StringDescription, Matcher, CoreMatchers, Des...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -101,7 +101,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>37</td>
       <td>226</td>
       <td>2584</td>
-      <td>[JobDetail, JobBuilder, JobDataMap, JobKey, Sc...</td>
+      <td>[JobDataMap, JobExecutionContext, SchedulerCon...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -133,7 +133,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>10</td>
       <td>50</td>
       <td>2584</td>
-      <td>[ExecutionContext, TaskInstance, Task, TaskWit...</td>
+      <td>[TaskWithDataDescriptor, ExecutionContext, Tas...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -157,7 +157,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>8</td>
       <td>34</td>
       <td>2584</td>
-      <td>[CacheEntryCreatedListener, CacheEntryEventFil...</td>
+      <td>[CacheEntryExpiredListener, CacheEntryCreatedL...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -165,7 +165,7 @@ Additionally, it shows which types of the external package are actually used. Ex
       <td>8</td>
       <td>33</td>
       <td>2584</td>
-      <td>[EventType, CacheEvent, CacheEventListener, Ev...</td>
+      <td>[EventType, EventFiring, EventOrdering, CacheE...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -527,7 +527,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>38</td>
       <td>188</td>
       <td>24</td>
-      <td>[Matcher, Description, BaseMatcher, TypeSafeMa...</td>
+      <td>[Description, BaseMatcher, Matcher, TypeSafeMa...</td>
       <td>matchers</td>
     </tr>
     <tr>
@@ -538,7 +538,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>28</td>
       <td>123</td>
       <td>42</td>
-      <td>[Signal, FluxSink, Flux, Mono, FluxSink$Overfl...</td>
+      <td>[Flux, Mono, Signal, Sinks$Many, Sinks$EmitRes...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -549,7 +549,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>19</td>
       <td>95</td>
       <td>6</td>
-      <td>[JobDataMap, JobExecutionException, Job, Sched...</td>
+      <td>[JobDataMap, JobDetail, JobExecutionContext, S...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -560,7 +560,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>18</td>
       <td>131</td>
       <td>4</td>
-      <td>[JobDataMap, JobExecutionContext, JobExecution...</td>
+      <td>[JobKey, SchedulerException, JobBuilder, JobDa...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -582,7 +582,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>15</td>
       <td>73</td>
       <td>7</td>
-      <td>[JsonNode, ObjectMapper, DeserializationContex...</td>
+      <td>[ObjectWriter, ObjectReader, JsonNode, ObjectM...</td>
       <td>json</td>
     </tr>
     <tr>
@@ -593,7 +593,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>13</td>
       <td>59</td>
       <td>20</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>pooled</td>
     </tr>
     <tr>
@@ -637,7 +637,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>9</td>
       <td>91</td>
       <td>21</td>
-      <td>[Matcher, StringDescription, CoreMatchers, Des...</td>
+      <td>[StringDescription, Matcher, Description, Core...</td>
       <td>saga</td>
     </tr>
     <tr>
@@ -659,7 +659,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>8</td>
       <td>33</td>
       <td>15</td>
-      <td>[EventOrdering, EventFiring, EventType, CacheE...</td>
+      <td>[EventType, EventFiring, EventOrdering, CacheE...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -670,7 +670,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>8</td>
       <td>34</td>
       <td>15</td>
-      <td>[CacheEntryCreatedListener, CacheEntryEventFil...</td>
+      <td>[CacheEntryExpiredListener, CacheEntryCreatedL...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -681,7 +681,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>8</td>
       <td>15</td>
       <td>54</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>annotation</td>
     </tr>
     <tr>
@@ -703,7 +703,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>7</td>
       <td>16</td>
       <td>42</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -754,22 +754,22 @@ The next table lists internal packages and the artifacts they belong to that use
       <th>21</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.io</td>
+      <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
-      <td>39</td>
+      <td>12</td>
       <td>34</td>
-      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
+      <td>[MarshallingContext, UnmarshallingContext]</td>
       <td>serialization</td>
     </tr>
     <tr>
       <th>22</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.converters</td>
+      <td>com.thoughtworks.xstream.io</td>
       <td>6</td>
-      <td>12</td>
+      <td>39</td>
       <td>34</td>
-      <td>[MarshallingContext, UnmarshallingContext]</td>
+      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
       <td>serialization</td>
     </tr>
     <tr>
@@ -780,7 +780,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>6</td>
       <td>68</td>
       <td>7</td>
-      <td>[Index, EntityManager, EntityManagerFactory, T...</td>
+      <td>[Index, EntityNotFoundException, EntityManager...</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -835,7 +835,7 @@ The next table lists internal packages and the artifacts they belong to that use
       <td>5</td>
       <td>25</td>
       <td>6</td>
-      <td>[ExecutionContext, TaskInstance, Task, TaskWit...</td>
+      <td>[TaskWithDataDescriptor, ExecutionContext, Tas...</td>
       <td>dbscheduler</td>
     </tr>
     <tr>
@@ -1079,7 +1079,7 @@ This table lists the internal types that utilize the most different external typ
       <th>13</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
+      <td>GapAwareTrackingTokenConverter</td>
       <td>6</td>
       <td>25</td>
       <td>4</td>
@@ -1093,7 +1093,7 @@ This table lists the internal types that utilize the most different external typ
       <th>14</th>
       <td>axon-messaging-4.8.0</td>
       <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter</td>
+      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
       <td>6</td>
       <td>25</td>
       <td>4</td>
@@ -1398,28 +1398,28 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>0</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>org.axonframework</td>
-      <td>axon-modelling</td>
+      <td>org.quartz-scheduler</td>
+      <td>quartz</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>test</td>
-      <td>True</td>
-      <td>io.projectreactor</td>
-      <td>reactor-core</td>
+      <td>False</td>
+      <td>javax.inject</td>
+      <td>javax.inject</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>test</td>
+      <td>default</td>
       <td>False</td>
-      <td>javax.inject</td>
-      <td>javax.inject</td>
+      <td>${project.groupId}</td>
+      <td>axon-disruptor</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1427,16 +1427,16 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
-      <td>org.hsqldb</td>
-      <td>hsqldb</td>
+      <td>org.hibernate</td>
+      <td>hibernate-core-jakarta</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>test</td>
+      <td>default</td>
       <td>False</td>
-      <td>${project.groupId}</td>
+      <td>org.axonframework</td>
       <td>axon-messaging</td>
     </tr>
     <tr>
@@ -1454,20 +1454,11 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
       <td>True</td>
-      <td>org.hamcrest</td>
-      <td>hamcrest-library</td>
+      <td>junit</td>
+      <td>junit</td>
     </tr>
     <tr>
       <th>110</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>org.hamcrest</td>
-      <td>hamcrest</td>
-    </tr>
-    <tr>
-      <th>111</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>test</td>
@@ -1476,13 +1467,22 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>jakarta.persistence-api</td>
     </tr>
     <tr>
-      <th>112</th>
+      <th>111</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>test</td>
       <td>False</td>
-      <td>javax.inject</td>
-      <td>javax.inject</td>
+      <td>org.springframework</td>
+      <td>spring-beans</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>axon-test</td>
+      <td>Axon Framework - Test Fixtures</td>
+      <td>default</td>
+      <td>True</td>
+      <td>com.google.code.gson</td>
+      <td>gson</td>
     </tr>
     <tr>
       <th>113</th>
@@ -1490,8 +1490,8 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
       <td>True</td>
-      <td>com.google.code.gson</td>
-      <td>gson</td>
+      <td>org.hamcrest</td>
+      <td>hamcrest</td>
     </tr>
   </tbody>
 </table>
