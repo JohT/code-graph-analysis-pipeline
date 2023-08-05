@@ -12,5 +12,5 @@ dependencies:
   - pip=22.3.*
   - pip:
       - monotonic==1.*
-      - py2neo==2021.2.*
       - wordcloud==1.9.*
+      - neo4j==5.11.*
