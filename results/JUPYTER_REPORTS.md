@@ -12,6 +12,7 @@ Report | Analysis | Description
 | [Overview.md](./AxonFramework-4.7.5/overview/Overview.md) | AxonFramework-4.7.5 | Overview |
 | [VisibilityMetrics.md](./AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.7.5 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.7.5/wordcloud/Wordcloud.md) | AxonFramework-4.7.5 | Wordcloud |
+| [ArtifactDependencies.md](./AxonFramework-4.8.0/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.8.0 | Artifact Dependencies |
 | [ExternalDependencies.md](./AxonFramework-4.8.0/external-dependencies/ExternalDependencies.md) | AxonFramework-4.8.0 | External Dependencies |
 | [InternalDependencies.md](./AxonFramework-4.8.0/internal-dependencies/InternalDependencies.md) | AxonFramework-4.8.0 | Internal Dependencies |
 | [ObjectOrientedDesignMetrics.md](./AxonFramework-4.8.0/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.8.0 | Object Oriented Design Quality Metrics |
