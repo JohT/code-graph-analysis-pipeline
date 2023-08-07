@@ -1,0 +1,17 @@
+{
+  "name": "code-structure-graph-visualization",
+  "version": "0.9.0",
+  "description": "Visualizes the code structure as a graph and provides a script to export it as an image",
+  "main": "renderVisualization.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JohT",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^10.3.3",
+    "neovis.js": "^2.1.0",
+    "puppeteer": "^21.0.1"
+  }
+}

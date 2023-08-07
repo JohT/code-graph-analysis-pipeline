@@ -45,6 +45,7 @@ jobs:
           java: 17
           python: 3.11
           mambaforge: 23.1.0-3
+          node: 18
 
     env: 
       CI_COMMIT_MESSAGE: Automated code structure analysis reports (CI)
@@ -62,6 +63,15 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: ${{ matrix.java }}
+
+    - name: Setup node.js ${{ matrix.node }} for Graph Visualization
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Install nodes packages for Graph Visualization
+      working-directory: graph-visualization
+      run: npm ci
 
     - name: Setup Cache for Conda package manager Mambaforge
       uses: actions/cache@v3

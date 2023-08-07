@@ -140,6 +140,17 @@ which is included in the pipeline [code-structure-analysis.yml](.github/workflow
 ./../scripts/documentation/generateJupyterReportReference.sh
 ```
 
+### Generate Image Reference
+
+Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateImageReference.sh](./scripts/documentation/generateImageReference.sh) with the following command:
+
+👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
+which is included in the pipeline [code-structure-analysis.yml](.github/workflows/code-structure-analysis.yml) and doesn't need to be executed manually normally.
+
+```script
+./../scripts/documentation/generateImageReference.sh
+```
+
 ### Generate Environment Variable Reference
 
 Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then execute the script [generateEnvironmentVariableReference.sh](./scripts/documentation/generateEnvironmentVariableReference.sh) with the following command:

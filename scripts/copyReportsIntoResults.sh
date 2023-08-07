@@ -45,3 +45,6 @@ done
 
 # Generate CSV_REPORTS.md containing a reference to all CSV cypher query reports in the "results" directory and its subdirectories.
 (cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateCsvReportReference.sh")
+
+# Generate IMAGES.md containing a reference to all PNG images in the "results" directory and its subdirectories.
+(cd "./../${RESULTS_DIRECTORY}" && exec "${SCRIPTS_DIR}/documentation/generateImageReference.sh")
