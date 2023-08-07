@@ -34,6 +34,7 @@ JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv4-jqassistant.yaml   | Na
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.4.3                               | Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x |
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
 JUPYTER_NOTEBOOK_DIRECTORY            | ${SCRIPTS_DIR}/../jupyter           | Repository directory containing the Jupyter Notebooks |
+GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
 NEO4J_BOLT_URI                        | bolt://localhost:${NEO4J_BOLT_PORT} | Neo4j's own "Bolt Protocol" address |
 NEO4J_USER                            | neo4j                               | Neo4j login user |
