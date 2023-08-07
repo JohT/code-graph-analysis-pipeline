@@ -10,7 +10,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 - Analyze static code structure as a graph
 - Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
-- Comprehensive reports including dependencies, metrics and graph structure
+- Comprehensive reports including dependencies, metrics and graph structure visualization
 - Automated reference document generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
@@ -69,6 +69,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
   - [monotonic](https://github.com/atdt/monotonic)
   - [py2neo](https://py2neo.org)
   - [wordcloud](https://github.com/amueller/word_cloud)
+- [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 
 **Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list. 
 
