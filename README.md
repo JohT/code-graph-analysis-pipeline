@@ -85,6 +85,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 [JUPYTER_REPORTS.md](./results/JUPYTER_REPORTS.md) lists all Jupyter Notebook reports inside the [results](./results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-jupyter-notebook-report-reference).
 
+## 📈 Image Reference
+
+[IMAGES.md](./results/IMAGES.md) lists all PNG images inside the [results](./results) directory. It can be generated as described in [Generate Image Reference](./COMMANDS.md#generate-image-reference).
+
 ## ⚙️ Script Reference
 
 [SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository including their first comment line as a description. It can be generated as described in [Generate Script Reference](./COMMANDS.md#generate-script-reference).
