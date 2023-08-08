@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="./../index.css">
     <script src="./../node_modules/neovis.js/dist/neovis.js"></script>
+    <script type="text/javascript" src="./../vis-configuration-presets.js"></script>
+    <script type="text/javascript" src="./../visualization-pagination.js"></script>
     <script type="text/javascript" src="artifactDependenciesGraph.js"></script>
 </head>
 
@@ -19,7 +21,7 @@
         <input type="password" id="neo4j-server-password" name="neo4j-server-password" />
         <input type="submit" id="neo4j-server-login" value="Login" onClick="draw()" />
     </span>
-    <div id="viz"></div>
+    <div id="visualizations"></div>
 </body>
 
 </html>
