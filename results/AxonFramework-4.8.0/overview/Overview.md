@@ -30,26 +30,26 @@
     <tr>
       <th>0</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Class</td>
-      <td>570</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-messaging-4.8.0</td>
       <td>Interface</td>
       <td>147</td>
     </tr>
     <tr>
+      <th>1</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>Class</td>
+      <td>570</td>
+    </tr>
+    <tr>
       <th>2</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-messaging-4.8.0</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>4</th>
@@ -78,14 +78,14 @@
     <tr>
       <th>8</th>
       <td>axon-test-4.8.0</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Class</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>9</th>
       <td>axon-test-4.8.0</td>
-      <td>Class</td>
-      <td>71</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>10</th>

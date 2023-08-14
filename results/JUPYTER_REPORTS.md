@@ -20,3 +20,4 @@ Report | Analysis | Description
 | [VisibilityMetrics.md](./AxonFramework-4.8.0/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.8.0 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.8.0/wordcloud/Wordcloud.md) | AxonFramework-4.8.0 | Wordcloud |
 | [CSV_REPORTS.md](./CSV_REPORTS.md) |  | CSV Cypher Query Reports Reference |
+| [IMAGES.md](./IMAGES.md) |  | Image Reference |
