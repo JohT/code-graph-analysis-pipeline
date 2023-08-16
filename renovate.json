@@ -6,6 +6,7 @@
     ":ignoreUnstable",
     "schedule:earlyMondays"
   ],
+  "ignoreUnstable": false,
   "regexManagers": [
     {
       "fileMatch": [
