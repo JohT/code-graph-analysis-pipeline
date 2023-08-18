@@ -2,7 +2,7 @@
 
 # Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
 # It requires an already running Neo4j graph database with already scanned analyzed artifacts.
-# The reports (csv files) will be written into the sub directory reports/community.
+# The reports (csv files) will be written into the sub directory reports/centrality-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
 # Requires executeQueryFunctions.sh

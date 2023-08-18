@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports.
+# Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports.
 # They list external library package usage like how often a external package is called.
 
 # Requires executeQueryFunctions.sh

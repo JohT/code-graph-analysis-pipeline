@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes "Package_Usage" Cypher queries to get the "internal-dependencies" CSV reports.
+# Executes "Package_Usage" Cypher queries to get the "internal-dependencies-csv" CSV reports.
 # It contains lists of e.g. incoming and outgoing package dependencies,
 # abstractness, instability and the distance to the so called "main sequence".
 
