@@ -78,14 +78,14 @@
     <tr>
       <th>8</th>
       <td>axon-eventsourcing-4.8.0</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>9</th>
       <td>axon-eventsourcing-4.8.0</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>10</th>
@@ -102,20 +102,20 @@
     <tr>
       <th>12</th>
       <td>axon-modelling-4.8.0</td>
-      <td>Enum</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>axon-modelling-4.8.0</td>
       <td>Interface</td>
       <td>26</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
       <td>axon-modelling-4.8.0</td>
       <td>Annotation</td>
       <td>12</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>Enum</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>15</th>
