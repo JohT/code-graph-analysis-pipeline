@@ -35,27 +35,27 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-messaging-4.8.0.jar</td>
-      <td>64</td>
-      <td>762</td>
+      <td>axon-configuration-4.8.0.jar</td>
+      <td>1</td>
+      <td>39</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-eventsourcing-4.8.0.jar</td>
-      <td>9</td>
-      <td>130</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>axon-test-4.8.0.jar</td>
       <td>8</td>
       <td>87</td>
     </tr>
     <tr>
+      <th>2</th>
+      <td>axon-eventsourcing-4.8.0.jar</td>
+      <td>9</td>
+      <td>130</td>
+    </tr>
+    <tr>
       <th>3</th>
-      <td>axon-configuration-4.8.0.jar</td>
+      <td>axon-disruptor-4.8.0.jar</td>
       <td>1</td>
-      <td>39</td>
+      <td>22</td>
     </tr>
     <tr>
       <th>4</th>
@@ -65,9 +65,9 @@
     </tr>
     <tr>
       <th>5</th>
-      <td>axon-disruptor-4.8.0.jar</td>
-      <td>1</td>
-      <td>22</td>
+      <td>axon-messaging-4.8.0.jar</td>
+      <td>64</td>
+      <td>762</td>
     </tr>
   </tbody>
 </table>
@@ -1088,46 +1088,6 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>8</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>callbacks</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>org.axonframework.deadline.quartz</td>
-      <td>quartz</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>org.axonframework.eventhandling.deadletter</td>
-      <td>deadletter</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>org.axonframework.eventhandling.scheduling.java</td>
-      <td>java</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>org.axonframework.eventhandling.tokenstore.jpa</td>
-      <td>jpa</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>13</th>
       <td>org.axonframework.test.server</td>
       <td>server</td>
       <td>0.000000</td>
@@ -1135,23 +1095,47 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>4</td>
     </tr>
     <tr>
+      <th>9</th>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>callbacks</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>org.axonframework.deadline.quartz</td>
+      <td>quartz</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>org.axonframework.eventhandling.deadletter</td>
+      <td>deadletter</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>org.axonframework.eventhandling.scheduling.java</td>
+      <td>java</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>org.axonframework.eventhandling.tokenstore.jpa</td>
+      <td>jpa</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
       <th>14</th>
-      <td>org.axonframework.eventhandling.scheduling.job...</td>
-      <td>jobrunr</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>org.axonframework.util</td>
-      <td>util</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>org.axonframework.modelling.saga.repository.le...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1159,31 +1143,23 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>3</td>
     </tr>
     <tr>
+      <th>15</th>
+      <td>org.axonframework.eventhandling.scheduling.job...</td>
+      <td>jobrunr</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.util</td>
+      <td>util</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
       <th>17</th>
-      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
-      <td>inmemory</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
-      <td>legacyjpa</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>org.axonframework.messaging.interceptors.legac...</td>
-      <td>legacyvalidation</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>20</th>
       <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1191,7 +1167,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>18</th>
       <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1199,9 +1175,33 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>19</th>
       <td>org.axonframework.modelling.saga.repository.in...</td>
       <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
+      <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
+      <td>legacyjpa</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>org.axonframework.messaging.interceptors.legac...</td>
+      <td>legacyvalidation</td>
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
