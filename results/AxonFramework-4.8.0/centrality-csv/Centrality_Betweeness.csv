@@ -1,5 +1,5 @@
 "fullQualifiedPackageName","packageName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_5c_Betweeness_Stream.cypher"
-"org.axonframework.eventhandling","eventhandling",861.6666666666666,4937,1557,""
+"org.axonframework.eventhandling","eventhandling",861.6666666666667,4937,1557,""
 "org.axonframework.messaging","messaging",457,8829,133,""
 "org.axonframework.tracing","tracing",436,187,122,""
 "org.axonframework.messaging.annotation","annotation",339.41666666666663,1056,301,""
