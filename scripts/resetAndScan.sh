@@ -5,7 +5,7 @@
 # CAUTION: This script deletes all relationships and nodes in the Neo4j Graph Database. 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD is required to login to Neo4j.
 
-JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.6"} # 2.0.3 is the newest version (june 2023) compatible with Neo4j v5,  Version 1.12.2 is compatible with Neo4j v4
+JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.7"} # 2.0.3 is the newest version (june 2023) compatible with Neo4j v5,  Version 1.12.2 is compatible with Neo4j v4
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-distribution"} #  Neo4j v5: "jqassistant-commandline-distribution", Neo4j v4: "jqassistant-commandline-neo4jv3"
 JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv5-jqassistant.yaml"} #  Neo4j v5: "template-neo4jv5-jqassistant.yaml", Neo4j v4: "template-neo4jv4-jqassistant.yaml"
 
