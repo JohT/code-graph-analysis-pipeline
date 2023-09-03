@@ -36,8 +36,9 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 CYCLIC_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Cyclic_Dependencies"
 INTERNAL_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Internal_Dependencies"
 
-execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_as_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicDependencies.csv"
-execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicDependenciesUnwinded.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown_Backward_Only.csv"
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicArtifactDependenciesUnwinded.csv"
 
 execute_cypher "${CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${FULL_REPORT_DIRECTORY}/InterfaceSegregationCandidates.csv"

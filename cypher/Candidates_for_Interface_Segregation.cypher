@@ -2,7 +2,7 @@
 
 MATCH (type:Type)-[:DECLARES]->(method:Method)-[:INVOKES]->(dependentMethod:Method)
 MATCH (dependentMethod)<-[:DECLARES]-(dependentType:Type)
-MATCH (dependentType)-[:IMPLEMENTS*]->(superType:Type)-[:DECLARES]->(inheritedMethod:Method)
+MATCH (dependentType)-[:IMPLEMENTS*1..9]->(superType:Type)-[:DECLARES]->(inheritedMethod:Method)
 WHERE type.fqn <> dependentType.fqn
   AND dependentMethod.name IS NOT NULL
   AND inheritedMethod.name IS NOT NULL
@@ -15,6 +15,8 @@ WHERE type.fqn <> dependentType.fqn
      // Count the different signatures without the return type
      // of all declared methods including the inherited ones
      ,count(DISTINCT split(method.signature, ' ')[1]) + count(DISTINCT split(inheritedMethod.signature, ' ')[1]) AS declaredMethods
+// Filter out types that declare only a few more methods than those that are actually used.
+// A good interface segregation candidate declares a lot of methods where only a few of them are used widely.
 WHERE declaredMethods > calledMethods + 2
  WITH fullDependentTypeName
      ,declaredMethods
