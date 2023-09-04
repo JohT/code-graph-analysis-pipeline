@@ -42,13 +42,13 @@
     <tr>
       <th>2</th>
       <td>axon-configuration-4.8.0</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-configuration-4.8.0</td>
-      <td>Enum</td>
+      <td>Annotation</td>
       <td>1</td>
     </tr>
     <tr>
