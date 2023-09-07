@@ -34,6 +34,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 OVERVIEW_CYPHER_DIR="${CYPHER_DIR}/Overview"
 
+execute_cypher "${OVERVIEW_CYPHER_DIR}/Overview_size.cypher" > "${FULL_REPORT_DIRECTORY}/Overview_size.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Cyclomatic_Method_Complexity_Distribution.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclomatic_Method_Complexity.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_lines_of_method_code_per_package.cypher" > "${FULL_REPORT_DIRECTORY}/Effective_lines_of_method_code_per_package.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_lines_of_method_code_per_type.cypher" > "${FULL_REPORT_DIRECTORY}/Effective_lines_of_method_code_per_type.csv"
