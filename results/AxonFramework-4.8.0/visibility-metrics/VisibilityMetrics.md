@@ -5,71 +5,13 @@
 - [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th)
 - [Calculate metrics](https://101.jqassistant.org/calculate-metrics/index.html)
 - [Controlling Access to Members of a Class](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
-- [py2neo](https://py2neo.org/2021.1/)
+- [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver/current)
 
 
 
 
 
-## Artifacts
 
-### Table 1
-
-- List all the artifacts this notebook is based on
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>artifactName</th>
-      <th>packages</th>
-      <th>types</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>axon-configuration-4.8.0.jar</td>
-      <td>1</td>
-      <td>39</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-test-4.8.0.jar</td>
-      <td>8</td>
-      <td>87</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>axon-eventsourcing-4.8.0.jar</td>
-      <td>9</td>
-      <td>130</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-disruptor-4.8.0.jar</td>
-      <td>1</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-modelling-4.8.0.jar</td>
-      <td>10</td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>axon-messaging-4.8.0.jar</td>
-      <td>64</td>
-      <td>762</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 
 
@@ -89,9 +31,12 @@ The relative visibility is between zero (all types are package protected) and on
 
 Non public classes can't be accessed from another package so they can be changed without affecting code in other packages. They clearly indicate functionality that only belongs to one package. This also motivates to use more classes and to split up code into smaller pieces with a single responsibility and reason to change.
 
-### Table 2
+### Table 1a - Top 40 artifacts with lowest median of package protection encapsulation
 
-- Show relative visibility statistics aggregated for all packages per artifact 
+This table shows the relative visibility statistics aggregated for all packages per artifact and focusses on artifacts with many packages and hardly any package protected types (lowest median, high visibility). Package protected types would help to  improve encapsulation.
+
+Only the top 40 entries are shown. The whole table can be found in the following CSV report:  
+`Global_relative_visibility_statistics_for_types`
 
 
 
@@ -116,29 +61,29 @@ Non public classes can't be accessed from another package so they can be changed
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-configuration-4.8.0</td>
-      <td>39</td>
-      <td>26</td>
-      <td>0.666667</td>
-      <td>0.666667</td>
-      <td>0.666667</td>
-      <td>0.666667</td>
-      <td>0.666667</td>
-      <td>0.666667</td>
-      <td>0.666667</td>
+      <td>axon-messaging-4.8.0</td>
+      <td>762</td>
+      <td>623</td>
+      <td>0.100000</td>
+      <td>1.000000</td>
+      <td>0.866241</td>
+      <td>0.750000</td>
+      <td>0.973684</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-disruptor-4.8.0</td>
-      <td>22</td>
-      <td>9</td>
-      <td>0.409091</td>
-      <td>0.409091</td>
-      <td>0.409091</td>
-      <td>0.409091</td>
-      <td>0.409091</td>
-      <td>0.409091</td>
-      <td>0.409091</td>
+      <td>axon-modelling-4.8.0</td>
+      <td>150</td>
+      <td>129</td>
+      <td>0.500000</td>
+      <td>1.000000</td>
+      <td>0.805873</td>
+      <td>0.737500</td>
+      <td>0.813187</td>
+      <td>0.895588</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>2</th>
@@ -155,14 +100,126 @@ Non public classes can't be accessed from another package so they can be changed
     </tr>
     <tr>
       <th>3</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>762</td>
-      <td>623</td>
-      <td>0.100000</td>
+      <td>axon-test-4.8.0</td>
+      <td>87</td>
+      <td>65</td>
+      <td>0.473684</td>
       <td>1.000000</td>
-      <td>0.866241</td>
-      <td>0.750000</td>
-      <td>0.973684</td>
+      <td>0.781086</td>
+      <td>0.650000</td>
+      <td>0.775000</td>
+      <td>0.968750</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-configuration-4.8.0</td>
+      <td>39</td>
+      <td>26</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-disruptor-4.8.0</td>
+      <td>22</td>
+      <td>9</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### Table 1b - Top 40 artifacts with highest median of package protection encapsulation
+
+This table shows the relative visibility statistics aggregated for all packages per artifact and focusses on artifacts with many packages and the highest median of package protected types (low visibility). Package protected types help to improve encapsulation.
+
+Only the top 40 entries are shown. The whole table can be found in the following CSV report:  
+`Global_relative_visibility_statistics_for_types`
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>artifact</th>
+      <th>all</th>
+      <th>public</th>
+      <th>min</th>
+      <th>max</th>
+      <th>average</th>
+      <th>percentile25</th>
+      <th>percentile50</th>
+      <th>percentile75</th>
+      <th>percentile90</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>axon-disruptor-4.8.0</td>
+      <td>22</td>
+      <td>9</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+      <td>0.409091</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>axon-configuration-4.8.0</td>
+      <td>39</td>
+      <td>26</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>axon-test-4.8.0</td>
+      <td>87</td>
+      <td>65</td>
+      <td>0.473684</td>
+      <td>1.000000</td>
+      <td>0.781086</td>
+      <td>0.650000</td>
+      <td>0.775000</td>
+      <td>0.968750</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>130</td>
+      <td>95</td>
+      <td>0.500000</td>
+      <td>1.000000</td>
+      <td>0.769159</td>
+      <td>0.612903</td>
+      <td>0.785714</td>
       <td>1.000000</td>
       <td>1.000000</td>
     </tr>
@@ -181,15 +238,15 @@ Non public classes can't be accessed from another package so they can be changed
     </tr>
     <tr>
       <th>5</th>
-      <td>axon-test-4.8.0</td>
-      <td>87</td>
-      <td>65</td>
-      <td>0.473684</td>
+      <td>axon-messaging-4.8.0</td>
+      <td>762</td>
+      <td>623</td>
+      <td>0.100000</td>
       <td>1.000000</td>
-      <td>0.781086</td>
-      <td>0.650000</td>
-      <td>0.775000</td>
-      <td>0.968750</td>
+      <td>0.866241</td>
+      <td>0.750000</td>
+      <td>0.973684</td>
+      <td>1.000000</td>
       <td>1.000000</td>
     </tr>
   </tbody>
@@ -198,9 +255,28 @@ Non public classes can't be accessed from another package so they can be changed
 
 
 
-### Table 3
+### Table 1 Chart 1 - Relative visibility in artifacts
 
-- List the top 40 packages and their artifact with the highest relative visibility
+    /usr/share/miniconda3/envs/codegraph/lib/python3.11/site-packages/pandas/plotting/_matplotlib/core.py:1259: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+      scatter = ax.scatter(
+
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](VisibilityMetrics_files/VisibilityMetrics_17_2.png)
+    
+
+
+### Table 2a - Top 40 packages with the highest visibility and lowest encapsulation
+
+This table shows the relative visibility statistics per packages and artifact and focusses on packages with many types, hardly any package protected ones and therefore the highest relative visibility (lowest encapsulation). Package protected types would help to improve encapsulation.
+
+Only the top 40 entries are shown. The whole table can be found in the following CSV report:  
+`Relative_visibility_public_types_to_all_types_per_package`
 
 
 
@@ -579,98 +655,414 @@ Non public classes can't be accessed from another package so they can be changed
       <td>24</td>
       <td>0.958333</td>
     </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### Table 2b - Top 40 packages with the lowest visibility and highest encapsulation
+
+This table shows the relative visibility statistics per packages and artifact and focusses on packages with many types, many package protected ones and therefore the lowest relative visibility (highest encapsulation). Package protected types help to improve encapsulation. Zero percent visibility and therefore packages with no public visible type are suspicious to be dead code.
+
+Only the top 40 entries are shown. The whole table can be found in the following CSV report:  
+`Relative_visibility_public_types_to_all_types_per_package`
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
+      <th>packageName</th>
+      <th>publicTypes</th>
+      <th>allTypes</th>
+      <th>relativeVisibility</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
-      <th>40</th>
+      <th>0</th>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.messaging.deadletter</td>
-      <td>deadletter</td>
-      <td>18</td>
-      <td>19</td>
-      <td>0.947368</td>
+      <td>org.axonframework.eventhandling.pooled</td>
+      <td>pooled</td>
+      <td>2</td>
+      <td>20</td>
+      <td>0.100000</td>
     </tr>
     <tr>
-      <th>41</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventhandling.deadletter.jdbc</td>
-      <td>jdbc</td>
-      <td>13</td>
-      <td>14</td>
-      <td>0.928571</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>distributed</td>
-      <td>24</td>
-      <td>26</td>
-      <td>0.923077</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.messaging</td>
-      <td>messaging</td>
-      <td>32</td>
-      <td>35</td>
-      <td>0.914286</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>axon-modelling-4.8.0</td>
-      <td>org.axonframework.modelling.saga.repository.jdbc</td>
-      <td>jdbc</td>
-      <td>9</td>
-      <td>10</td>
-      <td>0.900000</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.commandhandling</td>
+      <th>1</th>
+      <td>axon-disruptor-4.8.0</td>
+      <td>org.axonframework.disruptor.commandhandling</td>
       <td>commandhandling</td>
-      <td>26</td>
-      <td>29</td>
-      <td>0.896552</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventhandling.tokenstore.jdbc</td>
-      <td>jdbc</td>
-      <td>8</td>
       <td>9</td>
-      <td>0.888889</td>
+      <td>22</td>
+      <td>0.409091</td>
     </tr>
     <tr>
-      <th>47</th>
-      <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.eventhandling.deadletter.jpa</td>
-      <td>jpa</td>
-      <td>8</td>
+      <th>2</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test.aggregate</td>
+      <td>aggregate</td>
       <td>9</td>
-      <td>0.888889</td>
+      <td>19</td>
+      <td>0.473684</td>
     </tr>
     <tr>
-      <th>48</th>
+      <th>3</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>legacyjpa</td>
+      <td>5</td>
+      <td>10</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.deadletter</td>
+      <td>deadletter</td>
+      <td>2</td>
+      <td>4</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
+      <td>inmemory</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
+      <td>inmemory</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>7</th>
       <td>axon-modelling-4.8.0</td>
-      <td>org.axonframework.modelling.command</td>
-      <td>command</td>
-      <td>45</td>
-      <td>51</td>
-      <td>0.882353</td>
+      <td>org.axonframework.modelling.saga.repository.in...</td>
+      <td>inmemory</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
     </tr>
     <tr>
-      <th>49</th>
+      <th>8</th>
       <td>axon-messaging-4.8.0</td>
-      <td>org.axonframework.common</td>
-      <td>common</td>
-      <td>24</td>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>gateway</td>
+      <td>19</td>
+      <td>34</td>
+      <td>0.558824</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.async</td>
+      <td>async</td>
+      <td>9</td>
+      <td>15</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common.caching</td>
+      <td>caching</td>
+      <td>9</td>
+      <td>15</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.replay</td>
+      <td>replay</td>
+      <td>6</td>
+      <td>10</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.deadline.annotation</td>
+      <td>annotation</td>
+      <td>3</td>
+      <td>5</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test</td>
+      <td>test</td>
+      <td>3</td>
+      <td>5</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>eventstore</td>
+      <td>19</td>
+      <td>31</td>
+      <td>0.612903</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>axon-configuration-4.8.0</td>
+      <td>org.axonframework.config</td>
+      <td>config</td>
+      <td>26</td>
+      <td>39</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>org.axonframework.eventsourcing</td>
+      <td>eventsourcing</td>
+      <td>26</td>
+      <td>39</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test.saga</td>
+      <td>saga</td>
+      <td>14</td>
+      <td>21</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common.annotation</td>
+      <td>annotation</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common.stream</td>
+      <td>stream</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>org.axonframework.modelling.saga.repository.le...</td>
+      <td>legacyjpa</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.deadline</td>
+      <td>deadline</td>
+      <td>7</td>
+      <td>10</td>
+      <td>0.700000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>unitofwork</td>
+      <td>10</td>
+      <td>14</td>
+      <td>0.714286</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.tracing</td>
+      <td>tracing</td>
+      <td>13</td>
+      <td>18</td>
+      <td>0.722222</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common.lock</td>
+      <td>lock</td>
+      <td>8</td>
+      <td>11</td>
+      <td>0.727273</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>org.axonframework.modelling.saga.repository</td>
+      <td>repository</td>
+      <td>11</td>
+      <td>15</td>
+      <td>0.733333</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
+      <td>40</td>
+      <td>54</td>
+      <td>0.740741</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.queryhandling.annotation</td>
+      <td>annotation</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.scheduling.java</td>
+      <td>java</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common.transaction</td>
+      <td>transaction</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
+      <td>20</td>
+      <td>26</td>
+      <td>0.769231</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.queryhandling</td>
+      <td>queryhandling</td>
+      <td>33</td>
+      <td>42</td>
+      <td>0.785714</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
+      <td>jdbc</td>
+      <td>11</td>
+      <td>14</td>
+      <td>0.785714</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test.utils</td>
+      <td>utils</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0.800000</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
       <td>28</td>
-      <td>0.857143</td>
+      <td>34</td>
+      <td>0.823529</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common.jdbc</td>
+      <td>jdbc</td>
+      <td>15</td>
+      <td>18</td>
+      <td>0.833333</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.deadletter.leg...</td>
+      <td>legacyjpa</td>
+      <td>5</td>
+      <td>6</td>
+      <td>0.833333</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.monitoring</td>
+      <td>monitoring</td>
+      <td>5</td>
+      <td>6</td>
+      <td>0.833333</td>
     </tr>
   </tbody>
 </table>
 </div>
 
+
+
+### Table 2 Chart 1 - Relative visibility of packages
+
+    /usr/share/miniconda3/envs/codegraph/lib/python3.11/site-packages/pandas/plotting/_matplotlib/core.py:1259: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+      scatter = ax.scatter(
+
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](VisibilityMetrics_files/VisibilityMetrics_24_2.png)
+    
 

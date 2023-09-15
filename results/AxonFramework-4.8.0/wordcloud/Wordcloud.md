@@ -33,75 +33,75 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>config</td>
+      <td>commandhandling</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org</td>
+      <td>callbacks</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>axonframework</td>
+      <td>distributed</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>test</td>
+      <td>commandfilter</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>aggregate</td>
+      <td>gateway</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>matchers</td>
+      <td>common</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>saga</td>
+      <td>annotation</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>server</td>
+      <td>caching</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>utils</td>
+      <td>digest</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>deadline</td>
+      <td>io</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>eventscheduler</td>
+      <td>jdbc</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>org</td>
+      <td>jpa</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>axonframework</td>
+      <td>legacyjpa</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>eventsourcing</td>
+      <td>property</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>conflictresolution</td>
+      <td>lock</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>eventstore</td>
+      <td>stream</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>inmemory</td>
+      <td>transaction</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>jdbc</td>
+      <td>deadline</td>
     </tr>
   </tbody>
 </table>

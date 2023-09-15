@@ -7,71 +7,9 @@
 - [jqassistant](https://jqassistant.org)
 - [notebook walks through examples for integrating various packages with Neo4j](https://nicolewhite.github.io/neo4j-jupyter/hello-world.html)
 - [OO Design Quality Metrics](https://api.semanticscholar.org/CorpusID:18246616)
-- [py2neo](https://py2neo.org/2021.1/)
+- [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver/current)
 
 
-
-
-
-## Artifacts
-
-#### Table 1
-
-- List all the artifacts this notebook is based on
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>artifactName</th>
-      <th>packages</th>
-      <th>types</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>axon-configuration-4.8.0.jar</td>
-      <td>1</td>
-      <td>39</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-test-4.8.0.jar</td>
-      <td>8</td>
-      <td>87</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>axon-eventsourcing-4.8.0.jar</td>
-      <td>9</td>
-      <td>130</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-disruptor-4.8.0.jar</td>
-      <td>1</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-modelling-4.8.0.jar</td>
-      <td>10</td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>axon-messaging-4.8.0.jar</td>
-      <td>64</td>
-      <td>762</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 
 
@@ -1088,14 +1026,6 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>8</th>
-      <td>org.axonframework.test.server</td>
-      <td>server</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>9</th>
       <td>org.axonframework.commandhandling.callbacks</td>
       <td>callbacks</td>
       <td>0.000000</td>
@@ -1103,7 +1033,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>4</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
       <td>org.axonframework.deadline.quartz</td>
       <td>quartz</td>
       <td>0.000000</td>
@@ -1111,7 +1041,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>4</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>org.axonframework.eventhandling.deadletter</td>
       <td>deadletter</td>
       <td>0.000000</td>
@@ -1119,7 +1049,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>4</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>org.axonframework.eventhandling.scheduling.java</td>
       <td>java</td>
       <td>0.000000</td>
@@ -1127,7 +1057,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>4</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
       <td>org.axonframework.eventhandling.tokenstore.jpa</td>
       <td>jpa</td>
       <td>0.000000</td>
@@ -1135,15 +1065,15 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>4</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>org.axonframework.modelling.saga.repository.le...</td>
-      <td>legacyjpa</td>
+      <th>13</th>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
       <td>0.000000</td>
       <td>0</td>
-      <td>3</td>
+      <td>4</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
       <td>org.axonframework.eventhandling.scheduling.job...</td>
       <td>jobrunr</td>
       <td>0.000000</td>
@@ -1151,7 +1081,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>3</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>15</th>
       <td>org.axonframework.util</td>
       <td>util</td>
       <td>0.000000</td>
@@ -1159,31 +1089,15 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>3</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
-      <td>inmemory</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <th>16</th>
+      <td>org.axonframework.modelling.saga.repository.le...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
       <td>0</td>
-      <td>2</td>
+      <td>3</td>
     </tr>
     <tr>
-      <th>19</th>
-      <td>org.axonframework.modelling.saga.repository.in...</td>
-      <td>inmemory</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>20</th>
+      <th>17</th>
       <td>org.axonframework.eventhandling.tokenstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1191,7 +1105,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>18</th>
       <td>org.axonframework.eventhandling.tokenstore.leg...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1199,9 +1113,33 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>19</th>
       <td>org.axonframework.messaging.interceptors.legac...</td>
       <td>legacyvalidation</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>legacyjpa</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>org.axonframework.modelling.saga.repository.in...</td>
+      <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
+      <td>inmemory</td>
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
@@ -1276,7 +1214,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 
 #### Table 6
 
-- Show the top 20 packages with the highest distance from the "main sequence"
+- Show the top 30 packages with the highest distance from the "main sequence"
 
 
 
@@ -1496,6 +1434,106 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0.239760</td>
       <td>93</td>
     </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.eventhandling.tokenstore</td>
+      <td>tokenstore</td>
+      <td>0.335907</td>
+      <td>0.285714</td>
+      <td>0.378378</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
+      <td>0.333333</td>
+      <td>0.000000</td>
+      <td>0.666667</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.util</td>
+      <td>util</td>
+      <td>0.333333</td>
+      <td>0.000000</td>
+      <td>0.666667</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.common</td>
+      <td>common</td>
+      <td>0.332675</td>
+      <td>0.642857</td>
+      <td>0.024468</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.serialization.upcasting.event</td>
+      <td>event</td>
+      <td>0.331858</td>
+      <td>0.500000</td>
+      <td>0.831858</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
+      <td>0.326329</td>
+      <td>0.379310</td>
+      <td>0.294360</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>axon-modelling-4.8.0</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
+      <td>0.317073</td>
+      <td>0.500000</td>
+      <td>0.817073</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>axon-eventsourcing-4.8.0</td>
+      <td>org.axonframework.eventsourcing.conflictresolu...</td>
+      <td>conflictresolution</td>
+      <td>0.312865</td>
+      <td>0.444444</td>
+      <td>0.868421</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>axon-test-4.8.0</td>
+      <td>org.axonframework.test.saga</td>
+      <td>saga</td>
+      <td>0.303009</td>
+      <td>0.333333</td>
+      <td>0.969676</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>axon-messaging-4.8.0</td>
+      <td>org.axonframework.messaging.interceptors</td>
+      <td>interceptors</td>
+      <td>0.297481</td>
+      <td>0.375000</td>
+      <td>0.922481</td>
+      <td>8</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -1511,7 +1549,14 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 - Color the packages by their distance to the "main sequence" (blue=near, red=far)
 
 
+
+
+    'io'
+
+
+
+
     
-![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_21_0.png)
+![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_20_0.png)
     
 
