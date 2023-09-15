@@ -19,7 +19,7 @@ NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
-    echo "Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'."
+    echo "Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'." >&2
     exit 1
 fi
 
@@ -29,9 +29,9 @@ no_source_reference=false
 
 # Input Arguments: Function to print usage information
 print_usage() {
-    echo "Usage: $0 <filename> [--no-source-reference-column]"
-    echo "Options:"
-    echo "  --no-source-reference-column: Exclude the source reference column"
+    echo "Usage: $0 <filename> [--no-source-reference-column]" >&2
+    echo "Options:" >&2
+    echo "  --no-source-reference-column: Exclude the source reference column" >&2
 }
 
 # Input Arguments: Parse the command-line arguments
@@ -51,12 +51,12 @@ while [[ $# -gt 0 ]]; do
                 
                 # Input Arguments: Check the first input argument to be a valid file
                 if [ ! -f "${cypher_query_file_name}" ] ; then
-                  echo "Error: Please provide a valid filename."
+                  echo "Error: Please provide a valid filename." >&2
                   print_usage
                   exit 1
                 fi
             else
-                echo "Error: Unknown option: $key"
+                echo "Error: Unknown option: $key" >&2
                 print_usage
                 exit 1
             fi

@@ -52,7 +52,7 @@ execute_cypher_http_expect_results() {
     results=$( execute_cypher_http ${cypherFileName} | wc -l )
     results=$((results - 1))
     if [[ "$results" -lt 1 ]]; then
-        echo "$(basename -- "${cypherFileName}") (via http) Error: Expected at least one entry but was ${results}"
+        echo "$(basename -- "${cypherFileName}") (via http) Error: Expected at least one entry but was ${results}" >&2
         exit 1
     fi
 }
@@ -64,7 +64,7 @@ execute_cypher_shell() {
 
     # Check if NEO4J_BIN exists
     if [ ! -d "${NEO4J_BIN}" ] ; then
-        echo "executeQuery: Error: Neo4j Binary Directory <${NEO4J_BIN}> doesn't exist. Please run setupNeo4j.sh first."
+        echo "executeQuery: Error: Neo4j Binary Directory <${NEO4J_BIN}> doesn't exist. Please run setupNeo4j.sh first." >&2
         exit 1
     fi
 
@@ -95,7 +95,7 @@ execute_cypher_shell_expect_results() {
     results=$( execute_cypher_shell ${cypherFileName} | wc -l )
     results=$((results - 2))
     if [[ "$results" -lt 1 ]]; then
-        echo "$(basename -- "${cypherFileName}") (via cypher-shell) Error: Expected at least one entry but was ${results}"
+        echo "$(basename -- "${cypherFileName}") (via cypher-shell) Error: Expected at least one entry but was ${results}" >&2
         exit 1
     fi
 }

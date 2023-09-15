@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics" CSV reports.
+# Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports.
 # It contains lists of e.g. incoming and outgoing package dependencies,
 # abstractness, instability and the distance to the so called "main sequence".
 

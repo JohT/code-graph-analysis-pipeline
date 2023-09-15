@@ -1,5 +1,31 @@
 div {
-    width: 75vw;
+    width: 100vw;
     height: 100vh;
-    /*border: 1px solid lightgray;*/
+}
+
+.indexedVisualization {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 400vw;
+    height: 400vh;
+    display:inline-block;
+}
+
+.indexedVisualization.visualization-finished {
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgreen;
+}
+
+.indexedVisualization:not(.visualization-finished) {
+    border-width: 2px;
+    border-style: dotted;
+    border-color: orange;
+}
+
+.indexedVisualization.visualization-finished.visualization-failed {
+    height: 6em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
 }

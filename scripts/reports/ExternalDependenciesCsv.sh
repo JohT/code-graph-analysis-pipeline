@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports.
+# Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports.
 # They list external library package usage like how often a external package is called.
 
 # Requires executeQueryFunctions.sh
@@ -40,8 +40,16 @@ if ! execute_cypher_expect_results "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/List_ext
 fi
 
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_overall.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_overall.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_spread.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_spread.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_second_level_package_usage_overall.cypher" > "${FULL_REPORT_DIRECTORY}/External_second_level_package_usage_overall.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_second_level_package_usage_spread.cypher" > "${FULL_REPORT_DIRECTORY}/External_second_level_package_usage_spread.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_type.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_type.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact.csv"
-execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_type_distribution.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_type_distribution.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact_sorted_top.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact_sorted_top.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact_distribution.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact_distribution.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact_package_aggregated.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact_package_aggregated.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact_and_package.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact_and_package.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_artifact_and_external_package.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_per_artifact_and_external_package.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_second_level_package_usage_per_artifact_and_external_package.cypher" > "${FULL_REPORT_DIRECTORY}/External_second_level_package_usage_per_artifact_and_external_package.csv"
+
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Maven_POMs_and_their_declared_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Maven_POM_dependencies.csv"

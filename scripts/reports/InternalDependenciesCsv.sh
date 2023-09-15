@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes "Package_Usage" Cypher queries to get the "internal-dependencies" CSV reports.
+# Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports.
 # It contains lists of e.g. incoming and outgoing package dependencies,
 # abstractness, instability and the distance to the so called "main sequence".
 
@@ -34,12 +34,15 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 
 # Local Constants
 CYCLIC_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Cyclic_Dependencies"
-PACKAGE_USAGE_CYPHER_DIR="${CYPHER_DIR}/Package_Usage"
+INTERNAL_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Internal_Dependencies"
 
-execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_as_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicDependencies.csv"
-execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicDependenciesUnwinded.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown_Backward_Only.csv"
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicArtifactDependenciesUnwinded.csv"
+
 execute_cypher "${CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${FULL_REPORT_DIRECTORY}/InterfaceSegregationCandidates.csv"
-execute_cypher "${PACKAGE_USAGE_CYPHER_DIR}/List_types_that_are_used_by_many_different_packages.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypes.csv"
-execute_cypher "${PACKAGE_USAGE_CYPHER_DIR}/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ArtifactPackageUsage.csv"
-execute_cypher "${PACKAGE_USAGE_CYPHER_DIR}/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ClassesPerPackageUsageAcrossArtifacts.csv"
+
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_types_that_are_used_by_many_different_packages.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypes.csv"
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ArtifactPackageUsage.csv"
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ClassesPerPackageUsageAcrossArtifacts.csv"

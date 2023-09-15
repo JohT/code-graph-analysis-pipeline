@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "glob": "^10.3.3",
+    "jimp": "^0.22.10",
     "neovis.js": "^2.1.0",
     "puppeteer": "^21.0.1"
   }

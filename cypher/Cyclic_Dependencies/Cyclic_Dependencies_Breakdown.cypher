@@ -1,14 +1,20 @@
-//Cyclic Dependencies as unwinded List
+//Cyclic Dependencies Breakdown
 
 MATCH (package:Package)-[:CONTAINS]->(forwardSource:Type)-[:DEPENDS_ON]->(forwardTarget:Type)<-[:CONTAINS]-(dependentPackage:Package)
 MATCH (dependentPackage)-[:CONTAINS]->(backwardSource:Type)-[:DEPENDS_ON]->(backwardTarget:Type)<-[:CONTAINS]-(package)
-WHERE package <> dependentPackage
- WITH package
-     ,dependentPackage
+MATCH (artifact:Artifact)-[:CONTAINS]->(package)
+MATCH (dependentArtifact:Artifact)-[:CONTAINS]->(dependentPackage)
+WHERE package.fqn <> dependentPackage.fqn
+ WITH replace(last(split(artifact.fileName, '/')), '.jar', '')            AS artifactName
+     ,package.fqn                                                         AS packageName
+     ,replace(last(split(dependentArtifact .fileName, '/')), '.jar', '')  AS dependentArtifactName
+     ,dependentPackage.fqn                                                AS dependentPackageName
      ,collect(DISTINCT forwardSource.name  + '->' + forwardTarget.name)   AS forwardDependencies
      ,collect(DISTINCT backwardTarget.name + '<-' + backwardSource.name)  AS backwardDependencies
- WITH package
-     ,dependentPackage
+ WITH artifactName
+     ,packageName
+     ,dependentArtifactName
+     ,dependentPackageName
      ,forwardDependencies
      ,backwardDependencies
      ,size(forwardDependencies)  AS numberOfForwardDependencies
@@ -16,10 +22,12 @@ WHERE package <> dependentPackage
      ,size(forwardDependencies) + size(backwardDependencies) AS numberOfAllCyclicDependencies
 WHERE (size(forwardDependencies) > size(backwardDependencies)
    OR (size(forwardDependencies) = size(backwardDependencies)
-  AND  size(package.fqn)    >= size(dependentPackage.fqn)))
+  AND  size(packageName)    >= size(dependentPackageName)))
 UNWIND (backwardDependencies + forwardDependencies) AS dependency
-RETURN package.fqn          AS packageName
-      ,dependentPackage.fqn AS dependentPackageName
+RETURN artifactName
+      ,packageName
+      ,dependentArtifactName
+      ,dependentPackageName
       ,dependency
       ,toFloat(ABS(numberOfForwardDependencies - numberOfBackwardDependencies)) / numberOfAllCyclicDependencies AS forwardToBackwardBalance
       ,numberOfForwardDependencies  AS numberForward

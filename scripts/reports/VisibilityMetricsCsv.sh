@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes "Visibility" Cypher queries to get the "visibility-metrics" CSV reports.
+# Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports.
 # It contains lists of packages with their relative visibility (public types divided by all types)
 # as well as the global statistics for every artifact.
 

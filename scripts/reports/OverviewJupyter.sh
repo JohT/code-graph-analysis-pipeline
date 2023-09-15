@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 # Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb".
-# It contains a basic overview on how many Classes, Interfaces, Enums and Annotations earch artifact contains,
-# how they relate to each other, distribution of Methods and their effective lines of code
-# and how the cyclomatic complexity is distributed across all Methods per artifact.
+# It contains a basic overview on how many Classes, Interfaces, Enums and Annotations earch artifact contains and
+# how they relate to each other.
 
 # Requires executeJupyterNotebook.sh
 
