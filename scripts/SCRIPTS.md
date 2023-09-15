@@ -27,20 +27,24 @@ Script | Directory | Description
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
 | [Neo4jv5.sh](./profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
+| [ArtifactCommunityCsv.sh](./reports/ArtifactCommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
+| [ArtifactDependenciesCsv.sh](./reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports. |
 | [ArtifactDependenciesJupyter.sh](./reports/ArtifactDependenciesJupyter.sh) | reports | Creates the "artifact-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
+| [ArtifactTopologicalSortCsv.sh](./reports/ArtifactTopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm to order the artifacts by their artifacts (build order/level) using Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "external-dependencies-csv" CSV reports. |
+| [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports. |
 | [ExternalDependenciesJupyter.sh](./reports/ExternalDependenciesJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [GraphVisualization.sh](./reports/GraphVisualization.sh) | reports | Creates the "graph-visualization" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
-| [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Package_Usage" Cypher queries to get the "internal-dependencies" CSV reports. |
+| [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
 | [InternalDependenciesJupyter.sh](./reports/InternalDependenciesJupyter.sh) | reports | Creates the "internal-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "InternalDependencies.ipynb". |
-| [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics" CSV reports. |
+| [MethodMetricsJupyter.sh](./reports/MethodMetricsJupyter.sh) | reports | Creates the method metrics report (ipynb, md, pdf) based on the Jupyter Notebook "MethodMetrics.ipynb". |
+| [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports. |
 | [ObjectOrientedDesignMetricsJupyter.sh](./reports/ObjectOrientedDesignMetricsJupyter.sh) | reports | Creates the "object-oriented-design-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "ObjectOrientedDesignMetrics.ipynb". |
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
 | [OverviewJupyter.sh](./reports/OverviewJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics" CSV reports. |
+| [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports. |
 | [VisibilityMetricsJupyter.sh](./reports/VisibilityMetricsJupyter.sh) | reports | Creates the "visibility-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "VisibilityMetrics.ipynb". |
 | [WordcloudJupyter.sh](./reports/WordcloudJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [AllReports.sh](./reports/compilations/AllReports.sh) | compilations | Runs all report scripts. |
