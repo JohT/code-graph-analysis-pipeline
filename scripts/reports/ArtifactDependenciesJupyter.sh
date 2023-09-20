@@ -3,7 +3,7 @@
 # Creates the "artifact-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb".
 # It contains the hierarchical artifact dependencies graph
 
-# Requires executeJupyterNotebook.sh, AritfactCommunityCsv.sh
+# Requires executeJupyterNotebook.sh
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
@@ -27,19 +27,10 @@ echo "ArtifactDependenciesJupyter: JUPYTER_NOTEBOOK_DIRECTORY=$JUPYTER_NOTEBOOK_
 CYPHER_DIR=${CYPHER_DIR:-"${REPORTS_SCRIPT_DIR}/../../cypher"}
 echo "ArtifactDependenciesJupyter CYPHER_DIR=${CYPHER_DIR}"
 
-# Define functions to execute cypher queries from within a given file
-source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
-
-# Local Constants
-LEIDEN_CYPHER_DIR="$CYPHER_DIR/Community_Detection_Leiden_for_Artifacts"
-
 # Create report directory
 REPORT_NAME="artifact-dependencies"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
-
-# Dependency: Assure that artifacts have a Leiden Community Id (written by "AritfactCommunityCsv.sh")
-execute_cypher_expect_results "${LEIDEN_CYPHER_DIR}/Community_Detection_8_Check_Leiden_Community_Id.cypher"
 
 # Execute and convert the Jupyter Notebook "ArtifactDependencies.ipynb" within the given reports directory
 (cd "${FULL_REPORT_DIRECTORY}" && exec ${SCRIPTS_DIR}/executeJupyterNotebook.sh ${JUPYTER_NOTEBOOK_DIRECTORY}/ArtifactDependencies.ipynb) || exit 1
