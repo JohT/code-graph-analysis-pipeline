@@ -1,19 +1,16 @@
-// Centrality 7b Harmonic Closeness Write
+//Centrality 8b Closeness Statistics
 
-CALL gds.alpha.closeness.harmonic.write('package-centrality-without-empty', {
-   writeProperty: 'harmonicCentrality'
+CALL gds.beta.closeness.stats(
+ $dependencies_projection + '-without-empty', {
+   useWassermanFaust: true
 })
-YIELD nodes
-     ,preProcessingMillis
+YIELD preProcessingMillis
      ,computeMillis
-     ,writeMillis
-     ,writeProperty
+     ,postProcessingMillis
      ,centralityDistribution
-RETURN nodes
-     ,preProcessingMillis
+RETURN preProcessingMillis
      ,computeMillis
-     ,writeMillis
-     ,writeProperty
+     ,postProcessingMillis
      ,centralityDistribution.min
      ,centralityDistribution.mean
      ,centralityDistribution.max

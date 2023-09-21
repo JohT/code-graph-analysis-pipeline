@@ -1,15 +1,23 @@
-//Centrality 8a Closeness Statistics
+// Centrality 8d Closeness Write
 
-CALL gds.beta.closeness.stats('package-centrality-without-empty', {
-   useWassermanFaust: true
+CALL gds.beta.closeness.write(
+ $dependencies_projection + '-without-empty', {
+    useWassermanFaust: true
+   ,writeProperty: $dependencies_projection_write_property
 })
-YIELD preProcessingMillis
+YIELD nodePropertiesWritten
+     ,preProcessingMillis
      ,computeMillis
      ,postProcessingMillis
+     ,writeMillis
+     ,writeProperty
      ,centralityDistribution
-RETURN preProcessingMillis
+RETURN nodePropertiesWritten
+     ,preProcessingMillis
      ,computeMillis
      ,postProcessingMillis
+     ,writeMillis
+     ,writeProperty
      ,centralityDistribution.min
      ,centralityDistribution.mean
      ,centralityDistribution.max

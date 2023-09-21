@@ -1,12 +1,13 @@
 //Centrality 4d Article Rank Write
 
-CALL gds.articleRank.write('package-centrality-without-empty', {
+CALL gds.articleRank.write(
+ $dependencies_projection + '-without-empty', {
    maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
-  ,relationshipWeightProperty: 'weight25PercentInterfaces'
+  ,relationshipWeightProperty: $dependencies_projection_weight_property
   ,scaler: "L2Norm"
-  ,writeProperty: "articleRank25PercentInterfaces"
+  ,writeProperty: $dependencies_projection_write_property
 })
 YIELD nodePropertiesWritten
      ,ranIterations

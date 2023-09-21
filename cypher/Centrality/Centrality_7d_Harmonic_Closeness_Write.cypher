@@ -1,20 +1,20 @@
-// Centrality 8c Closeness Write
+// Centrality 7d Harmonic Closeness Write
 
-CALL gds.beta.closeness.write('package-centrality-without-empty', {
-   useWassermanFaust: true,
-   writeProperty: 'closeness'
+CALL gds.alpha.closeness.harmonic.write(
+    $dependencies_projection + '-without-empty', {
+    ,writeProperty: $dependencies_projection_write_property
 })
-YIELD nodePropertiesWritten
+YIELD nodes
      ,preProcessingMillis
      ,computeMillis
-     ,postProcessingMillis
      ,writeMillis
+     ,writeProperty
      ,centralityDistribution
-RETURN nodePropertiesWritten
+RETURN nodes
      ,preProcessingMillis
      ,computeMillis
-     ,postProcessingMillis
      ,writeMillis
+     ,writeProperty
      ,centralityDistribution.min
      ,centralityDistribution.mean
      ,centralityDistribution.max

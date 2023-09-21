@@ -1,11 +1,12 @@
 //Centrality 2a Page Rank Estimate Memory
 
-CALL gds.pageRank.write.estimate('package-centrality-without-empty', {
-   writeProperty: 'pageRank'
+CALL gds.pageRank.write.estimate(
+ $dependencies_projection + '-without-empty', {
+   writeProperty: $dependencies_projection_write_property
   ,maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
-  ,relationshipWeightProperty: 'weight25PercentInterfaces'
+  ,relationshipWeightProperty: $dependencies_projection_weight_property
   ,scaler: "L1Norm"
 })
  YIELD nodeCount, relationshipCount, bytesMin, bytesMax, heapPercentageMin, heapPercentageMax, treeView

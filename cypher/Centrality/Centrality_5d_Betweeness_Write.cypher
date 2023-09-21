@@ -1,8 +1,9 @@
 // Centrality 5d Betweeness Write
 
-CALL gds.betweenness.write('package-centrality-without-empty', {
-   relationshipWeightProperty: 'weight25PercentInterfaces',
-   writeProperty: 'betweenness25PercentInterfaces'
+CALL gds.betweenness.write(
+ $dependencies_projection + '-without-empty', {
+    relationshipWeightProperty: $dependencies_projection_weight_property
+   ,writeProperty: $dependencies_projection_write_property
 })
 YIELD nodePropertiesWritten
      ,preProcessingMillis

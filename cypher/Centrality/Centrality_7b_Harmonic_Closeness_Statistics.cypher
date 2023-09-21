@@ -1,9 +1,7 @@
-//Centrality 5b Betweeness Statistics
+// Centrality 7b Harmonic Closeness Statistics
 
- CALL gds.betweenness.stats(
-  $dependencies_projection + '-without-empty', {
-     relationshipWeightProperty: $dependencies_projection_weight_property
-    })
+CALL gds.closeness.harmonic.stats(
+ $dependencies_projection + '-without-empty', {})
  YIELD preProcessingMillis
       ,computeMillis
       ,postProcessingMillis
