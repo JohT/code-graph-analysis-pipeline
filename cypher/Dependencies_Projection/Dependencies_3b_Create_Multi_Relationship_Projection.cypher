@@ -1,11 +1,8 @@
-//Similarity 1 Create Projection
+// Create multi relationship projection.  Variables: dependencies_projection, dependencies_projection_node
 
-  CALL gds.graph.project('package-similarity', 
-    {
-      Package: {
-        properties: ['incomingDependencies', 'outgoingDependencies']
-      }
-    },
+  CALL gds.graph.project(
+    $dependencies_projection,
+    $dependencies_projection_node,
     ['DEPENDS_ON', 'CONTAINS'],
     {
         relationshipProperties: {
@@ -18,7 +15,8 @@
           weight25PercentInterfaces: {
             defaultValue: 1.0
           }
-        }
+        },
+        nodeProperties: ['incomingDependencies', 'outgoingDependencies']
     }
   )
  YIELD graphName, nodeCount, relationshipCount
