@@ -1,0 +1,10 @@
+//Create filtered subgraph projection without zero-degree nodes. Variables: dependencies_projection, dependencies_projection_node
+
+CALL gds.beta.graph.project.subgraph(
+  $dependencies_projection + '-without-empty',
+  $dependencies_projection,
+  'n.outgoingDependencies > 0 OR n.incomingDependencies > 0',
+  '*'
+)
+ YIELD graphName, fromGraphName, nodeCount, relationshipCount, nodeFilter
+RETURN graphName, fromGraphName, nodeCount, relationshipCount, nodeFilter

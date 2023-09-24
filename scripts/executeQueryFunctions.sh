@@ -10,6 +10,24 @@
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 
+# Extact the value of one key out of a "key=value" array e.g. for query parameters. 
+# The first argument is the name of the target key.
+# All following arguments are the "key=value" parameters.
+# Example: `extractQueryParameter "b" "a=1" "b=2" "c=3"` returns `2`
+extractQueryParameter() {
+    target_key=${1}
+    shift # ignore first argument containing the query file name
+
+    for arg in "${@}"; do
+        key=$(echo "$arg" | cut -d'=' -f1)
+        value=$(echo "$arg" | cut -d'=' -f2)
+        if [ "${key}" = "${target_key}" ]; then
+            echo "${value}"
+            break
+        fi
+    done
+}
+
 # Function to execute a cypher query from the given file (first argument) with the default method
 execute_cypher() { 
     execute_cypher_http "${@}" || exit 1 # "${@}": Get all function arguments and forward them
