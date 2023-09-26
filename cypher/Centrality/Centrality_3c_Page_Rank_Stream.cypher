@@ -1,17 +1,17 @@
 //Centrality 3c Page Rank Stream
 
-CALL gds.pageRank.stream('package-centrality-without-empty', {
+CALL gds.pageRank.stream(
+ $dependencies_projection + '-without-empty', {
    maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
-  ,relationshipWeightProperty: 'weight25PercentInterfaces'
+  ,relationshipWeightProperty: $dependencies_projection_weight_property
   ,scaler: "L2Norm"
 })
  YIELD nodeId, score
-  WITH gds.util.asNode(nodeId) AS package, score
-RETURN package.fqn                  AS fullQualifiedPackageName
-      ,package.name                 AS packageName
+  WITH gds.util.asNode(nodeId) AS member, score
+RETURN coalesce(member.fqn, member.fileName, member.name) AS memberName
       ,score
-      ,package.incomingDependencies AS incomingDependencies
-      ,package.outgoingDependencies AS outgoingDependencies
- ORDER BY score DESC, packageName ASC
+      ,member.incomingDependencies AS incomingDependencies
+      ,member.outgoingDependencies AS outgoingDependencies
+ ORDER BY score DESC, memberName ASC

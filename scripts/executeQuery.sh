@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
 # Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format.
-# Use it when "cypher-shell" is not present or not flexible enough.
+# Use it when "cypher-shell" is not present, not flexible enough or to avoid an additional dependency.
 
 # It requires "cURL" ( https://curl.se ) and "jq" ( https://stedolan.github.io/jq ) to be installed.
 # The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
 # Using "cypher-shell" that comes with Neo4j server is much simpler to use:
-# cat $cypher_query_file_name | $NEO4J_HOME/bin/cypher-shell -u neo4j -p password --format plain
+# cat $cypher_query_file_name | $NEO4J_HOME/bin/cypher-shell -u neo4j -p password --format plain --param "number ⇒ 3"
 
 # Note: These command line arguments are supported:
 # -> "filename" of the cypher query file (required, unnamed first argument)
 # -> "--no_source_reference" to not append the cypher query file name as last CSV column
+# -> any following key=value arguments are used as query parameters
 
 # Overrideable Defaults
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
@@ -19,55 +20,64 @@ NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
-    echo "Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'." >&2
+    echo "executeQuery requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'." >&2
     exit 1
 fi
 
 # Input Arguments: Initialize arguments and set default values for optional ones
 cypher_query_file_name=""
 no_source_reference=false
+query_parameters=""
 
 # Input Arguments: Function to print usage information
 print_usage() {
-    echo "Usage: $0 <filename> [--no-source-reference-column]" >&2
+    echo "executeQuery Usage: $0 <filename> [--no-source-reference-column]" >&2
     echo "Options:" >&2
     echo "  --no-source-reference-column: Exclude the source reference column" >&2
 }
 
 # Input Arguments: Parse the command-line arguments
 while [[ $# -gt 0 ]]; do
-    key="$1"
+    arg="$1"
 
-    case $key in
+    case $arg in
         --no-source-reference-column)
             no_source_reference=true
             shift
             ;;
         *)
-            if [[ -z "$cypher_query_file_name" ]]; then
+            if [[ -z "${cypher_query_file_name}" ]]; then
                 # Input Arguments: Read the first unnamed input argument containing the name of the cypher file
-                cypher_query_file_name="$key"
+                cypher_query_file_name="${arg}"
                 #echo "Cypher File: $cypher_query_file_name"
                 
                 # Input Arguments: Check the first input argument to be a valid file
                 if [ ! -f "${cypher_query_file_name}" ] ; then
-                  echo "Error: Please provide a valid filename." >&2
+                  echo "executeQuery Error: Invalid cypher query filename ${cypher_query_file_name}." >&2
                   print_usage
                   exit 1
                 fi
             else
-                echo "Error: Unknown option: $key" >&2
-                print_usage
-                exit 1
+                # Convert key=value argument to JSON "key": "value" and strip all incoming quotes first
+                json_parameter=$(echo "${arg}" | sed "s/[\"\']//g" | awk -F'='  '{ print "\""$1"\": \""$2"\""}'| grep -iv '\"#')
+                if [[ -z "${query_parameters}" ]]; then
+                  # Add first query parameter directly
+                  query_parameters="${json_parameter}"
+                else
+                  # Append next query parameter separated by a comma and a space 
+                  query_parameters="${query_parameters}, ${json_parameter}"
+                fi
             fi
             shift
             ;;
     esac
 done
 
+#echo "executeQuery: query_parameters: ${query_parameters}"
+
 # Read the file that contains the Cypher query
 original_cypher_query=$(<"${cypher_query_file_name}")
-#echo "Original Query: $original_cypher_query"
+#echo "executeQuery: Original Query: $original_cypher_query"
 
 # Encode the string containing the Cypher query to be used inside JSON using jq ( https://stedolan.github.io/jq )
 # Be sure to put double quotes around the original Cypher query to prevent newlines from beeing removed. 
@@ -77,11 +87,11 @@ original_cypher_query=$(<"${cypher_query_file_name}")
 # . means "output the root of the JSON document"
 # Source: https://stackoverflow.com/questions/10053678/escaping-characters-in-bash-for-json
 cypher_query=$(echo -n "${original_cypher_query}" | jq -Rsa .)
-#echo "Cypher Query: $cypher_query"
+#echo "executeQuery: Cypher Query JSON Encoded: $cypher_query"
 
 # Put the query inside the structure that is expected by the Neo4j HTTP API
-cypher_query_for_api="{\"statements\":[{\"statement\":${cypher_query},\"includeStats\": false}]}"
-#echo "Cypher Query for API: ${cypher_query_for_api}"
+cypher_query_for_api="{\"statements\":[{\"statement\":${cypher_query},\"parameters\":{${query_parameters}},\"includeStats\": false}]}"
+#echo "executeQuery: Cypher Query for API: ${cypher_query_for_api}"
 
 # Calls the Neo4j HTTP API using cURL ( https://curl.se )
 cyper_query_result=$(curl --silent -S --fail-with-body -H Accept:application/json -H Content-Type:application/json \

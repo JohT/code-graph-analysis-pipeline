@@ -33,51 +33,299 @@ REPORT_NAME="centrality-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
-# Local Constants
-CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+# Centrality Preparation
+# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+createProjection() {
+    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
 
-# Preparation for Centrality - Create package dependencies projection
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_0_Delete_Projection.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_0b_Delete_Subraph_Projection.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1_Create_Projection.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1b_Create_Subgraph_Without_Empty_Packages.cypher"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
+}
 
-# Centrality using the Page Rank Algorithm - Query CSV
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_2a_Page_Rank_Estimate_Memory.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_2b_Page_Rank_Statistics.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_3c_Page_Rank_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Centrality_Page_Rank.csv"
+# Apply the centrality algorithm "Page Rank".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithPageRank() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
 
-# Centrality using the Page Rank Algorithm - Update Graph
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_3d_Page_Rank_Write.cypher"
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityPageRank" 
 
-# Centrality using the Article Rank Algorithm - Query CSV
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4a_Article_Rank_Estimate_Memory.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4b_Article_Rank_Statistics.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4c_Article_Rank_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Centrality_Article_Rank.csv"
+    # Statistics
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_2a_Page_Rank_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_2b_Page_Rank_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_3c_Page_Rank_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Page_Rank.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_3d_Page_Rank_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
 
-# Centrality using the Article Rank Algorithm - Update Graph
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4d_Article_Rank_Write.cypher"
+# Apply the centrality algorithm "Article Rank".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithArticleRank() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+    
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityArticleRank" 
 
-# Centrality using the Betweeness Algorithm - Query CSV
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5a_Betweeness_Estimate.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5b_Betweeness_Statistics.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5c_Betweeness_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Centrality_Betweeness.csv"
+    # Statistics
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4a_Article_Rank_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4b_Article_Rank_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4c_Article_Rank_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Article_Rank.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_4d_Article_Rank_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
 
-# Centrality using the Betweeness Algorithm - Update Graph
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5d_Betweeness_Write.cypher"
+# Apply the centrality algorithm "Betweenness".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithBetweenness() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+    
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityBetweenness" 
 
-# Centrality using the Cost Effective Lazy Formward (CELF) Algorithm - Query CSV
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Centrality_Cost_Effective_Lazy_Forward.csv"
+    # Statistics
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5a_Betweeness_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5b_Betweeness_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5c_Betweeness_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Betweeness.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_5d_Betweeness_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
 
-# Centrality using the Harmonic Closeness Algorithm - Query CSV
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_7a_Harmonic_Closeness_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Centrality_Harmonic.csv"
+# Apply the centrality algorithm "Cost Effective Lazy Forward (CELF)".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithCostEffectiveLazyForwardCELF() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
 
-# Centrality using the Harmonic Closeness Algorithm - Update Graph
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_7b_Harmonic_Closeness_Write.cypher"
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityCostEffectiveLazyForward" 
 
-# Centrality using the Closeness Algorithm - Query CSV
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8a_Closeness_Statistics.cypher"
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8b_Closeness_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Centrality_Closeness.csv"
+    # Statistics
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_6a_Cost_effective_Lazy_Forward_CELF_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_6b_Cost_effective_Lazy_Forward_CELF_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Cost_effective_Lazy_Forward_CELF.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_6d_Cost_effective_Lazy_Forward_CELF_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
 
-# Centrality using the Closeness Algorithm - Update Graph
-execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8c_Closeness_Write.cypher"
+# Apply the centrality algorithm "Harmonic" (variant of "Closeness)").
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithHarmonic() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityHarmonic" 
+
+    # Statistics
+    # Note: Estimate procedure doesn't seem to exist for now (gds version 2.5.0-preview3)
+    # execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_7a_Harmonic_Closeness_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_7b_Harmonic_Closeness_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_7c_Harmonic_Closeness_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Harmonic.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_7d_Harmonic_Closeness_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
+
+# Apply the centrality algorithm "Closeness".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithCloseness() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityCloseness" 
+
+    # Statistics
+    # Note: Estimate procedure doesn't seem to exist for now (gds version 2.5.0-preview3)
+    # execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8a_Closeness_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8b_Closeness_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8c_Closeness_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Closeness.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_8d_Closeness_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
+
+# Apply the centrality algorithm "Hyperlink-Induced Topic Search (HITS)".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "centralityPageRank"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+centralityWithHyperlinkInducedTopicSearchHITS() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+
+    # Name of the property that will be written to the nodes containing the centrality score.
+    # This is also used as a name with the first letter capitalized as a label for the top centraliy nodes.
+    local writePropertyName="dependencies_projection_write_property=centralityHyperlinkInducedTopicSearchAuthority" 
+
+    # Statistics
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9a_Hyperlink_Induced_Topic_Search_HITS_Estimate.cypher" "${@}" "${writePropertyName}"
+    # Note: There is an issue in gds version 2.5.0-preview3: https://github.com/neo4j/graph-data-science/issues/285
+    #execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Hyperlink_Induced_Topic_Search_HITS.csv"
+    
+    # Update Graph (node properties and labels)
+    # Note: There is an issue in gds version 2.5.0-preview3: https://github.com/neo4j/graph-data-science/issues/285
+    #execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Write.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}"
+}
+
+# ---------------------------------------------------------------
+
+# Artifact Query Parameters
+ARTIFACT_PROJECTION="dependencies_projection=artifact-centrality" 
+ARTIFACT_NODE="dependencies_projection_node=Artifact" 
+ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
+
+# Artifact Centrality
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
+createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithPageRank "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithArticleRank "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithBetweenness "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithCostEffectiveLazyForwardCELF "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithHarmonic "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithCloseness "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time centralityWithHyperlinkInducedTopicSearchHITS "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+
+# ---------------------------------------------------------------
+
+# Package Query Parameters
+PACKAGE_PROJECTION="dependencies_projection=package-centrality" 
+PACKAGE_NODE="dependencies_projection_node=Package" 
+PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
+
+# Package Centrality
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
+createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithPageRank "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithArticleRank "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithBetweenness "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithCostEffectiveLazyForwardCELF "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithHarmonic "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithCloseness "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time centralityWithHyperlinkInducedTopicSearchHITS "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+
+# ---------------------------------------------------------------
+
+# Type Query Parameters
+TYPE_PROJECTION="dependencies_projection=type-centrality" 
+TYPE_NODE="dependencies_projection_node=Type" 
+TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
+
+# Type Centrality
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
+createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithPageRank "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithArticleRank "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithBetweenness "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithCostEffectiveLazyForwardCELF "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithHarmonic "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithCloseness "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time centralityWithHyperlinkInducedTopicSearchHITS "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"

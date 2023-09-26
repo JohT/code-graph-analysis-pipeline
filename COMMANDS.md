@@ -208,14 +208,47 @@ Be sure to replace `path/to/local/neo4j` and `password` with your settings.
 cat ./cypher/Get_Graph_Data_Science_Library_Version.cypher | path/to/local/neo4j/bin/cypher-shell -u neo4j -p password --format plain
 ```
 
+Query parameter can be added with the option `--param`. Here is an example:
+
+```shell
+cat ./cypher/Get_Graph_Data_Science_Library_Version.cypher | path/to/local/neo4j/bin/cypher-shell -u neo4j -p password --format plain --param {a: 1}
+```
+
+For a full list of options use the help function:
+
+```shell
+path/to/local/neo4j/bin/cypher-shell --help
+```
+
 ### HTTP API
 
 Use [executeQuery.sh](./scripts/executeQuery.sh) to execute a Cypher query from the file given as an argument.
-It uses `curl` and `jq` to access the HTTP API of Neo4j.
+It uses `curl` and `jq` to access the [HTTP API of Neo4j](https://neo4j.com/docs/http-api/current/query).
 Here is an example:
 
 ```shell
 ./scripts/executeQuery.sh ./cypher/Get_Graph_Data_Science_Library_Version.cypher
+```
+
+Query parameters can be added as arguments after the file name. Here is an example:
+
+```shell
+./scripts/executeQuery.sh ./cypher/Get_Graph_Data_Science_Library_Version.cypher a=1
+```
+
+### executeQueryFunctions
+
+The script [executeQueryFunctions.sh](./scripts/executeQueryFunctions.sh) contains functions to simplify the
+call of [executeQuery.sh](./scripts/executeQuery.sh) for different purposes. For example, `execute_cypher_summarized`
+prints out the results on the console in a summarized manner and `execute_cypher_expect_results` fails when there are no results.
+
+The script also provides an API abstraction that defaults to [HTTP](#http-api), but can easily be switched to [cypher-shell](#cypher-shell).
+
+Query parameters can be added as arguments after the file name. Here is an example:
+
+```shell
+source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
+execute_cypher ./cypher/Get_Graph_Data_Science_Library_Version.cypher a=1
 ```
 
 ## Stop Neo4j

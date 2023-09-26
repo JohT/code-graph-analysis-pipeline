@@ -1,9 +1,10 @@
 //Centrality 4b Article Rank Statistics
-CALL gds.articleRank.stats('package-centrality-without-empty', {
+CALL gds.articleRank.stats(
+ $dependencies_projection + '-without-empty', {
    maxIterations: 30
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
-  ,relationshipWeightProperty: 'weight25PercentInterfaces'
+  ,relationshipWeightProperty: $dependencies_projection_weight_property
   ,scaler: "L1Norm"
 })
  YIELD ranIterations

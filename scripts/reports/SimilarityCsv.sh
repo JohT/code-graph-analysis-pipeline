@@ -33,15 +33,85 @@ REPORT_NAME="similarity-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
-# Local Constants
-SIMILARITY_CYPHER_DIR="$CYPHER_DIR/Similarity"
+# Similarity Preparation
+# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+createProjection() {
+    PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
 
-# Preparation Similarity - Create package dependencies projection
-execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_0_Delete_Projection.cypher"
-execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_0b_Delete_Subgraph_Projection.cypher"
-execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1_Create_Projection.cypher"
-execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1b_Create_subgraph_without_empty_packages.cypher"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
+}
 
-# Similarity using Node Similarity Algorithm with JACCARD metric - Query CSV
-execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_3_Estimate_Memory.cypher"
-execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_4_Stream.cypher" > "${FULL_REPORT_DIRECTORY}/Similarity_Jaccard.csv"
+# Apply the similarity algorithm "Similarity".
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+similarity() {
+    local SIMILARITY_CYPHER_DIR="$CYPHER_DIR/Similarity"
+
+    # Statistics
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1a_Estimate.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1b_Statistics.cypher" "${@}"
+    
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1c_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
+    
+    # Update Graph (node properties and labels)
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1d_Delete_Relationships.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1e_Write.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1f_Write_Node_Properties.cypher" "${@}"
+}
+
+# ---------------------------------------------------------------
+
+# Artifact Query Parameters
+ARTIFACT_PROJECTION="dependencies_projection=artifact-similarity" 
+ARTIFACT_NODE="dependencies_projection_node=Artifact" 
+ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
+
+# Artifact Similarity
+echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
+createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+time similarity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+
+# ---------------------------------------------------------------
+
+# Package Query Parameters
+PACKAGE_PROJECTION="dependencies_projection=package-similarity" 
+PACKAGE_NODE="dependencies_projection_node=Package" 
+PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
+
+# Package Similarity
+echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
+createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+time similarity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+
+# ---------------------------------------------------------------
+
+# Type Query Parameters
+TYPE_PROJECTION="dependencies_projection=type-similarity" 
+TYPE_NODE="dependencies_projection_node=Type" 
+TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
+
+# Type Similarity
+echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
+createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+time similarity "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"

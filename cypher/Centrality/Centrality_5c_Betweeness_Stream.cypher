@@ -1,13 +1,13 @@
 // Centrality 5c Betweeness Stream
 
-CALL gds.betweenness.stream('package-centrality-without-empty', {
-   relationshipWeightProperty: 'weight25PercentInterfaces'
+CALL gds.betweenness.stream(
+ $dependencies_projection + '-without-empty', {
+   relationshipWeightProperty: $dependencies_projection_weight_property
 })
  YIELD nodeId, score
-  WITH gds.util.asNode(nodeId) AS package, score
-RETURN package.fqn                  AS fullQualifiedPackageName
-      ,package.name                 AS packageName
+  WITH gds.util.asNode(nodeId) AS member, score
+RETURN coalesce(member.fqn, member.fileName, member.name) AS memberName
       ,score
-      ,package.incomingDependencies AS incomingDependencies
-      ,package.outgoingDependencies AS outgoingDependencies
- ORDER BY score DESC, packageName ASC
+      ,member.incomingDependencies AS incomingDependencies
+      ,member.outgoingDependencies AS outgoingDependencies
+ ORDER BY score DESC, memberName ASC

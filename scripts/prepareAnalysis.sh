@@ -56,3 +56,7 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_ann
 # Preparation - Add Artifact node properties "incomingDependencies" and "outgoingDependencies"
 execute_cypher_expect_results "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Artifact_Dependencies.cypher" || exit 1
 execute_cypher_expect_results "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Artifact_Dependencies.cypher" || exit 1
+
+# Preparation - Add Type node properties "incomingDependencies" and "outgoingDependencies"
+execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Incoming_Type_Dependencies.cypher" || exit 1
+execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Outgoing_Type_Dependencies.cypher" || exit 1

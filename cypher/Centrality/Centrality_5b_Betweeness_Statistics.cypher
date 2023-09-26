@@ -1,7 +1,8 @@
 //Centrality 5b Betweeness Statistics
 
- CALL gds.betweenness.stats('package-centrality-without-empty', {
-     relationshipWeightProperty: 'weight25PercentInterfaces'
+ CALL gds.betweenness.stats(
+  $dependencies_projection + '-without-empty', {
+     relationshipWeightProperty: $dependencies_projection_weight_property
     })
  YIELD preProcessingMillis
       ,computeMillis
