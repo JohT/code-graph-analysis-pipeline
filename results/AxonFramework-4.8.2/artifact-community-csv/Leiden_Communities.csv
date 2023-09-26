@@ -1,2 +1,0 @@
-"firstCommunityId","finalCommunityId","countOfMembers","artifactNames","Source Cypher File: Community_Detection_Leiden_for_Artifacts/Community_Detection_4_Leiden_Stream.cypher"
-5,5,6,"axon-disruptor-4.8.2,axon-eventsourcing-4.8.2,axon-configuration-4.8.2,axon-test-4.8.2,axon-modelling-4.8.2,axon-messaging-4.8.2",""

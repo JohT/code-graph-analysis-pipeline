@@ -1,0 +1,7 @@
+"memberName","score","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_3c_Page_Rank_Stream.cypher"
+"/axon-messaging-4.8.2.jar",0.8918404794413924,5,0,""
+"/axon-modelling-4.8.2.jar",0.2636997924507219,4,1,""
+"/axon-eventsourcing-4.8.2.jar",0.211128417938286,3,2,""
+"/axon-disruptor-4.8.2.jar",0.17400307146553007,1,3,""
+"/axon-configuration-4.8.2.jar",0.1735377494244865,0,4,""
+"/axon-test-4.8.2.jar",0.1735377494244865,0,3,""

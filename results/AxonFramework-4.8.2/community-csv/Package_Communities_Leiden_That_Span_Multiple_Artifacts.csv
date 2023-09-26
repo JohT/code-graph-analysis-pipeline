@@ -1,4 +1,4 @@
-"communityId","artifactName","packageCount","packageNames","Source Cypher File: Community_Detection_Leiden/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher"
+"communityId","artifactName","packageCount","packageNames","Source Cypher File: Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher"
 0,"axon-disruptor-4.8.2",1,"commandhandling",""
 0,"axon-eventsourcing-4.8.2",2,"eventsourcing,conflictresolution",""
 0,"axon-messaging-4.8.2",14,"commandhandling,callbacks,distributed,commandfilter,gateway,common,annotation,caching,digest,lock,property",""
