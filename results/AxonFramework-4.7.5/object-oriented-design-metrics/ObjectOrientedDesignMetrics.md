@@ -7,71 +7,9 @@
 - [jqassistant](https://jqassistant.org)
 - [notebook walks through examples for integrating various packages with Neo4j](https://nicolewhite.github.io/neo4j-jupyter/hello-world.html)
 - [OO Design Quality Metrics](https://api.semanticscholar.org/CorpusID:18246616)
-- [py2neo](https://py2neo.org/2021.1/)
+- [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver/current)
 
 
-
-
-
-## Artifacts
-
-#### Table 1
-
-- List all the artifacts this notebook is based on
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>artifactName</th>
-      <th>packages</th>
-      <th>types</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>axon-messaging-4.7.5.jar</td>
-      <td>61</td>
-      <td>729</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-modelling-4.7.5.jar</td>
-      <td>10</td>
-      <td>149</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>axon-disruptor-4.7.5.jar</td>
-      <td>1</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-eventsourcing-4.7.5.jar</td>
-      <td>9</td>
-      <td>130</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-configuration-4.7.5.jar</td>
-      <td>1</td>
-      <td>39</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>axon-test-4.7.5.jar</td>
-      <td>8</td>
-      <td>85</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 
 
@@ -106,203 +44,203 @@ If these packages get changed, the incoming dependencies might be affected by th
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.messaging</td>
-      <td>8507</td>
-      <td>33749</td>
-      <td>310</td>
-      <td>64</td>
-      <td>50</td>
-      <td>6</td>
+      <td>org</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>4409</td>
-      <td>27987</td>
-      <td>280</td>
-      <td>52</td>
-      <td>44</td>
-      <td>5</td>
+      <td>org.axonframework</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>org.axonframework.commandhandling</td>
-      <td>1539</td>
-      <td>7503</td>
+      <td>268</td>
+      <td>1138</td>
       <td>123</td>
-      <td>18</td>
+      <td>0</td>
       <td>18</td>
       <td>6</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.serialization</td>
-      <td>1078</td>
-      <td>5606</td>
-      <td>126</td>
-      <td>15</td>
-      <td>30</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>8</td>
+      <td>27</td>
+      <td>7</td>
+      <td>0</td>
       <td>4</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.messaging.annotation</td>
-      <td>1050</td>
-      <td>5603</td>
-      <td>149</td>
-      <td>18</td>
-      <td>25</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>org.axonframework.common</td>
-      <td>876</td>
-      <td>2059</td>
-      <td>313</td>
-      <td>12</td>
-      <td>74</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>org.axonframework.common.transaction</td>
-      <td>276</td>
-      <td>1060</td>
-      <td>67</td>
-      <td>5</td>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>50</td>
+      <td>289</td>
       <td>24</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>org.axonframework.modelling.command</td>
-      <td>254</td>
-      <td>995</td>
-      <td>75</td>
-      <td>8</td>
-      <td>10</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>org.axonframework.messaging.unitofwork</td>
-      <td>251</td>
-      <td>1384</td>
-      <td>81</td>
-      <td>5</td>
-      <td>34</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>org.axonframework.modelling.saga</td>
-      <td>242</td>
-      <td>1482</td>
-      <td>57</td>
-      <td>11</td>
-      <td>10</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
-      <td>218</td>
-      <td>1404</td>
-      <td>26</td>
-      <td>14</td>
+      <td>0</td>
       <td>2</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>org.axonframework.monitoring</td>
-      <td>189</td>
-      <td>641</td>
+      <th>5</th>
+      <td>org.axonframework.commandhandling.distributed....</td>
+      <td>12</td>
+      <td>22</td>
+      <td>6</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>101</td>
+      <td>409</td>
+      <td>35</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>org.axonframework.common</td>
+      <td>422</td>
+      <td>1067</td>
+      <td>313</td>
+      <td>0</td>
+      <td>74</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>org.axonframework.common.annotation</td>
+      <td>22</td>
       <td>39</td>
-      <td>6</td>
+      <td>22</td>
+      <td>0</td>
       <td>10</td>
-      <td>4</td>
+      <td>3</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>org.axonframework.queryhandling</td>
-      <td>175</td>
-      <td>935</td>
-      <td>47</td>
-      <td>10</td>
-      <td>9</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>org.axonframework.tracing</td>
-      <td>173</td>
-      <td>712</td>
-      <td>65</td>
-      <td>4</td>
-      <td>16</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>169</td>
-      <td>814</td>
-      <td>60</td>
+      <th>9</th>
+      <td>org.axonframework.common.caching</td>
+      <td>30</td>
+      <td>174</td>
+      <td>19</td>
+      <td>0</td>
       <td>5</td>
-      <td>10</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>org.axonframework.deadline</td>
-      <td>165</td>
-      <td>1367</td>
-      <td>33</td>
-      <td>8</td>
-      <td>11</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>org.axonframework.messaging.deadletter</td>
-      <td>135</td>
-      <td>978</td>
-      <td>28</td>
-      <td>7</td>
       <td>5</td>
-      <td>2</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>org.axonframework.eventsourcing</td>
-      <td>134</td>
-      <td>657</td>
-      <td>41</td>
-      <td>6</td>
-      <td>5</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>org.axonframework.config</td>
-      <td>115</td>
-      <td>1483</td>
-      <td>34</td>
+      <th>10</th>
+      <td>org.axonframework.common.digest</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>1</td>
     </tr>
     <tr>
+      <th>11</th>
+      <td>org.axonframework.common.io</td>
+      <td>10</td>
+      <td>21</td>
+      <td>10</td>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>org.axonframework.common.jdbc</td>
+      <td>49</td>
+      <td>269</td>
+      <td>25</td>
+      <td>0</td>
+      <td>8</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>org.axonframework.common.jpa</td>
+      <td>16</td>
+      <td>92</td>
+      <td>15</td>
+      <td>0</td>
+      <td>7</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>org.axonframework.common.legacyjpa</td>
+      <td>14</td>
+      <td>70</td>
+      <td>13</td>
+      <td>0</td>
+      <td>6</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>org.axonframework.common.lock</td>
+      <td>42</td>
+      <td>178</td>
+      <td>21</td>
+      <td>0</td>
+      <td>7</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.common.property</td>
+      <td>23</td>
+      <td>50</td>
+      <td>13</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>org.axonframework.common.stream</td>
+      <td>17</td>
+      <td>77</td>
+      <td>15</td>
+      <td>0</td>
+      <td>7</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>org.axonframework.common.transaction</td>
+      <td>85</td>
+      <td>296</td>
+      <td>67</td>
+      <td>0</td>
+      <td>24</td>
+      <td>4</td>
+    </tr>
+    <tr>
       <th>19</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>101</td>
-      <td>409</td>
-      <td>35</td>
-      <td>1</td>
-      <td>3</td>
-      <td>3</td>
+      <td>org.axonframework.deadline</td>
+      <td>56</td>
+      <td>360</td>
+      <td>33</td>
+      <td>0</td>
+      <td>11</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -332,213 +270,213 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <th></th>
       <th>packageName</th>
       <th>outgoingDependencies</th>
+      <th>outgoingDependenciesWeight</th>
       <th>outgoingDependentTypes</th>
       <th>outgoingDependentInterfaces</th>
       <th>outgoingDependentPackages</th>
       <th>outgoingDependentArtifacts</th>
-      <th>outgoingDependenciesWeight</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.config</td>
-      <td>7942</td>
-      <td>212</td>
-      <td>84</td>
-      <td>46</td>
-      <td>5</td>
-      <td>34762</td>
+      <td>org</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>2223</td>
-      <td>92</td>
-      <td>34</td>
-      <td>16</td>
-      <td>4</td>
-      <td>9766</td>
+      <td>org.axonframework</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>1557</td>
-      <td>151</td>
-      <td>54</td>
-      <td>16</td>
+      <td>org.axonframework.commandhandling</td>
+      <td>144</td>
+      <td>537</td>
+      <td>70</td>
+      <td>0</td>
+      <td>9</td>
       <td>1</td>
-      <td>7770</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>1487</td>
-      <td>85</td>
-      <td>31</td>
-      <td>14</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>13</td>
+      <td>47</td>
       <td>4</td>
-      <td>7444</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.saga</td>
-      <td>1375</td>
-      <td>79</td>
-      <td>26</td>
-      <td>17</td>
-      <td>3</td>
-      <td>4837</td>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>128</td>
+      <td>518</td>
+      <td>67</td>
+      <td>0</td>
+      <td>11</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
-      <td>1340</td>
-      <td>51</td>
-      <td>27</td>
-      <td>11</td>
+      <td>org.axonframework.commandhandling.distributed....</td>
+      <td>20</td>
+      <td>91</td>
+      <td>7</td>
+      <td>0</td>
       <td>3</td>
-      <td>8129</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>org.axonframework.queryhandling</td>
-      <td>1108</td>
-      <td>78</td>
-      <td>28</td>
-      <td>11</td>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>170</td>
+      <td>645</td>
+      <td>58</td>
+      <td>0</td>
+      <td>10</td>
       <td>1</td>
-      <td>6955</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>org.axonframework.eventhandling.pooled</td>
-      <td>1022</td>
-      <td>57</td>
-      <td>26</td>
-      <td>12</td>
+      <td>org.axonframework.common</td>
+      <td>23</td>
+      <td>53</td>
+      <td>15</td>
+      <td>0</td>
       <td>1</td>
-      <td>5590</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>org.axonframework.eventsourcing</td>
-      <td>976</td>
-      <td>91</td>
-      <td>31</td>
-      <td>16</td>
+      <td>org.axonframework.common.annotation</td>
       <td>3</td>
-      <td>4142</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>org.axonframework.modelling.command</td>
-      <td>827</td>
-      <td>91</td>
-      <td>33</td>
-      <td>15</td>
+      <td>org.axonframework.common.caching</td>
+      <td>27</td>
+      <td>131</td>
+      <td>11</td>
+      <td>0</td>
       <td>2</td>
-      <td>4151</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>org.axonframework.modelling.command.inspection</td>
-      <td>781</td>
-      <td>73</td>
-      <td>28</td>
-      <td>10</td>
-      <td>2</td>
-      <td>4141</td>
+      <td>org.axonframework.common.digest</td>
+      <td>1</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>642</td>
-      <td>70</td>
-      <td>28</td>
-      <td>9</td>
-      <td>1</td>
-      <td>2295</td>
+      <td>org.axonframework.common.io</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>603</td>
-      <td>67</td>
-      <td>23</td>
-      <td>11</td>
+      <td>org.axonframework.common.jdbc</td>
+      <td>26</td>
+      <td>120</td>
+      <td>18</td>
+      <td>0</td>
+      <td>4</td>
       <td>1</td>
-      <td>2368</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>603</td>
-      <td>64</td>
-      <td>25</td>
-      <td>16</td>
+      <td>org.axonframework.common.jpa</td>
+      <td>6</td>
+      <td>18</td>
+      <td>5</td>
+      <td>0</td>
       <td>3</td>
-      <td>2501</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>org.axonframework.deadline.quartz</td>
-      <td>481</td>
-      <td>38</td>
+      <td>org.axonframework.common.legacyjpa</td>
+      <td>6</td>
       <td>18</td>
-      <td>10</td>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
       <td>1</td>
-      <td>2187</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>447</td>
-      <td>58</td>
-      <td>11</td>
-      <td>10</td>
+      <td>org.axonframework.common.lock</td>
+      <td>24</td>
+      <td>92</td>
+      <td>12</td>
+      <td>0</td>
+      <td>2</td>
       <td>1</td>
-      <td>1622</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>org.axonframework.modelling.saga</td>
-      <td>386</td>
-      <td>58</td>
-      <td>21</td>
-      <td>9</td>
+      <td>org.axonframework.common.property</td>
+      <td>15</td>
+      <td>28</td>
+      <td>8</td>
+      <td>0</td>
       <td>2</td>
-      <td>1799</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
-      <td>375</td>
-      <td>47</td>
-      <td>17</td>
-      <td>15</td>
-      <td>2</td>
-      <td>1870</td>
+      <td>org.axonframework.common.stream</td>
+      <td>5</td>
+      <td>11</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.deadline.jobrunr</td>
-      <td>348</td>
-      <td>31</td>
-      <td>15</td>
-      <td>8</td>
+      <td>org.axonframework.common.transaction</td>
+      <td>6</td>
+      <td>16</td>
+      <td>4</td>
+      <td>0</td>
       <td>1</td>
-      <td>1611</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>19</th>
       <td>org.axonframework.deadline</td>
-      <td>347</td>
+      <td>68</td>
+      <td>287</td>
       <td>43</td>
-      <td>21</td>
+      <td>0</td>
       <td>8</td>
       <td>1</td>
-      <td>1281</td>
     </tr>
   </tbody>
 </table>
@@ -590,21 +528,21 @@ Conversely, high values approaching one indicate high *Instability*. With some o
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.messaging</td>
-      <td>messaging</td>
-      <td>0.015394</td>
-      <td>0.101449</td>
-      <td>0.189873</td>
-      <td>0.107143</td>
+      <td>org.axonframework.common</td>
+      <td>common</td>
+      <td>0.051685</td>
+      <td>0.045732</td>
+      <td>0.0</td>
+      <td>0.013333</td>
       <td>0.142857</td>
-      <td>133</td>
-      <td>8507</td>
-      <td>35</td>
-      <td>310</td>
+      <td>23</td>
+      <td>422</td>
       <td>15</td>
-      <td>64</td>
-      <td>6</td>
-      <td>50</td>
+      <td>313</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>74</td>
       <td>1</td>
       <td>6</td>
     </tr>
@@ -612,17 +550,17 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <th>1</th>
       <td>org.axonframework.common.transaction</td>
       <td>transaction</td>
-      <td>0.021277</td>
+      <td>0.065934</td>
       <td>0.056338</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.040000</td>
       <td>0.200000</td>
       <td>6</td>
-      <td>276</td>
+      <td>85</td>
       <td>4</td>
       <td>67</td>
       <td>0</td>
-      <td>5</td>
+      <td>0</td>
       <td>1</td>
       <td>24</td>
       <td>1</td>
@@ -630,51 +568,11 @@ Conversely, high values approaching one indicate high *Instability*. With some o
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.common</td>
-      <td>common</td>
-      <td>0.025584</td>
-      <td>0.045732</td>
-      <td>0.000000</td>
-      <td>0.013333</td>
-      <td>0.142857</td>
-      <td>23</td>
-      <td>876</td>
-      <td>15</td>
-      <td>313</td>
-      <td>0</td>
-      <td>12</td>
-      <td>1</td>
-      <td>74</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>org.axonframework.monitoring</td>
-      <td>monitoring</td>
-      <td>0.100000</td>
-      <td>0.152174</td>
-      <td>0.333333</td>
-      <td>0.230769</td>
-      <td>0.200000</td>
-      <td>21</td>
-      <td>189</td>
-      <td>7</td>
-      <td>39</td>
-      <td>3</td>
-      <td>6</td>
-      <td>3</td>
-      <td>10</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>org.axonframework.eventhandling.scheduling</td>
       <td>scheduling</td>
       <td>0.111111</td>
       <td>0.166667</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.250000</td>
       <td>0.250000</td>
       <td>2</td>
@@ -682,19 +580,19 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <td>2</td>
       <td>10</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
       <td>2</td>
       <td>6</td>
       <td>1</td>
       <td>3</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>3</th>
       <td>org.axonframework.common.annotation</td>
       <td>annotation</td>
       <td>0.120000</td>
       <td>0.120000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.166667</td>
       <td>0.250000</td>
       <td>3</td>
@@ -709,20 +607,60 @@ Conversely, high values approaching one indicate high *Instability*. With some o
       <td>3</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>org.axonframework.messaging</td>
+      <td>messaging</td>
+      <td>0.124194</td>
+      <td>0.101449</td>
+      <td>0.0</td>
+      <td>0.107143</td>
+      <td>0.142857</td>
+      <td>77</td>
+      <td>543</td>
+      <td>35</td>
+      <td>310</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>50</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>org.axonframework.monitoring</td>
+      <td>monitoring</td>
+      <td>0.186667</td>
+      <td>0.152174</td>
+      <td>0.0</td>
+      <td>0.230769</td>
+      <td>0.200000</td>
+      <td>14</td>
+      <td>61</td>
+      <td>7</td>
+      <td>39</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>10</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
       <th>6</th>
       <td>org.axonframework.lifecycle</td>
       <td>lifecycle</td>
-      <td>0.138889</td>
+      <td>0.192308</td>
       <td>0.259259</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.214286</td>
       <td>0.250000</td>
       <td>10</td>
-      <td>62</td>
+      <td>42</td>
       <td>7</td>
       <td>20</td>
       <td>0</td>
-      <td>3</td>
+      <td>0</td>
       <td>3</td>
       <td>11</td>
       <td>1</td>
@@ -730,263 +668,263 @@ Conversely, high values approaching one indicate high *Instability*. With some o
     </tr>
     <tr>
       <th>7</th>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>0.140351</td>
-      <td>0.267442</td>
-      <td>0.318182</td>
-      <td>0.230769</td>
-      <td>0.200000</td>
-      <td>176</td>
-      <td>1078</td>
-      <td>46</td>
-      <td>126</td>
-      <td>7</td>
-      <td>15</td>
-      <td>9</td>
-      <td>30</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>8</th>
       <td>org.axonframework.common.stream</td>
       <td>stream</td>
-      <td>0.147059</td>
+      <td>0.227273</td>
       <td>0.166667</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.125000</td>
       <td>0.250000</td>
       <td>5</td>
-      <td>29</td>
+      <td>17</td>
       <td>3</td>
       <td>15</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
       <td>1</td>
       <td>7</td>
       <td>1</td>
       <td>3</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>org.axonframework.messaging.annotation</td>
-      <td>annotation</td>
-      <td>0.222798</td>
-      <td>0.310185</td>
-      <td>0.419355</td>
-      <td>0.218750</td>
-      <td>0.142857</td>
-      <td>301</td>
-      <td>1050</td>
-      <td>67</td>
-      <td>149</td>
-      <td>13</td>
-      <td>18</td>
-      <td>7</td>
-      <td>25</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>org.axonframework.eventhandling</td>
-      <td>eventhandling</td>
-      <td>0.260979</td>
-      <td>0.350348</td>
-      <td>0.509434</td>
-      <td>0.266667</td>
-      <td>0.166667</td>
-      <td>1557</td>
-      <td>4409</td>
-      <td>151</td>
-      <td>280</td>
-      <td>54</td>
-      <td>52</td>
-      <td>16</td>
-      <td>44</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>org.axonframework.common.jpa</td>
-      <td>jpa</td>
-      <td>0.272727</td>
-      <td>0.250000</td>
-      <td>1.000000</td>
-      <td>0.300000</td>
-      <td>0.200000</td>
-      <td>6</td>
-      <td>16</td>
-      <td>5</td>
-      <td>15</td>
-      <td>2</td>
-      <td>0</td>
-      <td>3</td>
-      <td>7</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>commandhandling</td>
-      <td>0.294360</td>
-      <td>0.362694</td>
-      <td>0.608696</td>
-      <td>0.333333</td>
-      <td>0.142857</td>
-      <td>642</td>
-      <td>1539</td>
-      <td>70</td>
-      <td>123</td>
-      <td>28</td>
-      <td>18</td>
-      <td>9</td>
-      <td>18</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>org.axonframework.common.legacyjpa</td>
-      <td>legacyjpa</td>
-      <td>0.300000</td>
-      <td>0.277778</td>
-      <td>1.000000</td>
-      <td>0.333333</td>
-      <td>0.250000</td>
-      <td>6</td>
-      <td>14</td>
-      <td>5</td>
-      <td>13</td>
-      <td>2</td>
-      <td>0</td>
-      <td>3</td>
-      <td>6</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>org.axonframework.serialization.upcasting</td>
-      <td>upcasting</td>
-      <td>0.312500</td>
-      <td>0.083333</td>
-      <td>0.000000</td>
-      <td>0.333333</td>
-      <td>0.500000</td>
-      <td>5</td>
-      <td>11</td>
-      <td>1</td>
-      <td>11</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>15</th>
+      <th>8</th>
       <td>org.axonframework.messaging.unitofwork</td>
       <td>unitofwork</td>
-      <td>0.328877</td>
+      <td>0.255411</td>
       <td>0.198020</td>
-      <td>0.583333</td>
+      <td>0.0</td>
       <td>0.128205</td>
       <td>0.142857</td>
-      <td>123</td>
-      <td>251</td>
+      <td>59</td>
+      <td>172</td>
       <td>20</td>
       <td>81</td>
-      <td>7</td>
-      <td>5</td>
+      <td>0</td>
+      <td>0</td>
       <td>5</td>
       <td>34</td>
       <td>1</td>
       <td>6</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>org.axonframework.common.lock</td>
-      <td>lock</td>
-      <td>0.352113</td>
-      <td>0.363636</td>
-      <td>0.500000</td>
-      <td>0.222222</td>
+      <th>9</th>
+      <td>org.axonframework.common.jpa</td>
+      <td>jpa</td>
+      <td>0.272727</td>
+      <td>0.250000</td>
+      <td>0.0</td>
+      <td>0.300000</td>
       <td>0.200000</td>
-      <td>25</td>
-      <td>46</td>
-      <td>12</td>
-      <td>21</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
+      <td>6</td>
+      <td>16</td>
+      <td>5</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
       <td>7</td>
       <td>1</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>org.axonframework.messaging.correlation</td>
-      <td>correlation</td>
-      <td>0.358974</td>
+      <th>10</th>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
+      <td>0.272727</td>
+      <td>0.267442</td>
+      <td>0.0</td>
       <td>0.230769</td>
-      <td>0.400000</td>
-      <td>0.333333</td>
-      <td>0.333333</td>
-      <td>14</td>
-      <td>25</td>
-      <td>3</td>
-      <td>10</td>
-      <td>2</td>
-      <td>3</td>
-      <td>2</td>
+      <td>0.200000</td>
+      <td>111</td>
+      <td>296</td>
+      <td>46</td>
+      <td>126</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>30</td>
+      <td>1</td>
       <td>4</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>org.axonframework.eventhandling.tokenstore</td>
+      <td>tokenstore</td>
+      <td>0.287879</td>
+      <td>0.342105</td>
+      <td>0.0</td>
+      <td>0.333333</td>
+      <td>0.333333</td>
+      <td>19</td>
+      <td>47</td>
+      <td>13</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>8</td>
       <td>1</td>
       <td>2</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>org.axonframework.common.legacyjpa</td>
+      <td>legacyjpa</td>
+      <td>0.300000</td>
+      <td>0.277778</td>
+      <td>0.0</td>
+      <td>0.333333</td>
+      <td>0.250000</td>
+      <td>6</td>
+      <td>14</td>
+      <td>5</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>6</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>org.axonframework.serialization.upcasting</td>
+      <td>upcasting</td>
+      <td>0.312500</td>
+      <td>0.083333</td>
+      <td>0.0</td>
+      <td>0.333333</td>
+      <td>0.500000</td>
+      <td>5</td>
+      <td>11</td>
+      <td>1</td>
+      <td>11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>org.axonframework.test</td>
+      <td>test</td>
+      <td>0.333333</td>
+      <td>0.318182</td>
+      <td>0.0</td>
+      <td>0.400000</td>
+      <td>0.666667</td>
+      <td>8</td>
+      <td>16</td>
+      <td>7</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>6</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>org.axonframework.tracing</td>
+      <td>tracing</td>
+      <td>0.338462</td>
+      <td>0.293478</td>
+      <td>0.0</td>
+      <td>0.360000</td>
+      <td>0.200000</td>
+      <td>66</td>
+      <td>129</td>
+      <td>27</td>
+      <td>65</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>16</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.common.jdbc</td>
+      <td>jdbc</td>
+      <td>0.346667</td>
+      <td>0.418605</td>
+      <td>0.0</td>
+      <td>0.333333</td>
+      <td>0.200000</td>
+      <td>26</td>
+      <td>49</td>
+      <td>18</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>8</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
+      <td>0.349515</td>
+      <td>0.362694</td>
+      <td>0.0</td>
+      <td>0.333333</td>
+      <td>0.142857</td>
+      <td>144</td>
+      <td>268</td>
+      <td>70</td>
+      <td>123</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>18</td>
+      <td>1</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.eventhandling.tokenstore</td>
-      <td>tokenstore</td>
-      <td>0.378378</td>
-      <td>0.342105</td>
-      <td>0.571429</td>
-      <td>0.333333</td>
-      <td>0.333333</td>
-      <td>42</td>
-      <td>69</td>
-      <td>13</td>
+      <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
+      <td>0.353846</td>
+      <td>0.310185</td>
+      <td>0.0</td>
+      <td>0.218750</td>
+      <td>0.142857</td>
+      <td>184</td>
+      <td>336</td>
+      <td>67</td>
+      <td>149</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
       <td>25</td>
-      <td>4</td>
-      <td>3</td>
-      <td>4</td>
-      <td>8</td>
       <td>1</td>
-      <td>2</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.axonframework.common.property</td>
-      <td>property</td>
-      <td>0.394737</td>
-      <td>0.380952</td>
-      <td>1.000000</td>
-      <td>0.285714</td>
-      <td>0.333333</td>
-      <td>15</td>
-      <td>23</td>
-      <td>8</td>
-      <td>13</td>
-      <td>1</td>
+      <td>org.axonframework.common.lock</td>
+      <td>lock</td>
+      <td>0.363636</td>
+      <td>0.363636</td>
+      <td>0.0</td>
+      <td>0.222222</td>
+      <td>0.200000</td>
+      <td>24</td>
+      <td>42</td>
+      <td>12</td>
+      <td>21</td>
+      <td>0</td>
       <td>0</td>
       <td>2</td>
-      <td>5</td>
+      <td>7</td>
       <td>1</td>
-      <td>2</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -1276,7 +1214,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 
 #### Table 6
 
-- Show the top 20 packages with the highest distance from the "main sequence"
+- Show the top 30 packages with the highest distance from the "main sequence"
 
 
 
@@ -1318,36 +1256,6 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>2</th>
-      <td>axon-eventsourcing-4.7.5</td>
-      <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
-      <td>statements</td>
-      <td>0.727273</td>
-      <td>1.000000</td>
-      <td>0.727273</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.monitoring</td>
-      <td>monitoring</td>
-      <td>0.566667</td>
-      <td>0.333333</td>
-      <td>0.100000</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>0.565531</td>
-      <td>0.294118</td>
-      <td>0.140351</td>
-      <td>34</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.digest</td>
       <td>digest</td>
@@ -1357,27 +1265,27 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.annotation</td>
-      <td>annotation</td>
-      <td>0.499424</td>
-      <td>0.277778</td>
-      <td>0.222798</td>
-      <td>54</td>
+      <th>3</th>
+      <td>axon-eventsourcing-4.7.5</td>
+      <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
+      <td>statements</td>
+      <td>0.482759</td>
+      <td>1.000000</td>
+      <td>0.482759</td>
+      <td>15</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>4</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.common.transaction</td>
-      <td>transaction</td>
-      <td>0.478723</td>
-      <td>0.500000</td>
-      <td>0.021277</td>
-      <td>4</td>
+      <td>org.axonframework.monitoring</td>
+      <td>monitoring</td>
+      <td>0.480000</td>
+      <td>0.333333</td>
+      <td>0.186667</td>
+      <td>6</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>5</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.jpa</td>
       <td>jpa</td>
@@ -1387,17 +1295,37 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>4</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>6</th>
+      <td>axon-test-4.7.5</td>
+      <td>org.axonframework.test</td>
+      <td>test</td>
+      <td>0.466667</td>
+      <td>0.200000</td>
+      <td>0.333333</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.unitofwork</td>
+      <td>unitofwork</td>
+      <td>0.458874</td>
+      <td>0.285714</td>
+      <td>0.255411</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.lock</td>
       <td>lock</td>
-      <td>0.466069</td>
+      <td>0.454545</td>
       <td>0.181818</td>
-      <td>0.352113</td>
+      <td>0.363636</td>
       <td>11</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
       <td>axon-messaging-4.7.5</td>
       <td>org.axonframework.common.legacyjpa</td>
       <td>legacyjpa</td>
@@ -1407,94 +1335,204 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>4</td>
     </tr>
     <tr>
+      <th>10</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.tracing</td>
+      <td>tracing</td>
+      <td>0.439316</td>
+      <td>0.222222</td>
+      <td>0.338462</td>
+      <td>18</td>
+    </tr>
+    <tr>
       <th>11</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.eventhandling.gateway</td>
-      <td>gateway</td>
-      <td>0.425397</td>
-      <td>0.600000</td>
-      <td>0.825397</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>axon-configuration-4.7.5</td>
-      <td>org.axonframework.config</td>
-      <td>config</td>
-      <td>0.421624</td>
-      <td>0.435897</td>
-      <td>0.985727</td>
-      <td>39</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>axon-test-4.7.5</td>
-      <td>org.axonframework.test.matchers</td>
-      <td>matchers</td>
-      <td>0.419643</td>
-      <td>0.125000</td>
-      <td>0.455357</td>
-      <td>24</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.correlation</td>
-      <td>correlation</td>
-      <td>0.391026</td>
-      <td>0.250000</td>
-      <td>0.358974</td>
+      <td>org.axonframework.common.transaction</td>
+      <td>transaction</td>
+      <td>0.434066</td>
+      <td>0.500000</td>
+      <td>0.065934</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>12</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging.unitofwork</td>
-      <td>unitofwork</td>
-      <td>0.385409</td>
+      <td>org.axonframework.serialization</td>
+      <td>serialization</td>
+      <td>0.433155</td>
+      <td>0.294118</td>
+      <td>0.272727</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.eventhandling.tokenstore</td>
+      <td>tokenstore</td>
+      <td>0.426407</td>
       <td>0.285714</td>
-      <td>0.328877</td>
-      <td>14</td>
+      <td>0.287879</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axon-test-4.7.5</td>
+      <td>org.axonframework.test.matchers</td>
+      <td>matchers</td>
+      <td>0.423387</td>
+      <td>0.125000</td>
+      <td>0.451613</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>axon-modelling-4.7.5</td>
+      <td>org.axonframework.modelling.saga.repository.in...</td>
+      <td>inmemory</td>
+      <td>0.416667</td>
+      <td>0.000000</td>
+      <td>0.583333</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>16</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.messaging</td>
-      <td>messaging</td>
-      <td>0.384606</td>
-      <td>0.600000</td>
-      <td>0.015394</td>
-      <td>35</td>
+      <td>org.axonframework.serialization.xml</td>
+      <td>xml</td>
+      <td>0.414634</td>
+      <td>0.000000</td>
+      <td>0.585366</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>17</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.serialization.xml</td>
-      <td>xml</td>
-      <td>0.377778</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>callbacks</td>
+      <td>0.380952</td>
       <td>0.000000</td>
-      <td>0.622222</td>
-      <td>7</td>
+      <td>0.619048</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>18</th>
       <td>axon-messaging-4.7.5</td>
-      <td>org.axonframework.tracing</td>
-      <td>tracing</td>
-      <td>0.364218</td>
-      <td>0.222222</td>
-      <td>0.413559</td>
-      <td>18</td>
+      <td>org.axonframework.commandhandling.distributed....</td>
+      <td>commandfilter</td>
+      <td>0.375000</td>
+      <td>0.000000</td>
+      <td>0.625000</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>axon-test-4.7.5</td>
-      <td>org.axonframework.test</td>
-      <td>test</td>
-      <td>0.351724</td>
-      <td>0.200000</td>
-      <td>0.448276</td>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
+      <td>0.368376</td>
+      <td>0.277778</td>
+      <td>0.353846</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.util</td>
+      <td>util</td>
+      <td>0.333333</td>
+      <td>0.000000</td>
+      <td>0.666667</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.eventhandling.async</td>
+      <td>async</td>
+      <td>0.316667</td>
+      <td>0.133333</td>
+      <td>0.550000</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.common</td>
+      <td>common</td>
+      <td>0.305457</td>
+      <td>0.642857</td>
+      <td>0.051685</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>axon-eventsourcing-4.7.5</td>
+      <td>org.axonframework.eventsourcing.snapshotting</td>
+      <td>snapshotting</td>
+      <td>0.303030</td>
+      <td>0.333333</td>
+      <td>0.363636</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging.correlation</td>
+      <td>correlation</td>
+      <td>0.300000</td>
+      <td>0.250000</td>
+      <td>0.450000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.messaging</td>
+      <td>messaging</td>
+      <td>0.275806</td>
+      <td>0.600000</td>
+      <td>0.124194</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.common.property</td>
+      <td>property</td>
+      <td>0.271930</td>
+      <td>0.333333</td>
+      <td>0.394737</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
+      <td>0.271175</td>
+      <td>0.379310</td>
+      <td>0.349515</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.eventhandling.gateway</td>
+      <td>gateway</td>
+      <td>0.256250</td>
+      <td>0.600000</td>
+      <td>0.656250</td>
       <td>5</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>axon-messaging-4.7.5</td>
+      <td>org.axonframework.eventhandling.tokenstore.jpa</td>
+      <td>jpa</td>
+      <td>0.236842</td>
+      <td>0.000000</td>
+      <td>0.763158</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -1511,7 +1549,14 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 - Color the packages by their distance to the "main sequence" (blue=near, red=far)
 
 
+
+
+    'server'
+
+
+
+
     
-![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_21_0.png)
+![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_20_0.png)
     
 

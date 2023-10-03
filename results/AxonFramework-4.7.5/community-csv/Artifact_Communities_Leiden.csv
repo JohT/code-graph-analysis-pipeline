@@ -1,0 +1,3 @@
+"firstCommunityId","finalCommunityId","memberCount","memberNames","intermediateCommunityIds","Source Cypher File: Community_Detection/Community_Detection_2c_Leiden_Stream.cypher"
+4,4,5,"/axon-messaging-4.7.5.jar,/axon-modelling-4.7.5.jar,/axon-disruptor-4.7.5.jar,/axon-eventsourcing-4.7.5.jar,/axon-configuration-4.7.5.jar","4",""
+1,1,1,"/axon-test-4.7.5.jar","1",""
