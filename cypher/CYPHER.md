@@ -46,6 +46,7 @@ Script | Directory | Description
 | [Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher](./Centrality/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher) | Centrality | Centrality 9b Hyperlink-Induced Topic Search (HITS) Memory Statistics |
 | [Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher](./Centrality/Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher) | Centrality | Centrality 9c Hyperlink-Induced Topic Search (HITS) Memory Stream |
 | [Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Write.cypher](./Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Write.cypher) | Centrality | Centrality 9d Hyperlink-Induced Topic Search (HITS) Memory Write |
+| [Set_Parameters.cypher](./Centrality/Set_Parameters.cypher) | Centrality | Example on how to set the parameters for centrality in this case for Packages and PageRank |
 | [Community_Detection_1a_Louvain_Estimate.cypher](./Community_Detection/Community_Detection_1a_Louvain_Estimate.cypher) | Community_Detection | Community Detection Louvain Estimate Memory |
 | [Community_Detection_1b_Louvain_Statistics.cypher](./Community_Detection/Community_Detection_1b_Louvain_Statistics.cypher) | Community_Detection | Community Detection Louvain Statistics |
 | [Community_Detection_1c_Louvain_Stream.cypher](./Community_Detection/Community_Detection_1c_Louvain_Stream.cypher) | Community_Detection | Community Detection Louvain Stream |
@@ -73,6 +74,7 @@ Script | Directory | Description
 | [Community_Detection_4f_Label_Propagation_Label.cypher](./Community_Detection/Community_Detection_4f_Label_Propagation_Label.cypher) | Community_Detection | Community Detection Add LabelPropagationCommunity+Id label |
 | [Compare_Community_Detection_Results.cypher](./Community_Detection/Compare_Community_Detection_Results.cypher) | Community_Detection | Compare Community Detection Results |
 | [Get_all_Packages_with_a_Community_Detection_Label.cypher](./Community_Detection/Get_all_Packages_with_a_Community_Detection_Label.cypher) | Community_Detection | Get all Packages with a Community Detection Label |
+| [Set_Parameters.cypher](./Community_Detection/Set_Parameters.cypher) | Community_Detection | Example on how to set the parameters for community detaction in this case for Packages and Leiden |
 | [Which_package_community_spans_multiple_artifacts.cypher](./Community_Detection/Which_package_community_spans_multiple_artifacts.cypher) | Community_Detection | Which package community spans multiple artifacts? |
 | [Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher](./Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher) | Community_Detection | Which package community spans several artifacts and how are the packages distributed? |
 | [Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher](./Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher) | Community_Detection | Which type community spans several artifacts and how are the types distributed? |
@@ -96,6 +98,9 @@ Script | Directory | Description
 | [Dependencies_5_Create_Subgraph.cypher](./Dependencies_Projection/Dependencies_5_Create_Subgraph.cypher) | Dependencies_Projection | Create filtered subgraph projection without zero-degree nodes. Variables: dependencies_projection, dependencies_projection_node |
 | [Dependencies_6_Check_Projection_Nodes.cypher](./Dependencies_Projection/Dependencies_6_Check_Projection_Nodes.cypher) | Dependencies_Projection | Check Projection Node Properties |
 | [Dependencies_7_Check_Projection_Relationships.cypher](./Dependencies_Projection/Dependencies_7_Check_Projection_Relationships.cypher) | Dependencies_Projection | Check Projection Relationships |
+| [Dependencies_8_Stream_Mutated.cypher](./Dependencies_Projection/Dependencies_8_Stream_Mutated.cypher) | Dependencies_Projection | Read a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
+| [Dependencies_9_Write_Mutated.cypher](./Dependencies_Projection/Dependencies_9_Write_Mutated.cypher) | Dependencies_Projection | Write a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
+| [Set_Parameters.cypher](./Dependencies_Projection/Set_Parameters.cypher) | Dependencies_Projection | Example on how to set the parameters for the dependencies projection in this case for Packages and the useage with PageRank |
 | [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
 | [External_package_levels.cypher](./External_Dependencies/External_package_levels.cypher) | External_Dependencies | External package levels |
 | [External_package_name_elements.cypher](./External_Dependencies/External_package_name_elements.cypher) | External_Dependencies | External package name elements |
@@ -148,6 +153,19 @@ Script | Directory | Description
 | [Set_Outgoing_Package_Dependencies.cypher](./Metrics/Set_Outgoing_Package_Dependencies.cypher) | Metrics | Set Outgoing Package Dependencies |
 | [Set_Outgoing_Package_Method_Call_Dependencies.cypher](./Metrics/Set_Outgoing_Package_Method_Call_Dependencies.cypher) | Metrics | Set Outgoing Package Method Call Dependencies |
 | [Set_Outgoing_Type_Dependencies.cypher](./Metrics/Set_Outgoing_Type_Dependencies.cypher) | Metrics | Set Outgoing Type Dependencies |
+| [Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher](./Node_Embeddings/Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher) | Node_Embeddings | Node Embeddings 1a using Fast Random Projection: Estimate |
+| [Node_Embeddings_1b_Fast_Random_Projection_Statistics.cypher](./Node_Embeddings/Node_Embeddings_1b_Fast_Random_Projection_Statistics.cypher) | Node_Embeddings | Node Embeddings 1b using Fast Random Projection: Statistics |
+| [Node_Embeddings_1c_Fast_Random_Projection_Mutate.cypher](./Node_Embeddings/Node_Embeddings_1c_Fast_Random_Projection_Mutate.cypher) | Node_Embeddings | Node Embeddings 1c using Fast Random Projection: Mutate |
+| [Node_Embeddings_1d_Fast_Random_Projection_Stream.cypher](./Node_Embeddings/Node_Embeddings_1d_Fast_Random_Projection_Stream.cypher) | Node_Embeddings | Node Embeddings 1d using Fast Random Projection: Stream |
+| [Node_Embeddings_1e_Fast_Random_Projection_Write.cypher](./Node_Embeddings/Node_Embeddings_1e_Fast_Random_Projection_Write.cypher) | Node_Embeddings | Node Embeddings 1d using Fast Random Projection: Write |
+| [Node_Embeddings_2a_Hash_GNN_Estimate.cypher](./Node_Embeddings/Node_Embeddings_2a_Hash_GNN_Estimate.cypher) | Node_Embeddings | Node Embeddings 2a using Hash GNN (Graph Neural Networks): Estimate |
+| [Node_Embeddings_2c_Hash_GNN_Mutate.cypher](./Node_Embeddings/Node_Embeddings_2c_Hash_GNN_Mutate.cypher) | Node_Embeddings | Node Embeddings 2b using Hash GNN (Graph Neural Networks): Mutate |
+| [Node_Embeddings_2d_Hash_GNN_Stream.cypher](./Node_Embeddings/Node_Embeddings_2d_Hash_GNN_Stream.cypher) | Node_Embeddings | Node Embeddings 2c using Hash GNN (Graph Neural Networks): Stream |
+| [Node_Embeddings_3a_Node2Vec_Estimate.cypher](./Node_Embeddings/Node_Embeddings_3a_Node2Vec_Estimate.cypher) | Node_Embeddings | Node Embeddings 3a using Node2Vec: Estimate |
+| [Node_Embeddings_3c_Node2Vec_Mutate.cypher](./Node_Embeddings/Node_Embeddings_3c_Node2Vec_Mutate.cypher) | Node_Embeddings | Node Embeddings 3c using Node2Vec: Mutate |
+| [Node_Embeddings_3d_Node2Vec_Stream.cypher](./Node_Embeddings/Node_Embeddings_3d_Node2Vec_Stream.cypher) | Node_Embeddings | Node Embeddings 3c using Node2Vec: Stream |
+| [Node_Embeddings_3e_Node2Vec_Write.cypher](./Node_Embeddings/Node_Embeddings_3e_Node2Vec_Write.cypher) | Node_Embeddings | Node Embeddings 3d using Node2Vec: Write |
+| [Set_Parameters.cypher](./Node_Embeddings/Set_Parameters.cypher) | Node_Embeddings | Example on how to set the parameters for node embeddings in this case for Packages and Node2Vec |
 | [Cyclomatic_Method_Complexity_Distribution.cypher](./Overview/Cyclomatic_Method_Complexity_Distribution.cypher) | Overview | Cyclomatic Complexity Method Complexity Distribution |
 | [Effective_Method_Line_Count_Distribution.cypher](./Overview/Effective_Method_Line_Count_Distribution.cypher) | Overview | Effective Method Line Count Distribution |
 | [Effective_lines_of_method_code_per_package.cypher](./Overview/Effective_lines_of_method_code_per_package.cypher) | Overview | Effective lines of method code per package |
@@ -165,6 +183,7 @@ Script | Directory | Description
 | [Path_Finding_3_Depth_First_Search_Path.cypher](./Path_Finding/Path_Finding_3_Depth_First_Search_Path.cypher) | Path_Finding | Path Finding 3 Depth First Search Path |
 | [Path_Finding_4_Breadth_First_Search_Path.cypher](./Path_Finding/Path_Finding_4_Breadth_First_Search_Path.cypher) | Path_Finding | Path Finding 4 Breadth First Search Path |
 | [Set_artifactName_property_on_every_Package_node.cypher](./Set_artifactName_property_on_every_Package_node.cypher) |  | Set artifactName property on every Package node |
+| [Set_Parameters.cypher](./Similarity/Set_Parameters.cypher) | Similarity | Example on how to set the parameters for similarity in this case for Packages and Node Similarity |
 | [Similarity_1a_Estimate.cypher](./Similarity/Similarity_1a_Estimate.cypher) | Similarity | Similarity Estimate Memory |
 | [Similarity_1b_Statistics.cypher](./Similarity/Similarity_1b_Statistics.cypher) | Similarity | Similarity Statistics |
 | [Similarity_1c_Stream.cypher](./Similarity/Similarity_1c_Stream.cypher) | Similarity | Similarity Stream |
