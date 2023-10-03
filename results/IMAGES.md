@@ -56,6 +56,7 @@ Image  | Analysis |
 | [ExternalDependencies_84_1.png](./AxonFramework-4.8.2/external-dependencies/ExternalDependencies_files/ExternalDependencies_84_1.png) | AxonFramework-4.8.2 |
 | [MethodMetrics_14_1.png](./AxonFramework-4.8.2/method-metrics/MethodMetrics_files/MethodMetrics_14_1.png) | AxonFramework-4.8.2 |
 | [MethodMetrics_26_1.png](./AxonFramework-4.8.2/method-metrics/MethodMetrics_files/MethodMetrics_26_1.png) | AxonFramework-4.8.2 |
+| [NodeEmbeddings_18_0.png](./AxonFramework-4.8.2/node-embeddings/NodeEmbeddings_files/NodeEmbeddings_18_0.png) | AxonFramework-4.8.2 |
 | [ObjectOrientedDesignMetrics_20_0.png](./AxonFramework-4.8.2/object-oriented-design-metrics/ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_20_0.png) | AxonFramework-4.8.2 |
 | [Overview_17_1.png](./AxonFramework-4.8.2/overview/Overview_files/Overview_17_1.png) | AxonFramework-4.8.2 |
 | [Overview_21_1.png](./AxonFramework-4.8.2/overview/Overview_files/Overview_21_1.png) | AxonFramework-4.8.2 |

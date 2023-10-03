@@ -24,6 +24,7 @@ Report | Analysis | Description
 | [ExternalDependencies.md](./AxonFramework-4.8.2/external-dependencies/ExternalDependencies.md) | AxonFramework-4.8.2 | External Dependencies |
 | [InternalDependencies.md](./AxonFramework-4.8.2/internal-dependencies/InternalDependencies.md) | AxonFramework-4.8.2 | Internal Dependencies |
 | [MethodMetrics.md](./AxonFramework-4.8.2/method-metrics/MethodMetrics.md) | AxonFramework-4.8.2 | Method Metrics |
+| [NodeEmbeddings.md](./AxonFramework-4.8.2/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.8.2 | Node Embeddings |
 | [ObjectOrientedDesignMetrics.md](./AxonFramework-4.8.2/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.8.2 | Object Oriented Design Quality Metrics |
 | [Overview.md](./AxonFramework-4.8.2/overview/Overview.md) | AxonFramework-4.8.2 | Overview |
 | [VisibilityMetrics.md](./AxonFramework-4.8.2/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.8.2 | Visibility Metrics |
