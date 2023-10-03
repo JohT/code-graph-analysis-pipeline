@@ -1,0 +1,12 @@
+// Node Embeddings 3a using Node2Vec: Estimate
+
+CALL gds.node2vec.write.estimate(
+ $dependencies_projection + '-without-empty', {
+     ,embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
+     ,iterations: 3
+     ,relationshipWeightProperty: $dependencies_projection_weight_property
+     ,writeProperty: $dependencies_projection_write_property
+  }
+)
+ YIELD requiredMemory, nodeCount, relationshipCount, bytesMin, bytesMax, heapPercentageMin, heapPercentageMax, treeView, mapView
+RETURN requiredMemory, nodeCount, relationshipCount, bytesMin, bytesMax, heapPercentageMin, heapPercentageMax, treeView, mapView
