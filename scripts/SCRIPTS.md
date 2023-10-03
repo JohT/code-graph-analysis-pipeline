@@ -38,6 +38,8 @@ Script | Directory | Description
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
 | [InternalDependenciesJupyter.sh](./reports/InternalDependenciesJupyter.sh) | reports | Creates the "internal-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "InternalDependencies.ipynb". |
 | [MethodMetricsJupyter.sh](./reports/MethodMetricsJupyter.sh) | reports | Creates the method metrics report (ipynb, md, pdf) based on the Jupyter Notebook "MethodMetrics.ipynb". |
+| [NodeEmbeddingsCsv.sh](./reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports. |
+| [NodeEmbeddingsJupyter.sh](./reports/NodeEmbeddingsJupyter.sh) | reports | Creates the "node-embeddings" report (ipynb, md, pdf) based on the Jupyter Notebook "NodeEmbeddings.ipynb". |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports. |
 | [ObjectOrientedDesignMetricsJupyter.sh](./reports/ObjectOrientedDesignMetricsJupyter.sh) | reports | Creates the "object-oriented-design-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "ObjectOrientedDesignMetrics.ipynb". |
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
