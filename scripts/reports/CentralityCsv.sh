@@ -318,7 +318,7 @@ TYPE_NODE="dependencies_projection_node=Type"
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 
 # Type Centrality
-echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
 createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 time centralityWithPageRank "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 time centralityWithArticleRank "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
