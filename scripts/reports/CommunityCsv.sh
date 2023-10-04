@@ -165,6 +165,40 @@ detectCommunitiesWithWeaklyConnectedComponents() {
     execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3f_WeaklyConnectedComponents_Label.cypher" "${@}"
 }
 
+
+# Community Detection using the K-Core Decomposition Algorithm
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+detectCommunitiesWithKCoreDecomposition() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+    local writePropertyName="dependencies_projection_write_property=communityKCoreDecompositionValue" 
+    local writeLabelName="dependencies_projection_write_label=KCoreDecomposition" 
+
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_5a_K_Core_Decomposition_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_5b_K_Core_Decomposition_Statistics.cypher" "${@}"
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_5c_K_Core_Decomposition_Mutate.cypher" "${@}" "${writePropertyName}"
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_K_Core_Decomposition.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+}
+
 # ---------------------------------------------------------------
 
 # Artifact Query Parameters
@@ -180,6 +214,7 @@ time detectCommunitiesWithLeiden "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${
 time detectCommunitiesWithLouvain "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 time detectCommunitiesWithWeaklyConnectedComponents "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 time detectCommunitiesWithLabelPropagation "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
+time detectCommunitiesWithKCoreDecomposition "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
 
 # ---------------------------------------------------------------
 
@@ -196,6 +231,7 @@ time detectCommunitiesWithLeiden "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PA
 time detectCommunitiesWithLouvain "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 time detectCommunitiesWithWeaklyConnectedComponents "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 time detectCommunitiesWithLabelPropagation "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
+time detectCommunitiesWithKCoreDecomposition "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
 
 # Package Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Compare_Community_Detection_Results.cypher" > "${FULL_REPORT_DIRECTORY}/Compare_Community_Detection_Results.csv"
@@ -216,6 +252,7 @@ time detectCommunitiesWithLeiden "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEI
 time detectCommunitiesWithLouvain "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 time detectCommunitiesWithWeaklyConnectedComponents "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 time detectCommunitiesWithLabelPropagation "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
+time detectCommunitiesWithKCoreDecomposition "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
 
 # Type Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
