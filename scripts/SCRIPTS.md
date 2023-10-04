@@ -29,7 +29,6 @@ Script | Directory | Description
 | [Neo4jv5.sh](./profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
 | [ArtifactDependenciesCsv.sh](./reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports. |
 | [ArtifactDependenciesJupyter.sh](./reports/ArtifactDependenciesJupyter.sh) | reports | Creates the "artifact-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
-| [ArtifactTopologicalSortCsv.sh](./reports/ArtifactTopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm to order the artifacts by their artifacts (build order/level) using Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports. |
@@ -45,6 +44,7 @@ Script | Directory | Description
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
 | [OverviewJupyter.sh](./reports/OverviewJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
+| [TopologicalSortCsv.sh](./reports/TopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm for directed acyclic graphs (DAG) to order code units by their dependencies |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports. |
 | [VisibilityMetricsJupyter.sh](./reports/VisibilityMetricsJupyter.sh) | reports | Creates the "visibility-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "VisibilityMetrics.ipynb". |
 | [WordcloudJupyter.sh](./reports/WordcloudJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
