@@ -88,43 +88,43 @@ The result can be used in machine learning as features approximating the graph s
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.tracing.attributes</td>
+      <td>org.axonframework.disruptor.commandhandling</td>
       <td>0</td>
-      <td>0.013868</td>
-      <td>axon-messaging-4.8.2</td>
-      <td>[-0.31267625093460083, 0.1016240268945694, -0....</td>
+      <td>0.013999</td>
+      <td>axon-disruptor-4.8.2</td>
+      <td>[0.4645318388938904, -0.03662916645407677, -0....</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.util</td>
-      <td>0</td>
-      <td>0.027632</td>
-      <td>axon-messaging-4.8.2</td>
-      <td>[-0.19514280557632446, 0.2654886245727539, -0....</td>
+      <td>org.axonframework.test</td>
+      <td>1</td>
+      <td>0.028744</td>
+      <td>axon-test-4.8.2</td>
+      <td>[0.490167498588562, -0.1074967309832573, 0.002...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.modelling.command</td>
+      <td>org.axonframework.test.aggregate</td>
       <td>1</td>
-      <td>0.033153</td>
-      <td>axon-modelling-4.8.2</td>
-      <td>[-0.14552786946296692, 0.07297534495592117, -0...</td>
+      <td>0.013868</td>
+      <td>axon-test-4.8.2</td>
+      <td>[0.4954816997051239, -0.11642370373010635, -0....</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.modelling.command.inspection</td>
+      <td>org.axonframework.test.matchers</td>
       <td>1</td>
-      <td>0.023037</td>
-      <td>axon-modelling-4.8.2</td>
-      <td>[-0.13238555192947388, 0.054727762937545776, 0...</td>
+      <td>0.020120</td>
+      <td>axon-test-4.8.2</td>
+      <td>[0.4632232189178467, -0.10380994528532028, -0....</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>org.axonframework.test.saga</td>
       <td>1</td>
       <td>0.013868</td>
-      <td>axon-modelling-4.8.2</td>
-      <td>[-0.011791974306106567, 0.036903269588947296, ...</td>
+      <td>axon-test-4.8.2</td>
+      <td>[0.3809250593185425, -0.11352261900901794, -0....</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.029s...
+    [t-SNE] Computed neighbors for 93 samples in 0.035s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.496500
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.546570
-    [t-SNE] KL divergence after 850 iterations: 0.127048
+    [t-SNE] Mean sigma: 0.491796
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.185715
+    [t-SNE] KL divergence after 1000 iterations: 0.160638
 
 
 
@@ -176,48 +176,48 @@ reduces them to a 2 dimensional array for visualization.
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.tracing.attributes</td>
-      <td>axon-messaging-4.8.2</td>
+      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>axon-disruptor-4.8.2</td>
       <td>0</td>
-      <td>0.013868</td>
-      <td>-0.626748</td>
-      <td>-1.734230</td>
+      <td>0.013999</td>
+      <td>-7.163761</td>
+      <td>-1.406978</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.util</td>
-      <td>axon-messaging-4.8.2</td>
-      <td>0</td>
-      <td>0.027632</td>
-      <td>2.648445</td>
-      <td>-0.709589</td>
+      <td>org.axonframework.test</td>
+      <td>axon-test-4.8.2</td>
+      <td>1</td>
+      <td>0.028744</td>
+      <td>4.794747</td>
+      <td>1.837888</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.modelling.command</td>
-      <td>axon-modelling-4.8.2</td>
+      <td>org.axonframework.test.aggregate</td>
+      <td>axon-test-4.8.2</td>
       <td>1</td>
-      <td>0.033153</td>
-      <td>-1.864579</td>
-      <td>2.460430</td>
+      <td>0.013868</td>
+      <td>4.766205</td>
+      <td>1.003411</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.modelling.command.inspection</td>
-      <td>axon-modelling-4.8.2</td>
+      <td>org.axonframework.test.matchers</td>
+      <td>axon-test-4.8.2</td>
       <td>1</td>
-      <td>0.023037</td>
-      <td>-2.148328</td>
-      <td>2.274505</td>
+      <td>0.020120</td>
+      <td>4.894242</td>
+      <td>1.813505</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
-      <td>axon-modelling-4.8.2</td>
+      <td>org.axonframework.test.saga</td>
+      <td>axon-test-4.8.2</td>
       <td>1</td>
       <td>0.013868</td>
-      <td>-2.684988</td>
-      <td>3.431300</td>
+      <td>5.458785</td>
+      <td>2.092274</td>
     </tr>
   </tbody>
 </table>
