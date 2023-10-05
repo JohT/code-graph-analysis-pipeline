@@ -54,62 +54,6 @@ createProjection() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
 }
 
-# Community Detection using the Label Propagation Algorithm
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-detectCommunitiesWithLabelPropagation() {
-    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
-
-    # Statistics
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4a_Label_Propagation_Estimate.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4b_Label_Propagation_Statistics.cypher" "${@}"
-    
-    # Stream to CSV
-    local nodeLabel
-    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4c_Label_Propagation_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Label_Propagation.csv"
-    
-    # Update Graph (node properties and labels)
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4d_Label_Propagation_Write.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4e_Label_Propagation_Label_Delete.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4f_Label_Propagation_Label.cypher" "${@}"
-}
-
-# Community Detection using the Leiden Algorithm
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-# - dependencies_leiden_gamma
-#   Leiden algorithmus parameter "gamma". Example (Default): 1.00
-detectCommunitiesWithLeiden() {
-    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
-
-    # Statistics
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2a_Leiden_Estimate.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2b_Leiden_Statistics.cypher" "${@}"
-    
-    # Stream to CSV
-    local nodeLabel
-    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2c_Leiden_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Leiden.csv"
-    
-    # Update Graph (node properties and labels)
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2d_Leiden_Write_Node_Property.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2e_Leiden_Label_Delete.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2f_Leiden_Label.cypher" "${@}"
-}
-
 # Community Detection using the Louvain Algorithm
 # 
 # Required Parameters:
@@ -121,21 +65,81 @@ detectCommunitiesWithLeiden() {
 #   Name of the node property that contains the dependency weight. Example: "weight"
 detectCommunitiesWithLouvain() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=louvainCommunityId" 
+    local writePropertyNameIntermediate="dependencies_projection_write_property=intermediateLouvainCommunityIds" 
+    
+    local excludeIntermediateCommunities="dependencies_include_intermediate_communities=false" 
+    local includeIntermediateCommunities="dependencies_include_intermediate_communities=true" 
+    
+    local writeLabelName="dependencies_projection_write_label=LouvainCommunity" 
 
     # Statistics
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1a_Louvain_Estimate.cypher" "${@}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1a_Louvain_Estimate.cypher" "${@}" "${writePropertyNameIntermediate}"
     execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1b_Louvain_Statistics.cypher" "${@}"
     
-    # Stream to CSV
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1c_Louvain_Mutate.cypher" "${@}" "${writePropertyName}" "${excludeIntermediateCommunities}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1c_Louvain_Mutate.cypher" "${@}" "${writePropertyNameIntermediate}" "${includeIntermediateCommunities}"
+
+    # Stream to CSV 
+    # Reads the mutated intermediate community ids for hierarchical algorighms in general
+    # and provides the first, the final and all intermediate community ids.
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1c_Louvain_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Louvain.csv"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1d_Stream_Intermediate_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Louvain.csv"
+    #execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1d_Louvain_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Louvain.csv"
     
-    # Update Graph (node properties and labels)
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1d_Louvain_Write_louvainCommunityId.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1d_Louvain_Write_intermediateLouvainCommunityId.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1e_Louvain_Label_Delete.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1f_Louvain_Label.cypher" "${@}"
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+}
+
+# Community Detection using the Leiden Algorithm
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+detectCommunitiesWithLeiden() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=leidenCommunityId" 
+    local writePropertyNameIntermediate="dependencies_projection_write_property=intermediateleidenCommunityIds" 
+    
+    local excludeIntermediateCommunities="dependencies_include_intermediate_communities=false" 
+    local includeIntermediateCommunities="dependencies_include_intermediate_communities=true" 
+    
+    local writeLabelName="dependencies_projection_write_label=LeidenCommunity" 
+
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2a_Leiden_Estimate.cypher" "${@}" "${writePropertyNameIntermediate}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2b_Leiden_Statistics.cypher" "${@}"
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2c_Leiden_Mutate.cypher" "${@}" "${writePropertyName}" "${excludeIntermediateCommunities}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2c_Leiden_Mutate.cypher" "${@}" "${writePropertyNameIntermediate}" "${includeIntermediateCommunities}"
+
+    # Stream to CSV
+    # Reads the mutated intermediate community ids for hierarchical algorighms in general
+    # and provides the first, the final and all intermediate community ids.
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_1d_Stream_Intermediate_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Louvain.csv"
+    #execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_2d_Leiden_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Leiden.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
 }
 
 # Community Detection using the Weakly Connected Components Algorithm
@@ -149,22 +153,64 @@ detectCommunitiesWithLouvain() {
 #   Name of the node property that contains the dependency weight. Example: "weight"
 detectCommunitiesWithWeaklyConnectedComponents() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=weaklyConnectedComponentId" 
+    local writeLabelName="dependencies_projection_write_label=WeaklyConnectedComponent" 
 
     # Statistics
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3a_WeaklyConnectedComponents_Estimate.cypher" "${@}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3a_WeaklyConnectedComponents_Estimate.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3b_WeaklyConnectedComponents_Statistics.cypher" "${@}"
     
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3c_WeaklyConnectedComponents_Mutate.cypher" "${@}" "${writePropertyName}"
+
     # Stream to CSV
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3c_WeaklyConnectedComponents_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Weakly_Connected_Components.csv"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated_Grouped.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Weakly_Connected_Components.csv"
+    #execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3d_WeaklyConnectedComponents_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Weakly_Connected_Components.csv"
     
-    # Update Graph (node properties and labels)
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3d_WeaklyConnectedComponents_Write.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3e_WeaklyConnectedComponents_Label_Delete.cypher" "${@}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3f_WeaklyConnectedComponents_Label.cypher" "${@}"
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
 }
 
+# Community Detection using the Label Propagation Algorithm
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+detectCommunitiesWithLabelPropagation() {
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+
+    local writePropertyName="dependencies_projection_write_property=labelPropagationCommunityId" 
+    local writeLabelName="dependencies_projection_write_label=LabelPropagation" 
+
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4a_Label_Propagation_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4b_Label_Propagation_Statistics.cypher" "${@}"
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4c_Label_Propagation_Mutate.cypher" "${@}" "${writePropertyName}"
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated_Grouped.cypher" "${@}"  "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Label_Propagation.csv"
+    #execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_4d_Label_Propagation_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Label_Propagation.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+}
 
 # Community Detection using the K-Core Decomposition Algorithm
 # 
@@ -178,6 +224,7 @@ detectCommunitiesWithWeaklyConnectedComponents() {
 detectCommunitiesWithKCoreDecomposition() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
     local writePropertyName="dependencies_projection_write_property=communityKCoreDecompositionValue" 
     local writeLabelName="dependencies_projection_write_label=KCoreDecomposition" 
 
@@ -191,14 +238,22 @@ detectCommunitiesWithKCoreDecomposition() {
     # Stream to CSV
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_K_Core_Decomposition.csv"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated_Grouped.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_K_Core_Decomposition.csv"
     
     # Update Graph (node properties and labels) using the already mutated property projection
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
 }
 
+detectCommunities() {
+    createProjection "${@}"
+    time detectCommunitiesWithWeaklyConnectedComponents "${@}"
+    time detectCommunitiesWithLabelPropagation "${@}"
+    time detectCommunitiesWithLouvain "${@}"
+    time detectCommunitiesWithLeiden "${@}"
+    time detectCommunitiesWithKCoreDecomposition "${@}"
+}
 # ---------------------------------------------------------------
 
 # Artifact Query Parameters
@@ -209,12 +264,7 @@ ARTIFACT_GAMMA="dependencies_leiden_gamma=1.11" # default = 1.00
 
 # Artifact Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-time detectCommunitiesWithLeiden "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
-time detectCommunitiesWithLouvain "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-time detectCommunitiesWithWeaklyConnectedComponents "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-time detectCommunitiesWithLabelPropagation "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
-time detectCommunitiesWithKCoreDecomposition "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
+detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
 
 # ---------------------------------------------------------------
 
@@ -226,12 +276,7 @@ PACKAGE_GAMMA="dependencies_leiden_gamma=1.14" # default = 1.00
 
 # Package Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') communityCsv: Processing package dependencies..."
-createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-time detectCommunitiesWithLeiden "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
-time detectCommunitiesWithLouvain "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-time detectCommunitiesWithWeaklyConnectedComponents "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-time detectCommunitiesWithLabelPropagation "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
-time detectCommunitiesWithKCoreDecomposition "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
+detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
 
 # Package Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Compare_Community_Detection_Results.cypher" > "${FULL_REPORT_DIRECTORY}/Compare_Community_Detection_Results.csv"
@@ -247,12 +292,7 @@ TYPE_GAMMA="dependencies_leiden_gamma=5.00" # default = 1.00
 
 # Type Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-time detectCommunitiesWithLeiden "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
-time detectCommunitiesWithLouvain "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-time detectCommunitiesWithWeaklyConnectedComponents "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-time detectCommunitiesWithLabelPropagation "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
-time detectCommunitiesWithKCoreDecomposition "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
+detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
 
 # Type Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"

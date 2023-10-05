@@ -7,7 +7,7 @@ CALL gds.beta.leiden.write.estimate(
   tolerance: 0.0000001,
   consecutiveIds: true,
   relationshipWeightProperty: $dependencies_projection_weight_property,
-  writeProperty: 'leidenCommunityId'
+  writeProperty: $dependencies_projection_write_property
 })
 YIELD nodeCount
      ,relationshipCount

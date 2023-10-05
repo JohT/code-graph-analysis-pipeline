@@ -4,7 +4,7 @@ CALL gds.louvain.write.estimate(
  $dependencies_projection + '-without-empty', {
   tolerance: 0.00001,
   relationshipWeightProperty: $dependencies_projection_weight_property,
-  writeProperty: 'louvainCommunityId',
+  writeProperty: $dependencies_projection_write_property,
   includeIntermediateCommunities: true
 })
 YIELD nodeCount
