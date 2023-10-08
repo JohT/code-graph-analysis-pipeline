@@ -246,6 +246,42 @@ detectCommunitiesWithKCoreDecomposition() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
 }
 
+# Community Detection using the Approximate Maximum k-cut Algorithm
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+detectCommunitiesWithApproximateMaximumKCut() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=communityMaximumKCutId" 
+    local writeLabelName="dependencies_projection_write_label=MaximumKCut" 
+
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_6a_Approximate_Maximum_k_cut_Estimate.cypher" "${@}" "${writePropertyName}"
+    # Note: There is no statistics function yet in gds version 2.5.0-preview3
+    #execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_5b_K_Core_Decomposition_Statistics.cypher" "${@}"
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_6c_Approximate_Maximum_k_cut_Mutate.cypher" "${@}" "${writePropertyName}"
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated_Grouped.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Approximate_Maximum_K_Cut.csv"
+    #execute_cypher "${PROJECTION_CYPHER_DIR}/Community_Detection_6d_Approximate_Maximum_k_cut_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Approximate_Maximum_K_Cut.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+}
+
 detectCommunities() {
     createProjection "${@}"
     time detectCommunitiesWithWeaklyConnectedComponents "${@}"
@@ -253,6 +289,7 @@ detectCommunities() {
     time detectCommunitiesWithLouvain "${@}"
     time detectCommunitiesWithLeiden "${@}"
     time detectCommunitiesWithKCoreDecomposition "${@}"
+    time detectCommunitiesWithApproximateMaximumKCut "${@}"
 }
 # ---------------------------------------------------------------
 
@@ -261,10 +298,11 @@ ARTIFACT_PROJECTION="dependencies_projection=artifact-community"
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 ARTIFACT_GAMMA="dependencies_leiden_gamma=1.11" # default = 1.00
+ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
 # Artifact Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}"
+detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
 
 # ---------------------------------------------------------------
 
@@ -273,10 +311,11 @@ PACKAGE_PROJECTION="dependencies_projection=package-community"
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 PACKAGE_GAMMA="dependencies_leiden_gamma=1.14" # default = 1.00
+PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 
 # Package Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') communityCsv: Processing package dependencies..."
-detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}"
+detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
 
 # Package Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Compare_Community_Detection_Results.cypher" > "${FULL_REPORT_DIRECTORY}/Compare_Community_Detection_Results.csv"
@@ -289,10 +328,11 @@ TYPE_PROJECTION="dependencies_projection=type-community"
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 TYPE_GAMMA="dependencies_leiden_gamma=5.00" # default = 1.00
+TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
 # Type Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}"
+detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
 
 # Type Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
