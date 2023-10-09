@@ -5,6 +5,9 @@
 # Note: If called with "clear" instead of a filename then the generated markdown reference documentation file is deleted.
 #       This is helpful to start over with the generation of a new document.
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Markdown file name
 markdownFile="ENVIRONMENT_VARIABLES.md"
 

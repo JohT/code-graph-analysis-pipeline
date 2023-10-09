@@ -6,6 +6,9 @@
 # Note: The first (and only) parameter is the version of AxonFramework to analyze.
 # Note: This script is meant to be started in the root directory of this repository.
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Read the first input argument containing the version of the artifacts
 if [ "$#" -ne 1 ]; then
   echo "analyzeAxonFramework Error: Usage: $0 <version>" >&2
@@ -20,12 +23,12 @@ if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
 fi
 
 # Create the temporary directory for all analysis projects.
-mkdir -p ./temp || exit 1
-cd ./temp || exit 1
+mkdir -p ./temp
+cd ./temp
 
 # Create the working directory for this specific analysis.
-mkdir -p "./AxonFramework-${artifactsVersion}" || exit 2
-cd "./AxonFramework-${artifactsVersion}"  || exit 2
+mkdir -p "./AxonFramework-${artifactsVersion}"
+cd "./AxonFramework-${artifactsVersion}" 
 
 # Create the artifacts directory that will contain the code to be analyzed.
 mkdir -p ./artifacts

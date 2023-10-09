@@ -92,7 +92,7 @@ fi
 echo "executeJupyterNotebook: pathToConda=${pathToConda}"
 
 # Activate conda shell hook
-eval "$(${pathToConda}conda shell.bash hook)" || exit 1
+eval "$(${pathToConda}conda shell.bash hook)"
 
 # Create (if missing) and activate Conda environment for code structure graph analysis
 backupCondaEnvironment=$CONDA_DEFAULT_ENV
@@ -107,9 +107,9 @@ if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
             exit 2
         fi
         echo "executeJupyterNotebook: Creating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
-        ${pathToConda}conda env create --file ${jupyter_notebook_file_path}/environment.yml --name "${CODEGRAPH_CONDA_ENVIRONMENT}" || exit 3
+        ${pathToConda}conda env create --file ${jupyter_notebook_file_path}/environment.yml --name "${CODEGRAPH_CONDA_ENVIRONMENT}"
     fi
-    ${pathToConda}conda activate "${CODEGRAPH_CONDA_ENVIRONMENT}"  || exit 4
+    ${pathToConda}conda activate "${CODEGRAPH_CONDA_ENVIRONMENT}" 
     echo "executeJupyterNotebook: Activated Conda environment: $CODEGRAPH_CONDA_ENVIRONMENT "
 fi
 
@@ -118,11 +118,10 @@ jupyter nbconvert --to notebook \
                   --execute "${jupyter_notebook_file}" \
                   --output "$jupyter_notebook_output_file_name" \
                   --output-dir="./" \
-                  --ExecutePreprocessor.timeout=480 \
-                  || exit 5
+                  --ExecutePreprocessor.timeout=480
 
 # Convert the Jupyter Notebook to Markdown 
-jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file" || exit 6
+jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file"
 
 # Remove style blocks from Markdown file
 # The inplace option -i of sed doesn't seem to work at least on Mac in this case.
@@ -137,6 +136,6 @@ fi
 
 # Restore Conda environment
 if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
-    ${pathToConda}conda activate "${backupCondaEnvironment}" || exit 8
+    ${pathToConda}conda activate "${backupCondaEnvironment}"
     echo "executeJupyterNotebook: Restored Conda Environment: ${backupCondaEnvironment}"
 fi

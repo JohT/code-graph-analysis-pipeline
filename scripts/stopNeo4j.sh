@@ -4,6 +4,9 @@
 
 # Note: Does nothing if the database is already stopped.
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.10.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
@@ -37,7 +40,9 @@ else
 fi
 
 # Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
+neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
+neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
+if [ -n "${neo4jNotRunning}" ]; then
     echo "stopNeo4j: Successfully stopped neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 else
     echo "stopNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} still running. Something went wrong. Details see 'NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status'."
@@ -45,8 +50,8 @@ else
 fi
 
 # Check if there are still processes running that listen to the Neo4j HTTP port
-port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN )
-if echo -n "${port_listener_process_id}" | grep -q ".*"; then
+port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN || true )
+if [ -n "${port_listener_process_id}" ]; then
     echo "stopNeo4j: Terminating the following process that still listens to port ${NEO4J_HTTP_PORT}"
     ps -p "${port_listener_process_id}"
     # Terminate the process that is listening to the Neo4j HTTP port
