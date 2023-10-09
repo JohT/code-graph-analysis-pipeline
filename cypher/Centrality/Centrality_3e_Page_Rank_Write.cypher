@@ -1,4 +1,4 @@
-//Centrality 3d Page Rank Write
+// Centrality 3e Page Rank Write
 
 CALL gds.pageRank.write(
  $dependencies_projection + '-without-empty', {

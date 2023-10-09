@@ -1,4 +1,5 @@
-//Centrality 4a Article Rank Estimate Memory
+// Centrality 4a Article Rank Estimate Memory
+
 CALL gds.articleRank.write.estimate(
   $dependencies_projection + '-without-empty', {
    writeProperty: $dependencies_projection_write_property

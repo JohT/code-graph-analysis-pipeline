@@ -1,4 +1,4 @@
-// Read a property from the projection. Variables: dependencies_projection, dependencies_projection_write_property
+// Read a property from the projection and order it by its value descending. Variables: dependencies_projection, dependencies_projection_write_property
 
 CALL gds.graph.nodeProperties.stream(
      $dependencies_projection + '-without-empty'
@@ -12,3 +12,4 @@ RETURN DISTINCT coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.signature, co
      ,coalesce(codeUnit.name, replace(last(split(codeUnit.fileName, '/')), '.jar', ''))      AS shortCodeUnitName
      ,propertyName
      ,propertyValue
+ORDER BY propertyValue DESCENDING, codeUnitName ASCENDING

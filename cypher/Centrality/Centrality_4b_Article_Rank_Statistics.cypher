@@ -1,4 +1,5 @@
-//Centrality 4b Article Rank Statistics
+// Centrality 4b Article Rank Statistics
+
 CALL gds.articleRank.stats(
  $dependencies_projection + '-without-empty', {
    maxIterations: 30

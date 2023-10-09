@@ -1,25 +1,17 @@
-//Centrality 4d Article Rank Write
+// Centrality 5e Betweeness Write
 
-CALL gds.articleRank.write(
+CALL gds.betweenness.write(
  $dependencies_projection + '-without-empty', {
-   maxIterations: 50
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
-  ,relationshipWeightProperty: $dependencies_projection_weight_property
-  ,scaler: "L2Norm"
-  ,writeProperty: $dependencies_projection_write_property
+    relationshipWeightProperty: $dependencies_projection_weight_property
+   ,writeProperty: $dependencies_projection_write_property
 })
 YIELD nodePropertiesWritten
-     ,ranIterations
-     ,didConverge
      ,preProcessingMillis
      ,computeMillis
      ,postProcessingMillis
      ,writeMillis
      ,centralityDistribution
 RETURN nodePropertiesWritten
-      ,ranIterations
-      ,didConverge
       ,preProcessingMillis
       ,computeMillis
       ,postProcessingMillis

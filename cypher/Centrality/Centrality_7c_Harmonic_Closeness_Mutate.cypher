@@ -1,15 +1,19 @@
-// Centrality 5b Betweeness Statistics
+// Centrality 7c Harmonic Closeness Mutate
 
- CALL gds.betweenness.stats(
+CALL gds.closeness.harmonic.mutate(
   $dependencies_projection + '-without-empty', {
-     relationshipWeightProperty: $dependencies_projection_weight_property
-    })
- YIELD preProcessingMillis
+    mutateProperty: $dependencies_projection_write_property
+})
+ YIELD nodePropertiesWritten
+      ,preProcessingMillis
       ,computeMillis
+      ,mutateMillis
       ,postProcessingMillis
       ,centralityDistribution
-RETURN preProcessingMillis
+RETURN nodePropertiesWritten
+      ,preProcessingMillis
       ,computeMillis
+      ,mutateMillis
       ,postProcessingMillis
       ,centralityDistribution.min
       ,centralityDistribution.mean
@@ -19,3 +23,4 @@ RETURN preProcessingMillis
       ,centralityDistribution.p90
       ,centralityDistribution.p95
       ,centralityDistribution.p99
+      ,centralityDistribution.p999

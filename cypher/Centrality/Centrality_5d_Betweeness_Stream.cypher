@@ -1,12 +1,8 @@
-//Centrality 3c Page Rank Stream
+// Centrality 5d Betweeness Stream
 
-CALL gds.pageRank.stream(
+CALL gds.betweenness.stream(
  $dependencies_projection + '-without-empty', {
-   maxIterations: 50
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
-  ,relationshipWeightProperty: $dependencies_projection_weight_property
-  ,scaler: "L2Norm"
+   relationshipWeightProperty: $dependencies_projection_weight_property
 })
  YIELD nodeId, score
   WITH gds.util.asNode(nodeId) AS member, score

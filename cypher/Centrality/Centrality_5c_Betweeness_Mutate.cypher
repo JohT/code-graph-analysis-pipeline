@@ -1,23 +1,20 @@
-// Centrality 2b Page Rank Statistics
+// Centrality 5c Betweeness Mutate
 
-CALL gds.pageRank.stats(
+CALL gds.betweenness.mutate(
  $dependencies_projection + '-without-empty', {
-   maxIterations: 50
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
-  ,relationshipWeightProperty: $dependencies_projection_weight_property
-  ,scaler: "L1Norm"
+   relationshipWeightProperty: $dependencies_projection_weight_property
+  ,mutateProperty: $dependencies_projection_write_property
 })
- YIELD ranIterations
-      ,didConverge
+ YIELD nodePropertiesWritten
       ,preProcessingMillis
       ,computeMillis
+      ,mutateMillis
       ,postProcessingMillis
       ,centralityDistribution
-RETURN ranIterations
-      ,didConverge
+RETURN nodePropertiesWritten
       ,preProcessingMillis
       ,computeMillis
+      ,mutateMillis
       ,postProcessingMillis
       ,centralityDistribution.min
       ,centralityDistribution.mean
@@ -27,3 +24,4 @@ RETURN ranIterations
       ,centralityDistribution.p90
       ,centralityDistribution.p95
       ,centralityDistribution.p99
+      ,centralityDistribution.p999

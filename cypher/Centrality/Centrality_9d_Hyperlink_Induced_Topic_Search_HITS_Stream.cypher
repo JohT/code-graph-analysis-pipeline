@@ -1,4 +1,4 @@
-// Centrality 9c Hyperlink-Induced Topic Search (HITS) Memory Stream
+// Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream
 
   CALL gds.alpha.hits.stream(
  $dependencies_projection + '-without-empty', {

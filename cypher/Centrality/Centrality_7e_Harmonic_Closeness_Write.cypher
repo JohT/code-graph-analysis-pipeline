@@ -1,6 +1,6 @@
 // Centrality 7d Harmonic Closeness Write
 
-CALL gds.alpha.closeness.harmonic.write(
+CALL gds.closeness.harmonic.write(
     $dependencies_projection + '-without-empty', {
     ,writeProperty: $dependencies_projection_write_property
 })

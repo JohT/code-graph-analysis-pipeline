@@ -1,4 +1,4 @@
-//Centrality 5a Betweeness Estimate
+// Centrality 5a Betweeness Estimate
 
 CALL gds.betweenness.write.estimate(
  $dependencies_projection + '-without-empty', {

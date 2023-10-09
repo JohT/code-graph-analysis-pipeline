@@ -1,6 +1,6 @@
 // Centrality 8c Closeness Stream
 
-CALL gds.beta.closeness.stream(
+CALL gds.closeness.stream(
   $dependencies_projection + '-without-empty', {
    useWassermanFaust: true
 })

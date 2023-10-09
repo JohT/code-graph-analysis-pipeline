@@ -1,8 +1,8 @@
-//Centrality 4c Article Rank Stream
+// Centrality 3d Page Rank Stream
 
-CALL gds.articleRank.stream(
+CALL gds.pageRank.stream(
  $dependencies_projection + '-without-empty', {
-   maxIterations: 30
+   maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
   ,relationshipWeightProperty: $dependencies_projection_weight_property

@@ -1,4 +1,4 @@
-//Centrality 2a Page Rank Estimate Memory
+// Centrality 2a Page Rank Estimate Memory
 
 CALL gds.pageRank.write.estimate(
  $dependencies_projection + '-without-empty', {

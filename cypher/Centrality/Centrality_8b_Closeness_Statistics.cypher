@@ -1,6 +1,6 @@
 //Centrality 8b Closeness Statistics
 
-CALL gds.beta.closeness.stats(
+CALL gds.closeness.stats(
  $dependencies_projection + '-without-empty', {
    useWassermanFaust: true
 })
