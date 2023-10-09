@@ -8,7 +8,12 @@ YIELD nodeId, nodeProperty, propertyValue
  WITH gds.util.asNode(nodeId) AS codeUnit
      ,nodeProperty            AS propertyName
      ,propertyValue
-RETURN DISTINCT coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.name)                AS codeUnitName
-     ,coalesce(codeUnit.name, replace(last(split(codeUnit.fileName, '/')), '.jar', '')) AS shortCodeUnitName
-     ,propertyName
+ WITH propertyName
      ,propertyValue
+     ,coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.name)                          AS codeUnitName
+     ,coalesce(codeUnit.name, replace(last(split(codeUnit.fileName, '/')), '.jar', '')) AS shortCodeUnitName
+ WITH propertyName
+     ,propertyValue
+     ,collect(DISTINCT codeUnitName)      AS codeUnitNames
+     ,collect(DISTINCT shortCodeUnitName) AS shortCodeUnitNames
+RETURN propertyName, propertyValue, size(codeUnitNames) AS codeUnits, codeUnitNames, shortCodeUnitNames

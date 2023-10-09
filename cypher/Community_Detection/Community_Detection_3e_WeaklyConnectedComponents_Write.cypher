@@ -1,10 +1,10 @@
-// Community Detection Weakly Connected Components write node property weaklyConnectedComponentId
+// Community Detection Weakly Connected Components write node property communityWeaklyConnectedComponentId
 
 CALL gds.wcc.write(
  $dependencies_projection + '-without-empty', {
        relationshipWeightProperty: $dependencies_projection_weight_property
       ,consecutiveIds: true
-      ,writeProperty: 'weaklyConnectedComponentId'
+      ,writeProperty: 'communityWeaklyConnectedComponentId'
 })
 YIELD componentCount
      ,preProcessingMillis

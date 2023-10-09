@@ -1,30 +1,28 @@
-//Community Detection Louvain Write intermediateLouvainCommunityId
+// Community Detection Label Propagation write node property communityLabelPropagationId
 
-CALL gds.louvain.write(
+CALL gds.labelPropagation.write(
  $dependencies_projection + '-without-empty', {
-    tolerance: 0.00001,
-    includeIntermediateCommunities: true,
-    relationshipWeightProperty: $dependencies_projection_weight_property,
-    writeProperty: 'intermediateLouvainCommunityId'
+     relationshipWeightProperty: $dependencies_projection_weight_property
+    ,consecutiveIds: true
+    ,writeProperty: 'communityLabelPropagationId'
 })
-YIELD preProcessingMillis
+YIELD ranIterations
+     ,didConverge
+     ,communityCount
+     ,preProcessingMillis
      ,computeMillis
      ,writeMillis
      ,postProcessingMillis
      ,nodePropertiesWritten
-     ,communityCount
-     ,ranLevels
-     ,modularity
-     ,modularities
      ,communityDistribution
-RETURN preProcessingMillis
+RETURN ranIterations
+      ,didConverge
+      ,communityCount
+      ,preProcessingMillis
       ,computeMillis
       ,writeMillis
       ,postProcessingMillis
       ,nodePropertiesWritten
-      ,communityCount
-      ,ranLevels
-      ,modularity
       ,communityDistribution.min
       ,communityDistribution.mean
       ,communityDistribution.max
@@ -34,4 +32,3 @@ RETURN preProcessingMillis
       ,communityDistribution.p95
       ,communityDistribution.p99
       ,communityDistribution.p999
-      ,modularities

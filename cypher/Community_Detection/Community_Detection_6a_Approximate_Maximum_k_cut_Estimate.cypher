@@ -1,10 +1,10 @@
-// Community Detection Label Propagation Estimate
+// Community Detection Approximate Maximum k-cut Estimate
 
-CALL gds.labelPropagation.write.estimate(
+CALL gds.maxkcut.mutate.estimate(
  $dependencies_projection + '-without-empty', {
      relationshipWeightProperty: $dependencies_projection_weight_property
-    ,writeProperty: $dependencies_projection_write_property
-    ,consecutiveIds: true
+    ,mutateProperty: $dependencies_projection_write_property
+    ,k: toInteger($dependencies_maxkcut)
 })
  YIELD requiredMemory
       ,nodeCount

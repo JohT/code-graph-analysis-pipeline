@@ -1,13 +1,11 @@
-//Community Detection Leiden Write property communityLeidenId
+//Community Detection Louvain write node property communityLouvainId
 
-CALL gds.beta.leiden.write(
+CALL gds.louvain.write(
  $dependencies_projection + '-without-empty', {
-  gamma: toFloat($dependencies_leiden_gamma),
-  theta: 0.001,
-  tolerance: 0.0000001,
-  consecutiveIds: true,
-  relationshipWeightProperty: $dependencies_projection_weight_property,
-  writeProperty: 'communityLeidenId'
+    tolerance: 0.00001,
+    consecutiveIds: true,
+    relationshipWeightProperty: $dependencies_projection_weight_property,
+    writeProperty: 'communityLouvainId'
 })
 YIELD preProcessingMillis
      ,computeMillis
