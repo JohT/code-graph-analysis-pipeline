@@ -124,15 +124,15 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 - How can i trigger a full rescan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
 
-- How can PDF generation be skipped to speed up report generation and not depend on chromium?  
-  👉 Set environment variable `SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  
+- How can PDF generation for Jupyter Notebooks be enabled (depends on chromium, takes more time)?  
+  👉 Set environment variable `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  
 
   ```shell
-  export SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION="true"
+  export ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION="true"
   ```
 
-  👉 Or prepend your command with `SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION="true"` like:  
+  👉 Alternatively prepend your command with `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION="true"` like:  
   
   ```shell
-  SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
+  ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
   ```

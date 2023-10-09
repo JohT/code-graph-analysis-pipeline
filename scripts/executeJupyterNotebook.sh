@@ -21,7 +21,10 @@
 
 # Requires juypter nbconvert
 
-SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Skip PDF generation for Jupyter Notebooks if set to a non empty value e.g. "true"
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
+ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -128,8 +131,8 @@ sed -E '/<style( scoped)?>/,/<\/style>/d' "${jupyter_notebook_markdown_file}" > 
 mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_file}"
 
 # Convert the Jupyter Notebook to PDF
-if [ -z "${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
-    jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file" || exit 7
+if [ -n "${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
+    jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
 fi
 
 # Restore Conda environment

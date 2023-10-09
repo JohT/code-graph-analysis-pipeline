@@ -121,6 +121,7 @@ jobs:
       shell: bash -el {0}
       env:
         NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
+        ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
       run: |
         ./../../scripts/analysis/analyze.sh
 
