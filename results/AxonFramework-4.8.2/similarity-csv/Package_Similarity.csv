@@ -254,7 +254,7 @@
 0.1388888888888889,"axon-messaging-4.8.2","org.axonframework.serialization.converters",0,7,"axon-messaging-4.8.2","org.axonframework.eventhandling.tokenstore",47,19,""
 0.1282051282051282,"axon-messaging-4.8.2","org.axonframework.serialization.converters",0,7,"axon-messaging-4.8.2","org.axonframework.eventhandling.scheduling.jobrunr",3,27,""
 0.1282051282051282,"axon-messaging-4.8.2","org.axonframework.serialization.converters",0,7,"axon-messaging-4.8.2","org.axonframework.serialization.xml",17,24,""
-0.125,"axon-messaging-4.8.2","org.axonframework.util",3,6,"axon-messaging-4.8.2","org.axonframework.common.jpa",16,6,""
+0.125,"axon-messaging-4.8.2","org.axonframework.util",3,6,"axon-test-4.8.2","org.axonframework.test.server",1,2,""
 0.12396694214876033,"axon-eventsourcing-4.8.2","org.axonframework.eventsourcing.eventstore.jdbc.statements",30,28,"axon-messaging-4.8.2","org.axonframework.eventhandling.tokenstore",47,19,""
 0.11842105263157894,"axon-messaging-4.8.2","org.axonframework.commandhandling.callbacks",8,13,"axon-messaging-4.8.2","org.axonframework.commandhandling.distributed",50,133,""
 0.11764705882352941,"axon-messaging-4.8.2","org.axonframework.commandhandling.distributed.commandfilter",12,20,"axon-messaging-4.8.2","org.axonframework.commandhandling.callbacks",8,13,""
