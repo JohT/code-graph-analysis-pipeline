@@ -89,42 +89,42 @@ The result can be used in machine learning as features approximating the graph s
     <tr>
       <th>0</th>
       <td>org.axonframework.disruptor.commandhandling</td>
-      <td>0</td>
+      <td>1</td>
       <td>0.013999</td>
       <td>axon-disruptor-4.8.2</td>
-      <td>[0.4645318388938904, -0.03662916645407677, -0....</td>
+      <td>[0.10140606015920639, 0.2674823999404907, 0.40...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.axonframework.test</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.028744</td>
       <td>axon-test-4.8.2</td>
-      <td>[0.490167498588562, -0.1074967309832573, 0.002...</td>
+      <td>[-0.03350472450256348, 0.0058460659347474575, ...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>org.axonframework.test.aggregate</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.013868</td>
       <td>axon-test-4.8.2</td>
-      <td>[0.4954816997051239, -0.11642370373010635, -0....</td>
+      <td>[0.03623310104012489, 0.09929260611534119, 0.3...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>org.axonframework.test.matchers</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.020120</td>
       <td>axon-test-4.8.2</td>
-      <td>[0.4632232189178467, -0.10380994528532028, -0....</td>
+      <td>[-0.04687018319964409, 0.014389925636351109, 0...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>org.axonframework.test.saga</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.013868</td>
       <td>axon-test-4.8.2</td>
-      <td>[0.3809250593185425, -0.11352261900901794, -0....</td>
+      <td>[-0.09528440237045288, 0.048415593802928925, 0...</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.035s...
+    [t-SNE] Computed neighbors for 93 samples in 0.039s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.491796
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.185715
-    [t-SNE] KL divergence after 1000 iterations: 0.160638
+    [t-SNE] Mean sigma: 0.544064
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.604187
+    [t-SNE] KL divergence after 1000 iterations: 0.201800
 
 
 
@@ -178,46 +178,46 @@ reduces them to a 2 dimensional array for visualization.
       <th>0</th>
       <td>org.axonframework.disruptor.commandhandling</td>
       <td>axon-disruptor-4.8.2</td>
-      <td>0</td>
+      <td>1</td>
       <td>0.013999</td>
-      <td>-7.163761</td>
-      <td>-1.406978</td>
+      <td>0.695686</td>
+      <td>-0.478884</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.axonframework.test</td>
       <td>axon-test-4.8.2</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.028744</td>
-      <td>4.794747</td>
-      <td>1.837888</td>
+      <td>-2.782221</td>
+      <td>2.729927</td>
     </tr>
     <tr>
       <th>2</th>
       <td>org.axonframework.test.aggregate</td>
       <td>axon-test-4.8.2</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.013868</td>
-      <td>4.766205</td>
-      <td>1.003411</td>
+      <td>-2.027213</td>
+      <td>2.133565</td>
     </tr>
     <tr>
       <th>3</th>
       <td>org.axonframework.test.matchers</td>
       <td>axon-test-4.8.2</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.020120</td>
-      <td>4.894242</td>
-      <td>1.813505</td>
+      <td>-2.804823</td>
+      <td>2.656628</td>
     </tr>
     <tr>
       <th>4</th>
       <td>org.axonframework.test.saga</td>
       <td>axon-test-4.8.2</td>
-      <td>1</td>
+      <td>4</td>
       <td>0.013868</td>
-      <td>5.458785</td>
-      <td>2.092274</td>
+      <td>-3.052886</td>
+      <td>2.146340</td>
     </tr>
   </tbody>
 </table>
