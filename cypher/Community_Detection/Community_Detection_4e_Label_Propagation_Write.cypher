@@ -1,10 +1,10 @@
-// Community Detection Label Propagation write node property labelPropagationCommunityId
+// Community Detection Label Propagation write node property communityLabelPropagationId
 
 CALL gds.labelPropagation.write(
  $dependencies_projection + '-without-empty', {
      relationshipWeightProperty: $dependencies_projection_weight_property
     ,consecutiveIds: true
-    ,writeProperty: 'labelPropagationCommunityId'
+    ,writeProperty: 'communityLabelPropagationId'
 })
 YIELD ranIterations
      ,didConverge

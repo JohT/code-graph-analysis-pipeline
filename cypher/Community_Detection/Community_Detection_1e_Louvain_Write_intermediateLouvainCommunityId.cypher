@@ -1,11 +1,11 @@
-//Community Detection Louvain Write intermediateLouvainCommunityId
+//Community Detection Louvain Write communityLouvainIntermediateIds
 
 CALL gds.louvain.write(
  $dependencies_projection + '-without-empty', {
     tolerance: 0.00001,
     includeIntermediateCommunities: true,
     relationshipWeightProperty: $dependencies_projection_weight_property,
-    writeProperty: 'intermediateLouvainCommunityId'
+    writeProperty: 'communityLouvainIntermediateIds'
 })
 YIELD preProcessingMillis
      ,computeMillis

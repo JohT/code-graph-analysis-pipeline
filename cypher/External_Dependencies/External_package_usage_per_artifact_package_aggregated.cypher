@@ -5,7 +5,7 @@
  MATCH (package)-[:CONTAINS]->(type:Type)
  WHERE NOT type:ExternalType
   WITH replace(last(split(artifact.fileName, '/')), '.jar', '')  AS artifactName
-      ,artifact.leidenCommunityId                                AS leidenCommunityId
+      ,artifact.communityLeidenId                                AS leidenCommunityId
       ,count(DISTINCT package.fqn)                               AS artifactPackages
       ,count(DISTINCT type.fqn)                                  AS artifactTypes
       ,collect(type)                                             AS typeList

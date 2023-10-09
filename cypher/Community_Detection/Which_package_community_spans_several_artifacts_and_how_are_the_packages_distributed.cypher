@@ -3,9 +3,9 @@
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (externalArtifact:Artifact)-[:CONTAINS]->(externalPackage:Package)
  WHERE artifact.fileName <> externalArtifact.fileName
-   AND package.leidenCommunityId 
-     = externalPackage.leidenCommunityId
-  WITH package.leidenCommunityId AS communityId
+   AND package.communityLeidenId 
+     = externalPackage.communityLeidenId
+  WITH package.communityLeidenId AS communityId
       ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
       ,collect(DISTINCT package.name)  AS packageNames
       ,size(collect(DISTINCT package)) AS packageCount

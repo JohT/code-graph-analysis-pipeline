@@ -67,8 +67,8 @@ detectCommunitiesWithLouvain() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
-    local writePropertyName="dependencies_projection_write_property=louvainCommunityId" 
-    local writePropertyNameIntermediate="dependencies_projection_write_property=intermediateLouvainCommunityIds" 
+    local writePropertyName="dependencies_projection_write_property=communityLouvainId" 
+    local writePropertyNameIntermediate="dependencies_projection_write_property=communityLouvainIntermediateIds" 
     
     local excludeIntermediateCommunities="dependencies_include_intermediate_communities=false" 
     local includeIntermediateCommunities="dependencies_include_intermediate_communities=true" 
@@ -112,8 +112,8 @@ detectCommunitiesWithLeiden() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
-    local writePropertyName="dependencies_projection_write_property=leidenCommunityId" 
-    local writePropertyNameIntermediate="dependencies_projection_write_property=intermediateleidenCommunityIds" 
+    local writePropertyName="dependencies_projection_write_property=communityLeidenId" 
+    local writePropertyNameIntermediate="dependencies_projection_write_property=communityLeidenIntermediateIds" 
     
     local excludeIntermediateCommunities="dependencies_include_intermediate_communities=false" 
     local includeIntermediateCommunities="dependencies_include_intermediate_communities=true" 
@@ -157,7 +157,7 @@ detectCommunitiesWithWeaklyConnectedComponents() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
-    local writePropertyName="dependencies_projection_write_property=weaklyConnectedComponentId" 
+    local writePropertyName="dependencies_projection_write_property=communityWeaklyConnectedComponentId" 
     local writeLabelName="dependencies_projection_write_label=WeaklyConnectedComponent" 
 
     # Statistics
@@ -192,7 +192,7 @@ detectCommunitiesWithLabelPropagation() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
 
-    local writePropertyName="dependencies_projection_write_property=labelPropagationCommunityId" 
+    local writePropertyName="dependencies_projection_write_property=communityLabelPropagationId" 
     local writeLabelName="dependencies_projection_write_label=LabelPropagation" 
 
     # Statistics
@@ -284,6 +284,17 @@ detectCommunitiesWithApproximateMaximumKCut() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
 }
 
+# Compare the results of different community detection algorighms
+# 
+# Required Parameters:
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+compareCommunityDetectionResults() {
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${CYPHER_DIR}/Community_Detection/Compare_Louvain_vs_Leiden_Results.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Compare_Louvain_with_Leiden.csv"
+}
+
 detectCommunities() {
     createProjection "${@}"
     time detectCommunitiesWithWeaklyConnectedComponents "${@}"
@@ -292,6 +303,7 @@ detectCommunities() {
     time detectCommunitiesWithLeiden "${@}"
     time detectCommunitiesWithKCoreDecomposition "${@}"
     time detectCommunitiesWithApproximateMaximumKCut "${@}"
+    compareCommunityDetectionResults "${@}"
 }
 # ---------------------------------------------------------------
 
@@ -320,7 +332,6 @@ echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') communityCsv: Processing pack
 detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
 
 # Package Community Detection - Special CSV Queries after update
-execute_cypher "${CYPHER_DIR}/Community_Detection/Compare_Community_Detection_Results.cypher" > "${FULL_REPORT_DIRECTORY}/Compare_Community_Detection_Results.csv"
 execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
 
 # ---------------------------------------------------------------

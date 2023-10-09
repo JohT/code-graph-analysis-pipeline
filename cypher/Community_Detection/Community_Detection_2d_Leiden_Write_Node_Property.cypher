@@ -1,4 +1,4 @@
-//Community Detection Leiden Write property leidenCommunityId
+//Community Detection Leiden Write property communityLeidenId
 
 CALL gds.beta.leiden.write(
  $dependencies_projection + '-without-empty', {
@@ -7,7 +7,7 @@ CALL gds.beta.leiden.write(
   tolerance: 0.0000001,
   consecutiveIds: true,
   relationshipWeightProperty: $dependencies_projection_weight_property,
-  writeProperty: 'leidenCommunityId'
+  writeProperty: 'communityLeidenId'
 })
 YIELD preProcessingMillis
      ,computeMillis

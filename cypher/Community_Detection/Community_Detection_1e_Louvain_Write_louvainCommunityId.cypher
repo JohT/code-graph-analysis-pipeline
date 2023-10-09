@@ -1,11 +1,11 @@
-//Community Detection Louvain write node property louvainCommunityId
+//Community Detection Louvain write node property communityLouvainId
 
 CALL gds.louvain.write(
  $dependencies_projection + '-without-empty', {
     tolerance: 0.00001,
     consecutiveIds: true,
     relationshipWeightProperty: $dependencies_projection_weight_property,
-    writeProperty: 'louvainCommunityId'
+    writeProperty: 'communityLouvainId'
 })
 YIELD preProcessingMillis
      ,computeMillis

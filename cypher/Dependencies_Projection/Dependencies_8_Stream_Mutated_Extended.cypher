@@ -13,6 +13,6 @@ RETURN DISTINCT coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.name) AS code
      ,coalesce(codeUnit.name, replace(last(split(codeUnit.fileName, '/')), '.jar', '')) AS shortCodeUnitName
      ,propertyName
      ,propertyValue
-     ,coalesce(codeUnit.leidenCommunityId, 0) AS communityId // optional, might be null
+     ,coalesce(codeUnit.communityLeidenId, 0) AS communityId // optional, might be null
      ,coalesce(codeUnit.centralityPageRank, 0.01) AS centrality // optional, might be null
      ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS owningArtifactName
