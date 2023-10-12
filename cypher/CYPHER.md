@@ -79,7 +79,7 @@ Script | Directory | Description
 | [Community_Detection_6d_Approximate_Maximum_k_cut_Stream.cypher](./Community_Detection/Community_Detection_6d_Approximate_Maximum_k_cut_Stream.cypher) | Community_Detection | Community Detection Approximate Maximum k-cut Stream |
 | [Community_Detection_7d_Modularity.cypher](./Community_Detection/Community_Detection_7d_Modularity.cypher) | Community_Detection | Community Detection Modularity |
 | [Community_Detection_7d_Modularity_Members.cypher](./Community_Detection/Community_Detection_7d_Modularity_Members.cypher) | Community_Detection | Community Detection Modularity Members |
-| [Community_Detection_7e_Write_Modularity.cypher](./Community_Detection/Community_Detection_7e_Write_Modularity.cypher) | Community_Detection | Community Detection Write Modularity |
+| [Community_Detection_7e_Write_Modularity.cypher](./Community_Detection/Community_Detection_7e_Write_Modularity.cypher) | Community_Detection | Community Detection Modularity Write |
 | [Compare_Louvain_vs_Leiden_Results.cypher](./Community_Detection/Compare_Louvain_vs_Leiden_Results.cypher) | Community_Detection | Compare Louvain vs. Leiden Community Detection Results. Variables: dependencies_projection_node (e.g. "Artifact", "Package", "Type") |
 | [Get_all_Packages_with_a_Community_Detection_Label.cypher](./Community_Detection/Get_all_Packages_with_a_Community_Detection_Label.cypher) | Community_Detection | Get all Packages with a Community Detection Label |
 | [Set_Parameters.cypher](./Community_Detection/Set_Parameters.cypher) | Community_Detection | Example on how to set the parameters for community detaction in this case for Packages and Leiden |
