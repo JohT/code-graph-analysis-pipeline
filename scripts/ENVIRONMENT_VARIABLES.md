@@ -13,7 +13,7 @@ ARTIFACTS_DIRECTORY                   | artifacts                           | Wo
 RESULTS_DIRECTORY                     | results                             | Repository directory containing the final analysis report results |
 REPORTS_DIRECTORY                     | reports                             | Working directory where the analysis reports are written to  |
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | Name of the file that contains the hash code of the file list for change detection |
-SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION  |                                     | Skip PDF generation for Jupyter Notebooks if set to a non empty value e.g. "true" |
+ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
 CODEGRAPH_CONDA_ENVIRONMENT           | codegraph                           | Name of the conda environment to use for code graph analysis |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
