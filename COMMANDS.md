@@ -83,12 +83,12 @@ If only the Jupyter reports are needed e.g. when the CSV reports had already bee
 ./../../scripts/analysis/analyze.sh --report Jupyter
 ```
 
-#### Start an analysis without PDF generation
+#### Start an analysis with PDF generation
 
-Generating a PDF from a Jupyter notebook using [nbconvert](https://nbconvert.readthedocs.io) might take a while or even fail due to a timeout error. Here is an example on how to skip PDF generation:
+Note: Generating a PDF from a Jupyter notebook using [nbconvert](https://nbconvert.readthedocs.io) takes some time and might even fail due to a timeout error.
 
 ```shell
-SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
+ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
 ```
 
 #### Setup everything to explore the graph manually

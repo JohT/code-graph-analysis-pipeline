@@ -121,6 +121,7 @@ jobs:
       shell: bash -el {0}
       env:
         NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
+        ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
       run: |
         ./../../scripts/analysis/analyze.sh
 
@@ -136,7 +137,6 @@ jobs:
         name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
         path: |
           ./temp/**/runtime/*
-          ./results
         retention-days: 5
 
     # Upload successful results in case they are needed for troubleshooting

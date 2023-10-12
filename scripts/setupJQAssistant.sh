@@ -7,6 +7,9 @@
 # Note: This script runs in the current directory. If you want JQassistant to be installed in e.a. the "tools" directory, 
 # then create and change it beforehand.
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.8"} # Neo4j v5: 2.0.3 (june 2023), Neo4j v4: 1.12.2 (april 2023)
 JQASSISTANT_CLI_DOWNLOAD_URL=${JQASSISTANT_CLI_DOWNLOAD_URL:-"https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli"} # Download URL for the jQAssistant CLI
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-distribution"} #  Neo4j v5: "jqassistant-commandline-distribution", Neo4j v4: "jqassistant-commandline-neo4jv3"
@@ -28,7 +31,7 @@ if [ -z "${TOOLS_DIRECTORY}" ]; then
 else
     # Create tools directory if it doesn't exists
     echo "setupJQAssistant: Creating tools directory <${TOOLS_DIRECTORY}> if neccessary"
-    mkdir -p "${TOOLS_DIRECTORY}" || exit 1
+    mkdir -p "${TOOLS_DIRECTORY}"
 fi
 
 # Check if SHARED_DOWNLOADS_DIRECTORY variable is set
@@ -49,10 +52,12 @@ JQASSISTANT_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_INSTALLATIO
 if [ ! -d "${JQASSISTANT_INSTALLATION_DIRECTORY}" ] ; then    
     jqassistant_cli_fulldownload_url=${JQASSISTANT_CLI_DOWNLOAD_URL}/${JQASSISTANT_CLI_ARTIFACT}/${JQASSISTANT_CLI_VERSION}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}-${JQASSISTANT_CLI_DISTRIBUTION}
     jqassistant_cli_fulldownload_file="${JQASSISTANT_INSTALLATION_NAME}.zip"
-    source ${SCRIPTS_DIR}/download.sh --url "${jqassistant_cli_fulldownload_url}" --filename "${jqassistant_cli_fulldownload_file}" || exit 2
+    source ${SCRIPTS_DIR}/download.sh --url "${jqassistant_cli_fulldownload_url}" --filename "${jqassistant_cli_fulldownload_file}"
 
     # Unpack the ZIP file (-q option for less verbose output)
-    unzip -q "${SHARED_DOWNLOADS_DIRECTORY}/${jqassistant_cli_fulldownload_file}" -d "${TOOLS_DIRECTORY}" || exit 3
+    unzip -q "${SHARED_DOWNLOADS_DIRECTORY}/${jqassistant_cli_fulldownload_file}" -d "${TOOLS_DIRECTORY}"
+    
+    echo "setupJQAssistant: Installed sucessfully"
 else
     echo "setupJQAssistant: ${jqassistant_cli_fulldownload_file} already installed"
 fi

@@ -7,6 +7,9 @@
 # --url Download URL (required)
 # --filename Target file name with extension without path (optional, default = basename of download URL)
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Function to display script usage
 usage() {
   echo "Usage: $0 --url https://my.download.url [--filename download-file-name-without-path.ext> (default=url filename)]"

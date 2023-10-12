@@ -21,7 +21,10 @@
 
 # Requires juypter nbconvert
 
-SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION=${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Skip PDF generation for Jupyter Notebooks if set to a non empty value e.g. "true"
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
+ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -89,7 +92,7 @@ fi
 echo "executeJupyterNotebook: pathToConda=${pathToConda}"
 
 # Activate conda shell hook
-eval "$(${pathToConda}conda shell.bash hook)" || exit 1
+eval "$(${pathToConda}conda shell.bash hook)"
 
 # Create (if missing) and activate Conda environment for code structure graph analysis
 backupCondaEnvironment=$CONDA_DEFAULT_ENV
@@ -104,9 +107,9 @@ if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
             exit 2
         fi
         echo "executeJupyterNotebook: Creating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
-        ${pathToConda}conda env create --file ${jupyter_notebook_file_path}/environment.yml --name "${CODEGRAPH_CONDA_ENVIRONMENT}" || exit 3
+        ${pathToConda}conda env create --file ${jupyter_notebook_file_path}/environment.yml --name "${CODEGRAPH_CONDA_ENVIRONMENT}"
     fi
-    ${pathToConda}conda activate "${CODEGRAPH_CONDA_ENVIRONMENT}"  || exit 4
+    ${pathToConda}conda activate "${CODEGRAPH_CONDA_ENVIRONMENT}" 
     echo "executeJupyterNotebook: Activated Conda environment: $CODEGRAPH_CONDA_ENVIRONMENT "
 fi
 
@@ -115,11 +118,10 @@ jupyter nbconvert --to notebook \
                   --execute "${jupyter_notebook_file}" \
                   --output "$jupyter_notebook_output_file_name" \
                   --output-dir="./" \
-                  --ExecutePreprocessor.timeout=480 \
-                  || exit 5
+                  --ExecutePreprocessor.timeout=480
 
 # Convert the Jupyter Notebook to Markdown 
-jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file" || exit 6
+jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file"
 
 # Remove style blocks from Markdown file
 # The inplace option -i of sed doesn't seem to work at least on Mac in this case.
@@ -128,12 +130,12 @@ sed -E '/<style( scoped)?>/,/<\/style>/d' "${jupyter_notebook_markdown_file}" > 
 mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_file}"
 
 # Convert the Jupyter Notebook to PDF
-if [ -z "${SKIP_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
-    jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file" || exit 7
+if [ -n "${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
+    jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
 fi
 
 # Restore Conda environment
 if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
-    ${pathToConda}conda activate "${backupCondaEnvironment}" || exit 8
+    ${pathToConda}conda activate "${backupCondaEnvironment}"
     echo "executeJupyterNotebook: Restored Conda Environment: ${backupCondaEnvironment}"
 fi

@@ -10,6 +10,9 @@
 
 # Requires download.sh
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Overrideable constants
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/downloads}"
@@ -67,16 +70,16 @@ DOWNLOAD_URL="${BASE_URL}/${GROUP_ID_FOR_API}/${artifactId}/${version}/${ARTIFAC
 
 # Download Maven Artifact into the "targetDirectory"
 if [ ! -f "./${targetDirectory}/${ARTIFACT_FILENAME}" ] ; then
-    source ${SCRIPTS_DIR}/download.sh --url "${DOWNLOAD_URL}" || exit 1
+    source ${SCRIPTS_DIR}/download.sh --url "${DOWNLOAD_URL}"
 
     # Create artifacts targetDirectory if it doen't exist
-    mkdir -p "./${targetDirectory}" || exit 1
+    mkdir -p "./${targetDirectory}"
 
     # Delete already existing older versions of the artifact
-    rm -f "./${targetDirectory}/${artifactId}"* || exit 1
+    rm -f "./${targetDirectory}/${artifactId}"*
 
     # Copy artifact into artifacts targetDirectory
-    cp -R "${SHARED_DOWNLOADS_DIRECTORY}/${ARTIFACT_FILENAME}" "./${targetDirectory}" || exit 1
+    cp -R "${SHARED_DOWNLOADS_DIRECTORY}/${ARTIFACT_FILENAME}" "./${targetDirectory}"
 else
     echo "downloadMavenArtifact: ${ARTIFACT_FILENAME} already downloaded into target directory ${targetDirectory}"
 fi

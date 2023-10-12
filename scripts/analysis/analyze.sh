@@ -30,6 +30,9 @@
 
 # Requires setupNeo4j.sh,setupJQAssistant.sh,startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,stopNeo4j.sh,comilations/*.sh,profiles/*.sh
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Overrideable variables with directory names
 REPORTS_SCRIPTS_DIRECTORY=${REPORTS_SCRIPTS_DIRECTORY:-"reports"} # Working directory containing the generated reports
 REPORT_COMPILATIONS_SCRIPTS_DIRECTORY=${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY:-"compilations"} # Repository directory that contains scripts that execute selected report generation scripts
@@ -116,18 +119,18 @@ fi
 
 # Execute the settings profile script that sets all the neccessary settings variables (overrideable by environment variables).
 echo "analyze: Using analysis settings profile script ${SETTINGS_PROFILE_SCRIPT}"
-source "${SETTINGS_PROFILE_SCRIPT}" || exit 2
+source "${SETTINGS_PROFILE_SCRIPT}"
 
 # Setup Tools
-source "${SCRIPTS_DIR}/setupNeo4j.sh" || exit 3
-source "${SCRIPTS_DIR}/setupJQAssistant.sh" || exit 3
-source "${SCRIPTS_DIR}/startNeo4j.sh" || exit 3
+source "${SCRIPTS_DIR}/setupNeo4j.sh"
+source "${SCRIPTS_DIR}/setupJQAssistant.sh"
+source "${SCRIPTS_DIR}/startNeo4j.sh"
 
 # Scan and analyze artifacts when they were changed
-source "${SCRIPTS_DIR}/resetAndScanChanged.sh" || exit 4
+source "${SCRIPTS_DIR}/resetAndScanChanged.sh"
 
 # Prepare and validate graph database before analyzing and creating reports 
-source "${SCRIPTS_DIR}/prepareAnalysis.sh" || exit 5
+source "${SCRIPTS_DIR}/prepareAnalysis.sh"
 
 if ${exploreMode}; then
   echo "analyze: Explore mode activated. Report generation will be skipped. Neo4j keeps running."
@@ -138,7 +141,7 @@ fi
 # Create Reports
 #########################
 echo "analyze: Creating Reports with ${REPORT_COMPILATION_SCRIPT} ..."
-source "${REPORT_COMPILATION_SCRIPT}" || exit 6
+source "${REPORT_COMPILATION_SCRIPT}"
 
 # Stop Neo4j at the end
 source "${SCRIPTS_DIR}/stopNeo4j.sh"

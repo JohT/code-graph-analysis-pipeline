@@ -6,6 +6,9 @@
 
 # Requires download.sh,setupNeo4jInitialPassword.sh
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.10.0"}
 NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"5.12.0"} #Awesome Procedures for Neo4j Plugin, Version needs to be compatible to Neo4j
@@ -134,6 +137,8 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).
     # This needs to be done after the configuration changes.
     source ${SCRIPTS_DIR}/setupNeo4jInitialPassword.sh
+
+    echo "setupNeo4j: Installed sucessfully"
 else
     echo "setupNeo4j: ${NEO4J_INSTALLATION_NAME} already installed"
 fi
@@ -164,6 +169,8 @@ if [ ! -f "${NEO4J_PLUGINS}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
          echo "# Enables writing local files to disk for file export. Default=false"
          echo "apoc.export.file.enabled=true"
     } >> "${NEO4J_APOC_CONFIG}"
+
+    echo "setupNeo4j: Awesome Procedures for Neo4j (APOC) installed sucessfully"
 else 
     echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already installed"
 fi
@@ -199,6 +206,8 @@ if [ ! -f "${NEO4J_PLUGINS}/${neo4jGraphDataScienceReleaseArtifact}" ] ; then
         echo "setupNeo4j: Error: Failed to install ${neo4jGraphDataScienceReleaseArtifact}"
         exit 1
     fi
+
+    echo "setupNeo4j: Graph Data Science (GDS) installed sucessfully"
 else 
     echo "setupNeo4j: ${neo4jGraphDataScienceReleaseArtifact} already installed"
 fi

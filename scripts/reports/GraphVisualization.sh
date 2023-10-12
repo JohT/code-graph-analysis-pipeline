@@ -5,6 +5,9 @@
 
 # Requires executeJupyterNotebook.sh
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 
@@ -24,4 +27,4 @@ GRAPH_VISUALIZATION_DIRECTORY=${GRAPH_VISUALIZATION_DIRECTORY:-"${SCRIPTS_DIR}/.
 echo "GraphVisualization: GRAPH_VISUALIZATION_DIRECTORY=$GRAPH_VISUALIZATION_DIRECTORY"
 
 # Execute the node.js script to render the graph visualizations as image files
-(cd "${REPORTS_DIRECTORY}" && exec node ${GRAPH_VISUALIZATION_DIRECTORY}/renderVisualizations.js) || exit 1
+(cd "${REPORTS_DIRECTORY}" && exec node ${GRAPH_VISUALIZATION_DIRECTORY}/renderVisualizations.js)

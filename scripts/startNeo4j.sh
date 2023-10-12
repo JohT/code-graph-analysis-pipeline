@@ -7,6 +7,9 @@
 
 # Requires waitForNeo4jHttp.sh
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.10.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
@@ -39,12 +42,14 @@ else
 fi
 
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
+neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
+neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
+if [ -n "${neo4jNotRunning}" ]; then
     echo "startNeo4j: Starting neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} in ${NEO4J_DIR}"
 
     # Check if there is already a process that listens to the Neo4j HTTP port
-    port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN )
-    if echo -n "${port_listener_process_id}" | grep -q ".*"; then
+    port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN || true )
+    if [ -n "${port_listener_process_id}" ]; then
         echo "startNeo4j: There is already a process that listens to port ${NEO4J_HTTP_PORT}"
         ps -p "${port_listener_process_id}"
         echo "startNeo4j: Use this command to stop it: kill -9 \$( lsof -t -i:${NEO4J_HTTP_PORT} -sTCP:LISTEN )"
@@ -59,7 +64,9 @@ if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running
         echo "startNeo4j: Waiting for ${waitTime} second(s)"
         sleep ${waitTime}
 
-        if ! NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
+        neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
+        neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
+        if [ -z "${neo4jNotRunning}" ]; then
             echo "startNeo4j: Successfully started neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
             exit 0
         fi
@@ -69,7 +76,9 @@ else
 fi
 
 # Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
-if NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 | grep -q "not running" ; then
+neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
+neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
+if [ -n "${neo4jNotRunning}" ]; then
     echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} still not running. Something went wrong. Details see 'NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status'."
     exit 1
 fi

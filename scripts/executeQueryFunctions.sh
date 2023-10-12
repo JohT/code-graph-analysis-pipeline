@@ -4,6 +4,9 @@
 
 # Requires executeQuery.sh
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
@@ -30,23 +33,23 @@ extractQueryParameter() {
 
 # Function to execute a cypher query from the given file (first argument) with the default method
 execute_cypher() { 
-    execute_cypher_http "${@}" || exit 1 # "${@}": Get all function arguments and forward them
+    execute_cypher_http "${@}" # "${@}": Get all function arguments and forward them
 }
 
 # Function to execute a cypher query from the given file (first argument) with the default method and just return the number of results
 execute_cypher_summarized() { 
-    execute_cypher_http_summarized "${@}" || exit 1 # "${@}": Get all function arguments and forward them
+    execute_cypher_http_summarized "${@}" # "${@}": Get all function arguments and forward them
 }
 
 # Function to execute a cypher query from the given file (first argument) with the default method and fail if there is no result
 execute_cypher_expect_results() { 
-    execute_cypher_http_expect_results "${@}" || exit 1 # "${@}": Get all function arguments and forward them
+    execute_cypher_http_expect_results "${@}" # "${@}": Get all function arguments and forward them
 }
 
 # Function to execute a cypher query from the given file (first and only argument) using Neo4j's HTTP API
 execute_cypher_http() { 
     # (Neo4j HTTP API Script) Execute the Cyper query contained in the file and print the results as CSV
-    source $SCRIPTS_DIR/executeQuery.sh "${@}" || exit 1 # "${@}": Get all function arguments and forward them
+    source $SCRIPTS_DIR/executeQuery.sh "${@}" # "${@}": Get all function arguments and forward them
 }
 
 # Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using Neo4j's HTTP API
@@ -120,7 +123,7 @@ execute_cypher_shell_summarized() {
 
     results=$( execute_cypher_shell ${cypherFileName} | wc -l )
     results=$((results - 2))
-    echo "$(basename -- "${cypherFileName}") (via cypher-shell) result lines: ${results}" || exit 1
+    echo "$(basename -- "${cypherFileName}") (via cypher-shell) result lines: ${results}"
 }
 
 # Function to execute a cypher query from the given file (first and only argument) that fails on no result using "cypher-shell" provided by Neo4j

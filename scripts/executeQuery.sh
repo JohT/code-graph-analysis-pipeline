@@ -14,6 +14,9 @@
 # -> "--no_source_reference" to not append the cypher query file name as last CSV column
 # -> any following key=value arguments are used as query parameters
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Overrideable Defaults
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
 NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
@@ -106,6 +109,7 @@ if [[ -n "${error_message}" ]]; then
   redColor='\033[0;31m'
   noColor='\033[0m' # No Color
   echo -e "${redColor}${cypher_query_file_name}: ${error_message}${noColor}" >&2
+  exit 1
 fi
 
 # Output results in CSV format

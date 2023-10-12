@@ -4,6 +4,9 @@
 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.10.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
@@ -43,3 +46,4 @@ else
     NEO4J_HOME="${NEO4J_INSTALLATION_DIRECTORY}" ${NEO4J_INSTALLATION_DIRECTORY}/bin/neo4j-admin set-initial-password "${NEO4J_INITIAL_PASSWORD}"
 fi
 
+echo "setupNeo4jInitialPassword: Initial password set sucessfully"

@@ -2,6 +2,9 @@
 
 # Generates "IMAGES.md" containing a reference to all images (PNG) in this directory and its subdirectories.
 
+# Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
+set -eo pipefail
+
 # Markdown file name
 markdown_file="IMAGES.md"
 
