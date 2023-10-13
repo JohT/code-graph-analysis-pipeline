@@ -966,7 +966,7 @@ The following table shows the top 30 packages with the highest effective lines o
       <td>569</td>
       <td>236</td>
       <td>24</td>
-      <td>getTrackedEventData</td>
+      <td>&lt;init&gt;</td>
     </tr>
     <tr>
       <th>14</th>
@@ -1326,7 +1326,7 @@ The following table shows the top 30 methods with the highest effective lines of
       <td>axon-eventsourcing-4.8.2</td>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>JdbcEventStorageEngine</td>
-      <td>getTrackedEventData</td>
+      <td>&lt;init&gt;</td>
       <td>24</td>
       <td>569</td>
     </tr>
@@ -1917,7 +1917,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>688</td>
       <td>582</td>
       <td>7</td>
-      <td>getFactoryForType</td>
+      <td>invokeLifecycleHandlers</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2016,7 +2016,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>290</td>
       <td>185</td>
       <td>8</td>
-      <td>fetchTrackedEvents</td>
+      <td>withGapsCleaned</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2052,7 +2052,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>264</td>
       <td>181</td>
       <td>6</td>
-      <td>equals</td>
+      <td>handle</td>
     </tr>
     <tr>
       <th>17</th>
@@ -2097,7 +2097,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>209</td>
       <td>156</td>
       <td>4</td>
-      <td>equals</td>
+      <td>resolveDetails</td>
     </tr>
     <tr>
       <th>24</th>
@@ -2160,7 +2160,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>155</td>
       <td>101</td>
       <td>8</td>
-      <td>withGapsCleaned</td>
+      <td>loadKeyViolationCodes</td>
     </tr>
     <tr>
       <th>33</th>

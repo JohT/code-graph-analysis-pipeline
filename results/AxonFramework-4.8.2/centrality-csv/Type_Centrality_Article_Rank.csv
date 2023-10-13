@@ -60,7 +60,7 @@
 "org.axonframework.messaging.annotation.HandlerDefinition",0.03176400478496908,33,2,""
 "org.axonframework.modelling.command.inspection.AggregateModel",0.03156361312372361,24,1,""
 "org.axonframework.monitoring.MessageMonitor$MonitorCallback",0.03139091425073576,15,,""
-"org.axonframework.eventhandling.EventBus",0.030209859858716288,32,3,""
+"org.axonframework.eventhandling.EventBus",0.030209859858716295,32,3,""
 "org.axonframework.test.matchers.FieldFilter",0.02845676900007072,18,,""
 "org.axonframework.messaging.unitofwork.RollbackConfigurationType",0.02837484599475541,11,5,""
 "org.axonframework.eventhandling.deadletter.jdbc.DeadLetterSchema$Builder",0.02735673610609567,1,2,""
