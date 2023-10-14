@@ -16,36 +16,45 @@ Script | Directory | Description
 | [Usage_and_spread_of_internal_artifact_dependencies.cypher](./Artifact_Dependencies/Usage_and_spread_of_internal_artifact_dependencies.cypher) | Artifact_Dependencies | Usage and spread of internal artifact dependencies |
 | [Usage_and_spread_of_internal_artifact_dependents.cypher](./Artifact_Dependencies/Usage_and_spread_of_internal_artifact_dependents.cypher) | Artifact_Dependencies | Usage and spread of internal artifact dependents |
 | [Candidates_for_Interface_Segregation.cypher](./Candidates_for_Interface_Segregation.cypher) |  | Candidates for Interface Segregation |
+| [Centrality_10_Summary.cypher](./Centrality/Centrality_10_Summary.cypher) | Centrality | Centrality Summary |
 | [Centrality_1a_List_TopPercentile.cypher](./Centrality/Centrality_1a_List_TopPercentile.cypher) | Centrality | List the top centrality nodes with a 99.5 percentile or higher |
 | [Centrality_1b_List_TopPercent.cypher](./Centrality/Centrality_1b_List_TopPercent.cypher) | Centrality | List the top 2% nodes with the highest centrality score. |
 | [Centrality_1c_Label_Delete.cypher](./Centrality/Centrality_1c_Label_Delete.cypher) | Centrality | Centrality Label Delete |
 | [Centrality_1d_Label_Add.cypher](./Centrality/Centrality_1d_Label_Add.cypher) | Centrality | Centrality Add label to the top 2% nodes with the highest centrality score |
 | [Centrality_2a_Page_Rank_Estimate.cypher](./Centrality/Centrality_2a_Page_Rank_Estimate.cypher) | Centrality | Centrality 2a Page Rank Estimate Memory |
 | [Centrality_2b_Page_Rank_Statistics.cypher](./Centrality/Centrality_2b_Page_Rank_Statistics.cypher) | Centrality | Centrality 2b Page Rank Statistics |
-| [Centrality_3c_Page_Rank_Stream.cypher](./Centrality/Centrality_3c_Page_Rank_Stream.cypher) | Centrality | Centrality 3c Page Rank Stream |
-| [Centrality_3d_Page_Rank_Write.cypher](./Centrality/Centrality_3d_Page_Rank_Write.cypher) | Centrality | Centrality 3d Page Rank Write |
+| [Centrality_3c_Page_Rank_Mutate.cypher](./Centrality/Centrality_3c_Page_Rank_Mutate.cypher) | Centrality | Centrality 3c Page Rank Mutate |
+| [Centrality_3d_Page_Rank_Stream.cypher](./Centrality/Centrality_3d_Page_Rank_Stream.cypher) | Centrality | Centrality 3d Page Rank Stream |
+| [Centrality_3e_Page_Rank_Write.cypher](./Centrality/Centrality_3e_Page_Rank_Write.cypher) | Centrality | Centrality 3e Page Rank Write |
 | [Centrality_4a_Article_Rank_Estimate.cypher](./Centrality/Centrality_4a_Article_Rank_Estimate.cypher) | Centrality | Centrality 4a Article Rank Estimate Memory |
 | [Centrality_4b_Article_Rank_Statistics.cypher](./Centrality/Centrality_4b_Article_Rank_Statistics.cypher) | Centrality | Centrality 4b Article Rank Statistics |
-| [Centrality_4c_Article_Rank_Stream.cypher](./Centrality/Centrality_4c_Article_Rank_Stream.cypher) | Centrality | Centrality 4c Article Rank Stream |
-| [Centrality_4d_Article_Rank_Write.cypher](./Centrality/Centrality_4d_Article_Rank_Write.cypher) | Centrality | Centrality 4d Article Rank Write |
+| [Centrality_4c_Article_Rank_Mutate.cypher](./Centrality/Centrality_4c_Article_Rank_Mutate.cypher) | Centrality | Centrality 4c Article Rank Mutate |
+| [Centrality_4d_Article_Rank_Stream.cypher](./Centrality/Centrality_4d_Article_Rank_Stream.cypher) | Centrality | Centrality 4d Article Rank Stream |
+| [Centrality_4e_Article_Rank_Write.cypher](./Centrality/Centrality_4e_Article_Rank_Write.cypher) | Centrality | Centrality 4e Article Rank Write |
 | [Centrality_5a_Betweeness_Estimate.cypher](./Centrality/Centrality_5a_Betweeness_Estimate.cypher) | Centrality | Centrality 5a Betweeness Estimate |
 | [Centrality_5b_Betweeness_Statistics.cypher](./Centrality/Centrality_5b_Betweeness_Statistics.cypher) | Centrality | Centrality 5b Betweeness Statistics |
-| [Centrality_5c_Betweeness_Stream.cypher](./Centrality/Centrality_5c_Betweeness_Stream.cypher) | Centrality | Centrality 5c Betweeness Stream |
-| [Centrality_5d_Betweeness_Write.cypher](./Centrality/Centrality_5d_Betweeness_Write.cypher) | Centrality | Centrality 5d Betweeness Write |
-| [Centrality_6a_Cost_effective_Lazy_Forward_CELF_Estimate.cypher](./Centrality/Centrality_6a_Cost_effective_Lazy_Forward_CELF_Estimate.cypher) | Centrality | Centrality 6c Cost-effective Lazy Forward (CELF) Estimate |
-| [Centrality_6b_Cost_effective_Lazy_Forward_CELF_Statistics.cypher](./Centrality/Centrality_6b_Cost_effective_Lazy_Forward_CELF_Statistics.cypher) | Centrality | Centrality 6b Cost-effective Lazy Forward (CELF) Estimate |
-| [Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher](./Centrality/Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher) | Centrality | Centrality 6c Cost-effective Lazy Forward (CELF) Stream |
-| [Centrality_6d_Cost_effective_Lazy_Forward_CELF_Write.cypher](./Centrality/Centrality_6d_Cost_effective_Lazy_Forward_CELF_Write.cypher) | Centrality | Centrality 6d Cost-effective Lazy Forward (CELF) Write |
+| [Centrality_5c_Betweeness_Mutate.cypher](./Centrality/Centrality_5c_Betweeness_Mutate.cypher) | Centrality | Centrality 5c Betweeness Mutate |
+| [Centrality_5d_Betweeness_Stream.cypher](./Centrality/Centrality_5d_Betweeness_Stream.cypher) | Centrality | Centrality 5d Betweeness Stream |
+| [Centrality_5e_Betweeness_Write.cypher](./Centrality/Centrality_5e_Betweeness_Write.cypher) | Centrality | Centrality 5e Betweeness Write |
+| [Centrality_6a_Cost_effective_Lazy_Forward_CELF_Estimate.cypher](./Centrality/Centrality_6a_Cost_effective_Lazy_Forward_CELF_Estimate.cypher) | Centrality | Centrality 6a Cost-effective Lazy Forward (CELF) Estimate |
+| [Centrality_6b_Cost_effective_Lazy_Forward_CELF_Statistics.cypher](./Centrality/Centrality_6b_Cost_effective_Lazy_Forward_CELF_Statistics.cypher) | Centrality | Centrality 6b Cost-effective Lazy Forward (CELF) Statistics |
+| [Centrality_6c_Cost_effective_Lazy_Forward_CELF_Mutate.cypher](./Centrality/Centrality_6c_Cost_effective_Lazy_Forward_CELF_Mutate.cypher) | Centrality | Centrality 6c Cost-effective Lazy Forward (CELF) Mutate |
+| [Centrality_6d_Cost_effective_Lazy_Forward_CELF_Stream.cypher](./Centrality/Centrality_6d_Cost_effective_Lazy_Forward_CELF_Stream.cypher) | Centrality | Centrality 6d Cost-effective Lazy Forward (CELF) Stream |
+| [Centrality_6e_Cost_effective_Lazy_Forward_CELF_Write.cypher](./Centrality/Centrality_6e_Cost_effective_Lazy_Forward_CELF_Write.cypher) | Centrality | Centrality 6e Cost-effective Lazy Forward (CELF) Write |
 | [Centrality_7b_Harmonic_Closeness_Statistics.cypher](./Centrality/Centrality_7b_Harmonic_Closeness_Statistics.cypher) | Centrality | Centrality 7b Harmonic Closeness Statistics |
-| [Centrality_7c_Harmonic_Closeness_Stream.cypher](./Centrality/Centrality_7c_Harmonic_Closeness_Stream.cypher) | Centrality | Centrality 7a Harmonic Closeness Stream |
-| [Centrality_7d_Harmonic_Closeness_Write.cypher](./Centrality/Centrality_7d_Harmonic_Closeness_Write.cypher) | Centrality | Centrality 7d Harmonic Closeness Write |
+| [Centrality_7c_Harmonic_Closeness_Mutate.cypher](./Centrality/Centrality_7c_Harmonic_Closeness_Mutate.cypher) | Centrality | Centrality 7c Harmonic Closeness Mutate |
+| [Centrality_7d_Harmonic_Closeness_Stream.cypher](./Centrality/Centrality_7d_Harmonic_Closeness_Stream.cypher) | Centrality | Centrality 7a Harmonic Closeness Stream |
+| [Centrality_7e_Harmonic_Closeness_Write.cypher](./Centrality/Centrality_7e_Harmonic_Closeness_Write.cypher) | Centrality | Centrality 7d Harmonic Closeness Write |
 | [Centrality_8b_Closeness_Statistics.cypher](./Centrality/Centrality_8b_Closeness_Statistics.cypher) | Centrality | Centrality 8b Closeness Statistics |
-| [Centrality_8c_Closeness_Stream.cypher](./Centrality/Centrality_8c_Closeness_Stream.cypher) | Centrality | Centrality 8c Closeness Stream |
-| [Centrality_8d_Closeness_Write.cypher](./Centrality/Centrality_8d_Closeness_Write.cypher) | Centrality | Centrality 8d Closeness Write |
+| [Centrality_8c_Closeness_Mutate.cypher](./Centrality/Centrality_8c_Closeness_Mutate.cypher) | Centrality | Centrality 8c Closeness Mutate |
+| [Centrality_8d_Closeness_Stream.cypher](./Centrality/Centrality_8d_Closeness_Stream.cypher) | Centrality | Centrality 8c Closeness Stream |
+| [Centrality_8e_Closeness_Write.cypher](./Centrality/Centrality_8e_Closeness_Write.cypher) | Centrality | Centrality 8d Closeness Write |
 | [Centrality_9a_Hyperlink_Induced_Topic_Search_HITS_Estimate.cypher](./Centrality/Centrality_9a_Hyperlink_Induced_Topic_Search_HITS_Estimate.cypher) | Centrality | Centrality 9a Hyperlink-Induced Topic Search (HITS) Memory Estimation |
-| [Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher](./Centrality/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher) | Centrality | Centrality 9b Hyperlink-Induced Topic Search (HITS) Memory Statistics |
-| [Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher](./Centrality/Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher) | Centrality | Centrality 9c Hyperlink-Induced Topic Search (HITS) Memory Stream |
-| [Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Write.cypher](./Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Write.cypher) | Centrality | Centrality 9d Hyperlink-Induced Topic Search (HITS) Memory Write |
+| [Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher](./Centrality/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher) | Centrality | Centrality 9b Hyperlink-Induced Topic Search (HITS) Statistics |
+| [Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Mutate.cypher](./Centrality/Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Mutate.cypher) | Centrality | Centrality 9c Hyperlink-Induced Topic Search (HITS) Mutate |
+| [Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher](./Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher) | Centrality | Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream |
+| [Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream_Mutated.cypher](./Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream_Mutated.cypher) | Centrality | Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream Mutated |
+| [Centrality_9e_Hyperlink_Induced_Topic_Search_HITS_Write.cypher](./Centrality/Centrality_9e_Hyperlink_Induced_Topic_Search_HITS_Write.cypher) | Centrality | Centrality 9e Hyperlink-Induced Topic Search (HITS) Write |
 | [Set_Parameters.cypher](./Centrality/Set_Parameters.cypher) | Centrality | Example on how to set the parameters for centrality in this case for Packages and PageRank |
 | [Community_Detection_1a_Louvain_Estimate.cypher](./Community_Detection/Community_Detection_1a_Louvain_Estimate.cypher) | Community_Detection | Community Detection Louvain Estimate Memory |
 | [Community_Detection_1b_Louvain_Statistics.cypher](./Community_Detection/Community_Detection_1b_Louvain_Statistics.cypher) | Community_Detection | Community Detection Louvain Statistics |
@@ -111,6 +120,7 @@ Script | Directory | Description
 | [Dependencies_8_Stream_Mutated.cypher](./Dependencies_Projection/Dependencies_8_Stream_Mutated.cypher) | Dependencies_Projection | Read a property from the projection. Variables: dependencies_projection, dependencies_projection_write_property |
 | [Dependencies_8_Stream_Mutated_Extended.cypher](./Dependencies_Projection/Dependencies_8_Stream_Mutated_Extended.cypher) | Dependencies_Projection | Read a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
 | [Dependencies_8_Stream_Mutated_Grouped.cypher](./Dependencies_Projection/Dependencies_8_Stream_Mutated_Grouped.cypher) | Dependencies_Projection | Read a property from the projection. Variables: dependencies_projection, dependencies_projection_write_property |
+| [Dependencies_8_Stream_Mutated_Value_Descending.cypher](./Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher) | Dependencies_Projection | Read a property from the projection and order it by its value descending. Variables: dependencies_projection, dependencies_projection_write_property |
 | [Dependencies_9_Write_Mutated.cypher](./Dependencies_Projection/Dependencies_9_Write_Mutated.cypher) | Dependencies_Projection | Write a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
 | [Set_Parameters.cypher](./Dependencies_Projection/Set_Parameters.cypher) | Dependencies_Projection | Example on how to set the parameters for the dependencies projection in this case for Packages and the useage with PageRank |
 | [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
@@ -146,6 +156,8 @@ Script | Directory | Description
 | [How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher](./Internal_Dependencies/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher) | Internal_Dependencies | How many packages compared to all existing are used by dependent artifacts? |
 | [List_types_that_are_used_by_many_different_packages.cypher](./Internal_Dependencies/List_types_that_are_used_by_many_different_packages.cypher) | Internal_Dependencies | List types that are used by many different packages |
 | [List_all_existing_artifacts.cypher](./List_all_existing_artifacts.cypher) |  | List all existing artifacts |
+| [Methods_1_Delete_Projection.cypher](./Method_Projection/Methods_1_Delete_Projection.cypher) | Method_Projection | Delete projection if existing. Variables: dependencies_projection |
+| [Methods_2_Create_Projection.cypher](./Method_Projection/Methods_2_Create_Projection.cypher) | Method_Projection | Create directed projection for methods. Variables: dependencies_projection, dependencies_projection_weight_property |
 | [Calculate_and_set_Abstractness.cypher](./Metrics/Calculate_and_set_Abstractness.cypher) | Metrics | Calculate and set Abstractness |
 | [Calculate_and_set_Abstractness_including_Counts.cypher](./Metrics/Calculate_and_set_Abstractness_including_Counts.cypher) | Metrics | Calculate and set Abstractness including Counts |
 | [Calculate_and_set_Instability_outgoing_incoming_Dependencies.cypher](./Metrics/Calculate_and_set_Instability_outgoing_incoming_Dependencies.cypher) | Metrics | Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies |
