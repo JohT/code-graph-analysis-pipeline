@@ -338,6 +338,14 @@ centralityWithHyperlinkInducedTopicSearchHITS() {
     execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}Hub"
 }
 
+listAllResults() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_10_Summary.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_All.csv"
+}
+
 # Run all contained centrality algorithms.
 # 
 # Required Parameters:
@@ -355,6 +363,7 @@ runCentralityAlgorithms() {
     time centralityWithHarmonic "${@}"
     time centralityWithCloseness "${@}"
     time centralityWithHyperlinkInducedTopicSearchHITS "${@}"
+    listAllResults "${@}"
 }
 
 # ---------------------------------------------------------------
