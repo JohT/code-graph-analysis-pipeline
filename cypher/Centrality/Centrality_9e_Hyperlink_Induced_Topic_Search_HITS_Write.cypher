@@ -1,10 +1,10 @@
-// Centrality 9d Hyperlink-Induced Topic Search (HITS) Memory Write
+// Centrality 9e Hyperlink-Induced Topic Search (HITS) Write
 
   CALL gds.alpha.hits.write(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      hitsIterations: 20
-    ,authProperty: $dependencies_projection_write_property
-    ,hubProperty: 'centralityHyperlinkInducedTopicSearchHub'
+    ,authProperty: $dependencies_projection_write_property + 'Authority'
+    ,hubProperty: $dependencies_projection_write_property + 'Hub'
 })
 YIELD nodePropertiesWritten, ranIterations, didConverge, preProcessingMillis, computeMillis, writeMillis
 RETURN nodePropertiesWritten, ranIterations, didConverge, preProcessingMillis, computeMillis, writeMillis

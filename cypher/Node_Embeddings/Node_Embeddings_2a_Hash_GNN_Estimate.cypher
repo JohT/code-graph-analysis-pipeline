@@ -1,7 +1,7 @@
 // Node Embeddings 2a using Hash GNN (Graph Neural Networks): Estimate
 
 CALL gds.beta.hashgnn.stream.estimate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      ,embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2
      ,iterations: 3
      ,generateFeatures: {

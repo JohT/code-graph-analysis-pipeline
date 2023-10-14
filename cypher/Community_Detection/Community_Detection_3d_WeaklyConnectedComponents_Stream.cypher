@@ -1,7 +1,7 @@
 // Community Detection Weakly Connected Components Stream
 
 CALL gds.wcc.stream(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
       relationshipWeightProperty: $dependencies_projection_weight_property,
       consecutiveIds: true
 })

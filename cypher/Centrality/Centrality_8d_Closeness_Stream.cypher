@@ -1,8 +1,8 @@
-// Centrality 5c Betweeness Stream
+// Centrality 8c Closeness Stream
 
-CALL gds.betweenness.stream(
- $dependencies_projection + '-without-empty', {
-   relationshipWeightProperty: $dependencies_projection_weight_property
+CALL gds.closeness.stream(
+  $dependencies_projection + '-cleaned', {
+   useWassermanFaust: true
 })
  YIELD nodeId, score
   WITH gds.util.asNode(nodeId) AS member, score

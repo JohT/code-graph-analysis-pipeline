@@ -1,7 +1,7 @@
 // Community Detection Leiden Mutate
 
 CALL gds.leiden.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
     tolerance: 0.00001,
     consecutiveIds: NOT toBoolean($dependencies_include_intermediate_communities),
     includeIntermediateCommunities: toBoolean($dependencies_include_intermediate_communities),

@@ -1,7 +1,7 @@
 // Node Embeddings 3c using Node2Vec: Mutate
 
 CALL gds.node2vec.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      ,embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
      ,iterations: 3
      ,relationshipWeightProperty: $dependencies_projection_weight_property

@@ -1,7 +1,7 @@
 // Centrality 8d Closeness Write
 
-CALL gds.beta.closeness.write(
- $dependencies_projection + '-without-empty', {
+CALL gds.closeness.write(
+ $dependencies_projection + '-cleaned', {
     useWassermanFaust: true
    ,writeProperty: $dependencies_projection_write_property
 })

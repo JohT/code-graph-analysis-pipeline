@@ -1,6 +1,6 @@
 // Centrality 7a Harmonic Closeness Stream
 
-CALL gds.alpha.closeness.harmonic.stream($dependencies_projection + '-without-empty', {})
+CALL gds.closeness.harmonic.stream($dependencies_projection + '-cleaned', {})
  YIELD nodeId, centrality
   WITH gds.util.asNode(nodeId) AS member, centrality
 RETURN coalesce(member.fqn, member.fileName, member.name) AS memberName

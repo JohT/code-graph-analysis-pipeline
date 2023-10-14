@@ -1,7 +1,7 @@
 // Centrality 7b Harmonic Closeness Statistics
 
 CALL gds.closeness.harmonic.stats(
- $dependencies_projection + '-without-empty', {})
+ $dependencies_projection + '-cleaned', {})
  YIELD preProcessingMillis
       ,computeMillis
       ,postProcessingMillis

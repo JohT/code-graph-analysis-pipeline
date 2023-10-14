@@ -1,7 +1,7 @@
 // Check Projection Node Properties
 
 CALL gds.graph.nodeProperties.stream(
-   $dependencies_projection + '-without-empty'
+   $dependencies_projection + '-cleaned'
   ,['incomingDependencies', 'outgoingDependencies']
 )
 YIELD nodeId, targetNodeId, propertyValue, relationshipType

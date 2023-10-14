@@ -1,7 +1,7 @@
 // Node Embeddings 3d using Node2Vec: Write
 
 CALL gds.node2vec.write(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      ,embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
      ,iterations: 3
      ,relationshipWeightProperty: $dependencies_projection_weight_property

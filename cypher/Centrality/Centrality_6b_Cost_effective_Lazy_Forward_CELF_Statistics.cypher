@@ -1,7 +1,7 @@
-// Centrality 6b Cost-effective Lazy Forward (CELF) Estimate
+// Centrality 6b Cost-effective Lazy Forward (CELF) Statistics
 
-CALL gds.beta.influenceMaximization.celf.stats(
-  $dependencies_projection + '-without-empty', {
+CALL gds.influenceMaximization.celf.stats(
+  $dependencies_projection + '-cleaned', {
     seedSetSize: 5
   })
  YIELD computeMillis

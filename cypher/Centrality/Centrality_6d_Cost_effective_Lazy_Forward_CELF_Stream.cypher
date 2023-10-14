@@ -1,7 +1,7 @@
-// Centrality 6c Cost-effective Lazy Forward (CELF) Stream
+// Centrality 6d Cost-effective Lazy Forward (CELF) Stream
 
-  CALL gds.beta.influenceMaximization.celf.stream(
-   $dependencies_projection + '-without-empty', {
+  CALL gds.influenceMaximization.celf.stream(
+   $dependencies_projection + '-cleaned', {
       seedSetSize: 5
  })
  YIELD nodeId, spread

@@ -1,11 +1,11 @@
-//Centrality 3d Page Rank Write
+// Centrality 3e Page Rank Write
 
 CALL gds.pageRank.write(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
    maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
-  ,relationshipWeightProperty: $dependencies_projection_weight_property
+  ,relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
   ,scaler: "L2Norm"
   ,writeProperty: $dependencies_projection_write_property
 })

@@ -1,7 +1,7 @@
 //Community Detection Louvain Estimate Memory
 
 CALL gds.louvain.write.estimate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
   tolerance: 0.00001,
   relationshipWeightProperty: $dependencies_projection_weight_property,
   writeProperty: $dependencies_projection_write_property,

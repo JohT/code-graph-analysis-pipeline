@@ -1,7 +1,7 @@
 //Community Detection Louvain Statistics
 
 CALL gds.louvain.stats(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
   tolerance: 0.00001,
   relationshipWeightProperty: $dependencies_projection_weight_property,
   includeIntermediateCommunities: true

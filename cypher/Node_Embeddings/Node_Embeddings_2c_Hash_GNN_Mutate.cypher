@@ -1,7 +1,7 @@
 // Node Embeddings 2b using Hash GNN (Graph Neural Networks): Mutate
 
 CALL gds.beta.hashgnn.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      ,embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2
      ,iterations: 3
      ,generateFeatures: {

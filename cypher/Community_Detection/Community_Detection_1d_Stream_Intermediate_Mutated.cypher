@@ -1,7 +1,7 @@
 // Community Detection Stream Intermediate Mutated for hierarchical algorithmns (Louvain, Leiden)
 
 CALL gds.graph.nodeProperty.stream(
-     $dependencies_projection + '-without-empty'
+     $dependencies_projection + '-cleaned'
     ,$dependencies_projection_write_property
 )
  YIELD nodeId, propertyValue
