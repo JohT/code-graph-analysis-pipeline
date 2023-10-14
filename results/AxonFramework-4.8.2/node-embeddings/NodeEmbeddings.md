@@ -52,7 +52,7 @@ Create an in-memory undirected graph projection containing Package nodes (vertic
   <tbody>
     <tr>
       <th>0</th>
-      <td>package-embeddings-notebook-without-empty</td>
+      <td>package-embeddings-notebook-cleaned</td>
       <td>package-embeddings-notebook</td>
       <td>93</td>
       <td>1130</td>
@@ -92,7 +92,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.013999</td>
       <td>axon-disruptor-4.8.2</td>
-      <td>[-0.20894134044647217, 0.2695821523666382, -0....</td>
+      <td>[-0.1822344809770584, 0.1299275904893875, -0.1...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -100,7 +100,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.028744</td>
       <td>axon-test-4.8.2</td>
-      <td>[-0.127921000123024, -0.052550025284290314, 0....</td>
+      <td>[0.00023671239614486694, 0.11516499519348145, ...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -108,7 +108,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.013868</td>
       <td>axon-test-4.8.2</td>
-      <td>[-0.24180135130882263, 0.13739299774169922, -0...</td>
+      <td>[-0.019603952765464783, 0.1267286092042923, -0...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -116,7 +116,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.020120</td>
       <td>axon-test-4.8.2</td>
-      <td>[-0.1176428496837616, -0.04503189027309418, 0....</td>
+      <td>[-0.009701468050479889, 0.10321725159883499, -...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -124,7 +124,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.013868</td>
       <td>axon-test-4.8.2</td>
-      <td>[-0.15501751005649567, 0.030369192361831665, -...</td>
+      <td>[0.036567725241184235, 0.11346830427646637, -0...</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.030s...
+    [t-SNE] Computed neighbors for 93 samples in 0.069s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.429902
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.146931
-    [t-SNE] KL divergence after 1000 iterations: 0.187667
+    [t-SNE] Mean sigma: 0.504033
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.547836
+    [t-SNE] KL divergence after 900 iterations: 0.124734
 
 
 
@@ -180,8 +180,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-disruptor-4.8.2</td>
       <td>0</td>
       <td>0.013999</td>
-      <td>-0.399394</td>
-      <td>4.690575</td>
+      <td>2.721016</td>
+      <td>5.445649</td>
     </tr>
     <tr>
       <th>1</th>
@@ -189,8 +189,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.8.2</td>
       <td>1</td>
       <td>0.028744</td>
-      <td>0.178081</td>
-      <td>-5.823867</td>
+      <td>5.497223</td>
+      <td>1.652973</td>
     </tr>
     <tr>
       <th>2</th>
@@ -198,8 +198,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.8.2</td>
       <td>1</td>
       <td>0.013868</td>
-      <td>-0.512739</td>
-      <td>-5.459812</td>
+      <td>4.537615</td>
+      <td>2.596540</td>
     </tr>
     <tr>
       <th>3</th>
@@ -207,8 +207,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.8.2</td>
       <td>1</td>
       <td>0.020120</td>
-      <td>0.158158</td>
-      <td>-5.710916</td>
+      <td>5.418225</td>
+      <td>1.627366</td>
     </tr>
     <tr>
       <th>4</th>
@@ -216,8 +216,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.8.2</td>
       <td>1</td>
       <td>0.013868</td>
-      <td>0.624592</td>
-      <td>-5.260262</td>
+      <td>4.923881</td>
+      <td>1.159050</td>
     </tr>
   </tbody>
 </table>

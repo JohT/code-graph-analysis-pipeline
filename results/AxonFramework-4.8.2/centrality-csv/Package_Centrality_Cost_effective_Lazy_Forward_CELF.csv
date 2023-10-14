@@ -1,6 +1,0 @@
-"memberName","spread","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_6c_Cost_effective_Lazy_Forward_CELF_Stream.cypher"
-"org.axonframework.config",9.69,115,432,""
-"org.axonframework.test.aggregate",2.7200000000000006,31,181,""
-"org.axonframework.eventsourcing.eventstore.legacyjpa",2.01,23,84,""
-"org.axonframework.modelling.command.legacyjpa",1.9799999999999986,2,23,""
-"org.axonframework.commandhandling.distributed",1.740000000000002,50,133,""
