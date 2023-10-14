@@ -1,7 +1,7 @@
 // Centrality 4a Article Rank Estimate Memory
 
 CALL gds.articleRank.write.estimate(
-  $dependencies_projection + '-without-empty', {
+  $dependencies_projection + '-cleaned', {
    writeProperty: $dependencies_projection_write_property
   ,maxIterations: 30
   ,dampingFactor: 0.85

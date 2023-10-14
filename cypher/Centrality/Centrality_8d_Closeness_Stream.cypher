@@ -1,7 +1,7 @@
 // Centrality 8c Closeness Stream
 
 CALL gds.closeness.stream(
-  $dependencies_projection + '-without-empty', {
+  $dependencies_projection + '-cleaned', {
    useWassermanFaust: true
 })
  YIELD nodeId, score

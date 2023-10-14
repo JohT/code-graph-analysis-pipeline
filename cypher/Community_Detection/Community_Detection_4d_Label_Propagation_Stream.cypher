@@ -1,7 +1,7 @@
 // Community Detection Label Propagation Stream
 
 CALL gds.labelPropagation.stream(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      relationshipWeightProperty: $dependencies_projection_weight_property
     ,consecutiveIds: true
 })

@@ -1,7 +1,7 @@
 // Centrality 8c Closeness Mutate
 
 CALL gds.closeness.mutate(
-  $dependencies_projection + '-without-empty', {
+  $dependencies_projection + '-cleaned', {
    useWassermanFaust: true
   ,mutateProperty: $dependencies_projection_write_property
 })

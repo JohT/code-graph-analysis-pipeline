@@ -1,7 +1,7 @@
 // Community Detection Approximate Maximum k-cut Stream
 
 CALL gds.maxkcut.stream(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
 })
  YIELD nodeId, communityId
   WITH gds.util.asNode(nodeId) AS member

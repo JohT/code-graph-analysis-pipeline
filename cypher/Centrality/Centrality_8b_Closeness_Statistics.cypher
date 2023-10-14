@@ -1,7 +1,7 @@
 //Centrality 8b Closeness Statistics
 
 CALL gds.closeness.stats(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
    useWassermanFaust: true
 })
 YIELD preProcessingMillis

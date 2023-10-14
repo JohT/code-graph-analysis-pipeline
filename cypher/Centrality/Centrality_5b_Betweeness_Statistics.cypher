@@ -1,7 +1,7 @@
 // Centrality 5b Betweeness Statistics
 
  CALL gds.betweenness.stats(
-  $dependencies_projection + '-without-empty', {
+  $dependencies_projection + '-cleaned', {
      relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
     })
  YIELD preProcessingMillis

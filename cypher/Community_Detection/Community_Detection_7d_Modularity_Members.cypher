@@ -1,7 +1,7 @@
 // Community Detection Modularity Members
 
 CALL gds.modularity.stream(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      relationshipWeightProperty: $dependencies_projection_weight_property
     ,communityProperty: $dependencies_projection_write_property
 })

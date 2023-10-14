@@ -1,7 +1,7 @@
 // Community Detection K-Core Decomposition Stream
 
 CALL gds.kcore.stream(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
 })
  YIELD nodeId, coreValue
   WITH gds.util.asNode(nodeId) AS member

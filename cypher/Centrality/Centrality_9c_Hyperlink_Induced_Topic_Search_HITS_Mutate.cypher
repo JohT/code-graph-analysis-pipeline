@@ -1,7 +1,7 @@
 // Centrality 9c Hyperlink-Induced Topic Search (HITS) Mutate
 
   CALL gds.alpha.hits.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      hitsIterations: 20
     ,authProperty: $dependencies_projection_write_property + 'Authority'
     ,hubProperty: $dependencies_projection_write_property + 'Hub'

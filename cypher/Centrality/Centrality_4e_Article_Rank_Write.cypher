@@ -1,7 +1,7 @@
 //Centrality 4e Article Rank Write
 
 CALL gds.articleRank.write(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
    maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001

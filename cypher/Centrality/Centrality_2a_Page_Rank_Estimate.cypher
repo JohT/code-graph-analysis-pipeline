@@ -1,7 +1,7 @@
 // Centrality 2a Page Rank Estimate Memory
 
 CALL gds.pageRank.write.estimate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
    writeProperty: $dependencies_projection_write_property
   ,maxIterations: 50
   ,dampingFactor: 0.85

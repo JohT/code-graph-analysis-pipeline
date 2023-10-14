@@ -1,7 +1,7 @@
 // Node Embeddings 1a using Fast Random Projection: Estimate
 
 CALL gds.fastRP.stream.estimate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
       embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
      ,relationshipWeightProperty: $dependencies_projection_weight_property
   }

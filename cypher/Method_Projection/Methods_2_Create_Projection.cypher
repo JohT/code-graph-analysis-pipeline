@@ -7,7 +7,7 @@
    AND target.visibility = 'public'
    AND source.name <> '<init>'
    AND target.name <> '<init>'
-  WITH gds.graph.project($dependencies_projection + '-without-empty', source, target) AS projection
+  WITH gds.graph.project($dependencies_projection + '-cleaned', source, target) AS projection
 RETURN projection.graphName         AS graphName
       ,projection.nodeCount         AS nodeCount
       ,projection.relationshipCount AS relationshipCount

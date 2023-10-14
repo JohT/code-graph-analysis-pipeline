@@ -1,7 +1,7 @@
 // Centrality 4b Article Rank Statistics
 
 CALL gds.articleRank.stats(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
    maxIterations: 30
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001

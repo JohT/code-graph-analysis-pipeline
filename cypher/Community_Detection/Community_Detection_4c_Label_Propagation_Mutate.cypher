@@ -1,7 +1,7 @@
 // Community Detection Label Propagation Mutate
 
 CALL gds.labelPropagation.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
      relationshipWeightProperty: $dependencies_projection_weight_property
     ,mutateProperty: $dependencies_projection_write_property
     ,consecutiveIds: true

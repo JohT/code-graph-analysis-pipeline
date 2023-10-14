@@ -2,7 +2,7 @@
 // Needs graph-data-science plugin version >= 2.5.0
 
 CALL gds.dag.topologicalSort.stream(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
     computeMaxDistanceFromSource: true
 }) YIELD nodeId, maxDistanceFromSource
    WITH nodeId

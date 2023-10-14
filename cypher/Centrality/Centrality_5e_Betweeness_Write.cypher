@@ -1,7 +1,7 @@
 // Centrality 5e Betweeness Write
 
 CALL gds.betweenness.write(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
     relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
    ,writeProperty: $dependencies_projection_write_property
 })

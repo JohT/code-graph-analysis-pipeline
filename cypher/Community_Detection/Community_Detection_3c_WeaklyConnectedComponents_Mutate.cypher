@@ -1,7 +1,7 @@
 // Community Detection Weakly Connected Components Mutate
 
 CALL gds.wcc.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
       relationshipWeightProperty: $dependencies_projection_weight_property
      ,mutateProperty: $dependencies_projection_write_property
      ,consecutiveIds: true

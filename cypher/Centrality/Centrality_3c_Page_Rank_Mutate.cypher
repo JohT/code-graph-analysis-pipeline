@@ -1,7 +1,7 @@
 // Centrality 3c Page Rank Mutate
 
 CALL gds.pageRank.mutate(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
    maxIterations: 50
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001

@@ -1,7 +1,7 @@
 // Centrality 7c Harmonic Closeness Mutate
 
 CALL gds.closeness.harmonic.mutate(
-  $dependencies_projection + '-without-empty', {
+  $dependencies_projection + '-cleaned', {
     mutateProperty: $dependencies_projection_write_property
 })
  YIELD nodePropertiesWritten

@@ -1,7 +1,7 @@
 //Community Detection Louvain Write communityLouvainIntermediateIds
 
 CALL gds.louvain.write(
- $dependencies_projection + '-without-empty', {
+ $dependencies_projection + '-cleaned', {
     tolerance: 0.00001,
     includeIntermediateCommunities: true,
     relationshipWeightProperty: $dependencies_projection_weight_property,

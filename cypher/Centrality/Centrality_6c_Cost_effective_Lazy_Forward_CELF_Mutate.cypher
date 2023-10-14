@@ -1,7 +1,7 @@
 // Centrality 6c Cost-effective Lazy Forward (CELF) Mutate
 
   CALL gds.influenceMaximization.celf.mutate(
-   $dependencies_projection + '-without-empty', {
+   $dependencies_projection + '-cleaned', {
       seedSetSize: 5
      ,mutateProperty: $dependencies_projection_write_property
  })
