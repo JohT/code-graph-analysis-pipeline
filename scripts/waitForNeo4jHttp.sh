@@ -21,7 +21,7 @@ echo "waitForNeo4jHttp: SCRIPTS_DIR=$SCRIPTS_DIR"
 CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"}
 echo "waitForNeo4jHttp: CYPHER_DIR=$CYPHER_DIR"
 
-# Define functions to execute a cypher query from within the given file (first and only argument)
+# Define functions to execute a Cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 # List of wait times in seconds per retry
@@ -34,19 +34,19 @@ echo "${WAIT_TIMES}" | tr ' ' '\n' | while read -r waitTime; do
     sleep "${waitTime}"
 
     # Queries node and relationship count as a basic validation
-    if ! cyper_elements_query_result=$(execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher");
+    if ! cypher_elements_query_result=$(execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher");
     then
         continue; # query failed -> try again
     fi
     
-    if [[ -n "${cyper_elements_query_result}" ]]; then 
+    if [[ -n "${cypher_elements_query_result}" ]]; then 
         echo "waitForNeo4jHttp: Successfully accessed Neo4j HTTP API."
-        echo "${cyper_elements_query_result}"
+        echo "${cypher_elements_query_result}"
         exit 0
     fi
 done
 
-if ! cyper_elements_query_result=$(execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher"); then
+if ! cypher_elements_query_result=$(execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher"); then
     # Error: Couldn't access HTTP after all wait iterations
     echo "waitForNeo4jHttp: Error: Failed to access Neo4j HTTP API."
     exit 1

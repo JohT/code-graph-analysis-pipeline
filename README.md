@@ -37,7 +37,8 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 
 ## 🛠 Prerequisites
 
-- Java 17 is required (June 2023 Neo4j 5.x requirement)
+- Java 17 is [required for Neo4j](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-software) (5.x requirement)
+- [jq](https://github.com/jqlang/jq) the "lightweight and flexible command-line JSON processor" needs to be installed. Latest releases: https://github.com/jqlang/jq/releases/latest. Check using `jq --version`.
 - Python and a conda package manager are required for Jupyter Notebook reports
 - Chromium will automatically be downloaded if needed for Jupyter Notebook reports in PDF format
 

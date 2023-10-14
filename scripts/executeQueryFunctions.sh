@@ -48,8 +48,8 @@ execute_cypher_expect_results() {
 
 # Function to execute a cypher query from the given file (first and only argument) using Neo4j's HTTP API
 execute_cypher_http() { 
-    # (Neo4j HTTP API Script) Execute the Cyper query contained in the file and print the results as CSV
-    source $SCRIPTS_DIR/executeQuery.sh "${@}" # "${@}": Get all function arguments and forward them
+    # (Neo4j HTTP API Script) Execute the Cypher query contained in the file and print the results as CSV
+    source "$SCRIPTS_DIR/executeQuery.sh" "${@}" # "${@}": Get all function arguments and forward them
 }
 
 # Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using Neo4j's HTTP API
@@ -107,11 +107,10 @@ execute_cypher_shell() {
     query_parameters=$(cypher_shell_query_parameters "${@}")
     echo "executeQuery: query_parameters=${query_parameters}"
 
-    # (Neo4j Cyper Shell CLI) Execute the Cyper query contained in the file and print the results as CSV
+    # (Neo4j Cypher Shell CLI) Execute the Cypher query contained in the file and print the results as CSV
     cat $cypherFileName | NEO4J_HOME="${NEO4J_DIRECTORY}" ${NEO4J_BIN}/cypher-shell -u neo4j -p "${NEO4J_INITIAL_PASSWORD}" --format plain --param "${query_parameters}" || exit 1
 
     # Display the name of the Cypher file without its path at the bottom of the CSV (or console) separated by an empty line
-    # TODO Find a solution to move the source reference to the last column name
     echo ""
     echo "\"Source Cypher File:\",\"$(basename -- "${cypherFileName}")\""
 }

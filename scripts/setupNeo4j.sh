@@ -4,7 +4,7 @@
 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
-# Requires download.sh,setupNeo4jInitialPassword.sh
+# Requires download.sh,setupNeo4jInitialPassword.sh,operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -eo pipefail
@@ -68,14 +68,25 @@ if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
     exit 1
 fi
 
+# Include operation system function to for example detect Windows.
+source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
+
 # Download and extract Neo4j
 if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
 
-    neo4jDownloadArchiveFileName="${NEO4J_INSTALLATION_NAME}-unix.tar.gz"
-    source ${SCRIPTS_DIR}/download.sh --url "https://dist.neo4j.org/${neo4jDownloadArchiveFileName}" || exit 1
+    neo4jInstallationSystemPostfix=$(ifWindows "windows.zip" "unix.tar.gz")
+    neo4jDownloadArchiveFileName="${NEO4J_INSTALLATION_NAME}-${neo4jInstallationSystemPostfix}"
+    echo "setupNeo4j: Using Neo4j distribution ${neo4jDownloadArchiveFileName}"
+
+    source "${SCRIPTS_DIR}/download.sh" --url "https://dist.neo4j.org/${neo4jDownloadArchiveFileName}" || exit 1
     
-    # Extract the tar file
-    tar -xf "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jDownloadArchiveFileName}" --directory "${TOOLS_DIRECTORY}" || exit 1
+    if [[ ${neo4jInstallationSystemPostfix} == "unix.tar.gz" ]]; then
+        # Extract the unix tar file
+        tar -xf "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jDownloadArchiveFileName}" --directory "${TOOLS_DIRECTORY}" || exit 1
+    else
+        # Unpack the windows ZIP file (-q option for less verbose output, ignore warnings (backslash) with || true)
+        unzip -q "${SHARED_DOWNLOADS_DIRECTORY}/${neo4jDownloadArchiveFileName}" -d "${TOOLS_DIRECTORY}" || true
+    fi
 
     # Fail if Neo4j hadn't been downloaded successfully
     if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
@@ -87,16 +98,22 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
     # instead of inside the neo4j directory
     echo "setupNeo4j: Configuring dynamic settings (data directories, ports, ...)"
 
+    neo4jDataPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_DATA_PATH}")
+    neo4jLogsPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_RUNTIME_PATH}/logs")
+    neo4jDumpsPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_RUNTIME_PATH}/dumps")
+    neo4jRunPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_RUNTIME_PATH}/run")
+    neo4jTransactionsPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_DATA_PATH}/transactions")
+
     if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
         echo "setupNeo4j: Neo4j v5 or higher detected"
         {
             echo ""
             echo "# Paths of data directories in the installation (v5)"
-            echo "server.directories.data=${NEO4J_DATA_PATH}"
-            echo "server.directories.logs=${NEO4J_RUNTIME_PATH}/logs"
-            echo "server.directories.dumps.root=${NEO4J_RUNTIME_PATH}/dumps"
-            echo "server.directories.run=${NEO4J_RUNTIME_PATH}/run"
-            echo "server.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
+            echo "server.directories.data=${neo4jDataPath}"
+            echo "server.directories.logs=${neo4jLogsPath}"
+            echo "server.directories.dumps.root=${neo4jDumpsPath}"
+            echo "server.directories.run=${neo4jRunPath}"
+            echo "server.directories.transaction.logs.root=${neo4jTransactionsPath}"
             echo ""
             echo "# Ports Configuration (v5)"
             echo "server.bolt.listen_address=:${NEO4J_BOLT_PORT}"
@@ -111,11 +128,11 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         {
             echo ""
             echo "# Paths of data directories in the installation"
-            echo "dbms.directories.data=${NEO4J_DATA_PATH}"
-            echo "dbms.directories.logs=${NEO4J_RUNTIME_PATH}/logs"
-            echo "dbms.directories.dumps.root=${NEO4J_RUNTIME_PATH}/dumps"
-            echo "dbms.directories.run=${NEO4J_RUNTIME_PATH}/run"
-            echo "dbms.directories.transaction.logs.root=${NEO4J_DATA_PATH}/transactions"
+            echo "dbms.directories.data=${neo4jDataPath}"
+            echo "dbms.directories.logs=${neo4jLogsPath}"
+            echo "dbms.directories.dumps.root=${neo4jDumpsPath}"
+            echo "dbms.directories.run=${neo4jRunPath}"
+            echo "dbms.directories.transaction.logs.root=${neo4jTransactionsPath}"
             echo ""
             echo "# Ports Configuration"
             echo "dbms.connector.bolt.listen_address=:${NEO4J_BOLT_PORT}"
@@ -136,9 +153,9 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
 
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).
     # This needs to be done after the configuration changes.
-    source ${SCRIPTS_DIR}/setupNeo4jInitialPassword.sh
+    source "${SCRIPTS_DIR}/setupNeo4jInitialPassword.sh"
 
-    echo "setupNeo4j: Installed sucessfully"
+    echo "setupNeo4j: Installed successfully"
 else
     echo "setupNeo4j: ${NEO4J_INSTALLATION_NAME} already installed"
 fi
@@ -146,7 +163,7 @@ fi
 # Download and Install the Neo4j Plugin "Awesome Procedures for Neo4j" (APOC)
 if [ ! -f "${NEO4J_PLUGINS}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
 
-    source ${SCRIPTS_DIR}/download.sh --url "https://github.com/${NEO4J_APOC_PLUGIN_GITHUB}/releases/download/${NEO4J_APOC_PLUGIN_VERSION}/${NEO4J_APOC_PLUGIN_ARTIFACT}" || exit 1
+    source "${SCRIPTS_DIR}/download.sh" --url "https://github.com/${NEO4J_APOC_PLUGIN_GITHUB}/releases/download/${NEO4J_APOC_PLUGIN_VERSION}/${NEO4J_APOC_PLUGIN_ARTIFACT}" || exit 1
 
     # Uninstall previously installed Neo4j Plugin "Awesome Procedures for Neo4j" (APOC)
     rm -f "${NEO4J_PLUGINS}/apoc*.jar"
@@ -192,7 +209,7 @@ fi
 
 if [ ! -f "${NEO4J_PLUGINS}/${neo4jGraphDataScienceReleaseArtifact}" ] ; then
     # Download the Neo4j Plugin "Graph Data Science" (GDS)
-    source ${SCRIPTS_DIR}/download.sh --url "${neo4jGraphDataScienceDownloadUrl}/${neo4jGraphDataScienceReleaseArtifact}" || exit 1
+    source "${SCRIPTS_DIR}/download.sh" --url "${neo4jGraphDataScienceDownloadUrl}/${neo4jGraphDataScienceReleaseArtifact}" || exit 1
 
     # Uninstall previously installed Neo4j Plugin "Graph Data Science" (GDS)
     rm -f "${NEO4J_PLUGINS}/*graph-data-science*.jar"

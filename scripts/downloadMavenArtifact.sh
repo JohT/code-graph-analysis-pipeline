@@ -70,7 +70,7 @@ DOWNLOAD_URL="${BASE_URL}/${GROUP_ID_FOR_API}/${artifactId}/${version}/${ARTIFAC
 
 # Download Maven Artifact into the "targetDirectory"
 if [ ! -f "./${targetDirectory}/${ARTIFACT_FILENAME}" ] ; then
-    source ${SCRIPTS_DIR}/download.sh --url "${DOWNLOAD_URL}"
+    source "${SCRIPTS_DIR}/download.sh" --url "${DOWNLOAD_URL}"
 
     # Create artifacts targetDirectory if it doen't exist
     mkdir -p "./${targetDirectory}"
