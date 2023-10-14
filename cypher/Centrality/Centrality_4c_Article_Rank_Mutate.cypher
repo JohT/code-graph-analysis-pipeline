@@ -6,7 +6,7 @@ CALL gds.articleRank.mutate(
   ,dampingFactor: 0.85
   ,tolerance: 0.00000001
   ,scaler: "L2Norm"
-  ,relationshipWeightProperty: $dependencies_projection_weight_property
+  ,relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
   ,mutateProperty: $dependencies_projection_write_property
 })
  YIELD nodePropertiesWritten
