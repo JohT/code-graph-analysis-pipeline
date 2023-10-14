@@ -8,7 +8,7 @@
 set -eo pipefail
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.10.0"}
+NEO4J_VERSION=${NEO4J_VERSION:-"5.12.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 
 # Internal constants
