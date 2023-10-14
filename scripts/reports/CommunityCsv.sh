@@ -99,7 +99,6 @@ detectCommunitiesWithLouvain() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7e_Write_Modularity.cypher" "${@}" "${writePropertyName}"
 }
 
 # Community Detection using the Leiden Algorithm
@@ -144,6 +143,18 @@ detectCommunitiesWithLeiden() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+}
+
+# Write modularity for Leiden communities
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+writeLeidenModularity() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local writePropertyName="dependencies_projection_write_property=communityLeidenId" 
     execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7e_Write_Modularity.cypher" "${@}" "${writePropertyName}"
 }
 
@@ -320,6 +331,7 @@ ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 # Artifact Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
 detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
+writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 
 # ---------------------------------------------------------------
 
@@ -333,6 +345,7 @@ PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 # Package Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') communityCsv: Processing package dependencies..."
 detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
+writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 
 # Package Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
