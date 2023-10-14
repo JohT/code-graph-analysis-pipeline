@@ -36,18 +36,18 @@ REPORT_NAME="centrality-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
-# Centrality Preparation
-# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
+# Centrality preparation for dependencies between Artifacts, Packages and Types.
+# Selects the dependent nodes and relationships for the algorithm and creates an in-memory projection.
 # Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
 #
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
-createProjection() {
+createDependencyProjection() {
     local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
@@ -56,13 +56,27 @@ createProjection() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
 }
 
+# Centrality preparation for method calls 
+# Selects the method nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+createMethodProjection() {
+    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Method_Projection"
+
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_1_Delete_Projection.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_2_Create_Projection.cypher" "${@}"
+}
+
 # Apply the centrality algorithm "Page Rank".
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithPageRank() {
@@ -97,9 +111,9 @@ centralityWithPageRank() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithArticleRank() {
@@ -134,9 +148,9 @@ centralityWithArticleRank() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithBetweenness() {
@@ -171,9 +185,9 @@ centralityWithBetweenness() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithCostEffectiveLazyForwardCELF() {
@@ -208,9 +222,9 @@ centralityWithCostEffectiveLazyForwardCELF() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithHarmonic() {
@@ -246,9 +260,9 @@ centralityWithHarmonic() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithCloseness() {
@@ -284,9 +298,9 @@ centralityWithCloseness() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "centralityPageRank"
+#   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 centralityWithHyperlinkInducedTopicSearchHITS() {
@@ -334,7 +348,6 @@ centralityWithHyperlinkInducedTopicSearchHITS() {
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 runCentralityAlgorithms() {
-    createProjection "${@}"
     time centralityWithPageRank "${@}"
     time centralityWithArticleRank "${@}"
     time centralityWithBetweenness "${@}"
@@ -353,6 +366,7 @@ ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Artifact Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
+createDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 runCentralityAlgorithms "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 
 # ---------------------------------------------------------------
@@ -364,6 +378,7 @@ PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterface
 
 # Package Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
+createDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 runCentralityAlgorithms "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 
 # ---------------------------------------------------------------
@@ -375,6 +390,21 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
+createDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+
+# ---------------------------------------------------------------
+
+# Method Query Parameters
+METHOD_PROJECTION="dependencies_projection=method-centrality" 
+METHOD_NODE="dependencies_projection_node=Method" 
+METHOD_WEIGHT="dependencies_projection_weight_property=" 
+
+# Method Centrality
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing method dependencies..."
+createMethodProjection "${METHOD_PROJECTION}"
+runCentralityAlgorithms "${METHOD_PROJECTION}" "${METHOD_NODE}" "${METHOD_WEIGHT}"
+
+# ---------------------------------------------------------------
 
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
