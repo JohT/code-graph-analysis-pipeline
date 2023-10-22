@@ -45,13 +45,12 @@ fi
 # Include operation system function to for example detect Windows.
 source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
 
-scriptExtension=$(ifWindows ".bat" "")
-echo "startNeo4j: Using scriptExtension ${scriptExtension} for Windows."
+# Include functions to check or wait for the database to be ready
+source "${SCRIPTS_DIR}/waitForNeo4jHttpFunctions.sh"
 
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
-neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} | ${NEO4J_BIN}/neo4j${scriptExtension} status 2>&1 || true)"
-neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
-if [ -n "${neo4jNotRunning}" ]; then
+isDatabaseReady=$(isDatabaseQueryable)
+if [[ ${isDatabaseReady} == "false" ]]; then
     echo "startNeo4j: Starting neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} in ${NEO4J_DIR}"
 
     # Check if there is already a process that listens to the Neo4j HTTP port
@@ -86,28 +85,8 @@ if [ -n "${neo4jNotRunning}" ]; then
         NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j start --verbose
     fi
 
-    # Wait some time for the start of the database
-    echo "${WAIT_TIMES}" | tr ' ' '\n' | while read waitTime; do
-        echo "startNeo4j: Waiting for ${waitTime} second(s)"
-        sleep ${waitTime}
-
-        neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} | ${NEO4J_BIN}/neo4j${scriptExtension} status 2>&1 || true)"
-        neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
-        if [ -z "${neo4jNotRunning}" ]; then
-            echo "startNeo4j: Successfully started neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
-            exit 0
-        fi
-    done
+   waitUntilDatabaseIsQueryable
+   
 else
     echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} already started"
 fi
-
-# Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
-neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} | ${NEO4J_BIN}/neo4j${scriptExtension} status 2>&1 || true)"
-neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
-if [ -n "${neo4jNotRunning}" ]; then
-    echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} still not running. Something went wrong. Details see 'NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status'."
-    exit 1
-fi
-
-source "${SCRIPTS_DIR}/waitForNeo4jHttp.sh" || exit 1

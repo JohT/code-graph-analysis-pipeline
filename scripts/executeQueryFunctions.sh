@@ -13,7 +13,7 @@ set -eo pipefail
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 
-# Extact the value of one key out of a "key=value" array e.g. for query parameters. 
+# Extract the value of one key out of a "key=value" array e.g. for query parameters. 
 # The first argument is the name of the target key.
 # All following arguments are the "key=value" parameters.
 # Example: `extractQueryParameter "b" "a=1" "b=2" "c=3"` returns `2`
@@ -49,7 +49,7 @@ execute_cypher_expect_results() {
 # Function to execute a cypher query from the given file (first and only argument) using Neo4j's HTTP API
 execute_cypher_http() { 
     # (Neo4j HTTP API Script) Execute the Cypher query contained in the file and print the results as CSV
-    source "$SCRIPTS_DIR/executeQuery.sh" "${@}" # "${@}": Get all function arguments and forward them
+    source "${SCRIPTS_DIR}/executeQuery.sh" "${@}" # "${@}": Get all function arguments and forward them
 }
 
 # Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using Neo4j's HTTP API
@@ -63,8 +63,7 @@ execute_cypher_http_summarized() {
 execute_cypher_http_expect_results() { 
     # Get the Cypher file name from the first argument
     cypherFileName="${1}"
-
-    results=$( execute_cypher_http ${cypherFileName} | wc -l )
+    results=$( execute_cypher_http "${cypherFileName}" | wc -l )
     results=$((results - 1))
     if [[ "$results" -lt 1 ]]; then
         echo "$(basename -- "${cypherFileName}") (via http) Error: Expected at least one entry but was ${results}" >&2
