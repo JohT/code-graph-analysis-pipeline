@@ -89,19 +89,19 @@
     </tr>
     <tr>
       <th>16</th>
-      <td>eventsourcing</td>
+      <td>commandhandling</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>conflictresolution</td>
+      <td>callbacks</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>eventstore</td>
+      <td>distributed</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>inmemory</td>
+      <td>gateway</td>
     </tr>
   </tbody>
 </table>

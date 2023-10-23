@@ -204,43 +204,43 @@ If these packages get changed, the incoming dependencies might be affected by th
     </tr>
     <tr>
       <th>16</th>
-      <td>org.axonframework.eventsourcing</td>
-      <td>113</td>
-      <td>538</td>
-      <td>41</td>
+      <td>org.axonframework.commandhandling</td>
+      <td>268</td>
+      <td>1134</td>
+      <td>123</td>
       <td>0</td>
-      <td>5</td>
-      <td>4</td>
+      <td>18</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
-      <td>15</td>
-      <td>46</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>8</td>
+      <td>24</td>
       <td>7</td>
+      <td>0</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>50</td>
+      <td>282</td>
+      <td>24</td>
       <td>0</td>
       <td>2</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>120</td>
-      <td>644</td>
-      <td>60</td>
-      <td>0</td>
-      <td>10</td>
-      <td>4</td>
-    </tr>
-    <tr>
       <th>19</th>
-      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>97</td>
+      <td>395</td>
+      <td>33</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>3</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -440,43 +440,43 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
     </tr>
     <tr>
       <th>16</th>
-      <td>org.axonframework.eventsourcing</td>
-      <td>211</td>
-      <td>872</td>
-      <td>91</td>
+      <td>org.axonframework.commandhandling</td>
+      <td>145</td>
+      <td>539</td>
+      <td>71</td>
       <td>0</td>
-      <td>16</td>
-      <td>3</td>
+      <td>9</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
-      <td>32</td>
-      <td>102</td>
-      <td>18</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>13</td>
+      <td>47</td>
+      <td>4</td>
       <td>0</td>
-      <td>9</td>
-      <td>3</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>161</td>
-      <td>784</td>
-      <td>64</td>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>133</td>
+      <td>524</td>
+      <td>72</td>
       <td>0</td>
-      <td>16</td>
-      <td>3</td>
+      <td>12</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
-      <td>13</td>
-      <td>107</td>
-      <td>11</td>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>166</td>
+      <td>631</td>
+      <td>56</td>
       <td>0</td>
-      <td>4</td>
-      <td>2</td>
+      <td>10</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1098,14 +1098,6 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>17</th>
-      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
-      <td>inmemory</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>18</th>
       <td>org.axonframework.eventhandling.tokenstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1113,7 +1105,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
       <td>org.axonframework.eventhandling.tokenstore.leg...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1121,7 +1113,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>19</th>
       <td>org.axonframework.messaging.interceptors.legac...</td>
       <td>legacyvalidation</td>
       <td>0.000000</td>
@@ -1129,7 +1121,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>20</th>
       <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1137,8 +1129,16 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>21</th>
       <td>org.axonframework.modelling.saga.repository.in...</td>
+      <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
       <td>0</td>
