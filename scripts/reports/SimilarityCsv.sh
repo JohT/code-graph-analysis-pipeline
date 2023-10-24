@@ -72,15 +72,20 @@ similarity() {
     execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1a_Estimate.cypher" "${@}"
     execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1b_Statistics.cypher" "${@}"
     
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1c_Mutate.cypher" "${@}"
+
     # Stream to CSV
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1c_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1d_Stream_Mutated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
+    #execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1e_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
     
     # Update Graph (node properties and labels)
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1d_Delete_Relationships.cypher" "${@}"
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1e_Write.cypher" "${@}"
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1f_Write_Node_Properties.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1f_Delete_Relationships.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1g_Write_Mutated.cypher" "${@}"
+    #execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1h_Write.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1i_Write_Node_Properties.cypher" "${@}"
 }
 
 # ---------------------------------------------------------------

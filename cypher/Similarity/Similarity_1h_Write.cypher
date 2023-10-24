@@ -3,6 +3,7 @@
 CALL gds.nodeSimilarity.write(
  $dependencies_projection + '-cleaned', {
      relationshipWeightProperty: $dependencies_projection_weight_property
+    ,relationshipTypes: ['DEPENDS_ON']
     ,writeRelationshipType: 'SIMILAR'
     ,writeProperty: 'score'
     ,topK: 3
