@@ -309,6 +309,13 @@ compareCommunityDetectionResults() {
     execute_cypher "${CYPHER_DIR}/Community_Detection/Compare_Louvain_vs_Leiden_Results.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Compare_Louvain_with_Leiden.csv"
 }
 
+listAllResults() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_Summary.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_All_Communities.csv"
+}
+
 detectCommunities() {
     createProjection "${@}"
     time detectCommunitiesWithWeaklyConnectedComponents "${@}"
@@ -318,6 +325,7 @@ detectCommunities() {
     time detectCommunitiesWithKCoreDecomposition "${@}"
     time detectCommunitiesWithApproximateMaximumKCut "${@}"
     compareCommunityDetectionResults "${@}"
+    listAllResults "${@}"
 }
 # ---------------------------------------------------------------
 
