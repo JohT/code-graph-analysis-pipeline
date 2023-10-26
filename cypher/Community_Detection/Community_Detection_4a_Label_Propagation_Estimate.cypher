@@ -23,4 +23,4 @@ RETURN requiredMemory
       ,heapPercentageMin
       ,heapPercentageMax
       ,treeView
-      ,mapView
+      //,mapView //doesn't work on Windows with git bash jq version jq-1.7-dirty
