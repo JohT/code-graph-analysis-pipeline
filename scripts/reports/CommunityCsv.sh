@@ -57,6 +57,20 @@ createProjection() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
 }
 
+# Community Detection Preparation for Types
+# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+createTypeProjection() {
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}"
+}
+
 # Community Detection using the Louvain Algorithm
 # 
 # Required Parameters:
@@ -317,7 +331,6 @@ listAllResults() {
 }
 
 detectCommunities() {
-    createProjection "${@}"
     time detectCommunitiesWithWeaklyConnectedComponents "${@}"
     time detectCommunitiesWithLabelPropagation "${@}"
     time detectCommunitiesWithLouvain "${@}"
@@ -338,6 +351,7 @@ ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
 # Artifact Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
+createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
 writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 
@@ -352,6 +366,7 @@ PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 
 # Package Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') communityCsv: Processing package dependencies..."
+createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
 writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 
@@ -369,6 +384,7 @@ TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
 # Type Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
+createTypeProjection "${TYPE_PROJECTION}"
 detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
 
 # Type Community Detection - Special CSV Queries after update

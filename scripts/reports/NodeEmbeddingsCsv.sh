@@ -77,6 +77,34 @@ createDirectedProjection() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
 }
 
+# Node Embeddings Preparation: Create a directed in-memory Graph for "Type" nodes.
+# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+createDirectedTypeProjection() {
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}"
+}
+
+# Node Embeddings Preparation: Create a undirected in-memory Graph for "Type" nodes.
+# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+createUndirectedTypeProjection() {
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}"
+}
+
 # Node Embeddings using Fast Random Projection
 # 
 # Required Parameters:
@@ -226,11 +254,11 @@ TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
 
 # Type Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createUndirectedProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+createUndirectedTypeProjection "${TYPE_PROJECTION}"
 time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 
-createDirectedProjection "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+createDirectedTypeProjection "${TYPE_PROJECTION_DIRECTED}"
 time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"

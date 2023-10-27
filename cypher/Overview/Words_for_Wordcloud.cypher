@@ -2,10 +2,8 @@
 
 MATCH (package:Package)
  WITH collect(package.name) AS packageNames
-MATCH (type:Type)
-WHERE type.byteCodeVersion IS NOT NULL  // no external types 
-  AND NOT type.fqn STARTS WITH 'java.'  // no java types
-  AND type.name <> 'package-info'       // not package-info files
+MATCH (type:Type&!PrimitiveType&!Void&!JavaType&!ResolvedDuplicateType&!ExternalType)
+WHERE type.name <> 'package-info'       // not package-info files
  WITH packageNames, split(type.name, '$') AS splittedInnerClasses
 UNWIND splittedInnerClasses AS splittedInnerClass
  WITH packageNames
