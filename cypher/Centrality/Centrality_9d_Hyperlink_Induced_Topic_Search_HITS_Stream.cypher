@@ -1,6 +1,6 @@
 // Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream
 
-  CALL gds.alpha.hits.stream(
+  CALL gds.hits.stream(
  $dependencies_projection + '-cleaned', {
     hitsIterations: 20
 })

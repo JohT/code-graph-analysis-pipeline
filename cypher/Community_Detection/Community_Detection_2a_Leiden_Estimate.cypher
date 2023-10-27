@@ -1,6 +1,6 @@
 //Community Detection Leiden Estimate Memory
 
-CALL gds.beta.leiden.write.estimate(
+CALL gds.leiden.write.estimate(
  $dependencies_projection + '-cleaned', {
   gamma: toFloat($dependencies_leiden_gamma),
   theta: 0.001,

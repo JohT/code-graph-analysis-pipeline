@@ -1,6 +1,6 @@
 //Community Detection Leiden Statistics
 
-CALL gds.beta.leiden.stats(
+CALL gds.leiden.stats(
  $dependencies_projection + '-cleaned', {
   gamma: toFloat($dependencies_leiden_gamma),
   theta: 0.001,

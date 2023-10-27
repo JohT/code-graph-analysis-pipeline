@@ -1,6 +1,6 @@
 //Community Detection Leiden Write property communityLeidenId
 
-CALL gds.beta.leiden.write(
+CALL gds.leiden.write(
  $dependencies_projection + '-cleaned', {
   gamma: toFloat($dependencies_leiden_gamma),
   theta: 0.001,
