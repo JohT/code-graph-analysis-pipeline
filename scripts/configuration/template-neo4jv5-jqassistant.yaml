@@ -181,9 +181,9 @@ jqassistant:
     # -Djqassistant.analyze.concepts[0]
     # https://github.com/jQAssistant/jqa-java-plugin/blob/e17fc3032fb0d4258d4f5ca0c64099a6c789c070/src/main/asciidoc/release-notes.adoc#L9
     concepts:
-     - java-classpath:Resolve
      - java:PackageDependency
      - java:ArtifactDependency
+     - java-classpath:Resolve
      - java:JavaVersion
 
     # The constraints to be validated.

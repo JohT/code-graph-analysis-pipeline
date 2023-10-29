@@ -56,6 +56,20 @@ createProjection() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
 }
 
+# Similarity Preparation for Types
+# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
+# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+createTypeProjection() {
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}"
+}
+
 # Apply the similarity algorithm "Similarity".
 # 
 # Required Parameters:
@@ -72,15 +86,20 @@ similarity() {
     execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1a_Estimate.cypher" "${@}"
     execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1b_Statistics.cypher" "${@}"
     
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1c_Mutate.cypher" "${@}"
+
     # Stream to CSV
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1c_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1d_Stream_Mutated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
+    #execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1e_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Similarity.csv"
     
     # Update Graph (node properties and labels)
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1d_Delete_Relationships.cypher" "${@}"
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1e_Write.cypher" "${@}"
-    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1f_Write_Node_Properties.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1f_Delete_Relationships.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1g_Write_Mutated.cypher" "${@}"
+    #execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1h_Write.cypher" "${@}"
+    execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1i_Write_Node_Properties.cypher" "${@}"
 }
 
 # ---------------------------------------------------------------
@@ -116,5 +135,5 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Similarity
 echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+createTypeProjection "${TYPE_PROJECTION}"
 time similarity "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"

@@ -1,21 +1,25 @@
-// Similarity Statistics
+// Similarity Mutate
 
-CALL gds.nodeSimilarity.stats(
+ CALL gds.nodeSimilarity.mutate(
   $dependencies_projection + '-cleaned', {
       relationshipWeightProperty: $dependencies_projection_weight_property
      ,relationshipTypes: ['DEPENDS_ON']
      ,topK: 3
+     ,mutateRelationshipType: 'SIMILAR'
+     ,mutateProperty: 'score'
  })
- YIELD nodesCompared
-      ,similarityPairs
+YIELD  relationshipsWritten
+      ,nodesCompared
       ,preProcessingMillis
       ,computeMillis
+      ,mutateMillis
       ,postProcessingMillis
       ,similarityDistribution
-RETURN nodesCompared
-      ,similarityPairs
+RETURN relationshipsWritten
+      ,nodesCompared
       ,preProcessingMillis
       ,computeMillis
+      ,mutateMillis
       ,postProcessingMillis
       ,similarityDistribution.min
       ,similarityDistribution.mean
@@ -25,3 +29,4 @@ RETURN nodesCompared
       ,similarityDistribution.p90
       ,similarityDistribution.p95
       ,similarityDistribution.p99
+      ,similarityDistribution.p999

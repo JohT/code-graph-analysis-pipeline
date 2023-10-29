@@ -3,6 +3,7 @@
  CALL gds.nodeSimilarity.stream(
   $dependencies_projection + '-cleaned', {
       relationshipWeightProperty: $dependencies_projection_weight_property
+     ,relationshipTypes: ['DEPENDS_ON']
      ,topK: 3
  })
 YIELD node1, node2, similarity

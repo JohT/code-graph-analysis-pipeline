@@ -32,6 +32,7 @@ PACKAGE_WEIGHTS_CYPHER_DIR="$CYPHER_DIR/Package_Relationship_Weights"
 PACKAGE_METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
 EXTERNAL_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/External_Dependencies"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
+TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 
 # Preparation - Create indizes
 execute_cypher "${CYPHER_DIR}/Create_index_for_full_qualified_type_name.cypher"
@@ -53,6 +54,11 @@ execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Outgoing_Packag
 # Preparation - Label external types and annotations
 #               "external" means that there is no byte code available, not a primitive type and not a java type
 #               "annoatation" means that there is a ANNOTATED_BY to that external type
+execute_cypher "${TYPES_CYPHER_DIR}/Remove_extended_type_labels.cypher"
+execute_cypher "${TYPES_CYPHER_DIR}/Label_base_java_types.cypher"
+execute_cypher "${TYPES_CYPHER_DIR}/Label_buildin_java_types.cypher"
+execute_cypher "${TYPES_CYPHER_DIR}/Label_resolved_duplicate_types.cypher"
+
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Remove_external_type_and_annotation_labels.cypher"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
 
@@ -63,3 +69,5 @@ execute_cypher_expect_results "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Arti
 # Preparation - Add Type node properties "incomingDependencies" and "outgoingDependencies"
 execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Incoming_Type_Dependencies.cypher"
 execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Outgoing_Type_Dependencies.cypher"
+
+echo "prepareAnalysis: Preparation successful"

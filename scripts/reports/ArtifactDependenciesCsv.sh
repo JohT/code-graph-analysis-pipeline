@@ -42,6 +42,7 @@ execute_cypher_expect_results "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_number_of
 
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Most_used_internal_dependencies_acreoss_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/MostUsedDependenciesAcrossArtifacts.csv"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Artifacts_with_dependencies_to_other_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/DependenciesAcrossArtifacts.csv"
+execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Artifacts_with_duplicate_packages.cypher" > "${FULL_REPORT_DIRECTORY}/DuplicatePackageNamesAcrossArtifacts.csv"
 
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Usage_and_spread_of_internal_artifact_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/InternalArtifactUsageSpreadPerDependency.csv"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Usage_and_spread_of_internal_artifact_dependents.cypher" > "${FULL_REPORT_DIRECTORY}/InternalArtifactUsageSpreadPerDependent.csv"
