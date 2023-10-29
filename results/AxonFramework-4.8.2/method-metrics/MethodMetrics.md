@@ -966,7 +966,7 @@ The following table shows the top 30 packages with the highest effective lines o
       <td>569</td>
       <td>236</td>
       <td>24</td>
-      <td>&lt;init&gt;</td>
+      <td>getTrackedEventData</td>
     </tr>
     <tr>
       <th>14</th>
@@ -1083,7 +1083,7 @@ The following table shows the top 30 packages with the highest effective lines o
       <td>348</td>
       <td>156</td>
       <td>13</td>
-      <td>describeTo</td>
+      <td>defaultHeaders</td>
     </tr>
     <tr>
       <th>27</th>
@@ -1326,7 +1326,7 @@ The following table shows the top 30 methods with the highest effective lines of
       <td>axon-eventsourcing-4.8.2</td>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>JdbcEventStorageEngine</td>
-      <td>&lt;init&gt;</td>
+      <td>getTrackedEventData</td>
       <td>24</td>
       <td>569</td>
     </tr>
@@ -1917,7 +1917,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>688</td>
       <td>582</td>
       <td>7</td>
-      <td>getFactoryForType</td>
+      <td>invokeLifecycleHandlers</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2025,7 +2025,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>285</td>
       <td>181</td>
       <td>7</td>
-      <td>calculateRoute</td>
+      <td>equals</td>
     </tr>
     <tr>
       <th>10</th>
@@ -2034,7 +2034,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>274</td>
       <td>184</td>
       <td>8</td>
-      <td>onResult</td>
+      <td>doDispatch</td>
     </tr>
     <tr>
       <th>13</th>
@@ -2043,7 +2043,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>273</td>
       <td>236</td>
       <td>7</td>
-      <td>lambda$cleanGaps$37</td>
+      <td>lambda$fetchTrackedEvents$32</td>
     </tr>
     <tr>
       <th>20</th>
@@ -2097,7 +2097,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>209</td>
       <td>156</td>
       <td>4</td>
-      <td>equals</td>
+      <td>endScope</td>
     </tr>
     <tr>
       <th>24</th>
@@ -2160,7 +2160,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>155</td>
       <td>101</td>
       <td>8</td>
-      <td>loadKeyViolationCodes</td>
+      <td>withGapsCleaned</td>
     </tr>
     <tr>
       <th>33</th>

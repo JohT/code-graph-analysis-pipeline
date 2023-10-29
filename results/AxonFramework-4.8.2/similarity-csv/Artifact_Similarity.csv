@@ -1,4 +1,4 @@
-"similarity","artifactName1","node1Name","node1IncomingDependencies","node1OutgoingDependencies","artifactName2","node2Name","node2IncomingDependencies","node2OutgoingDependencies","Source Cypher File: Similarity/Similarity_1c_Stream.cypher"
+"similarity","sourceArtifactName","sourceNodeName","sourceNodeIncomingDependencies","sourceNodeOutgoingDependencies","targetArtifactName","targetNodeName","targetNodeIncomingDependencies","targetNodeOutgoingDependencies","Source Cypher File: Similarity/Similarity_1d_Stream_Mutated.cypher"
 0.8029925187032418,,"/axon-eventsourcing-4.8.2.jar",3,2,,"/axon-modelling-4.8.2.jar",4,1,""
 0.8029925187032418,,"/axon-modelling-4.8.2.jar",4,1,,"/axon-eventsourcing-4.8.2.jar",3,2,""
 0.7975460122699386,,"/axon-configuration-4.8.2.jar",0,4,,"/axon-test-4.8.2.jar",0,3,""

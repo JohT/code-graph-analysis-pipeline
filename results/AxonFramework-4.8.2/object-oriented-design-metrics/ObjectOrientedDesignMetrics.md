@@ -64,27 +64,27 @@ If these packages get changed, the incoming dependencies might be affected by th
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.disruptor</td>
+      <td>org.axonframework.config</td>
+      <td>115</td>
+      <td>1491</td>
+      <td>34</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>55</td>
-      <td>269</td>
-      <td>21</td>
+      <td>org</td>
       <td>0</td>
-      <td>2</td>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org</td>
+      <td>org.axonframework</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -94,16 +94,6 @@ If these packages get changed, the incoming dependencies might be affected by th
     </tr>
     <tr>
       <th>5</th>
-      <td>org.axonframework</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>6</th>
       <td>org.axonframework.test</td>
       <td>16</td>
       <td>114</td>
@@ -113,7 +103,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>org.axonframework.test.aggregate</td>
       <td>31</td>
       <td>263</td>
@@ -123,7 +113,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
       <td>org.axonframework.test.matchers</td>
       <td>51</td>
       <td>215</td>
@@ -133,7 +123,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
       <td>org.axonframework.test.saga</td>
       <td>43</td>
       <td>197</td>
@@ -143,7 +133,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
       <td>org.axonframework.test.server</td>
       <td>1</td>
       <td>1</td>
@@ -153,7 +143,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>org.axonframework.test.utils</td>
       <td>8</td>
       <td>24</td>
@@ -163,7 +153,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>org.axonframework.test.deadline</td>
       <td>10</td>
       <td>117</td>
@@ -173,7 +163,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
       <td>org.axonframework.test.eventscheduler</td>
       <td>9</td>
       <td>66</td>
@@ -183,7 +173,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>1</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
       <td>org</td>
       <td>0</td>
       <td>0</td>
@@ -193,7 +183,7 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>0</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
       <td>org.axonframework</td>
       <td>0</td>
       <td>0</td>
@@ -203,44 +193,54 @@ If these packages get changed, the incoming dependencies might be affected by th
       <td>0</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>268</td>
-      <td>1134</td>
-      <td>123</td>
+      <th>15</th>
+      <td>org.axonframework.disruptor</td>
       <td>0</td>
-      <td>18</td>
-      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>55</td>
+      <td>269</td>
+      <td>21</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>8</td>
-      <td>24</td>
-      <td>7</td>
+      <td>org</td>
       <td>0</td>
-      <td>4</td>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>50</td>
-      <td>282</td>
-      <td>24</td>
+      <td>org.axonframework</td>
       <td>0</td>
-      <td>2</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>97</td>
-      <td>395</td>
-      <td>33</td>
+      <td>org.axonframework.eventsourcing</td>
+      <td>113</td>
+      <td>538</td>
+      <td>41</td>
       <td>0</td>
-      <td>3</td>
-      <td>3</td>
+      <td>5</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -300,27 +300,27 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.disruptor</td>
+      <td>org.axonframework.config</td>
+      <td>432</td>
+      <td>2744</td>
+      <td>213</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>46</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>185</td>
-      <td>869</td>
-      <td>85</td>
+      <td>org</td>
       <td>0</td>
-      <td>14</td>
-      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org</td>
+      <td>org.axonframework</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -330,16 +330,6 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
     </tr>
     <tr>
       <th>5</th>
-      <td>org.axonframework</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>6</th>
       <td>org.axonframework.test</td>
       <td>8</td>
       <td>16</td>
@@ -349,7 +339,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>2</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>org.axonframework.test.aggregate</td>
       <td>181</td>
       <td>933</td>
@@ -359,7 +349,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>4</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
       <td>org.axonframework.test.matchers</td>
       <td>42</td>
       <td>99</td>
@@ -369,7 +359,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>2</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
       <td>org.axonframework.test.saga</td>
       <td>149</td>
       <td>645</td>
@@ -379,7 +369,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>3</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
       <td>org.axonframework.test.server</td>
       <td>2</td>
       <td>3</td>
@@ -389,7 +379,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>2</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>org.axonframework.test.utils</td>
       <td>14</td>
       <td>57</td>
@@ -399,7 +389,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>3</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>org.axonframework.test.deadline</td>
       <td>26</td>
       <td>169</td>
@@ -409,7 +399,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>2</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
       <td>org.axonframework.test.eventscheduler</td>
       <td>16</td>
       <td>76</td>
@@ -419,7 +409,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>2</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
       <td>org</td>
       <td>0</td>
       <td>0</td>
@@ -429,7 +419,7 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>0</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
       <td>org.axonframework</td>
       <td>0</td>
       <td>0</td>
@@ -439,44 +429,54 @@ Code from other packages and libraries you’re depending on (outgoing) might ch
       <td>0</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>145</td>
-      <td>539</td>
-      <td>71</td>
+      <th>15</th>
+      <td>org.axonframework.disruptor</td>
       <td>0</td>
-      <td>9</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>185</td>
+      <td>869</td>
+      <td>85</td>
+      <td>0</td>
+      <td>14</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>13</td>
-      <td>47</td>
-      <td>4</td>
+      <td>org</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>133</td>
-      <td>524</td>
-      <td>72</td>
+      <td>org.axonframework</td>
       <td>0</td>
-      <td>12</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>166</td>
-      <td>631</td>
-      <td>56</td>
+      <td>org.axonframework.eventsourcing</td>
+      <td>211</td>
+      <td>872</td>
+      <td>91</td>
       <td>0</td>
-      <td>10</td>
-      <td>1</td>
+      <td>16</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -1074,22 +1074,6 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>14</th>
-      <td>org.axonframework.eventhandling.scheduling.job...</td>
-      <td>jobrunr</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>org.axonframework.util</td>
-      <td>util</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>org.axonframework.modelling.saga.repository.le...</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1097,8 +1081,24 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>3</td>
     </tr>
     <tr>
+      <th>15</th>
+      <td>org.axonframework.eventhandling.scheduling.job...</td>
+      <td>jobrunr</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.axonframework.util</td>
+      <td>util</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
       <th>17</th>
-      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
+      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
       <td>0.000000</td>
       <td>0</td>
@@ -1106,22 +1106,6 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
     </tr>
     <tr>
       <th>18</th>
-      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
-      <td>legacyjpa</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>org.axonframework.messaging.interceptors.legac...</td>
-      <td>legacyvalidation</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>20</th>
       <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>legacyjpa</td>
       <td>0.000000</td>
@@ -1129,7 +1113,7 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>19</th>
       <td>org.axonframework.modelling.saga.repository.in...</td>
       <td>inmemory</td>
       <td>0.000000</td>
@@ -1137,9 +1121,25 @@ Zero *Abstractness* means that there are no abstract types or interfaces in the 
       <td>2</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>org.axonframework.eventsourcing.eventstore.inm...</td>
+      <th>20</th>
+      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
       <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
+      <td>legacyjpa</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>org.axonframework.messaging.interceptors.legac...</td>
+      <td>legacyvalidation</td>
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>

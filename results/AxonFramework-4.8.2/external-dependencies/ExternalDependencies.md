@@ -76,7 +76,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>585</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -87,7 +87,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>87</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JsonTypeInfo$Id, JsonTypeInfo, JsonProperty, ...</td>
+      <td>[JsonCreator, JsonProperty, JsonTypeInfo, Json...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -98,7 +98,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>340</td>
       <td>93</td>
       <td>1190</td>
-      <td>[EntityManager, TypedQuery, Basic, MappedSuper...</td>
+      <td>[MappedSuperclass, Id, IdClass, Entity, Table,...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -109,7 +109,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>328</td>
       <td>93</td>
       <td>1190</td>
-      <td>[EntityManager, TypedQuery, MappedSuperclass, ...</td>
+      <td>[MappedSuperclass, IdClass, Id, TypedQuery, Qu...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -120,7 +120,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>498</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Matcher, Description, StringDescription, Core...</td>
+      <td>[CoreMatchers, Matcher, Description, StringDes...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -131,7 +131,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>54</td>
       <td>93</td>
       <td>1190</td>
-      <td>[ScheduledExecution, Scheduler, SchedulerState]</td>
+      <td>[ScheduledExecution, SchedulerState, Scheduler]</td>
     </tr>
     <tr>
       <th>7</th>
@@ -142,7 +142,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>50</td>
       <td>93</td>
       <td>1190</td>
-      <td>[TaskWithDataDescriptor, TaskInstance, Task, E...</td>
+      <td>[TaskInstance, ExecutionContext, Task, TaskWit...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -175,7 +175,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>226</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JobDataMap, Job, JobExecutionException, Sched...</td>
+      <td>[JobExecutionException, SchedulerContext, Job,...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -186,7 +186,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>157</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Mono, Flux, Sinks$EmitResult, Sinks$Many, Sig...</td>
+      <td>[Flux, Mono, Sinks$Many, Sinks$EmitResult, Sig...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -197,7 +197,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>11</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JsonProcessingException, JsonParser, JacksonE...</td>
+      <td>[JsonParser, JacksonException, JsonProcessingE...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -208,7 +208,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>73</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JsonNode, ObjectMapper, ObjectWriter, ObjectR...</td>
+      <td>[DeserializationContext, JsonDeserializer, Jso...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -230,7 +230,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>9</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JsonObject, JsonParser, JsonArray, JsonElement]</td>
+      <td>[JsonObject, JsonParser, JsonElement, JsonArray]</td>
     </tr>
     <tr>
       <th>16</th>
@@ -241,7 +241,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>29</td>
       <td>93</td>
       <td>1190</td>
-      <td>[WaitStrategy, BlockingWaitStrategy, Exception...</td>
+      <td>[RingBuffer, EventHandler, WaitStrategy, Block...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -252,7 +252,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>22</td>
       <td>93</td>
       <td>1190</td>
-      <td>[ProducerType, Disruptor, EventHandlerGroup]</td>
+      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
     </tr>
     <tr>
       <th>18</th>
@@ -274,7 +274,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>13</td>
       <td>93</td>
       <td>1190</td>
-      <td>[XomReader, Dom4JReader, XppDriver, CompactWri...</td>
+      <td>[CompactWriter, XppDriver, Dom4JReader, XomRea...</td>
     </tr>
   </tbody>
 </table>
@@ -362,7 +362,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>585</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -373,7 +373,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>196</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JsonTypeInfo$Id, JsonTypeInfo, JsonProperty, ...</td>
+      <td>[JsonCreator, JsonProperty, JsonTypeInfo, Json...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -384,7 +384,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>340</td>
       <td>93</td>
       <td>1190</td>
-      <td>[EntityManager, TypedQuery, Basic, MappedSuper...</td>
+      <td>[MappedSuperclass, Id, IdClass, Entity, Table,...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -395,7 +395,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>328</td>
       <td>93</td>
       <td>1190</td>
-      <td>[EntityManager, TypedQuery, MappedSuperclass, ...</td>
+      <td>[MappedSuperclass, IdClass, Id, TypedQuery, Qu...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -406,7 +406,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>498</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Matcher, Description, StringDescription, Core...</td>
+      <td>[CoreMatchers, Matcher, Description, StringDes...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -417,7 +417,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>118</td>
       <td>93</td>
       <td>1190</td>
-      <td>[TaskWithDataDescriptor, ScheduledExecution, S...</td>
+      <td>[TaskInstance, ScheduledExecution, SchedulerSt...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -428,7 +428,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>135</td>
       <td>93</td>
       <td>1190</td>
-      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
+      <td>[XStream, CollectionConverter, Mapper, Unmarsh...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -439,7 +439,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>39</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JobId, JobScheduler, JobBuilder]</td>
+      <td>[JobScheduler, JobId, JobBuilder]</td>
     </tr>
     <tr>
       <th>9</th>
@@ -450,7 +450,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>18</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Statement, BeforeEachCallback, ExtensionConte...</td>
+      <td>[TestRule, Description, Statement, ExtensionCo...</td>
     </tr>
     <tr>
       <th>10</th>
@@ -461,7 +461,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>228</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JobDataMap, Job, JobExecutionException, Sched...</td>
+      <td>[JobExecutionException, SchedulerContext, Job,...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -472,7 +472,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>159</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Mono, Flux, Sinks$EmitResult, Sinks$Many, Sig...</td>
+      <td>[Flux, Mono, Sinks$Many, Sinks$EmitResult, Sig...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -483,7 +483,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>9</td>
       <td>93</td>
       <td>1190</td>
-      <td>[JsonObject, JsonParser, JsonArray, JsonElement]</td>
+      <td>[JsonObject, JsonParser, JsonElement, JsonArray]</td>
     </tr>
     <tr>
       <th>13</th>
@@ -494,7 +494,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>51</td>
       <td>93</td>
       <td>1190</td>
-      <td>[WaitStrategy, ProducerType, BlockingWaitStrat...</td>
+      <td>[Disruptor, RingBuffer, EventHandlerGroup, Eve...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -505,7 +505,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>22</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Validation, ValidatorFactory, ConstraintViola...</td>
+      <td>[ConstraintViolation, ValidatorFactory, Valida...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -516,7 +516,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>59</td>
       <td>93</td>
       <td>1190</td>
-      <td>[Cache, CacheEntryListenerConfiguration, Cache...</td>
+      <td>[CacheEntryRemovedListener, CacheEntryEvent, C...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -527,7 +527,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>22</td>
       <td>93</td>
       <td>1190</td>
-      <td>[ConstraintViolation, Validation, Validator, V...</td>
+      <td>[ConstraintViolation, ValidatorFactory, Valida...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -538,7 +538,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>72</td>
       <td>93</td>
       <td>1190</td>
-      <td>[CacheEventListener, CacheException, Element, ...</td>
+      <td>[CacheEventListener, RegisteredEventListeners,...</td>
     </tr>
     <tr>
       <th>18</th>
@@ -654,7 +654,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>8.833333</td>
       <td>14.441837</td>
       <td>25.0000</td>
-      <td>100.000000</td>
+      <td>100.0000</td>
       <td>...</td>
       <td>75</td>
       <td>8.5</td>
@@ -665,7 +665,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>10.305875</td>
       <td>13.015792</td>
       <td>12.036202</td>
-      <td>[axon-disruptor-4.8.2, axon-test-4.8.2, axon-m...</td>
+      <td>[axon-configuration-4.8.2, axon-test-4.8.2, ax...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -678,7 +678,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>1.000000</td>
       <td>4.6875</td>
-      <td>20.000000</td>
+      <td>20.0000</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
@@ -689,7 +689,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>1.785854</td>
       <td>0.655686</td>
-      <td>[axon-messaging-4.8.2, axon-modelling-4.8.2, a...</td>
+      <td>[axon-eventsourcing-4.8.2, axon-modelling-4.8....</td>
     </tr>
     <tr>
       <th>2</th>
@@ -702,7 +702,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>3.000000</td>
       <td>1.000000</td>
       <td>6.2500</td>
-      <td>30.000000</td>
+      <td>30.0000</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
@@ -713,34 +713,58 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>1.785854</td>
       <td>0.655686</td>
-      <td>[axon-messaging-4.8.2, axon-modelling-4.8.2, a...</td>
+      <td>[axon-eventsourcing-4.8.2, axon-modelling-4.8....</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>javax.sql</td>
-      <td>3</td>
-      <td>4</td>
+      <td>AggregateEventPublisherImpl</td>
       <td>1</td>
-      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
       <td>1.0</td>
-      <td>1.333333</td>
-      <td>0.577350</td>
-      <td>1.5625</td>
-      <td>22.222222</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>12.5000</td>
+      <td>12.5000</td>
       <td>...</td>
-      <td>4</td>
+      <td>1</td>
       <td>1.0</td>
-      <td>2.000000</td>
-      <td>1.732051</td>
-      <td>0.131234</td>
-      <td>3.076923</td>
-      <td>0.666667</td>
-      <td>1.291608</td>
-      <td>1.569135</td>
-      <td>[axon-messaging-4.8.2, axon-modelling-4.8.2, a...</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>0.000000</td>
+      <td>[axon-test-4.8.2]</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>100.0000</td>
+      <td>100.0000</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>0.000000</td>
+      <td>[axon-disruptor-4.8.2]</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>3</td>
@@ -750,7 +774,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>3.000000</td>
       <td>0.000000</td>
       <td>4.6875</td>
-      <td>4.687500</td>
+      <td>4.6875</td>
       <td>...</td>
       <td>5</td>
       <td>5.0</td>
@@ -764,7 +788,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-messaging-4.8.2]</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>1</td>
@@ -774,7 +798,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>3</td>
       <td>3.0</td>
@@ -788,7 +812,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-messaging-4.8.2]</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>com.fasterxml.jackson.databind</td>
       <td>1</td>
       <td>1</td>
@@ -798,7 +822,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>7</td>
       <td>7.0</td>
@@ -812,7 +836,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-messaging-4.8.2]</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>1</td>
@@ -822,31 +846,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
-      <td>...</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.131234</td>
-      <td>0.131234</td>
-      <td>0.131234</td>
-      <td>0.131234</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.8.2]</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>com.fasterxml.jackson.databind.module</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
       <td>...</td>
       <td>1</td>
       <td>1.0</td>
@@ -861,7 +861,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
     </tr>
     <tr>
       <th>9</th>
-      <td>com.fasterxml.jackson.databind.node</td>
+      <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -870,16 +870,16 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
       <td>0.000000</td>
-      <td>0.262467</td>
-      <td>0.262467</td>
-      <td>0.262467</td>
-      <td>0.262467</td>
+      <td>0.131234</td>
+      <td>0.131234</td>
+      <td>0.131234</td>
+      <td>0.131234</td>
       <td>0.000000</td>
       <td>[axon-messaging-4.8.2]</td>
     </tr>
@@ -944,16 +944,26 @@ This table shows the top 20 most widely spread external packages focussing on th
     </tr>
     <tr>
       <th>3</th>
-      <td>javax.sql</td>
-      <td>3</td>
+      <td>AggregateEventPublisherImpl</td>
       <td>1</td>
-      <td>2</td>
+      <td>1</td>
+      <td>1</td>
       <td>1.0</td>
-      <td>1.333333</td>
-      <td>0.577350</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>3</td>
@@ -963,7 +973,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>1</td>
@@ -973,7 +983,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>com.fasterxml.jackson.databind</td>
       <td>1</td>
       <td>1</td>
@@ -983,7 +993,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>1</td>
@@ -993,7 +1003,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>1</td>
@@ -1003,7 +1013,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>1</td>
@@ -1013,7 +1023,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>com.fasterxml.jackson.databind.type</td>
       <td>1</td>
       <td>1</td>
@@ -1023,7 +1033,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>12</th>
       <td>com.fasterxml.jackson.datatype.jsr310</td>
       <td>1</td>
       <td>1</td>
@@ -1033,7 +1043,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>13</th>
       <td>com.github.kagkarlsson.scheduler</td>
       <td>1</td>
       <td>2</td>
@@ -1043,7 +1053,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>14</th>
       <td>com.github.kagkarlsson.scheduler.task</td>
       <td>1</td>
       <td>2</td>
@@ -1053,7 +1063,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>15</th>
       <td>com.github.kagkarlsson.scheduler.task.helper</td>
       <td>1</td>
       <td>2</td>
@@ -1063,7 +1073,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>16</th>
       <td>com.google.gson</td>
       <td>1</td>
       <td>1</td>
@@ -1073,7 +1083,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>17</th>
       <td>com.lmax.disruptor</td>
       <td>1</td>
       <td>1</td>
@@ -1083,7 +1093,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>18</th>
       <td>com.lmax.disruptor.dsl</td>
       <td>1</td>
       <td>1</td>
@@ -1093,23 +1103,13 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>com.thoughtworks.xstream</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
       <td>2.0</td>
       <td>2.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1145,7 +1145,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>org.slf4j</td>
       <td>6</td>
       <td>25.0000</td>
-      <td>100.000000</td>
+      <td>100.0000</td>
       <td>59.687500</td>
       <td>66.655093</td>
       <td>28.911597</td>
@@ -1155,7 +1155,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>jakarta.persistence</td>
       <td>3</td>
       <td>4.6875</td>
-      <td>20.000000</td>
+      <td>20.0000</td>
       <td>11.111111</td>
       <td>11.932870</td>
       <td>7.689254</td>
@@ -1165,179 +1165,179 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>javax.persistence</td>
       <td>3</td>
       <td>6.2500</td>
-      <td>30.000000</td>
+      <td>30.0000</td>
       <td>22.222222</td>
       <td>19.490741</td>
       <td>12.108318</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>javax.sql</td>
-      <td>3</td>
-      <td>1.5625</td>
-      <td>22.222222</td>
-      <td>10.000000</td>
-      <td>11.261574</td>
-      <td>10.387478</td>
+      <td>AggregateEventPublisherImpl</td>
+      <td>1</td>
+      <td>12.5000</td>
+      <td>12.5000</td>
+      <td>12.500000</td>
+      <td>12.500000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>com.fasterxml.jackson.annotation</td>
+      <td>WeakValue</td>
       <td>1</td>
-      <td>4.6875</td>
-      <td>4.687500</td>
-      <td>4.687500</td>
-      <td>4.687500</td>
+      <td>100.0000</td>
+      <td>100.0000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>com.fasterxml.jackson.core</td>
+      <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
+      <td>4.6875</td>
+      <td>4.6875</td>
+      <td>4.687500</td>
+      <td>4.687500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>com.fasterxml.jackson.databind</td>
+      <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>1.562500</td>
       <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>com.fasterxml.jackson.databind.jsontype</td>
+      <td>com.fasterxml.jackson.databind</td>
       <td>1</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>1.562500</td>
       <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>com.fasterxml.jackson.databind.module</td>
+      <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>1.562500</td>
       <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>com.fasterxml.jackson.databind.node</td>
+      <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>1.562500</td>
       <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>com.fasterxml.jackson.databind.type</td>
+      <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>1.562500</td>
       <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
+      <td>com.fasterxml.jackson.databind.type</td>
       <td>1</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>1.562500</td>
       <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>com.github.kagkarlsson.scheduler</td>
+      <td>com.fasterxml.jackson.datatype.jsr310</td>
       <td>1</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
+      <td>1.5625</td>
+      <td>1.5625</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>com.github.kagkarlsson.scheduler</td>
       <td>1</td>
       <td>3.1250</td>
-      <td>3.125000</td>
+      <td>3.1250</td>
       <td>3.125000</td>
       <td>3.125000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>com.github.kagkarlsson.scheduler.task.helper</td>
+      <td>com.github.kagkarlsson.scheduler.task</td>
       <td>1</td>
       <td>3.1250</td>
-      <td>3.125000</td>
+      <td>3.1250</td>
       <td>3.125000</td>
       <td>3.125000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>com.google.gson</td>
+      <td>com.github.kagkarlsson.scheduler.task.helper</td>
       <td>1</td>
-      <td>12.5000</td>
-      <td>12.500000</td>
-      <td>12.500000</td>
-      <td>12.500000</td>
+      <td>3.1250</td>
+      <td>3.1250</td>
+      <td>3.125000</td>
+      <td>3.125000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>com.lmax.disruptor</td>
+      <td>com.google.gson</td>
       <td>1</td>
-      <td>100.0000</td>
-      <td>100.000000</td>
-      <td>100.000000</td>
-      <td>100.000000</td>
+      <td>12.5000</td>
+      <td>12.5000</td>
+      <td>12.500000</td>
+      <td>12.500000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>com.lmax.disruptor.dsl</td>
+      <td>com.lmax.disruptor</td>
       <td>1</td>
       <td>100.0000</td>
-      <td>100.000000</td>
+      <td>100.0000</td>
       <td>100.000000</td>
       <td>100.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>com.thoughtworks.xstream</td>
+      <td>com.lmax.disruptor.dsl</td>
       <td>1</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
+      <td>100.0000</td>
+      <td>100.0000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>com.thoughtworks.xstream.converters</td>
+      <td>com.thoughtworks.xstream</td>
       <td>1</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
+      <td>3.1250</td>
+      <td>3.1250</td>
+      <td>3.125000</td>
+      <td>3.125000</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1400,16 +1400,26 @@ This table shows the top 20 most widely spread external packages focussing on th
     </tr>
     <tr>
       <th>3</th>
-      <td>javax.sql</td>
-      <td>3</td>
+      <td>AggregateEventPublisherImpl</td>
       <td>1</td>
-      <td>4</td>
+      <td>1</td>
+      <td>1</td>
       <td>1.0</td>
-      <td>2.000000</td>
-      <td>1.732051</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>5</td>
@@ -1419,7 +1429,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>3</td>
@@ -1429,7 +1439,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>com.fasterxml.jackson.databind</td>
       <td>1</td>
       <td>7</td>
@@ -1439,7 +1449,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>1</td>
@@ -1449,7 +1459,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>1</td>
@@ -1459,7 +1469,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>2</td>
@@ -1469,7 +1479,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>com.fasterxml.jackson.databind.type</td>
       <td>1</td>
       <td>3</td>
@@ -1479,7 +1489,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>12</th>
       <td>com.fasterxml.jackson.datatype.jsr310</td>
       <td>1</td>
       <td>1</td>
@@ -1489,7 +1499,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>13</th>
       <td>com.github.kagkarlsson.scheduler</td>
       <td>1</td>
       <td>4</td>
@@ -1499,7 +1509,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>14</th>
       <td>com.github.kagkarlsson.scheduler.task</td>
       <td>1</td>
       <td>4</td>
@@ -1509,7 +1519,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>15</th>
       <td>com.github.kagkarlsson.scheduler.task.helper</td>
       <td>1</td>
       <td>2</td>
@@ -1519,7 +1529,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>16</th>
       <td>com.google.gson</td>
       <td>1</td>
       <td>1</td>
@@ -1529,7 +1539,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>17</th>
       <td>com.lmax.disruptor</td>
       <td>1</td>
       <td>7</td>
@@ -1539,7 +1549,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>18</th>
       <td>com.lmax.disruptor.dsl</td>
       <td>1</td>
       <td>4</td>
@@ -1549,23 +1559,13 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>com.thoughtworks.xstream</td>
       <td>1</td>
       <td>4</td>
       <td>4</td>
       <td>4.0</td>
       <td>4.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>1</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>3.000000</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1628,16 +1628,26 @@ This table shows the top 20 most widely spread external packages focussing on th
     </tr>
     <tr>
       <th>3</th>
-      <td>javax.sql</td>
-      <td>3</td>
-      <td>0.131234</td>
-      <td>3.076923</td>
-      <td>0.666667</td>
-      <td>1.291608</td>
-      <td>1.569135</td>
+      <td>AggregateEventPublisherImpl</td>
+      <td>1</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>0.656168</td>
@@ -1647,7 +1657,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>0.393701</td>
@@ -1657,7 +1667,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>com.fasterxml.jackson.databind</td>
       <td>1</td>
       <td>0.918635</td>
@@ -1667,7 +1677,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>0.131234</td>
@@ -1677,7 +1687,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>0.131234</td>
@@ -1687,7 +1697,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>0.262467</td>
@@ -1697,7 +1707,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>com.fasterxml.jackson.databind.type</td>
       <td>1</td>
       <td>0.393701</td>
@@ -1707,7 +1717,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>12</th>
       <td>com.fasterxml.jackson.datatype.jsr310</td>
       <td>1</td>
       <td>0.131234</td>
@@ -1717,7 +1727,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>13</th>
       <td>com.github.kagkarlsson.scheduler</td>
       <td>1</td>
       <td>0.524934</td>
@@ -1727,7 +1737,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>14</th>
       <td>com.github.kagkarlsson.scheduler.task</td>
       <td>1</td>
       <td>0.524934</td>
@@ -1737,7 +1747,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>15</th>
       <td>com.github.kagkarlsson.scheduler.task.helper</td>
       <td>1</td>
       <td>0.262467</td>
@@ -1747,7 +1757,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>16</th>
       <td>com.google.gson</td>
       <td>1</td>
       <td>1.149425</td>
@@ -1757,7 +1767,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>17</th>
       <td>com.lmax.disruptor</td>
       <td>1</td>
       <td>31.818182</td>
@@ -1767,7 +1777,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>18</th>
       <td>com.lmax.disruptor.dsl</td>
       <td>1</td>
       <td>18.181818</td>
@@ -1777,23 +1787,13 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>com.thoughtworks.xstream</td>
       <td>1</td>
       <td>0.524934</td>
       <td>0.524934</td>
       <td>0.524934</td>
       <td>0.524934</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>1</td>
-      <td>0.393701</td>
-      <td>0.393701</td>
-      <td>0.393701</td>
-      <td>0.393701</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1886,7 +1886,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>8.833333</td>
       <td>14.441837</td>
       <td>25.0000</td>
-      <td>100.000000</td>
+      <td>100.0000</td>
       <td>...</td>
       <td>75</td>
       <td>8.5</td>
@@ -1897,7 +1897,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>10.305875</td>
       <td>13.015792</td>
       <td>12.036202</td>
-      <td>[axon-disruptor-4.8.2, axon-test-4.8.2, axon-m...</td>
+      <td>[axon-configuration-4.8.2, axon-test-4.8.2, ax...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1910,7 +1910,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>1.000000</td>
       <td>4.6875</td>
-      <td>20.000000</td>
+      <td>20.0000</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
@@ -1921,7 +1921,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>1.785854</td>
       <td>0.655686</td>
-      <td>[axon-messaging-4.8.2, axon-modelling-4.8.2, a...</td>
+      <td>[axon-eventsourcing-4.8.2, axon-modelling-4.8....</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1934,7 +1934,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>3.000000</td>
       <td>1.000000</td>
       <td>6.2500</td>
-      <td>30.000000</td>
+      <td>30.0000</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
@@ -1945,83 +1945,11 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>1.785854</td>
       <td>0.655686</td>
-      <td>[axon-messaging-4.8.2, axon-modelling-4.8.2, a...</td>
+      <td>[axon-eventsourcing-4.8.2, axon-modelling-4.8....</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>javax.sql</td>
-      <td>3</td>
-      <td>4</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>1.333333</td>
-      <td>0.577350</td>
-      <td>1.5625</td>
-      <td>22.222222</td>
-      <td>...</td>
-      <td>4</td>
-      <td>1.0</td>
-      <td>2.000000</td>
-      <td>1.732051</td>
-      <td>0.131234</td>
-      <td>3.076923</td>
-      <td>0.666667</td>
-      <td>1.291608</td>
-      <td>1.569135</td>
-      <td>[axon-messaging-4.8.2, axon-modelling-4.8.2, a...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>com.fasterxml</td>
-      <td>1</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-      <td>6.2500</td>
-      <td>6.250000</td>
-      <td>...</td>
-      <td>12</td>
-      <td>12.0</td>
-      <td>12.000000</td>
-      <td>0.000000</td>
-      <td>1.574803</td>
-      <td>1.574803</td>
-      <td>1.574803</td>
-      <td>1.574803</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.8.2]</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>com.github</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>...</td>
-      <td>6</td>
-      <td>6.0</td>
-      <td>6.000000</td>
-      <td>0.000000</td>
-      <td>0.787402</td>
-      <td>0.787402</td>
-      <td>0.787402</td>
-      <td>0.787402</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.8.2]</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>com.google</td>
+      <td>AggregateEventPublisherImpl</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -2030,7 +1958,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>12.5000</td>
-      <td>12.500000</td>
+      <td>12.5000</td>
       <td>...</td>
       <td>1</td>
       <td>1.0</td>
@@ -2044,7 +1972,103 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-test-4.8.2]</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>100.0000</td>
+      <td>100.0000</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>4.545455</td>
+      <td>0.000000</td>
+      <td>[axon-disruptor-4.8.2]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>com.fasterxml</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4.0</td>
+      <td>4.000000</td>
+      <td>0.000000</td>
+      <td>6.2500</td>
+      <td>6.2500</td>
+      <td>...</td>
+      <td>12</td>
+      <td>12.0</td>
+      <td>12.000000</td>
+      <td>0.000000</td>
+      <td>1.574803</td>
+      <td>1.574803</td>
+      <td>1.574803</td>
+      <td>1.574803</td>
+      <td>0.000000</td>
+      <td>[axon-messaging-4.8.2]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>com.github</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+      <td>3.1250</td>
+      <td>3.1250</td>
+      <td>...</td>
+      <td>6</td>
+      <td>6.0</td>
+      <td>6.000000</td>
+      <td>0.000000</td>
+      <td>0.787402</td>
+      <td>0.787402</td>
+      <td>0.787402</td>
+      <td>0.787402</td>
+      <td>0.000000</td>
+      <td>[axon-messaging-4.8.2]</td>
+    </tr>
+    <tr>
       <th>7</th>
+      <td>com.google</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>12.5000</td>
+      <td>12.5000</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>1.149425</td>
+      <td>0.000000</td>
+      <td>[axon-test-4.8.2]</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>com.lmax</td>
       <td>1</td>
       <td>1</td>
@@ -2054,7 +2078,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>100.0000</td>
-      <td>100.000000</td>
+      <td>100.0000</td>
       <td>...</td>
       <td>7</td>
       <td>7.0</td>
@@ -2068,7 +2092,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-disruptor-4.8.2]</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>com.thoughtworks</td>
       <td>1</td>
       <td>2</td>
@@ -2078,7 +2102,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>0.000000</td>
       <td>3.1250</td>
-      <td>3.125000</td>
+      <td>3.1250</td>
       <td>...</td>
       <td>8</td>
       <td>8.0</td>
@@ -2092,7 +2116,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-messaging-4.8.2]</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>jakarta.validation</td>
       <td>1</td>
       <td>1</td>
@@ -2102,31 +2126,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
-      <td>...</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>0.262467</td>
-      <td>0.262467</td>
-      <td>0.262467</td>
-      <td>0.262467</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.8.2]</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>javax.cache</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
       <td>...</td>
       <td>2</td>
       <td>2.0</td>
@@ -2141,7 +2141,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
     </tr>
     <tr>
       <th>11</th>
-      <td>javax.validation</td>
+      <td>javax.cache</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -2150,7 +2150,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>2</td>
       <td>2.0</td>
@@ -2165,7 +2165,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
     </tr>
     <tr>
       <th>12</th>
-      <td>javax.xml</td>
+      <td>javax.validation</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -2174,16 +2174,16 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.000000</td>
       <td>0.000000</td>
-      <td>0.131234</td>
-      <td>0.131234</td>
-      <td>0.131234</td>
-      <td>0.131234</td>
+      <td>0.262467</td>
+      <td>0.262467</td>
+      <td>0.262467</td>
+      <td>0.262467</td>
       <td>0.000000</td>
       <td>[axon-messaging-4.8.2]</td>
     </tr>
@@ -2198,7 +2198,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>2</td>
       <td>2.0</td>
@@ -2222,7 +2222,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>3</td>
       <td>3.0</td>
@@ -2246,7 +2246,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>3</td>
       <td>3.0</td>
@@ -2270,7 +2270,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
       <td>0.000000</td>
       <td>1.5625</td>
-      <td>1.562500</td>
+      <td>1.5625</td>
       <td>...</td>
       <td>3</td>
       <td>3.0</td>
@@ -2294,7 +2294,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>5.000000</td>
       <td>0.000000</td>
       <td>62.5000</td>
-      <td>62.500000</td>
+      <td>62.5000</td>
       <td>...</td>
       <td>27</td>
       <td>27.0</td>
@@ -2318,7 +2318,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>0.000000</td>
       <td>3.1250</td>
-      <td>3.125000</td>
+      <td>3.1250</td>
       <td>...</td>
       <td>4</td>
       <td>4.0</td>
@@ -2342,7 +2342,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.000000</td>
       <td>0.000000</td>
       <td>25.0000</td>
-      <td>25.000000</td>
+      <td>25.0000</td>
       <td>...</td>
       <td>4</td>
       <td>4.0</td>
@@ -2561,9 +2561,9 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>12</td>
       <td>22</td>
       <td>22</td>
-      <td>12</td>
-      <td>4</td>
-      <td>54.545455</td>
+      <td>13</td>
+      <td>5</td>
+      <td>59.090909</td>
       <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
@@ -2573,10 +2573,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>29</td>
       <td>22</td>
-      <td>12</td>
-      <td>4</td>
-      <td>54.545455</td>
-      <td>[RingBuffer, EventHandler, LifecycleAware, Wai...</td>
+      <td>13</td>
+      <td>5</td>
+      <td>59.090909</td>
+      <td>[RingBuffer, ExceptionHandler, WaitStrategy, B...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2585,9 +2585,9 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6</td>
       <td>23</td>
       <td>22</td>
-      <td>12</td>
-      <td>4</td>
-      <td>54.545455</td>
+      <td>13</td>
+      <td>5</td>
+      <td>59.090909</td>
       <td>[Nonnull]</td>
     </tr>
     <tr>
@@ -2597,442 +2597,442 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>22</td>
       <td>22</td>
-      <td>12</td>
-      <td>4</td>
-      <td>54.545455</td>
-      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
+      <td>13</td>
+      <td>5</td>
+      <td>59.090909</td>
+      <td>[Disruptor, ProducerType, EventHandlerGroup]</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>axon-disruptor-4.8.2</td>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>5</td>
+      <td>22</td>
+      <td>13</td>
+      <td>5</td>
+      <td>59.090909</td>
+      <td>[WeakValue]</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>axon-test-4.8.2</td>
       <td>org.hamcrest</td>
       <td>61</td>
       <td>498</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
-      <td>[Matcher, Description, StringDescription, Core...</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
+      <td>[Matcher, StringDescription, Description, Type...</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-test-4.8.2</td>
       <td>javax.annotation</td>
       <td>10</td>
       <td>52</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[Nonnull]</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>axon-test-4.8.2</td>
       <td>org.testcontainers.utility</td>
       <td>5</td>
       <td>27</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[MountableFile, DockerImageName]</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-test-4.8.2</td>
       <td>com.google.gson</td>
       <td>4</td>
       <td>9</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
-      <td>[JsonObject, JsonParser, JsonArray, JsonElement]</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
+      <td>[JsonObject, JsonParser, JsonElement, JsonArray]</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>axon-test-4.8.2</td>
       <td>org.slf4j</td>
       <td>4</td>
       <td>13</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>axon-test-4.8.2</td>
       <td>org.testcontainers.containers</td>
       <td>4</td>
       <td>15</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
-      <td>[GenericContainer, ContainerLaunchException]</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
+      <td>[ContainerLaunchException, GenericContainer]</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>axon-test-4.8.2</td>
       <td>org.testcontainers.containers.wait.strategy</td>
       <td>4</td>
       <td>5</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[Wait, HttpWaitStrategy]</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>12</th>
       <td>axon-test-4.8.2</td>
       <td>org.junit.jupiter.api.extension</td>
       <td>3</td>
       <td>6</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
-      <td>[BeforeEachCallback, ExtensionContext, AfterEa...</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
+      <td>[ExtensionContext, BeforeEachCallback, AfterEa...</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>13</th>
       <td>axon-test-4.8.2</td>
       <td>org.junit.runners.model</td>
       <td>2</td>
       <td>8</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[Statement]</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>14</th>
+      <td>axon-test-4.8.2</td>
+      <td>AggregateEventPublisherImpl</td>
+      <td>1</td>
+      <td>2</td>
+      <td>87</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
+      <td>[AggregateEventPublisherImpl]</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>axon-test-4.8.2</td>
       <td>org.junit.jupiter.api</td>
       <td>1</td>
       <td>1</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[Assertions]</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>16</th>
       <td>axon-test-4.8.2</td>
       <td>org.junit.rules</td>
       <td>1</td>
       <td>1</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[TestRule]</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>17</th>
       <td>axon-test-4.8.2</td>
       <td>org.junit.runner</td>
       <td>1</td>
       <td>2</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
       <td>[Description]</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>18</th>
       <td>axon-modelling-4.8.2</td>
       <td>javax.annotation</td>
       <td>37</td>
       <td>132</td>
       <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
+      <td>35</td>
+      <td>5</td>
+      <td>23.333333</td>
       <td>[Nonnull, Nullable]</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>19</th>
       <td>axon-modelling-4.8.2</td>
       <td>javax.persistence</td>
       <td>23</td>
       <td>96</td>
       <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
-      <td>[Entity, Table, Basic, GeneratedValue, Index, ...</td>
+      <td>35</td>
+      <td>5</td>
+      <td>23.333333</td>
+      <td>[LockModeType, EntityManager, Entity, Basic, L...</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>20</th>
       <td>axon-modelling-4.8.2</td>
       <td>jakarta.persistence</td>
       <td>18</td>
       <td>90</td>
       <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
-      <td>[LockModeType, EntityManager, Table, Entity, I...</td>
+      <td>35</td>
+      <td>5</td>
+      <td>23.333333</td>
+      <td>[LockModeType, EntityManager, Basic, Id, Entit...</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>21</th>
       <td>axon-modelling-4.8.2</td>
       <td>org.slf4j</td>
       <td>17</td>
       <td>58</td>
       <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>35</td>
+      <td>5</td>
+      <td>23.333333</td>
+      <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>22</th>
       <td>axon-modelling-4.8.2</td>
       <td>com.fasterxml.jackson.annotation</td>
       <td>4</td>
       <td>6</td>
       <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
+      <td>35</td>
+      <td>5</td>
+      <td>23.333333</td>
       <td>[JsonProperty, JsonCreator]</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>axon-modelling-4.8.2</td>
-      <td>javax.sql</td>
-      <td>1</td>
-      <td>2</td>
-      <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
-      <td>[DataSource]</td>
-    </tr>
-    <tr>
-      <th>22</th>
+      <th>23</th>
       <td>axon-messaging-4.8.2</td>
       <td>javax.annotation</td>
       <td>245</td>
       <td>1160</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
       <td>[Nonnull, Nullable]</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>24</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.slf4j</td>
       <td>136</td>
       <td>421</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>25</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.fasterxml.jackson.annotation</td>
       <td>53</td>
       <td>81</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[JsonCreator, JsonProperty, JsonGetter, JsonTy...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[JsonProperty, JsonCreator, JsonGetter, JsonTy...</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>26</th>
       <td>axon-messaging-4.8.2</td>
       <td>javax.persistence</td>
       <td>44</td>
       <td>194</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[TypedQuery, Lob, Index, Id, Table, Entity, Em...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[TypedQuery, EntityManager, LockModeType, Quer...</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>27</th>
       <td>axon-messaging-4.8.2</td>
       <td>jakarta.persistence</td>
       <td>40</td>
       <td>188</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[TypedQuery, LockModeType, Query, EntityManage...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[LockModeType, Entity, Lob, Index, Embedded, T...</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>28</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.quartz</td>
       <td>37</td>
       <td>226</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[Scheduler, Job, JobExecutionException, Schedu...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[JobDataMap, JobExecutionException, SchedulerC...</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>29</th>
       <td>axon-messaging-4.8.2</td>
       <td>reactor.core.publisher</td>
       <td>35</td>
       <td>157</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[Mono, Flux, Signal, MonoSink, Sinks$EmitResul...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[Signal, FluxSink$OverflowStrategy, Flux, Mono...</td>
     </tr>
     <tr>
-      <th>29</th>
+      <th>30</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.fasterxml.jackson.databind</td>
       <td>15</td>
       <td>73</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[JsonNode, JsonDeserializer, DeserializationCo...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[JsonNode, ObjectMapper, ObjectWriter, ObjectR...</td>
     </tr>
     <tr>
-      <th>30</th>
+      <th>31</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.reactivestreams</td>
       <td>13</td>
       <td>41</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
       <td>[Publisher]</td>
     </tr>
     <tr>
-      <th>31</th>
+      <th>32</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.github.kagkarlsson.scheduler.task</td>
       <td>10</td>
       <td>50</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[TaskWithDataDescriptor, TaskInstance, Task, E...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[TaskInstanceId, TaskInstance, ExecutionContex...</td>
     </tr>
     <tr>
-      <th>32</th>
+      <th>33</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.thoughtworks.xstream.io</td>
       <td>9</td>
       <td>46</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
       <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
     </tr>
     <tr>
-      <th>33</th>
+      <th>34</th>
       <td>axon-messaging-4.8.2</td>
       <td>javax.cache.event</td>
       <td>8</td>
       <td>34</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[CacheEntryListener, CacheEntryRemovedListener...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[CacheEntryRemovedListener, CacheEntryEvent, C...</td>
     </tr>
     <tr>
-      <th>34</th>
+      <th>35</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.ehcache.event</td>
       <td>8</td>
       <td>33</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[EventType, CacheEventListener, CacheEvent, Ev...</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[EventType, CacheEvent, CacheEventListener, Ev...</td>
     </tr>
     <tr>
-      <th>35</th>
+      <th>36</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.github.kagkarlsson.scheduler</td>
       <td>7</td>
       <td>54</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[Scheduler, SchedulerState, ScheduledExecution]</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>[ScheduledExecution, SchedulerState, Scheduler]</td>
     </tr>
     <tr>
-      <th>36</th>
+      <th>37</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
       <td>12</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
       <td>[UnmarshallingContext, MarshallingContext]</td>
     </tr>
     <tr>
-      <th>37</th>
+      <th>38</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.jobrunr.scheduling</td>
       <td>6</td>
       <td>37</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
       <td>[JobScheduler, JobBuilder]</td>
     </tr>
     <tr>
-      <th>38</th>
+      <th>39</th>
       <td>axon-messaging-4.8.2</td>
       <td>com.thoughtworks.xstream.mapper</td>
       <td>5</td>
       <td>10</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
       <td>[Mapper, CannotResolveClassException]</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>jakarta.validation</td>
-      <td>5</td>
-      <td>22</td>
-      <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>[Validation, ValidatorFactory, ConstraintViola...</td>
     </tr>
   </tbody>
 </table>
@@ -3102,7 +3102,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.0000</td>
       <td>30.769231</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.MessageHandlerRegist...</td>
+      <td>[org.axonframework.config.EventProcessingConfi...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3125,7 +3125,23 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>4</td>
+      <td>5</td>
+      <td>1</td>
+      <td>100.00</td>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100.0000</td>
+      <td>4.545455</td>
+      <td>[org.axonframework.disruptor.commandhandling]</td>
+      <td>[org.axonframework.disruptor.commandhandling.F...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-disruptor-4.8.2</td>
+      <td>1</td>
+      <td>22</td>
+      <td>5</td>
       <td>1</td>
       <td>100.00</td>
       <td>com.lmax.disruptor</td>
@@ -3137,11 +3153,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>4</td>
+      <td>5</td>
       <td>1</td>
       <td>100.00</td>
       <td>com.lmax.disruptor.dsl</td>
@@ -3153,11 +3169,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>4</td>
+      <td>5</td>
       <td>1</td>
       <td>100.00</td>
       <td>javax.annotation</td>
@@ -3166,14 +3182,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.0000</td>
       <td>27.272727</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.C...</td>
+      <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>4</td>
+      <td>5</td>
       <td>1</td>
       <td>100.00</td>
       <td>org.slf4j</td>
@@ -3182,14 +3198,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.0000</td>
       <td>36.363636</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.C...</td>
+      <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.hamcrest</td>
@@ -3201,11 +3217,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.test.aggregate.ResultValida...</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>javax.annotation</td>
@@ -3217,11 +3233,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.test.aggregate.AggregateTes...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.slf4j</td>
@@ -3233,11 +3249,27 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.test.aggregate.AggregateTes...</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
+      <td>7</td>
+      <td>87.50</td>
+      <td>AggregateEventPublisherImpl</td>
+      <td>1</td>
+      <td>1</td>
+      <td>12.5000</td>
+      <td>1.149425</td>
+      <td>[org.axonframework.test.saga]</td>
+      <td>[org.axonframework.test.saga.SagaTestFixture]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-test-4.8.2</td>
+      <td>8</td>
+      <td>87</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>com.google.gson</td>
@@ -3249,11 +3281,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.test.server.AxonServerConta...</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>12</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.junit.jupiter.api</td>
@@ -3265,46 +3297,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.test.saga.FixtureExecutionR...</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>axon-test-4.8.2</td>
-      <td>8</td>
-      <td>87</td>
-      <td>12</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.jupiter.api.extension</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.aggregate]</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>axon-test-4.8.2</td>
-      <td>8</td>
-      <td>87</td>
-      <td>12</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.rules</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.aggregate]</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
-    </tr>
-    <tr>
       <th>13</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
-      <td>org.junit.runner</td>
+      <td>org.junit.jupiter.api.extension</td>
       <td>1</td>
       <td>1</td>
       <td>12.5000</td>
@@ -3317,7 +3317,39 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
+      <td>7</td>
+      <td>87.50</td>
+      <td>org.junit.rules</td>
+      <td>1</td>
+      <td>1</td>
+      <td>12.5000</td>
+      <td>1.149425</td>
+      <td>[org.axonframework.test.aggregate]</td>
+      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>axon-test-4.8.2</td>
+      <td>8</td>
+      <td>87</td>
+      <td>13</td>
+      <td>7</td>
+      <td>87.50</td>
+      <td>org.junit.runner</td>
+      <td>1</td>
+      <td>1</td>
+      <td>12.5000</td>
+      <td>1.149425</td>
+      <td>[org.axonframework.test.aggregate]</td>
+      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>axon-test-4.8.2</td>
+      <td>8</td>
+      <td>87</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.junit.runners.model</td>
@@ -3329,11 +3361,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.test.aggregate.StubAggregat...</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>17</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.testcontainers.containers</td>
@@ -3342,14 +3374,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>12.5000</td>
       <td>3.448276</td>
       <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerSECon...</td>
+      <td>[org.axonframework.test.server.AxonServerConta...</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>18</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.testcontainers.containers.wait.strategy</td>
@@ -3358,14 +3390,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>12.5000</td>
       <td>3.448276</td>
       <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerSECon...</td>
+      <td>[org.axonframework.test.server.AxonServerConta...</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>19</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>12</td>
+      <td>13</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.testcontainers.utility</td>
@@ -3374,16 +3406,16 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>12.5000</td>
       <td>3.448276</td>
       <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerSECon...</td>
+      <td>[org.axonframework.test.server.AxonServerConta...</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>20</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>javax.annotation</td>
       <td>47</td>
       <td>219</td>
@@ -3393,13 +3425,13 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.commandhandling.MethodComma...</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>21</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>org.slf4j</td>
       <td>38</td>
       <td>75</td>
@@ -3409,13 +3441,13 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.commandhandling.LoggingDupl...</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>22</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.fasterxml.jackson.annotation</td>
       <td>11</td>
       <td>21</td>
@@ -3425,45 +3457,45 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.commandhandling.distributed...</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>23</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>javax.persistence</td>
       <td>7</td>
       <td>14</td>
       <td>10.9375</td>
       <td>1.837270</td>
       <td>[org.axonframework.common.legacyjpa, org.axonf...</td>
-      <td>[org.axonframework.common.legacyjpa.SimpleEnti...</td>
+      <td>[org.axonframework.common.legacyjpa.PagingJpaQ...</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>24</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>jakarta.persistence</td>
       <td>4</td>
       <td>13</td>
       <td>6.2500</td>
       <td>1.706037</td>
       <td>[org.axonframework.common.jpa, org.axonframewo...</td>
-      <td>[org.axonframework.common.jpa.SimpleEntityMana...</td>
+      <td>[org.axonframework.common.jpa.EntityManagerPro...</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>25</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.github.kagkarlsson.scheduler</td>
       <td>2</td>
       <td>4</td>
@@ -3473,13 +3505,13 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>26</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.github.kagkarlsson.scheduler.task</td>
       <td>2</td>
       <td>4</td>
@@ -3489,13 +3521,13 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>27</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.github.kagkarlsson.scheduler.task.helper</td>
       <td>2</td>
       <td>2</td>
@@ -3505,13 +3537,13 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>28</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.thoughtworks.xstream</td>
       <td>2</td>
       <td>4</td>
@@ -3521,13 +3553,13 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>[org.axonframework.serialization.AbstractXStre...</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>29</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>43</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.thoughtworks.xstream.io</td>
       <td>2</td>
       <td>4</td>
@@ -3535,38 +3567,6 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>0.524934</td>
       <td>[org.axonframework.serialization, org.axonfram...</td>
       <td>[org.axonframework.serialization.GapAwareTrack...</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>64</td>
-      <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
-      <td>org.jobrunr.jobs</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.1250</td>
-      <td>0.262467</td>
-      <td>[org.axonframework.deadline.jobrunr, org.axonf...</td>
-      <td>[org.axonframework.deadline.jobrunr.JobRunrDea...</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>64</td>
-      <td>762</td>
-      <td>45</td>
-      <td>53</td>
-      <td>82.81</td>
-      <td>org.jobrunr.scheduling</td>
-      <td>2</td>
-      <td>4</td>
-      <td>3.1250</td>
-      <td>0.524934</td>
-      <td>[org.axonframework.deadline.jobrunr, org.axonf...</td>
-      <td>[org.axonframework.deadline.jobrunr.JobRunrDea...</td>
     </tr>
   </tbody>
 </table>
@@ -3616,7 +3616,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.0000</td>
       <td>30.769231</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.MessageHandlerRegist...</td>
+      <td>[org.axonframework.config.EventProcessingConfi...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3639,7 +3639,23 @@ The following table groups the external packages by their first two levels. For 
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>3</td>
+      <td>4</td>
+      <td>1</td>
+      <td>100.00</td>
+      <td>WeakValue</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100.0000</td>
+      <td>4.545455</td>
+      <td>[org.axonframework.disruptor.commandhandling]</td>
+      <td>[org.axonframework.disruptor.commandhandling.F...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-disruptor-4.8.2</td>
+      <td>1</td>
+      <td>22</td>
+      <td>4</td>
       <td>1</td>
       <td>100.00</td>
       <td>com.lmax</td>
@@ -3651,11 +3667,11 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>3</td>
+      <td>4</td>
       <td>1</td>
       <td>100.00</td>
       <td>javax.annotation</td>
@@ -3664,14 +3680,14 @@ The following table groups the external packages by their first two levels. For 
       <td>100.0000</td>
       <td>27.272727</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.C...</td>
+      <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>3</td>
+      <td>4</td>
       <td>1</td>
       <td>100.00</td>
       <td>org.slf4j</td>
@@ -3680,14 +3696,14 @@ The following table groups the external packages by their first two levels. For 
       <td>100.0000</td>
       <td>36.363636</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.C...</td>
+      <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>6</td>
+      <td>7</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.hamcrest</td>
@@ -3699,11 +3715,11 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.test.aggregate.ResultValida...</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>6</td>
+      <td>7</td>
       <td>7</td>
       <td>87.50</td>
       <td>javax.annotation</td>
@@ -3715,11 +3731,11 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.test.aggregate.AggregateTes...</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>6</td>
+      <td>7</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.junit</td>
@@ -3731,11 +3747,11 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.test.aggregate.StubAggregat...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>6</td>
+      <td>7</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.slf4j</td>
@@ -3747,11 +3763,27 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.test.aggregate.AggregateTes...</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>6</td>
+      <td>7</td>
+      <td>7</td>
+      <td>87.50</td>
+      <td>AggregateEventPublisherImpl</td>
+      <td>1</td>
+      <td>1</td>
+      <td>12.5000</td>
+      <td>1.149425</td>
+      <td>[org.axonframework.test.saga]</td>
+      <td>[org.axonframework.test.saga.SagaTestFixture]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-test-4.8.2</td>
+      <td>8</td>
+      <td>87</td>
+      <td>7</td>
       <td>7</td>
       <td>87.50</td>
       <td>com.google</td>
@@ -3763,11 +3795,11 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.test.server.AxonServerConta...</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>12</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>6</td>
+      <td>7</td>
       <td>7</td>
       <td>87.50</td>
       <td>org.testcontainers</td>
@@ -3776,16 +3808,16 @@ The following table groups the external packages by their first two levels. For 
       <td>12.5000</td>
       <td>3.448276</td>
       <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerSECon...</td>
+      <td>[org.axonframework.test.server.AxonServerConta...</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>13</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>javax.annotation</td>
       <td>47</td>
       <td>219</td>
@@ -3795,13 +3827,13 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.commandhandling.MethodComma...</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>14</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>org.slf4j</td>
       <td>38</td>
       <td>75</td>
@@ -3811,13 +3843,13 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.commandhandling.LoggingDupl...</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>15</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.fasterxml</td>
       <td>12</td>
       <td>28</td>
@@ -3827,45 +3859,45 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.commandhandling.distributed...</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>16</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>javax.persistence</td>
       <td>7</td>
       <td>14</td>
       <td>10.9375</td>
       <td>1.837270</td>
       <td>[org.axonframework.common.legacyjpa, org.axonf...</td>
-      <td>[org.axonframework.common.legacyjpa.SimpleEnti...</td>
+      <td>[org.axonframework.common.legacyjpa.PagingJpaQ...</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>17</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>jakarta.persistence</td>
       <td>4</td>
       <td>13</td>
       <td>6.2500</td>
       <td>1.706037</td>
       <td>[org.axonframework.common.jpa, org.axonframewo...</td>
-      <td>[org.axonframework.common.jpa.SimpleEntityMana...</td>
+      <td>[org.axonframework.common.jpa.EntityManagerPro...</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>18</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.github</td>
       <td>2</td>
       <td>6</td>
@@ -3875,29 +3907,29 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>19</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>com.thoughtworks</td>
       <td>2</td>
       <td>8</td>
       <td>3.1250</td>
       <td>1.049869</td>
       <td>[org.axonframework.serialization, org.axonfram...</td>
-      <td>[org.axonframework.serialization.GapAwareTrack...</td>
+      <td>[org.axonframework.serialization.AbstractXStre...</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>20</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>org.jobrunr</td>
       <td>2</td>
       <td>4</td>
@@ -3907,13 +3939,13 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.deadline.jobrunr.JobRunrDea...</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>21</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>org.quartz</td>
       <td>2</td>
       <td>9</td>
@@ -3923,61 +3955,61 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.deadline.quartz.DeadlineJob...</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>22</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>org.reactivestreams</td>
       <td>2</td>
       <td>13</td>
       <td>3.1250</td>
       <td>1.706037</td>
       <td>[org.axonframework.messaging.responsetypes, or...</td>
-      <td>[org.axonframework.messaging.responsetypes.Mul...</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>64</td>
-      <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
-      <td>reactor.core</td>
-      <td>2</td>
-      <td>18</td>
-      <td>3.1250</td>
-      <td>2.362205</td>
-      <td>[org.axonframework.messaging.responsetypes, or...</td>
-      <td>[org.axonframework.messaging.responsetypes.Mul...</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>64</td>
-      <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
-      <td>jakarta.validation</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1.5625</td>
-      <td>0.262467</td>
-      <td>[org.axonframework.messaging.interceptors]</td>
-      <td>[org.axonframework.messaging.interceptors.Bean...</td>
+      <td>[org.axonframework.messaging.responsetypes.Ins...</td>
     </tr>
     <tr>
       <th>23</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
+      <td>reactor.core</td>
+      <td>2</td>
+      <td>18</td>
+      <td>3.1250</td>
+      <td>2.362205</td>
+      <td>[org.axonframework.messaging.responsetypes, or...</td>
+      <td>[org.axonframework.messaging.responsetypes.Ins...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>axon-messaging-4.8.2</td>
+      <td>64</td>
+      <td>762</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
+      <td>jakarta.validation</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5625</td>
+      <td>0.262467</td>
+      <td>[org.axonframework.messaging.interceptors]</td>
+      <td>[org.axonframework.messaging.interceptors.JSR3...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>axon-messaging-4.8.2</td>
+      <td>64</td>
+      <td>762</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>javax.cache</td>
       <td>1</td>
       <td>2</td>
@@ -3987,29 +4019,13 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.common.caching.JCacheAdapte...</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>26</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
-      <td>javax.sql</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>0.131234</td>
-      <td>[org.axonframework.common.jdbc]</td>
-      <td>[org.axonframework.common.jdbc.DataSourceConne...</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>64</td>
-      <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>javax.validation</td>
       <td>1</td>
       <td>2</td>
@@ -4019,29 +4035,13 @@ The following table groups the external packages by their first two levels. For 
       <td>[org.axonframework.messaging.interceptors.lega...</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>64</td>
-      <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
-      <td>javax.xml</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>0.131234</td>
-      <td>[org.axonframework.serialization.xml]</td>
-      <td>[org.axonframework.serialization.xml.InputStre...</td>
-    </tr>
-    <tr>
       <th>27</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>net.sf</td>
       <td>1</td>
       <td>2</td>
@@ -4055,32 +4055,32 @@ The following table groups the external packages by their first two levels. For 
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>nu.xom</td>
       <td>1</td>
       <td>3</td>
       <td>1.5625</td>
       <td>0.393701</td>
       <td>[org.axonframework.serialization.xml]</td>
-      <td>[org.axonframework.serialization.xml.XStreamSe...</td>
+      <td>[org.axonframework.serialization.xml.InputStre...</td>
     </tr>
     <tr>
       <th>29</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
-      <td>21</td>
-      <td>53</td>
-      <td>82.81</td>
+      <td>19</td>
+      <td>52</td>
+      <td>81.25</td>
       <td>org.dom4j</td>
       <td>1</td>
       <td>3</td>
       <td>1.5625</td>
       <td>0.393701</td>
       <td>[org.axonframework.serialization.xml]</td>
-      <td>[org.axonframework.serialization.xml.XStreamSe...</td>
+      <td>[org.axonframework.serialization.xml.Dom4JToBy...</td>
     </tr>
   </tbody>
 </table>
@@ -4102,8 +4102,8 @@ The following table uses pivot to show the artifacts in columns, the external de
       <th>artifactName</th>
       <th>axon-messaging-4.8.2</th>
       <th>axon-test-4.8.2</th>
-      <th>axon-eventsourcing-4.8.2</th>
       <th>axon-modelling-4.8.2</th>
+      <th>axon-eventsourcing-4.8.2</th>
       <th>axon-disruptor-4.8.2</th>
       <th>axon-configuration-4.8.2</th>
     </tr>
@@ -4119,11 +4119,29 @@ The following table uses pivot to show the artifacts in columns, the external de
   </thead>
   <tbody>
     <tr>
+      <th>AggregateEventPublisherImpl</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>WeakValue</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>com.fasterxml.jackson.annotation</th>
       <td>11</td>
       <td>0</td>
-      <td>0</td>
       <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -4320,8 +4338,8 @@ The following table uses pivot to show the artifacts in columns, the external de
       <th>javax.annotation</th>
       <td>47</td>
       <td>4</td>
-      <td>6</td>
       <td>4</td>
+      <td>6</td>
       <td>1</td>
       <td>1</td>
     </tr>
@@ -4362,25 +4380,7 @@ The following table uses pivot to show the artifacts in columns, the external de
       <td>0</td>
     </tr>
     <tr>
-      <th>javax.sql</th>
-      <td>1</td>
-      <td>0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
       <th>javax.validation</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.xml.stream</th>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -4563,8 +4563,8 @@ The following table uses pivot to show the artifacts in columns, the external de
       <th>org.slf4j</th>
       <td>38</td>
       <td>2</td>
-      <td>5</td>
       <td>6</td>
+      <td>5</td>
       <td>1</td>
       <td>1</td>
     </tr>
@@ -4650,8 +4650,8 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr style="text-align: right;">
       <th>artifactName</th>
       <th>axon-messaging-4.8.2</th>
-      <th>axon-eventsourcing-4.8.2</th>
       <th>axon-modelling-4.8.2</th>
+      <th>axon-eventsourcing-4.8.2</th>
       <th>axon-test-4.8.2</th>
       <th>axon-disruptor-4.8.2</th>
       <th>axon-configuration-4.8.2</th>
@@ -4668,10 +4668,28 @@ The following table uses pivot to show the artifacts in columns, the external pa
   </thead>
   <tbody>
     <tr>
+      <th>AggregateEventPublisherImpl</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>WeakValue</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>com.fasterxml</th>
       <td>12</td>
-      <td>0</td>
       <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4733,8 +4751,8 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr>
       <th>javax.annotation</th>
       <td>47</td>
-      <td>6</td>
       <td>4</td>
+      <td>6</td>
       <td>4</td>
       <td>1</td>
       <td>1</td>
@@ -4758,25 +4776,7 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
     </tr>
     <tr>
-      <th>javax.sql</th>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
       <th>javax.validation</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.xml</th>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -4868,8 +4868,8 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr>
       <th>org.slf4j</th>
       <td>38</td>
-      <td>5</td>
       <td>6</td>
+      <td>5</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
@@ -4985,12 +4985,12 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>0</th>
       <td>axon-disruptor-4.8.2</td>
       <td>22</td>
-      <td>12</td>
-      <td>4</td>
-      <td>54.545455</td>
-      <td>32</td>
-      <td>96</td>
-      <td>4</td>
+      <td>13</td>
+      <td>5</td>
+      <td>59.090909</td>
+      <td>33</td>
+      <td>101</td>
+      <td>5</td>
       <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
       <td>[[Logger, LoggerFactory]]</td>
     </tr>
@@ -4998,25 +4998,25 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>1</th>
       <td>axon-test-4.8.2</td>
       <td>87</td>
-      <td>27</td>
-      <td>12</td>
-      <td>31.034483</td>
-      <td>100</td>
-      <td>637</td>
-      <td>12</td>
+      <td>28</td>
+      <td>13</td>
+      <td>32.183908</td>
+      <td>101</td>
+      <td>639</td>
+      <td>13</td>
       <td>[org.hamcrest, javax.annotation, org.testconta...</td>
-      <td>[[Matcher, Description, StringDescription, Cor...</td>
+      <td>[[Matcher, StringDescription, Description, Typ...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-modelling-4.8.2</td>
       <td>150</td>
-      <td>36</td>
-      <td>6</td>
-      <td>24.000000</td>
-      <td>100</td>
-      <td>384</td>
-      <td>6</td>
+      <td>35</td>
+      <td>5</td>
+      <td>23.333333</td>
+      <td>99</td>
+      <td>382</td>
+      <td>5</td>
       <td>[javax.annotation, javax.persistence, jakarta....</td>
       <td>[[Nonnull, Nullable]]</td>
     </tr>
@@ -5024,12 +5024,12 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>3</th>
       <td>axon-messaging-4.8.2</td>
       <td>762</td>
-      <td>157</td>
-      <td>45</td>
-      <td>20.603675</td>
-      <td>746</td>
-      <td>3144</td>
-      <td>45</td>
+      <td>155</td>
+      <td>43</td>
+      <td>20.341207</td>
+      <td>744</td>
+      <td>3138</td>
+      <td>43</td>
       <td>[javax.annotation, org.slf4j, com.fasterxml.ja...</td>
       <td>[[Nonnull, Nullable]]</td>
     </tr>
@@ -5037,12 +5037,12 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>4</th>
       <td>axon-eventsourcing-4.8.2</td>
       <td>130</td>
-      <td>26</td>
-      <td>5</td>
-      <td>20.000000</td>
-      <td>78</td>
-      <td>255</td>
-      <td>5</td>
+      <td>25</td>
+      <td>4</td>
+      <td>19.230769</td>
+      <td>74</td>
+      <td>237</td>
+      <td>4</td>
       <td>[javax.annotation, org.slf4j, jakarta.persiste...</td>
       <td>[[Nonnull, PreDestroy, Nullable]]</td>
     </tr>
@@ -5109,7 +5109,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>38</td>
       <td>188</td>
       <td>24</td>
-      <td>[TypeSafeMatcher, Matcher, Description, BaseMa...</td>
+      <td>[Description, Matcher, BaseMatcher, TypeSafeMa...</td>
       <td>matchers</td>
     </tr>
     <tr>
@@ -5120,7 +5120,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>28</td>
       <td>123</td>
       <td>42</td>
-      <td>[Mono, Flux, Sinks$EmitResult, Sinks$Many, Sig...</td>
+      <td>[Flux, Sinks$Many, Sinks$EmitResult, Signal, M...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -5131,7 +5131,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>19</td>
       <td>95</td>
       <td>6</td>
-      <td>[JobDataMap, SchedulerContext, Job, JobExecuti...</td>
+      <td>[JobDataMap, Scheduler, Trigger, SchedulerCont...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -5142,7 +5142,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>18</td>
       <td>131</td>
       <td>4</td>
-      <td>[JobDataMap, Job, JobExecutionException, Sched...</td>
+      <td>[JobExecutionException, SchedulerContext, Job,...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -5153,7 +5153,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>15</td>
       <td>55</td>
       <td>93</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>eventhandling</td>
     </tr>
     <tr>
@@ -5164,7 +5164,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>15</td>
       <td>73</td>
       <td>7</td>
-      <td>[JsonNode, ObjectMapper, ObjectWriter, ObjectR...</td>
+      <td>[DeserializationContext, JsonDeserializer, Jso...</td>
       <td>json</td>
     </tr>
     <tr>
@@ -5175,7 +5175,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>13</td>
       <td>61</td>
       <td>20</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>pooled</td>
     </tr>
     <tr>
@@ -5197,7 +5197,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>28</td>
       <td>39</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>config</td>
     </tr>
     <tr>
@@ -5208,7 +5208,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>29</td>
       <td>22</td>
-      <td>[WaitStrategy, BlockingWaitStrategy, Exception...</td>
+      <td>[RingBuffer, EventHandler, WaitStrategy, Block...</td>
       <td>commandhandling</td>
     </tr>
     <tr>
@@ -5219,7 +5219,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>91</td>
       <td>21</td>
-      <td>[StringDescription, Matcher, Description, Core...</td>
+      <td>[Description, Matcher, CoreMatchers, StringDes...</td>
       <td>saga</td>
     </tr>
     <tr>
@@ -5230,29 +5230,29 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>15</td>
       <td>10</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>legacyjpa</td>
     </tr>
     <tr>
       <th>12</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.common.caching</td>
-      <td>org.ehcache.event</td>
+      <td>javax.cache.event</td>
       <td>8</td>
-      <td>33</td>
+      <td>34</td>
       <td>15</td>
-      <td>[CacheEventListener, EventType, CacheEvent, Ev...</td>
+      <td>[CacheEntryRemovedListener, CacheEntryEvent, C...</td>
       <td>caching</td>
     </tr>
     <tr>
       <th>13</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.common.caching</td>
-      <td>javax.cache.event</td>
+      <td>org.ehcache.event</td>
       <td>8</td>
-      <td>34</td>
+      <td>33</td>
       <td>15</td>
-      <td>[CacheEntryListener, CacheEntryRemovedListener...</td>
+      <td>[EventType, EventOrdering, CacheEventListener,...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -5263,7 +5263,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>15</td>
       <td>54</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>annotation</td>
     </tr>
     <tr>
@@ -5274,22 +5274,11 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>34</td>
       <td>8</td>
-      <td>[Mono, Flux]</td>
+      <td>[Flux, Mono]</td>
       <td>responsetypes</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>org.axonframework.queryhandling</td>
-      <td>org.slf4j</td>
-      <td>7</td>
-      <td>16</td>
-      <td>42</td>
-      <td>[Logger, LoggerFactory]</td>
-      <td>queryhandling</td>
-    </tr>
-    <tr>
-      <th>17</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.queryhandling</td>
       <td>org.reactivestreams</td>
@@ -5300,6 +5289,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>queryhandling</td>
     </tr>
     <tr>
+      <th>17</th>
+      <td>axon-messaging-4.8.2</td>
+      <td>org.axonframework.queryhandling</td>
+      <td>org.slf4j</td>
+      <td>7</td>
+      <td>16</td>
+      <td>42</td>
+      <td>[Logger, LoggerFactory]</td>
+      <td>queryhandling</td>
+    </tr>
+    <tr>
       <th>18</th>
       <td>axon-test-4.8.2</td>
       <td>org.axonframework.test.aggregate</td>
@@ -5307,7 +5307,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>136</td>
       <td>19</td>
-      <td>[Matcher, Description, StringDescription, Core...</td>
+      <td>[CoreMatchers, Matcher, Description, StringDes...</td>
       <td>aggregate</td>
     </tr>
     <tr>
@@ -5336,22 +5336,22 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>21</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.io</td>
+      <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
-      <td>39</td>
+      <td>12</td>
       <td>34</td>
-      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
+      <td>[UnmarshallingContext, MarshallingContext]</td>
       <td>serialization</td>
     </tr>
     <tr>
       <th>22</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.converters</td>
+      <td>com.thoughtworks.xstream.io</td>
       <td>6</td>
-      <td>12</td>
+      <td>39</td>
       <td>34</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
+      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
       <td>serialization</td>
     </tr>
     <tr>
@@ -5362,7 +5362,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6</td>
       <td>68</td>
       <td>7</td>
-      <td>[Index, EntityNotFoundException, TypedQuery, E...</td>
+      <td>[Index, EntityManagerFactory, Query, TypedQuer...</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -5373,7 +5373,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>22</td>
       <td>22</td>
-      <td>[ProducerType, Disruptor, EventHandlerGroup]</td>
+      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
       <td>commandhandling</td>
     </tr>
     <tr>
@@ -5384,7 +5384,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>42</td>
       <td>7</td>
-      <td>[EntityExistsException, Index, TypedQuery, Ent...</td>
+      <td>[TypedQuery, Query, EntityManager, Index, Enti...</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -5395,7 +5395,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>15</td>
       <td>28</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>common</td>
     </tr>
     <tr>
@@ -5406,7 +5406,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>63</td>
       <td>15</td>
-      <td>[CacheException, Element, Ehcache]</td>
+      <td>[Ehcache, Element, CacheException]</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -5417,7 +5417,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>25</td>
       <td>6</td>
-      <td>[TaskWithDataDescriptor, TaskInstance, Task, E...</td>
+      <td>[TaskInstance, ExecutionContext, Task, TaskWit...</td>
       <td>dbscheduler</td>
     </tr>
     <tr>
@@ -5428,7 +5428,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>16</td>
       <td>15</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>async</td>
     </tr>
     <tr>
@@ -5439,7 +5439,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>54</td>
       <td>9</td>
-      <td>[Index, Query, NoResultException, TypedQuery, ...</td>
+      <td>[Query, TypedQuery, EntityManager, NoResultExc...</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -5450,7 +5450,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>25</td>
       <td>6</td>
-      <td>[TaskInstanceId, TaskWithDataDescriptor, TaskI...</td>
+      <td>[Task, TaskInstance, TaskWithDataDescriptor, E...</td>
       <td>dbscheduler</td>
     </tr>
     <tr>
@@ -5461,7 +5461,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>64</td>
       <td>4</td>
-      <td>[LockModeType, TypedQuery, Query, EntityManager]</td>
+      <td>[LockModeType, Query, EntityManager, TypedQuery]</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -5472,7 +5472,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>64</td>
       <td>2</td>
-      <td>[LockModeType, EntityManager, Query, TypedQuery]</td>
+      <td>[LockModeType, TypedQuery, EntityManager, Query]</td>
       <td>legacyjpa</td>
     </tr>
     <tr>
@@ -5483,7 +5483,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>22</td>
       <td>8</td>
-      <td>[Validation, ValidatorFactory, ConstraintViola...</td>
+      <td>[ConstraintViolation, ValidatorFactory, Valida...</td>
       <td>interceptors</td>
     </tr>
     <tr>
@@ -5494,7 +5494,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>22</td>
       <td>2</td>
-      <td>[ConstraintViolation, Validation, Validator, V...</td>
+      <td>[ConstraintViolation, ValidatorFactory, Valida...</td>
       <td>legacyvalidation</td>
     </tr>
     <tr>
@@ -5527,7 +5527,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>66</td>
       <td>3</td>
-      <td>[Query, EntityManagerFactory, TypedQuery, Enti...</td>
+      <td>[EntityNotFoundException, EntityManagerFactory...</td>
       <td>legacyjpa</td>
     </tr>
     <tr>
@@ -5538,7 +5538,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>27</td>
       <td>4</td>
-      <td>[DockerImageName, MountableFile]</td>
+      <td>[MountableFile, DockerImageName]</td>
       <td>server</td>
     </tr>
   </tbody>
@@ -5654,7 +5654,7 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <td>4</td>
       <td>6</td>
       <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
-      <td>[org.slf4j.LoggerFactory, org.slf4j.Logger, co...</td>
+      <td>[org.slf4j.Logger, com.lmax.disruptor.RingBuff...</td>
       <td>commandhandling</td>
       <td>org.axonframework.disruptor.commandhandling.Di...</td>
     </tr>
@@ -5732,20 +5732,6 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <th>10</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.queryhandling</td>
-      <td>SimpleQueryUpdateEmitter</td>
-      <td>13</td>
-      <td>33</td>
-      <td>4</td>
-      <td>13</td>
-      <td>[javax.annotation, org.slf4j, org.reactivestre...</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>queryhandling</td>
-      <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>axon-messaging-4.8.2</td>
-      <td>org.axonframework.queryhandling</td>
       <td>SimpleQueryBus</td>
       <td>6</td>
       <td>54</td>
@@ -5755,6 +5741,20 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
       <td>queryhandling</td>
       <td>org.axonframework.queryhandling.SimpleQueryBus</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-messaging-4.8.2</td>
+      <td>org.axonframework.queryhandling</td>
+      <td>SimpleQueryUpdateEmitter</td>
+      <td>13</td>
+      <td>33</td>
+      <td>4</td>
+      <td>13</td>
+      <td>[javax.annotation, org.slf4j, org.reactivestre...</td>
+      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
+      <td>queryhandling</td>
+      <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -5774,7 +5774,7 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <th>13</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
+      <td>GapAwareTrackingTokenConverter</td>
       <td>6</td>
       <td>25</td>
       <td>4</td>
@@ -5788,7 +5788,7 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <th>14</th>
       <td>axon-messaging-4.8.2</td>
       <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter</td>
+      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
       <td>6</td>
       <td>25</td>
       <td>4</td>
@@ -5816,20 +5816,6 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <th>16</th>
       <td>axon-disruptor-4.8.2</td>
       <td>org.axonframework.disruptor.commandhandling</td>
-      <td>BlacklistDetectingCallback</td>
-      <td>4</td>
-      <td>11</td>
-      <td>3</td>
-      <td>4</td>
-      <td>[org.slf4j, com.lmax.disruptor, javax.annotation]</td>
-      <td>[org.slf4j.LoggerFactory, org.slf4j.Logger, co...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Bl...</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>axon-disruptor-4.8.2</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
       <td>DisruptorCommandBus$ExceptionHandler</td>
       <td>3</td>
       <td>5</td>
@@ -5839,6 +5825,20 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <td>[org.slf4j.Logger, com.lmax.disruptor.dsl.Disr...</td>
       <td>commandhandling</td>
       <td>org.axonframework.disruptor.commandhandling.Di...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>axon-disruptor-4.8.2</td>
+      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>BlacklistDetectingCallback</td>
+      <td>4</td>
+      <td>11</td>
+      <td>3</td>
+      <td>4</td>
+      <td>[org.slf4j, com.lmax.disruptor, javax.annotation]</td>
+      <td>[org.slf4j.Logger, com.lmax.disruptor.RingBuff...</td>
+      <td>commandhandling</td>
+      <td>org.axonframework.disruptor.commandhandling.Bl...</td>
     </tr>
     <tr>
       <th>18</th>
@@ -5857,16 +5857,16 @@ Only the last 20 entries are shown. The whole table can be found in the followin
     <tr>
       <th>19</th>
       <td>axon-eventsourcing-4.8.2</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
-      <td>SQLErrorCodesResolver</td>
-      <td>4</td>
-      <td>12</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>JpaEventStorageEngine</td>
+      <td>6</td>
+      <td>47</td>
       <td>3</td>
-      <td>4</td>
-      <td>[org.slf4j, javax.sql, jakarta.persistence]</td>
-      <td>[org.slf4j.Logger, org.slf4j.LoggerFactory, ja...</td>
-      <td>jpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
+      <td>6</td>
+      <td>[javax.annotation, org.slf4j, javax.persistence]</td>
+      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
+      <td>legacyjpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
     </tr>
   </tbody>
 </table>
@@ -5915,21 +5915,21 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
       <td>762</td>
+      <td>42</td>
       <td>44</td>
-      <td>45</td>
-      <td>153</td>
-      <td>20.078740</td>
-      <td>70.312500</td>
+      <td>152</td>
+      <td>19.947507</td>
+      <td>68.750000</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-modelling-4.8.2</td>
       <td>10</td>
       <td>150</td>
-      <td>4</td>
+      <td>3</td>
       <td>7</td>
-      <td>13</td>
-      <td>8.666667</td>
+      <td>12</td>
+      <td>8.000000</td>
       <td>70.000000</td>
     </tr>
     <tr>
@@ -5937,10 +5937,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>axon-test-4.8.2</td>
       <td>8</td>
       <td>87</td>
-      <td>11</td>
+      <td>12</td>
       <td>6</td>
-      <td>35</td>
-      <td>40.229885</td>
+      <td>36</td>
+      <td>41.379310</td>
       <td>75.000000</td>
     </tr>
     <tr>
@@ -5948,10 +5948,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>axon-eventsourcing-4.8.2</td>
       <td>9</td>
       <td>130</td>
-      <td>4</td>
+      <td>3</td>
       <td>5</td>
-      <td>17</td>
-      <td>13.076923</td>
+      <td>15</td>
+      <td>11.538462</td>
       <td>55.555556</td>
     </tr>
     <tr>
@@ -5970,10 +5970,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
       <td>22</td>
-      <td>3</td>
+      <td>4</td>
       <td>1</td>
-      <td>9</td>
-      <td>40.909091</td>
+      <td>10</td>
+      <td>45.454545</td>
       <td>100.000000</td>
     </tr>
   </tbody>
@@ -6128,45 +6128,45 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>0</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
-      <td>44</td>
+      <td>42</td>
       <td>1</td>
       <td>1.0</td>
-      <td>2.227273</td>
+      <td>2.285714</td>
       <td>38</td>
-      <td>5.560925</td>
+      <td>5.688181</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-modelling-4.8.2</td>
       <td>10</td>
-      <td>4</td>
-      <td>1</td>
-      <td>2.5</td>
-      <td>3.000000</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3.0</td>
+      <td>3.666667</td>
       <td>6</td>
-      <td>2.160247</td>
+      <td>2.081666</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-eventsourcing-4.8.2</td>
       <td>9</td>
-      <td>4</td>
+      <td>3</td>
       <td>1</td>
       <td>2.0</td>
-      <td>2.500000</td>
+      <td>2.666667</td>
       <td>5</td>
-      <td>1.732051</td>
+      <td>2.081666</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
-      <td>11</td>
+      <td>12</td>
       <td>1</td>
       <td>1.0</td>
-      <td>1.454545</td>
+      <td>1.416667</td>
       <td>5</td>
-      <td>1.213560</td>
+      <td>1.164500</td>
     </tr>
     <tr>
       <th>4</th>
@@ -6183,7 +6183,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>5</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
-      <td>3</td>
+      <td>4</td>
       <td>1</td>
       <td>1.0</td>
       <td>1.000000</td>
@@ -6221,45 +6221,45 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>0</th>
       <td>axon-messaging-4.8.2</td>
       <td>64</td>
-      <td>44</td>
+      <td>42</td>
       <td>1.562500</td>
       <td>1.562500</td>
-      <td>3.480114</td>
+      <td>3.571429</td>
       <td>59.375000</td>
-      <td>8.688946</td>
+      <td>8.887782</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-modelling-4.8.2</td>
       <td>10</td>
-      <td>4</td>
-      <td>10.000000</td>
-      <td>25.000000</td>
+      <td>3</td>
+      <td>20.000000</td>
       <td>30.000000</td>
+      <td>36.666667</td>
       <td>60.000000</td>
-      <td>21.602469</td>
+      <td>20.816660</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-eventsourcing-4.8.2</td>
       <td>9</td>
-      <td>4</td>
+      <td>3</td>
       <td>11.111111</td>
       <td>22.222222</td>
-      <td>27.777778</td>
+      <td>29.629630</td>
       <td>55.555556</td>
-      <td>19.245009</td>
+      <td>23.129622</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-test-4.8.2</td>
       <td>8</td>
-      <td>11</td>
+      <td>12</td>
       <td>12.500000</td>
       <td>12.500000</td>
-      <td>18.181818</td>
+      <td>17.708333</td>
       <td>62.500000</td>
-      <td>15.169497</td>
+      <td>14.556252</td>
     </tr>
     <tr>
       <th>4</th>
@@ -6276,7 +6276,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>5</th>
       <td>axon-disruptor-4.8.2</td>
       <td>1</td>
-      <td>3</td>
+      <td>4</td>
       <td>100.000000</td>
       <td>100.000000</td>
       <td>100.000000</td>
@@ -6314,21 +6314,21 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>0</th>
       <td>axon-messaging-4.8.2</td>
       <td>762</td>
-      <td>44</td>
+      <td>42</td>
       <td>1</td>
-      <td>2.0</td>
-      <td>5.045455</td>
+      <td>2.5</td>
+      <td>5.238095</td>
       <td>75</td>
-      <td>11.305390</td>
+      <td>11.541673</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-modelling-4.8.2</td>
       <td>150</td>
-      <td>4</td>
-      <td>1</td>
+      <td>3</td>
+      <td>3</td>
       <td>3.0</td>
-      <td>4.000000</td>
+      <td>5.000000</td>
       <td>9</td>
       <td>3.464102</td>
     </tr>
@@ -6336,23 +6336,23 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>2</th>
       <td>axon-eventsourcing-4.8.2</td>
       <td>130</td>
-      <td>4</td>
       <td>3</td>
-      <td>3.5</td>
-      <td>6.000000</td>
+      <td>3</td>
+      <td>3.0</td>
+      <td>6.666667</td>
       <td>14</td>
-      <td>5.354126</td>
+      <td>6.350853</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-test-4.8.2</td>
       <td>87</td>
-      <td>11</td>
+      <td>12</td>
       <td>1</td>
-      <td>2.0</td>
-      <td>4.090909</td>
+      <td>1.5</td>
+      <td>3.833333</td>
       <td>27</td>
-      <td>7.647935</td>
+      <td>7.346407</td>
     </tr>
     <tr>
       <th>4</th>
@@ -6369,12 +6369,12 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>5</th>
       <td>axon-disruptor-4.8.2</td>
       <td>22</td>
-      <td>3</td>
       <td>4</td>
-      <td>7.0</td>
-      <td>6.333333</td>
+      <td>1</td>
+      <td>5.5</td>
+      <td>5.000000</td>
       <td>8</td>
-      <td>2.081666</td>
+      <td>3.162278</td>
     </tr>
   </tbody>
 </table>
@@ -6407,21 +6407,21 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>0</th>
       <td>axon-messaging-4.8.2</td>
       <td>762</td>
-      <td>44</td>
+      <td>42</td>
       <td>0.131234</td>
-      <td>0.262467</td>
-      <td>0.662133</td>
+      <td>0.328084</td>
+      <td>0.687414</td>
       <td>9.842520</td>
-      <td>1.483647</td>
+      <td>1.514655</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-modelling-4.8.2</td>
       <td>150</td>
-      <td>4</td>
-      <td>0.666667</td>
+      <td>3</td>
       <td>2.000000</td>
-      <td>2.666667</td>
+      <td>2.000000</td>
+      <td>3.333333</td>
       <td>6.000000</td>
       <td>2.309401</td>
     </tr>
@@ -6429,23 +6429,23 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>2</th>
       <td>axon-eventsourcing-4.8.2</td>
       <td>130</td>
-      <td>4</td>
+      <td>3</td>
       <td>2.307692</td>
-      <td>2.692308</td>
-      <td>4.615385</td>
+      <td>2.307692</td>
+      <td>5.128205</td>
       <td>10.769231</td>
-      <td>4.118559</td>
+      <td>4.885272</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-test-4.8.2</td>
       <td>87</td>
-      <td>11</td>
+      <td>12</td>
       <td>1.149425</td>
-      <td>2.298851</td>
-      <td>4.702194</td>
+      <td>1.724138</td>
+      <td>4.406130</td>
       <td>31.034483</td>
-      <td>8.790730</td>
+      <td>8.444146</td>
     </tr>
     <tr>
       <th>4</th>
@@ -6462,12 +6462,12 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>5</th>
       <td>axon-disruptor-4.8.2</td>
       <td>22</td>
-      <td>3</td>
-      <td>18.181818</td>
-      <td>31.818182</td>
-      <td>28.787879</td>
+      <td>4</td>
+      <td>4.545455</td>
+      <td>25.000000</td>
+      <td>22.727273</td>
       <td>36.363636</td>
-      <td>9.462118</td>
+      <td>14.373989</td>
     </tr>
   </tbody>
 </table>
@@ -6544,10 +6544,10 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>1</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>test</td>
+      <td>default</td>
       <td>False</td>
-      <td>org.hibernate</td>
-      <td>hibernate-core-jakarta</td>
+      <td>org.axonframework</td>
+      <td>axon-modelling</td>
     </tr>
     <tr>
       <th>2</th>
@@ -6563,18 +6563,18 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>default</td>
-      <td>True</td>
-      <td>jakarta.annotation</td>
-      <td>jakarta.annotation-api</td>
+      <td>False</td>
+      <td>org.axonframework</td>
+      <td>axon-messaging</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>test</td>
+      <td>provided</td>
       <td>False</td>
-      <td>org.hsqldb</td>
-      <td>hsqldb</td>
+      <td>com.google.code.findbugs</td>
+      <td>jsr305</td>
     </tr>
     <tr>
       <th>...</th>
@@ -6589,28 +6589,28 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>109</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>test</td>
-      <td>False</td>
-      <td>org.springframework</td>
-      <td>spring-beans</td>
+      <td>default</td>
+      <td>True</td>
+      <td>junit</td>
+      <td>junit</td>
     </tr>
     <tr>
       <th>110</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>com.google.code.gson</td>
-      <td>gson</td>
+      <td>test</td>
+      <td>False</td>
+      <td>javax.inject</td>
+      <td>javax.inject</td>
     </tr>
     <tr>
       <th>111</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>True</td>
-      <td>junit</td>
-      <td>junit</td>
+      <td>test</td>
+      <td>False</td>
+      <td>jakarta.persistence</td>
+      <td>jakarta.persistence-api</td>
     </tr>
     <tr>
       <th>112</th>
@@ -6625,10 +6625,10 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>113</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
-      <td>test</td>
-      <td>False</td>
-      <td>jakarta.persistence</td>
-      <td>jakarta.persistence-api</td>
+      <td>default</td>
+      <td>True</td>
+      <td>org.hamcrest</td>
+      <td>hamcrest</td>
     </tr>
   </tbody>
 </table>
