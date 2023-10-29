@@ -46,11 +46,18 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
   ```
   To run Jupyter notebooks, create an `.env` file in the folder from where you open the notebook containing for example: `NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice`
 
-### Further Prerequisites for Python Jupyter Notebooks
+### Further Prerequisites for Python and Jupyter Notebooks
 
 - Python is required for Jupyter Notebook reports.
 - A conda package manager like [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows) is required for Jupyter Notebook reports.
 - Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
+
+### Further Prerequisites for Graph Visualization
+
+These tools are needed to run the graph visualization scripts of directory [graph-visualization](./graph-visualization):
+
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com)
 
 ### Hints for Windows
 

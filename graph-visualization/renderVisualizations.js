@@ -9,6 +9,7 @@ import jimp from "jimp";
 const indexOfScriptFilePathArgument = 1;
 const __filename = process.argv[indexOfScriptFilePathArgument];
 const __dirname = dirname(__filename);
+console.log(`renderVisualizations.js: dirname=${__dirname}`);
 
 /**
  * Crops the image in the buffer so that there is no empty frame around it.
@@ -88,14 +89,17 @@ let browser;
  * and takes a screenshot of the canvas elements using {@link takeCanvasScreenshots}.
  */
 (async () => {
+  console.log('renderVisualizations.js: Starting headless browser...');
   browser = await puppeteer.launch({ headless: "new" }); // { headless: false } for testing
 
   // Get all *.html files in this (script) directory and its subdirectories
-  const htmlFiles = globSync(`${__dirname}/**/*.html`, { ignore: `${__dirname}/node_modules/**` });
+  // The separate filter is needed to ignore the "node_modules" directory. 
+  // Glob's build-in filter doesn't seem to work on Windows.
+  const htmlFiles = globSync(`${__dirname}/**/*.html`, { absolute: true }).filter(file => !file.includes('node_modules'));
   for (const htmlFile of htmlFiles) {
     await takeCanvasScreenshots(browser, htmlFile);
   }
-  console.log(`Successfully rendered ${htmlFiles.length} html file(s)`);
+  console.log(`renderVisualizations.js: Successfully rendered ${htmlFiles.length} html file(s)`);
 })()
   .catch((err) => console.error(err))
   .finally(() => browser?.close());
