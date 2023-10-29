@@ -9,6 +9,7 @@ Script | Directory | Description
 | [Adding_the_artifact_name_temporarily_to_a_new_virtual_node_using_APOC.cypher](./Adding_the_artifact_name_temporarily_to_a_new_virtual_node_using_APOC.cypher) |  | Adding the artifact name temporarily to a new virtual node using APOC. Doesn't take all relationships into account and therefore doesn't work yet. |
 | [Adding_the_artifact_name_temporarily_to_the_Package_node_using_map_projection.cypher](./Adding_the_artifact_name_temporarily_to_the_Package_node_using_map_projection.cypher) |  | Adding the artifact name temporarily to the Package node using map projection |
 | [Artifacts_with_dependencies_to_other_artifacts.cypher](./Artifact_Dependencies/Artifacts_with_dependencies_to_other_artifacts.cypher) | Artifact_Dependencies | Artifacts with dependencies to other artifacts |
+| [Artifacts_with_duplicate_packages.cypher](./Artifact_Dependencies/Artifacts_with_duplicate_packages.cypher) | Artifact_Dependencies | Artifacts with the same full qualified package name (duplicate packages). These can lead to confusion and provide access to package protected classes to another artifact that might not be intended. |
 | [Incoming_Artifact_Dependencies.cypher](./Artifact_Dependencies/Incoming_Artifact_Dependencies.cypher) | Artifact_Dependencies | Incoming Artifact Dependencies |
 | [Most_used_internal_dependencies_acreoss_artifacts.cypher](./Artifact_Dependencies/Most_used_internal_dependencies_acreoss_artifacts.cypher) | Artifact_Dependencies | Most used internal dependencies across artifacts |
 | [Outgoing_Artifact_Dependencies.cypher](./Artifact_Dependencies/Outgoing_Artifact_Dependencies.cypher) | Artifact_Dependencies | Outgoing Artifact Dependencies |
@@ -89,6 +90,7 @@ Script | Directory | Description
 | [Community_Detection_7d_Modularity.cypher](./Community_Detection/Community_Detection_7d_Modularity.cypher) | Community_Detection | Community Detection Modularity |
 | [Community_Detection_7d_Modularity_Members.cypher](./Community_Detection/Community_Detection_7d_Modularity_Members.cypher) | Community_Detection | Community Detection Modularity Members |
 | [Community_Detection_7e_Write_Modularity.cypher](./Community_Detection/Community_Detection_7e_Write_Modularity.cypher) | Community_Detection | Community Detection Modularity Write |
+| [Community_Detection_Summary.cypher](./Community_Detection/Community_Detection_Summary.cypher) | Community_Detection | Community Detection Summary. Variables: dependencies_projection_node ("Artifact", "Package", "Type") |
 | [Compare_Louvain_vs_Leiden_Results.cypher](./Community_Detection/Compare_Louvain_vs_Leiden_Results.cypher) | Community_Detection | Compare Louvain vs. Leiden Community Detection Results. Variables: dependencies_projection_node (e.g. "Artifact", "Package", "Type") |
 | [Get_all_Packages_with_a_Community_Detection_Label.cypher](./Community_Detection/Get_all_Packages_with_a_Community_Detection_Label.cypher) | Community_Detection | Get all Packages with a Community Detection Label |
 | [Set_Parameters.cypher](./Community_Detection/Set_Parameters.cypher) | Community_Detection | Example on how to set the parameters for community detaction in this case for Packages and Leiden |
@@ -113,7 +115,9 @@ Script | Directory | Description
 | [Dependencies_2_Delete_Subgraph.cypher](./Dependencies_Projection/Dependencies_2_Delete_Subgraph.cypher) | Dependencies_Projection | Delete filtered subgraph projection if exists. Variables: dependencies_projection |
 | [Dependencies_3_Create_Projection.cypher](./Dependencies_Projection/Dependencies_3_Create_Projection.cypher) | Dependencies_Projection | Create directed projection. Variables: dependencies_projection, dependencies_projection_node, dependencies_projection_weight_property |
 | [Dependencies_3b_Create_Multi_Relationship_Projection.cypher](./Dependencies_Projection/Dependencies_3b_Create_Multi_Relationship_Projection.cypher) | Dependencies_Projection | Create multi relationship projection. Variables: dependencies_projection, dependencies_projection_node |
+| [Dependencies_3c_Create_Type_Projection.cypher](./Dependencies_Projection/Dependencies_3c_Create_Type_Projection.cypher) | Dependencies_Projection | Create filtered Type node projection without zero-degree nodes, external types, java types or duplicates. Variables: dependencies_projection. Requires 'Label_base_java_types', 'Label_buildin_java_types' and 'Label_resolved_duplicate_types' of 'Types' directory. |
 | [Dependencies_4_Create_Undirected_Projection.cypher](./Dependencies_Projection/Dependencies_4_Create_Undirected_Projection.cypher) | Dependencies_Projection | Create undirected projection. Variables: dependencies_projection, dependencies_projection_node, dependencies_projection_weight_property |
+| [Dependencies_4c_Create_Undirected_Type_Projection.cypher](./Dependencies_Projection/Dependencies_4c_Create_Undirected_Type_Projection.cypher) | Dependencies_Projection | Create filtered Type node projection without zero-degree nodes, external types, java types or duplicates. Variables: dependencies_projection. Requires 'Label_base_java_types', 'Label_buildin_java_types' and 'Label_resolved_duplicate_types' of 'Types' directory. |
 | [Dependencies_5_Create_Subgraph.cypher](./Dependencies_Projection/Dependencies_5_Create_Subgraph.cypher) | Dependencies_Projection | Create filtered subgraph projection without zero-degree nodes. Variables: dependencies_projection, dependencies_projection_node |
 | [Dependencies_6_Check_Projection_Nodes.cypher](./Dependencies_Projection/Dependencies_6_Check_Projection_Nodes.cypher) | Dependencies_Projection | Check Projection Node Properties |
 | [Dependencies_7_Check_Projection_Relationships.cypher](./Dependencies_Projection/Dependencies_7_Check_Projection_Relationships.cypher) | Dependencies_Projection | Check Projection Relationships |
@@ -143,7 +147,7 @@ Script | Directory | Description
 | [External_second_level_package_usage_per_artifact_and_external_package.cypher](./External_Dependencies/External_second_level_package_usage_per_artifact_and_external_package.cypher) | External_Dependencies | External second level package usage per artifact and external package |
 | [External_second_level_package_usage_spread.cypher](./External_Dependencies/External_second_level_package_usage_spread.cypher) | External_Dependencies | External second level package usage spread |
 | [External_types_per_artifact_using_requires.cypher](./External_Dependencies/External_types_per_artifact_using_requires.cypher) | External_Dependencies | External types per artifact using requires |
-| [Label_external_types_and_annotations.cypher](./External_Dependencies/Label_external_types_and_annotations.cypher) | External_Dependencies | Label external types and annotations |
+| [Label_external_types_and_annotations.cypher](./External_Dependencies/Label_external_types_and_annotations.cypher) | External_Dependencies | Label external types and external annotations. Requires 'Label_base_java_types', 'Label_buildin_java_types' and 'Label_resolved_duplicate_types' of 'Types' directory. |
 | [List_external_types_used.cypher](./External_Dependencies/List_external_types_used.cypher) | External_Dependencies | List external types used |
 | [Maven_POMs_and_their_declared_dependencies.cypher](./External_Dependencies/Maven_POMs_and_their_declared_dependencies.cypher) | External_Dependencies | Maven POMs and their declared dependencies |
 | [Remove_external_type_and_annotation_labels.cypher](./External_Dependencies/Remove_external_type_and_annotation_labels.cypher) | External_Dependencies | Remove external type and annotation labels |
@@ -210,12 +214,19 @@ Script | Directory | Description
 | [Set_Parameters.cypher](./Similarity/Set_Parameters.cypher) | Similarity | Example on how to set the parameters for similarity in this case for Packages and Node Similarity |
 | [Similarity_1a_Estimate.cypher](./Similarity/Similarity_1a_Estimate.cypher) | Similarity | Similarity Estimate Memory |
 | [Similarity_1b_Statistics.cypher](./Similarity/Similarity_1b_Statistics.cypher) | Similarity | Similarity Statistics |
-| [Similarity_1c_Stream.cypher](./Similarity/Similarity_1c_Stream.cypher) | Similarity | Similarity Stream |
-| [Similarity_1d_Delete_Relationships.cypher](./Similarity/Similarity_1d_Delete_Relationships.cypher) | Similarity | Delete Relationship "SIMILAR" |
-| [Similarity_1e_Write.cypher](./Similarity/Similarity_1e_Write.cypher) | Similarity | Similarity Write |
-| [Similarity_1f_Write_Node_Properties.cypher](./Similarity/Similarity_1f_Write_Node_Properties.cypher) | Similarity | Write similar node names and their score per node |
+| [Similarity_1c_Mutate.cypher](./Similarity/Similarity_1c_Mutate.cypher) | Similarity | Similarity Mutate |
+| [Similarity_1d_Stream_Mutated.cypher](./Similarity/Similarity_1d_Stream_Mutated.cypher) | Similarity | Read the similarity relationship from the projection. Variables: dependencies_projection |
+| [Similarity_1e_Stream.cypher](./Similarity/Similarity_1e_Stream.cypher) | Similarity | Similarity Stream |
+| [Similarity_1f_Delete_Relationships.cypher](./Similarity/Similarity_1f_Delete_Relationships.cypher) | Similarity | Delete Relationship "SIMILAR" |
+| [Similarity_1g_Write_Mutated.cypher](./Similarity/Similarity_1g_Write_Mutated.cypher) | Similarity | Write the Similarity relationship from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
+| [Similarity_1h_Write.cypher](./Similarity/Similarity_1h_Write.cypher) | Similarity | Similarity Write |
+| [Similarity_1i_Write_Node_Properties.cypher](./Similarity/Similarity_1i_Write_Node_Properties.cypher) | Similarity | Write similar node names and their score per node |
 | [Topological_Sort_List.cypher](./Topological_Sort/Topological_Sort_List.cypher) | Topological_Sort | Topological Sort to list the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) for each code unit node. Needs graph-data-science plugin version >= 2.5.0 |
 | [Topological_Sort_Query.cypher](./Topological_Sort/Topological_Sort_Query.cypher) | Topological_Sort | Topological Sort to query the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) for each code unit node in topologicalSortIndex order. Needs graph-data-science plugin version >= 2.5.0 |
 | [Topological_Sort_Write.cypher](./Topological_Sort/Topological_Sort_Write.cypher) | Topological_Sort | Topological Sort to write the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) into the graph. Needs graph-data-science plugin version >= 2.5.0 |
+| [Label_base_java_types.cypher](./Types/Label_base_java_types.cypher) | Types | Label primitive Java types and void |
+| [Label_buildin_java_types.cypher](./Types/Label_buildin_java_types.cypher) | Types | Label build-in Java types |
+| [Label_resolved_duplicate_types.cypher](./Types/Label_resolved_duplicate_types.cypher) | Types | Label resolved duplicate types. |
+| [Remove_extended_type_labels.cypher](./Types/Remove_extended_type_labels.cypher) | Types | Remove external type and annotation labels |
 | [Global_relative_visibility_statistics_for_types.cypher](./Visibility/Global_relative_visibility_statistics_for_types.cypher) | Visibility | Global relative visibility statistics for types |
 | [Relative_visibility_public_types_to_all_types_per_package.cypher](./Visibility/Relative_visibility_public_types_to_all_types_per_package.cypher) | Visibility | Relative visibility: public types to all types per package |
