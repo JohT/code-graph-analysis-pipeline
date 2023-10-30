@@ -97,6 +97,10 @@ jobs:
         auto-activate-base: false
         use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
 
+    - name: Conda environment info
+      shell: bash -el {0}
+      run: conda info
+
     - name: Setup temp directory if missing
       run: mkdir -p ./temp
 
