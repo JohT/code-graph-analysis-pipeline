@@ -82,62 +82,8 @@ if [ ! -f "${jupyter_notebook_file_path}/.env" ] ; then
     echo "NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD}" > "${jupyter_notebook_file_path}/.env"
 fi
 
-# Define conda environment to use for code structure analysis. Default "codegraph"
-CODEGRAPH_CONDA_ENVIRONMENT=${CODEGRAPH_CONDA_ENVIRONMENT:-"codegraph"} # Name of the conda environment to use for code graph analysis
-backupCondaEnvironment=$CONDA_DEFAULT_ENV
-echo "executeJupyterNotebook: CODEGRAPH_CONDA_ENVIRONMENT=${CODEGRAPH_CONDA_ENVIRONMENT}"
-echo "executeJupyterNotebook: CONDA_PREFIX=${CONDA_PREFIX}"
-echo "executeJupyterNotebook: Current conda environment=${CONDA_DEFAULT_ENV}"
-
-# Include operation system function to for example detect Windows.
-source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
-
-# Determine the path to "conda"
-if [ -n "${CONDA}" ]; then
-    if isWindows; then
-        pathToConda="${CONDA}\\Scripts\\" # the trailing backslash character is required
-    else
-        pathToConda="${CONDA}/bin/" # the trailing slash character is required
-    fi
-else
-    pathToConda=""
-fi
-
-echo "executeJupyterNotebook: pathToConda=${pathToConda}"
-
-scriptExtension=$(ifWindows ".bat" "")
-echo "executeJupyterNotebook: scriptExtension=${scriptExtension}"
-
-# Activate conda shell hook. Also resets CONDA_DEFAULT_ENV to base. 
-# Thats why CONDA_DEFAULT_ENV (base) is never equal to CODEGRAPH_CONDA_ENVIRONMENT (codegraph).
-eval "$(${pathToConda}conda${scriptExtension} shell.bash hook)"
-echo "executeJupyterNotebook: Current conda environment after shell hook=${CONDA_DEFAULT_ENV}"
-
-# Create (if missing) and activate Conda environment for code structure graph analysis
-if { "${pathToConda}conda" env list | grep "$CODEGRAPH_CONDA_ENVIRONMENT "; } >/dev/null 2>&1; then
-    echo "executeJupyterNotebook: Conda environment $CODEGRAPH_CONDA_ENVIRONMENT already created"
-else
-    if [ ! -f "${jupyter_notebook_file_path}/environment.yml" ] ; then
-        echo "executeJupyterNotebook: Couldn't find environment file ${jupyter_notebook_file_path}/environment.yml."
-        exit 2
-    fi
-    echo "executeJupyterNotebook: Creating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
-    "${pathToConda}conda" env create --file "${jupyter_notebook_file_path}/environment.yml" --name "${CODEGRAPH_CONDA_ENVIRONMENT}"
-fi
-
-echo "executeJupyterNotebook: Activating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
-if isWindows; then
-    "${pathToConda}conda" activate ${CODEGRAPH_CONDA_ENVIRONMENT}
-else
-    conda activate "${CODEGRAPH_CONDA_ENVIRONMENT}"
-fi
-
-if [ "${CONDA_DEFAULT_ENV}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] ; then
-    echo "executeJupyterNotebook: Activated Conda environment: ${CONDA_DEFAULT_ENV}"
-else
-    echo "executeJupyterNotebook: Error: Failed to activate Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}. ${CONDA_DEFAULT_ENV} still active."
-    exit 1
-fi
+# Create and activate (if necessary) Conda environment as defined in environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
+source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
 
 # Execute the Jupyter Notebook and write it to the output file name
 jupyter nbconvert --to notebook \
@@ -158,10 +104,4 @@ mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_f
 # Convert the Jupyter Notebook to PDF
 if [ -n "${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
     jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
-fi
-
-# Restore Conda environment
-if [ ! "${backupCondaEnvironment}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] ; then
-    "${pathToConda}conda" activate "${backupCondaEnvironment}"
-    echo "executeJupyterNotebook: Restored Conda Environment to ${backupCondaEnvironment}: ${CONDA_DEFAULT_ENV}"
 fi
