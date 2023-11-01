@@ -6,6 +6,8 @@ This file was generated with the script [appendEnvironmentVariables.sh](./append
 
 | Environment Variable Name           | Default                             | Description                                            |
 | ----------------------------------- | ----------------------------------- | ------------------------------------------------------ |
+JUPYTER_NOTEBOOK_DIRECTORY            | ${SCRIPTS_DIR}/../jupyter           | Repository directory containing the Jupyter Notebooks |
+CODEGRAPH_CONDA_ENVIRONMENT           | codegraph                           | Name of the conda environment to use for code graph analysis |
 REPORTS_SCRIPTS_DIRECTORY             | reports                             | Working directory containing the generated reports |
 REPORT_COMPILATIONS_SCRIPTS_DIRECTORY | compilations                        | Repository directory that contains scripts that execute selected report generation scripts |
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY    | profiles                            | Repository directory that contains scripts containing settings |
@@ -15,7 +17,6 @@ REPORTS_DIRECTORY                     | reports                             | Wo
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | Name of the file that contains the hash code of the file list for change detection |
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
-CODEGRAPH_CONDA_ENVIRONMENT           | codegraph                           | Name of the conda environment to use for code graph analysis |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
 CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            | Repository directory containing the cypher queries |
@@ -33,7 +34,6 @@ JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Ne
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv4-jqassistant.yaml   | Name of the template file for the jqassistant configuration |
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.5.2+41                            | Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x |
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
-JUPYTER_NOTEBOOK_DIRECTORY            | ${SCRIPTS_DIR}/../jupyter           | Repository directory containing the Jupyter Notebooks |
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
 NEO4J_BOLT_URI                        | bolt://localhost:${NEO4J_BOLT_PORT} | Neo4j's own "Bolt Protocol" address |
