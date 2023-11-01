@@ -15,16 +15,19 @@
 #       in the same directory as the given jupyter notebook ipynb file
 #       to create the environment.
 
-# Note: This script uses conda to activate the environment defined in CODEGRAPH_CONDA_ENVIRONMENT (defaults to "codegraph").
-#       It it isn't activated, it will save the currently activated environment, change to codegraph, and restore the original one at the end again.
-#       In cases of an error it might be, that the original conda environment isn't set back. Typically this shouldn't be the case though. 
-
-# Requires juypter nbconvert
+# Requires juypter nbconvert,operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -eo pipefail
 
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true"
+
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+echo "executeJupyterNotebook: SCRIPTS_DIR=$SCRIPTS_DIR"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -79,39 +82,8 @@ if [ ! -f "${jupyter_notebook_file_path}/.env" ] ; then
     echo "NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD}" > "${jupyter_notebook_file_path}/.env"
 fi
 
-# Define conda environment to use for code structure analysis. Default "codegraph"
-CODEGRAPH_CONDA_ENVIRONMENT=${CODEGRAPH_CONDA_ENVIRONMENT:-"codegraph"} # Name of the conda environment to use for code graph analysis
-echo "executeJupyterNotebook: CODEGRAPH_CONDA_ENVIRONMENT=$CODEGRAPH_CONDA_ENVIRONMENT"
-
-# Determine the path to "conda"
-if [ -n "${CONDA}" ]; then
-    pathToConda="$CONDA/bin/" # the trailing slash character is required
-else
-    pathToConda=""
-fi
-echo "executeJupyterNotebook: pathToConda=${pathToConda}"
-
-# Activate conda shell hook
-eval "$(${pathToConda}conda shell.bash hook)"
-
-# Create (if missing) and activate Conda environment for code structure graph analysis
-backupCondaEnvironment=$CONDA_DEFAULT_ENV
-if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
-    backupCondaEnvironment=$CONDA_DEFAULT_ENV
-
-    if { ${pathToConda}conda env list | grep "$CODEGRAPH_CONDA_ENVIRONMENT "; } >/dev/null 2>&1; then
-        echo "executeJupyterNotebook: Conda environment $CODEGRAPH_CONDA_ENVIRONMENT already created"
-    else
-        if [ ! -f "${jupyter_notebook_file_path}/environment.yml" ] ; then
-            echo "executeJupyterNotebook: Couldn't find environment file ${jupyter_notebook_file_path}/environment.yml."
-            exit 2
-        fi
-        echo "executeJupyterNotebook: Creating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
-        ${pathToConda}conda env create --file ${jupyter_notebook_file_path}/environment.yml --name "${CODEGRAPH_CONDA_ENVIRONMENT}"
-    fi
-    ${pathToConda}conda activate "${CODEGRAPH_CONDA_ENVIRONMENT}" 
-    echo "executeJupyterNotebook: Activated Conda environment: $CODEGRAPH_CONDA_ENVIRONMENT "
-fi
+# Create and activate (if necessary) Conda environment as defined in environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
+source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
 
 # Execute the Jupyter Notebook and write it to the output file name
 jupyter nbconvert --to notebook \
@@ -132,10 +104,4 @@ mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_f
 # Convert the Jupyter Notebook to PDF
 if [ -n "${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
     jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
-fi
-
-# Restore Conda environment
-if [ ! "$backupCondaEnvironment" = "$CODEGRAPH_CONDA_ENVIRONMENT" ] ; then
-    ${pathToConda}conda activate "${backupCondaEnvironment}"
-    echo "executeJupyterNotebook: Restored Conda Environment: ${backupCondaEnvironment}"
 fi

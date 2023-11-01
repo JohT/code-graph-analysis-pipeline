@@ -2,47 +2,11 @@
 
 ## Start an analysis
 
-1. Create a directory for all analysis projects
-
-    ```shell
-    mkdir temp
-    cd temp
-    ```
-
-1. Create a working directory for your specific analysis
-  
-    ```shell
-    mkdir MyFirstAnalysis
-    cd MyFirstAnalysis
-    ```
-
-1. Choose an initial password for Neo4j
-
-    ```shell
-    export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
-    ```
-
-1. Create the `artifacts` directory for the code to be analyzed (without `cd` afterwards)
-
-    ```shell
-    mkdir artifacts
-    ```
-
-1. Move the artifacts you want to analyze into the `artifacts` directory
-
-1. Optionally run a predefined script to download artifacts
-
-    ```shell
-    ./../../scripts/downloader/downloadAxonFramework.sh <version>
-    ```
-
-1. Optionally use a script to download artifacts from Maven ([details](#download-maven-artifacts-to-analyze))
-
-1. Start the analysis
-
-    ```shell
-    ./../../scripts/analysis/analyze.sh
-    ```
+An analysis is started with the script [analyze.sh](./scripts/analysis/analyze.sh).
+To run all analysis steps simple execute the following command:
+```shell
+./../../scripts/analysis/analyze.sh
+```
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
 👉 See [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) on how to do this within a GitHub Actions Workflow.

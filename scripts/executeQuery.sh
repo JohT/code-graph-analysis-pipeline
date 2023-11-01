@@ -97,26 +97,32 @@ cypher_query_for_api="{\"statements\":[{\"statement\":${cypher_query},\"paramete
 #echo "executeQuery: Cypher Query for API: ${cypher_query_for_api}"
 
 # Calls the Neo4j HTTP API using cURL ( https://curl.se )
-cyper_query_result=$(curl --silent -S --fail-with-body -H Accept:application/json -H Content-Type:application/json \
+if ! cypher_query_result=$(curl --silent -S --fail-with-body -H Accept:application/json -H Content-Type:application/json \
      -u neo4j:"${NEO4J_INITIAL_PASSWORD}" \
      "http://localhost:${NEO4J_HTTP_PORT}/${NEO4J_HTTP_TRANSACTION_ENDPOINT}" \
-     -d "${cypher_query_for_api}")
-#echo "executeQuery: Cypher Query Result: ${cyper_query_result}"
+     -d "${cypher_query_for_api}" 2>&1) ;
+then
+  redColor='\033[0;31m'
+  noColor='\033[0m'
+  echo -e "${redColor}${cypher_query_file_name}: ${cypher_query_result}${noColor}" >&2
+  exit 1
+fi
+#echo "executeQuery: Cypher Query OK Result: ${cypher_query_result}"
 
 # If there is a error message print it to syserr >&2 in red color
-error_message=$( echo "${cyper_query_result}" | jq -r '.errors[0] // empty' )
+error_message=$( echo "${cypher_query_result}" | jq -r '.errors[0] // empty' )
 if [[ -n "${error_message}" ]]; then 
   redColor='\033[0;31m'
-  noColor='\033[0m' # No Color
+  noColor='\033[0m'
   echo -e "${redColor}${cypher_query_file_name}: ${error_message}${noColor}" >&2
   exit 1
 fi
 
 # Output results in CSV format
 if [ "${no_source_reference}" = true ] ; then
-  echo -n "${cyper_query_result}" | jq -r '(.results[0])? | .columns,(.data[].row)? | map(if type == "array" then join(",") else . end) | flatten | @csv'
+  echo -n "${cypher_query_result}" | jq -r '(.results[0])? | .columns,(.data[].row)? | map(if type == "array" then join(",") else . end) | flatten | @csv'
 else
   cypher_query_file_relative_name=${cypher_query_file_name#/**/cypher/}
   sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_relative_name}"
-  echo -n "${cyper_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
+  echo -n "${cypher_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
 fi

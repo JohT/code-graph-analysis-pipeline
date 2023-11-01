@@ -24,7 +24,13 @@ echo "GraphVisualization: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Get the "graph-visualization" directory by taking the path of this script and going two directory up and then to "visualization".
 GRAPH_VISUALIZATION_DIRECTORY=${GRAPH_VISUALIZATION_DIRECTORY:-"${SCRIPTS_DIR}/../graph-visualization"} # Repository directory containing the Jupyter Notebooks
-echo "GraphVisualization: GRAPH_VISUALIZATION_DIRECTORY=$GRAPH_VISUALIZATION_DIRECTORY"
+echo "GraphVisualization: GRAPH_VISUALIZATION_DIRECTORY=${GRAPH_VISUALIZATION_DIRECTORY}"
+
+# Execute "npm ci" to get all required node modules from npm package manager
+if [ ! -d "${GRAPH_VISUALIZATION_DIRECTORY}/node_modules" ] ; then
+    echo "GraphVisualization: Resolving node_modules..."
+    (cd "${GRAPH_VISUALIZATION_DIRECTORY}" && exec npm ci)
+fi
 
 # Execute the node.js script to render the graph visualizations as image files
-(cd "${REPORTS_DIRECTORY}" && exec node ${GRAPH_VISUALIZATION_DIRECTORY}/renderVisualizations.js)
+(cd "${REPORTS_DIRECTORY}" && exec node "${GRAPH_VISUALIZATION_DIRECTORY}/renderVisualizations.js")

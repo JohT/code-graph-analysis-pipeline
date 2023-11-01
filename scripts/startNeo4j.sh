@@ -5,7 +5,7 @@
 # Note: Does nothing if the database is already running.
 # Note: It requires Neo4j to be installed in the TOOLS_DIRECTORY.
 
-# Requires waitForNeo4jHttp.sh
+# Requires waitForNeo4jHttp.sh,operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -eo pipefail
@@ -17,8 +17,9 @@ NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j's own "Bolt Protocol" port
 
 # Internal Constants
 NEO4J_DIR="${TOOLS_DIRECTORY}/neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
+NEO4J_DIR_WINDOWS="${TOOLS_DIRECTORY}\neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_BIN="${NEO4J_DIR}/bin"
-WAIT_TIMES="1 2 4 8 16 32"
+NEO4J_BIN_WINDOWS="${NEO4J_DIR_WINDOWS}\bin"
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -41,46 +42,51 @@ else
     exit 1
 fi
 
+# Include operation system function to for example detect Windows.
+source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
+
+# Include functions to check or wait for the database to be ready
+source "${SCRIPTS_DIR}/waitForNeo4jHttpFunctions.sh"
+
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
-neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
-neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
-if [ -n "${neo4jNotRunning}" ]; then
+isDatabaseReady=$(isDatabaseQueryable)
+if [[ ${isDatabaseReady} == "false" ]]; then
     echo "startNeo4j: Starting neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} in ${NEO4J_DIR}"
 
     # Check if there is already a process that listens to the Neo4j HTTP port
-    port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN || true )
-    if [ -n "${port_listener_process_id}" ]; then
-        echo "startNeo4j: There is already a process that listens to port ${NEO4J_HTTP_PORT}"
-        ps -p "${port_listener_process_id}"
-        echo "startNeo4j: Use this command to stop it: kill -9 \$( lsof -t -i:${NEO4J_HTTP_PORT} -sTCP:LISTEN )"
-        exit 1
+    if isWindows; then
+        echo "startNeo4j: Skipping detection of processes listening to port ${NEO4J_HTTP_PORT} on Windows"
+    else
+        port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN || true )
+        if [ -n "${port_listener_process_id}" ]; then
+            echo "startNeo4j: There is already a process that listens to port ${NEO4J_HTTP_PORT}"
+            ps -p "${port_listener_process_id}"
+            echo "startNeo4j: Use this command to stop it: kill -9 \$( lsof -t -i:${NEO4J_HTTP_PORT} -sTCP:LISTEN )"
+            exit 1
+        fi
     fi
 
     # Start Neo4j using a temporary NEO4J_HOME environment variable that points to the current installation
-    NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j start
-    
-    # Wait some time for the start of the database
-    echo "${WAIT_TIMES}" | tr ' ' '\n' | while read waitTime; do
-        echo "startNeo4j: Waiting for ${waitTime} second(s)"
-        sleep ${waitTime}
+    if isWindows; then
+        neo4jStartCommand="${NEO4J_BIN_WINDOWS}\neo4j.bat console --verbose"
+        # On Windows it is necessary to take the absolute full qualified path to Neo4j for the environment variable NEO4J_HOME.
+        # It also works without any environment variable but this would likely lead to ambiguity problems when there are multiple Neo4j instances installed.
+        # If the path is wrong content-wise this leads to a ClassNotFoundException.
+        # If the path is wrong syntactically there is an error while reading the plugins directory.
+        windowsCommandEnvironment="set NEO4J_HOME=%cd%\\${NEO4J_DIR_WINDOWS}&& echo NEO4J_HOME=!NEO4J_HOME!"
+        windowsCommand="${windowsCommandEnvironment}&&${neo4jStartCommand}"
+        
+        echo "startNeo4j: Starting Neo4j on Windows in a separate console window..."
+        echo "startNeo4j: The following Windows command is used: ${windowsCommand}"
+        echo "startNeo4j: IMPORTANT: Only close the console window when the scripts and your work is finished !"
 
-        neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
-        neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
-        if [ -z "${neo4jNotRunning}" ]; then
-            echo "startNeo4j: Successfully started neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
-            exit 0
-        fi
-    done
+        cmd //c start cmd //v //k "${windowsCommand}"
+    else
+        NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j start --verbose
+    fi
+
+   waitUntilDatabaseIsQueryable
+   
 else
     echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} already started"
 fi
-
-# Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
-neo4jStatus="$( NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status 2>&1 || true)"
-neo4jNotRunning=$(echo "$neo4jStatus" | grep "not running" || true)
-if [ -n "${neo4jNotRunning}" ]; then
-    echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} still not running. Something went wrong. Details see 'NEO4J_HOME=${NEO4J_DIR} ${NEO4J_BIN}/neo4j status'."
-    exit 1
-fi
-
-source ${SCRIPTS_DIR}/waitForNeo4jHttp.sh || exit 1

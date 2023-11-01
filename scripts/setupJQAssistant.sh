@@ -52,7 +52,7 @@ JQASSISTANT_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_INSTALLATIO
 if [ ! -d "${JQASSISTANT_INSTALLATION_DIRECTORY}" ] ; then    
     jqassistant_cli_fulldownload_url=${JQASSISTANT_CLI_DOWNLOAD_URL}/${JQASSISTANT_CLI_ARTIFACT}/${JQASSISTANT_CLI_VERSION}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}-${JQASSISTANT_CLI_DISTRIBUTION}
     jqassistant_cli_fulldownload_file="${JQASSISTANT_INSTALLATION_NAME}.zip"
-    source ${SCRIPTS_DIR}/download.sh --url "${jqassistant_cli_fulldownload_url}" --filename "${jqassistant_cli_fulldownload_file}"
+    source "${SCRIPTS_DIR}/download.sh" --url "${jqassistant_cli_fulldownload_url}" --filename "${jqassistant_cli_fulldownload_file}"
 
     # Unpack the ZIP file (-q option for less verbose output)
     unzip -q "${SHARED_DOWNLOADS_DIRECTORY}/${jqassistant_cli_fulldownload_file}" -d "${TOOLS_DIRECTORY}"

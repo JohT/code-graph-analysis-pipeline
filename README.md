@@ -6,7 +6,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
 - Analyze static code structure as a graph
 - Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
@@ -37,13 +37,36 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 
 ## 🛠 Prerequisites
 
-- Java 17 is required (June 2023 Neo4j 5.x requirement)
-- Python and a conda package manager are required for Jupyter Notebook reports
-- Chromium will automatically be downloaded if needed for Jupyter Notebook reports in PDF format
+- Java 17 is [required for Neo4j](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-software) (Neo4j 5.x requirement).
+- On Windows it is recommended to use the git bash provided by [git for windows](https://gitforwindows.org).
+- [jq](https://github.com/jqlang/jq) the "lightweight and flexible command-line JSON processor" needs to be installed. Latest releases: https://github.com/jqlang/jq/releases/latest. Check using `jq --version`.
+- Set environment variable `NEO4J_INITIAL_PASSWORD` to a password of your choice. For example:
+  ```shell
+  export NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice
+  ```
+  To run Jupyter notebooks, create an `.env` file in the folder from where you open the notebook containing for example: `NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice`
 
-## Getting Started
+### Further Prerequisites for Python and Jupyter Notebooks
 
-See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md) on how to start an analysis on your local machine.
+- Python is required for Jupyter Notebook reports.
+- A conda package manager like [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows) is required for Jupyter Notebook reports.
+- Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
+
+### Further Prerequisites for Graph Visualization
+
+These tools are needed to run the graph visualization scripts of directory [graph-visualization](./graph-visualization):
+
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com)
+
+### Hints for Windows
+
+- Add this line to your `~/.bashrc` file if you are using Anaconda3: `/c/ProgramData/Anaconda3/etc/profile.d/conda.sh`. Try to find a similar script for other conda package managers or versions.
+- Run `conda init` in the git bash opened as administrator. Running it in normal mode usually leads to an error message.
+
+## 🚀 Getting Started
+
+See [GETTING_STARTED.md](./GETTING_STARTED.md) on how to get started on your local machine.
 
 ## 🏗 Pipeline and Tools
 

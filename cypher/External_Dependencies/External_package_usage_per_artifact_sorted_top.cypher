@@ -46,7 +46,6 @@ RETURN artifactName
       ,externalTypeRate
       ,numberOfExternalTypeCaller
       ,numberOfExternalTypeCalls
-      ,size(externalPackageNames) AS numberOfExternalPackages
-      ,externalPackageNames[0..4] AS top5ExternalPackages
-      ,externalTypeNames[0..1]    AS someExternalTypes
-LIMIT 40
+      ,size(externalPackageNames)                 AS numberOfExternalPackages
+      ,externalPackageNames[0..4]                 AS top5ExternalPackages
+      ,apoc.coll.flatten(externalTypeNames)[0..9] AS someExternalTypes

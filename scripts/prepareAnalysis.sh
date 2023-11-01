@@ -22,7 +22,7 @@ fi
 
 # Get the "cypher" directory by taking the path of this script, going one directory up and then into "cypher".
 CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"} # Repository directory containing the cypher queries
-echo "prepareAnalysis: CYPHER_DIR=$CYPHER_DIR"
+echo "prepareAnalysis: CYPHER_DIR=${CYPHER_DIR}"
 
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -34,7 +34,7 @@ EXTERNAL_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/External_Dependencies"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 
-# Preparation - Create indizes
+# Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_index_for_full_qualified_type_name.cypher"
 
 # Preparation - Create DEPENDS_ON for every DEPENDS_ON_PACKAGE relationship
