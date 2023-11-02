@@ -49,3 +49,5 @@ execute_cypher "${CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_types_that_are_used_by_many_different_packages.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypes.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ArtifactPackageUsage.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ClassesPerPackageUsageAcrossArtifacts.csv"
+
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/Annotated_language_elements.cypher" > "${FULL_REPORT_DIRECTORY}/AnnotatedCodeElements.csv"
