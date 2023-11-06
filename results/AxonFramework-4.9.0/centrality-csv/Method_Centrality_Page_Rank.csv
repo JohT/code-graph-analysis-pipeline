@@ -1,6 +1,6 @@
 "codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"void assertThat(java.lang.Object,java.util.function.Predicate,java.lang.String)","assertThat","centralityPageRank",0.6071729599421537,""
-"void assertNonNull(java.lang.Object,java.lang.String)","assertNonNull","centralityPageRank",0.5701254241176434,""
+"void assertThat(java.lang.Object,java.util.function.Predicate,java.lang.String)","assertThat","centralityPageRank",0.6071729599421538,""
+"void assertNonNull(java.lang.Object,java.lang.String)","assertNonNull","centralityPageRank",0.5701254241176436,""
 "void assertThat(java.lang.Object,java.util.function.Predicate,java.util.function.Supplier)","assertThat","centralityPageRank",0.5198609091326882,""
 "void state(boolean,java.util.function.Supplier)","state","centralityPageRank",0.07273437043332417,""
 "void assertNonEmpty(java.lang.String,java.lang.String)","assertNonEmpty","centralityPageRank",0.0605732485172166,""
