@@ -29,7 +29,7 @@
 "void startRecording()","startRecording","centralityHarmonic",0.004363001745200698,""
 "java.lang.Object executeQuery(java.sql.Connection,org.axonframework.common.jdbc.JdbcUtils$SqlFunction,org.axonframework.common.jdbc.JdbcUtils$SqlResultConverter,java.util.function.Function,boolean)","executeQuery","centralityHarmonic",0.004072134962187318,""
 "java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityHarmonic",0.003926701570680628,""
-"org.axonframework.eventhandling.pooled.Coordinator$RunState attemptStop()","attemptStop","centralityHarmonic",0.003635834787667248,""
+"org.axonframework.eventhandling.pooled.Coordinator$RunState attemptStop()","attemptStop","centralityHarmonic",0.003635834787667249,""
 "int[] executeUpdates(java.sql.Connection,java.util.function.Consumer,org.axonframework.common.jdbc.JdbcUtils$SqlFunction[])","executeUpdates","centralityHarmonic",0.0034904013961605585,""
 "org.axonframework.deadline.DefaultDeadlineManagerSpanFactory$Builder spanFactory(org.axonframework.tracing.SpanFactory)","spanFactory","centralityHarmonic",0.0034904013961605585,""
 "org.axonframework.eventsourcing.EventSourcedAggregate put(java.lang.String,org.axonframework.eventsourcing.EventSourcedAggregate)","put","centralityHarmonic",0.0034904013961605585,""
