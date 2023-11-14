@@ -7,7 +7,7 @@
 # Note: This script is meant to be started in the root directory of this repository.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Read the first input argument containing the version of the artifacts
 if [ "$#" -ne 1 ]; then

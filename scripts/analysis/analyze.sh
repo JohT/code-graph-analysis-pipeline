@@ -31,7 +31,7 @@
 # Requires setupNeo4j.sh,setupJQAssistant.sh,startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,stopNeo4j.sh,comilations/*.sh,profiles/*.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Overrideable variables with directory names
 REPORTS_SCRIPTS_DIRECTORY=${REPORTS_SCRIPTS_DIRECTORY:-"reports"} # Working directory containing the generated reports

@@ -8,7 +8,7 @@
 # then create and change it beforehand.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.8"} # Neo4j v5: 2.0.3 (june 2023), Neo4j v4: 1.12.2 (april 2023)
 JQASSISTANT_CLI_DOWNLOAD_URL=${JQASSISTANT_CLI_DOWNLOAD_URL:-"https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli"} # Download URL for the jQAssistant CLI

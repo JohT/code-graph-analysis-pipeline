@@ -6,7 +6,7 @@
 #       This is helpful to start over with the generation of a new document.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Markdown file name
 markdownFile="ENVIRONMENT_VARIABLES.md"
