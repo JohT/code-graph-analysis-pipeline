@@ -31,7 +31,10 @@ echo "activateCondaEnvironment: Target conda environment=${CODEGRAPH_CONDA_ENVIR
 
 if [ "${CONDA_DEFAULT_ENV}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] ; then
     echo "activateCondaEnvironment: Skipping activation. Target conda environment ${CODEGRAPH_CONDA_ENVIRONMENT} is already activated."
-    exit 0
+    # "return" needs to be used here instead of "exit".
+    # This script is included in another script by using "source". 
+    # "exit" would end the main script, "return" just ends this sub script.
+    return 0
 fi
 
 # Include operation system function to for example detect Windows.
