@@ -6,7 +6,7 @@
 # Requires executeQueryFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 

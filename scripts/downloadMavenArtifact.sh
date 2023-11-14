@@ -11,7 +11,7 @@
 # Requires download.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Overrideable constants
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}

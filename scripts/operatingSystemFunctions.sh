@@ -5,7 +5,7 @@
 # Requires executeQuery.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 

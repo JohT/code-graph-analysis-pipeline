@@ -6,7 +6,7 @@
 # https://chat.openai.com/share/0bd3cde7-32d0-460d-830c-79b7d00a2492
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Output Markdown file name
 output_file="CSV_REPORTS.md"

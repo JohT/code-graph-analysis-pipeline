@@ -29,7 +29,7 @@ Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org
 
 ### 📖 Graph Data Science Reports
 
-Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#📃-csv-cypher-query-report-reference) below. 
+Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#📃-csv-cypher-query-report-reference) below.
 
 - [Community Detection with Leiden](./results/AxonFramework-4.8.0/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
 - [Centrality with Page Rank](./results/AxonFramework-4.8.0/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
@@ -41,9 +41,11 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 - On Windows it is recommended to use the git bash provided by [git for windows](https://gitforwindows.org).
 - [jq](https://github.com/jqlang/jq) the "lightweight and flexible command-line JSON processor" needs to be installed. Latest releases: https://github.com/jqlang/jq/releases/latest. Check using `jq --version`.
 - Set environment variable `NEO4J_INITIAL_PASSWORD` to a password of your choice. For example:
+
   ```shell
   export NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice
   ```
+
   To run Jupyter notebooks, create an `.env` file in the folder from where you open the notebook containing for example: `NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice`
 
 ### Further Prerequisites for Python and Jupyter Notebooks
@@ -94,7 +96,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
   - [wordcloud](https://github.com/amueller/word_cloud)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 
-**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list. 
+**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list.
 
 ## 🛠 Command Reference
 

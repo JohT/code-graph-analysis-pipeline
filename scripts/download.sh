@@ -8,7 +8,7 @@
 # --filename Target file name with extension without path (optional, default = basename of download URL)
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Function to display script usage
 usage() {

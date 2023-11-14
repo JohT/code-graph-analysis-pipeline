@@ -7,7 +7,7 @@
 
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.8"} # 2.0.3 is the newest version (june 2023) compatible with Neo4j v5,  Version 1.12.2 is compatible with Neo4j v4
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-distribution"} #  Neo4j v5: "jqassistant-commandline-distribution", Neo4j v4: "jqassistant-commandline-neo4jv3"

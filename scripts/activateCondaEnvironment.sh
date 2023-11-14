@@ -10,7 +10,7 @@
 # Requires operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -31,7 +31,10 @@ echo "activateCondaEnvironment: Target conda environment=${CODEGRAPH_CONDA_ENVIR
 
 if [ "${CONDA_DEFAULT_ENV}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] ; then
     echo "activateCondaEnvironment: Skipping activation. Target conda environment ${CODEGRAPH_CONDA_ENVIRONMENT} is already activated."
-    exit 0
+    # "return" needs to be used here instead of "exit".
+    # This script is included in another script by using "source". 
+    # "exit" would end the main script, "return" just ends this sub script.
+    return 0
 fi
 
 # Include operation system function to for example detect Windows.

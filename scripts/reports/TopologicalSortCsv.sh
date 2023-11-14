@@ -10,7 +10,7 @@
 # Requires executeQueryFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 # Overrideable constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}

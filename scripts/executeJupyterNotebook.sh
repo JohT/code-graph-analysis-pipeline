@@ -18,7 +18,7 @@
 # Requires juypter nbconvert,operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION:-""} # Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true"
 
@@ -85,12 +85,16 @@ fi
 # Create and activate (if necessary) Conda environment as defined in environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
 source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
 
+jupyter --version || exit 1
+
 # Execute the Jupyter Notebook and write it to the output file name
+echo "executeJupyterNotebook: Executing Jupyter Notebook ${jupyter_notebook_output_file_name}..."
 jupyter nbconvert --to notebook \
                   --execute "${jupyter_notebook_file}" \
                   --output "$jupyter_notebook_output_file_name" \
                   --output-dir="./" \
                   --ExecutePreprocessor.timeout=480
+echo "executeJupyterNotebook: Sucessfully executed Jupyter Notebook ${jupyter_notebook_output_file_name}."
 
 # Convert the Jupyter Notebook to Markdown 
 jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file"
@@ -100,8 +104,10 @@ jupyter nbconvert --to markdown --no-input "$jupyter_notebook_output_file"
 # Therefore the temporary file ".nostyle" is created and then moved to overwrite the original markdown file.
 sed -E '/<style( scoped)?>/,/<\/style>/d' "${jupyter_notebook_markdown_file}" > "${jupyter_notebook_markdown_file}.nostyle"
 mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_file}"
+echo "executeJupyterNotebook: Sucessfully created Markdown ${jupyter_notebook_markdown_file}.."
 
 # Convert the Jupyter Notebook to PDF
 if [ -n "${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
     jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
+    echo "executeJupyterNotebook: Sucessfully created PDF ${jupyter_notebook_output_file}."
 fi

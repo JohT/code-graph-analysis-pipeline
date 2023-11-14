@@ -5,7 +5,7 @@
 # Note: The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -eo pipefail
+set -o errexit -o pipefail
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.13.0"}
