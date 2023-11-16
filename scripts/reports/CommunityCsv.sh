@@ -389,5 +389,7 @@ detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_G
 
 # Type Community Detection - Special CSV Queries after update
 execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
+execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
+execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_that_span_the_most_packages_with_type_statistics.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_that_span_the_most_packages_with_type_statistics.csv"
 
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
