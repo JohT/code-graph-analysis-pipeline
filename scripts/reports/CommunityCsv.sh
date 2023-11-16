@@ -113,6 +113,8 @@ detectCommunitiesWithLouvain() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
 # Community Detection using the Leiden Algorithm
@@ -157,19 +159,8 @@ detectCommunitiesWithLeiden() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyNameIntermediate}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
-}
 
-# Write modularity for Leiden communities
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-writeLeidenModularity() {
-    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
-    local writePropertyName="dependencies_projection_write_property=communityLeidenId" 
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7e_Write_Modularity.cypher" "${@}" "${writePropertyName}"
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
 # Community Detection using the Weakly Connected Components Algorithm
@@ -205,6 +196,8 @@ detectCommunitiesWithWeaklyConnectedComponents() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
 # Community Detection using the Label Propagation Algorithm
@@ -240,6 +233,8 @@ detectCommunitiesWithLabelPropagation() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
 # Community Detection using the K-Core Decomposition Algorithm
@@ -274,6 +269,8 @@ detectCommunitiesWithKCoreDecomposition() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
 # Community Detection using the Approximate Maximum k-cut Algorithm
@@ -310,6 +307,63 @@ detectCommunitiesWithApproximateMaximumKCut() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
+}
+
+# Calculates community metrics including "Modularity" and "Conductance".
+# 
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - writePropertyName=...
+#   Name of the property that contains the communitiy id
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+calculateCommunityMetrics() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+
+    local propertyName
+    propertyName=$( extractQueryParameter "dependencies_projection_write_property" "${@}")
+
+    local fileNamePrefix
+    fileNamePrefix="${FULL_REPORT_DIRECTORY}/${nodeLabel}_${propertyName}_Community_"
+
+    # Print results to CSV
+    local combinedMetrics
+    if combinedMetrics=$( execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_9_Community_Metrics.cypher" "${@}" ); then
+        echo "${combinedMetrics}" > "${fileNamePrefix}_Metrics.csv"
+    else
+        # Combined metrics failed. Trying one by one at least get those that doesn't fail.
+        local modularity
+        if modularity=$( execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7d_Modularity_Members.cypher" "${@}" ); then
+            echo "${modularity}" > "${fileNamePrefix}_Modularity.csv"
+        fi
+        local conductance
+        if conductance=$( execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_8d_Conductance_Members.cypher" "${@}" ); then
+            echo "${conductance}" > "${fileNamePrefix}_Conductance.csv"
+        fi
+    fi
+    # Continue even if there were metrics that failed since they aren't essential
+    # and there seem to be open issues like: 
+    # gds.modularity.stream ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 100
+}
+
+# Write modularity for Leiden communities
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+writeLeidenModularity() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local writePropertyName="dependencies_projection_write_property=communityLeidenId" 
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7e_Write_Modularity.cypher" "${@}" "${writePropertyName}"
 }
 
 # Compare the results of different community detection algorighms
