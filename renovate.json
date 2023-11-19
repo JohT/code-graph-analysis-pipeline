@@ -22,6 +22,17 @@
     },
     {
       "fileMatch": [
+        "README.md"
+      ],
+      "matchStrings": [
+        "\\/AxonFramework-?(?<currentValue>.*?)\\/"
+      ],
+      "depNameTemplate": "AxonFramework/AxonFramework",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^axon-?(?<version>.*?)$"
+    },
+    {
+      "fileMatch": [
         "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
         "(^|\\/)action\\.ya?ml$]"
       ],
