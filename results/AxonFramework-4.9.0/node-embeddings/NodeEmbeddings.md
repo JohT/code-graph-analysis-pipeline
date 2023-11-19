@@ -100,7 +100,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.107658</td>
       <td>axon-eventsourcing-4.9.0</td>
-      <td>[-0.3480038344860077, 0.0767437219619751, 0.32...</td>
+      <td>[0.11037018895149231, 0.053251296281814575, -0...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -108,7 +108,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.044085</td>
       <td>axon-eventsourcing-4.9.0</td>
-      <td>[-0.3765128552913666, 0.07928123325109482, 0.3...</td>
+      <td>[0.2151636779308319, 0.007680345326662064, -0....</td>
     </tr>
     <tr>
       <th>3</th>
@@ -116,7 +116,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.179264</td>
       <td>axon-eventsourcing-4.9.0</td>
-      <td>[-0.3930038809776306, 0.06933631747961044, 0.2...</td>
+      <td>[0.13181927800178528, 0.07275605201721191, -0....</td>
     </tr>
     <tr>
       <th>4</th>
@@ -124,7 +124,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.041254</td>
       <td>axon-eventsourcing-4.9.0</td>
-      <td>[-0.31992679834365845, 0.027896778658032417, 0...</td>
+      <td>[0.09057323634624481, 0.15546447038650513, -0....</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.071s...
+    [t-SNE] Computed neighbors for 93 samples in 0.043s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.616007
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 47.632637
-    [t-SNE] KL divergence after 1000 iterations: 0.065482
+    [t-SNE] Mean sigma: 0.589731
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.491776
+    [t-SNE] KL divergence after 1000 iterations: 0.057072
 
 
 
@@ -180,8 +180,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-configuration-4.9.0</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>-2.094933</td>
-      <td>4.453591</td>
+      <td>-5.267148</td>
+      <td>-0.795210</td>
     </tr>
     <tr>
       <th>1</th>
@@ -189,8 +189,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-eventsourcing-4.9.0</td>
       <td>1</td>
       <td>0.107658</td>
-      <td>-0.067668</td>
-      <td>5.672524</td>
+      <td>-7.487581</td>
+      <td>-1.345081</td>
     </tr>
     <tr>
       <th>2</th>
@@ -198,8 +198,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-eventsourcing-4.9.0</td>
       <td>1</td>
       <td>0.044085</td>
-      <td>0.281932</td>
-      <td>5.854850</td>
+      <td>-7.715580</td>
+      <td>-1.619395</td>
     </tr>
     <tr>
       <th>3</th>
@@ -207,8 +207,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-eventsourcing-4.9.0</td>
       <td>1</td>
       <td>0.179264</td>
-      <td>-0.445568</td>
-      <td>6.150910</td>
+      <td>-7.691609</td>
+      <td>-0.848348</td>
     </tr>
     <tr>
       <th>4</th>
@@ -216,8 +216,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-eventsourcing-4.9.0</td>
       <td>1</td>
       <td>0.041254</td>
-      <td>-0.995648</td>
-      <td>5.772814</td>
+      <td>-7.036011</td>
+      <td>-0.370915</td>
     </tr>
   </tbody>
 </table>
