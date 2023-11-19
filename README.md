@@ -13,6 +13,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Comprehensive reports including dependencies, metrics and graph structure visualization
 - Automated reference document generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
+- Tested on MacOS (zsh), Linux (bash) and Windows (Git Bash)
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 
@@ -20,20 +21,29 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org). For a detailed reference see [Jupyter Notebook Report Reference](#📈-jupyter-notebook-report-reference) below.
 
-- [External Dependencies](./results/AxonFramework-4.8.0/external-dependencies/ExternalDependencies.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependencies.ipynb))
-- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.8.0/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) is based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Notebook](./jupyter/ObjectOrientedDesignMetrics.ipynb))
-- [Overview](./results/AxonFramework-4.8.0/overview/Overview.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/Overview.ipynb))
-- [Internal Dependencies](./results/AxonFramework-4.8.0/internal-dependencies/InternalDependencies.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) including cyclic dependencies ([Notebook](./jupyter/InternalDependencies.ipynb))
-- [Visibility Metrics](./results/AxonFramework-4.8.0/visibility-metrics/VisibilityMetrics.md) is based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Notebook](./jupyter/VisibilityMetrics.ipynb))
-- [Wordcloud](./results/AxonFramework-4.8.0/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb))
+- [External Dependencies](./results/AxonFramework-4.8.0/external-dependencies/ExternalDependencies.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependencies.ipynb)).
+- [Internal Dependencies](./results/AxonFramework-4.8.0/internal-dependencies/InternalDependencies.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependencies.ipynb)).
+- [Method Metrics](./results/AxonFramework-4.8.0/method-metrics/MethodMetrics.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetrics.ipynb)).
+- [Node Embeddings](./results/AxonFramework-4.8.0/node-embeddings/NodeEmbeddings.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddings.ipynb)).
+- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.8.0/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) is based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Notebook](./jupyter/ObjectOrientedDesignMetrics.ipynb)).
+- [Overview](./results/AxonFramework-4.8.0/overview/Overview.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/Overview.ipynb)).
+- [Visibility Metrics](./results/AxonFramework-4.8.0/visibility-metrics/VisibilityMetrics.md) is based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Notebook](./jupyter/VisibilityMetrics.ipynb)).
+- [Wordcloud](./results/AxonFramework-4.8.0/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
 
 ### 📖 Graph Data Science Reports
 
 Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#📃-csv-cypher-query-report-reference) below.
 
-- [Community Detection with Leiden](./results/AxonFramework-4.8.0/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
 - [Centrality with Page Rank](./results/AxonFramework-4.8.0/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
+- [Community Detection with Leiden](./results/AxonFramework-4.8.0/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
+- [Node Embeddings with HashGNN](./results/AxonFramework-4.8.0/node-embeddings-csv/Package_Embeddings_HashGNN.csv) ([Source Script](./scripts/reports/NodeEmbeddingsCsv.sh))
 - [Similarity with Jaccard](./results/AxonFramework-4.8.0/similarity-csv/Similarity_Jaccard.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
+- [Topology Sort](./results/AxonFramework-4.8.0/artifact-topology-csv/TopologicalSortedArtifacts.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
+
+## 📖 Blog Articles
+
+- [Analyze java dependencies with jQAssistant](https://joht.github.io/johtizen/data/2021/02/21/java-jar-dependency-analysis.html)
+- [Analyze java package metrics in a graph database (Part 2)](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html)
 
 ## 🛠 Prerequisites
 
@@ -48,20 +58,20 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 
   To run Jupyter notebooks, create an `.env` file in the folder from where you open the notebook containing for example: `NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice`
 
-### Further Prerequisites for Python and Jupyter Notebooks
+### Additional Prerequisites for Python and Jupyter Notebooks
 
 - Python is required for Jupyter Notebook reports.
 - A conda package manager like [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows) is required for Jupyter Notebook reports.
 - Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
 
-### Further Prerequisites for Graph Visualization
+### Additional Prerequisites for Graph Visualization
 
 These tools are needed to run the graph visualization scripts of directory [graph-visualization](./graph-visualization):
 
 - [Node.js](https://nodejs.org/en)
 - [npm](https://www.npmjs.com)
 
-### Hints for Windows
+### Additional Prerequisites for Windows
 
 - Add this line to your `~/.bashrc` file if you are using Anaconda3: `/c/ProgramData/Anaconda3/etc/profile.d/conda.sh`. Try to find a similar script for other conda package managers or versions.
 - Run `conda init` in the git bash opened as administrator. Running it in normal mode usually leads to an error message.
@@ -93,6 +103,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
   - [pip](https://pip.pypa.io/en/stable)
   - [monotonic](https://github.com/atdt/monotonic)
   - [py2neo](https://py2neo.org)
+  - [sklearn](https://scikit-learn.org)
   - [wordcloud](https://github.com/amueller/word_cloud)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 
