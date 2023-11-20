@@ -96,35 +96,35 @@ The result can be used in machine learning as features approximating the graph s
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.eventsourcing</td>
+      <td>org.axonframework.modelling.command</td>
       <td>1</td>
-      <td>0.107658</td>
-      <td>axon-eventsourcing-4.9.0</td>
-      <td>[0.11037018895149231, 0.053251296281814575, -0...</td>
+      <td>0.155609</td>
+      <td>axon-modelling-4.9.0</td>
+      <td>[0.15840929746627808, 0.0, 0.5630112886428833,...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
+      <td>org.axonframework.modelling.command.inspection</td>
       <td>1</td>
-      <td>0.044085</td>
-      <td>axon-eventsourcing-4.9.0</td>
-      <td>[0.2151636779308319, 0.007680345326662064, -0....</td>
+      <td>0.152740</td>
+      <td>axon-modelling-4.9.0</td>
+      <td>[0.17259621620178223, 0.0, 0.5832822322845459,...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>1</td>
-      <td>0.179264</td>
-      <td>axon-eventsourcing-4.9.0</td>
-      <td>[0.13181927800178528, 0.07275605201721191, -0....</td>
+      <td>0.016234</td>
+      <td>axon-modelling-4.9.0</td>
+      <td>[0.2085569202899933, 0.0, 0.6405332088470459, ...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
-      <td>1</td>
-      <td>0.041254</td>
-      <td>axon-eventsourcing-4.9.0</td>
-      <td>[0.09057323634624481, 0.15546447038650513, -0....</td>
+      <td>org.axonframework.modelling.saga</td>
+      <td>2</td>
+      <td>0.349429</td>
+      <td>axon-modelling-4.9.0</td>
+      <td>[-0.6182226538658142, 0.1278398036956787, 0.08...</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.043s...
+    [t-SNE] Computed neighbors for 93 samples in 0.024s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.589731
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.491776
-    [t-SNE] KL divergence after 1000 iterations: 0.057072
+    [t-SNE] Mean sigma: 0.575747
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.724426
+    [t-SNE] KL divergence after 850 iterations: 0.088963
 
 
 
@@ -180,44 +180,44 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-configuration-4.9.0</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>-5.267148</td>
-      <td>-0.795210</td>
+      <td>-1.204360</td>
+      <td>7.117894</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.eventsourcing</td>
-      <td>axon-eventsourcing-4.9.0</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>axon-modelling-4.9.0</td>
       <td>1</td>
-      <td>0.107658</td>
-      <td>-7.487581</td>
-      <td>-1.345081</td>
+      <td>0.155609</td>
+      <td>-2.474499</td>
+      <td>6.281957</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
-      <td>axon-eventsourcing-4.9.0</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>axon-modelling-4.9.0</td>
       <td>1</td>
-      <td>0.044085</td>
-      <td>-7.715580</td>
-      <td>-1.619395</td>
+      <td>0.152740</td>
+      <td>-2.492542</td>
+      <td>6.270282</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>axon-eventsourcing-4.9.0</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>axon-modelling-4.9.0</td>
       <td>1</td>
-      <td>0.179264</td>
-      <td>-7.691609</td>
-      <td>-0.848348</td>
+      <td>0.016234</td>
+      <td>-2.515396</td>
+      <td>6.241854</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
-      <td>axon-eventsourcing-4.9.0</td>
-      <td>1</td>
-      <td>0.041254</td>
-      <td>-7.036011</td>
-      <td>-0.370915</td>
+      <td>org.axonframework.modelling.saga</td>
+      <td>axon-modelling-4.9.0</td>
+      <td>2</td>
+      <td>0.349429</td>
+      <td>-5.473534</td>
+      <td>7.064782</td>
     </tr>
   </tbody>
 </table>
