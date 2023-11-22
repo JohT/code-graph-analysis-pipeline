@@ -105,6 +105,7 @@ then
   redColor='\033[0;31m'
   noColor='\033[0m'
   echo -e "${redColor}${cypher_query_file_name}: ${cypher_query_result}${noColor}" >&2
+  echo -e "${redColor}Parameters: ${query_parameters}${noColor}" >&2
   exit 1
 fi
 #echo "executeQuery: Cypher Query OK Result: ${cypher_query_result}"
@@ -115,6 +116,7 @@ if [[ -n "${error_message}" ]]; then
   redColor='\033[0;31m'
   noColor='\033[0m'
   echo -e "${redColor}${cypher_query_file_name}: ${error_message}${noColor}" >&2
+  echo -e "${redColor}Parameters: ${query_parameters}${noColor}" >&2
   exit 1
 fi
 
