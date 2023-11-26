@@ -13,7 +13,7 @@ NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"} # Neo4j HTTPS port for encrypted qu
 NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
 
 # Awesome Procedures (APOC) Plugin for Neo4j
-NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"5.13.0"} # Version number matches Neo4j version since 5.x
+NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"5.14.0"} # Version number matches Neo4j version since 5.x
 NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"} # Since Neo4j v5 the core edition is updated with Neo4j
 NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"} # Core edition was moved to "neo4j/apoc" for Neo4j v5
 
