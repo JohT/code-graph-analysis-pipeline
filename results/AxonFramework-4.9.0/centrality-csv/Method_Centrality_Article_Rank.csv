@@ -34,7 +34,7 @@
 "org.axonframework.eventsourcing.eventstore.BatchingEventStorageEngine$Builder persistenceExceptionResolver(org.axonframework.common.jdbc.PersistenceExceptionResolver)","persistenceExceptionResolver","centralityArticleRank",0.01698959053541076,""
 "java.util.Optional resolveDetails(java.lang.Throwable)","resolveDetails","centralityArticleRank",0.015931474286886304,""
 "void advanceTimeTo(java.time.Instant,org.axonframework.test.eventscheduler.EventConsumer)","advanceTimeTo","centralityArticleRank",0.015702832423016413,""
-"java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityArticleRank",0.01547388816889531,""
+"java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityArticleRank",0.015473888168895307,""
 "void describe(java.util.List,org.hamcrest.Description)","describe","centralityArticleRank",0.015407663466391852,""
 "org.axonframework.commandhandling.gateway.AbstractCommandGateway$Builder commandBus(org.axonframework.commandhandling.CommandBus)","commandBus","centralityArticleRank",0.015183815318782011,""
 "org.axonframework.commandhandling.gateway.AbstractCommandGateway$Builder dispatchInterceptors(java.util.List)","dispatchInterceptors","centralityArticleRank",0.015183815318782011,""
