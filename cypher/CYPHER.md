@@ -160,10 +160,13 @@ Script | Directory | Description
 | [Get_Graph_Data_Science_Library_Version.cypher](./Get_Graph_Data_Science_Library_Version.cypher) |  | Get Graph Data Science Library Version |
 | [Get_Graph_Data_Science_System_Information.cypher](./Get_Graph_Data_Science_System_Information.cypher) |  | Get Graph Data Science System Information |
 | [Get_all_declared_and_inherited_methods_of_a_type.cypher](./Get_all_declared_and_inherited_methods_of_a_type.cypher) |  | Get all declared and inherited methods of a type |
-| [Annotated_language_elements.cypher](./Internal_Dependencies/Annotated_language_elements.cypher) | Internal_Dependencies | Annotated language elements by number of annotations |
 | [How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher](./Internal_Dependencies/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher) | Internal_Dependencies | How many classes compared to all existing in the same package are used by dependent packages across different artifacts? |
 | [How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher](./Internal_Dependencies/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher) | Internal_Dependencies | How many packages compared to all existing are used by dependent artifacts? |
 | [List_types_that_are_used_by_many_different_packages.cypher](./Internal_Dependencies/List_types_that_are_used_by_many_different_packages.cypher) | Internal_Dependencies | List types that are used by many different packages |
+| [Annotated_code_elements.cypher](./Java/Annotated_code_elements.cypher) | Java | Annotated code elements overall by element type with some examples |
+| [Annotated_code_elements_per_artifact.cypher](./Java/Annotated_code_elements_per_artifact.cypher) | Java | Annotated code elements per artifact and element type with some examples |
+| [Java_Reflection_usage.cypher](./Java/Java_Reflection_usage.cypher) | Java | Query Java Reflection usage combined with invokations of "Class.forName" |
+| [Java_deprecated_element_usage.cypher](./Java/Java_deprecated_element_usage.cypher) | Java | Query deprecated type and member usage by non deprecated elements |
 | [List_all_existing_artifacts.cypher](./List_all_existing_artifacts.cypher) |  | List all existing artifacts |
 | [Methods_1_Delete_Projection.cypher](./Method_Projection/Methods_1_Delete_Projection.cypher) | Method_Projection | Delete projection if existing. Variables: dependencies_projection |
 | [Methods_2_Create_Projection.cypher](./Method_Projection/Methods_2_Create_Projection.cypher) | Method_Projection | Create directed projection for methods. Variables: dependencies_projection, dependencies_projection_weight_property |
