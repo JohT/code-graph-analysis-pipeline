@@ -38,6 +38,7 @@ Script | Directory | Description
 | [GraphVisualization.sh](./reports/GraphVisualization.sh) | reports | Creates the "graph-visualization" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
 | [InternalDependenciesJupyter.sh](./reports/InternalDependenciesJupyter.sh) | reports | Creates the "internal-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "InternalDependencies.ipynb". |
+| [JavaCsv.sh](./reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports. |
 | [MethodMetricsJupyter.sh](./reports/MethodMetricsJupyter.sh) | reports | Creates the method metrics report (ipynb, md, pdf) based on the Jupyter Notebook "MethodMetrics.ipynb". |
 | [NodeEmbeddingsCsv.sh](./reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [NodeEmbeddingsJupyter.sh](./reports/NodeEmbeddingsJupyter.sh) | reports | Creates the "node-embeddings" report (ipynb, md, pdf) based on the Jupyter Notebook "NodeEmbeddings.ipynb". |
