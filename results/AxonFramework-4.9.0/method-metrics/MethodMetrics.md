@@ -1092,7 +1092,7 @@ The following table shows the top 30 packages with the highest effective lines o
       <td>348</td>
       <td>156</td>
       <td>13</td>
-      <td>defaultHeaders</td>
+      <td>describeTo</td>
     </tr>
     <tr>
       <th>28</th>
@@ -2043,7 +2043,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>285</td>
       <td>181</td>
       <td>7</td>
-      <td>equals</td>
+      <td>calculateRoute</td>
     </tr>
     <tr>
       <th>17</th>
@@ -2061,7 +2061,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>274</td>
       <td>184</td>
       <td>8</td>
-      <td>onResult</td>
+      <td>doDispatch</td>
     </tr>
     <tr>
       <th>13</th>
@@ -2383,7 +2383,7 @@ The following table shows the top 30 packages containing the methods with the hi
       <td>28</td>
       <td>axon-messaging-4.9.0</td>
       <td>org.axonframework.deadline.dbscheduler</td>
-      <td>DbSchedulerBinaryDeadlineDetails</td>
+      <td>DbSchedulerHumanReadableDeadlineDetails</td>
       <td>equals</td>
       <td>11</td>
     </tr>
