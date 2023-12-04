@@ -1,6 +1,6 @@
 "communityId","conductance","modularity","memberCount","someMemberNamesShort","someMemberNames","Source Cypher File: Community_Detection/Community_Detection_9_Community_Metrics.cypher"
-0,1,-0.0430995482285087,2,"axon-configuration-4.9.0,axon-test-4.9.0","/axon-configuration-4.9.0.jar,/axon-test-4.9.0.jar",""
-1,1,-0.001972650978445754,1,"axon-disruptor-4.9.0","/axon-disruptor-4.9.0.jar",""
+0,1,-0.013710739445230406,1,"axon-configuration-4.9.0","/axon-configuration-4.9.0.jar",""
+1,1,-0.018205018938536252,2,"axon-disruptor-4.9.0,axon-test-4.9.0","/axon-disruptor-4.9.0.jar,/axon-test-4.9.0.jar",""
 2,1,-0.18088249412642718,1,"axon-messaging-4.9.0","/axon-messaging-4.9.0.jar",""
 3,1,-0.020449384927787206,1,"axon-eventsourcing-4.9.0","/axon-eventsourcing-4.9.0.jar",""
 4,1,-0.03228381900881987,1,"axon-modelling-4.9.0","/axon-modelling-4.9.0.jar",""
