@@ -86,7 +86,7 @@ jobs:
 
     # "Setup Python" can be skipped if jupyter notebook reports aren't needed
     - name: Setup Python ${{ matrix.python }} with Conda package manager Mambaforge
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python }}
         miniforge-variant: Mambaforge
