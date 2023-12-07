@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>71134</td>
-      <td>203268</td>
+      <td>71138</td>
+      <td>203289</td>
       <td>6</td>
       <td>97</td>
       <td>1654</td>
@@ -80,15 +80,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>1</th>
       <td>axon-messaging-4.9.0</td>
       <td>786</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Interface</td>
+      <td>154</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-messaging-4.9.0</td>
       <td>786</td>
-      <td>Interface</td>
-      <td>154</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>3</th>
