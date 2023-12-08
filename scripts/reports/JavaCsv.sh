@@ -37,8 +37,13 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 JAVA_CYPHER_DIR="${CYPHER_DIR}/Java"
 
+echo "JavaCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries..."
+
 execute_cypher "${JAVA_CYPHER_DIR}/Java_Reflection_usage.cypher" > "${FULL_REPORT_DIRECTORY}/ReflectionUsage.csv"
 execute_cypher "${JAVA_CYPHER_DIR}/Java_Reflection_usage_detailed.cypher" > "${FULL_REPORT_DIRECTORY}/ReflectionUsageDetailed.csv"
 execute_cypher "${JAVA_CYPHER_DIR}/Java_deprecated_element_usage.cypher" > "${FULL_REPORT_DIRECTORY}/DeprecatedElementUsage.csv"
+execute_cypher "${JAVA_CYPHER_DIR}/Java_deprecated_element_usage_detailed.cypher" > "${FULL_REPORT_DIRECTORY}/DeprecatedElementUsageDetailed.csv"
 execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements.cypher" > "${FULL_REPORT_DIRECTORY}/AnnotatedCodeElements.csv"
 execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/AnnotatedCodeElementsPerArtifact.csv"
+
+echo "JavaCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
