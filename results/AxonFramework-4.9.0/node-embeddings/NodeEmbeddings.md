@@ -88,43 +88,43 @@ The result can be used in machine learning as features approximating the graph s
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.config</td>
+      <td>org.axonframework.commandhandling</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>axon-configuration-4.9.0</td>
-      <td>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ...</td>
+      <td>0.062492</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>[0.10886185616254807, -0.0904235988855362, -0....</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.modelling.command</td>
-      <td>1</td>
-      <td>0.155609</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>[0.2084457129240036, 0.2084457129240036, -0.06...</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>0</td>
+      <td>0.019602</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>[0.20682232081890106, -0.07204115390777588, -0...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.modelling.command.inspection</td>
-      <td>1</td>
-      <td>0.152740</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>[0.24538426101207733, 0.24538426101207733, -0....</td>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>0</td>
+      <td>0.028509</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>[0.10303518176078796, -0.07290735095739365, -0...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
-      <td>1</td>
-      <td>0.016234</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>[0.25349435210227966, 0.25349435210227966, -0....</td>
+      <td>org.axonframework.commandhandling.distributed....</td>
+      <td>0</td>
+      <td>0.018051</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>[0.10667519271373749, -0.010812338441610336, -...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.modelling.saga</td>
-      <td>2</td>
-      <td>0.349429</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>[0.016400713473558426, 0.09459847956895828, -0...</td>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>0</td>
+      <td>0.016234</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>[0.19502374529838562, -0.09658371657133102, -0...</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.046s...
+    [t-SNE] Computed neighbors for 93 samples in 0.054s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.628251
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.075214
-    [t-SNE] KL divergence after 1000 iterations: 0.073697
+    [t-SNE] Mean sigma: 0.550452
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.284126
+    [t-SNE] KL divergence after 750 iterations: 0.070199
 
 
 
@@ -176,48 +176,48 @@ reduces them to a 2 dimensional array for visualization.
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.config</td>
-      <td>axon-configuration-4.9.0</td>
+      <td>org.axonframework.commandhandling</td>
+      <td>axon-messaging-4.9.0</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>2.486209</td>
-      <td>-2.268671</td>
+      <td>0.062492</td>
+      <td>-5.806868</td>
+      <td>-1.147245</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.modelling.command</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>1</td>
-      <td>0.155609</td>
-      <td>2.119159</td>
-      <td>-0.238294</td>
+      <td>org.axonframework.commandhandling.callbacks</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>0</td>
+      <td>0.019602</td>
+      <td>-6.504912</td>
+      <td>-0.813952</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.modelling.command.inspection</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>1</td>
-      <td>0.152740</td>
-      <td>2.115422</td>
-      <td>-0.229025</td>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>0</td>
+      <td>0.028509</td>
+      <td>-5.372363</td>
+      <td>-1.015420</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>1</td>
-      <td>0.016234</td>
-      <td>2.110459</td>
-      <td>-0.212686</td>
+      <td>org.axonframework.commandhandling.distributed....</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>0</td>
+      <td>0.018051</td>
+      <td>-6.155689</td>
+      <td>-0.587476</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.modelling.saga</td>
-      <td>axon-modelling-4.9.0</td>
-      <td>2</td>
-      <td>0.349429</td>
-      <td>5.518914</td>
-      <td>0.524457</td>
+      <td>org.axonframework.commandhandling.gateway</td>
+      <td>axon-messaging-4.9.0</td>
+      <td>0</td>
+      <td>0.016234</td>
+      <td>-6.143025</td>
+      <td>-1.031680</td>
     </tr>
   </tbody>
 </table>
