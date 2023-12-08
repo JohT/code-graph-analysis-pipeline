@@ -363,7 +363,13 @@ calculateCommunityMetrics() {
 writeLeidenModularity() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
     local writePropertyName="dependencies_projection_write_property=communityLeidenId" 
-    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7e_Write_Modularity.cypher" "${@}" "${writePropertyName}"
+    local writtenModularity
+    if writtenModularity=$( execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_7e_Write_Modularity.cypher" "${@}" "${writePropertyName}" ); then
+        echo "${writtenModularity}"
+        echo "communityCsv: Successfully written Leiden Modularity per node with parameters ${*}"
+    else
+        echo "communityCsv: Error: Failed to write Leiden Modularity per node with parameters ${*}"
+    fi
 }
 
 # Compare the results of different community detection algorighms
@@ -419,7 +425,7 @@ PACKAGE_GAMMA="dependencies_leiden_gamma=1.14" # default = 1.00
 PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 
 # Package Community Detection
-echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') communityCsv: Processing package dependencies..."
+echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z'): Processing package dependencies..."
 createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
 writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"

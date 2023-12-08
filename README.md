@@ -8,9 +8,11 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ## ✨ Features
 
-- Analyze static code structure as a graph
+- Analyze static Java code structure as a graph
 - Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
-- Comprehensive reports including dependencies, metrics and graph structure visualization
+- 130 CSV reports including dependencies, metrics, cycles, annotations, algorithms and many more
+- 9 Jupyter notebook reports including dependencies, metrics, visibility and many more
+- Graph structure visualization
 - Automated reference document generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
 - Tested on MacOS (zsh), Linux (bash) and Windows (Git Bash)
@@ -172,3 +174,15 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
   ```shell
   ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
   ```
+
+## 🕸 Web References
+
+- [Graph Data Science 101: Understanding Graphs and Graph Data Science](https://techfirst.medium.com/graph-data-science-101-understanding-graphs-and-graph-data-science-c25055a9db01)
+- [The Story behind Russian Twitter Trolls](https://neo4j.com/blog/story-behind-russian-twitter-trolls)
+- [Graphs for Data Science and Machine Learning](https://de.slideshare.net/neo4j/graphs-for-data-science-and-machine-learning)
+- [Modularity](https://www.cs.cmu.edu/~ckingsf/bioinfo-lectures/modularity.pdf)
+- [Graph Data Science Centrality Algorithms](https://neo4j.com/docs/graph-data-science/2.5/algorithms/centrality)
+- [Graph Data Science Community Detection Algorithms](https://neo4j.com/docs/graph-data-science/2.5/algorithms/community)
+- [Graph Data Science Community Similarity Algorithms](https://neo4j.com/docs/graph-data-science/2.5/algorithms/similarity)
+- [Graph Data Science Community Topological Sort Algorithm](https://neo4j.com/docs/graph-data-science/2.5/algorithms/dag/topological-sort)
+- [Node embeddings for Beginners](https://towardsdatascience.com/node-embeddings-for-beginners-554ab1625d98)

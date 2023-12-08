@@ -1,4 +1,4 @@
-// Query Java Reflection usage combined with invokations of "Class.forName"
+// Query all types that use Java Reflection or "Class.forName"
 
    MATCH (dependentArtifact:Artifact)-[:CONTAINS]-(dependentType:Type)
     WITH replace(last(split(dependentArtifact.fileName, '/')), '.jar', '') AS dependentArtifactName
@@ -8,10 +8,9 @@ OPTIONAL MATCH (dependentType)-[:DEPENDS_ON]->(reflectionType:Type)
 OPTIONAL MATCH (dependentType)-[:DECLARES]->(dependentMethod:Method)-[:INVOKES]->(classForName:Method)
    WHERE classForName.signature STARTS WITH 'java.lang.Class forName'
     WITH dependentArtifactName
+        ,dependentType.fqn  AS reflectionCallerTypeName
         ,collect(DISTINCT coalesce(reflectionType.fqn, 'Class.' + classForName.name)) AS reflectionTypes
-        ,collect(DISTINCT dependentType.fqn)  AS reflectionCaller
-        ,count(DISTINCT dependentType.fqn)    AS numberOfReflectionCaller
-RETURN dependentArtifactName
-      ,numberOfReflectionCaller
-      ,reflectionCaller[0..19] AS someReflectionCaller
-      ,reflectionTypes[0..19]  AS someReflectionTypes
+   WHERE size(reflectionTypes) > 0
+  RETURN dependentArtifactName
+        ,reflectionCallerTypeName
+        ,reflectionTypes[0..19]  AS reflectionTypes
