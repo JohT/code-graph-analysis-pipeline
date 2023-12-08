@@ -166,7 +166,9 @@ Script | Directory | Description
 | [Annotated_code_elements.cypher](./Java/Annotated_code_elements.cypher) | Java | Annotated code elements overall by element type with some examples |
 | [Annotated_code_elements_per_artifact.cypher](./Java/Annotated_code_elements_per_artifact.cypher) | Java | Annotated code elements per artifact and element type with some examples |
 | [Java_Reflection_usage.cypher](./Java/Java_Reflection_usage.cypher) | Java | Query Java Reflection usage combined with invokations of "Class.forName" |
+| [Java_Reflection_usage_detailed.cypher](./Java/Java_Reflection_usage_detailed.cypher) | Java | Query all types that use Java Reflection or "Class.forName" |
 | [Java_deprecated_element_usage.cypher](./Java/Java_deprecated_element_usage.cypher) | Java | Query deprecated type and member usage by non deprecated elements |
+| [Java_deprecated_element_usage_detailed.cypher](./Java/Java_deprecated_element_usage_detailed.cypher) | Java | List all non deprecated elements (types, members) that call deprecated elements |
 | [List_all_existing_artifacts.cypher](./List_all_existing_artifacts.cypher) |  | List all existing artifacts |
 | [Methods_1_Delete_Projection.cypher](./Method_Projection/Methods_1_Delete_Projection.cypher) | Method_Projection | Delete projection if existing. Variables: dependencies_projection |
 | [Methods_2_Create_Projection.cypher](./Method_Projection/Methods_2_Create_Projection.cypher) | Method_Projection | Create directed projection for methods. Variables: dependencies_projection, dependencies_projection_weight_property |
