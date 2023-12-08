@@ -76,7 +76,7 @@ topologicalSort() {
     # Stream to CSV
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
-    execute_cypher "${TOPOLOGICAL_SORT_DIR}/Topological_Sort_Query.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Topolical_Sort.csv"
+    execute_cypher "${TOPOLOGICAL_SORT_DIR}/Topological_Sort_Query.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Topological_Sort.csv"
 }
 
 # ---------------------------------------------------------------
