@@ -10,8 +10,8 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 - Analyze static Java code structure as a graph
 - Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
-- 130 CSV reports including dependencies, metrics, cycles, annotations, algorithms and many more
-- 9 Jupyter notebook reports including dependencies, metrics, visibility and many more
+- More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
+- Jupyter notebook reports for dependencies, metrics, visibility and many more
 - Graph structure visualization
 - Automated reference document generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
