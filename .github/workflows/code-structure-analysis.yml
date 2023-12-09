@@ -141,6 +141,7 @@ jobs:
         name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
         path: |
           ./temp/**/runtime/*
+          ./temp/**/reports/*
         retention-days: 5
 
     # Upload successful results in case they are needed for troubleshooting
