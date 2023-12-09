@@ -128,6 +128,4 @@ let browser;
     await takeCanvasScreenshots(browser, htmlFile);
   }
   console.log(`renderVisualizations.js: Successfully rendered ${htmlFiles.length} html file(s)`);
-})()
-  .catch((err) => console.error(err))
-  .finally(() => browser?.close());
+})().finally(() => browser?.close());
