@@ -13,7 +13,7 @@ console.log(`renderVisualizations.js: dirname=${__dirname}`);
 
 /**
  * Crops the image in the buffer so that there is no empty frame around it.
- * @param {Buffer} buffer 
+ * @param {Buffer} buffer
  * @returns Buffer
  */
 const autoCropImageBuffer = async (buffer) => {
@@ -32,18 +32,51 @@ const autoCropImageBuffer = async (buffer) => {
 const camelToKebabCase = (str) => str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 
 /**
+ * Take a screenshot after an error happened.
+ *
+ * @param {string} htmlFilename
+ * @param {string} reason
+ */
+const makeScreenshotOfError = async (page, htmlFilename, reason) => {
+  const reportName = basename(htmlFilename, ".html");
+  const directoryName = camelToKebabCase(reportName);
+  console.log(`Taking an error screenshot of report ${reportName}. Reason: ${reason}`);
+  await page.screenshot({ path: `./${directoryName}/error-${reportName}-${reason}.png`, omitBackground: false });
+};
+
+/**
+ * Handle a catched error by taking a screenshot.
+ *
+ * @param {string} htmlFilename
+ * @param {string} reason
+ * @return
+ */
+const handleErrorWithScreenshot = (page, htmlFilename, reason) => async (error) => {
+  await makeScreenshotOfError(page, htmlFilename, reason);
+  throw new Error(error);
+};
+/**
  * Creates a new page and takes a screenshot of all canvas tags that are contained within a div.
  * Note: Don't run this in parallel. See https://github.com/puppeteer/puppeteer/issues/1479
  * @param {Browser} browser
  * @param {string} htmlFilename
  */
 const takeCanvasScreenshots = async (browser, htmlFilename) => {
+  const reportName = basename(htmlFilename, ".html");
+  const directoryName = camelToKebabCase(reportName);
+  if (!existsSync(directoryName)) {
+    mkdirSync(directoryName);
+  }
+
   const page = await browser.newPage();
   await page.setViewport({ width: 1500, height: 1000, isMobile: false, isLandscape: true, hasTouch: false, deviceScaleFactor: 1 });
 
   console.log(`Loading ${htmlFilename}`);
   await page.goto(`file://${htmlFilename}`);
 
+  if (!process.env.NEO4J_INITIAL_PASSWORD) {
+    throw new Error("Missing environment variable NEO4J_INITIAL_PASSWORD");
+  }
   // Login with Neo4j server password from the environment variable NEO4J_INITIAL_PASSWORD
   const loginButton = await page.waitForSelector("#neo4j-server-login");
   await page.type("#neo4j-server-password", process.env.NEO4J_INITIAL_PASSWORD);
@@ -51,21 +84,18 @@ const takeCanvasScreenshots = async (browser, htmlFilename) => {
 
   // Wait for the graph visualization to be rendered onto a HTML5 canvas
   console.log(`Waiting for visualizations to be finished`);
-  await page.waitForSelector(".visualization-finished", { timeout: 90_000 });
+  await page
+    .waitForSelector(".visualization-finished", { timeout: 90_000 })
+    .catch(handleErrorWithScreenshot(page, htmlFilename, "visualization-did-not-finish"));
 
   // Get all HTML canvas tag elements
   const canvasElements = await page.$$("canvas");
   if (canvasElements.length <= 0) {
-    console.error(`No elements with CSS selector 'canvas' found in ${htmlFilename}`);
+    await makeScreenshotOfError(page, htmlFilename, "no-canvas-found");
   }
   console.log(`Found ${canvasElements.length} visualizations`);
 
   // Take a png screenshot of every canvas element and save them with increasing indices
-  const reportName = basename(htmlFilename, ".html");
-  const directoryName = camelToKebabCase(reportName);
-  if (!existsSync(directoryName)) {
-    mkdirSync(directoryName);
-  }
   await Promise.all(
     Array.from(canvasElements).map(async (canvasElement, index) => {
       console.log(`Exporting image ${reportName}-${index}.png...`);
@@ -74,10 +104,8 @@ const takeCanvasScreenshots = async (browser, htmlFilename) => {
       }, canvasElement);
       let data = Buffer.from(dataUrl.split(",").pop(), "base64");
       console.log(`Cropping image ${reportName}-${index}.png...`);
-      data = await autoCropImageBuffer(data);
+      data = await autoCropImageBuffer(data).catch(handleErrorWithScreenshot(page, htmlFilename, `failed-to-crop-image-${index}`));
       writeFileSync(`./${directoryName}/${reportName}-${index}.png`, data);
-      // console.log(`Taking screenshot ${reportName} of canvas ${index} in ${htmlFilename} of element...`);
-      // await canvasElement.screenshot({ path: `./${directoryName}/${reportName}-${index}.png`, omitBackground: true });
     })
   );
 };
@@ -89,13 +117,13 @@ let browser;
  * and takes a screenshot of the canvas elements using {@link takeCanvasScreenshots}.
  */
 (async () => {
-  console.log('renderVisualizations.js: Starting headless browser...');
+  console.log("renderVisualizations.js: Starting headless browser...");
   browser = await puppeteer.launch({ headless: "new" }); // { headless: false } for testing
 
   // Get all *.html files in this (script) directory and its subdirectories
-  // The separate filter is needed to ignore the "node_modules" directory. 
+  // The separate filter is needed to ignore the "node_modules" directory.
   // Glob's build-in filter doesn't seem to work on Windows.
-  const htmlFiles = globSync(`${__dirname}/**/*.html`, { absolute: true }).filter(file => !file.includes('node_modules'));
+  const htmlFiles = globSync(`${__dirname}/**/*.html`, { absolute: true }).filter((file) => !file.includes("node_modules"));
   for (const htmlFile of htmlFiles) {
     await takeCanvasScreenshots(browser, htmlFile);
   }
