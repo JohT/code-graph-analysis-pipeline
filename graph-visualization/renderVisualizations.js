@@ -69,6 +69,7 @@ const takeCanvasScreenshots = async (browser, htmlFilename) => {
   }
 
   const page = await browser.newPage();
+  page.on("requestfailed", (request) => console.log(`${request.failure().errorText} ${request.url()}`));
   await page.setViewport({ width: 1500, height: 1000, isMobile: false, isLandscape: true, hasTouch: false, deviceScaleFactor: 1 });
 
   console.log(`Loading ${htmlFilename}`);
@@ -118,7 +119,7 @@ let browser;
  */
 (async () => {
   console.log("renderVisualizations.js: Starting headless browser...");
-  browser = await puppeteer.launch({ headless: "new" }); // { headless: false } for testing
+  browser = await puppeteer.launch({ headless: "new", dumpio: true }); // { headless: false } for testing
 
   // Get all *.html files in this (script) directory and its subdirectories
   // The separate filter is needed to ignore the "node_modules" directory.
