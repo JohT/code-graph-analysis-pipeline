@@ -119,7 +119,26 @@ let browser;
  */
 (async () => {
   console.log("renderVisualizations.js: Starting headless browser...");
-  browser = await puppeteer.launch({ headless: "new", dumpio: true }); // { headless: false } for testing
+  browser = await puppeteer.launch({
+    headless: "new",
+    dumpio: true,
+    args: [
+      "--enable-logging", 
+      "--disable-search-engine-choice-screen",
+      "--ash-no-nudges",
+      "--no-first-run",
+      "--no-default-browser-check",
+      "--hide-scrollbars",
+      "--disable-features=Translate",
+      "--disable-features=InterestFeedContentSuggestions",
+      "--disable-extensions",
+      "--disable-default-apps",
+      "--disable-component-extensions-with-background-pages",
+      "--disable-client-side-phishing-detection",
+      "--use-gl=disabled",
+      "--disable-features=Vulkan", 
+    ],
+  }); // { headless: false } for testing
 
   // Get all *.html files in this (script) directory and its subdirectories
   // The separate filter is needed to ignore the "node_modules" directory.
