@@ -15,11 +15,10 @@ set -o errexit -o pipefail
 REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
 echo "AllReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
 
-REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
-echo "AllReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
-
-# Run all report scripts
-for report_script_file in "${REPORTS_SCRIPT_DIR}"/*.sh; do 
-    echo "AllReports: Starting ${report_script_file}..."; 
-    source "${report_script_file}"
-done
+# The reports will not be generically searched as files anymore
+# but will be processed in order. Especially the visualization
+# needs to be done as a last step to be able to use properties
+# and data written to the Graph in the CsvReports.
+source "${REPORT_COMPILATIONS_SCRIPT_DIR}/CsvReports.sh"
+source "${REPORT_COMPILATIONS_SCRIPT_DIR}/JupyterReports.sh"
+source "${REPORT_COMPILATIONS_SCRIPT_DIR}/VisualizationReports.sh"
