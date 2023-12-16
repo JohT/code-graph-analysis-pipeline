@@ -6,15 +6,24 @@ This file was generated with the script [generateMarkdownReference.sh](./../scri
 
 Report | Analysis | Description
 -------|----------|------------
-| [ArtifactDependencies.md](./AxonFramework-4.7.5/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.7.5 | Artifact Dependencies |
-| [ExternalDependencies.md](./AxonFramework-4.7.5/external-dependencies/ExternalDependencies.md) | AxonFramework-4.7.5 | External Dependencies |
-| [InternalDependencies.md](./AxonFramework-4.7.5/internal-dependencies/InternalDependencies.md) | AxonFramework-4.7.5 | Internal Dependencies |
-| [MethodMetrics.md](./AxonFramework-4.7.5/method-metrics/MethodMetrics.md) | AxonFramework-4.7.5 | Method Metrics |
-| [NodeEmbeddings.md](./AxonFramework-4.7.5/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.7.5 | Node Embeddings |
-| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.7.5/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.7.5 | Object Oriented Design Quality Metrics |
-| [Overview.md](./AxonFramework-4.7.5/overview/Overview.md) | AxonFramework-4.7.5 | Overview |
-| [VisibilityMetrics.md](./AxonFramework-4.7.5/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.7.5 | Visibility Metrics |
-| [Wordcloud.md](./AxonFramework-4.7.5/wordcloud/Wordcloud.md) | AxonFramework-4.7.5 | Wordcloud |
+| [ArtifactDependencies.md](./AxonFramework-4.6.8/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.6.8 | Artifact Dependencies |
+| [ExternalDependencies.md](./AxonFramework-4.6.8/external-dependencies/ExternalDependencies.md) | AxonFramework-4.6.8 | External Dependencies |
+| [InternalDependencies.md](./AxonFramework-4.6.8/internal-dependencies/InternalDependencies.md) | AxonFramework-4.6.8 | Internal Dependencies |
+| [MethodMetrics.md](./AxonFramework-4.6.8/method-metrics/MethodMetrics.md) | AxonFramework-4.6.8 | Method Metrics |
+| [NodeEmbeddings.md](./AxonFramework-4.6.8/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.6.8 | Node Embeddings |
+| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.6.8/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.6.8 | Object Oriented Design Quality Metrics |
+| [Overview.md](./AxonFramework-4.6.8/overview/Overview.md) | AxonFramework-4.6.8 | Overview |
+| [VisibilityMetrics.md](./AxonFramework-4.6.8/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.6.8 | Visibility Metrics |
+| [Wordcloud.md](./AxonFramework-4.6.8/wordcloud/Wordcloud.md) | AxonFramework-4.6.8 | Wordcloud |
+| [ArtifactDependencies.md](./AxonFramework-4.7.6/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.7.6 | Artifact Dependencies |
+| [ExternalDependencies.md](./AxonFramework-4.7.6/external-dependencies/ExternalDependencies.md) | AxonFramework-4.7.6 | External Dependencies |
+| [InternalDependencies.md](./AxonFramework-4.7.6/internal-dependencies/InternalDependencies.md) | AxonFramework-4.7.6 | Internal Dependencies |
+| [MethodMetrics.md](./AxonFramework-4.7.6/method-metrics/MethodMetrics.md) | AxonFramework-4.7.6 | Method Metrics |
+| [NodeEmbeddings.md](./AxonFramework-4.7.6/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.7.6 | Node Embeddings |
+| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.7.6/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.7.6 | Object Oriented Design Quality Metrics |
+| [Overview.md](./AxonFramework-4.7.6/overview/Overview.md) | AxonFramework-4.7.6 | Overview |
+| [VisibilityMetrics.md](./AxonFramework-4.7.6/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.7.6 | Visibility Metrics |
+| [Wordcloud.md](./AxonFramework-4.7.6/wordcloud/Wordcloud.md) | AxonFramework-4.7.6 | Wordcloud |
 | [ArtifactDependencies.md](./AxonFramework-4.8.0/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.8.0 | Artifact Dependencies |
 | [ExternalDependencies.md](./AxonFramework-4.8.0/external-dependencies/ExternalDependencies.md) | AxonFramework-4.8.0 | External Dependencies |
 | [InternalDependencies.md](./AxonFramework-4.8.0/internal-dependencies/InternalDependencies.md) | AxonFramework-4.8.0 | Internal Dependencies |
@@ -24,6 +33,15 @@ Report | Analysis | Description
 | [Overview.md](./AxonFramework-4.8.0/overview/Overview.md) | AxonFramework-4.8.0 | Overview |
 | [VisibilityMetrics.md](./AxonFramework-4.8.0/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.8.0 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.8.0/wordcloud/Wordcloud.md) | AxonFramework-4.8.0 | Wordcloud |
+| [ArtifactDependencies.md](./AxonFramework-4.8.3/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.8.3 | Artifact Dependencies |
+| [ExternalDependencies.md](./AxonFramework-4.8.3/external-dependencies/ExternalDependencies.md) | AxonFramework-4.8.3 | External Dependencies |
+| [InternalDependencies.md](./AxonFramework-4.8.3/internal-dependencies/InternalDependencies.md) | AxonFramework-4.8.3 | Internal Dependencies |
+| [MethodMetrics.md](./AxonFramework-4.8.3/method-metrics/MethodMetrics.md) | AxonFramework-4.8.3 | Method Metrics |
+| [NodeEmbeddings.md](./AxonFramework-4.8.3/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.8.3 | Node Embeddings |
+| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.8.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.8.3 | Object Oriented Design Quality Metrics |
+| [Overview.md](./AxonFramework-4.8.3/overview/Overview.md) | AxonFramework-4.8.3 | Overview |
+| [VisibilityMetrics.md](./AxonFramework-4.8.3/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.8.3 | Visibility Metrics |
+| [Wordcloud.md](./AxonFramework-4.8.3/wordcloud/Wordcloud.md) | AxonFramework-4.8.3 | Wordcloud |
 | [ArtifactDependencies.md](./AxonFramework-4.9.0/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.9.0 | Artifact Dependencies |
 | [ExternalDependencies.md](./AxonFramework-4.9.0/external-dependencies/ExternalDependencies.md) | AxonFramework-4.9.0 | External Dependencies |
 | [InternalDependencies.md](./AxonFramework-4.9.0/internal-dependencies/InternalDependencies.md) | AxonFramework-4.9.0 | Internal Dependencies |

@@ -1,0 +1,2 @@
+"firstCommunityId","communityId","intermediateCommunityIds","memberCount","memberNames","Source Cypher File: Community_Detection/Community_Detection_1d_Stream_Intermediate_Mutated.cypher"
+3,3,"3",6,"/axon-test-4.6.8.jar,/axon-disruptor-4.6.8.jar,/axon-modelling-4.6.8.jar,/axon-messaging-4.6.8.jar,/axon-eventsourcing-4.6.8.jar,/axon-configuration-4.6.8.jar",""
