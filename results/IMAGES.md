@@ -82,6 +82,7 @@ Image  | Analysis |
 | [VisibilityMetrics_17_2.png](./AxonFramework-4.9.0/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_17_2.png) | AxonFramework-4.9.0 |
 | [VisibilityMetrics_24_2.png](./AxonFramework-4.9.0/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_24_2.png) | AxonFramework-4.9.0 |
 | [Wordcloud_10_1.png](./AxonFramework-4.9.0/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | AxonFramework-4.9.0 |
+| [artifactDependenciesGraph-0.png](./AxonFramework-4.9.1/artifact-dependencies-graph/artifactDependenciesGraph-0.png) | AxonFramework-4.9.1 |
 | [ExternalDependencies_14_0.png](./AxonFramework-4.9.1/external-dependencies/ExternalDependencies_files/ExternalDependencies_14_0.png) | AxonFramework-4.9.1 |
 | [ExternalDependencies_17_0.png](./AxonFramework-4.9.1/external-dependencies/ExternalDependencies_files/ExternalDependencies_17_0.png) | AxonFramework-4.9.1 |
 | [ExternalDependencies_21_0.png](./AxonFramework-4.9.1/external-dependencies/ExternalDependencies_files/ExternalDependencies_21_0.png) | AxonFramework-4.9.1 |
