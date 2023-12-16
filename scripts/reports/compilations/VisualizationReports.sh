@@ -6,6 +6,7 @@
 # Therefore these reports will take longer and require more ressources than just plain database queries/procedures.
 
 # Requires reports/*.sh
+# Needs to run after reports/TopologySortCsv.sh that provides the property "topologicalSortIndex" to be queried.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail

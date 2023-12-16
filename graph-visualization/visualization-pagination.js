@@ -26,11 +26,14 @@ function paginatedGraphVisualization({
   /**
    * Marks the given element as finished when the visualization is completed.
    * @param {Element} indexedVisualizationElement
+   * @param {string} logDescription
    */
-  function markVisualizationAsFinished(indexedVisualizationElement) {
+  function markVisualizationAsFinished(indexedVisualizationElement, logDescription) {
     indexedVisualizationElement.classList.add(classOfFinishedVisualization);
     const unfinishedVisualizations = document.querySelectorAll(`.${classOfIndexedVisualizationElement}:not(.${classOfFinishedVisualization})`);
     if (unfinishedVisualizations.length === 0) {
+      console.debug(`${logDescription}: Last visualization finished on element ${JSON.stringify(indexedVisualizationElement)}.`);
+      console.debug(`${logDescription}: Mark whole visualization as finished on parent element ${JSON.stringify( indexedVisualizationElement.parentElement)}`);
       indexedVisualizationElement.parentElement.classList.add(classOfFinishedVisualization);
     }
   }
@@ -48,19 +51,23 @@ function paginatedGraphVisualization({
 
     neoViz.registerOnEvent(NeoVis.NeoVisEvents.CompletionEvent, (event) => {
       if (event.recordCount == 0) {
+        if (index=0) {
+          log.error('No query results. Nothing to visualize. Check the query and if the nodes and properties have been written.')
+        }
         indexedVisualizationContainer.remove(); // remove an empty canvas
-        markVisualizationAsFinished(indexedVisualizationContainer);
+        markVisualizationAsFinished(indexedVisualizationContainer, 'No query results (anymore)');
       } else {
         setTimeout(() => {
           neoViz.stabilize();
-          markVisualizationAsFinished(indexedVisualizationContainer);
+          markVisualizationAsFinished(indexedVisualizationContainer, 'Visualization stabilized');
         }, 5000);
       }
     });
     neoViz.registerOnEvent(NeoVis.NeoVisEvents.ErrorEvent, (event) => {
       indexedVisualizationContainer.classList.add(classOfFailedVisualization);
       indexedVisualizationContainer.textContent = event.error.message;
-      markVisualizationAsFinished(indexedVisualizationContainer);
+      console.error(`Visualization Error: ${JSON.stringify(event.error)}`)
+      markVisualizationAsFinished(indexedVisualizationContainer, 'Error event');
     });
     const parameters = {
       blockSize: recordsPerVisualization,

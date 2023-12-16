@@ -33,4 +33,6 @@ if [ ! -d "${GRAPH_VISUALIZATION_DIRECTORY}/node_modules" ] ; then
 fi
 
 # Execute the node.js script to render the graph visualizations as image files
-(cd "${REPORTS_DIRECTORY}" && exec node "${GRAPH_VISUALIZATION_DIRECTORY}/renderVisualizations.js")
+(cd "${REPORTS_DIRECTORY}" && exec node "${GRAPH_VISUALIZATION_DIRECTORY}/renderVisualizations.js") 
+
+echo "GraphVisualization: Successfully finished"
