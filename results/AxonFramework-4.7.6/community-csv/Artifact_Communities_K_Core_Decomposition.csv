@@ -1,0 +1,3 @@
+"propertyName","propertyValue","codeUnits","codeUnitNames","shortCodeUnitNames","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Grouped.cypher"
+"communityKCoreDecompositionValue",4,5,"/axon-modelling-4.7.6.jar,/axon-disruptor-4.7.6.jar,/axon-eventsourcing-4.7.6.jar,/axon-configuration-4.7.6.jar,/axon-messaging-4.7.6.jar","axon-modelling-4.7.6,axon-disruptor-4.7.6,axon-eventsourcing-4.7.6,axon-configuration-4.7.6,axon-messaging-4.7.6",""
+"communityKCoreDecompositionValue",3,1,"/axon-test-4.7.6.jar","axon-test-4.7.6",""
