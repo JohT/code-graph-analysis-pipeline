@@ -10,7 +10,7 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
-JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.9"} # Neo4j v5: 2.0.3 (june 2023), Neo4j v4: 1.12.2 (april 2023)
+JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.0.10"} # Neo4j v5: 2.0.3 (june 2023), Neo4j v4: 1.12.2 (april 2023)
 JQASSISTANT_CLI_DOWNLOAD_URL=${JQASSISTANT_CLI_DOWNLOAD_URL:-"https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli"} # Download URL for the jQAssistant CLI
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-distribution"} #  Neo4j v5: "jqassistant-commandline-distribution", Neo4j v4: "jqassistant-commandline-neo4jv3"
 JQASSISTANT_CLI_DISTRIBUTION=${JQASSISTANT_CLI_DISTRIBUTION:-"bin.zip"} #  Neo4j v5: "bin.zip", Neo4j v4: "distribution.zip"
