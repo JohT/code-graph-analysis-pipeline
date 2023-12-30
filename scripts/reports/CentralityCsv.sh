@@ -327,11 +327,10 @@ centralityWithHyperlinkInducedTopicSearchHITS() {
 
     # Statistics
     execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9a_Hyperlink_Induced_Topic_Search_HITS_Estimate.cypher" "${@}" "${writePropertyName}"
-    # Note: There is an issue in gds version 2.5.0-preview3: https://github.com/neo4j/graph-data-science/issues/285
-    #execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher" "${@}"
+    # Note: There was an issue in gds version 2.5.0-preview3 that is now resolved: https://github.com/neo4j/graph-data-science/issues/285
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher" "${@}"
     
     # Run the algorithm and write the result into the in-memory projection ("mutate")
-    # Note: There is an issue in gds version 2.5.0-preview3: https://github.com/neo4j/graph-data-science/issues/285
     execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Mutate.cypher" "${@}" "${writePropertyName}"
 
     # Stream to CSV
@@ -342,8 +341,8 @@ centralityWithHyperlinkInducedTopicSearchHITS() {
     #execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Hyperlink_Induced_Topic_Search_HITS.csv"
     
     # Update Graph (node properties and labels)
-    # Note: There is an issue in gds version 2.5.0-preview3: https://github.com/neo4j/graph-data-science/issues/285
-    #execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9e_Hyperlink_Induced_Topic_Search_HITS_Write.cypher" "${@}" "${writePropertyName}"
+    # Note: There was an issue in gds version 2.5.0-preview3 that is now resolved: https://github.com/neo4j/graph-data-science/issues/285
+    # execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_9e_Hyperlink_Induced_Topic_Search_HITS_Write.cypher" "${@}" "${writePropertyName}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}Authority"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}Hub"
     execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1c_Label_Delete.cypher" "${@}" "${writePropertyName}Authority"
