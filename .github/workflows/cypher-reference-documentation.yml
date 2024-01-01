@@ -33,7 +33,7 @@ jobs:
         ./../scripts/documentation/generateCypherReference.sh
 
     - name: Archive generated cypher reference document
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: cypher-reference-document
         path: ./cypher/CYPHER.md

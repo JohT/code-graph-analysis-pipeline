@@ -33,7 +33,7 @@ jobs:
         ./documentation/generateScriptReference.sh
 
     - name: Archive generated scripts reference document
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: scripts-reference-document
         path: ./scripts/SCRIPTS.md

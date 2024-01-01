@@ -136,7 +136,7 @@ jobs:
     # Upload logs and unfinished reports in case of an error for troubleshooting
     - name: Archive failed run with logs and unfinished results
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
         path: |
@@ -147,7 +147,7 @@ jobs:
     # Upload successful results in case they are needed for troubleshooting
     - name: Archive successful results
       if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
         path: ./results
