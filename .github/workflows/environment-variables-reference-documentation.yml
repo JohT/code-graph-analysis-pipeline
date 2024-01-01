@@ -33,7 +33,7 @@ jobs:
         ./documentation/generateEnvironmentVariableReference.sh
 
     - name: Archive generated environment variables reference document
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: environment-variables-reference-document
         path: ./scripts/ENVIRONMENT_VARIABLES.md
