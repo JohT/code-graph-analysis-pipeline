@@ -4,7 +4,7 @@
 "void assertThat(java.lang.Object,java.util.function.Predicate,java.util.function.Supplier)","assertThat","centralityArticleRank",0.20018465723557458,""
 "void assertNonEmpty(java.lang.String,java.lang.String)","assertNonEmpty","centralityArticleRank",0.0933718538806384,""
 "void closeQuietly(java.sql.Connection)","closeQuietly","centralityArticleRank",0.07110543705248439,""
-"void state(boolean,java.util.function.Supplier)","state","centralityArticleRank",0.0669057277707753,""
+"void state(boolean,java.util.function.Supplier)","state","centralityArticleRank",0.06690572777077529,""
 "void isTrue(boolean,java.util.function.Supplier)","isTrue","centralityArticleRank",0.05937231644668358,""
 "org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityArticleRank",0.055806540442010215,""
 "void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityArticleRank",0.04898206768407919,""

@@ -1299,7 +1299,7 @@
 0.4,"axon-messaging-4.9.1","org.axonframework.messaging.annotation.ScopeDescriptorParameterResolverFactory$ScopeDescriptorParameterResolver",1,6,"axon-messaging-4.9.1","org.axonframework.messaging.annotation.PayloadParameterResolver",1,2,""
 0.4,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.DeadLetterParameterResolverFactory$DeadLetterParameterResolver",1,5,"axon-messaging-4.9.1","org.axonframework.messaging.annotation.DefaultParameterResolverFactory$MetaDataParameterResolver",1,2,""
 0.4,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.EnqueueDecision",13,2,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.EnqueuePolicy",6,3,""
-0.4,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.EnqueuePolicy",6,3,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.SequencedDeadLetterProcessor",3,2,""
+0.4,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.EnqueuePolicy",6,3,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.EnqueueDecision",13,2,""
 0.4,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.SequencedDeadLetterProcessor",3,2,"axon-messaging-4.9.1","org.axonframework.messaging.deadletter.EnqueuePolicy",6,3,""
 0.4,"axon-messaging-4.9.1","org.axonframework.messaging.interceptors.BeanValidationInterceptor",,6,"axon-messaging-4.9.1","org.axonframework.messaging.interceptors.CorrelationDataInterceptor",2,5,""
 0.4,"axon-messaging-4.9.1","org.axonframework.messaging.interceptors.CorrelationDataInterceptor",2,5,"axon-messaging-4.9.1","org.axonframework.messaging.interceptors.BeanValidationInterceptor",,6,""
