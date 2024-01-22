@@ -74,7 +74,7 @@ jobs:
       run: npm ci
 
     - name: Setup Cache for Conda package manager Mambaforge
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       env:
         # Increase this value to reset cache if etc/example-environment.yml has not changed
         # Reference: https://github.com/conda-incubator/setup-miniconda#caching
@@ -105,7 +105,7 @@ jobs:
       run: mkdir -p ./temp
 
     - name: Setup Cache for "temp/downloads" folder
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ./temp/downloads
         key:
