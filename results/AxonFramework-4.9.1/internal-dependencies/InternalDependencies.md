@@ -2002,7 +2002,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <th>12</th>
       <td>org.axonframework.eventhandling.DomainEventMes...</td>
       <td>10</td>
-      <td>[getAggregateIdentifier]</td>
+      <td>[getType]</td>
       <td>1</td>
       <td>4</td>
     </tr>
@@ -2010,7 +2010,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <th>13</th>
       <td>org.axonframework.eventhandling.DomainEventMes...</td>
       <td>10</td>
-      <td>[getType]</td>
+      <td>[getAggregateIdentifier]</td>
       <td>1</td>
       <td>4</td>
     </tr>
@@ -2630,9 +2630,9 @@ This table shows the top 30 types that only use a few (compared to all existing)
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-test-4.9.1</td>
+      <td>axon-modelling-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.test.matchers</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
       <td>org.axonframework.eventhandling</td>
       <td>1</td>
       <td>100</td>
@@ -2641,9 +2641,9 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-modelling-4.9.1</td>
+      <td>axon-test-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>org.axonframework.test.matchers</td>
       <td>org.axonframework.eventhandling</td>
       <td>1</td>
       <td>100</td>
@@ -2685,28 +2685,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>5</th>
-      <td>axon-test-4.9.1</td>
-      <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.test.eventscheduler</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>2</td>
-      <td>100</td>
-      <td>0.020000</td>
-      <td>[org.axonframework.eventhandling.EventMessage,...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>axon-eventsourcing-4.9.1</td>
-      <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>2</td>
-      <td>100</td>
-      <td>0.020000</td>
-      <td>[org.axonframework.eventhandling.DomainEventMe...</td>
-    </tr>
-    <tr>
-      <th>7</th>
       <td>axon-modelling-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.modelling.command</td>
@@ -2717,7 +2695,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.eventhandling.DomainEventSe...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>6</th>
       <td>axon-modelling-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.modelling.command.legacyjpa</td>
@@ -2726,6 +2704,28 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>100</td>
       <td>0.020000</td>
       <td>[org.axonframework.eventhandling.DomainEventSe...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>axon-test-4.9.1</td>
+      <td>axon-messaging-4.9.1</td>
+      <td>org.axonframework.test.eventscheduler</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>2</td>
+      <td>100</td>
+      <td>0.020000</td>
+      <td>[org.axonframework.eventhandling.EventMessage,...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-eventsourcing-4.9.1</td>
+      <td>axon-messaging-4.9.1</td>
+      <td>org.axonframework.eventsourcing.conflictresolu...</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>2</td>
+      <td>100</td>
+      <td>0.020000</td>
+      <td>[org.axonframework.eventhandling.DomainEventMe...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -2775,7 +2775,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <th>13</th>
       <td>axon-eventsourcing-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -2797,7 +2797,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <th>15</th>
       <td>axon-eventsourcing-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -2852,17 +2852,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <th>20</th>
       <td>axon-eventsourcing-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
-      <td>org.axonframework.common</td>
-      <td>1</td>
-      <td>28</td>
-      <td>0.035714</td>
-      <td>[org.axonframework.common.DateTimeUtils]</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>axon-eventsourcing-4.9.1</td>
-      <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.eventsourcing.snapshotting</td>
       <td>org.axonframework.common</td>
       <td>1</td>
@@ -2871,7 +2860,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.common.BuilderUtils]</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>21</th>
       <td>axon-test-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.test.eventscheduler</td>
@@ -2880,6 +2869,17 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>28</td>
       <td>0.035714</td>
       <td>[org.axonframework.common.DateTimeUtils]</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>axon-test-4.9.1</td>
+      <td>axon-messaging-4.9.1</td>
+      <td>org.axonframework.test.utils</td>
+      <td>org.axonframework.common</td>
+      <td>1</td>
+      <td>28</td>
+      <td>0.035714</td>
+      <td>[org.axonframework.common.Registration]</td>
     </tr>
     <tr>
       <th>23</th>
@@ -2905,6 +2905,17 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>25</th>
+      <td>axon-eventsourcing-4.9.1</td>
+      <td>axon-messaging-4.9.1</td>
+      <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
+      <td>org.axonframework.common</td>
+      <td>1</td>
+      <td>28</td>
+      <td>0.035714</td>
+      <td>[org.axonframework.common.DateTimeUtils]</td>
+    </tr>
+    <tr>
+      <th>26</th>
       <td>axon-modelling-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.modelling.command.legacyjpa</td>
@@ -2915,18 +2926,18 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.common.BuilderUtils]</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>axon-test-4.9.1</td>
-      <td>axon-messaging-4.9.1</td>
-      <td>org.axonframework.test.utils</td>
-      <td>org.axonframework.common</td>
-      <td>1</td>
-      <td>28</td>
-      <td>0.035714</td>
-      <td>[org.axonframework.common.Registration]</td>
+      <th>27</th>
+      <td>axon-eventsourcing-4.9.1</td>
+      <td>axon-modelling-4.9.1</td>
+      <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>2</td>
+      <td>54</td>
+      <td>0.037037</td>
+      <td>[org.axonframework.modelling.command.Concurren...</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>28</th>
       <td>axon-eventsourcing-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.eventsourcing.conflictresolu...</td>
@@ -2937,7 +2948,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.messaging.annotation.Parame...</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>29</th>
       <td>axon-modelling-4.9.1</td>
       <td>axon-messaging-4.9.1</td>
       <td>org.axonframework.modelling.command.legacyjpa</td>
@@ -2946,17 +2957,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>54</td>
       <td>0.037037</td>
       <td>[org.axonframework.messaging.annotation.Parame...</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>axon-eventsourcing-4.9.1</td>
-      <td>axon-modelling-4.9.1</td>
-      <td>org.axonframework.eventsourcing.eventstore</td>
-      <td>org.axonframework.modelling.command</td>
-      <td>2</td>
-      <td>54</td>
-      <td>0.037037</td>
-      <td>[org.axonframework.modelling.command.Concurren...</td>
     </tr>
   </tbody>
 </table>

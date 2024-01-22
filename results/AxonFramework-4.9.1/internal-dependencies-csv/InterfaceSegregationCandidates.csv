@@ -198,7 +198,7 @@
 "org.axonframework.modelling.command.AggregateAnnotationCommandHandler",6,"access$700,access$400",2,1,""
 "org.axonframework.modelling.command.AggregateAnnotationCommandHandler",6,"resolveReturnValue,access$400",2,1,""
 "org.axonframework.modelling.command.AggregateAnnotationCommandHandler",6,"subscribe,builder",2,1,""
-"org.axonframework.modelling.command.Repository",6,"loadOrCreate,newInstance,load",3,1,""
+"org.axonframework.modelling.command.Repository",6,"newInstance,load,loadOrCreate",3,1,""
 "org.axonframework.modelling.saga.repository.jpa.JpaSagaStore",6,"builder",1,1,""
 "org.axonframework.queryhandling.annotation.AnnotationQueryHandlerAdapter",6,"subscribe",1,1,""
 "org.axonframework.serialization.SimpleSerializedObject",6,"getData,getType,getContentType",3,1,""
