@@ -46,4 +46,6 @@ execute_cypher "${JAVA_CYPHER_DIR}/Java_deprecated_element_usage_detailed.cypher
 execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements.cypher" > "${FULL_REPORT_DIRECTORY}/AnnotatedCodeElements.csv"
 execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/AnnotatedCodeElementsPerArtifact.csv"
 
+execute_cypher "${JAVA_CYPHER_DIR}/JakartaEE_REST_Annotations.cypher" > "${FULL_REPORT_DIRECTORY}/JakartaEE_REST_Annotations.csv"
+
 echo "JavaCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
