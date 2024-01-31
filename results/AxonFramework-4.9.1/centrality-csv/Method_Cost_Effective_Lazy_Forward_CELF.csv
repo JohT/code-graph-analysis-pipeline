@@ -899,7 +899,6 @@
 "void deleteSaga(java.lang.Class,java.lang.String,java.util.Set)","deleteSaga","centralityCostEffectiveLazyForward",0,""
 "void deleteToken(java.lang.String,int)","deleteToken","centralityCostEffectiveLazyForward",0,""
 "void describe(java.util.List,org.hamcrest.Description)","describe","centralityCostEffectiveLazyForward",0,""
-"void describeTo(org.hamcrest.Description)","describeTo","centralityCostEffectiveLazyForward",0,""
 "void detectConflicts(java.util.function.Predicate)","detectConflicts","centralityCostEffectiveLazyForward",0,""
 "void detectConflicts(java.util.function.Predicate,org.axonframework.eventsourcing.conflictresolution.ConflictExceptionSupplier)","detectConflicts","centralityCostEffectiveLazyForward",0,""
 "void disconnect()","disconnect","centralityCostEffectiveLazyForward",0,""
