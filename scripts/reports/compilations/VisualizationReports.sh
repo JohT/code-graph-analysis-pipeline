@@ -3,7 +3,7 @@
 # Runs all Visualization reports.
 # It only consideres scripts in the "reports" directory (overridable with REPORTS_SCRIPT_DIR) one directory above this one.
 # These require node.js.
-# Therefore these reports will take longer and require more ressources than just plain database queries/procedures.
+# Therefore these reports will take longer and require more resources than just plain database queries/procedures.
 
 # Requires reports/*.sh
 # Needs to run after reports/TopologySortCsv.sh that provides the property "topologicalSortIndex" to be queried.
