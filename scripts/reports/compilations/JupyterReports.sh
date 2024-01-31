@@ -4,7 +4,7 @@
 # It only consideres scripts in the "reports" directory (overridable with REPORTS_SCRIPT_DIR) one directory above this one.
 # These require phython, conda (e.g. miniconda) as well as several packages.
 # For PDF generation chromium is required additionally.
-# Therefore these reports will take longer and require more ressources than just plain database queries/procedures.
+# Therefore these reports will take longer and require more resources than just plain database queries/procedures.
 
 # Requires reports/*.sh
 
