@@ -47,5 +47,6 @@ execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements.cypher" > "${FULL_REP
 execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/AnnotatedCodeElementsPerArtifact.csv"
 
 execute_cypher "${JAVA_CYPHER_DIR}/JakartaEE_REST_Annotations.cypher" > "${FULL_REPORT_DIRECTORY}/JakartaEE_REST_Annotations.csv"
+execute_cypher "${JAVA_CYPHER_DIR}/Spring_Web_Request_Annotations.cypher" > "${FULL_REPORT_DIRECTORY}/Spring_Web_Request_Annotations.csv"
 
 echo "JavaCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
