@@ -195,13 +195,7 @@ fi
 # Download and install the Neo4j plugin "Graph Data Science" (GDS)
 if [[ ${NEO4J_GDS_PLUGIN_EDITION} == "open" ]]; then
     neo4jGraphDataScienceDownloadUrl="https://github.com/JohT/open-graph-data-science-packaging/releases/download/v${NEO4J_OPEN_GDS_PLUGIN_VERSION}"
-    # TODO Maybe it would be a better solution to release open graph data science packages just with the major release version
-    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
-        neo4jGraphDataScienceNeo4jVersion="5.9.0"
-    else
-        neo4jGraphDataScienceNeo4jVersion="4.4.23"
-    fi
-    neo4jGraphDataScienceReleaseArtifact="open-graph-data-science-${NEO4J_OPEN_GDS_PLUGIN_VERSION}-for-neo4j-${neo4jGraphDataScienceNeo4jVersion}.jar"
+    neo4jGraphDataScienceReleaseArtifact="open-graph-data-science-${NEO4J_OPEN_GDS_PLUGIN_VERSION}-for-neo4j-${NEO4J_MAJOR_VERSION_NUMBER}.jar"
 else
     neo4jGraphDataScienceDownloadUrl="https://github.com/neo4j/graph-data-science/releases/download/${NEO4J_GDS_PLUGIN_VERSION}"
     neo4jGraphDataScienceReleaseArtifact="neo4j-graph-data-science-${NEO4J_GDS_PLUGIN_VERSION}-${NEO4J_GDS_PLUGIN_EDITION}.jar"
