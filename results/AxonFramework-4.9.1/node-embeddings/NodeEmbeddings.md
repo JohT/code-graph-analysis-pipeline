@@ -92,7 +92,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.080026</td>
       <td>axon-test-4.9.1</td>
-      <td>[0.2918349504470825, -0.025072962045669556, 0....</td>
+      <td>[0.08393055200576782, 0.21279335021972656, 0.1...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -100,7 +100,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.016234</td>
       <td>axon-test-4.9.1</td>
-      <td>[0.25596290826797485, -0.08176998049020767, 0....</td>
+      <td>[0.1174338161945343, 0.18242521584033966, 0.15...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -108,7 +108,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.033857</td>
       <td>axon-test-4.9.1</td>
-      <td>[0.27682146430015564, -0.032861240208148956, 0...</td>
+      <td>[0.07703667134046555, 0.2000320553779602, 0.15...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -116,7 +116,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.016234</td>
       <td>axon-test-4.9.1</td>
-      <td>[0.26446467638015747, -0.03989574313163757, 0....</td>
+      <td>[0.07380469143390656, 0.1928604692220688, 0.19...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.086s...
+    [t-SNE] Computed neighbors for 93 samples in 0.024s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.599552
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 47.249542
-    [t-SNE] KL divergence after 900 iterations: 0.056409
+    [t-SNE] Mean sigma: 0.570529
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 51.288090
+    [t-SNE] KL divergence after 850 iterations: 0.051738
 
 
 
@@ -180,8 +180,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.9.1</td>
       <td>0</td>
       <td>0.080026</td>
-      <td>4.781836</td>
-      <td>-1.897516</td>
+      <td>5.612916</td>
+      <td>5.899832</td>
     </tr>
     <tr>
       <th>1</th>
@@ -189,8 +189,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.9.1</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>5.169194</td>
-      <td>-1.581888</td>
+      <td>5.882976</td>
+      <td>5.787358</td>
     </tr>
     <tr>
       <th>2</th>
@@ -198,8 +198,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.9.1</td>
       <td>0</td>
       <td>0.033857</td>
-      <td>4.726551</td>
-      <td>-1.552492</td>
+      <td>5.862032</td>
+      <td>5.815067</td>
     </tr>
     <tr>
       <th>3</th>
@@ -207,8 +207,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.9.1</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>4.692797</td>
-      <td>-1.589250</td>
+      <td>5.911063</td>
+      <td>6.172715</td>
     </tr>
     <tr>
       <th>4</th>
@@ -216,8 +216,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-test-4.9.1</td>
       <td>1</td>
       <td>0.016234</td>
-      <td>3.485007</td>
-      <td>1.083403</td>
+      <td>8.452803</td>
+      <td>5.020557</td>
     </tr>
   </tbody>
 </table>
