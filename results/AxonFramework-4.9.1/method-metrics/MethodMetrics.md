@@ -2052,7 +2052,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>277</td>
       <td>194</td>
       <td>6</td>
-      <td>instantiateAssociationResolver</td>
+      <td>handle</td>
     </tr>
     <tr>
       <th>11</th>
@@ -2142,7 +2142,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>191</td>
       <td>108</td>
       <td>8</td>
-      <td>matchesList</td>
+      <td>matchingFields</td>
     </tr>
     <tr>
       <th>31</th>
