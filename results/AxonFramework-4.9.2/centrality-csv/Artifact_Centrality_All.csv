@@ -1,0 +1,7 @@
+"name","shortName","pageRank","articleRank","betweenness","costEffectiveLazyForward","harmonicCloseness","closeness","hyperlinkInducedTopicSearchAuthority","hyperlinkInducedTopicSearchHub","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_10_Summary.cypher"
+"/axon-configuration-4.9.2.jar","axon-configuration-4.9.2",0.17349249045040177,0.17458255907958278,0,1.45,0,0,0,0.5585580106036322,0,4,""
+"/axon-modelling-4.9.2.jar","axon-modelling-4.9.2",0.2656364109934899,0.2664096508079405,0,0.9199999999999999,0.8,0.8,0.5823953999804579,0.19194138600788554,4,1,""
+"/axon-messaging-4.9.2.jar","axon-messaging-4.9.2",0.891313488046944,0.8902297714626831,0,0,1,1,0.6399635184733874,0,5,0,""
+"/axon-eventsourcing-4.9.2.jar","axon-eventsourcing-4.9.2",0.211072054965073,0.21197049753624264,0.5,0.9000000000000004,0.6,0.6,0.4724377211016632,0.3666166245957466,3,2,""
+"/axon-test-4.9.2.jar","axon-test-4.9.2",0.17349249045040177,0.17458255907958278,0,1.0000000000000002,0,0,0,0.5083127500357955,0,3,""
+"/axon-disruptor-4.9.2.jar","axon-disruptor-4.9.2",0.17391625084374326,0.175006343492389,3,0.9199999999999999,0.2,0.2,0.1675257973717242,0.5083127500357955,1,3,""
