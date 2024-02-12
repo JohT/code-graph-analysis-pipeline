@@ -92,7 +92,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.062492</td>
       <td>axon-messaging-4.9.2</td>
-      <td>[-0.022292155772447586, 0.37211525440216064, 0...</td>
+      <td>[0.3669738471508026, 0.1478676199913025, -0.03...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -100,7 +100,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.019602</td>
       <td>axon-messaging-4.9.2</td>
-      <td>[-0.06166955456137657, 0.3806968629360199, 0.3...</td>
+      <td>[0.4117594361305237, 0.1504957675933838, -0.02...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -108,7 +108,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.028509</td>
       <td>axon-messaging-4.9.2</td>
-      <td>[-0.005785259883850813, 0.3588583469390869, 0....</td>
+      <td>[0.3224855363368988, 0.048177432268857956, 0.0...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -116,7 +116,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.018051</td>
       <td>axon-messaging-4.9.2</td>
-      <td>[0.05052007734775543, 0.35947757959365845, 0.2...</td>
+      <td>[0.2529202997684479, 0.11035385727882385, 0.06...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -124,7 +124,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>0</td>
       <td>0.016234</td>
       <td>axon-messaging-4.9.2</td>
-      <td>[-0.028438188135623932, 0.39108672738075256, 0...</td>
+      <td>[0.4403724670410156, 0.12706738710403442, 0.01...</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.030s...
+    [t-SNE] Computed neighbors for 93 samples in 0.023s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.593917
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.770294
-    [t-SNE] KL divergence after 1000 iterations: 0.059756
+    [t-SNE] Mean sigma: 0.597538
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.064270
+    [t-SNE] KL divergence after 1000 iterations: 0.052596
 
 
 
@@ -180,8 +180,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-messaging-4.9.2</td>
       <td>0</td>
       <td>0.062492</td>
-      <td>1.928571</td>
-      <td>7.774081</td>
+      <td>-0.877457</td>
+      <td>7.006725</td>
     </tr>
     <tr>
       <th>1</th>
@@ -189,8 +189,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-messaging-4.9.2</td>
       <td>0</td>
       <td>0.019602</td>
-      <td>2.339262</td>
-      <td>8.477276</td>
+      <td>-0.554192</td>
+      <td>7.948486</td>
     </tr>
     <tr>
       <th>2</th>
@@ -198,8 +198,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-messaging-4.9.2</td>
       <td>0</td>
       <td>0.028509</td>
-      <td>1.955720</td>
-      <td>7.452811</td>
+      <td>-1.436433</td>
+      <td>7.215178</td>
     </tr>
     <tr>
       <th>3</th>
@@ -207,8 +207,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-messaging-4.9.2</td>
       <td>0</td>
       <td>0.018051</td>
-      <td>2.445948</td>
-      <td>8.008995</td>
+      <td>-1.071239</td>
+      <td>7.862156</td>
     </tr>
     <tr>
       <th>4</th>
@@ -216,8 +216,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-messaging-4.9.2</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>2.080626</td>
-      <td>8.155166</td>
+      <td>-0.733847</td>
+      <td>7.426977</td>
     </tr>
   </tbody>
 </table>

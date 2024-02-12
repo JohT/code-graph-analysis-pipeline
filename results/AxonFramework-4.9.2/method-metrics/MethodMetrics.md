@@ -1092,7 +1092,7 @@ The following table shows the top 30 packages with the highest effective lines o
       <td>348</td>
       <td>156</td>
       <td>13</td>
-      <td>defaultHeaders</td>
+      <td>describeTo</td>
     </tr>
     <tr>
       <th>28</th>
@@ -2043,7 +2043,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>285</td>
       <td>181</td>
       <td>7</td>
-      <td>calculateRoute</td>
+      <td>equals</td>
     </tr>
     <tr>
       <th>18</th>
@@ -2052,7 +2052,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>277</td>
       <td>194</td>
       <td>6</td>
-      <td>equals</td>
+      <td>instantiateAssociationResolver</td>
     </tr>
     <tr>
       <th>11</th>
@@ -2061,7 +2061,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>274</td>
       <td>184</td>
       <td>8</td>
-      <td>onResult</td>
+      <td>doDispatch</td>
     </tr>
     <tr>
       <th>13</th>
@@ -2115,7 +2115,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>209</td>
       <td>156</td>
       <td>4</td>
-      <td>equals</td>
+      <td>resolveDetails</td>
     </tr>
     <tr>
       <th>25</th>
@@ -2142,7 +2142,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>191</td>
       <td>108</td>
       <td>8</td>
-      <td>matchingFields</td>
+      <td>matchesList</td>
     </tr>
     <tr>
       <th>31</th>
@@ -2187,7 +2187,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>155</td>
       <td>101</td>
       <td>8</td>
-      <td>loadKeyViolationCodes</td>
+      <td>withGapsCleaned</td>
     </tr>
   </tbody>
 </table>
@@ -2383,7 +2383,7 @@ The following table shows the top 30 packages containing the methods with the hi
       <td>28</td>
       <td>axon-messaging-4.9.2</td>
       <td>org.axonframework.deadline.dbscheduler</td>
-      <td>DbSchedulerBinaryDeadlineDetails</td>
+      <td>DbSchedulerHumanReadableDeadlineDetails</td>
       <td>equals</td>
       <td>11</td>
     </tr>
