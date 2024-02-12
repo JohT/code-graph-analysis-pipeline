@@ -18,7 +18,7 @@
 "org.axonframework.queryhandling","queryhandling","centralityPageRank",0.04912091248497908,""
 "org.axonframework.eventhandling.tokenstore","tokenstore","centralityPageRank",0.04608201333877249,""
 "org.axonframework.eventsourcing.conflictresolution","conflictresolution","centralityPageRank",0.044084710601396425,""
-"org.axonframework.tracing","tracing","centralityPageRank",0.04340902569351488,""
+"org.axonframework.tracing","tracing","centralityPageRank",0.043409025693514874,""
 "org.axonframework.eventsourcing.eventstore.jdbc","jdbc","centralityPageRank",0.041253868366675626,""
 "org.axonframework.test.matchers","matchers","centralityPageRank",0.03385699069961874,""
 "org.axonframework.deadline","deadline","centralityPageRank",0.032892416398674976,""
