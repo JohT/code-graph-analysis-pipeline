@@ -5,6 +5,7 @@
 # CAUTION: This script deletes all relationships and nodes in the Neo4j Graph Database. 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD is required to login to Neo4j.
 
+# Requires findTypescriptDataFiles.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -65,10 +66,12 @@ else
     echo "resetAndScan: jQAssistant configuration won't be changed since it already exists."
 fi
 
-# Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
-echo "resetAndScan: Scanning ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
+directoriesAndFilesToScan="${ARTIFACTS_DIRECTORY} $(source ${SCRIPTS_DIR}/findTypescriptDataFiles.sh)"
 
-"${JQASSISTANT_BIN}"/jqassistant.sh scan -f ./${ARTIFACTS_DIRECTORY}
+# Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
+echo "resetAndScan: Using jQAssistant CLI version ${JQASSISTANT_CLI_VERSION} to scan: ${directoriesAndFilesToScan}"
+
+"${JQASSISTANT_BIN}"/jqassistant.sh scan -f ./${directoriesAndFilesToScan}
 
 # Use jQAssistant to add dependencies between artifacts, package dependencies, artifact dependencies and the java version to the Neo4j Graph Database
 echo "resetAndScan: Analyzing ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"

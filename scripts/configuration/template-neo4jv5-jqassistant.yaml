@@ -26,6 +26,10 @@ jqassistant:
   #    version:
   #    classifier:
   #    type:
+  plugins:
+    - group-id: org.jqassistant.plugin.typescript
+      artifact-id: jqassistant-typescript-plugin
+      version: 1.0.0-RC1
 
   # The store configuration
   store:
