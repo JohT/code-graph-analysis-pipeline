@@ -32,8 +32,7 @@ echo "resetAndScan: SCRIPTS_DIR=${SCRIPTS_DIR}"
 # Internal constants
 JQASSISTANT_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_BIN="${JQASSISTANT_DIRECTORY}/bin"
-#JQASSISTANT_NEO4J_OPTIONS="-D jqassistant.store.uri=${NEO4J_BOLT_URI} -D jqassistant.store.remote.username=${NEO4J_USER} -D jqassistant.store.remote.password=${NEO4J_INITIAL_PASSWORD}"
-#JQASSISTANT_NEO4J_OPTIONS=-configurationLocations "${JQASSISTANT_CONFIG}/.jqassistant.yaml"
+JQASSISTANT_CONFIG_TEMPLATE_PATH="${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -55,9 +54,16 @@ else
     echo "resetAndScan: Using jQAssistant binary directory ${JQASSISTANT_BIN}"
 fi
 
-# Create jQAssistant configuration YAML file by copying a template for it
+# Create jQAssistant configuration YAML file by copying it from a corresponding template
 mkdir -p "./.jqassistant"
-cp "${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}" "./.jqassistant/"
+
+echo "resetAndScan: Check if ./.jqassistant/${JQASSISTANT_CONFIG_TEMPLATE} needs to be copied."
+if [ ! -f "./.jqassistant/${JQASSISTANT_CONFIG_TEMPLATE}" ]; then
+    cp "${JQASSISTANT_CONFIG_TEMPLATE_PATH}" "./.jqassistant/"
+    echo "resetAndScan: jQAssistant configuration copied from configuration template"
+else
+    echo "resetAndScan: jQAssistant configuration won't be changed since it already exists."
+fi
 
 # Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
 echo "resetAndScan: Scanning ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
