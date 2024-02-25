@@ -7,7 +7,7 @@
 # The reports (csv files) will be written into the sub directory reports/topology-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -33,6 +33,9 @@ echo "topologicalSortCsv: CYPHER_DIR=$CYPHER_DIR"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
 # Create report directory
 REPORT_NAME="topology-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
@@ -51,11 +54,13 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 #   Name of the node property that contains the dependency weight. Example: "weight"
 createProjection() {
     local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
-
+    local projectionResult
+    
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Apply the algorithm "Topological Sort".
@@ -88,9 +93,11 @@ ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Artifact Topology
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-time topologicalSort "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-
+if createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+    time topologicalSort "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+else
+    echo "topologicalSortCsv: No data. Artifact analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Package Query Parameters
@@ -100,9 +107,11 @@ PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterface
 
 # Package Topology
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-time topologicalSort "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-
+if createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+    time topologicalSort "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+else
+    echo "topologicalSortCsv: No data. Package analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Type Query Parameters
@@ -112,7 +121,11 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Topology
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-time topologicalSort "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+if createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
+    time topologicalSort "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+else
+    echo "topologicalSortCsv: No data. Type analysis skipped."
+fi
+# ---------------------------------------------------------------
 
-echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
+echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
