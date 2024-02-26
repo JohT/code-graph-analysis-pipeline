@@ -14,13 +14,14 @@ set -o errexit -o pipefail
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
-echo "resetAndScanChanged SCRIPTS_DIR=$SCRIPTS_DIR"
+echo "resetAndScanChanged SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Scan and analyze Artifacts when they were changed
-changeDetectionReturnCode=$( source "$SCRIPTS_DIR/detectChangedArtifacts.sh" )
+changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedArtifacts.sh" --readonly)
 if [[ "${changeDetectionReturnCode}" == "0" ]] ; then
     echo "resetAndScanChanged: Artifacts unchanged. Scan skipped."
 else
     echo "resetAndScanChanged: Detected change (${changeDetectionReturnCode}). Resetting database and scanning artifacts."
     source "${SCRIPTS_DIR}/resetAndScan.sh"
+    changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedArtifacts.sh")
 fi
