@@ -47,9 +47,10 @@ fi
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_index_for_full_qualified_type_name.cypher"
 
-# Preparation - Create DEPENDS_ON for every DEPENDS_ON_PACKAGE relationship
-execute_cypher_expect_results "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher"
-execute_cypher_expect_results "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher"
+# Preparation - Create DEPENDS_ON for every DEPENDS_ON_* relationship
+# Workaround for https://github.com/jQAssistant/jqa-java-plugin/issues/44
+# execute_cypher "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher"
+# execute_cypher "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher"
 
 # Preparation - Add weights to package DEPENDS_ON relationships 
 execute_cypher_expect_results "${PACKAGE_WEIGHTS_CYPHER_DIR}/Add_weight_property_for_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
