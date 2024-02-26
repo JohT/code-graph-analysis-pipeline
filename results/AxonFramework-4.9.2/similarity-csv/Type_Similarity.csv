@@ -2409,7 +2409,7 @@
 0.21487603305785125,"axon-messaging-4.9.2","org.axonframework.queryhandling.DefaultQueryGateway",2,21,"axon-messaging-4.9.2","org.axonframework.queryhandling.QueryBus",9,13,""
 0.21487603305785125,"axon-messaging-4.9.2","org.axonframework.queryhandling.QueryBus",9,13,"axon-messaging-4.9.2","org.axonframework.queryhandling.DefaultQueryGateway",2,21,""
 0.21428571428571427,"axon-configuration-4.9.2","org.axonframework.config.Component",5,3,"axon-configuration-4.9.2","org.axonframework.config.Configuration$1",1,3,""
-0.21428571428571427,"axon-configuration-4.9.2","org.axonframework.config.LifecycleHandlerInspector$1",1,4,"axon-messaging-4.9.2","org.axonframework.lifecycle.Lifecycle",15,2,""
+0.21428571428571427,"axon-configuration-4.9.2","org.axonframework.config.LifecycleHandlerInspector$1",1,4,"axon-messaging-4.9.2","org.axonframework.lifecycle.Lifecycle$LifecycleRegistry",19,1,""
 0.21428571428571427,"axon-messaging-4.9.2","org.axonframework.eventhandling.MultiStreamableMessageSource$MultiSourceBlockingStream",1,6,"axon-messaging-4.9.2","org.axonframework.eventhandling.TrackingEventProcessor$WrappedMessageStream",1,3,""
 0.21428571428571427,"axon-messaging-4.9.2","org.axonframework.eventhandling.TrackedDomainEventData",3,4,"axon-eventsourcing-4.9.2","org.axonframework.eventsourcing.eventstore.EqualRevisionPredicate",,5,""
 0.21428571428571427,"axon-messaging-4.9.2","org.axonframework.eventhandling.TrackingEventProcessor$WrappedMessageStream",1,3,"axon-messaging-4.9.2","org.axonframework.eventhandling.MultiStreamableMessageSource$MultiSourceBlockingStream",1,6,""
