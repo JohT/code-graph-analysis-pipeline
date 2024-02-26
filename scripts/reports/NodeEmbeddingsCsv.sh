@@ -6,7 +6,7 @@
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -32,6 +32,9 @@ echo "nodeEmbeddingsCsv: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
 # Create report directory
 REPORT_NAME="node-embeddings-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
@@ -50,11 +53,13 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 #   Name of the node property that contains the dependency weight. Example: "weight"
 createUndirectedProjection() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4_Create_Undirected_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Node Embeddings Preparation: Create a directed in-memory Graph.
@@ -100,9 +105,11 @@ createDirectedTypeProjection() {
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
 createUndirectedTypeProjection() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Node Embeddings using Fast Random Projection
@@ -218,12 +225,15 @@ ARTIFACT_DIMENSIONS="dependencies_projection_embedding_dimension=16"
 
 # Artifact Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-createUndirectedProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-time nodeEmbeddingsWithFastRandomProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-
-createDirectedProjection "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
+if createUndirectedProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+    time nodeEmbeddingsWithFastRandomProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
+    time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
+    
+    createDirectedProjection "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+    time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
+else
+    echo "nodeEmbeddingsCsv: No data. Artifact analysis skipped."
+fi
 
 # ---------------------------------------------------------------
 
@@ -236,13 +246,15 @@ PACKAGE_DIMENSIONS="dependencies_projection_embedding_dimension=32"
 
 # Package Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-createUndirectedProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-time nodeEmbeddingsWithFastRandomProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
+if createUndirectedProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+    time nodeEmbeddingsWithFastRandomProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
+    time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
 
-createDirectedProjection "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-
+    createDirectedProjection "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+    time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
+else
+    echo "nodeEmbeddingsCsv: No data. Package analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Type Query Parameters
@@ -254,11 +266,15 @@ TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
 
 # Type Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createUndirectedTypeProjection "${TYPE_PROJECTION}"
-time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
-time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+if createUndirectedTypeProjection "${TYPE_PROJECTION}"; then
+    time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+    time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 
-createDirectedTypeProjection "${TYPE_PROJECTION_DIRECTED}"
-time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+    createDirectedTypeProjection "${TYPE_PROJECTION_DIRECTED}"
+    time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+else
+    echo "nodeEmbeddingsCsv: No data. Type analysis skipped."
+fi
+# ---------------------------------------------------------------
 
-echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
+echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

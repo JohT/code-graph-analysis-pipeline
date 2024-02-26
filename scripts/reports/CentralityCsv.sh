@@ -5,7 +5,7 @@
 # The reports (csv files) will be written into the sub directory reports/centrality-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
@@ -31,6 +31,9 @@ echo "centralityCsv: CYPHER_DIR=$CYPHER_DIR"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
 # Create report directory
 REPORT_NAME="centrality-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
@@ -49,11 +52,13 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 #   Name of the node property that contains the dependency weight. Example: "weight"
 createDependencyProjection() {
     local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Centrality preparation for Type nodes 
@@ -65,9 +70,11 @@ createDependencyProjection() {
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
 createTypeProjection() {
     local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Centrality preparation for method calls 
@@ -79,9 +86,11 @@ createTypeProjection() {
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
 createMethodProjection() {
     local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Method_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_2_Create_Projection.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_2_Create_Projection.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Apply the centrality algorithm "Page Rank".
@@ -388,9 +397,11 @@ ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Artifact Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-createDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-runCentralityAlgorithms "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-
+if createDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+    runCentralityAlgorithms "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+else
+    echo "centralityCsv: No data. Artifacts analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Package Query Parameters
@@ -400,9 +411,11 @@ PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterface
 
 # Package Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-createDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-runCentralityAlgorithms "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-
+if createDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+    runCentralityAlgorithms "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+else
+    echo "centralityCsv: No data. Package analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Type Query Parameters
@@ -412,9 +425,11 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createTypeProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-
+if createTypeProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
+    runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+else
+    echo "centralityCsv: No data. Type analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Method Query Parameters
@@ -424,9 +439,11 @@ METHOD_WEIGHT="dependencies_projection_weight_property="
 
 # Method Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing method dependencies..."
-createMethodProjection "${METHOD_PROJECTION}"
-runCentralityAlgorithms "${METHOD_PROJECTION}" "${METHOD_NODE}" "${METHOD_WEIGHT}"
-
+if createMethodProjection "${METHOD_PROJECTION}"; then
+    runCentralityAlgorithms "${METHOD_PROJECTION}" "${METHOD_NODE}" "${METHOD_WEIGHT}"
+else
+    echo "centralityCsv: No data. Method analysis skipped."
+fi
 # ---------------------------------------------------------------
 
-echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
+echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

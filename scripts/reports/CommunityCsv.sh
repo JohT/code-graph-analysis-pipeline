@@ -6,7 +6,7 @@
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -32,6 +32,9 @@ echo "communityCsv: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
 # Create report directory
 REPORT_NAME="community-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
@@ -50,11 +53,13 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 #   Name of the node property that contains the dependency weight. Example: "weight"
 createProjection() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4_Create_Undirected_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Community Detection Preparation for Types
@@ -66,9 +71,11 @@ createProjection() {
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
 createTypeProjection() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+    local projectionResult
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}"
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}")
+    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
 }
 
 # Community Detection using the Louvain Algorithm
@@ -411,10 +418,12 @@ ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
 # Artifact Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
-writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-
+if createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+    detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
+    writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+else
+    echo "communityCsv: No data. Artifact analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Package Query Parameters
@@ -426,13 +435,15 @@ PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 
 # Package Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z'): Processing package dependencies..."
-createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
-writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-
-# Package Community Detection - Special CSV Queries after update
-execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
-
+if createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+    detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
+    writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+    
+    # Package Community Detection - Special CSV Queries after update
+    execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
+else
+    echo "communityCsv: No data. Package analysis skipped."
+fi
 # ---------------------------------------------------------------
 
 # Type Query Parameters
@@ -444,12 +455,16 @@ TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
 # Type Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-createTypeProjection "${TYPE_PROJECTION}"
-detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
+if createTypeProjection "${TYPE_PROJECTION}"; then
+    detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
 
-# Type Community Detection - Special CSV Queries after update
-execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
-execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
-execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_that_span_the_most_packages_with_type_statistics.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_that_span_the_most_packages_with_type_statistics.csv"
+    # Type Community Detection - Special CSV Queries after update
+    execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
+    execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
+    execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_that_span_the_most_packages_with_type_statistics.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_that_span_the_most_packages_with_type_statistics.csv"
+else
+    echo "communityCsv: No data. Type analysis skipped."
+fi
+# ---------------------------------------------------------------
 
-echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"
+echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
