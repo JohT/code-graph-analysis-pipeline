@@ -25,6 +25,7 @@ Script | Directory | Description
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
+| [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
