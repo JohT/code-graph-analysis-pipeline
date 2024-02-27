@@ -69,5 +69,14 @@ Report | Analysis | Description
 | [Overview.md](./AxonFramework-4.9.2/overview/Overview.md) | AxonFramework-4.9.2 | Overview |
 | [VisibilityMetrics.md](./AxonFramework-4.9.2/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.9.2 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.9.2/wordcloud/Wordcloud.md) | AxonFramework-4.9.2 | Wordcloud |
+| [ArtifactDependencies.md](./AxonFramework-4.9.3/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.9.3 | Artifact Dependencies |
+| [ExternalDependencies.md](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies.md) | AxonFramework-4.9.3 | External Dependencies |
+| [InternalDependencies.md](./AxonFramework-4.9.3/internal-dependencies/InternalDependencies.md) | AxonFramework-4.9.3 | Internal Dependencies |
+| [MethodMetrics.md](./AxonFramework-4.9.3/method-metrics/MethodMetrics.md) | AxonFramework-4.9.3 | Method Metrics |
+| [NodeEmbeddings.md](./AxonFramework-4.9.3/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.9.3 | Node Embeddings |
+| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.9.3 | Object Oriented Design Quality Metrics |
+| [Overview.md](./AxonFramework-4.9.3/overview/Overview.md) | AxonFramework-4.9.3 | Overview |
+| [VisibilityMetrics.md](./AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.9.3 | Visibility Metrics |
+| [Wordcloud.md](./AxonFramework-4.9.3/wordcloud/Wordcloud.md) | AxonFramework-4.9.3 | Wordcloud |
 | [CSV_REPORTS.md](./CSV_REPORTS.md) |  | CSV Cypher Query Reports Reference |
 | [IMAGES.md](./IMAGES.md) |  | Image Reference |
