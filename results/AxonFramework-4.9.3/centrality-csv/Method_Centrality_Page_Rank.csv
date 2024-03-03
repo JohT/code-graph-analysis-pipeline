@@ -9,7 +9,7 @@
 "void isTrue(boolean,java.util.function.Supplier)","isTrue","centralityPageRank",0.039908476544340286,""
 "void closeQuietly(java.sql.Connection)","closeQuietly","centralityPageRank",0.03663049214301195,""
 "boolean isExplicitlyNonTransient(java.lang.Throwable)","isExplicitlyNonTransient","centralityPageRank",0.034826922787117506,""
-"org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityPageRank",0.03391083195142087,""
+"org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityPageRank",0.03391083195142086,""
 "void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityPageRank",0.029658805435815318,""
 "java.lang.Object get()","get","centralityPageRank",0.0266370607039129,""
 "java.util.Optional resolveDetails(java.lang.Throwable)","resolveDetails","centralityPageRank",0.025046231051610357,""
