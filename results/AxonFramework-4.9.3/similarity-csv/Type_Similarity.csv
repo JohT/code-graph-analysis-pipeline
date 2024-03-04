@@ -2161,7 +2161,7 @@
 0.25,"axon-disruptor-4.9.3","org.axonframework.disruptor.commandhandling.CommandHandlingEntry$RepeatingCommandHandler",1,5,"axon-disruptor-4.9.3","org.axonframework.disruptor.commandhandling.BlacklistDetectingCallback",4,7,""
 0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.AddedTrackerStatus",1,2,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventTrackerStatusChangeListener",4,1,""
 0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventHandlerInvoker",12,2,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventProcessor",7,3,""
-0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventTrackerStatus",8,2,"axon-messaging-4.9.3","org.axonframework.eventhandling.pooled.WorkPackage$ProcessingEntry",3,2,""
+0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventTrackerStatus",8,2,"axon-messaging-4.9.3","org.axonframework.eventhandling.TrackedEventMessage",50,2,""
 0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventTrackerStatusChangeListener",4,1,"axon-messaging-4.9.3","org.axonframework.eventhandling.AddedTrackerStatus",1,2,""
 0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.EventTrackerStatusChangeListener",4,1,"axon-messaging-4.9.3","org.axonframework.eventhandling.RemovedTrackerStatus",2,2,""
 0.25,"axon-messaging-4.9.3","org.axonframework.eventhandling.GenericDomainEventEntry",3,1,"axon-messaging-4.9.3","org.axonframework.eventhandling.AbstractSequencedDomainEventEntry",1,4,""

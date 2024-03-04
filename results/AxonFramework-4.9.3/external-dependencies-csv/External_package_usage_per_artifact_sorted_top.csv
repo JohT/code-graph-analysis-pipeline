@@ -2,6 +2,6 @@
 "axon-disruptor-4.9.3",22,13,5,59.09090909090909,33,101,5,"org.slf4j,com.lmax.disruptor,javax.annotation,com.lmax.disruptor.dsl","Logger,LoggerFactory,RingBuffer,ExceptionHandler,BlockingWaitStrategy,WaitStrategy,EventHandler,LifecycleAware,Nonnull",""
 "axon-test-4.9.3",87,28,13,32.183908045977006,101,639,13,"org.hamcrest,javax.annotation,org.testcontainers.utility,com.google.gson","Description,BaseMatcher,Matcher,CoreMatchers,StringDescription,Matchers,TypeSafeMatcher,Nonnull,DockerImageName",""
 "axon-modelling-4.9.3",156,35,5,22.435897435897438,99,382,5,"javax.annotation,javax.persistence,jakarta.persistence,org.slf4j","Nonnull,Nullable,EntityManager,LockModeType,Basic,Id,Entity,Lob,Column",""
-"axon-messaging-4.9.3",786,155,43,19.720101781170484,753,3196,43,"javax.annotation,org.slf4j,com.fasterxml.jackson.annotation,javax.persistence","Nonnull,Nullable,LoggerFactory,Logger,JsonProperty,JsonCreator,JsonGetter,JsonTypeInfo,JsonTypeInfo$Id",""
+"axon-messaging-4.9.3",786,155,43,19.720101781170484,753,3196,43,"javax.annotation,org.slf4j,com.fasterxml.jackson.annotation,javax.persistence","Nonnull,Nullable,Logger,LoggerFactory,JsonCreator,JsonProperty,JsonTypeInfo$As,JsonTypeInfo$Id,JsonTypeInfo",""
 "axon-eventsourcing-4.9.3",133,25,4,18.796992481203006,74,242,4,"javax.annotation,org.slf4j,javax.persistence,jakarta.persistence","Nonnull,Nullable,PreDestroy,LoggerFactory,Logger,Index,Table,Entity,IdClass",""
 "axon-configuration-4.9.3",40,4,2,10,24,137,2,"javax.annotation,org.slf4j","Nonnull,Nullable,Logger,LoggerFactory",""
