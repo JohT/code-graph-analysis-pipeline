@@ -38,8 +38,27 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 METRICS_CYPHER_DIR="${CYPHER_DIR}/Metrics"
 
+echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing packages without sub-packages..."
+
+# Packages only without sub-packages
 execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Package_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependencies.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Package_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependencies.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_outgoing_incoming_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Instability.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_including_Counts.cypher" > "${FULL_REPORT_DIRECTORY}/Abstractness.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistance.csv"
+
+
+# Packages including sub-packages (overlapping/redundant)
+#   Since Java Packages are organized hierarchically, 
+#   incoming dependencies can also be calculated by including all of their sub-packages. 
+#   Top level packages like for example "org" and "org.company" are left out 
+#   by assuring that only those packages are considered, 
+#   that have other packages or types in the same hierarchy level ("siblings").
+echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing packages including sub-packages..."
+execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Package_Dependencies_Including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesIncludingSubpackages.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Package_Dependencies_Including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesIncludingSubpackages.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_Including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/InstabilityIncludingSubpackages.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessIncludingSubpackages.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_including_subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceIncludingSubpackages.csv"
+
+echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
