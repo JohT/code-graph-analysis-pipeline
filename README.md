@@ -144,6 +144,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 - How can i run an analysis locally?  
   👉 See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
+  👉 To get started from scratch see [GETTING_STARTED.md](./GETTING_STARTED.md).
+
+- How can i explore the Graph manually?
+  👉 After analysis [start Neo4j](./COMMANDS.md#start-neo4j-graph-database) and open the [Neo4j Web UI](http://localhost:7474/browser).
 
 - How can i add a CSV report to the pipeline?  
   👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  

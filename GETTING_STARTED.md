@@ -49,25 +49,36 @@ Please read through the [Prerequisites](./README.md#🛠-prerequisites) in the [
 1. Start the analysis
 
   - Without any additional dependencies:
+
     ```shell
     ./../../scripts/analysis/analyze.sh --report Csv
     ```
+
   - Jupyter notebook reports when Python and Conda are installed:
+
     ```shell
     ./../../scripts/analysis/analyze.sh --report Jupyter
     ```
+
   - Graph visualizations when Node.js and npm are installed:
+
     ```shell
     ./../../scripts/analysis/analyze.sh --report Jupyter
     ```
+
   - All reports with Python, Conda, Node.js and npm installed:
+
     ```shell
     ./../../scripts/analysis/analyze.sh
     ```
+
   - To explore the database yourself without any automatically generated reports and no additional requirements:
+
     ```shell
-    ./../../scripts/analysis/analyze.sh
+    ./../../scripts/analysis/analyze.sh --explore
     ```
+
+    Then open your browser and login to your [local Neo4j Web UI](http://localhost:7474/browser) with "neo4j" as user and the initial password you've chosen.
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
 👉 See [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) on how to do this within a GitHub Actions Workflow.
