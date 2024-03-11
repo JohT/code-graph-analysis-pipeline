@@ -113,6 +113,7 @@ Script | Directory | Description
 | [Cyclic_Dependencies_Concatenated.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_Concatenated.cypher) | Cyclic_Dependencies | Cyclic Dependencies Concatenated |
 | [Cyclic_Dependencies_as_Nodes.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_as_Nodes.cypher) | Cyclic_Dependencies | Cyclic Dependencies |
 | [Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher) | Cyclic_Dependencies | Cyclic Dependencies between Artifacts as unwinded List |
+| [Data_verification_DEPENDS_ON_relationships.cypher](./Data_verification_DEPENDS_ON_relationships.cypher) |  | Data verification DEPENDS_ON relationship distinct label constellations |
 | [Dependencies_10_Delete_Label.cypher](./Dependencies_Projection/Dependencies_10_Delete_Label.cypher) | Dependencies_Projection | Community Detection Label Propagation Label Delete |
 | [Dependencies_11_Add_Label.cypher](./Dependencies_Projection/Dependencies_11_Add_Label.cypher) | Dependencies_Projection | Write a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
 | [Dependencies_1_Delete_Projection.cypher](./Dependencies_Projection/Dependencies_1_Delete_Projection.cypher) | Dependencies_Projection | Delete projection if existing. Variables: dependencies_projection |
@@ -176,22 +177,30 @@ Script | Directory | Description
 | [Methods_1_Delete_Projection.cypher](./Method_Projection/Methods_1_Delete_Projection.cypher) | Method_Projection | Delete projection if existing. Variables: dependencies_projection |
 | [Methods_2_Create_Projection.cypher](./Method_Projection/Methods_2_Create_Projection.cypher) | Method_Projection | Create directed projection for methods. Variables: dependencies_projection, dependencies_projection_weight_property |
 | [Calculate_and_set_Abstractness.cypher](./Metrics/Calculate_and_set_Abstractness.cypher) | Metrics | Calculate and set Abstractness |
-| [Calculate_and_set_Abstractness_including_Counts.cypher](./Metrics/Calculate_and_set_Abstractness_including_Counts.cypher) | Metrics | Calculate and set Abstractness including Counts |
+| [Calculate_and_set_Abstractness_including_Counts.cypher](./Metrics/Calculate_and_set_Abstractness_including_Counts.cypher) | Metrics | Calculate and set Abstractness for Java Packages including Counts |
+| [Calculate_and_set_Abstractness_including_Subpackages.cypher](./Metrics/Calculate_and_set_Abstractness_including_Subpackages.cypher) | Metrics | Calculate and set Abstractness for Java Packages including sub-packages |
+| [Calculate_and_set_Instability_Including_Subpackages.cypher](./Metrics/Calculate_and_set_Instability_Including_Subpackages.cypher) | Metrics | Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies |
 | [Calculate_and_set_Instability_outgoing_incoming_Dependencies.cypher](./Metrics/Calculate_and_set_Instability_outgoing_incoming_Dependencies.cypher) | Metrics | Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies |
 | [Calculate_distance_between_abstractness_and_instability.cypher](./Metrics/Calculate_distance_between_abstractness_and_instability.cypher) | Metrics | Calculate distance between abstractness and instability |
+| [Calculate_distance_between_abstractness_and_instability_including_subpackages.cypher](./Metrics/Calculate_distance_between_abstractness_and_instability_including_subpackages.cypher) | Metrics | Calculate distance between abstractness and instability including subpackages |
+| [Clear_all_metrics.cypher](./Metrics/Clear_all_metrics.cypher) | Metrics | Clear all object oriented design metrics |
 | [Count_and_set_abstract_types.cypher](./Metrics/Count_and_set_abstract_types.cypher) | Metrics | Count and set abstract types |
 | [Incoming_Class_Dependencies.cypher](./Metrics/Incoming_Class_Dependencies.cypher) | Metrics | Incoming Class Dependencies |
 | [Incoming_Class_Method_Call_Dependencies.cypher](./Metrics/Incoming_Class_Method_Call_Dependencies.cypher) | Metrics | Incoming Class Method Call Dependencies |
 | [Incoming_Package_Dependencies.cypher](./Metrics/Incoming_Package_Dependencies.cypher) | Metrics | Incoming Package Dependencies |
+| [Incoming_Package_Dependencies_Including_Subpackages.cypher](./Metrics/Incoming_Package_Dependencies_Including_Subpackages.cypher) | Metrics | Incoming Package Dependencies including sub-packages |
 | [Incoming_Package_Method_Call_Dependencies.cypher](./Metrics/Incoming_Package_Method_Call_Dependencies.cypher) | Metrics | Incoming Package Method Call Dependencies |
 | [Outgoing_Class_Dependencies.cypher](./Metrics/Outgoing_Class_Dependencies.cypher) | Metrics | Outgoing Class Dependencies |
 | [Outgoing_Class_Method_Call_Dependencies.cypher](./Metrics/Outgoing_Class_Method_Call_Dependencies.cypher) | Metrics | Outgoing Class Method Call Dependencies |
 | [Outgoing_Package_Dependencies.cypher](./Metrics/Outgoing_Package_Dependencies.cypher) | Metrics | Outgoing Package Dependencies |
+| [Outgoing_Package_Dependencies_Including_Subpackages.cypher](./Metrics/Outgoing_Package_Dependencies_Including_Subpackages.cypher) | Metrics | Outgoing Package Dependencies including sub-packages |
 | [Outgoing_Package_Method_Call_Dependencies.cypher](./Metrics/Outgoing_Package_Method_Call_Dependencies.cypher) | Metrics | Outgoing Package Method Call Dependencies |
 | [Set_Incoming_Package_Dependencies.cypher](./Metrics/Set_Incoming_Package_Dependencies.cypher) | Metrics | Set Incoming Package Dependencies |
+| [Set_Incoming_Package_Dependencies_Including_Subpackages.cypher](./Metrics/Set_Incoming_Package_Dependencies_Including_Subpackages.cypher) | Metrics | Set Incoming Package Dependencies including sub-packages |
 | [Set_Incoming_Package_Method_Call_Dependencies.cypher](./Metrics/Set_Incoming_Package_Method_Call_Dependencies.cypher) | Metrics | Set Incoming Package Method Call Dependencies |
 | [Set_Incoming_Type_Dependencies.cypher](./Metrics/Set_Incoming_Type_Dependencies.cypher) | Metrics | Set Incoming Type Dependencies |
 | [Set_Outgoing_Package_Dependencies.cypher](./Metrics/Set_Outgoing_Package_Dependencies.cypher) | Metrics | Set Outgoing Package Dependencies |
+| [Set_Outgoing_Package_Dependencies_Including_Subpackages.cypher](./Metrics/Set_Outgoing_Package_Dependencies_Including_Subpackages.cypher) | Metrics | Set Outgoing Package Dependencies including sub-packages |
 | [Set_Outgoing_Package_Method_Call_Dependencies.cypher](./Metrics/Set_Outgoing_Package_Method_Call_Dependencies.cypher) | Metrics | Set Outgoing Package Method Call Dependencies |
 | [Set_Outgoing_Type_Dependencies.cypher](./Metrics/Set_Outgoing_Type_Dependencies.cypher) | Metrics | Set Outgoing Type Dependencies |
 | [Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher](./Node_Embeddings/Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher) | Node_Embeddings | Node Embeddings 1a using Fast Random Projection: Estimate |
