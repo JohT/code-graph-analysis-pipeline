@@ -33,75 +33,75 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>test</td>
+      <td>modelling</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>aggregate</td>
+      <td>command</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>matchers</td>
+      <td>inspection</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>saga</td>
+      <td>legacyjpa</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>server</td>
+      <td>saga</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>utils</td>
+      <td>metamodel</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>deadline</td>
+      <td>repository</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>eventscheduler</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>org</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>axonframework</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>eventsourcing</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>conflictresolution</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>eventstore</td>
-    </tr>
-    <tr>
-      <th>15</th>
       <td>inmemory</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>10</th>
       <td>jdbc</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>statements</td>
-    </tr>
-    <tr>
-      <th>18</th>
+      <th>11</th>
       <td>jpa</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>12</th>
       <td>legacyjpa</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>org</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axonframework</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>aggregate</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>matchers</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>saga</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>server</td>
     </tr>
   </tbody>
 </table>
