@@ -2,7 +2,7 @@
 
 # Prepares and validates the graph database before analysis 
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -27,12 +27,22 @@ echo "prepareAnalysis: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
 # Local Constants
 PACKAGE_WEIGHTS_CYPHER_DIR="$CYPHER_DIR/Package_Relationship_Weights"
 PACKAGE_METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
 EXTERNAL_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/External_Dependencies"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
+
+# Preparation - Data verification: DEPENDS_ON releationships
+dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPENDS_ON_relationships.cypher" "${@}")
+if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; then
+    echo "prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship required. Check if the artifacts directory is empty or if the scan failed."
+    exit 1
+fi
 
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_index_for_full_qualified_type_name.cypher"
