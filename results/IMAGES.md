@@ -202,7 +202,8 @@ Image  | Analysis |
 | [MethodMetrics_14_1.png](./AxonFramework-4.9.3/method-metrics/MethodMetrics_files/MethodMetrics_14_1.png) | AxonFramework-4.9.3 |
 | [MethodMetrics_26_1.png](./AxonFramework-4.9.3/method-metrics/MethodMetrics_files/MethodMetrics_26_1.png) | AxonFramework-4.9.3 |
 | [NodeEmbeddings_18_0.png](./AxonFramework-4.9.3/node-embeddings/NodeEmbeddings_files/NodeEmbeddings_18_0.png) | AxonFramework-4.9.3 |
-| [ObjectOrientedDesignMetrics_20_0.png](./AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_20_0.png) | AxonFramework-4.9.3 |
+| [ObjectOrientedDesignMetrics_36_0.png](./AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_36_0.png) | AxonFramework-4.9.3 |
+| [ObjectOrientedDesignMetrics_38_0.png](./AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_38_0.png) | AxonFramework-4.9.3 |
 | [Overview_17_1.png](./AxonFramework-4.9.3/overview/Overview_files/Overview_17_1.png) | AxonFramework-4.9.3 |
 | [Overview_21_1.png](./AxonFramework-4.9.3/overview/Overview_files/Overview_21_1.png) | AxonFramework-4.9.3 |
 | [Overview_23_1.png](./AxonFramework-4.9.3/overview/Overview_files/Overview_23_1.png) | AxonFramework-4.9.3 |
