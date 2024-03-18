@@ -17,7 +17,7 @@
 "org.axonframework.eventsourcing","eventsourcing","centralityArticleRank",0.06162596169094024,""
 "org.axonframework.tracing","tracing","centralityArticleRank",0.05767115872352587,""
 "org.axonframework.eventsourcing.eventstore.jdbc","jdbc","centralityArticleRank",0.05710709983384374,""
-"org.axonframework.common.transaction","transaction","centralityArticleRank",0.05425156226112907,""
+"org.axonframework.common.transaction","transaction","centralityArticleRank",0.05425156226112906,""
 "org.axonframework.eventsourcing.snapshotting","snapshotting","centralityArticleRank",0.050443673367101184,""
 "org.axonframework.test.matchers","matchers","centralityArticleRank",0.04716951878168336,""
 "org.axonframework.deadline","deadline","centralityArticleRank",0.045559229291318955,""

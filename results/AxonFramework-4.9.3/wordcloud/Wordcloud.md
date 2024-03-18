@@ -33,75 +33,75 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>modelling</td>
+      <td>disruptor</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>command</td>
+      <td>commandhandling</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>inspection</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>legacyjpa</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>saga</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>metamodel</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>repository</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>inmemory</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>jdbc</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>jpa</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>legacyjpa</td>
-    </tr>
-    <tr>
-      <th>13</th>
       <td>org</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>5</th>
       <td>axonframework</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>test</td>
+      <th>6</th>
+      <td>modelling</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>aggregate</td>
+      <th>7</th>
+      <td>command</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>matchers</td>
+      <th>8</th>
+      <td>inspection</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>9</th>
+      <td>legacyjpa</td>
+    </tr>
+    <tr>
+      <th>10</th>
       <td>saga</td>
     </tr>
     <tr>
+      <th>11</th>
+      <td>metamodel</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>repository</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>inmemory</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>jdbc</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>jpa</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>legacyjpa</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>org</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>axonframework</td>
+    </tr>
+    <tr>
       <th>19</th>
-      <td>server</td>
+      <td>config</td>
     </tr>
   </tbody>
 </table>
