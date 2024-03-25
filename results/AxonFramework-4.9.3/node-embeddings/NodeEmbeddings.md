@@ -100,7 +100,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.155609</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.0, -0.2979847192764282, 0.0, 0.297984719276...</td>
+      <td>[0.2656734585762024, 0.0, 0.0, 0.1578663438558...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -108,7 +108,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.152740</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.0, -0.2648466229438782, 0.0, 0.264846622943...</td>
+      <td>[0.25651758909225464, 0.0, 0.0, 0.177569687366...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -116,7 +116,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>1</td>
       <td>0.016234</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.0, -0.2863466739654541, 0.0, 0.286346673965...</td>
+      <td>[0.2945811450481415, 0.0, 0.0, 0.2192130088806...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -124,7 +124,7 @@ The result can be used in machine learning as features approximating the graph s
       <td>2</td>
       <td>0.349429</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.12455207109451294, -0.12455207109451294, -0...</td>
+      <td>[-0.37914764881134033, 0.2323479950428009, -0....</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.042s...
+    [t-SNE] Computed neighbors for 93 samples in 0.023s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.552232
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.375961
-    [t-SNE] KL divergence after 800 iterations: 0.108465
+    [t-SNE] Mean sigma: 0.534304
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.602699
+    [t-SNE] KL divergence after 1000 iterations: 0.059028
 
 
 
@@ -180,8 +180,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-disruptor-4.9.3</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>1.764325</td>
-      <td>-7.447410</td>
+      <td>0.897540</td>
+      <td>1.312869</td>
     </tr>
     <tr>
       <th>1</th>
@@ -189,8 +189,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.155609</td>
-      <td>0.966115</td>
-      <td>-5.313376</td>
+      <td>-1.268893</td>
+      <td>1.815264</td>
     </tr>
     <tr>
       <th>2</th>
@@ -198,8 +198,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.152740</td>
-      <td>0.961044</td>
-      <td>-5.306224</td>
+      <td>-1.286800</td>
+      <td>1.820829</td>
     </tr>
     <tr>
       <th>3</th>
@@ -207,8 +207,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.016234</td>
-      <td>0.956701</td>
-      <td>-5.291767</td>
+      <td>-1.328972</td>
+      <td>1.831230</td>
     </tr>
     <tr>
       <th>4</th>
@@ -216,8 +216,8 @@ reduces them to a 2 dimensional array for visualization.
       <td>axon-modelling-4.9.3</td>
       <td>2</td>
       <td>0.349429</td>
-      <td>3.738875</td>
-      <td>-9.758543</td>
+      <td>3.653563</td>
+      <td>-0.107899</td>
     </tr>
   </tbody>
 </table>
