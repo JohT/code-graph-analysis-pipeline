@@ -88,43 +88,43 @@ The result can be used in machine learning as features approximating the graph s
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.disruptor.commandhandling</td>
+      <td>org.axonframework.modelling.command</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>axon-disruptor-4.9.3</td>
-      <td>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ...</td>
+      <td>0.155609</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>[0.15563252568244934, -0.20949940383434296, 0....</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.modelling.command</td>
-      <td>1</td>
-      <td>0.155609</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>0</td>
+      <td>0.152740</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.13389667868614197, -0.45905783772468567, 0....</td>
+      <td>[0.12177932262420654, -0.24581024050712585, 0....</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.modelling.command.inspection</td>
-      <td>1</td>
-      <td>0.152740</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>0</td>
+      <td>0.016234</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.1468452513217926, -0.47052812576293945, 0.0...</td>
+      <td>[0.12081566452980042, -0.2573017477989197, 0.0...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>org.axonframework.modelling.saga</td>
       <td>1</td>
-      <td>0.016234</td>
+      <td>0.349429</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[0.16727639734745026, -0.48904162645339966, 0....</td>
+      <td>[-0.15903340280056, 0.13385947048664093, 0.415...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.modelling.saga</td>
-      <td>2</td>
-      <td>0.349429</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>1</td>
+      <td>0.315690</td>
       <td>axon-modelling-4.9.3</td>
-      <td>[-0.22669143974781036, -0.21791383624076843, -...</td>
+      <td>[-0.1713848114013672, 0.17754653096199036, 0.4...</td>
     </tr>
   </tbody>
 </table>
@@ -143,11 +143,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.081s...
+    [t-SNE] Computed neighbors for 93 samples in 0.046s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.575578
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 47.716946
-    [t-SNE] KL divergence after 800 iterations: 0.068835
+    [t-SNE] Mean sigma: 0.575958
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.351082
+    [t-SNE] KL divergence after 1000 iterations: 0.058903
 
 
 
@@ -176,48 +176,48 @@ reduces them to a 2 dimensional array for visualization.
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>axon-disruptor-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>6.120821</td>
-      <td>0.836151</td>
+      <td>0.155609</td>
+      <td>-1.724936</td>
+      <td>-0.984767</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.modelling.command</td>
+      <td>org.axonframework.modelling.command.inspection</td>
       <td>axon-modelling-4.9.3</td>
-      <td>1</td>
-      <td>0.155609</td>
-      <td>4.068711</td>
-      <td>0.519881</td>
+      <td>0</td>
+      <td>0.152740</td>
+      <td>-1.719448</td>
+      <td>-0.974232</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.modelling.command.inspection</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>axon-modelling-4.9.3</td>
-      <td>1</td>
-      <td>0.152740</td>
-      <td>4.061427</td>
-      <td>0.518075</td>
+      <td>0</td>
+      <td>0.016234</td>
+      <td>-1.707920</td>
+      <td>-0.948645</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>org.axonframework.modelling.saga</td>
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
-      <td>0.016234</td>
-      <td>4.044757</td>
-      <td>0.516970</td>
+      <td>0.349429</td>
+      <td>0.799697</td>
+      <td>-5.317724</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.modelling.saga</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
       <td>axon-modelling-4.9.3</td>
-      <td>2</td>
-      <td>0.349429</td>
-      <td>5.837539</td>
-      <td>3.520002</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>1.116018</td>
+      <td>-5.363355</td>
     </tr>
   </tbody>
 </table>
