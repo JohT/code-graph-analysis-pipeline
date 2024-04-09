@@ -61,4 +61,12 @@ execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_Including_Su
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessIncludingSubpackages.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_including_subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceIncludingSubpackages.csv"
 
+# Typescript Modules
+echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing Typescript modules..."
+execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesTypescript.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesTypescript.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/InstabilityTypescript.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessTypescript.csv"
+execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceTypescript.csv"
+
 echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
