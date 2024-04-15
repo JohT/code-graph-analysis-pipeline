@@ -7,7 +7,7 @@
 "void closeQuietly(java.sql.Connection)","closeQuietly","centralityHarmonic",0.02240599378003958,""
 "org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityHarmonic",0.01993214588634436,""
 "void isTrue(boolean,java.util.function.Supplier)","isTrue","centralityHarmonic",0.018518518518518517,""
-"void executeInTransaction(java.lang.Runnable)","executeInTransaction","centralityHarmonic",0.015125812835736498,""
+"void executeInTransaction(java.lang.Runnable)","executeInTransaction","centralityHarmonic",0.015125812835736496,""
 "void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityHarmonic",0.01441899915182358,""
 "java.lang.Object get()","get","centralityHarmonic",0.01272264631043257,""
 "void update(java.util.function.Function)","update","centralityHarmonic",0.01102629346904156,""
