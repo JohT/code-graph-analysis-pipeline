@@ -1,6 +1,6 @@
 // Add weight25PercentInterfaces to Package DEPENDS_ON relationships
 
- MATCH (package:Package)-[r:DEPENDS_ON]->(dependent:Package)
+ MATCH (package:Java:Package)-[r:DEPENDS_ON]->(dependent:Java:Package)
   WITH package, r
       ,toInteger(r.weight - round(r.weightInterfaces * 0.75)) AS weight25PercentInterfaces
    SET r.weight25PercentInterfaces = weight25PercentInterfaces

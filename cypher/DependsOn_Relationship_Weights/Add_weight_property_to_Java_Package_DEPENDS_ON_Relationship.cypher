@@ -1,6 +1,6 @@
 // Add weight property to Package DEPENDS_ON Relationship 
 
- MATCH (sourcePackage:Package)-[:CONTAINS]->(sourceType:Type)-[typeDependency:DEPENDS_ON]->(dependentType:Type)<-[:CONTAINS]-(dependentPackage:Package)
+ MATCH (sourcePackage:Java:Package)-[:CONTAINS]->(sourceType:Type)-[typeDependency:DEPENDS_ON]->(dependentType:Type)<-[:CONTAINS]-(dependentPackage:Java:Package)
  MATCH (sourcePackage)-[packageDependency:DEPENDS_ON]->(dependentPackage)
  WHERE sourcePackage.fqn <> dependentPackage.fqn
   WITH packageDependency

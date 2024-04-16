@@ -31,8 +31,8 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
 # Local Constants
-PACKAGE_WEIGHTS_CYPHER_DIR="$CYPHER_DIR/Package_Relationship_Weights"
-PACKAGE_METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
+DEPENDS_ON_CYPHER_DIR="$CYPHER_DIR/DependsOn_Relationship_Weights"
+METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
 EXTERNAL_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/External_Dependencies"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
@@ -94,8 +94,8 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_ann
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
 
-# Preparation - Add Type node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Incoming_Type_Dependencies.cypher"
-execute_cypher_expect_results "${PACKAGE_METRICS_CYPHER_DIR}/Set_Outgoing_Type_Dependencies.cypher"
+# Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
+execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
+execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
 
 echo "prepareAnalysis: Preparation successful"
