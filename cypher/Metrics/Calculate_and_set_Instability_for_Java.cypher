@@ -2,6 +2,8 @@
 // Instability = outgoing / (outgoing + incoming) Dependencies
 
  MATCH (p:Java:Package)
+WHERE p.incomingDependencies > 0 
+  AND p.outgoingDependencies > 0
   WITH p
       ,toFloat(p.outgoingDependencies) / (p.outgoingDependencies + p.incomingDependencies + 1E-38) as instability
       ,toFloat(p.outgoingDependentTypes) / (p.outgoingDependentTypes + p.incomingDependentTypes + 1E-38) as instabilityTypes
@@ -19,9 +21,10 @@
       ,instabilityInterfaces
       ,instabilityPackages
       ,instabilityArtifacts
-WHERE p.incomingDependencies > 0 
-  AND p.outgoingDependencies > 0
-RETURN DISTINCT p.fqn, p.name
+MATCH (artifact:Artifact)-[:CONTAINS]->(p)
+RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+      ,p.fqn                   AS fullQualifiedPackageName
+      ,p.name                  AS packageName
       ,instability
       ,instabilityTypes
       ,instabilityInterfaces

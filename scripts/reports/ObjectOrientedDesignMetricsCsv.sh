@@ -40,9 +40,12 @@ METRICS_CYPHER_DIR="${CYPHER_DIR}/Metrics"
 
 # Java Packages only without sub-packages
 echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing Java packages without sub-packages..."
-# TODO "Set_Incoming_Java_Package_Dependencies" and "Set_Outgoing_Java_Package_Dependencies" are also included in "prepareAnalysis.sh"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesJava.csv"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesJava.csv"
+execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Incoming_Java_Package_Dependencies.cypher" \
+                                     "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher" \
+                                     > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesJava.csv"
+execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Outgoing_Java_Package_Dependencies.cypher" \
+                                     "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher" \
+                                     > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesJava.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Java.cypher" > "${FULL_REPORT_DIRECTORY}/InstabilityJava.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Java.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessJava.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Java.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceJava.csv"
@@ -54,16 +57,24 @@ execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_an
 #   by assuring that only those packages are considered, 
 #   that have other packages or types in the same hierarchy level ("siblings").
 echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing packages including sub-packages..."
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesIncludingSubpackagesJava.csv"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesIncludingSubpackagesJava.csv"
+execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher" \
+                                     "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher" \
+                                     > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesIncludingSubpackagesJava.csv"
+execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher" \
+                                     "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher" \
+                                     > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesIncludingSubpackagesJava.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Java_Including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/InstabilityIncludingSubpackagesJava.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Java_including_Subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessIncludingSubpackagesJava.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Java_including_subpackages.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceIncludingSubpackagesJava.csv"
 
 # Typescript Modules
 echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing Typescript modules..."
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesTypescript.csv"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesTypescript.csv"
+execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Incoming_Typescript_Module_Dependencies.cypher" \
+                                     "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher" \
+                                     > "${FULL_REPORT_DIRECTORY}/IncomingPackageDependenciesTypescript.csv"
+execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Outgoing_Typescript_Module_Dependencies.cypher" \
+                                     "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher" \
+                                     > "${FULL_REPORT_DIRECTORY}/OutgoingPackageDependenciesTypescript.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/InstabilityTypescript.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessTypescript.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceTypescript.csv"

@@ -30,7 +30,8 @@ ORDER BY incomingDependencies DESC, p.fqn ASC // package with most incoming depe
         ,p.incomingDependentPackagesIncludingSubpackages   = incomingDependentPackages
         ,p.incomingDependentArtifactsIncludingSubpackages  = incomingDependentArtifacts
   RETURN artifactName
-        ,p.fqn  AS packageName
+        ,p.fqn  AS fullQualifiedPackageName
+        ,p.name AS packageName
         ,incomingDependencies
         ,incomingDependenciesWeight
         ,incomingDependentTypes

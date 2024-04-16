@@ -20,7 +20,10 @@
       ,instabilityInterfaces
       ,instabilityPackages
       ,instabilityArtifacts
-RETURN DISTINCT p.fqn, p.name
+ MATCH (artifact:Artifact)-[:CONTAINS]->(p)
+RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+      ,p.fqn                   AS fullQualifiedPackageName
+      ,p.name                  AS packageName
       ,instability
       ,instabilityTypes
       ,instabilityInterfaces
