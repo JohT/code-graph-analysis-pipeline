@@ -4,7 +4,7 @@
 # It contains lists of e.g. incoming and outgoing package dependencies,
 # abstractness, instability and the distance to the so called "main sequence".
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -78,5 +78,8 @@ execute_cypher_queries_until_results "${METRICS_CYPHER_DIR}/Get_Outgoing_Typescr
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/InstabilityTypescript.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/AbstractnessTypescript.csv"
 execute_cypher "${METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/MainSequenceAbstractnessInstabilityDistanceTypescript.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "ObjectOrientedDesignMetricsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

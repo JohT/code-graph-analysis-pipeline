@@ -7,7 +7,7 @@
 # The reports (csv files) will be written into the sub directory reports/topology-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -127,5 +127,8 @@ else
     echo "topologicalSortCsv: No data. Type analysis skipped."
 fi
 # ---------------------------------------------------------------
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

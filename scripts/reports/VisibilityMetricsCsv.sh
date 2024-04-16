@@ -4,7 +4,7 @@
 # It contains lists of packages with their relative visibility (public types divided by all types)
 # as well as the global statistics for every artifact.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -40,3 +40,6 @@ VISIBILITY_CYPHER_DIR="${CYPHER_DIR}/Visibility"
 
 execute_cypher "${VISIBILITY_CYPHER_DIR}/Global_relative_visibility_statistics_for_types.cypher" > "${FULL_REPORT_DIRECTORY}/RelativeVisibilityPerArtifact.csv"
 execute_cypher "${VISIBILITY_CYPHER_DIR}/Relative_visibility_public_types_to_all_types_per_package.cypher" > "${FULL_REPORT_DIRECTORY}/RelativeVisibilityPerPackage.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

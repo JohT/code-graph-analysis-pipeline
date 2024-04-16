@@ -3,7 +3,7 @@
 # Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports.
 # It contains lists of dependencies across artifacts and hby ow many packages/types they are used by.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -46,3 +46,6 @@ execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Artifacts_with_duplicate_pac
 
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Usage_and_spread_of_internal_artifact_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/InternalArtifactUsageSpreadPerDependency.csv"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Usage_and_spread_of_internal_artifact_dependents.cypher" > "${FULL_REPORT_DIRECTORY}/InternalArtifactUsageSpreadPerDependent.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

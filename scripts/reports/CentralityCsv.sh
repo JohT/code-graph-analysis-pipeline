@@ -5,7 +5,7 @@
 # The reports (csv files) will be written into the sub directory reports/centrality-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
@@ -445,5 +445,8 @@ else
     echo "centralityCsv: No data. Method analysis skipped."
 fi
 # ---------------------------------------------------------------
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

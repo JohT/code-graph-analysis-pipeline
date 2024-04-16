@@ -3,7 +3,7 @@
 # Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports.
 # They list external library package usage like how often a external package is called.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -56,3 +56,6 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_a
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_second_level_package_usage_per_artifact_and_external_package.cypher" > "${FULL_REPORT_DIRECTORY}/External_second_level_package_usage_per_artifact_and_external_package.csv"
 
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Maven_POMs_and_their_declared_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Maven_POM_dependencies.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
