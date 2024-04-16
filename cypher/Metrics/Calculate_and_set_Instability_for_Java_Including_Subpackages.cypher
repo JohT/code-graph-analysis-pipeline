@@ -1,6 +1,6 @@
 // Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies
 
- MATCH (p:Package)
+ MATCH (p:Java:Package)
  WHERE p.incomingDependenciesIncludingSubpackages > 0 
    AND p.outgoingDependenciesIncludingSubpackages > 0
   WITH p

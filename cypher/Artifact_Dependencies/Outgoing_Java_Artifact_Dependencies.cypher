@@ -1,6 +1,6 @@
 // Outgoing Artifact Dependencies
 
-   MATCH (a:Artifact:Archive)
+   MATCH (a:Java:Artifact:Archive)
 OPTIONAL MATCH (a)-[r:DEPENDS_ON]->(ea:Artifact:Archive)
    WHERE a.fileName <> ea.fileName
     WITH a

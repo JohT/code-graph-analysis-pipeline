@@ -1,5 +1,6 @@
 //Set Outgoing Package Method Call Dependencies
-MATCH (p:Package)
+
+MATCH (p:Java:Package)
 OPTIONAL MATCH (p)-[:CONTAINS]->(t:Java:Type)-[:DECLARES]->(m:Method)-[:INVOKES]->(dm:Method)<-[:DECLARES]-(dt:Java:Type)<-[:CONTAINS]-(dp:Package)<-[:CONTAINS]-(da:Artifact)
 OPTIONAL MATCH (dm)<-[:DECLARES]-(dti:Interface)
 WHERE p <> dp

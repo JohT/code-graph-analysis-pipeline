@@ -1,6 +1,7 @@
-// Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies
+// Calculate and set Instability for Java
+// Instability = outgoing / (outgoing + incoming) Dependencies
 
- MATCH (p:Package)
+ MATCH (p:Java:Package)
   WITH p
       ,toFloat(p.outgoingDependencies) / (p.outgoingDependencies + p.incomingDependencies + 1E-38) as instability
       ,toFloat(p.outgoingDependentTypes) / (p.outgoingDependentTypes + p.incomingDependentTypes + 1E-38) as instabilityTypes

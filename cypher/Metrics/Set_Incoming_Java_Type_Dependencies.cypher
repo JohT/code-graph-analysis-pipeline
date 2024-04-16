@@ -1,6 +1,6 @@
 // Set Incoming Type Dependencies
 
-   MATCH (p:Package)
+   MATCH (p:Java:Package)
 OPTIONAL MATCH (p)-[:CONTAINS]->(it:Java:Type)<-[r:DEPENDS_ON]-(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
 OPTIONAL MATCH (it)<-[:DEPENDS_ON]-(eti:Type:Interface)
    WHERE it <> et

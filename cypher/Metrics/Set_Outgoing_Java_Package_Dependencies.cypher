@@ -1,6 +1,6 @@
 //Set Outgoing Package Dependencies
 
-   MATCH (p:Package)
+   MATCH (p:Java:Package)
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)
 OPTIONAL MATCH (p)-[:CONTAINS]->(it:Java:Type)-[r:DEPENDS_ON]->(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
 OPTIONAL MATCH (it)-[:DEPENDS_ON]->(eti:Java:Type:Interface)

@@ -1,6 +1,6 @@
 // Set Outgoing Package Dependencies including sub-packages
 
-   MATCH (p:Package)
+   MATCH (p:Java:Package)
     WITH *
         ,EXISTS{
             MATCH (p)<-[:CONTAINS]-(ancestor:Package)-[:CONTAINS]->(sibling:Package) 
@@ -9,7 +9,7 @@
         ,EXISTS{(p)-[:CONTAINS]->(:Type)} AS containsTypes
     WHERE hasSiblingPackages OR containsTypes
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)
-OPTIONAL MATCH (p:Package)-[:CONTAINS*0..]->(sp:Package)-[:CONTAINS]->(st:Java:Type)-[r:DEPENDS_ON]->(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
+OPTIONAL MATCH (p)-[:CONTAINS*0..]->(sp:Package)-[:CONTAINS]->(st:Java:Type)-[r:DEPENDS_ON]->(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
    WHERE NOT ep.fqn starts with p.fqn + '.'
      AND ep.fqn <> p.fqn
      // AND p.outgoingDependenciesIncludingSubpackages IS NULL // comment out to recalculate
