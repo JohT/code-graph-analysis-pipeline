@@ -37,10 +37,9 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 EXTERNAL_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/External_Dependencies"
 
-if ! execute_cypher_expect_results "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/List_external_types_used.cypher"; then
-    echo "Please execute 'prepareAnalysis.sh' with 'Label_external_types_and_annotations.cypher' first."
-    exit 1
-fi
+# Check if there are already labels for external Java types and create them otherwise
+execute_cypher_queries_until_results "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/List_external_Java_types_used.cypher" \
+                                     "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
 
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_overall.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_overall.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_spread.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_spread.csv"

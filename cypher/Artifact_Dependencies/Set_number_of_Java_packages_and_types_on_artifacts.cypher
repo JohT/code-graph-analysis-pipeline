@@ -1,6 +1,6 @@
-// Set number of packages and types on artifacts
+// Set number of Java packages and types on artifacts
 
- MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
+ MATCH (artifact:Java:Artifact)-[:CONTAINS]->(package:Java:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
   WITH artifact
       ,COUNT(DISTINCT package.fqn) AS numberOfPackages

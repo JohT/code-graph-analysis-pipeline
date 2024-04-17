@@ -38,7 +38,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Artifact_Dependencies"
 
 # Preparation: Set number of packages and types per artifact
-execute_cypher_expect_results "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_number_of_packages_and_types_on_artifacts.cypher"
+execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_number_of_Java_packages_and_types_on_artifacts.cypher"
 
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Most_used_internal_dependencies_acreoss_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/MostUsedDependenciesAcrossArtifacts.csv"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Artifacts_with_dependencies_to_other_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/DependenciesAcrossArtifacts.csv"
