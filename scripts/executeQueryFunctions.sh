@@ -57,20 +57,28 @@ execute_cypher_http() {
     source "${SCRIPTS_DIR}/executeQuery.sh" "${@}" # "${@}": Get all function arguments and forward them
 }
 
-# Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using Neo4j's HTTP API
-execute_cypher_http_summarized() { 
-    results=$( execute_cypher_http "${@}" | wc -l ) # "${@}": Get all function arguments and forward them
-    results=$((results - 2))
+# Function to execute a cypher query from the given file (first and only argument) 
+# and returning number of resulting lines using Neo4j's HTTP API
+execute_cypher_http_number_of_lines_in_result() {
+    results=$( execute_cypher_http "${@}" | wc -l | awk '{print $1}' ) # "${@}"= Get all function arguments and forward them
+    results=$((results - 1))
+    echo "${results}"
+}
+
+# Function to execute a cypher query from the given file (first and only argument) 
+# with a summarized (console) output using Neo4j's HTTP API
+execute_cypher_http_summarized() {
+    cypherFileName="${1}" # Get the Cypher file name from the first argument
+    results=$( execute_cypher_http_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
     echo "$(basename -- "${cypherFileName}") (via http) result lines: ${results}"
 }
 
-# Function to execute a cypher query from the given file (first and only argument) that fails on no result using Neo4j's HTTP API
+# Function to execute a cypher query from the given file (first and only argument) 
+# that fails on no result using Neo4j's HTTP API
 execute_cypher_http_expect_results() { 
-    # Get the Cypher file name from the first argument
-    cypherFileName="${1}"
-    results=$( execute_cypher_http "${cypherFileName}" | wc -l )
-    results=$((results - 1))
-    if [[ "$results" -lt 1 ]]; then
+    cypherFileName="${1}" # Get the Cypher file name from the first argument
+    results=$( execute_cypher_http_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
+    if [[ "${results}" -lt 1 ]]; then
         echo "$(basename -- "${cypherFileName}") (via http) Error: Expected at least one entry but was ${results}" >&2
         exit 1
     fi
@@ -163,24 +171,27 @@ execute_cypher_shell() {
     echo "\"Source Cypher File:\",\"$(basename -- "${cypherFileName}")\""
 }
 
-# Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using "cypher-shell" provided by Neo4j
-execute_cypher_shell_summarized() { 
-    # Get the Cypher file name from the first argument
-    cypherFileName="${1}"
+# Function to execute a cypher query from the given file (first and only argument) 
+# and returning number of resulting lines using "cypher-shell" provided by Neo4j
+execute_cypher_shell_number_of_lines_in_result() {
+    results=$( execute_cypher_http "${@}" | wc -l | awk '{print $1}' ) # "${@}"= Get all function arguments and forward them
+    results=$((results - 1))
+    echo "${results}"
+}
 
-    results=$( execute_cypher_shell ${cypherFileName} | wc -l )
-    results=$((results - 2))
+# Function to execute a cypher query from the given file (first and only argument) 
+# with a summarized (console) output using "cypher-shell" provided by Neo4j
+execute_cypher_shell_summarized() { 
+    cypherFileName="${1}" # Get the Cypher file name from the first argument
+    results=$( execute_cypher_shell_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
     echo "$(basename -- "${cypherFileName}") (via cypher-shell) result lines: ${results}"
 }
 
 # Function to execute a cypher query from the given file (first and only argument) that fails on no result using "cypher-shell" provided by Neo4j
 execute_cypher_shell_expect_results() { 
-    # Get the Cypher file name from the first argument
-    cypherFileName="${1}"
-
-    results=$( execute_cypher_shell ${cypherFileName} | wc -l )
-    results=$((results - 2))
-    if [[ "$results" -lt 1 ]]; then
+    cypherFileName="${1}"  # Get the Cypher file name from the first argument
+    results=$( execute_cypher_shell_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
+    if [[ "${results}" -lt 1 ]]; then
         echo "$(basename -- "${cypherFileName}") (via cypher-shell) Error: Expected at least one entry but was ${results}" >&2
         exit 1
     fi
