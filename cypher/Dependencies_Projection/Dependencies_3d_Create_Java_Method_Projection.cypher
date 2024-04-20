@@ -1,6 +1,6 @@
-// Create directed projection for methods. Variables: dependencies_projection, dependencies_projection_weight_property
+// Create directed projection for public Java methods filtering out constructors, getters and setters. Variables: dependencies_projection, dependencies_projection_weight_property
 
- MATCH (source:Method)-[r:INVOKES]->(target:Method)
+ MATCH (source:Java:Method)-[r:INVOKES]->(target:Java:Method)
  WHERE source.effectiveLineCount > 1
    AND target.effectiveLineCount > 1
    AND source.visibility = 'public'

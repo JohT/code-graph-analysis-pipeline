@@ -5,7 +5,7 @@
 # The reports (csv files) will be written into the sub directory reports/centrality-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, cleanupAfterReportGeneration.sh
+# Requires executeQueryFunctions.sh, projectionFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
@@ -31,67 +31,13 @@ echo "centralityCsv: CYPHER_DIR=$CYPHER_DIR"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
-source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+# Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
 REPORT_NAME="centrality-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
-
-# Centrality preparation for dependencies between Artifacts, Packages and Types.
-# Selects the dependent nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-#
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Type"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-createDependencyProjection() {
-    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
-
-# Centrality preparation for Type nodes 
-# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-#
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-createTypeProjection() {
-    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
-
-# Centrality preparation for method calls 
-# Selects the method nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-#
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-createMethodProjection() {
-    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Method_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_1_Delete_Projection.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Methods_2_Create_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
 
 # Apply the centrality algorithm "Page Rank".
 # 
@@ -397,7 +343,7 @@ ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Artifact Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-if createDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     runCentralityAlgorithms "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 else
     echo "centralityCsv: No data. Artifacts analysis skipped."
@@ -411,7 +357,7 @@ PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterface
 
 # Package Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-if createDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     runCentralityAlgorithms "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 else
     echo "centralityCsv: No data. Package analysis skipped."
@@ -425,7 +371,7 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-if createTypeProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
+if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
     runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 else
     echo "centralityCsv: No data. Type analysis skipped."
@@ -439,7 +385,7 @@ METHOD_WEIGHT="dependencies_projection_weight_property="
 
 # Method Centrality
 echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing method dependencies..."
-if createMethodProjection "${METHOD_PROJECTION}"; then
+if createDirectedJavaMethodDependencyProjection "${METHOD_PROJECTION}"; then
     runCentralityAlgorithms "${METHOD_PROJECTION}" "${METHOD_NODE}" "${METHOD_WEIGHT}"
 else
     echo "centralityCsv: No data. Method analysis skipped."

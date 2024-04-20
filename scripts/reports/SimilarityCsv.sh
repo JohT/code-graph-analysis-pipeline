@@ -5,7 +5,7 @@
 # The reports (csv files) will be written into the sub directory reports/similarity-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, cleanupAfterReportGeneration.sh
+# Requires executeQueryFunctions.sh, projectionFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -31,51 +31,13 @@ echo "similarityCsv: CYPHER_DIR=$CYPHER_DIR"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
-source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+# Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
 REPORT_NAME="similarity-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
-
-# Similarity Preparation
-# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-#
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-createProjection() {
-    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
-
-# Similarity Preparation for Types
-# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-createTypeProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
 
 # Apply the similarity algorithm "Similarity".
 # 
@@ -118,7 +80,7 @@ ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Artifact Similarity
 echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-if createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time similarity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 else
     echo "similarityCsv: No data. Artifact analysis skipped."
@@ -132,7 +94,7 @@ PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterface
 
 # Package Similarity
 echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-if createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time similarity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 else
     echo "similarityCsv: No data. Package analysis skipped."
@@ -146,7 +108,7 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Similarity
 echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-if createTypeProjection "${TYPE_PROJECTION}"; then
+if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     time similarity "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 else
     echo "similarityCsv: No data. Type analysis skipped."
