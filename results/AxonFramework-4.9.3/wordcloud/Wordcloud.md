@@ -33,75 +33,75 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>modelling</td>
+      <td>test</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>command</td>
+      <td>aggregate</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>inspection</td>
+      <td>matchers</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>legacyjpa</td>
-    </tr>
-    <tr>
-      <th>6</th>
       <td>saga</td>
     </tr>
     <tr>
+      <th>6</th>
+      <td>server</td>
+    </tr>
+    <tr>
       <th>7</th>
-      <td>metamodel</td>
+      <td>utils</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>repository</td>
+      <td>deadline</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>inmemory</td>
+      <td>eventscheduler</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>jdbc</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>jpa</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>legacyjpa</td>
-    </tr>
-    <tr>
-      <th>13</th>
       <td>org</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>11</th>
       <td>axonframework</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>12</th>
       <td>commandhandling</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>13</th>
       <td>callbacks</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>14</th>
       <td>distributed</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>15</th>
       <td>commandfilter</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>16</th>
       <td>gateway</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>common</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>annotation</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>caching</td>
     </tr>
   </tbody>
 </table>
