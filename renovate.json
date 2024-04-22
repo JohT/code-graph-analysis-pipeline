@@ -22,6 +22,18 @@
     },
     {
       "fileMatch": [
+        "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "REACT_ROUTER_VERSION:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "remix-run/react-router",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^react-router@?(?<version>.*?)$"
+    },
+    {
+      "fileMatch": [
         "README.md"
       ],
       "matchStrings": [

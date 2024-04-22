@@ -81,4 +81,4 @@ Please read through the [Prerequisites](./README.md#🛠-prerequisites) in the [
     Then open your browser and login to your [local Neo4j Web UI](http://localhost:7474/browser) with "neo4j" as user and the initial password you've chosen.
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
-👉 See [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) on how to do this within a GitHub Actions Workflow.
+👉 See [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.

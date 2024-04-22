@@ -10,7 +10,9 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 - Analyze static code structure as a graph
 - **🌟New🌟:** Also supports Typescript
-- Fully automated [pipeline](./.github/workflows/java-code-analysis.yml) from tool installation to report generation
+- Fully automated [pipeline for Java](./.github/workflows/java-code-analysis.yml) from tool installation to report generation
+- Fully automated [pipeline for Typescript](./.github/workflows/typescript-code-analysis.yml) from tool installation to report generation
+- Fully automated [local run](./GETTING_STARTED.md)
 - More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
 - Jupyter notebook reports for dependencies, metrics, visibility and many more
 - Graph structure visualization
@@ -97,7 +99,7 @@ See [GETTING_STARTED.md](./GETTING_STARTED.md) on how to get started on your loc
 
 ## 🏗 Pipeline and Tools
 
-The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
+The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
 
 - Use [GitHub Actions](https://docs.github.com/de/actions) Linux Runner
 - [Checkout GIT Repository](https://github.com/actions/checkout)
@@ -175,7 +177,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 - How can i add another code basis to be analyzed automatically?  
   👉 Create a new artifacts download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
-  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/code-structure-analysis.yml).
+  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/java-code-analysis.yml).
 
 - How can i trigger a full rescan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
