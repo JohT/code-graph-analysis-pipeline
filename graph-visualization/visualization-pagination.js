@@ -51,10 +51,14 @@ function paginatedGraphVisualization({
 
     neoViz.registerOnEvent(NeoVis.NeoVisEvents.CompletionEvent, (event) => {
       if (event.recordCount == 0) {
-        if (index=0) {
-          log.error('No query results. Nothing to visualize. Check the query and if the nodes and properties have been written.')
+        if (index === 0) {
+          const message = 'No query results. Nothing to visualize. Check the query and if the nodes and properties have been written.';
+          console.warn(message)
+          indexedVisualizationContainer.classList.add(classOfFailedVisualization);
+          indexedVisualizationContainer.textContent = message;
+        } else {
+          indexedVisualizationContainer.remove(); // remove an empty canvas
         }
-        indexedVisualizationContainer.remove(); // remove an empty canvas
         markVisualizationAsFinished(indexedVisualizationContainer, 'No query results (anymore)');
       } else {
         setTimeout(() => {
