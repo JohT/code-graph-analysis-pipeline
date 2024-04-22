@@ -1,4 +1,4 @@
-name: Code Structure Analysis
+name: Java Code Structure Graph Analysis
 
 on:
   push:
@@ -50,6 +50,8 @@ jobs:
     env: 
       CI_COMMIT_MESSAGE: Automated code structure analysis reports (CI)
       CI_COMMIT_AUTHOR: ${{ github.event.repository.name }} Continuous Integration
+      PROJECT_NAME: AxonFramework
+      # Version variable name matches renovate.json configuration entry
       AXON_FRAMEWORK_VERSION: 4.9.3
 
     steps:
@@ -111,16 +113,16 @@ jobs:
         key:
           ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
 
-    - name: Download AxonFramework artifacts
+    - name: Download ${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}
       working-directory: temp
       run: |
-        mkdir -p AxonFramework-${{ env.AXON_FRAMEWORK_VERSION }}
-        cd AxonFramework-${{ env.AXON_FRAMEWORK_VERSION }}
+        mkdir -p ${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}
+        cd ${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}
         echo "Working directory: $( pwd -P )"
         ./../../scripts/downloader/downloadAxonFramework.sh ${{ env.AXON_FRAMEWORK_VERSION }}
 
-    - name: Analyze AxonFramework
-      working-directory: temp/AxonFramework-${{ env.AXON_FRAMEWORK_VERSION }}
+    - name: Analyze ${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}
+      working-directory: temp/${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}
       # Shell type can be skipped if jupyter notebook reports (and therefore conda) aren't needed
       shell: bash -el {0}
       env:
