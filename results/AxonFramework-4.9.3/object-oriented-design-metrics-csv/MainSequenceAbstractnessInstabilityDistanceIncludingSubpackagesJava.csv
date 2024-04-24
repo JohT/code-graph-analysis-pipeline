@@ -1,4 +1,4 @@
-"artifactName","fullQualifiedPackageName","packageName","distance","abstractness","instability","typesInPackage","Source Cypher File: Metrics/Calculate_distance_between_abstractness_and_instability_including_subpackages.cypher"
+"artifactName","fullQualifiedName","name","distance","abstractness","instability","elementsCount","Source Cypher File: Metrics/Calculate_distance_between_abstractness_and_instability_for_Java_including_subpackages.cypher"
 "axon-messaging-4.9.3","org.axonframework.tracing","tracing",0.7338677354709419,0.2,0.06613226452905811,25,""
 "axon-messaging-4.9.3","org.axonframework.common.lock","lock",0.711038961038961,0.18181818181818182,0.10714285714285714,11,""
 "axon-messaging-4.9.3","org.axonframework.common.digest","digest",0.6666666666666667,0,0.3333333333333333,1,""

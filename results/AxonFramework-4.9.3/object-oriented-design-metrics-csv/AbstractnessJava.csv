@@ -1,4 +1,4 @@
-"artifactName","fullQualifiedPackageName","packageName","abstractness","numberAbstractTypes","numberTypes","Source Cypher File: Metrics/Calculate_and_set_Abstractness_including_Counts.cypher"
+"artifactName","fullQualifiedPackageName","packageName","abstractness","numberAbstractTypes","numberTypes","Source Cypher File: Metrics/Calculate_and_set_Abstractness_for_Java.cypher"
 "axon-eventsourcing-4.9.3","org.axonframework.eventsourcing.eventstore.legacyjpa","legacyjpa",0,0,10,""
 "axon-messaging-4.9.3","org.axonframework.commandhandling.distributed.commandfilter","commandfilter",0,0,7,""
 "axon-messaging-4.9.3","org.axonframework.deadline.dbscheduler","dbscheduler",0,0,7,""

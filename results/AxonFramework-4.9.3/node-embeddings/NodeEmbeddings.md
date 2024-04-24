@@ -34,103 +34,11 @@ In future it might make sense to also run a community detection algorithm co-loc
 
 Create an in-memory undirected graph projection containing Package nodes (vertices) and their dependencies (edges).
 
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>graphName</th>
-      <th>fromGraphName</th>
-      <th>nodeCount</th>
-      <th>relationshipCount</th>
-      <th>nodeFilter</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>package-embeddings-notebook-cleaned</td>
-      <td>package-embeddings-notebook</td>
-      <td>93</td>
-      <td>690</td>
-      <td>n.outgoingDependencies &gt; 0 OR n.incomingDepend...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 ### Generate Node Embeddings using Fast Random Projection (Fast RP)
 
 [Fast Random Projection](https://neo4j.com/docs/graph-data-science/current/machine-learning/node-embeddings/fastrp) calculates an array of floats (length = embedding dimension) for every node in the graph. These numbers approximate the relationship and similarity information of each node and are called node embeddings. Random Projections is used to reduce the dimensionality of the node feature space while preserving pairwise distances.
 
 The result can be used in machine learning as features approximating the graph structure. It can also be used to further reduce the dimensionality to visualize the graph in a 2D plot, as we will be doing here.
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>codeUnitName</th>
-      <th>communityId</th>
-      <th>centrality</th>
-      <th>artifactName</th>
-      <th>embedding</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>0</td>
-      <td>0.080026</td>
-      <td>axon-test-4.9.3</td>
-      <td>[0.025213003158569336, -0.010468095541000366, ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>axon-test-4.9.3</td>
-      <td>[0.022677278146147728, -0.015194494277238846, ...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>0</td>
-      <td>0.033857</td>
-      <td>axon-test-4.9.3</td>
-      <td>[0.027307655662298203, -0.01701384223997593, -...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>org.axonframework.test.saga</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>axon-test-4.9.3</td>
-      <td>[0.03163512051105499, -0.013894213363528252, -...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>org.axonframework.test.server</td>
-      <td>1</td>
-      <td>0.016234</td>
-      <td>axon-test-4.9.3</td>
-      <td>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 ### Dimensionality reduction with t-distributed stochastic neighbor embedding (t-SNE)
 
@@ -143,86 +51,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.025s...
+    [t-SNE] Computed neighbors for 93 samples in 0.228s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.614793
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.583450
-    [t-SNE] KL divergence after 1000 iterations: 0.100103
-
-
-
-
-
-    (93, 2)
-
-
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>codeUnit</th>
-      <th>artifact</th>
-      <th>communityId</th>
-      <th>centrality</th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.080026</td>
-      <td>-0.681052</td>
-      <td>-0.245069</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>-0.804065</td>
-      <td>-0.412035</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.033857</td>
-      <td>-0.828161</td>
-      <td>-0.409188</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>org.axonframework.test.saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>-1.048978</td>
-      <td>-0.155949</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>org.axonframework.test.server</td>
-      <td>axon-test-4.9.3</td>
-      <td>1</td>
-      <td>0.016234</td>
-      <td>-2.533404</td>
-      <td>-1.923344</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+    [t-SNE] Mean sigma: 0.617398
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 51.613049
+    [t-SNE] KL divergence after 1000 iterations: 0.067252
 
 
 

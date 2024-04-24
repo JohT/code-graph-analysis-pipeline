@@ -23,7 +23,7 @@ If these packages get changed, the incoming dependencies might be affected by th
 Since Java Packages are organized hierarchically, incoming dependencies can be count for every package in isolation or by including all of its sub-packages. The latter one is done without top level packages like for example "org" or "org.company" by assuring that only packages are considered that have other packages or types in the same hierarchy level ("siblings").
 
 #### Table 1a
-- Show the top 20 packages with the most incoming dependencies
+- Show the top 20 Java Packages with the most incoming dependencies
 - Set the "incomingDependencies" properties on Package nodes.
 
 
@@ -35,6 +35,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr style="text-align: right;">
       <th></th>
       <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
       <th>packageName</th>
       <th>incomingDependencies</th>
       <th>incomingDependenciesWeight</th>
@@ -49,6 +50,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>0</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
+      <td>messaging</td>
       <td>8706</td>
       <td>35171</td>
       <td>329</td>
@@ -60,6 +62,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>1</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
+      <td>eventhandling</td>
       <td>5417</td>
       <td>34593</td>
       <td>302</td>
@@ -71,6 +74,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>2</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
       <td>1641</td>
       <td>7998</td>
       <td>126</td>
@@ -82,6 +86,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>3</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.serialization</td>
+      <td>serialization</td>
       <td>1240</td>
       <td>6854</td>
       <td>138</td>
@@ -93,6 +98,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>4</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
       <td>1057</td>
       <td>5648</td>
       <td>151</td>
@@ -104,6 +110,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>5</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common</td>
+      <td>common</td>
       <td>926</td>
       <td>2235</td>
       <td>338</td>
@@ -115,6 +122,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>6</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
+      <td>tracing</td>
       <td>516</td>
       <td>2865</td>
       <td>93</td>
@@ -126,6 +134,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>7</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.transaction</td>
+      <td>transaction</td>
       <td>314</td>
       <td>1182</td>
       <td>76</td>
@@ -137,6 +146,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>8</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command</td>
+      <td>command</td>
       <td>270</td>
       <td>1055</td>
       <td>79</td>
@@ -148,6 +158,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>9</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga</td>
+      <td>saga</td>
       <td>258</td>
       <td>1531</td>
       <td>60</td>
@@ -159,6 +170,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>10</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.unitofwork</td>
+      <td>unitofwork</td>
       <td>256</td>
       <td>1406</td>
       <td>82</td>
@@ -170,6 +182,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>11</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline</td>
+      <td>deadline</td>
       <td>238</td>
       <td>1845</td>
       <td>42</td>
@@ -181,6 +194,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>12</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
+      <td>jdbc</td>
       <td>218</td>
       <td>1404</td>
       <td>26</td>
@@ -192,6 +206,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>13</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.queryhandling</td>
+      <td>queryhandling</td>
       <td>218</td>
       <td>1107</td>
       <td>55</td>
@@ -203,6 +218,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>14</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.deadletter</td>
+      <td>deadletter</td>
       <td>200</td>
       <td>1548</td>
       <td>35</td>
@@ -214,6 +230,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>15</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.monitoring</td>
+      <td>monitoring</td>
       <td>188</td>
       <td>640</td>
       <td>39</td>
@@ -225,6 +242,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>16</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>eventstore</td>
       <td>169</td>
       <td>816</td>
       <td>60</td>
@@ -236,6 +254,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>17</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing</td>
+      <td>eventsourcing</td>
       <td>145</td>
       <td>701</td>
       <td>44</td>
@@ -247,6 +266,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>18</th>
       <td>axon-configuration-4.9.3</td>
       <td>org.axonframework.config</td>
+      <td>config</td>
       <td>119</td>
       <td>1560</td>
       <td>35</td>
@@ -258,6 +278,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>19</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling.gateway</td>
+      <td>gateway</td>
       <td>97</td>
       <td>395</td>
       <td>33</td>
@@ -272,7 +293,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
 
 
 #### Table 1b
-- Show the top 20 packages including their sub-packages with the most incoming dependencies
+- Show the top 20 Java Packages including their sub-packages with the most incoming dependencies
 - Set the property "incomingDependenciesIncludingSubpackages" on Package nodes.
 
 
@@ -284,6 +305,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr style="text-align: right;">
       <th></th>
       <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
       <th>packageName</th>
       <th>incomingDependencies</th>
       <th>incomingDependenciesWeight</th>
@@ -298,6 +320,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>0</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
+      <td>messaging</td>
       <td>7692</td>
       <td>34146</td>
       <td>328</td>
@@ -309,6 +332,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>1</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
+      <td>eventhandling</td>
       <td>3139</td>
       <td>18167</td>
       <td>143</td>
@@ -320,6 +344,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>2</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common</td>
+      <td>common</td>
       <td>1269</td>
       <td>3934</td>
       <td>360</td>
@@ -331,6 +356,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>3</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.serialization</td>
+      <td>serialization</td>
       <td>1076</td>
       <td>6084</td>
       <td>92</td>
@@ -342,6 +368,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>4</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.annotation</td>
+      <td>annotation</td>
       <td>938</td>
       <td>5202</td>
       <td>106</td>
@@ -353,6 +380,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>5</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
       <td>784</td>
       <td>4609</td>
       <td>57</td>
@@ -364,6 +392,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>6</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
+      <td>tracing</td>
       <td>466</td>
       <td>2627</td>
       <td>72</td>
@@ -375,6 +404,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>7</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.transaction</td>
+      <td>transaction</td>
       <td>308</td>
       <td>1166</td>
       <td>73</td>
@@ -386,6 +416,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>8</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.unitofwork</td>
+      <td>unitofwork</td>
       <td>219</td>
       <td>1143</td>
       <td>71</td>
@@ -397,6 +428,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>9</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.monitoring</td>
+      <td>monitoring</td>
       <td>178</td>
       <td>604</td>
       <td>34</td>
@@ -408,6 +440,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>10</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.deadletter</td>
+      <td>deadletter</td>
       <td>167</td>
       <td>1382</td>
       <td>20</td>
@@ -419,6 +452,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>11</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command</td>
+      <td>command</td>
       <td>160</td>
       <td>607</td>
       <td>37</td>
@@ -430,6 +464,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>12</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline</td>
+      <td>deadline</td>
       <td>114</td>
       <td>1079</td>
       <td>19</td>
@@ -441,6 +476,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>13</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing</td>
+      <td>eventsourcing</td>
       <td>105</td>
       <td>505</td>
       <td>14</td>
@@ -452,6 +488,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>14</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>eventstore</td>
       <td>85</td>
       <td>313</td>
       <td>23</td>
@@ -463,6 +500,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>15</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga</td>
+      <td>saga</td>
       <td>75</td>
       <td>247</td>
       <td>18</td>
@@ -474,6 +512,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>16</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.lifecycle</td>
+      <td>lifecycle</td>
       <td>65</td>
       <td>197</td>
       <td>19</td>
@@ -485,6 +524,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>17</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
+      <td>responsetypes</td>
       <td>61</td>
       <td>436</td>
       <td>14</td>
@@ -496,6 +536,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>18</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.queryhandling</td>
+      <td>queryhandling</td>
       <td>57</td>
       <td>192</td>
       <td>8</td>
@@ -507,6 +548,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>19</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.tokenstore</td>
+      <td>tokenstore</td>
       <td>47</td>
       <td>207</td>
       <td>21</td>
@@ -514,6 +556,37 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>3</td>
       <td>1</td>
     </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### Table 1c
+- Show the top 20 Typescript modules with the most incoming dependencies
+- Set the property "incomingDependencies" on Module nodes if not already done.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fullQualifiedModuleName</th>
+      <th>moduleName</th>
+      <th>incomingDependencies</th>
+      <th>incomingDependenciesWeight</th>
+      <th>incomingDependentAbstractTypes</th>
+      <th>incomingDependentAbstractTypeWeight</th>
+      <th>incomingDependentModules</th>
+      <th>incomingDependentPackages</th>
+      <th>externalModuleExamples</th>
+      <th>projectNames</th>
+    </tr>
+  </thead>
+  <tbody>
   </tbody>
 </table>
 </div>
@@ -531,7 +604,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
 
 #### Table 2a
 
-- Show the top 20 packages with the most outgoing dependencies
+- Show the top 20 Java Packages with the most outgoing dependencies
 - Set the "outgoingDependencies" properties on Package nodes.
 
 
@@ -543,6 +616,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
     <tr style="text-align: right;">
       <th></th>
       <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
       <th>packageName</th>
       <th>outgoingDependencies</th>
       <th>outgoingDependenciesWeight</th>
@@ -557,6 +631,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>0</th>
       <td>axon-configuration-4.9.3</td>
       <td>org.axonframework.config</td>
+      <td>config</td>
       <td>10226</td>
       <td>43714</td>
       <td>242</td>
@@ -568,6 +643,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>1</th>
       <td>axon-test-4.9.3</td>
       <td>org.axonframework.test.aggregate</td>
+      <td>aggregate</td>
       <td>2223</td>
       <td>9766</td>
       <td>92</td>
@@ -579,6 +655,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>2</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
+      <td>eventhandling</td>
       <td>1565</td>
       <td>8066</td>
       <td>160</td>
@@ -590,6 +667,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>3</th>
       <td>axon-disruptor-4.9.3</td>
       <td>org.axonframework.disruptor.commandhandling</td>
+      <td>commandhandling</td>
       <td>1487</td>
       <td>7444</td>
       <td>85</td>
@@ -601,6 +679,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>4</th>
       <td>axon-test-4.9.3</td>
       <td>org.axonframework.test.saga</td>
+      <td>saga</td>
       <td>1487</td>
       <td>5146</td>
       <td>82</td>
@@ -612,6 +691,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>5</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
+      <td>jdbc</td>
       <td>1340</td>
       <td>8129</td>
       <td>51</td>
@@ -623,6 +703,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>6</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.queryhandling</td>
+      <td>queryhandling</td>
       <td>1141</td>
       <td>7105</td>
       <td>86</td>
@@ -634,6 +715,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>7</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing</td>
+      <td>eventsourcing</td>
       <td>1009</td>
       <td>4309</td>
       <td>95</td>
@@ -645,6 +727,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>8</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.pooled</td>
+      <td>pooled</td>
       <td>892</td>
       <td>5306</td>
       <td>56</td>
@@ -656,6 +739,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>9</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command</td>
+      <td>command</td>
       <td>847</td>
       <td>4243</td>
       <td>94</td>
@@ -667,6 +751,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>10</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
       <td>781</td>
       <td>4141</td>
       <td>73</td>
@@ -678,6 +763,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>11</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling.distributed</td>
+      <td>distributed</td>
       <td>738</td>
       <td>2842</td>
       <td>74</td>
@@ -689,6 +775,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>12</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
       <td>691</td>
       <td>2432</td>
       <td>74</td>
@@ -700,6 +787,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>13</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>eventstore</td>
       <td>615</td>
       <td>2542</td>
       <td>65</td>
@@ -711,6 +799,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>14</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.deadletter.jdbc</td>
+      <td>jdbc</td>
       <td>581</td>
       <td>4165</td>
       <td>49</td>
@@ -722,6 +811,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>15</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.dbscheduler</td>
+      <td>dbscheduler</td>
       <td>488</td>
       <td>2642</td>
       <td>40</td>
@@ -733,6 +823,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>16</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.quartz</td>
+      <td>quartz</td>
       <td>453</td>
       <td>2099</td>
       <td>40</td>
@@ -744,6 +835,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>17</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling.gateway</td>
+      <td>gateway</td>
       <td>443</td>
       <td>1608</td>
       <td>56</td>
@@ -755,6 +847,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>18</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga</td>
+      <td>saga</td>
       <td>432</td>
       <td>1954</td>
       <td>62</td>
@@ -766,6 +859,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>19</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.jobrunr</td>
+      <td>jobrunr</td>
       <td>419</td>
       <td>1803</td>
       <td>37</td>
@@ -781,7 +875,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
 
 #### Table 2b
 
-- Show the top 20 packages including their sub-packages with the most outgoing dependencies
+- Show the top 20 Java Packages including their sub-packages with the most outgoing dependencies
 - Set the property "outgoingDependenciesIncludingSubpackages" on Package nodes.
 
 
@@ -793,6 +887,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
     <tr style="text-align: right;">
       <th></th>
       <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
       <th>packageName</th>
       <th>outgoingDependencies</th>
       <th>outgoingDependenciesWeight</th>
@@ -807,6 +902,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>0</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
+      <td>eventhandling</td>
       <td>588</td>
       <td>2506</td>
       <td>106</td>
@@ -818,6 +914,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>1</th>
       <td>axon-configuration-4.9.3</td>
       <td>org.axonframework.config</td>
+      <td>config</td>
       <td>542</td>
       <td>1866</td>
       <td>202</td>
@@ -829,6 +926,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>2</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing</td>
+      <td>eventsourcing</td>
       <td>381</td>
       <td>1735</td>
       <td>95</td>
@@ -840,6 +938,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>3</th>
       <td>axon-test-4.9.3</td>
       <td>org.axonframework.test</td>
+      <td>test</td>
       <td>275</td>
       <td>1022</td>
       <td>100</td>
@@ -851,6 +950,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>4</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>eventstore</td>
       <td>246</td>
       <td>1203</td>
       <td>58</td>
@@ -862,6 +962,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>5</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command</td>
+      <td>command</td>
       <td>230</td>
       <td>990</td>
       <td>63</td>
@@ -873,6 +974,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>6</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.deadletter</td>
+      <td>deadletter</td>
       <td>208</td>
       <td>1215</td>
       <td>57</td>
@@ -884,6 +986,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>7</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling</td>
+      <td>commandhandling</td>
       <td>195</td>
       <td>591</td>
       <td>67</td>
@@ -895,6 +998,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>8</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline</td>
+      <td>deadline</td>
       <td>190</td>
       <td>800</td>
       <td>48</td>
@@ -906,6 +1010,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>9</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
+      <td>messaging</td>
       <td>183</td>
       <td>593</td>
       <td>27</td>
@@ -917,6 +1022,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>10</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.queryhandling</td>
+      <td>queryhandling</td>
       <td>175</td>
       <td>746</td>
       <td>51</td>
@@ -928,6 +1034,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>11</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga</td>
+      <td>saga</td>
       <td>156</td>
       <td>603</td>
       <td>58</td>
@@ -939,6 +1046,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>12</th>
       <td>axon-test-4.9.3</td>
       <td>org.axonframework.test.aggregate</td>
+      <td>aggregate</td>
       <td>150</td>
       <td>670</td>
       <td>74</td>
@@ -950,6 +1058,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>13</th>
       <td>axon-disruptor-4.9.3</td>
       <td>org.axonframework.disruptor.commandhandling</td>
+      <td>commandhandling</td>
       <td>131</td>
       <td>607</td>
       <td>63</td>
@@ -961,6 +1070,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>14</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
       <td>119</td>
       <td>551</td>
       <td>51</td>
@@ -972,6 +1082,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>15</th>
       <td>axon-test-4.9.3</td>
       <td>org.axonframework.test.saga</td>
+      <td>saga</td>
       <td>112</td>
       <td>469</td>
       <td>61</td>
@@ -983,6 +1094,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>16</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.pooled</td>
+      <td>pooled</td>
       <td>106</td>
       <td>597</td>
       <td>35</td>
@@ -994,6 +1106,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>17</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga.repository</td>
+      <td>repository</td>
       <td>104</td>
       <td>558</td>
       <td>34</td>
@@ -1005,6 +1118,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>18</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling.distributed</td>
+      <td>distributed</td>
       <td>93</td>
       <td>319</td>
       <td>48</td>
@@ -1016,6 +1130,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>19</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.scheduling</td>
+      <td>scheduling</td>
       <td>88</td>
       <td>362</td>
       <td>22</td>
@@ -1023,6 +1138,38 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>9</td>
       <td>0</td>
     </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### Table 2c
+
+- Show the top 20 Typescript modules with the most outgoing dependencies
+- Set the "outgoingDependencies" properties on Module nodes if not already done
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fullQualifiedModuleName</th>
+      <th>moduleName</th>
+      <th>outgoingDependencies</th>
+      <th>outgoingDependenciesWeight</th>
+      <th>outgoingDependentAbstractTypes</th>
+      <th>outgoingDependentAbstractTypeWeight</th>
+      <th>outgoingDependentModules</th>
+      <th>outgoingDependentPackages</th>
+      <th>externalModuleExamples</th>
+      <th>projectNames</th>
+    </tr>
+  </thead>
+  <tbody>
   </tbody>
 </table>
 </div>
@@ -1043,7 +1190,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
 
 #### Table 3a
 
-- Show the top 20 packages with the lowest *Instability*
+- Show the top 20 Java Packages with the lowest *Instability*
 - Set the property "instability" on Package nodes. 
 
 
@@ -1054,8 +1201,9 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>p.fqn</th>
-      <th>p.name</th>
+      <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
+      <th>packageName</th>
       <th>instability</th>
       <th>instabilityTypes</th>
       <th>instabilityInterfaces</th>
@@ -1076,6 +1224,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
       <td>0.015047</td>
@@ -1096,6 +1245,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.transaction</td>
       <td>transaction</td>
       <td>0.018750</td>
@@ -1116,6 +1266,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>2</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common</td>
       <td>common</td>
       <td>0.024236</td>
@@ -1136,6 +1287,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>3</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.scheduling</td>
       <td>scheduling</td>
       <td>0.090909</td>
@@ -1156,6 +1308,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>4</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.monitoring</td>
       <td>monitoring</td>
       <td>0.100478</td>
@@ -1176,6 +1329,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>5</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.annotation</td>
       <td>annotation</td>
       <td>0.120000</td>
@@ -1196,6 +1350,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>6</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.lifecycle</td>
       <td>lifecycle</td>
       <td>0.123457</td>
@@ -1216,6 +1371,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>7</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.serialization</td>
       <td>serialization</td>
       <td>0.124294</td>
@@ -1236,6 +1392,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>8</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.stream</td>
       <td>stream</td>
       <td>0.147059</td>
@@ -1256,6 +1413,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>9</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
       <td>tracing</td>
       <td>0.191223</td>
@@ -1276,6 +1434,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>10</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.annotation</td>
       <td>annotation</td>
       <td>0.221649</td>
@@ -1296,6 +1455,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>11</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
       <td>eventhandling</td>
       <td>0.224148</td>
@@ -1316,6 +1476,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>12</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.jpa</td>
       <td>jpa</td>
       <td>0.272727</td>
@@ -1336,6 +1497,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>13</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling</td>
       <td>commandhandling</td>
       <td>0.296312</td>
@@ -1356,6 +1518,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>14</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.legacyjpa</td>
       <td>legacyjpa</td>
       <td>0.300000</td>
@@ -1376,6 +1539,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>15</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.serialization.upcasting</td>
       <td>upcasting</td>
       <td>0.312500</td>
@@ -1396,6 +1560,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>16</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.unitofwork</td>
       <td>unitofwork</td>
       <td>0.324538</td>
@@ -1416,6 +1581,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>17</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.digest</td>
       <td>digest</td>
       <td>0.333333</td>
@@ -1436,6 +1602,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>18</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.deadletter</td>
       <td>deadletter</td>
       <td>0.344262</td>
@@ -1456,6 +1623,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>19</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.lock</td>
       <td>lock</td>
       <td>0.352113</td>
@@ -1482,7 +1650,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
 
 #### Table 3b
 
-- Show the top 20 packages including their sub-packages with the lowest *Instability*
+- Show the top 20 Java Packages including their sub-packages with the lowest *Instability*
 - Set the property "instabilityIncludingSubpackages" on Package nodes. 
 
 
@@ -1493,8 +1661,9 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>p.fqn</th>
-      <th>p.name</th>
+      <th>artifactName</th>
+      <th>fullQualifiedPackageName</th>
+      <th>packageName</th>
       <th>instability</th>
       <th>instabilityTypes</th>
       <th>instabilityInterfaces</th>
@@ -1515,6 +1684,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common</td>
       <td>common</td>
       <td>0.003925</td>
@@ -1535,6 +1705,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
       <td>messaging</td>
       <td>0.023238</td>
@@ -1555,6 +1726,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>2</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.monitoring</td>
       <td>monitoring</td>
       <td>0.043011</td>
@@ -1575,6 +1747,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>3</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.serialization</td>
       <td>serialization</td>
       <td>0.044405</td>
@@ -1595,6 +1768,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>4</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.lifecycle</td>
       <td>lifecycle</td>
       <td>0.057971</td>
@@ -1615,6 +1789,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>5</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
       <td>tracing</td>
       <td>0.066132</td>
@@ -1635,6 +1810,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>6</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.annotation</td>
       <td>annotation</td>
       <td>0.074951</td>
@@ -1655,6 +1831,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>7</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.annotation</td>
       <td>annotation</td>
       <td>0.086957</td>
@@ -1675,6 +1852,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>8</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.lock</td>
       <td>lock</td>
       <td>0.107143</td>
@@ -1695,6 +1873,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>9</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.unitofwork</td>
       <td>unitofwork</td>
       <td>0.113360</td>
@@ -1715,6 +1894,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>10</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
       <td>eventhandling</td>
       <td>0.157768</td>
@@ -1735,6 +1915,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>11</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.property</td>
       <td>property</td>
       <td>0.166667</td>
@@ -1755,6 +1936,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>12</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>responsetypes</td>
       <td>0.175676</td>
@@ -1775,6 +1957,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>13</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.jdbc</td>
       <td>jdbc</td>
       <td>0.177778</td>
@@ -1795,6 +1978,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>14</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.jpa</td>
       <td>jpa</td>
       <td>0.187500</td>
@@ -1815,6 +1999,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>15</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.deadletter</td>
       <td>deadletter</td>
       <td>0.189320</td>
@@ -1835,6 +2020,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>16</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling</td>
       <td>commandhandling</td>
       <td>0.199183</td>
@@ -1855,6 +2041,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>17</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.legacyjpa</td>
       <td>legacyjpa</td>
       <td>0.214286</td>
@@ -1875,6 +2062,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>18</th>
+      <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.snapshotting</td>
       <td>snapshotting</td>
       <td>0.230769</td>
@@ -1895,6 +2083,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>19</th>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.correlation</td>
       <td>correlation</td>
       <td>0.266667</td>
@@ -1913,6 +2102,43 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0</td>
       <td>1</td>
     </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### Table 3c
+
+- Show the top 20 Typescript modules with the lowest *Instability*
+- Set the property "instability" on Module nodes if not already done
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>projectName</th>
+      <th>fullQualifiedModuleName</th>
+      <th>moduleName</th>
+      <th>instability</th>
+      <th>instabilityAbstractTypes</th>
+      <th>instabilityModules</th>
+      <th>instabilityPackages</th>
+      <th>module.outgoingDependencies</th>
+      <th>module.incomingDependencies</th>
+      <th>module.outgoingDependentAbstractTypes</th>
+      <th>module.incomingDependentAbstractTypes</th>
+      <th>module.outgoingDependentModules</th>
+      <th>module.incomingDependentModules</th>
+      <th>module.outgoingDependentPackages</th>
+      <th>module.incomingDependentPackages</th>
+    </tr>
+  </thead>
+  <tbody>
   </tbody>
 </table>
 </div>
@@ -2543,7 +2769,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <th>abstractness</th>
       <th>numberAbstractTypes</th>
       <th>numberTypes</th>
-      <th>numberOfIncludedSubPackages</th>
       <th>maxSubpackageDepth</th>
     </tr>
   </thead>
@@ -2557,7 +2782,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>10</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2567,7 +2791,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>7</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2579,7 +2802,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>7</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2589,7 +2811,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>7</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2601,7 +2822,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>7</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>5</th>
@@ -2611,7 +2831,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>7</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2623,7 +2842,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>6</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
@@ -2633,7 +2851,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>5</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2645,7 +2862,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>4</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>9</th>
@@ -2655,7 +2871,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>4</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2667,7 +2882,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>4</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>11</th>
@@ -2677,7 +2891,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>4</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2689,7 +2902,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>4</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>13</th>
@@ -2699,7 +2911,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>3</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2711,7 +2922,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>15</th>
@@ -2721,7 +2931,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>3</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2733,7 +2942,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>17</th>
@@ -2743,7 +2951,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2755,7 +2962,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>19</th>
@@ -2765,7 +2971,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2777,7 +2982,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>21</th>
@@ -2787,7 +2991,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2799,7 +3002,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>23</th>
@@ -2809,7 +3011,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.000000</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2821,7 +3022,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>25</th>
@@ -2831,7 +3031,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.045455</td>
       <td>1</td>
       <td>22</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2843,7 +3042,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>1</td>
       <td>10</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>27</th>
@@ -2853,7 +3051,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.111111</td>
       <td>1</td>
       <td>9</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2865,7 +3062,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>1</td>
       <td>9</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>29</th>
@@ -2875,7 +3071,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.125000</td>
       <td>3</td>
       <td>24</td>
-      <td>4</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -2902,7 +3097,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <th>abstractness</th>
       <th>numberAbstractTypes</th>
       <th>numberTypes</th>
-      <th>numberOfIncludedSubPackages</th>
       <th>maxSubpackageDepth</th>
     </tr>
   </thead>
@@ -2916,7 +3110,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>15</td>
       <td>15</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>90</th>
@@ -2926,7 +3119,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.666667</td>
       <td>2</td>
       <td>3</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2938,7 +3130,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>2</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>89</th>
@@ -2948,7 +3139,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.620690</td>
       <td>18</td>
       <td>29</td>
-      <td>1</td>
       <td>1</td>
     </tr>
     <tr>
@@ -2960,7 +3150,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>11</td>
       <td>18</td>
       <td>1</td>
-      <td>1</td>
     </tr>
     <tr>
       <th>86</th>
@@ -2970,7 +3159,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.600000</td>
       <td>6</td>
       <td>10</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -2982,7 +3170,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>3</td>
       <td>5</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>83</th>
@@ -2992,7 +3179,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.500000</td>
       <td>6</td>
       <td>12</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3004,7 +3190,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>2</td>
       <td>4</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>85</th>
@@ -3014,7 +3199,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.500000</td>
       <td>2</td>
       <td>4</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3026,7 +3210,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>8</td>
       <td>18</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>82</th>
@@ -3037,7 +3220,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>4</td>
       <td>9</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>80</th>
@@ -3047,7 +3229,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.425743</td>
       <td>43</td>
       <td>101</td>
-      <td>11</td>
       <td>1</td>
     </tr>
     <tr>
@@ -3059,7 +3240,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>17</td>
       <td>40</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>75</th>
@@ -3069,7 +3249,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.400000</td>
       <td>2</td>
       <td>5</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3081,7 +3260,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>2</td>
       <td>5</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>77</th>
@@ -3091,7 +3269,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.400000</td>
       <td>2</td>
       <td>5</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3103,7 +3280,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>2</td>
       <td>5</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>74</th>
@@ -3113,7 +3289,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.390244</td>
       <td>32</td>
       <td>82</td>
-      <td>2</td>
       <td>1</td>
     </tr>
     <tr>
@@ -3124,7 +3299,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.379747</td>
       <td>30</td>
       <td>79</td>
-      <td>5</td>
       <td>2</td>
     </tr>
     <tr>
@@ -3135,7 +3309,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.375000</td>
       <td>54</td>
       <td>144</td>
-      <td>7</td>
       <td>2</td>
     </tr>
     <tr>
@@ -3147,7 +3320,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>3</td>
       <td>8</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>70</th>
@@ -3158,7 +3330,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>7</td>
       <td>19</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>69</th>
@@ -3168,7 +3339,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.353383</td>
       <td>47</td>
       <td>133</td>
-      <td>8</td>
       <td>3</td>
     </tr>
     <tr>
@@ -3180,7 +3350,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>9</td>
       <td>26</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>64</th>
@@ -3190,7 +3359,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.333333</td>
       <td>7</td>
       <td>21</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3202,7 +3370,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>3</td>
       <td>9</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>66</th>
@@ -3212,7 +3379,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.333333</td>
       <td>2</td>
       <td>6</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3224,7 +3390,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>1</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>63</th>
@@ -3234,9 +3399,36 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0.315789</td>
       <td>18</td>
       <td>57</td>
-      <td>2</td>
       <td>1</td>
     </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### Table 4e
+
+- Show the top 30 Typescript modules with the lowest *Abstractness*
+- Set the property "abstractness" on Module nodes if not already done.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>projectName</th>
+      <th>fullQualifiedModuleName</th>
+      <th>moduleName</th>
+      <th>abstractness</th>
+      <th>numberAbstractTypes</th>
+      <th>numberTypes</th>
+    </tr>
+  </thead>
+  <tbody>
   </tbody>
 </table>
 </div>
@@ -3262,167 +3454,197 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr style="text-align: right;">
       <th></th>
       <th>artifactName</th>
-      <th>fullQualifiedPackageName</th>
-      <th>packageName</th>
+      <th>fullQualifiedName</th>
+      <th>name</th>
       <th>distance</th>
       <th>abstractness</th>
       <th>instability</th>
-      <th>typesInPackage</th>
+      <th>elementsCount</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.common.io</td>
-      <td>io</td>
-      <td>1.000000</td>
+      <td>org.axonframework.tracing.attributes</td>
+      <td>attributes</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1</td>
+      <td>NaN</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-test-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
-      <td>1.000000</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.serialization.converters</td>
+      <td>converters</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0</td>
+      <td>NaN</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
-      <td>1.000000</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.common.io</td>
+      <td>io</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0</td>
+      <td>NaN</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-messaging-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
-      <td>1.000000</td>
+      <td>org.axonframework.eventhandling.interceptors</td>
+      <td>interceptors</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0</td>
+      <td>NaN</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
-      <td>1.000000</td>
+      <td>axon-test-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
-      <td>1.000000</td>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
-      <td>1.000000</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org.axonframework.modelling</td>
-      <td>modelling</td>
-      <td>1.000000</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>axon-disruptor-4.9.3</td>
+      <td>axon-modelling-4.9.3</td>
       <td>org</td>
       <td>org</td>
-      <td>1.000000</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>axon-disruptor-4.9.3</td>
+      <td>axon-modelling-4.9.3</td>
       <td>org.axonframework</td>
       <td>axonframework</td>
-      <td>1.000000</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>axon-disruptor-4.9.3</td>
-      <td>org.axonframework.disruptor</td>
-      <td>disruptor</td>
-      <td>1.000000</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>org.axonframework.modelling</td>
+      <td>modelling</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>axon-eventsourcing-4.9.3</td>
+      <td>axon-disruptor-4.9.3</td>
       <td>org</td>
       <td>org</td>
-      <td>1.000000</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>axon-eventsourcing-4.9.3</td>
+      <td>axon-disruptor-4.9.3</td>
       <td>org.axonframework</td>
       <td>axonframework</td>
-      <td>1.000000</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>axon-configuration-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
-      <td>1.000000</td>
+      <td>axon-disruptor-4.9.3</td>
+      <td>org.axonframework.disruptor</td>
+      <td>disruptor</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>axon-configuration-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
-      <td>1.000000</td>
+      <td>axon-eventsourcing-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
+      <td>NaN</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>NaN</td>
       <td>0</td>
     </tr>
     <tr>
       <th>15</th>
+      <td>axon-eventsourcing-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>axon-configuration-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>axon-configuration-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
       <td>statements</td>
@@ -3432,7 +3654,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>15</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>19</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.digest</td>
       <td>digest</td>
@@ -3442,7 +3664,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>1</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>20</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.serialization</td>
       <td>serialization</td>
@@ -3452,7 +3674,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>34</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>21</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.monitoring</td>
       <td>monitoring</td>
@@ -3462,7 +3684,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>6</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>22</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
       <td>tracing</td>
@@ -3472,7 +3694,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>19</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>23</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.annotation</td>
       <td>annotation</td>
@@ -3482,7 +3704,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>54</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>24</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.transaction</td>
       <td>transaction</td>
@@ -3492,7 +3714,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>4</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>25</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.jpa</td>
       <td>jpa</td>
@@ -3502,7 +3724,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>4</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>26</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.lock</td>
       <td>lock</td>
@@ -3512,7 +3734,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>11</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>27</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.common.legacyjpa</td>
       <td>legacyjpa</td>
@@ -3522,7 +3744,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>4</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>28</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.gateway</td>
       <td>gateway</td>
@@ -3532,7 +3754,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>5</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>29</th>
       <td>axon-test-4.9.3</td>
       <td>org.axonframework.test.matchers</td>
       <td>matchers</td>
@@ -3540,36 +3762,6 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0.125000</td>
       <td>0.455357</td>
       <td>24</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>axon-configuration-4.9.3</td>
-      <td>org.axonframework.config</td>
-      <td>config</td>
-      <td>0.413497</td>
-      <td>0.425000</td>
-      <td>0.988497</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.util</td>
-      <td>util</td>
-      <td>0.400000</td>
-      <td>0.000000</td>
-      <td>0.600000</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.messaging.correlation</td>
-      <td>correlation</td>
-      <td>0.391026</td>
-      <td>0.250000</td>
-      <td>0.358974</td>
-      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -3590,12 +3782,12 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr style="text-align: right;">
       <th></th>
       <th>artifactName</th>
-      <th>fullQualifiedPackageName</th>
-      <th>packageName</th>
+      <th>fullQualifiedName</th>
+      <th>name</th>
       <th>distance</th>
       <th>abstractness</th>
       <th>instability</th>
-      <th>typesInPackage</th>
+      <th>elementsCount</th>
     </tr>
   </thead>
   <tbody>
@@ -3905,6 +4097,34 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 
 
 
+#### Table 5c
+
+- Show the top 30 Typescript modules with the highest distance from the "main sequence"
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>artifactName</th>
+      <th>fullQualifiedName</th>
+      <th>name</th>
+      <th>distance</th>
+      <th>abstractness</th>
+      <th>instability</th>
+      <th>elementsCount</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+
+
 ### *Abstractness* vs. *Instability* Plot with "Main Sequence" line as reference
 
 - Plot *Abstractness* vs. *Instability* of all packages
@@ -3916,7 +4136,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 
 
     
-![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_36_0.png)
+![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_51_0.png)
     
 
 
@@ -3924,6 +4144,8 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
 
 
     
-![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_38_0.png)
+![png](ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_53_0.png)
     
 
+
+#### Figure 1c - Typescript Modules
