@@ -8,6 +8,7 @@ Script | Directory | Description
 -------|-----------|------------
 | [activateCondaEnvironment.sh](./activateCondaEnvironment.sh) |  | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to execute the Jupyter Notebooks. |
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
+| [cleanupAfterReportGeneration.sh](./cleanupAfterReportGeneration.sh) |  | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder. |
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory with a text file containing the last hash code of the contents. |
 | [appendEnvironmentVariables.sh](./documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
@@ -20,37 +21,34 @@ Script | Directory | Description
 | [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
 | [downloadMavenArtifact.sh](./downloadMavenArtifact.sh) |  | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central) |
 | [downloadAxonFramework.sh](./downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central. |
+| [downloadReactRouter.sh](./downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone. |
 | [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
+| [executeJupyterNotebookReports.sh](./executeJupyterNotebookReports.sh) |  | Executes the Jupyter Notebook given with the command line option --jupyterNotebook and creates a report directory for the results (ipynb, md, pdf).. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
+| [findTypescriptDataFiles.sh](./findTypescriptDataFiles.sh) |  | Echoes a list of Typescript data files starting with "ts-" and having extension "json" in the artifacts directory of sub directories.  |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
 | [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
 | [Neo4jv5.sh](./profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
+| [projectionFunctions.sh](./projectionFunctions.sh) |  | Provides functions to create and delete Graph Projections for Neo4j Graph Data Science. |
 | [ArtifactDependenciesCsv.sh](./reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports. |
-| [ArtifactDependenciesJupyter.sh](./reports/ArtifactDependenciesJupyter.sh) | reports | Creates the "artifact-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports. |
-| [ExternalDependenciesJupyter.sh](./reports/ExternalDependenciesJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [GraphVisualization.sh](./reports/GraphVisualization.sh) | reports | Creates the "graph-visualization" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
-| [InternalDependenciesJupyter.sh](./reports/InternalDependenciesJupyter.sh) | reports | Creates the "internal-dependencies" report (ipynb, md, pdf) based on the Jupyter Notebook "InternalDependencies.ipynb". |
 | [JavaCsv.sh](./reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports. |
-| [MethodMetricsJupyter.sh](./reports/MethodMetricsJupyter.sh) | reports | Creates the method metrics report (ipynb, md, pdf) based on the Jupyter Notebook "MethodMetrics.ipynb". |
 | [NodeEmbeddingsCsv.sh](./reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [NodeEmbeddingsJupyter.sh](./reports/NodeEmbeddingsJupyter.sh) | reports | Creates the "node-embeddings" report (ipynb, md, pdf) based on the Jupyter Notebook "NodeEmbeddings.ipynb". |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports. |
-| [ObjectOrientedDesignMetricsJupyter.sh](./reports/ObjectOrientedDesignMetricsJupyter.sh) | reports | Creates the "object-oriented-design-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "ObjectOrientedDesignMetrics.ipynb". |
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
 | [OverviewJupyter.sh](./reports/OverviewJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [TopologicalSortCsv.sh](./reports/TopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm for directed acyclic graphs (DAG) to order code units by their dependencies |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports. |
-| [VisibilityMetricsJupyter.sh](./reports/VisibilityMetricsJupyter.sh) | reports | Creates the "visibility-metrics" report (ipynb, md, pdf) based on the Jupyter Notebook "VisibilityMetrics.ipynb". |
 | [WordcloudJupyter.sh](./reports/WordcloudJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [AllReports.sh](./reports/compilations/AllReports.sh) | compilations | Runs all report scripts. |
 | [CsvReports.sh](./reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required). |
