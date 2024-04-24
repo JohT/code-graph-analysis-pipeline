@@ -2,14 +2,17 @@
 
 <img src="./images/DALL-E-Mini-Graph-Pipeline-Logo-2.png" align="left" hspace="10" width="180">
 
-Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.org/get-started), it is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.org/get-started), it now also [supports Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) and is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
 
 ---
 
 ## ✨ Features
 
-- Analyze static Java code structure as a graph
-- Fully automated [pipeline](./.github/workflows/code-structure-analysis.yml) from tool installation to report generation
+- Analyze static code structure as a graph
+- **🌟New🌟:** Also supports Typescript
+- Fully automated [pipeline for Java](./.github/workflows/java-code-analysis.yml) from tool installation to report generation
+- Fully automated [pipeline for Typescript](./.github/workflows/typescript-code-analysis.yml) from tool installation to report generation
+- Fully automated [local run](./GETTING_STARTED.md)
 - More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
 - Jupyter notebook reports for dependencies, metrics, visibility and many more
 - Graph structure visualization
@@ -78,13 +81,25 @@ These tools are needed to run the graph visualization scripts of directory [grap
 - Add this line to your `~/.bashrc` file if you are using Anaconda3: `/c/ProgramData/Anaconda3/etc/profile.d/conda.sh`. Try to find a similar script for other conda package managers or versions.
 - Run `conda init` in the git bash opened as administrator. Running it in normal mode usually leads to an error message.
 
+### Additional Prerequisites for analyzing Typescript
+
+- Please follow the description on how to create a json file with the static code information
+of your Typescript project here: https://github.com/jqassistant-plugin/jqassistant-typescript-plugin  
+This could be as simple as running the following command in your Typescript project:
+
+  ```shell
+  npx --yes @jqassistant/ts-lce
+  ```
+
+- Copy the resulting json file (e.g. `.reports/jqa/ts-output.json`) into the "artifacts" directory for your analysis work directory. Custom subdirectories within "artifacts" are also supported.
+
 ## 🚀 Getting Started
 
 See [GETTING_STARTED.md](./GETTING_STARTED.md) on how to get started on your local machine.
 
 ## 🏗 Pipeline and Tools
 
-The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
+The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
 
 - Use [GitHub Actions](https://docs.github.com/de/actions) Linux Runner
 - [Checkout GIT Repository](https://github.com/actions/checkout)
@@ -92,7 +107,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 - [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
 - Download artifacts that contain the code to be analyzed [scripts/artifacts](./scripts/downloader/)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
-- Setup [jQAssistant](https://jqassistant.org/get-started) for Java Analysis ([analysis.sh](./scripts/analysis/analyze.sh))
+- Setup [jQAssistant](https://jqassistant.org/get-started) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [environment.yml](./jupyter/environment.yml):
@@ -109,7 +124,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
   - [wordcloud](https://github.com/amueller/word_cloud)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 
-**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if i've forgotten something in the list.
+**Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if something is missing or wrong in the list.
 
 ## 🛠 Command Reference
 
@@ -143,6 +158,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 ## 🤔 Questions & Answers
 
 - How can i run an analysis locally?  
+  👉 Check the [prerequisites](#🛠-prerequisites).
   👉 See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
   👉 To get started from scratch see [GETTING_STARTED.md](./GETTING_STARTED.md).
 
@@ -161,7 +177,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/code-structure-analys
 
 - How can i add another code basis to be analyzed automatically?  
   👉 Create a new artifacts download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
-  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/code-structure-analysis.yml).
+  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/java-code-analysis.yml).
 
 - How can i trigger a full rescan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.

@@ -7,7 +7,7 @@
 # The reports (csv files) will be written into the sub directory reports/topology-csv.
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh, projectionFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -33,35 +33,13 @@ echo "topologicalSortCsv: CYPHER_DIR=$CYPHER_DIR"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
-source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+# Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
 REPORT_NAME="topology-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
-
-# Topological Sort Preparation
-# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies (zero degree) will be filtered out with a subgraph.
-#
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-createProjection() {
-    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
-    local projectionResult
-    
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
 
 # Apply the algorithm "Topological Sort".
 # 
@@ -93,7 +71,7 @@ ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Artifact Topology
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-if createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time topologicalSort "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 else
     echo "topologicalSortCsv: No data. Artifact analysis skipped."
@@ -107,7 +85,7 @@ PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterface
 
 # Package Topology
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-if createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time topologicalSort "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 else
     echo "topologicalSortCsv: No data. Package analysis skipped."
@@ -121,11 +99,14 @@ TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 # Type Topology
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-if createProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
+if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
     time topologicalSort "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 else
     echo "topologicalSortCsv: No data. Type analysis skipped."
 fi
 # ---------------------------------------------------------------
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

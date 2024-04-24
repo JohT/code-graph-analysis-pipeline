@@ -3,7 +3,7 @@
 # Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 # It contains the numbers of packages, types, methods, cyclic complexity, etc.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -44,3 +44,6 @@ execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_lines_of_method_code_per_type.c
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_Method_Line_Count_Distribution.cypher" > "${FULL_REPORT_DIRECTORY}/Effective_Method_Line_Count.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_packages_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_packages_per_artifact.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_types_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_types_per_artifact.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

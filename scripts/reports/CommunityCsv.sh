@@ -6,7 +6,7 @@
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh projectionFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -32,51 +32,13 @@ echo "communityCsv: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
-source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+# Define functions to create and delete Graph Projections like "createUndirectedDependencyProjection"
+source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
 REPORT_NAME="community-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
-
-# Community Detection Preparation 
-# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-createProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4_Create_Undirected_Projection.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
-
-# Community Detection Preparation for Types
-# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-createTypeProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
 
 # Community Detection using the Louvain Algorithm
 # 
@@ -418,7 +380,7 @@ ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
 # Artifact Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-if createProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
     writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 else
@@ -435,7 +397,7 @@ PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 
 # Package Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z'): Processing package dependencies..."
-if createProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
     writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
     
@@ -455,7 +417,7 @@ TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
 # Type Community Detection
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-if createTypeProjection "${TYPE_PROJECTION}"; then
+if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
 
     # Type Community Detection - Special CSV Queries after update
@@ -466,5 +428,8 @@ else
     echo "communityCsv: No data. Type analysis skipped."
 fi
 # ---------------------------------------------------------------
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

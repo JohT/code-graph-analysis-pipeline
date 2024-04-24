@@ -3,7 +3,7 @@
 # Executes "Java" Cypher queries to get the "java-csv" CSV reports.
 # It contains lists of e.g. reflection usage, annotated language elements and usage of deprecated elements.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -48,5 +48,8 @@ execute_cypher "${JAVA_CYPHER_DIR}/Annotated_code_elements_per_artifact.cypher" 
 
 execute_cypher "${JAVA_CYPHER_DIR}/JakartaEE_REST_Annotations.cypher" > "${FULL_REPORT_DIRECTORY}/JakartaEE_REST_Annotations.csv"
 execute_cypher "${JAVA_CYPHER_DIR}/Spring_Web_Request_Annotations.cypher" > "${FULL_REPORT_DIRECTORY}/Spring_Web_Request_Annotations.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "JavaCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished"

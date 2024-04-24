@@ -1,0 +1,185 @@
+name: Typescript Code Structure Graph Analysis
+
+on:
+  push:
+    branches:
+      - main
+    # Ignore changes in documentation, general configuration and reports for push events
+    paths-ignore: 
+      - 'results/**'
+      - '**/*.md'
+      - '**/*.txt'
+      - '**/*.css'
+      - '**/*.html'
+      - '**/*.js'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'renovate.json'
+      - 'changelogTemplate.mustache'
+      - '**.code-workspace'
+  pull_request:
+    branches:
+      - main
+    # Ignore changes in documentation, general configuration and reports for pull request events
+    paths-ignore: 
+      - 'results/**'
+      - '**/*.md'
+      - '**/*.txt'
+      - '**/*.css'
+      - '**/*.html'
+      - '**/*.js'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'renovate.json'
+      - 'changelogTemplate.mustache'
+      - '**.code-workspace'
+
+# Requires the secret NEO4J_INITIAL_PASSWORD to be configured
+jobs:
+  reports:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+        - os: ubuntu-latest
+          java: 17
+          python: 3.11
+          mambaforge: 24.3.0-0
+          node: 18
+
+    env: 
+      CI_COMMIT_MESSAGE: Automated code structure analysis reports (CI)
+      CI_COMMIT_AUTHOR: ${{ github.event.repository.name }} Continuous Integration
+      PROJECT_NAME: react-router
+      # Version variable name matches renovate.json configuration entry
+      REACT_ROUTER_VERSION: 6.22.0
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
+  
+    - name: Setup Java JDK ${{ matrix.java }}
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'adopt'
+        java-version: ${{ matrix.java }}
+
+    - name: Setup node.js ${{ matrix.node }} for Graph Visualization
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Install nodes packages for Graph Visualization
+      working-directory: graph-visualization
+      run: npm ci
+
+    - name: Setup Cache for Conda package manager Mambaforge
+      uses: actions/cache@v4
+      env:
+        # Increase this value to reset cache if etc/example-environment.yml has not changed
+        # Reference: https://github.com/conda-incubator/setup-miniconda#caching
+        CACHE_NUMBER: 0
+      with:
+        path: ~/conda_pkgs_dir
+        key:
+          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml', '.github/workflows/*.yml') }}
+
+    # "Setup Python" can be skipped if jupyter notebook reports aren't needed
+    - name: Setup Python ${{ matrix.python }} with Conda package manager Mambaforge
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: ${{ matrix.python }}
+        miniforge-variant: Mambaforge
+        miniforge-version: ${{ matrix.mambaforge }}
+        use-mamba: true
+        activate-environment: codegraph
+        environment-file: ./jupyter/environment.yml
+        auto-activate-base: false
+        use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+
+    - name: Conda environment info
+      shell: bash -el {0}
+      run: conda info
+
+    - name: Setup temp directory if missing
+      run: mkdir -p ./temp
+
+    - name: Setup Cache for "temp/downloads" folder
+      uses: actions/cache@v4
+      with:
+        path: ./temp/downloads
+        key:
+          ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
+
+    - name: Download ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
+      working-directory: temp
+      run: |
+        mkdir -p ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
+        cd ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
+        echo "Working directory: $( pwd -P )"
+        ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }}
+
+    - name: Analyze ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
+      working-directory: temp/${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
+      # Shell type can be skipped if jupyter notebook reports (and therefore conda) aren't needed
+      shell: bash -el {0}
+      env:
+        NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
+        ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
+      run: |
+        ./../../scripts/analysis/analyze.sh
+
+    - name: Move reports from the temp to the results directory preserving their surrounding directory
+      working-directory: temp
+      run: ./../scripts/copyReportsIntoResults.sh
+  
+    # Upload logs and unfinished reports in case of an error for troubleshooting
+    - name: Archive failed run with logs and unfinished results
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        path: |
+          ./temp/**/runtime/*
+          ./temp/**/reports/*
+        retention-days: 5
+
+    # Upload successful results in case they are needed for troubleshooting
+    - name: Archive successful results
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        path: ./results
+        if-no-files-found: error
+        retention-days: 5
+
+    # Upload Database Export
+    # Only possible after an export with "./../../scripts/analysis/analyze.sh --report DatabaseCsvExport"
+    # Won't be done here because of performance and security concerns
+    #- name: Archive exported database
+    #  uses: actions/upload-artifact@v3
+    #  with:
+    #    name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+    #    path: ./temp/**/import
+    #    if-no-files-found: error
+    #    retention-days: 5
+
+    # Commit and push the native image agent results
+    - name: Display environment variable "github.event_name"
+      run: echo "github.event_name=${{ github.event_name }}"
+    - name: Commit "results" directory containing the reports
+      # Only run when a pull request gets merged or a commit is pushed to the main branch
+      # git add parameters need to match paths-ignore parameters above
+      # Git pull before add/commit/push to reduce race conditions on parallel builds
+      if: github.event_name == 'push'
+      run: |
+        git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
+        git config --global user.email 'joht@users.noreply.github.com'
+        git config --local http.postBuffer 524288000
+        git pull
+        git add results
+        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git push

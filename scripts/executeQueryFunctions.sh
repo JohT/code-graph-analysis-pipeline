@@ -46,29 +46,86 @@ execute_cypher_expect_results() {
     execute_cypher_http_expect_results "${@}" # "${@}": Get all function arguments and forward them
 }
 
+# Function to execute all Cypher queries in the given filesnames and returns the first non empty result with the default method.
+execute_cypher_queries_until_results() { 
+    execute_cypher_http_queries_until_results "${@}" # "${@}": Get all function arguments and forward them
+}
+
 # Function to execute a cypher query from the given file (first and only argument) using Neo4j's HTTP API
 execute_cypher_http() { 
     # (Neo4j HTTP API Script) Execute the Cypher query contained in the file and print the results as CSV
     source "${SCRIPTS_DIR}/executeQuery.sh" "${@}" # "${@}": Get all function arguments and forward them
 }
 
-# Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using Neo4j's HTTP API
-execute_cypher_http_summarized() { 
-    results=$( execute_cypher_http "${@}" | wc -l ) # "${@}": Get all function arguments and forward them
-    results=$((results - 2))
+# Function to execute a cypher query from the given file (first and only argument) 
+# and returning number of resulting lines using Neo4j's HTTP API
+execute_cypher_http_number_of_lines_in_result() {
+    results=$( execute_cypher_http "${@}" | wc -l | awk '{print $1}' ) # "${@}"= Get all function arguments and forward them
+    results=$((results - 1))
+    echo "${results}"
+}
+
+# Function to execute a cypher query from the given file (first and only argument) 
+# with a summarized (console) output using Neo4j's HTTP API
+execute_cypher_http_summarized() {
+    cypherFileName="${1}" # Get the Cypher file name from the first argument
+    results=$( execute_cypher_http_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
     echo "$(basename -- "${cypherFileName}") (via http) result lines: ${results}"
 }
 
-# Function to execute a cypher query from the given file (first and only argument) that fails on no result using Neo4j's HTTP API
+# Function to execute a cypher query from the given file (first and only argument) 
+# that fails on no result using Neo4j's HTTP API
 execute_cypher_http_expect_results() { 
-    # Get the Cypher file name from the first argument
-    cypherFileName="${1}"
-    results=$( execute_cypher_http "${cypherFileName}" | wc -l )
-    results=$((results - 1))
-    if [[ "$results" -lt 1 ]]; then
+    cypherFileName="${1}" # Get the Cypher file name from the first argument
+    results=$( execute_cypher_http_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
+    if [[ "${results}" -lt 1 ]]; then
         echo "$(basename -- "${cypherFileName}") (via http) Error: Expected at least one entry but was ${results}" >&2
         exit 1
     fi
+}
+
+# Executes all Cypher queries in the given filesnames and returns the first non empty result.
+# If all queries lead to an empty result then the last (empty) result is returned.
+# Takes one or more filenames as first arguments followed by optional query parameters (key=value).
+execute_cypher_http_queries_until_results() {
+    local cypherFileNames=""
+    
+    while [[ $# -gt 0 ]]; do
+        arg="${1}" # Get the value of the current argument
+
+        if [ "${arg#*"="}" == "${arg}" ]; then
+            # The argument doesn't contain an equal sign and 
+            # is therefore considered to be a filename (first arguments).
+            cypherFileNames+="\n${arg}"
+        else
+            # The argument contains an equal sign and is therefore the first query parameter.
+            # Keep the argument pointer unchanged (no shift) to use ${@} for all remaining arguments.
+            break;
+        fi
+        shift # iterate to the next argument
+    done
+    cypherFileNames="${cypherFileNames#'\n'}" # remove the leading new line character
+
+    # echo -e "debug execute_cypher_http_queries_until_results: ------------------"
+    # echo -e "debug execute_cypher_http_queries_until_results: cypherFileNames=${cypherFileNames}"
+    # echo -e "debug execute_cypher_http_queries_until_results: additional arguments=${*}"
+    # echo -e "debug execute_cypher_http_queries_until_results: ------------------"
+
+    echo -e "${cypherFileNames}" | while read -r cypherFileName; do
+        # echo "debug execute_cypher_until_results: execute cypherFileName=${cypherFileName}"
+        results=$( execute_cypher_http "${cypherFileName}" "${@}" )
+        # echo "debug execute_cypher_http_queries_until_results: results=${results}"
+
+        resultsCount=$(echo "${results}" | wc -l)
+        resultsCount=$((resultsCount - 1))
+        # echo "debug execute_cypher_http_queries_until_results: resultsCount=${resultsCount}"
+
+        if [[ "${resultsCount}" -gt 0 ]]; then
+        # Return the results when they aren't empty.
+            echo -en "${results}"
+            break;
+        fi    
+    done
 }
 
 cypher_shell_query_parameters() {
@@ -114,25 +171,72 @@ execute_cypher_shell() {
     echo "\"Source Cypher File:\",\"$(basename -- "${cypherFileName}")\""
 }
 
-# Function to execute a cypher query from the given file (first and only argument) with a summarized (console) output using "cypher-shell" provided by Neo4j
-execute_cypher_shell_summarized() { 
-    # Get the Cypher file name from the first argument
-    cypherFileName="${1}"
+# Function to execute a cypher query from the given file (first and only argument) 
+# and returning number of resulting lines using "cypher-shell" provided by Neo4j
+execute_cypher_shell_number_of_lines_in_result() {
+    results=$( execute_cypher_http "${@}" | wc -l | awk '{print $1}' ) # "${@}"= Get all function arguments and forward them
+    results=$((results - 1))
+    echo "${results}"
+}
 
-    results=$( execute_cypher_shell ${cypherFileName} | wc -l )
-    results=$((results - 2))
+# Function to execute a cypher query from the given file (first and only argument) 
+# with a summarized (console) output using "cypher-shell" provided by Neo4j
+execute_cypher_shell_summarized() { 
+    cypherFileName="${1}" # Get the Cypher file name from the first argument
+    results=$( execute_cypher_shell_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
     echo "$(basename -- "${cypherFileName}") (via cypher-shell) result lines: ${results}"
 }
 
 # Function to execute a cypher query from the given file (first and only argument) that fails on no result using "cypher-shell" provided by Neo4j
 execute_cypher_shell_expect_results() { 
-    # Get the Cypher file name from the first argument
-    cypherFileName="${1}"
-
-    results=$( execute_cypher_shell ${cypherFileName} | wc -l )
-    results=$((results - 2))
-    if [[ "$results" -lt 1 ]]; then
+    cypherFileName="${1}"  # Get the Cypher file name from the first argument
+    results=$( execute_cypher_shell_number_of_lines_in_result "${@}" ) # "${@}"= Get all function arguments and forward them
+    if [[ "${results}" -lt 1 ]]; then
         echo "$(basename -- "${cypherFileName}") (via cypher-shell) Error: Expected at least one entry but was ${results}" >&2
         exit 1
     fi
+}
+
+# Executes all Cypher queries in the given filesnames and returns the first non empty result using "cypher-shell" provided by Neo4j.
+# If all queries lead to an empty result then the last (empty) result is returned.
+# Takes one or more filenames as first arguments followed by optional query parameters (key=value).
+execute_cypher_shell_queries_until_results() {
+    local cypherFileNames=""
+    
+    while [[ $# -gt 0 ]]; do
+        arg="${1}" # Get the value of the current argument
+
+        if [ "${arg#*"="}" == "${arg}" ]; then
+            # The argument doesn't contain an equal sign and 
+            # is therefore considered to be a filename (first arguments).
+            cypherFileNames+="\n${arg}"
+        else
+            # The argument contains an equal sign and is therefore the first query parameter.
+            # Keep the argument pointer unchanged (no shift) to use ${@} for all remaining arguments.
+            break;
+        fi
+        shift # iterate to the next argument
+    done
+    cypherFileNames="${cypherFileNames#'\n'}" # remove the leading new line character
+
+    # echo -e "debug execute_cypher_shell_queries_until_results: ------------------"
+    # echo -e "debug execute_cypher_shell_queries_until_results: cypherFileNames=${cypherFileNames}"
+    # echo -e "debug execute_cypher_shell_queries_until_results: additional arguments=${*}"
+    # echo -e "debug execute_cypher_shell_queries_until_results: ------------------"
+
+    echo -e "${cypherFileNames}" | while read -r cypherFileName; do
+        # echo "debug execute_cypher_until_results: execute cypherFileName=${cypherFileName}"
+        results=$( execute_cypher_shell "${cypherFileName}" "${@}" )
+        # echo "debug execute_cypher_shell_queries_until_results: results=${results}"
+
+        resultsCount=$(echo "${results}" | wc -l)
+        resultsCount=$((resultsCount - 1))
+        # echo "debug execute_cypher_shell_queries_until_results: resultsCount=${resultsCount}"
+
+        if [[ "${resultsCount}" -gt 0 ]]; then
+        # Return the results when they aren't empty.
+            echo -en "${results}"
+            break;
+        fi    
+    done
 }

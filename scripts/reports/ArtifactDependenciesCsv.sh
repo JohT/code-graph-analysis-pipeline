@@ -3,7 +3,7 @@
 # Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports.
 # It contains lists of dependencies across artifacts and hby ow many packages/types they are used by.
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -38,7 +38,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Artifact_Dependencies"
 
 # Preparation: Set number of packages and types per artifact
-execute_cypher_expect_results "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_number_of_packages_and_types_on_artifacts.cypher"
+execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_number_of_Java_packages_and_types_on_artifacts.cypher"
 
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Most_used_internal_dependencies_acreoss_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/MostUsedDependenciesAcrossArtifacts.csv"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Artifacts_with_dependencies_to_other_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/DependenciesAcrossArtifacts.csv"
@@ -46,3 +46,6 @@ execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Artifacts_with_duplicate_pac
 
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Usage_and_spread_of_internal_artifact_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/InternalArtifactUsageSpreadPerDependency.csv"
 execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Usage_and_spread_of_internal_artifact_dependents.cypher" > "${FULL_REPORT_DIRECTORY}/InternalArtifactUsageSpreadPerDependent.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

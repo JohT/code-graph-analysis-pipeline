@@ -4,7 +4,7 @@
 # It contains lists of e.g. incoming and outgoing package dependencies,
 # abstractness, instability and the distance to the so called "main sequence".
 
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -49,3 +49,6 @@ execute_cypher "${CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_types_that_are_used_by_many_different_packages.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypes.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ArtifactPackageUsage.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ClassesPerPackageUsageAcrossArtifacts.csv"
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

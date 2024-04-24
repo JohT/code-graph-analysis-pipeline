@@ -6,7 +6,7 @@
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh, projectionFunctions.sh, cleanupAfterReportGeneration.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -32,85 +32,13 @@ echo "nodeEmbeddingsCsv: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
-source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+# Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
 REPORT_NAME="node-embeddings-csv"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
-
-# Node Embeddings Preparation: Create an undirected in-memory Graph.
-# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-createUndirectedProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4_Create_Undirected_Projection.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
-
-# Node Embeddings Preparation: Create a directed in-memory Graph.
-# Selects the nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-# - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-createDirectedProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}"
-}
-
-# Node Embeddings Preparation: Create a directed in-memory Graph for "Type" nodes.
-# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-createDirectedTypeProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Type_Projection.cypher" "${@}"
-}
-
-# Node Embeddings Preparation: Create a undirected in-memory Graph for "Type" nodes.
-# Selects the Type nodes and relationships for the algorithm and creates an in-memory projection.
-# Nodes without incoming and outgoing dependencies will be filtered out with a subgraph.
-# 
-# Required Parameters:
-# - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
-createUndirectedTypeProjection() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
-    local projectionResult
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
-}
 
 # Node Embeddings using Fast Random Projection
 # 
@@ -225,11 +153,11 @@ ARTIFACT_DIMENSIONS="dependencies_projection_embedding_dimension=16"
 
 # Artifact Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
-if createUndirectedProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
     
-    createDirectedProjection "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+    createDirectedDependencyProjection "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
     time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
 else
     echo "nodeEmbeddingsCsv: No data. Artifact analysis skipped."
@@ -246,11 +174,11 @@ PACKAGE_DIMENSIONS="dependencies_projection_embedding_dimension=32"
 
 # Package Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
-if createUndirectedProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
 
-    createDirectedProjection "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+    createDirectedDependencyProjection "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
     time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
 else
     echo "nodeEmbeddingsCsv: No data. Package analysis skipped."
@@ -266,15 +194,18 @@ TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
 
 # Type Node Embeddings
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
-if createUndirectedTypeProjection "${TYPE_PROJECTION}"; then
+if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 
-    createDirectedTypeProjection "${TYPE_PROJECTION_DIRECTED}"
+    createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION_DIRECTED}"
     time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 else
     echo "nodeEmbeddingsCsv: No data. Type analysis skipped."
 fi
 # ---------------------------------------------------------------
+
+# Clean-up after report generation. Empty reports will be deleted.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
