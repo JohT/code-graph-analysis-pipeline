@@ -51,11 +51,11 @@ reduces them to a 2 dimensional array for visualization.
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.228s...
+    [t-SNE] Computed neighbors for 93 samples in 0.053s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.617398
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 51.613049
-    [t-SNE] KL divergence after 1000 iterations: 0.067252
+    [t-SNE] Mean sigma: 0.544898
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.305748
+    [t-SNE] KL divergence after 1000 iterations: 0.067849
 
 
 
