@@ -181,5 +181,6 @@ jobs:
         git config --local http.postBuffer 524288000
         git pull
         git add results
+        git status
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git push
