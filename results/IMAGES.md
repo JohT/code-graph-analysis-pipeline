@@ -213,3 +213,8 @@ Image  | Analysis |
 | [VisibilityMetrics_17_2.png](./AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_17_2.png) | AxonFramework-4.9.3 |
 | [VisibilityMetrics_24_2.png](./AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_24_2.png) | AxonFramework-4.9.3 |
 | [Wordcloud_10_1.png](./AxonFramework-4.9.3/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | AxonFramework-4.9.3 |
+| [error-artifactDependenciesGraph-no-canvas-found.png](./react-router-6.22.0/artifact-dependencies-graph/error-artifactDependenciesGraph-no-canvas-found.png) | react-router-6.22.0 |
+| [ObjectOrientedDesignMetrics_55_0.png](./react-router-6.22.0/object-oriented-design-metrics/ObjectOrientedDesignMetrics_files/ObjectOrientedDesignMetrics_55_0.png) | react-router-6.22.0 |
+| [VisibilityMetrics_17_2.png](./react-router-6.22.0/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_17_2.png) | react-router-6.22.0 |
+| [VisibilityMetrics_24_2.png](./react-router-6.22.0/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_24_2.png) | react-router-6.22.0 |
+| [Wordcloud_10_1.png](./react-router-6.22.0/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | react-router-6.22.0 |
