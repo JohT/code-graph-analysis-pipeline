@@ -2,8 +2,10 @@
 // Inspired by https://github.com/jQAssistant/jqa-java-plugin/blob/f092122b62bb13d597840b64b73b2010bd074d1f/src/main/resources/META-INF/jqassistant-rules/java-classpath.xml#L5
 
 MATCH (module:TS:Module)
+WHERE  module.globalFqn IS NOT NULL
 MATCH (externalModule:TS:ExternalModule)
-WHERE (toLower(module.globalFqn) = toLower(externalModule.globalFqn)
+WHERE module.globalFqn IS NOT NULL
+  AND (toLower(module.globalFqn) = toLower(externalModule.globalFqn)
    OR  toLower(module.globalFqn) = split(toLower(externalModule.globalFqn), '/index.')[0]
    OR  toLower(externalModule.globalFqn) = split(toLower(module.globalFqn), '/index.')[0]
       )
