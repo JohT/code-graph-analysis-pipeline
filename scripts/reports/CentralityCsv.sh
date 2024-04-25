@@ -374,6 +374,19 @@ if createDirectedJavaMethodDependencyProjection "${METHOD_PROJECTION}"; then
     runCentralityAlgorithms "${METHOD_PROJECTION}" "${METHOD_NODE}" "${METHOD_WEIGHT}"
 fi
 
+# -- Typescript Modules Centrality -------------------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript" 
+MODULE_PROJECTION="dependencies_projection=typescript-module-centrality" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight"
+
+if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    runCentralityAlgorithms "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+fi
+
+# ---------------------------------------------------------------
+
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 

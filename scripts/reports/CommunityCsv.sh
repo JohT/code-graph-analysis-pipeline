@@ -415,6 +415,20 @@ if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_that_span_the_most_packages_with_type_statistics.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_that_span_the_most_packages_with_type_statistics.csv"
 fi
+
+# -- Typescript Module Community Detection -----------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript" 
+MODULE_PROJECTION="dependencies_projection=typescript-module-community" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+MODULE_GAMMA="dependencies_leiden_gamma=1.14" # default = 1.00
+MODULE_KCUT="dependencies_maxkcut=20" # default = 2
+
+if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    detectCommunities "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_GAMMA}" "${MODULE_KCUT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

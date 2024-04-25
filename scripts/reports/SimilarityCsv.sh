@@ -101,6 +101,17 @@ if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     time similarity "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 fi
 
+# -- Typescript Module Similarity -------------------------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript"
+MODULE_PROJECTION="dependencies_projection=typescript-module-similarity" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+
+if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    time similarity "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

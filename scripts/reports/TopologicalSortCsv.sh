@@ -92,6 +92,17 @@ if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}
     time topologicalSort "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 fi
 
+# -- Typescript Module Topology ---------------------------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript"
+MODULE_PROJECTION="dependencies_projection=typescript-module-topology" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+
+if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    time topologicalSort "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

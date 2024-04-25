@@ -50,7 +50,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 # - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the outcoming array of floating point nummbers
+#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithFastRandomProjection() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
@@ -82,7 +82,7 @@ nodeEmbeddingsWithFastRandomProjection() {
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 # - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the outcoming array of floating point nummbers
+#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithHashGNN() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
@@ -119,7 +119,7 @@ nodeEmbeddingsWithHashGNN() {
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 # - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the outcoming array of floating point nummbers
+#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithNode2Vec() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
@@ -188,6 +188,23 @@ if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
 
     createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION_DIRECTED}"
     time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+fi
+
+# -- Typescript Module Node Embeddings ---------------------------
+
+MODULE_PROJECTION="dependencies_projection=typescript-module-embeddings" 
+MODULE_PROJECTION_DIRECTED="dependencies_projection=typescript-module-directed-embeddings" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+MODULE_DIMENSIONS="dependencies_projection_embedding_dimension=32" 
+MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
+
+if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    time nodeEmbeddingsWithFastRandomProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
+    time nodeEmbeddingsWithHashGNN "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS_HASHGNN}"
+
+    createDirectedDependencyProjection "${MODULE_PROJECTION_DIRECTED}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+    time nodeEmbeddingsWithNode2Vec "${MODULE_PROJECTION_DIRECTED}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
 fi
 
 # ---------------------------------------------------------------
