@@ -89,3 +89,12 @@ Report | Analysis | Description
 | [Overview.md](./react-router-6.22.0/overview/Overview.md) | react-router-6.22.0 | Overview |
 | [VisibilityMetrics.md](./react-router-6.22.0/visibility-metrics/VisibilityMetrics.md) | react-router-6.22.0 | Visibility Metrics |
 | [Wordcloud.md](./react-router-6.22.0/wordcloud/Wordcloud.md) | react-router-6.22.0 | Wordcloud |
+| [ArtifactDependencies.md](./react-router-6.23.0/artifact-dependencies/ArtifactDependencies.md) | react-router-6.23.0 | Artifact Dependencies |
+| [ExternalDependencies.md](./react-router-6.23.0/external-dependencies/ExternalDependencies.md) | react-router-6.23.0 | External Dependencies |
+| [InternalDependencies.md](./react-router-6.23.0/internal-dependencies/InternalDependencies.md) | react-router-6.23.0 | Internal Dependencies |
+| [MethodMetrics.md](./react-router-6.23.0/method-metrics/MethodMetrics.md) | react-router-6.23.0 | Method Metrics |
+| [NodeEmbeddings.md](./react-router-6.23.0/node-embeddings/NodeEmbeddings.md) | react-router-6.23.0 | Node Embeddings |
+| [ObjectOrientedDesignMetrics.md](./react-router-6.23.0/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | react-router-6.23.0 | Object Oriented Design Quality Metrics |
+| [Overview.md](./react-router-6.23.0/overview/Overview.md) | react-router-6.23.0 | Overview |
+| [VisibilityMetrics.md](./react-router-6.23.0/visibility-metrics/VisibilityMetrics.md) | react-router-6.23.0 | Visibility Metrics |
+| [Wordcloud.md](./react-router-6.23.0/wordcloud/Wordcloud.md) | react-router-6.23.0 | Wordcloud |
