@@ -71,48 +71,36 @@ similarity() {
     execute_cypher "${SIMILARITY_CYPHER_DIR}/Similarity_1i_Write_Node_Properties.cypher" "${@}"
 }
 
-# ---------------------------------------------------------------
+# -- Java Artifact Similarity ------------------------------------
 
-# Artifact Query Parameters
 ARTIFACT_PROJECTION="dependencies_projection=artifact-similarity" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 
-# Artifact Similarity
-echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
 if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time similarity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-else
-    echo "similarityCsv: No data. Artifact analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Package Query Parameters
+# -- Java Package Similarity -------------------------------------
+
 PACKAGE_PROJECTION="dependencies_projection=package-similarity" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 
-# Package Similarity
-echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
 if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time similarity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-else
-    echo "similarityCsv: No data. Package analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Type Query Parameters
+# -- Java Type Similarity ----------------------------------------
+
 TYPE_PROJECTION="dependencies_projection=type-similarity" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 
-# Type Similarity
-echo "similarityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
 if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     time similarity "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-else
-    echo "similarityCsv: No data. Type analysis skipped."
 fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.
