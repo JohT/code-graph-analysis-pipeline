@@ -30,8 +30,7 @@ NEO4J_APOC_PLUGIN_GITHUB              | neo4j-contrib/neo4j-apoc-procedures | Lo
 NEO4J_GDS_PLUGIN_VERSION              | 2.3.4                               | Graph Data Science Plugin Version 2.3.x is compatible with Neo4j 4.4.x |
 NEO4J_GDS_PLUGIN_EDITION              | full                                | Graph Data Science Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license |
 JQASSISTANT_CLI_VERSION               | 1.12.2                              | Version 1.12.2 is the newest version (may 2023) compatible with Neo4j v4 |
-JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv3     | For Neo4j v3 & 4: "jqassistant-commandline-neo4jv3" |
-JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Neo4j v3 & 4: "distribution.zip" |
+JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv4     | For Neo4j 4: "jqassistant-commandline-neo4jv4" |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv4-jqassistant.yaml   | Name of the template file for the jqassistant configuration |
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.7.0-alpha01                       | Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x |
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
@@ -42,5 +41,6 @@ NEO4J_USER                            | neo4j                               | Ne
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
 JQASSISTANT_CLI_DOWNLOAD_URL          | https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli | Download URL for the jQAssistant CLI |
+JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Neo4j v5 & v4: "distribution.zip" |
 NEO4J_DATA_PATH                       | $( pwd -P )/data                    | Path where Neo4j writes its data to (outside tools dir) |
 NEO4J_RUNTIME_PATH                    | $( pwd -P )/runtime                 | Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir) |
