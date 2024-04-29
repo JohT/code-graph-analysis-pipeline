@@ -21,6 +21,5 @@ NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.3.4"} # Graph Data Scien
 NEO4J_GDS_PLUGIN_EDITION=${NEO4J_GDS_PLUGIN_EDITION:-"full"}  # Graph Data Science Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"}  # Version 1.12.2 is the newest version (may 2023) compatible with Neo4j v4
-JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv3"} # For Neo4j v3 & 4: "jqassistant-commandline-neo4jv3"
-JQASSISTANT_CLI_DISTRIBUTION=${JQASSISTANT_CLI_DISTRIBUTION:-"distribution.zip"} # Neo4j v3 & 4: "distribution.zip"
+JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv4"} # For Neo4j 4: "jqassistant-commandline-neo4jv4"
 JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv4-jqassistant.yaml"} # Name of the template file for the jqassistant configuration
