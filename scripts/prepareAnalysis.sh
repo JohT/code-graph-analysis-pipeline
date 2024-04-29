@@ -69,7 +69,8 @@ execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_P
 execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
 
 # Preparation - Add weights to Typescript Module DEPENDS_ON relationships
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_module_dependencies.cypher"
+execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
+execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
 
 # Preparation - Add Typescript Module node properties "incomingDependencies" and "outgoingDependencies"
 execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
