@@ -32,7 +32,7 @@ echo "nodeEmbeddingsCsv: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+# Define functions to create and delete Graph Projections like "createUndirectedDependencyProjection"
 source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
@@ -145,7 +145,6 @@ nodeEmbeddingsWithNode2Vec() {
 # -- Java Artifact Node Embeddings -------------------------------
 
 ARTIFACT_PROJECTION="dependencies_projection=artifact-embeddings" 
-ARTIFACT_PROJECTION_DIRECTED="dependencies_projection=artifact-directed-embeddings" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 ARTIFACT_DIMENSIONS="dependencies_projection_embedding_dimension=16"
@@ -154,15 +153,12 @@ ARTIFACT_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=32"
 if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS_HASHGNN}"
-    
-    createDirectedDependencyProjection "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-    time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
+    time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
 PACKAGE_PROJECTION="dependencies_projection=package-embeddings" 
-PACKAGE_PROJECTION_DIRECTED="dependencies_projection=package-directed-embeddings" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 PACKAGE_DIMENSIONS="dependencies_projection_embedding_dimension=32" 
@@ -171,15 +167,12 @@ PACKAGE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
 if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS_HASHGNN}"
-
-    createDirectedDependencyProjection "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-    time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
+    time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
 
 TYPE_PROJECTION="dependencies_projection=type-embeddings" 
-TYPE_PROJECTION_DIRECTED="dependencies_projection=type-directed-embeddings" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64" 
@@ -188,15 +181,12 @@ TYPE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS_HASHGNN}"
-
-    createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION_DIRECTED}"
-    time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+    time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 fi
 
 # -- Typescript Module Node Embeddings ---------------------------
 
 MODULE_PROJECTION="dependencies_projection=typescript-module-embeddings" 
-MODULE_PROJECTION_DIRECTED="dependencies_projection=typescript-module-directed-embeddings" 
 MODULE_NODE="dependencies_projection_node=Module" 
 MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
 MODULE_DIMENSIONS="dependencies_projection_embedding_dimension=32" 
@@ -205,9 +195,7 @@ MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
 if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
     time nodeEmbeddingsWithHashGNN "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS_HASHGNN}"
-
-    createDirectedDependencyProjection "${MODULE_PROJECTION_DIRECTED}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
-    time nodeEmbeddingsWithNode2Vec "${MODULE_PROJECTION_DIRECTED}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
+    time nodeEmbeddingsWithNode2Vec "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
 fi
 
 # ---------------------------------------------------------------
