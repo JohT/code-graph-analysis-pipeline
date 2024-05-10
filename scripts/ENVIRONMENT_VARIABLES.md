@@ -33,6 +33,7 @@ JQASSISTANT_CLI_VERSION               | 1.12.2                              | Ve
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv4     | For Neo4j 4: "jqassistant-commandline-neo4jv4" |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv4-jqassistant.yaml   | Name of the template file for the jqassistant configuration |
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.7.0-alpha01                       | Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x |
+programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
