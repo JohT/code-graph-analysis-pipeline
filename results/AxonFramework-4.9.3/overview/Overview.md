@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>71148</td>
-      <td>206653</td>
+      <td>71153</td>
+      <td>206667</td>
       <td>6</td>
       <td>97</td>
       <td>1654</td>
@@ -101,15 +101,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>4</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
-      <td>Class</td>
-      <td>113</td>
+      <td>Interface</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>5</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
-      <td>Interface</td>
-      <td>28</td>
+      <td>Class</td>
+      <td>113</td>
     </tr>
     <tr>
       <th>6</th>
@@ -171,22 +171,22 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>14</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Interface</td>
-      <td>15</td>
+      <td>Class</td>
+      <td>23</td>
     </tr>
     <tr>
       <th>15</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Interface</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>16</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Class</td>
-      <td>23</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>17</th>
