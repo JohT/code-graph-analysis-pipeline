@@ -369,54 +369,44 @@ detectCommunities() {
     compareCommunityDetectionResults "${@}"
     listAllResults "${@}"
 }
-# ---------------------------------------------------------------
 
-# Artifact Query Parameters
+# -- Java Artifact Community Detection ---------------------------
+
 ARTIFACT_PROJECTION="dependencies_projection=artifact-community" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 ARTIFACT_GAMMA="dependencies_leiden_gamma=1.11" # default = 1.00
 ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
-# Artifact Community Detection
-echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
 if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
     writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-else
-    echo "communityCsv: No data. Artifact analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Package Query Parameters
+# -- Java Package Community Detection -------------------------------
+
 PACKAGE_PROJECTION="dependencies_projection=package-community" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 PACKAGE_GAMMA="dependencies_leiden_gamma=1.14" # default = 1.00
 PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 
-# Package Community Detection
-echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z'): Processing package dependencies..."
 if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
     writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
     
     # Package Community Detection - Special CSV Queries after update
     execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
-else
-    echo "communityCsv: No data. Package analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Type Query Parameters
+# -- Java Type Community Detection -------------------------------
+
 TYPE_PROJECTION="dependencies_projection=type-community" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 TYPE_GAMMA="dependencies_leiden_gamma=5.00" # default = 1.00
 TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
-# Type Community Detection
-echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
 
@@ -424,9 +414,21 @@ if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_that_span_the_most_packages_with_type_statistics.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_that_span_the_most_packages_with_type_statistics.csv"
-else
-    echo "communityCsv: No data. Type analysis skipped."
 fi
+
+# -- Typescript Module Community Detection -----------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript" 
+MODULE_PROJECTION="dependencies_projection=typescript-module-community" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+MODULE_GAMMA="dependencies_leiden_gamma=1.14" # default = 1.00
+MODULE_KCUT="dependencies_maxkcut=20" # default = 2
+
+if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    detectCommunities "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_GAMMA}" "${MODULE_KCUT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

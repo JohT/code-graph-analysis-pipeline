@@ -6,9 +6,11 @@ CALL gds.beta.hashgnn.mutate(
      ,iterations: 3
      ,generateFeatures: {
          dimension: toInteger($dependencies_projection_embedding_dimension) * 4
-        ,densityLevel: 1
+        ,densityLevel: 3
      }
      ,outputDimension: toInteger($dependencies_projection_embedding_dimension)
+     ,neighborInfluence: 0.9
+     ,randomSeed: 30
      ,mutateProperty: $dependencies_projection_write_property
   }
 )

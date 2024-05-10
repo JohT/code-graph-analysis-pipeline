@@ -334,62 +334,57 @@ runCentralityAlgorithms() {
     listAllResults "${@}"
 }
 
-# ---------------------------------------------------------------
+# -- Java Artifact Centrality ------------------------------------
 
-# Artifact Query Parameters
 ARTIFACT_PROJECTION="dependencies_projection=artifact-centrality" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 
-# Artifact Centrality
-echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
 if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     runCentralityAlgorithms "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-else
-    echo "centralityCsv: No data. Artifacts analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Package Query Parameters
+# -- Java Package Centrality -------------------------------------
+
 PACKAGE_PROJECTION="dependencies_projection=package-centrality" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 
-# Package Centrality
-echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
 if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     runCentralityAlgorithms "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-else
-    echo "centralityCsv: No data. Package analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Type Query Parameters
+# -- Java Type Centrality ----------------------------------------
+
 TYPE_PROJECTION="dependencies_projection=type-centrality" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 
-# Type Centrality
-echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
 if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
     runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-else
-    echo "centralityCsv: No data. Type analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Method Query Parameters
+# -- Java Method Centrality --------------------------------------
+
 METHOD_PROJECTION="dependencies_projection=method-centrality" 
 METHOD_NODE="dependencies_projection_node=Method" 
 METHOD_WEIGHT="dependencies_projection_weight_property=" 
 
-# Method Centrality
-echo "centralityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing method dependencies..."
 if createDirectedJavaMethodDependencyProjection "${METHOD_PROJECTION}"; then
     runCentralityAlgorithms "${METHOD_PROJECTION}" "${METHOD_NODE}" "${METHOD_WEIGHT}"
-else
-    echo "centralityCsv: No data. Method analysis skipped."
 fi
+
+# -- Typescript Modules Centrality -------------------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript" 
+MODULE_PROJECTION="dependencies_projection=typescript-module-centrality" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight"
+
+if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    runCentralityAlgorithms "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

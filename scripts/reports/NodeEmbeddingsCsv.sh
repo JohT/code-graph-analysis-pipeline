@@ -32,7 +32,7 @@ echo "nodeEmbeddingsCsv: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+# Define functions to create and delete Graph Projections like "createUndirectedDependencyProjection"
 source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
 # Create report directory
@@ -50,7 +50,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 # - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the outcoming array of floating point nummbers
+#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithFastRandomProjection() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
@@ -82,7 +82,7 @@ nodeEmbeddingsWithFastRandomProjection() {
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 # - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the outcoming array of floating point nummbers
+#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithHashGNN() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
@@ -119,7 +119,7 @@ nodeEmbeddingsWithHashGNN() {
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 # - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the outcoming array of floating point nummbers
+#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithNode2Vec() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
@@ -142,67 +142,62 @@ nodeEmbeddingsWithNode2Vec() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
 }
 
-# ---------------------------------------------------------------
+# -- Java Artifact Node Embeddings -------------------------------
 
-# Artifact Query Parameters
 ARTIFACT_PROJECTION="dependencies_projection=artifact-embeddings" 
-ARTIFACT_PROJECTION_DIRECTED="dependencies_projection=artifact-directed-embeddings" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 ARTIFACT_DIMENSIONS="dependencies_projection_embedding_dimension=16"
+ARTIFACT_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=32"
 
-# Artifact Node Embeddings
-echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
 if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-    
-    createDirectedDependencyProjection "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-    time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION_DIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-else
-    echo "nodeEmbeddingsCsv: No data. Artifact analysis skipped."
+    time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS_HASHGNN}"
+    time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
 fi
 
-# ---------------------------------------------------------------
+# -- Java Package Node Embeddings --------------------------------
 
-# Package Query Parameters
 PACKAGE_PROJECTION="dependencies_projection=package-embeddings" 
-PACKAGE_PROJECTION_DIRECTED="dependencies_projection=package-directed-embeddings" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 PACKAGE_DIMENSIONS="dependencies_projection_embedding_dimension=32" 
+PACKAGE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
 
-# Package Node Embeddings
-echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
 if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-
-    createDirectedDependencyProjection "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-    time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION_DIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-else
-    echo "nodeEmbeddingsCsv: No data. Package analysis skipped."
+    time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS_HASHGNN}"
+    time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
 fi
-# ---------------------------------------------------------------
 
-# Type Query Parameters
+# -- Java Type Node Embeddings -----------------------------------
+
 TYPE_PROJECTION="dependencies_projection=type-embeddings" 
-TYPE_PROJECTION_DIRECTED="dependencies_projection=type-directed-embeddings" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64" 
+TYPE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"
 
-# Type Node Embeddings
-echo "nodeEmbeddingsCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
-
-    createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION_DIRECTED}"
-    time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION_DIRECTED}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
-else
-    echo "nodeEmbeddingsCsv: No data. Type analysis skipped."
+    time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS_HASHGNN}"
+    time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
 fi
+
+# -- Typescript Module Node Embeddings ---------------------------
+
+MODULE_PROJECTION="dependencies_projection=typescript-module-embeddings" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+MODULE_DIMENSIONS="dependencies_projection_embedding_dimension=32" 
+MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
+
+if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    time nodeEmbeddingsWithFastRandomProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
+    time nodeEmbeddingsWithHashGNN "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS_HASHGNN}"
+    time nodeEmbeddingsWithNode2Vec "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

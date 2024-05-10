@@ -62,48 +62,47 @@ topologicalSort() {
     execute_cypher "${TOPOLOGICAL_SORT_DIR}/Topological_Sort_Query.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Topological_Sort.csv"
 }
 
-# ---------------------------------------------------------------
+# -- Java Artifact Topology --------------------------------------
 
-# Artifact Query Parameters
 ARTIFACT_PROJECTION="dependencies_projection=artifact-topology" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 
-# Artifact Topology
-echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing artifact dependencies..."
 if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     time topologicalSort "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
-else
-    echo "topologicalSortCsv: No data. Artifact analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Package Query Parameters
+# -- Java Package Topology ---------------------------------------
+
 PACKAGE_PROJECTION="dependencies_projection=package-topology" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 
-# Package Topology
-echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing package dependencies..."
 if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     time topologicalSort "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-else
-    echo "topologicalSortCsv: No data. Package analysis skipped."
 fi
-# ---------------------------------------------------------------
 
-# Type Query Parameters
+# -- Java Type Topology ------------------------------------------
+
 TYPE_PROJECTION="dependencies_projection=type-topology" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 
-# Type Topology
-echo "topologicalSortCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing type dependencies..."
 if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
     time topologicalSort "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
-else
-    echo "topologicalSortCsv: No data. Type analysis skipped."
 fi
+
+# -- Typescript Module Topology ---------------------------------------
+
+MODULE_LANGUAGE="dependencies_projection_language=Typescript"
+MODULE_PROJECTION="dependencies_projection=typescript-module-topology" 
+MODULE_NODE="dependencies_projection_node=Module" 
+MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
+
+if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    time topologicalSort "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

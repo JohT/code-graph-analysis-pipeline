@@ -19,7 +19,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 # Example: `extractQueryParameter "b" "a=1" "b=2" "c=3"` returns `2`
 extractQueryParameter() {
     target_key=${1}
-    shift # ignore first argument containing the query file name
+    shift # skip first argument containing the target key
 
     for arg in "${@}"; do
         key=$(echo "$arg" | cut -d'=' -f1)

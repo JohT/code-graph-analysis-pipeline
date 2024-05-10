@@ -34,6 +34,36 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 # Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
+# Writes a log entry when the creation of the projection starts.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
+logProjectionCreationStart() {
+    local programmingLanguage projectionName 
+    programmingLanguage=$( extractQueryParameter "dependencies_projection_language" "${@}" )
+    programmingLanguage=${programmingLanguage:-"Java"} # Set to default value "Java" if not set since it is optional
+    projectionName=$( extractQueryParameter "dependencies_projection" "${@}" )
+    echo "projectionFunctions: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating ${programmingLanguage} ${projectionName} projection."
+}
+
+# Writes a log entry for the case when no data was found to create the projection and therefore the analysis will be skipped.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
+logNoDataForProjection() {
+    local programmingLanguage projectionName 
+    programmingLanguage=$( extractQueryParameter "dependencies_projection_language" "${@}" )
+    programmingLanguage=${programmingLanguage:-"Java"} # Set to default value "Java" if not set since it is optional
+    projectionName=$( extractQueryParameter "dependencies_projection" "${@}" )
+    echo "projectionFunctions: $(date +'%Y-%m-%dT%H:%M:%S%z') No data. ${programmingLanguage} ${projectionName} analysis skipped."
+}
+
 # Creates a directed Graph projection for dependencies between nodes specified by the parameter "dependencies_projection_node".
 # Nodes without incoming and outgoing dependencies will be filtered out using a subgraph.
 #
@@ -48,19 +78,28 @@ source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 #   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedDependencyProjection() {
-    local projectionResult
+    logProjectionCreationStart "${@}"
 
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}"
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
     if [[ "${projectionCheckResult}" -lt 1 ]]; then
+        logNoDataForProjection "${@}"
         return 1
     fi
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
+    
+    local projectionResult
     projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
+    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
+        true;
+    else
+        logNoDataForProjection "${@}"
+        false;
+    fi
 }
 
 # Creates an undirected Graph projection for dependencies between nodes specified by the parameter "dependencies_projection_node".
@@ -77,19 +116,27 @@ createDirectedDependencyProjection() {
 #   Label of the nodes that will be used for the projection. Example: "Type"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedDependencyProjection() {
-    local projectionResult
+    logProjectionCreationStart "${@}"
 
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}"
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
     if [[ "${projectionCheckResult}" -lt 1 ]]; then
         return 1
     fi
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}"
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4_Create_Undirected_Projection.cypher" "${@}"
+
+    local projectionResult
     projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_5_Create_Subgraph.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
+    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
+        true;
+    else
+        logNoDataForProjection "${@}"
+        false;
+    fi
 }
 
 # Creates a directed Graph projection specialized on Java Type dependencies. 
@@ -102,12 +149,21 @@ createUndirectedDependencyProjection() {
 # Required Parameters:
 # - dependencies_projection=...
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaTypeDependencyProjection() {
-    local projectionResult
+    logProjectionCreationStart "${@}"
 
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
+    
+    local projectionResult
     projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Java_Type_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
+    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
+        true;
+    else
+        logNoDataForProjection "${@}"
+        false;
+    fi
 }
 
 # Creates an undirected Graph projection specialized on Java Type dependencies. 
@@ -120,12 +176,21 @@ createDirectedJavaTypeDependencyProjection() {
 # Required Parameters:
 # - dependencies_projection=...
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedJavaTypeDependencyProjection() {
-    local projectionResult
+    logProjectionCreationStart "${@}"
 
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
+
+    local projectionResult
     projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
+    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
+        true;
+    else
+        logNoDataForProjection "${@}"
+        false;
+    fi
 }
 
 # Creates a directed Graph projection specialized on Java Method dependencies. 
@@ -138,11 +203,20 @@ createUndirectedJavaTypeDependencyProjection() {
 # Required Parameters:
 # - dependencies_projection=...
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaMethodDependencyProjection() {
-    local projectionResult
+    logProjectionCreationStart "${@}"
 
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
+
+    local projectionResult
     projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3d_Create_Java_Method_Projection.cypher" "${@}")
-    is_csv_column_greater_zero "${projectionResult}" "relationshipCount"
+    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
+        true;
+    else
+        logNoDataForProjection "${@}"
+        false;
+    fi
 }
 
