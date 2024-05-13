@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Typescript Module Dependencies Graph Visualization with neovis.js</title>
+
+    <script src="./../node_modules/neovis.js/dist/neovis.js"></script>
+    <script type="text/javascript" src="./../vis-configuration-presets.js"></script>
+    <script type="text/javascript" src="./../visualization-pagination.js"></script>
+    <script type="text/javascript" src="graphVisualizationTypescriptModuleDependencies.js"></script>
+    
+    <link rel="stylesheet" href="./../index.css">
+</head>
+
+<body">
+    <span>
+        <label for="neo4j-server-password">Neo4j Server Password:</label>
+        <input type="password" id="neo4j-server-password" name="neo4j-server-password" />
+        <input type="submit" id="neo4j-server-login" value="Login" onClick="draw()" />
+    </span>
+    <div id="visualizations"></div>
+</body>
+
+</html>
