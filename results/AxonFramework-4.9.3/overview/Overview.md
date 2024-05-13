@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>71153</td>
-      <td>206667</td>
+      <td>71151</td>
+      <td>206663</td>
       <td>6</td>
       <td>97</td>
       <td>1654</td>
@@ -73,22 +73,22 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>0</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Class</td>
-      <td>587</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Interface</td>
-      <td>154</td>
+      <td>Class</td>
+      <td>587</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Interface</td>
+      <td>154</td>
     </tr>
     <tr>
       <th>3</th>
@@ -129,15 +129,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>8</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Interface</td>
-      <td>32</td>
+      <td>Class</td>
+      <td>98</td>
     </tr>
     <tr>
       <th>9</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Class</td>
-      <td>98</td>
+      <td>Interface</td>
+      <td>32</td>
     </tr>
     <tr>
       <th>10</th>
@@ -157,15 +157,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>12</th>
       <td>axon-test-4.9.3</td>
       <td>87</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Class</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>13</th>
       <td>axon-test-4.9.3</td>
       <td>87</td>
-      <td>Class</td>
-      <td>71</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>14</th>
@@ -185,14 +185,14 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>16</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
       <th>17</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Enum</td>
+      <td>Annotation</td>
       <td>1</td>
     </tr>
     <tr>
