@@ -3,6 +3,11 @@ div {
     height: 100vh;
 }
 
+div.vis-tooltip {
+    font-size: 4px;
+    overflow-y: auto;
+}
+
 .indexedVisualization {
     margin-top: 10px;
     margin-left: 10px;
