@@ -33,8 +33,10 @@ function paginatedGraphVisualization({
     const unfinishedVisualizations = document.querySelectorAll(`.${classOfIndexedVisualizationElement}:not(.${classOfFinishedVisualization})`);
     if (unfinishedVisualizations.length === 0) {
       console.debug(`${logDescription}: Last visualization finished on element ${JSON.stringify(indexedVisualizationElement)}.`);
-      console.debug(`${logDescription}: Mark whole visualization as finished on parent element ${JSON.stringify( indexedVisualizationElement.parentElement)}`);
-      indexedVisualizationElement.parentElement.classList.add(classOfFinishedVisualization);
+      if (indexedVisualizationElement.parentElement) {
+        console.debug(`${logDescription}: Mark whole visualization as finished on parent element ${JSON.stringify( indexedVisualizationElement.parentElement)}`);
+        indexedVisualizationElement.parentElement.classList.add(classOfFinishedVisualization);
+      }
     }
   }
 
@@ -72,6 +74,12 @@ function paginatedGraphVisualization({
       indexedVisualizationContainer.textContent = event.error.message;
       console.error(`Visualization Error: ${JSON.stringify(event.error)}`)
       markVisualizationAsFinished(indexedVisualizationContainer, 'Error event');
+    });
+    neoViz.registerOnEvent(NeoVis.NeoVisEvents.ClickNodeEvent, (event) => {
+      console.debug(`Clicked on node: ${JSON.stringify(event.node, undefined, 2)}`)
+    });
+    neoViz.registerOnEvent(NeoVis.NeoVisEvents.ClickEdgeEvent, (event) => {
+      console.debug(`Clicked on edge: ${JSON.stringify(event.edge, undefined, 2)}`)
     });
     const parameters = {
       blockSize: recordsPerVisualization,
