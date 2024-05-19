@@ -9,6 +9,8 @@ set -o errexit -o pipefail
 # Markdown file name
 markdown_file="SCRIPTS.md"
 
+echo "generateScriptReference: Generating ${markdown_file}..."
+
 { 
   echo "# Scripts Reference" 
   echo ""
@@ -38,3 +40,5 @@ find . -type f -name "*.sh" | sort | while read -r script_file; do
     # Add the script file and its description to the Markdown table
     echo "| ${link} | ${last_path_segment%%.} | ${description//|/\\|} |" >> ${markdown_file}
 done
+
+echo "generateScriptReference: Successfully generated ${markdown_file}."

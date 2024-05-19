@@ -9,6 +9,8 @@ set -o errexit -o pipefail
 # Markdown file name
 markdown_file="CYPHER.md"
 
+echo "generateCypherReference: Generating ${markdown_file}..."
+
 { 
   echo "# Cypher Reference" 
   echo ""
@@ -43,3 +45,5 @@ find . -type f -name "*.cypher" | sort | while read -r cypher_file; do
     # Add the script file and its description to the Markdown table
     echo "| ${link} | ${last_path_segment%%.} | ${description//|/\\|} |" >> ${markdown_file}
 done
+
+echo "generateCypherReference: Successfully generated ${markdown_file}."

@@ -9,7 +9,7 @@
 set -o errexit -o pipefail
 
 # Output Markdown file name
-output_file="CSV_REPORTS.md"
+markdown_file="CSV_REPORTS.md"
 
 # Function to count rows in a CSV file
 count_rows() {
@@ -23,6 +23,8 @@ get_source_query() {
   echo "$source_query"
 }
 
+echo "generateCsvReportReference: Generating ${markdown_file}..."
+
 # Create the Markdown header
 {
   echo "# CSV Cypher Query Reports Reference"
@@ -33,10 +35,10 @@ get_source_query() {
   # Create the Markdown table header
   echo "| CSV File | Analysis | Number of Rows | Source Query |"
   echo "| -------- | -------- | -------------- | ------------ |"
-} > "$output_file"
+} > "$markdown_file"
 
 # Find and process CSV files
-find . -type f -name "*.csv" | while IFS= read -r csv_file; do
+find . -type f -name "*.csv" | sort | while IFS= read -r csv_file; do
   num_rows=$(count_rows "$csv_file")
   source_query=$(get_source_query "$csv_file")
   
@@ -53,7 +55,7 @@ find . -type f -name "*.csv" | while IFS= read -r csv_file; do
   source_query_link="./../cypher/$source_query"
   
   # Append a new row to the Markdown table
-  echo "| [$base_name]($csv_link) | $main_dir | $num_rows | [$source_query]($source_query_link) |" >> "$output_file"
+  echo "| [$base_name]($csv_link) | $main_dir | $num_rows | [$source_query]($source_query_link) |" >> "$markdown_file"
 done
 
-echo "CSV table and header generated in $output_file"
+echo "generateCsvReportReference: Successfully generated ${markdown_file}."

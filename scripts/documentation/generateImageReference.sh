@@ -8,6 +8,8 @@ set -o errexit -o pipefail
 # Markdown file name
 markdown_file="IMAGES.md"
 
+echo "generateImageReference: Generating ${markdown_file}..."
+
 { 
   echo "# Image Reference" 
   echo ""
@@ -43,3 +45,5 @@ find . -type f -name "*.png" | sort | while read -r image_file; do
     # Add the script file and its description to the Markdown table
     echo "| ${link} | ${analysisname%%.} |" >> ${markdown_file}
 done
+
+echo "generateImageReference: Successfully generated ${markdown_file}."
