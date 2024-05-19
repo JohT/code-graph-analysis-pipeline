@@ -1,0 +1,64 @@
+name: Generate report reference documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'results/**' # Only run results have been updates
+      - '!results/*.md'  # Ignore when report reference documentation itself changes
+      - '.github/workflows/report-reference-documentation.yml' # or when this file was changed
+  pull_request:
+    branches:
+      - main
+    paths: 
+      - 'results/**' # Only run results have been updates
+      - '!results/*.md'  # Ignore when report reference documentation itself changes
+      - '.github/workflows/report-reference-documentation.yml' # or when this file was changed
+  
+jobs:
+  reports:
+    runs-on: ubuntu-latest
+    env: 
+      CI_COMMIT_MESSAGE: Automated report reference document generation (CI)
+      CI_COMMIT_AUTHOR: ${{ github.event.repository.name }} Continuous Integration
+
+    steps:
+    - name: Checkout git repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
+  
+    - name: Generate report reference document
+      working-directory: results
+      run: |
+        ./../scripts/documentation/generateReportReferences.sh
+
+    - name: Use git to detect changes in the regenerated documenta and set generated_document_changed
+      run: git diff --quiet || echo "generated_document_changed=true" >> $GITHUB_ENV
+
+    - name: Display generated_document_changed
+      run: echo "generated_document_changed=${{ env.generated_document_changed}}"
+
+    - name: Archive generated report reference document
+      if: env.generated_document_changed
+      uses: actions/upload-artifact@v4
+      with:
+        name: report-reference-document
+        path: ./results/*.md
+        if-no-files-found: error
+        retention-days: 5
+        
+    - name: Commit generated report reference document if there were changes
+      # Only run when a pull request gets merged or a commit is pushed to the main branch.
+      # And only run when the generated document changed to avoid an empty commit or an error while committing.
+      if: github.event_name == 'push' && env.generated_document_changed
+      run: |
+        git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
+        git config --global user.email 'joht@users.noreply.github.com'
+        set -o errexit -o pipefail -o xtrace
+        git add ./results/*.md
+        git status
+        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git status
+        git push --verbose
