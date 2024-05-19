@@ -37,111 +37,111 @@
     </tr>
     <tr>
       <th>3</th>
-      <td>implementation</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>title</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>automatic</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>4</th>
       <td>module</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>5</th>
       <td>name</td>
     </tr>
     <tr>
+      <th>6</th>
+      <td>bnd</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>last</td>
+    </tr>
+    <tr>
       <th>8</th>
-      <td>implementation</td>
+      <td>modified</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>version</td>
-    </tr>
-    <tr>
-      <th>10</th>
       <td>build</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>jdk</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>spec</td>
     </tr>
     <tr>
+      <th>12</th>
+      <td>bundle</td>
+    </tr>
+    <tr>
       <th>13</th>
-      <td>created</td>
+      <td>description</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>by</td>
+      <td>bundle</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>org</td>
+      <td>license</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>axonframework</td>
+      <td>bundle</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>test</td>
+      <td>manifest</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>aggregate</td>
+      <td>version</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>matchers</td>
+      <td>bundle</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>saga</td>
+      <td>name</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>server</td>
+      <td>bundle</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>utils</td>
+      <td>symbolic</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>deadline</td>
+      <td>name</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>eventscheduler</td>
+      <td>bundle</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>fixture</td>
+      <td>version</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>resource</td>
+      <td>created</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>parameter</td>
+      <td>by</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>resolver</td>
+      <td>export</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>factory</td>
+      <td>package</td>
     </tr>
   </tbody>
 </table>

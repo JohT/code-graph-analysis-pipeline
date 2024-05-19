@@ -75,48 +75,48 @@ The following function takes the original node embeddings with a higher dimensio
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>test</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.080026</td>
-      <td>[-0.22236235439777374, 0.24672456085681915, 0....</td>
+      <td>0.155609</td>
+      <td>[0.0, 0.0, 0.0, 0.0, 0.0, 0.4744147062301636, ...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>aggregate</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>[-0.26334983110427856, 0.20723092555999756, 0....</td>
+      <td>0.152740</td>
+      <td>[0.0, 0.0, 0.0, 0.0, 0.0, 0.44183439016342163,...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>matchers</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>legacyjpa</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.033857</td>
-      <td>[-0.21329262852668762, 0.23033273220062256, 0....</td>
+      <td>0.016234</td>
+      <td>[0.0, 0.0, 0.0, 0.0, 0.0, 0.48884743452072144,...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.test.saga</td>
+      <td>org.axonframework.modelling.saga</td>
       <td>saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>[-0.2046269029378891, 0.2115609496831894, 0.28...</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.349429</td>
+      <td>[0.547947108745575, 0.0, -0.2763155996799469, ...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.utils</td>
-      <td>utils</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.017779</td>
-      <td>[-0.12896481156349182, 0.18578116595745087, 0....</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>[0.6282529234886169, 0.0, -0.3879297971725464,...</td>
     </tr>
   </tbody>
 </table>
@@ -129,11 +129,11 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.025s...
+    [t-SNE] Computed neighbors for 93 samples in 0.038s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.639745
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.599266
-    [t-SNE] KL divergence after 1000 iterations: 0.042240
+    [t-SNE] Mean sigma: 0.605718
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.157574
+    [t-SNE] KL divergence after 1000 iterations: 0.140873
 
 
 
@@ -157,48 +157,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.080026</td>
-      <td>-5.371109</td>
-      <td>-0.718254</td>
+      <td>0.155609</td>
+      <td>-5.984459</td>
+      <td>1.591714</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>-5.577371</td>
-      <td>-0.402238</td>
+      <td>0.152740</td>
+      <td>-5.996661</td>
+      <td>1.603274</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.033857</td>
-      <td>-5.518748</td>
-      <td>-0.465776</td>
+      <td>0.016234</td>
+      <td>-6.018620</td>
+      <td>1.613458</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.test.saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>-5.887218</td>
-      <td>-0.753249</td>
+      <td>org.axonframework.modelling.saga</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.349429</td>
+      <td>-0.568303</td>
+      <td>-2.404437</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.utils</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.017779</td>
-      <td>-5.935193</td>
-      <td>-0.556728</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>-0.309986</td>
+      <td>-2.472639</td>
     </tr>
   </tbody>
 </table>
@@ -237,48 +237,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>test</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.080026</td>
-      <td>[0.4330126941204071, -1.5155444294214249, 0.21...</td>
+      <td>0.155609</td>
+      <td>[0.4330126941204071, 0.4330126941204071, 0.0, ...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>aggregate</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>[0.21650634706020355, -1.2990380823612213, 0.2...</td>
+      <td>0.152740</td>
+      <td>[0.4330126941204071, 0.4330126941204071, 0.0, ...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>matchers</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>legacyjpa</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.033857</td>
-      <td>[0.4330126941204071, -1.5155444294214249, 0.21...</td>
+      <td>0.016234</td>
+      <td>[0.4330126941204071, 0.4330126941204071, 0.0, ...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.test.saga</td>
+      <td>org.axonframework.modelling.saga</td>
       <td>saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>[0.4330126941204071, -1.5155444294214249, 0.21...</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.349429</td>
+      <td>[0.4330126941204071, -0.4330126941204071, -0.4...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.utils</td>
-      <td>utils</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.017779</td>
-      <td>[0.4330126941204071, -1.2990380823612213, 0.21...</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>[0.4330126941204071, -0.6495190411806107, -0.4...</td>
     </tr>
   </tbody>
 </table>
@@ -289,9 +289,9 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     [t-SNE] Indexed 93 samples in 0.000s...
     [t-SNE] Computed neighbors for 93 samples in 0.001s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 2.716086
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.225838
-    [t-SNE] KL divergence after 1000 iterations: 0.016466
+    [t-SNE] Mean sigma: 2.750054
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.837646
+    [t-SNE] KL divergence after 1000 iterations: -0.065712
 
 
 
@@ -315,48 +315,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.080026</td>
-      <td>-44.630524</td>
-      <td>-120.249916</td>
+      <td>0.155609</td>
+      <td>43.949684</td>
+      <td>236.020798</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>-25.058277</td>
-      <td>-125.731430</td>
+      <td>0.152740</td>
+      <td>43.949684</td>
+      <td>236.020798</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.033857</td>
-      <td>-44.630524</td>
-      <td>-120.249916</td>
+      <td>0.016234</td>
+      <td>43.949684</td>
+      <td>236.020798</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.test.saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>-44.630524</td>
-      <td>-120.249916</td>
+      <td>org.axonframework.modelling.saga</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.349429</td>
+      <td>67.926430</td>
+      <td>142.122147</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.utils</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.017779</td>
-      <td>-29.680235</td>
-      <td>-105.208969</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>49.684147</td>
+      <td>119.744423</td>
     </tr>
   </tbody>
 </table>
@@ -391,48 +391,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>test</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.080026</td>
-      <td>[1.772119164466858, 0.48790624737739563, 0.419...</td>
+      <td>0.155609</td>
+      <td>[1.0180115699768066, 0.9696140289306641, 0.604...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>aggregate</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>[1.717078447341919, 0.5539498329162598, 0.3436...</td>
+      <td>0.152740</td>
+      <td>[0.9976913928985596, 0.9408471584320068, 0.633...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>matchers</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>legacyjpa</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.033857</td>
-      <td>[1.722919225692749, 0.4568258225917816, 0.3360...</td>
+      <td>0.016234</td>
+      <td>[0.9963914752006531, 0.9348244667053223, 0.605...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.test.saga</td>
+      <td>org.axonframework.modelling.saga</td>
       <td>saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>[1.725204586982727, 0.5310317873954773, 0.4015...</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.349429</td>
+      <td>[-0.3185178339481354, 0.7194064259529114, 0.68...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.utils</td>
-      <td>utils</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.017779</td>
-      <td>[1.6739325523376465, 0.41601377725601196, 0.31...</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>[-0.3213884234428406, 0.6567391157150269, 0.51...</td>
     </tr>
   </tbody>
 </table>
@@ -441,11 +441,11 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.001s...
+    [t-SNE] Computed neighbors for 93 samples in 0.002s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.698542
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.961761
-    [t-SNE] KL divergence after 1000 iterations: 0.125391
+    [t-SNE] Mean sigma: 0.683568
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 47.223454
+    [t-SNE] KL divergence after 1000 iterations: 0.113261
 
 
 
@@ -469,48 +469,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.test</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.080026</td>
-      <td>-4.607224</td>
-      <td>1.543899</td>
+      <td>0.155609</td>
+      <td>-3.079287</td>
+      <td>-1.341806</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.test.aggregate</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.016234</td>
-      <td>-4.587439</td>
-      <td>1.722075</td>
+      <td>0.152740</td>
+      <td>-3.082808</td>
+      <td>-1.339177</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.test.matchers</td>
-      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>axon-modelling-4.9.3</td>
       <td>0</td>
-      <td>0.033857</td>
-      <td>-4.735137</td>
-      <td>1.673839</td>
+      <td>0.016234</td>
+      <td>-3.080321</td>
+      <td>-1.341932</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.test.saga</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.016234</td>
-      <td>-4.536349</td>
-      <td>1.702251</td>
+      <td>org.axonframework.modelling.saga</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.349429</td>
+      <td>1.643651</td>
+      <td>5.185021</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.test.utils</td>
-      <td>axon-test-4.9.3</td>
-      <td>0</td>
-      <td>0.017779</td>
-      <td>-4.802489</td>
-      <td>1.704073</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>1</td>
+      <td>0.315690</td>
+      <td>1.542703</td>
+      <td>5.175893</td>
     </tr>
   </tbody>
 </table>

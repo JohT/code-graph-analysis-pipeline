@@ -2260,15 +2260,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>9</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework.test.server</td>
-      <td>server</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>10</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling.callbacks</td>
       <td>callbacks</td>
@@ -2277,7 +2268,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>4</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.quartz</td>
       <td>quartz</td>
@@ -2286,7 +2277,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>4</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.scheduling.java</td>
       <td>java</td>
@@ -2295,7 +2286,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>4</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.tokenstore.jpa</td>
       <td>jpa</td>
@@ -2304,25 +2295,16 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>4</td>
     </tr>
     <tr>
+      <th>13</th>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
       <th>14</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventhandling.scheduling.job...</td>
-      <td>jobrunr</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.util</td>
-      <td>util</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga.repository.le...</td>
       <td>legacyjpa</td>
@@ -2331,34 +2313,25 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>3</td>
     </tr>
     <tr>
+      <th>15</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventhandling.scheduling.job...</td>
+      <td>jobrunr</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.util</td>
+      <td>util</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
       <th>17</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
-      <td>inmemory</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
-      <td>legacyjpa</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.messaging.interceptors.legac...</td>
-      <td>legacyvalidation</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>20</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>legacyjpa</td>
@@ -2367,7 +2340,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>2</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>18</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga.repository.in...</td>
       <td>inmemory</td>
@@ -2376,10 +2349,37 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>2</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>19</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
+      <td>inmemory</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
+      <td>legacyjpa</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.messaging.interceptors.legac...</td>
+      <td>legacyvalidation</td>
       <td>0.0</td>
       <td>0</td>
       <td>2</td>
@@ -2413,7 +2413,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>26</th>
-      <td>axon-test-4.9.3</td>
+      <td>axon-modelling-4.9.3</td>
       <td>org</td>
       <td>org</td>
       <td>0.0</td>
@@ -2422,7 +2422,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>27</th>
-      <td>axon-test-4.9.3</td>
+      <td>axon-modelling-4.9.3</td>
       <td>org.axonframework</td>
       <td>axonframework</td>
       <td>0.0</td>
@@ -2431,18 +2431,18 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>28</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>org.axonframework.modelling</td>
+      <td>modelling</td>
       <td>0.0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
+      <td>axon-configuration-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
       <td>0.0</td>
       <td>0</td>
       <td>0</td>
@@ -2566,18 +2566,18 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>96</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.common.transaction</td>
-      <td>transaction</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
       <td>0.500000</td>
       <td>2</td>
       <td>4</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org.axonframework.modelling.saga.metamodel</td>
-      <td>metamodel</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.common.transaction</td>
+      <td>transaction</td>
       <td>0.500000</td>
       <td>2</td>
       <td>4</td>
@@ -2629,24 +2629,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>86</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework.test.utils</td>
-      <td>utils</td>
-      <td>0.400000</td>
-      <td>2</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>87</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework.test.eventscheduler</td>
-      <td>eventscheduler</td>
-      <td>0.400000</td>
-      <td>2</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>88</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.annotation</td>
       <td>annotation</td>
@@ -2655,10 +2637,28 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>5</td>
     </tr>
     <tr>
-      <th>89</th>
+      <th>87</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.queryhandling.registration</td>
       <td>registration</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.test.utils</td>
+      <td>utils</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.test.eventscheduler</td>
+      <td>eventscheduler</td>
       <td>0.400000</td>
       <td>2</td>
       <td>5</td>
@@ -2719,18 +2719,18 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>78</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>distributed</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>org.axonframework.modelling.command.inspection</td>
+      <td>inspection</td>
       <td>0.346154</td>
       <td>9</td>
       <td>26</td>
     </tr>
     <tr>
       <th>79</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org.axonframework.modelling.command.inspection</td>
-      <td>inspection</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.commandhandling.distributed</td>
+      <td>distributed</td>
       <td>0.346154</td>
       <td>9</td>
       <td>26</td>
@@ -2855,16 +2855,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>8</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework.test.server</td>
-      <td>server</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.commandhandling.callbacks</td>
       <td>callbacks</td>
@@ -2874,7 +2864,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.quartz</td>
       <td>quartz</td>
@@ -2884,7 +2874,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.scheduling.java</td>
       <td>java</td>
@@ -2894,7 +2884,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling.tokenstore.jpa</td>
       <td>jpa</td>
@@ -2904,27 +2894,17 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
+      <th>12</th>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.test.server</td>
+      <td>server</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>13</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventhandling.scheduling.job...</td>
-      <td>jobrunr</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.util</td>
-      <td>util</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>15</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga.repository.le...</td>
       <td>legacyjpa</td>
@@ -2934,37 +2914,27 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
+      <th>14</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventhandling.scheduling.job...</td>
+      <td>jobrunr</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.util</td>
+      <td>util</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>16</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
-      <td>inmemory</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
-      <td>legacyjpa</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.messaging.interceptors.legac...</td>
-      <td>legacyvalidation</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>19</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>legacyjpa</td>
@@ -2974,7 +2944,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>17</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling.saga.repository.in...</td>
       <td>inmemory</td>
@@ -2984,10 +2954,40 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>18</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventhandling.tokenstore.inm...</td>
+      <td>inmemory</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
+      <td>legacyjpa</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.messaging.interceptors.legac...</td>
+      <td>legacyvalidation</td>
       <td>0.000000</td>
       <td>0</td>
       <td>2</td>
@@ -3183,9 +3183,9 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>84</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.common.transaction</td>
-      <td>transaction</td>
+      <td>axon-modelling-4.9.3</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
+      <td>metamodel</td>
       <td>0.500000</td>
       <td>2</td>
       <td>4</td>
@@ -3193,9 +3193,9 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>85</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org.axonframework.modelling.saga.metamodel</td>
-      <td>metamodel</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.common.transaction</td>
+      <td>transaction</td>
       <td>0.500000</td>
       <td>2</td>
       <td>4</td>
@@ -3243,26 +3243,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>75</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework.test.utils</td>
-      <td>utils</td>
-      <td>0.400000</td>
-      <td>2</td>
-      <td>5</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>76</th>
-      <td>axon-test-4.9.3</td>
-      <td>org.axonframework.test.eventscheduler</td>
-      <td>eventscheduler</td>
-      <td>0.400000</td>
-      <td>2</td>
-      <td>5</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>77</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.deadline.annotation</td>
       <td>annotation</td>
@@ -3272,10 +3252,30 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>0</td>
     </tr>
     <tr>
-      <th>78</th>
+      <th>76</th>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.queryhandling.registration</td>
       <td>registration</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.test.utils</td>
+      <td>utils</td>
+      <td>0.400000</td>
+      <td>2</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework.test.eventscheduler</td>
+      <td>eventscheduler</td>
       <td>0.400000</td>
       <td>2</td>
       <td>5</td>
@@ -3505,7 +3505,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-test-4.9.3</td>
+      <td>axon-modelling-4.9.3</td>
       <td>org</td>
       <td>org</td>
       <td>NaN</td>
@@ -3515,7 +3515,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>5</th>
-      <td>axon-test-4.9.3</td>
+      <td>axon-modelling-4.9.3</td>
       <td>org.axonframework</td>
       <td>axonframework</td>
       <td>NaN</td>
@@ -3525,46 +3525,6 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>6</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
       <td>axon-modelling-4.9.3</td>
       <td>org.axonframework.modelling</td>
       <td>modelling</td>
@@ -3574,8 +3534,48 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0</td>
     </tr>
     <tr>
+      <th>7</th>
+      <td>axon-configuration-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-configuration-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>axon-eventsourcing-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>axon-eventsourcing-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>11</th>
-      <td>axon-disruptor-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
       <td>org</td>
       <td>org</td>
       <td>NaN</td>
@@ -3585,7 +3585,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>12</th>
-      <td>axon-disruptor-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
       <td>org.axonframework</td>
       <td>axonframework</td>
       <td>NaN</td>
@@ -3595,9 +3595,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>13</th>
-      <td>axon-disruptor-4.9.3</td>
-      <td>org.axonframework.disruptor</td>
-      <td>disruptor</td>
+      <td>axon-test-4.9.3</td>
+      <td>org</td>
+      <td>org</td>
       <td>NaN</td>
       <td>0.000000</td>
       <td>NaN</td>
@@ -3605,9 +3605,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>14</th>
-      <td>axon-eventsourcing-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
+      <td>axon-test-4.9.3</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
       <td>NaN</td>
       <td>0.000000</td>
       <td>NaN</td>
@@ -3615,7 +3615,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>15</th>
-      <td>axon-eventsourcing-4.9.3</td>
+      <td>axon-disruptor-4.9.3</td>
       <td>org.axonframework</td>
       <td>axonframework</td>
       <td>NaN</td>
@@ -3625,7 +3625,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>16</th>
-      <td>axon-configuration-4.9.3</td>
+      <td>axon-disruptor-4.9.3</td>
       <td>org</td>
       <td>org</td>
       <td>NaN</td>
@@ -3635,9 +3635,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>17</th>
-      <td>axon-configuration-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
+      <td>axon-disruptor-4.9.3</td>
+      <td>org.axonframework.disruptor</td>
+      <td>disruptor</td>
       <td>NaN</td>
       <td>0.000000</td>
       <td>NaN</td>

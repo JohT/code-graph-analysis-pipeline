@@ -11,31 +11,142 @@ This report includes graph visualization(s) using JavaScript and might not be ex
 - [Neo4j Graph Data Science Topological Sort](https://neo4j.com/docs/graph-data-science/current/algorithms/alpha/topological-sort)
 
 
-## Hierarchical Artifact Dependencies
+## Dependencies Hierarchy
 
-The following hierarchical graph shows artifact dependencies with the most used basis/shared artifact at the bottom and the artifact the builds upon the other dependencies on top. The visualization is limited to the first 60 nodes and their direct dependency ordered by the dependency layer ("maxDistanceFromSource") descending. 
+The following hierarchical graphs shows dependencies with the most used and shared elements at the bottom and the ones that use the most dependencies on top. The visualization is limited to the first 20 nodes and their direct dependency ordered descending by their layer ("maxDistanceFromSource"). 
 
-For the whole list of topologically sorted artifacts including the hierarchical layer go to the report `TopologicalSortedArtifacts.csv`. This is also known as the "build order".
+For the whole list of topologically sorted elements including the hierarchical layer see the detailed report `TopologicalSorted....csv`. It is for example helpful to find out in which order Artifacts need to be build/assembled in case of breaking changes.
 
+### Hierarchical Java Artifact Dependencies
 
-
-
-    <IPython.core.display.Javascript object>
-
+The following Graph shows up to 60 Java Artifact dependencies in hierarchical form sorted by their topology.
 
 
 
-<style type="text/css">
-    #graph-visualization {
-        width: 660px;
-        height: 660px;
-        border: 1px solid lightgray;
-    }
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jupyter Notebook embedded neovis.js visualization</title>
+  <style type="text/css">
+.graph-visualization {
+    width: 660px;
+    height: 660px;
+    border: 1px solid lightgray;
+}
+div.vis-tooltip {
+  font-size: 6px;
+}
 </style>
-<div id="graph-visualization"></div>
+</head>
+<body>
+  <div id="graph-visualization-java-artifacts" class="graph-visualization"></div>
+  <script type="text/javascript" defer>
+    configuration={"containerId": "graph-visualization-java-artifacts", "visConfig": {"nodes": {"shape": "hexagon", "shadow": false, "font": {"strokeWidth": 4, "strokeColor": "#F2F2FF", "size": 12}, "size": 22, "borderWidth": 2, "widthConstraint": {"maximum": 60}}, "edges": {"arrows": {"to": {"enabled": true, "scaleFactor": 0.3}}, "scaling": {"max": 6}}, "physics": {"hierarchicalRepulsion": {"nodeDistance": 200, "centralGravity": 0.2, "springLength": 100, "springConstant": 0.02, "damping": 0.09, "avoidOverlap": 0.9}, "solver": "hierarchicalRepulsion"}, "layout": {"hierarchical": {"enabled": true, "sortMethod": "directed"}}}, "neo4j": {"serverUrl": "bolt://localhost:7687", "serverUser": "neo4j", "serverPassword": "j92UxWht08Vdt3YOMpI="}, "initialCypher": "\n        MATCH (artifact:Java:Artifact:Archive)-[dependency:DEPENDS_ON]->(dependent:Java:Artifact:Archive)\n        WHERE  artifact.maxDistanceFromSource IS NOT NULL\n        AND  dependent.maxDistanceFromSource > artifact.maxDistanceFromSource\n        RETURN artifact, dependency, dependent\n        ORDER BY artifact.maxDistanceFromSource DESC\n                ,artifact.maxDistanceFromSource ASC\n                ,artifact.topologicalSortIndex  ASC\n                ,dependent.topologicalSortIndex ASC\n        LIMIT 20        \n    ", "labels": {"Artifact": {"label": "fileName"}}, "relationships": {"DEPENDS_ON": {"value": "weight", "label": false}}}; 
+function draw(NeoVis) {
+  configuration.labels[NeoVis.NEOVIS_DEFAULT_CONFIG] = {
+    [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+      function: {
+        title: NeoVis.objectToTitleHtml // Show all node properties in the tooltip
+      }
+    }
+  }
+  configuration.relationships[NeoVis.NEOVIS_DEFAULT_CONFIG] = {
+    [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+      function: {
+        title: NeoVis.objectToTitleHtml // Show all relationship properties in the tooltip
+      }
+    }
+  }
+  configuration.labels.Artifact = {
+      [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+          function: {
+              // Use "fileName" as label. Remove leading slash, trailing ".jar" and version number.
+              // TODO Enrich the Graph so that there is a distinct property for the "cleaned up" artifact name
+              label: (node) => node.properties.fileName.replace('/', '').replace('.jar', '').replace(/-[\d\.]+/, '')
+          }
+      }
+  }
+  console.debug(configuration)
+  const neoViz = new NeoVis.default(configuration);
+  neoViz.render();
+}
+
+// Use JavaScript library neovis.js to render the graph into the HTML above
+requirejs(['https://unpkg.com/neovis.js@2.1.0'], function(NeoVis){ 
+  draw(NeoVis);
+}, function (err) {
+    throw new Error("Failed to load NeoVis:" + err);
+});
+
+  </script>
+</body>
+</html>
 
 
 
+### Hierarchical Typescript Module Dependencies
 
-    <IPython.core.display.Javascript object>
+The following Graph shows up to 20 Typescript Module dependencies in hierarchical form sorted by their topology.
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jupyter Notebook embedded neovis.js visualization</title>
+  <style type="text/css">
+.graph-visualization {
+    width: 660px;
+    height: 660px;
+    border: 1px solid lightgray;
+}
+div.vis-tooltip {
+  font-size: 6px;
+}
+</style>
+</head>
+<body>
+  <div id="graph-visualization-typescript-modules" class="graph-visualization"></div>
+  <script type="text/javascript" defer>
+    configuration={"containerId": "graph-visualization-typescript-modules", "visConfig": {"nodes": {"shape": "hexagon", "shadow": false, "font": {"strokeWidth": 4, "strokeColor": "#F2F2FF", "size": 12}, "size": 22, "borderWidth": 2, "widthConstraint": {"maximum": 60}}, "edges": {"arrows": {"to": {"enabled": true, "scaleFactor": 0.3}}, "scaling": {"max": 6}}, "physics": {"hierarchicalRepulsion": {"nodeDistance": 200, "centralGravity": 0.2, "springLength": 100, "springConstant": 0.02, "damping": 0.09, "avoidOverlap": 0.9}, "solver": "hierarchicalRepulsion"}, "layout": {"hierarchical": {"enabled": true, "sortMethod": "directed"}}}, "neo4j": {"serverUrl": "bolt://localhost:7687", "serverUser": "neo4j", "serverPassword": "j92UxWht08Vdt3YOMpI="}, "initialCypher": "\n        MATCH (module:TS:Module)-[dependency:DEPENDS_ON]->(dependent:TS:Module)\n        WHERE  module.maxDistanceFromSource IS NOT NULL\n        AND  dependent.maxDistanceFromSource > module.maxDistanceFromSource\n        RETURN module, dependency, dependent\n        ORDER BY module.maxDistanceFromSource DESC\n                ,module.maxDistanceFromSource ASC\n                ,module.topologicalSortIndex  ASC\n                ,dependent.topologicalSortIndex ASC\n        LIMIT 20        \n    ", "defaultLabelConfig": {"label": "name"}, "labels": {"File": {"label": "name"}}, "relationships": {"DEPENDS_ON": {"value": "cardinality", "label": false}}}; 
+function draw(NeoVis) {
+  configuration.labels[NeoVis.NEOVIS_DEFAULT_CONFIG] = {
+    [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+      function: {
+        title: NeoVis.objectToTitleHtml // Show all node properties in the tooltip
+      }
+    }
+  }
+  configuration.relationships[NeoVis.NEOVIS_DEFAULT_CONFIG] = {
+    [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+      function: {
+        title: NeoVis.objectToTitleHtml // Show all relationship properties in the tooltip
+      }
+    }
+  }
+  configuration.labels.Artifact = {
+      [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+          function: {
+              // Use "fileName" as label. Remove leading slash, trailing ".jar" and version number.
+              // TODO Enrich the Graph so that there is a distinct property for the "cleaned up" artifact name
+              label: (node) => node.properties.fileName.replace('/', '').replace('.jar', '').replace(/-[\d\.]+/, '')
+          }
+      }
+  }
+  console.debug(configuration)
+  const neoViz = new NeoVis.default(configuration);
+  neoViz.render();
+}
+
+// Use JavaScript library neovis.js to render the graph into the HTML above
+requirejs(['https://unpkg.com/neovis.js@2.1.0'], function(NeoVis){ 
+  draw(NeoVis);
+}, function (err) {
+    throw new Error("Failed to load NeoVis:" + err);
+});
+
+  </script>
+</body>
+</html>
+
 
