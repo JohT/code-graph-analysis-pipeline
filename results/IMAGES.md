@@ -186,7 +186,6 @@ Image  | Analysis |
 | [VisibilityMetrics_17_2.png](./AxonFramework-4.9.2/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_17_2.png) | AxonFramework-4.9.2 |
 | [VisibilityMetrics_24_2.png](./AxonFramework-4.9.2/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_24_2.png) | AxonFramework-4.9.2 |
 | [Wordcloud_10_1.png](./AxonFramework-4.9.2/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | AxonFramework-4.9.2 |
-| [artifactDependenciesGraph-0.png](./AxonFramework-4.9.3/artifact-dependencies-graph/artifactDependenciesGraph-0.png) | AxonFramework-4.9.3 |
 | [ExternalDependencies_14_0.png](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies_files/ExternalDependencies_14_0.png) | AxonFramework-4.9.3 |
 | [ExternalDependencies_17_0.png](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies_files/ExternalDependencies_17_0.png) | AxonFramework-4.9.3 |
 | [ExternalDependencies_21_0.png](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies_files/ExternalDependencies_21_0.png) | AxonFramework-4.9.3 |
@@ -199,6 +198,8 @@ Image  | Analysis |
 | [ExternalDependencies_60_1.png](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies_files/ExternalDependencies_60_1.png) | AxonFramework-4.9.3 |
 | [ExternalDependencies_82_1.png](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies_files/ExternalDependencies_82_1.png) | AxonFramework-4.9.3 |
 | [ExternalDependencies_84_1.png](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies_files/ExternalDependencies_84_1.png) | AxonFramework-4.9.3 |
+| [graphVisualizationJavaArtifactDependencies-0.png](./AxonFramework-4.9.3/graph-visualization-java-artifact-dependencies/graphVisualizationJavaArtifactDependencies-0.png) | AxonFramework-4.9.3 |
+| [error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png](./AxonFramework-4.9.3/graph-visualization-typescript-module-dependencies/error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png) | AxonFramework-4.9.3 |
 | [MethodMetrics_14_1.png](./AxonFramework-4.9.3/method-metrics/MethodMetrics_files/MethodMetrics_14_1.png) | AxonFramework-4.9.3 |
 | [MethodMetrics_26_1.png](./AxonFramework-4.9.3/method-metrics/MethodMetrics_files/MethodMetrics_26_1.png) | AxonFramework-4.9.3 |
 | [NodeEmbeddings_21_0.png](./AxonFramework-4.9.3/node-embeddings/NodeEmbeddings_files/NodeEmbeddings_21_0.png) | AxonFramework-4.9.3 |
