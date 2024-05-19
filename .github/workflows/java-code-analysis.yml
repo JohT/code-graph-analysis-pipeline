@@ -179,8 +179,9 @@ jobs:
         git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
         git config --global user.email 'joht@users.noreply.github.com'
         git config --local http.postBuffer 524288000
-        git pull
+        set -o errexit -o pipefail -o xtrace
         git add results
         git status
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-        git push
+        git status
+        git push --verbose
