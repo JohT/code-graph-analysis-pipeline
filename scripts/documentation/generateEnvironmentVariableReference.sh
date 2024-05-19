@@ -14,6 +14,8 @@ set -o errexit -o pipefail
 DOCUMENTATION_SCRIPTS_DIR=${DOCUMENTATION_SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the documentation generation scripts
 echo "generateEnvironmentVariablesReference: DOCUMENTATION_SCRIPTS_DIR=${DOCUMENTATION_SCRIPTS_DIR}"
 
+echo "generateEnvironmentVariableReference: Generating ENVIRONMENT_VARIABLES.md..."
+
 # Clear existing markdown document
 source "${DOCUMENTATION_SCRIPTS_DIR}/appendEnvironmentVariables.sh" "clear" || exit 1
 
@@ -22,3 +24,5 @@ find . -type f -name "*.sh" | sort | while read -r scriptFile; do
   echo "generateEnvironmentVariablesReference: Searching for environment variables in ${scriptFile}"
   source "${DOCUMENTATION_SCRIPTS_DIR}/appendEnvironmentVariables.sh" "${scriptFile}" || exit 1
 done
+
+echo "generateEnvironmentVariableReference: Successfully generated ENVIRONMENT_VARIABLES.md."

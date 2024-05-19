@@ -9,6 +9,8 @@ set -o errexit -o pipefail
 # Markdown file name
 markdown_file="JUPYTER_REPORTS.md"
 
+echo "generateJupyterReportReference: Generating ${markdown_file}..."
+
 { 
   echo "# Jupyter Notebook Reports Reference" 
   echo ""
@@ -50,3 +52,5 @@ find . -type f -name "*.md" | sort | while read -r report_file; do
     # Add the script file and its description to the Markdown table
     echo "| ${link} | ${analysisname%%.} | ${description} |" >> ${markdown_file}
 done
+
+echo "generateJupyterReportReference: Successfully generated ${markdown_file}."

@@ -32,19 +32,20 @@ jobs:
       run: |
         ./documentation/generateScriptReference.sh
 
+    - name: Use git to detect changes in the regenerated document and set generated_document_changed
+      run: git diff --quiet || echo "generated_document_changed=true" >> $GITHUB_ENV
+
+    - name: Display generated_document_changed
+      run: echo "generated_document_changed=${{ env.generated_document_changed}}"
+
     - name: Archive generated scripts reference document
+      if: env.generated_document_changed
       uses: actions/upload-artifact@v4
       with:
         name: scripts-reference-document
         path: ./scripts/SCRIPTS.md
         if-no-files-found: error
         retention-days: 5
-
-    - name: Use git to detect changes in the regenerated document and set generated_document_changed
-      run: git diff --quiet || echo "generated_document_changed=true" >> $GITHUB_ENV
-
-    - name: Display generated_document_changed
-      run: echo "generated_document_changed=${{ env.generated_document_changed}}"
 
     - name: Commit generated scripts reference document if there were changes
       # Only run when a pull request gets merged or a commit is pushed to the main branch.
