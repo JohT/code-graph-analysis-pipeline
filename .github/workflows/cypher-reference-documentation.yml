@@ -55,6 +55,7 @@ jobs:
         git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
         git config --global user.email 'joht@users.noreply.github.com'
         set -o errexit -o pipefail -o xtrace
+        git pull --verbose
         git add ./cypher/CYPHER.md
         git status
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
