@@ -30,7 +30,7 @@ if [ -z "${TOOLS_DIRECTORY}" ]; then
     exit 1
 else
     # Create tools directory if it doesn't exists
-    echo "setupJQAssistant: Creating tools directory <${TOOLS_DIRECTORY}> if neccessary"
+    echo "setupJQAssistant: Creating tools directory <${TOOLS_DIRECTORY}> if necessary"
     mkdir -p "${TOOLS_DIRECTORY}"
 fi
 
@@ -40,7 +40,7 @@ if [ -z "${SHARED_DOWNLOADS_DIRECTORY}" ]; then
     exit 1
 else
     # Create shared downloads directory if it doesn't exists
-    echo "setupJQAssistant: Creating shared downloads directory <${SHARED_DOWNLOADS_DIRECTORY}> if neccessary"
+    echo "setupJQAssistant: Creating shared downloads directory <${SHARED_DOWNLOADS_DIRECTORY}> if necessary"
     mkdir -p "${SHARED_DOWNLOADS_DIRECTORY}"
 fi
 
@@ -57,7 +57,7 @@ if [ ! -d "${JQASSISTANT_INSTALLATION_DIRECTORY}" ] ; then
     # Unpack the ZIP file (-q option for less verbose output)
     unzip -q "${SHARED_DOWNLOADS_DIRECTORY}/${jqassistant_cli_fulldownload_file}" -d "${TOOLS_DIRECTORY}"
     
-    echo "setupJQAssistant: Installed sucessfully"
+    echo "setupJQAssistant: Installed successfully"
 else
     echo "setupJQAssistant: ${jqassistant_cli_fulldownload_file} already installed"
 fi

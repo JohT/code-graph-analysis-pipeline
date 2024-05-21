@@ -121,7 +121,7 @@ if [ ! -f "${SETTINGS_PROFILE_SCRIPT}" ] ; then
   exit 1
 fi
 
-# Execute the settings profile script that sets all the neccessary settings variables (overrideable by environment variables).
+# Execute the settings profile script that sets all the necessary settings variables (overrideable by environment variables).
 echo "analyze: Using analysis settings profile script ${SETTINGS_PROFILE_SCRIPT}"
 source "${SETTINGS_PROFILE_SCRIPT}"
 
