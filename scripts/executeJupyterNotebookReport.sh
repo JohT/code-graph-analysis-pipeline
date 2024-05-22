@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-# Executes the Jupyter Notebook given with the command line option --jupyterNotebook and creates a report directory for the results (ipynb, md, pdf)..
+# Executes the given Jupyter Notebook and puts all resulting files (ipynb, md, pdf) into an accordingly named directory within the "results" directory.
+#
+# Command line options:
+# --jupyterNotebook: Name of the Jupyter Notebook file including its file extension relative to the "jupyter" directory (required)
+# --reportName: nameOfTheReportsDirectory (optional, default = kebab cased name of the Jupyter Notebook file)
 
 # Requires executeQueryFunctions.sh, executeJupyterNotebook.sh, cleanupAfterReportGeneration.sh
 
@@ -47,25 +51,25 @@ validate_data_available() {
 
   dataValidation=$(get_data_validation_from_jupyter_metadata "${jupyterNotebookFile}")
   if [ -z "${dataValidation}" ] ; then
-      echo "executeJupyterNotebookReports: Skipping data validation. Jupyter Notebook ${jupyterNotebookFile} has no 'code_graph_analysis_pipeline_data_validation' metadata property."
+      echo "executeJupyterNotebookReport: Skipping data validation. Jupyter Notebook ${jupyterNotebookFile} has no 'code_graph_analysis_pipeline_data_validation' metadata property."
       return 0
   fi
-  echo "executeJupyterNotebookReports: dataValidation=${dataValidation}"
+  echo "executeJupyterNotebookReport: dataValidation=${dataValidation}"
 
   local dataValidationCypherQuery="${cypherDirectory}/Validation/${dataValidation}.cypher"
   if [ ! -f "${dataValidationCypherQuery}" ] ; then
-    echo "executeJupyterNotebookReports: Error: Validation Cypher Query file ${dataValidationCypherQuery} doesn't exist."
+    echo "executeJupyterNotebookReport: Error: Validation Cypher Query file ${dataValidationCypherQuery} doesn't exist."
     exit 1
   fi
 
-  echo "executeJupyterNotebookReports: Validating data using Cypher query ${dataValidationCypherQuery} ..."
+  echo "executeJupyterNotebookReport: Validating data using Cypher query ${dataValidationCypherQuery} ..."
   local dataValidationResult
   dataValidationResult=$( execute_cypher_http_number_of_lines_in_result "${dataValidationCypherQuery}" )
   if [[ "${dataValidationResult}" -ge 1 ]]; then
-    echo "executeJupyterNotebookReports: Validation succeeded."
+    echo "executeJupyterNotebookReport: Validation succeeded."
     true;
   else
-    echo "executeJupyterNotebookReports: Validation failed. No data from query ${dataValidationCypherQuery}."
+    echo "executeJupyterNotebookReport: Validation failed. No data from query ${dataValidationCypherQuery}."
     false;
   fi
 }
@@ -88,7 +92,7 @@ while [[ $# -gt 0 ]]; do
       ;;
 
     *)
-      echo "executeJupyterNotebookReports: Error: Unknown option: ${commandLineOption}"
+      echo "executeJupyterNotebookReport: Error: Unknown option: ${commandLineOption}"
       usage
       ;;
   esac
@@ -102,7 +106,7 @@ fi
 
 if [[ -z ${reportName} ]]; then
   reportName=$(camel_to_kebab_case_file_name "${jupyterNotebook}")
-  echo "executeJupyterNotebookReports: reportName defaults to ${reportName}"
+  echo "executeJupyterNotebookReport: reportName defaults to ${reportName}"
 fi
 
 ## Get this "scripts" directory if not already set
@@ -110,19 +114,19 @@ fi
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
-echo "executeJupyterNotebookReports: SCRIPTS_DIR=${SCRIPTS_DIR}"
+echo "executeJupyterNotebookReport: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-"${SCRIPTS_DIR}/reports"} # Repository directory containing the report scripts
-echo "executeJupyterNotebookReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
+echo "executeJupyterNotebookReport: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 
 # Get the "jupyter" directory by taking the path of this script and going two directory up and then to "jupyter".
 JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY:-"${SCRIPTS_DIR}/../jupyter"} # Repository directory containing the Jupyter Notebooks
-echo "executeJupyterNotebookReports: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
+echo "executeJupyterNotebookReport: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
 
 # Get the "cypher" directory by taking the path of this script and going two directory up and then to "cypher".
 CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"}
-echo "executeJupyterNotebookReports CYPHER_DIR=${CYPHER_DIR}"
+echo "executeJupyterNotebookReport CYPHER_DIR=${CYPHER_DIR}"
 
 # Define functions to execute cypher queries from within a given file, like e.g. "get_data_validation_from_jupyter_metadata"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -135,7 +139,7 @@ if validate_data_available "${JUPYTER_NOTEBOOK_DIRECTORY}/${jupyterNotebook}" "$
   # Execute and convert the given Jupyter Notebook within the given reports directory
   (cd "${FULL_REPORT_DIRECTORY}" && exec "${SCRIPTS_DIR}/executeJupyterNotebook.sh" "${JUPYTER_NOTEBOOK_DIRECTORY}/${jupyterNotebook}")
 else
-  echo "executeJupyterNotebookReports: Skipping Jupyter Notebook ${jupyterNotebook} because of missing data."
+  echo "executeJupyterNotebookReport: Skipping Jupyter Notebook ${jupyterNotebook} because of missing data."
 fi
 
 
