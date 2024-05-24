@@ -69,14 +69,14 @@ Report | Analysis | Description
 | [Overview.md](./AxonFramework-4.9.2/overview/Overview.md) | AxonFramework-4.9.2 | Overview |
 | [VisibilityMetrics.md](./AxonFramework-4.9.2/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.9.2 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.9.2/wordcloud/Wordcloud.md) | AxonFramework-4.9.2 | Wordcloud |
-| [ArtifactDependencies.md](./AxonFramework-4.9.3/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.9.3 | Artifact Dependencies |
-| [ExternalDependencies.md](./AxonFramework-4.9.3/external-dependencies/ExternalDependencies.md) | AxonFramework-4.9.3 | External Dependencies |
-| [InternalDependencies.md](./AxonFramework-4.9.3/internal-dependencies/InternalDependencies.md) | AxonFramework-4.9.3 | Internal Dependencies |
-| [MethodMetrics.md](./AxonFramework-4.9.3/method-metrics/MethodMetrics.md) | AxonFramework-4.9.3 | Method Metrics |
-| [NodeEmbeddings.md](./AxonFramework-4.9.3/node-embeddings/NodeEmbeddings.md) | AxonFramework-4.9.3 | Node Embeddings |
-| [ObjectOrientedDesignMetrics.md](./AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) | AxonFramework-4.9.3 | Object Oriented Design Quality Metrics |
-| [Overview.md](./AxonFramework-4.9.3/overview/Overview.md) | AxonFramework-4.9.3 | Overview |
-| [VisibilityMetrics.md](./AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics.md) | AxonFramework-4.9.3 | Visibility Metrics |
+| [DependenciesGraphJava.md](./AxonFramework-4.9.3/dependencies-graph-java/DependenciesGraphJava.md) | AxonFramework-4.9.3 | Artifact Dependencies |
+| [ExternalDependenciesJava.md](./AxonFramework-4.9.3/external-dependencies-java/ExternalDependenciesJava.md) | AxonFramework-4.9.3 | External Dependencies |
+| [InternalDependenciesJava.md](./AxonFramework-4.9.3/internal-dependencies-java/InternalDependenciesJava.md) | AxonFramework-4.9.3 | Internal Dependencies |
+| [MethodMetricsJava.md](./AxonFramework-4.9.3/method-metrics-java/MethodMetricsJava.md) | AxonFramework-4.9.3 | Method Metrics |
+| [NodeEmbeddingsJava.md](./AxonFramework-4.9.3/node-embeddings-java/NodeEmbeddingsJava.md) | AxonFramework-4.9.3 | Node Embeddings |
+| [ObjectOrientedDesignMetricsJava.md](./AxonFramework-4.9.3/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) | AxonFramework-4.9.3 | Object Oriented Design Quality Metrics |
+| [OverviewJava.md](./AxonFramework-4.9.3/overview-java/OverviewJava.md) | AxonFramework-4.9.3 | Overview |
+| [VisibilityMetricsJava.md](./AxonFramework-4.9.3/visibility-metrics-java/VisibilityMetricsJava.md) | AxonFramework-4.9.3 | Visibility Metrics |
 | [Wordcloud.md](./AxonFramework-4.9.3/wordcloud/Wordcloud.md) | AxonFramework-4.9.3 | Wordcloud |
 | [CSV_REPORTS.md](./CSV_REPORTS.md) |  | CSV Cypher Query Reports Reference |
 | [IMAGES.md](./IMAGES.md) |  | Image Reference |
