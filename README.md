@@ -2,11 +2,11 @@
 
 <img src="./images/DALL-E-Mini-Graph-Pipeline-Logo-2.png" align="left" hspace="10" width="180">
 
-Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.org/get-started), it now also [supports Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) and is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.github.io/jqassistant/doc), it now also [supports Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) and is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
 
 ---
 
-## ✨ Features
+## :sparkles: Features
 
 - Analyze static code structure as a graph
 - **🌟New🌟:** Also supports Typescript
@@ -22,38 +22,38 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 
-### 📖 Jupyter Notebook Reports
+### :book: Jupyter Notebook Reports
 
-Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org). For a detailed reference see [Jupyter Notebook Report Reference](#📈-jupyter-notebook-report-reference) below.
+Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org). For a detailed reference see [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference
 
-- [External Dependencies](./results/AxonFramework-4.9.3/external-dependencies/ExternalDependencies.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependencies.ipynb)).
-- [Internal Dependencies](./results/AxonFramework-4.9.3/internal-dependencies/InternalDependencies.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependencies.ipynb)).
-- [Method Metrics](./results/AxonFramework-4.9.3/method-metrics/MethodMetrics.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetrics.ipynb)).
-- [Node Embeddings](./results/AxonFramework-4.9.3/node-embeddings/NodeEmbeddings.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddings.ipynb)).
-- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) is based on [OO Design Quality Metrics by Robert Martin](https://www.semanticscholar.org/paper/OO-Design-Quality-Metrics-Martin-October/18acd7eb21b918c8a5f619157f7e4f6d451d18f8) ([Notebook](./jupyter/ObjectOrientedDesignMetrics.ipynb)).
-- [Overview](./results/AxonFramework-4.9.3/overview/Overview.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/Overview.ipynb)).
-- [Visibility Metrics](./results/AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics.md) is based on [Visibility Metrics and the Importance of Hiding Things](https://dzone.com/articles/visibility-metrics-and-the-importance-of-hiding-th) ([Notebook](./jupyter/VisibilityMetrics.ipynb)).
+- [External Dependencies](./results/AxonFramework-4.9.3/external-dependencies/ExternalDependencies.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependenciesJava.ipynb)).
+- [Internal Dependencies](./results/AxonFramework-4.9.3/internal-dependencies/InternalDependencies.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependenciesJava.ipynb)).
+- [Method Metrics](./results/AxonFramework-4.9.3/method-metrics/MethodMetrics.ipynb)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
+- [Node Embeddings](./results/AxonFramework-4.9.3/node-embeddings/NodeEmbeddings.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
+- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./jupyter/ObjectOrientedDesignMetricsJava.ipynb)).
+- [Overview](./results/AxonFramework-4.9.3/overview/Overview.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
+- [Visibility Metrics](./results/AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
 - [Wordcloud](./results/AxonFramework-4.9.3/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
 
-### 📖 Graph Data Science Reports
+### :book: Graph Data Science Reports
 
-Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#📃-csv-cypher-query-report-reference) below.
+Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference)
 
-- [Centrality with Page Rank](./results/AxonFramework-4.9.3/centrality-csv/Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
-- [Community Detection with Leiden](./results/AxonFramework-4.9.3/community-csv/Leiden_Communities.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
+- [Centrality with Page Rank](./results/AxonFramework-4.9.3/centrality-csv/Package_Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
+- [Community Detection with Leiden](./results/AxonFramework-4.9.3/community-csv/Package_communityLeidenId_Community__Metrics.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
 - [Node Embeddings with HashGNN](./results/AxonFramework-4.9.3/node-embeddings-csv/Package_Embeddings_HashGNN.csv) ([Source Script](./scripts/reports/NodeEmbeddingsCsv.sh))
-- [Similarity with Jaccard](./results/AxonFramework-4.9.3/similarity-csv/Similarity_Jaccard.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
-- [Topology Sort](./results/AxonFramework-4.9.3/artifact-topology-csv/TopologicalSortedArtifacts.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
+- [Similarity with Jaccard](./results/AxonFramework-4.9.3/similarity-csv/Package_Similarity.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
+- [Topology Sort](./results/AxonFramework-4.9.3/topology-csv/Package_Topological_Sort.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
 
-## 📖 Blog Articles
+## :book: Blog Articles
 
 - [Analyze java dependencies with jQAssistant](https://joht.github.io/johtizen/data/2021/02/21/java-jar-dependency-analysis.html)
 - [Analyze java package metrics in a graph database (Part 2)](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html)
 
-## 🛠 Prerequisites
+## :hammer_and_wrench: Prerequisites
 
 - Java 17 is [required for Neo4j](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-software) (Neo4j 5.x requirement).
-- On Windows it is recommended to use the git bash provided by [git for windows](https://gitforwindows.org).
+- On Windows it is recommended to use the git bash provided by [git for windows](https://github.com/git-guides/install-git#install-git-on-windows).
 - [jq](https://github.com/jqlang/jq) the "lightweight and flexible command-line JSON processor" needs to be installed. Latest releases: https://github.com/jqlang/jq/releases/latest. Check using `jq --version`.
 - Set environment variable `NEO4J_INITIAL_PASSWORD` to a password of your choice. For example:
 
@@ -93,11 +93,11 @@ This could be as simple as running the following command in your Typescript proj
 
 - Copy the resulting json file (e.g. `.reports/jqa/ts-output.json`) into the "artifacts" directory for your analysis work directory. Custom subdirectories within "artifacts" are also supported.
 
-## 🚀 Getting Started
+## :rocket: Getting Started
 
 See [GETTING_STARTED.md](./GETTING_STARTED.md) on how to get started on your local machine.
 
-## 🏗 Pipeline and Tools
+## :building_construction: Pipeline and Tools
 
 The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
 
@@ -107,7 +107,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
 - [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
 - Download artifacts that contain the code to be analyzed [scripts/artifacts](./scripts/downloader/)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
-- Setup [jQAssistant](https://jqassistant.org/get-started) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
+- Setup [jQAssistant](https://jqassistant.github.io/jqassistant/doc) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [environment.yml](./jupyter/environment.yml):
@@ -119,46 +119,46 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   - [pandas](https://pandas.pydata.org)
   - [pip](https://pip.pypa.io/en/stable)
   - [monotonic](https://github.com/atdt/monotonic)
-  - [py2neo](https://py2neo.org)
+  - [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver)
   - [sklearn](https://scikit-learn.org)
   - [wordcloud](https://github.com/amueller/word_cloud)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 
 **Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if something is missing or wrong in the list.
 
-## 🛠 Command Reference
+## :runner: Command Reference
 
 [COMMANDS.md](./COMMANDS.md) contains further details on commands and how to do a manual setup.
 
-## 📃 CSV Cypher Query Report Reference
+## :page_with_curl: CSV Cypher Query Report Reference
 
 [CSV_REPORTS.md](./results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](./results) directory. It can be generated as described in [Generate CSV Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
 
-## 📈 Jupyter Notebook Report Reference
+## :page_with_curl: Jupyter Notebook Report Reference
 
 [JUPYTER_REPORTS.md](./results/JUPYTER_REPORTS.md) lists all Jupyter Notebook reports inside the [results](./results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-jupyter-notebook-report-reference).
 
-## 📈 Image Reference
+## :camera: Image Reference
 
 [IMAGES.md](./results/IMAGES.md) lists all PNG images inside the [results](./results) directory. It can be generated as described in [Generate Image Reference](./COMMANDS.md#generate-image-reference).
 
-## ⚙️ Script Reference
+## :gear: Script Reference
 
 [SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository including their first comment line as a description. It can be generated as described in [Generate Script Reference](./COMMANDS.md#generate-script-reference).
 
-## 🔎 Cypher Query Reference
+## :mag: Cypher Query Reference
 
 [CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#generate-cypher-reference).
 > [Cypher](https://neo4j.com/docs/getting-started/cypher-intro) is Neo4j’s graph query language that lets you retrieve data from the graph.
 
-## ⚙️ Environment Variable Reference
+## :globe_with_meridians: Environment Variable Reference
 
 [ENVIRONMENT_VARIABLES.md](./scripts/ENVIRONMENT_VARIABLES.md) contains all environment variables that are supported by the scripts including default values and description. It can be generated as described in [Generate Environment Variable Reference](./COMMANDS.md#generate-environment-variable-reference).
 
-## 🤔 Questions & Answers
+## :thinking: Questions & Answers
 
 - How can i run an analysis locally?  
-  👉 Check the [prerequisites](#🛠-prerequisites).
+  👉 Check the [prerequisites](#hammer_and_wrench-prerequisites).
   👉 See [Start an analysis](./COMMANDS.md#start-an-analysis) in the [Commands Reference](./COMMANDS.md).
   👉 To get started from scratch see [GETTING_STARTED.md](./GETTING_STARTED.md).
 
@@ -179,10 +179,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   👉 Create a new artifacts download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
   👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/java-code-analysis.yml).
 
-- How can i trigger a full rescan of all artifacts?  
+- How can i trigger a full re-scan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
 
-- How can PDF generation for Jupyter Notebooks be enabled (depends on chromium, takes more time)?  
+- How can i enable PDF generation for Jupyter Notebooks (depends on chromium, takes more time)?  
   👉 Set environment variable `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  
 
   ```shell
@@ -194,6 +194,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   ```shell
   ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
   ```
+
+- Why are some Jupyter Notebook reports skipped?
+  👉 The custom Jupyter Notebook metadata property `code_graph_analysis_pipeline_data_validation` can be set to choose a query from [cypher/Validation](./cypher/Validation) that will be executed preliminary to the notebook. If the query leads to at least one result, the validation succeeds and the notebook will be run. If the query leads to no result, the notebook will be skipped.
+  For more details see [Data Availability Validation](./COMMANDS.md#data-availability-validation).
 
 ## 🕸 Web References
 

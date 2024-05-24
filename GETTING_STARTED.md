@@ -6,7 +6,7 @@ For more details on how the commands work in detail see [COMMANDS](./COMMANDS.md
 
 ## 🛠 Prerequisites
 
-Please read through the [Prerequisites](./README.md#🛠-prerequisites) in the [README](./README.md) file for what is required to run the scripts.
+Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisites) in the [README](./README.md) file for what is required to run the scripts.
 
 ## Start an analysis
 
@@ -44,7 +44,7 @@ Please read through the [Prerequisites](./README.md#🛠-prerequisites) in the [
     ./../../scripts/downloader/downloadAxonFramework.sh <version>
     ```
 
-1. Optionally use a script to download artifacts from Maven ([details](#download-maven-artifacts-to-analyze))
+1. Optionally use a script to download artifacts from Maven ([details](./COMMANDS.md#download-maven-artifacts-to-analyze))
 
 1. Start the analysis
 

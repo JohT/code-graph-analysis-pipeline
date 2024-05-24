@@ -1,9 +1,53 @@
 # Code Graph Analysis Pipeline - Commands
 
-## Start an analysis
+<!-- TOC -->
+
+- [Start an Analysis](#start-an-analysis)
+    - [Command Line Options](#command-line-options)
+    - [Notes](#notes)
+    - [Examples](#examples)
+        - [Start an analysis with CSV reports only](#start-an-analysis-with-csv-reports-only)
+        - [Start an analysis with Jupyter reports only](#start-an-analysis-with-jupyter-reports-only)
+        - [Start an analysis with PDF generation](#start-an-analysis-with-pdf-generation)
+        - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
+- [Generate Markdown References](#generate-markdown-references)
+    - [Generate Cypher Reference](#generate-cypher-reference)
+    - [Generate Script Reference](#generate-script-reference)
+    - [Generate CSV Cypher Query Report Reference](#generate-csv-cypher-query-report-reference)
+    - [Generate Jupyter Notebook Report Reference](#generate-jupyter-notebook-report-reference)
+    - [Generate Image Reference](#generate-image-reference)
+    - [Generate Environment Variable Reference](#generate-environment-variable-reference)
+- [Validate Links in Markdown](#validate-links-in-markdown)
+- [Manual Setup](#manual-setup)
+    - [Setup Neo4j Graph Database](#setup-neo4j-graph-database)
+    - [Start Neo4j Graph Database](#start-neo4j-graph-database)
+    - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
+    - [Download Maven Artifacts to Analyze](#download-maven-artifacts-to-analyze)
+    - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
+- [Database Queries](#database-queries)
+    - [Cypher Shell](#cypher-shell)
+    - [HTTP API](#http-api)
+    - [executeQueryFunctions.sh](#executequeryfunctionssh)
+- [Stop Neo4j](#stop-neo4j)
+- [Jupyter Notebook](#jupyter-notebook)
+    - [Create a report with executeJupyterNotebookReport.sh](#create-a-report-with-executejupyternotebookreportsh)
+        - [Data Availability Validation](#data-availability-validation)
+    - [Execute a Notebook with executeJupyterNotebook.sh](#execute-a-notebook-with-executejupyternotebooksh)
+    - [Manually setup the environment using Conda](#manually-setup-the-environment-using-conda)
+    - [Executing Jupyter Notebooks with nbconvert](#executing-jupyter-notebooks-with-nbconvert)
+- [References](#references)
+- [Other Commands](#other-commands)
+    - [Information about a process that listens to a specific local port](#information-about-a-process-that-listens-to-a-specific-local-port)
+    - [Kill process that listens to a specific local port](#kill-process-that-listens-to-a-specific-local-port)
+    - [Memory Estimation](#memory-estimation)
+
+<!-- /TOC -->
+
+## Start an Analysis
 
 An analysis is started with the script [analyze.sh](./scripts/analysis/analyze.sh).
 To run all analysis steps simple execute the following command:
+
 ```shell
 ./../../scripts/analysis/analyze.sh
 ```
@@ -55,7 +99,7 @@ Note: Generating a PDF from a Jupyter notebook using [nbconvert](https://nbconve
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
 ```
 
-#### Setup everything to explore the graph manually
+#### Only run setup and explore the Graph manually
 
 To prepare everything for analysis including installation, configuration and preparation queries to explore the graph manually
 without report generation use this command:
@@ -123,6 +167,14 @@ Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then 
 ./documentation/generateEnvironmentVariableReference.sh
 ```
 
+## Validate Links in Markdown
+
+The following command shows how to use [markdown-link-check](https://github.com/tcort/markdown-link-check) to for example check the links in the [README.md](./README.md) file:
+
+```script
+npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md
+```
+
 ## Manual Setup
 
 The manual setup is only documented for completeness. It isn't needed since the analysis also covers download, installation and configuration of all needed tools.
@@ -141,7 +193,7 @@ It runs the script with a temporary `NEO4J_HOME` environment variable to not int
 
 ### Setup jQAssistant Java Code Analyzer
 
-Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.org/get-started).
+Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.github.io/jqassistant/doc).
 
 ### Download Maven Artifacts to analyze
 
@@ -200,7 +252,7 @@ Query parameters can be added as arguments after the file name. Here is an examp
 ./scripts/executeQuery.sh ./cypher/Get_Graph_Data_Science_Library_Version.cypher a=1
 ```
 
-### executeQueryFunctions
+### executeQueryFunctions.sh
 
 The script [executeQueryFunctions.sh](./scripts/executeQueryFunctions.sh) contains functions to simplify the
 call of [executeQuery.sh](./scripts/executeQuery.sh) for different purposes. For example, `execute_cypher_summarized`
@@ -221,7 +273,41 @@ Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Gra
 
 ## Jupyter Notebook
 
-### Commands
+### Create a report with executeJupyterNotebookReport.sh
+
+The script [executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookReport.sh) combines:
+
+- creating a directory within the "reports" directory
+- data availability validation using [executeQueryFunctions.sh](#executequeryfunctionssh)
+- executing and converting the given Notebook using [executeJupyterNotebook.sh](#execute-a-notebook-with-executejupyternotebooksh)
+
+Here is an example on how to run the report [Wordcloud.ipynb](./jupyter/Wordcloud.ipynb):
+
+```shell
+./scripts/executeJupyterNotebookReport.sh  --jupyterNotebook Wordcloud.ipynb
+```
+
+#### Data Availability Validation
+
+[Jupyter Notebooks](https://jupyter.org) can have additional custom tags within their [metadata section](https://ipython.readthedocs.io/en/3.x/notebook/nbformat.html#metadata). Opening these files with a text editor unveils that typically at the end of the file. Some editors also support editing them directly. Here, the optional metadata property `code_graph_analysis_pipeline_data_validation` is used to specify which data validation query in the [cypher/Validation](./cypher/Validation/) directory should be used. Without this property, the data validation step is skipped. If a validation is specified, it will be executed before the Jupyter Notebook is executed. If the query has at least one result, the validation is seen as successful. Otherwise, the Jupyter Notebook will not be executed.
+
+This is helpful for Jupyter Notebook reports that are specific to a programming language or other specific data prerequisites. The Notebook will be skipped if there is no data available which would otherwise lead to confusing and distracting reports with empty tables and figures.
+
+You can search the messages `Validation succeeded` or `Validation failed` inside the log to get detailed information which Notebook had been skipped for which reason.
+
+### Execute a Notebook with executeJupyterNotebook.sh
+
+[executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) executes a Jupyter Notebook in the command line and convert it to different formats like Markdown and PDF (optionally). It takes care of [setting up the environment](#manually-setup-the-environment-using-conda) and [uses nbconvert](#executing-jupyter-notebooks-with-nbconvert) to execute the notebook and convert it to other file formats under the hood.
+
+Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) to for example run [Wordcloud.ipynb](./jupyter/Wordcloud.ipynb):
+
+```shell
+./scripts/executeJupyterNotebook.sh ./jupyter/Wordcloud.ipynb
+```
+
+### Manually setup the environment using Conda
+
+[Conda](https://conda.io) provides package, dependency, and environment management for any language. Here, it is used to setup the environment for Juypter Notebooks.
 
 - Setup environment
 
@@ -230,10 +316,10 @@ Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Gra
   conda activate codegraph
   ```
 
-  or by using the environment file [codegraph-environment.yml](./jupyter/codegraph-environment.yml):
+  or by using the environment file [codegraph-environment.yml](./jupyter/environment.yml):
 
   ```shell
-  conda env create --file ./jupyter/codegraph-environment.yml
+  conda env create --file ./jupyter/environment.yml
   conda activate codegraph
   ```
 
@@ -246,8 +332,12 @@ Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Gra
 - Export only explicit environment.yml
 
   ```shell
-  conda env export --from-history --name codegraph | grep -v "^prefix: " > codegraph-environment.yml
+  conda env export --from-history --name codegraph | grep -v "^prefix: " > explicit-codegraph-environment.yml
   ```
+
+### Executing Jupyter Notebooks with nbconvert
+
+[nbconvert](https://nbconvert.readthedocs.io) converts Jupyter Notebooks to other static formats including HTML, LaTeX, PDF, Markdown, reStructuredText, and more.
 
 - Install pandoc used by nbconvert for LaTeX support (Mac)
 
@@ -273,23 +363,19 @@ Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Gra
   jupyter nbconvert --to pdf ./jupyter/first-neo4j-tryout.nbconvert.ipynb
   ```
 
-- Shell script to execute and convert a Jupyter notebook file
-  
-  Use [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) like this:
-
-  ```shell
-  ./scripts/executeJupyterNotebook.sh ./jupyter/first-neo4j-tryout.ipynb
-  ```
-
 ## References
 
-- [Managing environments with Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+- [Conda](https://conda.io)
+- [jQAssistant](https://jqassistant.github.io/jqassistant/doc)
+- [Jupyter Notebook](https://jupyter.org)
 - [Jupyter Notebook - Using as a command line tool](https://nbconvert.readthedocs.io/en/latest/usage.html)
 - [Jupyter Notebook - Installing TeX for PDF conversion](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex)
-- [Integrate Neo4j with Jupyter notebook](https://medium.com/@technologydata25/connect-neo4j-to-jupyter-notebook-c178f716d6d5)
+- [Jupyter Notebook Format - Metadata](https://ipython.readthedocs.io/en/3.x/notebook/nbformat.html#metadata)
+- [Integrate Neo4j with Jupyter Notebook](https://medium.com/@technologydata25/connect-neo4j-to-jupyter-notebook-c178f716d6d5)
 - [Hello World](https://nicolewhite.github.io/neo4j-jupyter/hello-world.html)
-- [py2neo](https://pypi.org/project/py2neo/)
-- [The Py2neo Handbook](https://py2neo.org/2021.1/)
+- [Managing environments with Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+- [Neo4j - Download](https://neo4j.com/download-center)
+- [Neo4j - HTTP API](https://neo4j.com/docs/http-api/current/query)
 - [How to Use Conda With Github Actions](https://autobencoder.com/2020-08-24-conda-actions)
 - [Older database download link (neo4j community)](https://community.neo4j.com/t/older-database-download-link/43334/9)
 
