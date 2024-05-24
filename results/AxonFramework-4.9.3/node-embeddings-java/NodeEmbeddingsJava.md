@@ -132,11 +132,11 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.056s...
+    [t-SNE] Computed neighbors for 93 samples in 0.072s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.497782
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 51.020866
-    [t-SNE] KL divergence after 1000 iterations: 0.081719
+    [t-SNE] Mean sigma: 0.643282
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.059189
+    [t-SNE] KL divergence after 800 iterations: 0.089308
 
 
 
@@ -164,8 +164,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.155609</td>
-      <td>2.348690</td>
-      <td>4.945360</td>
+      <td>-2.316905</td>
+      <td>1.645078</td>
     </tr>
     <tr>
       <th>1</th>
@@ -173,8 +173,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.152740</td>
-      <td>2.347646</td>
-      <td>4.939652</td>
+      <td>-2.315709</td>
+      <td>1.656115</td>
     </tr>
     <tr>
       <th>2</th>
@@ -182,8 +182,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>2.348303</td>
-      <td>4.907983</td>
+      <td>-2.313216</td>
+      <td>1.677108</td>
     </tr>
     <tr>
       <th>3</th>
@@ -191,8 +191,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.349429</td>
-      <td>-0.914810</td>
-      <td>7.337688</td>
+      <td>-3.741343</td>
+      <td>-4.053920</td>
     </tr>
     <tr>
       <th>4</th>
@@ -200,8 +200,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.315690</td>
-      <td>-1.403686</td>
-      <td>7.534324</td>
+      <td>-3.821021</td>
+      <td>-4.334672</td>
     </tr>
   </tbody>
 </table>
@@ -292,9 +292,9 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     [t-SNE] Indexed 93 samples in 0.000s...
     [t-SNE] Computed neighbors for 93 samples in 0.002s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 2.633192
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.269073
-    [t-SNE] KL divergence after 1000 iterations: 0.081518
+    [t-SNE] Mean sigma: 2.839166
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.048817
+    [t-SNE] KL divergence after 1000 iterations: -0.075532
 
 
 
@@ -322,8 +322,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.155609</td>
-      <td>-62.299290</td>
-      <td>16.372051</td>
+      <td>60.818573</td>
+      <td>95.293839</td>
     </tr>
     <tr>
       <th>1</th>
@@ -331,8 +331,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.152740</td>
-      <td>-62.299290</td>
-      <td>16.372051</td>
+      <td>60.818573</td>
+      <td>95.293839</td>
     </tr>
     <tr>
       <th>2</th>
@@ -340,8 +340,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>-62.299290</td>
-      <td>16.372051</td>
+      <td>60.818573</td>
+      <td>95.293839</td>
     </tr>
     <tr>
       <th>3</th>
@@ -349,8 +349,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.349429</td>
-      <td>-116.217636</td>
-      <td>6.991715</td>
+      <td>10.671844</td>
+      <td>154.030533</td>
     </tr>
     <tr>
       <th>4</th>
@@ -358,8 +358,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.315690</td>
-      <td>-136.427231</td>
-      <td>8.803449</td>
+      <td>10.671844</td>
+      <td>154.030533</td>
     </tr>
   </tbody>
 </table>
@@ -399,7 +399,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.155609</td>
-      <td>[2.172774314880371, 0.7097528576850891, 1.1767...</td>
+      <td>[1.5525641441345215, -0.050923220813274384, -0...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -408,7 +408,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.152740</td>
-      <td>[2.1533849239349365, 0.6707140207290649, 1.144...</td>
+      <td>[1.4184802770614624, -0.0715189278125763, -0.3...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -417,7 +417,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>[2.0996270179748535, 0.6510329842567444, 1.115...</td>
+      <td>[1.4274920225143433, -0.05479925870895386, -0....</td>
     </tr>
     <tr>
       <th>3</th>
@@ -426,7 +426,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.349429</td>
-      <td>[0.7844417095184326, 1.0392029285430908, 0.947...</td>
+      <td>[-0.30794599652290344, -0.529090404510498, 0.3...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -435,7 +435,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.315690</td>
-      <td>[0.8615782260894775, 0.8992257118225098, 0.883...</td>
+      <td>[-0.30051910877227783, -0.5740488767623901, 0....</td>
     </tr>
   </tbody>
 </table>
@@ -444,11 +444,11 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
 
     [t-SNE] Computing 91 nearest neighbors...
     [t-SNE] Indexed 93 samples in 0.000s...
-    [t-SNE] Computed neighbors for 93 samples in 0.002s...
+    [t-SNE] Computed neighbors for 93 samples in 0.001s...
     [t-SNE] Computed conditional probabilities for sample 93 / 93
-    [t-SNE] Mean sigma: 0.657453
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.763687
-    [t-SNE] KL divergence after 1000 iterations: 0.127873
+    [t-SNE] Mean sigma: 0.684650
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.476254
+    [t-SNE] KL divergence after 1000 iterations: 0.127669
 
 
 
@@ -476,8 +476,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.155609</td>
-      <td>3.217983</td>
-      <td>1.709876</td>
+      <td>-4.675839</td>
+      <td>-2.867482</td>
     </tr>
     <tr>
       <th>1</th>
@@ -485,8 +485,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.152740</td>
-      <td>3.216232</td>
-      <td>1.706274</td>
+      <td>-4.675829</td>
+      <td>-2.867575</td>
     </tr>
     <tr>
       <th>2</th>
@@ -494,8 +494,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>0</td>
       <td>0.016234</td>
-      <td>3.216905</td>
-      <td>1.705634</td>
+      <td>-4.677393</td>
+      <td>-2.866932</td>
     </tr>
     <tr>
       <th>3</th>
@@ -503,8 +503,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.349429</td>
-      <td>3.336328</td>
-      <td>4.156161</td>
+      <td>-2.333180</td>
+      <td>-1.476808</td>
     </tr>
     <tr>
       <th>4</th>
@@ -512,8 +512,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-modelling-4.9.3</td>
       <td>1</td>
       <td>0.315690</td>
-      <td>3.548158</td>
-      <td>4.031281</td>
+      <td>-2.505436</td>
+      <td>-1.373911</td>
     </tr>
   </tbody>
 </table>
