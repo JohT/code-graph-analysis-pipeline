@@ -18,9 +18,9 @@ ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | Na
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
+CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
-CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            | Repository directory containing the cypher queries |
 NEO4J_VERSION                         | 4.4.20                              | Version 4.4.x is the current long term support (LTS) version (may 2023) |
 NEO4J_HTTPS_PORT                      | 7473                                | Neo4j HTTPS port for encrypted querying |
 NEO4J_BOLT_PORT                       | 7687                                | Neo4j's own "Bolt Protocol" port |
