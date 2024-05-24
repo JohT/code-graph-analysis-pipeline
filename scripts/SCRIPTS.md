@@ -25,7 +25,7 @@ Script | Directory | Description
 | [downloadReactRouter.sh](./downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone. |
 | [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
-| [executeJupyterNotebookReports.sh](./executeJupyterNotebookReports.sh) |  | Executes the Jupyter Notebook given with the command line option --jupyterNotebook and creates a report directory for the results (ipynb, md, pdf).. |
+| [executeJupyterNotebookReport.sh](./executeJupyterNotebookReport.sh) |  | Executes the given Jupyter Notebook and puts all resulting files (ipynb, md, pdf) into an accordingly named directory within the "results" directory. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [findTypescriptDataFiles.sh](./findTypescriptDataFiles.sh) |  | Echoes a list of Typescript data files starting with "ts-" and having extension "json" in the artifacts directory of sub directories.  |
