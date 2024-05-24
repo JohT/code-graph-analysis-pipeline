@@ -48,7 +48,7 @@ if [ -z "${TOOLS_DIRECTORY}" ]; then
     exit 1
 else
     # Create tools directory if it doesn't exists
-    echo "setupNeo4j: Creating tools directory <${TOOLS_DIRECTORY}> if neccessary"
+    echo "setupNeo4j: Creating tools directory <${TOOLS_DIRECTORY}> if necessary"
     mkdir -p "${TOOLS_DIRECTORY}"
 fi
 
@@ -58,7 +58,7 @@ if [ -z "${SHARED_DOWNLOADS_DIRECTORY}" ]; then
     exit 1
 else
     # Create shared downloads directory if it doesn't exists
-    echo "setupNeo4j: Creating shared downloads directory <${SHARED_DOWNLOADS_DIRECTORY}> if neccessary"
+    echo "setupNeo4j: Creating shared downloads directory <${SHARED_DOWNLOADS_DIRECTORY}> if necessary"
     mkdir -p "${SHARED_DOWNLOADS_DIRECTORY}"
 fi
 
@@ -187,7 +187,7 @@ if [ ! -f "${NEO4J_PLUGINS}/${NEO4J_APOC_PLUGIN_ARTIFACT}" ] ; then
          echo "apoc.export.file.enabled=true"
     } >> "${NEO4J_APOC_CONFIG}"
 
-    echo "setupNeo4j: Awesome Procedures for Neo4j (APOC) installed sucessfully"
+    echo "setupNeo4j: Awesome Procedures for Neo4j (APOC) installed successfully"
 else 
     echo "setupNeo4j: ${NEO4J_APOC_PLUGIN_ARTIFACT} already installed"
 fi
@@ -218,7 +218,7 @@ if [ ! -f "${NEO4J_PLUGINS}/${neo4jGraphDataScienceReleaseArtifact}" ] ; then
         exit 1
     fi
 
-    echo "setupNeo4j: Graph Data Science (GDS) installed sucessfully"
+    echo "setupNeo4j: Graph Data Science (GDS) installed successfully"
 else 
     echo "setupNeo4j: ${neo4jGraphDataScienceReleaseArtifact} already installed"
 fi

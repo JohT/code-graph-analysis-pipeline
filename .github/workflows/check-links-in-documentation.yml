@@ -1,0 +1,29 @@
+name: Check links in documentation
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Only watch root level Markdown documentation file changes
+    paths:
+      - 'README.md'
+      - 'COMMANDS.md'
+      - 'GETTING_STARTED.md'
+      - '.github/workflows/check-links-in-documentation.yml' # also run when this file was changed
+  schedule:
+    - cron: "15 6 1 * *" # On the first day of each month at 6:15 o'clock
+
+jobs:
+  reports:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v4
+
+    - name: Setup node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: Check links in top level documentation Markdown files
+      run: npx --yes markdown-link-check --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md

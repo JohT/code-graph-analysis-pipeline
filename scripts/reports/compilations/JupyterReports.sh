@@ -6,7 +6,7 @@
 # For PDF generation chromium is required additionally.
 # Therefore these reports will take longer and require more resources than just plain database queries/procedures.
 
-# Requires executeJupyterNotebookReports.sh, jupyter/*.ipynb
+# Requires executeJupyterNotebookReport.sh, jupyter/*.ipynb
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -33,5 +33,5 @@ echo "JupyterReports: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
 for jupyter_notebook_file in "${JUPYTER_NOTEBOOK_DIRECTORY}"/*.ipynb; do 
     jupyter_notebook_file=$( basename "${jupyter_notebook_file}")
     echo "JupyterReports: Executing ${jupyter_notebook_file}..."; 
-    source "${SCRIPTS_DIR}/executeJupyterNotebookReports.sh" --jupyterNotebook "${jupyter_notebook_file}"
+    source "${SCRIPTS_DIR}/executeJupyterNotebookReport.sh" --jupyterNotebook "${jupyter_notebook_file}"
 done
