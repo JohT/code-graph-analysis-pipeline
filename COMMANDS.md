@@ -22,7 +22,7 @@
     - [Setup Neo4j Graph Database](#setup-neo4j-graph-database)
     - [Start Neo4j Graph Database](#start-neo4j-graph-database)
     - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
-    - [Download Maven Artifacts to Analyze](#download-maven-artifacts-to-analyze)
+    - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
     - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
 - [Database Queries](#database-queries)
     - [Cypher Shell](#cypher-shell)
@@ -52,7 +52,8 @@ To run all analysis steps simple execute the following command:
 ./../../scripts/analysis/analyze.sh
 ```
 
-👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps.  
+👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps for a Java Project.
+👉 See [scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) as an example script that combines all the above steps for a Typescript Project.  
 👉 See [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.
 
 ### Command Line Options
