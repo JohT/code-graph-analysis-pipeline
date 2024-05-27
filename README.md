@@ -26,13 +26,13 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org). For a detailed reference see [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference
 
-- [External Dependencies](./results/AxonFramework-4.9.3/external-dependencies/ExternalDependencies.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependenciesJava.ipynb)).
-- [Internal Dependencies](./results/AxonFramework-4.9.3/internal-dependencies/InternalDependencies.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependenciesJava.ipynb)).
-- [Method Metrics](./results/AxonFramework-4.9.3/method-metrics/MethodMetrics.ipynb)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
-- [Node Embeddings](./results/AxonFramework-4.9.3/node-embeddings/NodeEmbeddings.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
-- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.9.3/object-oriented-design-metrics/ObjectOrientedDesignMetrics.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./jupyter/ObjectOrientedDesignMetricsJava.ipynb)).
-- [Overview](./results/AxonFramework-4.9.3/overview/Overview.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
-- [Visibility Metrics](./results/AxonFramework-4.9.3/visibility-metrics/VisibilityMetrics.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
+- [External Dependencies](./results/AxonFramework-4.9.3/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependenciesJava.ipynb)).
+- [Internal Dependencies](./results/AxonFramework-4.9.3/internal-dependencies-java/InternalDependenciesJava.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependenciesJava.ipynb)).
+- [Method Metrics](./results/AxonFramework-4.9.3/method-metrics-java/MethodMetricsJava.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
+- [Node Embeddings](./results/AxonFramework-4.9.3/node-embeddings-java/NodeEmbeddingsJava.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
+- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.9.3/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./jupyter/ObjectOrientedDesignMetricsJava.ipynb)).
+- [Overview](./results/AxonFramework-4.9.3/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
+- [Visibility Metrics](./results/AxonFramework-4.9.3/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
 - [Wordcloud](./results/AxonFramework-4.9.3/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
 
 ### :book: Graph Data Science Reports
