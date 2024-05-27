@@ -24,6 +24,7 @@ Script | Directory | Description
 | [downloadAxonFramework.sh](./downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central. |
 | [downloadReactRouter.sh](./downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone. |
 | [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
+| [analyzeReactRouter.sh](./examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router". |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
 | [executeJupyterNotebookReport.sh](./executeJupyterNotebookReport.sh) |  | Executes the given Jupyter Notebook and puts all resulting files (ipynb, md, pdf) into an accordingly named directory within the "results" directory. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
