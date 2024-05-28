@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>71209</td>
-      <td>206734</td>
+      <td>71229</td>
+      <td>206772</td>
       <td>6</td>
       <td>97</td>
       <td>1654</td>
@@ -80,8 +80,8 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>1</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Interface</td>
+      <td>154</td>
     </tr>
     <tr>
       <th>2</th>
@@ -94,36 +94,36 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>3</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Interface</td>
-      <td>154</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>156</td>
-      <td>Enum</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
       <td>Interface</td>
       <td>28</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
       <td>Class</td>
       <td>113</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
       <td>Annotation</td>
       <td>12</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>axon-modelling-4.9.3</td>
+      <td>156</td>
+      <td>Enum</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>8</th>
@@ -143,15 +143,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>10</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>12</th>
@@ -185,14 +185,14 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>16</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Enum</td>
+      <td>Annotation</td>
       <td>1</td>
     </tr>
     <tr>
       <th>17</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
