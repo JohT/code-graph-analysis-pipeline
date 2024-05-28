@@ -93,55 +93,55 @@
     </tr>
     <tr>
       <th>17</th>
-      <td>route</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>object</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>route</td>
+      <td>ts</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>object</td>
+      <td>history</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>error</td>
+      <td>ts</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>boundary</td>
+      <td>utils</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>route</td>
+      <td>ts</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>object</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>error</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>element</td>
-    </tr>
-    <tr>
-      <th>27</th>
       <td>route</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>25</th>
       <td>object</td>
     </tr>
     <tr>
+      <th>26</th>
+      <td>route</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>error</td>
+    </tr>
+    <tr>
       <th>29</th>
-      <td>component</td>
+      <td>boundary</td>
     </tr>
   </tbody>
 </table>
@@ -149,7 +149,7 @@
 
 
 
-    There are 784 words in the dataset.
+    There are 1252 words in the dataset.
 
 
 
