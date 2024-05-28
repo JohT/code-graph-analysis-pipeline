@@ -89,5 +89,7 @@ Report | Analysis | Description
 | [Overview.md](./react-router-6.22.0/overview/Overview.md) | react-router-6.22.0 | Overview |
 | [VisibilityMetrics.md](./react-router-6.22.0/visibility-metrics/VisibilityMetrics.md) | react-router-6.22.0 | Visibility Metrics |
 | [Wordcloud.md](./react-router-6.22.0/wordcloud/Wordcloud.md) | react-router-6.22.0 | Wordcloud |
-| [OverviewJava.md](./react-router-6.23.0/overview-java/OverviewJava.md) | react-router-6.23.0 | Overview |
+| [DependenciesGraphTypescript.md](./react-router-6.23.0/dependencies-graph-typescript/DependenciesGraphTypescript.md) | react-router-6.23.0 | Artifact Dependencies |
+| [NodeEmbeddingsTypescript.md](./react-router-6.23.0/node-embeddings-typescript/NodeEmbeddingsTypescript.md) | react-router-6.23.0 | Node Embeddings |
+| [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.23.0/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.23.0 | Object Oriented Design Quality Metrics |
 | [Wordcloud.md](./react-router-6.23.0/wordcloud/Wordcloud.md) | react-router-6.23.0 | Wordcloud |

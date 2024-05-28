@@ -222,5 +222,9 @@ Image  | Analysis |
 | [VisibilityMetrics_24_2.png](./react-router-6.22.0/visibility-metrics/VisibilityMetrics_files/VisibilityMetrics_24_2.png) | react-router-6.22.0 |
 | [Wordcloud_10_1.png](./react-router-6.22.0/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | react-router-6.22.0 |
 | [error-graphVisualizationJavaArtifactDependencies-no-canvas-found.png](./react-router-6.23.0/graph-visualization-java-artifact-dependencies/error-graphVisualizationJavaArtifactDependencies-no-canvas-found.png) | react-router-6.23.0 |
-| [error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png](./react-router-6.23.0/graph-visualization-typescript-module-dependencies/error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png) | react-router-6.23.0 |
+| [graphVisualizationTypescriptModuleDependencies-0.png](./react-router-6.23.0/graph-visualization-typescript-module-dependencies/graphVisualizationTypescriptModuleDependencies-0.png) | react-router-6.23.0 |
+| [NodeEmbeddingsTypescript_21_0.png](./react-router-6.23.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_21_0.png) | react-router-6.23.0 |
+| [NodeEmbeddingsTypescript_23_5.png](./react-router-6.23.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_23_5.png) | react-router-6.23.0 |
+| [NodeEmbeddingsTypescript_25_5.png](./react-router-6.23.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_25_5.png) | react-router-6.23.0 |
+| [ObjectOrientedDesignMetricsTypescript_28_0.png](./react-router-6.23.0/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript_files/ObjectOrientedDesignMetricsTypescript_28_0.png) | react-router-6.23.0 |
 | [Wordcloud_10_1.png](./react-router-6.23.0/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | react-router-6.23.0 |
