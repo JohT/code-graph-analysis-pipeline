@@ -65,7 +65,7 @@ jobs:
         distribution: 'adopt'
         java-version: ${{ matrix.java }}
 
-    - name: Setup Node.js for Graph Visualization
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version-file: 'graph-visualization/.nvmrc'
@@ -111,6 +111,11 @@ jobs:
         path: ./temp/downloads
         key:
           ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
+
+    - name: Setup pnpm for react-router
+      uses: pnpm/action-setup@v3.0.0
+      with:
+        version: 8.10.5
 
     - name: Download ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
       working-directory: temp

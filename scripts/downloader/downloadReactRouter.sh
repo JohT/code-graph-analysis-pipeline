@@ -9,7 +9,12 @@
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
 
+# Note: react-router uses pnpm as package manager which needs to be installed
+
 # Requires downloadMavenArtifact.sh
+
+# Fail on any error (errexit = exit on first error, errtrace = error inherited from sub-shell ,pipefail exist on errors within piped commands)
+set -o errexit -o errtrace -o pipefail
 
 # Get the analysis name from the middle part of the current file name (without prefix "download" and without extension)
 SCRIPT_FILE_NAME="$(basename -- "${BASH_SOURCE[0]}")"
@@ -29,15 +34,18 @@ fi
 PROJECT_VERSION=$1
 echo "download${ANALYSIS_NAME}: PROJECT_VERSION=${PROJECT_VERSION}"
 
+# Create runtime logs directory if it hasn't existed yet
+mkdir -p ./runtime/logs
+
 ################################################################
 # Download react-router source files to be analyzed
 ################################################################
 git clone https://github.com/remix-run/react-router.git source
 (
   cd source || exit
-  git checkout "react-router@${PROJECT_VERSION}"
-  yarn install || yarn
-  npx --yes @jqassistant/ts-lce >jqassostant-typescript-scan.log
+  git checkout "react-router@${PROJECT_VERSION}" || exit
+  pnpm install --frozen-lockfile || exit
+  npx --yes @jqassistant/ts-lce >./../runtime/logs/jqassostant-typescript-scan.log 2>&1 || exit
 )
 mkdir -p artifacts
 mv -nv "source/.reports/jqa/ts-output.json" "artifacts/ts-react-router-${PROJECT_VERSION}.json"
