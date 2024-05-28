@@ -190,7 +190,7 @@ MODULE_PROJECTION="dependencies_projection=typescript-module-embeddings"
 MODULE_NODE="dependencies_projection_node=Module" 
 MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight" 
 MODULE_DIMENSIONS="dependencies_projection_embedding_dimension=32" 
-MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
+MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=32"
 
 if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
     time nodeEmbeddingsWithFastRandomProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
