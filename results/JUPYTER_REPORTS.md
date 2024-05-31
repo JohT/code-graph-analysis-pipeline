@@ -93,3 +93,7 @@ Report | Analysis | Description
 | [NodeEmbeddingsTypescript.md](./react-router-6.23.0/node-embeddings-typescript/NodeEmbeddingsTypescript.md) | react-router-6.23.0 | Node Embeddings |
 | [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.23.0/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.23.0 | Object Oriented Design Quality Metrics |
 | [Wordcloud.md](./react-router-6.23.0/wordcloud/Wordcloud.md) | react-router-6.23.0 | Wordcloud |
+| [DependenciesGraphTypescript.md](./react-router-6.23.1/dependencies-graph-typescript/DependenciesGraphTypescript.md) | react-router-6.23.1 | Artifact Dependencies |
+| [NodeEmbeddingsTypescript.md](./react-router-6.23.1/node-embeddings-typescript/NodeEmbeddingsTypescript.md) | react-router-6.23.1 | Node Embeddings |
+| [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.23.1/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.23.1 | Object Oriented Design Quality Metrics |
+| [Wordcloud.md](./react-router-6.23.1/wordcloud/Wordcloud.md) | react-router-6.23.1 | Wordcloud |
