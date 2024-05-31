@@ -134,7 +134,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     t-SNE: perplexity=4.0
     [t-SNE] Computing 4 nearest neighbors...
     [t-SNE] Indexed 5 samples in 0.000s...
-    [t-SNE] Computed neighbors for 5 samples in 0.069s...
+    [t-SNE] Computed neighbors for 5 samples in 0.041s...
     [t-SNE] Computed conditional probabilities for sample 5 / 5
     [t-SNE] Mean sigma: 5.393599
     [t-SNE] KL divergence after 250 iterations with early exaggeration: 49.202202
@@ -406,7 +406,7 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router</td>
       <td>0</td>
       <td>0.535139</td>
-      <td>[-0.1376151591539383, 0.004443143494427204, 0....</td>
+      <td>[0.09323552995920181, -0.29096725583076477, -0...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -415,7 +415,7 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-dom</td>
       <td>0</td>
       <td>0.188825</td>
-      <td>[-0.14225848019123077, 0.0036932036746293306, ...</td>
+      <td>[0.1055491715669632, -0.2911439538002014, -0.0...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -424,7 +424,7 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-native</td>
       <td>0</td>
       <td>0.188825</td>
-      <td>[-0.14351126551628113, -0.007717015687376261, ...</td>
+      <td>[0.09434158354997635, -0.29476141929626465, -0...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -433,7 +433,7 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-dom</td>
       <td>1</td>
       <td>0.188825</td>
-      <td>[-0.1433415561914444, 0.00019238927052356303, ...</td>
+      <td>[0.09866148978471756, -0.2854238450527191, -0....</td>
     </tr>
     <tr>
       <th>4</th>
@@ -442,7 +442,7 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>router</td>
       <td>1</td>
       <td>0.778885</td>
-      <td>[-0.13868556916713715, 0.00669258926063776, 0....</td>
+      <td>[0.10286279022693634, -0.2969144582748413, -0....</td>
     </tr>
   </tbody>
 </table>
@@ -456,8 +456,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
     [t-SNE] Computed neighbors for 5 samples in 0.001s...
     [t-SNE] Computed conditional probabilities for sample 5 / 5
     [t-SNE] Mean sigma: 1.000000
-    [t-SNE] KL divergence after 250 iterations with early exaggeration: 35.659271
-    [t-SNE] KL divergence after 1000 iterations: 0.110676
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 50.125542
+    [t-SNE] KL divergence after 1000 iterations: 0.151143
 
 
 
@@ -485,8 +485,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router</td>
       <td>0</td>
       <td>0.535139</td>
-      <td>139.544449</td>
-      <td>20.536655</td>
+      <td>54.093979</td>
+      <td>189.914215</td>
     </tr>
     <tr>
       <th>1</th>
@@ -494,8 +494,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-dom</td>
       <td>0</td>
       <td>0.188825</td>
-      <td>14.723129</td>
-      <td>133.817566</td>
+      <td>107.251671</td>
+      <td>-54.951126</td>
     </tr>
     <tr>
       <th>2</th>
@@ -503,8 +503,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-native</td>
       <td>0</td>
       <td>0.188825</td>
-      <td>-65.256317</td>
-      <td>-80.132729</td>
+      <td>-19.014631</td>
+      <td>-179.182632</td>
     </tr>
     <tr>
       <th>3</th>
@@ -512,8 +512,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-dom</td>
       <td>1</td>
       <td>0.188825</td>
-      <td>90.100838</td>
-      <td>-147.171616</td>
+      <td>-131.758163</td>
+      <td>-43.255604</td>
     </tr>
     <tr>
       <th>4</th>
@@ -521,8 +521,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>router</td>
       <td>1</td>
       <td>0.778885</td>
-      <td>-147.181396</td>
-      <td>67.835236</td>
+      <td>-14.854548</td>
+      <td>55.560371</td>
     </tr>
   </tbody>
 </table>
