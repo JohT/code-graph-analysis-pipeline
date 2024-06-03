@@ -3,7 +3,7 @@
 "org.axonframework.messaging","messaging","centralityHarmonic",0.4782608695652174,""
 "org.axonframework.eventhandling","eventhandling","centralityHarmonic",0.40942028985507245,""
 "org.axonframework.messaging.unitofwork","unitofwork","centralityHarmonic",0.39855072463768115,""
-"org.axonframework.common.transaction","transaction","centralityHarmonic",0.391304347826087,""
+"org.axonframework.common.transaction","transaction","centralityHarmonic",0.39130434782608703,""
 "org.axonframework.serialization","serialization","centralityHarmonic",0.3822463768115942,""
 "org.axonframework.messaging.annotation","annotation","centralityHarmonic",0.31702898550724634,""
 "org.axonframework.tracing","tracing","centralityHarmonic",0.3061594202898551,""
