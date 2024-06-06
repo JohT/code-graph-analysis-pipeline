@@ -3489,8 +3489,8 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr>
       <th>15</th>
       <td>axon-disruptor-4.9.3</td>
-      <td>org.axonframework</td>
-      <td>axonframework</td>
+      <td>org</td>
+      <td>org</td>
       <td>NaN</td>
       <td>0.000000</td>
       <td>NaN</td>
@@ -3499,8 +3499,8 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr>
       <th>16</th>
       <td>axon-disruptor-4.9.3</td>
-      <td>org</td>
-      <td>org</td>
+      <td>org.axonframework.disruptor</td>
+      <td>disruptor</td>
       <td>NaN</td>
       <td>0.000000</td>
       <td>NaN</td>
@@ -3509,8 +3509,8 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     <tr>
       <th>17</th>
       <td>axon-disruptor-4.9.3</td>
-      <td>org.axonframework.disruptor</td>
-      <td>disruptor</td>
+      <td>org.axonframework</td>
+      <td>axonframework</td>
       <td>NaN</td>
       <td>0.000000</td>
       <td>NaN</td>
