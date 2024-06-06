@@ -101,8 +101,7 @@
       ],
       "depNameTemplate": "JohT/open-graph-data-science-packaging",
       "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^v?(?<version>.*?)$",
-      "versioning": "loose"
+      "extractVersionTemplate": "^v?(?<version>.*?)$"
     },
     {
       "fileMatch": [
