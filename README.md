@@ -120,7 +120,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   - [pip](https://pip.pypa.io/en/stable)
   - [monotonic](https://github.com/atdt/monotonic)
   - [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver)
-  - [sklearn](https://scikit-learn.org)
+  - [openTSNE](https://github.com/pavlin-policar/openTSNE)
   - [wordcloud](https://github.com/amueller/word_cloud)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 
