@@ -92,3 +92,6 @@ coverage/
 # Jupyter Notebook
 .ipynb_checkpoints
 *.nbconvert*
+
+# Python environments
+.conda
