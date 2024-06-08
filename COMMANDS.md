@@ -24,6 +24,10 @@
     - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
     - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
     - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
+    - [Import git log](#import-git-log)
+        - [Parameters](#parameters)
+        - [Resolving git files to code files](#resolving-git-files-to-code-files)
+    - [Import aggregated git log](#import-aggregated-git-log)
 - [Database Queries](#database-queries)
     - [Cypher Shell](#cypher-shell)
     - [HTTP API](#http-api)
@@ -213,6 +217,35 @@ Use [resetAndScan.sh](./scripts/resetAndScan.sh) to scan the local `artifacts` d
 enhance the data further with relationships between artifacts and packages.
 
 Be aware that this script deletes all previous relationships and nodes in the local Neo4j Graph database.
+
+### Import git log
+
+Use [importGitLog.sh](./scripts/importGitLog.sh) to import git log data into the Graph.
+It uses `git log` to extract commits, their authors and the names of the files changed with them. These are stored in an intermediate CSV file and are then imported into Neo4j with the following schema:
+
+```Cypher
+(Git:Log:Author)-[:AUTHORED]->(Git:Log:Commit)->[:CONTAINS]->(Git:Log:File)
+```
+
+👉**Note:** Commit messages containing `[bot]` are filtered out to ignore changes made by bots.
+
+#### Parameters
+
+The optional parameter `--repository directory-path-to-a-git-repository` can be used to select a different directory for the repository. By default, the `source` directory within the analysis workspace directory is used. This command only needs the git history to be present so a `git clone --bare` is sufficient. If the `source` directory is also used for the analysis then a full git clone is of course needed (like for Typescript).
+
+#### Resolving git files to code files
+
+After git log data has been imported successfully, [Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher](./cypher/GitLog/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher) is used to try to resolve the imported git file names to  code files. This first attempt will cover most cases, but not all of them. With this approach it is, for example, not possible to distinguish identical file names in different Java jars from the git source files of a mono repo.
+
+You can use [List_unresolved_git_files.cypher](./cypher/GitLog/List_unresolved_git_files.cypher) to find code files that couldn't be matched to git file names and [List_ambiguous_git_files.cypher](./cypher/GitLog/List_ambiguous_git_files.cypher) to find ambiguously resolved git files. If you have any idea on how to improve this feel free to [open an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new).
+
+### Import aggregated git log
+
+Use [importAggregatedGitLog.sh](./scripts/importAggregatedGitLog.sh) to import git log data in an aggregated form into the Graph. It works similar to the [full git log version above](#import-git-log). The only difference is that not every single commit is imported. Instead, changes are grouped per month including their commit count. This is in many cases sufficient and reduces data size and processing time significantly. Here is the resulting schema:
+
+```Cypher
+(Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan)-[:CONTAINS]->(Git:Log:File)
+```
 
 ## Database Queries
 
