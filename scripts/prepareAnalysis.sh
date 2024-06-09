@@ -58,22 +58,22 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matchi
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher" 
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher" 
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
 
 # Preparation - Add weights to Typescript Module DEPENDS_ON relationships
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
 
 # Preparation - Add Typescript Module node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher"
 
 # Preparation - Add Java Package node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
 # Preparation - Label external types and annotations
 #               "external" means that there is no byte code available, not a primitive type and not a java type
@@ -87,11 +87,11 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Remove_external_type_and_ann
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
 
 # Preparation - Add Java Artifact node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
-execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
 
 # Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
 
 echo "prepareAnalysis: Preparation successful"
