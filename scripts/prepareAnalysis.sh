@@ -49,11 +49,6 @@ fi
 execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cypher"
 execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_full_qualified_name.cypher"
 
-# Preparation - Create DEPENDS_ON for every DEPENDS_ON_* relationship
-# Workaround for https://github.com/jQAssistant/jqa-java-plugin/issues/44
-# execute_cypher "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher"
-# execute_cypher "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher"
-
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_and_module_properties.cypher"
 
