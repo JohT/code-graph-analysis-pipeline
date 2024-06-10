@@ -7,6 +7,8 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"full"} # Select how to import git log data. Options: "none", "aggregated", "full". Default="full".
+
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
@@ -46,9 +48,13 @@ if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; t
 fi
 
 # Preparation - Import git log if source or history is available
-# TODO move into separate analysis compilation/part that is selectable
-source "${SCRIPTS_DIR}/importGitLog.sh"
-source "${SCRIPTS_DIR}/importAggregatedGitLog.sh"
+if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
+    if [[ ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "aggregated" ]]; then
+        source "${SCRIPTS_DIR}/importAggregatedGitLog.sh"
+    else
+        source "${SCRIPTS_DIR}/importGitLog.sh"
+    fi
+fi
 
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cypher"

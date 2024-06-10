@@ -197,6 +197,25 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
   ```
 
+- How can i disable git log data import?  
+  👉 Set environment variable `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` to `none`. Example:  
+
+  ```shell
+  export IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none"
+  ```
+
+  👉 Alternatively prepend your command with `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none"`:  
+  
+  ```shell
+  IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none" ./../../scripts/analysis/analyze.sh
+  ```
+
+  👉 An in-between option would be to only import monthly aggregated changes using `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated"`:  
+  
+  ```shell
+  IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated" ./../../scripts/analysis/analyze.sh
+  ```
+
 - Why are some Jupyter Notebook reports skipped?
   👉 The custom Jupyter Notebook metadata property `code_graph_analysis_pipeline_data_validation` can be set to choose a query from [cypher/Validation](./cypher/Validation) that will be executed preliminary to the notebook. If the query leads to at least one result, the validation succeeds and the notebook will be run. If the query leads to no result, the notebook will be skipped.
   For more details see [Data Availability Validation](./COMMANDS.md#data-availability-validation).

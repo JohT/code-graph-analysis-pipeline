@@ -9,6 +9,7 @@
         - [Start an analysis with CSV reports only](#start-an-analysis-with-csv-reports-only)
         - [Start an analysis with Jupyter reports only](#start-an-analysis-with-jupyter-reports-only)
         - [Start an analysis with PDF generation](#start-an-analysis-with-pdf-generation)
+        - [Start an analysis without importing git log data](#start-an-analysis-without-importing-git-log-data)
         - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
 - [Generate Markdown References](#generate-markdown-references)
     - [Generate Cypher Reference](#generate-cypher-reference)
@@ -102,6 +103,14 @@ Note: Generating a PDF from a Jupyter notebook using [nbconvert](https://nbconve
 
 ```shell
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
+```
+
+#### Start an analysis without importing git log data
+
+To speed up analysis and get a smaller data footprint you can switch of git log data import of the "source" directory (if present) with `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none"` as shown below or choose `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated"` to reduce data size by only importing monthly grouped changes instead of all commits.
+
+```shell
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none" ./../../scripts/analysis/analyze.sh
 ```
 
 #### Only run setup and explore the Graph manually
