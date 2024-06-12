@@ -2,11 +2,11 @@
 
 # Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation.
 # - Download and setup Neo4j and JQAssistant
-# - Scan and analyze the contents of the artifacts directory to create the graph 
+# - Scan and analyze the contents of the artifacts and source directory to create the graph 
 # - Trigger all requested reports
 
 # Note: Everything is done in the current (=working) directory and one directory above (shared downloads). 
-#       It is recommended to create an empty directory (preferrable "temp") and
+#       It is recommended to create an empty directory (preferable "temp") and
 #       within that another one for the analysis (e.g. "MyCodebaseName-Version")
 #       and change into it prior to starting this script.
 
