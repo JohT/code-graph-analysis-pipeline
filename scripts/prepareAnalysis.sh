@@ -2,7 +2,7 @@
 
 # Prepares and validates the graph database before analysis 
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, importGitLog.sh, importAggregatedGitLog
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -24,10 +24,10 @@ fi
 CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"} # Repository directory containing the cypher queries
 echo "prepareAnalysis: CYPHER_DIR=${CYPHER_DIR}"
 
-# Define functions to execute a cypher query from within the given file (first and only argument)
+# Define functions (like execute_cypher) to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+# Define functions (like is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
 # Local Constants
@@ -38,12 +38,17 @@ ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 TYPESCRIPT_CYPHER_DIR="$CYPHER_DIR/Typescript_Enrichment"
 
-# Preparation - Data verification: DEPENDS_ON releationships
+# Preparation - Data verification: DEPENDS_ON relationships
 dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPENDS_ON_relationships.cypher" "${@}")
 if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; then
     echo "prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship required. Check if the artifacts directory is empty or if the scan failed."
     exit 1
 fi
+
+# Preparation - Import git log if source or history is available
+# TODO move into separate analysis compilation/part that is selectable
+source "${SCRIPTS_DIR}/importGitLog.sh"
+source "${SCRIPTS_DIR}/importAggregatedGitLog.sh"
 
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cypher"
