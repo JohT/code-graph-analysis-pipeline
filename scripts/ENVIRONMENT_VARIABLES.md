@@ -15,13 +15,17 @@ ARTIFACTS_DIRECTORY                   | artifacts                           | Wo
 RESULTS_DIRECTORY                     | results                             | Repository directory containing the final analysis report results |
 REPORTS_DIRECTORY                     | reports                             | Working directory where the analysis reports are written to  |
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | Name of the file that contains the hash code of the file list for change detection |
+SOURCE_DIRECTORY                      | source                              | Get the source repository directory (defaults to "source") |
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
 CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
-NEO4J_VERSION                         | 4.4.20                              | Version 4.4.x is the current long term support (LTS) version (may 2023) |
+NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
+NEO4J_VERSION                         | 5.16.0                              |  |
+TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | full                                | Select how to import git log data. Options: "none", "aggregated", "full". Default="full". |
 NEO4J_HTTPS_PORT                      | 7473                                | Neo4j HTTPS port for encrypted querying |
 NEO4J_BOLT_PORT                       | 7687                                | Neo4j's own "Bolt Protocol" port |
 NEO4J_APOC_PLUGIN_VERSION             | 4.4.0.15                            | Version number matches Neo4j version |
@@ -36,11 +40,9 @@ NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.7.0-alpha01                       | Gr
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
-NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
 NEO4J_BOLT_URI                        | bolt://localhost:${NEO4J_BOLT_PORT} | Neo4j's own "Bolt Protocol" address |
 NEO4J_USER                            | neo4j                               | Neo4j login user |
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
-TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
 JQASSISTANT_CLI_DOWNLOAD_URL          | https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli | Download URL for the jQAssistant CLI |
 JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Neo4j v5 & v4: "distribution.zip" |
 NEO4J_DATA_PATH                       | $( pwd -P )/data                    | Path where Neo4j writes its data to (outside tools dir) |
