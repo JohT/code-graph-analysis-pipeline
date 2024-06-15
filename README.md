@@ -91,7 +91,9 @@ This could be as simple as running the following command in your Typescript proj
   npx --yes @jqassistant/ts-lce
   ```
 
-- Copy the resulting json file (e.g. `.reports/jqa/ts-output.json`) into the "artifacts" directory for your analysis work directory. Custom subdirectories within "artifacts" are also supported.
+- It is recommended to put the cloned source code repository into a directory called `source` within the analysis workspace so that it will also be picked up to import git log data.
+
+- Copy the resulting json file (e.g. `.reports/jqa/ts-output.json`) into the `artifacts` directory for your analysis work directory. Custom subdirectories within `artifacts` are also supported.
 
 ## :rocket: Getting Started
 
@@ -105,7 +107,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
 - [Checkout GIT Repository](https://github.com/actions/checkout)
 - [Setup Java](https://github.com/actions/setup-java)
 - [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
-- Download artifacts that contain the code to be analyzed [scripts/artifacts](./scripts/downloader/)
+- Download artifacts and optionally source code that contain the code to be analyzed [scripts/downloader](./scripts/downloader)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.github.io/jqassistant/doc) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
@@ -176,7 +178,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
 
 - How can i add another code basis to be analyzed automatically?  
-  👉 Create a new artifacts download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
+  👉 Create a new download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
   👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/java-code-analysis.yml).
 
 - How can i trigger a full re-scan of all artifacts?  
@@ -193,6 +195,25 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   
   ```shell
   ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
+  ```
+
+- How can i disable git log data import?  
+  👉 Set environment variable `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` to `none`. Example:  
+
+  ```shell
+  export IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none"
+  ```
+
+  👉 Alternatively prepend your command with `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none"`:  
+  
+  ```shell
+  IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none" ./../../scripts/analysis/analyze.sh
+  ```
+
+  👉 An in-between option would be to only import monthly aggregated changes using `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated"`:  
+  
+  ```shell
+  IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated" ./../../scripts/analysis/analyze.sh
   ```
 
 - Why are some Jupyter Notebook reports skipped?

@@ -24,7 +24,7 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
     cd MyFirstAnalysis
     ```
 
-1. Choose an initial password for Neo4j
+1. Choose an initial password for Neo4j if not already done
 
     ```shell
     export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
@@ -36,9 +36,11 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
     mkdir artifacts
     ```
 
-1. Move the artifacts you want to analyze into the `artifacts` directory
+1. Move the artifacts (Java jar or Typescript analysis json files) you want to analyze into the `artifacts` directory
 
-1. Optionally run a predefined script to download artifacts
+1. Optionally, create a `source` directory and clone the corresponding source code into it to also gather git log data.
+
+1. Alternatively to the steps above, run an already predefined download script
 
     ```shell
     ./../../scripts/downloader/downloadAxonFramework.sh <version>
@@ -48,31 +50,31 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
 
 1. Start the analysis
 
-  - Without any additional dependencies:
+   - Without any additional dependencies:
 
     ```shell
     ./../../scripts/analysis/analyze.sh --report Csv
     ```
 
-  - Jupyter notebook reports when Python and Conda are installed:
+   - Jupyter notebook reports when Python and Conda are installed:
 
     ```shell
     ./../../scripts/analysis/analyze.sh --report Jupyter
     ```
 
-  - Graph visualizations when Node.js and npm are installed:
+   - Graph visualizations when Node.js and npm are installed:
 
     ```shell
     ./../../scripts/analysis/analyze.sh --report Jupyter
     ```
 
-  - All reports with Python, Conda, Node.js and npm installed:
+   - All reports with Python, Conda, Node.js and npm installed:
 
     ```shell
     ./../../scripts/analysis/analyze.sh
     ```
 
-  - To explore the database yourself without any automatically generated reports and no additional requirements:
+   - To explore the database yourself without any automatically generated reports and no additional requirements:
 
     ```shell
     ./../../scripts/analysis/analyze.sh --explore

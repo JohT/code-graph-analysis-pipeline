@@ -2,10 +2,12 @@
 
 # Prepares and validates the graph database before analysis 
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, importGitLog.sh, importAggregatedGitLog
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
+
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"full"} # Select how to import git log data. Options: "none", "aggregated", "full". Default="full".
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -24,10 +26,10 @@ fi
 CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"} # Repository directory containing the cypher queries
 echo "prepareAnalysis: CYPHER_DIR=${CYPHER_DIR}"
 
-# Define functions to execute a cypher query from within the given file (first and only argument)
+# Define functions (like execute_cypher) to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+# Define functions (like is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
 # Local Constants
@@ -38,21 +40,25 @@ ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 TYPESCRIPT_CYPHER_DIR="$CYPHER_DIR/Typescript_Enrichment"
 
-# Preparation - Data verification: DEPENDS_ON releationships
+# Preparation - Data verification: DEPENDS_ON relationships
 dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPENDS_ON_relationships.cypher" "${@}")
 if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; then
     echo "prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship required. Check if the artifacts directory is empty or if the scan failed."
     exit 1
 fi
 
+# Preparation - Import git log if source or history is available
+if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
+    if [[ ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "aggregated" ]]; then
+        source "${SCRIPTS_DIR}/importAggregatedGitLog.sh"
+    else
+        source "${SCRIPTS_DIR}/importGitLog.sh"
+    fi
+fi
+
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cypher"
 execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_full_qualified_name.cypher"
-
-# Preparation - Create DEPENDS_ON for every DEPENDS_ON_* relationship
-# Workaround for https://github.com/jQAssistant/jqa-java-plugin/issues/44
-# execute_cypher "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_PACKAGE.cypher"
-# execute_cypher "${CYPHER_DIR}/Create_a_DEPENDS_ON_relationship_for_every_DEPENDS_ON_ARTIFACT.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_and_module_properties.cypher"
@@ -63,22 +69,22 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matchi
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher" 
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher" 
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
 
 # Preparation - Add weights to Typescript Module DEPENDS_ON relationships
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
-execute_cypher "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
+execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
 
 # Preparation - Add Typescript Module node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher"
 
 # Preparation - Add Java Package node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
 # Preparation - Label external types and annotations
 #               "external" means that there is no byte code available, not a primitive type and not a java type
@@ -92,11 +98,11 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Remove_external_type_and_ann
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
 
 # Preparation - Add Java Artifact node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
-execute_cypher "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
 
 # Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
-execute_cypher "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
 
 echo "prepareAnalysis: Preparation successful"
