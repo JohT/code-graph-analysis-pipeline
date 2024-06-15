@@ -53,11 +53,13 @@ jobs:
       if: github.event_name == 'push' && env.generated_document_changed
       run: |
         git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
-        git config --global user.email 'joht@users.noreply.github.com'
-        set -o errexit -o pipefail -o xtrace
-        git pull --verbose
+        git config --global user.email "7671054+JohT@users.noreply.github.com"
+        git fetch origin
+        git status
         git add ./scripts/SCRIPTS.md
         git status
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git status
+        git rebase --strategy-option=theirs origin/main --verbose
         git status
         git push --verbose
