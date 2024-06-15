@@ -61,7 +61,7 @@ execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cyp
 execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_full_qualified_name.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
-execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_and_module_properties.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_module_properties.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding relationships between Modules with the same globalFqn
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_modules.cypher"

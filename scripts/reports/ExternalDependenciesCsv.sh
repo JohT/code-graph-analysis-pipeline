@@ -39,7 +39,9 @@ EXTERNAL_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/External_Dependencies"
 
 # Check if there are already labels for external Java types and create them otherwise
 execute_cypher_queries_until_results "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/List_external_Java_types_used.cypher" \
-                                     "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
+                                     "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher" >/dev/null
+
+# CSV reports for Java Packages
 
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_overall.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_overall.csv"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_spread.cypher" > "${FULL_REPORT_DIRECTORY}/External_package_usage_spread.csv"
@@ -55,6 +57,20 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_package_usage_per_a
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_second_level_package_usage_per_artifact_and_external_package.cypher" > "${FULL_REPORT_DIRECTORY}/External_second_level_package_usage_per_artifact_and_external_package.csv"
 
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Maven_POMs_and_their_declared_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Maven_POM_dependencies.csv"
+
+# CSV reports for Typescript Modules
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_module_usage_overall_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_module_usage_overall_for_Typescript.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_module_usage_spread_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_module_usage_spread_for_Typescript.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_namespace_usage_overall_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_namespace_usage_overall_for_Typescript.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_namespace_usage_spread_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_namespace_usage_spread_for_Typescript.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_module_usage_per_internal_module_sorted_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_module_usage_per_internal_module_sorted_for_Typescript.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_namespace_usage_per_internal_module_sorted_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_namespace_usage_per_internal_module_sorted_for_Typescript.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_module_usage_per_internal_module_aggregated_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_module_usage_per_internal_module_aggregated_for_Typescript.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_module_usage_per_internal_module_distribution_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_module_usage_per_internal_module_distribution_for_Typescript.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
