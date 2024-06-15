@@ -30,6 +30,8 @@ Script | Directory | Description
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [findTypescriptDataFiles.sh](./findTypescriptDataFiles.sh) |  | Echoes a list of Typescript data files starting with "ts-" and having extension "json" in the artifacts directory of sub directories.  |
+| [importAggregatedGitLog.sh](./importAggregatedGitLog.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. The CSV is then imported into Neo4j. |
+| [importGitLog.sh](./importGitLog.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. The CSV is then imported into Neo4j. |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
 | [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
