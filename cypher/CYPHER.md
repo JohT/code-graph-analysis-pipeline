@@ -171,6 +171,7 @@ Script | Directory | Description
 | [List_external_Java_types_used.cypher](./External_Dependencies/List_external_Java_types_used.cypher) | External_Dependencies | List external Java types used |
 | [Maven_POMs_and_their_declared_dependencies.cypher](./External_Dependencies/Maven_POMs_and_their_declared_dependencies.cypher) | External_Dependencies | Maven POMs and their declared dependencies |
 | [Remove_external_type_and_annotation_labels.cypher](./External_Dependencies/Remove_external_type_and_annotation_labels.cypher) | External_Dependencies | Remove external type and annotation labels |
+| [Add_HAS_PARENT_relationships_to_commits.cypher](./GitLog/Add_HAS_PARENT_relationships_to_commits.cypher) | GitLog | Creates a HAS_PARENT relationship between Git Commit nodes and their parent. |
 | [Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher](./GitLog/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher) | GitLog | Connect git files to code files with a RESOLVES_TO relationship if their names match Note: Even if is tempting to combine this file with the Typescript variant, they are intentionally spearated. The differences are subtle but need to be thought through and tested carefully. Having separate files makes it obvious that there needs to be one for every new source code language. |
 | [Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher](./GitLog/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher) | GitLog | Connect git files to Typescript files with a RESOLVES_TO relationship if their names match Note: Even if is tempting to combine this file with the Java variant, they are intentionally spearated. The differences are subtle but need to be thought through and tested carefully. Having separate files makes it obvious that there needs to be one for every new source code language. |
 | [Delete_git_log_data.cypher](./GitLog/Delete_git_log_data.cypher) | GitLog | Delete all Git log data in the Graph |
@@ -179,6 +180,7 @@ Script | Directory | Description
 | [Index_author_name.cypher](./GitLog/Index_author_name.cypher) | GitLog | Create index for author name (git data) |
 | [Index_change_span_year.cypher](./GitLog/Index_change_span_year.cypher) | GitLog | Create index for change span year (aggregated git data) |
 | [Index_commit_hash.cypher](./GitLog/Index_commit_hash.cypher) | GitLog | Create index for commit hash (git data) |
+| [Index_commit_parent.cypher](./GitLog/Index_commit_parent.cypher) | GitLog | Create index for parent commit hash (git data) |
 | [Index_file_name.cypher](./GitLog/Index_file_name.cypher) | GitLog | Create index for the file name |
 | [List_ambiguous_git_files.cypher](./GitLog/List_ambiguous_git_files.cypher) | GitLog | List ambigiously resolved git files where a single git file is attached to more than one code file for troubleshooting/testing. |
 | [List_unresolved_git_files.cypher](./GitLog/List_unresolved_git_files.cypher) | GitLog | List code files not covered by imported git data for troubleshooting/testing. |
