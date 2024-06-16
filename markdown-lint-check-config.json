@@ -4,5 +4,9 @@
             "pattern": "^http://localhost"
         }
     ],
+    "timeout": "30s",
+    "retryOn429": true,
+    "retryCount": 3,
+    "fallbackRetryDelay": "60s",  
     "aliveStatusCodes": [200, 202, 206]
 }
