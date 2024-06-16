@@ -234,6 +234,7 @@ It uses `git log` to extract commits, their authors and the names of the files c
 
 ```Cypher
 (Git:Log:Author)-[:AUTHORED]->(Git:Log:Commit)->[:CONTAINS]->(Git:Log:File)
+(Git:Log:Commit)->[:HAS_PARENT]-(Git:Log:Commit)
 ```
 
 👉**Note:** Commit messages containing `[bot]` are filtered out to ignore changes made by bots.

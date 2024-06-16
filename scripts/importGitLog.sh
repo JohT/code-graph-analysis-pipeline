@@ -78,17 +78,18 @@ echo "importGitLog: Creating ${OUTPUT_CSV_FILENAME} from git log..."
   cd "${repository}" || exit
 
   # Prints the header line of the CSV file with the names of the columns.
-  echo "hash,author,email,timestamp,timestamp_unix,message,filename" > "${OUTPUT_CSV_FILENAME}"
+  echo "hash,parent,author,email,timestamp,timestamp_unix,message,filename" > "${OUTPUT_CSV_FILENAME}"
   
   # Prints the git log in CSV format including the changed files.
   # Includes quoted strings, double quote escaping and supports commas in strings.
-  git log --no-merges --pretty=format:' %h,,,%an,,,%ae,,,%aI,,,%ct,,,%s' --name-only | \
-  awk 'BEGIN { COMMA=",";QUOTE="\"" } /^ / { split($0, a, ",,,"); gsub(/^ /, "", a[1]); gsub(/"/, "\"\"", a[2]); gsub(/"/, "\"\"", a[3]); gsub(/"/, "\"\"", a[6]); gsub(/\\/, " ", a[6]); commit=a[1] COMMA QUOTE a[2] QUOTE COMMA QUOTE a[3] QUOTE COMMA a[4] COMMA a[5] COMMA QUOTE a[6] QUOTE } NF && !/^\ / { print commit ",\""$0"\"" }' | \
+  git log --no-merges --pretty=format:' %h,,,%p,,,%an,,,%ae,,,%aI,,,%ct,,,%s' --name-only | \
+  awk 'BEGIN { COMMA=",";QUOTE="\"" } /^ / { split($0, a, ",,,"); gsub(/^ /, "", a[1]); gsub(/"/, "\"\"", a[3]); gsub(/"/, "\"\"", a[4]); gsub(/"/, "\"\"", a[7]); gsub(/\\/, " ", a[7]); commit=a[1] COMMA a[2] COMMA QUOTE a[3] QUOTE COMMA QUOTE a[4] QUOTE COMMA a[5] COMMA a[6] COMMA QUOTE a[7] QUOTE } NF && !/^\ / { print commit ",\""$0"\"" }' | \
   grep -v -F '[bot]' >> "${OUTPUT_CSV_FILENAME}"
   # Explanation:
   #
   # - --no-merges: Excludes merge commits from the log.
   # - %h: Abbreviated commit hash
+  # - %p: Abbreviated parent commit hash
   # - %an: Author name
   # - %ae: Author email
   # - %aI: Author date, ISO 8601 format
@@ -125,6 +126,7 @@ GIT_LOG_CYPHER_DIR="${CYPHER_DIR}/GitLog"
 echo "importGitLog: Prepare import by creating indexes..."
 execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_author_name.cypher"
 execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_hash.cypher"
+execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_parent.cypher"
 execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
 
 echo "importGitLog: Deleting all existing git data in the Graph..."
@@ -133,7 +135,10 @@ execute_cypher "${GIT_LOG_CYPHER_DIR}/Delete_git_log_data.cypher"
 echo "importGitLog: Importing git log data into the Graph..."
 time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_csv_data.cypher"
 
-echo "importGitLog: Creating connections to nodes with matching file names..."
+echo "importGitLog: Creating relationships for parent commits..."
+execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_HAS_PARENT_relationships_to_commits.cypher"
+
+echo "importGitLog: Creating relationships to nodes with matching file names..."
 execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher"
 execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher"
 execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_commits.cypher"
