@@ -5,6 +5,7 @@ CALL { WITH row
     MERGE (git_author:Git:Log:Author {name: row.author, email: row.email})
     MERGE (git_commit:Git:Log:Commit {
         hash:           row.hash, 
+        parent:         coalesce(row.parent, ''), 
         message:        row.message,
         timestamp:      datetime(row.timestamp),
         timestamp_unix: toInteger(row.timestamp_unix)
