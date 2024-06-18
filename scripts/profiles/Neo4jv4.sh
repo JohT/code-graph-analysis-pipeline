@@ -18,7 +18,7 @@ NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"all"} # Since Neo4j v5 o
 NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j-contrib/neo4j-apoc-procedures"} # Location for the old plugins compatible to Neo4j v4
 
 NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.3.4"} # Graph Data Science Plugin Version 2.3.x is compatible with Neo4j 4.4.x
-NEO4J_OPEN_GDS_PLUGIN_VERSION=${NEO4J_OPEN_GDS_PLUGIN_VERSION:-"2.6.7"} # Open package variant of the graph-data-science plugin for Neo4j (https://github.com/JohT/open-graph-data-science-packaging). Since version 2.4. compatible with Neo4j 5.x.
+NEO4J_OPEN_GDS_PLUGIN_VERSION=${NEO4J_OPEN_GDS_PLUGIN_VERSION:-"2.6.8"} # Open package variant of the graph-data-science plugin for Neo4j (https://github.com/JohT/open-graph-data-science-packaging). Since version 2.4. compatible with Neo4j 5.x.
 NEO4J_GDS_PLUGIN_EDITION=${NEO4J_GDS_PLUGIN_EDITION:-"open"}  # Graph Data Science Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 
 JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"1.12.2"}  # Version 1.12.2 is the newest version (may 2023) compatible with Neo4j v4
