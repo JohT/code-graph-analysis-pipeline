@@ -7,7 +7,7 @@
 "void update(java.util.function.Function)","update","centralityPageRank",0.0429034634784916,""
 "java.lang.reflect.Type getExactSuperType(java.lang.reflect.Type,java.lang.Class)","getExactSuperType","centralityPageRank",0.0408324042575586,""
 "void isTrue(boolean,java.util.function.Supplier)","isTrue","centralityPageRank",0.03689483231414066,""
-"void closeQuietly(java.sql.Connection)","closeQuietly","centralityPageRank",0.03386438125993903,""
+"void closeQuietly(java.sql.Connection)","closeQuietly","centralityPageRank",0.03386438125993902,""
 "boolean isExplicitlyNonTransient(java.lang.Throwable)","isExplicitlyNonTransient","centralityPageRank",0.032197006438484325,""
 "org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityPageRank",0.03135009318360234,""
 "void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityPageRank",0.029015474315723155,""

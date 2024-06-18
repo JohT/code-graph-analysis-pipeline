@@ -22,7 +22,7 @@
 "org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityArticleRank",0.019671555623813692,""
 "org.axonframework.eventsourcing.eventstore.DomainEventStream of(java.util.stream.Stream,java.util.function.Supplier)","of","centralityArticleRank",0.019438340532335424,""
 "java.lang.Object getIdentifier()","getIdentifier","centralityArticleRank",0.019091036718769865,""
-"java.lang.reflect.Type getExactSuperType(java.lang.reflect.Type,java.lang.Class)","getExactSuperType","centralityArticleRank",0.019007657886872246,""
+"java.lang.reflect.Type getExactSuperType(java.lang.reflect.Type,java.lang.Class)","getExactSuperType","centralityArticleRank",0.019007657886872243,""
 "void notNull(java.lang.Object,java.util.function.Supplier)","notNull","centralityArticleRank",0.018702190155716152,""
 "java.lang.reflect.AccessibleObject ensureAccessible(java.lang.reflect.AccessibleObject)","ensureAccessible","centralityArticleRank",0.01858200832342837,""
 "java.lang.reflect.Type unwrapIfType(java.lang.reflect.Type,java.lang.Class[])","unwrapIfType","centralityArticleRank",0.01789041716206593,""
