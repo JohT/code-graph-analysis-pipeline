@@ -19,7 +19,7 @@
 "org.axonframework.messaging.MetaData from(java.util.Map)","from","centralityArticleRank",0.022016705127535518,""
 "org.axonframework.eventhandling.EventMessage asEventMessage(java.lang.Object)","asEventMessage","centralityArticleRank",0.021932915318970223,""
 "void assertStrictPositive(long,java.lang.String)","assertStrictPositive","centralityArticleRank",0.020249417143511764,""
-"org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityArticleRank",0.019595562711300998,""
+"org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityArticleRank",0.019595562711301,""
 "org.axonframework.eventsourcing.eventstore.DomainEventStream of(java.util.stream.Stream,java.util.function.Supplier)","of","centralityArticleRank",0.019374875615697316,""
 "java.lang.Object getIdentifier()","getIdentifier","centralityArticleRank",0.019014160932006394,""
 "java.lang.reflect.Type getExactSuperType(java.lang.reflect.Type,java.lang.Class)","getExactSuperType","centralityArticleRank",0.018990586188129592,""

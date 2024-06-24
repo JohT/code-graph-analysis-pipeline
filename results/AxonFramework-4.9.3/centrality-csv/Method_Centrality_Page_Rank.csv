@@ -31,7 +31,7 @@
 "void assertStrictPositive(long,java.lang.String)","assertStrictPositive","centralityPageRank",0.010634113537455211,""
 "java.lang.reflect.Type unwrapIfType(java.lang.reflect.Type,java.lang.Class[])","unwrapIfType","centralityPageRank",0.009976228264412195,""
 "org.axonframework.eventsourcing.eventstore.AbstractEventStorageEngine$Builder persistenceExceptionResolver(org.axonframework.common.jdbc.PersistenceExceptionResolver)","persistenceExceptionResolver","centralityPageRank",0.009829762306450336,""
-"org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityPageRank",0.009439532501309359,""
+"org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityPageRank",0.00943953250130936,""
 "org.axonframework.eventsourcing.eventstore.BatchingEventStorageEngine$Builder persistenceExceptionResolver(org.axonframework.common.jdbc.PersistenceExceptionResolver)","persistenceExceptionResolver","centralityPageRank",0.009359893765566304,""
 "void notNull(java.lang.Object,java.util.function.Supplier)","notNull","centralityPageRank",0.009174070048832503,""
 "void attachTransaction(org.axonframework.common.transaction.TransactionManager)","attachTransaction","centralityPageRank",0.00892188071897949,""
