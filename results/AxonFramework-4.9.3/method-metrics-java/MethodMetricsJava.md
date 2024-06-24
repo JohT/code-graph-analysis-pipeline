@@ -1092,7 +1092,7 @@ The following table shows the top 30 packages with the highest effective lines o
       <td>348</td>
       <td>156</td>
       <td>13</td>
-      <td>defaultHeaders</td>
+      <td>describeTo</td>
     </tr>
     <tr>
       <th>28</th>
@@ -2052,7 +2052,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>277</td>
       <td>194</td>
       <td>6</td>
-      <td>instantiateAssociationResolver</td>
+      <td>equals</td>
     </tr>
     <tr>
       <th>11</th>
@@ -2115,7 +2115,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>209</td>
       <td>156</td>
       <td>4</td>
-      <td>resolveDetails</td>
+      <td>endScope</td>
     </tr>
     <tr>
       <th>25</th>
