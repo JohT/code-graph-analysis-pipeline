@@ -10,6 +10,5 @@ MATCH (git_file:File&Git)
 WHERE git_file.fileName ENDS WITH codeFileName
 MERGE (git_file)-[:RESOLVES_TO]->(code_file)
   SET git_file.resolved = true
-RETURN labels(code_file)[0..4]       AS codeFileLabels
-      ,count(DISTINCT codeFileName)  AS numberOfCodeFiles
+RETURN count(DISTINCT codeFileName)  AS numberOfCodeFiles
       ,collect(DISTINCT codeFileName + ' <-> ' + git_file.fileName + '\n')[0..4] AS examples
