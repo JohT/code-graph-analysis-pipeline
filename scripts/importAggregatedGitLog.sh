@@ -11,7 +11,7 @@ set -o errexit -o pipefail
 
 # Overrideable Defaults
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.16.0"}
+NEO4J_VERSION=${NEO4J_VERSION:-"5.20.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
 
