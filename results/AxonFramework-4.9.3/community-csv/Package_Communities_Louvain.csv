@@ -9,7 +9,7 @@
 49,9,"49,9",5,"org.axonframework.common.jdbc,org.axonframework.eventhandling.deadletter.jdbc,org.axonframework.eventhandling.tokenstore,org.axonframework.eventhandling.tokenstore.inmemory,org.axonframework.eventhandling.tokenstore.jdbc",""
 14,15,"14,15",5,"org.axonframework.commandhandling,org.axonframework.commandhandling.callbacks,org.axonframework.commandhandling.distributed,org.axonframework.commandhandling.distributed.commandfilter,org.axonframework.commandhandling.gateway",""
 84,10,"84,10",3,"org.axonframework.modelling.command,org.axonframework.modelling.command.inspection,org.axonframework.modelling.command.legacyjpa",""
-30,22,"30,22",3,"org.axonframework.deadline,org.axonframework.deadline.quartz,org.axonframework.deadline.jobrunr",""
+31,22,"31,22",3,"org.axonframework.deadline,org.axonframework.deadline.jobrunr,org.axonframework.deadline.quartz",""
 51,9,"51,9",2,"org.axonframework.eventhandling.tokenstore.jpa,org.axonframework.eventhandling.tokenstore.legacyjpa",""
 5,20,"5,20",2,"org.axonframework.eventsourcing.eventstore.jdbc,org.axonframework.eventsourcing.eventstore.jdbc.statements",""
 82,13,"82,13",1,"org.axonframework.disruptor.commandhandling",""
