@@ -15,7 +15,7 @@ JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-ne
 JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv5-jqassistant.yaml"} #  Neo4j v5: "template-neo4jv5-jqassistant.yaml", Neo4j v4: "template-neo4jv4-jqassistant.yaml"
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.16.0"}
+NEO4J_VERSION=${NEO4J_VERSION:-"5.20.0"}
 NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
 NEO4J_BOLT_URI=${NEO4J_BOLT_URI:-"bolt://localhost:${NEO4J_BOLT_PORT}"} # Neo4j's own "Bolt Protocol" address
 NEO4J_USER=${NEO4J_USER:-"neo4j"} # Neo4j login user

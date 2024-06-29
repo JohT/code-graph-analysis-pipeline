@@ -2,7 +2,7 @@
 
 CALL gds.closeness.harmonic.write(
     $dependencies_projection + '-cleaned', {
-    ,writeProperty: $dependencies_projection_write_property
+    writeProperty: $dependencies_projection_write_property
 })
 YIELD nodes
      ,preProcessingMillis
