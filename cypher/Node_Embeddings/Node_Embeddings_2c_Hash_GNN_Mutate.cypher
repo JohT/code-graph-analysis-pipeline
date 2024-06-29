@@ -2,7 +2,7 @@
 
 CALL gds.beta.hashgnn.mutate(
  $dependencies_projection + '-cleaned', {
-     ,embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2
+      embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2
      ,iterations: 3
      ,generateFeatures: {
          dimension: toInteger($dependencies_projection_embedding_dimension) * 4
