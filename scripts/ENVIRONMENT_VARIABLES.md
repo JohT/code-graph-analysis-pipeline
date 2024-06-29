@@ -23,7 +23,7 @@ CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
-NEO4J_VERSION                         | 5.16.0                              |  |
+NEO4J_VERSION                         | 5.20.0                              |  |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | full                                | Select how to import git log data. Options: "none", "aggregated", "full". Default="full". |
 NEO4J_HTTPS_PORT                      | 7473                                | Neo4j HTTPS port for encrypted querying |
