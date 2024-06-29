@@ -44,7 +44,7 @@ done
 # Check if the repository is actually a git repository
 if ! (cd "${repository}" || exit; git rev-parse --git-dir 2> /dev/null || exit); then
   echo "importAggregatedGitLog: Import skipped. ${repository} is not a git repository."
-  exit 0
+  return 0
 fi
 
 echo "importAggregatedGitLog: repository=${repository}"
