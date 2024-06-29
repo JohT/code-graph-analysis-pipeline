@@ -42,7 +42,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check if the repository is actually a git repository
-if ! (cd "${repository}" || exit; git rev-parse --git-dir 2> /dev/null || exit); then
+if [ ! -d "${repository}/.git" ]; then
+#The following line would also take upper directories into account which isn't what we want here:
+#if ! (cd "${repository}" || exit; git rev-parse --git-dir 2> /dev/null || exit); then
   echo "importAggregatedGitLog: Import skipped. ${repository} is not a git repository."
   return 0
 fi
@@ -64,7 +66,6 @@ echo "importAggregatedGitLog: CYPHER_DIR=${CYPHER_DIR}"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 # Internal constants
-IMPORTS_CYPHER_DIR="${CYPHER_DIR}/Imports"
 NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
 NEO4J_FULL_IMPORT_DIRECTORY=$(cd "${NEO4J_INSTALLATION_DIRECTORY}/import"; pwd)
