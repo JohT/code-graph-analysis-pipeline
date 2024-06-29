@@ -21,8 +21,10 @@ Script | Directory | Description
 | [generateScriptReference.sh](./documentation/generateScriptReference.sh) | documentation | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
 | [downloadMavenArtifact.sh](./downloadMavenArtifact.sh) |  | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central) |
+| [downloadAntDesign.sh](./downloader/downloadAntDesign.sh) | downloader | Downloads the Typescript project ant-design (https://github.com/ant-design/ant-design) from GitHub using git clone. |
 | [downloadAxonFramework.sh](./downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central. |
 | [downloadReactRouter.sh](./downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone. |
+| [analyzeAntDesign.sh](./examples/analyzeAntDesign.sh) | examples | This is an example for the analysis of a the Typescript project "ant-design". |
 | [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
 | [analyzeReactRouter.sh](./examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router". |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
