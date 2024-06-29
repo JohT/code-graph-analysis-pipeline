@@ -42,7 +42,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check if the repository is actually a git repository
-if ! (cd "${repository}" || exit; git rev-parse --git-dir 2> /dev/null || exit); then
+if [ ! -d "${repository}/.git" ]; then
+#The following line would also take upper directories into account which isn't what we want here:
+#if ! (cd "${repository}" || exit; git rev-parse --git-dir 2> /dev/null || exit); then
   echo "importGitLog: Import skipped. ${repository} is not a git repository."
   exit 0
 fi

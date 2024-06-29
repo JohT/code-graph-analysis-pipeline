@@ -83,5 +83,6 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
     Then open your browser and login to your [local Neo4j Web UI](http://localhost:7474/browser) with "neo4j" as user and the initial password you've chosen.
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps for a Java Project.
-👉 See [scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) as an example script that combines all the above steps for a Typescript Project. 
+👉 See [scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) as an example script that combines all the above steps for a Typescript Project.
+👉 See [scripts/examples/analyzeAntDesign.sh](./scripts/examples/analyzeAntDesign.sh) as an example script that combines all the above steps for a large scale monorepo Typescript Project.
 👉 See [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.

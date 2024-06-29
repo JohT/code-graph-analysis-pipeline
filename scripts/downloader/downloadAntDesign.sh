@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone.
+# Downloads the Typescript project ant-design (https://github.com/ant-design/ant-design) from GitHub using git clone.
 # The source files are written into the "source" directory of the current analysis directory.
 # After scanning it with jQAssistant Typescript Plugin the resulting JSON will be moved into the "artifacts" directory.
 
@@ -8,8 +8,6 @@
 #       The other parts of the script can be reused/copied as a reference to write other download scripts.
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
-
-# Note: react-router uses pnpm as package manager which needs to be installed
 
 # Fail on any error (errexit = exit on first error, errtrace = error inherited from sub-shell ,pipefail exist on errors within piped commands)
 set -o errexit -o errtrace -o pipefail
@@ -37,15 +35,18 @@ echo "download${ANALYSIS_NAME}: PROJECT_VERSION=${PROJECT_VERSION}"
 mkdir -p ./runtime/logs
 
 ################################################################
-# Download react-router source files to be analyzed
+# Download ant-design source files to be analyzed
 ################################################################
-git clone https://github.com/remix-run/react-router.git "${SOURCE_DIRECTORY}"
+if [ ! -d "${SOURCE_DIRECTORY}" ] ; then # only clone if source doesn't exist
+  git clone --branch "${PROJECT_VERSION}" https://github.com/ant-design/ant-design.git "${SOURCE_DIRECTORY}"
+fi
 (
   cd "${SOURCE_DIRECTORY}" || exit
-  git checkout "react-router@${PROJECT_VERSION}" || exit
-  pnpm install --frozen-lockfile || exit
+  echo "download${ANALYSIS_NAME}: Installing dependencies..."
+  npm install || exit
+  echo "download${ANALYSIS_NAME}: Analyzing source..."
   npx --yes @jqassistant/ts-lce >./../runtime/logs/jqassistant-typescript-scan.log 2>&1 || exit
 )
 mkdir -p artifacts
-mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/ts-react-router-${PROJECT_VERSION}.json"
+mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/ts-ant-design-${PROJECT_VERSION}.json"
 ################################################################
