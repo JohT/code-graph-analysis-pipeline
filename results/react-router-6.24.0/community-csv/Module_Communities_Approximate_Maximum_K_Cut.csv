@@ -1,0 +1,6 @@
+"propertyName","propertyValue","codeUnits","codeUnitNames","shortCodeUnitNames","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Grouped.cypher"
+"communityMaximumKCutId",13,1,"./index.ts","react-router",""
+"communityMaximumKCutId",6,1,"./index.tsx","react-router-dom",""
+"communityMaximumKCutId",19,1,"./server.tsx","server.tsx",""
+"communityMaximumKCutId",11,1,"./index.tsx","react-router-native",""
+"communityMaximumKCutId",14,1,"./index.ts","router",""
