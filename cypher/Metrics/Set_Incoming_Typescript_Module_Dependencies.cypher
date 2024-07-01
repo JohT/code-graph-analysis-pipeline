@@ -1,8 +1,8 @@
 // Set incoming Typscript Module dependencies
 
-// Get the top level dependency between a Typescript module and an external modules it uses
+// Get the top level dependency between a Typescript module and other modules that uses it
  MATCH (source:TS:Module)
-OPTIONAL MATCH (source)<-[:RESOLVES_TO]-(sourceExternal:ExternalModule)<-[moduleDependency:DEPENDS_ON]-(target:TS:Module)
+OPTIONAL MATCH (source)<-[moduleDependency:DEPENDS_ON]-(target:TS:Module)
  WHERE source <> target
 // Get the project of the external module if available
 OPTIONAL MATCH (projectdir:Directory)<-[:HAS_ROOT]-(project:TS:Project)-[:CONTAINS]->(target)
@@ -21,9 +21,6 @@ OPTIONAL MATCH (projectdir:Directory)<-[:HAS_ROOT]-(project:TS:Project)-[:CONTAI
      ,source.incomingDependentAbstractTypeWeight = abstractTypeCardinality
      ,source.incomingDependentModules            = externalModuleCount
      ,source.incomingDependentPackages           = size(projectNames)
-   // Incoming dependencies properties can't easily be set on sourceExternal nodes
-   // since there might be more than one per source. If this is needed in future
-   // assure that there is no regression for the source nodes.
 RETURN source.globalFqn        AS fullQualifiedModuleName
       ,source.name             AS moduleName
       ,declarationCount        AS incomingDependencies
