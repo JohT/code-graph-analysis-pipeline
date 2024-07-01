@@ -17,6 +17,8 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
+      - '.github/workflows/java-code-analysis.yml'
+      - '.github/workflows/*documentation.yml'
   pull_request:
     branches:
       - main
@@ -33,6 +35,8 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
+      - '.github/workflows/java-code-analysis.yml'
+      - '.github/workflows/*documentation.yml'
 
 # Requires the secret NEO4J_INITIAL_PASSWORD to be configured
 jobs:
