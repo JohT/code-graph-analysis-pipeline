@@ -39,16 +39,27 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 CYCLIC_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Cyclic_Dependencies"
 INTERNAL_DEPENDENCIES_CYPHER_DIR="${CYPHER_DIR}/Internal_Dependencies"
 
+# Cyclic Dependencies Java
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies.csv"
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown.csv"
 execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown_Backward_Only.csv"
-execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_between_Artrifacts_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicArtifactDependenciesUnwinded.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_between_Artifacts_as_unwinded_List.cypher" > "${FULL_REPORT_DIRECTORY}/CyclicArtifactDependenciesUnwinded.csv"
 
-execute_cypher "${CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${FULL_REPORT_DIRECTORY}/InterfaceSegregationCandidates.csv"
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" > "${FULL_REPORT_DIRECTORY}/InterfaceSegregationCandidates.csv"
 
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_all_Java_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/List_all_Java_artifacts.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_types_that_are_used_by_many_different_packages.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypes.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_packages_compared_to_all_existing_are_used_by_dependent_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ArtifactPackageUsage.csv"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher" > "${FULL_REPORT_DIRECTORY}/ClassesPerPackageUsageAcrossArtifacts.csv"
+
+# Internal Dependencies for TypeScript
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_for_Typescript.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown_for_Typescript.csv"
+execute_cypher "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.csv"
+
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_all_Typescript_modules.cypher" > "${FULL_REPORT_DIRECTORY}/List_all_Typescript_modules.csv"
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/List_elements_that_are_used_by_many_different_modules_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/WidelyUsedTypescriptElements.csv"
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/How_many_elements_compared_to_all_existing_are_used_by_dependent_modules_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/ModuleElementsUsageTypescript.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
