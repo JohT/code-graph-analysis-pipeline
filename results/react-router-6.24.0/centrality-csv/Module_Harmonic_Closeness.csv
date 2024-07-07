@@ -3,4 +3,4 @@
 "./index.ts","react-router","centralityHarmonic",0.75,""
 "./index.tsx","react-router-dom","centralityHarmonic",0.25,""
 "./index.tsx","react-router-native","centralityHarmonic",0,""
-"./server.tsx","server.tsx","centralityHarmonic",0,""
+"./server.tsx","server","centralityHarmonic",0,""

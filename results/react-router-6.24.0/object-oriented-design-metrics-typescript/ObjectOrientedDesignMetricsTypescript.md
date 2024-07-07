@@ -49,8 +49,8 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
-      <td>21</td>
+      <td>react-router</td>
+      <td>19</td>
       <td>42</td>
       <td>0</td>
       <td>0</td>
@@ -60,9 +60,9 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router</td>
+      <td>router</td>
       <td>19</td>
-      <td>42</td>
+      <td>20</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
@@ -93,7 +93,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -165,7 +165,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>40</td>
       <td>62</td>
       <td>0</td>
@@ -294,7 +294,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0</td>
-      <td>21</td>
+      <td>19</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -342,7 +342,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <th>4</th>
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>1.000000</td>
       <td>0.0</td>
       <td>1.000000</td>
@@ -434,7 +434,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <th>2</th>
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>0.333333</td>
       <td>None</td>
       <td>None</td>

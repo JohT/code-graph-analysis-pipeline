@@ -279,7 +279,7 @@ external package.
       <td>112.5</td>
       <td>212.5</td>
       <td>263.391344</td>
-      <td>[react-router, react-router-dom, server.tsx, r...</td>
+      <td>[react-router, react-router-dom, server, react...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -683,7 +683,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>125.0</td>
       <td>218.75</td>
       <td>261.705146</td>
-      <td>[react-router, react-router-dom, server.tsx, r...</td>
+      <td>[react-router, react-router-dom, server, react...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -868,7 +868,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[default]</td>
+      <td>[url-search-params]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -884,7 +884,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
     </tr>
     <tr>
       <th>4</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>@types/react</td>
       <td>3</td>
       <td>3</td>
@@ -956,7 +956,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[default]</td>
+      <td>[url-search-params]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -972,7 +972,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
     </tr>
     <tr>
       <th>3</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>@types</td>
       <td>3</td>
       <td>3</td>
@@ -1014,7 +1014,7 @@ The following table uses pivot to show the internal modules in columns, the exte
       <th>internalModuleName</th>
       <th>react-router-dom</th>
       <th>react-router-native</th>
-      <th>server.tsx</th>
+      <th>server</th>
       <th>react-router</th>
     </tr>
     <tr>
@@ -1067,7 +1067,7 @@ The following table uses pivot to show the internal modules in columns, the exte
       <th>internalModuleName</th>
       <th>react-router-dom</th>
       <th>react-router-native</th>
-      <th>server.tsx</th>
+      <th>server</th>
       <th>react-router</th>
     </tr>
     <tr>
@@ -1131,7 +1131,7 @@ This table lists internal elements and the modules they belong to that use many 
     </tr>
     <tr>
       <th>4</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>2</td>
       <td>6</td>
     </tr>
@@ -1229,7 +1229,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>2</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>6</td>
       <td>1</td>
       <td>3</td>
@@ -1326,7 +1326,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>3</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>6</td>
       <td>1</td>
       <td>1</td>
@@ -1397,7 +1397,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>3</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>6</td>
       <td>1</td>
       <td>3</td>
@@ -1468,7 +1468,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>3</th>
-      <td>server.tsx</td>
+      <td>server</td>
       <td>6</td>
       <td>1</td>
       <td>50.000000</td>

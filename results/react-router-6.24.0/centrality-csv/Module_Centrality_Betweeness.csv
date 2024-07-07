@@ -3,4 +3,4 @@
 "./index.ts","react-router","centralityCloseness",0.75,""
 "./index.tsx","react-router-dom","centralityCloseness",0.25,""
 "./index.tsx","react-router-native","centralityCloseness",0,""
-"./server.tsx","server.tsx","centralityCloseness",0,""
+"./server.tsx","server","centralityCloseness",0,""

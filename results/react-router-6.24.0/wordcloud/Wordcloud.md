@@ -109,39 +109,39 @@
     </tr>
     <tr>
       <th>21</th>
-      <td>ts</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>router</td>
-    </tr>
-    <tr>
-      <th>23</th>
       <td>react</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>23</th>
       <td>utils</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>ts</td>
-    </tr>
-    <tr>
-      <th>26</th>
+      <th>24</th>
       <td>router</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>ts</td>
-    </tr>
-    <tr>
-      <th>28</th>
+      <th>25</th>
       <td>history</td>
     </tr>
     <tr>
+      <th>26</th>
+      <td>route</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>object</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>route</td>
+    </tr>
+    <tr>
       <th>29</th>
-      <td>ts</td>
+      <td>object</td>
     </tr>
   </tbody>
 </table>
@@ -149,7 +149,7 @@
 
 
 
-    There are 3142 words in the dataset.
+    There are 3125 words in the dataset.
 
 
 

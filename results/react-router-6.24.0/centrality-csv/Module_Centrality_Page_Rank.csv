@@ -3,4 +3,4 @@
 "./index.ts","react-router","centralityPageRank",0.54332500741408,""
 "./index.tsx","react-router-dom","centralityPageRank",0.21720178951036845,""
 "./index.tsx","react-router-native","centralityPageRank",0.18734386157228544,""
-"./server.tsx","server.tsx","centralityPageRank",0.18734386157228544,""
+"./server.tsx","server","centralityPageRank",0.18734386157228544,""
