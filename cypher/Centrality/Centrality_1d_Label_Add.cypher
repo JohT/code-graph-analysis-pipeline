@@ -10,7 +10,7 @@ UNWIND members AS member
  ORDER BY member[$dependencies_projection_write_property] DESCENDING    
   WITH memberCount2Percent
       ,collect(DISTINCT member)[0..memberCount2Percent] AS topMembers
-      ,'Top' + apoc.text.capitalize($dependencies_projection_write_property) AS labelName
+      ,'Mark4Top' + apoc.text.capitalize($dependencies_projection_write_property) AS labelName
 UNWIND topMembers AS topMember
   CALL apoc.create.addLabels(topMember, [labelName]) YIELD node
 RETURN count(node) AS nodesCount

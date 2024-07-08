@@ -1,7 +1,7 @@
 // Community Detection Label Propagation Label Delete
 
   CALL db.labels() YIELD label
- WHERE label STARTS WITH $dependencies_projection_node + $dependencies_projection_write_label
+ WHERE label STARTS WITH 'Mark4' + $dependencies_projection_node + $dependencies_projection_write_label
   WITH collect(label) AS selectedLabels
  MATCH (member)
  WHERE $dependencies_projection_node IN labels(member) 
