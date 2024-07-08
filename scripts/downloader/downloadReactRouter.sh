@@ -39,13 +39,16 @@ mkdir -p ./runtime/logs
 ################################################################
 # Download react-router source files to be analyzed
 ################################################################
-git clone https://github.com/remix-run/react-router.git "${SOURCE_DIRECTORY}"
+if [ ! -d "${SOURCE_DIRECTORY}" ] ; then # only clone if source doesn't exist
+git clone --branch "react-router@${PROJECT_VERSION}" https://github.com/remix-run/react-router.git "${SOURCE_DIRECTORY}"
+fi
 (
   cd "${SOURCE_DIRECTORY}" || exit
-  git checkout "react-router@${PROJECT_VERSION}" || exit
+  echo "download${ANALYSIS_NAME}: Installing dependencies..."
   pnpm install --frozen-lockfile || exit
+  echo "download${ANALYSIS_NAME}: Analyzing source..."
   npx --yes @jqassistant/ts-lce >./../runtime/logs/jqassistant-typescript-scan.log 2>&1 || exit
 )
-mkdir -p artifacts
-mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/ts-react-router-${PROJECT_VERSION}.json"
+mkdir -p artifacts/typescript
+mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/typescript/react-router-${PROJECT_VERSION}.json"
 ################################################################

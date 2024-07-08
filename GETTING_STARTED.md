@@ -10,33 +10,35 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
 
 ## Start an analysis
 
-1. Create a directory for all analysis projects
+1. Create a directory for all analysis projects.
 
     ```shell
     mkdir temp
     cd temp
     ```
 
-1. Create a working directory for your specific analysis
+1. Create a working directory for your specific analysis.
   
     ```shell
     mkdir MyFirstAnalysis
     cd MyFirstAnalysis
     ```
 
-1. Choose an initial password for Neo4j if not already done
+1. Choose an initial password for Neo4j if not already done.
 
     ```shell
     export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
     ```
 
-1. Create the `artifacts` directory for the code to be analyzed (without `cd` afterwards)
+1. Create the `artifacts` directory for the code to be analyzed (without `cd` afterwards).
 
     ```shell
     mkdir artifacts
     ```
 
-1. Move the artifacts (Java jar or Typescript analysis json files) you want to analyze into the `artifacts` directory
+1. Move the artifacts (e.g. Java jars json files) you want to analyze into the `artifacts` directory.
+
+1. Optionally, create a subdirectory `typescript` inside the `artifacts` directory and move the Typescript analysis json files you want to analyze into it.
 
 1. Optionally, create a `source` directory and clone the corresponding source code into it to also gather git log data.
 
@@ -46,9 +48,9 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
     ./../../scripts/downloader/downloadAxonFramework.sh <version>
     ```
 
-1. Optionally use a script to download artifacts from Maven ([details](./COMMANDS.md#download-maven-artifacts-to-analyze))
+1. Optionally use a script to download artifacts from Maven ([details](./COMMANDS.md#download-maven-artifacts-to-analyze)).
 
-1. Start the analysis
+1. Start the analysis.
 
    - Without any additional dependencies:
 
