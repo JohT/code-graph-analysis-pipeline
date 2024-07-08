@@ -713,7 +713,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.800000</td>
       <td>9</td>
       <td>1</td>
-      <td>[SimpleDeadlineManager$DeadlineTask-&gt;Span, Sim...</td>
+      <td>[SimpleDeadlineManager$DeadlineTask-&gt;SpanScope...</td>
       <td>[SpanUtils-&gt;DeadlineMessage]</td>
     </tr>
     <tr>
@@ -761,7 +761,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.647059</td>
       <td>14</td>
       <td>3</td>
-      <td>[EventUtils-&gt;Serializer, EventUtils-&gt;LazyDeser...</td>
+      <td>[EventUtils-&gt;Serializer, EventUtils-&gt;Serialize...</td>
       <td>[AbstractXStreamSerializer-&gt;GenericDomainEvent...</td>
     </tr>
     <tr>
@@ -785,8 +785,8 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.538462</td>
       <td>10</td>
       <td>3</td>
-      <td>[AsynchronousEventProcessingStrategy-&gt;EventMes...</td>
-      <td>[SimpleEventHandlerInvoker$Builder-&gt;Sequential...</td>
+      <td>[AsynchronousEventProcessingStrategy-&gt;EventPro...</td>
+      <td>[SimpleEventHandlerInvoker$Builder-&gt;Sequencing...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -809,7 +809,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.333333</td>
       <td>6</td>
       <td>3</td>
-      <td>[InitialEventRepresentation-&gt;TrackedEventData,...</td>
+      <td>[InitialEventRepresentation-&gt;EventData, Initia...</td>
       <td>[EventUtils-&gt;InitialEventRepresentation, Event...</td>
     </tr>
     <tr>
@@ -845,8 +845,8 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.250000</td>
       <td>20</td>
       <td>12</td>
-      <td>[ChildForwardingCommandMessageHandlingMember-&gt;...</td>
-      <td>[LockingRepository$Builder-&gt;AggregateModel, Ab...</td>
+      <td>[AggregateMemberAnnotatedChildEntityMapDefinit...</td>
+      <td>[ForwardingMode-&gt;EntityModel, AbstractReposito...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -869,7 +869,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.238095</td>
       <td>13</td>
       <td>8</td>
-      <td>[Message-&gt;SerializedObject, Message-&gt;Serialize...</td>
+      <td>[Message-&gt;Serializer, Message-&gt;SerializedObjec...</td>
       <td>[SerializedMessage-&gt;GenericMessage, Serialized...</td>
     </tr>
     <tr>
@@ -894,7 +894,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>4</td>
       <td>3</td>
       <td>[AnnotatedSagaManager-&gt;SagaModel, AnnotatedSag...</td>
-      <td>[SagaModel-&gt;AssociationValue, AnnotationSagaMe...</td>
+      <td>[AnnotationSagaMetaModelFactory$InspectedSagaM...</td>
     </tr>
     <tr>
       <th>21</th>
@@ -982,7 +982,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
-      <td>AbstractEventBus$Builder-&gt;SpanFactory</td>
+      <td>AbstractEventBus$Builder-&gt;NoOpSpanFactory</td>
       <td>0.900000</td>
       <td>19</td>
       <td>1</td>
@@ -1081,7 +1081,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
-      <td>DefaultEventBusSpanFactory-&gt;Span</td>
+      <td>DefaultEventBusSpanFactory-&gt;SpanFactory</td>
       <td>0.900000</td>
       <td>19</td>
       <td>1</td>
@@ -1092,7 +1092,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
-      <td>DefaultEventBusSpanFactory-&gt;SpanFactory</td>
+      <td>DefaultEventBusSpanFactory-&gt;Span</td>
       <td>0.900000</td>
       <td>19</td>
       <td>1</td>
@@ -1103,7 +1103,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
-      <td>DefaultEventProcessorSpanFactory-&gt;SpanFactory</td>
+      <td>DefaultEventProcessorSpanFactory-&gt;NoOpSpanFact...</td>
       <td>0.900000</td>
       <td>19</td>
       <td>1</td>
@@ -1114,7 +1114,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
-      <td>AbstractEventBus$Builder-&gt;NoOpSpanFactory</td>
+      <td>AbstractEventBus$Builder-&gt;SpanFactory</td>
       <td>0.900000</td>
       <td>19</td>
       <td>1</td>
@@ -1125,7 +1125,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.tracing</td>
-      <td>DefaultEventProcessorSpanFactory-&gt;NoOpSpanFact...</td>
+      <td>DefaultEventProcessorSpanFactory-&gt;SpanFactory</td>
       <td>0.900000</td>
       <td>19</td>
       <td>1</td>
@@ -1180,7 +1180,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.queryhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>GenericStreamingQueryMessage-&gt;ResponseType</td>
+      <td>GenericStreamingQueryMessage-&gt;PublisherRespons...</td>
       <td>0.882353</td>
       <td>16</td>
       <td>1</td>
@@ -1213,7 +1213,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.queryhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;MultipleInstancesRes...</td>
+      <td>SimpleQueryUpdateEmitter-&gt;PublisherResponseType</td>
       <td>0.882353</td>
       <td>16</td>
       <td>1</td>
@@ -1224,7 +1224,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.queryhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;ResponseType</td>
+      <td>SimpleQueryUpdateEmitter-&gt;MultipleInstancesRes...</td>
       <td>0.882353</td>
       <td>16</td>
       <td>1</td>
@@ -1290,7 +1290,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.queryhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>GenericStreamingQueryMessage-&gt;PublisherRespons...</td>
+      <td>GenericStreamingQueryMessage-&gt;ResponseType</td>
       <td>0.882353</td>
       <td>16</td>
       <td>1</td>
@@ -1323,7 +1323,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.queryhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging.responsetypes</td>
-      <td>SimpleQueryUpdateEmitter-&gt;PublisherResponseType</td>
+      <td>SimpleQueryUpdateEmitter-&gt;ResponseType</td>
       <td>0.882353</td>
       <td>16</td>
       <td>1</td>
@@ -1465,7 +1465,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
-      <td>DomainEventMessage&lt;-Headers</td>
+      <td>EventMessage&lt;-Headers</td>
       <td>0.857143</td>
       <td>39</td>
       <td>3</td>
@@ -1476,7 +1476,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.messaging</td>
-      <td>EventMessage&lt;-Headers</td>
+      <td>DomainEventMessage&lt;-Headers</td>
       <td>0.857143</td>
       <td>39</td>
       <td>3</td>
@@ -1652,7 +1652,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling.async</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
-      <td>SequencingPolicy&lt;-SimpleEventHandlerInvoker$Bu...</td>
+      <td>SequentialPerAggregatePolicy&lt;-SimpleEventHandl...</td>
       <td>0.538462</td>
       <td>10</td>
       <td>3</td>
@@ -1663,7 +1663,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.eventhandling.async</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
-      <td>SequentialPerAggregatePolicy&lt;-SimpleEventHandl...</td>
+      <td>SequencingPolicy&lt;-SimpleEventHandlerInvoker$Bu...</td>
       <td>0.538462</td>
       <td>10</td>
       <td>3</td>
@@ -1707,7 +1707,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.serialization.upcasting.event</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
-      <td>IntermediateEventRepresentation&lt;-EventUtils</td>
+      <td>EventUpcaster&lt;-EventUtils</td>
       <td>0.333333</td>
       <td>6</td>
       <td>3</td>
@@ -1729,7 +1729,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>org.axonframework.serialization.upcasting.event</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventhandling</td>
-      <td>EventUpcaster&lt;-EventUtils</td>
+      <td>IntermediateEventRepresentation&lt;-EventUtils</td>
       <td>0.333333</td>
       <td>6</td>
       <td>3</td>
@@ -1914,7 +1914,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <th>1</th>
       <td>org.axonframework.eventhandling.EventMessage</td>
       <td>9</td>
-      <td>[getIdentifier, getTimestamp]</td>
+      <td>[getTimestamp, getIdentifier]</td>
       <td>2</td>
       <td>10</td>
     </tr>
@@ -1954,7 +1954,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <th>6</th>
       <td>org.axonframework.messaging.ResultMessage</td>
       <td>9</td>
-      <td>[exceptionResult, isExceptional]</td>
+      <td>[isExceptional, exceptionResult]</td>
       <td>2</td>
       <td>6</td>
     </tr>
@@ -1984,14 +1984,6 @@ The following table shows the top 40 most used combinations of methods of larger
     </tr>
     <tr>
       <th>10</th>
-      <td>org.axonframework.modelling.command.inspection...</td>
-      <td>13</td>
-      <td>[type]</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>11</th>
       <td>org.axonframework.eventhandling.TrackedEventMe...</td>
       <td>12</td>
       <td>[trackingToken]</td>
@@ -1999,7 +1991,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
       <td>org.axonframework.deadline.DeadlineMessage</td>
       <td>10</td>
       <td>[getDeadlineName]</td>
@@ -2007,7 +1999,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
       <td>org.axonframework.eventhandling.DomainEventMes...</td>
       <td>10</td>
       <td>[getAggregateIdentifier]</td>
@@ -2015,7 +2007,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
       <td>org.axonframework.eventhandling.DomainEventMes...</td>
       <td>10</td>
       <td>[getType]</td>
@@ -2023,7 +2015,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
       <td>org.axonframework.eventhandling.GenericEventMe...</td>
       <td>10</td>
       <td>[asEventMessage]</td>
@@ -2031,7 +2023,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>15</th>
       <td>org.axonframework.eventhandling.EventMessage</td>
       <td>9</td>
       <td>[getTimestamp]</td>
@@ -2039,7 +2031,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>16</th>
       <td>org.axonframework.deadline.DefaultDeadlineMana...</td>
       <td>8</td>
       <td>[builder]</td>
@@ -2047,7 +2039,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>17</th>
       <td>org.axonframework.common.transaction.NoTransac...</td>
       <td>4</td>
       <td>[instance]</td>
@@ -2055,10 +2047,18 @@ The following table shows the top 40 most used combinations of methods of larger
       <td>4</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
       <td>org.axonframework.commandhandling.GenericComma...</td>
       <td>15</td>
       <td>[asCommandResultMessage]</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>org.axonframework.modelling.command.inspection...</td>
+      <td>13</td>
+      <td>[type]</td>
       <td>1</td>
       <td>3</td>
     </tr>
@@ -2106,7 +2106,7 @@ The following table shows the top 40 most used combinations of methods of larger
       <th>25</th>
       <td>org.axonframework.eventhandling.GapAwareTracki...</td>
       <td>10</td>
-      <td>[getIndex, withGapsTruncatedAt, getGaps, advan...</td>
+      <td>[withGapsTruncatedAt, advanceTo, getIndex, new...</td>
       <td>5</td>
       <td>3</td>
     </tr>
@@ -2566,8 +2566,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.command, org.axon...</td>
-      <td>[command, inspection, repository, saga, jpa, m...</td>
+      <td>[org.axonframework.modelling.saga, org.axonfra...</td>
+      <td>[saga, repository, jpa, inspection, command, m...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2577,7 +2577,7 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>8</td>
       <td>0.625000</td>
       <td>[org.axonframework.test, org.axonframework.tes...</td>
-      <td>[test, utils, deadline, matchers, eventscheduler]</td>
+      <td>[test, matchers, eventscheduler, utils, deadline]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2586,8 +2586,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>41</td>
       <td>64</td>
       <td>0.640625</td>
-      <td>[org.axonframework.messaging, org.axonframewor...</td>
-      <td>[messaging, annotation, deadline, eventhandlin...</td>
+      <td>[org.axonframework.deadline, org.axonframework...</td>
+      <td>[deadline, annotation, messaging, transaction,...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2685,17 +2685,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>5</th>
-      <td>axon-modelling-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>2</td>
-      <td>100</td>
-      <td>0.020000</td>
-      <td>[org.axonframework.eventhandling.DomainEventSe...</td>
-    </tr>
-    <tr>
-      <th>6</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventsourcing.conflictresolu...</td>
@@ -2706,10 +2695,10 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.eventhandling.DomainEventMe...</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
       <td>axon-modelling-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.modelling.command</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>org.axonframework.eventhandling</td>
       <td>2</td>
       <td>100</td>
@@ -2717,7 +2706,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.eventhandling.DomainEventSe...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
       <td>axon-test-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.test.eventscheduler</td>
@@ -2726,6 +2715,17 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>100</td>
       <td>0.020000</td>
       <td>[org.axonframework.eventhandling.EventMessage,...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-modelling-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>2</td>
+      <td>100</td>
+      <td>0.020000</td>
+      <td>[org.axonframework.eventhandling.DomainEventSe...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -2740,28 +2740,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>10</th>
-      <td>axon-eventsourcing-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventsourcing.conflictresolu...</td>
-      <td>org.axonframework.messaging</td>
-      <td>1</td>
-      <td>35</td>
-      <td>0.028571</td>
-      <td>[org.axonframework.messaging.Message]</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>axon-test-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.test</td>
-      <td>org.axonframework.messaging</td>
-      <td>1</td>
-      <td>35</td>
-      <td>0.028571</td>
-      <td>[org.axonframework.messaging.Message]</td>
-    </tr>
-    <tr>
-      <th>12</th>
       <td>axon-test-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.test.matchers</td>
@@ -2772,10 +2750,32 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.messaging.Message]</td>
     </tr>
     <tr>
+      <th>11</th>
+      <td>axon-eventsourcing-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.eventsourcing.conflictresolu...</td>
+      <td>org.axonframework.messaging</td>
+      <td>1</td>
+      <td>35</td>
+      <td>0.028571</td>
+      <td>[org.axonframework.messaging.Message]</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>axon-test-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.test</td>
+      <td>org.axonframework.messaging</td>
+      <td>1</td>
+      <td>35</td>
+      <td>0.028571</td>
+      <td>[org.axonframework.messaging.Message]</td>
+    </tr>
+    <tr>
       <th>13</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -2797,7 +2797,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <th>15</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -2850,14 +2850,14 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>20</th>
-      <td>axon-modelling-4.9.3</td>
+      <td>axon-test-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
+      <td>org.axonframework.test.utils</td>
       <td>org.axonframework.common</td>
       <td>1</td>
       <td>28</td>
       <td>0.035714</td>
-      <td>[org.axonframework.common.BuilderUtils]</td>
+      <td>[org.axonframework.common.Registration]</td>
     </tr>
     <tr>
       <th>21</th>
@@ -2872,39 +2872,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>22</th>
-      <td>axon-test-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.test.server</td>
-      <td>org.axonframework.common</td>
-      <td>1</td>
-      <td>28</td>
-      <td>0.035714</td>
-      <td>[org.axonframework.common.Assert]</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>axon-test-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.test.eventscheduler</td>
-      <td>org.axonframework.common</td>
-      <td>1</td>
-      <td>28</td>
-      <td>0.035714</td>
-      <td>[org.axonframework.common.DateTimeUtils]</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>axon-test-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.test.utils</td>
-      <td>org.axonframework.common</td>
-      <td>1</td>
-      <td>28</td>
-      <td>0.035714</td>
-      <td>[org.axonframework.common.Registration]</td>
-    </tr>
-    <tr>
-      <th>25</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventsourcing.conflictresolu...</td>
@@ -2915,10 +2882,43 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.common.Assert]</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>23</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>axon-messaging-4.9.3</td>
       <td>org.axonframework.eventsourcing.snapshotting</td>
+      <td>org.axonframework.common</td>
+      <td>1</td>
+      <td>28</td>
+      <td>0.035714</td>
+      <td>[org.axonframework.common.BuilderUtils]</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>axon-test-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.test.eventscheduler</td>
+      <td>org.axonframework.common</td>
+      <td>1</td>
+      <td>28</td>
+      <td>0.035714</td>
+      <td>[org.axonframework.common.DateTimeUtils]</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>axon-test-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.test.server</td>
+      <td>org.axonframework.common</td>
+      <td>1</td>
+      <td>28</td>
+      <td>0.035714</td>
+      <td>[org.axonframework.common.Assert]</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>axon-modelling-4.9.3</td>
+      <td>axon-messaging-4.9.3</td>
+      <td>org.axonframework.modelling.command.legacyjpa</td>
       <td>org.axonframework.common</td>
       <td>1</td>
       <td>28</td>
@@ -2949,14 +2949,14 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>29</th>
+      <td>axon-eventsourcing-4.9.3</td>
       <td>axon-modelling-4.9.3</td>
-      <td>axon-messaging-4.9.3</td>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
-      <td>org.axonframework.messaging.annotation</td>
+      <td>org.axonframework.eventsourcing.eventstore</td>
+      <td>org.axonframework.modelling.command</td>
       <td>2</td>
       <td>54</td>
       <td>0.037037</td>
-      <td>[org.axonframework.messaging.annotation.Handle...</td>
+      <td>[org.axonframework.modelling.command.Concurren...</td>
     </tr>
   </tbody>
 </table>
