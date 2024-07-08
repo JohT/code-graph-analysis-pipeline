@@ -14,5 +14,5 @@
 53,9,"53,9",2,"org.axonframework.eventhandling.tokenstore.legacyjpa,org.axonframework.eventhandling.tokenstore.jpa",""
 5,19,"5,19",2,"org.axonframework.eventsourcing.eventstore.jdbc,org.axonframework.eventsourcing.eventstore.jdbc.statements",""
 82,13,"82,13",1,"org.axonframework.disruptor.commandhandling",""
+78,14,"78,14",1,"org.axonframework.test.server",""
 9,20,"9,20",1,"org.axonframework.config",""
-78,21,"78,21",1,"org.axonframework.test.server",""
