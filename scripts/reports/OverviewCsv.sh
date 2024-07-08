@@ -45,5 +45,13 @@ execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_Method_Line_Count_Distribution.
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_packages_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_packages_per_artifact.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_types_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_types_per_artifact.csv"
 
+# In general
+execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_label_count.cypher" > "${FULL_REPORT_DIRECTORY}/Node_label_count.csv"
+execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_label_combination_count.cypher" > "${FULL_REPORT_DIRECTORY}/Node_label_combination_count.csv"
+execute_cypher "${OVERVIEW_CYPHER_DIR}/Relationship_type_count.cypher" > "${FULL_REPORT_DIRECTORY}/Relationship_type_count.csv"
+
+# TODO Performance needs improvement. Included (limited) in OverviewGeneral Jupyter Notebook.
+# execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_labels_and_their_relationships.cypher" > "${FULL_REPORT_DIRECTORY}/Node_labels_and_their_relationships.csv"
+
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
