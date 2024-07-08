@@ -47,6 +47,6 @@ fi
   echo "download${ANALYSIS_NAME}: Analyzing source..."
   npx --yes @jqassistant/ts-lce >./../runtime/logs/jqassistant-typescript-scan.log 2>&1 || exit
 )
-mkdir -p artifacts
-mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/ts-ant-design-${PROJECT_VERSION}.json"
+mkdir -p artifacts/typescript
+mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/typescript/ant-design-${PROJECT_VERSION}.json"
 ################################################################

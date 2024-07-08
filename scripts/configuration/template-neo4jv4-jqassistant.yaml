@@ -88,6 +88,7 @@ jqassistant:
       #
       # -Djqassistant.store.properties
       properties:
+        json.file.exclude: "*/typescript/*.json"
 
   # The Scanner configuration
   scan:

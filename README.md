@@ -93,7 +93,7 @@ This could be as simple as running the following command in your Typescript proj
 
 - It is recommended to put the cloned source code repository into a directory called `source` within the analysis workspace so that it will also be picked up to import git log data.
 
-- Copy the resulting json file (e.g. `.reports/jqa/ts-output.json`) into the `artifacts` directory for your analysis work directory. Custom subdirectories within `artifacts` are also supported.
+- Copy the resulting json file (e.g. `.reports/jqa/ts-output.json`) into the `artifacts/typescript` directory for your analysis work directory. Create the directory, if it doesn't exists. Custom subdirectories within `artifacts/typescript` are also supported.
 
 ## :rocket: Getting Started
 

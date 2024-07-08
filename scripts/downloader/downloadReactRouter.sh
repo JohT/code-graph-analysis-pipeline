@@ -46,6 +46,6 @@ git clone https://github.com/remix-run/react-router.git "${SOURCE_DIRECTORY}"
   pnpm install --frozen-lockfile || exit
   npx --yes @jqassistant/ts-lce >./../runtime/logs/jqassistant-typescript-scan.log 2>&1 || exit
 )
-mkdir -p artifacts
-mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/ts-react-router-${PROJECT_VERSION}.json"
+mkdir -p artifacts/typescript
+mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/typescript/react-router-${PROJECT_VERSION}.json"
 ################################################################
