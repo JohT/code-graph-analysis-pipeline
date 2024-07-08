@@ -74,7 +74,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>18</td>
       <td>4</td>
       <td>58</td>
-      <td>[&lt;useDeepLinking&gt; of module &lt;react-router-nati...</td>
+      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -844,7 +844,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[LinkingStatic.removeEventListener, LinkingSta...</td>
+      <td>[BackHandler, BackHandlerStatic.addEventListen...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -856,7 +856,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, React.ReactNode, React.JSX.E...</td>
+      <td>[React.useEffect, React.JSX.Element, React.Rea...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -880,7 +880,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>79.411765</td>
-      <td>[React.useCallback, React.useState, React.useR...</td>
+      <td>[React.createContext, React.Context, React.use...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -892,7 +892,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>2</td>
       <td>1</td>
       <td>33.333333</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>5</th>
@@ -944,7 +944,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[LinkingStatic.removeEventListener, LinkingSta...</td>
+      <td>[React.useEffect, BackHandler, BackHandlerStat...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -968,7 +968,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>79.411765</td>
-      <td>[React.useCallback, React.useState, React.useR...</td>
+      <td>[React.createContext, React.Context, React.use...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -980,7 +980,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>2</td>
       <td>1</td>
       <td>33.333333</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>4</th>
