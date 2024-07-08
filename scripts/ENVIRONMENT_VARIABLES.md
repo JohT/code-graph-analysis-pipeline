@@ -22,6 +22,7 @@ REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Re
 CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
+TYPESCRIPT_ARTIFACTS_DIRECTORY        | typescript                          | Subdirectory of "artifacts" containing the typescript analysis result json files for import |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
 NEO4J_VERSION                         | 5.20.0                              |  |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
