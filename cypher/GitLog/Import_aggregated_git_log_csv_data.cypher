@@ -10,7 +10,7 @@ CALL { WITH row
     })
     MERGE (git_file:Git:Log:File {fileName: row.filename})
     MERGE (git_author)-[:AUTHORED]->(git_change_span)
-    MERGE (git_change_span)-[:CONTAINS]->(git_file)
+    MERGE (git_change_span)-[:CONTAINS_CHANGED]->(git_file)
 } IN TRANSACTIONS OF 1000 ROWS
 RETURN count(DISTINCT row.author)   AS numberOfAuthors
       ,count(DISTINCT row.filename) AS numberOfFiles

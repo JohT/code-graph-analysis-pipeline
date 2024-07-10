@@ -233,7 +233,7 @@ Use [importGitLog.sh](./scripts/importGitLog.sh) to import git log data into the
 It uses `git log` to extract commits, their authors and the names of the files changed with them. These are stored in an intermediate CSV file and are then imported into Neo4j with the following schema:
 
 ```Cypher
-(Git:Log:Author)-[:AUTHORED]->(Git:Log:Commit)->[:CONTAINS]->(Git:Log:File)
+(Git:Log:Author)-[:AUTHORED]->(Git:Log:Commit)->[:CONTAINS_CHANGED]->(Git:Log:File)
 (Git:Log:Commit)->[:HAS_PARENT]-(Git:Log:Commit)
 ```
 
@@ -254,7 +254,7 @@ You can use [List_unresolved_git_files.cypher](./cypher/GitLog/List_unresolved_g
 Use [importAggregatedGitLog.sh](./scripts/importAggregatedGitLog.sh) to import git log data in an aggregated form into the Graph. It works similar to the [full git log version above](#import-git-log). The only difference is that not every single commit is imported. Instead, changes are grouped per month including their commit count. This is in many cases sufficient and reduces data size and processing time significantly. Here is the resulting schema:
 
 ```Cypher
-(Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan)-[:CONTAINS]->(Git:Log:File)
+(Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan)-[:CONTAINS_CHANGED]->(Git:Log:File)
 ```
 
 ## Database Queries
