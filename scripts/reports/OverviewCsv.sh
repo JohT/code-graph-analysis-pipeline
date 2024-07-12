@@ -37,6 +37,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 OVERVIEW_CYPHER_DIR="${CYPHER_DIR}/Overview"
 
+# For Java
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Overview_size.cypher" > "${FULL_REPORT_DIRECTORY}/Overview_size.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Cyclomatic_Method_Complexity_Distribution.cypher" > "${FULL_REPORT_DIRECTORY}/Cyclomatic_Method_Complexity.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_lines_of_method_code_per_package.cypher" > "${FULL_REPORT_DIRECTORY}/Effective_lines_of_method_code_per_package.csv"
@@ -44,6 +45,9 @@ execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_lines_of_method_code_per_type.c
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Effective_Method_Line_Count_Distribution.cypher" > "${FULL_REPORT_DIRECTORY}/Effective_Method_Line_Count.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_packages_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_packages_per_artifact.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_types_per_artifact.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_types_per_artifact.csv"
+
+# For TypeScript
+execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_elements_per_module_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_elements_per_module_for_Typescript.csv"
 
 # In general
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_label_count.cypher" > "${FULL_REPORT_DIRECTORY}/Node_label_count.csv"
