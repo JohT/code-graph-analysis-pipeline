@@ -54,6 +54,12 @@ Script | Directory | Description
 | [Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream_Mutated.cypher](./Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream_Mutated.cypher) | Centrality | Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream Mutated |
 | [Centrality_9e_Hyperlink_Induced_Topic_Search_HITS_Write.cypher](./Centrality/Centrality_9e_Hyperlink_Induced_Topic_Search_HITS_Write.cypher) | Centrality | Centrality 9e Hyperlink-Induced Topic Search (HITS) Write |
 | [Set_Parameters.cypher](./Centrality/Set_Parameters.cypher) | Centrality | Example on how to set the parameters for centrality in this case for Packages and PageRank |
+| [Community_Detection_10a_LocalClusteringCoefficient_Estimate.cypher](./Community_Detection/Community_Detection_10a_LocalClusteringCoefficient_Estimate.cypher) | Community_Detection | Community Detection - Local Clustering Coefficient - Estimate |
+| [Community_Detection_10b_LocalClusteringCoefficient_Statistics.cypher](./Community_Detection/Community_Detection_10b_LocalClusteringCoefficient_Statistics.cypher) | Community_Detection | Community Detection - Local Clustering Coefficient - Statistics |
+| [Community_Detection_10c_LocalClusteringCoefficient_Mutate.cypher](./Community_Detection/Community_Detection_10c_LocalClusteringCoefficient_Mutate.cypher) | Community_Detection | Community Detection - Local Clustering Coefficient - Mutate |
+| [Community_Detection_10d_LocalClusteringCoefficient_Stream.cypher](./Community_Detection/Community_Detection_10d_LocalClusteringCoefficient_Stream.cypher) | Community_Detection | Community Detection - Local Clustering Coefficient - Stream |
+| [Community_Detection_10d_LocalClusteringCoefficient_Stream_Aggregated.cypher](./Community_Detection/Community_Detection_10d_LocalClusteringCoefficient_Stream_Aggregated.cypher) | Community_Detection | Community Detection - Local Clustering Coefficient - Stream Aggregated |
+| [Community_Detection_10e_LocalClusteringCoefficient_Write.cypher](./Community_Detection/Community_Detection_10e_LocalClusteringCoefficient_Write.cypher) | Community_Detection | Community Detection - Local Clustering Coefficient - Write |
 | [Community_Detection_1a_Louvain_Estimate.cypher](./Community_Detection/Community_Detection_1a_Louvain_Estimate.cypher) | Community_Detection | Community Detection Louvain Estimate Memory |
 | [Community_Detection_1b_Louvain_Statistics.cypher](./Community_Detection/Community_Detection_1b_Louvain_Statistics.cypher) | Community_Detection | Community Detection Louvain Statistics |
 | [Community_Detection_1c_Louvain_Mutate.cypher](./Community_Detection/Community_Detection_1c_Louvain_Mutate.cypher) | Community_Detection | Community Detection Louvain Mutate |
@@ -284,9 +290,15 @@ Script | Directory | Description
 | [Effective_Method_Line_Count_Distribution.cypher](./Overview/Effective_Method_Line_Count_Distribution.cypher) | Overview | Effective Method Line Count Distribution |
 | [Effective_lines_of_method_code_per_package.cypher](./Overview/Effective_lines_of_method_code_per_package.cypher) | Overview | Effective lines of method code per package |
 | [Effective_lines_of_method_code_per_type.cypher](./Overview/Effective_lines_of_method_code_per_type.cypher) | Overview | Effective lines of method code per type |
+| [Node_label_combination_count.cypher](./Overview/Node_label_combination_count.cypher) | Overview | Node count for each label combination. Sums up to the total number of nodes. |
+| [Node_label_count.cypher](./Overview/Node_label_count.cypher) | Overview | Node count for each label separate. Doesn_t sum up to the number of total labels since one node can have multiple labels. |
+| [Node_labels_and_their_relationships.cypher](./Overview/Node_labels_and_their_relationships.cypher) | Overview | List node labels and their relationship types, their count and their density. |
+| [Number_of_elements_per_module_for_Typescript.cypher](./Overview/Number_of_elements_per_module_for_Typescript.cypher) | Overview | Number of elements per module for Typescript |
 | [Number_of_packages_per_artifact.cypher](./Overview/Number_of_packages_per_artifact.cypher) | Overview | Number of packages per artifact |
 | [Number_of_types_per_artifact.cypher](./Overview/Number_of_types_per_artifact.cypher) | Overview | Number of types per artifact |
 | [Overview_size.cypher](./Overview/Overview_size.cypher) | Overview | Overview size |
+| [Overview_size_for_Typescript.cypher](./Overview/Overview_size_for_Typescript.cypher) | Overview | Overview size for Typescript |
+| [Relationship_type_count.cypher](./Overview/Relationship_type_count.cypher) | Overview | Relationship count for each type separate. Sums up to the total number of relationships (100%). |
 | [Words_for_Wordcloud.cypher](./Overview/Words_for_Wordcloud.cypher) | Overview | Words for Wordcloud |
 | [Words_for_universal_Wordcloud.cypher](./Overview/Words_for_universal_Wordcloud.cypher) | Overview | Words for universal Wordcloud |
 | [Path_Finding_1_Create_Projection.cypher](./Path_Finding/Path_Finding_1_Create_Projection.cypher) | Path_Finding | Path Finding 1 Create Projection |
