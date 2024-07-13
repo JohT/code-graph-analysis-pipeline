@@ -322,6 +322,41 @@ calculateCommunityMetrics() {
     # gds.modularity.stream ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 100
 }
 
+# Calculates the Local Clustering Coefficient for each node in the projected graph.
+# It describes the likelihood that the neighbors of a node are also connected.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+calculateLocalClusteringCoefficient() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=communityLocalClusteringCoefficient" 
+    local writeLabelName="dependencies_projection_write_label=MaximumKCut" 
+
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_10a_LocalClusteringCoefficient_Estimate.cypher" "${@}" "${writePropertyName}"
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_10c_LocalClusteringCoefficient_Mutate.cypher" "${@}" "${writePropertyName}"
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_10d_LocalClusteringCoefficient_Stream_Aggregated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Local_Clustering_Coefficient_Aggregated.csv"
+    #execute_cypher "${PROJECTION_CYPHER_DIR}/Community_Detection_10d_LocalClusteringCoefficient_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Local_Clustering_Coefficient.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+}
+
 # Write modularity for Leiden communities
 # 
 # Required Parameters:
@@ -366,6 +401,7 @@ detectCommunities() {
     time detectCommunitiesWithLeiden "${@}"
     time detectCommunitiesWithKCoreDecomposition "${@}"
     time detectCommunitiesWithApproximateMaximumKCut "${@}"
+    time calculateLocalClusteringCoefficient "${@}"
     compareCommunityDetectionResults "${@}"
     listAllResults "${@}"
 }

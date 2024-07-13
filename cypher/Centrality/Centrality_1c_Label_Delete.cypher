@@ -1,7 +1,7 @@
 // Centrality Label Delete
 
   CALL db.labels() YIELD label
- WHERE label = 'Top' + apoc.text.capitalize($dependencies_projection_write_property)
+ WHERE label = 'Mark4Top' + apoc.text.capitalize($dependencies_projection_write_property)
   WITH collect(label) AS selectedLabels
  MATCH (member)
  WHERE $dependencies_projection_node IN LABELS(member) 

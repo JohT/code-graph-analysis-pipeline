@@ -5,7 +5,7 @@
    AND $dependencies_projection_node IN LABELS(member) 
   WITH collect(member)            AS members
       ,count(DISTINCT member)     AS memberCount
-      ,$dependencies_projection_node + $dependencies_projection_write_label + toString(member[$dependencies_projection_write_property]) AS labelName
+      ,'Mark4' + $dependencies_projection_node + $dependencies_projection_write_label + toString(member[$dependencies_projection_write_property]) AS labelName
  WHERE memberCount > 1
 UNWIND members AS member
   CALL apoc.create.addLabels(member, [labelName]) YIELD node
