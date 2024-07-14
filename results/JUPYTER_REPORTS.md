@@ -77,7 +77,7 @@ Report | Analysis | Description
 | [ObjectOrientedDesignMetricsJava.md](./AxonFramework-4.9.3/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) | AxonFramework-4.9.3 | Object Oriented Design Quality Metrics |
 | [OverviewGeneral.md](./AxonFramework-4.9.3/overview-general/OverviewGeneral.md) | AxonFramework-4.9.3 | Overview in General |
 | [OverviewJava.md](./AxonFramework-4.9.3/overview-java/OverviewJava.md) | AxonFramework-4.9.3 | Overview for Java |
-| [VisibilityMetricsJava.md](./AxonFramework-4.9.3/visibility-metrics-java/VisibilityMetricsJava.md) | AxonFramework-4.9.3 | Visibility Metrics |
+| [VisibilityMetricsJava.md](./AxonFramework-4.9.3/visibility-metrics-java/VisibilityMetricsJava.md) | AxonFramework-4.9.3 | Visibility Metrics for Java |
 | [Wordcloud.md](./AxonFramework-4.9.3/wordcloud/Wordcloud.md) | AxonFramework-4.9.3 | Wordcloud |
 | [CSV_REPORTS.md](./CSV_REPORTS.md) |  | CSV Cypher Query Reports Reference |
 | [IMAGES.md](./IMAGES.md) |  | Image Reference |
