@@ -333,5 +333,7 @@ Script | Directory | Description
 | [ValidateJavaPackageDependencies.cypher](./Validation/ValidateJavaPackageDependencies.cypher) | Validation | Check if there is at least one Java Packagte dependency. |
 | [ValidateJavaTypes.cypher](./Validation/ValidateJavaTypes.cypher) | Validation | Check if there is at least one Java Method, its Type and an Artifact it belongs to. |
 | [ValidateTypescriptModuleDependencies.cypher](./Validation/ValidateTypescriptModuleDependencies.cypher) | Validation | Check if there is at least one Typescript Module dependency. |
+| [Global_relative_visibility_statistics_for_elements_for_Typescript.cypher](./Visibility/Global_relative_visibility_statistics_for_elements_for_Typescript.cypher) | Visibility | Global relative visibility statistics for elements for Typescript |
 | [Global_relative_visibility_statistics_for_types.cypher](./Visibility/Global_relative_visibility_statistics_for_types.cypher) | Visibility | Global relative visibility statistics for types |
+| [Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher](./Visibility/Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher) | Visibility | Relative visibility: exported elements to all elements per module |
 | [Relative_visibility_public_types_to_all_types_per_package.cypher](./Visibility/Relative_visibility_public_types_to_all_types_per_package.cypher) | Visibility | Relative visibility: public types to all types per package |
