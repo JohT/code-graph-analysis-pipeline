@@ -282,4 +282,6 @@ Image  | Analysis |
 | [OverviewTypescript_23_1.png](./react-router-6.24.0/overview-typescript/OverviewTypescript_files/OverviewTypescript_23_1.png) | react-router-6.24.0 |
 | [OverviewTypescript_25_1.png](./react-router-6.24.0/overview-typescript/OverviewTypescript_files/OverviewTypescript_25_1.png) | react-router-6.24.0 |
 | [OverviewTypescript_27_1.png](./react-router-6.24.0/overview-typescript/OverviewTypescript_files/OverviewTypescript_27_1.png) | react-router-6.24.0 |
+| [VisibilityMetricsTypescript_17_2.png](./react-router-6.24.0/visibility-metrics-typescript/VisibilityMetricsTypescript_files/VisibilityMetricsTypescript_17_2.png) | react-router-6.24.0 |
+| [VisibilityMetricsTypescript_24_2.png](./react-router-6.24.0/visibility-metrics-typescript/VisibilityMetricsTypescript_files/VisibilityMetricsTypescript_24_2.png) | react-router-6.24.0 |
 | [Wordcloud_10_1.png](./react-router-6.24.0/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | react-router-6.24.0 |

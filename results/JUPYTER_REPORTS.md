@@ -106,4 +106,5 @@ Report | Analysis | Description
 | [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.24.0/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.24.0 | Object Oriented Design Quality Metrics |
 | [OverviewGeneral.md](./react-router-6.24.0/overview-general/OverviewGeneral.md) | react-router-6.24.0 | Overview in General |
 | [OverviewTypescript.md](./react-router-6.24.0/overview-typescript/OverviewTypescript.md) | react-router-6.24.0 | Overview for Typescript |
+| [VisibilityMetricsTypescript.md](./react-router-6.24.0/visibility-metrics-typescript/VisibilityMetricsTypescript.md) | react-router-6.24.0 | Visibility Metrics for Typescript |
 | [Wordcloud.md](./react-router-6.24.0/wordcloud/Wordcloud.md) | react-router-6.24.0 | Wordcloud |
