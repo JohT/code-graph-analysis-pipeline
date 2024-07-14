@@ -38,8 +38,13 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 # Local Constants
 VISIBILITY_CYPHER_DIR="${CYPHER_DIR}/Visibility"
 
+# For Java
 execute_cypher "${VISIBILITY_CYPHER_DIR}/Global_relative_visibility_statistics_for_types.cypher" > "${FULL_REPORT_DIRECTORY}/RelativeVisibilityPerArtifact.csv"
 execute_cypher "${VISIBILITY_CYPHER_DIR}/Relative_visibility_public_types_to_all_types_per_package.cypher" > "${FULL_REPORT_DIRECTORY}/RelativeVisibilityPerPackage.csv"
+
+# For TypeScript
+execute_cypher "${VISIBILITY_CYPHER_DIR}/Global_relative_visibility_statistics_for_elements_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/RelativeVisibilityPerTypescriptProject.csv"
+execute_cypher "${VISIBILITY_CYPHER_DIR}/Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/RelativeVisibilityPerTypescriptModule.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
