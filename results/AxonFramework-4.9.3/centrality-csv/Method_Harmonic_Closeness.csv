@@ -2,7 +2,7 @@
 "void assertNonNull(java.lang.Object,java.lang.String)","assertNonNull","centralityHarmonic",0.2748049052396878,""
 "void assertThat(java.lang.Object,java.util.function.Predicate,java.lang.String)","assertThat","centralityHarmonic",0.1855490523968785,""
 "void assertThat(java.lang.Object,java.util.function.Predicate,java.util.function.Supplier)","assertThat","centralityHarmonic",0.12552954292084723,""
-"void state(boolean,java.util.function.Supplier)","state","centralityHarmonic",0.029682274247491643,""
+"void state(boolean,java.util.function.Supplier)","state","centralityHarmonic",0.02968227424749164,""
 "void assertNonEmpty(java.lang.String,java.lang.String)","assertNonEmpty","centralityHarmonic",0.029264214046822744,""
 "void closeQuietly(java.sql.Connection)","closeQuietly","centralityHarmonic",0.022087513935340024,""
 "void update(java.util.function.Function)","update","centralityHarmonic",0.020903010033444816,""

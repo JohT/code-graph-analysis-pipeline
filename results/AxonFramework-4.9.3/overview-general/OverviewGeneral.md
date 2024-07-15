@@ -20,7 +20,7 @@ The total list would sum up to the total number of labels (100%).
 
 The whole table can be found in the CSV report `Node_label_combination_count`.
 
-    Total number of nodes: 68813
+    Total number of nodes: 68812
 
 
 
@@ -41,181 +41,181 @@ The whole table can be found in the CSV report `Node_label_combination_count`.
       <th>0</th>
       <td>[Java, ByteCode, Parameter]</td>
       <td>11184</td>
-      <td>16.252743</td>
+      <td>16.252979</td>
     </tr>
     <tr>
       <th>1</th>
       <td>[Java, ByteCode, Member, Method]</td>
-      <td>10615</td>
-      <td>15.425864</td>
+      <td>10617</td>
+      <td>15.428995</td>
     </tr>
     <tr>
       <th>2</th>
       <td>[File, Git, Log]</td>
       <td>7804</td>
-      <td>11.340880</td>
+      <td>11.341045</td>
     </tr>
     <tr>
       <th>3</th>
       <td>[Commit, Git, Log]</td>
       <td>7618</td>
-      <td>11.070583</td>
+      <td>11.070743</td>
     </tr>
     <tr>
       <th>4</th>
       <td>[Java, ByteCode, Bound, ParameterizedType]</td>
       <td>6537</td>
-      <td>9.499658</td>
+      <td>9.499797</td>
     </tr>
     <tr>
       <th>5</th>
       <td>[Java, ByteCode, Bound]</td>
       <td>6308</td>
-      <td>9.166873</td>
+      <td>9.167006</td>
     </tr>
     <tr>
       <th>6</th>
       <td>[Java, ByteCode, Member, Field]</td>
       <td>2846</td>
-      <td>4.135846</td>
+      <td>4.135907</td>
     </tr>
     <tr>
       <th>7</th>
       <td>[Java, ByteCode, Bound, WildcardType]</td>
       <td>2722</td>
-      <td>3.955648</td>
+      <td>3.955705</td>
     </tr>
     <tr>
       <th>8</th>
       <td>[Java, Value, ByteCode, Annotation]</td>
       <td>2225</td>
-      <td>3.233401</td>
+      <td>3.233448</td>
     </tr>
     <tr>
       <th>9</th>
       <td>[Java, ByteCode, Member, Constructor, Method]</td>
-      <td>1649</td>
-      <td>2.396350</td>
+      <td>1646</td>
+      <td>2.392025</td>
     </tr>
     <tr>
       <th>10</th>
       <td>[Xml, Element]</td>
       <td>1534</td>
-      <td>2.229230</td>
+      <td>2.229262</td>
     </tr>
     <tr>
       <th>11</th>
       <td>[Xml, Text]</td>
       <td>1016</td>
-      <td>1.476465</td>
+      <td>1.476487</td>
     </tr>
     <tr>
       <th>12</th>
       <td>[Java, ByteCode, Bound, TypeVariable]</td>
       <td>988</td>
-      <td>1.435775</td>
+      <td>1.435796</td>
     </tr>
     <tr>
       <th>13</th>
       <td>[Java, ByteCode, Member, Method, Lambda]</td>
       <td>767</td>
-      <td>1.114615</td>
+      <td>1.114631</td>
     </tr>
     <tr>
       <th>14</th>
       <td>[Type, File, Java, ByteCode, Class]</td>
       <td>699</td>
-      <td>1.015796</td>
+      <td>1.015811</td>
     </tr>
     <tr>
       <th>15</th>
       <td>[Type, File, Java, ByteCode, JavaType]</td>
       <td>596</td>
-      <td>0.866115</td>
+      <td>0.866128</td>
     </tr>
     <tr>
       <th>16</th>
       <td>[Type, File, Java, ByteCode, ResolvedDuplicate...</td>
       <td>542</td>
-      <td>0.787642</td>
+      <td>0.787653</td>
     </tr>
     <tr>
       <th>17</th>
       <td>[Java, ByteCode, GenericDeclaration, Member, M...</td>
       <td>525</td>
-      <td>0.762937</td>
+      <td>0.762948</td>
     </tr>
     <tr>
       <th>18</th>
       <td>[Java, Value, ByteCode, Primitive]</td>
       <td>467</td>
-      <td>0.678651</td>
+      <td>0.678661</td>
     </tr>
     <tr>
       <th>19</th>
       <td>[Author, Git, Log]</td>
       <td>260</td>
-      <td>0.377836</td>
+      <td>0.377841</td>
     </tr>
     <tr>
       <th>20</th>
       <td>[Type, File, Java, ByteCode, Class, GenericDec...</td>
       <td>215</td>
-      <td>0.312441</td>
+      <td>0.312446</td>
     </tr>
     <tr>
       <th>21</th>
       <td>[Type, File, Java, ByteCode, ExternalType]</td>
       <td>194</td>
-      <td>0.281923</td>
+      <td>0.281928</td>
     </tr>
     <tr>
       <th>22</th>
       <td>[Type, File, Java, ByteCode, Interface]</td>
       <td>166</td>
-      <td>0.241233</td>
+      <td>0.241237</td>
     </tr>
     <tr>
       <th>23</th>
       <td>[Java, ByteCode, Bound, GenericArrayType]</td>
       <td>144</td>
-      <td>0.209263</td>
+      <td>0.209266</td>
     </tr>
     <tr>
       <th>24</th>
       <td>[Java, Value, ByteCode, Enum]</td>
       <td>142</td>
-      <td>0.206356</td>
+      <td>0.206359</td>
     </tr>
     <tr>
       <th>25</th>
       <td>[Maven, Dependency]</td>
       <td>116</td>
-      <td>0.168573</td>
+      <td>0.168575</td>
     </tr>
     <tr>
       <th>26</th>
       <td>[Value, Property]</td>
       <td>109</td>
-      <td>0.158400</td>
+      <td>0.158403</td>
     </tr>
     <tr>
       <th>27</th>
       <td>[Package, File, Directory, Java]</td>
       <td>107</td>
-      <td>0.155494</td>
+      <td>0.155496</td>
     </tr>
     <tr>
       <th>28</th>
       <td>[Value, Array]</td>
       <td>104</td>
-      <td>0.151134</td>
+      <td>0.151136</td>
     </tr>
     <tr>
       <th>29</th>
       <td>[Value, ManifestEntry]</td>
       <td>91</td>
-      <td>0.132242</td>
+      <td>0.132244</td>
     </tr>
   </tbody>
 </table>
@@ -337,13 +337,13 @@ Lists the 30 label combinations with the lowest number of nodes until they reach
       <th>13</th>
       <td>[Maven, Plugin]</td>
       <td>16</td>
-      <td>0.023251</td>
+      <td>0.023252</td>
     </tr>
     <tr>
       <th>14</th>
       <td>[Maven, Configuration]</td>
       <td>16</td>
-      <td>0.023251</td>
+      <td>0.023252</td>
     </tr>
     <tr>
       <th>15</th>
@@ -355,31 +355,31 @@ Lists the 30 label combinations with the lowest number of nodes until they reach
       <th>16</th>
       <td>[Type, File, Java, ByteCode, PrimitiveType]</td>
       <td>21</td>
-      <td>0.030517</td>
+      <td>0.030518</td>
     </tr>
     <tr>
       <th>17</th>
       <td>[Xml, Namespace]</td>
       <td>24</td>
-      <td>0.034877</td>
+      <td>0.034878</td>
     </tr>
     <tr>
       <th>18</th>
       <td>[Type, File, Java, ByteCode, Enum]</td>
       <td>25</td>
-      <td>0.036330</td>
+      <td>0.036331</td>
     </tr>
     <tr>
       <th>19</th>
       <td>[Java, Value, ByteCode, Class]</td>
       <td>28</td>
-      <td>0.040690</td>
+      <td>0.040691</td>
     </tr>
     <tr>
       <th>20</th>
       <td>[File, Directory]</td>
       <td>29</td>
-      <td>0.042143</td>
+      <td>0.042144</td>
     </tr>
     <tr>
       <th>21</th>
@@ -391,49 +391,49 @@ Lists the 30 label combinations with the lowest number of nodes until they reach
       <th>22</th>
       <td>[Type, File, Java, ByteCode, ExternalAnnotatio...</td>
       <td>65</td>
-      <td>0.094459</td>
+      <td>0.094460</td>
     </tr>
     <tr>
       <th>23</th>
       <td>[Artifact, Maven]</td>
       <td>69</td>
-      <td>0.100272</td>
+      <td>0.100273</td>
     </tr>
     <tr>
       <th>24</th>
       <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
       <td>79</td>
-      <td>0.114804</td>
+      <td>0.114806</td>
     </tr>
     <tr>
       <th>25</th>
       <td>[Value, ManifestEntry]</td>
       <td>91</td>
-      <td>0.132242</td>
+      <td>0.132244</td>
     </tr>
     <tr>
       <th>26</th>
       <td>[Value, Array]</td>
       <td>104</td>
-      <td>0.151134</td>
+      <td>0.151136</td>
     </tr>
     <tr>
       <th>27</th>
       <td>[Package, File, Directory, Java]</td>
       <td>107</td>
-      <td>0.155494</td>
+      <td>0.155496</td>
     </tr>
     <tr>
       <th>28</th>
       <td>[Value, Property]</td>
       <td>109</td>
-      <td>0.158400</td>
+      <td>0.158403</td>
     </tr>
     <tr>
       <th>29</th>
       <td>[Maven, Dependency]</td>
       <td>116</td>
-      <td>0.168573</td>
+      <td>0.168575</td>
     </tr>
   </tbody>
 </table>
@@ -478,242 +478,242 @@ Helps to identify commonly used labels.
     <tr>
       <th>0</th>
       <td>Java</td>
-      <td>49940</td>
-      <td>72.573496</td>
+      <td>49939</td>
+      <td>72.573098</td>
     </tr>
     <tr>
       <th>1</th>
       <td>ByteCode</td>
-      <td>49798</td>
-      <td>72.367140</td>
+      <td>49797</td>
+      <td>72.366738</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Bound</td>
       <td>16699</td>
-      <td>24.267217</td>
+      <td>24.267570</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Member</td>
-      <td>16405</td>
-      <td>23.839972</td>
+      <td>16404</td>
+      <td>23.838865</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Git</td>
       <td>15682</td>
-      <td>22.789299</td>
+      <td>22.789630</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Log</td>
       <td>15682</td>
-      <td>22.789299</td>
+      <td>22.789630</td>
     </tr>
     <tr>
       <th>6</th>
       <td>Method</td>
-      <td>13559</td>
-      <td>19.704126</td>
+      <td>13558</td>
+      <td>19.702959</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Parameter</td>
       <td>11184</td>
-      <td>16.252743</td>
+      <td>16.252979</td>
     </tr>
     <tr>
       <th>8</th>
       <td>File</td>
       <td>10623</td>
-      <td>15.437490</td>
+      <td>15.437714</td>
     </tr>
     <tr>
       <th>9</th>
       <td>Commit</td>
       <td>7618</td>
-      <td>11.070583</td>
+      <td>11.070743</td>
     </tr>
     <tr>
       <th>10</th>
       <td>ParameterizedType</td>
       <td>6537</td>
-      <td>9.499658</td>
+      <td>9.499797</td>
     </tr>
     <tr>
       <th>11</th>
       <td>Value</td>
       <td>3166</td>
-      <td>4.600875</td>
+      <td>4.600942</td>
     </tr>
     <tr>
       <th>12</th>
       <td>Field</td>
       <td>2846</td>
-      <td>4.135846</td>
+      <td>4.135907</td>
     </tr>
     <tr>
       <th>13</th>
       <td>WildcardType</td>
       <td>2722</td>
-      <td>3.955648</td>
+      <td>3.955705</td>
     </tr>
     <tr>
       <th>14</th>
       <td>Type</td>
       <td>2648</td>
-      <td>3.848110</td>
+      <td>3.848166</td>
     </tr>
     <tr>
       <th>15</th>
       <td>Xml</td>
       <td>2592</td>
-      <td>3.766730</td>
+      <td>3.766785</td>
     </tr>
     <tr>
       <th>16</th>
       <td>Annotation</td>
       <td>2265</td>
-      <td>3.291529</td>
+      <td>3.291577</td>
     </tr>
     <tr>
       <th>17</th>
       <td>Constructor</td>
-      <td>1652</td>
-      <td>2.400709</td>
+      <td>1649</td>
+      <td>2.396384</td>
     </tr>
     <tr>
       <th>18</th>
       <td>Element</td>
       <td>1534</td>
-      <td>2.229230</td>
+      <td>2.229262</td>
     </tr>
     <tr>
       <th>19</th>
       <td>Text</td>
       <td>1016</td>
-      <td>1.476465</td>
+      <td>1.476487</td>
     </tr>
     <tr>
       <th>20</th>
       <td>TypeVariable</td>
       <td>988</td>
-      <td>1.435775</td>
+      <td>1.435796</td>
     </tr>
     <tr>
       <th>21</th>
       <td>Class</td>
       <td>942</td>
-      <td>1.368927</td>
+      <td>1.368947</td>
     </tr>
     <tr>
       <th>22</th>
       <td>GenericDeclaration</td>
       <td>822</td>
-      <td>1.194542</td>
+      <td>1.194559</td>
     </tr>
     <tr>
       <th>23</th>
       <td>Lambda</td>
       <td>767</td>
-      <td>1.114615</td>
+      <td>1.114631</td>
     </tr>
     <tr>
       <th>24</th>
       <td>JavaType</td>
       <td>596</td>
-      <td>0.866115</td>
+      <td>0.866128</td>
     </tr>
     <tr>
       <th>25</th>
       <td>ResolvedDuplicateType</td>
       <td>542</td>
-      <td>0.787642</td>
+      <td>0.787653</td>
     </tr>
     <tr>
       <th>26</th>
       <td>Primitive</td>
       <td>467</td>
-      <td>0.678651</td>
+      <td>0.678661</td>
     </tr>
     <tr>
       <th>27</th>
       <td>Author</td>
       <td>260</td>
-      <td>0.377836</td>
+      <td>0.377841</td>
     </tr>
     <tr>
       <th>28</th>
       <td>ExternalType</td>
       <td>259</td>
-      <td>0.376382</td>
+      <td>0.376388</td>
     </tr>
     <tr>
       <th>29</th>
       <td>Maven</td>
       <td>252</td>
-      <td>0.366210</td>
+      <td>0.366215</td>
     </tr>
     <tr>
       <th>30</th>
       <td>Interface</td>
       <td>245</td>
-      <td>0.356037</td>
+      <td>0.356043</td>
     </tr>
     <tr>
       <th>31</th>
       <td>Enum</td>
       <td>167</td>
-      <td>0.242687</td>
+      <td>0.242690</td>
     </tr>
     <tr>
       <th>32</th>
       <td>GenericArrayType</td>
       <td>144</td>
-      <td>0.209263</td>
+      <td>0.209266</td>
     </tr>
     <tr>
       <th>33</th>
       <td>Directory</td>
       <td>136</td>
-      <td>0.197637</td>
+      <td>0.197640</td>
     </tr>
     <tr>
       <th>34</th>
       <td>Dependency</td>
       <td>116</td>
-      <td>0.168573</td>
+      <td>0.168575</td>
     </tr>
     <tr>
       <th>35</th>
       <td>Property</td>
       <td>109</td>
-      <td>0.158400</td>
+      <td>0.158403</td>
     </tr>
     <tr>
       <th>36</th>
       <td>Package</td>
       <td>107</td>
-      <td>0.155494</td>
+      <td>0.155496</td>
     </tr>
     <tr>
       <th>37</th>
       <td>Array</td>
       <td>104</td>
-      <td>0.151134</td>
+      <td>0.151136</td>
     </tr>
     <tr>
       <th>38</th>
       <td>ManifestEntry</td>
       <td>91</td>
-      <td>0.132242</td>
+      <td>0.132244</td>
     </tr>
     <tr>
       <th>39</th>
       <td>Artifact</td>
       <td>75</td>
-      <td>0.108991</td>
+      <td>0.108993</td>
     </tr>
   </tbody>
 </table>
@@ -742,7 +742,7 @@ Shows the 40 labels with the highest number of nodes.
 Lists the 30 relationship types with the highest number of occurrences.
 The whole table can be found in the CSV report `Relationship_type_count`.
 
-    Total number of relationships: 232065
+    Total number of relationships: 232066
 
 
 
@@ -763,181 +763,181 @@ The whole table can be found in the CSV report `Relationship_type_count`.
       <th>0</th>
       <td>CONTAINS_CHANGED</td>
       <td>45786</td>
-      <td>19.729817</td>
+      <td>19.729732</td>
     </tr>
     <tr>
       <th>1</th>
       <td>INVOKES</td>
       <td>29614</td>
-      <td>12.761080</td>
+      <td>12.761025</td>
     </tr>
     <tr>
       <th>2</th>
       <td>OF_TYPE</td>
       <td>17618</td>
-      <td>7.591838</td>
+      <td>7.591806</td>
     </tr>
     <tr>
       <th>3</th>
       <td>DEPENDS_ON</td>
       <td>17426</td>
-      <td>7.509103</td>
+      <td>7.509071</td>
     </tr>
     <tr>
       <th>4</th>
       <td>DECLARES</td>
-      <td>16767</td>
-      <td>7.225131</td>
+      <td>16766</td>
+      <td>7.224669</td>
     </tr>
     <tr>
       <th>5</th>
       <td>OF_RAW_TYPE</td>
       <td>15183</td>
-      <td>6.542564</td>
+      <td>6.542535</td>
     </tr>
     <tr>
       <th>6</th>
       <td>HAS</td>
       <td>11884</td>
-      <td>5.120979</td>
+      <td>5.120957</td>
     </tr>
     <tr>
       <th>7</th>
       <td>RETURNS</td>
       <td>10623</td>
-      <td>4.577597</td>
+      <td>4.577577</td>
     </tr>
     <tr>
       <th>8</th>
       <td>READS</td>
       <td>7684</td>
-      <td>3.311141</td>
+      <td>3.311127</td>
     </tr>
     <tr>
       <th>9</th>
       <td>AUTHORED</td>
       <td>7618</td>
-      <td>3.282701</td>
+      <td>3.282687</td>
     </tr>
     <tr>
       <th>10</th>
       <td>HAS_ACTUAL_TYPE_ARGUMENT</td>
       <td>7495</td>
-      <td>3.229699</td>
+      <td>3.229685</td>
     </tr>
     <tr>
       <th>11</th>
       <td>HAS_PARENT</td>
       <td>6162</td>
-      <td>2.655291</td>
+      <td>2.655279</td>
     </tr>
     <tr>
       <th>12</th>
       <td>OF_GENERIC_TYPE</td>
       <td>5346</td>
-      <td>2.303665</td>
+      <td>2.303655</td>
     </tr>
     <tr>
       <th>13</th>
       <td>SIMILAR</td>
       <td>3416</td>
-      <td>1.472001</td>
+      <td>1.471995</td>
     </tr>
     <tr>
       <th>14</th>
       <td>RETURNS_GENERIC</td>
       <td>3250</td>
-      <td>1.400470</td>
+      <td>1.400464</td>
     </tr>
     <tr>
       <th>15</th>
       <td>WRITES</td>
       <td>3065</td>
-      <td>1.320751</td>
+      <td>1.320745</td>
     </tr>
     <tr>
       <th>16</th>
       <td>CONTAINS</td>
       <td>3027</td>
-      <td>1.304376</td>
+      <td>1.304370</td>
     </tr>
     <tr>
       <th>17</th>
       <td>RESOLVES_TO</td>
-      <td>2908</td>
-      <td>1.253097</td>
+      <td>2910</td>
+      <td>1.253954</td>
     </tr>
     <tr>
       <th>18</th>
       <td>ANNOTATED_BY</td>
       <td>2213</td>
-      <td>0.953612</td>
+      <td>0.953608</td>
     </tr>
     <tr>
       <th>19</th>
       <td>HAS_FIRST_CHILD</td>
       <td>1534</td>
-      <td>0.661022</td>
+      <td>0.661019</td>
     </tr>
     <tr>
       <th>20</th>
       <td>HAS_LAST_CHILD</td>
       <td>1534</td>
-      <td>0.661022</td>
+      <td>0.661019</td>
     </tr>
     <tr>
       <th>21</th>
       <td>HAS_ELEMENT</td>
       <td>1522</td>
-      <td>0.655851</td>
+      <td>0.655848</td>
     </tr>
     <tr>
       <th>22</th>
       <td>REQUIRES</td>
       <td>1424</td>
-      <td>0.613621</td>
+      <td>0.613619</td>
     </tr>
     <tr>
       <th>23</th>
       <td>HAS_UPPER_BOUND</td>
       <td>1405</td>
-      <td>0.605434</td>
+      <td>0.605431</td>
     </tr>
     <tr>
       <th>24</th>
       <td>EXTENDS</td>
       <td>1267</td>
-      <td>0.545968</td>
+      <td>0.545965</td>
     </tr>
     <tr>
       <th>25</th>
       <td>HAS_TEXT</td>
       <td>1016</td>
-      <td>0.437808</td>
+      <td>0.437806</td>
     </tr>
     <tr>
       <th>26</th>
       <td>HAS_SIBLING</td>
       <td>1004</td>
-      <td>0.432637</td>
+      <td>0.432636</td>
     </tr>
     <tr>
       <th>27</th>
       <td>DECLARES_TYPE_PARAMETER</td>
       <td>971</td>
-      <td>0.418417</td>
+      <td>0.418415</td>
     </tr>
     <tr>
       <th>28</th>
       <td>IMPLEMENTS</td>
       <td>707</td>
-      <td>0.304656</td>
+      <td>0.304655</td>
     </tr>
     <tr>
       <th>29</th>
       <td>THROWS</td>
       <td>633</td>
-      <td>0.272768</td>
+      <td>0.272767</td>
     </tr>
   </tbody>
 </table>
@@ -1089,7 +1089,7 @@ Lists the 30 relationships type with the lowest number of occurrences up to 0.5%
       <th>18</th>
       <td>HAS_COMPONENT_TYPE</td>
       <td>144</td>
-      <td>0.062052</td>
+      <td>0.062051</td>
     </tr>
     <tr>
       <th>19</th>
@@ -1101,7 +1101,7 @@ Lists the 30 relationships type with the lowest number of occurrences up to 0.5%
       <th>20</th>
       <td>IMPLEMENTS_GENERIC</td>
       <td>324</td>
-      <td>0.139616</td>
+      <td>0.139615</td>
     </tr>
     <tr>
       <th>21</th>
@@ -1119,31 +1119,31 @@ Lists the 30 relationships type with the lowest number of occurrences up to 0.5%
       <th>23</th>
       <td>THROWS</td>
       <td>633</td>
-      <td>0.272768</td>
+      <td>0.272767</td>
     </tr>
     <tr>
       <th>24</th>
       <td>IMPLEMENTS</td>
       <td>707</td>
-      <td>0.304656</td>
+      <td>0.304655</td>
     </tr>
     <tr>
       <th>25</th>
       <td>DECLARES_TYPE_PARAMETER</td>
       <td>971</td>
-      <td>0.418417</td>
+      <td>0.418415</td>
     </tr>
     <tr>
       <th>26</th>
       <td>HAS_SIBLING</td>
       <td>1004</td>
-      <td>0.432637</td>
+      <td>0.432636</td>
     </tr>
     <tr>
       <th>27</th>
       <td>HAS_TEXT</td>
       <td>1016</td>
-      <td>0.437808</td>
+      <td>0.437806</td>
     </tr>
   </tbody>
 </table>
@@ -1204,10 +1204,10 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>[Java, ByteCode, Member, Method]</td>
       <td>INVOKES</td>
       <td>[Java, ByteCode, Member, Method]</td>
-      <td>18173</td>
-      <td>10535</td>
-      <td>10535</td>
-      <td>0.016374</td>
+      <td>18177</td>
+      <td>10537</td>
+      <td>10537</td>
+      <td>0.016371</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1225,9 +1225,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>HAS</td>
       <td>[Java, ByteCode, Parameter]</td>
       <td>7303</td>
-      <td>10535</td>
+      <td>10537</td>
       <td>11184</td>
-      <td>0.006198</td>
+      <td>0.006197</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1235,9 +1235,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>READS</td>
       <td>[Java, ByteCode, Member, Field]</td>
       <td>6939</td>
-      <td>10535</td>
+      <td>10537</td>
       <td>2846</td>
-      <td>0.023143</td>
+      <td>0.023139</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1315,9 +1315,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>WRITES</td>
       <td>[Java, ByteCode, Member, Field]</td>
       <td>1971</td>
-      <td>1649</td>
+      <td>1646</td>
       <td>2846</td>
-      <td>0.041998</td>
+      <td>0.042075</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1325,9 +1325,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>RETURNS</td>
       <td>[Type, File, Java, ByteCode, JavaType]</td>
       <td>1889</td>
-      <td>10535</td>
+      <td>10537</td>
       <td>596</td>
-      <td>0.030085</td>
+      <td>0.030079</td>
     </tr>
     <tr>
       <th>14</th>
@@ -1354,10 +1354,10 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>[Java, ByteCode, Member, Constructor, Method]</td>
       <td>INVOKES</td>
       <td>[Java, ByteCode, Member, Constructor, Method]</td>
-      <td>1746</td>
-      <td>1649</td>
-      <td>1649</td>
-      <td>0.064210</td>
+      <td>1742</td>
+      <td>1646</td>
+      <td>1646</td>
+      <td>0.064297</td>
     </tr>
     <tr>
       <th>17</th>
@@ -1365,9 +1365,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>INVOKES</td>
       <td>[Java, ByteCode, Member, Constructor, Method]</td>
       <td>1724</td>
-      <td>10535</td>
-      <td>1649</td>
-      <td>0.009924</td>
+      <td>10537</td>
+      <td>1646</td>
+      <td>0.009940</td>
     </tr>
     <tr>
       <th>18</th>
@@ -1375,9 +1375,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>HAS</td>
       <td>[Java, ByteCode, Parameter]</td>
       <td>1710</td>
-      <td>1649</td>
+      <td>1646</td>
       <td>11184</td>
-      <td>0.009272</td>
+      <td>0.009289</td>
     </tr>
     <tr>
       <th>19</th>
@@ -1396,8 +1396,8 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>[Java, ByteCode, Member, Method]</td>
       <td>1534</td>
       <td>767</td>
-      <td>10535</td>
-      <td>0.018984</td>
+      <td>10537</td>
+      <td>0.018981</td>
     </tr>
     <tr>
       <th>21</th>
@@ -1405,9 +1405,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>INVOKES</td>
       <td>[Java, ByteCode, Member, Method]</td>
       <td>1531</td>
-      <td>1649</td>
-      <td>10535</td>
-      <td>0.008813</td>
+      <td>1646</td>
+      <td>10537</td>
+      <td>0.008827</td>
     </tr>
     <tr>
       <th>22</th>
@@ -1435,9 +1435,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>RETURNS</td>
       <td>[Type, File, Java, ByteCode, Void]</td>
       <td>1464</td>
-      <td>10535</td>
+      <td>10537</td>
       <td>6</td>
-      <td>2.316089</td>
+      <td>2.315650</td>
     </tr>
     <tr>
       <th>25</th>
@@ -1446,18 +1446,18 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>[Java, ByteCode, Member, Method]</td>
       <td>1277</td>
       <td>596</td>
-      <td>10535</td>
-      <td>0.020338</td>
+      <td>10537</td>
+      <td>0.020334</td>
     </tr>
     <tr>
       <th>26</th>
       <td>[Java, ByteCode, GenericDeclaration, Member, M...</td>
       <td>INVOKES</td>
       <td>[Java, ByteCode, Member, Method]</td>
-      <td>1274</td>
+      <td>1273</td>
       <td>510</td>
-      <td>10535</td>
-      <td>0.023712</td>
+      <td>10537</td>
+      <td>0.023689</td>
     </tr>
     <tr>
       <th>27</th>
@@ -1465,9 +1465,9 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>RETURNS</td>
       <td>[Type, File, Java, ByteCode, Void]</td>
       <td>1221</td>
-      <td>1649</td>
+      <td>1646</td>
       <td>6</td>
-      <td>12.340813</td>
+      <td>12.363305</td>
     </tr>
     <tr>
       <th>28</th>
@@ -1485,7 +1485,7 @@ Lists the 30 node labels and their relationship types with the highest number of
       <td>RETURNS_GENERIC</td>
       <td>[Java, ByteCode, Bound, ParameterizedType]</td>
       <td>1159</td>
-      <td>10535</td>
+      <td>10537</td>
       <td>6537</td>
       <td>0.001683</td>
     </tr>
@@ -1497,8 +1497,8 @@ Lists the 30 node labels and their relationship types with the highest number of
 
 ## Graph Density
 
-    total_number_of_nodes (vertices): 68813
-    total_number_of_relationships (edges): 232065
-    -> total directed graph density: 4.900890199161407e-05
-    -> total directed graph density in percent: 0.004900890199161408
+    total_number_of_nodes (vertices): 68812
+    total_number_of_relationships (edges): 232066
+    -> total directed graph density: 4.9010537633488076e-05
+    -> total directed graph density in percent: 0.004901053763348808
 
