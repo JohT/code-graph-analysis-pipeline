@@ -55,7 +55,7 @@ jobs:
       CI_COMMIT_AUTHOR: ${{ github.event.repository.name }} Continuous Integration
       PROJECT_NAME: react-router
       # Version variable name matches renovate.json configuration entry
-      REACT_ROUTER_VERSION: 6.24.0
+      REACT_ROUTER_VERSION: 6.24.1
 
     steps:
     - name: Checkout GIT Repository
