@@ -1,0 +1,6 @@
+"name","shortName","louvainId","louvainIntermediateIds","leidenId","leidenIntermediateIds","leidenModularity","weaklyConnectedComponentId","labelPropagationId","kCoreDecompositionValue","maximumKCutId","incomingDependencies","outgoingDependencies","Source Cypher File: Community_Detection/Community_Detection_Summary.cypher"
+"./index.ts","react-router",0,"1",0,"1",,0,0,3,1,19,17,""
+"./index.tsx","react-router-dom",0,"1",0,"1",,0,0,3,11,2,146,""
+"./server.tsx","server",1,"4",1,"4",,0,0,3,0,0,40,""
+"./index.tsx","react-router-native",0,"1",0,"1",,0,0,1,0,0,24,""
+"./index.ts","router",1,"4",1,"4",,0,0,3,17,19,0,""

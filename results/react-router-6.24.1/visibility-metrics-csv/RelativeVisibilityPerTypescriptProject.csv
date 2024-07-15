@@ -1,0 +1,4 @@
+"projectPath","all","exported","min","max","average","percentile25","percentile50","percentile75","percentile90","percentile95","percentile99","Source Cypher File: Visibility/Global_relative_visibility_statistics_for_elements_for_Typescript.cypher"
+"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.24.1/source/packages/react-router",6,6,1,1,1,1,1,1,1,1,1,""
+"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.24.1/source/packages/react-router-dom",84,41,0.375,0.5147058823529411,0.44485294117647056,0.4099264705882353,0.44485294117647056,0.47977941176470584,0.5007352941176471,0.5077205882352941,0.5133088235294118,""
+"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.24.1/source/packages/react-router-native",15,12,0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8,""
