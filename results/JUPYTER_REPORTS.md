@@ -108,3 +108,12 @@ Report | Analysis | Description
 | [OverviewTypescript.md](./react-router-6.24.0/overview-typescript/OverviewTypescript.md) | react-router-6.24.0 | Overview for Typescript |
 | [VisibilityMetricsTypescript.md](./react-router-6.24.0/visibility-metrics-typescript/VisibilityMetricsTypescript.md) | react-router-6.24.0 | Visibility Metrics for Typescript |
 | [Wordcloud.md](./react-router-6.24.0/wordcloud/Wordcloud.md) | react-router-6.24.0 | Wordcloud |
+| [DependenciesGraphTypescript.md](./react-router-6.24.1/dependencies-graph-typescript/DependenciesGraphTypescript.md) | react-router-6.24.1 | Artifact Dependencies |
+| [ExternalDependenciesTypescript.md](./react-router-6.24.1/external-dependencies-typescript/ExternalDependenciesTypescript.md) | react-router-6.24.1 | External Dependencies |
+| [InternalDependenciesTypescript.md](./react-router-6.24.1/internal-dependencies-typescript/InternalDependenciesTypescript.md) | react-router-6.24.1 | Internal Dependencies |
+| [NodeEmbeddingsTypescript.md](./react-router-6.24.1/node-embeddings-typescript/NodeEmbeddingsTypescript.md) | react-router-6.24.1 | Node Embeddings |
+| [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.24.1/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.24.1 | Object Oriented Design Quality Metrics |
+| [OverviewGeneral.md](./react-router-6.24.1/overview-general/OverviewGeneral.md) | react-router-6.24.1 | Overview in General |
+| [OverviewTypescript.md](./react-router-6.24.1/overview-typescript/OverviewTypescript.md) | react-router-6.24.1 | Overview for Typescript |
+| [VisibilityMetricsTypescript.md](./react-router-6.24.1/visibility-metrics-typescript/VisibilityMetricsTypescript.md) | react-router-6.24.1 | Visibility Metrics for Typescript |
+| [Wordcloud.md](./react-router-6.24.1/wordcloud/Wordcloud.md) | react-router-6.24.1 | Wordcloud |
