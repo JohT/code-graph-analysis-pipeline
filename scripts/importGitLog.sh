@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. The CSV is then imported into Neo4j.
+# (DEPRECATED, use importGit) Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. The CSV is then imported into Neo4j.
+# TODO delete if not used anymore
 
 # Note: This script needs the path to a git repository directory. It defaults to SOURCE_DIRECTORY ("source"). 
 # Note: Import will be skipped without an error if the directory is not a git repository.

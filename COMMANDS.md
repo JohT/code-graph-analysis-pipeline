@@ -26,9 +26,10 @@
     - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
     - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
     - [Import git log](#import-git-log)
-        - [Parameters](#parameters)
+        - [Import aggregated git log](#import-aggregated-git-log)
+        - [Parameter](#parameter)
+        - [Environment Variable](#environment-variable)
         - [Resolving git files to code files](#resolving-git-files-to-code-files)
-    - [Import aggregated git log](#import-aggregated-git-log)
 - [Database Queries](#database-queries)
     - [Cypher Shell](#cypher-shell)
     - [HTTP API](#http-api)
@@ -239,23 +240,33 @@ It uses `git log` to extract commits, their authors and the names of the files c
 
 👉**Note:** Commit messages containing `[bot]` are filtered out to ignore changes made by bots.
 
-#### Parameters
+#### Import aggregated git log
 
-The optional parameter `--repository directory-path-to-a-git-repository` can be used to select a different directory for the repository. By default, the `source` directory within the analysis workspace directory is used. This command only needs the git history to be present so a `git clone --bare` is sufficient. If the `source` directory is also used for the analysis then a full git clone is of course needed (like for Typescript).
+Instead of importing every single commit, changes can be grouped by month including their commit count. This is in many cases sufficient and reduces data size and processing time significantly. To do this, set the environment variable `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` to `aggregated`. If you don't want to set the environment variable globally, then you can also prepend the command with it like this (inside the analysis workspace directory contained within temp):
+
+```shell
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated" ./../../scripts/importGit.sh
+```
+
+Here is the resulting schema:
+
+```Cypher
+(Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan)-[:CONTAINS_CHANGED]->(Git:Log:File)
+```
+
+#### Parameter
+
+The optional parameter `--source directory-path-to-the-source-folder-containing-git-repositories` can be used to select a different directory for the repositories. By default, the `source` directory within the analysis workspace directory is used. This command only needs the git history to be present. Therefore, `git clone --bare` is sufficient. If the `source` directory is also used for code analysis (like for Typescript) then a full git clone is of course needed.
+
+#### Environment Variable
+
+- `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` supports the values `none`, `aggregated` and `full` (default). With it, you can switch off git import (`none`), import aggregated data for a smaller memory footprint (`aggregated`) or  import all git commits and the files that where changed with them (`full`=default) .
 
 #### Resolving git files to code files
 
 After git log data has been imported successfully, [Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher](./cypher/GitLog/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher) is used to try to resolve the imported git file names to  code files. This first attempt will cover most cases, but not all of them. With this approach it is, for example, not possible to distinguish identical file names in different Java jars from the git source files of a mono repo.
 
 You can use [List_unresolved_git_files.cypher](./cypher/GitLog/List_unresolved_git_files.cypher) to find code files that couldn't be matched to git file names and [List_ambiguous_git_files.cypher](./cypher/GitLog/List_ambiguous_git_files.cypher) to find ambiguously resolved git files. If you have any idea on how to improve this feel free to [open an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new).
-
-### Import aggregated git log
-
-Use [importAggregatedGitLog.sh](./scripts/importAggregatedGitLog.sh) to import git log data in an aggregated form into the Graph. It works similar to the [full git log version above](#import-git-log). The only difference is that not every single commit is imported. Instead, changes are grouped per month including their commit count. This is in many cases sufficient and reduces data size and processing time significantly. Here is the resulting schema:
-
-```Cypher
-(Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan)-[:CONTAINS_CHANGED]->(Git:Log:File)
-```
 
 ## Database Queries
 
