@@ -25,7 +25,7 @@
     - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
     - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
     - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
-    - [Import git log](#import-git-log)
+    - [Import git data](#import-git-data)
         - [Import aggregated git log](#import-aggregated-git-log)
         - [Parameter](#parameter)
         - [Environment Variable](#environment-variable)
@@ -228,9 +228,9 @@ enhance the data further with relationships between artifacts and packages.
 
 Be aware that this script deletes all previous relationships and nodes in the local Neo4j Graph database.
 
-### Import git log
+### Import git data
 
-Use [importGitLog.sh](./scripts/importGitLog.sh) to import git log data into the Graph.
+Use [importGit.sh](./scripts/importGit.sh) to import git data into the Graph.
 It uses `git log` to extract commits, their authors and the names of the files changed with them. These are stored in an intermediate CSV file and are then imported into Neo4j with the following schema:
 
 ```Cypher
