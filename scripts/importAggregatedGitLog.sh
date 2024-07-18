@@ -11,9 +11,7 @@
 set -o errexit -o pipefail
 
 # Overrideable Defaults
-NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.20.0"}
-TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
+IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"import"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
 
 # Default and initial values for command line options
@@ -67,9 +65,7 @@ echo "importAggregatedGitLog: CYPHER_DIR=${CYPHER_DIR}"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 # Internal constants
-NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
-NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
-NEO4J_FULL_IMPORT_DIRECTORY=$(cd "${NEO4J_INSTALLATION_DIRECTORY}/import"; pwd)
+NEO4J_FULL_IMPORT_DIRECTORY=$(cd "${IMPORT_DIRECTORY}"; pwd)
 OUTPUT_CSV_FILENAME="${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv"
 
 # ----- Create a CSV file with git log data containing all commits and their changed files
