@@ -65,6 +65,37 @@ deleteExistingGitData() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Delete_git_log_data.cypher"
 }
 
+# Creates one (Git:Repository) node with information about the repository.  
+# The first and only parameter is the absolute/full repository directory path.
+create_git_repository_node() {
+    local full_local_repository_path=${1}
+    echo "importGit:   - full_local_repository_path=${full_local_repository_path}"
+
+    local_repository=$(basename "${full_local_repository_path}")
+    echo "importGit:   - local_repository=    ${local_repository}"
+
+    remote_origin=$(cd "${full_local_repository_path}" ;git config --get remote.origin.url || true)
+    remote_origin=$(basename -s .git "${remote_origin}" || true)
+    echo "importGit:   - remote_origin=       ${remote_origin}"
+
+    current_tags=$(cd "${full_local_repository_path}" ;git tag --points-at HEAD | paste -sd "," - || true)
+    echo "importGit:   - current_tags=        ${current_tags}"
+    
+    current_branch=$(cd "${full_local_repository_path}" ;git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+    echo "importGit:   - current_branch=      ${current_branch}"
+
+    current_commit=$(cd "${full_local_repository_path}" ;git rev-parse HEAD || true)
+    echo "importGit:   - current_commit=      ${current_commit}"
+
+    execute_cypher "${GIT_LOG_CYPHER_DIR}/Create_git_repository_node.cypher" \
+      "git_repository_origin=${remote_origin}" \
+      "git_repository_current_tags=${current_tags}" \
+      "git_repository_current_branch=${current_branch}" \
+      "git_repository_current_commit=${current_commit}" \
+      "git_repository_directory_name=${local_repository}" \
+      "git_repository_absolute_directory_name=${full_local_repository_path}"
+}
+
 importGitLog() {
   echo "importGit: Preparing import by creating indexes for the full git log..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_author_name.cypher"
@@ -73,7 +104,7 @@ importGitLog() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   
   echo "importGit: Importing full git log data into the Graph..."
-  time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_csv_data.cypher"
+  time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_csv_data.cypher" "${@}"
   
   echo "importGit: Creating relationships for parent commits..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_HAS_PARENT_relationships_to_commits.cypher"
@@ -86,7 +117,7 @@ importAggregatedGitLog() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
 
   echo "importGit: Importing aggregated git log data into the Graph..."
-  time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_aggregated_git_log_csv_data.cypher"
+  time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_aggregated_git_log_csv_data.cypher" "${@}"
 }
 
 commonPostGitLogImport() {
@@ -125,16 +156,20 @@ if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
     fi
     
     echo "importGit: Importing git repository ${repository}"
+    full_repository_path=$(cd "${repository}"; pwd)
+    
+    create_git_repository_node "${full_repository_path}"
+
     if [[ ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "aggregated" ]]; then
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
         (cd "${repository}" && source "${SCRIPTS_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
-        importAggregatedGitLog
-        postAggregatedGitLogImport
+        importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
+        postAggregatedGitLogImport 
     else
     # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full" (default)
         (cd "${repository}" && source "${SCRIPTS_DIR}/createGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
-        importGitLog
-        postGitLogImport
+        importGitLog "git_repository_absolute_directory_name=${full_repository_path}"
+        postGitLogImport 
     fi
   done
 fi

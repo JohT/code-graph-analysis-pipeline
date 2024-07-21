@@ -235,7 +235,10 @@ It uses `git log` to extract commits, their authors and the names of the files c
 
 ```Cypher
 (Git:Log:Author)-[:AUTHORED]->(Git:Log:Commit)->[:CONTAINS_CHANGED]->(Git:Log:File)
-(Git:Log:Commit)->[:HAS_PARENT]-(Git:Log:Commit)
+(Git:Log:Commit)-[:HAS_PARENT]->(Git:Log:Commit)
+(Git:Repository)-[:HAS_COMMIT]->(Git:Log:Commit)
+(Git:Repository)-[:HAS_AUTHOR]->(Git:Log:Author)
+(Git:Repository)-[:HAS_FILE]->(Git:Log:File)
 ```
 
 👉**Note:** Commit messages containing `[bot]` are filtered out to ignore changes made by bots.
@@ -252,6 +255,9 @@ Here is the resulting schema:
 
 ```Cypher
 (Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan)-[:CONTAINS_CHANGED]->(Git:Log:File)
+(Git:Repository)-[:HAS_CHANGE_SPAN]->(Git:Log:ChangeSpan)
+(Git:Repository)-[:HAS_AUTHOR]->(Git:Log:Author)
+(Git:Repository)-[:HAS_FILE]->(Git:Log:File)
 ```
 
 #### Parameter
