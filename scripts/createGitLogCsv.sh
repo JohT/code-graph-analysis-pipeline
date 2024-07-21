@@ -31,14 +31,14 @@ echo "hash,parent,author,email,timestamp,timestamp_unix,message,filename" > "${C
 
 # Prints the git log in CSV format including the changed files.
 # Includes quoted strings, double quote escaping and supports commas in strings.
-git log --no-merges --pretty=format:' %h,,,%p,,,%an,,,%ae,,,%aI,,,%ct,,,%s' --name-only | \
+git log --no-merges --pretty=format:' %H,,,%P,,,%an,,,%ae,,,%aI,,,%ct,,,%s' --name-only | \
 awk 'BEGIN { COMMA=",";QUOTE="\"" } /^ / { split($0, a, ",,,"); gsub(/^ /, "", a[1]); gsub(/"/, "\"\"", a[3]); gsub(/"/, "\"\"", a[4]); gsub(/"/, "\"\"", a[7]); gsub(/\\/, " ", a[7]); commit=a[1] COMMA a[2] COMMA QUOTE a[3] QUOTE COMMA QUOTE a[4] QUOTE COMMA a[5] COMMA a[6] COMMA QUOTE a[7] QUOTE } NF && !/^\ / { print commit ",\""$0"\"" }' | \
 grep -v -F '[bot]' >> "${CSV_OUTPUT_FILE_PATH}"
 # Explanation:
 #
 # - --no-merges: Excludes merge commits from the log.
-# - %h: Abbreviated commit hash
-# - %p: Abbreviated parent commit hash
+# - %H: Commit hash
+# - %P: Commit hash parent(s)
 # - %an: Author name
 # - %ae: Author email
 # - %aI: Author date, ISO 8601 format
