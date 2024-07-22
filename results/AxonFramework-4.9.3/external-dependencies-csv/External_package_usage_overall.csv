@@ -15,7 +15,7 @@
 "com.fasterxml.jackson.databind",1,7,15,65,93,1224,"JsonNode,ObjectMapper,ObjectWriter,ObjectReader,DeserializationContext,JsonDeserializer,DeserializationFeature,ObjectMapper$DefaultTyping",""
 "com.fasterxml.jackson.databind.node",1,2,3,12,93,1224,"ObjectNode,JsonNodeType",""
 "com.google.gson",1,1,4,7,93,1224,"JsonObject,JsonArray,JsonParser,JsonElement",""
-"com.lmax.disruptor",1,7,9,25,93,1224,"RingBuffer,ExceptionHandler,BlockingWaitStrategy,WaitStrategy,EventHandler,LifecycleAware",""
+"com.lmax.disruptor",1,7,9,25,93,1224,"RingBuffer,EventHandler,ExceptionHandler,WaitStrategy,BlockingWaitStrategy,LifecycleAware",""
 "com.lmax.disruptor.dsl",1,4,5,21,93,1224,"Disruptor,ProducerType,EventHandlerGroup",""
 "com.thoughtworks.xstream.converters",1,3,6,6,93,1224,"UnmarshallingContext,MarshallingContext",""
 "com.thoughtworks.xstream.io.xml",1,2,4,13,93,1224,"Dom4JReader,XomReader,XppDriver,CompactWriter",""

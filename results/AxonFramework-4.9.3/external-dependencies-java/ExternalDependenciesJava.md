@@ -241,7 +241,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>25</td>
       <td>93</td>
       <td>1224</td>
-      <td>[RingBuffer, ExceptionHandler, BlockingWaitStr...</td>
+      <td>[RingBuffer, EventHandler, ExceptionHandler, W...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -494,7 +494,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>46</td>
       <td>93</td>
       <td>1224</td>
-      <td>[RingBuffer, Disruptor, ExceptionHandler, Prod...</td>
+      <td>[RingBuffer, Disruptor, EventHandler, Exceptio...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2576,7 +2576,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>13</td>
       <td>5</td>
       <td>59.090909</td>
-      <td>[ExceptionHandler, EventHandler, BlockingWaitS...</td>
+      <td>[ExceptionHandler, RingBuffer, EventHandler, L...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2600,7 +2600,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>13</td>
       <td>5</td>
       <td>59.090909</td>
-      <td>[Disruptor, ProducerType, EventHandlerGroup]</td>
+      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2792,7 +2792,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>35</td>
       <td>5</td>
       <td>22.435897</td>
-      <td>[EntityManager, LockModeType, Table, Entity, G...</td>
+      <td>[EntityManagerFactory, EntityManager, EntityNo...</td>
     </tr>
     <tr>
       <th>20</th>
@@ -2804,7 +2804,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>35</td>
       <td>5</td>
       <td>22.435897</td>
-      <td>[LockModeType, EntityManager, GeneratedValue, ...</td>
+      <td>[GeneratedValue, Entity, Id, Table, Index, Bas...</td>
     </tr>
     <tr>
       <th>21</th>
@@ -3102,7 +3102,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.0000</td>
       <td>32.500000</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.EventProcessingConfi...</td>
+      <td>[org.axonframework.config.Configurer, org.axon...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3616,7 +3616,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.0000</td>
       <td>32.500000</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.EventProcessingConfi...</td>
+      <td>[org.axonframework.config.Configurer, org.axon...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -4983,7 +4983,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>93</td>
       <td>5</td>
       <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
-      <td>[Logger, LoggerFactory, ExceptionHandler, Even...</td>
+      <td>[Logger, LoggerFactory, ExceptionHandler, Ring...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -5009,7 +5009,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>356</td>
       <td>5</td>
       <td>[javax.annotation, javax.persistence, jakarta....</td>
-      <td>[Nonnull, Nullable, EntityManager, LockModeTyp...</td>
+      <td>[Nonnull, Nullable, EntityManagerFactory, Enti...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -5048,7 +5048,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>137</td>
       <td>2</td>
       <td>[javax.annotation, org.slf4j]</td>
-      <td>[Nonnull, Nullable, LoggerFactory, Logger]</td>
+      <td>[Nonnull, Nullable, Logger, LoggerFactory]</td>
     </tr>
   </tbody>
 </table>
@@ -5188,7 +5188,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>11</td>
       <td>32</td>
       <td>40</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>config</td>
     </tr>
     <tr>
@@ -5199,7 +5199,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>25</td>
       <td>22</td>
-      <td>[RingBuffer, ExceptionHandler, BlockingWaitStr...</td>
+      <td>[RingBuffer, EventHandler, ExceptionHandler, W...</td>
       <td>commandhandling</td>
     </tr>
     <tr>
@@ -5353,7 +5353,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6</td>
       <td>57</td>
       <td>7</td>
-      <td>[Index, EntityManagerFactory, Query, TypedQuer...</td>
+      <td>[EntityNotFoundException, TypedQuery, EntityMa...</td>
       <td>jpa</td>
     </tr>
     <tr>
@@ -5529,7 +5529,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5</td>
       <td>55</td>
       <td>3</td>
-      <td>[Query, EntityManagerFactory, EntityNotFoundEx...</td>
+      <td>[EntityManagerFactory, EntityManager, EntityNo...</td>
       <td>legacyjpa</td>
     </tr>
   </tbody>
@@ -6528,17 +6528,17 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
-      <td>org.quartz-scheduler</td>
-      <td>quartz</td>
+      <td>jakarta.persistence</td>
+      <td>jakarta.persistence-api</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>org.axonframework</td>
-      <td>axon-modelling</td>
+      <td>${project.groupId}</td>
+      <td>axon-messaging</td>
     </tr>
     <tr>
       <th>2</th>
@@ -6546,26 +6546,26 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
-      <td>org.hsqldb</td>
-      <td>hsqldb</td>
+      <td>org.hibernate</td>
+      <td>hibernate-core-jakarta</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>True</td>
-      <td>jakarta.annotation</td>
-      <td>jakarta.annotation-api</td>
+      <td>io.projectreactor</td>
+      <td>reactor-core</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-disruptor</td>
+      <td>org.hsqldb</td>
+      <td>hsqldb</td>
     </tr>
     <tr>
       <th>...</th>
