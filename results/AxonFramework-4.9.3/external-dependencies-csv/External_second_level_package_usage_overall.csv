@@ -12,7 +12,7 @@
 "org.quartz",2,9,36,187,93,1224,"JobDataMap,Scheduler,JobDetail,Trigger,SchedulerContext,JobKey,Job,JobExecutionException,JobExecutionContext",""
 "reactor.core",2,18,36,140,93,1224,"Mono,Flux,MonoSink,Disposable,FluxSink,Signal,Sinks$ManySpec,EmitterProcessor,Sinks$MulticastReplaySpec",""
 "com.google",1,1,4,7,93,1224,"JsonObject,JsonArray,JsonParser,JsonElement",""
-"com.lmax",1,7,14,46,93,1224,"RingBuffer,Disruptor,EventHandler,ExceptionHandler,WaitStrategy,ProducerType,BlockingWaitStrategy,LifecycleAware,EventHandlerGroup",""
+"com.lmax",1,7,14,46,93,1224,"RingBuffer,Disruptor,ExceptionHandler,ProducerType,BlockingWaitStrategy,WaitStrategy,EventHandlerGroup,EventHandler,LifecycleAware",""
 "jakarta.validation",1,2,5,15,93,1224,"Validator,ValidatorFactory,Validation,ConstraintViolation",""
 "javax.cache",1,2,12,48,93,1224,"CacheEntryListenerConfiguration,Cache,CacheEntryListener,CacheEntryEventFilter,CacheEntryUpdatedListener,CacheEntryEvent,CacheEntryListenerException,CacheEntryRemovedListener,CacheEntryExpiredListener",""
 "javax.validation",1,2,5,15,93,1224,"ConstraintViolation,Validation,Validator,ValidatorFactory",""
