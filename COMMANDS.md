@@ -24,6 +24,7 @@
     - [Start Neo4j Graph Database](#start-neo4j-graph-database)
     - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
     - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
+    - [Download Typescript project to analyze](#download-typescript-project-to-analyze)
     - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
     - [Import git data](#import-git-data)
         - [Import aggregated git log](#import-aggregated-git-log)
@@ -220,6 +221,27 @@ to download a Maven artifact into the artifacts directory:
 - `-v <maven artifact version>`
 - `-t <maven artifact type (optional, defaults to jar)>`
 - `-d <target directory for the downloaded file (optional, defaults to "artifacts")>`
+
+### Download Typescript project to analyze
+
+Use [downloadTypescriptProject.sh](./scripts/downloader/downloadTypescriptProject.sh) with the following options
+to download a Typescript project using git clone and prepare it for analysis:
+
+- `--url` Git clone URL (required)
+- `--version` Version of the project
+- `--tag` Tag to switch to after "git clone" (optional, default = version)
+- `--project` Name of the project/repository (optional, default = clone url file name without .git extension)
+- `--packageManager` One of "npm", "pnpm" or "yarn". (optional, default = "npm")
+
+Here is an example:
+
+```shell
+./../../downloadTypescriptProject.sh \
+  --url https://github.com/remix-run/react-router.git \
+  --version 6.24.0 \
+  --tag "react-router@6.24.0" \
+  --packageManager pnpm
+```
 
 ### Reset the database and scan the java artifacts
 
