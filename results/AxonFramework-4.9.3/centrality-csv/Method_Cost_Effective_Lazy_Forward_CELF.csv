@@ -41,7 +41,6 @@
 "java.lang.Class declaringClass(java.lang.Class,java.lang.String,java.lang.Class[])","declaringClass","centralityCostEffectiveLazyForward",0,""
 "java.lang.Class nullSafeTypeOf(java.lang.Object)","nullSafeTypeOf","centralityCostEffectiveLazyForward",0,""
 "java.lang.Class resolvePrimitiveWrapperType(java.lang.Class)","resolvePrimitiveWrapperType","centralityCostEffectiveLazyForward",0,""
-"java.lang.Integer matchRank(java.lang.reflect.Type)","matchRank","centralityCostEffectiveLazyForward",0,""
 "java.lang.Iterable deadLetterSequence(java.lang.Object)","deadLetterSequence","centralityCostEffectiveLazyForward",0,""
 "java.lang.Iterable deadLetters()","deadLetters","centralityCostEffectiveLazyForward",0,""
 "java.lang.Iterable next()","next","centralityCostEffectiveLazyForward",0,""
