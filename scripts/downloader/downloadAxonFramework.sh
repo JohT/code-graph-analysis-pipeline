@@ -29,7 +29,7 @@ fi
 ARTIFACTS_VERSION=$1
 echo "download${ANALYSIS_NAME}: ARTIFACTS_VERSION=${ARTIFACTS_VERSION}"
 
-## Get this "scripts/analysis" directory if not already set
+## Get this "scripts/downloader" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
