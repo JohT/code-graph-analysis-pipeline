@@ -74,7 +74,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>18</td>
       <td>4</td>
       <td>59</td>
-      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
+      <td>[&lt;Link&gt; of module &lt;react-router-native&gt; import...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -844,7 +844,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[BackHandler, BackHandlerStatic.addEventListen...</td>
+      <td>[GestureResponderEvent.defaultPrevented, Gestu...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -856,7 +856,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, React.useCallback, React.use...</td>
+      <td>[React.JSX.Element, React.ReactNode, React.use...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -880,7 +880,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.Context, React.createContext, React.use...</td>
+      <td>[React.useEffect, React.MouseEvent, React.Mous...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -944,7 +944,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, BackHandler, BackHandlerStat...</td>
+      <td>[GestureResponderEvent.defaultPrevented, React...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -968,7 +968,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.Context, React.createContext, React.use...</td>
+      <td>[React.useEffect, React.MouseEvent, React.Mous...</td>
     </tr>
     <tr>
       <th>3</th>
