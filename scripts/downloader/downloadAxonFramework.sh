@@ -29,7 +29,7 @@ fi
 ARTIFACTS_VERSION=$1
 echo "download${ANALYSIS_NAME}: ARTIFACTS_VERSION=${ARTIFACTS_VERSION}"
 
-## Get this "scripts/analysis" directory if not already set
+## Get this "scripts/downloader" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
@@ -43,14 +43,14 @@ echo "download${ANALYSIS_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
 ################################################################
 # Download Artifacts that will be analyzed
 ARTIFACTS_GROUP="org.axonframework"
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g ${ARTIFACTS_GROUP} -a axon-configuration -v ${ARTIFACTS_VERSION} || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g ${ARTIFACTS_GROUP} -a axon-disruptor -v ${ARTIFACTS_VERSION} || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g ${ARTIFACTS_GROUP} -a axon-eventsourcing -v ${ARTIFACTS_VERSION} || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g ${ARTIFACTS_GROUP} -a axon-messaging -v ${ARTIFACTS_VERSION} || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g ${ARTIFACTS_GROUP} -a axon-modelling -v ${ARTIFACTS_VERSION} || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g ${ARTIFACTS_GROUP} -a axon-test -v ${ARTIFACTS_VERSION} || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-configuration" -v"${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-disruptor" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-eventsourcing" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-messaging" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-modelling" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-test" -v "${ARTIFACTS_VERSION}" || exit 2
 
 # Download the git history (bare clone without working tree) into the "source" folder.
 # This makes it possible to additionally import the git log into the graph 
-git clone --bare https://github.com/AxonFramework/AxonFramework.git --branch "axon-${ARTIFACTS_VERSION}" "${SOURCE_DIRECTORY}/.git"
+git clone --bare https://github.com/AxonFramework/AxonFramework.git --branch "axon-${ARTIFACTS_VERSION}" "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git"
 ################################################################

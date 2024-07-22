@@ -5,7 +5,7 @@
 # CAUTION: This script deletes all relationships and nodes in the Neo4j Graph Database. 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD is required to login to Neo4j.
 
-# Requires findTypescriptDataFiles.sh
+# Requires findTypescriptDataFiles.sh, importGit.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -77,3 +77,6 @@ echo "resetAndScan: Using jQAssistant CLI version ${JQASSISTANT_CLI_VERSION} to 
 echo "resetAndScan: Analyzing ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
 
 "${JQASSISTANT_BIN}"/jqassistant.sh analyze
+
+# Scan all git repositories within the "source" (default) folder, scan their git log (history) and import it.
+source "${SCRIPTS_DIR}/importGit.sh"

@@ -4,51 +4,31 @@
 # The source files are written into the "source" directory of the current analysis directory.
 # After scanning it with jQAssistant Typescript Plugin the resulting JSON will be moved into the "artifacts" directory.
 
-# Note: The #-framed blocks are those that are specific to this download.
-#       The other parts of the script can be reused/copied as a reference to write other download scripts.
-
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
+# Note: react-router uses pnpm as package manager which needs to be installed first
 
-# Note: react-router uses pnpm as package manager which needs to be installed
+# Requires downloadTypescriptProject.sh
 
 # Fail on any error (errexit = exit on first error, errtrace = error inherited from sub-shell ,pipefail exist on errors within piped commands)
 set -o errexit -o errtrace -o pipefail
 
-# Get the analysis name from the middle part of the current file name (without prefix "download" and without extension)
-SCRIPT_FILE_NAME="$(basename -- "${BASH_SOURCE[0]}")"
-SCRIPT_FILE_NAME_WITHOUT_EXTENSION="${SCRIPT_FILE_NAME%%.*}"
-SCRIPT_FILE_NAME_WITHOUT_PREFIX_AND_EXTENSION="${SCRIPT_FILE_NAME_WITHOUT_EXTENSION##download}"
-ANALYSIS_NAME="${SCRIPT_FILE_NAME_WITHOUT_PREFIX_AND_EXTENSION}"
-SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
-
-echo "download${ANALYSIS_NAME}: SCRIPT_FILE_NAME=${SCRIPT_FILE_NAME}"
-echo "download${ANALYSIS_NAME}: SCRIPT_FILE_NAME_WITHOUT_EXTENSION=${SCRIPT_FILE_NAME_WITHOUT_EXTENSION}"
-echo "download${ANALYSIS_NAME}: ANALYSIS_NAME=${ANALYSIS_NAME}"
-
 # Read the first input argument containing the version(s) of the artifact(s)
 if [ "$#" -ne 1 ]; then
-  echo "Error (download${ANALYSIS_NAME}): Usage: $0 <version>" >&2
+  echo "downloadAntDesign: Error: Usage: $0 <version>" >&2
   exit 1
 fi
-PROJECT_VERSION=$1
-echo "download${ANALYSIS_NAME}: PROJECT_VERSION=${PROJECT_VERSION}"
+projectVersion="${1}"
+echo "downloadAntDesign: projectVersion=${projectVersion}"
 
-# Create runtime logs directory if it hasn't existed yet
-mkdir -p ./runtime/logs
+## Get the directory of this script if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+echo "downloadReactRouter: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}"
 
-################################################################
-# Download react-router source files to be analyzed
-################################################################
-if [ ! -d "${SOURCE_DIRECTORY}" ] ; then # only clone if source doesn't exist
-git clone --branch "react-router@${PROJECT_VERSION}" https://github.com/remix-run/react-router.git "${SOURCE_DIRECTORY}"
-fi
-(
-  cd "${SOURCE_DIRECTORY}" || exit
-  echo "download${ANALYSIS_NAME}: Installing dependencies..."
-  pnpm install --frozen-lockfile || exit
-  echo "download${ANALYSIS_NAME}: Analyzing source..."
-  npx --yes @jqassistant/ts-lce >./../runtime/logs/jqassistant-typescript-scan.log 2>&1 || exit
-)
-mkdir -p artifacts/typescript
-mv -nv "${SOURCE_DIRECTORY}/.reports/jqa/ts-output.json" "artifacts/typescript/react-router-${PROJECT_VERSION}.json"
-################################################################
+source "${DOWNLOADER_SCRIPTS_DIR}/downloadTypescriptProject.sh" \
+  --url https://github.com/remix-run/react-router.git \
+  --version "${projectVersion}" \
+  --tag "react-router@${projectVersion}" \
+  --packageManager pnpm

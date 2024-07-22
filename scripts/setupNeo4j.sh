@@ -17,9 +17,10 @@ NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"} #Awesome Proc
 NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.7.0"} # Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x
 NEO4J_OPEN_GDS_PLUGIN_VERSION=${NEO4J_OPEN_GDS_PLUGIN_VERSION:-"2.7.0"} # Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x
 NEO4J_GDS_PLUGIN_EDITION=${NEO4J_GDS_PLUGIN_EDITION:-"open"} # Graph Data Science Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
-NEO4J_DATA_PATH=${NEO4J_DATA_PATH:-"$( pwd -P )/data"} # Path where Neo4j writes its data to (outside tools dir)
-NEO4J_RUNTIME_PATH=${NEO4J_RUNTIME_PATH:-"$( pwd -P )/runtime"} # Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir)
+DATA_DIRECTORY=${DATA_DIRECTORY:-"$( pwd -P )/data"} # Path where Neo4j writes its data to (outside tools dir)
+RUNTIME_DIRECTORY=${RUNTIME_DIRECTORY:-"$( pwd -P )/runtime"} # Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir)
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
+IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"$( pwd -P )/import"} # The name of the directory that is used to import data (e.g. CSV) files. Defaults to "import".
 SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/downloads}"
 
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
@@ -94,15 +95,28 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         exit 1
     fi
 
+    echo "setupNeo4j: Commenting out configuration properties that will later be replaced or are not needed"
+    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
+        sed -i.backup '/^server\.directories\.import=/ s/^/# defined in the directory section further below #/' "${NEO4J_CONFIG}"
+    else
+        sed -i.backup '/^dbms\.directories\.import=/ s/^/# defined in the directory section further below #/' "${NEO4J_CONFIG}"
+    fi
+    # Remove the backup file
+    rm -f "${NEO4J_CONFIG}.backup"
+
     # Configure all paths with data that changes (database data, logs, ...) to be in the outside "data" directory
     # instead of inside the neo4j directory
     echo "setupNeo4j: Configuring dynamic settings (data directories, ports, ...)"
 
-    neo4jDataPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_DATA_PATH}")
-    neo4jLogsPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_RUNTIME_PATH}/logs")
-    neo4jDumpsPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_RUNTIME_PATH}/dumps")
-    neo4jRunPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_RUNTIME_PATH}/run")
-    neo4jTransactionsPath=$(convertPosixToWindowsPathIfNecessary "${NEO4J_DATA_PATH}/transactions")
+    neo4jDataPath=$(convertPosixToWindowsPathIfNecessary "${DATA_DIRECTORY}")
+    neo4jLogsPath=$(convertPosixToWindowsPathIfNecessary "${RUNTIME_DIRECTORY}/logs")
+    neo4jDumpsPath=$(convertPosixToWindowsPathIfNecessary "${RUNTIME_DIRECTORY}/dumps")
+    neo4jRunPath=$(convertPosixToWindowsPathIfNecessary "${RUNTIME_DIRECTORY}/run")
+    neo4jTransactionsPath=$(convertPosixToWindowsPathIfNecessary "${DATA_DIRECTORY}/transactions")
+    neo4jImportPath=$(convertPosixToWindowsPathIfNecessary "${IMPORT_DIRECTORY}")
+    
+    # Create import directory in case it doesn't exist.
+    mkdir -p "${IMPORT_DIRECTORY}"
 
     if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
         echo "setupNeo4j: Neo4j v5 or higher detected"
@@ -114,6 +128,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
             echo "server.directories.dumps.root=${neo4jDumpsPath}"
             echo "server.directories.run=${neo4jRunPath}"
             echo "server.directories.transaction.logs.root=${neo4jTransactionsPath}"
+            echo "server.directories.import=${neo4jImportPath}"
             echo ""
             echo "# Ports Configuration (v5)"
             echo "server.bolt.listen_address=:${NEO4J_BOLT_PORT}"
@@ -133,6 +148,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
             echo "dbms.directories.dumps.root=${neo4jDumpsPath}"
             echo "dbms.directories.run=${neo4jRunPath}"
             echo "dbms.directories.transaction.logs.root=${neo4jTransactionsPath}"
+            echo "dbms.directories.import=${neo4jImportPath}"
             echo ""
             echo "# Ports Configuration"
             echo "dbms.connector.bolt.listen_address=:${NEO4J_BOLT_PORT}"

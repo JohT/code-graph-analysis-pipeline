@@ -178,9 +178,9 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
   👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
 
-- How can i add another code basis to be analyzed automatically?  
-  👉 Create a new download script in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference.  
-  👉 Run the script separately before executing [analyze.sh](./scripts/analysis/analyze.sh) also in the [pipeline](./.github/workflows/java-code-analysis.yml).
+- How can i analyze a different code basis automatically?  
+  👉 Create a new download script like the ones in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference for Java projects and [downloadReactRouter.sh](./scripts/downloader/downloadReactRouter.sh) as a reference for Typescript projects.
+  👉 After downloading, run [analyze.sh](./scripts/analysis/analyze.sh). You can find these steps also in the [pipeline](./.github/workflows/java-code-analysis.yml) as a reference.
 
 - How can i trigger a full re-scan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.

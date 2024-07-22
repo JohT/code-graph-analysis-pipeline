@@ -2,7 +2,7 @@
 
 # Prepares and validates the graph database before analysis 
 
-# Requires executeQueryFunctions.sh, parseCsvFunctions.sh, importGitLog.sh, importAggregatedGitLog
+# Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -45,15 +45,6 @@ dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPEND
 if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; then
     echo "prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship required. Check if the artifacts directory is empty or if the scan failed."
     exit 1
-fi
-
-# Preparation - Import git log if source or history is available
-if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
-    if [[ ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "aggregated" ]]; then
-        source "${SCRIPTS_DIR}/importAggregatedGitLog.sh"
-    else
-        source "${SCRIPTS_DIR}/importGitLog.sh"
-    fi
 fi
 
 # Preparation - Create indices
