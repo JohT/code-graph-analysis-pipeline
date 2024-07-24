@@ -8,23 +8,29 @@
   WITH source
       ,target
       ,moduleDependency
-OPTIONAL MATCH (source)-[elementDependency:DEPENDS_ON]->(elementType:TS)<-[:EXPORTS]-(target)
+      ,moduleDependency.cardinality AS targetModuleCardinality
+
+// Get optional external (e.g. type) declarations that the external module (target) provides and the source module uses
+OPTIONAL MATCH (source)-[elementDependency:DEPENDS_ON|EXPORTS]->(elementType:TS)<-[:EXPORTS]-(target)
   WITH source
       ,target
       ,moduleDependency
-      ,count(DISTINCT elementType.globalFqn)          AS elementTypeCount
-      ,sum(elementDependency.cardinality)             AS elementTypeCardinality
-      ,collect(DISTINCT elementType.globalFqn)[0..4]  AS elementTypeExamples
-OPTIONAL MATCH (source)-[abstractDependency:DEPENDS_ON]->(abstractType:TypeAlias|Interface)<-[:EXPORTS]-(target)
+      ,targetModuleCardinality      
+      ,coalesce(count(DISTINCT elementType.globalFqn), 0) AS elementTypeCount
+      ,sum(elementDependency.cardinality)                 AS elementTypeCardinality
+      ,collect(DISTINCT elementType.globalFqn)[0..4]      AS elementTypeExamples
+// Get optional low coupling elements (TypeAlias, Interface) that the source module contains and defines (low level) that depend on the external module (target)
+OPTIONAL MATCH (source)-[abstractDependency:DEPENDS_ON|EXPORTS]->(abstractType:TypeAlias|Interface)<-[:EXPORTS]-(target)
   WITH source
       ,target
       ,moduleDependency
+      ,targetModuleCardinality      
       ,elementTypeCount        
       ,elementTypeCardinality   
       ,elementTypeExamples     
-      ,count(DISTINCT abstractType.globalFqn)         AS abstractTypeCount
-      ,sum(abstractDependency.cardinality)            AS abstractTypeCardinality
-      ,collect(DISTINCT abstractType.globalFqn)[0..4] AS abstractTypeExamples 
+      ,coalesce(count(DISTINCT abstractType.globalFqn), 0) AS abstractTypeCount
+      ,sum(abstractDependency.cardinality)                 AS abstractTypeCardinality
+      ,collect(DISTINCT abstractType.globalFqn)[0..4]      AS abstractTypeExamples 
 // Set additional fine grained relationship properties (weights) to distinguish low and high coupling elements.
 // The "cardinality" property is similar to "weight" property for Java dependencies and comes from the jQAssistant Typescript Plugin.
 // - "abstractTypeCardinality" is the sum of all TypeAlias and Interface cardinality properties (if available)
@@ -34,7 +40,8 @@ OPTIONAL MATCH (source)-[abstractDependency:DEPENDS_ON]->(abstractType:TypeAlias
 // - "lowCouplingElement25PercentWeight" subtracts 75% of the weights for abstract types like Interfaces and Type aliases
 //   to compensate for their low coupling influence. Not included "high coupling" elements like Functions and Classes 
 //   remain in the weight as they were. The same applies for "lowCouplingElement10PercentWeight" but with in a stronger manner.
- SET moduleDependency.abstractTypeCount       = abstractTypeCount
+ SET moduleDependency.declarationCount        = elementTypeCount
+    ,moduleDependency.abstractTypeCount       = abstractTypeCount
     ,moduleDependency.abstractTypeCardinality = abstractTypeCardinality
     ,moduleDependency.lowCouplingElement25PercentWeight = 
         toInteger(elementTypeCardinality - round(abstractTypeCardinality * 0.75))
@@ -42,13 +49,13 @@ OPTIONAL MATCH (source)-[abstractDependency:DEPENDS_ON]->(abstractType:TypeAlias
         toInteger(elementTypeCardinality - round(abstractTypeCardinality * 0.90))
 RETURN source.globalFqn    AS sourceName
       ,target.globalFqn    AS targetName
-      ,abstractTypeCount
       ,elementTypeCount
-      ,moduleDependency.cardinality AS externalModuleCardinality
-      ,abstractTypeCardinality
+      ,abstractTypeCount
+      ,targetModuleCardinality      
       ,elementTypeCardinality
+      ,abstractTypeCardinality
       ,moduleDependency.lowCouplingElement25PercentWeight
       ,moduleDependency.lowCouplingElement10PercentWeight
-      ,abstractTypeExamples
       ,elementTypeExamples
+      ,abstractTypeExamples
 ORDER BY sourceName ASC
