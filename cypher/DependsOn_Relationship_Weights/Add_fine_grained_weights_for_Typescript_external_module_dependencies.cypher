@@ -2,7 +2,9 @@
 
 // Get the top level dependency between a Typescript module and the external modules it uses
  MATCH (source:TS:Module)-[moduleDependency:DEPENDS_ON]->(target:ExternalModule)
- WHERE NOT EXISTS {(target)-[:RESOLVES_TO]->(source)}
+// Exclude all targets where an ExternalModule was found that resolves to them
+// because those are covered in the fine grained weights for "ExternalModule"s.
+ WHERE NOT EXISTS { (target)-[:RESOLVES_TO]->(source) }
 OPTIONAL MATCH (source)-[resolvedModuleDependency:DEPENDS_ON]->(resolvedTarget:TS:Module)<-[:RESOLVES_TO]-(target)
   WITH source
       ,target
@@ -43,15 +45,17 @@ OPTIONAL MATCH (source)-[ra:DEPENDS_ON]->(declaration)-[:RESOLVES_TO]->(abstract
 // - "lowCouplingElement25PercentWeight" subtracts 75% of the weights for abstract types like Interfaces and Type aliases
 //   to compensate for their low coupling influence. Not included "high coupling" elements like Functions and Classes 
 //   remain in the weight as they were. The same applies for "lowCouplingElement10PercentWeight" but with in a stronger manner.
-  SET moduleDependency.declarationCount        = declarationCount
-     ,moduleDependency.abstractTypeCount       = abstractTypeCount
-     ,moduleDependency.abstractTypeCardinality = abstractTypeCardinality
-     ,moduleDependency.lowCouplingElement25PercentWeight = toInteger(moduleDependency.cardinality - round(abstractTypeCardinality * 0.75))
-     ,moduleDependency.lowCouplingElement10PercentWeight = toInteger(moduleDependency.cardinality - round(abstractTypeCardinality * 0.90))
+  SET moduleDependency.declarationCount        = coalesce(declarationCount, 0)
+     ,moduleDependency.abstractTypeCount       = coalesce(abstractTypeCount, 0)
+     ,moduleDependency.abstractTypeCardinality = coalesce(abstractTypeCardinality, 0)
+     ,moduleDependency.lowCouplingElement25PercentWeight = 
+        toInteger(moduleDependency.cardinality - round(abstractTypeCardinality * 0.75))
+     ,moduleDependency.lowCouplingElement10PercentWeight = 
+        toInteger(moduleDependency.cardinality - round(abstractTypeCardinality * 0.90))
  // Set all new properties also to a resolved (direct) dependency relationship if it exists.    
-     ,resolvedModuleDependency.declarationCount        = declarationCount
-     ,resolvedModuleDependency.abstractTypeCount       = abstractTypeCount
-     ,resolvedModuleDependency.abstractTypeCardinality = abstractTypeCardinality
+     ,resolvedModuleDependency.declarationCount        = coalesce(declarationCount, 0)
+     ,resolvedModuleDependency.abstractTypeCount       = coalesce(abstractTypeCount, 0)
+     ,resolvedModuleDependency.abstractTypeCardinality = coalesce(abstractTypeCardinality, 0)
      ,resolvedModuleDependency.lowCouplingElement25PercentWeight = toInteger(resolvedModuleDependency.cardinality - round(abstractTypeCardinality * 0.75))
      ,resolvedModuleDependency.lowCouplingElement10PercentWeight = toInteger(resolvedModuleDependency.cardinality - round(abstractTypeCardinality * 0.90))
 RETURN source.globalFqn    AS sourceName
