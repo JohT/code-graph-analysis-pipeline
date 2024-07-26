@@ -534,3 +534,45 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
 </div>
 
 
+
+### Table 3c - Distance distribution between dependent files
+
+This table shows the file directory distance distribution between dependent files. Intuitively, the distance is given by the fewest number of change directory commands needed to navigate between a file and a dependency it uses. Those are aggregate to see how many dependent files are in the same directory, how many are just one change directory command apart, and so on.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dependency.fileDistanceAsFewestChangeDirectoryCommands</th>
+      <th>numberOfDependencies</th>
+      <th>numberOfDependencyUsers</th>
+      <th>numberOfDependencyProviders</th>
+      <th>examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx uses ./index.tsx]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>6</td>
+      <td>4</td>
+      <td>2</td>
+      <td>[./index.tsx uses ./index.ts, ./index.tsx uses...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
