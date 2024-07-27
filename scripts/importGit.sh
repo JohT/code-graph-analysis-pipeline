@@ -140,6 +140,9 @@ postAggregatedGitLogImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
 }
 
+# Create import directory in case it doesn't exist.
+mkdir -p "${IMPORT_DIRECTORY}"
+
 # Internal constants
 NEO4J_FULL_IMPORT_DIRECTORY=$(cd "${IMPORT_DIRECTORY}"; pwd)
 
