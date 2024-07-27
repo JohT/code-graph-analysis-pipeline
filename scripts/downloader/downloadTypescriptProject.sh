@@ -161,7 +161,7 @@ fi
   cd "${fullSourceDirectory}" || exit
   usePackageManagerToInstallDependencies
   echo "downloadTypescriptProject: Scanning Typescript source using @jqassistant/ts-lce..."
-  npx --yes @jqassistant/ts-lce >"./../../runtime/logs/jqassistant-typescript-scan-${projectName}.log" 2>&1 || exit
+  npx --yes @jqassistant/ts-lce@1.2.0 >"./../../runtime/logs/jqassistant-typescript-scan-${projectName}.log" 2>&1 || exit
 )
 echo "downloadTypescriptProject: Moving scanned results into the artifacts/typescript directory..."
 mkdir -p artifacts/typescript
