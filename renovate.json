@@ -116,6 +116,18 @@
       "depNameTemplate": "jQAssistant/jqa-commandline-tool",
       "datasourceTemplate": "github-tags",
       "extractVersionTemplate": "^REL-?(?<version>.*?)$"
+    },
+    {
+      "fileMatch": [
+        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Default\\.sh$",
+        "^scripts\/[^\/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "npx --yes @jqassistant/ts-lce@?(?<currentValue>.*?)"
+      ],
+      "depNameTemplate": "jqassistant-plugin/jqassistant-typescript-plugin",
+      "datasourceTemplate": "github-tags"
     }
   ]
 }
