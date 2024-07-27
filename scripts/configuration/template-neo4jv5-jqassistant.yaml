@@ -30,7 +30,10 @@ jqassistant:
     - group-id: org.jqassistant.plugin.typescript
       artifact-id: jqassistant-typescript-plugin
       version: 1.0.0-RC1
-
+    - group-id: org.jqassistant.plugin
+      artifact-id: jqassistant-npm-plugin
+      version: 2.0.0
+      
   # The store configuration
   store:
     # URI of the database to connect to. Supported URI schemes are 'file' for embedded databases and 'bolt' for connecting to a running Neo4j instance (3.x+), e.g.
