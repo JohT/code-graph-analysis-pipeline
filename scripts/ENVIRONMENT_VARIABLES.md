@@ -12,10 +12,11 @@ REPORTS_SCRIPTS_DIRECTORY             | reports                             | Wo
 REPORT_COMPILATIONS_SCRIPTS_DIRECTORY | compilations                        | Repository directory that contains scripts that execute selected report generation scripts |
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY    | profiles                            | Repository directory that contains scripts containing settings |
 ARTIFACTS_DIRECTORY                   | artifacts                           | Working directory containing the artifacts to be analyzed |
+SOURCE_DIRECTORY                      | source                              |  |
+NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY  | npm-package-json                    | Subdirectory of "artifacts" containing the npm package.json files to scan |
 RESULTS_DIRECTORY                     | results                             | Repository directory containing the final analysis report results |
 REPORTS_DIRECTORY                     | reports                             | Working directory where the analysis reports are written to  |
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | Name of the file that contains the hash code of the file list for change detection |
-SOURCE_DIRECTORY                      | source                              | Get the source repository directory (defaults to "source") |
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
