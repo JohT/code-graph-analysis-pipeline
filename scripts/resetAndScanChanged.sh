@@ -4,7 +4,7 @@
 
 # Note: "resetAndScan" expects jQAssistant to be installed in the "tools" directory.
 
-# Requires resetAndScan.sh
+# Requires resetAndScan.sh, copyPackageJsonFiles.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -15,6 +15,9 @@ set -o errexit -o pipefail
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "resetAndScanChanged SCRIPTS_DIR=${SCRIPTS_DIR}"
+
+# Copy 
+source "${SCRIPTS_DIR}/copyPackageJsonFiles.sh"
 
 # Scan and analyze Artifacts when they were changed
 changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedArtifacts.sh" --readonly)
