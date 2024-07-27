@@ -9,6 +9,7 @@ Script | Directory | Description
 | [activateCondaEnvironment.sh](./activateCondaEnvironment.sh) |  | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to execute the Jupyter Notebooks. |
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
 | [cleanupAfterReportGeneration.sh](./cleanupAfterReportGeneration.sh) |  | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder. |
+| [copyPackageJsonFiles.sh](./copyPackageJsonFiles.sh) |  | Copies all package.json files inside the source directory into the artifacts/npm-package-json directory. |
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [createAggregatedGitLogCsv.sh](./createAggregatedGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. |
 | [createGitLogCsv.sh](./createGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. |
