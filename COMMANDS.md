@@ -210,7 +210,7 @@ It runs the script with a temporary `NEO4J_HOME` environment variable to not int
 
 ### Setup jQAssistant Java Code Analyzer
 
-Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.github.io/jqassistant/doc).
+Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.github.io/jqassistant/current).
 
 ### Download Maven Artifacts to analyze
 
@@ -461,7 +461,7 @@ Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJu
 ## References
 
 - [Conda](https://conda.io)
-- [jQAssistant](https://jqassistant.github.io/jqassistant/doc)
+- [jQAssistant](https://jqassistant.github.io/jqassistant/current)
 - [Jupyter Notebook](https://jupyter.org)
 - [Jupyter Notebook - Using as a command line tool](https://nbconvert.readthedocs.io/en/latest/usage.html)
 - [Jupyter Notebook - Installing TeX for PDF conversion](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex)
