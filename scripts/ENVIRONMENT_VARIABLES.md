@@ -50,3 +50,4 @@ JQASSISTANT_CLI_DOWNLOAD_URL          | https://repo1.maven.org/maven2/com/busch
 JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Neo4j v5 & v4: "distribution.zip" |
 DATA_DIRECTORY                        | $( pwd -P )/data                    | Path where Neo4j writes its data to (outside tools dir) |
 RUNTIME_DIRECTORY                     | $( pwd -P )/runtime                 | Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir) |
+IGNORED_JARS_DIRECTORY                | ./../ignored-jars                   | Directory to move the filtered out .jar files to |
