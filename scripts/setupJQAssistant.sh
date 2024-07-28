@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Installs (download and unzip) jQAssistant (https://jqassistant.org/get-started).
+# Installs (download and unzip) jQAssistant (https://jqassistant.github.io/jqassistant/current).
 
 # Requires download.sh
 

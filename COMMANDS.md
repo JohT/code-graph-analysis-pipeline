@@ -24,6 +24,7 @@
     - [Start Neo4j Graph Database](#start-neo4j-graph-database)
     - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
     - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
+    - [Sort out jar files containing external libraries](#sort-out-jar-files-containing-external-libraries)
     - [Download Typescript project to analyze](#download-typescript-project-to-analyze)
     - [Reset the database and scan the java artifacts](#reset-the-database-and-scan-the-java-artifacts)
     - [Import git data](#import-git-data)
@@ -209,7 +210,7 @@ It runs the script with a temporary `NEO4J_HOME` environment variable to not int
 
 ### Setup jQAssistant Java Code Analyzer
 
-Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.github.io/jqassistant/doc).
+Use [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) to download [jQAssistant](https://jqassistant.github.io/jqassistant/current).
 
 ### Download Maven Artifacts to analyze
 
@@ -221,6 +222,17 @@ to download a Maven artifact into the artifacts directory:
 - `-v <maven artifact version>`
 - `-t <maven artifact type (optional, defaults to jar)>`
 - `-d <target directory for the downloaded file (optional, defaults to "artifacts")>`
+
+### Sort out jar files containing external libraries
+
+After collecting all the Java artifacts it might be needed to sort out external libraries you don't want to analyze directly.
+For that you can use [sortOutExternalJavaJarFiles.sh](./scripts/sortOutExternalJavaJarFiles.sh). It needs to be started in the directory of the jar files ("artifacts") of you analysis workspace and will create a new directory called "ignored-jars" besides the "artifacts" directory so that those jars don't get analyzed.
+
+Here is an example that can be started from your temp analysis workspace and that will filter out all jar files that don't contain any `org.neo4j` package:
+
+```script
+cd artifacts; ./../../../scripts/sortOutExternalJavaJarFiles.sh org.neo4j
+```
 
 ### Download Typescript project to analyze
 
@@ -449,7 +461,7 @@ Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJu
 ## References
 
 - [Conda](https://conda.io)
-- [jQAssistant](https://jqassistant.github.io/jqassistant/doc)
+- [jQAssistant](https://jqassistant.github.io/jqassistant/current)
 - [Jupyter Notebook](https://jupyter.org)
 - [Jupyter Notebook - Using as a command line tool](https://nbconvert.readthedocs.io/en/latest/usage.html)
 - [Jupyter Notebook - Installing TeX for PDF conversion](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex)
