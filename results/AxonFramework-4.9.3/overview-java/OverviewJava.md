@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>68849</td>
-      <td>247829</td>
+      <td>68852</td>
+      <td>247834</td>
       <td>6</td>
       <td>97</td>
       <td>1652</td>
@@ -73,15 +73,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>0</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Interface</td>
-      <td>154</td>
+      <td>Class</td>
+      <td>587</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-messaging-4.9.3</td>
       <td>786</td>
-      <td>Class</td>
-      <td>587</td>
+      <td>Interface</td>
+      <td>154</td>
     </tr>
     <tr>
       <th>2</th>
@@ -143,15 +143,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>10</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>12</th>
