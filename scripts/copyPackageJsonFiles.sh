@@ -38,5 +38,6 @@ fi
         fileName=$(basename "${file}")
         jq 'del(.author)' "${targetDirectory}/${fileName}" > "${targetDirectory}/${fileName}.edited"
         jq 'del(.contributors)' "${targetDirectory}/${fileName}.edited" > "${targetDirectory}/${fileName}"
+        rm -f "${targetDirectory}/${fileName}.edited"
     done
 )
