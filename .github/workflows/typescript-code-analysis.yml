@@ -106,6 +106,10 @@ jobs:
       shell: bash -el {0}
       run: conda info
 
+    - name: Conda environment list updates
+      shell: bash -el {0}
+      run: conda update --all --dry-run | grep -Fe '-->'
+
     - name: Setup temp directory if missing
       run: mkdir -p ./temp
 
