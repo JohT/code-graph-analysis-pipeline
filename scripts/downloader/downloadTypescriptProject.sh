@@ -139,8 +139,9 @@ usePackageManagerToInstallDependencies() {
   case "${packageManager}" in
     npm)
       # npm ci is not sufficient for projects like "ant-design" that rely on generating the package-lock
-      # Even if this is not standard, this is an acceptable solution for standard and edge cases.
-      npm install --ignore-scripts --verbose || exit
+      # Even if this is not standard, this is an acceptable solution since it is only used to prepare scanning.
+      # The same applies to "--force" which shouldn't be done normally.
+      npm install --ignore-scripts --force --verbose || exit
       ;;
     pnpm)
       pnpm install --frozen-lockfile || exit
@@ -177,8 +178,8 @@ fi
   cd "${fullSourceDirectory}" || exit
   usePackageManagerToInstallDependencies
   echo "downloadTypescriptProject: Scanning Typescript source using @jqassistant/ts-lce..."
-  npx --yes @jqassistant/ts-lce@1.2.0 >"./../../runtime/logs/jqassistant-typescript-scan-${projectName}.log" 2>&1 || exit
+  npx --yes @jqassistant/ts-lce@1.2.0 --extension React >"./../../runtime/logs/jqassistant-typescript-scan-${projectName}.log" 2>&1 || exit
 )
 echo "downloadTypescriptProject: Moving scanned results into the artifacts/typescript directory..."
 mkdir -p artifacts/typescript
-mv -nv "${fullSourceDirectory}/.reports/jqa/ts-output.json" "artifacts/typescript/${fullProjectName}.json"
+mv -fv "${fullSourceDirectory}/.reports/jqa/ts-output.json" "artifacts/typescript/${fullProjectName}.json"
