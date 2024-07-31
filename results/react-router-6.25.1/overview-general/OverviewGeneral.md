@@ -742,7 +742,7 @@ Shows the 40 labels with the highest number of nodes.
 Lists the 30 relationship types with the highest number of occurrences.
 The whole table can be found in the CSV report `Relationship_type_count`.
 
-    Total number of relationships: 44913
+    Total number of relationships: 44915
 
 
 
@@ -763,139 +763,139 @@ The whole table can be found in the CSV report `Relationship_type_count`.
       <th>0</th>
       <td>CONTAINS_CHANGED</td>
       <td>21331</td>
-      <td>47.494044</td>
+      <td>47.491929</td>
     </tr>
     <tr>
       <th>1</th>
       <td>AUTHORED</td>
       <td>5646</td>
-      <td>12.570971</td>
+      <td>12.570411</td>
     </tr>
     <tr>
       <th>2</th>
       <td>HAS_COMMIT</td>
       <td>5646</td>
-      <td>12.570971</td>
+      <td>12.570411</td>
     </tr>
     <tr>
       <th>3</th>
       <td>HAS_PARENT</td>
       <td>4811</td>
-      <td>10.711821</td>
+      <td>10.711344</td>
     </tr>
     <tr>
       <th>4</th>
       <td>HAS_FILE</td>
       <td>3534</td>
-      <td>7.868546</td>
+      <td>7.868195</td>
     </tr>
     <tr>
       <th>5</th>
       <td>HAS_AUTHOR</td>
       <td>994</td>
-      <td>2.213168</td>
+      <td>2.213069</td>
     </tr>
     <tr>
       <th>6</th>
       <td>DEPENDS_ON</td>
       <td>953</td>
-      <td>2.121880</td>
+      <td>2.121786</td>
     </tr>
     <tr>
       <th>7</th>
       <td>CONTAINS</td>
       <td>468</td>
-      <td>1.042015</td>
+      <td>1.041968</td>
     </tr>
     <tr>
       <th>8</th>
       <td>OF_TYPE</td>
       <td>330</td>
-      <td>0.734754</td>
+      <td>0.734721</td>
     </tr>
     <tr>
       <th>9</th>
       <td>EXPORTS</td>
       <td>271</td>
-      <td>0.603389</td>
+      <td>0.603362</td>
     </tr>
     <tr>
       <th>10</th>
       <td>REFERENCES</td>
       <td>198</td>
-      <td>0.440852</td>
+      <td>0.440833</td>
     </tr>
     <tr>
       <th>11</th>
       <td>DECLARES</td>
       <td>185</td>
-      <td>0.411907</td>
+      <td>0.411889</td>
     </tr>
     <tr>
       <th>12</th>
       <td>HAS_MEMBER</td>
       <td>99</td>
-      <td>0.220426</td>
+      <td>0.220416</td>
     </tr>
     <tr>
       <th>13</th>
       <td>HAS_TYPE_ARGUMENT</td>
       <td>99</td>
-      <td>0.220426</td>
+      <td>0.220416</td>
     </tr>
     <tr>
       <th>14</th>
       <td>RETURNS</td>
       <td>81</td>
-      <td>0.180349</td>
+      <td>0.180341</td>
     </tr>
     <tr>
       <th>15</th>
       <td>HAS_PARAMETER</td>
       <td>71</td>
-      <td>0.158083</td>
+      <td>0.158076</td>
     </tr>
     <tr>
       <th>16</th>
       <td>INITIALIZED_WITH</td>
       <td>32</td>
-      <td>0.071249</td>
+      <td>0.071246</td>
     </tr>
     <tr>
       <th>17</th>
       <td>REQUIRES_CONCEPT</td>
       <td>28</td>
-      <td>0.062343</td>
+      <td>0.062340</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>USES</td>
-      <td>25</td>
-      <td>0.055663</td>
+      <td>RESOLVES_TO</td>
+      <td>26</td>
+      <td>0.057887</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>RESOLVES_TO</td>
-      <td>24</td>
-      <td>0.053437</td>
+      <td>USES</td>
+      <td>25</td>
+      <td>0.055661</td>
     </tr>
     <tr>
       <th>20</th>
       <td>INCLUDES_CONCEPT</td>
       <td>19</td>
-      <td>0.042304</td>
+      <td>0.042302</td>
     </tr>
     <tr>
       <th>21</th>
       <td>SIMILAR</td>
       <td>10</td>
-      <td>0.022265</td>
+      <td>0.022264</td>
     </tr>
     <tr>
       <th>22</th>
       <td>EXTENDS</td>
       <td>7</td>
-      <td>0.015586</td>
+      <td>0.015585</td>
     </tr>
     <tr>
       <th>23</th>
@@ -987,7 +987,7 @@ Lists the 30 relationships type with the lowest number of occurrences up to 0.5%
       <th>1</th>
       <td>REFERENCED_PROJECTS</td>
       <td>5</td>
-      <td>0.011133</td>
+      <td>0.011132</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1035,79 +1035,79 @@ Lists the 30 relationships type with the lowest number of occurrences up to 0.5%
       <th>9</th>
       <td>EXTENDS</td>
       <td>7</td>
-      <td>0.015586</td>
+      <td>0.015585</td>
     </tr>
     <tr>
       <th>10</th>
       <td>SIMILAR</td>
       <td>10</td>
-      <td>0.022265</td>
+      <td>0.022264</td>
     </tr>
     <tr>
       <th>11</th>
       <td>INCLUDES_CONCEPT</td>
       <td>19</td>
-      <td>0.042304</td>
+      <td>0.042302</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>RESOLVES_TO</td>
-      <td>24</td>
-      <td>0.053437</td>
+      <td>USES</td>
+      <td>25</td>
+      <td>0.055661</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>USES</td>
-      <td>25</td>
-      <td>0.055663</td>
+      <td>RESOLVES_TO</td>
+      <td>26</td>
+      <td>0.057887</td>
     </tr>
     <tr>
       <th>14</th>
       <td>REQUIRES_CONCEPT</td>
       <td>28</td>
-      <td>0.062343</td>
+      <td>0.062340</td>
     </tr>
     <tr>
       <th>15</th>
       <td>INITIALIZED_WITH</td>
       <td>32</td>
-      <td>0.071249</td>
+      <td>0.071246</td>
     </tr>
     <tr>
       <th>16</th>
       <td>HAS_PARAMETER</td>
       <td>71</td>
-      <td>0.158083</td>
+      <td>0.158076</td>
     </tr>
     <tr>
       <th>17</th>
       <td>RETURNS</td>
       <td>81</td>
-      <td>0.180349</td>
+      <td>0.180341</td>
     </tr>
     <tr>
       <th>18</th>
       <td>HAS_TYPE_ARGUMENT</td>
       <td>99</td>
-      <td>0.220426</td>
+      <td>0.220416</td>
     </tr>
     <tr>
       <th>19</th>
       <td>HAS_MEMBER</td>
       <td>99</td>
-      <td>0.220426</td>
+      <td>0.220416</td>
     </tr>
     <tr>
       <th>20</th>
       <td>DECLARES</td>
       <td>185</td>
-      <td>0.411907</td>
+      <td>0.411889</td>
     </tr>
     <tr>
       <th>21</th>
       <td>REFERENCES</td>
       <td>198</td>
-      <td>0.440852</td>
+      <td>0.440833</td>
     </tr>
   </tbody>
 </table>
@@ -1462,7 +1462,7 @@ Lists the 30 node labels and their relationship types with the highest number of
 ## Graph Density
 
     total_number_of_nodes (vertices): 11822
-    total_number_of_relationships (edges): 44913
-    -> total directed graph density: 0.0003213859543697348
-    -> total directed graph density in percent: 0.032138595436973484
+    total_number_of_relationships (edges): 44915
+    -> total directed graph density: 0.0003214002658588079
+    -> total directed graph density in percent: 0.03214002658588079
 
