@@ -50,14 +50,22 @@ fi
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cypher"
 execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_full_qualified_name.cypher"
+execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_name.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_module_properties.cypher"
+
+# Preparation - Enrich Graph for Typescript by adding a name properties
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_projects.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_scan_nodes.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding relationships between Modules with the same globalFqn
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_modules.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
+
+# Preparation - Enrich Graph for Typescript by adding relationships between corresponding TS:Project and NPM:Package nodes
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
 execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
