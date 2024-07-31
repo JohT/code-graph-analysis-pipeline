@@ -50,6 +50,7 @@ fi
 # Preparation - Create indices
 execute_cypher "${CYPHER_DIR}/Create_Java_Type_index_for_full_qualified_name.cypher"
 execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_full_qualified_name.cypher"
+execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_name.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_module_properties.cypher"
