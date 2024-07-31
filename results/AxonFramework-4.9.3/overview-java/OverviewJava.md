@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>68847</td>
-      <td>247817</td>
+      <td>68849</td>
+      <td>247824</td>
       <td>6</td>
       <td>97</td>
       <td>1652</td>
@@ -101,8 +101,8 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>4</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
-      <td>Annotation</td>
-      <td>12</td>
+      <td>Interface</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>5</th>
@@ -115,8 +115,8 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>6</th>
       <td>axon-modelling-4.9.3</td>
       <td>156</td>
-      <td>Interface</td>
-      <td>28</td>
+      <td>Annotation</td>
+      <td>12</td>
     </tr>
     <tr>
       <th>7</th>
@@ -136,22 +136,22 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>9</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Interface</td>
+      <td>32</td>
     </tr>
     <tr>
       <th>10</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Interface</td>
-      <td>32</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-eventsourcing-4.9.3</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>12</th>
@@ -178,21 +178,21 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>15</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Enum</td>
-      <td>1</td>
+      <td>Interface</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>16</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Interface</td>
-      <td>15</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>17</th>
       <td>axon-configuration-4.9.3</td>
       <td>40</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
