@@ -6,6 +6,41 @@ This file was generated with the script [generateImageReference.sh](./../scripts
 
 Image  | Analysis |
 -------|----------|
+| [ExternalDependenciesJava_14_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_14_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_17_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_17_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_21_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_21_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_23_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_23_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_35_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_35_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_37_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_37_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_41_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_41_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_43_0.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_43_0.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_58_1.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_58_1.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_60_1.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_60_1.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_82_1.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_82_1.png) | AxonFramework-4.10.0 |
+| [ExternalDependenciesJava_84_1.png](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_84_1.png) | AxonFramework-4.10.0 |
+| [graphVisualizationJavaArtifactDependencies-0.png](./AxonFramework-4.10.0/graph-visualization-java-artifact-dependencies/graphVisualizationJavaArtifactDependencies-0.png) | AxonFramework-4.10.0 |
+| [error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png](./AxonFramework-4.10.0/graph-visualization-typescript-module-dependencies/error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png) | AxonFramework-4.10.0 |
+| [MethodMetricsJava_14_1.png](./AxonFramework-4.10.0/method-metrics-java/MethodMetricsJava_files/MethodMetricsJava_14_1.png) | AxonFramework-4.10.0 |
+| [MethodMetricsJava_26_1.png](./AxonFramework-4.10.0/method-metrics-java/MethodMetricsJava_files/MethodMetricsJava_26_1.png) | AxonFramework-4.10.0 |
+| [NodeEmbeddingsJava_21_0.png](./AxonFramework-4.10.0/node-embeddings-java/NodeEmbeddingsJava_files/NodeEmbeddingsJava_21_0.png) | AxonFramework-4.10.0 |
+| [NodeEmbeddingsJava_23_5.png](./AxonFramework-4.10.0/node-embeddings-java/NodeEmbeddingsJava_files/NodeEmbeddingsJava_23_5.png) | AxonFramework-4.10.0 |
+| [NodeEmbeddingsJava_25_5.png](./AxonFramework-4.10.0/node-embeddings-java/NodeEmbeddingsJava_files/NodeEmbeddingsJava_25_5.png) | AxonFramework-4.10.0 |
+| [ObjectOrientedDesignMetricsJava_41_0.png](./AxonFramework-4.10.0/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava_files/ObjectOrientedDesignMetricsJava_41_0.png) | AxonFramework-4.10.0 |
+| [ObjectOrientedDesignMetricsJava_43_0.png](./AxonFramework-4.10.0/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava_files/ObjectOrientedDesignMetricsJava_43_0.png) | AxonFramework-4.10.0 |
+| [OverviewGeneral_13_1.png](./AxonFramework-4.10.0/overview-general/OverviewGeneral_files/OverviewGeneral_13_1.png) | AxonFramework-4.10.0 |
+| [OverviewGeneral_17_1.png](./AxonFramework-4.10.0/overview-general/OverviewGeneral_files/OverviewGeneral_17_1.png) | AxonFramework-4.10.0 |
+| [OverviewGeneral_21_1.png](./AxonFramework-4.10.0/overview-general/OverviewGeneral_files/OverviewGeneral_21_1.png) | AxonFramework-4.10.0 |
+| [OverviewGeneral_26_1.png](./AxonFramework-4.10.0/overview-general/OverviewGeneral_files/OverviewGeneral_26_1.png) | AxonFramework-4.10.0 |
+| [OverviewGeneral_30_1.png](./AxonFramework-4.10.0/overview-general/OverviewGeneral_files/OverviewGeneral_30_1.png) | AxonFramework-4.10.0 |
+| [OverviewJava_17_1.png](./AxonFramework-4.10.0/overview-java/OverviewJava_files/OverviewJava_17_1.png) | AxonFramework-4.10.0 |
+| [OverviewJava_21_1.png](./AxonFramework-4.10.0/overview-java/OverviewJava_files/OverviewJava_21_1.png) | AxonFramework-4.10.0 |
+| [OverviewJava_23_1.png](./AxonFramework-4.10.0/overview-java/OverviewJava_files/OverviewJava_23_1.png) | AxonFramework-4.10.0 |
+| [OverviewJava_25_1.png](./AxonFramework-4.10.0/overview-java/OverviewJava_files/OverviewJava_25_1.png) | AxonFramework-4.10.0 |
+| [OverviewJava_27_1.png](./AxonFramework-4.10.0/overview-java/OverviewJava_files/OverviewJava_27_1.png) | AxonFramework-4.10.0 |
+| [OverviewJava_32_0.png](./AxonFramework-4.10.0/overview-java/OverviewJava_files/OverviewJava_32_0.png) | AxonFramework-4.10.0 |
+| [VisibilityMetricsJava_17_2.png](./AxonFramework-4.10.0/visibility-metrics-java/VisibilityMetricsJava_files/VisibilityMetricsJava_17_2.png) | AxonFramework-4.10.0 |
+| [VisibilityMetricsJava_24_2.png](./AxonFramework-4.10.0/visibility-metrics-java/VisibilityMetricsJava_files/VisibilityMetricsJava_24_2.png) | AxonFramework-4.10.0 |
+| [Wordcloud_10_1.png](./AxonFramework-4.10.0/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | AxonFramework-4.10.0 |
 | [artifactDependenciesGraph-0.png](./AxonFramework-4.6.8/artifact-dependencies-graph/artifactDependenciesGraph-0.png) | AxonFramework-4.6.8 |
 | [ExternalDependencies_14_0.png](./AxonFramework-4.6.8/external-dependencies/ExternalDependencies_files/ExternalDependencies_14_0.png) | AxonFramework-4.6.8 |
 | [ExternalDependencies_17_0.png](./AxonFramework-4.6.8/external-dependencies/ExternalDependencies_files/ExternalDependencies_17_0.png) | AxonFramework-4.6.8 |
