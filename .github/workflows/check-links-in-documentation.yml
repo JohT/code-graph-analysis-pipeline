@@ -25,5 +25,15 @@ jobs:
       with:
         node-version-file: '.nvmrc'
 
+    - name: Skip on update of AxonFramework by bot (Renovate)
+      if: |
+        github.event_name == 'pull_request' && 
+        startsWith(github.event.pull_request.title, 'Update dependency AxonFramework') && 
+        github.event.pull_request.user.type == 'Bot'
+      run: |
+        echo "Skipping link check on AxonFramework updates since the updated links tto the reports will only be active " 
+        echo "skip_link_check=true" >> $GITHUB_ENV
+
     - name: Check links in top level documentation Markdown files
+      if: ${{ ! env.skip_link_check}}
       run: npx --yes markdown-link-check --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md
