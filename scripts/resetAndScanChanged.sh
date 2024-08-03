@@ -16,7 +16,7 @@ set -o errexit -o pipefail
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "resetAndScanChanged SCRIPTS_DIR=${SCRIPTS_DIR}"
 
-# Copy 
+# Prepare scan
 source "${SCRIPTS_DIR}/copyPackageJsonFiles.sh"
 
 # Scan and analyze Artifacts when they were changed
