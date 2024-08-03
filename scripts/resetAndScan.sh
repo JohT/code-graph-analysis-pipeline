@@ -60,15 +60,27 @@ else
     echo "resetAndScan: jQAssistant configuration won't be changed since it already exists."
 fi
 
-directoriesAndFilesToScan="${ARTIFACTS_DIRECTORY} $(source ${SCRIPTS_DIR}/findTypescriptDataFiles.sh)"
+# Collect all files and directories to scan
+directoriesAndFilesToScan=""
+
+# Scan all files in the artifacts directory (e.g. *.ear, *.war, *.jar for Java)
+if [ -d "${ARTIFACTS_DIRECTORY}" ] ; then
+    directoriesAndFilesToScan="${directoriesAndFilesToScan},./${ARTIFACTS_DIRECTORY}"
+fi
+
+# Scan Typescript analysis json data files in the artifacts/typescript directory
+typescriptAnalysisFiles="$(source "${SCRIPTS_DIR}/findTypescriptDataFiles.sh")"
+if [ -n "${typescriptAnalysisFiles}" ]; then
+    directoriesAndFilesToScan="${directoriesAndFilesToScan},${typescriptAnalysisFiles}"
+fi
 
 # Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
 echo "resetAndScan: Using jQAssistant CLI version ${JQASSISTANT_CLI_VERSION} to scan: ${directoriesAndFilesToScan}"
 
-"${JQASSISTANT_BIN}"/jqassistant.sh scan -f ./${directoriesAndFilesToScan}
+"${JQASSISTANT_BIN}"/jqassistant.sh scan -f "${directoriesAndFilesToScan}"
 
 # Use jQAssistant to add dependencies between artifacts, package dependencies, artifact dependencies and the java version to the Neo4j Graph Database
-echo "resetAndScan: Analyzing ${ARTIFACTS_DIRECTORY} with jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
+echo "resetAndScan: Analyzing using jQAssistant CLI version ${JQASSISTANT_CLI_VERSION}"
 
 "${JQASSISTANT_BIN}"/jqassistant.sh analyze
 

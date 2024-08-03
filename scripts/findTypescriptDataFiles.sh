@@ -26,4 +26,4 @@ if [ ! -d "./${ARTIFACTS_DIRECTORY}/${TYPESCRIPT_ARTIFACTS_DIRECTORY}" ] ; then
     return 0
 fi
 
-find "./${ARTIFACTS_DIRECTORY}/${TYPESCRIPT_ARTIFACTS_DIRECTORY}" -type f -name '*.json' -exec echo {} \; | sed 's/^/typescript:project::/' | tr '\n' ' ' 
+find "./${ARTIFACTS_DIRECTORY}/${TYPESCRIPT_ARTIFACTS_DIRECTORY}" -type f -name '*.json' -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/'
