@@ -5,7 +5,7 @@
 # CAUTION: This script deletes all relationships and nodes in the Neo4j Graph Database. 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD is required to login to Neo4j.
 
-# Requires findTypescriptDataFiles.sh, importGit.sh
+# Requires importGit.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -60,7 +60,7 @@ else
     echo "resetAndScan: jQAssistant configuration won't be changed since it already exists."
 fi
 
-# Collect all files and directories to scan
+# -- Collect all files and directories to scan ---------------------
 directoriesAndFilesToScan=""
 
 # Scan all files in the artifacts directory (e.g. *.ear, *.war, *.jar for Java)
@@ -69,10 +69,12 @@ if [ -d "${ARTIFACTS_DIRECTORY}" ] ; then
 fi
 
 # Scan Typescript analysis json data files in the artifacts/typescript directory
-typescriptAnalysisFiles="$(source "${SCRIPTS_DIR}/findTypescriptDataFiles.sh")"
+typescriptAnalysisFiles="$(find . -type f -path "*/.reports/jqa/ts-output.json" -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
 if [ -n "${typescriptAnalysisFiles}" ]; then
     directoriesAndFilesToScan="${directoriesAndFilesToScan},${typescriptAnalysisFiles}"
 fi
+
+# ------------------------------------------------------------------
 
 # Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
 echo "resetAndScan: Using jQAssistant CLI version ${JQASSISTANT_CLI_VERSION} to scan: ${directoriesAndFilesToScan}"

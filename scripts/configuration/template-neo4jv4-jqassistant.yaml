@@ -94,7 +94,6 @@ jqassistant:
       #
       # -Djqassistant.store.properties
       properties:
-        json.file.exclude: "*/typescript/*.json"
 
   # The Scanner configuration
   scan:
@@ -127,6 +126,7 @@ jqassistant:
     # -Djqassistant.scan.properties
     properties:
       # plugin.property.key: value
+      json.file.exclude: "*/.reports/jqa/ts-output.json"
 
   # The analyze configuration
   analyze:
