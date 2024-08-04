@@ -5,6 +5,9 @@
 # CAUTION: This script deletes all relationships and nodes in the Neo4j Graph Database. 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD is required to login to Neo4j.
 
+# Command line options:
+#   This script takes one parameter that contains the comma-separated list of paths to scan
+
 # Requires importGit.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
@@ -17,7 +20,6 @@ JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv5-jqa
 NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD:-""} # Neo4j login password that was set to replace the temporary initial password
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Directory with the Java artifacts to scan and analyze
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
-SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -30,6 +32,15 @@ echo "resetAndScan: SCRIPTS_DIR=${SCRIPTS_DIR}"
 JQASSISTANT_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_BIN="${JQASSISTANT_DIRECTORY}/bin"
 JQASSISTANT_CONFIG_TEMPLATE_PATH="${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}"
+
+# Parse the single parameter that contains the comma-separated file and directory names to scan.
+if [ "$#" -eq 0 ]; then
+    echo "resetAndScan: Skipping reset and scan since no paths to scan were passed."
+    return 0
+else
+    directoriesAndFilesToScan="$1"
+    shift
+fi
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
@@ -61,30 +72,7 @@ else
     echo "resetAndScan: jQAssistant configuration won't be changed since it already exists."
 fi
 
-# -- Collect all files and directories to scan ---------------------
-directoriesAndFilesToScan=""
-
-# Scan all files in the artifacts directory (e.g. *.ear, *.war, *.jar for Java)
-if [ -d "${ARTIFACTS_DIRECTORY}" ] ; then
-    directoriesAndFilesToScan="${directoriesAndFilesToScan},./${ARTIFACTS_DIRECTORY}"
-fi
-
-if [ -d "${SOURCE_DIRECTORY}" ] ; then
-    # Scan Typescript analysis json data files in the source directory
-    typescriptAnalysisFiles="$(find "${SOURCE_DIRECTORY}" -type f -path "*/.reports/jqa/ts-output.json" -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
-    if [ -n "${typescriptAnalysisFiles}" ]; then
-        directoriesAndFilesToScan="${directoriesAndFilesToScan},${typescriptAnalysisFiles}"
-    fi
-    # Scan package.json files for npm (nodes package manager) in the source directory
-    npmPackageJsonFiles="$(find "${SOURCE_DIRECTORY}" -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} | tr '\n' ',' | sed 's/,$/\n/')"
-    if [ -n "${npmPackageJsonFiles}" ]; then
-        directoriesAndFilesToScan="${directoriesAndFilesToScan},${npmPackageJsonFiles}"
-    fi
-fi
-
-# ------------------------------------------------------------------
-
-# Use jQAssistant to scan the downloaded artifacts and write the results into the separate, local Neo4j Graph Database
+# Use jQAssistant to scan the downloaded artifacts and stores the results into the local Neo4j Graph Database
 echo "resetAndScan: Using jQAssistant CLI version ${JQASSISTANT_CLI_VERSION} to scan the following files and directories:"
 for directoryOrFileToScan in ${directoriesAndFilesToScan//,/ }; do
     echo " - ${directoryOrFileToScan}"

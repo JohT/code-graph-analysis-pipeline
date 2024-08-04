@@ -38,6 +38,7 @@ REPORTS_SCRIPTS_DIRECTORY=${REPORTS_SCRIPTS_DIRECTORY:-"reports"} # Working dire
 REPORT_COMPILATIONS_SCRIPTS_DIRECTORY=${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY:-"compilations"} # Repository directory that contains scripts that execute selected report generation scripts
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY=${SETTINGS_PROFILE_SCRIPTS_DIRECTORY:-"profiles"} # Repository directory that contains scripts containing settings
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Working directory containing the artifacts to be analyzed
+SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
 
 # Function to display script usage
 usage() {
@@ -86,9 +87,9 @@ if ! [[ ${settingsProfile} =~ ^[[:alnum:]]+$ ]]; then
   exit 1
 fi
 
-# Check if Neo4j is installed
-if [ ! -d "${ARTIFACTS_DIRECTORY}" ] ; then
-    echo "analyze: The ${ARTIFACTS_DIRECTORY} directory doesn't exist. Please download artifacts first."
+# Check if there is something to scan and analyze
+if [ ! -d "${ARTIFACTS_DIRECTORY}" ] && [ ! -d "${SOURCE_DIRECTORY}" ] ; then
+    echo "analyze: Neither ${ARTIFACTS_DIRECTORY} nor the ${SOURCE_DIRECTORY} directory exist. Please download artifacts/sources first."
     exit 1
 fi
 
