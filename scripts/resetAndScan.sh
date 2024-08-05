@@ -14,11 +14,6 @@ JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.3.1"} # 2.0.3 is the newes
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv5"} #  Neo4j v5: "jqassistant-commandline-neo4jv5", Neo4j v4: "jqassistant-commandline-neo4jv4"
 JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4jv5-jqassistant.yaml"} #  Neo4j v5: "template-neo4jv5-jqassistant.yaml", Neo4j v4: "template-neo4jv4-jqassistant.yaml"
 
-NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.20.0"}
-NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
-NEO4J_BOLT_URI=${NEO4J_BOLT_URI:-"bolt://localhost:${NEO4J_BOLT_PORT}"} # Neo4j's own "Bolt Protocol" address
-NEO4J_USER=${NEO4J_USER:-"neo4j"} # Neo4j login user
 NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD:-""} # Neo4j login password that was set to replace the temporary initial password
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Directory with the Java artifacts to scan and analyze
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
@@ -49,7 +44,7 @@ fi
 
 # Check if jQAssistant is installed
 if [ ! -d "${JQASSISTANT_BIN}" ] ; then
-    echo "resetAndScan: Error: ${JQASSISTANT_BIN} doesnt exist. Please run setupJQAssistant first."
+    echo "resetAndScan: Error: ${JQASSISTANT_BIN} doesn't exist. Please run setupJQAssistant first."
     exit 1
 else
     echo "resetAndScan: Using jQAssistant binary directory ${JQASSISTANT_BIN}"
@@ -58,7 +53,6 @@ fi
 # Create jQAssistant configuration YAML file by copying it from a corresponding template
 mkdir -p "./.jqassistant"
 
-echo "resetAndScan: Check if ./.jqassistant/${JQASSISTANT_CONFIG_TEMPLATE} needs to be copied."
 if [ ! -f "./.jqassistant/${JQASSISTANT_CONFIG_TEMPLATE}" ]; then
     cp "${JQASSISTANT_CONFIG_TEMPLATE_PATH}" "./.jqassistant/"
     echo "resetAndScan: jQAssistant configuration copied from configuration template"
