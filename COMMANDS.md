@@ -300,7 +300,7 @@ The optional parameter `--source directory-path-to-the-source-folder-containing-
 
 #### Environment Variable
 
-- `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` supports the values `none`, `aggregated` and `full` (default). With it, you can switch off git import (`none`), import aggregated data for a smaller memory footprint (`aggregated`) or  import all git commits and the files that where changed with them (`full`=default) .
+- `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` supports the values `none`, `aggregated`, `full` and `plugin` (default). With it, you can switch off git import (`none`), import aggregated data for a smaller memory footprint (`aggregated`), import all commits with git log in a simple way (`full`) or let a plugin take care of git data (`plugin`= `""`=default) .
 
 #### Resolving git files to code files
 

@@ -40,6 +40,14 @@ if [ -d "${SOURCE_DIRECTORY}" ] ; then
     if [ -n "${npmPackageJsonFiles}" ]; then
         directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
     fi
+
+    # Scan git repositories in the artifacts directory
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ] ; then
+        gitDirectories="$(find "${SOURCE_DIRECTORY}" -type d -name ".git" -exec echo {} \; | tr '\n' ',' | sed 's/,$/\n/')"
+        if [ -n "${gitDirectories}" ]; then
+            directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${gitDirectories}"
+        fi
+    fi
 else
     echo "findPathsToScan: Source directory ${SOURCE_DIRECTORY} doesn't exist and will therefore be skipped." >&2
 fi

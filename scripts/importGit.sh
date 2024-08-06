@@ -14,14 +14,14 @@ set -o errexit -o pipefail
 # Overrideable Defaults
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
 IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"import"}
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"full"} # Select how to import git log data. Options: "none", "aggregated", "full". Default="full".
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
 
 # Default and initial values for command line options
 source="${SOURCE_DIRECTORY}"
 
 # Read  command line options
 USAGE="importGit: Usage: $0 [--source <directory containing git repositories>(default=source)]"
-while [[ $# -gt 0 ]]; do
+while [ "$#" -gt "0" ]; do
   key="$1"
   case $key in
     --source)
@@ -120,21 +120,33 @@ importAggregatedGitLog() {
   time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_aggregated_git_log_csv_data.cypher" "${@}"
 }
 
-commonPostGitLogImport() {
+commonPostGitImport() {
   echo "importGit: Creating relationships to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher"
 }
 
 postGitLogImport() {
-  commonPostGitLogImport
+  commonPostGitImport
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
-  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_commits.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_commits.cypher"
+}
+
+postGitPluginImport() {
+  echo "importGit: Creating indexes for plugin-provided git data..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_sha.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
+
+  commonPostGitImport
+
+  echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
 }
 
 postAggregatedGitLogImport() {
-  commonPostGitLogImport
+  commonPostGitImport
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
@@ -146,8 +158,8 @@ mkdir -p "${IMPORT_DIRECTORY}"
 # Internal constants
 NEO4J_FULL_IMPORT_DIRECTORY=$(cd "${IMPORT_DIRECTORY}"; pwd)
 
-# Skip import when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "none"
-if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
+# Skip import if it is switched off ("none") or if it already taken care of by a plugin ("plugin"), which is the default.
+if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ]; then
 
   existing_data_has_been_deleted=false
 
@@ -163,7 +175,7 @@ if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
     
     create_git_repository_node "${full_repository_path}"
 
-    if [[ ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "aggregated" ]]; then
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
         (cd "${repository}" && source "${SCRIPTS_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
         importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
@@ -177,4 +189,9 @@ if [[ ! ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT} == "none" ]]; then
   done
 else
   echo "importGit: Skipped git import because of IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}"
+fi
+
+# Even if the data had already been imported by a plugin, the post data enrichment still needs to be done.
+if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ]; then
+  postGitPluginImport
 fi
