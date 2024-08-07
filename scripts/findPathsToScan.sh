@@ -36,10 +36,12 @@ if [ -d "${SOURCE_DIRECTORY}" ] ; then
     fi
 
     # Scan package.json files for npm (nodes package manager) in the source directory
-    npmPackageJsonFiles="$(find "${SOURCE_DIRECTORY}" -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} | tr '\n' ',' | sed 's/,$/\n/')"
-    if [ -n "${npmPackageJsonFiles}" ]; then
-        directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
-    fi
+    # # TODO The following lines can be reactivated when the following issue is resolved:
+    # https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
+    #npmPackageJsonFiles="$(find "${SOURCE_DIRECTORY}" -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} | tr '\n' ',' | sed 's/,$/\n/')"
+    #if [ -n "${npmPackageJsonFiles}" ]; then
+    #    directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
+    #fi
 
     # Scan git repositories in the artifacts directory
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ] ; then
