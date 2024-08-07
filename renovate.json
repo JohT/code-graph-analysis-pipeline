@@ -119,8 +119,6 @@
     },
     {
       "fileMatch": [
-        "^scripts\/profiles\/Neo4jv5\\.sh$",
-        "^scripts\/profiles\/Default\\.sh$",
         "^scripts\/[^\/]*\\.sh$"
       ],
       "matchStrings": [

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Finds all files and directories to scan and analyze and provides them as comma-separated list.
+# This includes the scan of Typescript projects that leads to the intermediate json data file for jQAssistant.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -21,16 +22,23 @@ appendNonEmpty() {
 # Collect all files and directories to scan
 directoriesAndFilesToScan=""
 
-if [ -d "${ARTIFACTS_DIRECTORY}" ] ; then
+if [ -d "./${ARTIFACTS_DIRECTORY}" ] ; then
     # Scan all files in the artifacts directory (e.g. *.ear, *.war, *.jar for Java)
     directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")./${ARTIFACTS_DIRECTORY}"
 else
     echo "findPathsToScan: Artifacts directory ${ARTIFACTS_DIRECTORY} doesn't exist and will therefore be skipped." >&2
 fi
 
-if [ -d "${SOURCE_DIRECTORY}" ] ; then
+if [ -d "./${SOURCE_DIRECTORY}" ] ; then
+    if command -v "npx" &> /dev/null ; then
+        echo "findPathsToScan: Scanning Typescript source using @jqassistant/ts-lce..." >&2
+        ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.0 --extension React >"./../runtime/logs/jqassistant-typescript-scan.log" 2>&1 || exit )
+    else
+        echo "findPathToScan Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects."
+    fi
+
     # Scan Typescript analysis json data files in the source directory
-    typescriptAnalysisFiles="$(find "${SOURCE_DIRECTORY}" -type f -path "*/.reports/jqa/ts-output.json" -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
+    typescriptAnalysisFiles="$(find "./${SOURCE_DIRECTORY}" -type f -path "*/.reports/jqa/ts-output.json" -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
     if [ -n "${typescriptAnalysisFiles}" ]; then
         directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${typescriptAnalysisFiles}"
     fi
@@ -45,7 +53,7 @@ if [ -d "${SOURCE_DIRECTORY}" ] ; then
 
     # Scan git repositories in the artifacts directory
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ] ; then
-        gitDirectories="$(find "${SOURCE_DIRECTORY}" -type d -name ".git" -exec echo {} \; | tr '\n' ',' | sed 's/,$/\n/')"
+        gitDirectories="$(find "./${SOURCE_DIRECTORY}" -type d -name ".git" -exec echo {} \; | tr '\n' ',' | sed 's/,$/\n/')"
         if [ -n "${gitDirectories}" ]; then
             directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${gitDirectories}"
         fi

@@ -177,6 +177,4 @@ fi
 (
   cd "${fullSourceDirectory}" || exit
   usePackageManagerToInstallDependencies
-  echo "downloadTypescriptProject: Scanning Typescript source using @jqassistant/ts-lce..."
-  npx --yes @jqassistant/ts-lce@1.2.0 --extension React >"./../../runtime/logs/jqassistant-typescript-scan-${projectName}.log" 2>&1 || exit
 )
