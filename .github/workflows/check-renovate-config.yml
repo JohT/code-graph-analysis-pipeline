@@ -1,0 +1,24 @@
+name: Check Renovate Configuration
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Only watch root level Renovate configuration changes
+    paths:
+      - 'renovate.json*'
+
+jobs:
+  reports:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v4
+
+    - name: Setup node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: Run renovate-config-validator
+      run: npx --yes --package renovate -- renovate-config-validator
