@@ -7,8 +7,9 @@
     "schedule:earlyMondays"
   ],
   "ignoreUnstable": false,
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
         "(^|\\/)action\\.ya?ml$]"
@@ -21,6 +22,7 @@
       "extractVersionTemplate": "^axon-?(?<version>.*?)$"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
         "(^|\\/)action\\.ya?ml$]"
@@ -33,6 +35,7 @@
       "extractVersionTemplate": "^react-router@?(?<version>.*?)$"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "README.md"
       ],
@@ -44,6 +47,7 @@
       "extractVersionTemplate": "^axon-?(?<version>.*?)$"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
         "(^|\\/)action\\.ya?ml$]"
@@ -55,6 +59,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^scripts\/profiles\/Neo4jv5\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
@@ -67,6 +72,7 @@
       "datasourceTemplate": "github-tags"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^scripts\/profiles\/Neo4jv5\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
@@ -79,6 +85,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^scripts\/profiles\/Neo4jv5\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
@@ -91,6 +98,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^scripts\/profiles\/Neo4jv5\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
@@ -105,6 +113,7 @@
       "versioningTemplate": "loose"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^scripts\/profiles\/Neo4jv5\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
@@ -118,6 +127,7 @@
       "extractVersionTemplate": "^REL-?(?<version>.*?)$"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "^scripts\/[^\/]*\\.sh$"
       ],
