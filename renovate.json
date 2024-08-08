@@ -151,7 +151,7 @@
     },
     {
       "fileMatch": [
-        "^scripts\/configuration\/*\\.yaml$"
+        "^scripts\/configuration\/[^/]+\\.ya?ml$"
       ],
       "matchStrings": [
         "\\s*\\-\\s+group-id:\\s*(?<group>.*?)\\s*[\r\n]\\s*artifact-id:\\s*(?<artifact>.*?)\\s*[\r\n]\\s*version:\\s*(?<currentValue>.*?)\\s*[\r\n]"
