@@ -26,7 +26,7 @@
 "void notNull(java.lang.Object,java.util.function.Supplier)","notNull","centralityArticleRank",0.01852948155484861,""
 "java.lang.reflect.AccessibleObject ensureAccessible(java.lang.reflect.AccessibleObject)","ensureAccessible","centralityArticleRank",0.018412316527721913,""
 "void attachTransaction(org.axonframework.common.transaction.TransactionManager)","attachTransaction","centralityArticleRank",0.018358198520601738,""
-"java.lang.reflect.Type unwrapIfType(java.lang.reflect.Type,java.lang.Class[])","unwrapIfType","centralityArticleRank",0.017726604668599603,""
+"java.lang.reflect.Type unwrapIfType(java.lang.reflect.Type,java.lang.Class[])","unwrapIfType","centralityArticleRank",0.0177266046685996,""
 "java.lang.Object getObject()","getObject","centralityArticleRank",0.016808150386503184,""
 "boolean isExplicitlyNonTransient(java.lang.Throwable)","isExplicitlyNonTransient","centralityArticleRank",0.016376748101170156,""
 "java.lang.Object executeQuery(java.sql.Connection,org.axonframework.common.jdbc.JdbcUtils$SqlFunction,org.axonframework.common.jdbc.JdbcUtils$SqlResultConverter,java.util.function.Function,boolean)","executeQuery","centralityArticleRank",0.016173762285454803,""
