@@ -201,11 +201,14 @@ Script | Directory | Description
 | [Index_change_span_year.cypher](./GitLog/Index_change_span_year.cypher) | GitLog | Create index for change span year (aggregated git data) |
 | [Index_commit_hash.cypher](./GitLog/Index_commit_hash.cypher) | GitLog | Create index for commit hash (git data) |
 | [Index_commit_parent.cypher](./GitLog/Index_commit_parent.cypher) | GitLog | Create index for parent commit hash (git data) |
+| [Index_commit_sha.cypher](./GitLog/Index_commit_sha.cypher) | GitLog | Create index for git commit sha |
 | [Index_file_name.cypher](./GitLog/Index_file_name.cypher) | GitLog | Create index for the file name |
+| [Index_file_relative_path.cypher](./GitLog/Index_file_relative_path.cypher) | GitLog | Create index for the relative file path |
 | [List_ambiguous_git_files.cypher](./GitLog/List_ambiguous_git_files.cypher) | GitLog | List ambigiously resolved git files where a single git file is attached to more than one code file for troubleshooting/testing. |
 | [List_unresolved_git_files.cypher](./GitLog/List_unresolved_git_files.cypher) | GitLog | List code files not covered by imported git data for troubleshooting/testing. |
 | [Set_number_of_aggregated_git_commits.cypher](./GitLog/Set_number_of_aggregated_git_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when aggregated change spans with grouped commits are present. |
-| [Set_number_of_git_commits.cypher](./GitLog/Set_number_of_git_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when git commits are present |
+| [Set_number_of_git_log_commits.cypher](./GitLog/Set_number_of_git_log_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when git commits are present |
+| [Set_number_of_git_plugin_commits.cypher](./GitLog/Set_number_of_git_plugin_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when git commits (detected by the plugin) are present |
 | [Candidates_for_Interface_Segregation.cypher](./Internal_Dependencies/Candidates_for_Interface_Segregation.cypher) | Internal_Dependencies | Candidates for Interface Segregation |
 | [Get_file_distance_as_shortest_contains_path_for_dependencies.cypher](./Internal_Dependencies/Get_file_distance_as_shortest_contains_path_for_dependencies.cypher) | Internal_Dependencies | Get file distance distribution for dependencies (intuitively the fewest number of change directory commands needed) |
 | [How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher](./Internal_Dependencies/How_many_classes_compared_to_all_existing_in_the_same_package_are_used_by_dependent_packages_across_different_artifacts.cypher) | Internal_Dependencies | How many classes compared to all existing in the same package are used by dependent packages across different artifacts? |
