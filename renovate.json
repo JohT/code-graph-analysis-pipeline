@@ -136,6 +136,16 @@
       ],
       "depNameTemplate": "jqassistant-plugin/jqassistant-typescript-plugin",
       "datasourceTemplate": "github-tags"
+    },
+    {
+      "fileMatch": [
+        "^scripts\/configuration\/*\\.yaml$"
+      ],
+      "matchStrings": [
+        "\\s*\\-\\s+group-id:\\s*(?<group>.*?)\\s*[\r\n]\\s*artifact-id:\\s*(?<artifact>.*?)\\s*[\r\n]\\s*version:\\s*(?<currentValue>.*?)\\s*[\r\n]"
+      ],
+      "depNameTemplate": "{{{group}}}:{{{artifact}}}",
+      "datasourceTemplate": "maven"
     }
   ]
 }
