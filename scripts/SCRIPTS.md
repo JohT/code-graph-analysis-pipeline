@@ -13,7 +13,7 @@ Script | Directory | Description
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [createAggregatedGitLogCsv.sh](./createAggregatedGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. |
 | [createGitLogCsv.sh](./createGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. |
-| [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory with a text file containing the last hash code of the contents. |
+| [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory or in a given list of paths  |
 | [appendEnvironmentVariables.sh](./documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
 | [generateCsvReportReference.sh](./documentation/generateCsvReportReference.sh) | documentation | Generates "CSV_REPORTS.md" containing a reference to all CSV cypher query reports in this directory and its subdirectories. |
 | [generateCypherReference.sh](./documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
@@ -35,7 +35,7 @@ Script | Directory | Description
 | [executeJupyterNotebookReport.sh](./executeJupyterNotebookReport.sh) |  | Executes the given Jupyter Notebook and puts all resulting files (ipynb, md, pdf) into an accordingly named directory within the "results" directory. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
-| [findTypescriptDataFiles.sh](./findTypescriptDataFiles.sh) |  | Echoes a list of Typescript analysis data json files in the directory "artifacts/typescript" or subdirectories and having extension "json".  |
+| [findPathsToScan.sh](./findPathsToScan.sh) |  | Finds all files and directories to scan and analyze and provides them as comma-separated list. |
 | [importGit.sh](./importGit.sh) |  | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT. |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
 | [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
