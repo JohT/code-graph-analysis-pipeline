@@ -844,7 +844,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[GestureResponderEvent, LinkingStatic.addEvent...</td>
+      <td>[GestureResponderEvent, BackHandler, BackHandl...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -856,7 +856,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, React.MutableRefObject.curre...</td>
+      <td>[React.useEffect, React.ReactNode, React.JSX.E...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -880,7 +880,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.createContext, React.Context, React.Mou...</td>
+      <td>[React.ForwardRefExoticComponent, React.RefAtt...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -944,7 +944,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[GestureResponderEvent, React.useEffect, Linki...</td>
+      <td>[GestureResponderEvent, React.useEffect, BackH...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -968,7 +968,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.createContext, React.Context, React.Mou...</td>
+      <td>[React.ForwardRefExoticComponent, React.RefAtt...</td>
     </tr>
     <tr>
       <th>3</th>
