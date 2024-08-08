@@ -33,7 +33,11 @@ jqassistant:
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-npm-plugin
       version: 2.0.0
-      
+    - group-id: de.kontext-e.jqassistant.plugin
+      artifact-id: jqassistant.plugin.git
+      version: 2.1.0
+
+
   # The store configuration
   store:
     # URI of the database to connect to. Supported URI schemes are 'file' for embedded databases and 'bolt' for connecting to a running Neo4j instance (3.x+), e.g.
@@ -127,7 +131,7 @@ jqassistant:
     # -Djqassistant.scan.properties
     properties:
       # plugin.property.key: value
-      json.file.exclude: "*/typescript/*.json"
+      json.file.exclude: "*/.reports/jqa/ts-output.json"
 
   # The analyze configuration
   analyze:

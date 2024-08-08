@@ -7,8 +7,11 @@ MATCH (code_file:File&!Git)
 WHERE NOT EXISTS { (code_file)-[:RESOLVES_TO]->(other_file:File&!Git) } // only original nodes, no duplicates
  WITH code_file, replace(code_file.fileName, '.class', '.java') AS codeFileName
 MATCH (git_file:File&Git)
-WHERE git_file.fileName ENDS WITH codeFileName
+ WITH *
+     ,git_file
+     ,coalesce(git_file.fileName, git_file.relativePath) AS gitFileName
+WHERE gitFileName ENDS WITH codeFileName
 MERGE (git_file)-[:RESOLVES_TO]->(code_file)
   SET git_file.resolved = true
 RETURN count(DISTINCT codeFileName)  AS numberOfCodeFiles
-      ,collect(DISTINCT codeFileName + ' <-> ' + git_file.fileName + '\n')[0..4] AS examples
+      ,collect(DISTINCT codeFileName + ' <-> ' + gitFileName + '\n')[0..4] AS examples

@@ -5,6 +5,7 @@ CALL { WITH row
     MATCH (git_repository:Git:Repository{absoluteFileName: $git_repository_absolute_directory_name})
     MERGE (git_author:Git:Log:Author {name: row.author, email: row.email})
     MERGE (git_commit:Git:Log:Commit {
+        sha:            row.hash, 
         hash:           row.hash, 
         parent:         coalesce(row.parent, ''), 
         message:        row.message,

@@ -140,7 +140,7 @@ jobs:
       env:
         NEO4J_INITIAL_PASSWORD: ${{ secrets.NEO4J_INITIAL_PASSWORD }}
         ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
-        IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "full" # Options: "none", "aggregated", "full"
+        IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
       run: |
         ./../../scripts/analysis/analyze.sh
 

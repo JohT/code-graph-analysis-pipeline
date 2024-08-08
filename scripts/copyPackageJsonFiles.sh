@@ -31,7 +31,7 @@ fi
         # echo "copyPackageJsonFiles: Copying ${file} to ${targetDirectory}"
 
         mkdir -p "${targetDirectory}"
-        cp "${file}" "${targetDirectory}"
+        cp -rf "${file}" "${targetDirectory}"
 
         # Workaround until the following issue is resolved:
         # https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
