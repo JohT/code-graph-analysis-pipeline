@@ -3,10 +3,22 @@
   "extends": [
     "config:base",
     ":combinePatchMinorReleases",
-    ":ignoreUnstable",
     "schedule:earlyMondays"
   ],
   "ignoreUnstable": false,
+  "packageRules": [
+    {
+      "description": "Neo4j update settings",
+      "matchDepNames": [
+        "neo4j/neo4j"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "major"
+      ],
+      "minimumReleaseAge": "1 month"
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
