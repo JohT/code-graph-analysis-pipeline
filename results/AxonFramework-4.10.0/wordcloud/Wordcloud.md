@@ -149,7 +149,7 @@
 
 
 
-    There are 34794 words in the dataset.
+    There are 34788 words in the dataset.
 
 
 
