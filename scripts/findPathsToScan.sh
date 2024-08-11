@@ -3,11 +3,20 @@
 # Finds all files and directories to scan and analyze and provides them as comma-separated list.
 # This includes the scan of Typescript projects that leads to the intermediate json data file for jQAssistant.
 
+# Uses: patchJQAssistantTypescriptPlugin.sh
+
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+echo "findPathsToScan SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
 # This function returns the argument followed by a comma (separator) if it is not empty 
 # and just an empty string otherwise.
@@ -31,6 +40,8 @@ fi
 
 if [ -d "./${SOURCE_DIRECTORY}" ] ; then
     if command -v "npx" &> /dev/null ; then
+        # TODO: Remove patchJQAssistantTypescriptPlugin when issue is resolved: https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125
+        source "${SCRIPTS_DIR}/patchJQAssistantTypescriptPlugin.sh" >&2
         echo "findPathsToScan: Scanning Typescript source using @jqassistant/ts-lce..." >&2
         ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.0 --extension React >"./../runtime/logs/jqassistant-typescript-scan.log" 2>&1 || exit )
     else

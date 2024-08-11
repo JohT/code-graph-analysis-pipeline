@@ -1,0 +1,50 @@
+diff --git a/node_modules/@jqassistant/ts-lce/dist/src/core/utils/project.utils.js b/node_modules/@jqassistant/ts-lce/dist/src/core/utils/project.utils.js
+index d1c33c4..672e6a1 100644
+--- a/node_modules/@jqassistant/ts-lce/dist/src/core/utils/project.utils.js
++++ b/node_modules/@jqassistant/ts-lce/dist/src/core/utils/project.utils.js
+@@ -35,7 +35,7 @@ class ProjectUtils {
+             const projectRoot = dirsToScan[0];
+             const tsConfigPath = path_1.default.join(projectRoot, "tsconfig.json");
+             if (fs_1.default.existsSync(tsConfigPath)) {
+-                result.push(...this.getProjectInfo(projectRoot));
++                result.push(...this.getProjectInfo(projectRoot, 'tsconfig.json'));
+             }
+             else {
+                 // add all subdirectories as potential project candidates
+@@ -61,13 +61,19 @@ class ProjectUtils {
+             }
+         });
+     }
+-    static getProjectInfo(projectPath) {
++    static getConfigFileName(rawConfigPath) {
++        const pathIsADirectory = fs_1.default.statSync(rawConfigPath).isDirectory();
++        const defaultConfigFileName = 'tsconfig.json';
++        return pathIsADirectory? path_1.default.join(rawConfigPath, defaultConfigFileName) : rawConfigPath;
++    }
++    static getProjectInfo(projectPath, configFileName) {
+         const result = [];
+-        const tsConfig = this.parseTsConfig(projectPath);
++        const tsConfig = this.parseTsConfig(projectPath, configFileName);
+         const subProjectPaths = [];
+         if (tsConfig.projectReferences) {
+             for (const ref of tsConfig.projectReferences) {
+-                const subProjectInfos = this.getProjectInfo(ref.path);
++                const referencedConfigFileName = this.getConfigFileName(ref.path);
++                const subProjectInfos = this.getProjectInfo(path_1.default.dirname(referencedConfigFileName), path_1.default.basename(referencedConfigFileName));
+                 subProjectPaths.push(...subProjectInfos.map(spi => spi.projectPath.replace(/\\/g, "/")));
+                 result.push(...subProjectInfos);
+             }
+@@ -85,10 +91,10 @@ class ProjectUtils {
+         });
+         return result;
+     }
+-    static parseTsConfig(projectRoot) {
+-        const tsConfigPath = path_1.default.join(projectRoot, "tsconfig.json");
++    static parseTsConfig(projectRoot, configFile) {
++        const tsConfigPath = path_1.default.join(projectRoot, configFile);
+         const configFileText = fs_1.default.readFileSync(tsConfigPath, 'utf8');
+-        const configFileSourceFile = (0, typescript_1.createSourceFile)('tsconfig.json', configFileText, typescript_1.ScriptTarget.JSON);
++        const configFileSourceFile = (0, typescript_1.createSourceFile)(configFile, configFileText, typescript_1.ScriptTarget.JSON);
+         // Parse the tsconfig.json
+         const parsedCommandLine = (0, typescript_1.parseJsonSourceFileConfigFileContent)(configFileSourceFile, typescript_1.sys, path_1.default.dirname(tsConfigPath));
+         // explicitly set rootDir option to default value, if not set manually
