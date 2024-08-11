@@ -39,6 +39,7 @@ Script | Directory | Description
 | [importGit.sh](./importGit.sh) |  | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT. |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
 | [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
+| [patchJQAssistantTypescriptPlugin.sh](./patchJQAssistantTypescriptPlugin.sh) |  | Patches jQAssistant Typescript Plugin as a workaround for https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125 |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
