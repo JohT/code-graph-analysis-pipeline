@@ -135,11 +135,23 @@ postGitLogImport() {
 
 postGitPluginImport() {
   echo "importGit: Creating indexes for plugin-provided git data..."
+
+  # TODO: The deletion of all plain files in the "/.git" directory is needed
+  #       until there is a way to exclude all files inside a directory
+  #       while still being able to get them analyzed by the git plugin.
+  #       This would most likely be solved with https://github.com/jQAssistant/jqassistant/issues/410
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Delete_plain_git_directory_file_nodes.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_sha.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
 
   commonPostGitImport
+
+  #TODO Add verification steps
+  #verificationResult=$( execute_cypher_http_number_of_lines_in_result "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher" )
+  #if [ "${verificationResult}" != 0 ]; then
+  #  echo "importGit: Error: Verification failed. Git:File->!Git:File RESOLVES_TO relationships ambiguous"
+  #fi
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
