@@ -131,6 +131,7 @@ jqassistant:
     # -Djqassistant.scan.properties
     properties:
       # plugin.property.key: value
+      file.exclude: "*/.DS_Store"
       json.file.exclude: "*/.reports/jqa/ts-output.json"
 
   # The analyze configuration
