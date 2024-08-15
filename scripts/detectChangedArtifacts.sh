@@ -70,7 +70,7 @@ get_file_size() {
 }
 
 # Function to process a single path
-unwind_directories() {
+file_names_and_sizes() {
     if [ -d "$1" ]; then
         # If it's a directory, list all files inside 
         # except for "node_modules", "target", "temp" and the change detection file itself
@@ -80,10 +80,11 @@ unwind_directories() {
           -type d -name "temp" -prune -o \
           -not -name "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE}" \
           -type f \
+          -exec stat -f "%N %z" {} + \
         | sort 
     elif [ -f "$1" ]; then
         # If it's a file, just echo the file path
-        echo "$1"
+        stat -f "%N %z" < "$1"
     fi
 }
 
@@ -92,17 +93,18 @@ unwind_directories() {
 # and calculates the md5 hash for every of these .
 get_md5_checksum_of_all_file_names_and_sizes() {
   local paths=${1}
-  local files_and_sizes=""
+  local total_paths; total_paths=$(echo "${paths}" | awk -F '[\t,]' '{print NF}')
+  local all_files_and_sizes=""
+  local processed_paths=0
 
   for path in ${paths//,/ }; do
-      files=$(unwind_directories "${path}")
-      for file in ${files}; do
-          size=$(get_file_size "${file}")
-          files_and_sizes="${files_and_sizes}${file}${size}"
-      done
+      local files_and_their_size; files_and_their_size=$(file_names_and_sizes "${path}")
+      all_files_and_sizes="${all_files_and_sizes}${files_and_their_size}"
+      processed_paths=$((processed_paths + 1))
+      echo -ne "detectChangedArtifacts: Calculate checksum progress: ($processed_paths/$total_paths)\r" >&2
   done
-
-  echo "${files_and_sizes}" | openssl md5 | awk '{print $2}'
+  echo "" >&2
+  echo "${all_files_and_sizes}" | openssl md5 | awk '{print $2}'
 }
 
 # Use find to list all files in the directory with their properties,
@@ -118,6 +120,8 @@ if [ ! -f "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}" ] ; then
         mkdir -p "${ARTIFACTS_DIRECTORY}"
         echo "${CURRENT_ARTIFACTS_HASH}" > "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}"
         echo "detectChangedArtifacts: Change detection file created" >&2
+    else
+        echo "detectChangedArtifacts: Skipping file creation with content (=hash) ${CURRENT_ARTIFACTS_HASH}" >&2
     fi
     echo 1 # 1=Change detected and change detection file created
     exit 0
@@ -132,6 +136,8 @@ else
         # Write the updated hash into the file containing the hash of the files list for the next call
         echo "$CURRENT_ARTIFACTS_HASH" > "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}"
         echo "detectChangedArtifacts: Change detection file updated" >&2
+    else
+        echo "detectChangedArtifacts: Skipping file update with content (=hash) ${CURRENT_ARTIFACTS_HASH}" >&2
     fi
     echo 2 # 2=Change detected and change detection file updated
 fi
