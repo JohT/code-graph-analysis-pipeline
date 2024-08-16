@@ -1,6 +1,6 @@
 "codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"java.lang.Object createGateway(java.lang.Class)","createGateway","centralityCostEffectiveLazyForward",2.82,""
-"void run()","run","centralityCostEffectiveLazyForward",1.9499999999999997,""
+"java.lang.Object createGateway(java.lang.Class)","createGateway","centralityCostEffectiveLazyForward",2.8,""
+"void run()","run","centralityCostEffectiveLazyForward",1.9500000000000002,""
 "org.axonframework.modelling.saga.repository.SagaStore$Entry loadSaga(java.lang.Class,java.lang.String)","loadSaga","centralityCostEffectiveLazyForward",1.87,""
 "org.axonframework.modelling.command.Aggregate load(java.lang.String)","load","centralityCostEffectiveLazyForward",1.6000000000000005,""
 "org.axonframework.test.aggregate.FixtureConfiguration registerAggregateFactory(org.axonframework.eventsourcing.AggregateFactory)","registerAggregateFactory","centralityCostEffectiveLazyForward",1.5899999999999999,""
