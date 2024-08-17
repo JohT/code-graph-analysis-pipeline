@@ -139,15 +139,17 @@
       "extractVersionTemplate": "^REL-?(?<version>.*?)$"
     },
     {
+      "description": "Update npx command package versions",
       "customType": "regex",
       "fileMatch": [
-        "^scripts\/[^\/]*\\.sh$"
+        "^scripts\/[^\/]*\\.sh$",
+        "^(workflow-templates|\\.github\/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
       ],
       "matchStrings": [
-        "npx --yes @jqassistant/ts-lce@?(?<currentValue>.*?)"
+        "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)"
       ],
-      "depNameTemplate": "jqassistant-plugin/jqassistant-typescript-plugin",
-      "datasourceTemplate": "github-tags"
+      "datasourceTemplate": "npm"
     },
     {
       "fileMatch": [

@@ -36,4 +36,4 @@ jobs:
 
     - name: Check links in top level documentation Markdown files
       if: ${{ ! env.skip_link_check}}
-      run: npx --yes markdown-link-check --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md
+      run: npx --yes markdown-link-check@3.12.2 --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md
