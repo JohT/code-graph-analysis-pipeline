@@ -21,7 +21,7 @@ if ! command -v "npx" &> /dev/null ; then
 fi
 
 echo "patchJQAssistantTypescriptPlugin: Installing jQAssistant Typescript Plugin @jqassistant/ts-lce using npx"
-jqassistant_typescript_plugin_installation_path=$(npx --yes --package @jqassistant/ts-lce@1.2.0 which jqa-ts-lce)
+jqassistant_typescript_plugin_installation_path=$(npx --yes --package @jqassistant/ts-lce@1.2.1 which jqa-ts-lce)
 echo "patchJQAssistantTypescriptPlugin: jqassistant_typescript_plugin_installation_path=${jqassistant_typescript_plugin_installation_path}"
 
 jqassistant_typescript_plugin_bin_path=$(dirname -- "${jqassistant_typescript_plugin_installation_path}")

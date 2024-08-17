@@ -43,7 +43,7 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
         # TODO: Remove patchJQAssistantTypescriptPlugin when issue is resolved: https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125
         source "${SCRIPTS_DIR}/patchJQAssistantTypescriptPlugin.sh" >&2
         echo "findPathsToScan: Scanning Typescript source using @jqassistant/ts-lce..." >&2
-        ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.0 --extension React >"./../runtime/logs/jqassistant-typescript-scan.log" 2>&1 || exit )
+        ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.1 --extension React >"./../runtime/logs/jqassistant-typescript-scan.log" 2>&1 || exit )
     else
         echo "findPathToScan Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects."
     fi
