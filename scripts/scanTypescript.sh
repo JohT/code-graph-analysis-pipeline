@@ -36,9 +36,6 @@ if [ "${changeDetectionReturnCode}" == "0" ] ; then
 else
     echo "scanTypescript: Detected change (${changeDetectionReturnCode}). Scanning Typescript source using @jqassistant/ts-lce."
     
-    # TODO: Remove patchJQAssistantTypescriptPlugin when issue is resolved: https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125
-    source "${SCRIPTS_DIR}/patchJQAssistantTypescriptPlugin.sh" >&2    
-    
     # Note: The npx command will be executed in the source directory using a subshell by putting parentheses around it.
     #       The subshell is the reason why it isn't needed to change back to the main directory after execution.
     # Note: This script must not output anything except for the return code to stdout,
