@@ -39,21 +39,6 @@ else
 fi
 
 if [ -d "./${SOURCE_DIRECTORY}" ] ; then
-    if command -v "npx" &> /dev/null ; then
-        # TODO: Remove patchJQAssistantTypescriptPlugin when issue is resolved: https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125
-        source "${SCRIPTS_DIR}/patchJQAssistantTypescriptPlugin.sh" >&2
-        echo "findPathsToScan: Scanning Typescript source using @jqassistant/ts-lce..." >&2
-        # Note: The npx command will be executed in the source directory using a subshell by putting parentheses around it.
-        #       The subshell is the reason why it isn't needed to change back to the main directory after execution.
-        # Note: This script must not output anything except for the return code to stdout,
-        #       all output of the scanning needs to be redirected to stderr using ">&2".
-        #       For later troubleshooting, the output is also copied to a dedicated log file using "tee".
-        # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
-        ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.1 --extension React 2>&1 | tee "./../runtime/logs/jqassistant-typescript-scan.log" >&2 || exit )
-    else
-        echo "findPathToScan Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects." >&2
-    fi
-
     # Scan Typescript analysis json data files in the source directory
     typescriptAnalysisFiles="$(find "./${SOURCE_DIRECTORY}" \
                                     -type d -name "node_modules" -prune -o \
