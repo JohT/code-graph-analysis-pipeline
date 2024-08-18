@@ -9,7 +9,7 @@ CALL { WITH row
         month:   toInteger(row.month),
         commits: toInteger(row.commits)
     })
-    MERGE (git_file:Git:Log:File {fileName: row.filename})
+    MERGE (git_file:Git:Log:File {fileName: row.filename, repositoryPath: $git_repository_absolute_directory_name})
     MERGE (git_author)-[:AUTHORED]->(git_change_span)
     MERGE (git_change_span)-[:CONTAINS_CHANGED]->(git_file)
     MERGE (git_repository)-[:HAS_CHANGE_SPAN]->(git_change_span)

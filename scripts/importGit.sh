@@ -124,6 +124,12 @@ commonPostGitImport() {
   echo "importGit: Creating relationships to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher"
+
+  # Since it's currently not possible to rule out ambiguity in git<->code file matching,
+  # the following verifications are only an additional info in the log rather than an error.
+  echo "importGit: Running verification queries for troubleshooting (non failing)..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
 }
 
 postGitLogImport() {
@@ -146,12 +152,6 @@ postGitPluginImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
 
   commonPostGitImport
-
-  #TODO Add verification steps
-  #verificationResult=$( execute_cypher_http_number_of_lines_in_result "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher" )
-  #if [ "${verificationResult}" != 0 ]; then
-  #  echo "importGit: Error: Verification failed. Git:File->!Git:File RESOLVES_TO relationships ambiguous"
-  #fi
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
