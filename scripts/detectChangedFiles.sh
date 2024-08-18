@@ -16,12 +16,13 @@ set -o errexit -o pipefail
 
 # Overrideable defaults
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
-ARTIFACTS_CHANGE_DETECTION_HASH_FILE=${ARTIFACTS_CHANGE_DETECTION_HASH_FILE:-"artifactsChangeDetectionHash.txt"} # Name of the file that contains the hash code of the file list for change detection
-ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH="./${ARTIFACTS_DIRECTORY}/$ARTIFACTS_CHANGE_DETECTION_HASH_FILE"
+ARTIFACTS_CHANGE_DETECTION_HASH_FILE=${ARTIFACTS_CHANGE_DETECTION_HASH_FILE:-"artifactsChangeDetectionHash.txt"} # !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE.
+CHANGE_DETECTION_HASH_FILE=${CHANGE_DETECTION_HASH_FILE:-"${ARTIFACTS_CHANGE_DETECTION_HASH_FILE}"} # Name of the file that contains the hash code of the file list for change detection
+CHANGE_DETECTION_HASH_FILE_PATH=${CHANGE_DETECTION_HASH_FILE_PATH:-"./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE}"} # Path of the file that contains the hash code of the file list for change detection
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--readonly] [--paths <comma separated list of file and directory names>]"
+  echo "Usage: $0 [--readonly] [--paths <comma separated list of file and directory names> (default=artifacts)]"
   exit 1
 }
 
@@ -43,7 +44,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     *)
-      echo "detectChangedArtifacts: Error: Unknown option: ${key}"
+      echo "detectChangedFiles: Error: Unknown option: ${key}"
       usage
       ;;
   esac
@@ -51,10 +52,12 @@ while [[ $# -gt 0 ]]; do
 done
 
 if ${readonlyMode}; then
-  echo "detectChangedArtifacts: Readonly mode activated. Change detection file won't be created." >&2
+  echo "detectChangedFiles: Readonly mode activated. Change detection file won't be created." >&2
+else
+  echo "detectChangedFiles: ${CHANGE_DETECTION_HASH_FILE_PATH} will be used as change detection file." >&2
 fi
 
-# Check if the artifacts directory exists
+# Check if the paths parameter exist
 if [ -z "${paths}" ] ; then
     echo 0 # 0=No change detected. The path list is empty. There is nothing to compare. Therefore assume that there are no changes.
     exit 0
@@ -78,7 +81,7 @@ file_names_and_sizes() {
           -type d -name "node_modules" -prune -o \
           -type d -name "target" -prune -o \
           -type d -name "temp" -prune -o \
-          -not -name "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE}" \
+          -not -path "${CHANGE_DETECTION_HASH_FILE_PATH}" \
           -type f \
           -exec stat -f "%N %z" {} + \
         | sort 
@@ -101,7 +104,7 @@ get_md5_checksum_of_all_file_names_and_sizes() {
       local files_and_their_size; files_and_their_size=$(file_names_and_sizes "${path}")
       all_files_and_sizes="${all_files_and_sizes}${files_and_their_size}"
       processed_paths=$((processed_paths + 1))
-      echo -ne "detectChangedArtifacts: Calculate checksum progress: ($processed_paths/$total_paths)\r" >&2
+      echo -ne "detectChangedFiles: Calculate checksum progress: ($processed_paths/$total_paths)\r" >&2
   done
   echo "" >&2
   echo "${all_files_and_sizes}" | openssl md5 | awk '{print $2}'
@@ -111,17 +114,19 @@ get_md5_checksum_of_all_file_names_and_sizes() {
 # sort the output, and pipe it to md5 to create a hash
 # Use openssl md5 that is at least available on Mac and Linux. 
 # See: https://github.com/TRON-US/go-btfs/issues/90#issuecomment-517409369
-CURRENT_ARTIFACTS_HASH=$(get_md5_checksum_of_all_file_names_and_sizes "${paths}")
+CURRENT_FILES_HASH=$(get_md5_checksum_of_all_file_names_and_sizes "${paths}")
 
 # Assume that the files where changed if the file containing the hash of the file list does not exist yet.
-if [ ! -f "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}" ] ; then
+if [ ! -f "${CHANGE_DETECTION_HASH_FILE_PATH}" ] ; then
     if [ "${readonlyMode}" = false ] ; then
+        # Create the directory for the hash file if it hadn't existed yet.
+        hash_file_directory=$(dirname "${CHANGE_DETECTION_HASH_FILE_PATH}")
+        mkdir -p "${hash_file_directory}"
         # Create the file containing the hash of the files list to a new file for the next call
-        mkdir -p "${ARTIFACTS_DIRECTORY}"
-        echo "${CURRENT_ARTIFACTS_HASH}" > "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}"
-        echo "detectChangedArtifacts: Change detection file created" >&2
+        echo "${CURRENT_FILES_HASH}" > "${CHANGE_DETECTION_HASH_FILE_PATH}"
+        echo "detectChangedFiles: Change detection file created" >&2
     else
-        echo "detectChangedArtifacts: Skipping file creation with content (=hash) ${CURRENT_ARTIFACTS_HASH}" >&2
+        echo "detectChangedFiles: Skipping file creation with content (=hash) ${CURRENT_FILES_HASH}" >&2
     fi
     echo 1 # 1=Change detected and change detection file created
     exit 0
@@ -129,15 +134,15 @@ fi
 
 # Assume that there is no change if the saved hash is equal to the current one.
 # Otherwise assume that the files where changed and overwrite the hash with the current one for the next call
-if [[ $(< "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}") == "$CURRENT_ARTIFACTS_HASH" ]] ; then
+if [[ $(< "${CHANGE_DETECTION_HASH_FILE_PATH}") == "$CURRENT_FILES_HASH" ]] ; then
     echo 0 # 0=No change detected
 else
     if ! ${readonlyMode}; then
         # Write the updated hash into the file containing the hash of the files list for the next call
-        echo "$CURRENT_ARTIFACTS_HASH" > "${ARTIFACTS_CHANGE_DETECTION_HASH_FILE_PATH}"
-        echo "detectChangedArtifacts: Change detection file updated" >&2
+        echo "$CURRENT_FILES_HASH" > "${CHANGE_DETECTION_HASH_FILE_PATH}"
+        echo "detectChangedFiles: Change detection file updated" >&2
     else
-        echo "detectChangedArtifacts: Skipping file update with content (=hash) ${CURRENT_ARTIFACTS_HASH}" >&2
+        echo "detectChangedFiles: Skipping file update with content (=hash) ${CURRENT_FILES_HASH}" >&2
     fi
     echo 2 # 2=Change detected and change detection file updated
 fi
