@@ -18,17 +18,20 @@ set -o errexit -o pipefail
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE=${ARTIFACTS_CHANGE_DETECTION_HASH_FILE:-"artifactsChangeDetectionHash.txt"} # !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE.
 CHANGE_DETECTION_HASH_FILE=${CHANGE_DETECTION_HASH_FILE:-"${ARTIFACTS_CHANGE_DETECTION_HASH_FILE}"} # Name of the file that contains the hash code of the file list for change detection
-CHANGE_DETECTION_HASH_FILE_PATH=${CHANGE_DETECTION_HASH_FILE_PATH:-"./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE}"} # Path of the file that contains the hash code of the file list for change detection
+CHANGE_DETECTION_HASH_FILE_PATH=${CHANGE_DETECTION_HASH_FILE_PATH:-"./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE}"} # Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option.
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--readonly] [--paths <comma separated list of file and directory names> (default=artifacts)]"
+  echo "Usage: $0 [--readonly]"
+  echo "          [--paths <comma separated list of file and directory names> (default=artifacts)]"
+  echo "          [--hashfile <path to the file that contains the hash for change detection> (default=env var CHANGE_DETECTION_HASH_FILE_PATH)]"
   exit 1
 }
 
 # Default values
 readonlyMode=false
 paths="./${ARTIFACTS_DIRECTORY}"
+hashFilePath="${CHANGE_DETECTION_HASH_FILE_PATH}"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -43,6 +46,10 @@ while [[ $# -gt 0 ]]; do
       paths="${value}"
       shift
       ;;
+    --hashfile)
+      hashFilePath="${value}"
+      shift
+      ;;
     *)
       echo "detectChangedFiles: Error: Unknown option: ${key}"
       usage
@@ -54,7 +61,7 @@ done
 if ${readonlyMode}; then
   echo "detectChangedFiles: Readonly mode activated. Change detection file won't be created." >&2
 else
-  echo "detectChangedFiles: ${CHANGE_DETECTION_HASH_FILE_PATH} will be used as change detection file." >&2
+  echo "detectChangedFiles: ${hashFilePath} will be used as change detection file." >&2
 fi
 
 # Check if the paths parameter exist
@@ -81,7 +88,7 @@ file_names_and_sizes() {
           -type d -name "node_modules" -prune -o \
           -type d -name "target" -prune -o \
           -type d -name "temp" -prune -o \
-          -not -path "${CHANGE_DETECTION_HASH_FILE_PATH}" \
+          -not -path "${hashFilePath}" \
           -type f \
           -exec stat -f "%N %z" {} + \
         | sort 
@@ -117,13 +124,13 @@ get_md5_checksum_of_all_file_names_and_sizes() {
 CURRENT_FILES_HASH=$(get_md5_checksum_of_all_file_names_and_sizes "${paths}")
 
 # Assume that the files where changed if the file containing the hash of the file list does not exist yet.
-if [ ! -f "${CHANGE_DETECTION_HASH_FILE_PATH}" ] ; then
+if [ ! -f "${hashFilePath}" ] ; then
     if [ "${readonlyMode}" = false ] ; then
         # Create the directory for the hash file if it hadn't existed yet.
-        hash_file_directory=$(dirname "${CHANGE_DETECTION_HASH_FILE_PATH}")
+        hash_file_directory=$(dirname "${hashFilePath}")
         mkdir -p "${hash_file_directory}"
         # Create the file containing the hash of the files list to a new file for the next call
-        echo "${CURRENT_FILES_HASH}" > "${CHANGE_DETECTION_HASH_FILE_PATH}"
+        echo "${CURRENT_FILES_HASH}" > "${hashFilePath}"
         echo "detectChangedFiles: Change detection file created" >&2
     else
         echo "detectChangedFiles: Skipping file creation with content (=hash) ${CURRENT_FILES_HASH}" >&2
@@ -134,12 +141,12 @@ fi
 
 # Assume that there is no change if the saved hash is equal to the current one.
 # Otherwise assume that the files where changed and overwrite the hash with the current one for the next call
-if [[ $(< "${CHANGE_DETECTION_HASH_FILE_PATH}") == "$CURRENT_FILES_HASH" ]] ; then
+if [[ $(< "${hashFilePath}") == "${CURRENT_FILES_HASH}" ]] ; then
     echo 0 # 0=No change detected
 else
     if ! ${readonlyMode}; then
         # Write the updated hash into the file containing the hash of the files list for the next call
-        echo "$CURRENT_FILES_HASH" > "${CHANGE_DETECTION_HASH_FILE_PATH}"
+        echo "${CURRENT_FILES_HASH}" > "${hashFilePath}"
         echo "detectChangedFiles: Change detection file updated" >&2
     else
         echo "detectChangedFiles: Skipping file update with content (=hash) ${CURRENT_FILES_HASH}" >&2
