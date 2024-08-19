@@ -42,6 +42,7 @@ else
     #       all output of the scanning needs to be redirected to stderr using ">&2".
     #       For later troubleshooting, the output is also copied to a dedicated log file using "tee".
     # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
+    mkdir -p "./runtime/logs"
     ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.1 --extension React 2>&1 | tee "./../runtime/logs/jqassistant-typescript-scan.log" >&2 || exit )
     
     changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")
