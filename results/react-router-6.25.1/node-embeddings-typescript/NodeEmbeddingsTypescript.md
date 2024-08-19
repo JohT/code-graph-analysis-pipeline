@@ -84,8 +84,8 @@ The following function takes the original node embeddings with a higher dimensio
       <td>react-router</td>
       <td>react-router</td>
       <td>0</td>
-      <td>0.577212</td>
-      <td>[0.2955484390258789, -0.06563244760036469, 0.5...</td>
+      <td>0.543325</td>
+      <td>[0.29678285121917725, -0.08935068547725677, 0....</td>
     </tr>
     <tr>
       <th>1</th>
@@ -93,35 +93,35 @@ The following function takes the original node embeddings with a higher dimensio
       <td>react-router-dom</td>
       <td>react-router-dom</td>
       <td>0</td>
-      <td>0.234789</td>
-      <td>[0.30690157413482666, -0.0659116581082344, 0.5...</td>
+      <td>0.217202</td>
+      <td>[0.31028297543525696, -0.08976315706968307, 0....</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
-      <td>react-router-dom</td>
+      <td>react-router-native</td>
+      <td>react-router-native</td>
       <td>0</td>
-      <td>0.182952</td>
-      <td>[0.3941478729248047, -0.08976708352565765, 0.7...</td>
+      <td>0.187344</td>
+      <td>[0.29623618721961975, -0.07173414528369904, 0....</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>react-router-native</td>
-      <td>0</td>
-      <td>0.182952</td>
-      <td>[0.29623112082481384, -0.06263356655836105, 0....</td>
+      <td>server</td>
+      <td>react-router-dom</td>
+      <td>1</td>
+      <td>0.187344</td>
+      <td>[0.39301326870918274, -0.19139763712882996, 0....</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
       <td>router</td>
-      <td>0</td>
-      <td>0.738076</td>
-      <td>[0.3878895044326782, -0.08466154336929321, 0.7...</td>
+      <td>1</td>
+      <td>0.766437</td>
+      <td>[0.38770297169685364, -0.11157901585102081, 0....</td>
     </tr>
   </tbody>
 </table>
@@ -139,29 +139,29 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     TSNE(early_exaggeration=12, random_state=47, verbose=1)
     --------------------------------------------------------------------------------
     ===> Finding 4 nearest neighbors using exact search using euclidean distance...
-       --> Time elapsed: 0.04 seconds
+       --> Time elapsed: 0.02 seconds
     ===> Calculating affinity matrix...
        --> Time elapsed: 0.00 seconds
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=0.42 for 250 iterations...
-    Iteration   50, KL divergence 0.4022, 50 iterations in 0.0071 sec
-    Iteration  100, KL divergence 0.4541, 50 iterations in 0.0072 sec
-    Iteration  150, KL divergence 0.4560, 50 iterations in 0.0073 sec
-    Iteration  200, KL divergence 0.4571, 50 iterations in 0.0073 sec
-    Iteration  250, KL divergence 0.4535, 50 iterations in 0.0073 sec
+    Iteration   50, KL divergence 0.4032, 50 iterations in 0.0072 sec
+    Iteration  100, KL divergence 0.4654, 50 iterations in 0.0069 sec
+    Iteration  150, KL divergence 0.4635, 50 iterations in 0.0073 sec
+    Iteration  200, KL divergence 0.4635, 50 iterations in 0.0073 sec
+    Iteration  250, KL divergence 0.4635, 50 iterations in 0.0073 sec
        --> Time elapsed: 0.04 seconds
     ===> Running optimization with exaggeration=1.00, lr=5.00 for 500 iterations...
-    Iteration   50, KL divergence 0.0299, 50 iterations in 0.0068 sec
-    Iteration  100, KL divergence 0.0233, 50 iterations in 0.0065 sec
-    Iteration  150, KL divergence 0.0210, 50 iterations in 0.0065 sec
-    Iteration  200, KL divergence 0.0195, 50 iterations in 0.0065 sec
-    Iteration  250, KL divergence 0.0181, 50 iterations in 0.0065 sec
-    Iteration  300, KL divergence 0.0164, 50 iterations in 0.0065 sec
-    Iteration  350, KL divergence 0.0146, 50 iterations in 0.0064 sec
-    Iteration  400, KL divergence 0.0138, 50 iterations in 0.0064 sec
-    Iteration  450, KL divergence 0.0134, 50 iterations in 0.0064 sec
-    Iteration  500, KL divergence 0.0131, 50 iterations in 0.0063 sec
+    Iteration   50, KL divergence 0.0253, 50 iterations in 0.0066 sec
+    Iteration  100, KL divergence 0.0208, 50 iterations in 0.0065 sec
+    Iteration  150, KL divergence 0.0186, 50 iterations in 0.0064 sec
+    Iteration  200, KL divergence 0.0173, 50 iterations in 0.0064 sec
+    Iteration  250, KL divergence 0.0165, 50 iterations in 0.0063 sec
+    Iteration  300, KL divergence 0.0159, 50 iterations in 0.0063 sec
+    Iteration  350, KL divergence 0.0154, 50 iterations in 0.0064 sec
+    Iteration  400, KL divergence 0.0150, 50 iterations in 0.0063 sec
+    Iteration  450, KL divergence 0.0147, 50 iterations in 0.0063 sec
+    Iteration  500, KL divergence 0.0144, 50 iterations in 0.0063 sec
        --> Time elapsed: 0.06 seconds
 
 
@@ -189,45 +189,45 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>0</td>
-      <td>0.577212</td>
-      <td>-6.448307</td>
-      <td>-1.948598</td>
+      <td>0.543325</td>
+      <td>-5.430352</td>
+      <td>0.000020</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>0</td>
-      <td>0.234789</td>
-      <td>-8.611533</td>
-      <td>0.390473</td>
+      <td>0.217202</td>
+      <td>-7.463835</td>
+      <td>0.000027</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
+      <td>react-router-native</td>
       <td>0</td>
-      <td>0.182952</td>
-      <td>11.863060</td>
-      <td>-0.952109</td>
+      <td>0.187344</td>
+      <td>-10.483964</td>
+      <td>0.000037</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>0</td>
-      <td>0.182952</td>
-      <td>-10.098698</td>
-      <td>1.963744</td>
+      <td>react-router-dom</td>
+      <td>1</td>
+      <td>0.187344</td>
+      <td>12.661583</td>
+      <td>0.000028</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
-      <td>0</td>
-      <td>0.738076</td>
-      <td>13.295479</td>
-      <td>0.546490</td>
+      <td>1</td>
+      <td>0.766437</td>
+      <td>10.716568</td>
+      <td>-0.000112</td>
     </tr>
   </tbody>
 </table>
@@ -270,7 +270,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>react-router</td>
       <td>react-router</td>
       <td>0</td>
-      <td>0.577212</td>
+      <td>0.543325</td>
       <td>[1.8371173739433289, -0.3061862289905548, 0.61...</td>
     </tr>
     <tr>
@@ -279,34 +279,34 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>react-router-dom</td>
       <td>react-router-dom</td>
       <td>0</td>
-      <td>0.234789</td>
+      <td>0.217202</td>
       <td>[1.8371173739433289, -0.3061862289905548, 0.61...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
-      <td>react-router-dom</td>
+      <td>react-router-native</td>
+      <td>react-router-native</td>
       <td>0</td>
-      <td>0.182952</td>
-      <td>[1.8371173739433289, -0.3061862289905548, 0.61...</td>
+      <td>0.187344</td>
+      <td>[1.8371173739433289, 0.0, 0.3061862289905548, ...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>react-router-native</td>
-      <td>0</td>
-      <td>0.182952</td>
-      <td>[1.8371173739433289, 0.0, 0.3061862289905548, ...</td>
+      <td>server</td>
+      <td>react-router-dom</td>
+      <td>1</td>
+      <td>0.187344</td>
+      <td>[1.8371173739433289, -0.3061862289905548, 0.61...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
       <td>router</td>
-      <td>0</td>
-      <td>0.738076</td>
+      <td>1</td>
+      <td>0.766437</td>
       <td>[1.8371173739433289, -0.3061862289905548, 0.61...</td>
     </tr>
   </tbody>
@@ -327,24 +327,24 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=0.42 for 250 iterations...
-    Iteration   50, KL divergence -0.3095, 50 iterations in 0.0075 sec
-    Iteration  100, KL divergence 0.7122, 50 iterations in 0.0074 sec
-    Iteration  150, KL divergence 0.7122, 50 iterations in 0.0078 sec
-    Iteration  200, KL divergence 0.7122, 50 iterations in 0.0067 sec
-    Iteration  250, KL divergence 0.7122, 50 iterations in 0.0072 sec
-       --> Time elapsed: 0.04 seconds
+    Iteration   50, KL divergence -0.3095, 50 iterations in 0.0066 sec
+    Iteration  100, KL divergence 0.7122, 50 iterations in 0.0062 sec
+    Iteration  150, KL divergence 0.7122, 50 iterations in 0.0061 sec
+    Iteration  200, KL divergence 0.7122, 50 iterations in 0.0061 sec
+    Iteration  250, KL divergence 0.7122, 50 iterations in 0.0061 sec
+       --> Time elapsed: 0.03 seconds
     ===> Running optimization with exaggeration=1.00, lr=5.00 for 500 iterations...
-    Iteration   50, KL divergence 0.2924, 50 iterations in 0.0072 sec
-    Iteration  100, KL divergence 0.1372, 50 iterations in 0.0078 sec
-    Iteration  150, KL divergence 0.1351, 50 iterations in 0.0072 sec
-    Iteration  200, KL divergence 0.1346, 50 iterations in 0.0071 sec
-    Iteration  250, KL divergence 0.1348, 50 iterations in 0.0073 sec
-    Iteration  300, KL divergence 0.1369, 50 iterations in 0.0071 sec
-    Iteration  350, KL divergence 0.1338, 50 iterations in 0.0073 sec
-    Iteration  400, KL divergence 0.1335, 50 iterations in 0.0070 sec
-    Iteration  450, KL divergence 0.1341, 50 iterations in 0.0070 sec
-    Iteration  500, KL divergence 0.1360, 50 iterations in 0.0070 sec
-       --> Time elapsed: 0.07 seconds
+    Iteration   50, KL divergence 0.3081, 50 iterations in 0.0064 sec
+    Iteration  100, KL divergence 0.1396, 50 iterations in 0.0063 sec
+    Iteration  150, KL divergence 0.1363, 50 iterations in 0.0063 sec
+    Iteration  200, KL divergence 0.1349, 50 iterations in 0.0063 sec
+    Iteration  250, KL divergence 0.1341, 50 iterations in 0.0063 sec
+    Iteration  300, KL divergence 0.1337, 50 iterations in 0.0063 sec
+    Iteration  350, KL divergence 0.1335, 50 iterations in 0.0062 sec
+    Iteration  400, KL divergence 0.1333, 50 iterations in 0.0062 sec
+    Iteration  450, KL divergence 0.1331, 50 iterations in 0.0062 sec
+    Iteration  500, KL divergence 0.1330, 50 iterations in 0.0060 sec
+       --> Time elapsed: 0.06 seconds
 
 
 
@@ -371,45 +371,45 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>0</td>
-      <td>0.577212</td>
-      <td>3.810531</td>
-      <td>2.956781</td>
+      <td>0.543325</td>
+      <td>-2.249032</td>
+      <td>-9.575017</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>0</td>
-      <td>0.234789</td>
-      <td>1.819820</td>
-      <td>-2.677379</td>
+      <td>0.217202</td>
+      <td>3.442438</td>
+      <td>9.213224</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
+      <td>react-router-native</td>
       <td>0</td>
-      <td>0.182952</td>
-      <td>-2.155648</td>
-      <td>2.412603</td>
+      <td>0.187344</td>
+      <td>17.192297</td>
+      <td>-5.207812</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>0</td>
-      <td>0.182952</td>
-      <td>-4.525381</td>
-      <td>-3.510447</td>
+      <td>react-router-dom</td>
+      <td>1</td>
+      <td>0.187344</td>
+      <td>-14.348020</td>
+      <td>4.346589</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
-      <td>0</td>
-      <td>0.738076</td>
-      <td>1.050677</td>
-      <td>0.818443</td>
+      <td>1</td>
+      <td>0.766437</td>
+      <td>-4.037683</td>
+      <td>1.223015</td>
     </tr>
   </tbody>
 </table>
@@ -451,8 +451,8 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router</td>
       <td>react-router</td>
       <td>0</td>
-      <td>0.577212</td>
-      <td>[0.008784672245383263, 0.04596918821334839, 0....</td>
+      <td>0.543325</td>
+      <td>[-0.00522183533757925, -0.10375229269266129, 0...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -460,35 +460,35 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>react-router-dom</td>
       <td>react-router-dom</td>
       <td>0</td>
-      <td>0.234789</td>
-      <td>[0.005749312695115805, 0.04243186488747597, 0....</td>
+      <td>0.217202</td>
+      <td>[-0.007755592931061983, -0.10968545079231262, ...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
-      <td>react-router-dom</td>
+      <td>react-router-native</td>
+      <td>react-router-native</td>
       <td>0</td>
-      <td>0.182952</td>
-      <td>[0.007260559592396021, 0.03008350171148777, 0....</td>
+      <td>0.187344</td>
+      <td>[-0.007835941389203072, -0.09592472016811371, ...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>react-router-native</td>
-      <td>0</td>
-      <td>0.182952</td>
-      <td>[0.005323492456227541, 0.04744711518287659, 0....</td>
+      <td>server</td>
+      <td>react-router-dom</td>
+      <td>1</td>
+      <td>0.187344</td>
+      <td>[-0.007130950223654509, -0.11010828614234924, ...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
       <td>router</td>
-      <td>0</td>
-      <td>0.738076</td>
-      <td>[0.007888616994023323, 0.03629167005419731, 0....</td>
+      <td>1</td>
+      <td>0.766437</td>
+      <td>[-0.009304161183536053, -0.11524533480405807, ...</td>
     </tr>
   </tbody>
 </table>
@@ -508,23 +508,23 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=0.42 for 250 iterations...
-    Iteration   50, KL divergence 0.9819, 50 iterations in 0.0069 sec
-    Iteration  100, KL divergence 0.8144, 50 iterations in 0.0070 sec
-    Iteration  150, KL divergence 0.8316, 50 iterations in 0.0070 sec
-    Iteration  200, KL divergence 0.8320, 50 iterations in 0.0070 sec
-    Iteration  250, KL divergence 0.8319, 50 iterations in 0.0070 sec
+    Iteration   50, KL divergence 1.0005, 50 iterations in 0.0069 sec
+    Iteration  100, KL divergence 0.0842, 50 iterations in 0.0065 sec
+    Iteration  150, KL divergence 1.2236, 50 iterations in 0.0061 sec
+    Iteration  200, KL divergence 1.2236, 50 iterations in 0.0064 sec
+    Iteration  250, KL divergence 1.2236, 50 iterations in 0.0082 sec
        --> Time elapsed: 0.03 seconds
     ===> Running optimization with exaggeration=1.00, lr=5.00 for 500 iterations...
-    Iteration   50, KL divergence 0.0743, 50 iterations in 0.0067 sec
-    Iteration  100, KL divergence 0.0718, 50 iterations in 0.0067 sec
-    Iteration  150, KL divergence 0.0699, 50 iterations in 0.0065 sec
-    Iteration  200, KL divergence 0.0676, 50 iterations in 0.0064 sec
-    Iteration  250, KL divergence 0.0661, 50 iterations in 0.0064 sec
-    Iteration  300, KL divergence 0.0653, 50 iterations in 0.0064 sec
-    Iteration  350, KL divergence 0.0648, 50 iterations in 0.0064 sec
-    Iteration  400, KL divergence 0.0644, 50 iterations in 0.0064 sec
-    Iteration  450, KL divergence 0.0641, 50 iterations in 0.0063 sec
-    Iteration  500, KL divergence 0.0639, 50 iterations in 0.0064 sec
+    Iteration   50, KL divergence 0.0843, 50 iterations in 0.0066 sec
+    Iteration  100, KL divergence 0.0800, 50 iterations in 0.0065 sec
+    Iteration  150, KL divergence 0.0779, 50 iterations in 0.0064 sec
+    Iteration  200, KL divergence 0.0776, 50 iterations in 0.0065 sec
+    Iteration  250, KL divergence 0.0771, 50 iterations in 0.0064 sec
+    Iteration  300, KL divergence 0.0766, 50 iterations in 0.0064 sec
+    Iteration  350, KL divergence 0.0764, 50 iterations in 0.0064 sec
+    Iteration  400, KL divergence 0.0765, 50 iterations in 0.0064 sec
+    Iteration  450, KL divergence 0.0763, 50 iterations in 0.0063 sec
+    Iteration  500, KL divergence 0.0761, 50 iterations in 0.0064 sec
        --> Time elapsed: 0.06 seconds
 
 
@@ -552,45 +552,45 @@ The [node2vec](https://towardsdatascience.com/complete-guide-to-understanding-no
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>0</td>
-      <td>0.577212</td>
-      <td>5.033078</td>
-      <td>0.142064</td>
+      <td>0.543325</td>
+      <td>9.401377</td>
+      <td>2.819006</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>0</td>
-      <td>0.234789</td>
-      <td>-14.805453</td>
-      <td>-1.843865</td>
+      <td>0.217202</td>
+      <td>-13.385565</td>
+      <td>-2.411911</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
+      <td>react-router-native</td>
       <td>0</td>
-      <td>0.182952</td>
-      <td>-13.292631</td>
-      <td>1.243068</td>
+      <td>0.187344</td>
+      <td>5.799909</td>
+      <td>4.675511</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>0</td>
-      <td>0.182952</td>
-      <td>13.447093</td>
-      <td>0.255174</td>
+      <td>react-router-dom</td>
+      <td>1</td>
+      <td>0.187344</td>
+      <td>14.580010</td>
+      <td>-0.200228</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
-      <td>0</td>
-      <td>0.738076</td>
-      <td>9.617913</td>
-      <td>0.203558</td>
+      <td>1</td>
+      <td>0.766437</td>
+      <td>-16.395730</td>
+      <td>-4.882378</td>
     </tr>
   </tbody>
 </table>
