@@ -16,7 +16,8 @@ SOURCE_DIRECTORY                      | source                              |  |
 NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY  | npm-package-json                    | Subdirectory of "artifacts" containing the npm package.json files to scan |
 RESULTS_DIRECTORY                     | results                             | Repository directory containing the final analysis report results |
 REPORTS_DIRECTORY                     | reports                             | Working directory where the analysis reports are written to  |
-ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | Name of the file that contains the hash code of the file list for change detection |
+ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE. |
+CHANGE_DETECTION_HASH_FILE_PATH       | ./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE} | Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option. |
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
