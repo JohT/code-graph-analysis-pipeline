@@ -51,7 +51,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>19</td>
-      <td>42</td>
+      <td>9</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
@@ -61,8 +61,8 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
-      <td>18</td>
-      <td>20</td>
+      <td>19</td>
+      <td>36</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
@@ -294,7 +294,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0</td>
-      <td>18</td>
+      <td>19</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
