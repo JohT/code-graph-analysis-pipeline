@@ -10,16 +10,11 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+# Overrideable Defaults
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
 NEO4J_VERSION=${NEO4J_VERSION:-"5.21.2"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j's own "Bolt Protocol" port
-
-# Internal Constants
-NEO4J_DIR="${TOOLS_DIRECTORY}/neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
-NEO4J_DIR_WINDOWS="${TOOLS_DIRECTORY}\neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
-NEO4J_BIN="${NEO4J_DIR}/bin"
-NEO4J_BIN_WINDOWS="${NEO4J_DIR_WINDOWS}\bin"
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -33,6 +28,22 @@ if [ -z "${TOOLS_DIRECTORY}" ]; then
     echo "startNeo4j: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
     exit 1
 fi
+
+# Detect Neo4j directory within the "tools" directory
+neo4j_directory="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}" # Default directory using environment variables
+if [ ! -d "${TOOLS_DIRECTORY}/${neo4j_directory}" ] ; then
+    # Default directory doesn't exist. Try to find one with another version.
+    # This usually happens when Neo4j had been updated while a local project is still using an older version.
+    neo4j_directories=$(find "./${TOOLS_DIRECTORY}" -type d -name "neo4j-${NEO4J_EDITION}-*" | sort -r | head -n 1) 
+    neo4j_directory=$(basename -- "$neo4j_directories")
+    echo "startNeo4j: Auto detected Neo4j directory within the tools directory: ${neo4j_directory}"
+fi
+
+# Internal Constants
+NEO4J_DIR="${TOOLS_DIRECTORY}/${neo4j_directory}"
+NEO4J_DIR_WINDOWS="${TOOLS_DIRECTORY}\\${neo4j_directory}"
+NEO4J_BIN="${NEO4J_DIR}/bin"
+NEO4J_BIN_WINDOWS="${NEO4J_DIR_WINDOWS}\bin"
 
 # Check if Neo4j is installed
 if [ -d "${NEO4J_BIN}" ] ; then
@@ -51,7 +62,7 @@ source "${SCRIPTS_DIR}/waitForNeo4jHttpFunctions.sh"
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
 isDatabaseReady=$(isDatabaseQueryable)
 if [[ ${isDatabaseReady} == "false" ]]; then
-    echo "startNeo4j: Starting neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} in ${NEO4J_DIR}"
+    echo "startNeo4j: Starting ${neo4j_directory} in ${NEO4J_DIR}"
 
     # Check if there is already a process that listens to the Neo4j HTTP port
     if isWindows; then
@@ -88,5 +99,5 @@ if [[ ${isDatabaseReady} == "false" ]]; then
    waitUntilDatabaseIsQueryable
    
 else
-    echo "startNeo4j: neo4j-${NEO4J_EDITION}-${NEO4J_VERSION} already started"
+    echo "startNeo4j: ${neo4j_directory} already started"
 fi

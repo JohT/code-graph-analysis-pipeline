@@ -182,6 +182,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
 
 - How can i trigger a full re-scan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
+  👉 Delete the file `typescriptFileChangeDetectionHashFile.txt` in the `source` directory to additionally re-scan Typescript projects.
 
 - How can i enable PDF generation for Jupyter Notebooks (depends on chromium, takes more time)?  
   👉 Set environment variable `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  

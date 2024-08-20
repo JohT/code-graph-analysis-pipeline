@@ -124,6 +124,12 @@ commonPostGitImport() {
   echo "importGit: Creating relationships to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher"
+
+  # Since it's currently not possible to rule out ambiguity in git<->code file matching,
+  # the following verifications are only an additional info in the log rather than an error.
+  echo "importGit: Running verification queries for troubleshooting (non failing)..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
 }
 
 postGitLogImport() {
@@ -135,6 +141,12 @@ postGitLogImport() {
 
 postGitPluginImport() {
   echo "importGit: Creating indexes for plugin-provided git data..."
+
+  # TODO: The deletion of all plain files in the "/.git" directory is needed
+  #       until there is a way to exclude all files inside a directory
+  #       while still being able to get them analyzed by the git plugin.
+  #       This would most likely be solved with https://github.com/jQAssistant/jqassistant/issues/410
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Delete_plain_git_directory_file_nodes.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_sha.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"

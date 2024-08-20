@@ -64,6 +64,54 @@ logNoDataForProjection() {
     echo "projectionFunctions: $(date +'%Y-%m-%dT%H:%M:%S%z') No data. ${programmingLanguage} ${projectionName} analysis skipped."
 }
 
+# Writes a log entry for the case when data validation failed.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
+# - verificationResult=...
+#   Full query result of the failed verification
+logDataVerificationFailedForProjection() {
+    local programmingLanguage projectionName verificationResult
+    programmingLanguage=$( extractQueryParameter "dependencies_projection_language" "${@}" )
+    programmingLanguage=${programmingLanguage:-"Java"} # Set to default value "Java" if not set since it is optional
+    projectionName=$( extractQueryParameter "dependencies_projection" "${@}" )
+    redColor='\033[0;31m'
+    noColor='\033[0m'
+    echo -e "${redColor}projectionFunctions: $(date +'%Y-%m-%dT%H:%M:%S%z') Error. Data validation for ${programmingLanguage} ${projectionName} failed.${noColor}" >&2
+    echo -e "${redColor}  -> This might be due to missing node or relationship properties.${noColor}" >&2
+    echo -e "${redColor}     For more details see the following verification query and its result (CSV):${noColor}" >&2
+}
+
+# Verifies if the nodes and relationships properties are complete (no missing properties) and the data is ready for projection.
+#
+# Returns true  (=0) if the data is ready for projection.
+# Returns false (=1) if the verification failed.
+# Exits with an error if there are technical issues.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Type"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+# - dependencies_projection_language=...
+#   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
+verifyDataReadyForProjection() {
+    local verificationResult
+    verificationResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Verify_Projectable.cypher" "${@}")
+    if is_csv_column_greater_zero "${verificationResult}" "numberOfRelationships"; then
+        logDataVerificationFailedForProjection "${@}" "verificationResult=${verificationResult}"
+        redColor='\033[0;31m'
+        noColor='\033[0m'
+        echo -e "${redColor}${verificationResult}${noColor}" >&2
+        exit 1;
+    fi
+}
+
 # Creates a directed Graph projection for dependencies between nodes specified by the parameter "dependencies_projection_node".
 # Nodes without incoming and outgoing dependencies will be filtered out using a subgraph.
 #
@@ -82,9 +130,10 @@ logNoDataForProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedDependencyProjection() {
     logProjectionCreationStart "${@}"
+    verifyDataReadyForProjection "${@}"
 
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
-    if [[ "${projectionCheckResult}" -lt 1 ]]; then
+    if [ "${projectionCheckResult}" -lt 1 ]; then
         logNoDataForProjection "${@}"
         return 1
     fi
@@ -120,9 +169,10 @@ createDirectedDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedDependencyProjection() {
     logProjectionCreationStart "${@}"
+    verifyDataReadyForProjection "${@}"
 
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
-    if [[ "${projectionCheckResult}" -lt 1 ]]; then
+    if [ "${projectionCheckResult}" -lt 1 ]; then
         return 1
     fi
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
@@ -153,6 +203,7 @@ createUndirectedDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaTypeDependencyProjection() {
     logProjectionCreationStart "${@}"
+    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Type" "dependencies_projection_weight_property=weight"
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
     
@@ -180,6 +231,7 @@ createDirectedJavaTypeDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedJavaTypeDependencyProjection() {
     logProjectionCreationStart "${@}"
+    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Type" "dependencies_projection_weight_property=weight"
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
 
@@ -207,6 +259,7 @@ createUndirectedJavaTypeDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaMethodDependencyProjection() {
     logProjectionCreationStart "${@}"
+    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Method" "dependencies_projection_weight_property=weight"
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
 

@@ -39,17 +39,14 @@ else
 fi
 
 if [ -d "./${SOURCE_DIRECTORY}" ] ; then
-    if command -v "npx" &> /dev/null ; then
-        # TODO: Remove patchJQAssistantTypescriptPlugin when issue is resolved: https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125
-        source "${SCRIPTS_DIR}/patchJQAssistantTypescriptPlugin.sh" >&2
-        echo "findPathsToScan: Scanning Typescript source using @jqassistant/ts-lce..." >&2
-        ( cd "./${SOURCE_DIRECTORY}" && npx --yes @jqassistant/ts-lce@1.2.1 --extension React >"./../runtime/logs/jqassistant-typescript-scan.log" 2>&1 || exit )
-    else
-        echo "findPathToScan Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects."
-    fi
-
     # Scan Typescript analysis json data files in the source directory
-    typescriptAnalysisFiles="$(find "./${SOURCE_DIRECTORY}" -type f -path "*/.reports/jqa/ts-output.json" -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
+    typescriptAnalysisFiles="$(find "./${SOURCE_DIRECTORY}" \
+                                    -type d -name "node_modules" -prune -o \
+                                    -type d -name "target" -prune -o \
+                                    -type d -name "temp" -prune -o \
+                                    -type f -path "*/.reports/jqa/ts-output.json" \
+                                    -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
+
     if [ -n "${typescriptAnalysisFiles}" ]; then
         directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${typescriptAnalysisFiles}"
     fi
@@ -64,7 +61,11 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
 
     # Scan git repositories in the artifacts directory
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ] ; then
-        gitDirectories="$(find "./${SOURCE_DIRECTORY}" -type d -name ".git" -exec echo {} \; | tr '\n' ',' | sed 's/,$/\n/')"
+        gitDirectories="$(find "./${SOURCE_DIRECTORY}" \
+                                -type d -name "node_modules" -prune -o \
+                                -type d -name "target" -prune -o \
+                                -type d -name "temp" -prune -o \
+                                -type d -name ".git" -exec echo {} \; | tr '\n' ',' | sed 's/,$/\n/')"
         if [ -n "${gitDirectories}" ]; then
             directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${gitDirectories}"
         fi

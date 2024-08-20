@@ -6,7 +6,7 @@
  WHERE module <> resolvedModule
   CALL {  WITH module, dependsOn, resolvedModule
          MERGE (module)-[resolvedDependsOn:DEPENDS_ON]->(resolvedModule)
-           SET resolvedDependsOn = dependsOn
-              ,resolvedDependsOn.resolved=true
+            ON CREATE SET resolvedDependsOn          = dependsOn
+                         ,resolvedDependsOn.resolved = true
        } IN TRANSACTIONS
 RETURN count(*) as resolvedDependencies

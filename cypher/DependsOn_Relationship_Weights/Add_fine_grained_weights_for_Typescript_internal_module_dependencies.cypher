@@ -2,14 +2,16 @@
 
 // Get the top level dependency between a Typescript module and the external modules it uses
  MATCH (source:TS:Module)-[moduleDependency:DEPENDS_ON]->(target:Module)
-// Exclude all targets where an ExternalModule was found that resolves to them
-// because those are covered in the fine grained weights for "ExternalModule"s.
- WHERE NOT EXISTS { (target)<-[:RESOLVES_TO]-(resolvedTarget:ExternalModule) }
+// Exclude all that already have extended weight properties
+// for example because those were covered in the fine grained weights for "ExternalModule"s.
+ WHERE moduleDependency.declarationCount IS NULL
+// Ruling out resolved targets also filters out entries that aren't covered by the fine grained weights for "ExternalModule"s.
+// Therefore, the exists filter is commented out for now and replaced by focussing on missing detailed weight properties to catch them all.
+//WHERE NOT EXISTS { (target)<-[:RESOLVES_TO]-(resolvedTarget:ExternalModule) }
   WITH source
       ,target
       ,moduleDependency
       ,moduleDependency.cardinality AS targetModuleCardinality
-
 // Get optional external (e.g. type) declarations that the external module (target) provides and the source module uses
 OPTIONAL MATCH (source)-[elementDependency:DEPENDS_ON|EXPORTS]->(elementType:TS)<-[:EXPORTS]-(target)
   WITH source
@@ -40,13 +42,18 @@ OPTIONAL MATCH (source)-[abstractDependency:DEPENDS_ON|EXPORTS]->(abstractType:T
 // - "lowCouplingElement25PercentWeight" subtracts 75% of the weights for abstract types like Interfaces and Type aliases
 //   to compensate for their low coupling influence. Not included "high coupling" elements like Functions and Classes 
 //   remain in the weight as they were. The same applies for "lowCouplingElement10PercentWeight" but with in a stronger manner.
+//   If there are no declarations and therefore the elementTypeCardinality is zero then the original targetModuleCardinality is used.
  SET moduleDependency.declarationCount        = elementTypeCount
     ,moduleDependency.abstractTypeCount       = abstractTypeCount
     ,moduleDependency.abstractTypeCardinality = abstractTypeCardinality
-    ,moduleDependency.lowCouplingElement25PercentWeight = 
-        toInteger(elementTypeCardinality - round(abstractTypeCardinality * 0.75))
-    ,moduleDependency.lowCouplingElement10PercentWeight = 
-        toInteger(elementTypeCardinality - round(abstractTypeCardinality * 0.90))
+    ,moduleDependency.lowCouplingElement25PercentWeight = toInteger(
+        coalesce(nullif(elementTypeCardinality, 0), targetModuleCardinality) - 
+        round(abstractTypeCardinality * 0.75)
+     )
+    ,moduleDependency.lowCouplingElement10PercentWeight = toInteger(
+        coalesce(nullif(elementTypeCardinality, 0), targetModuleCardinality) - 
+        round(abstractTypeCardinality * 0.90)
+     )
 RETURN source.globalFqn    AS sourceName
       ,target.globalFqn    AS targetName
       ,elementTypeCount

@@ -49,6 +49,9 @@ source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axo
 source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-messaging" -v "${ARTIFACTS_VERSION}" || exit 2
 source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-modelling" -v "${ARTIFACTS_VERSION}" || exit 2
 source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-test" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-server-connector" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-spring-boot-autoconfigure" -v "${ARTIFACTS_VERSION}" || exit 2
+source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-tracing-opentelemetry" -v "${ARTIFACTS_VERSION}" || exit 2
 
 # Download the git history (bare clone without working tree) into the "source" folder.
 # This makes it possible to additionally import the git log into the graph 

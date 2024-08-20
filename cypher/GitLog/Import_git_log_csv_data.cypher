@@ -12,7 +12,7 @@ CALL { WITH row
         timestamp:      datetime(row.timestamp),
         timestamp_unix: toInteger(row.timestamp_unix)
     })
-    MERGE (git_file:Git:Log:File {fileName: row.filename})
+    MERGE (git_file:Git:Log:File {fileName: row.filename, repositoryPath: $git_repository_absolute_directory_name})
     MERGE (git_author)-[:AUTHORED]->(git_commit)
     MERGE (git_commit)-[:CONTAINS_CHANGED]->(git_file)
     MERGE (git_repository)-[:HAS_COMMIT]->(git_commit)
