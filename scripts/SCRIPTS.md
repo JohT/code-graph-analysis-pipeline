@@ -13,7 +13,7 @@ Script | Directory | Description
 | [copyReportsIntoResults.sh](./copyReportsIntoResults.sh) |  | Copies the results from the temp directory to the results directory grouped by the analysis name. |
 | [createAggregatedGitLogCsv.sh](./createAggregatedGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. |
 | [createGitLogCsv.sh](./createGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. |
-| [detectChangedArtifacts.sh](./detectChangedArtifacts.sh) |  | Detect changed files in the artifacts directory or in a given list of paths  |
+| [detectChangedFiles.sh](./detectChangedFiles.sh) |  | Detect changed files in the artifacts directory or in a given list of paths  |
 | [appendEnvironmentVariables.sh](./documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns. |
 | [generateCsvReportReference.sh](./documentation/generateCsvReportReference.sh) | documentation | Generates "CSV_REPORTS.md" containing a reference to all CSV cypher query reports in this directory and its subdirectories. |
 | [generateCypherReference.sh](./documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories. |
@@ -39,7 +39,6 @@ Script | Directory | Description
 | [importGit.sh](./importGit.sh) |  | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT. |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
 | [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
-| [patchJQAssistantTypescriptPlugin.sh](./patchJQAssistantTypescriptPlugin.sh) |  | Patches jQAssistant Typescript Plugin as a workaround for https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/125 |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
@@ -66,7 +65,8 @@ Script | Directory | Description
 | [JupyterReports.sh](./reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts. |
 | [VisualizationReports.sh](./reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports. |
 | [resetAndScan.sh](./resetAndScan.sh) |  | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph. |
-| [resetAndScanChanged.sh](./resetAndScanChanged.sh) |  | Executes "resetAndScan.sh" only if "detectChangedArtifacts.sh" returns detected changes. |
+| [resetAndScanChanged.sh](./resetAndScanChanged.sh) |  | Executes "resetAndScan.sh" only if "detectChangedFiles.sh" returns detected changes. |
+| [scanTypescript.sh](./scanTypescript.sh) |  | Executes the npm package @jqassistant/ts-lc using npx to scan the Typescript projects in the source directory and create an intermediate json data file for the jQAssistant Typescript plugin. |
 | [setupJQAssistant.sh](./setupJQAssistant.sh) |  | Installs (download and unzip) jQAssistant (https://jqassistant.github.io/jqassistant/current). |
 | [setupNeo4j.sh](./setupNeo4j.sh) |  | Installs (download, unpack, get plugins, configure) a local Neo4j Graph Database (https://neo4j.com/download-center/#community). |
 | [setupNeo4jInitialPassword.sh](./setupNeo4jInitialPassword.sh) |  | Sets the initial password for the local Neo4j Graph Database (https://neo4j.com/download-center/#community). |
