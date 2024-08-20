@@ -33,13 +33,13 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>307309</td>
-      <td>954053</td>
-      <td>6</td>
-      <td>97</td>
-      <td>1655</td>
-      <td>6954</td>
-      <td>8433</td>
+      <td>319102</td>
+      <td>967221</td>
+      <td>9</td>
+      <td>122</td>
+      <td>2083</td>
+      <td>8420</td>
+      <td>10289</td>
     </tr>
   </tbody>
 </table>
@@ -73,43 +73,43 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>0</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
-      <td>Annotation</td>
-      <td>26</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>787</td>
       <td>Class</td>
       <td>587</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
       <td>Interface</td>
       <td>155</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
       <td>Enum</td>
       <td>19</td>
     </tr>
     <tr>
+      <th>3</th>
+      <td>axon-messaging-4.10.0</td>
+      <td>787</td>
+      <td>Annotation</td>
+      <td>26</td>
+    </tr>
+    <tr>
       <th>4</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
-      <td>Interface</td>
-      <td>28</td>
+      <td>Class</td>
+      <td>113</td>
     </tr>
     <tr>
       <th>5</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
-      <td>Class</td>
-      <td>113</td>
+      <td>Interface</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>6</th>
@@ -143,64 +143,120 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>10</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>axon-test-4.10.0</td>
-      <td>87</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>Class</td>
+      <td>107</td>
     </tr>
     <tr>
       <th>13</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>Interface</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>Enum</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
       <td>Class</td>
       <td>71</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>axon-configuration-4.10.0</td>
-      <td>41</td>
+      <th>16</th>
+      <td>axon-test-4.10.0</td>
+      <td>87</td>
       <td>Interface</td>
       <td>16</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>17</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>Class</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>Annotation</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>Enum</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>Interface</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>21</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>Class</td>
       <td>23</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>22</th>
+      <td>axon-configuration-4.10.0</td>
+      <td>41</td>
+      <td>Interface</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>23</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>24</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>Annotation</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>25</th>
       <td>axon-disruptor-4.10.0</td>
       <td>22</td>
       <td>Class</td>
       <td>22</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>5</td>
+      <td>Class</td>
+      <td>5</td>
     </tr>
   </tbody>
 </table>
@@ -258,11 +314,25 @@ The source data for this aggregated table can be found in the CSV report `Number
       <td>2</td>
     </tr>
     <tr>
+      <th>axon-server-connector-4.10.0</th>
+      <td>107</td>
+      <td>23</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
       <th>axon-test-4.10.0</th>
       <td>71</td>
       <td>16</td>
       <td>0</td>
       <td>0</td>
+    </tr>
+    <tr>
+      <th>axon-spring-boot-autoconfigure-4.10.0</th>
+      <td>68</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>axon-configuration-4.10.0</th>
@@ -274,6 +344,13 @@ The source data for this aggregated table can be found in the CSV report `Number
     <tr>
       <th>axon-disruptor-4.10.0</th>
       <td>22</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>axon-tracing-opentelemetry-4.10.0</th>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -342,11 +419,25 @@ The source data for this aggregated table can be found in the CSV report `Number
       <td>1.503759</td>
     </tr>
     <tr>
+      <th>axon-server-connector-4.10.0</th>
+      <td>81.679389</td>
+      <td>17.557252</td>
+      <td>0.000000</td>
+      <td>0.763359</td>
+    </tr>
+    <tr>
       <th>axon-test-4.10.0</th>
       <td>81.609195</td>
       <td>18.390805</td>
       <td>0.000000</td>
       <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>axon-spring-boot-autoconfigure-4.10.0</th>
+      <td>91.891892</td>
+      <td>1.351351</td>
+      <td>4.054054</td>
+      <td>2.702703</td>
     </tr>
     <tr>
       <th>axon-configuration-4.10.0</th>
@@ -357,6 +448,13 @@ The source data for this aggregated table can be found in the CSV report `Number
     </tr>
     <tr>
       <th>axon-disruptor-4.10.0</th>
+      <td>100.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>axon-tracing-opentelemetry-4.10.0</th>
       <td>100.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
@@ -440,27 +538,42 @@ The whole table can be found in the CSV report `Number_of_packages_per_artifact`
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-modelling-4.10.0</td>
       <td>10</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>9</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>5</th>
       <td>axon-test-4.10.0</td>
       <td>8</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>6</th>
       <td>axon-configuration-4.10.0</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>axon-disruptor-4.10.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
       <td>1</td>
     </tr>
   </tbody>

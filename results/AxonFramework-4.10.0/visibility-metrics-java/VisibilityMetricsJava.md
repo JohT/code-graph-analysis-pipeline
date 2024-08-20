@@ -61,6 +61,32 @@ Only the top 40 entries are shown. The whole table can be found in the following
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>67</td>
+      <td>0.750000</td>
+      <td>1.000000</td>
+      <td>0.949234</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
       <td>645</td>
@@ -73,7 +99,20 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>3</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>102</td>
+      <td>0.428571</td>
+      <td>1.000000</td>
+      <td>0.857633</td>
+      <td>0.784615</td>
+      <td>0.909091</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
       <td>135</td>
@@ -86,7 +125,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>5</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
       <td>98</td>
@@ -99,7 +138,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>6</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
       <td>65</td>
@@ -112,7 +151,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>1.000000</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>7</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>28</td>
@@ -125,7 +164,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.682927</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>8</th>
       <td>axon-disruptor-4.10.0</td>
       <td>22</td>
       <td>9</td>
@@ -238,6 +277,19 @@ Only the top 40 entries are shown. The whole table can be found in the following
     </tr>
     <tr>
       <th>5</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>102</td>
+      <td>0.428571</td>
+      <td>1.000000</td>
+      <td>0.857633</td>
+      <td>0.784615</td>
+      <td>0.909091</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
       <td>645</td>
@@ -246,6 +298,32 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.867147</td>
       <td>0.750000</td>
       <td>0.973684</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>67</td>
+      <td>0.750000</td>
+      <td>1.000000</td>
+      <td>0.949234</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
     </tr>
@@ -302,358 +380,358 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>saga</td>
       <td>33</td>
       <td>33</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot</td>
+      <td>springboot</td>
+      <td>25</td>
+      <td>25</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore.jdb...</td>
       <td>statements</td>
       <td>15</td>
       <td>15</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.upcasting.event</td>
       <td>event</td>
       <td>12</td>
       <td>12</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.lifecycle</td>
       <td>lifecycle</td>
       <td>10</td>
       <td>10</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.conflictresolu...</td>
       <td>conflictresolution</td>
       <td>9</td>
       <td>9</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.property</td>
       <td>property</td>
       <td>9</td>
       <td>9</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.util</td>
+      <td>util</td>
+      <td>9</td>
+      <td>9</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.interceptors</td>
       <td>interceptors</td>
       <td>8</td>
       <td>8</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>9</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>responsetypes</td>
       <td>8</td>
       <td>8</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>10</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.commandhandling.distributed....</td>
       <td>commandfilter</td>
       <td>7</td>
       <td>7</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>11</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.deadline.dbscheduler</td>
       <td>dbscheduler</td>
       <td>7</td>
       <td>7</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>12</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.scheduling.dbs...</td>
       <td>dbscheduler</td>
       <td>7</td>
       <td>7</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>13</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.json</td>
       <td>json</td>
       <td>7</td>
       <td>7</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>14</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.tokenstore</td>
       <td>tokenstore</td>
       <td>7</td>
       <td>7</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>15</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.xml</td>
       <td>xml</td>
       <td>7</td>
       <td>7</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>16</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.tracing.attributes</td>
       <td>attributes</td>
       <td>6</td>
       <td>6</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>17</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.scheduling.quartz</td>
       <td>quartz</td>
       <td>6</td>
       <td>6</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>18</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.upcasting</td>
       <td>upcasting</td>
       <td>6</td>
       <td>6</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>19</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.converters</td>
       <td>converters</td>
       <td>5</td>
       <td>5</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>20</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.gateway</td>
       <td>gateway</td>
       <td>5</td>
       <td>5</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>21</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.queryhandling.registration</td>
       <td>registration</td>
       <td>5</td>
       <td>5</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>22</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.eventscheduler</td>
       <td>eventscheduler</td>
       <td>5</td>
       <td>5</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>23</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>org.axonframework.tracing.opentelemetry</td>
+      <td>opentelemetry</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.commandhandling.callbacks</td>
       <td>callbacks</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>25</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.correlation</td>
       <td>correlation</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>26</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.deadline.jobrunr</td>
       <td>jobrunr</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>27</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.jpa</td>
       <td>jpa</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>28</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.tokenstore.jpa</td>
       <td>jpa</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>29</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.legacyjpa</td>
       <td>legacyjpa</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>30</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.deadline.quartz</td>
       <td>quartz</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>31</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.deadline</td>
       <td>deadline</td>
       <td>4</td>
       <td>4</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>29</th>
+      <th>32</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.snapshotting</td>
       <td>snapshotting</td>
       <td>3</td>
       <td>3</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>30</th>
+      <th>33</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.scheduling.job...</td>
       <td>jobrunr</td>
       <td>3</td>
       <td>3</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>31</th>
+      <th>34</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.scheduling</td>
       <td>scheduling</td>
       <td>3</td>
       <td>3</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>32</th>
+      <th>35</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.util</td>
       <td>util</td>
       <td>3</td>
       <td>3</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>33</th>
+      <th>36</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.processor</td>
+      <td>processor</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.util</td>
+      <td>util</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>38</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.tokenstore.leg...</td>
       <td>legacyjpa</td>
       <td>2</td>
       <td>2</td>
-      <td>1.000000</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>34</th>
+      <th>39</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.interceptors.legac...</td>
       <td>legacyvalidation</td>
       <td>2</td>
       <td>2</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>org.axonframework.modelling.command.legacyjpa</td>
-      <td>legacyjpa</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.common.digest</td>
-      <td>digest</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.interceptors</td>
-      <td>interceptors</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.common.io</td>
-      <td>io</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.axonframework.test.matchers</td>
-      <td>matchers</td>
-      <td>23</td>
-      <td>24</td>
-      <td>0.958333</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
@@ -714,6 +792,15 @@ Only the top 40 entries are shown. The whole table can be found in the following
     </tr>
     <tr>
       <th>3</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>query</td>
+      <td>9</td>
+      <td>21</td>
+      <td>0.428571</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.aggregate</td>
       <td>aggregate</td>
@@ -722,7 +809,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.473684</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore.leg...</td>
       <td>legacyjpa</td>
@@ -731,7 +818,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.500000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore.inm...</td>
       <td>inmemory</td>
@@ -740,7 +827,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.500000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.tokenstore.inm...</td>
       <td>inmemory</td>
@@ -749,7 +836,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.500000</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-modelling-4.10.0</td>
       <td>org.axonframework.modelling.saga.repository.in...</td>
       <td>inmemory</td>
@@ -758,7 +845,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.500000</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.commandhandling.gateway</td>
       <td>gateway</td>
@@ -767,7 +854,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.558824</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>10</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.async</td>
       <td>async</td>
@@ -776,7 +863,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.600000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>11</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.caching</td>
       <td>caching</td>
@@ -785,7 +872,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.600000</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>12</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.replay</td>
       <td>replay</td>
@@ -794,7 +881,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.600000</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>13</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.deadline.annotation</td>
       <td>annotation</td>
@@ -803,7 +890,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.600000</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>14</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test</td>
       <td>test</td>
@@ -812,7 +899,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.600000</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>15</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
       <td>eventstore</td>
@@ -821,7 +908,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.612903</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>16</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.saga</td>
       <td>saga</td>
@@ -830,7 +917,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.666667</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>17</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.annotation</td>
       <td>annotation</td>
@@ -839,7 +926,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.666667</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>18</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.stream</td>
       <td>stream</td>
@@ -848,7 +935,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.666667</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>19</th>
       <td>axon-modelling-4.10.0</td>
       <td>org.axonframework.modelling.saga.repository.le...</td>
       <td>legacyjpa</td>
@@ -857,7 +944,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.666667</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>20</th>
       <td>axon-configuration-4.10.0</td>
       <td>org.axonframework.config</td>
       <td>config</td>
@@ -866,7 +953,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.682927</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>21</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing</td>
       <td>eventsourcing</td>
@@ -875,7 +962,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.690476</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>22</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.unitofwork</td>
       <td>unitofwork</td>
@@ -884,7 +971,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.714286</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>23</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.lock</td>
       <td>lock</td>
@@ -893,7 +980,16 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.727273</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>24</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>axon</td>
+      <td>19</td>
+      <td>26</td>
+      <td>0.730769</td>
+    </tr>
+    <tr>
+      <th>25</th>
       <td>axon-modelling-4.10.0</td>
       <td>org.axonframework.modelling.saga.repository</td>
       <td>repository</td>
@@ -902,7 +998,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.733333</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>26</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.tracing</td>
       <td>tracing</td>
@@ -911,7 +1007,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.736842</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>27</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.annotation</td>
       <td>annotation</td>
@@ -920,7 +1016,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.740741</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>28</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.queryhandling.annotation</td>
       <td>annotation</td>
@@ -929,7 +1025,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.750000</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>29</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.scheduling.java</td>
       <td>java</td>
@@ -938,7 +1034,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.750000</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>30</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.transaction</td>
       <td>transaction</td>
@@ -947,7 +1043,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.750000</td>
     </tr>
     <tr>
-      <th>29</th>
+      <th>31</th>
       <td>axon-modelling-4.10.0</td>
       <td>org.axonframework.modelling.saga.metamodel</td>
       <td>metamodel</td>
@@ -956,7 +1052,16 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.750000</td>
     </tr>
     <tr>
-      <th>30</th>
+      <th>32</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.service.connection</td>
+      <td>connection</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>33</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.server</td>
       <td>server</td>
@@ -965,7 +1070,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.750000</td>
     </tr>
     <tr>
-      <th>31</th>
+      <th>34</th>
       <td>axon-modelling-4.10.0</td>
       <td>org.axonframework.modelling.command.inspection</td>
       <td>inspection</td>
@@ -974,7 +1079,16 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.769231</td>
     </tr>
     <tr>
-      <th>32</th>
+      <th>35</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>util</td>
+      <td>20</td>
+      <td>26</td>
+      <td>0.769231</td>
+    </tr>
+    <tr>
+      <th>36</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.deadline</td>
       <td>deadline</td>
@@ -983,7 +1097,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.769231</td>
     </tr>
     <tr>
-      <th>33</th>
+      <th>37</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>jdbc</td>
@@ -992,58 +1106,22 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.785714</td>
     </tr>
     <tr>
-      <th>34</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.axonframework.test.utils</td>
-      <td>utils</td>
-      <td>4</td>
-      <td>5</td>
-      <td>0.800000</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.queryhandling</td>
-      <td>queryhandling</td>
-      <td>39</td>
-      <td>48</td>
-      <td>0.812500</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>serialization</td>
-      <td>28</td>
-      <td>34</td>
-      <td>0.823529</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.common.jdbc</td>
-      <td>jdbc</td>
-      <td>15</td>
-      <td>18</td>
-      <td>0.833333</td>
-    </tr>
-    <tr>
       <th>38</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.deadletter.leg...</td>
-      <td>legacyjpa</td>
-      <td>5</td>
-      <td>6</td>
-      <td>0.833333</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>autoconfig</td>
+      <td>23</td>
+      <td>29</td>
+      <td>0.793103</td>
     </tr>
     <tr>
       <th>39</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.monitoring</td>
-      <td>monitoring</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>heartbeat</td>
+      <td>4</td>
       <td>5</td>
-      <td>6</td>
-      <td>0.833333</td>
+      <td>0.800000</td>
     </tr>
   </tbody>
 </table>

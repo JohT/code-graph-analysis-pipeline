@@ -59,222 +59,222 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>javax.annotation</td>
-      <td>63</td>
-      <td>310</td>
+      <td>76</td>
       <td>342</td>
-      <td>1602</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>374</td>
+      <td>1729</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[Nonnull, Nullable, PreDestroy]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.slf4j</td>
-      <td>53</td>
-      <td>117</td>
-      <td>208</td>
-      <td>605</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>66</td>
+      <td>141</td>
+      <td>253</td>
+      <td>713</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>javax.persistence</td>
+      <td>15</td>
+      <td>27</td>
+      <td>82</td>
+      <td>311</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[EntityManager, LockModeType, Basic, Id, Colum...</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>13</td>
       <td>23</td>
       <td>57</td>
       <td>87</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JsonProperty, JsonCreator, JsonTypeInfo, Json...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>javax.persistence</td>
-      <td>13</td>
-      <td>24</td>
-      <td>78</td>
-      <td>305</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[EntityManager, LockModeType, Entity, Lob, Col...</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[JsonProperty, JsonCreator, JsonTypeInfo$Id, J...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>jakarta.persistence</td>
-      <td>8</td>
-      <td>22</td>
-      <td>69</td>
-      <td>293</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[EntityManager, LockModeType, Basic, Lob, Id, ...</td>
+      <td>10</td>
+      <td>25</td>
+      <td>73</td>
+      <td>299</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[EntityManager, LockModeType, Column, Basic, L...</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>io.axoniq.axonserver.grpc</td>
+      <td>7</td>
+      <td>30</td>
+      <td>55</td>
+      <td>273</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[ErrorMessage, InstructionAck, InstructionAck$...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>io.axoniq.axonserver.connector</td>
+      <td>6</td>
+      <td>21</td>
+      <td>30</td>
+      <td>126</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[AxonServerConnectionFactory, AxonServerConnec...</td>
+    </tr>
+    <tr>
+      <th>7</th>
       <td>org.hamcrest</td>
       <td>5</td>
       <td>27</td>
       <td>59</td>
       <td>370</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[CoreMatchers, StringDescription, Matcher, Des...</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>8</th>
+      <td>io.grpc</td>
+      <td>4</td>
+      <td>12</td>
+      <td>50</td>
+      <td>94</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Channel, ManagedChannelBuilder, Metadata$Key,...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>reactor.core.publisher</td>
+      <td>4</td>
+      <td>27</td>
+      <td>49</td>
+      <td>198</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Flux, Mono, SignalType, BaseSubscriber, FluxS...</td>
+    </tr>
+    <tr>
+      <th>10</th>
       <td>com.github.kagkarlsson.scheduler</td>
-      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+      <td>8</td>
+      <td>49</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Scheduler, ScheduledExecution, SchedulerState]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>3</td>
+      <td>5</td>
+      <td>11</td>
+      <td>44</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Task, TaskInstanceId, ExecutionContext, TaskW...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>io.grpc.stub</td>
+      <td>3</td>
+      <td>6</td>
+      <td>7</td>
+      <td>27</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[StreamObserver, ClientCallStreamObserver, Cli...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>org.jobrunr.scheduling</td>
+      <td>3</td>
+      <td>5</td>
+      <td>7</td>
+      <td>34</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[JobScheduler, JobBuilder]</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>org.springframework.boot.actuate.health</td>
+      <td>3</td>
       <td>4</td>
       <td>7</td>
-      <td>46</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[ScheduledExecution, SchedulerState, Scheduler]</td>
+      <td>24</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Status, SimpleStatusAggregator, AbstractHealt...</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>com.github.kagkarlsson.scheduler.task</td>
+      <th>15</th>
+      <td>org.springframework.boot.autoconfigure</td>
+      <td>3</td>
+      <td>24</td>
+      <td>54</td>
+      <td>55</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[AutoConfigurationPackages, AutoConfiguration,...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>org.springframework.boot.autoconfigure.condition</td>
+      <td>3</td>
+      <td>32</td>
+      <td>66</td>
+      <td>150</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[ConditionOutcome, SpringBootCondition, Condit...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>org.springframework.context.annotation</td>
+      <td>3</td>
+      <td>30</td>
+      <td>41</td>
+      <td>134</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[ImportBeanDefinitionRegistrar, ConfigurationC...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>com.fasterxml.jackson.databind</td>
       <td>2</td>
-      <td>4</td>
-      <td>10</td>
-      <td>40</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[TaskInstanceId, TaskWithDataDescriptor, TaskI...</td>
+      <td>9</td>
+      <td>17</td>
+      <td>75</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[ObjectMapper, ObjectReader, ObjectWriter, Jso...</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>19</th>
       <td>com.thoughtworks.xstream.io</td>
       <td>2</td>
       <td>4</td>
       <td>9</td>
       <td>39</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>org.jobrunr.scheduling</td>
-      <td>2</td>
-      <td>4</td>
-      <td>6</td>
-      <td>31</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JobScheduler, JobBuilder]</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>org.quartz</td>
-      <td>2</td>
-      <td>9</td>
-      <td>35</td>
-      <td>185</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[SchedulerContext, JobDetail, JobKey, Schedule...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>reactor.core.publisher</td>
-      <td>2</td>
-      <td>18</td>
-      <td>35</td>
-      <td>142</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Mono, Flux, MonoSink, FluxSink, Sinks$Many, S...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>com.fasterxml.jackson.core</td>
-      <td>1</td>
-      <td>3</td>
-      <td>4</td>
-      <td>7</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JsonProcessingException, JacksonException, Js...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>1</td>
-      <td>7</td>
-      <td>15</td>
-      <td>65</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JsonNode, ObjectMapper, DeserializationFeatur...</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>com.fasterxml.jackson.databind.node</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>12</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[ObjectNode, JsonNodeType]</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>com.google.gson</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>7</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JsonElement, JsonObject, JsonArray, JsonParser]</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>com.lmax.disruptor</td>
-      <td>1</td>
-      <td>7</td>
-      <td>9</td>
-      <td>25</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[RingBuffer, EventHandler, ExceptionHandler, L...</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>1</td>
-      <td>4</td>
-      <td>5</td>
-      <td>21</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Disruptor, ProducerType, EventHandlerGroup]</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>1</td>
-      <td>3</td>
-      <td>6</td>
-      <td>6</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream.io.xml</td>
-      <td>1</td>
-      <td>2</td>
-      <td>4</td>
-      <td>13</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[XppDriver, CompactWriter, Dom4JReader, XomRea...</td>
     </tr>
   </tbody>
 </table>
@@ -345,222 +345,222 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>javax.annotation</td>
-      <td>63</td>
-      <td>310</td>
+      <td>76</td>
       <td>342</td>
-      <td>1602</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>374</td>
+      <td>1729</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[Nonnull, Nullable, PreDestroy]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>org.slf4j</td>
-      <td>53</td>
-      <td>117</td>
-      <td>208</td>
-      <td>605</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>66</td>
+      <td>141</td>
+      <td>253</td>
+      <td>713</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[Logger, LoggerFactory]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>com.fasterxml</td>
-      <td>14</td>
-      <td>30</td>
-      <td>85</td>
-      <td>181</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JsonProperty, JsonCreator, JsonTypeInfo, Json...</td>
+      <td>15</td>
+      <td>33</td>
+      <td>89</td>
+      <td>199</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[JsonProperty, JsonCreator, ObjectMapper, CBOR...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>javax.persistence</td>
-      <td>13</td>
-      <td>24</td>
-      <td>78</td>
-      <td>305</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[EntityManager, LockModeType, Entity, Lob, Col...</td>
+      <td>15</td>
+      <td>27</td>
+      <td>82</td>
+      <td>311</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[EntityManager, LockModeType, Basic, Id, Colum...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>jakarta.persistence</td>
-      <td>8</td>
-      <td>22</td>
-      <td>69</td>
-      <td>293</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[EntityManager, LockModeType, Basic, Lob, Id, ...</td>
+      <td>10</td>
+      <td>25</td>
+      <td>73</td>
+      <td>299</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[EntityManager, LockModeType, Column, Basic, L...</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>io.axoniq</td>
+      <td>9</td>
+      <td>67</td>
+      <td>197</td>
+      <td>973</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[AxonServerConnectionFactory, ContextConnectio...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>org.springframework</td>
+      <td>8</td>
+      <td>53</td>
+      <td>249</td>
+      <td>531</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[ConfigurationProperties, Status, SimpleStatus...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>io.grpc</td>
+      <td>5</td>
+      <td>18</td>
+      <td>61</td>
+      <td>126</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Channel, StreamObserver, ManagedChannelBuilde...</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>org.hamcrest</td>
       <td>5</td>
       <td>27</td>
       <td>59</td>
       <td>370</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[CoreMatchers, StringDescription, Matcher, Des...</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>com.github</td>
-      <td>2</td>
-      <td>6</td>
-      <td>19</td>
-      <td>100</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[TaskInstanceId, Tasks$OneTimeTaskBuilder, Tas...</td>
+      <th>9</th>
+      <td>reactor.core</td>
+      <td>5</td>
+      <td>28</td>
+      <td>53</td>
+      <td>203</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Scheduler, Schedulers, Flux, Mono, SignalType...</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>com.thoughtworks</td>
-      <td>2</td>
-      <td>8</td>
-      <td>31</td>
-      <td>113</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[UnmarshallingContext, MapConverter, Marshalli...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>org.jobrunr</td>
-      <td>2</td>
+      <th>10</th>
+      <td>com.google</td>
       <td>4</td>
-      <td>6</td>
-      <td>31</td>
-      <td>93</td>
-      <td>1226</td>
+      <td>9</td>
+      <td>12</td>
+      <td>18</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[JsonElement, JsonObject, JsonArray, JsonParse...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>com.github</td>
+      <td>3</td>
+      <td>7</td>
+      <td>21</td>
+      <td>107</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Scheduler, Task, TaskInstanceId, Tasks$OneTim...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>com.thoughtworks</td>
+      <td>3</td>
+      <td>10</td>
+      <td>33</td>
+      <td>121</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[XStream, HierarchicalStreamWriter, Marshallin...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>org.jobrunr</td>
+      <td>3</td>
+      <td>5</td>
+      <td>7</td>
+      <td>34</td>
+      <td>114</td>
+      <td>1436</td>
       <td>[JobScheduler, JobBuilder]</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>14</th>
+      <td>org.axonframework</td>
+      <td>2</td>
+      <td>7</td>
+      <td>17</td>
+      <td>59</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[SpringUtils, MetricsConfigurerModule, GlobalM...</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>org.junit</td>
       <td>2</td>
       <td>4</td>
       <td>8</td>
       <td>14</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Statement, TestRule, Description, ExtensionCo...</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Statement, ExtensionContext, BeforeEachCallba...</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>16</th>
       <td>org.quartz</td>
       <td>2</td>
       <td>9</td>
       <td>36</td>
       <td>187</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[SchedulerContext, JobDetail, JobKey, Schedule...</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[Scheduler, Trigger, JobKey, TriggerBuilder, J...</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>reactor.core</td>
-      <td>2</td>
-      <td>18</td>
-      <td>36</td>
-      <td>143</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Mono, Flux, MonoSink, Disposable, FluxSink, S...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>com.google</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>7</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[JsonElement, JsonObject, JsonArray, JsonParser]</td>
-    </tr>
-    <tr>
-      <th>13</th>
+      <th>17</th>
       <td>com.lmax</td>
       <td>1</td>
       <td>7</td>
       <td>14</td>
       <td>46</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Disruptor, RingBuffer, EventHandler, Exceptio...</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>jakarta.validation</td>
-      <td>1</td>
-      <td>2</td>
-      <td>5</td>
-      <td>15</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Validator, Validation, ConstraintViolation, V...</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>javax.cache</td>
-      <td>1</td>
-      <td>2</td>
-      <td>12</td>
-      <td>48</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[CacheEntryListenerConfiguration, Cache, Cache...</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>javax.validation</td>
-      <td>1</td>
-      <td>2</td>
-      <td>5</td>
-      <td>15</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[ValidatorFactory, Validator, ConstraintViolat...</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>net.sf</td>
-      <td>1</td>
-      <td>2</td>
-      <td>8</td>
-      <td>54</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Element, Ehcache, RegisteredEventListeners, C...</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[EventHandler, Disruptor, RingBuffer, EventHan...</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>nu.xom</td>
+      <td>io.micrometer</td>
       <td>1</td>
-      <td>3</td>
-      <td>5</td>
-      <td>15</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Builder, Document, ParsingException]</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[SimpleMeterRegistry, MeterRegistry]</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.dom4j</td>
+      <td>io.opentelemetry</td>
       <td>1</td>
-      <td>3</td>
-      <td>4</td>
-      <td>14</td>
-      <td>93</td>
-      <td>1226</td>
-      <td>[Document, STAXEventReader]</td>
+      <td>5</td>
+      <td>21</td>
+      <td>74</td>
+      <td>114</td>
+      <td>1436</td>
+      <td>[TextMapSetter, Context, SpanKind, Span, SpanB...</td>
     </tr>
   </tbody>
 </table>
@@ -646,242 +646,242 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>org.slf4j</td>
-      <td>6</td>
-      <td>53</td>
+      <td>9</td>
+      <td>66</td>
       <td>1</td>
       <td>38</td>
-      <td>3.5</td>
-      <td>8.833333</td>
-      <td>14.441837</td>
-      <td>25.0000</td>
-      <td>100.0000</td>
+      <td>3.0</td>
+      <td>7.333333</td>
+      <td>11.821590</td>
+      <td>25.000000</td>
+      <td>100.000000</td>
       <td>...</td>
       <td>78</td>
-      <td>8.5</td>
-      <td>19.500000</td>
-      <td>28.925767</td>
+      <td>8.0</td>
+      <td>15.666667</td>
+      <td>24.067613</td>
       <td>2.298851</td>
       <td>36.363636</td>
-      <td>10.218685</td>
-      <td>13.250539</td>
-      <td>12.088115</td>
+      <td>10.526316</td>
+      <td>13.268051</td>
+      <td>10.242570</td>
       <td>[axon-test-4.10.0, axon-modelling-4.10.0, axon...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>jakarta.persistence</td>
-      <td>3</td>
-      <td>6</td>
+      <td>4</td>
+      <td>8</td>
       <td>1</td>
       <td>3</td>
       <td>2.0</td>
       <td>2.000000</td>
-      <td>1.000000</td>
-      <td>4.6875</td>
-      <td>20.0000</td>
+      <td>0.816497</td>
+      <td>4.687500</td>
+      <td>22.222222</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
-      <td>4.666667</td>
-      <td>2.886751</td>
+      <td>4.250000</td>
+      <td>2.500000</td>
       <td>1.016518</td>
-      <td>2.255639</td>
-      <td>1.923077</td>
-      <td>1.731745</td>
-      <td>0.641335</td>
-      <td>[axon-modelling-4.10.0, axon-messaging-4.10.0,...</td>
+      <td>4.054054</td>
+      <td>2.089358</td>
+      <td>2.312322</td>
+      <td>1.273769</td>
+      <td>[axon-modelling-4.10.0, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>3</td>
-      <td>9</td>
+      <td>4</td>
+      <td>11</td>
       <td>2</td>
       <td>4</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>1.000000</td>
-      <td>6.2500</td>
-      <td>30.0000</td>
+      <td>2.5</td>
+      <td>2.750000</td>
+      <td>0.957427</td>
+      <td>6.250000</td>
+      <td>30.000000</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
-      <td>4.666667</td>
-      <td>2.886751</td>
+      <td>4.250000</td>
+      <td>2.500000</td>
       <td>1.016518</td>
-      <td>2.255639</td>
-      <td>1.923077</td>
-      <td>1.731745</td>
-      <td>0.641335</td>
-      <td>[axon-modelling-4.10.0, axon-messaging-4.10.0,...</td>
+      <td>4.054054</td>
+      <td>2.089358</td>
+      <td>2.312322</td>
+      <td>1.273769</td>
+      <td>[axon-modelling-4.10.0, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>AggregateEventPublisherImpl</td>
-      <td>1</td>
-      <td>1</td>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>2</td>
+      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>12.5000</td>
-      <td>12.5000</td>
+      <td>1.562500</td>
+      <td>11.111111</td>
       <td>...</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>0.000000</td>
-      <td>[axon-test-4.10.0]</td>
+      <td>7</td>
+      <td>4.5</td>
+      <td>4.500000</td>
+      <td>3.535534</td>
+      <td>0.889454</td>
+      <td>2.702703</td>
+      <td>1.796078</td>
+      <td>1.796078</td>
+      <td>1.282161</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>WeakValue</td>
+      <td>com.github.kagkarlsson.scheduler</td>
+      <td>2</td>
+      <td>3</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>100.0000</td>
-      <td>100.0000</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
       <td>...</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>4.545455</td>
-      <td>4.545455</td>
-      <td>4.545455</td>
-      <td>4.545455</td>
-      <td>0.000000</td>
-      <td>[axon-disruptor-4.10.0]</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>com.fasterxml.jackson.annotation</td>
+      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>2</td>
+      <td>3</td>
       <td>1</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-      <td>4.6875</td>
-      <td>4.6875</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
       <td>...</td>
-      <td>5</td>
-      <td>5.0</td>
-      <td>5.000000</td>
-      <td>0.000000</td>
-      <td>0.635324</td>
-      <td>0.635324</td>
-      <td>0.635324</td>
-      <td>0.635324</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>com.fasterxml.jackson.core</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>...</td>
+      <td>com.thoughtworks.xstream</td>
+      <td>2</td>
       <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>...</td>
+      <td>4</td>
       <td>3.0</td>
       <td>3.000000</td>
-      <td>0.000000</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
+      <td>1.414214</td>
+      <td>0.508259</td>
+      <td>2.702703</td>
+      <td>1.605481</td>
+      <td>1.605481</td>
+      <td>1.551706</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>1</td>
-      <td>1</td>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>2</td>
+      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
+      <td>9.090909</td>
+      <td>11.111111</td>
       <td>...</td>
-      <td>7</td>
-      <td>7.0</td>
-      <td>7.000000</td>
-      <td>0.000000</td>
-      <td>0.889454</td>
-      <td>0.889454</td>
-      <td>0.889454</td>
-      <td>0.889454</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
+      <td>11</td>
+      <td>6.5</td>
+      <td>6.500000</td>
+      <td>6.363961</td>
+      <td>2.702703</td>
+      <td>8.396947</td>
+      <td>5.549825</td>
+      <td>5.549825</td>
+      <td>4.026438</td>
+      <td>[axon-server-connector-4.10.0, axon-spring-boo...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>com.fasterxml.jackson.databind.jsontype</td>
+      <td>io.axoniq.axonserver.connector.impl</td>
+      <td>2</td>
+      <td>4</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>2.000000</td>
+      <td>1.414214</td>
+      <td>11.111111</td>
+      <td>27.272727</td>
       <td>...</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+      <td>1.351351</td>
+      <td>3.053435</td>
+      <td>2.202393</td>
+      <td>2.202393</td>
+      <td>1.203555</td>
+      <td>[axon-server-connector-4.10.0, axon-spring-boo...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>com.fasterxml.jackson.databind.module</td>
+      <td>org.jobrunr.scheduling</td>
+      <td>2</td>
+      <td>3</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
       <td>...</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
     </tr>
   </tbody>
 </table>
@@ -915,35 +915,125 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>org.slf4j</td>
-      <td>6</td>
+      <td>9</td>
       <td>1</td>
       <td>38</td>
-      <td>3.5</td>
-      <td>8.833333</td>
-      <td>14.441837</td>
+      <td>3.0</td>
+      <td>7.333333</td>
+      <td>11.821590</td>
     </tr>
     <tr>
       <th>1</th>
       <td>jakarta.persistence</td>
-      <td>3</td>
+      <td>4</td>
       <td>1</td>
       <td>3</td>
       <td>2.0</td>
       <td>2.000000</td>
-      <td>1.000000</td>
+      <td>0.816497</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>3</td>
+      <td>4</td>
       <td>2</td>
       <td>4</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>1.000000</td>
+      <td>2.5</td>
+      <td>2.750000</td>
+      <td>0.957427</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>com.github.kagkarlsson.scheduler</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>com.thoughtworks.xstream</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>io.axoniq.axonserver.connector.impl</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>2.000000</td>
+      <td>1.414214</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>org.jobrunr.scheduling</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>org.reactivestreams</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>reactor.core.publisher</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>12</th>
       <td>AggregateEventPublisherImpl</td>
       <td>1</td>
       <td>1</td>
@@ -953,7 +1043,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>13</th>
       <td>WeakValue</td>
       <td>1</td>
       <td>1</td>
@@ -963,7 +1053,17 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>14</th>
+      <td>com.codahale.metrics</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>3</td>
@@ -973,7 +1073,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>16</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>1</td>
@@ -983,17 +1083,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>8</th>
+      <th>17</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>1</td>
@@ -1003,7 +1093,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>18</th>
       <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>1</td>
@@ -1013,103 +1103,13 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>19</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
       <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>com.fasterxml.jackson.databind.type</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>com.github.kagkarlsson.scheduler</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>com.github.kagkarlsson.scheduler.task</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>com.github.kagkarlsson.scheduler.task.helper</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>com.google.gson</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>com.lmax.disruptor</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1143,201 +1143,201 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>org.slf4j</td>
-      <td>6</td>
-      <td>25.0000</td>
-      <td>100.0000</td>
-      <td>59.687500</td>
-      <td>66.655093</td>
-      <td>28.911597</td>
+      <td>9</td>
+      <td>25.000000</td>
+      <td>100.000000</td>
+      <td>60.000000</td>
+      <td>68.342452</td>
+      <td>28.735691</td>
     </tr>
     <tr>
       <th>1</th>
       <td>jakarta.persistence</td>
-      <td>3</td>
-      <td>4.6875</td>
-      <td>20.0000</td>
-      <td>11.111111</td>
-      <td>11.932870</td>
-      <td>7.689254</td>
+      <td>4</td>
+      <td>4.687500</td>
+      <td>22.222222</td>
+      <td>15.555556</td>
+      <td>14.505208</td>
+      <td>8.116903</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>3</td>
-      <td>6.2500</td>
-      <td>30.0000</td>
+      <td>4</td>
+      <td>6.250000</td>
+      <td>30.000000</td>
       <td>22.222222</td>
-      <td>19.490741</td>
-      <td>12.108318</td>
+      <td>20.173611</td>
+      <td>9.980289</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>AggregateEventPublisherImpl</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>12.5000</td>
-      <td>12.500000</td>
-      <td>12.500000</td>
-      <td>0.000000</td>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>2</td>
+      <td>1.562500</td>
+      <td>11.111111</td>
+      <td>6.336806</td>
+      <td>6.336806</td>
+      <td>6.751888</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>WeakValue</td>
-      <td>1</td>
-      <td>100.0000</td>
-      <td>100.0000</td>
-      <td>100.000000</td>
-      <td>100.000000</td>
-      <td>0.000000</td>
+      <td>com.github.kagkarlsson.scheduler</td>
+      <td>2</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>7.118056</td>
+      <td>7.118056</td>
+      <td>5.647033</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>com.fasterxml.jackson.annotation</td>
-      <td>1</td>
-      <td>4.6875</td>
-      <td>4.6875</td>
-      <td>4.687500</td>
-      <td>4.687500</td>
-      <td>0.000000</td>
+      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>2</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>7.118056</td>
+      <td>7.118056</td>
+      <td>5.647033</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>com.fasterxml.jackson.core</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>0.000000</td>
+      <td>com.thoughtworks.xstream</td>
+      <td>2</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>7.118056</td>
+      <td>7.118056</td>
+      <td>5.647033</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>0.000000</td>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>2</td>
+      <td>9.090909</td>
+      <td>11.111111</td>
+      <td>10.101010</td>
+      <td>10.101010</td>
+      <td>1.428499</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>com.fasterxml.jackson.databind.jsontype</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>0.000000</td>
+      <td>io.axoniq.axonserver.connector.impl</td>
+      <td>2</td>
+      <td>11.111111</td>
+      <td>27.272727</td>
+      <td>19.191919</td>
+      <td>19.191919</td>
+      <td>11.427988</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>com.fasterxml.jackson.databind.module</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>0.000000</td>
+      <td>org.jobrunr.scheduling</td>
+      <td>2</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>7.118056</td>
+      <td>7.118056</td>
+      <td>5.647033</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>com.fasterxml.jackson.databind.node</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>0.000000</td>
+      <td>org.reactivestreams</td>
+      <td>2</td>
+      <td>3.125000</td>
+      <td>9.090909</td>
+      <td>6.107955</td>
+      <td>6.107955</td>
+      <td>4.218535</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>com.fasterxml.jackson.databind.type</td>
-      <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
-      <td>0.000000</td>
+      <td>reactor.core.publisher</td>
+      <td>2</td>
+      <td>3.125000</td>
+      <td>18.181818</td>
+      <td>10.653409</td>
+      <td>10.653409</td>
+      <td>10.646778</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
+      <td>AggregateEventPublisherImpl</td>
       <td>1</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>1.562500</td>
-      <td>1.562500</td>
+      <td>12.500000</td>
+      <td>12.500000</td>
+      <td>12.500000</td>
+      <td>12.500000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>com.github.kagkarlsson.scheduler</td>
+      <td>WeakValue</td>
       <td>1</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>com.codahale.metrics</td>
       <td>1</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>11.111111</td>
+      <td>11.111111</td>
+      <td>11.111111</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>com.github.kagkarlsson.scheduler.task.helper</td>
+      <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
+      <td>4.687500</td>
+      <td>4.687500</td>
+      <td>4.687500</td>
+      <td>4.687500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>com.google.gson</td>
+      <td>com.fasterxml.jackson.core</td>
       <td>1</td>
-      <td>12.5000</td>
-      <td>12.5000</td>
-      <td>12.500000</td>
-      <td>12.500000</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>com.lmax.disruptor</td>
+      <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
-      <td>100.0000</td>
-      <td>100.0000</td>
-      <td>100.000000</td>
-      <td>100.000000</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>com.lmax.disruptor.dsl</td>
+      <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
-      <td>100.0000</td>
-      <td>100.0000</td>
-      <td>100.000000</td>
-      <td>100.000000</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>com.thoughtworks.xstream</td>
+      <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
-      <td>3.125000</td>
-      <td>3.125000</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1371,35 +1371,125 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>org.slf4j</td>
-      <td>6</td>
-      <td>2</td>
+      <td>9</td>
+      <td>1</td>
       <td>78</td>
-      <td>8.5</td>
-      <td>19.500000</td>
-      <td>28.925767</td>
+      <td>8.0</td>
+      <td>15.666667</td>
+      <td>24.067613</td>
     </tr>
     <tr>
       <th>1</th>
       <td>jakarta.persistence</td>
-      <td>3</td>
+      <td>4</td>
       <td>3</td>
       <td>8</td>
       <td>3.0</td>
-      <td>4.666667</td>
-      <td>2.886751</td>
+      <td>4.250000</td>
+      <td>2.500000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>3</td>
+      <td>4</td>
       <td>3</td>
       <td>8</td>
       <td>3.0</td>
-      <td>4.666667</td>
-      <td>2.886751</td>
+      <td>4.250000</td>
+      <td>2.500000</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>2</td>
+      <td>2</td>
+      <td>7</td>
+      <td>4.5</td>
+      <td>4.500000</td>
+      <td>3.535534</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>com.github.kagkarlsson.scheduler</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>com.thoughtworks.xstream</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3.0</td>
+      <td>3.000000</td>
+      <td>1.414214</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>2</td>
+      <td>2</td>
+      <td>11</td>
+      <td>6.5</td>
+      <td>6.500000</td>
+      <td>6.363961</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>io.axoniq.axonserver.connector.impl</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>org.jobrunr.scheduling</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>org.reactivestreams</td>
+      <td>2</td>
+      <td>4</td>
+      <td>13</td>
+      <td>8.5</td>
+      <td>8.500000</td>
+      <td>6.363961</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>reactor.core.publisher</td>
+      <td>2</td>
+      <td>9</td>
+      <td>18</td>
+      <td>13.5</td>
+      <td>13.500000</td>
+      <td>6.363961</td>
+    </tr>
+    <tr>
+      <th>12</th>
       <td>AggregateEventPublisherImpl</td>
       <td>1</td>
       <td>1</td>
@@ -1409,7 +1499,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>13</th>
       <td>WeakValue</td>
       <td>1</td>
       <td>1</td>
@@ -1419,7 +1509,17 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>14</th>
+      <td>com.codahale.metrics</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>5</td>
@@ -1429,7 +1529,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>16</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>3</td>
@@ -1439,17 +1539,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>1</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7.0</td>
-      <td>7.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>8</th>
+      <th>17</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>1</td>
@@ -1459,7 +1549,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>18</th>
       <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>1</td>
@@ -1469,103 +1559,13 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>19</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
       <td>2.0</td>
       <td>2.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>com.fasterxml.jackson.databind.type</td>
-      <td>1</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>com.github.kagkarlsson.scheduler</td>
-      <td>1</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>com.github.kagkarlsson.scheduler.task</td>
-      <td>1</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>com.github.kagkarlsson.scheduler.task.helper</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>com.google.gson</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>com.lmax.disruptor</td>
-      <td>1</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7.0</td>
-      <td>7.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>1</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream</td>
-      <td>1</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1599,35 +1599,125 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>org.slf4j</td>
-      <td>6</td>
+      <td>9</td>
       <td>2.298851</td>
       <td>36.363636</td>
-      <td>10.218685</td>
-      <td>13.250539</td>
-      <td>12.088115</td>
+      <td>10.526316</td>
+      <td>13.268051</td>
+      <td>10.242570</td>
     </tr>
     <tr>
       <th>1</th>
       <td>jakarta.persistence</td>
-      <td>3</td>
+      <td>4</td>
       <td>1.016518</td>
-      <td>2.255639</td>
-      <td>1.923077</td>
-      <td>1.731745</td>
-      <td>0.641335</td>
+      <td>4.054054</td>
+      <td>2.089358</td>
+      <td>2.312322</td>
+      <td>1.273769</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>3</td>
+      <td>4</td>
       <td>1.016518</td>
-      <td>2.255639</td>
-      <td>1.923077</td>
-      <td>1.731745</td>
-      <td>0.641335</td>
+      <td>4.054054</td>
+      <td>2.089358</td>
+      <td>2.312322</td>
+      <td>1.273769</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>2</td>
+      <td>0.889454</td>
+      <td>2.702703</td>
+      <td>1.796078</td>
+      <td>1.796078</td>
+      <td>1.282161</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>com.github.kagkarlsson.scheduler</td>
+      <td>2</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>2</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>com.thoughtworks.xstream</td>
+      <td>2</td>
+      <td>0.508259</td>
+      <td>2.702703</td>
+      <td>1.605481</td>
+      <td>1.605481</td>
+      <td>1.551706</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>2</td>
+      <td>2.702703</td>
+      <td>8.396947</td>
+      <td>5.549825</td>
+      <td>5.549825</td>
+      <td>4.026438</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>io.axoniq.axonserver.connector.impl</td>
+      <td>2</td>
+      <td>1.351351</td>
+      <td>3.053435</td>
+      <td>2.202393</td>
+      <td>2.202393</td>
+      <td>1.203555</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>org.jobrunr.scheduling</td>
+      <td>2</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>org.reactivestreams</td>
+      <td>2</td>
+      <td>1.651842</td>
+      <td>3.053435</td>
+      <td>2.352639</td>
+      <td>2.352639</td>
+      <td>0.991076</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>reactor.core.publisher</td>
+      <td>2</td>
+      <td>2.287166</td>
+      <td>6.870229</td>
+      <td>4.578698</td>
+      <td>4.578698</td>
+      <td>3.240715</td>
+    </tr>
+    <tr>
+      <th>12</th>
       <td>AggregateEventPublisherImpl</td>
       <td>1</td>
       <td>1.149425</td>
@@ -1637,7 +1727,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>13</th>
       <td>WeakValue</td>
       <td>1</td>
       <td>4.545455</td>
@@ -1647,7 +1737,17 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>14</th>
+      <td>com.codahale.metrics</td>
+      <td>1</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>com.fasterxml.jackson.annotation</td>
       <td>1</td>
       <td>0.635324</td>
@@ -1657,7 +1757,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>16</th>
       <td>com.fasterxml.jackson.core</td>
       <td>1</td>
       <td>0.381194</td>
@@ -1667,17 +1767,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>1</td>
-      <td>0.889454</td>
-      <td>0.889454</td>
-      <td>0.889454</td>
-      <td>0.889454</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>8</th>
+      <th>17</th>
       <td>com.fasterxml.jackson.databind.jsontype</td>
       <td>1</td>
       <td>0.127065</td>
@@ -1687,7 +1777,7 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>18</th>
       <td>com.fasterxml.jackson.databind.module</td>
       <td>1</td>
       <td>0.127065</td>
@@ -1697,103 +1787,13 @@ This table shows the top 20 most widely spread external packages focussing on th
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>19</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>1</td>
       <td>0.254130</td>
       <td>0.254130</td>
       <td>0.254130</td>
       <td>0.254130</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>com.fasterxml.jackson.databind.type</td>
-      <td>1</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>com.fasterxml.jackson.datatype.jsr310</td>
-      <td>1</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.127065</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>com.github.kagkarlsson.scheduler</td>
-      <td>1</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>com.github.kagkarlsson.scheduler.task</td>
-      <td>1</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>com.github.kagkarlsson.scheduler.task.helper</td>
-      <td>1</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>com.google.gson</td>
-      <td>1</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>com.lmax.disruptor</td>
-      <td>1</td>
-      <td>31.818182</td>
-      <td>31.818182</td>
-      <td>31.818182</td>
-      <td>31.818182</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>1</td>
-      <td>18.181818</td>
-      <td>18.181818</td>
-      <td>18.181818</td>
-      <td>18.181818</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>com.thoughtworks.xstream</td>
-      <td>1</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1878,77 +1878,269 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>org.slf4j</td>
-      <td>6</td>
-      <td>53</td>
+      <td>9</td>
+      <td>66</td>
       <td>1</td>
       <td>38</td>
-      <td>3.5</td>
-      <td>8.833333</td>
-      <td>14.441837</td>
-      <td>25.0000</td>
-      <td>100.0000</td>
+      <td>3.0</td>
+      <td>7.333333</td>
+      <td>11.821590</td>
+      <td>25.000000</td>
+      <td>100.000000</td>
       <td>...</td>
       <td>78</td>
-      <td>8.5</td>
-      <td>19.500000</td>
-      <td>28.925767</td>
+      <td>8.0</td>
+      <td>15.666667</td>
+      <td>24.067613</td>
       <td>2.298851</td>
       <td>36.363636</td>
-      <td>10.218685</td>
-      <td>13.250539</td>
-      <td>12.088115</td>
+      <td>10.526316</td>
+      <td>13.268051</td>
+      <td>10.242570</td>
       <td>[axon-test-4.10.0, axon-modelling-4.10.0, axon...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>jakarta.persistence</td>
-      <td>3</td>
-      <td>6</td>
+      <td>4</td>
+      <td>8</td>
       <td>1</td>
       <td>3</td>
       <td>2.0</td>
       <td>2.000000</td>
-      <td>1.000000</td>
-      <td>4.6875</td>
-      <td>20.0000</td>
+      <td>0.816497</td>
+      <td>4.687500</td>
+      <td>22.222222</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
-      <td>4.666667</td>
-      <td>2.886751</td>
+      <td>4.250000</td>
+      <td>2.500000</td>
       <td>1.016518</td>
-      <td>2.255639</td>
-      <td>1.923077</td>
-      <td>1.731745</td>
-      <td>0.641335</td>
-      <td>[axon-modelling-4.10.0, axon-messaging-4.10.0,...</td>
+      <td>4.054054</td>
+      <td>2.089358</td>
+      <td>2.312322</td>
+      <td>1.273769</td>
+      <td>[axon-modelling-4.10.0, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>javax.persistence</td>
-      <td>3</td>
-      <td>9</td>
+      <td>4</td>
+      <td>11</td>
       <td>2</td>
       <td>4</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>1.000000</td>
-      <td>6.2500</td>
-      <td>30.0000</td>
+      <td>2.5</td>
+      <td>2.750000</td>
+      <td>0.957427</td>
+      <td>6.250000</td>
+      <td>30.000000</td>
       <td>...</td>
       <td>8</td>
       <td>3.0</td>
-      <td>4.666667</td>
-      <td>2.886751</td>
+      <td>4.250000</td>
+      <td>2.500000</td>
       <td>1.016518</td>
-      <td>2.255639</td>
-      <td>1.923077</td>
-      <td>1.731745</td>
-      <td>0.641335</td>
-      <td>[axon-modelling-4.10.0, axon-messaging-4.10.0,...</td>
+      <td>4.054054</td>
+      <td>2.089358</td>
+      <td>2.312322</td>
+      <td>1.273769</td>
+      <td>[axon-modelling-4.10.0, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>com.fasterxml</td>
+      <td>2</td>
+      <td>5</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+      <td>6.250000</td>
+      <td>11.111111</td>
+      <td>...</td>
+      <td>12</td>
+      <td>7.5</td>
+      <td>7.500000</td>
+      <td>6.363961</td>
+      <td>1.524778</td>
+      <td>4.054054</td>
+      <td>2.789416</td>
+      <td>2.789416</td>
+      <td>1.788469</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>com.github</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>...</td>
+      <td>6</td>
+      <td>3.5</td>
+      <td>3.500000</td>
+      <td>3.535534</td>
+      <td>0.762389</td>
+      <td>1.351351</td>
+      <td>1.056870</td>
+      <td>1.056870</td>
+      <td>0.416459</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>com.google</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>2.000000</td>
+      <td>1.414214</td>
+      <td>12.500000</td>
+      <td>27.272727</td>
+      <td>...</td>
+      <td>8</td>
+      <td>4.5</td>
+      <td>4.500000</td>
+      <td>4.949747</td>
+      <td>1.149425</td>
+      <td>6.106870</td>
+      <td>3.628148</td>
+      <td>3.628148</td>
+      <td>3.505443</td>
+      <td>[axon-test-4.10.0, axon-server-connector-4.10.0]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>com.thoughtworks</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>...</td>
+      <td>8</td>
+      <td>5.0</td>
+      <td>5.000000</td>
+      <td>4.242641</td>
+      <td>1.016518</td>
+      <td>2.702703</td>
+      <td>1.859611</td>
+      <td>1.859611</td>
+      <td>1.192312</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>io.axoniq</td>
+      <td>2</td>
+      <td>9</td>
+      <td>1</td>
+      <td>8</td>
+      <td>4.5</td>
+      <td>4.500000</td>
+      <td>4.949747</td>
+      <td>11.111111</td>
+      <td>72.727273</td>
+      <td>...</td>
+      <td>65</td>
+      <td>33.5</td>
+      <td>33.500000</td>
+      <td>44.547727</td>
+      <td>2.702703</td>
+      <td>49.618321</td>
+      <td>26.160512</td>
+      <td>26.160512</td>
+      <td>33.174352</td>
+      <td>[axon-server-connector-4.10.0, axon-spring-boo...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>org.jobrunr</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>11.111111</td>
+      <td>...</td>
+      <td>4</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>2.121320</td>
+      <td>0.508259</td>
+      <td>1.351351</td>
+      <td>0.929805</td>
+      <td>0.929805</td>
+      <td>0.596156</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0, axon-m...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>org.reactivestreams</td>
+      <td>2</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1.5</td>
+      <td>1.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>9.090909</td>
+      <td>...</td>
+      <td>13</td>
+      <td>8.5</td>
+      <td>8.500000</td>
+      <td>6.363961</td>
+      <td>1.651842</td>
+      <td>3.053435</td>
+      <td>2.352639</td>
+      <td>2.352639</td>
+      <td>0.991076</td>
+      <td>[axon-server-connector-4.10.0, axon-messaging-...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>reactor.core</td>
+      <td>2</td>
+      <td>5</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2.5</td>
+      <td>2.500000</td>
+      <td>0.707107</td>
+      <td>3.125000</td>
+      <td>27.272727</td>
+      <td>...</td>
+      <td>18</td>
+      <td>14.0</td>
+      <td>14.000000</td>
+      <td>5.656854</td>
+      <td>2.287166</td>
+      <td>7.633588</td>
+      <td>4.960377</td>
+      <td>4.960377</td>
+      <td>3.780491</td>
+      <td>[axon-server-connector-4.10.0, axon-messaging-...</td>
+    </tr>
+    <tr>
+      <th>11</th>
       <td>AggregateEventPublisherImpl</td>
       <td>1</td>
       <td>1</td>
@@ -1957,8 +2149,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>12.5000</td>
-      <td>12.5000</td>
+      <td>12.500000</td>
+      <td>12.500000</td>
       <td>...</td>
       <td>1</td>
       <td>1.0</td>
@@ -1972,7 +2164,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-test-4.10.0]</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>12</th>
       <td>WeakValue</td>
       <td>1</td>
       <td>1</td>
@@ -1981,8 +2173,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>100.0000</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
       <td>...</td>
       <td>1</td>
       <td>1.0</td>
@@ -1996,56 +2188,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-disruptor-4.10.0]</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>com.fasterxml</td>
-      <td>1</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-      <td>6.2500</td>
-      <td>6.2500</td>
-      <td>...</td>
-      <td>12</td>
-      <td>12.0</td>
-      <td>12.000000</td>
-      <td>0.000000</td>
-      <td>1.524778</td>
-      <td>1.524778</td>
-      <td>1.524778</td>
-      <td>1.524778</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>com.github</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
-      <td>...</td>
-      <td>6</td>
-      <td>6.0</td>
-      <td>6.000000</td>
-      <td>0.000000</td>
-      <td>0.762389</td>
-      <td>0.762389</td>
-      <td>0.762389</td>
-      <td>0.762389</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>com.google</td>
+      <th>13</th>
+      <td>com.codahale</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -2053,22 +2197,22 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>12.5000</td>
-      <td>12.5000</td>
+      <td>11.111111</td>
+      <td>11.111111</td>
       <td>...</td>
       <td>1</td>
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
-      <td>1.149425</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
       <td>0.000000</td>
-      <td>[axon-test-4.10.0]</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0]</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>14</th>
       <td>com.lmax</td>
       <td>1</td>
       <td>1</td>
@@ -2077,8 +2221,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>100.0000</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
       <td>...</td>
       <td>7</td>
       <td>7.0</td>
@@ -2092,31 +2236,79 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-disruptor-4.10.0]</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>com.thoughtworks</td>
+      <th>15</th>
+      <td>io.grpc</td>
       <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5.0</td>
+      <td>5.000000</td>
       <td>0.000000</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
+      <td>45.454545</td>
+      <td>45.454545</td>
       <td>...</td>
-      <td>8</td>
-      <td>8.0</td>
-      <td>8.000000</td>
+      <td>18</td>
+      <td>18.0</td>
+      <td>18.000000</td>
       <td>0.000000</td>
-      <td>1.016518</td>
-      <td>1.016518</td>
-      <td>1.016518</td>
-      <td>1.016518</td>
+      <td>13.740458</td>
+      <td>13.740458</td>
+      <td>13.740458</td>
+      <td>13.740458</td>
       <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
+      <td>[axon-server-connector-4.10.0]</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>16</th>
+      <td>io.micrometer</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>11.111111</td>
+      <td>11.111111</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>0.000000</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.0]</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>io.opentelemetry</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>...</td>
+      <td>5</td>
+      <td>5.0</td>
+      <td>5.000000</td>
+      <td>0.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>0.000000</td>
+      <td>[axon-tracing-opentelemetry-4.10.0]</td>
+    </tr>
+    <tr>
+      <th>18</th>
       <td>jakarta.validation</td>
       <td>1</td>
       <td>1</td>
@@ -2125,8 +2317,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>...</td>
       <td>2</td>
       <td>2.0</td>
@@ -2140,7 +2332,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>[axon-messaging-4.10.0]</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>19</th>
       <td>javax.cache</td>
       <td>1</td>
       <td>1</td>
@@ -2149,8 +2341,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
+      <td>1.562500</td>
+      <td>1.562500</td>
       <td>...</td>
       <td>2</td>
       <td>2.0</td>
@@ -2162,198 +2354,6 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>0.254130</td>
       <td>0.000000</td>
       <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>javax.validation</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>...</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>net.sf</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>...</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.254130</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>nu.xom</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>...</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>org.dom4j</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>...</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>org.ehcache</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>1.5625</td>
-      <td>1.5625</td>
-      <td>...</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.381194</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>org.hamcrest</td>
-      <td>1</td>
-      <td>5</td>
-      <td>5</td>
-      <td>5</td>
-      <td>5.0</td>
-      <td>5.000000</td>
-      <td>0.000000</td>
-      <td>62.5000</td>
-      <td>62.5000</td>
-      <td>...</td>
-      <td>27</td>
-      <td>27.0</td>
-      <td>27.000000</td>
-      <td>0.000000</td>
-      <td>31.034483</td>
-      <td>31.034483</td>
-      <td>31.034483</td>
-      <td>31.034483</td>
-      <td>0.000000</td>
-      <td>[axon-test-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>org.jobrunr</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>3.1250</td>
-      <td>3.1250</td>
-      <td>...</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.508259</td>
-      <td>0.000000</td>
-      <td>[axon-messaging-4.10.0]</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>org.junit</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>0.000000</td>
-      <td>25.0000</td>
-      <td>25.0000</td>
-      <td>...</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-      <td>4.597701</td>
-      <td>4.597701</td>
-      <td>4.597701</td>
-      <td>4.597701</td>
-      <td>0.000000</td>
-      <td>[axon-test-4.10.0]</td>
     </tr>
   </tbody>
 </table>
@@ -2410,103 +2410,103 @@ Only the last 20 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.junit.jupiter.api.extension</td>
-      <td>3</td>
+      <td>org.springframework.boot.docker.compose.servic...</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>net.sf.ehcache.event</td>
-      <td>3</td>
+      <td>org.springframework.boot.docker.compose.core</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>org.axonframework.spring.eventsourcing</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>org.axonframework.spring.config.annotation</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>org.axonframework.micrometer</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>org.axonframework.metrics</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>reactor.core.scheduler</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>org.springframework.boot.context.properties.bind</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>com.fasterxml.jackson.databind.node</td>
       <td>3</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>9</th>
+      <td>org.junit.jupiter.api.extension</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>net.sf.ehcache.event</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>11</th>
       <td>javax.cache.configuration</td>
       <td>3</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>org.testcontainers.containers</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>org.testcontainers.containers.wait.strategy</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>com.google.gson</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>7</th>
+      <th>12</th>
       <td>com.fasterxml.jackson.core</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>13</th>
+      <td>org.testcontainers.containers.wait.strategy</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>com.google.gson</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>15</th>
       <td>com.thoughtworks.xstream.io.xml</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>org.testcontainers.utility</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>jakarta.validation</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>com.thoughtworks.xstream.mapper</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>javax.validation</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>net.sf.ehcache</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>nu.xom</td>
-      <td>5</td>
-    </tr>
-    <tr>
       <th>16</th>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>6</td>
+      <td>org.springframework.beans.factory.config</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>org.jobrunr.scheduling</td>
-      <td>6</td>
+      <td>org.springframework.beans.factory.support</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>com.github.kagkarlsson.scheduler</td>
-      <td>7</td>
+      <td>org.springframework.beans.factory</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>org.ehcache.event</td>
-      <td>8</td>
+      <td>org.springframework.boot.testcontainers.servic...</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -2556,483 +2556,483 @@ Only the last 40 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>org.slf4j</td>
-      <td>12</td>
-      <td>22</td>
-      <td>22</td>
-      <td>13</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>io.opentelemetry.api.trace</td>
+      <td>9</td>
+      <td>47</td>
       <td>5</td>
-      <td>59.090909</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
+      <td>[SpanBuilder, StatusCode, SpanContext, Span, S...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>com.lmax.disruptor</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>io.opentelemetry.context.propagation</td>
       <td>9</td>
-      <td>25</td>
-      <td>22</td>
-      <td>13</td>
+      <td>18</td>
       <td>5</td>
-      <td>59.090909</td>
-      <td>[RingBuffer, EventHandler, LifecycleAware, Blo...</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
+      <td>[TextMapSetter, TextMapGetter, TextMapPropagat...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>axon-disruptor-4.10.0</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
       <td>javax.annotation</td>
-      <td>6</td>
-      <td>23</td>
-      <td>22</td>
-      <td>13</td>
+      <td>3</td>
+      <td>8</td>
       <td>5</td>
-      <td>59.090909</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
       <td>[Nonnull]</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>com.lmax.disruptor.dsl</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>io.opentelemetry.context</td>
+      <td>2</td>
+      <td>7</td>
       <td>5</td>
-      <td>21</td>
-      <td>22</td>
-      <td>13</td>
-      <td>5</td>
-      <td>59.090909</td>
-      <td>[Disruptor, EventHandlerGroup, ProducerType]</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
+      <td>[Scope, Context]</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>WeakValue</td>
-      <td>1</td>
-      <td>2</td>
-      <td>22</td>
-      <td>13</td>
-      <td>5</td>
-      <td>59.090909</td>
-      <td>[WeakValue]</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.hamcrest</td>
-      <td>59</td>
-      <td>370</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Matcher, Description, StringDescription, Base...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>axon-test-4.10.0</td>
-      <td>javax.annotation</td>
-      <td>10</td>
-      <td>52</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Nonnull]</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.testcontainers.utility</td>
-      <td>5</td>
-      <td>22</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[DockerImageName, MountableFile]</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>axon-test-4.10.0</td>
-      <td>com.google.gson</td>
-      <td>4</td>
-      <td>7</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[JsonElement, JsonObject, JsonArray, JsonParser]</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>axon-test-4.10.0</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
       <td>org.slf4j</td>
-      <td>4</td>
-      <td>13</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Logger, LoggerFactory]</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.testcontainers.containers</td>
-      <td>4</td>
-      <td>15</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[GenericContainer, ContainerLaunchException]</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.testcontainers.containers.wait.strategy</td>
-      <td>4</td>
-      <td>5</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Wait, HttpWaitStrategy]</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.junit.jupiter.api.extension</td>
-      <td>3</td>
-      <td>4</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[ExtensionContext, BeforeEachCallback, AfterEa...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.junit.runners.model</td>
       <td>2</td>
       <td>7</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Statement]</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>axon-test-4.10.0</td>
-      <td>AggregateEventPublisherImpl</td>
-      <td>1</td>
-      <td>2</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[AggregateEventPublisherImpl]</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.junit.jupiter.api</td>
-      <td>1</td>
-      <td>1</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Assertions]</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.junit.rules</td>
-      <td>1</td>
-      <td>1</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[TestRule]</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.junit.runner</td>
-      <td>1</td>
-      <td>1</td>
-      <td>87</td>
-      <td>28</td>
-      <td>13</td>
-      <td>32.183908</td>
-      <td>[Description]</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>javax.annotation</td>
-      <td>37</td>
-      <td>132</td>
-      <td>156</td>
-      <td>35</td>
       <td>5</td>
-      <td>22.435897</td>
-      <td>[Nonnull, Nullable]</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>javax.persistence</td>
-      <td>23</td>
-      <td>83</td>
-      <td>156</td>
-      <td>35</td>
-      <td>5</td>
-      <td>22.435897</td>
-      <td>[Entity, Lob, Column, Id, Basic, MappedSupercl...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>jakarta.persistence</td>
-      <td>18</td>
-      <td>77</td>
-      <td>156</td>
-      <td>35</td>
-      <td>5</td>
-      <td>22.435897</td>
-      <td>[Basic, Lob, Id, Column, Entity, EntityNotFoun...</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>org.slf4j</td>
-      <td>17</td>
-      <td>58</td>
-      <td>156</td>
-      <td>35</td>
-      <td>5</td>
-      <td>22.435897</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
       <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>com.fasterxml.jackson.annotation</td>
+      <th>5</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>io.opentelemetry.api</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
+      <td>[GlobalOpenTelemetry]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.autoconfigure.condition</td>
+      <td>66</td>
+      <td>150</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[ConditionalOnExpression, ConditionalOnClass, ...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.autoconfigure</td>
+      <td>54</td>
+      <td>55</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[AutoConfiguration, AutoConfigureBefore, AutoC...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.context.annotation</td>
+      <td>41</td>
+      <td>134</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[Bean, Primary, Role, Conditional, Lazy, Confi...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.context.properties</td>
+      <td>18</td>
+      <td>18</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[EnableConfigurationProperties, ConfigurationP...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.beans.factory.annotation</td>
+      <td>11</td>
+      <td>28</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[Qualifier, Autowired]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>javax.annotation</td>
+      <td>8</td>
+      <td>8</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[Nonnull]</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.slf4j</td>
+      <td>8</td>
+      <td>13</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[LoggerFactory, Logger]</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.context</td>
+      <td>8</td>
+      <td>29</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[ApplicationContext, ApplicationContextAware]</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.actuate.health</td>
+      <td>7</td>
+      <td>24</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[SimpleStatusAggregator, Status, AbstractHealt...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.spring.config</td>
+      <td>5</td>
+      <td>17</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[SpringSagaLookup, SpringAggregateLookup, Spri...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>jakarta.persistence</td>
       <td>4</td>
       <td>6</td>
-      <td>156</td>
-      <td>35</td>
-      <td>5</td>
-      <td>22.435897</td>
-      <td>[JsonProperty, JsonCreator]</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[EntityManagerFactory, PersistenceContext, Ent...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>javax.persistence</td>
+      <td>4</td>
+      <td>6</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[EntityManager, PersistenceContext, EntityMana...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.beans.factory</td>
+      <td>4</td>
+      <td>14</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[InitializingBean, BeanClassLoaderAware, BeanF...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.beans.factory.config</td>
+      <td>4</td>
+      <td>7</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[ConfigurableListableBeanFactory, RuntimeBeanR...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.beans.factory.support</td>
+      <td>4</td>
+      <td>21</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[BeanDefinitionBuilder, BeanDefinitionRegistry...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.testcontainers.servic...</td>
+      <td>4</td>
+      <td>9</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[ContainerConnectionSource, ContainerConnectio...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.core.annotation</td>
+      <td>4</td>
+      <td>4</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[AnnotationAwareOrderComparator, Order]</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>javax.annotation</td>
-      <td>247</td>
-      <td>1191</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[Nonnull, Nullable]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.beans</td>
+      <td>3</td>
+      <td>4</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[BeansException]</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.slf4j</td>
-      <td>141</td>
-      <td>437</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.autoconfigure.orm.jpa</td>
+      <td>3</td>
+      <td>3</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[HibernateJpaAutoConfiguration]</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.fasterxml.jackson.annotation</td>
-      <td>53</td>
-      <td>81</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[JsonTypeInfo$As, JsonTypeInfo, JsonTypeInfo$I...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.autoconfigure.service...</td>
+      <td>3</td>
+      <td>3</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[ConnectionDetails]</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>javax.persistence</td>
-      <td>44</td>
-      <td>174</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[EntityManager, LockModeType, TypedQuery, Quer...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.context.properties.bind</td>
+      <td>3</td>
+      <td>4</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[Binder, Bindable, BindResult]</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>jakarta.persistence</td>
-      <td>40</td>
-      <td>168</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[Query, TypedQuery, NoResultException, EntityM...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>2</td>
+      <td>10</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[ObjectMapper]</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.quartz</td>
-      <td>35</td>
-      <td>185</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[JobDataMap, JobBuilder, SchedulerException, T...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>com.fasterxml.jackson.dataformat.cbor.databind</td>
+      <td>2</td>
+      <td>8</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[CBORMapper]</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>reactor.core.publisher</td>
-      <td>35</td>
-      <td>142</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[FluxSink$OverflowStrategy, FluxSink, Sinks$Ma...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>com.thoughtworks.xstream</td>
+      <td>2</td>
+      <td>8</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[XStream]</td>
     </tr>
     <tr>
       <th>30</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.fasterxml.jackson.databind</td>
-      <td>15</td>
-      <td>65</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[JsonNode, DeserializationFeature, ObjectMappe...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>2</td>
+      <td>2</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[PersistentStreamProperties]</td>
     </tr>
     <tr>
       <th>31</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.reactivestreams</td>
-      <td>13</td>
-      <td>37</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[Publisher]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.metrics</td>
+      <td>2</td>
+      <td>8</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[MetricsConfigurerModule, GlobalMetricRegistry]</td>
     </tr>
     <tr>
       <th>32</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.github.kagkarlsson.scheduler.task</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.micrometer</td>
+      <td>2</td>
       <td>10</td>
-      <td>40</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[TaskWithDataDescriptor, TaskInstance, Task, E...</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[MetricsConfigurerModule, GlobalMetricRegistry]</td>
     </tr>
     <tr>
       <th>33</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.thoughtworks.xstream.io</td>
-      <td>9</td>
-      <td>39</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.spring.config.annotation</td>
+      <td>2</td>
+      <td>7</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[HandlerDefinitionFactoryBean, SpringParameter...</td>
     </tr>
     <tr>
       <th>34</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>javax.cache.event</td>
-      <td>8</td>
-      <td>26</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[CacheEntryListener, CacheEntryEventFilter, Ca...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.spring.eventsourcing</td>
+      <td>2</td>
+      <td>10</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[SpringAggregateSnapshotter, SpringAggregateSn...</td>
     </tr>
     <tr>
       <th>35</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.ehcache.event</td>
-      <td>8</td>
-      <td>30</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[EventFiring, EventType, EventOrdering, CacheE...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.docker.compose.core</td>
+      <td>2</td>
+      <td>5</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[RunningService, ConnectionPorts]</td>
     </tr>
     <tr>
       <th>36</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.github.kagkarlsson.scheduler</td>
-      <td>7</td>
-      <td>46</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[Scheduler, SchedulerState, ScheduledExecution]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.boot.docker.compose.servic...</td>
+      <td>2</td>
+      <td>5</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[DockerComposeConnectionDetailsFactory, Docker...</td>
     </tr>
     <tr>
       <th>37</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>6</td>
-      <td>6</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.core.env</td>
+      <td>2</td>
+      <td>2</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[Environment]</td>
     </tr>
     <tr>
       <th>38</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.jobrunr.scheduling</td>
-      <td>6</td>
-      <td>31</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[JobBuilder, JobScheduler]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.springframework.core.type</td>
+      <td>2</td>
+      <td>4</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[AnnotatedTypeMetadata, AnnotationMetadata]</td>
     </tr>
     <tr>
       <th>39</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>com.thoughtworks.xstream.mapper</td>
-      <td>5</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>com.codahale.metrics</td>
+      <td>1</td>
       <td>6</td>
-      <td>787</td>
-      <td>154</td>
-      <td>42</td>
-      <td>19.567980</td>
-      <td>[Mapper, CannotResolveClassException]</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>[MetricRegistry]</td>
     </tr>
   </tbody>
 </table>
@@ -3095,14 +3095,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>41</td>
       <td>2</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>javax.annotation</td>
       <td>1</td>
       <td>13</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>31.707317</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.DefaultConfigurer$Co...</td>
+      <td>[org.axonframework.config.ConfigurerModule, or...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3111,14 +3111,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>41</td>
       <td>2</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>org.slf4j</td>
       <td>1</td>
       <td>6</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>14.634146</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.DefaultConfigurer$Co...</td>
+      <td>[org.axonframework.config.AxonIQConsoleModule,...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3127,11 +3127,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>22</td>
       <td>5</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>WeakValue</td>
       <td>1</td>
       <td>1</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>4.545455</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
       <td>[org.axonframework.disruptor.commandhandling.F...</td>
@@ -3143,14 +3143,14 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>22</td>
       <td>5</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>com.lmax.disruptor</td>
       <td>1</td>
       <td>7</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>31.818182</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.D...</td>
+      <td>[org.axonframework.disruptor.commandhandling.E...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3159,11 +3159,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>22</td>
       <td>5</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>com.lmax.disruptor.dsl</td>
       <td>1</td>
       <td>4</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>18.181818</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
       <td>[org.axonframework.disruptor.commandhandling.D...</td>
@@ -3175,11 +3175,11 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>22</td>
       <td>5</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>javax.annotation</td>
       <td>1</td>
       <td>6</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>27.272727</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
       <td>[org.axonframework.disruptor.commandhandling.D...</td>
@@ -3191,382 +3191,382 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>22</td>
       <td>5</td>
       <td>1</td>
-      <td>100.00</td>
+      <td>100.0</td>
       <td>org.slf4j</td>
       <td>1</td>
       <td>8</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>36.363636</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.D...</td>
+      <td>[org.axonframework.disruptor.commandhandling.E...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>axon-test-4.10.0</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>javax.annotation</td>
+      <td>4</td>
       <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.hamcrest</td>
-      <td>5</td>
-      <td>27</td>
-      <td>62.5000</td>
-      <td>31.034483</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.ResultValida...</td>
+      <td>44.444444</td>
+      <td>10.810811</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.DefaultEnti...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>javax.annotation</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.slf4j</td>
+      <td>3</td>
       <td>4</td>
-      <td>10</td>
-      <td>50.0000</td>
-      <td>11.494253</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.AggregateTes...</td>
+      <td>33.333333</td>
+      <td>5.405405</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.AbstractQua...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.slf4j</td>
-      <td>2</td>
-      <td>2</td>
-      <td>25.0000</td>
-      <td>2.298851</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.AggregateTes...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.boot.actuate.health</td>
+      <td>3</td>
+      <td>4</td>
+      <td>33.333333</td>
+      <td>5.405405</td>
+      <td>[org.axonframework.actuator, org.axonframework...</td>
+      <td>[org.axonframework.actuator.HealthStatus, org....</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>AggregateEventPublisherImpl</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.saga]</td>
-      <td>[org.axonframework.test.saga.SagaTestFixture]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.boot.autoconfigure</td>
+      <td>3</td>
+      <td>24</td>
+      <td>33.333333</td>
+      <td>32.432432</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.DefaultEnti...</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>com.google.gson</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerConta...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.boot.autoconfigure.condition</td>
+      <td>3</td>
+      <td>32</td>
+      <td>33.333333</td>
+      <td>43.243243</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.AbstractQua...</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.jupiter.api</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.saga]</td>
-      <td>[org.axonframework.test.saga.FixtureExecutionR...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.boot.context.properties</td>
+      <td>3</td>
+      <td>18</td>
+      <td>33.333333</td>
+      <td>24.324324</td>
+      <td>[org.axonframework.springboot, org.axonframewo...</td>
+      <td>[org.axonframework.springboot.MetricsPropertie...</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.jupiter.api.extension</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.aggregate]</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.context.annotation</td>
+      <td>3</td>
+      <td>30</td>
+      <td>33.333333</td>
+      <td>40.540541</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.DefaultEnti...</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.rules</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.aggregate]</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>jakarta.persistence</td>
+      <td>2</td>
+      <td>3</td>
+      <td>22.222222</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.util.jpa, org.ax...</td>
+      <td>[org.axonframework.springboot.util.jpa.Contain...</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.runner</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.aggregate]</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>javax.persistence</td>
+      <td>2</td>
+      <td>3</td>
+      <td>22.222222</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.util.legacyjpa, ...</td>
+      <td>[org.axonframework.springboot.util.legacyjpa.C...</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit.runners.model</td>
-      <td>1</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.beans.factory.annotation</td>
       <td>2</td>
-      <td>12.5000</td>
-      <td>2.298851</td>
-      <td>[org.axonframework.test.aggregate]</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+      <td>10</td>
+      <td>22.222222</td>
+      <td>13.513514</td>
+      <td>[org.axonframework.springboot.autoconfig, org....</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonS...</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.testcontainers.containers</td>
-      <td>1</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.beans.factory.config</td>
+      <td>2</td>
       <td>3</td>
-      <td>12.5000</td>
-      <td>3.448276</td>
-      <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerConta...</td>
+      <td>22.222222</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.AbstractQua...</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.testcontainers.containers.wait.strategy</td>
-      <td>1</td>
-      <td>3</td>
-      <td>12.5000</td>
-      <td>3.448276</td>
-      <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerConta...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.beans.factory.support</td>
+      <td>2</td>
+      <td>2</td>
+      <td>22.222222</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.DefaultEnti...</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>13</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.testcontainers.utility</td>
-      <td>1</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.boot.autoconfigure.orm.jpa</td>
+      <td>2</td>
       <td>3</td>
-      <td>12.5000</td>
-      <td>3.448276</td>
-      <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerConta...</td>
+      <td>22.222222</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.autoconfig, org....</td>
+      <td>[org.axonframework.springboot.autoconfig.JpaEv...</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>javax.annotation</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
       <td>47</td>
-      <td>221</td>
-      <td>73.4375</td>
-      <td>28.081321</td>
-      <td>[org.axonframework.commandhandling, org.axonfr...</td>
-      <td>[org.axonframework.commandhandling.GenericComm...</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.context</td>
+      <td>2</td>
+      <td>6</td>
+      <td>22.222222</td>
+      <td>8.108108</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.XStreamSecu...</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>org.slf4j</td>
-      <td>38</td>
-      <td>78</td>
-      <td>59.3750</td>
-      <td>9.911055</td>
-      <td>[org.axonframework.commandhandling, org.axonfr...</td>
-      <td>[org.axonframework.commandhandling.LoggingDupl...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>org.springframework.core.annotation</td>
+      <td>2</td>
+      <td>4</td>
+      <td>22.222222</td>
+      <td>5.405405</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.DefaultEnti...</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.fasterxml.jackson.annotation</td>
-      <td>11</td>
-      <td>21</td>
-      <td>17.1875</td>
-      <td>2.668361</td>
-      <td>[org.axonframework.commandhandling.distributed...</td>
-      <td>[org.axonframework.commandhandling.distributed...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>com.codahale.metrics</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.Metri...</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>javax.persistence</td>
-      <td>7</td>
-      <td>14</td>
-      <td>10.9375</td>
-      <td>1.778907</td>
-      <td>[org.axonframework.common.legacyjpa, org.axonf...</td>
-      <td>[org.axonframework.common.legacyjpa.PagingJpaQ...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>com.fasterxml.jackson.databind</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11.111111</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.Objec...</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>jakarta.persistence</td>
-      <td>4</td>
-      <td>13</td>
-      <td>6.2500</td>
-      <td>1.651842</td>
-      <td>[org.axonframework.common.jpa, org.axonframewo...</td>
-      <td>[org.axonframework.common.jpa.EntityManagerPro...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>com.fasterxml.jackson.dataformat.cbor.databind</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11.111111</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.CBORM...</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
       <td>com.github.kagkarlsson.scheduler</td>
-      <td>2</td>
-      <td>4</td>
-      <td>3.1250</td>
-      <td>0.508259</td>
-      <td>[org.axonframework.deadline.dbscheduler, org.a...</td>
-      <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonD...</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
       <td>com.github.kagkarlsson.scheduler.task</td>
-      <td>2</td>
-      <td>4</td>
-      <td>3.1250</td>
-      <td>0.508259</td>
-      <td>[org.axonframework.deadline.dbscheduler, org.a...</td>
-      <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonD...</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.github.kagkarlsson.scheduler.task.helper</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>com.thoughtworks.xstream</td>
+      <td>1</td>
       <td>2</td>
-      <td>2</td>
-      <td>3.1250</td>
-      <td>0.254130</td>
-      <td>[org.axonframework.deadline.dbscheduler, org.a...</td>
-      <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
+      <td>11.111111</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.XStre...</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.thoughtworks.xstream</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>1</td>
       <td>2</td>
-      <td>4</td>
-      <td>3.1250</td>
-      <td>0.508259</td>
-      <td>[org.axonframework.serialization, org.axonfram...</td>
-      <td>[org.axonframework.serialization.AbstractXStre...</td>
+      <td>11.111111</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonS...</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>42</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.thoughtworks.xstream.io</td>
-      <td>2</td>
-      <td>4</td>
-      <td>3.1250</td>
-      <td>0.508259</td>
-      <td>[org.axonframework.serialization, org.axonfram...</td>
-      <td>[org.axonframework.serialization.AbstractXStre...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>47</td>
+      <td>9</td>
+      <td>100.0</td>
+      <td>io.axoniq.axonserver.connector.impl</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.Persi...</td>
     </tr>
   </tbody>
 </table>
@@ -3613,10 +3613,10 @@ The following table groups the external packages by their first two levels. For 
       <td>javax.annotation</td>
       <td>1</td>
       <td>13</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>31.707317</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.DefaultConfigurer$Co...</td>
+      <td>[org.axonframework.config.ConfigurerModule, or...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3629,10 +3629,10 @@ The following table groups the external packages by their first two levels. For 
       <td>org.slf4j</td>
       <td>1</td>
       <td>6</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>14.634146</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.DefaultConfigurer$Co...</td>
+      <td>[org.axonframework.config.AxonIQConsoleModule,...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3645,7 +3645,7 @@ The following table groups the external packages by their first two levels. For 
       <td>WeakValue</td>
       <td>1</td>
       <td>1</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>4.545455</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
       <td>[org.axonframework.disruptor.commandhandling.F...</td>
@@ -3661,10 +3661,10 @@ The following table groups the external packages by their first two levels. For 
       <td>com.lmax</td>
       <td>1</td>
       <td>7</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>31.818182</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.D...</td>
+      <td>[org.axonframework.disruptor.commandhandling.E...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3677,7 +3677,7 @@ The following table groups the external packages by their first two levels. For 
       <td>javax.annotation</td>
       <td>1</td>
       <td>6</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>27.272727</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
       <td>[org.axonframework.disruptor.commandhandling.D...</td>
@@ -3693,394 +3693,394 @@ The following table groups the external packages by their first two levels. For 
       <td>org.slf4j</td>
       <td>1</td>
       <td>8</td>
-      <td>100.0000</td>
+      <td>100.000000</td>
       <td>36.363636</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.D...</td>
+      <td>[org.axonframework.disruptor.commandhandling.E...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>org.springframework</td>
       <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.hamcrest</td>
-      <td>5</td>
-      <td>27</td>
-      <td>62.5000</td>
-      <td>31.034483</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.ResultValida...</td>
+      <td>52</td>
+      <td>77.777778</td>
+      <td>70.270270</td>
+      <td>[org.axonframework.actuator, org.axonframework...</td>
+      <td>[org.axonframework.actuator.HealthStatus, org....</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
       <td>javax.annotation</td>
       <td>4</td>
-      <td>10</td>
-      <td>50.0000</td>
-      <td>11.494253</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.AggregateTes...</td>
+      <td>8</td>
+      <td>44.444444</td>
+      <td>10.810811</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.DefaultEnti...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.junit</td>
-      <td>2</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>org.slf4j</td>
+      <td>3</td>
       <td>4</td>
-      <td>25.0000</td>
-      <td>4.597701</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.StubAggregat...</td>
+      <td>33.333333</td>
+      <td>5.405405</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.AbstractQua...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.slf4j</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>jakarta.persistence</td>
       <td>2</td>
-      <td>2</td>
-      <td>25.0000</td>
-      <td>2.298851</td>
-      <td>[org.axonframework.test.aggregate, org.axonfra...</td>
-      <td>[org.axonframework.test.aggregate.AggregateTes...</td>
+      <td>3</td>
+      <td>22.222222</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.util.jpa, org.ax...</td>
+      <td>[org.axonframework.springboot.util.jpa.Contain...</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>AggregateEventPublisherImpl</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.saga]</td>
-      <td>[org.axonframework.test.saga.SagaTestFixture]</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>javax.persistence</td>
+      <td>2</td>
+      <td>3</td>
+      <td>22.222222</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.util.legacyjpa, ...</td>
+      <td>[org.axonframework.springboot.util.legacyjpa.C...</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>org.axonframework</td>
+      <td>2</td>
       <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>com.google</td>
-      <td>1</td>
-      <td>1</td>
-      <td>12.5000</td>
-      <td>1.149425</td>
-      <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerConta...</td>
+      <td>22.222222</td>
+      <td>9.459459</td>
+      <td>[org.axonframework.springboot.util, org.axonfr...</td>
+      <td>[org.axonframework.springboot.util.AbstractQua...</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>axon-test-4.10.0</td>
-      <td>8</td>
-      <td>87</td>
-      <td>7</td>
-      <td>7</td>
-      <td>87.50</td>
-      <td>org.testcontainers</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>com.codahale</td>
       <td>1</td>
-      <td>3</td>
-      <td>12.5000</td>
-      <td>3.448276</td>
-      <td>[org.axonframework.test.server]</td>
-      <td>[org.axonframework.test.server.AxonServerConta...</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.Metri...</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>javax.annotation</td>
-      <td>47</td>
-      <td>221</td>
-      <td>73.4375</td>
-      <td>28.081321</td>
-      <td>[org.axonframework.commandhandling, org.axonfr...</td>
-      <td>[org.axonframework.commandhandling.GenericComm...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>com.fasterxml</td>
+      <td>1</td>
+      <td>3</td>
+      <td>11.111111</td>
+      <td>4.054054</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.Objec...</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>org.slf4j</td>
-      <td>38</td>
-      <td>78</td>
-      <td>59.3750</td>
-      <td>9.911055</td>
-      <td>[org.axonframework.commandhandling, org.axonfr...</td>
-      <td>[org.axonframework.commandhandling.LoggingDupl...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>com.github</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonD...</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.fasterxml</td>
-      <td>12</td>
-      <td>28</td>
-      <td>18.7500</td>
-      <td>3.557814</td>
-      <td>[org.axonframework.commandhandling.distributed...</td>
-      <td>[org.axonframework.commandhandling.distributed...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>com.thoughtworks</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11.111111</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.XStre...</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>javax.persistence</td>
-      <td>7</td>
-      <td>14</td>
-      <td>10.9375</td>
-      <td>1.778907</td>
-      <td>[org.axonframework.common.legacyjpa, org.axonf...</td>
-      <td>[org.axonframework.common.legacyjpa.PagingJpaQ...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>io.axoniq</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11.111111</td>
+      <td>2.702703</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonS...</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>jakarta.persistence</td>
-      <td>4</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
       <td>13</td>
-      <td>6.2500</td>
-      <td>1.651842</td>
-      <td>[org.axonframework.common.jpa, org.axonframewo...</td>
-      <td>[org.axonframework.common.jpa.EntityManagerPro...</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>io.micrometer</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.Micro...</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.github</td>
-      <td>2</td>
-      <td>6</td>
-      <td>3.1250</td>
-      <td>0.762389</td>
-      <td>[org.axonframework.deadline.dbscheduler, org.a...</td>
-      <td>[org.axonframework.deadline.dbscheduler.DbSche...</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>13</td>
+      <td>9</td>
+      <td>100.00</td>
+      <td>org.jobrunr</td>
+      <td>1</td>
+      <td>1</td>
+      <td>11.111111</td>
+      <td>1.351351</td>
+      <td>[org.axonframework.springboot.autoconfig]</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonJ...</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>com.thoughtworks</td>
-      <td>2</td>
-      <td>8</td>
-      <td>3.1250</td>
-      <td>1.016518</td>
-      <td>[org.axonframework.serialization, org.axonfram...</td>
-      <td>[org.axonframework.serialization.AbstractXStre...</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100.00</td>
+      <td>io.opentelemetry</td>
+      <td>1</td>
+      <td>5</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>[org.axonframework.tracing.opentelemetry]</td>
+      <td>[org.axonframework.tracing.opentelemetry.Metad...</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>org.jobrunr</td>
-      <td>2</td>
-      <td>4</td>
-      <td>3.1250</td>
-      <td>0.508259</td>
-      <td>[org.axonframework.deadline.jobrunr, org.axonf...</td>
-      <td>[org.axonframework.deadline.jobrunr.JobRunrDea...</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100.00</td>
+      <td>javax.annotation</td>
+      <td>1</td>
+      <td>3</td>
+      <td>100.000000</td>
+      <td>60.000000</td>
+      <td>[org.axonframework.tracing.opentelemetry]</td>
+      <td>[org.axonframework.tracing.opentelemetry.Metad...</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>org.quartz</td>
-      <td>2</td>
-      <td>9</td>
-      <td>3.1250</td>
-      <td>1.143583</td>
-      <td>[org.axonframework.deadline.quartz, org.axonfr...</td>
-      <td>[org.axonframework.deadline.quartz.QuartzDeadl...</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>3</td>
+      <td>1</td>
+      <td>100.00</td>
+      <td>org.slf4j</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100.000000</td>
+      <td>20.000000</td>
+      <td>[org.axonframework.tracing.opentelemetry]</td>
+      <td>[org.axonframework.tracing.opentelemetry.OpenT...</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>org.slf4j</td>
+      <td>9</td>
       <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>org.reactivestreams</td>
-      <td>2</td>
-      <td>13</td>
-      <td>3.1250</td>
-      <td>1.651842</td>
-      <td>[org.axonframework.messaging.responsetypes, or...</td>
-      <td>[org.axonframework.messaging.responsetypes.Abs...</td>
+      <td>81.818182</td>
+      <td>14.503817</td>
+      <td>[org.axonframework.axonserver.connector, org.a...</td>
+      <td>[org.axonframework.axonserver.connector.Server...</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>reactor.core</td>
-      <td>2</td>
-      <td>18</td>
-      <td>3.1250</td>
-      <td>2.287166</td>
-      <td>[org.axonframework.messaging.responsetypes, or...</td>
-      <td>[org.axonframework.messaging.responsetypes.Pub...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>io.axoniq</td>
+      <td>8</td>
+      <td>65</td>
+      <td>72.727273</td>
+      <td>49.618321</td>
+      <td>[org.axonframework.axonserver.connector, org.a...</td>
+      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>jakarta.validation</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1.5625</td>
-      <td>0.254130</td>
-      <td>[org.axonframework.messaging.interceptors]</td>
-      <td>[org.axonframework.messaging.interceptors.Bean...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>javax.annotation</td>
+      <td>8</td>
+      <td>21</td>
+      <td>72.727273</td>
+      <td>16.030534</td>
+      <td>[org.axonframework.axonserver.connector, org.a...</td>
+      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>javax.cache</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1.5625</td>
-      <td>0.254130</td>
-      <td>[org.axonframework.common.caching]</td>
-      <td>[org.axonframework.common.caching.JCacheAdapte...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>io.grpc</td>
+      <td>5</td>
+      <td>18</td>
+      <td>45.454545</td>
+      <td>13.740458</td>
+      <td>[org.axonframework.axonserver.connector, org.a...</td>
+      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>javax.validation</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1.5625</td>
-      <td>0.254130</td>
-      <td>[org.axonframework.messaging.interceptors.lega...</td>
-      <td>[org.axonframework.messaging.interceptors.lega...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>com.google</td>
+      <td>3</td>
+      <td>8</td>
+      <td>27.272727</td>
+      <td>6.106870</td>
+      <td>[org.axonframework.axonserver.connector.util, ...</td>
+      <td>[org.axonframework.axonserver.connector.util.G...</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>net.sf</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1.5625</td>
-      <td>0.254130</td>
-      <td>[org.axonframework.common.caching]</td>
-      <td>[org.axonframework.common.caching.EhCacheAdapt...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>reactor.core</td>
+      <td>3</td>
+      <td>10</td>
+      <td>27.272727</td>
+      <td>7.633588</td>
+      <td>[org.axonframework.axonserver.connector.util, ...</td>
+      <td>[org.axonframework.axonserver.connector.util.P...</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>nu.xom</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>org.reactivestreams</td>
       <td>1</td>
-      <td>3</td>
-      <td>1.5625</td>
-      <td>0.381194</td>
-      <td>[org.axonframework.serialization.xml]</td>
-      <td>[org.axonframework.serialization.xml.InputStre...</td>
+      <td>4</td>
+      <td>9.090909</td>
+      <td>3.053435</td>
+      <td>[org.axonframework.axonserver.connector.query]</td>
+      <td>[org.axonframework.axonserver.connector.query....</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>64</td>
-      <td>787</td>
-      <td>19</td>
-      <td>52</td>
-      <td>81.25</td>
-      <td>org.dom4j</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>8</td>
+      <td>10</td>
+      <td>90.91</td>
+      <td>org.springframework</td>
       <td>1</td>
-      <td>3</td>
-      <td>1.5625</td>
-      <td>0.381194</td>
-      <td>[org.axonframework.serialization.xml]</td>
-      <td>[org.axonframework.serialization.xml.Dom4JToBy...</td>
+      <td>1</td>
+      <td>9.090909</td>
+      <td>0.763359</td>
+      <td>[org.axonframework.axonserver.connector]</td>
+      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
     </tr>
   </tbody>
 </table>
@@ -4101,14 +4101,20 @@ The following table uses pivot to show the artifacts in columns, the external de
     <tr style="text-align: right;">
       <th>artifactName</th>
       <th>axon-messaging-4.10.0</th>
+      <th>axon-spring-boot-autoconfigure-4.10.0</th>
+      <th>axon-server-connector-4.10.0</th>
       <th>axon-test-4.10.0</th>
       <th>axon-modelling-4.10.0</th>
       <th>axon-eventsourcing-4.10.0</th>
+      <th>axon-tracing-opentelemetry-4.10.0</th>
       <th>axon-disruptor-4.10.0</th>
       <th>axon-configuration-4.10.0</th>
     </tr>
     <tr>
       <th>externalPackageName</th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -4121,7 +4127,10 @@ The following table uses pivot to show the artifacts in columns, the external de
     <tr>
       <th>AggregateEventPublisherImpl</th>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4133,14 +4142,32 @@ The following table uses pivot to show the artifacts in columns, the external de
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>com.codahale.metrics</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>com.fasterxml.jackson.annotation</th>
       <td>11</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4153,438 +4180,21 @@ The following table uses pivot to show the artifacts in columns, the external de
       <td>0</td>
       <td>0</td>
       <td>0</td>
-    </tr>
-    <tr>
-      <th>com.fasterxml.jackson.databind</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>com.fasterxml.jackson.databind.jsontype</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.fasterxml.jackson.databind.module</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.fasterxml.jackson.databind.node</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.fasterxml.jackson.databind.type</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.fasterxml.jackson.datatype.jsr310</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.github.kagkarlsson.scheduler</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.github.kagkarlsson.scheduler.task</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.github.kagkarlsson.scheduler.task.helper</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.google.gson</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.lmax.disruptor</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.lmax.disruptor.dsl</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.thoughtworks.xstream</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.thoughtworks.xstream.converters</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.thoughtworks.xstream.converters.collections</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.thoughtworks.xstream.io</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.thoughtworks.xstream.io.xml</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>com.thoughtworks.xstream.mapper</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>jakarta.persistence</th>
-      <td>4</td>
-      <td>0</td>
-      <td>2</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>jakarta.validation</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.annotation</th>
-      <td>47</td>
-      <td>4</td>
-      <td>4</td>
-      <td>6</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>javax.cache</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.cache.configuration</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.cache.event</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.persistence</th>
-      <td>7</td>
-      <td>0</td>
-      <td>3</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>javax.validation</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>net.sf.ehcache</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>net.sf.ehcache.event</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>nu.xom</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.dom4j</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.dom4j.io</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.ehcache.config</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.ehcache.core</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.ehcache.event</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.hamcrest</th>
-      <td>0</td>
-      <td>5</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.jobrunr.scheduling</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.junit.jupiter.api</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.junit.jupiter.api.extension</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.junit.rules</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.junit.runner</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.junit.runners.model</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.quartz</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.quartz.impl.matchers</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.reactivestreams</th>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.slf4j</th>
-      <td>38</td>
-      <td>2</td>
-      <td>6</td>
-      <td>5</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>org.testcontainers.containers</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.testcontainers.containers.wait.strategy</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>org.testcontainers.utility</th>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>reactor.core</th>
@@ -4594,10 +4204,28 @@ The following table uses pivot to show the artifacts in columns, the external de
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>reactor.core.publisher</th>
       <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>reactor.core.scheduler</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4612,6 +4240,9 @@ The following table uses pivot to show the artifacts in columns, the external de
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>reactor.util.context</th>
@@ -4621,9 +4252,13 @@ The following table uses pivot to show the artifacts in columns, the external de
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
+<p>117 rows × 9 columns</p>
 </div>
 
 
@@ -4641,14 +4276,20 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr style="text-align: right;">
       <th>artifactName</th>
       <th>axon-messaging-4.10.0</th>
+      <th>axon-server-connector-4.10.0</th>
+      <th>axon-spring-boot-autoconfigure-4.10.0</th>
       <th>axon-modelling-4.10.0</th>
       <th>axon-eventsourcing-4.10.0</th>
       <th>axon-test-4.10.0</th>
       <th>axon-disruptor-4.10.0</th>
+      <th>axon-tracing-opentelemetry-4.10.0</th>
       <th>axon-configuration-4.10.0</th>
     </tr>
     <tr>
       <th>externalPackageNameFirst2Levels</th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -4663,7 +4304,10 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -4673,13 +4317,31 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>com.codahale</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>com.fasterxml</th>
       <td>12</td>
+      <td>0</td>
+      <td>1</td>
       <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4689,6 +4351,9 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <th>com.github</th>
       <td>2</td>
       <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4697,9 +4362,12 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr>
       <th>com.google</th>
       <td>0</td>
+      <td>3</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -4709,23 +4377,80 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>com.thoughtworks</th>
       <td>2</td>
       <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
+      <th>io.axoniq</th>
+      <td>0</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>io.grpc</th>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>io.micrometer</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>io.opentelemetry</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>jakarta.persistence</th>
       <td>4</td>
+      <td>0</td>
       <td>2</td>
       <td>2</td>
+      <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4738,13 +4463,19 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>javax.annotation</th>
       <td>47</td>
+      <td>8</td>
+      <td>4</td>
       <td>4</td>
       <td>6</td>
       <td>4</td>
+      <td>1</td>
       <td>1</td>
       <td>1</td>
     </tr>
@@ -4756,12 +4487,18 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>javax.persistence</th>
       <td>7</td>
+      <td>0</td>
+      <td>2</td>
       <td>3</td>
       <td>3</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4769,6 +4506,9 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr>
       <th>javax.validation</th>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4783,10 +4523,28 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>nu.xom</th>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>org.axonframework</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4801,10 +4559,16 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>org.ehcache</th>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4816,13 +4580,19 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>5</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>org.jobrunr</th>
       <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4834,7 +4604,10 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -4846,10 +4619,16 @@ The following table uses pivot to show the artifacts in columns, the external pa
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>org.reactivestreams</th>
       <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4859,24 +4638,45 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr>
       <th>org.slf4j</th>
       <td>38</td>
+      <td>9</td>
+      <td>3</td>
       <td>6</td>
       <td>5</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>org.springframework</th>
+      <td>0</td>
+      <td>1</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>org.testcontainers</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>reactor.core</th>
       <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4886,6 +4686,9 @@ The following table uses pivot to show the artifacts in columns, the external pa
     <tr>
       <th>reactor.util</th>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -4974,6 +4777,45 @@ Only the last 40 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>5</td>
+      <td>16</td>
+      <td>6</td>
+      <td>320.000000</td>
+      <td>26</td>
+      <td>89</td>
+      <td>6</td>
+      <td>[io.opentelemetry.context.propagation, io.open...</td>
+      <td>[TextMapSetter, TextMapGetter, TextMapPropagat...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>101</td>
+      <td>47</td>
+      <td>136.486486</td>
+      <td>304</td>
+      <td>672</td>
+      <td>47</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>[ConditionalOnExpression, ConditionalOnClass, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>113</td>
+      <td>26</td>
+      <td>86.259542</td>
+      <td>341</td>
+      <td>1383</td>
+      <td>26</td>
+      <td>[io.axoniq.axonserver.grpc, io.grpc, io.axoniq...</td>
+      <td>[ErrorMessage, SerializedObject, MetaDataValue...</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>axon-disruptor-4.10.0</td>
       <td>22</td>
       <td>13</td>
@@ -4983,10 +4825,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>93</td>
       <td>5</td>
       <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
-      <td>[Logger, LoggerFactory, RingBuffer, EventHandl...</td>
+      <td>[LoggerFactory, Logger, RingBuffer, EventHandl...</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
       <td>28</td>
@@ -4996,10 +4838,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>500</td>
       <td>13</td>
       <td>[org.hamcrest, javax.annotation, org.testconta...</td>
-      <td>[Matcher, Description, StringDescription, Base...</td>
+      <td>[Description, StringDescription, BaseMatcher, ...</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>5</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
       <td>35</td>
@@ -5009,10 +4851,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>356</td>
       <td>5</td>
       <td>[javax.annotation, javax.persistence, jakarta....</td>
-      <td>[Nonnull, Nullable, Entity, Lob, Column, Id, B...</td>
+      <td>[Nonnull, Nullable, Basic, MappedSuperclass, L...</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>6</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
       <td>154</td>
@@ -5025,7 +4867,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>[Nonnull, Nullable, Logger, LoggerFactory, Jso...</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>7</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
       <td>25</td>
@@ -5034,11 +4876,11 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>74</td>
       <td>238</td>
       <td>4</td>
-      <td>[javax.annotation, org.slf4j, javax.persistenc...</td>
+      <td>[javax.annotation, org.slf4j, jakarta.persiste...</td>
       <td>[Nonnull, Nullable, PreDestroy, Logger, Logger...</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>8</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>4</td>
@@ -5048,7 +4890,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>137</td>
       <td>2</td>
       <td>[javax.annotation, org.slf4j]</td>
-      <td>[Nonnull, Nullable, LoggerFactory, Logger]</td>
+      <td>[Nonnull, Nullable, Logger, LoggerFactory]</td>
     </tr>
   </tbody>
 </table>
@@ -5094,6 +4936,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>io.grpc</td>
+      <td>39</td>
+      <td>69</td>
+      <td>26</td>
+      <td>[Metadata$Key, Metadata, ClientCall, Forwardin...</td>
+      <td>util</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.matchers</td>
       <td>org.hamcrest</td>
@@ -5104,73 +4957,128 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>matchers</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.queryhandling</td>
       <td>reactor.core.publisher</td>
       <td>28</td>
       <td>108</td>
       <td>48</td>
-      <td>[MonoSink, Mono, Flux, FluxSink, Sinks$Many, S...</td>
+      <td>[Mono, Flux, Signal, Sinks$EmitResult, Sinks$M...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>io.axoniq.axonserver.grpc.query</td>
+      <td>25</td>
+      <td>124</td>
+      <td>21</td>
+      <td>[QueryRequest, QueryResponse, QueryResponse$Bu...</td>
+      <td>query</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query.s...</td>
+      <td>io.axoniq.axonserver.grpc.query</td>
+      <td>21</td>
+      <td>113</td>
+      <td>6</td>
+      <td>[QueryResponse, QueryUpdateCompleteExceptional...</td>
+      <td>subscription</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>io.axoniq.axonserver.grpc</td>
+      <td>20</td>
+      <td>106</td>
+      <td>26</td>
+      <td>[ProcessingKey, ProcessingInstruction, MetaDat...</td>
+      <td>util</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.deadline.quartz</td>
       <td>org.quartz</td>
       <td>18</td>
       <td>109</td>
       <td>4</td>
-      <td>[SchedulerContext, JobDetail, JobKey, Schedule...</td>
+      <td>[Scheduler, Trigger, JobKey, TriggerBuilder, J...</td>
       <td>quartz</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>7</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>io.axoniq.axonserver.connector.event</td>
+      <td>18</td>
+      <td>89</td>
+      <td>26</td>
+      <td>[EventChannel, AggregateEventStream, Persisten...</td>
+      <td>axon</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.scheduling.quartz</td>
       <td>org.quartz</td>
       <td>17</td>
       <td>76</td>
       <td>6</td>
-      <td>[Scheduler, JobDataMap, JobDetail, JobExecutio...</td>
+      <td>[JobDataMap, SchedulerContext, TriggerBuilder,...</td>
       <td>quartz</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>9</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>io.axoniq.axonserver.connector</td>
+      <td>17</td>
+      <td>53</td>
+      <td>21</td>
+      <td>[ReplyChannel, ResultStream, ResultStreamPubli...</td>
+      <td>query</td>
+    </tr>
+    <tr>
+      <th>10</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling</td>
       <td>org.slf4j</td>
       <td>16</td>
       <td>56</td>
       <td>100</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>eventhandling</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>11</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.pooled</td>
       <td>org.slf4j</td>
       <td>15</td>
       <td>71</td>
       <td>22</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>pooled</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>12</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.json</td>
       <td>com.fasterxml.jackson.databind</td>
       <td>15</td>
       <td>65</td>
       <td>7</td>
-      <td>[JsonNode, ObjectMapper, DeserializationFeatur...</td>
+      <td>[ObjectReader, ObjectWriter, JsonNode, ObjectM...</td>
       <td>json</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>13</th>
       <td>axon-disruptor-4.10.0</td>
       <td>org.axonframework.disruptor.commandhandling</td>
       <td>org.slf4j</td>
@@ -5181,7 +5089,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>commandhandling</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>14</th>
       <td>axon-configuration-4.10.0</td>
       <td>org.axonframework.config</td>
       <td>org.slf4j</td>
@@ -5192,18 +5100,62 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>config</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>15</th>
       <td>axon-disruptor-4.10.0</td>
       <td>org.axonframework.disruptor.commandhandling</td>
       <td>com.lmax.disruptor</td>
       <td>9</td>
       <td>25</td>
       <td>22</td>
-      <td>[RingBuffer, EventHandler, ExceptionHandler, L...</td>
+      <td>[EventHandler, RingBuffer, LifecycleAware, Exc...</td>
       <td>commandhandling</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>16</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.command</td>
+      <td>io.axoniq.axonserver.grpc.command</td>
+      <td>9</td>
+      <td>52</td>
+      <td>11</td>
+      <td>[CommandResponse, Command, CommandResponse$Bui...</td>
+      <td>command</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>io.axoniq.axonserver.grpc</td>
+      <td>9</td>
+      <td>46</td>
+      <td>21</td>
+      <td>[ErrorMessage, ProcessingInstruction$Builder, ...</td>
+      <td>query</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>org.axonframework.tracing.opentelemetry</td>
+      <td>io.opentelemetry.context.propagation</td>
+      <td>9</td>
+      <td>18</td>
+      <td>5</td>
+      <td>[TextMapSetter, TextMapGetter, TextMapPropagat...</td>
+      <td>opentelemetry</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>org.axonframework.tracing.opentelemetry</td>
+      <td>io.opentelemetry.api.trace</td>
+      <td>9</td>
+      <td>47</td>
+      <td>5</td>
+      <td>[SpanKind, Span, SpanBuilder, Tracer, StatusCo...</td>
+      <td>opentelemetry</td>
+    </tr>
+    <tr>
+      <th>20</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore.leg...</td>
       <td>org.slf4j</td>
@@ -5214,29 +5166,29 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>legacyjpa</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>21</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.caching</td>
       <td>org.ehcache.event</td>
       <td>8</td>
       <td>30</td>
       <td>15</td>
-      <td>[EventType, EventFiring, EventOrdering, CacheE...</td>
+      <td>[CacheEvent, CacheEventListener, EventType, Ev...</td>
       <td>caching</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>22</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.caching</td>
       <td>javax.cache.event</td>
       <td>8</td>
       <td>26</td>
       <td>15</td>
-      <td>[CacheEntryListener, CacheEntryEventFilter, Ca...</td>
+      <td>[CacheEntryUpdatedListener, CacheEntryEventFil...</td>
       <td>caching</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>23</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.annotation</td>
       <td>org.slf4j</td>
@@ -5247,29 +5199,73 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>annotation</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>24</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>io.axoniq.axonserver.grpc</td>
+      <td>8</td>
+      <td>68</td>
+      <td>27</td>
+      <td>[ErrorMessage, InstructionAck, InstructionAck$...</td>
+      <td>connector</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.command</td>
+      <td>io.axoniq.axonserver.grpc</td>
+      <td>8</td>
+      <td>25</td>
+      <td>11</td>
+      <td>[ErrorMessage, ProcessingInstruction, Processi...</td>
+      <td>command</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>io.axoniq.axonserver.grpc.event</td>
+      <td>8</td>
+      <td>43</td>
+      <td>26</td>
+      <td>[EventWithToken, Confirmation, Event, Event$Bu...</td>
+      <td>axon</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>org.slf4j</td>
+      <td>8</td>
+      <td>24</td>
+      <td>26</td>
+      <td>[Logger, LoggerFactory]</td>
+      <td>axon</td>
+    </tr>
+    <tr>
+      <th>28</th>
       <td>axon-test-4.10.0</td>
       <td>org.axonframework.test.saga</td>
       <td>org.hamcrest</td>
       <td>8</td>
       <td>66</td>
       <td>21</td>
-      <td>[Matcher, StringDescription, CoreMatchers, Des...</td>
+      <td>[Matcher, CoreMatchers, StringDescription, Des...</td>
       <td>saga</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>29</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>reactor.core.publisher</td>
       <td>7</td>
       <td>34</td>
       <td>8</td>
-      <td>[Mono, Flux]</td>
+      <td>[Flux, Mono]</td>
       <td>responsetypes</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>30</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.queryhandling</td>
       <td>org.reactivestreams</td>
@@ -5280,18 +5276,62 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>queryhandling</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>31</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.queryhandling</td>
       <td>org.slf4j</td>
       <td>7</td>
       <td>15</td>
       <td>48</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>queryhandling</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>32</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>io.axoniq.axonserver.grpc</td>
+      <td>7</td>
+      <td>18</td>
+      <td>26</td>
+      <td>[SerializedObject$Builder, SerializedObject, I...</td>
+      <td>axon</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>reactor.core.publisher</td>
+      <td>7</td>
+      <td>27</td>
+      <td>21</td>
+      <td>[Flux, Mono, SignalType, BaseSubscriber]</td>
+      <td>query</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query.s...</td>
+      <td>reactor.core.publisher</td>
+      <td>7</td>
+      <td>29</td>
+      <td>6</td>
+      <td>[FluxSink, Flux, Mono]</td>
+      <td>subscription</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>org.springframework.context</td>
+      <td>7</td>
+      <td>28</td>
+      <td>29</td>
+      <td>[ApplicationContext, ApplicationContextAware]</td>
+      <td>autoconfig</td>
+    </tr>
+    <tr>
+      <th>36</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>org.axonframework.eventsourcing.eventstore</td>
       <td>org.slf4j</td>
@@ -5302,7 +5342,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>eventstore</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>37</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.eventhandling.deadletter</td>
       <td>org.slf4j</td>
@@ -5313,7 +5353,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>deadletter</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>38</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.messaging.responsetypes</td>
       <td>org.reactivestreams</td>
@@ -5324,18 +5364,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>responsetypes</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.converters</td>
-      <td>6</td>
-      <td>6</td>
-      <td>34</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
-      <td>serialization</td>
-    </tr>
-    <tr>
-      <th>22</th>
+      <th>39</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization</td>
       <td>com.thoughtworks.xstream.io</td>
@@ -5344,193 +5373,6 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>34</td>
       <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
       <td>serialization</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>org.axonframework.modelling.saga.repository.jpa</td>
-      <td>jakarta.persistence</td>
-      <td>6</td>
-      <td>57</td>
-      <td>7</td>
-      <td>[Index, EntityNotFoundException, Query, TypedQ...</td>
-      <td>jpa</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>axon-test-4.10.0</td>
-      <td>org.axonframework.test.aggregate</td>
-      <td>org.hamcrest</td>
-      <td>6</td>
-      <td>97</td>
-      <td>19</td>
-      <td>[CoreMatchers, StringDescription, Matcher, Des...</td>
-      <td>aggregate</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>com.lmax.disruptor.dsl</td>
-      <td>5</td>
-      <td>21</td>
-      <td>22</td>
-      <td>[Disruptor, ProducerType, EventHandlerGroup]</td>
-      <td>commandhandling</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>axon-eventsourcing-4.10.0</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
-      <td>jakarta.persistence</td>
-      <td>5</td>
-      <td>40</td>
-      <td>7</td>
-      <td>[Index, Query, EntityManager, TypedQuery, Enti...</td>
-      <td>jpa</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.common</td>
-      <td>org.slf4j</td>
-      <td>5</td>
-      <td>15</td>
-      <td>28</td>
-      <td>[LoggerFactory, Logger]</td>
-      <td>common</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.common.caching</td>
-      <td>net.sf.ehcache</td>
-      <td>5</td>
-      <td>47</td>
-      <td>15</td>
-      <td>[Element, Ehcache, CacheException]</td>
-      <td>caching</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.deadline.dbscheduler</td>
-      <td>com.github.kagkarlsson.scheduler.task</td>
-      <td>5</td>
-      <td>21</td>
-      <td>7</td>
-      <td>[TaskInstanceId, TaskWithDataDescriptor, TaskI...</td>
-      <td>dbscheduler</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.async</td>
-      <td>org.slf4j</td>
-      <td>5</td>
-      <td>16</td>
-      <td>15</td>
-      <td>[Logger, LoggerFactory]</td>
-      <td>async</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.deadletter.jpa</td>
-      <td>jakarta.persistence</td>
-      <td>5</td>
-      <td>51</td>
-      <td>9</td>
-      <td>[Index, Query, TypedQuery, NoResultException, ...</td>
-      <td>jpa</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.scheduling.dbs...</td>
-      <td>com.github.kagkarlsson.scheduler.task</td>
-      <td>5</td>
-      <td>19</td>
-      <td>7</td>
-      <td>[TaskWithDataDescriptor, TaskInstance, Task, E...</td>
-      <td>dbscheduler</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.tokenstore.jpa</td>
-      <td>jakarta.persistence</td>
-      <td>5</td>
-      <td>49</td>
-      <td>4</td>
-      <td>[TypedQuery, LockModeType, EntityManager, Query]</td>
-      <td>jpa</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.tokenstore.leg...</td>
-      <td>javax.persistence</td>
-      <td>5</td>
-      <td>49</td>
-      <td>2</td>
-      <td>[LockModeType, Query, TypedQuery, EntityManager]</td>
-      <td>legacyjpa</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.messaging.interceptors</td>
-      <td>jakarta.validation</td>
-      <td>5</td>
-      <td>15</td>
-      <td>8</td>
-      <td>[Validator, Validation, ConstraintViolation, V...</td>
-      <td>interceptors</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.messaging.interceptors.legac...</td>
-      <td>javax.validation</td>
-      <td>5</td>
-      <td>15</td>
-      <td>2</td>
-      <td>[ValidatorFactory, Validator, ConstraintViolat...</td>
-      <td>legacyvalidation</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.mapper</td>
-      <td>5</td>
-      <td>6</td>
-      <td>34</td>
-      <td>[Mapper, CannotResolveClassException]</td>
-      <td>serialization</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization.xml</td>
-      <td>nu.xom</td>
-      <td>5</td>
-      <td>15</td>
-      <td>7</td>
-      <td>[Builder, Document, ParsingException]</td>
-      <td>xml</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>axon-modelling-4.10.0</td>
-      <td>org.axonframework.modelling.saga.repository.le...</td>
-      <td>javax.persistence</td>
-      <td>5</td>
-      <td>55</td>
-      <td>3</td>
-      <td>[EntityManager, TypedQuery, EntityNotFoundExce...</td>
-      <td>legacyjpa</td>
     </tr>
   </tbody>
 </table>
@@ -5581,6 +5423,174 @@ Only the last 20 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>AxonAutoConfiguration</td>
+      <td>19</td>
+      <td>91</td>
+      <td>12</td>
+      <td>19</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.AxonAu...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>InfraConfiguration</td>
+      <td>18</td>
+      <td>53</td>
+      <td>9</td>
+      <td>18</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.InfraC...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>AxonServerQueryBus</td>
+      <td>15</td>
+      <td>72</td>
+      <td>8</td>
+      <td>15</td>
+      <td>[javax.annotation, reactor.core.scheduler, org...</td>
+      <td>[javax.annotation.Nonnull, reactor.core.schedu...</td>
+      <td>query</td>
+      <td>org.axonframework.axonserver.connector.query.A...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>AxonServerAutoConfiguration</td>
+      <td>12</td>
+      <td>38</td>
+      <td>8</td>
+      <td>12</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.AxonSe...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.util</td>
+      <td>AbstractQualifiedBeanCondition</td>
+      <td>12</td>
+      <td>24</td>
+      <td>8</td>
+      <td>12</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>util</td>
+      <td>org.axonframework.springboot.util.AbstractQual...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>AxonServerEventStore$AxonIQEventStorageEngine</td>
+      <td>12</td>
+      <td>58</td>
+      <td>7</td>
+      <td>12</td>
+      <td>[javax.annotation, io.axoniq.axonserver.grpc, ...</td>
+      <td>[javax.annotation.Nonnull, io.axoniq.axonserve...</td>
+      <td>axon</td>
+      <td>org.axonframework.axonserver.connector.event.a...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>MicrometerMetricsAutoConfiguration</td>
+      <td>13</td>
+      <td>30</td>
+      <td>7</td>
+      <td>13</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.Microm...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>AxonDbSchedulerAutoConfiguration</td>
+      <td>9</td>
+      <td>26</td>
+      <td>7</td>
+      <td>9</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.AxonDb...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>JpaAutoConfiguration</td>
+      <td>10</td>
+      <td>19</td>
+      <td>7</td>
+      <td>10</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.JpaAut...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>XStreamAutoConfiguration</td>
+      <td>11</td>
+      <td>15</td>
+      <td>7</td>
+      <td>11</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.XStrea...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>PersistentStreamMessageSourceRegistrar</td>
+      <td>12</td>
+      <td>32</td>
+      <td>7</td>
+      <td>12</td>
+      <td>[org.springframework.beans.factory.support, or...</td>
+      <td>[org.springframework.beans.factory.support.Bea...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.Persis...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig.legacyjpa</td>
+      <td>JpaJavaxAutoConfiguration</td>
+      <td>11</td>
+      <td>20</td>
+      <td>7</td>
+      <td>11</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>legacyjpa</td>
+      <td>org.axonframework.springboot.autoconfig.legacy...</td>
+    </tr>
+    <tr>
+      <th>12</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization.json</td>
       <td>JacksonSerializer</td>
@@ -5594,270 +5604,102 @@ Only the last 20 entries are shown. The whole table can be found in the followin
       <td>org.axonframework.serialization.json.JacksonSe...</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.deadline.dbscheduler</td>
-      <td>DbSchedulerDeadlineManager</td>
-      <td>12</td>
-      <td>82</td>
-      <td>5</td>
-      <td>12</td>
-      <td>[javax.annotation, org.slf4j, com.github.kagka...</td>
-      <td>[javax.annotation.Nonnull, javax.annotation.Nu...</td>
-      <td>dbscheduler</td>
-      <td>org.axonframework.deadline.dbscheduler.DbSched...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.eventhandling.scheduling.dbs...</td>
-      <td>DbSchedulerEventScheduler</td>
-      <td>10</td>
-      <td>39</td>
-      <td>5</td>
-      <td>10</td>
-      <td>[javax.annotation, org.slf4j, com.github.kagka...</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>dbscheduler</td>
-      <td>org.axonframework.eventhandling.scheduling.dbs...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization.xml</td>
-      <td>XStreamSerializer</td>
-      <td>7</td>
-      <td>19</td>
-      <td>5</td>
-      <td>7</td>
-      <td>[org.slf4j, com.thoughtworks.xstream, org.dom4...</td>
-      <td>[org.slf4j.Logger, org.slf4j.LoggerFactory, co...</td>
-      <td>xml</td>
-      <td>org.axonframework.serialization.xml.XStreamSer...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus</td>
-      <td>6</td>
-      <td>33</td>
-      <td>4</td>
-      <td>6</td>
-      <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
-      <td>[org.slf4j.Logger, com.lmax.disruptor.RingBuff...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Di...</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus$DisruptorRepository</td>
-      <td>4</td>
-      <td>13</td>
-      <td>4</td>
-      <td>4</td>
-      <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
-      <td>[org.slf4j.Logger, com.lmax.disruptor.RingBuff...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Di...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.deadline.quartz</td>
-      <td>QuartzDeadlineManager</td>
-      <td>12</td>
-      <td>64</td>
-      <td>4</td>
-      <td>12</td>
-      <td>[javax.annotation, org.slf4j, org.quartz, org....</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>quartz</td>
-      <td>org.axonframework.deadline.quartz.QuartzDeadli...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.messaging.responsetypes</td>
-      <td>MultipleInstancesResponseType</td>
-      <td>7</td>
-      <td>17</td>
-      <td>4</td>
-      <td>7</td>
-      <td>[org.slf4j, com.fasterxml.jackson.annotation, ...</td>
-      <td>[org.slf4j.Logger, org.slf4j.LoggerFactory, co...</td>
-      <td>responsetypes</td>
-      <td>org.axonframework.messaging.responsetypes.Mult...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.queryhandling</td>
-      <td>SimpleQueryUpdateEmitter</td>
-      <td>13</td>
-      <td>29</td>
-      <td>4</td>
-      <td>13</td>
-      <td>[javax.annotation, org.slf4j, org.reactivestre...</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>queryhandling</td>
-      <td>org.axonframework.queryhandling.SimpleQueryUpd...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.queryhandling</td>
-      <td>SimpleQueryBus</td>
-      <td>6</td>
-      <td>51</td>
-      <td>4</td>
-      <td>6</td>
-      <td>[javax.annotation, org.slf4j, org.reactivestre...</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>queryhandling</td>
-      <td>org.axonframework.queryhandling.SimpleQueryBus</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>AbstractXStreamSerializer$MetaDataConverter</td>
-      <td>6</td>
-      <td>9</td>
-      <td>4</td>
-      <td>6</td>
-      <td>[com.thoughtworks.xstream.converters.collectio...</td>
-      <td>[com.thoughtworks.xstream.converters.collectio...</td>
-      <td>serialization</td>
-      <td>org.axonframework.serialization.AbstractXStrea...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter$ReflectivelyCon...</td>
-      <td>6</td>
-      <td>20</td>
-      <td>4</td>
-      <td>6</td>
-      <td>[com.thoughtworks.xstream.mapper, com.thoughtw...</td>
-      <td>[com.thoughtworks.xstream.mapper.Mapper, com.t...</td>
-      <td>serialization</td>
-      <td>org.axonframework.serialization.GapAwareTracki...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization</td>
-      <td>GapAwareTrackingTokenConverter</td>
-      <td>6</td>
-      <td>19</td>
-      <td>4</td>
-      <td>6</td>
-      <td>[com.thoughtworks.xstream.mapper, com.thoughtw...</td>
-      <td>[com.thoughtworks.xstream.mapper.Mapper, com.t...</td>
-      <td>serialization</td>
-      <td>org.axonframework.serialization.GapAwareTracki...</td>
-    </tr>
-    <tr>
       <th>13</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.serialization.json</td>
-      <td>MetaDataDeserializer</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>AxonServerConnectionManager$Builder</td>
+      <td>7</td>
+      <td>29</td>
       <td>6</td>
-      <td>15</td>
-      <td>4</td>
-      <td>6</td>
-      <td>[com.fasterxml.jackson.databind.type, com.fast...</td>
-      <td>[com.fasterxml.jackson.databind.type.TypeFacto...</td>
-      <td>json</td>
-      <td>org.axonframework.serialization.json.MetaDataD...</td>
+      <td>7</td>
+      <td>[io.grpc, io.axoniq.axonserver.connector, io.a...</td>
+      <td>[io.grpc.ManagedChannelBuilder, io.axoniq.axon...</td>
+      <td>connector</td>
+      <td>org.axonframework.axonserver.connector.AxonSer...</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>DisruptorCommandBus$ExceptionHandler</td>
-      <td>3</td>
-      <td>5</td>
-      <td>3</td>
-      <td>3</td>
-      <td>[org.slf4j, com.lmax.disruptor.dsl, com.lmax.d...</td>
-      <td>[org.slf4j.Logger, com.lmax.disruptor.dsl.Disr...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Di...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.event.axon</td>
+      <td>AxonServerEventScheduler</td>
+      <td>10</td>
+      <td>26</td>
+      <td>6</td>
+      <td>10</td>
+      <td>[javax.annotation, io.axoniq.axonserver.grpc, ...</td>
+      <td>[javax.annotation.Nonnull, io.axoniq.axonserve...</td>
+      <td>axon</td>
+      <td>org.axonframework.axonserver.connector.event.a...</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>axon-disruptor-4.10.0</td>
-      <td>org.axonframework.disruptor.commandhandling</td>
-      <td>BlacklistDetectingCallback</td>
-      <td>4</td>
-      <td>10</td>
-      <td>3</td>
-      <td>4</td>
-      <td>[org.slf4j, com.lmax.disruptor, javax.annotation]</td>
-      <td>[org.slf4j.Logger, com.lmax.disruptor.RingBuff...</td>
-      <td>commandhandling</td>
-      <td>org.axonframework.disruptor.commandhandling.Bl...</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.processor</td>
+      <td>EventProcessorControlService</td>
+      <td>8</td>
+      <td>36</td>
+      <td>6</td>
+      <td>8</td>
+      <td>[javax.annotation, org.slf4j, io.axoniq.axonse...</td>
+      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
+      <td>processor</td>
+      <td>org.axonframework.axonserver.connector.process...</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>axon-eventsourcing-4.10.0</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
-      <td>JpaEventStorageEngine</td>
+      <td>axon-server-connector-4.10.0</td>
+      <td>org.axonframework.axonserver.connector.query</td>
+      <td>QueryProcessingTask</td>
+      <td>10</td>
+      <td>38</td>
       <td>6</td>
-      <td>45</td>
-      <td>3</td>
-      <td>6</td>
-      <td>[javax.annotation, org.slf4j, jakarta.persiste...</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>jpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa...</td>
+      <td>10</td>
+      <td>[org.slf4j, io.grpc.netty.shaded.io.netty.util...</td>
+      <td>[org.slf4j.Logger, io.grpc.netty.shaded.io.net...</td>
+      <td>query</td>
+      <td>org.axonframework.axonserver.connector.query.Q...</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>axon-eventsourcing-4.10.0</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
-      <td>JpaEventStorageEngine</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>MetricsAutoConfiguration</td>
+      <td>11</td>
+      <td>28</td>
       <td>6</td>
-      <td>45</td>
-      <td>3</td>
-      <td>6</td>
-      <td>[javax.annotation, org.slf4j, javax.persistence]</td>
-      <td>[javax.annotation.Nonnull, org.slf4j.Logger, o...</td>
-      <td>legacyjpa</td>
-      <td>org.axonframework.eventsourcing.eventstore.leg...</td>
+      <td>11</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>[org.springframework.boot.autoconfigure.condit...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.Metric...</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.common.caching</td>
-      <td>EhCache3Adapter</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>JdbcAutoConfiguration</td>
+      <td>9</td>
+      <td>30</td>
       <td>6</td>
-      <td>23</td>
-      <td>3</td>
-      <td>6</td>
-      <td>[org.ehcache.event, org.ehcache.core, org.ehca...</td>
-      <td>[org.ehcache.event.EventType, org.ehcache.even...</td>
-      <td>caching</td>
-      <td>org.axonframework.common.caching.EhCache3Adapter</td>
+      <td>9</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.JdbcAu...</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>org.axonframework.deadline.jobrunr</td>
-      <td>JobRunrDeadlineManager</td>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>org.axonframework.springboot.autoconfig</td>
+      <td>JpaEventStoreAutoConfiguration</td>
+      <td>9</td>
+      <td>9</td>
       <td>6</td>
-      <td>27</td>
-      <td>3</td>
-      <td>6</td>
-      <td>[javax.annotation, org.slf4j, org.jobrunr.sche...</td>
-      <td>[javax.annotation.Nonnull, javax.annotation.Nu...</td>
-      <td>jobrunr</td>
-      <td>org.axonframework.deadline.jobrunr.JobRunrDead...</td>
+      <td>9</td>
+      <td>[org.springframework.boot.autoconfigure, org.s...</td>
+      <td>[org.springframework.boot.autoconfigure.AutoCo...</td>
+      <td>autoconfig</td>
+      <td>org.axonframework.springboot.autoconfig.JpaEve...</td>
     </tr>
   </tbody>
 </table>
@@ -5914,6 +5756,28 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>131</td>
+      <td>24</td>
+      <td>10</td>
+      <td>82</td>
+      <td>62.595420</td>
+      <td>90.909091</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>74</td>
+      <td>43</td>
+      <td>8</td>
+      <td>35</td>
+      <td>47.297297</td>
+      <td>88.888889</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>axon-modelling-4.10.0</td>
       <td>10</td>
       <td>156</td>
@@ -5924,7 +5788,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>70.000000</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>8</td>
       <td>87</td>
@@ -5935,7 +5799,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>75.000000</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>5</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>9</td>
       <td>133</td>
@@ -5946,7 +5810,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>55.555556</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>6</th>
       <td>axon-configuration-4.10.0</td>
       <td>1</td>
       <td>41</td>
@@ -5957,7 +5821,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>100.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>axon-disruptor-4.10.0</td>
       <td>1</td>
       <td>22</td>
@@ -5965,6 +5829,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1</td>
       <td>10</td>
       <td>45.454545</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1</td>
+      <td>5</td>
+      <td>100.000000</td>
       <td>100.000000</td>
     </tr>
   </tbody>
@@ -5993,10 +5868,14 @@ The whole table can be found in the following CSV report:
       <th>axon-eventsourcing-4.10.0</th>
       <th>axon-messaging-4.10.0</th>
       <th>axon-modelling-4.10.0</th>
+      <th>axon-server-connector-4.10.0</th>
+      <th>axon-spring-boot-autoconfigure-4.10.0</th>
       <th>axon-test-4.10.0</th>
     </tr>
     <tr>
       <th>numberOfPackages</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -6009,6 +5888,8 @@ The whole table can be found in the following CSV report:
       <td>22.222222</td>
       <td>3.1250</td>
       <td>20.0</td>
+      <td>18.181818</td>
+      <td>22.222222</td>
       <td>25.0</td>
     </tr>
     <tr>
@@ -6016,6 +5897,8 @@ The whole table can be found in the following CSV report:
       <td>33.333333</td>
       <td>0.0000</td>
       <td>30.0</td>
+      <td>27.272727</td>
+      <td>33.333333</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -6023,6 +5906,8 @@ The whole table can be found in the following CSV report:
       <td>0.000000</td>
       <td>6.2500</td>
       <td>40.0</td>
+      <td>36.363636</td>
+      <td>44.444444</td>
       <td>50.0</td>
     </tr>
     <tr>
@@ -6030,6 +5915,8 @@ The whole table can be found in the following CSV report:
       <td>55.555556</td>
       <td>0.0000</td>
       <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>62.5</td>
     </tr>
     <tr>
@@ -6037,6 +5924,8 @@ The whole table can be found in the following CSV report:
       <td>66.666667</td>
       <td>0.0000</td>
       <td>60.0</td>
+      <td>54.545455</td>
+      <td>0.000000</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -6044,6 +5933,26 @@ The whole table can be found in the following CSV report:
       <td>0.000000</td>
       <td>10.9375</td>
       <td>0.0</td>
+      <td>63.636364</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.000000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>72.727273</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.000000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>81.818182</td>
+      <td>0.000000</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -6051,6 +5960,8 @@ The whole table can be found in the following CSV report:
       <td>0.000000</td>
       <td>17.1875</td>
       <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -6058,6 +5969,8 @@ The whole table can be found in the following CSV report:
       <td>0.000000</td>
       <td>59.3750</td>
       <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>0.0</td>
     </tr>
     <tr>
@@ -6065,6 +5978,8 @@ The whole table can be found in the following CSV report:
       <td>0.000000</td>
       <td>73.4375</td>
       <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>0.0</td>
     </tr>
   </tbody>
@@ -6128,6 +6043,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>24</td>
+      <td>1</td>
+      <td>2.0</td>
+      <td>2.500000</td>
+      <td>9</td>
+      <td>2.085144</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-modelling-4.10.0</td>
       <td>10</td>
       <td>3</td>
@@ -6138,7 +6064,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>2.081666</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>9</td>
       <td>3</td>
@@ -6149,7 +6075,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>2.081666</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>8</td>
       <td>12</td>
@@ -6160,7 +6086,18 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1.164500</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>43</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.279070</td>
+      <td>3</td>
+      <td>0.548833</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-configuration-4.10.0</td>
       <td>1</td>
       <td>1</td>
@@ -6171,10 +6108,21 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>axon-disruptor-4.10.0</td>
       <td>1</td>
       <td>4</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>1</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>1</td>
+      <td>5</td>
       <td>1</td>
       <td>1.0</td>
       <td>1.000000</td>
@@ -6221,6 +6169,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>11</td>
+      <td>24</td>
+      <td>9.090909</td>
+      <td>18.181818</td>
+      <td>22.727273</td>
+      <td>81.818182</td>
+      <td>18.955856</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-modelling-4.10.0</td>
       <td>10</td>
       <td>3</td>
@@ -6231,7 +6190,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>20.816660</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>9</td>
       <td>3</td>
@@ -6242,7 +6201,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>23.129622</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>8</td>
       <td>12</td>
@@ -6253,7 +6212,18 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>14.556252</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>9</td>
+      <td>43</td>
+      <td>11.111111</td>
+      <td>11.111111</td>
+      <td>14.211886</td>
+      <td>33.333333</td>
+      <td>6.098150</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-configuration-4.10.0</td>
       <td>1</td>
       <td>1</td>
@@ -6264,10 +6234,21 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>axon-disruptor-4.10.0</td>
       <td>1</td>
       <td>4</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>1</td>
+      <td>5</td>
       <td>100.000000</td>
       <td>100.000000</td>
       <td>100.000000</td>
@@ -6314,6 +6295,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>24</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>7.125000</td>
+      <td>30</td>
+      <td>7.719611</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
       <td>3</td>
@@ -6324,7 +6316,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>3.464102</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
       <td>3</td>
@@ -6335,7 +6327,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6.350853</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
       <td>12</td>
@@ -6346,7 +6338,18 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7.346407</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>43</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.883721</td>
+      <td>6</td>
+      <td>1.159008</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>1</td>
@@ -6357,7 +6360,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>axon-disruptor-4.10.0</td>
       <td>22</td>
       <td>4</td>
@@ -6366,6 +6369,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>5.000000</td>
       <td>8</td>
       <td>3.162278</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1</td>
+      <td>2.0</td>
+      <td>2.200000</td>
+      <td>4</td>
+      <td>1.303840</td>
     </tr>
   </tbody>
 </table>
@@ -6407,6 +6421,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     </tr>
     <tr>
       <th>1</th>
+      <td>axon-server-connector-4.10.0</td>
+      <td>131</td>
+      <td>24</td>
+      <td>0.763359</td>
+      <td>3.053435</td>
+      <td>5.438931</td>
+      <td>22.900763</td>
+      <td>5.892833</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
       <td>3</td>
@@ -6417,7 +6442,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>2.220578</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
       <td>3</td>
@@ -6428,7 +6453,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>4.775077</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
       <td>12</td>
@@ -6439,7 +6464,18 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8.444146</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
+      <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>74</td>
+      <td>43</td>
+      <td>1.351351</td>
+      <td>1.351351</td>
+      <td>2.545569</td>
+      <td>8.108108</td>
+      <td>1.566227</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
       <td>1</td>
@@ -6450,7 +6486,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>axon-disruptor-4.10.0</td>
       <td>22</td>
       <td>4</td>
@@ -6459,6 +6495,17 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>22.727273</td>
       <td>36.363636</td>
       <td>14.373989</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>5</td>
+      <td>5</td>
+      <td>20.000000</td>
+      <td>40.000000</td>
+      <td>44.000000</td>
+      <td>80.000000</td>
+      <td>26.076810</td>
     </tr>
   </tbody>
 </table>
@@ -6544,19 +6591,19 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>2</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>org.axonframework</td>
+      <td>${project.groupId}</td>
       <td>axon-messaging</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-eventsourcing</td>
+      <td>org.hsqldb</td>
+      <td>hsqldb</td>
     </tr>
     <tr>
       <th>4</th>
@@ -6564,8 +6611,8 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Configuration</td>
       <td>test</td>
       <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-messaging</td>
+      <td>jakarta.persistence</td>
+      <td>jakarta.persistence-api</td>
     </tr>
     <tr>
       <th>...</th>
@@ -6577,53 +6624,53 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>...</td>
     </tr>
     <tr>
-      <th>111</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
-      <td>default</td>
-      <td>False</td>
-      <td>org.junit.jupiter</td>
-      <td>junit-jupiter</td>
-    </tr>
-    <tr>
-      <th>112</th>
+      <th>158</th>
       <td>axon-test</td>
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
       <td>True</td>
-      <td>junit</td>
-      <td>junit</td>
+      <td>org.hamcrest</td>
+      <td>hamcrest-library</td>
     </tr>
     <tr>
-      <th>113</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
-      <td>test</td>
+      <th>159</th>
+      <td>axon-tracing-opentelemetry</td>
+      <td>Axon Framework - OpenTelemetry Tracing</td>
+      <td>default</td>
       <td>False</td>
-      <td>jakarta.persistence</td>
-      <td>jakarta.persistence-api</td>
+      <td>io.opentelemetry</td>
+      <td>opentelemetry-api</td>
     </tr>
     <tr>
-      <th>114</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
+      <th>160</th>
+      <td>axon-tracing-opentelemetry</td>
+      <td>Axon Framework - OpenTelemetry Tracing</td>
       <td>provided</td>
       <td>False</td>
       <td>com.google.code.findbugs</td>
       <td>jsr305</td>
     </tr>
     <tr>
-      <th>115</th>
-      <td>axon-test</td>
-      <td>Axon Framework - Test Fixtures</td>
+      <th>161</th>
+      <td>axon-tracing-opentelemetry</td>
+      <td>Axon Framework - OpenTelemetry Tracing</td>
       <td>default</td>
-      <td>True</td>
-      <td>com.google.code.gson</td>
-      <td>gson</td>
+      <td>False</td>
+      <td>${project.groupId}</td>
+      <td>axon-configuration</td>
+    </tr>
+    <tr>
+      <th>162</th>
+      <td>axon-tracing-opentelemetry</td>
+      <td>Axon Framework - OpenTelemetry Tracing</td>
+      <td>default</td>
+      <td>False</td>
+      <td>${project.groupId}</td>
+      <td>axon-messaging</td>
     </tr>
   </tbody>
 </table>
-<p>116 rows × 6 columns</p>
+<p>163 rows × 6 columns</p>
 </div>
 
 
