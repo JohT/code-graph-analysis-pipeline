@@ -5,16 +5,19 @@
 
 # Note: The first (and only) parameter is the version of "ant-design" to analyze.
 # Note: This script is meant to be started in the root directory of this repository.
+# Note: This script requires "cURL" ( https://curl.se ) to be installed.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
-# Read the first input argument containing the version of the artifacts
-if [ "$#" -ne 1 ]; then
-  echo "analyzerAntDesign Error: Usage: $0 <version>" >&2
-  exit 1
-fi
+# Read the first input argument containing the version of the project
 projectVersion=$1
+if [ -z "${projectVersion}" ]; then
+  echo "analyzerAntDesign: Optional parameter <version> is not specified. Detecting latest version..." >&2
+  echo "analyzerAntDesign: Usage example: $0 <version>" >&2
+  projectVersion=$( ./../../scripts/examples/detectLatestGitTag.sh --url "https://github.com/ant-design/ant-design.git" )
+  echo "analyzerAntDesign: Using latest version: ${projectVersion}" >&2
+fi
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then

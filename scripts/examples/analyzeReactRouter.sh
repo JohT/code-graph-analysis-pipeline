@@ -9,12 +9,14 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
-# Read the first input argument containing the version of the artifacts
-if [ "$#" -ne 1 ]; then
-  echo "analyzerReactRouter Error: Usage: $0 <version>" >&2
-  exit 1
-fi
+# Read the first input argument containing the version of the project
 projectVersion=$1
+if [ -z "${projectVersion}" ]; then
+  echo "analyzerReactRouter: Optional parameter <version> is not specified. Detecting latest version..." >&2
+  echo "analyzerReactRouter: Usage example: $0 <version>" >&2
+  projectVersion=$( ./../../scripts/examples/detectLatestGitTag.sh --url "https://github.com/remix-run/react-router.git" )
+  echo "analyzerReactRouter: Using latest version: ${projectVersion}" >&2
+fi
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then

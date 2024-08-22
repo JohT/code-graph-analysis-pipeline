@@ -9,16 +9,17 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
-# Read the first input argument containing the version of the artifacts
-if [ "$#" -ne 1 ]; then
-  echo "analyzeAxonFramework Error: Usage: $0 <version>" >&2
-  exit 1
-fi
 artifactsVersion=$1
+if [ -z "${artifactsVersion}" ]; then
+  echo "analyzeAxonFramework: Optional parameter <version> is not specified. Detecting latest version..." >&2
+  echo "analyzeAxonFramework: Usage example: $0 <version>" >&2
+  artifactsVersion=$( ./../../scripts/examples/detectLatestGitTag.sh --url "https://github.com/AxonFramework/AxonFramework.git" --prefix "axon-")
+  echo "analyzeAxonFramework: Using latest version: ${artifactsVersion}" >&2
+fi
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
-    echo "analyzeAxonFramework: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'."
+    echo "analyzeAxonFramework: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'." >&2
     exit 1
 fi
 
