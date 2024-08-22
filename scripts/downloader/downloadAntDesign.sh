@@ -24,7 +24,7 @@ echo "downloadAntDesign: projectVersion=${projectVersion}"
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
-echo "downloadReactRouter: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}"
+echo "downloadAntDesign: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}"
 
 source "${DOWNLOADER_SCRIPTS_DIR}/downloadTypescriptProject.sh" \
   --url https://github.com/ant-design/ant-design.git \
