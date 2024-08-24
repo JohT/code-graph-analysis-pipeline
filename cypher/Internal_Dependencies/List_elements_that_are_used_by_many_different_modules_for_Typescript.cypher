@@ -1,8 +1,8 @@
 // List elements that are used by many different modules
 
-MATCH (sourceModule:TS&Module)-[:EXPORTS]->(sourceElement:TS)
+MATCH (sourceModule:TS&Module&!TestRelated)-[:EXPORTS]->(sourceElement:TS)
 MATCH (sourceElement)-[:DEPENDS_ON]->(dependentElement:TS&!Module&!ExternalModule)
-MATCH (dependentModule:TS&Module)-[:EXPORTS]->(dependentElement)
+MATCH (dependentModule:TS&Module&!TestRelated)-[:EXPORTS]->(dependentElement)
 WHERE sourceModule <> dependentModule
  WITH dependentElement
      ,labels(dependentElement)               AS dependentElementLabels
