@@ -85,5 +85,5 @@ echo "resetAndScan: Analyzing using jQAssistant CLI version ${JQASSISTANT_CLI_VE
 
 "${JQASSISTANT_BIN}"/jqassistant.sh analyze
 
-# Scan all git repositories within the "source" (default) folder, scan their git log (history) and import it.
-source "${SCRIPTS_DIR}/importGit.sh"
+# Scan all git repositories within the "source" (default) folder and import their git log (history) if configured.
+time source "${SCRIPTS_DIR}/importGit.sh"
