@@ -1,6 +1,7 @@
 // External Typescript module usage per internal module sorted by external usage descending
 
  MATCH (internalModule:TS:Module)-[:EXPORTS]->(internalElement:TS)
+ WHERE NOT internalModule:TestRelated
  OPTIONAL MATCH (internalElement)-[:DEPENDS_ON]->(externalDeclaration:ExternalDeclaration)
           WHERE externalDeclaration.isExternalImport = true
  OPTIONAL MATCH (externalModule:ExternalModule)-[:EXPORTS]->(externalDeclaration)
@@ -21,7 +22,7 @@ UNWIND internalElementList AS internalElement
       ,internalModuleName
       ,internalElement.globalFqn     AS fullInternalElementName
       ,internalElement.name          AS internalElementName
-      ,externalModule.namespace      AS externalNamespaceName
+      ,coalesce(nullif(externalModule.namespace, ''), 'no namespace') AS externalNamespaceName
       ,externalDeclaration.name      AS externalDeclarationName
   WITH numberOfAllElementsInInternalModule
       ,numberOfAllExternalDeclarationsUsedInInternalModule

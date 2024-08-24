@@ -2,6 +2,7 @@
 
 // Get the overall internal modules statistics first
  MATCH (internalModule:TS:Module)-[:EXPORTS]->(internalElement:TS)
+ WHERE NOT internalModule:TestRelated
   WITH count(DISTINCT internalModule.globalFqn)                  AS internalModulesCountOverall
       ,count(DISTINCT internalElement.globalFqn)                 AS internalElementsCountOverall
       ,collect(DISTINCT internalElement)                         AS internalElementList
@@ -14,7 +15,7 @@ UNWIND internalElementList AS internalElement
  MATCH (externalModule:TS:ExternalModule)-[:EXPORTS]->(externalDeclaration)
   WITH internalModulesCountOverall
       ,internalElementsCountOverall
-      ,externalModule.namespace                               AS externalModuleNamespace
+      ,coalesce(nullif(externalModule.namespace, ''), 'no namespace') AS externalModuleNamespace
       ,coalesce(nullIf(internalModule.namespace, '') + '/' + internalModule.name, internalModule.name) AS internalModuleName
       
       // Gathering counts for every internal element and the external module it uses

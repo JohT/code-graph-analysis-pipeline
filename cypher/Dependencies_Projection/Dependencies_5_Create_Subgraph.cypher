@@ -3,7 +3,7 @@
 CALL gds.graph.filter(
   $dependencies_projection + '-cleaned',
   $dependencies_projection,
-  'n.outgoingDependencies > 0 OR n.incomingDependencies > 0',
+  'n.testMarkerInteger = 0 AND (n.outgoingDependencies > 0 OR n.incomingDependencies > 0)',
   '*'
 )
  YIELD graphName, fromGraphName, nodeCount, relationshipCount, nodeFilter

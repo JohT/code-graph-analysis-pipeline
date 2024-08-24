@@ -7,7 +7,7 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
       ,reverse(split(reverse(replace(split(ts.globalFqn, '".')[0],'"', '')), '/')[0])       AS moduleName
       ,replace(split(split(ts.globalFqn, '/index')[0], '.default')[0],'"', '')              AS modulePathNameWithoutIndexAndDefault
       ,nullif(split(ts.globalFqn, '".')[1], 'default')                                      AS symbolName
-      ,split(nullif(reverse(split(reverse(ts.globalFqn), '@')[0]), ts.globalFqn), '/')[0]   AS namespaceName
+      ,split(split(reverse(split(reverse(ts.globalFqn), reverse('/node_modules/'))[0]),'@')[1], '/')[0] AS namespaceName
       ,(ts.globalFqn contains '/node_modules/')                                             AS isNodeModule
       ,((NOT ts.globalFqn STARTS WITH '/') AND size(split(ts.globalFqn, '/')) < 3)          AS isUnresolvedImport
       ,reverse(split(reverse(class.globalFqn), '.')[0])                                     AS optionalClassName
@@ -27,3 +27,14 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
        ,ts.isUnresolvedImport = isUnresolvedImport
        ,ts.isExternalImport   = isNodeModule OR isUnresolvedImport
 RETURN count(*) AS updatedModules
+// For debugging
+// RETURN namespaceNameWithAtPrefixed         AS namespace
+//        ,modulePathName                     AS module            
+//        ,moduleName                         AS moduleName        
+//        ,coalesce(symbolNameWithoutClassName, indexAndExtensionOmittedName) AS name              
+//        ,moduleNameExtensionExtended        AS extensionExtended 
+//        ,moduleNameExtension                AS extension         
+//        ,isNodeModule                       AS isNodeModule      
+//        ,isUnresolvedImport                 AS isUnresolvedImport
+//        ,isNodeModule OR isUnresolvedImport AS isExternalImport  
+// LIMIT 50

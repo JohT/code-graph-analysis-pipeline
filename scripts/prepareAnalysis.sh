@@ -55,6 +55,7 @@ execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_name.cypher"
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Index_module_name.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_module_properties.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Mark_test_modules.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding a name properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_projects.cypher"

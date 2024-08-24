@@ -1,8 +1,8 @@
 // How many elements compared to all existing are used by dependent Typescript modules?
 
-MATCH (sourceModule:TS&Module)-[:EXPORTS]-(sourceElement:TS)
+MATCH (sourceModule:TS&Module&!TestRelated)-[:EXPORTS]-(sourceElement:TS)
 MATCH (sourceElement)-[:DEPENDS_ON]->(dependentElement:TS&!Module&!ExternalModule)
-MATCH (dependentModule:TS&Module)-[:EXPORTS]->(dependentElement)
+MATCH (dependentModule:TS&Module&!TestRelated)-[:EXPORTS]->(dependentElement)
 WHERE sourceModule <> dependentModule
 MATCH (dependentModule)-[:EXPORTS]->(dependentModuleElement:TS)
   WITH sourceModule.name                                  AS sourceModuleName

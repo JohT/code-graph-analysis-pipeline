@@ -10,7 +10,7 @@ CALL gds.graph.project(
     },
     {
         relationshipProperties: [$dependencies_projection_weight_property],
-        nodeProperties: ['incomingDependencies', 'outgoingDependencies']
+        nodeProperties: ['incomingDependencies', 'outgoingDependencies', 'testMarkerInteger']
     }
 )
  YIELD graphName, nodeCount, relationshipCount
