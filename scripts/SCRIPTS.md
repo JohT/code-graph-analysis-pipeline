@@ -55,11 +55,9 @@ Script | Directory | Description
 | [NodeEmbeddingsCsv.sh](./reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports. |
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
-| [OverviewJupyter.sh](./reports/OverviewJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [TopologicalSortCsv.sh](./reports/TopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm for directed acyclic graphs (DAG) to order code units by their dependencies |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports. |
-| [WordcloudJupyter.sh](./reports/WordcloudJupyter.sh) | reports | Creates the "overview" report (ipynb, md, pdf) based on the Jupyter Notebook "Overview.ipynb". |
 | [AllReports.sh](./reports/compilations/AllReports.sh) | compilations | Runs all report scripts. |
 | [CsvReports.sh](./reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required). |
 | [DatabaseCsvExportReports.sh](./reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all" |
