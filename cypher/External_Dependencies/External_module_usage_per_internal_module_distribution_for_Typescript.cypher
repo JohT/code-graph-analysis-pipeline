@@ -1,6 +1,7 @@
 // External Typescript module usage distribution for internal modules
 
  MATCH (internalModule:TS:Module)-[:EXPORTS]->(internalElement:TS)
+ WHERE NOT internalModule:TestRelated
   WITH internalModule.name                       AS internalModuleName
       ,count(DISTINCT internalElement.globalFqn) AS numberOfAllInternalElements
       ,collect(DISTINCT internalElement)         AS internalElementList

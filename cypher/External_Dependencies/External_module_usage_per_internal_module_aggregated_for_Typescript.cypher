@@ -1,7 +1,8 @@
-// External Typescript module usage per interal module aggregated
+// External Typescript module usage per internal module aggregated
 
 // Get the overall internal module statistics first
  MATCH (internalModule:TS:Module)-[:EXPORTS]->(internalElement:TS)
+ WHERE NOT internalModule:TestRelated
   WITH internalModule.name                       AS internalModuleName
       ,internalModule.communityLeidenId          AS leidenCommunityId
       ,count(DISTINCT internalElement.globalFqn) AS internalModuleElementsCount

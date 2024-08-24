@@ -2,6 +2,7 @@
 
 // Get the overall internal modules statistics first
  MATCH (internalModule:TS:Module)-[:EXPORTS]->(internalElement:TS)
+ WHERE NOT internalModule:TestRelated
   WITH count(DISTINCT internalModule.globalFqn)                  AS internalModulesCountOverall
       ,count(DISTINCT internalElement.globalFqn)                 AS internalElementsCountOverall
       ,collect(DISTINCT internalElement)                         AS internalElementList
