@@ -121,6 +121,7 @@ Script | Directory | Description
 | [Cyclic_Dependencies_for_Typescript.cypher](./Cyclic_Dependencies/Cyclic_Dependencies_for_Typescript.cypher) | Cyclic_Dependencies | Cyclic Dependencies as List for Typescript |
 | [Data_verification_DEPENDS_ON_relationships.cypher](./Data_verification_DEPENDS_ON_relationships.cypher) |  | Data verification DEPENDS_ON relationship distinct label constellations |
 | [Dependencies_0_Check_Projectable.cypher](./Dependencies_Projection/Dependencies_0_Check_Projectable.cypher) | Dependencies_Projection | Check if there is at least one projectable dependency. Variables: dependencies_projection_node, dependencies_projection_weight_property |
+| [Dependencies_0_Prepare_Projection.cypher](./Dependencies_Projection/Dependencies_0_Prepare_Projection.cypher) | Dependencies_Projection | Prepare projection by e.g. filling in default values for missing properties |
 | [Dependencies_0_Verify_Projectable.cypher](./Dependencies_Projection/Dependencies_0_Verify_Projectable.cypher) | Dependencies_Projection | Verify that nodes and relationships are complete and ready for projection |
 | [Dependencies_10_Delete_Label.cypher](./Dependencies_Projection/Dependencies_10_Delete_Label.cypher) | Dependencies_Projection | Community Detection Label Propagation Label Delete |
 | [Dependencies_11_Add_Label.cypher](./Dependencies_Projection/Dependencies_11_Add_Label.cypher) | Dependencies_Projection | Write a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property |
@@ -161,7 +162,7 @@ Script | Directory | Description
 | [Explore_node_relationships.cypher](./Exploration/Explore_node_relationships.cypher) | Exploration | Get all relationships of one specific node to explore the schema |
 | [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
 | [External_module_usage_overall_for_Typescript.cypher](./External_Dependencies/External_module_usage_overall_for_Typescript.cypher) | External_Dependencies | External Typescript module usage overall |
-| [External_module_usage_per_internal_module_aggregated_for_Typescript.cypher](./External_Dependencies/External_module_usage_per_internal_module_aggregated_for_Typescript.cypher) | External_Dependencies | External Typescript module usage per interal module aggregated |
+| [External_module_usage_per_internal_module_aggregated_for_Typescript.cypher](./External_Dependencies/External_module_usage_per_internal_module_aggregated_for_Typescript.cypher) | External_Dependencies | External Typescript module usage per internal module aggregated |
 | [External_module_usage_per_internal_module_distribution_for_Typescript.cypher](./External_Dependencies/External_module_usage_per_internal_module_distribution_for_Typescript.cypher) | External_Dependencies | External Typescript module usage distribution for internal modules |
 | [External_module_usage_per_internal_module_sorted_for_Typescript.cypher](./External_Dependencies/External_module_usage_per_internal_module_sorted_for_Typescript.cypher) | External_Dependencies | External Typescript module usage per internal module sorted by external usage descending |
 | [External_module_usage_spread_for_Typescript.cypher](./External_Dependencies/External_module_usage_spread_for_Typescript.cypher) | External_Dependencies | External Typescript module usage spread |
@@ -342,6 +343,7 @@ Script | Directory | Description
 | [Add_name_to_property_on_scan_nodes.cypher](./Typescript_Enrichment/Add_name_to_property_on_scan_nodes.cypher) | Typescript_Enrichment | Set name property on Typescript scan nodes |
 | [Index_module_name.cypher](./Typescript_Enrichment/Index_module_name.cypher) | Typescript_Enrichment | Create index for module name |
 | [Link_projects_to_npm_packages.cypher](./Typescript_Enrichment/Link_projects_to_npm_packages.cypher) | Typescript_Enrichment | Link Typescript projects to npm packages |
+| [Mark_test_modules.cypher](./Typescript_Enrichment/Mark_test_modules.cypher) | Typescript_Enrichment | Add "Test" label for modules that contain tests and test-related implementations |
 | [ValidateJavaArtifactDependencies.cypher](./Validation/ValidateJavaArtifactDependencies.cypher) | Validation | Check if there is at least one Java Artifact dependency. |
 | [ValidateJavaExternalDependencies.cypher](./Validation/ValidateJavaExternalDependencies.cypher) | Validation | Check if there is at least one external Java Type dependency. |
 | [ValidateJavaInternalDependencies.cypher](./Validation/ValidateJavaInternalDependencies.cypher) | Validation | Check if there is at least one Java Artifact containing a Java Package with at least one Java Type. |
