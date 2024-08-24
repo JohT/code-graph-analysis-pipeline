@@ -31,6 +31,7 @@ Script | Directory | Description
 | [analyzeAntDesign.sh](./examples/analyzeAntDesign.sh) | examples | This is an example for the analysis of a the Typescript project "ant-design". |
 | [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
 | [analyzeReactRouter.sh](./examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router". |
+| [detectLatestGitTag.sh](./examples/detectLatestGitTag.sh) | examples | Returns the latest tag of a remote repository given by its url. |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
 | [executeJupyterNotebookReport.sh](./executeJupyterNotebookReport.sh) |  | Executes the given Jupyter Notebook and puts all resulting files (ipynb, md, pdf) into an accordingly named directory within the "results" directory. |
 | [executeQuery.sh](./executeQuery.sh) |  | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format. |
