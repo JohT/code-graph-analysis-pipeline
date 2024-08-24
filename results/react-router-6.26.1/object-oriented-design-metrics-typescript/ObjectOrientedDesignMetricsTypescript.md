@@ -62,7 +62,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
       <td>19</td>
-      <td>36</td>
+      <td>20</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
