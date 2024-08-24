@@ -5,7 +5,8 @@
     $dependencies_projection_node, 
       'DEPENDS_ON', {
         relationshipProperties: [$dependencies_projection_weight_property],
-        nodeProperties: ['incomingDependencies', 'outgoingDependencies']
-  })
+        nodeProperties: ['incomingDependencies', 'outgoingDependencies', 'testMarkerInteger']
+      }
+  )
  YIELD graphName, nodeCount, relationshipCount
 RETURN graphName, nodeCount, relationshipCount

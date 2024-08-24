@@ -16,7 +16,7 @@
             defaultValue: 1.0
           }
         },
-        nodeProperties: ['incomingDependencies', 'outgoingDependencies']
+        nodeProperties: ['incomingDependencies', 'outgoingDependencies', 'testMarkerInteger']
     }
   )
  YIELD graphName, nodeCount, relationshipCount

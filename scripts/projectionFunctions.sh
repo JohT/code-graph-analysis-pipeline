@@ -137,6 +137,7 @@ createDirectedDependencyProjection() {
         logNoDataForProjection "${@}"
         return 1
     fi
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Prepare_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3_Create_Projection.cypher" "${@}"
@@ -175,6 +176,7 @@ createUndirectedDependencyProjection() {
     if [ "${projectionCheckResult}" -lt 1 ]; then
         return 1
     fi
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Prepare_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4_Create_Undirected_Projection.cypher" "${@}"
