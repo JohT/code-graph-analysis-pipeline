@@ -22,7 +22,7 @@ UNWIND internalElementList AS internalElement
       ,internalModuleName
       ,internalElement.globalFqn     AS fullInternalElementName
       ,internalElement.name          AS internalElementName
-      ,externalModule.namespace      AS externalNamespaceName
+      ,coalesce(nullif(externalModule.namespace, ''), 'no namespace') AS externalNamespaceName
       ,externalDeclaration.name      AS externalDeclarationName
   WITH numberOfAllElementsInInternalModule
       ,numberOfAllExternalDeclarationsUsedInInternalModule
