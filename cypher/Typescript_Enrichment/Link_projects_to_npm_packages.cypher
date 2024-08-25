@@ -10,15 +10,15 @@ MATCH (npmPackage:NPM:Package)
           , '/package.json'
           , ''
           ) AS relativeNpmPackageDirectory
- MATCH (project:TS:Project)-[:HAS_ROOT]->(projectRoot:Directory)
- WHERE projectRoot.absoluteFileName ENDS WITH relativeNpmPackageDirectory
+ MATCH (project:TS:Project)-[:HAS_CONFIG]->(config:File)<-[:CONTAINS]-(projectConfigDir:Directory)
+ WHERE projectConfigDir.absoluteFileName ENDS WITH relativeNpmPackageDirectory
   WITH npmPackage
       ,relativeNpmPackageDirectory
       ,collect(DISTINCT project) AS projects
-      ,collect(DISTINCT projectRoot) AS projectRoots
+      ,collect(DISTINCT projectConfigDir) AS projectConfigDirs
 // Assure that the found connection is unique and not ambiguous 
- WHERE size(projects)     = 1
-   AND size(projectRoots) = 1
+ WHERE size(projects)          = 1
+   AND size(projectConfigDirs) = 1
  UNWIND projects AS project
 // Create a HAS_NPM_PACKAGE relationship between the Typescript project and the npm package
  MERGE (project)-[:HAS_NPM_PACKAGE]->(npmPackage)
@@ -27,6 +27,6 @@ MATCH (npmPackage:NPM:Package)
    SET npmPackage.relativeFileDirectory = relativeNpmPackageDirectory
  RETURN count(*) AS numberOfCreatedNpmPackageRelationships
 // Detailed results for debugging
-//RETURN npmPackage.fileName              AS npmPackageFileName
-//      ,projectRoots[0].absoluteFileName AS projectRootDirectory
+//RETURN npmPackage.fileName                   AS npmPackageFileName
+//      ,projectConfigDirs[0].absoluteFileName AS projectConfigDirectory
 //      ,relativeNpmPackageDirectory
