@@ -10,12 +10,19 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+echo "analyzerAntDesign: SCRIPTS_DIR=$SCRIPTS_DIR"
+
 # Read the first input argument containing the version of the project
 projectVersion=$1
 if [ -z "${projectVersion}" ]; then
   echo "analyzerAntDesign: Optional parameter <version> is not specified. Detecting latest version..." >&2
   echo "analyzerAntDesign: Usage example: $0 <version>" >&2
-  projectVersion=$( ./../../scripts/examples/detectLatestGitTag.sh --url "https://github.com/ant-design/ant-design.git" )
+  projectVersion=$( "${SCRIPTS_DIR}/detectLatestGitTag.sh" --url "https://github.com/ant-design/ant-design.git" )
   echo "analyzerAntDesign: Using latest version: ${projectVersion}" >&2
 fi
 
