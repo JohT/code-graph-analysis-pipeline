@@ -25,10 +25,13 @@ fi
     echo "copyPackageJsonFiles: Existing package.json files will be copied from from ${SOURCE_DIRECTORY} to ../${ARTIFACTS_DIRECTORY}/${NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY}"
     echo "copyPackageJsonFiles: Author will be removed as workaround for https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5"
     
-    for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {}); do
+    copied_package_json_files=0
+
+   #for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {}); do
+    for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} echo {}); do
         fileDirectory=$(dirname "${file}")
         targetDirectory="../${ARTIFACTS_DIRECTORY}/${NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY}/${fileDirectory}"
-        # echo "copyPackageJsonFiles: Copying ${file} to ${targetDirectory}"
+        # echo "copyPackageJsonFiles: Debug: Copying ${file} to ${targetDirectory}" # debug logging
 
         mkdir -p "${targetDirectory}"
         cp -rf "${file}" "${targetDirectory}"
@@ -39,5 +42,9 @@ fi
         jq 'del(.author)' "${targetDirectory}/${fileName}" > "${targetDirectory}/${fileName}.edited"
         jq 'del(.contributors)' "${targetDirectory}/${fileName}.edited" > "${targetDirectory}/${fileName}"
         rm -f "${targetDirectory}/${fileName}.edited"
+
+        copied_package_json_files=$((copied_package_json_files + 1))
     done
+
+    echo "copyPackageJsonFiles: Successfully copied ${copied_package_json_files} files"
 )

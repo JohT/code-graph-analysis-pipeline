@@ -7,6 +7,7 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+# Overrideable Defaults
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"full"} # Select how to import git log data. Options: "none", "aggregated", "full". Default="full".
 
 ## Get this "scripts" directory if not already set
@@ -40,10 +41,14 @@ ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 TYPESCRIPT_CYPHER_DIR="$CYPHER_DIR/Typescript_Enrichment"
 
+COLOR_RED='\033[0;31m'
+COLOR_DEFAULT='\033[0m'
+
 # Preparation - Data verification: DEPENDS_ON relationships
 dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPENDS_ON_relationships.cypher" "${@}")
 if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; then
-    echo "prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship required. Check if the artifacts directory is empty or if the scan failed."
+    echo -e "${COLOR_RED}prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship is required. Check if the artifacts directory is empty or if the scan failed.${COLOR_DEFAULT}"
+    echo -e "${COLOR_RED}${dataVerificationResult}${COLOR_DEFAULT}"
     exit 1
 fi
 
@@ -66,8 +71,18 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matchi
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
+# Preparation - Cleanup Graph for Typescript by removing duplicate relationships
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_between_files.cypher"
+
 # Preparation - Enrich Graph for Typescript by adding relationships between corresponding TS:Project and NPM:Package nodes
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
+dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
+if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
+    # There are Typescript projects and the unresolvedProjectsCount is greater than zero
+    echo -e "${COLOR_RED}prepareAnalysis: Error: Data verification failed. There are Typescript projects without a linked npm package:${COLOR_DEFAULT}"
+    echo -e "${COLOR_RED}${dataVerificationResult}${COLOR_DEFAULT}"
+    exit 1
+fi
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
 execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"

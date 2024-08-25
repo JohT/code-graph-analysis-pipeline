@@ -38,9 +38,7 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
 
 1. Move the artifacts (e.g. Java jars json files) you want to analyze into the `artifacts` directory.
 
-1. Optionally, create a subdirectory `typescript` inside the `artifacts` directory and move the Typescript analysis json files you want to analyze into it.
-
-1. Optionally, create a `source` directory and clone the corresponding source code into it to also gather git log data.
+1. Optionally, create a `source` directory and clone the corresponding source code into it to also scan git data.
 
 1. Alternatively to the steps above, run an already predefined download script
 

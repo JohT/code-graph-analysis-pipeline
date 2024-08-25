@@ -173,8 +173,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
 
 - How can i add a Jupyter Notebook report to the pipeline?  
   👉 Put your new notebook into the [jupyter](./jupyter) directory.  
-  👉 Create a new Jupyter report script in the [scripts/reports](./scripts/reports/) directory. Take [OverviewJupyter.sh](./scripts/reports/OverviewJupyter.sh) as a reference for example.  
-  👉 The script will automatically be included because of the directory and its name ending with "Jupyter.sh".
+  👉 The file will then automatically be picked up by [executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookReport.sh).
 
 - How can i analyze a different code basis automatically?  
   👉 Create a new download script like the ones in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference for Java projects and [downloadReactRouter.sh](./scripts/downloader/downloadReactRouter.sh) as a reference for Typescript projects.
