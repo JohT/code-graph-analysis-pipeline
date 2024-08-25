@@ -66,6 +66,9 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matchi
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
+# Preparation - Cleanup Graph for Typescript by removing duplicate relationships
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_between_files.cypher"
+
 # Preparation - Enrich Graph for Typescript by adding relationships between corresponding TS:Project and NPM:Package nodes
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 
