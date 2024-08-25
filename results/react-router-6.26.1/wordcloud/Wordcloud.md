@@ -25,123 +25,123 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>ts</td>
+      <td>tutorial</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>output</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>router</td>
+      <td>native</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>unstable</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>patch</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>routes</td>
+      <td>dom</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>on</td>
+      <td>compat</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>navigation</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>function</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>hash</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>pathname</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>search</td>
+      <td>dom</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>map</td>
+      <td>remix</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>route</td>
+      <td>run</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>properties</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>create</td>
+      <td>remix</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>memory</td>
+      <td>run</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>router</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>route</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>routes</td>
+      <td>basic</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>opts</td>
+      <td>data</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>react</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>router</td>
+      <td>multi</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>context</td>
+      <td>app</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>router</td>
+      <td>modal</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>react</td>
+      <td>notes</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>utils</td>
+      <td>basic</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>router</td>
+      <td>ssr</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>history</td>
+      <td>dev</td>
     </tr>
   </tbody>
 </table>
@@ -149,7 +149,7 @@
 
 
 
-    There are 4313 words in the dataset.
+    There are 5197 words in the dataset.
 
 
 

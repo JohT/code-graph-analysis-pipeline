@@ -37,8 +37,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>90841</td>
-      <td>256591</td>
+      <td>92746</td>
+      <td>258607</td>
       <td>6</td>
       <td>6</td>
       <td>84</td>
@@ -90,8 +90,8 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>35</td>
-      <td>Interface</td>
-      <td>10</td>
+      <td>Variable</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>2</th>
@@ -106,16 +106,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>35</td>
-      <td>Variable</td>
-      <td>5</td>
+      <td>Interface</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>4</th>
       <td>react-router-native</td>
       <td>index.tsx</td>
       <td>12</td>
-      <td>TypeAlias</td>
-      <td>3</td>
+      <td>Interface</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>5</th>
@@ -130,8 +130,8 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-native</td>
       <td>index.tsx</td>
       <td>12</td>
-      <td>Interface</td>
-      <td>2</td>
+      <td>TypeAlias</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>7</th>
@@ -146,16 +146,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router</td>
       <td>index.ts</td>
       <td>6</td>
-      <td>Function</td>
-      <td>2</td>
+      <td>Interface</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>9</th>
       <td>react-router</td>
       <td>index.ts</td>
       <td>6</td>
-      <td>Interface</td>
-      <td>1</td>
+      <td>Function</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>10</th>
