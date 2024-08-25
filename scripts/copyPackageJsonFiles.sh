@@ -27,7 +27,8 @@ fi
     
     copied_package_json_files=0
 
-    for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {}); do
+   #for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {}); do
+    for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} echo {}); do
         fileDirectory=$(dirname "${file}")
         targetDirectory="../${ARTIFACTS_DIRECTORY}/${NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY}/${fileDirectory}"
         # echo "copyPackageJsonFiles: Debug: Copying ${file} to ${targetDirectory}" # debug logging
