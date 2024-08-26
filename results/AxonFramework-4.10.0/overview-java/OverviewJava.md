@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>319219</td>
-      <td>967276</td>
+      <td>319220</td>
+      <td>967282</td>
       <td>9</td>
       <td>122</td>
       <td>2083</td>
@@ -80,36 +80,36 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>1</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
+      <td>Enum</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>axon-messaging-4.10.0</td>
+      <td>787</td>
       <td>Interface</td>
       <td>155</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
       <td>Annotation</td>
       <td>26</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>axon-messaging-4.10.0</td>
-      <td>787</td>
-      <td>Enum</td>
-      <td>19</td>
-    </tr>
-    <tr>
       <th>4</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
-      <td>Interface</td>
-      <td>28</td>
+      <td>Class</td>
+      <td>113</td>
     </tr>
     <tr>
       <th>5</th>
       <td>axon-modelling-4.10.0</td>
       <td>156</td>
-      <td>Class</td>
-      <td>113</td>
+      <td>Interface</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>6</th>
@@ -199,15 +199,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>18</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Annotation</td>
-      <td>3</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>19</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>20</th>
@@ -227,15 +227,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>22</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
-      <td>Enum</td>
-      <td>1</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>23</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Enum</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>24</th>
