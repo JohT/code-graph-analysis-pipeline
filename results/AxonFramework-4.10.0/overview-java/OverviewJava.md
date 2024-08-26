@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>319220</td>
-      <td>967282</td>
+      <td>319229</td>
+      <td>967533</td>
       <td>9</td>
       <td>122</td>
       <td>2083</td>
@@ -80,22 +80,22 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>1</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Interface</td>
+      <td>155</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
-      <td>Interface</td>
-      <td>155</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-messaging-4.10.0</td>
       <td>787</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>4</th>
@@ -143,15 +143,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>10</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>12</th>
@@ -178,15 +178,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>15</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Class</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>16</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
-      <td>Class</td>
-      <td>71</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>17</th>
@@ -199,22 +199,22 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>18</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>19</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Annotation</td>
-      <td>3</td>
+      <td>Interface</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>20</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Interface</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>21</th>
@@ -227,21 +227,21 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>22</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>23</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
-      <td>Enum</td>
-      <td>1</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>24</th>
       <td>axon-configuration-4.10.0</td>
       <td>41</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
