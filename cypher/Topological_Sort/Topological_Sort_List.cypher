@@ -19,4 +19,4 @@ FOREACH (i IN range(0, SIZE(sortedNodeIds)-1) |
  UNWIND topologicalSortedCodeUnits       AS sorted
  RETURN coalesce(sorted.codeUnit.fqn, sorted.codeUnit.fileName, sorted.codeUnit.name) AS codeUnitName
        ,sorted.codeUnit.maxDistanceFromSource                                         AS maxDistanceFromSource
-       ,overallMaxDistance                                                            AS overalNumberOfBuildLevels
+       ,overallMaxDistance                                                            AS overallNumberOfBuildLevels
