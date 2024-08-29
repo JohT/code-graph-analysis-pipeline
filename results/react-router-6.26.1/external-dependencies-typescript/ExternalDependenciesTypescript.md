@@ -74,7 +74,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>18</td>
       <td>4</td>
       <td>59</td>
-      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
+      <td>[&lt;useLinkPressHandler&gt; of module &lt;react-router...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -844,7 +844,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[BackHandlerStatic.addEventListener, BackHandl...</td>
+      <td>[GestureResponderEvent, BackHandlerStatic.remo...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -856,7 +856,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, React.ReactNode, React.JSX.E...</td>
+      <td>[React.useEffect, React.useMemo, React.useCall...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -880,7 +880,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.useContext, React.ForwardRefExoticCompo...</td>
+      <td>[React.useMemo, React.MutableRefObject.current...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -944,7 +944,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[BackHandlerStatic.addEventListener, BackHandl...</td>
+      <td>[GestureResponderEvent, BackHandlerStatic.remo...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -968,7 +968,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.useContext, React.ForwardRefExoticCompo...</td>
+      <td>[React.useMemo, React.MutableRefObject.current...</td>
     </tr>
     <tr>
       <th>3</th>

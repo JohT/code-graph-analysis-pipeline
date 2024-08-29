@@ -62,7 +62,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>router</td>
       <td>13</td>
-      <td>36</td>
+      <td>20</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
@@ -155,8 +155,8 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
-      <td>148</td>
-      <td>370</td>
+      <td>152</td>
+      <td>374</td>
       <td>0</td>
       <td>0</td>
       <td>10</td>
@@ -189,7 +189,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>17</td>
-      <td>28</td>
+      <td>29</td>
       <td>0</td>
       <td>0</td>
       <td>6</td>
@@ -325,11 +325,11 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
-      <td>0.986667</td>
+      <td>0.987013</td>
       <td>0.0</td>
       <td>0.909091</td>
       <td>0.666667</td>
-      <td>148</td>
+      <td>152</td>
       <td>2</td>
       <td>0</td>
       <td>0</td>
@@ -535,9 +535,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./index.tsx</td>
-      <td>0.358095</td>
+      <td>0.358442</td>
       <td>0.371429</td>
-      <td>0.986667</td>
+      <td>0.987013</td>
       <td>35</td>
     </tr>
     <tr>

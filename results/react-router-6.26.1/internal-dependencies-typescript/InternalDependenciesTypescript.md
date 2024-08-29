@@ -40,7 +40,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-dom</td>
       <td>35</td>
       <td>2</td>
-      <td>148</td>
+      <td>152</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
@@ -106,7 +106,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-dom</td>
       <td>35</td>
       <td>2</td>
-      <td>148</td>
+      <td>152</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
@@ -156,7 +156,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-dom</td>
       <td>35</td>
       <td>2</td>
-      <td>148</td>
+      <td>152</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
@@ -236,7 +236,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-dom</td>
       <td>35</td>
       <td>2</td>
-      <td>148</td>
+      <td>152</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
@@ -286,7 +286,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-dom</td>
       <td>35</td>
       <td>2</td>
-      <td>148</td>
+      <td>152</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
@@ -352,7 +352,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-dom</td>
       <td>35</td>
       <td>2</td>
-      <td>148</td>
+      <td>152</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
@@ -569,7 +569,7 @@ This table shows the file directory distance distribution between dependent file
       <td>6</td>
       <td>4</td>
       <td>2</td>
-      <td>[./index.tsx uses ./index.ts, ./index.tsx uses...</td>
+      <td>[./index.tsx uses ./index.ts, ./server.tsx use...</td>
     </tr>
   </tbody>
 </table>
