@@ -1,4 +1,4 @@
-// Similarity Stream
+// Similarity Stream. Requires "Add_file_name and_extension.cypher".
 
  CALL gds.nodeSimilarity.stream(
   $dependencies_projection + '-cleaned', {
@@ -14,8 +14,8 @@ OPTIONAL MATCH (artifact1:Artifact)-[:CONTAINS]->(node1)
 OPTIONAL MATCH (artifact2:Artifact)-[:CONTAINS]->(node2)
  WITH node1
      ,node2
-     ,replace(last(split(artifact1.fileName, '/')), '.jar', '') AS artifactName1
-     ,replace(last(split(artifact2.fileName, '/')), '.jar', '') AS artifactName2
+     ,artifact1.name AS artifactName1
+     ,artifact2.name AS artifactName2
      ,similarity
 RETURN similarity
       ,artifactName1

@@ -1,4 +1,4 @@
-// Set Incoming Package Dependencies
+// Set Incoming Package Dependencies. Requires "Add_file_name and_extension.cypher".
 
    MATCH (p:Java:Package)
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)
@@ -7,7 +7,7 @@ OPTIONAL MATCH (it)<-[:DEPENDS_ON]-(eti:Java:Type:Interface)
    WHERE p <> ep
      AND p.fqn <> ep.fqn
      // AND p.incomingDependencies IS NULL // comment out to recalculate
-    WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+    WITH artifact.name AS artifactName
         ,p
         ,COUNT(et)               AS incomingDependencies
         ,SUM(r.weight)           AS incomingDependenciesWeight

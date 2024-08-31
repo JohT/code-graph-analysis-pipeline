@@ -1,4 +1,4 @@
-// Type communities with few members in foreign packages
+// Type communities with few members in foreign packages. Requires "Add_file_name and_extension.cypher".
 
  MATCH (t:Type)
   WITH t.communityLeidenId   AS communityId
@@ -8,7 +8,7 @@
  MATCH (p)-[:CONTAINS]->(packageType:Type)
  WHERE communityType.communityLeidenId = communityId
    AND packageType.communityLeidenId IS NOT NULL
-  WITH replace(last(split(a.fileName, '/')), '.jar', '') AS artifactName
+  WITH a.name AS artifactName
       ,p.fqn                           AS packageName
       ,numberOfTypesInCommunity
       ,count(DISTINCT packageType.fqn) AS numberOfTypesInPackage

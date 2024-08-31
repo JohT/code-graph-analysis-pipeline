@@ -1,7 +1,7 @@
-// Number of types per artifact
+// Number of types per artifact. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(type:Type) 
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+  WITH artifact.name AS artifactName
       ,count(DISTINCT type.fqn) AS numberOfArtifactTypes
       ,collect(DISTINCT type)   AS types
 UNWIND types AS type

@@ -1,8 +1,8 @@
-// External package usage per artifact and package with external annotations
+// External package usage per artifact and package with external annotations. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+  WITH artifact.name AS artifactName
       ,package.fqn   AS fullPackageName
       ,package.name  AS packageName
       ,count(type)   AS numberOfTypesInPackage

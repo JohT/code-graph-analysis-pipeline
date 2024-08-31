@@ -1,9 +1,9 @@
-// Global relative visibility statistics for types
+// Global relative visibility statistics for types. Requires "Add_file_name and_extension.cypher".
 
          MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
          MATCH (package)-[:CONTAINS]->(anyType:Type)
 OPTIONAL MATCH (package)-[:CONTAINS]->(publicType:Type{visibility:"public"})
- WITH replace(last(split(artifact.fileName, '/')),'.jar','') AS artifact
+ WITH artifact.name              AS artifact
      ,package
      ,COUNT(DISTINCT publicType) AS publicTypes
      ,COUNT(DISTINCT anyType)    AS allTypes

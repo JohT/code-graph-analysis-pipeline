@@ -1,10 +1,10 @@
-// Get Java Packages including their sub packages with the lowest Instability
+// Get Java Packages including their sub packages with the lowest Instability. Requires "Add_file_name and_extension.cypher".
 // Instability = outgoing / (outgoing + incoming) Dependencies
 
  MATCH (p:Java:Package)
  WHERE p.instabilityIncludingSubpackages IS NOT NULL
  MATCH (artifact:Artifact)-[:CONTAINS]->(p)
-RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+RETURN artifact.name AS artifactName
       ,p.fqn                   AS fullQualifiedPackageName
       ,p.name                  AS packageName
       ,p.instabilityIncludingSubpackages           AS instability

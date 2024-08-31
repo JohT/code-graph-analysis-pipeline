@@ -1,7 +1,7 @@
-// Communities that span the most packages
+// Communities that span the most packages. Requires "Add_file_name and_extension.cypher".
 
  MATCH (a:Artifact)-[:CONTAINS]->(p:Package)-[:CONTAINS]->(t:Type)
-  WITH replace(last(split(a.fileName, '/')), '.jar', '') AS artifactName
+  WITH a.name AS artifactName
       ,t.communityLeidenId                               AS communityId  
       ,collect(DISTINCT p.fqn)                           AS packageNames
       ,count(DISTINCT p.fqn)                             AS packageCount

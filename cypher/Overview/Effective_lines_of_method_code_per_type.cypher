@@ -1,10 +1,10 @@
-// Effective lines of method code per type
+// Effective lines of method code per type. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
  MATCH (type)-[:DECLARES]->(method:Method)
  WHERE method.effectiveLineCount > 0
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+  WITH artifact.name AS artifactName
       ,package.fqn                                              AS packageName
       ,type.name                                                AS typeName
       ,sum(method.effectiveLineCount)                           AS sumEffectiveLinesOfMethodCode

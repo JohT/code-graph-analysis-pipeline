@@ -1,7 +1,7 @@
 // Communities that span the most packages with type statistics
 
  MATCH (a:Artifact)-[:CONTAINS]->(p:Package)-[:CONTAINS]->(t:Type)
-  WITH replace(last(split(a.fileName, '/')), '.jar', '') AS artifactName
+  WITH a.name AS artifactName
       ,t.communityLeidenId                               AS communityId
       ,p.fqn                                             AS packageName
       ,collect(DISTINCT p.fqn)                           AS packageNames

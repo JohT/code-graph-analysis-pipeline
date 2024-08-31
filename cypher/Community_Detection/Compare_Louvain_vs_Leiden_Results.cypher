@@ -1,4 +1,4 @@
-// Compare Louvain vs. Leiden Community Detection Results. Variables: dependencies_projection_node (e.g. "Artifact", "Package", "Type")
+// Compare Louvain vs. Leiden Community Detection Results. Variables: dependencies_projection_node (e.g. "Artifact", "Package", "Type"). Requires "Add_file_name and_extension.cypher".
 
  MATCH (member)
  WHERE $dependencies_projection_node IN LABELS(member)
@@ -7,7 +7,7 @@
  WITH member.communityLouvainId    AS louvainCommunityId
      ,member.communityLeidenId     AS leidenCommunityId
      ,coalesce(member.fqn, member.fileName, member.signature, member.name)          AS memberName
-     ,coalesce(member.name, replace(last(split(member.fileName, '/')), '.jar', '')) AS shortMemberName
+     ,member.name AS shortMemberName
  WITH louvainCommunityId
      ,leidenCommunityId
      ,collect(DISTINCT shortMemberName) AS shortMemberNames

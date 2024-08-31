@@ -1,10 +1,10 @@
-// External package usage per type
+// External package usage per type. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
  MATCH (type)-[externalDependency:DEPENDS_ON]->(externalType:ExternalType)
   WITH externalDependency
-      ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+      ,artifact.name AS artifactName
       ,package.fqn  AS fullPackageName
       ,package.name AS packageName
       ,type.fqn     AS fullTypeName

@@ -1,4 +1,4 @@
-// Annotated code elements per artifact and element type with some examples
+// Annotated code elements per artifact and element type with some examples. Requires "Add_file_name and_extension.cypher".
 
 MATCH (annotatedElement:Annotation|Parameter|Field|Method|Type&!ExternalType&!JavaType)-[:ANNOTATED_BY]->()-[]->(annotation:Type)
 OPTIONAL MATCH (annotatedElementArtifact:Artifact)-[:CONTAINS]->(annotatedElement)
@@ -12,7 +12,7 @@ OPTIONAL MATCH (parameterArtifact:Artifact)-[:CONTAINS]->(parameterOwnerType:Typ
               ,parameterOwnerType.fqn + '.' + parameterOwnerMethod.name + '(' +  annotatedElement.index + ')'
               ,annotatedElement.name
               ) AS nameOfAnnotatedElement
-     ,replace(last(split(coalesce(parameterArtifact, memberArtifact, annotatedElementArtifact).fileName, '/')), '.jar', '') AS artifactName
+     ,coalesce(parameterArtifact, memberArtifact, annotatedElementArtifact).name AS artifactName
  WITH annotation.fqn  AS annotationName
   ,CASE WHEN 'Annotation'  IN labels(annotatedElement) THEN 'Annotation'
         WHEN 'Parameter'   IN labels(annotatedElement) THEN 'Parameter'

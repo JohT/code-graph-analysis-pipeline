@@ -1,13 +1,13 @@
-//Cyclic Dependencies Breakdown
+//Cyclic Dependencies Breakdown. Requires "Add_file_name and_extension.cypher".
 
 MATCH (package:Package)-[:CONTAINS]->(forwardSource:Type)-[:DEPENDS_ON]->(forwardTarget:Type)<-[:CONTAINS]-(dependentPackage:Package)
 MATCH (dependentPackage)-[:CONTAINS]->(backwardSource:Type)-[:DEPENDS_ON]->(backwardTarget:Type)<-[:CONTAINS]-(package)
 MATCH (artifact:Artifact)-[:CONTAINS]->(package)
 MATCH (dependentArtifact:Artifact)-[:CONTAINS]->(dependentPackage)
 WHERE package.fqn <> dependentPackage.fqn
- WITH replace(last(split(artifact.fileName, '/')), '.jar', '')            AS artifactName
+ WITH artifact.name            AS artifactName
      ,package.fqn                                                         AS packageName
-     ,replace(last(split(dependentArtifact .fileName, '/')), '.jar', '')  AS dependentArtifactName
+     ,dependentArtifact.name                                              AS dependentArtifactName
      ,dependentPackage.fqn                                                AS dependentPackageName
      ,collect(DISTINCT forwardSource.name  + '->' + forwardTarget.name)   AS forwardDependencies
      ,collect(DISTINCT backwardTarget.name + '<-' + backwardSource.name)  AS backwardDependencies

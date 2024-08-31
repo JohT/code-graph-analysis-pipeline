@@ -1,4 +1,4 @@
-// Which package community spans several artifacts and how are the packages distributed?
+// Which package community spans several artifacts and how are the packages distributed? Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (externalArtifact:Artifact)-[:CONTAINS]->(externalPackage:Package)
@@ -6,7 +6,7 @@
    AND package.communityLeidenId 
      = externalPackage.communityLeidenId
   WITH package.communityLeidenId AS communityId
-      ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+      ,artifact.name AS artifactName
       ,collect(DISTINCT package.name)  AS packageNames
       ,size(collect(DISTINCT package)) AS packageCount
  WHERE communityId IS NOT NULL

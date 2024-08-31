@@ -1,4 +1,4 @@
-// Topological Sort to query the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) for each code unit node in topologicalSortIndex order.
+// Topological Sort to query the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) for each code unit node in topologicalSortIndex order. Requires "Add_file_name and_extension.cypher".
 // Needs graph-data-science plugin version >= 2.5.0
 
 MATCH (codeUnit)
@@ -9,7 +9,7 @@ MATCH (codeUnit)
       ,max(codeUnit.maxDistanceFromSource) AS overallMaxDistanceFromSource
 UNWIND codeUnits AS codeUnit
 RETURN coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.name)                          AS codeUnitName
-      ,coalesce(replace(last(split(codeUnit.fileName, '/')), '.jar', ''), codeUnit.name) AS shortName
+      ,codeUnit.name                                                                     AS shortName
       ,codeUnit.topologicalSortIndex                                                     AS topologicalSortIndex
       ,codeUnit.maxDistanceFromSource                                                    AS maxDistanceFromSource
       ,overallMaxDistanceFromSource

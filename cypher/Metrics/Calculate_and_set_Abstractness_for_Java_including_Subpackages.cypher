@@ -1,4 +1,4 @@
-//Calculate and set Abstractness for Java Packages including sub-packages 
+//Calculate and set Abstractness for Java Packages including sub-packages. Requires "Add_file_name and_extension.cypher".
 
 MATCH path = (package:Java:Package)-[:CONTAINS*0..]->(subpackage:Java:Package)
  WITH *
@@ -9,7 +9,7 @@ MATCH path = (package:Java:Package)-[:CONTAINS*0..]->(subpackage:Java:Package)
      ,EXISTS{ (package)-[:CONTAINS]->(:Type) } AS containsTypes
 WHERE hasSiblingPackages OR containsTypes
 MATCH (artifact:Artifact)-[:CONTAINS]->(package)
- WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+ WITH artifact.name AS artifactName
      ,package
      ,sum(subpackage.numberOfTypes)            AS numberTypes
      ,sum(subpackage.numberOfAbstractTypes)    AS numberAbstractTypes

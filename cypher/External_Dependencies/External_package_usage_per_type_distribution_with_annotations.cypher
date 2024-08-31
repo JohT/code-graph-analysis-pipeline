@@ -1,7 +1,7 @@
-// External package usage per type distribution with external annotations
+// External package usage per type distribution with external annotations. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(type:Type)
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '')  AS artifactName
+  WITH artifact.name  AS artifactName
       ,count(type)                                               AS artifactTypes
       ,collect(type)                                             AS typeList
 UNWIND typeList AS type

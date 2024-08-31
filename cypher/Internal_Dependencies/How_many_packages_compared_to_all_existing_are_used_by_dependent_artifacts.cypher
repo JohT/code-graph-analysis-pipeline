@@ -1,9 +1,9 @@
-// How many packages compared to all existing are used by dependent artifacts?
+// How many packages compared to all existing are used by dependent artifacts? Requires "Add_file_name and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]-(package:Package)-[:DEPENDS_ON]->(dependentPackage:Package)<-[:CONTAINS]-(dependentArtifact:Artifact)
 MATCH (dependentArtifact)-[:CONTAINS]->(dependentArtifactPackage:Package)-[:CONTAINS]->(dependentArtifactType:Type)
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
-      ,replace(last(split(dependentArtifact.fileName, '/')), '.jar', '') AS dependentArtifactName
+  WITH artifact.name AS artifactName
+      ,dependentArtifact.name AS dependentArtifactName
       ,dependentArtifact
       ,COUNT(DISTINCT dependentPackage.fqn)     AS dependentPackages
       ,COUNT(DISTINCT dependentArtifactPackage) AS dependentArtifactPackages

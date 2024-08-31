@@ -1,10 +1,10 @@
-// External package usage spread
+// External package usage spread. Requires "Add_file_name and_extension.cypher".
 
 // Get the overall artifact statistics first
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)
  WHERE NOT type:ExternalType
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '')  AS artifactName
+  WITH artifact.name  AS artifactName
       ,count(DISTINCT package.fqn)                               AS artifactPackages
       ,count(DISTINCT type.fqn)                                  AS artifactTypes
       ,collect(type)                                             AS typeList
