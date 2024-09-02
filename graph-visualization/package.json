@@ -13,6 +13,6 @@
     "glob": "11.0.0",
     "jimp": "0.22.12",
     "neovis.js": "2.1.0",
-    "puppeteer": "23.1.1"
+    "puppeteer": "23.2.1"
   }
 }
