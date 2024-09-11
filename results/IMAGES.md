@@ -413,6 +413,16 @@ Image  | Analysis |
 | [OverviewTypescript_23_1.png](./react-router-6.26.1/overview-typescript/OverviewTypescript_files/OverviewTypescript_23_1.png) | react-router-6.26.1 |
 | [OverviewTypescript_25_1.png](./react-router-6.26.1/overview-typescript/OverviewTypescript_files/OverviewTypescript_25_1.png) | react-router-6.26.1 |
 | [OverviewTypescript_27_1.png](./react-router-6.26.1/overview-typescript/OverviewTypescript_files/OverviewTypescript_27_1.png) | react-router-6.26.1 |
+| [PathFindingTypescript_37_0.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_37_0.png) | react-router-6.26.1 |
+| [PathFindingTypescript_40_1.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_40_1.png) | react-router-6.26.1 |
+| [PathFindingTypescript_47_0.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_47_0.png) | react-router-6.26.1 |
+| [PathFindingTypescript_50_1.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_50_1.png) | react-router-6.26.1 |
+| [PathFindingTypescript_53_1.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_53_1.png) | react-router-6.26.1 |
+| [PathFindingTypescript_62_0.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_62_0.png) | react-router-6.26.1 |
+| [PathFindingTypescript_64_1.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_64_1.png) | react-router-6.26.1 |
+| [PathFindingTypescript_71_0.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_71_0.png) | react-router-6.26.1 |
+| [PathFindingTypescript_74_1.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_74_1.png) | react-router-6.26.1 |
+| [PathFindingTypescript_77_1.png](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_77_1.png) | react-router-6.26.1 |
 | [VisibilityMetricsTypescript_17_2.png](./react-router-6.26.1/visibility-metrics-typescript/VisibilityMetricsTypescript_files/VisibilityMetricsTypescript_17_2.png) | react-router-6.26.1 |
 | [VisibilityMetricsTypescript_24_2.png](./react-router-6.26.1/visibility-metrics-typescript/VisibilityMetricsTypescript_files/VisibilityMetricsTypescript_24_2.png) | react-router-6.26.1 |
 | [Wordcloud_10_1.png](./react-router-6.26.1/wordcloud/Wordcloud_files/Wordcloud_10_1.png) | react-router-6.26.1 |

@@ -143,5 +143,6 @@ Report | Analysis | Description
 | [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.26.1/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.26.1 | Object Oriented Design Quality Metrics |
 | [OverviewGeneral.md](./react-router-6.26.1/overview-general/OverviewGeneral.md) | react-router-6.26.1 | Overview in General |
 | [OverviewTypescript.md](./react-router-6.26.1/overview-typescript/OverviewTypescript.md) | react-router-6.26.1 | Overview for Typescript |
+| [PathFindingTypescript.md](./react-router-6.26.1/path-finding-typescript/PathFindingTypescript.md) | react-router-6.26.1 | Path Finding for Typescript |
 | [VisibilityMetricsTypescript.md](./react-router-6.26.1/visibility-metrics-typescript/VisibilityMetricsTypescript.md) | react-router-6.26.1 | Visibility Metrics for Typescript |
 | [Wordcloud.md](./react-router-6.26.1/wordcloud/Wordcloud.md) | react-router-6.26.1 | Wordcloud |
