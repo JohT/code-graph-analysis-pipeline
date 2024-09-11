@@ -1,7 +1,7 @@
 // Check Projection Relationships
 
 CALL gds.graph.relationshipProperty.stream(
-   $dependencies_projection + '-cleaned',
+   $dependencies_projection + '-cleaned'
   ,$dependencies_projection_weight_property
   ,['DEPENDS_ON']
 )

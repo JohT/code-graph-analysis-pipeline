@@ -1,19 +1,14 @@
 // Check Projection Node Properties
 
-CALL gds.graph.nodeProperties.stream(
-   $dependencies_projection + '-cleaned'
-  ,['incomingDependencies', 'outgoingDependencies']
-)
-YIELD nodeId, targetNodeId, propertyValue, relationshipType
-  WITH nodeId                        AS sourceNodeId
-      ,gds.util.asNode(nodeId)       AS sourceNode
-      ,nodeProperty                  
-      ,propertyValue
-      ,nodeLabels
-RETURN sourceNodeId
+ CALL gds.graph.nodeProperties.stream(
+    $dependencies_projection + '-cleaned'
+   ,['incomingDependencies', 'outgoingDependencies']
+ )
+ YIELD nodeId, propertyValue
+  WITH * ,gds.util.asNode(nodeId) AS source               
+RETURN nodeId
       ,coalesce(source.fqn, source.fileName, source.name) AS sourceName
-      ,nodeProperty
       ,propertyValue
-      ,nodeLabels
+      ,labels(source)[0..4] AS first5NodeLabels
  ORDER BY sourceName ASC
  LIMIT 50
