@@ -1,8 +1,8 @@
-//Calculate and set Abstractness for Java Packages including Counts 
+//Calculate and set Abstractness for Java Packages including Counts. Requires "Add_file_name and_extension.cypher".
 
 MATCH (package:Java:Package)
 MATCH (artifact:Artifact)-[:CONTAINS]->(package)
- WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+ WITH artifact.name AS artifactName
      ,package
      ,count{(package)-[:CONTAINS]->(:Type)}                    AS numberTypes
      ,count{(package)-[:CONTAINS]->(:Class{abstract:true})}    AS numberAbstractClasses

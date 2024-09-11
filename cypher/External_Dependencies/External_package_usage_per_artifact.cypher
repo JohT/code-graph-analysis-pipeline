@@ -1,7 +1,7 @@
-// External package usage per artifact
+// External package usage per artifact. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact:Archive)-[:CONTAINS]->(type:Type)
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+  WITH artifact.name AS artifactName
       ,count(type)   AS numberOfTypesInArtifact
       ,collect(type) AS typeList
 UNWIND typeList AS type

@@ -1,7 +1,7 @@
-// Set artifactName property on every Package node
+// Set artifactName property on every Package node. Requires "Add_file_name and_extension.cypher".
 
 MATCH (a:Artifact:File)-[:CONTAINS]->(p:Package)
 WHERE a.fileName IS NOT NULL
- WITH p, replace(last(split(a.fileName, '/')), '.jar', '') AS artifactName
+ WITH p, a.name AS artifactName
   SET p.artifactName = artifactName
 RETURN p, artifactName

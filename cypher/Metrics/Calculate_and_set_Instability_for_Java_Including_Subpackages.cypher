@@ -1,4 +1,4 @@
-// Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies
+// Calculate and set Instability = outgoing / (outgoing + incoming) Dependencies. Requires "Add_file_name and_extension.cypher".
 
  MATCH (p:Java:Package)
  WHERE p.incomingDependenciesIncludingSubpackages > 0 
@@ -21,7 +21,7 @@
       ,instabilityPackages
       ,instabilityArtifacts
  MATCH (artifact:Artifact)-[:CONTAINS]->(p)
-RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+RETURN artifact.name AS artifactName
       ,p.fqn                   AS fullQualifiedPackageName
       ,p.name                  AS packageName
       ,instability

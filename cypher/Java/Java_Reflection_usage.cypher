@@ -1,7 +1,7 @@
-// Query Java Reflection usage combined with invokations of "Class.forName"
+// Query Java Reflection usage combined with invocations of "Class.forName". Requires "Add_file_name and_extension.cypher".
 
    MATCH (dependentArtifact:Artifact)-[:CONTAINS]-(dependentType:Type)
-    WITH replace(last(split(dependentArtifact.fileName, '/')), '.jar', '') AS dependentArtifactName
+    WITH dependentArtifact.name AS dependentArtifactName
         ,dependentType
 OPTIONAL MATCH (dependentType)-[:DEPENDS_ON]->(reflectionType:Type)
    WHERE reflectionType.fqn STARTS WITH 'java.lang.reflect.'

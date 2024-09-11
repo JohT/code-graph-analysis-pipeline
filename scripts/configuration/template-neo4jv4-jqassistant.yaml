@@ -194,10 +194,10 @@ jqassistant:
     # -Djqassistant.analyze.concepts[0]
     #  Migration to v2: https://github.com/jQAssistant/jqa-java-plugin/blob/master/src/main/asciidoc/release-notes.adoc
     concepts:
+     - classpath:Resolve
      - dependency:Package
      - dependency:Artifact
      - java:JavaVersion
-     - classpath:Resolve
 
     # The constraints to be validated.
     #

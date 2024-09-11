@@ -1,4 +1,4 @@
-// Usage and spread of internal artifact dependents
+// Usage and spread of internal artifact dependents. Requires "Add_file_name and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(packageInArtifact:Package)
 MATCH (packageInArtifact)-[:CONTAINS]->(typeInPackage:Type)
@@ -6,7 +6,7 @@ MATCH (typeInPackage)-[:DEPENDS_ON]->(dependencyType:Type)
 MATCH (dependencyPackage:Package)-[:CONTAINS]->(dependencyType)
 MATCH (dependencyArtifact:Artifact)-[:CONTAINS]->(dependencyPackage)
 WHERE artifact.fileName <> dependencyArtifact.fileName
- WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+ WITH artifact.name AS artifactName
      ,artifact.numberOfPackages                AS packagesInArtifactCount
      ,artifact.numberOfTypes                   AS typesInArtifactCount
      ,collect(DISTINCT packageInArtifact.fqn)  AS packages
@@ -19,7 +19,7 @@ WHERE artifact.fileName <> dependencyArtifact.fileName
      ,(100.0 
        / artifact.numberOfTypes 
        * count(DISTINCT typeInPackage.fqn))     AS typesSpread 
-     ,replace(last(split(dependencyArtifact.fileName, '/')), '.jar', '') AS dependencyArtifactName
+     ,dependencyArtifact.name AS dependencyArtifactName
 // additionally group by if the dependency is an interface or not
      ,dependencyType:Interface                 AS dependencyTypeIsInterface 
      ,collect(DISTINCT dependencyPackage.fqn)  AS dependencyPackages

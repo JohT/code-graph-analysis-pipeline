@@ -1,8 +1,8 @@
-// External package usage per artifact top externals
+// External package usage per artifact top externals. Requires "Add_file_name and_extension.cypher".
 
  MATCH (artifact:Artifact:Archive)-[:CONTAINS]->(type:Type)
  OPTIONAL MATCH (type)-[:DEPENDS_ON]->(externalType:ExternalType)
-  WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+  WITH artifact.name AS artifactName
       ,count(DISTINCT type.fqn)         AS numberOfTypesInArtifact
       ,count(DISTINCT externalType.fqn) AS numberOfExternalTypesInArtifact
       ,count(DISTINCT replace(externalType.fqn, '.' + externalType.name, '')) AS numberOfExternalPackagesInArtifact

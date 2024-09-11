@@ -1,4 +1,4 @@
-// Jakarta Enterprise Edition JAX-RS REST Annotations
+// Jakarta Enterprise Edition JAX-RS REST Annotations. Requires "Add_file_name and_extension.cypher".
 //
 // --- Method Http Annotation ---
 MATCH (method:Method)-[:ANNOTATED_BY]->(httpMethodLink:Annotation)-[:OF_TYPE]->(httpMethodAnnotation:Type)
@@ -37,7 +37,7 @@ RETURN replace(
          coalesce(pathMethodValue.value, '')
        , '//', '/')                                             AS path
       ,httpMethodAnnotation.name                                AS httpMethod
-      ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS resourceArtifact
+      ,artifact.name AS resourceArtifact
       ,coalesce(subPathType.fqn, pathType.fqn)                  AS resourceType
       ,method.name                                              AS resourceMethod
       ,collect(methodParamAnnotation.name + ': ' + 

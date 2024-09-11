@@ -1,4 +1,4 @@
-// Read a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property
+// Read a property from the projection into the Graph. Variables: dependencies_projection, dependencies_projection_write_property. Requires "Add_file_name and_extension.cypher".
 
 CALL gds.graph.nodeProperties.stream(
      $dependencies_projection + '-cleaned'
@@ -10,9 +10,9 @@ YIELD nodeId, nodeProperty, propertyValue
      ,propertyValue
 OPTIONAL MATCH (artifact:Artifact)-[:CONTAINS]->(codeUnit)
 RETURN DISTINCT coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.name) AS codeUnitName
-     ,coalesce(codeUnit.name, replace(last(split(codeUnit.fileName, '/')), '.jar', '')) AS shortCodeUnitName
+     ,codeUnit.name AS shortCodeUnitName
      ,propertyName
      ,propertyValue
      ,coalesce(codeUnit.communityLeidenId, 0) AS communityId // optional, might be null
      ,coalesce(codeUnit.centralityPageRank, 0.01) AS centrality // optional, might be null
-     ,replace(last(split(artifact.fileName, '/')), '.jar', '') AS owningArtifactName
+     ,artifact.name AS owningArtifactName

@@ -1,9 +1,9 @@
-// Get Java Packages with the most outgoing dependencies first (if set before)
+// Get Java Packages with the most outgoing dependencies first (if set before). Requires "Add_file_name and_extension.cypher".
 
 MATCH (p:Java:Package)
 WHERE p.outgoingDependencies IS NOT NULL
 MATCH (artifact:Artifact)-[:CONTAINS]->(p)
-RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName 
+RETURN artifact.name AS artifactName 
       ,p.fqn                         AS fullQualifiedPackageName
       ,p.name                        AS packageName
       ,p.outgoingDependencies        AS outgoingDependencies

@@ -1,4 +1,4 @@
-// Read the similarity relationship from the projection. Variables: dependencies_projection
+// Read the similarity relationship from the projection. Variables: dependencies_projection. Requires "Add_file_name and_extension.cypher".
 
 CALL gds.graph.relationshipProperty.stream(
      $dependencies_projection + '-cleaned'
@@ -16,8 +16,8 @@ OPTIONAL MATCH (sourceArtifact:Artifact)-[:CONTAINS]->(sourceNode)
 OPTIONAL MATCH (targetArtifact:Artifact)-[:CONTAINS]->(targetNode)
  WITH sourceNode
      ,targetNode
-     ,replace(last(split(sourceArtifact.fileName, '/')), '.jar', '')  AS sourceArtifactName
-     ,replace(last(split(targetArtifact.fileName, '/')), '.jar', '')  AS targetArtifactName
+     ,sourceArtifact.name AS sourceArtifactName
+     ,targetArtifact.name AS targetArtifactName
      ,similarity
  WHERE (sourceNode.incomingDependencies > 0
    OR   sourceNode.outgoingDependencies > 0)

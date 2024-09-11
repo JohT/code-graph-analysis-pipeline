@@ -1,4 +1,4 @@
-// Spring Web Request Annotations
+// Spring Web Request Annotations. Requires "Add_file_name and_extension.cypher".
 //
 // --- Method HTTP Annotation ---
 MATCH (method:Method)-[:ANNOTATED_BY]->(httpMethodLink:Annotation)-[:OF_TYPE]->(httpMethodAnnotation:Type)
@@ -42,7 +42,7 @@ RETURN replace(
           replace(replace(httpMethodAnnotation.name, 'Mapping', ''), 'Request', 'All')
           )
        )                                                            AS httpMethod
-      ,replace(last(split(artifact.fileName, '/')), '.jar', '')     AS resourceArtifact
+      ,artifact.name     AS resourceArtifact
       ,coalesce(subResourceType.fqn, resourceType.fqn)              AS resourceType
       ,method.name                                                  AS resourceMethod
       ,collect(

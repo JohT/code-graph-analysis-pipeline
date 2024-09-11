@@ -1,4 +1,4 @@
-// Community Metrics
+// Community Metrics. Requires "Add_file_name and_extension.cypher".
 
   CALL gds.conductance.stream(
  $dependencies_projection + '-cleaned', {
@@ -22,7 +22,7 @@
       ,modularities
       ,member[$dependencies_projection_write_property]                               AS communityId
       ,coalesce(member.fqn, member.fileName, member.name)                            AS memberName
-      ,coalesce(member.name, replace(last(split(member.fileName, '/')), '.jar', '')) AS shortMemberName
+      ,member.name AS shortMemberName
   WITH conductances
       ,modularities
       ,communityId

@@ -1,4 +1,4 @@
-// Outgoing Package Dependencies including sub-packages
+// Outgoing Package Dependencies including sub-packages. Requires "Add_file_name and_extension.cypher".
 
    MATCH (p:Package)
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)
@@ -6,7 +6,7 @@ OPTIONAL MATCH (p:Package)-[:CONTAINS*0..]->(sp:Package)-[:CONTAINS]->(st:Java:T
    WHERE NOT ep.fqn starts with p.fqn + '.'
      AND ep.fqn <> p.fqn
 OPTIONAL MATCH (st)<-[:DEPENDS_ON]-(ei:Java:Type:Interface)
-    WITH replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+    WITH artifact.name AS artifactName
         ,p
         ,COUNT(et)              AS outgoingDependencies
         ,SUM(r.weight)          AS outgoingDependenciesWeight

@@ -1,7 +1,7 @@
-// Calculate distance between abstractness and instability
+// Calculate distance between abstractness and instability. Requires "Add_file_name and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(package:Java:Package)
-RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+RETURN artifact.name AS artifactName
       ,package.fqn           AS fullQualifiedName
       ,package.name          AS name
       ,abs(package.abstractness + package.instability - 1) AS distance     

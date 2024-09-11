@@ -1,4 +1,4 @@
-// Query deprecated type and member usage by non deprecated elements
+// Query deprecated type and member usage by non deprecated elements. Requires "Add_file_name and_extension.cypher".
 
          MATCH (annotated)-[:ANNOTATED_BY]->(:Annotation)-[:OF_TYPE]->(:Type{fqn:'java.lang.Deprecated'})
 OPTIONAL MATCH (artifactReadsDeprecated:Artifact)-[:CONTAINS]->(typeReadsDeprecated:Type)-[:DECLARES]->(readsDeprecated:Method)-[:READS]->(annotated:Field)
@@ -28,7 +28,7 @@ OPTIONAL MATCH (artifactDependsOnDeprecated:Artifact)-[:CONTAINS]->(typeDependsO
   WHERE artifact IS NOT NULL
     AND NOT (type)-[:ANNOTATED_BY]->(:Annotation)-[:OF_TYPE]->(:Type{fqn:'java.lang.Deprecated'})
     AND NOT (method)-[:ANNOTATED_BY]->(:Annotation)-[:OF_TYPE]->(:Type{fqn:'java.lang.Deprecated'})
-RETURN replace(last(split(artifact.fileName, '/')), '.jar', '') AS artifactName
+RETURN artifact.name AS artifactName
       ,deprecatedElement
       ,count(DISTINCT elementUsingDeprecatedElement)            AS numberOfElementsUsingDeprecatedElements
       ,collect(DISTINCT elementUsingDeprecatedElement)[0..19]   AS someElementsUsingDeprecatedElements
