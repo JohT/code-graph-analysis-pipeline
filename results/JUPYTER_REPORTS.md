@@ -14,6 +14,7 @@ Report | Analysis | Description
 | [ObjectOrientedDesignMetricsJava.md](./AxonFramework-4.10.0/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) | AxonFramework-4.10.0 | Object Oriented Design Quality Metrics |
 | [OverviewGeneral.md](./AxonFramework-4.10.0/overview-general/OverviewGeneral.md) | AxonFramework-4.10.0 | Overview in General |
 | [OverviewJava.md](./AxonFramework-4.10.0/overview-java/OverviewJava.md) | AxonFramework-4.10.0 | Overview for Java |
+| [PathFindingJava.md](./AxonFramework-4.10.0/path-finding-java/PathFindingJava.md) | AxonFramework-4.10.0 | Path Finding for Java |
 | [VisibilityMetricsJava.md](./AxonFramework-4.10.0/visibility-metrics-java/VisibilityMetricsJava.md) | AxonFramework-4.10.0 | Visibility Metrics for Java |
 | [Wordcloud.md](./AxonFramework-4.10.0/wordcloud/Wordcloud.md) | AxonFramework-4.10.0 | Wordcloud |
 | [ArtifactDependencies.md](./AxonFramework-4.6.8/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.6.8 | Artifact Dependencies |
