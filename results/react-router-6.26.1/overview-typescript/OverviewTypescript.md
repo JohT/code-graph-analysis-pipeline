@@ -37,11 +37,11 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>92879</td>
-      <td>258995</td>
+      <td>93533</td>
+      <td>260922</td>
       <td>6</td>
       <td>6</td>
-      <td>84</td>
+      <td>83</td>
       <td>41</td>
       <td>14</td>
       <td>18</td>
@@ -82,32 +82,32 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>35</td>
-      <td>Interface</td>
-      <td>10</td>
+      <td>Function</td>
+      <td>17</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>35</td>
-      <td>Function</td>
-      <td>17</td>
+      <td>TypeAlias</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>35</td>
-      <td>Variable</td>
-      <td>5</td>
+      <td>Interface</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>35</td>
-      <td>TypeAlias</td>
-      <td>3</td>
+      <td>Variable</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>4</th>
@@ -138,19 +138,11 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router</td>
       <td>index.ts</td>
       <td>6</td>
-      <td>TypeAlias</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>react-router</td>
-      <td>index.ts</td>
-      <td>6</td>
       <td>Function</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
       <td>react-router</td>
       <td>index.ts</td>
       <td>6</td>
@@ -158,20 +150,28 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>1</td>
     </tr>
     <tr>
+      <th>9</th>
+      <td>react-router</td>
+      <td>index.ts</td>
+      <td>6</td>
+      <td>TypeAlias</td>
+      <td>3</td>
+    </tr>
+    <tr>
       <th>10</th>
       <td>server</td>
       <td>server.tsx</td>
       <td>6</td>
-      <td>Function</td>
-      <td>4</td>
+      <td>Interface</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>11</th>
       <td>server</td>
       <td>server.tsx</td>
       <td>6</td>
-      <td>Interface</td>
-      <td>2</td>
+      <td>Function</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>

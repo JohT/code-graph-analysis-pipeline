@@ -57,15 +57,6 @@ function draw(NeoVis) {
       }
     }
   }
-  configuration.labels.Artifact = {
-      [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
-          function: {
-              // Use "fileName" as label. Remove leading slash, trailing ".jar" and version number.
-              // TODO Enrich the Graph so that there is a distinct property for the "cleaned up" artifact name
-              label: (node) => node.properties.fileName.replace('/', '').replace('.jar', '').replace(/-[\d\.]+/, '')
-          }
-      }
-  }
   console.debug(configuration)
   const neoViz = new NeoVis.default(configuration);
   neoViz.render();

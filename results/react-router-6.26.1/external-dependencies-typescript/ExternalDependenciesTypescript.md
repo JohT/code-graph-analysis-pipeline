@@ -80,12 +80,12 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <th>2</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>2</td>
       <td>2</td>
       <td>4</td>
+      <td>4</td>
       <td>59</td>
-      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
+      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
     </tr>
   </tbody>
 </table>
@@ -168,12 +168,12 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <th>1</th>
       <td>@ungap</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>2</td>
       <td>2</td>
       <td>4</td>
+      <td>4</td>
       <td>59</td>
-      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
+      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
     </tr>
   </tbody>
 </table>
@@ -314,16 +314,16 @@ external package.
       <td>1.0</td>
       <td>1.00</td>
       <td>0.000000</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.0</td>
       <td>0.000000</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
       <td>0.000000</td>
       <td>[react-router-native]</td>
     </tr>
@@ -379,10 +379,10 @@ This table shows the top 20 most widely spread external packages focussing on th
       <th>2</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.0</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -437,10 +437,10 @@ This table shows the top 20 most widely spread external packages focussing on th
       <th>2</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -495,10 +495,10 @@ This table shows the top 20 most widely spread external packages focussing on th
       <th>2</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.0</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -553,10 +553,10 @@ This table shows the top 20 most widely spread external packages focussing on th
       <th>2</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -695,16 +695,16 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.0</td>
       <td>1.00</td>
       <td>0.000000</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.00</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2.00</td>
       <td>0.000000</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.0</td>
-      <td>25.00</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.0</td>
+      <td>50.00</td>
       <td>0.000000</td>
       <td>[react-router-native]</td>
     </tr>
@@ -774,7 +774,7 @@ Only the last 20 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>@ungap/url-search-params</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>1</th>
@@ -844,7 +844,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[GestureResponderEvent, BackHandlerStatic.remo...</td>
+      <td>[GestureResponderEvent, BackHandler, BackHandl...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -856,14 +856,14 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, React.useMemo, React.useCall...</td>
+      <td>[React.useMemo, React.useRef, React.useCallbac...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-native</td>
       <td>@ungap/url-search-params</td>
-      <td>1</td>
       <td>2</td>
+      <td>4</td>
       <td>12</td>
       <td>18</td>
       <td>3</td>
@@ -880,7 +880,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.useMemo, React.MutableRefObject.current...</td>
+      <td>[React.useContext, React.useCallback, React.Mu...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -944,14 +944,14 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[GestureResponderEvent, BackHandlerStatic.remo...</td>
+      <td>[GestureResponderEvent, React.useMemo, React.u...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-native</td>
       <td>@ungap</td>
-      <td>1</td>
       <td>2</td>
+      <td>4</td>
       <td>12</td>
       <td>18</td>
       <td>3</td>
@@ -968,7 +968,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.useMemo, React.MutableRefObject.current...</td>
+      <td>[React.useContext, React.useCallback, React.Mu...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1043,7 +1043,7 @@ The following table uses pivot to show the internal modules in columns, the exte
     <tr>
       <th>@ungap/url-search-params</th>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -1089,7 +1089,7 @@ The following table uses pivot to show the internal modules in columns, the exte
     <tr>
       <th>@ungap</th>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -1369,7 +1369,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>1.0</td>
+      <td>1.000000</td>
       <td>1</td>
       <td>0.000000</td>
     </tr>
@@ -1380,7 +1380,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1</td>
       <td>24</td>
       <td>24</td>
-      <td>24.0</td>
+      <td>24.000000</td>
       <td>24</td>
       <td>0.000000</td>
     </tr>
@@ -1389,11 +1389,11 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>react-router-native</td>
       <td>12</td>
       <td>3</td>
-      <td>1</td>
+      <td>2</td>
       <td>5</td>
-      <td>4.0</td>
+      <td>4.333333</td>
       <td>6</td>
-      <td>2.645751</td>
+      <td>2.081666</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1402,7 +1402,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1</td>
       <td>3</td>
       <td>3</td>
-      <td>3.0</td>
+      <td>3.000000</td>
       <td>3</td>
       <td>0.000000</td>
     </tr>
@@ -1460,11 +1460,11 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>react-router-native</td>
       <td>12</td>
       <td>3</td>
-      <td>8.333333</td>
+      <td>16.666667</td>
       <td>41.666667</td>
-      <td>33.333333</td>
+      <td>36.111111</td>
       <td>50.000000</td>
-      <td>22.047928</td>
+      <td>17.347217</td>
     </tr>
     <tr>
       <th>3</th>
