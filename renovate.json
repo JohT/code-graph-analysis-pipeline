@@ -20,9 +20,8 @@
     },
     {
       "description": "jQAssistant Typescript Plugin",
-      "matchPackageNames": [
-        "@jqassistant/ts-lce",
-        "org.jqassistant.plugin.typescript:jqassistant-typescript-plugin"
+      "matchSourceUrls": [
+        "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
       ]
     }
   ],
