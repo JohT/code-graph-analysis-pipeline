@@ -22,11 +22,6 @@
       "description": "jQAssistant Typescript Plugin",
       "matchSourceUrls": [
         "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
-      ],
-      "matchUpdateTypes": [
-        "patch",
-        "minor",
-        "major"
       ]
     }
   ],
