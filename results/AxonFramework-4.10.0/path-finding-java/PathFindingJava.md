@@ -731,7 +731,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <td>0</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
     </tr>
     <tr>
@@ -815,7 +815,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -828,7 +828,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>True</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -841,7 +841,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -867,7 +867,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -906,7 +906,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>True</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>4</td>
       <td>1</td>
@@ -978,7 +978,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -991,7 +991,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -1017,7 +1017,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -1056,12 +1056,12 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>3</td>
-      <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test/utils, /org/axonframework/test/saga -&gt;/org/axonframework/test/deadline, /org/axonframework/test/saga -&gt;/org/axonframework/test/eventscheduler]</td>
+      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test/utils, /org/axonframework/test/aggregate -&gt;/org/axonframework/test/deadline, /org/axonframework/test/saga -&gt;/org/axonframework/test/eventscheduler]</td>
     </tr>
     <tr>
       <th>12</th>
@@ -1074,7 +1074,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test/matchers]</td>
+      <td>[/org/axonframework/test/aggregate -&gt;/org/axonframework/test/matchers]</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1087,7 +1087,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test]</td>
+      <td>[/org/axonframework/test/aggregate -&gt;/org/axonframework/test]</td>
     </tr>
   </tbody>
 </table>
