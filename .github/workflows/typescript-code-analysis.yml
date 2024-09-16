@@ -48,7 +48,7 @@ jobs:
         - os: ubuntu-latest
           java: 17
           python: 3.11
-          mambaforge: 24.5.0-0
+          mambaforge: 24.7.1-0
 
     env: 
       CI_COMMIT_MESSAGE: Automated code structure analysis reports (CI)
