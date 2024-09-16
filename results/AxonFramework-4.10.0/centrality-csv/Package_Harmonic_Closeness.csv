@@ -34,7 +34,7 @@
 "org.axonframework.common.jdbc","jdbc","centralityHarmonic",0.16961651917404127,""
 "org.axonframework.serialization.xml","xml","centralityHarmonic",0.168141592920354,""
 "org.axonframework.modelling.saga","saga","centralityHarmonic",0.1430678466076696,""
-"org.axonframework.common.caching","caching","centralityHarmonic",0.14233038348082597,""
+"org.axonframework.common.caching","caching","centralityHarmonic",0.14233038348082594,""
 "org.axonframework.modelling.command.inspection","inspection","centralityHarmonic",0.13716814159292035,""
 "org.axonframework.eventsourcing.snapshotting","snapshotting","centralityHarmonic",0.13421828908554573,""
 "org.axonframework.eventsourcing","eventsourcing","centralityHarmonic",0.12831858407079647,""
