@@ -492,7 +492,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/serialization -&gt;/org/axonframework/commandhandling, /org/axonframework/tracing -&gt;/org/axonframework/commandhandling, /org/axonframework/tracing/attributes -&gt;/org/axonframework/commandhandling, /org/axonframework/util -&gt;/org/axonframework/commandhandling]</td>
+      <td>[/org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt;/org/axonframework/commandhandling, /org/axonframework/commandha...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -505,7 +505,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>563</td>
       <td>51</td>
       <td>30</td>
-      <td>[/org/axonframework/eventhandling/deadletter/jdbc -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/deadletter/jpa -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/deadletter/legacyjpa -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandli...</td>
+      <td>[/org/axonframework/deadline -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/dbscheduler -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/jobrunr -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/quartz -&gt;/org/axonframework/commandhandling]</td>
     </tr>
     <tr>
       <th>16</th>
@@ -518,7 +518,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>450</td>
       <td>51</td>
       <td>26</td>
-      <td>[/org/axonframework/eventhandling/gateway -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/interceptors -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/replay -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/scheduling/java -&gt;/or...</td>
+      <td>[/org/axonframework/common/jdbc -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/annotation -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/async -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/deadletter -&gt;/org/axonframework/command...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -531,7 +531,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>125</td>
       <td>32</td>
       <td>18</td>
-      <td>[/org/axonframework/lifecycle -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/gateway -&gt;/org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/interceptors -&gt;/org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/replay -&gt;/or...</td>
+      <td>[/org/axonframework/common/jdbc -&gt;/org/axonframework/commandhandling/callbacks, /org/axonframework/deadline/annotation -&gt;/org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/async -&gt;/org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/deadlette...</td>
     </tr>
     <tr>
       <th>18</th>
@@ -544,7 +544,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>7</td>
       <td>3</td>
       <td>5</td>
-      <td>[/org/axonframework/lifecycle -&gt;/org/axonframework/commandhandling/callbacks, /org/axonframework/lifecycle -&gt;/org/axonframework/messaging/responsetypes, /org/axonframework/lifecycle -&gt;/org/axonframework/queryhandling/registration, /org/axonframework/commandhandling/callbacks -&gt;/org/axonframework...</td>
+      <td>[/org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/common/property, /org/axonframework/commandhandling/distributed/commandfilter -&gt;/org/axonframework/common/property, /org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/serialization/upcasting, /org/axonframework/com...</td>
     </tr>
     <tr>
       <th>19</th>
@@ -921,9 +921,9 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>14</td>
+      <td>15</td>
       <td>1</td>
-      <td>14</td>
+      <td>15</td>
       <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/modelling/saga, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/modelling/saga/repository, /org/axonframe...</td>
     </tr>
     <tr>
@@ -934,10 +934,10 @@ The following table shows the first 10 rows with all details of the query above.
       <td>11</td>
       <td>2</td>
       <td>11</td>
-      <td>8</td>
+      <td>10</td>
       <td>1</td>
-      <td>8</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/digest, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/transaction, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/deadline, /org/axonframework/springboot/auto...</td>
+      <td>10</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/digest, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/transaction, /org/axonframework/springboot/autoco...</td>
     </tr>
   </tbody>
 </table>
