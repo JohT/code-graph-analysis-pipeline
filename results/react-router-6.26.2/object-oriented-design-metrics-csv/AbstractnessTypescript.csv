@@ -1,0 +1,7 @@
+"projectName","fullQualifiedModuleName","moduleName","abstractness","numberAbstractTypes","numberTypes","Source Cypher File: Metrics/Calculate_and_set_Abstractness_for_Typescript.cypher"
+"react-router-dom-v5-compat","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.2/source/react-router-6.26.2/packages/react-router-dom-v5-compat/index.ts","react-router-dom-v5-compat",0,0,0,""
+"router","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.2/source/react-router-6.26.2/packages/router/index.ts","router",0,0,0,""
+"react-router-dom","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.2/source/react-router-6.26.2/packages/react-router-dom/server.tsx","server",0.3333333333333333,2,6,""
+"react-router-dom","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.2/source/react-router-6.26.2/packages/react-router-dom/index.tsx","react-router-dom",0.37142857142857144,13,35,""
+"react-router-native","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.2/source/react-router-6.26.2/packages/react-router-native/index.tsx","react-router-native",0.38461538461538464,5,13,""
+"react-router","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.2/source/react-router-6.26.2/packages/react-router/index.ts","react-router",0.6666666666666666,4,6,""
