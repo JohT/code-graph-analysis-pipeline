@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>321612</td>
-      <td>974985</td>
+      <td>321654</td>
+      <td>975034</td>
       <td>9</td>
       <td>122</td>
       <td>2083</td>
@@ -136,22 +136,22 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>9</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Interface</td>
+      <td>32</td>
     </tr>
     <tr>
       <th>10</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Interface</td>
-      <td>32</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
       <td>axon-eventsourcing-4.10.0</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>12</th>
@@ -178,15 +178,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>15</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
-      <td>Interface</td>
-      <td>16</td>
+      <td>Class</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>16</th>
       <td>axon-test-4.10.0</td>
       <td>87</td>
-      <td>Class</td>
-      <td>71</td>
+      <td>Interface</td>
+      <td>16</td>
     </tr>
     <tr>
       <th>17</th>
@@ -199,15 +199,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>18</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Annotation</td>
-      <td>3</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>19</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
       <td>74</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>20</th>
@@ -563,7 +563,7 @@ The whole table can be found in the CSV report `Number_of_packages_per_artifact`
     </tr>
     <tr>
       <th>6</th>
-      <td>axon-tracing-opentelemetry-4.10.0</td>
+      <td>axon-disruptor-4.10.0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -573,7 +573,7 @@ The whole table can be found in the CSV report `Number_of_packages_per_artifact`
     </tr>
     <tr>
       <th>8</th>
-      <td>axon-disruptor-4.10.0</td>
+      <td>axon-tracing-opentelemetry-4.10.0</td>
       <td>1</td>
     </tr>
   </tbody>
