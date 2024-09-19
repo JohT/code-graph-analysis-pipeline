@@ -37,6 +37,8 @@ else
     echo "scanTypescript: Detected change (${changeDetectionReturnCode}). Scanning Typescript source using @jqassistant/ts-lce."
     
     mkdir -p "./runtime/logs"
+    LOG_DIRECTORY="$(pwd)/runtime/logs"
+    echo "scanTypescript: LOG_DIRECTORY=${LOG_DIRECTORY}" >&2
 
     source_directories=$( find -L "./${SOURCE_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 -r -I {} echo {} )
     total_directories=$(echo "${source_directories}" | wc -l | awk '{print $1}')
@@ -44,18 +46,15 @@ else
 
     for directory in ${source_directories}; do
         directory_name=$(basename "${directory}");
-        # Note: The npx command will be executed in the source directory using a subshell by putting parentheses around it.
-        #       The subshell is the reason why it isn't needed to change back to the main directory after execution.
+        processed_directories=$((processed_directories + 1))
+        echo "" >&2
+        echo "scanTypescript: $(date +'%Y-%m-%dT%H:%M:%S%z') Scanning ${directory_name} (${processed_directories}/${total_directories}) -----------------" >&2
         # Note: This script must not output anything except for the return code to stdout,
         #       all output of the scanning needs to be redirected to stderr using ">&2".
         #       For later troubleshooting, the output is also copied to a dedicated log file using "tee".
         # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
         # Note: NODE_OPTIONS --max-old-space-size=4096 increases the memory for larger projects to scan
-        ( cd "${directory}" && NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=4096" npx --yes @jqassistant/ts-lce@1.3.0 --extension React 2>&1 | tee "./../../runtime/logs/jqassistant-typescript-scan-${directory_name}.log" >&2 || exit )
-        processed_directories=$((processed_directories + 1))
-        echo "" >&2
-        echo "scanTypescript: Scanned ${directory_name} (${processed_directories}/${total_directories}) ----------------------" >&2
-        echo "" >&2
+        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=4096" npx --yes @jqassistant/ts-lce@1.3.0 "${directory}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
     done
 
     changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")

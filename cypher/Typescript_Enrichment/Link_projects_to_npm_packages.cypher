@@ -17,7 +17,7 @@ MATCH (npmPackage:NPM:Package)
       ,collect(DISTINCT project) AS projects
       ,collect(DISTINCT projectConfigDir) AS projectConfigDirs
 // Assure that the found connection is unique and not ambiguous 
- WHERE size(projects)          = 1
+ WHERE size(projects)          >= 1 // might appear more than once when there are multiple tsconfig files
    AND size(projectConfigDirs) = 1
  UNWIND projects AS project
 // Create a HAS_NPM_PACKAGE relationship between the Typescript project and the npm package

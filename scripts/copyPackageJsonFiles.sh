@@ -19,6 +19,21 @@ if [ ! -d "${SOURCE_DIRECTORY}" ]; then
   return 0
 fi
 
+# Returns all relevant package.json files for the source directory given as first and only parameter. 
+find_package_json_files() {
+  find -L "${1}" \
+      -type d -name "node_modules" -prune -o \
+      -type d -name "dist" -prune -o \
+      -type d -name ".yalc" -prune -o \
+      -type d -name "target" -prune -o \
+      -type d -name "temp" -prune -o \
+      -type d -name "lib" -prune -o \
+      -type d -name "libs" -prune -o \
+      -name 'package.json' \
+      -print0 | \
+      xargs -0 -r -I {} echo {}
+}
+
 (
     cd "./${SOURCE_DIRECTORY}"
     
@@ -27,8 +42,7 @@ fi
     
     copied_package_json_files=0
 
-   #for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {}); do
-    for file in $( find -L . -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} echo {}); do
+    for file in $( find_package_json_files . ); do
         fileDirectory=$(dirname "${file}")
         targetDirectory="../${ARTIFACTS_DIRECTORY}/${NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY}/${fileDirectory}"
         # echo "copyPackageJsonFiles: Debug: Copying ${file} to ${targetDirectory}" # debug logging

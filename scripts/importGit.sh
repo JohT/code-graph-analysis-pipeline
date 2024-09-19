@@ -175,7 +175,7 @@ if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT
 
   existing_data_has_been_deleted=false
 
-  for repository in $(find "${source}" -type d -name ".git" -print0 | xargs -0 -r -I {} dirname {}); do
+  for repository in $(find -L "${source}" -type d -name ".git" -print0 | xargs -0 -r -I {} dirname {}); do
     # Prepare import by cleaning existing data first
     if [ "${existing_data_has_been_deleted}" = false ] ; then
       deleteExistingGitData
