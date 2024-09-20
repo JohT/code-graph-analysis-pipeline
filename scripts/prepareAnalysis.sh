@@ -117,9 +117,10 @@ execute_cypher "${TYPES_CYPHER_DIR}/Label_resolved_duplicate_types.cypher"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Remove_external_type_and_annotation_labels.cypher"
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
 
-# Preparation - Add Java Artifact node properties "incomingDependencies" and "outgoingDependencies"
+# Preparation - Add Java Artifact node properties "incomingDependencies", "outgoingDependencies" and "version"
 execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
 execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_maven_artifact_version.cypher"
 
 # Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
 execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
