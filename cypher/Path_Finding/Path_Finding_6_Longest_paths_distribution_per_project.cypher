@@ -24,9 +24,14 @@ UNWIND sourcesAndTargets AS sourceAndTarget
 // Optionally get the project (e.g. Java Artifact, Typescript Project) the source and target belong to
 OPTIONAL MATCH (sourceProject:Artifact|Project)-[:CONTAINS]->(source)
 OPTIONAL MATCH (targetProject:Artifact|Project)-[:CONTAINS]->(target)
+// Optionally get the name of the scan that contained that project
+OPTIONAL MATCH (sourceScan:TS:Scan)-[:CONTAINS_PROJECT]->(sourceProject)
+OPTIONAL MATCH (targetScan:TS:Scan)-[:CONTAINS_PROJECT]->(targetProject)
 // Group by project name, if the target project is the same and the distance. Return those as result.
 RETURN sourceProject.name               AS sourceProject
+      ,sourceScan.name                  AS sourceScan
       ,(targetProject <> sourceProject) AS isDifferentTargetProject
+      ,(targetScan <> sourceScan)       AS isDifferentTargetScan
       ,distance
       ,distanceTotalPairCount
       ,distanceTotalSourceCount
