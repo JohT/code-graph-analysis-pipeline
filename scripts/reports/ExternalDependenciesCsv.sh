@@ -74,5 +74,8 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/External_module_usage_per_in
 
 execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/List_external_modules_resolved_to_internal_ones_for_Typescript.cypher" > "${FULL_REPORT_DIRECTORY}/External_modules_resolved_to_internal_ones_for_Typescript.csv"
 
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Package_json_dependencies_occurrence.cypher" > "${FULL_REPORT_DIRECTORY}/Package_json_dependencies_occurrence.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_CYPHER_DIR}/Package_json_dependencies_combinations.cypher" > "${FULL_REPORT_DIRECTORY}/Package_json_dependencies_combinations.csv"
+
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
