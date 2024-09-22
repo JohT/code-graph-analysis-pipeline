@@ -1,6 +1,6 @@
 // Words for universal Wordcloud
 
-MATCH (named:!Key&!Primitive&!PrimitiveType&!Void&!JavaType&!ResolvedDuplicateType&!ExternalType)
+MATCH (named:!Key&!Primitive&!PrimitiveType&!Void&!JavaType&!ResolvedDuplicateType&!ExternalType&!Git)
 WHERE named.name > ''
   AND named.name <> 'package-info'
   AND named.name <> '<init>'
