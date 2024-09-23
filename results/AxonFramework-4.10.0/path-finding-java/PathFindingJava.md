@@ -492,7 +492,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/util -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/commandhandling, /org/axonframework/util -&gt;/org/axonframework/common, /org/axonframework/commandhandling/distributed -&gt;/org/axonframework/commandhandling]</td>
+      <td>[/org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt;/org/axonframework/commandhandling, /org/axonframework/commandha...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -934,9 +934,9 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>14</td>
+      <td>13</td>
       <td>1</td>
-      <td>14</td>
+      <td>13</td>
       <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/jdbc, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/jpa, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/deadline/jobrunr, /org/axonframework/springboot/autoco...</td>
     </tr>
   </tbody>
