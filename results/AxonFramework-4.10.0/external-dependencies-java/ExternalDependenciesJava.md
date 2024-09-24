@@ -1,4 +1,4 @@
-# External Dependencies
+# External Dependencies for Java
 <br>  
 
 ### References
@@ -87,7 +87,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>311</td>
       <td>114</td>
       <td>1436</td>
-      <td>[EntityManager, TypedQuery, Column, Lob, Basic...</td>
+      <td>[TypedQuery, EntityManager, Column, Lob, Basic...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -120,7 +120,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>273</td>
       <td>114</td>
       <td>1436</td>
-      <td>[ErrorMessage, InstructionAck, InstructionAck$...</td>
+      <td>[ErrorMessage$Builder, ErrorMessage, Instructi...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -131,7 +131,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>126</td>
       <td>114</td>
       <td>1436</td>
-      <td>[AxonServerConnectionFactory, AxonServerConnec...</td>
+      <td>[AxonServerConnectionFactory$Builder, AxonServ...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -153,7 +153,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>94</td>
       <td>114</td>
       <td>1436</td>
-      <td>[ManagedChannelBuilder, Channel, ClientInterce...</td>
+      <td>[ManagedChannelBuilder, Channel, Metadata$Key,...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -164,7 +164,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>198</td>
       <td>114</td>
       <td>1436</td>
-      <td>[Flux, Mono, Signal, FluxSink, Sinks$EmitResul...</td>
+      <td>[Flux, Mono, Signal, FluxSink$OverflowStrategy...</td>
     </tr>
     <tr>
       <th>10</th>
@@ -197,7 +197,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>27</td>
       <td>114</td>
       <td>1436</td>
-      <td>[StreamObserver, ClientResponseObserver, Clien...</td>
+      <td>[StreamObserver, ClientCallStreamObserver, Cli...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -263,7 +263,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>75</td>
       <td>114</td>
       <td>1436</td>
-      <td>[ObjectReader, ObjectMapper, JsonNode, ObjectW...</td>
+      <td>[JsonNode, ObjectMapper, ObjectWriter, ObjectR...</td>
     </tr>
     <tr>
       <th>19</th>
@@ -282,25 +282,61 @@ Only the top 20 entries are shown. The whole table can be found in the following
 
 
 
-#### Table 1 Chart 1 - Most called external packages in % by types
+#### Table 1 Chart 1a - Most called external packages in % by types (more than 0.7% overall)
 
 External packages that are used less than 0.7% are grouped into the name "others" to get a cleaner chart
 with the most significant external packages and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_14_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_16_1.png)
     
 
 
-#### Table 1 Chart 2 - Most called external packages in % by packages
+#### Table 1 Chart 1b - Most called external packages in % by types (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external package. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_18_1.png)
+    
+
+
+#### Table 1 Chart 2a - Most called external packages in % by packages (more than 0.7% overall)
 
 External packages that are used less than 0.7% are grouped into the name "others" to get a cleaner chart
 with the most significant external packages and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_17_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_20_1.png)
+    
+
+
+#### Table 1 Chart 2b - Most called external packages in % by packages (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external package. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_22_1.png)
     
 
 
@@ -384,7 +420,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>311</td>
       <td>114</td>
       <td>1436</td>
-      <td>[EntityManager, TypedQuery, Column, Lob, Basic...</td>
+      <td>[TypedQuery, EntityManager, Column, Lob, Basic...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -406,7 +442,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>973</td>
       <td>114</td>
       <td>1436</td>
-      <td>[ErrorMessage, AxonServerConnectionFactory, Ax...</td>
+      <td>[ErrorMessage$Builder, ErrorMessage, NodeInfo,...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -428,7 +464,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>126</td>
       <td>114</td>
       <td>1436</td>
-      <td>[ManagedChannelBuilder, Channel, StreamObserve...</td>
+      <td>[StreamObserver, SslContextBuilder, ManagedCha...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -450,7 +486,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>203</td>
       <td>114</td>
       <td>1436</td>
-      <td>[Flux, Mono, Signal, FluxSink, Disposable, Sin...</td>
+      <td>[Flux, Mono, Signal, FluxSink$OverflowStrategy...</td>
     </tr>
     <tr>
       <th>10</th>
@@ -483,7 +519,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>121</td>
       <td>114</td>
       <td>1436</td>
-      <td>[XStream, MarshallingContext, HierarchicalStre...</td>
+      <td>[CollectionConverter, HierarchicalStreamReader...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -568,25 +604,61 @@ Only the top 20 entries are shown. The whole table can be found in the following
 
 
 
-#### Table 2 Chart 1 - Most called second level external packages in % by type
+#### Table 2 Chart 1a - Most called second level external packages in % by type
 
 External package groups that are used less than 0.7% are grouped into the name "others" to get a cleaner chart
 with the most significant external packages and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_21_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_26_1.png)
     
 
 
-#### Table 2 Chart 2 - Most called second level external packages in % by package
+#### Table 2 Chart 1b - Most called second level external packages in % by type (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external package. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_28_1.png)
+    
+
+
+#### Table 2 Chart 2a - Most called second level external packages in % by package (more than 0.7% overall)
 
 External package groups that are used less than 0.7% are grouped into the name "others" to get a cleaner chart
 with the most significant external packages and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_23_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_30_1.png)
+    
+
+
+#### Table 2 Chart 2b - Most called second level external packages in % by package (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external package. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_32_1.png)
     
 
 
@@ -1802,23 +1874,59 @@ This table shows the top 20 most widely spread external packages focussing on th
 
 
 
-#### Table 3 Chart 1 - Most widely spread external packages in % by types
+#### Table 3 Chart 1a - Most widely spread external packages in % by types (more than 0.5% overall)
 
 External packages that are used less than 0.5% are grouped into the name "others" to get a cleaner chart with the most significant external packages.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_35_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_44_1.png)
     
 
 
-#### Table 3 Chart 2 - Most widely spread external packages in % by packages
+#### Table 3 Chart 1b - Most widely spread external packages in % by types (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) most spread external packages. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_46_1.png)
+    
+
+
+#### Table 3 Chart 2a - Most widely spread external packages in % by packages (more than 0.5% overall)
 
 External packages that are used less than 0.5% are grouped into the name "others" to get a cleaner chart with the most significant external packages.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_37_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_48_1.png)
+    
+
+
+#### Table 3 Chart 2b - Most widely spread external packages in % by packages (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) most spread external packages. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_50_1.png)
     
 
 
@@ -2362,26 +2470,55 @@ Only the top 20 entries are shown. The whole table can be found in the following
 
 
 
-#### Table 4 Chart 1 - Most widely spread second level external packages in % by type
+#### Table 4 Chart 1a - Most widely spread second level external packages in % by type (more than 0.5% overall)
 
 External package groups that are used less than 0.5% are grouped into the name "others" to get a cleaner chart
 with the most significant external packages and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_41_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_54_1.png)
     
 
 
-#### Table 4 Chart 2 - Most widely spread second level external packages in % by package
+#### Table 4 Chart 1b - Most widely spread second level external packages in % by type  (less than 0.5% overall "others" drill-down)
+
+External packages that are used less than 0.5% are grouped into the name "others" to get a cleaner chart with the most significant external packages.
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_56_1.png)
+    
+
+
+#### Table 4 Chart 2a - Most widely spread second level external packages in % by package (more than 0.5% overall)
 
 External package groups that are used less than 0.5% are grouped into the name "others" to get a cleaner chart
 with the most significant external packages and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_43_0.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_58_1.png)
     
+
+
+#### Table 4 Chart 2b - Most widely spread second level external packages in % by package (less than 0.5% overall "others" drill-down)
+
+External packages that are used less than 0.5% are grouped into the name "others" to get a cleaner chart with the most significant external packages.
+
+    No data to plot for title 'Top external package (less than 0.7% overall "others" drill-down)'.
 
 
 ### Table 5 - Top 20 least used external packages overall
@@ -3102,7 +3239,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.000000</td>
       <td>31.707317</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.EventProcessingConfi...</td>
+      <td>[org.axonframework.config.MessageHandlerRegist...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3616,7 +3753,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.000000</td>
       <td>31.707317</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.EventProcessingConfi...</td>
+      <td>[org.axonframework.config.MessageHandlerRegist...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3984,7 +4121,7 @@ The following table groups the external packages by their first two levels. For 
       <td>72.727273</td>
       <td>49.618321</td>
       <td>[org.axonframework.axonserver.connector, org.a...</td>
-      <td>[org.axonframework.axonserver.connector.ErrorC...</td>
+      <td>[org.axonframework.axonserver.connector.Instru...</td>
     </tr>
     <tr>
       <th>24</th>
@@ -4000,7 +4137,7 @@ The following table groups the external packages by their first two levels. For 
       <td>72.727273</td>
       <td>16.030534</td>
       <td>[org.axonframework.axonserver.connector, org.a...</td>
-      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
+      <td>[org.axonframework.axonserver.connector.Server...</td>
     </tr>
     <tr>
       <th>25</th>
@@ -4016,7 +4153,7 @@ The following table groups the external packages by their first two levels. For 
       <td>45.454545</td>
       <td>13.740458</td>
       <td>[org.axonframework.axonserver.connector, org.a...</td>
-      <td>[org.axonframework.axonserver.connector.Manage...</td>
+      <td>[org.axonframework.axonserver.connector.Instru...</td>
     </tr>
     <tr>
       <th>26</th>
@@ -4713,7 +4850,7 @@ Note that every external dependency is counted separately so that if on internal
 
 
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_58_1.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_75_1.png)
     
 
 
@@ -4729,7 +4866,7 @@ Note that every external dependency is counted separately so that if on internal
 
 
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_60_1.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_77_1.png)
     
 
 
@@ -4812,7 +4949,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1383</td>
       <td>26</td>
       <td>[io.axoniq.axonserver.grpc, io.grpc, io.axoniq...</td>
-      <td>[InstructionAck, InstructionAck$Builder, Error...</td>
+      <td>[MetaDataValue, MetaDataValue$Builder, Process...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -4851,7 +4988,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>356</td>
       <td>5</td>
       <td>[javax.annotation, javax.persistence, jakarta....</td>
-      <td>[Nonnull, Nullable, Column, Entity, Basic, Lob...</td>
+      <td>[Nonnull, Nullable, Column, Entity, Id, Basic,...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -4877,7 +5014,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>238</td>
       <td>4</td>
       <td>[javax.annotation, org.slf4j, jakarta.persiste...</td>
-      <td>[Nonnull, PreDestroy, Nullable, LoggerFactory,...</td>
+      <td>[PreDestroy, Nonnull, Nullable, LoggerFactory,...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -4942,7 +5079,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>39</td>
       <td>69</td>
       <td>26</td>
-      <td>[ClientInterceptor, Metadata$AsciiMarshaller, ...</td>
+      <td>[Metadata$Key, ClientCall, Metadata, Forwardin...</td>
       <td>util</td>
     </tr>
     <tr>
@@ -4964,7 +5101,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>28</td>
       <td>108</td>
       <td>48</td>
-      <td>[Mono, Signal, Flux, FluxSink, Sinks$EmitResul...</td>
+      <td>[Signal, FluxSink$OverflowStrategy, Sinks$Many...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -4975,7 +5112,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>25</td>
       <td>124</td>
       <td>21</td>
-      <td>[QueryResponse, QueryResponse$Builder, QueryRe...</td>
+      <td>[QueryResponse$Builder, QueryResponse, QueryRe...</td>
       <td>query</td>
     </tr>
     <tr>
@@ -4986,7 +5123,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>21</td>
       <td>113</td>
       <td>6</td>
-      <td>[SubscriptionQuery, QueryResponse, QueryUpdate...</td>
+      <td>[QueryUpdateComplete, QueryUpdate, QueryUpdate...</td>
       <td>subscription</td>
     </tr>
     <tr>
@@ -4997,7 +5134,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>20</td>
       <td>106</td>
       <td>26</td>
-      <td>[SerializedObject, ProcessingKey, ProcessingIn...</td>
+      <td>[ErrorMessage, ErrorMessage$Builder, Serialize...</td>
       <td>util</td>
     </tr>
     <tr>
@@ -5019,7 +5156,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>18</td>
       <td>89</td>
       <td>26</td>
-      <td>[PersistentStreamProperties, PersistentStreamS...</td>
+      <td>[EventStream, PersistentStreamProperties, Even...</td>
       <td>axon</td>
     </tr>
     <tr>
@@ -5030,7 +5167,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>17</td>
       <td>76</td>
       <td>6</td>
-      <td>[JobDataMap, Scheduler, SchedulerException, Tr...</td>
+      <td>[SchedulerException, JobBuilder, TriggerBuilde...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -5041,7 +5178,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>17</td>
       <td>53</td>
       <td>21</td>
-      <td>[ReplyChannel, FlowControl, Registration, Resu...</td>
+      <td>[ReplyChannel, FlowControl, ResultStream, Axon...</td>
       <td>query</td>
     </tr>
     <tr>
@@ -5052,7 +5189,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>16</td>
       <td>56</td>
       <td>100</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>eventhandling</td>
     </tr>
     <tr>
@@ -5063,7 +5200,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>15</td>
       <td>71</td>
       <td>22</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>pooled</td>
     </tr>
     <tr>
@@ -5074,7 +5211,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>15</td>
       <td>65</td>
       <td>7</td>
-      <td>[ObjectReader, ObjectMapper, JsonNode, ObjectW...</td>
+      <td>[JsonNode, ObjectMapper, ObjectWriter, ObjectR...</td>
       <td>json</td>
     </tr>
     <tr>
@@ -5096,7 +5233,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>11</td>
       <td>32</td>
       <td>41</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>config</td>
     </tr>
     <tr>
@@ -5118,7 +5255,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>52</td>
       <td>11</td>
-      <td>[CommandResponse, Command, Command$Builder, Co...</td>
+      <td>[Command, CommandResponse, CommandResponse$Bui...</td>
       <td>command</td>
     </tr>
     <tr>
@@ -5129,7 +5266,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>46</td>
       <td>21</td>
-      <td>[ProcessingInstruction$Builder, MetaDataValue,...</td>
+      <td>[SerializedObject, MetaDataValue, MetaDataValu...</td>
       <td>query</td>
     </tr>
     <tr>
@@ -5169,22 +5306,22 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>21</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.caching</td>
-      <td>org.ehcache.event</td>
+      <td>javax.cache.event</td>
       <td>8</td>
-      <td>30</td>
+      <td>26</td>
       <td>15</td>
-      <td>[EventOrdering, EventType, CacheEventListener,...</td>
+      <td>[CacheEntryExpiredListener, CacheEntryRemovedL...</td>
       <td>caching</td>
     </tr>
     <tr>
       <th>22</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.common.caching</td>
-      <td>javax.cache.event</td>
+      <td>org.ehcache.event</td>
       <td>8</td>
-      <td>26</td>
+      <td>30</td>
       <td>15</td>
-      <td>[CacheEntryExpiredListener, CacheEntryRemovedL...</td>
+      <td>[EventType, CacheEvent, CacheEventListener, Ev...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -5206,7 +5343,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>68</td>
       <td>27</td>
-      <td>[ErrorMessage, InstructionAck, InstructionAck$...</td>
+      <td>[ErrorMessage$Builder, ErrorMessage, Instructi...</td>
       <td>connector</td>
     </tr>
     <tr>
@@ -5217,29 +5354,29 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>25</td>
       <td>11</td>
-      <td>[MetaDataValue, ProcessingKey, ProcessingInstr...</td>
+      <td>[ErrorMessage, MetaDataValue, MetaDataValue$Bu...</td>
       <td>command</td>
     </tr>
     <tr>
       <th>26</th>
       <td>axon-server-connector-4.10.0</td>
       <td>org.axonframework.axonserver.connector.event.axon</td>
-      <td>org.slf4j</td>
+      <td>io.axoniq.axonserver.grpc.event</td>
       <td>8</td>
-      <td>24</td>
+      <td>43</td>
       <td>26</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[EventWithToken, Event, Event$Builder, Confirm...</td>
       <td>axon</td>
     </tr>
     <tr>
       <th>27</th>
       <td>axon-server-connector-4.10.0</td>
       <td>org.axonframework.axonserver.connector.event.axon</td>
-      <td>io.axoniq.axonserver.grpc.event</td>
+      <td>org.slf4j</td>
       <td>8</td>
-      <td>43</td>
+      <td>24</td>
       <td>26</td>
-      <td>[EventWithToken, Event, Confirmation, Event$Bu...</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>axon</td>
     </tr>
     <tr>
@@ -5294,7 +5431,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>18</td>
       <td>26</td>
-      <td>[SerializedObject, SerializedObject$Builder, I...</td>
+      <td>[SerializedObject$Builder, InstructionAck, Ser...</td>
       <td>axon</td>
     </tr>
     <tr>
@@ -5305,7 +5442,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>27</td>
       <td>21</td>
-      <td>[Flux, Mono, SignalType, BaseSubscriber]</td>
+      <td>[BaseSubscriber, Flux, SignalType, Mono]</td>
       <td>query</td>
     </tr>
     <tr>
@@ -5316,7 +5453,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>29</td>
       <td>6</td>
-      <td>[Flux, Mono, FluxSink]</td>
+      <td>[Mono, Flux, FluxSink]</td>
       <td>subscription</td>
     </tr>
     <tr>
@@ -5349,7 +5486,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6</td>
       <td>25</td>
       <td>5</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>deadletter</td>
     </tr>
     <tr>
@@ -5367,11 +5504,11 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>39</th>
       <td>axon-messaging-4.10.0</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.converters</td>
+      <td>com.thoughtworks.xstream.io</td>
       <td>6</td>
-      <td>6</td>
+      <td>32</td>
       <td>34</td>
-      <td>[MarshallingContext, UnmarshallingContext]</td>
+      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
       <td>serialization</td>
     </tr>
   </tbody>
@@ -6525,7 +6662,7 @@ This chart shows per artifact the maximum percentage of internal packages (compa
 
 
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_82_1.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_99_1.png)
     
 
 
@@ -6541,7 +6678,7 @@ This chart shows per artifact the median (0.5 percentile) of internal packages (
 
 
     
-![png](ExternalDependenciesJava_files/ExternalDependenciesJava_84_1.png)
+![png](ExternalDependenciesJava_files/ExternalDependenciesJava_101_1.png)
     
 
 
@@ -6575,35 +6712,35 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>pom</td>
       <td>test</td>
       <td>False</td>
-      <td>jakarta.persistence</td>
-      <td>jakarta.persistence-api</td>
+      <td>${project.groupId}</td>
+      <td>axon-messaging</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-configuration</td>
       <td>pom</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>org.axonframework</td>
-      <td>axon-messaging</td>
+      <td>org.hibernate</td>
+      <td>hibernate-core-jakarta</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-configuration</td>
       <td>pom</td>
-      <td>test</td>
+      <td>default</td>
       <td>False</td>
       <td>${project.groupId}</td>
-      <td>axon-messaging</td>
+      <td>axon-eventsourcing</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-configuration</td>
       <td>pom</td>
       <td>test</td>
-      <td>False</td>
-      <td>org.hsqldb</td>
-      <td>hsqldb</td>
+      <td>True</td>
+      <td>io.projectreactor</td>
+      <td>reactor-core</td>
     </tr>
     <tr>
       <th>4</th>

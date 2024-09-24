@@ -4,7 +4,7 @@ This notebook demonstrates different ways on how path finding algorithms can be 
 
 Path algorithms in Graphs are famous for e.g. finding the fastest way from one place to another. How can these be applied to static code analysis and how can the results be interpreted?
 
-One promising algorithm is [All Pairs Shortest Path](https://neo4j.com/docs/graph-data-science/current/algorithms/all-pairs-shortest-path). It shows dependencies from a different perspective and provides an overview on how directly or indirectly dependencies are connected to each other. The longest shortest path has an additional meaning: It is also known as the [**Graph Diameter**](https://mathworld.wolfram.com/GraphDiameter.html) and is very useful as a metric for the complexity of the Graph (or Subgraphs). The same applies to the longest path (for directed acyclic graphs) that can uncover long dependency chains.
+One promising algorithm is [All Pairs Shortest Path](https://neo4j.com/docs/graph-data-science/current/algorithms/all-pairs-shortest-path). It shows dependencies from a different perspective and provides an overview on how directly or indirectly dependencies are connected to each other. The longest shortest path has an additional meaning: It is also known as the [**Graph Diameter**](https://mathworld.wolfram.com/GraphDiameter.html) and is very useful as a metric for the complexity of the Graph (or Subgraphs). The longest path (for directed acyclic graphs) can uncover the longest existing (worst case) dependency chains as long as there are no cycles in the Graph.
 
 <br>
 
@@ -131,7 +131,7 @@ Creates a in-memory projection of "Java:Package" nodes and their "DEPENDS_ON" re
       <td>114</td>
       <td>745</td>
       <td>0.057833</td>
-      <td>2924894</td>
+      <td>2924898</td>
       <td>0</td>
       <td>6.535088</td>
       <td>56</td>
@@ -254,7 +254,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -269,7 +271,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>0</th>
       <td>axon-configuration-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>1</td>
       <td>745</td>
       <td>108</td>
@@ -282,7 +286,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>1</th>
       <td>axon-configuration-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>2</td>
       <td>1550</td>
       <td>99</td>
@@ -295,7 +301,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>2</th>
       <td>axon-disruptor-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>1</td>
       <td>745</td>
       <td>108</td>
@@ -308,7 +316,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>3</th>
       <td>axon-disruptor-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>2</td>
       <td>1550</td>
       <td>99</td>
@@ -321,7 +331,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>4</th>
       <td>axon-disruptor-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>3</td>
       <td>1081</td>
       <td>94</td>
@@ -334,7 +346,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>5</th>
       <td>axon-disruptor-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>4</td>
       <td>198</td>
       <td>59</td>
@@ -347,7 +361,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>6</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>745</td>
       <td>108</td>
@@ -360,7 +376,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>7</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>1550</td>
       <td>99</td>
@@ -373,7 +391,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>8</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>3</td>
       <td>1081</td>
       <td>94</td>
@@ -386,7 +406,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>9</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>4</td>
       <td>198</td>
       <td>59</td>
@@ -417,7 +439,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -432,7 +456,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>6</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>745</td>
       <td>108</td>
@@ -445,7 +471,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>7</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>1550</td>
       <td>99</td>
@@ -458,7 +486,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>8</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>3</td>
       <td>1081</td>
       <td>94</td>
@@ -471,7 +501,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>9</th>
       <td>axon-eventsourcing-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>4</td>
       <td>198</td>
       <td>59</td>
@@ -484,7 +516,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>14</th>
       <td>axon-messaging-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>745</td>
       <td>108</td>
@@ -492,12 +526,14 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/util -&gt;/org/axonframework/commandhandling, /org/axonframework/util -&gt;/org/axonframework/common, /org/axonframework/util -&gt;/org/axonframework/common/annotation, /org/axonframework/util -&gt;/org/axonframework/common/io]</td>
+      <td>[/org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt;/org/axonframework/commandhandling, /org/axonframework/commandha...</td>
     </tr>
     <tr>
       <th>15</th>
       <td>axon-messaging-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>1550</td>
       <td>99</td>
@@ -510,7 +546,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>16</th>
       <td>axon-messaging-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>3</td>
       <td>1081</td>
       <td>94</td>
@@ -523,7 +561,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>17</th>
       <td>axon-messaging-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>4</td>
       <td>198</td>
       <td>59</td>
@@ -536,7 +576,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>18</th>
       <td>axon-messaging-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>5</td>
       <td>7</td>
       <td>3</td>
@@ -549,7 +591,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>19</th>
       <td>axon-modelling-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>745</td>
       <td>108</td>
@@ -731,7 +775,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <td>0</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
     </tr>
     <tr>
@@ -797,7 +841,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -812,10 +858,12 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>0</th>
       <td>axon-modelling-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -825,10 +873,12 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>1</th>
       <td>axon-modelling-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -838,20 +888,24 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>2</th>
       <td>axon-server-connector-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-server-connector-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -859,15 +913,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/util]</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -877,7 +933,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>5</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -890,7 +948,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>6</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>3</td>
       <td>18</td>
       <td>2</td>
@@ -903,10 +963,12 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>7</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>4</td>
       <td>1</td>
@@ -916,7 +978,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>8</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -929,7 +993,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>9</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>True</td>
+      <td>None</td>
       <td>3</td>
       <td>18</td>
       <td>2</td>
@@ -960,7 +1026,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -975,10 +1043,12 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>0</th>
       <td>axon-modelling-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -988,20 +1058,24 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>2</th>
       <td>axon-server-connector-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-server-connector-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -1009,15 +1083,17 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/util]</td>
     </tr>
     <tr>
       <th>4</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -1027,7 +1103,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>5</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -1040,7 +1118,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>6</th>
       <td>axon-spring-boot-autoconfigure-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>3</td>
       <td>18</td>
       <td>2</td>
@@ -1053,20 +1133,24 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>11</th>
       <td>axon-test-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>4</td>
+      <td>5</td>
       <td>13</td>
       <td>3</td>
-      <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test/utils, /org/axonframework/test/saga -&gt;/org/axonframework/test/deadline, /org/axonframework/test/saga -&gt;/org/axonframework/test/eventscheduler]</td>
+      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test/utils, /org/axonframework/test/aggregate -&gt;/org/axonframework/test/deadline, /org/axonframework/test/saga -&gt;/org/axonframework/test/eventscheduler]</td>
     </tr>
     <tr>
       <th>12</th>
       <td>axon-test-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -1074,12 +1158,14 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test/matchers]</td>
+      <td>[/org/axonframework/test/aggregate -&gt;/org/axonframework/test/matchers]</td>
     </tr>
     <tr>
       <th>13</th>
       <td>axon-test-4.10.0</td>
+      <td>None</td>
       <td>False</td>
+      <td>None</td>
       <td>3</td>
       <td>18</td>
       <td>2</td>
@@ -1087,7 +1173,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/saga -&gt;/org/axonframework/test]</td>
+      <td>[/org/axonframework/test/aggregate -&gt;/org/axonframework/test]</td>
     </tr>
   </tbody>
 </table>
@@ -1234,7 +1320,7 @@ Creates a in-memory projection of "Java:Artifact" nodes and their "DEPENDS_ON" r
       <td>9</td>
       <td>25</td>
       <td>0.347222</td>
-      <td>2692984</td>
+      <td>2692988</td>
       <td>0</td>
       <td>2.777778</td>
       <td>7</td>

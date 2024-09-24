@@ -11,7 +11,7 @@
 "java.lang.Object get()","get","centralityArticleRank",0.043798241632709435,""
 "void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityArticleRank",0.04177646052319368,""
 "void executeInTransaction(java.lang.Runnable)","executeInTransaction","centralityArticleRank",0.032427732328811965,""
-"java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityArticleRank",0.02843577880425928,""
+"java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityArticleRank",0.028435778804259286,""
 "void closeQuietly(java.sql.Statement)","closeQuietly","centralityArticleRank",0.02737787454306148,""
 "org.axonframework.messaging.MetaData from(java.util.Map)","from","centralityArticleRank",0.02379563141848036,""
 "java.util.stream.Stream getHandlers(java.lang.Class)","getHandlers","centralityArticleRank",0.023739124583671993,""

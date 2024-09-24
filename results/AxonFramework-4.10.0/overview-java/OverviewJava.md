@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>321900</td>
-      <td>975767</td>
+      <td>324042</td>
+      <td>982315</td>
       <td>9</td>
       <td>122</td>
       <td>2083</td>
@@ -369,7 +369,7 @@ The source data for this aggregated table can be found in the CSV report `Number
 
 
     
-![png](OverviewJava_files/OverviewJava_17_1.png)
+![png](OverviewJava_files/OverviewJava_20_1.png)
     
 
 
@@ -474,7 +474,7 @@ The source data for this aggregated table can be found in the CSV report `Number
 
 
     
-![png](OverviewJava_files/OverviewJava_21_1.png)
+![png](OverviewJava_files/OverviewJava_24_1.png)
     
 
 
@@ -486,7 +486,7 @@ The source data for this aggregated table can be found in the CSV report `Number
 
 
     
-![png](OverviewJava_files/OverviewJava_23_1.png)
+![png](OverviewJava_files/OverviewJava_26_1.png)
     
 
 
@@ -498,7 +498,7 @@ The source data for this aggregated table can be found in the CSV report `Number
 
 
     
-![png](OverviewJava_files/OverviewJava_25_1.png)
+![png](OverviewJava_files/OverviewJava_28_1.png)
     
 
 
@@ -510,7 +510,7 @@ The source data for this aggregated table can be found in the CSV report `Number
 
 
     
-![png](OverviewJava_files/OverviewJava_27_1.png)
+![png](OverviewJava_files/OverviewJava_30_1.png)
     
 
 
@@ -587,7 +587,11 @@ The whole table can be found in the CSV report `Number_of_packages_per_artifact`
 The following chat shows artifacts with the largest package count in percentage. Artifacts with less than 0.7% package count are grouped into "others" to focus on the most significant artifacts regarding their package count.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](OverviewJava_files/OverviewJava_32_0.png)
+![png](OverviewJava_files/OverviewJava_34_1.png)
     
 
