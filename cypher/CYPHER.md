@@ -193,6 +193,10 @@ Script | Directory | Description
 | [List_external_Java_types_used.cypher](./External_Dependencies/List_external_Java_types_used.cypher) | External_Dependencies | List external Java types used |
 | [List_external_modules_resolved_to_internal_ones_for_Typescript.cypher](./External_Dependencies/List_external_modules_resolved_to_internal_ones_for_Typescript.cypher) | External_Dependencies | Statistics about how many ExternalModule nodes were found that match internal Module nodes |
 | [Maven_POMs_and_their_declared_dependencies.cypher](./External_Dependencies/Maven_POMs_and_their_declared_dependencies.cypher) | External_Dependencies | Maven POMs and their declared dependencies |
+| [Package_json_dependencies_by_package.cypher](./External_Dependencies/Package_json_dependencies_by_package.cypher) | External_Dependencies | List package.json dependencies by package |
+| [Package_json_dependencies_combinations.cypher](./External_Dependencies/Package_json_dependencies_combinations.cypher) | External_Dependencies | List most used combination of 2 and 3 dependencies |
+| [Package_json_dependencies_combinations_with_versions.cypher](./External_Dependencies/Package_json_dependencies_combinations_with_versions.cypher) | External_Dependencies | List most used combination of 2 and 3 dependencies including version specifier |
+| [Package_json_dependencies_occurrence.cypher](./External_Dependencies/Package_json_dependencies_occurrence.cypher) | External_Dependencies | List package.json dependencies by the number they are used by all packages |
 | [Remove_external_type_and_annotation_labels.cypher](./External_Dependencies/Remove_external_type_and_annotation_labels.cypher) | External_Dependencies | Remove external type and annotation labels |
 | [Add_file_name and_extension.cypher](./General_Enrichment/Add_file_name and_extension.cypher) | General_Enrichment |  |
 | [Add_HAS_PARENT_relationships_to_commits.cypher](./GitLog/Add_HAS_PARENT_relationships_to_commits.cypher) | GitLog | Creates a HAS_PARENT relationship between Git Commit nodes and their parent. |
@@ -316,6 +320,7 @@ Script | Directory | Description
 | [Overview_size_for_Typescript.cypher](./Overview/Overview_size_for_Typescript.cypher) | Overview | Overview size for Typescript |
 | [Relationship_type_count.cypher](./Overview/Relationship_type_count.cypher) | Overview | Relationship count for each type separate. Sums up to the total number of relationships (100%). |
 | [Words_for_Wordcloud.cypher](./Overview/Words_for_Wordcloud.cypher) | Overview | Words for Wordcloud |
+| [Words_for_git_author_Wordcloud_with_frequency.cypher](./Overview/Words_for_git_author_Wordcloud_with_frequency.cypher) | Overview | Wordcloud of git authors and their commit count |
 | [Words_for_universal_Wordcloud.cypher](./Overview/Words_for_universal_Wordcloud.cypher) | Overview | Words for universal Wordcloud |
 | [Path_Finding_1_Create_Projection.cypher](./Path_Finding/Path_Finding_1_Create_Projection.cypher) | Path_Finding | Path Finding 1 Create Projection |
 | [Path_Finding_2_Estimate_Memory.cypher](./Path_Finding/Path_Finding_2_Estimate_Memory.cypher) | Path_Finding | Path Finding 2 Estimate Memory |
@@ -323,8 +328,10 @@ Script | Directory | Description
 | [Path_Finding_4_Breadth_First_Search_Path.cypher](./Path_Finding/Path_Finding_4_Breadth_First_Search_Path.cypher) | Path_Finding | Path Finding 4 Breadth First Search Path |
 | [Path_Finding_5_All_pairs_shortest_path_distribution_overall.cypher](./Path_Finding/Path_Finding_5_All_pairs_shortest_path_distribution_overall.cypher) | Path_Finding | Path Finding - All pairs shortest path algorithm - Stream - Overall |
 | [Path_Finding_5_All_pairs_shortest_path_distribution_per_project.cypher](./Path_Finding/Path_Finding_5_All_pairs_shortest_path_distribution_per_project.cypher) | Path_Finding | Path Finding - All pairs shortest path algorithm - Stream - Per project |
+| [Path_Finding_5_All_pairs_shortest_path_examples.cypher](./Path_Finding/Path_Finding_5_All_pairs_shortest_path_examples.cypher) | Path_Finding | Path Finding - All pairs shortest path algorithm - Stream - Longest paths as examples |
 | [Path_Finding_6_Longest_paths_distribution_overall.cypher](./Path_Finding/Path_Finding_6_Longest_paths_distribution_overall.cypher) | Path_Finding | Longest paths distribution |
 | [Path_Finding_6_Longest_paths_distribution_per_project.cypher](./Path_Finding/Path_Finding_6_Longest_paths_distribution_per_project.cypher) | Path_Finding | Longest paths distribution |
+| [Path_Finding_6_Longest_paths_examples.cypher](./Path_Finding/Path_Finding_6_Longest_paths_examples.cypher) | Path_Finding | Path Finding - Longest path - Stream - Max. paths as examples |
 | [Set_Parameters.cypher](./Path_Finding/Set_Parameters.cypher) | Path_Finding | Example on how to set the parameters for centrality in this case for Packages and PageRank |
 | [Set_Parameters.cypher](./Similarity/Set_Parameters.cypher) | Similarity | Example on how to set the parameters for similarity in this case for Packages and Node Similarity |
 | [Similarity_1a_Estimate.cypher](./Similarity/Similarity_1a_Estimate.cypher) | Similarity | Similarity Estimate Memory |
