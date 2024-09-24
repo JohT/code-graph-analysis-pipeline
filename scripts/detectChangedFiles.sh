@@ -84,7 +84,7 @@ file_names_and_sizes() {
     if [ -d "$1" ]; then
         # If it's a directory, list all files inside 
         # except for "node_modules", "target", "temp" and the change detection file itself
-        find "$1" \
+        find -L "$1" \
           -type d -name "node_modules" -prune -o \
           -type d -name "target" -prune -o \
           -type d -name "temp" -prune -o \
