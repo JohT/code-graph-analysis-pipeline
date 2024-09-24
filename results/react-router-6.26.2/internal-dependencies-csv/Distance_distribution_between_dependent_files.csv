@@ -1,3 +1,3 @@
 "fileDistanceAsFewestChangeDirectoryCommands","numberOfDependencies","numberOfDependencyUsers","numberOfDependencyProviders","examples","Source Cypher File: Internal_Dependencies/Set_file_distance_as_shortest_contains_path_for_dependencies.cypher"
 0,1,1,1,"./server.tsx uses ./index.tsx",""
-4,6,4,2,"./index.tsx uses ./index.ts,./index.tsx uses ./index.ts,./server.tsx uses ./index.ts,./index.ts uses ./index.ts",""
+4,6,4,2,"./index.tsx uses ./index.ts,./index.tsx uses ./index.ts,./server.tsx uses ./index.ts,./index.tsx uses ./index.ts",""

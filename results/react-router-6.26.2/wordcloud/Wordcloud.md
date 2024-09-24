@@ -11,6 +11,8 @@
 
 ## Word Cloud
 
+## WordCloud of names in code
+
 
 
 
@@ -63,85 +65,85 @@
       <th>9</th>
       <td>filter</td>
     </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+    There are 2231 words in the dataset for the plot titled 'Wordcloud of names in code'.
+
+
+
+    
+![png](Wordcloud_files/Wordcloud_14_1.png)
+    
+
+
+## WordCloud of git authors
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>word</th>
+      <th>frequency</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
-      <th>10</th>
-      <td>link</td>
+      <th>0</th>
+      <td>Brooks Lybrand</td>
+      <td>17</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>error</td>
+      <th>1</th>
+      <td>Pedro Cattori</td>
+      <td>283</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>boundaries</td>
+      <th>2</th>
+      <td>Remix Run Bot</td>
+      <td>271</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>notes</td>
+      <th>3</th>
+      <td>Mark Dalgleish</td>
+      <td>289</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>auth</td>
+      <th>4</th>
+      <td>Matt Brophy</td>
+      <td>1714</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>router</td>
+      <th>5</th>
+      <td>Ryan Florence</td>
+      <td>1252</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>provider</td>
+      <th>6</th>
+      <td>Jacob Ebey</td>
+      <td>222</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>scroll</td>
+      <th>7</th>
+      <td>Alec Flett</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>restoration</td>
+      <th>8</th>
+      <td>chencheng (云谦)</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>19</th>
-      <td>auth</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>route</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>objects</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>ssr</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>data</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>router</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>multi</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>app</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>data</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>router</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>lazy</td>
+      <th>9</th>
+      <td>markdalgleish</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -149,11 +151,8 @@
 
 
 
-    There are 5274 words in the dataset.
-
-
 
     
-![png](Wordcloud_files/Wordcloud_10_1.png)
+![png](Wordcloud_files/Wordcloud_17_0.png)
     
 

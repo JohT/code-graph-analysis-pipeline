@@ -1,4 +1,4 @@
-# External Dependencies
+# External Dependencies for Typescript
 <br>  
 
 ### References
@@ -93,26 +93,48 @@ Only the top 20 entries are shown. The whole table can be found in the following
 
 
 
-#### Table 1 Chart 1 - Most called external modules in % by internal elements
+#### Table 1 Chart 1a - Most called external modules in % by internal elements (more than 0.7% overall)
 
 External modules that are used less than 0.7% are grouped into "others" to get a cleaner chart
 containing the most significant external modules and how ofter they are called by internal elements in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_14_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_16_1.png)
     
 
 
-#### Table 1 Chart 2 - Most called external modules in % by internal modules
+#### Table 1 Chart 1b - Most called external modules in % by internal elements (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external modules. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external module usage [%] by internal elements  (less than 0.7% overall "others" drill-down)'.
+
+
+#### Table 1 Chart 2a - Most called external modules in % by internal modules (more than 0.7% overall)
 
 External modules that are used less than 0.7% are grouped into "others" to get a cleaner chart
 containing the most significant external modules and how ofter they are called by internal modules in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_17_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_20_1.png)
     
+
+
+#### Table 1 Chart 2b - Most called external modules in % by internal modules (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external modules. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external module usage [%] by internal modules (less than 0.7% overall "others" drill-down)'.
 
 
 ### Table 2 - Top 20 most used external namespaces
@@ -181,26 +203,48 @@ Only the top 20 entries are shown. The whole table can be found in the following
 
 
 
-#### Table 2 Chart 1 - Most called external namespaces in % by internal element
+#### Table 2 Chart 1a - Most called external namespaces in % by internal element (more than 0.7% overall)
 
 External namespaces that are used less than 0.7% are grouped into "others" to get a cleaner chart
 containing the most significant external namespaces and how ofter they are called by internal elements in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_21_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_26_1.png)
     
 
 
-#### Table 2 Chart 2 - Most called external namespaces in % by internal modules
+#### Table 2 Chart 1a - Most called external namespaces in % by internal element (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external namespaces. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external namespace usage [%] by internal elements (less than 0.7% overall "others" drill-down)'.
+
+
+#### Table 2 Chart 2a - Most called external namespaces in % by internal modules (more than 0.7% overall)
 
 External namespaces that are used less than 0.7% are grouped into "others" to get a cleaner chart
 containing the most significant external namespaces and how ofter they are called by internal modules in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_23_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_30_1.png)
     
+
+
+#### Table 2 Chart 2b - Most called external namespaces in % by internal modules (less than 0.7% overall "others" drill-down)
+
+Shows the lowest (less than 0.7% overall) most called external namespaces. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external namespace usage [%] by internal modules (less than 0.7% overall "others" drill-down)'.
 
 
 ### Table 3 - Top 20 most widely spread external modules
@@ -565,24 +609,46 @@ This table shows the top 20 most widely spread external packages focussing on th
 
 
 
-#### Table 3 Chart 1 - Most widely spread external packages in % by types
+#### Table 3 Chart 1a - Most widely spread external module in % by internal elements (more than 0.5% overall)
 
-External packages that are used less than 0.5% are grouped into the name "others" to get a cleaner chart with the most significant external packages.
+External modules that are used less than 0.5% are grouped into the name "others" to get a cleaner chart with the most significant external module.
+
+
+    <Figure size 640x480 with 0 Axes>
+
 
 
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_35_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_44_1.png)
     
 
 
-#### Table 3 Chart 2 - Most widely spread external modules in % by internal modules
+#### Table 3 Chart 1b - Most widely spread external modules in % by types (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) most widely spread external modules. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external module usage spread [%] by internal elements (less than 0.7% overall "others" drill-down)'.
+
+
+#### Table 3 Chart 2a - Most widely spread external modules in % by internal modules (more than 0.5% overall)
 
 External modules that are used less than 0.5% are grouped into "others" to get a cleaner chart containing the most significant external modules.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_37_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_48_1.png)
     
+
+
+#### Table 3 Chart 2b - Most widely spread external modules in % by internal modules (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) most widely spread external modules. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external module usage spread [%] by internal modules (less than 0.7% overall "others" drill-down)'.
 
 
 ### Table 4 - Top 20 most widely spread external namespaces
@@ -714,37 +780,70 @@ Only the top 20 entries are shown. The whole table can be found in the following
 
 
 
-#### Table 4 Chart 1 - Most widely spread external namespaces in % by internal element
+#### Table 4 Chart 1a - Most widely spread external namespaces in % by internal element (less than 0.5% overall)
 
 External namespaces that are used less than 0.5% are grouped into "others" to get a cleaner chart
 containing the most significant external namespaces and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_42_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_55_1.png)
     
 
 
-#### Table 4 Chart 2 - Most widely spread external namespace in % by internal modules
+#### Table 4 Chart 1b - Most widely spread external namespaces in % by internal element (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) most widely spread external namespaces. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external namespace usage spread [%] by internal elements (less than 0.7% overall "others" drill-down)'.
+
+
+#### Table 4 Chart 2a - Most widely spread external namespace in % by internal modules (more than 0.5% overall)
 
 External namespaces that are used less than 0.5% are grouped into "others" to get a cleaner chart
 containing the most significant external namespaces and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_44_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_59_1.png)
     
 
 
-#### Table 4 Chart 3 - External namespaces with the most used declarations in %
+#### Table 4 Chart 2b - Most widely spread external namespace in % by internal modules (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) most widely spread external namespaces. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external namespace usage spread [%] by internal modules (less than 0.7% overall "others" drill-down)'.
+
+
+#### Table 4 Chart 3a - External namespaces with the most used declarations in % (more than 0.5% overall)
 
 External namespaces that are used less than 0.5% are grouped into "others" to get a cleaner chart
 containing the most significant external namespaces and how ofter they are called in percent.
 
 
+    <Figure size 640x480 with 0 Axes>
+
+
+
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_46_0.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_63_1.png)
     
+
+
+#### Table 4 Chart 3b - External namespaces with the most used declarations in % (less than 0.5% overall "others" drill-down)
+
+Shows the lowest (less than 0.5% overall) external namespaces with the most used declarations. Therefore, this plot breaks down the "others" slice of the pie chart above. Values under 0.3% from that will be grouped into "others" to get a cleaner plot.
+
+    No data to plot for title 'Top external namespace declaration usage (less than 0.7% overall "others" drill-down)'.
 
 
 ### Table 5 - Top 20 least used external modules overall
@@ -1159,7 +1258,7 @@ Note that every external dependency is counted separately so that if on internal
 
 
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_62_1.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_81_1.png)
     
 
 
@@ -1175,7 +1274,7 @@ Note that every external dependency is counted separately so that if on internal
 
 
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_64_1.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_83_1.png)
     
 
 
@@ -1248,8 +1347,6 @@ Only the last 40 entries are shown. The whole table can be found in the followin
 </div>
 
 
-
-# TODO
 
 ### Table 8 - External package usage aggregated
 
@@ -1495,7 +1592,7 @@ This chart shows per internal module the maximum percentage of internal packages
 
 
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_77_1.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_96_1.png)
     
 
 
@@ -1511,6 +1608,6 @@ This chart shows per internal module the median (0.5 percentile) of internal pac
 
 
     
-![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_79_1.png)
+![png](ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_98_1.png)
     
 

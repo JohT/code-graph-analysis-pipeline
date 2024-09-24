@@ -4,7 +4,7 @@ This notebook demonstrates different ways on how path finding algorithms can be 
 
 Path algorithms in Graphs are famous for e.g. finding the fastest way from one place to another. How can these be applied to static code analysis and how can the results be interpreted?
 
-One promising algorithm is [All Pairs Shortest Path](https://neo4j.com/docs/graph-data-science/current/algorithms/all-pairs-shortest-path). It shows dependencies from a different perspective and provides an overview on how directly or indirectly dependencies are connected to each other. The longest shortest path has an additional meaning: It is also known as the [**Graph Diameter**](https://mathworld.wolfram.com/GraphDiameter.html) and is very useful as a metric for the complexity of the Graph (or Subgraphs). The same applies to the longest path (for directed acyclic graphs) that can uncover long dependency chains.
+One promising algorithm is [All Pairs Shortest Path](https://neo4j.com/docs/graph-data-science/current/algorithms/all-pairs-shortest-path). It shows dependencies from a different perspective and provides an overview on how directly or indirectly dependencies are connected to each other. The longest shortest path has an additional meaning: It is also known as the [**Graph Diameter**](https://mathworld.wolfram.com/GraphDiameter.html) and is very useful as a metric for the complexity of the Graph (or Subgraphs). The longest path (for directed acyclic graphs) can uncover the longest existing (worst case) dependency chains as long as there are no cycles in the Graph.
 
 <br>
 
@@ -210,7 +210,7 @@ First, we'll have a look at the overall/total result of the all pairs shortest p
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_40_1.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_39_1.png)
     
 
 
@@ -227,7 +227,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -242,7 +244,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>0</th>
       <td>react-router</td>
+      <td>react-router-6.26.2</td>
       <td>True</td>
+      <td>False</td>
       <td>1</td>
       <td>7</td>
       <td>4</td>
@@ -255,6 +259,8 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>7</td>
@@ -268,7 +274,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
       <td>True</td>
+      <td>False</td>
       <td>1</td>
       <td>7</td>
       <td>4</td>
@@ -281,7 +289,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>3</th>
       <td>react-router-native</td>
+      <td>react-router-6.26.2</td>
       <td>True</td>
+      <td>False</td>
       <td>1</td>
       <td>7</td>
       <td>4</td>
@@ -294,7 +304,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>4</th>
       <td>react-router-native</td>
+      <td>react-router-6.26.2</td>
       <td>True</td>
+      <td>False</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
@@ -325,7 +337,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -340,6 +354,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>7</td>
@@ -371,7 +387,7 @@ Shows the top 20 projects with the longest shortest path (=Graph Diameter).
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_47_0.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_46_0.png)
     
 
 
@@ -383,7 +399,7 @@ Shows the top 20 projects with the longest shortest path (=Graph Diameter).
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_50_1.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_49_1.png)
     
 
 
@@ -423,7 +439,122 @@ Shows the top 50 projects with the highest number of dependency paths stacked by
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_53_1.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_52_1.png)
+    
+
+
+### 1.1.5 All pairs shortest path for each scan
+
+In this section we'll focus only on pairs of nodes that both belong to the same scan, filtering out every line that has `isDifferentTargetScan==False`. The first ten rows are shown in a table followed by charts that show the distribution of shortest path distances across different scans in stacked bar charts (absolute and normalized).
+
+**Note:** It is possible that a (shortest) path could have nodes in between that belong to different scans. Therefore, the data of each scan isn't perfectly isolated. However, it shows how the dependencies interact across scans "in real life" while still providing a decent isolation of each scan.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sourceScan</th>
+      <th>distance</th>
+      <th>pairCount</th>
+      <th>sourceNodeCount</th>
+      <th>targetNodeCount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-6.26.2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-6.26.2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### All pairs shortest path for each scan - Longest shortest path (Diameter) for each scan
+
+Shows the top 20 scans with the longest shortest path (=Graph Diameter).
+
+
+
+
+    sourceScan
+    react-router-6.26.2    2
+    Name: distance, dtype: int64
+
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_57_0.png)
+    
+
+
+#### All pairs shortest path for each scan - Bar chart (absolute)
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_60_1.png)
+    
+
+
+#### All pairs shortest path for each scan - Bar chart (normalized)
+
+Shows the top 50 scans with the highest number of dependency paths stacked by their length.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>distance</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>sourceProject</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>react-router-dom</th>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_63_1.png)
     
 
 
@@ -494,7 +625,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_62_0.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_72_0.png)
     
 
 
@@ -506,13 +637,13 @@ First, we'll have a look at the overall/total result of the longest path algorit
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_64_1.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_74_1.png)
     
 
 
 ### 1.2.2 Longest path in detail
 
-The following table shows the first 10 rows with all details of the query above. It contains the results of the "longest path" algorithm including the artifact the source node belongs to and if the target node is in the same artifact or not. The main intuition is to show how the data is structured. It provides the basis for tables and charts shown in following sections below, that filter and group the data accordingly.
+The following table shows the first 10 rows with all details of the query above. It contains the results of the "longest path" algorithm including the project the source node belongs to and if the target node is in the same project or not. The main intuition is to show how the data is structured. It provides the basis for tables and charts shown in following sections below, that filter and group the data accordingly.
 
 
 
@@ -523,7 +654,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -538,6 +671,8 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>0</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>1</td>
@@ -551,7 +686,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
       <td>True</td>
+      <td>False</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
@@ -564,7 +701,9 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
       <td>True</td>
+      <td>False</td>
       <td>3</td>
       <td>1</td>
       <td>1</td>
@@ -582,9 +721,9 @@ The following table shows the first 10 rows with all details of the query above.
 
 ### 1.2.3 Longest path for each project
 
-In this section we'll focus only on pairs of nodes that both belong to the same artifact, filtering out every line that has `isDifferentTargetProject==False`. The first ten rows are shown in a table followed by charts that show the distribution of longest path distances across different artifacts in stacked bar charts (absolute and normalized).
+In this section we'll focus only on pairs of nodes that both belong to the same project, filtering out every line that has `isDifferentTargetProject==False`. The first ten rows are shown in a table followed by charts that show the distribution of longest path distances across different projects in stacked bar charts (absolute and normalized).
 
-**Note:** It is possible that a (longest) path could have nodes in between that belong to different artifacts. Therefore, the data of each artifact isn't perfectly isolated. However, it shows how the dependencies interact across artifacts "in real life" while still providing a decent isolation of each artifact.
+**Note:** It is possible that a (longest) path could have nodes in between that belong to different projects. Therefore, the data of each project isn't perfectly isolated. However, it shows how the dependencies interact across projects "in real life" while still providing a decent isolation of each project.
 
 
 
@@ -595,7 +734,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr style="text-align: right;">
       <th></th>
       <th>sourceProject</th>
+      <th>sourceScan</th>
       <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -610,6 +751,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>0</th>
       <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>1</td>
@@ -626,9 +769,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
 
 
 
-#### Longest path for each artifact - Max. longest path for each artifact
+#### Longest path for each project - Max. longest path for each project
 
-Shows the top 20 artifacts with their max. longest path.
+Shows the top 20 projects with their max. longest path.
 
 
 
@@ -641,11 +784,11 @@ Shows the top 20 artifacts with their max. longest path.
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_71_0.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_81_0.png)
     
 
 
-#### Longest path for each artifact - Bar chart (absolute)
+#### Longest path for each project - Bar chart (absolute)
 
 
     <Figure size 640x480 with 0 Axes>
@@ -653,13 +796,13 @@ Shows the top 20 artifacts with their max. longest path.
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_74_1.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_84_1.png)
     
 
 
-#### Longest path for each artifact - Bar chart (normalized)
+#### Longest path for each project - Bar chart (normalized)
 
-Shows the top 50 artifacts with the highest number of dependency paths stacked by their length.
+Shows the top 50 projects with the highest number of dependency paths stacked by their length.
 
 
 
@@ -693,7 +836,164 @@ Shows the top 50 artifacts with the highest number of dependency paths stacked b
 
 
     
-![png](PathFindingTypescript_files/PathFindingTypescript_77_1.png)
+![png](PathFindingTypescript_files/PathFindingTypescript_87_1.png)
+    
+
+
+### 1.2.4 Longest path for each scan
+
+In this section we'll focus only on pairs of nodes that both belong to the same scan, filtering out every line that has `isDifferentTargetScan==False`. The first ten rows are shown in a table followed by charts that show the distribution of longest path distances across different scans in stacked bar charts (absolute and normalized).
+
+**Note:** It is possible that a (longest) path could have nodes in-between that belong to different scans. Therefore, the data of each scan isn't perfectly isolated. However, it shows how the dependencies interact across scans "in real life" while still providing a decent amount of isolation of each scan.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sourceProject</th>
+      <th>sourceScan</th>
+      <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
+      <th>distance</th>
+      <th>distanceTotalPairCount</th>
+      <th>distanceTotalSourceCount</th>
+      <th>distanceTotalTargetCount</th>
+      <th>pairCount</th>
+      <th>sourceNodeCount</th>
+      <th>targetNodeCount</th>
+      <th>examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt;./index.tsx]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>True</td>
+      <td>False</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt;./index.ts]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>react-router-dom</td>
+      <td>react-router-6.26.2</td>
+      <td>True</td>
+      <td>False</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt;./index.ts]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+#### Longest path for each scan - Max. longest path for each scan
+
+Shows the top 20 scans with their max. longest path.
+
+
+
+
+    sourceScan
+    react-router-6.26.2    3
+    Name: distance, dtype: int64
+
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_92_0.png)
+    
+
+
+#### Longest path for each scan - Bar chart (absolute)
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_95_1.png)
+    
+
+
+#### Longest path for each scan - Bar chart (normalized)
+
+Shows the top 50 scans with the highest number of dependency paths stacked by their length.
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>distance</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>sourceScan</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>react-router-6.26.2</th>
+      <td>33.333333</td>
+      <td>33.333333</td>
+      <td>33.333333</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_98_1.png)
     
 
 
