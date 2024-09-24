@@ -43,6 +43,7 @@ SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Re
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
+TYPESCRIPT_SCAN_HEAP_MEMORY           | 4096                                | Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB. |
 JQASSISTANT_CLI_DOWNLOAD_URL          | https://repo1.maven.org/maven2/com/buschmais/jqassistant/cli | Download URL for the jQAssistant CLI |
 JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Neo4j v5 & v4: "distribution.zip" |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
