@@ -7,7 +7,7 @@ This file was generated with the script [generateMarkdownReference.sh](./../scri
 Report | Analysis | Description
 -------|----------|------------
 | [DependenciesGraphJava.md](./AxonFramework-4.10.0/dependencies-graph-java/DependenciesGraphJava.md) | AxonFramework-4.10.0 | Artifact Dependencies |
-| [ExternalDependenciesJava.md](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava.md) | AxonFramework-4.10.0 | External Dependencies |
+| [ExternalDependenciesJava.md](./AxonFramework-4.10.0/external-dependencies-java/ExternalDependenciesJava.md) | AxonFramework-4.10.0 | External Dependencies for Java |
 | [InternalDependenciesJava.md](./AxonFramework-4.10.0/internal-dependencies-java/InternalDependenciesJava.md) | AxonFramework-4.10.0 | Internal Dependencies |
 | [MethodMetricsJava.md](./AxonFramework-4.10.0/method-metrics-java/MethodMetricsJava.md) | AxonFramework-4.10.0 | Method Metrics |
 | [NodeEmbeddingsJava.md](./AxonFramework-4.10.0/node-embeddings-java/NodeEmbeddingsJava.md) | AxonFramework-4.10.0 | Node Embeddings |
