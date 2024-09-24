@@ -219,6 +219,13 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   👉 The custom Jupyter Notebook metadata property `code_graph_analysis_pipeline_data_validation` can be set to choose a query from [cypher/Validation](./cypher/Validation) that will be executed preliminary to the notebook. If the query leads to at least one result, the validation succeeds and the notebook will be run. If the query leads to no result, the notebook will be skipped.
   For more details see [Data Availability Validation](./COMMANDS.md#data-availability-validation).
 
+- How can i increase the heap memory when scanning large Typescript projects?  
+  👉 Use the environment variable TYPESCRIPT_SCAN_HEAP_MEMORY in megabyte (default = 4096):
+
+  ```shell
+  TYPESCRIPT_SCAN_HEAP_MEMORY=16384 ./../../scripts/analysis/analyze.sh
+  ```
+
 ## 🕸 Web References
 
 - [Graph Data Science 101: Understanding Graphs and Graph Data Science](https://techfirst.medium.com/graph-data-science-101-understanding-graphs-and-graph-data-science-c25055a9db01)

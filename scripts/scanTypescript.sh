@@ -9,6 +9,7 @@ set -o errexit -o pipefail
 
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+TYPESCRIPT_SCAN_HEAP_MEMORY=${TYPESCRIPT_SCAN_HEAP_MEMORY:-"4096"} # Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB.
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -54,7 +55,7 @@ else
         #       For later troubleshooting, the output is also copied to a dedicated log file using "tee".
         # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
         # Note: NODE_OPTIONS --max-old-space-size=4096 increases the memory for larger projects to scan
-        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=4096" npx --yes @jqassistant/ts-lce@1.3.0 "${directory}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
+        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.0 "${directory}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
     done
 
     changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")
