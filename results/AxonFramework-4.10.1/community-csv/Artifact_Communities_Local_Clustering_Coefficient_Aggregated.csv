@@ -1,0 +1,6 @@
+"localClusteringCoefficient","memberCount","memberNameExamples","Source Cypher File: Community_Detection/Community_Detection_10d_LocalClusteringCoefficient_Stream_Aggregated.cypher"
+1,4,"/axon-server-connector-4.10.1.jar,/axon-tracing-opentelemetry-4.10.1.jar,/axon-disruptor-4.10.1.jar,/axon-test-4.10.1.jar",""
+0.87,1,"/axon-configuration-4.10.1.jar",""
+0.76,2,"/axon-eventsourcing-4.10.1.jar,/axon-modelling-4.10.1.jar",""
+0.67,1,"/axon-spring-boot-autoconfigure-4.10.1.jar",""
+0.61,1,"/axon-messaging-4.10.1.jar",""
