@@ -55,7 +55,7 @@ jobs:
       CI_COMMIT_AUTHOR: ${{ github.event.repository.name }} Continuous Integration
       PROJECT_NAME: AxonFramework
       # Version variable name matches renovate.json configuration entry
-      AXON_FRAMEWORK_VERSION: 4.10.0
+      AXON_FRAMEWORK_VERSION: 4.10.1
 
     steps:
     - name: Checkout GIT Repository
