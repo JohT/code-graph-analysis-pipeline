@@ -131,7 +131,7 @@ Creates a in-memory projection of "Java:Package" nodes and their "DEPENDS_ON" re
       <td>114</td>
       <td>746</td>
       <td>0.05791</td>
-      <td>2924898</td>
+      <td>2925165</td>
       <td>0</td>
       <td>6.54386</td>
       <td>56</td>
@@ -526,7 +526,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt;/org/axonframework/commandhandling, /org/axonframework/commandha...</td>
+      <td>[/org/axonframework/serialization -&gt;/org/axonframework/commandhandling, /org/axonframework/tracing -&gt;/org/axonframework/commandhandling, /org/axonframework/tracing/attributes -&gt;/org/axonframework/commandhandling, /org/axonframework/util -&gt;/org/axonframework/commandhandling]</td>
     </tr>
     <tr>
       <th>15</th>
@@ -541,7 +541,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>563</td>
       <td>51</td>
       <td>30</td>
-      <td>[/org/axonframework/deadline -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/dbscheduler -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/jobrunr -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/quartz -&gt;/org/axonframework/commandhandling]</td>
+      <td>[/org/axonframework/messaging/responsetypes -&gt;/org/axonframework/commandhandling, /org/axonframework/queryhandling -&gt;/org/axonframework/commandhandling, /org/axonframework/serialization/converters -&gt;/org/axonframework/commandhandling, /org/axonframework/serialization/json -&gt;/org/axonframework/co...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -898,7 +898,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -913,7 +913,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/util]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1000,10 +1000,10 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>13</td>
+      <td>15</td>
       <td>1</td>
-      <td>13</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/jdbc, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/jpa, /org/axonframework/springboot/au...</td>
+      <td>15</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/commandhandling, /org/axonframework/springboot/autoconfig/legacyjpa -&gt;/org/axonframework/common/jdbc, /org/axonframework/springbo...</td>
     </tr>
   </tbody>
 </table>
@@ -1068,7 +1068,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1083,7 +1083,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/util]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1320,7 +1320,7 @@ Creates a in-memory projection of "Java:Artifact" nodes and their "DEPENDS_ON" r
       <td>9</td>
       <td>25</td>
       <td>0.347222</td>
-      <td>2692988</td>
+      <td>2693255</td>
       <td>0</td>
       <td>2.777778</td>
       <td>7</td>
