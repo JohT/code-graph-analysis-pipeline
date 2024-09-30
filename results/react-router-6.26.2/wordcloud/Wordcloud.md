@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Brooks Lybrand</td>
-      <td>17</td>
+      <td>Mark Dalgleish</td>
+      <td>295</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Pedro Cattori</td>
-      <td>283</td>
+      <td>297</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Remix Run Bot</td>
-      <td>271</td>
+      <td>280</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Mark Dalgleish</td>
-      <td>289</td>
+      <td>Mtende</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>Brooks Lybrand</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>Matt Brophy</td>
       <td>1714</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Ryan Florence</td>
       <td>1252</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>Jacob Ebey</td>
       <td>222</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Alec Flett</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>chencheng (云谦)</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>markdalgleish</td>
-      <td>2</td>
     </tr>
   </tbody>
 </table>
