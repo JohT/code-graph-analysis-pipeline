@@ -87,6 +87,7 @@ if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCou
     echo -e "${COLOR_RED}${dataVerificationResult}${COLOR_DEFAULT}"
     exit 1
 fi
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_external_modules_to_corresponding_npm_dependency.cypher"
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
 execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
