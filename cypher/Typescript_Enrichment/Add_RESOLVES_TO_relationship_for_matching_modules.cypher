@@ -7,12 +7,13 @@ MATCH (module:TS:Module)
 WHERE  module.globalFqn IS NOT NULL
 MATCH (externalModule:TS:ExternalModule)
 WHERE module.globalFqn IS NOT NULL
-  AND (module.globalFqn = externalModule.globalFqn
-   OR   ( externalModule.name              = module.name 
+  AND ((module.globalFqn = externalModule.globalFqn)
+   OR  (module.module    = externalModule.module)
+   OR  (  externalModule.name              = module.name 
       AND externalModule.moduleName        = module.moduleName 
       AND externalModule.namespace         = module.namespace
       AND externalModule.extensionExtended = module.extensionExtended
-        )
+       )
       )
   AND module <> externalModule
  CALL {  WITH module, externalModule
