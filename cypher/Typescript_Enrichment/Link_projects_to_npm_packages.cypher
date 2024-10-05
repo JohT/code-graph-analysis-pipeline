@@ -11,7 +11,7 @@ MATCH (npmPackage:NPM:Package)
           , ''
           ) AS relativeNpmPackageDirectory
  MATCH (project:TS:Project)-[:HAS_CONFIG]->(config:File)<-[:CONTAINS]-(projectConfigDir:Directory)
- WHERE projectConfigDir.absoluteFileName ENDS WITH relativeNpmPackageDirectory
+ WHERE projectConfigDir.absoluteFileName ENDS WITH '/source' + relativeNpmPackageDirectory
   WITH npmPackage
       ,relativeNpmPackageDirectory
       ,collect(DISTINCT project) AS projects
