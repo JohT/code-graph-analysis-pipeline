@@ -44,6 +44,7 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
                                     -type d -name "node_modules" -prune -o \
                                     -type d -name "dist" -prune -o \
                                     -type d -name "target" -prune -o \
+                                    -type d -name ".yalc" -prune -o \
                                     -type d -name "temp" -prune -o \
                                     -type f -path "*/.reports/jqa/ts-output.json" \
                                     -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
