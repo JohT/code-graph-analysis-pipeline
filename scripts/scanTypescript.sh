@@ -9,7 +9,9 @@ set -o errexit -o pipefail
 
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+
 TYPESCRIPT_SCAN_HEAP_MEMORY=${TYPESCRIPT_SCAN_HEAP_MEMORY:-"4096"} # Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB.
+echo "scanTypescript TYPESCRIPT_SCAN_HEAP_MEMORY=${TYPESCRIPT_SCAN_HEAP_MEMORY}" >&2
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
