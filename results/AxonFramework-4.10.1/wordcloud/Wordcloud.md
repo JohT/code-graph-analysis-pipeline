@@ -98,7 +98,7 @@
     <tr>
       <th>0</th>
       <td>Mitchell Herrijgers</td>
-      <td>262</td>
+      <td>270</td>
     </tr>
     <tr>
       <th>1</th>

@@ -2445,7 +2445,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>285</td>
       <td>181</td>
       <td>7</td>
-      <td>calculateRoute</td>
+      <td>equals</td>
     </tr>
     <tr>
       <th>22</th>
@@ -2454,7 +2454,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>277</td>
       <td>194</td>
       <td>6</td>
-      <td>instantiateAssociationResolver</td>
+      <td>equals</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2767,7 +2767,7 @@ The following table shows the top 30 packages containing the methods with the hi
       <td>32</td>
       <td>axon-messaging-4.10.1</td>
       <td>org.axonframework.deadline.dbscheduler</td>
-      <td>DbSchedulerBinaryDeadlineDetails</td>
+      <td>DbSchedulerHumanReadableDeadlineDetails</td>
       <td>equals</td>
       <td>11</td>
     </tr>
