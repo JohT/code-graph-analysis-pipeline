@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Steven van Beelen</td>
-      <td>3572</td>
+      <td>Mitchell Herrijgers</td>
+      <td>262</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Mitchell Herrijgers</td>
-      <td>250</td>
+      <td>Steven van Beelen</td>
+      <td>3613</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>Weronika Trzaska</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Allard Buijze</td>
+      <td>3092</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>Harold D. Turyasingura</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>5</th>
       <td>Marc</td>
       <td>23</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Allard Buijze</td>
-      <td>3088</td>
-    </tr>
-    <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Markus Hager</td>
       <td>6</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>David Gómez G.</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>David Gómez G</td>
       <td>55</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>Marc Gathier</td>
       <td>231</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Stefan Dragisic</td>
-      <td>94</td>
     </tr>
   </tbody>
 </table>
