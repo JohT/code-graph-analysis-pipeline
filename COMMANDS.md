@@ -71,7 +71,9 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 - `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports. `DatabaseCsvExport` exports the whole graph database as a CSV file (performance intense, check if there are security concerns first).
 
 - `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. `Neo4jv5` will explicitly select the newest (june 2023) version 5.x of Neo4j. Without setting
-a profile, the newest versions will be used. Profiles are scripts that can be found in the directory [scripts/profiles](./scripts/profiles/).
+a profile, the newest versions will be used. Profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+
+- `--profile Neo4jv5-continue-on-scan-errors` is based on the default profile (`Neo4jv5`) but uses the jQAssistant configuration template [template-neo4jv5-jqassistant-continue-on-error.yaml](./scripts/configuration/template-neo4jv5-jqassistant-continue-on-error.yaml) to continue on scan error instead of failing fast. This is temporarily useful when there is a known error that needs to be ignored. It is still recommended to use the default profile and fail fast if there is something wrong. Profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
 - `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 

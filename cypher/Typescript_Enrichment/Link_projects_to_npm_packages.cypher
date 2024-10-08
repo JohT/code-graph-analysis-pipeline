@@ -11,7 +11,7 @@ MATCH (npmPackage:NPM:Package)
           , ''
           ) AS relativeNpmPackageDirectory
  MATCH (project:TS:Project)-[:HAS_CONFIG]->(config:File)<-[:CONTAINS]-(projectConfigDir:Directory)
- WHERE projectConfigDir.absoluteFileName ENDS WITH relativeNpmPackageDirectory
+ WHERE projectConfigDir.absoluteFileName ENDS WITH '/source' + relativeNpmPackageDirectory
   WITH npmPackage
       ,relativeNpmPackageDirectory
       ,collect(DISTINCT project) AS projects
@@ -25,6 +25,7 @@ MATCH (npmPackage:NPM:Package)
 // Set the "relativeFileDirectory" on the npm package to the relative directory 
 // that contains the package.json file 
    SET npmPackage.relativeFileDirectory = relativeNpmPackageDirectory
+      ,project.version = npmPackage.version
  RETURN count(*) AS numberOfCreatedNpmPackageRelationships
 // Detailed results for debugging
 //RETURN npmPackage.fileName                   AS npmPackageFileName

@@ -18,7 +18,7 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
       ,coalesce('@' + nullif(namespaceName, ''), '')                                        AS namespaceNameWithAtPrefixed
       ,replace(symbolName, coalesce(optionalClassName + '.', ''), '')                       AS symbolNameWithoutClassName
     SET ts.namespace          = namespaceNameWithAtPrefixed
-       ,ts.module             = modulePathName
+       ,ts.module             = modulePathNameWithoutIndexAndDefault
        ,ts.moduleName         = moduleName
        ,ts.name               = coalesce(symbolNameWithoutClassName, indexAndExtensionOmittedName)
        ,ts.extensionExtended  = moduleNameExtensionExtended
