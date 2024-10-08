@@ -226,6 +226,14 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   TYPESCRIPT_SCAN_HEAP_MEMORY=16384 ./../../scripts/analysis/analyze.sh
   ```
 
+- How can i continue on errors when scanning Typescript projects instead of cancelling the whole analysis?  
+  👉 Use the profile `Neo4jv5-continue-on-scan-errors` (default = `Neo4jv5`):
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --profile Neo4jv5-continue-on-scan-errors
+  ```
+
+
 ## 🕸 Web References
 
 - [Graph Data Science 101: Understanding Graphs and Graph Data Science](https://techfirst.medium.com/graph-data-science-101-understanding-graphs-and-graph-data-science-c25055a9db01)
