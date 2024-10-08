@@ -35,7 +35,7 @@ NEO4J_APOC_PLUGIN_GITHUB              | neo4j-contrib/neo4j-apoc-procedures | Lo
 NEO4J_GDS_PLUGIN_VERSION              | 2.3.4                               | Graph Data Science Plugin Version 2.3.x is compatible with Neo4j 4.4.x |
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.6.8                               | Open package variant of the graph-data-science plugin for Neo4j (https://github.com/JohT/open-graph-data-science-packaging). Since version 2.4. compatible with Neo4j 5.x. |
 NEO4J_GDS_PLUGIN_EDITION              | open                                | Graph Data Science Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license |
-JQASSISTANT_CLI_VERSION               | 1.12.2                              | Version 1.12.2 is the newest version (may 2023) compatible with Neo4j v4 |
+JQASSISTANT_CLI_VERSION               | 1.12.2                              | Version number of the jQAssistant command line interface. Version 1.12.2 is compatible with Neo4j v4 |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv4     | For Neo4j 4: "jqassistant-commandline-neo4jv4" |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv4-jqassistant.yaml   | Name of the template file for the jqassistant configuration |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
