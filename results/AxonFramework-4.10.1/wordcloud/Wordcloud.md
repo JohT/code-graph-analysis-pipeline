@@ -97,13 +97,13 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Mitchell Herrijgers</td>
-      <td>270</td>
+      <td>Steven van Beelen</td>
+      <td>3620</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Steven van Beelen</td>
-      <td>3613</td>
+      <td>Mitchell Herrijgers</td>
+      <td>278</td>
     </tr>
     <tr>
       <th>2</th>

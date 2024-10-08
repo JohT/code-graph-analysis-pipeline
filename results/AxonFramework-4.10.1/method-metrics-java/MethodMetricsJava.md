@@ -2436,7 +2436,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>292</td>
       <td>187</td>
       <td>8</td>
-      <td>withGapsCleaned</td>
+      <td>fetchTrackedEvents</td>
     </tr>
     <tr>
       <th>18</th>
@@ -2454,7 +2454,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>277</td>
       <td>194</td>
       <td>6</td>
-      <td>handle</td>
+      <td>instantiateAssociationResolver</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2463,7 +2463,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>274</td>
       <td>184</td>
       <td>8</td>
-      <td>onResult</td>
+      <td>doDispatch</td>
     </tr>
     <tr>
       <th>16</th>
@@ -2472,7 +2472,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>273</td>
       <td>236</td>
       <td>7</td>
-      <td>lambda$cleanGaps$37</td>
+      <td>lambda$fetchTrackedEvents$32</td>
     </tr>
     <tr>
       <th>10</th>
@@ -2535,7 +2535,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>209</td>
       <td>156</td>
       <td>4</td>
-      <td>resolveDetails</td>
+      <td>equals</td>
     </tr>
     <tr>
       <th>29</th>
@@ -2562,7 +2562,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>191</td>
       <td>108</td>
       <td>8</td>
-      <td>matchesList</td>
+      <td>matchingFields</td>
     </tr>
     <tr>
       <th>38</th>
