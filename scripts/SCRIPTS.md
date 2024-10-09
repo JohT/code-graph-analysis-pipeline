@@ -43,6 +43,7 @@ Script | Directory | Description
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4jv4.sh](./profiles/Neo4jv4.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
+| [Neo4jv5-continue-on-scan-errors.sh](./profiles/Neo4jv5-continue-on-scan-errors.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
 | [Neo4jv5.sh](./profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
 | [projectionFunctions.sh](./projectionFunctions.sh) |  | Provides functions to create and delete Graph Projections for Neo4j Graph Data Science. |
 | [ArtifactDependenciesCsv.sh](./reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports. |
