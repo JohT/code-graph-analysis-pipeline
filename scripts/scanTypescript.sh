@@ -24,7 +24,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 echo "scanTypescript: SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
 # Dry run for internal testing (not intended to be accessible from the outside)
-TYPESCRIPT_SCAN_DRY_RUN=false
+TYPESCRIPT_SCAN_DRY_RUN=true # !!!!!!!! TODO !!!!!!! set back to false
 if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = true ] ; then
     echo "scanTypescript: -> DRY RUN <- Scanning will only be logged, not executed." >&2
 fi
@@ -38,6 +38,48 @@ if ! command -v "npx" &> /dev/null ; then
     echo "scanTypescript Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects." >&2
     exit 1
 fi
+
+# Takes one parameter containing the directory to search.
+# Returns all directories (multi-line) that contain a "package.json" file within the given base directory.
+find_directories_with_package_json_file() {
+    find -L "${1}" \
+        -type d -name "node_modules" -prune -o \
+        -type d -name "dist" -prune -o \
+        -type d -name ".yalc" -prune -o \
+        -type d -name "lib" -prune -o \
+        -type d -name "libs" -prune -o \
+        -type d -name "*test" -prune -o \
+        -type d -name "*tests" -prune -o \
+        -name "package.json" \
+        -print0 \
+        | xargs -0 -r -I {} dirname {}
+}
+
+# Takes one parameter containing the directory to scan for Typescript projects.
+# Executes the Typescript scan for the given base directory including subdirectories.
+# Skips the scan in case of a dry run
+scan_directory() {
+    echo "" >&2
+    echo "scanTypescript: $(date +'%Y-%m-%dT%H:%M:%S%z') Scanning ${directory_name} (${processed_directories}/${total_directories}) -----------------" >&2
+    
+    if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = false ] ; then
+        # Note: For later troubleshooting, the output is also copied to a dedicated log file using "tee".
+        # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
+        # Note: NODE_OPTIONS --max-old-space-size=4096 increases the memory for scanning larger projects
+        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.0 "${1}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
+    fi
+}
+
+# Takes one parameter containing the directory to scan for Typescript projects.
+# TODO under construction
+is_empty_scan_result() {
+    scan_file_size=$(wc -c "${1}/.reports/jqa/ts-output.json" | awk '{print $1}')
+    if [[ "${scan_file_size}" -le 600 ]]; then
+        true;
+    else
+        false;
+    fi
+}
 
 # Scan and analyze Artifacts when they were changed
 changeDetectionHashFilePath="./${SOURCE_DIRECTORY}/typescriptFileChangeDetectionHashFile.txt"
@@ -54,7 +96,10 @@ if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_DRY_RUN}" =
     LOG_DIRECTORY="$(pwd)/runtime/logs"
     echo "scanTypescript: LOG_DIRECTORY=${LOG_DIRECTORY}" >&2
 
-    source_directories=$( find -L "./${SOURCE_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 -r -I {} echo {} )
+    # source_directories=$( find -L "./${SOURCE_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 -r -I {} echo {} )
+    # TODO Idea: Leave source directories and get sub package.json projects for each of them. Ideally merge results with jq per source directory?
+    #      Another idea would be to switch between package.json granular scans versus current source level scans
+    source_directories=$( find_directories_with_package_json_file "./${SOURCE_DIRECTORY}" )
     
     total_directories=$(echo "${source_directories}" | wc -l | awk '{print $1}')
     processed_directories=0
@@ -62,15 +107,7 @@ if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_DRY_RUN}" =
     for directory in ${source_directories}; do
         directory_name=$(basename "${directory}");
         processed_directories=$((processed_directories + 1))
-        echo "" >&2
-        echo "scanTypescript: $(date +'%Y-%m-%dT%H:%M:%S%z') Scanning ${directory_name} (${processed_directories}/${total_directories}) -----------------" >&2
-        
-        if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = false ] ; then
-            # Note: For later troubleshooting, the output is also copied to a dedicated log file using "tee".
-            # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
-            # Note: NODE_OPTIONS --max-old-space-size=4096 increases the memory for scanning larger projects
-            NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.0 "${directory}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
-        fi
+        scan_directory "${directory}"
     done
 
     if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = false ] ; then
