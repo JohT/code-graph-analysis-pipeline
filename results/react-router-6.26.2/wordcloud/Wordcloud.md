@@ -51,19 +51,19 @@
     </tr>
     <tr>
       <th>6</th>
-      <td>tutorial</td>
+      <td>packages</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>examples</td>
+      <td>react</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>custom</td>
+      <td>router</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>filter</td>
+      <td>react</td>
     </tr>
   </tbody>
 </table>
@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Oleg</td>
-      <td>3</td>
+      <td>Matt Brophy</td>
+      <td>1745</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Mark Dalgleish</td>
-      <td>313</td>
+      <td>Brooks Lybrand</td>
+      <td>29</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Remix Run Bot</td>
-      <td>293</td>
+      <td>295</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Matt Brophy</td>
-      <td>1726</td>
+      <td>Mark Dalgleish</td>
+      <td>316</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Brooks Lybrand</td>
-      <td>26</td>
+      <td>Ryuya Yanagi</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>Oleg</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>Onur Guvenc</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>Pedro Cattori</td>
       <td>313</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Jacob Ebey</td>
       <td>223</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>Ryan Florence</td>
       <td>1258</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Kyukyoung Song (James Song)</td>
-      <td>1</td>
     </tr>
   </tbody>
 </table>
