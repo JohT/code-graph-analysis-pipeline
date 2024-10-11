@@ -35,35 +35,35 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>eventsourcing</td>
+      <td>test</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>maven</td>
+      <td>services</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org</td>
+      <td>maven</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>axonframework</td>
+      <td>org</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>axon</td>
+      <td>axonframework</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>eventsourcing</td>
+      <td>axon</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>main</td>
+      <td>test</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>manifest</td>
+      <td>main</td>
     </tr>
   </tbody>
 </table>
@@ -97,13 +97,13 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Steven van Beelen</td>
-      <td>3620</td>
+      <td>Mitchell Herrijgers</td>
+      <td>279</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Mitchell Herrijgers</td>
-      <td>278</td>
+      <td>Steven van Beelen</td>
+      <td>3629</td>
     </tr>
     <tr>
       <th>2</th>
