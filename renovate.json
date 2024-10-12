@@ -79,7 +79,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Neo4jv5.*\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
         "^scripts\/[^\/]*\\.sh$"
       ],
@@ -92,7 +92,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Neo4jv5.*\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
         "^scripts\/[^\/]*\\.sh$"
       ],
@@ -105,7 +105,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Neo4jv5.*\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
         "^scripts\/[^\/]*\\.sh$"
       ],
@@ -118,7 +118,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Neo4jv5.*\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
         "^scripts\/[^\/]*\\.sh$"
       ],
@@ -133,7 +133,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^scripts\/profiles\/Neo4jv5\\.sh$",
+        "^scripts\/profiles\/Neo4jv5.*\\.sh$",
         "^scripts\/profiles\/Default\\.sh$",
         "^scripts\/[^\/]*\\.sh$"
       ],

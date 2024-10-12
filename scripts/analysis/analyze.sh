@@ -76,13 +76,13 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Assure that the analysis report compilation only consists of letters and numbers
-if ! [[ ${analysisReportCompilation} =~ ^[[:alnum:]]+$ ]]; then
+if ! [[ ${analysisReportCompilation} =~ ^[-[:alnum:]]+$ ]]; then
   echo "analyze: Report can only contain letters and numbers."
   exit 1
 fi
 
 # Assure that the settings profile only consists of letters and numbers
-if ! [[ ${settingsProfile} =~ ^[[:alnum:]]+$ ]]; then
+if ! [[ ${settingsProfile} =~ ^[-[:alnum:]]+$ ]]; then
   echo "analyze: Error: Settings profile can only contain letters and numbers."
   exit 1
 fi
