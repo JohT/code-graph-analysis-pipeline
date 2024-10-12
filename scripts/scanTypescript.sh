@@ -91,10 +91,11 @@ is_valid_scan_result() {
     fi
 
     local scan_file_size; scan_file_size=$(wc -c "${scan_result_file}" | awk '{print $1}')
-    if [ "${scan_file_size}" -le "600" ]; then
-        echo "scanTypescript: Info: The scanned file ${scan_result_file} is too small: ${scan_file_size} < 600" >&2
+    if [ "${scan_file_size}" -le "900" ]; then
+        echo "scanTypescript: Info: The scanned file ${scan_result_file} is too small: ${scan_file_size} < 900" >&2
         false
     else
+        echo "scanTypescript: The scanned file size: ${scan_file_size}" >&2
         true
     fi
 }
