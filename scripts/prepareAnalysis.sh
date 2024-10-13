@@ -43,6 +43,7 @@ TYPESCRIPT_CYPHER_DIR="$CYPHER_DIR/Typescript_Enrichment"
 GENERAL_ENRICHMENT_CYPHER_DIR="${CYPHER_DIR}/General_Enrichment"
 
 COLOR_RED='\033[0;31m'
+COLOR_YELLOW='\033[0;33m'
 COLOR_DEFAULT='\033[0m'
 
 # Preparation - Data verification: DEPENDS_ON relationships
@@ -82,10 +83,11 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_bet
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
 if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
-    # There are Typescript projects and the unresolvedProjectsCount is greater than zero
-    echo -e "${COLOR_RED}prepareAnalysis: Error: Data verification failed. There are Typescript projects without a linked npm package:${COLOR_DEFAULT}"
-    echo -e "${COLOR_RED}${dataVerificationResult}${COLOR_DEFAULT}"
-    exit 1
+    # Warning: There are Typescript projects that are not linked to NPM Packages (unresolvedProjectsCount is greater than zero).
+    #          It is possible to have projects with a tsconfig.json file but without a package.json e.g. for testing purposes.
+    echo -e "${COLOR_YELLOW}prepareAnalysis: Data verification warning: There are Typescript projects that are not linked to a npm package:${COLOR_DEFAULT}"
+    echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
+    # Since this is now only a warning, execution will be continued.
 fi
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_external_modules_to_corresponding_npm_dependency.cypher"
 
