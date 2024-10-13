@@ -116,6 +116,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
     neo4jImportPath=$(convertPosixToWindowsPathIfNecessary "${IMPORT_DIRECTORY}")
     
     # Create import directory in case it doesn't exist.
+    # The import needs to be configured even if its not used since it will be configured below and validated by Neo4j.
     mkdir -p "${IMPORT_DIRECTORY}"
 
     if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
