@@ -1,0 +1,6 @@
+"sourceProject","sourceScan","isDifferentTargetProject","isDifferentTargetScan","distance","distanceTotalPairCount","distanceTotalSourceCount","distanceTotalTargetCount","pairCount","sourceNodeCount","targetNodeCount","examples","Source Cypher File: Path_Finding/Path_Finding_5_All_pairs_shortest_path_distribution_per_project.cypher"
+"react-router","react-router-6.27.0",true,false,1,7,4,3,1,1,1,"./index.ts ->./index.ts",""
+"react-router-dom","react-router-6.27.0",false,false,1,7,4,3,1,1,1,"./server.tsx ->./index.tsx",""
+"react-router-dom","react-router-6.27.0",true,false,1,7,4,3,4,2,2,"./index.tsx ->./index.ts,./server.tsx ->./index.ts",""
+"react-router-native","react-router-6.27.0",true,false,1,7,4,3,1,1,1,"./index.tsx ->./index.ts",""
+"react-router-native","react-router-6.27.0",true,false,2,1,1,1,1,1,1,"./index.tsx ->./index.ts",""

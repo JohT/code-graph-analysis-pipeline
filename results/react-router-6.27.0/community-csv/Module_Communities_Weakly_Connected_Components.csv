@@ -1,0 +1,2 @@
+"propertyName","propertyValue","codeUnits","codeUnitNames","shortCodeUnitNames","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Grouped.cypher"
+"communityWeaklyConnectedComponentId",0,3,"./index.ts,./index.tsx,./server.tsx","react-router,react-router-dom,server,react-router-native,router",""
