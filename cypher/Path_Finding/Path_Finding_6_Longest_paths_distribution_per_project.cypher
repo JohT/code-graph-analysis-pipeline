@@ -30,8 +30,10 @@ OPTIONAL MATCH (targetScan:TS:Scan)-[:CONTAINS_PROJECT]->(targetProject)
 // Group by project name, if the target project is the same and the distance. Return those as result.
 RETURN sourceProject.name               AS sourceProject
       ,sourceScan.name                  AS sourceScan
+      ,source.rootProjectName           AS sourceRootProject
       ,(targetProject <> sourceProject) AS isDifferentTargetProject
       ,(targetScan <> sourceScan)       AS isDifferentTargetScan
+      ,(target.rootProjectName <> source.rootProjectName) AS isDifferentTargetRootProject
       ,distance
       ,distanceTotalPairCount
       ,distanceTotalSourceCount
@@ -39,7 +41,9 @@ RETURN sourceProject.name               AS sourceProject
       ,count(*)                         AS pairCount
       ,count(DISTINCT sourceNodeId)     AS sourceNodeCount
       ,count(DISTINCT targetNodeId)     AS targetNodeCount
-      ,collect(DISTINCT source.fileName + ' ->' + target.fileName)[0..4] AS examples
+      ,collect(DISTINCT source.fileName    + ' -> ' + target.fileName)[0..4]    AS examples
+      ,collect(DISTINCT sourceProject.name + ' -> ' + targetProject.name)[0..4] AS exampleProjects
+      ,collect(DISTINCT sourceScan.name    + ' -> ' + targetScan.name)[0..4]    AS exampleScans
 // Sort by source project name, if the target project is the same and the distance, all ascending
 ORDER BY sourceProject, isDifferentTargetProject, distance
 
