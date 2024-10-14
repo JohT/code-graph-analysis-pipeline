@@ -1,6 +1,6 @@
 "artifactName","fullPackageName","linesInPackage","complexityInPackage","methodCount","maxLinesMethod","maxLinesMethodType","maxLinesMethodName","maxComplexity","maxComplexityType","maxComplexityMethod","packageName","Source Cypher File: Overview/Effective_lines_of_method_code_per_package.cypher"
 "axon-messaging-4.10.1","org.axonframework.eventhandling",2331,1276,838,64,"TrackingEventProcessor","processBatch",21,"TrackingEventProcessor","processBatch","eventhandling",""
-"axon-configuration-4.10.1","org.axonframework.config",1587,716,606,50,"DefaultConfigurer","<init>",7,"DefaultConfigurer","invokeLifecycleHandlers","config",""
+"axon-configuration-4.10.1","org.axonframework.config",1587,716,606,50,"DefaultConfigurer","<init>",7,"MessageMonitorFactoryBuilder","getFactoryForType","config",""
 "axon-messaging-4.10.1","org.axonframework.eventhandling.pooled",1041,460,341,77,"Coordinator$CoordinationTask","run",23,"Coordinator$CoordinationTask","run","pooled",""
 "axon-test-4.10.1","org.axonframework.test.aggregate",956,438,251,45,"Reporter","appendEventOverview",13,"AggregateTestFixture","ensureValuesEqual","aggregate",""
 "axon-messaging-4.10.1","org.axonframework.queryhandling",946,484,388,36,"SimpleQueryBus","doQuery",11,"SimpleQueryBus","doQuery","queryhandling",""

@@ -7,4 +7,4 @@
 "axon-modelling-4.10.1",158,35,5,22.151898734177216,99,356,5,"javax.annotation,javax.persistence,jakarta.persistence,org.slf4j","Nonnull,Nullable,EntityNotFoundException,EntityManagerFactory,TypedQuery,EntityManager,Query,Lob,Column",""
 "axon-messaging-4.10.1",787,154,42,19.567979669631512,749,2975,42,"javax.annotation,org.slf4j,com.fasterxml.jackson.annotation,javax.persistence","Nonnull,Nullable,Logger,LoggerFactory,JsonCreator,JsonProperty,JsonGetter,JsonTypeInfo$Id,JsonTypeInfo",""
 "axon-eventsourcing-4.10.1",133,25,4,18.796992481203006,74,238,4,"javax.annotation,org.slf4j,jakarta.persistence,javax.persistence","Nonnull,Nullable,PreDestroy,Logger,LoggerFactory,TypedQuery,Query,EntityManager,MappedSuperclass",""
-"axon-configuration-4.10.1",41,4,2,9.75609756097561,24,137,2,"javax.annotation,org.slf4j","Nonnull,Nullable,Logger,LoggerFactory",""
+"axon-configuration-4.10.1",41,4,2,9.75609756097561,24,137,2,"javax.annotation,org.slf4j","Nonnull,Nullable,LoggerFactory,Logger",""

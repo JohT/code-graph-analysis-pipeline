@@ -1,6 +1,6 @@
 "artifactName","externalPackageName","numberOfExternalTypeCaller","numberOfExternalTypeCalls","numberOfTypesInArtifact","externalTypeNames","Source Cypher File: External_Dependencies/External_package_usage_per_artifact.cypher"
 "axon-configuration-4.10.1","javax.annotation",13,105,41,"Nonnull,Nullable",""
-"axon-configuration-4.10.1","org.slf4j",11,32,41,"Logger,LoggerFactory",""
+"axon-configuration-4.10.1","org.slf4j",11,32,41,"LoggerFactory,Logger",""
 "axon-disruptor-4.10.1","org.slf4j",12,22,22,"Logger,LoggerFactory",""
 "axon-disruptor-4.10.1","com.lmax.disruptor",9,25,22,"RingBuffer,EventHandler,LifecycleAware,WaitStrategy,BlockingWaitStrategy,ExceptionHandler",""
 "axon-disruptor-4.10.1","javax.annotation",6,23,22,"Nonnull",""

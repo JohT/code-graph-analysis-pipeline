@@ -526,7 +526,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/commandhandling/callbacks -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt;/org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt;/org/axonframework/commandhandling, /org/axonframework/serializa...</td>
+      <td>[/org/axonframework/serialization -&gt;/org/axonframework/commandhandling, /org/axonframework/tracing -&gt;/org/axonframework/commandhandling, /org/axonframework/tracing/attributes -&gt;/org/axonframework/commandhandling, /org/axonframework/util -&gt;/org/axonframework/commandhandling]</td>
     </tr>
     <tr>
       <th>15</th>
@@ -541,7 +541,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>563</td>
       <td>51</td>
       <td>30</td>
-      <td>[/org/axonframework/deadline -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/dbscheduler -&gt;/org/axonframework/commandhandling, /org/axonframework/deadline/jobrunr -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling -&gt;/org/axonframework/commandhandling]</td>
+      <td>[/org/axonframework/eventhandling/scheduling/quartz -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/tokenstore -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/tokenstore/jdbc -&gt;/org/axonframework/commandhandling, /org/axonframework/eventhandling/toke...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -883,7 +883,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -898,7 +898,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/util]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1053,7 +1053,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/heartbeat]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1068,7 +1068,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt;/org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt;/org/axonframework/axonserver/connector/util]</td>
     </tr>
     <tr>
       <th>3</th>
