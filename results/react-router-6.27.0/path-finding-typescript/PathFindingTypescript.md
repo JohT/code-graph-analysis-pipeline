@@ -228,8 +228,10 @@ The following table shows the first 10 rows with all details of the query above.
       <th></th>
       <th>sourceProject</th>
       <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th>isDifferentTargetProject</th>
       <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -238,6 +240,8 @@ The following table shows the first 10 rows with all details of the query above.
       <th>sourceNodeCount</th>
       <th>targetNodeCount</th>
       <th>examples</th>
+      <th>exampleProjects</th>
+      <th>exampleScans</th>
     </tr>
   </thead>
   <tbody>
@@ -245,7 +249,9 @@ The following table shows the first 10 rows with all details of the query above.
       <th>0</th>
       <td>react-router</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>7</td>
@@ -254,12 +260,16 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.ts -&gt;./index.ts]</td>
+      <td>[./index.ts -&gt; ./index.ts]</td>
+      <td>[react-router -&gt; router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
+      <td>False</td>
       <td>False</td>
       <td>False</td>
       <td>1</td>
@@ -269,13 +279,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.tsx]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>7</td>
@@ -284,13 +298,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>4</td>
       <td>2</td>
       <td>2</td>
-      <td>[./index.tsx -&gt;./index.ts, ./server.tsx -&gt;./index.ts]</td>
+      <td>[./index.tsx -&gt; ./index.ts, ./server.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-dom -&gt; react-router, react-router-dom -&gt; router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-native</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>7</td>
@@ -299,13 +317,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.tsx -&gt;./index.ts]</td>
+      <td>[./index.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-native -&gt; react-router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>4</th>
       <td>react-router-native</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>2</td>
       <td>1</td>
@@ -314,7 +336,9 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.tsx -&gt;./index.ts]</td>
+      <td>[./index.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-native -&gt; router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
 </table>
@@ -338,8 +362,10 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th></th>
       <th>sourceProject</th>
       <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th>isDifferentTargetProject</th>
       <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -348,6 +374,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>sourceNodeCount</th>
       <th>targetNodeCount</th>
       <th>examples</th>
+      <th>exampleProjects</th>
+      <th>exampleScans</th>
     </tr>
   </thead>
   <tbody>
@@ -355,6 +383,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>1</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
+      <td>False</td>
       <td>False</td>
       <td>False</td>
       <td>1</td>
@@ -364,7 +394,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.tsx]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
 </table>
@@ -443,11 +475,11 @@ Shows the top 50 projects with the highest number of dependency paths stacked by
     
 
 
-### 1.1.5 All pairs shortest path for each scan
+### 1.1.5 All pairs shortest path for each root project
 
-In this section we'll focus only on pairs of nodes that both belong to the same scan, filtering out every line that has `isDifferentTargetScan==False`. The first ten rows are shown in a table followed by charts that show the distribution of shortest path distances across different scans in stacked bar charts (absolute and normalized).
+In this section we'll focus only on pairs of nodes that both belong to the same root project, filtering out every line that has `isDifferentTargetRootProject==False`. The first ten rows are shown in a table followed by charts that show the distribution of shortest path distances across different root projects in stacked bar charts (absolute and normalized).
 
-**Note:** It is possible that a (shortest) path could have nodes in between that belong to different scans. Therefore, the data of each scan isn't perfectly isolated. However, it shows how the dependencies interact across scans "in real life" while still providing a decent isolation of each scan.
+**Note:** It is possible that a (shortest) path could have nodes in between that belong to different root projects. Therefore, the data of each root project isn't perfectly isolated. However, it shows how the dependencies interact across root projects "in real life" while still providing a decent isolation of each root project.
 
 
 
@@ -457,7 +489,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th>distance</th>
       <th>pairCount</th>
       <th>sourceNodeCount</th>
@@ -487,14 +519,14 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
 
 
 
-#### All pairs shortest path for each scan - Longest shortest path (Diameter) for each scan
+#### All pairs shortest path for each root project - Longest shortest path (Diameter) for each root project
 
-Shows the top 20 scans with the longest shortest path (=Graph Diameter).
-
-
+Shows the top 20 root projects with the longest shortest path (=Graph Diameter).
 
 
-    sourceScan
+
+
+    sourceRootProject
     react-router-6.27.0    2
     Name: distance, dtype: int64
 
@@ -506,7 +538,7 @@ Shows the top 20 scans with the longest shortest path (=Graph Diameter).
     
 
 
-#### All pairs shortest path for each scan - Bar chart (absolute)
+#### All pairs shortest path for each root project - Bar chart (absolute)
 
 
     <Figure size 640x480 with 0 Axes>
@@ -518,9 +550,9 @@ Shows the top 20 scans with the longest shortest path (=Graph Diameter).
     
 
 
-#### All pairs shortest path for each scan - Bar chart (normalized)
+#### All pairs shortest path for each root project - Bar chart (normalized)
 
-Shows the top 50 scans with the highest number of dependency paths stacked by their length.
+Shows the top 50 root projects with the highest number of dependency paths stacked by their length.
 
 
 
@@ -655,8 +687,10 @@ The following table shows the first 10 rows with all details of the query above.
       <th></th>
       <th>sourceProject</th>
       <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th>isDifferentTargetProject</th>
       <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -665,6 +699,8 @@ The following table shows the first 10 rows with all details of the query above.
       <th>sourceNodeCount</th>
       <th>targetNodeCount</th>
       <th>examples</th>
+      <th>exampleProjects</th>
+      <th>exampleScans</th>
     </tr>
   </thead>
   <tbody>
@@ -672,8 +708,10 @@ The following table shows the first 10 rows with all details of the query above.
       <th>0</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>False</td>
       <td>False</td>
+      <td>False</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -681,13 +719,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.tsx]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>2</td>
       <td>1</td>
@@ -696,13 +738,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.ts]</td>
+      <td>[./server.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-dom -&gt; react-router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>3</td>
       <td>1</td>
@@ -711,7 +757,9 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.ts]</td>
+      <td>[./server.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-dom -&gt; router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
 </table>
@@ -735,8 +783,10 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th></th>
       <th>sourceProject</th>
       <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th>isDifferentTargetProject</th>
       <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -745,6 +795,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>sourceNodeCount</th>
       <th>targetNodeCount</th>
       <th>examples</th>
+      <th>exampleProjects</th>
+      <th>exampleScans</th>
     </tr>
   </thead>
   <tbody>
@@ -752,8 +804,10 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>0</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>False</td>
       <td>False</td>
+      <td>False</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -761,7 +815,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.tsx]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
 </table>
@@ -840,11 +896,11 @@ Shows the top 50 projects with the highest number of dependency paths stacked by
     
 
 
-### 1.2.4 Longest path for each scan
+### 1.2.4 Longest path for each root project
 
-In this section we'll focus only on pairs of nodes that both belong to the same scan, filtering out every line that has `isDifferentTargetScan==False`. The first ten rows are shown in a table followed by charts that show the distribution of longest path distances across different scans in stacked bar charts (absolute and normalized).
+In this section we'll focus only on pairs of nodes that both belong to the same root project, filtering out every line that has `isDifferentTargetRootProject==False`. The first ten rows are shown in a table followed by charts that show the distribution of longest path distances across different root projects in stacked bar charts (absolute and normalized).
 
-**Note:** It is possible that a (longest) path could have nodes in-between that belong to different scans. Therefore, the data of each scan isn't perfectly isolated. However, it shows how the dependencies interact across scans "in real life" while still providing a decent amount of isolation of each scan.
+**Note:** It is possible that a (longest) path could have nodes in-between that belong to different root projects. Therefore, the data of each root project isn't perfectly isolated. However, it shows how the dependencies interact across root projects "in real life" while still providing a decent amount of isolation of each root project.
 
 
 
@@ -856,8 +912,10 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th></th>
       <th>sourceProject</th>
       <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th>isDifferentTargetProject</th>
       <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
       <th>distance</th>
       <th>distanceTotalPairCount</th>
       <th>distanceTotalSourceCount</th>
@@ -866,6 +924,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>sourceNodeCount</th>
       <th>targetNodeCount</th>
       <th>examples</th>
+      <th>exampleProjects</th>
+      <th>exampleScans</th>
     </tr>
   </thead>
   <tbody>
@@ -873,8 +933,10 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>0</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>False</td>
       <td>False</td>
+      <td>False</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -882,13 +944,17 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.tsx]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>2</td>
       <td>1</td>
@@ -897,13 +963,17 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.ts]</td>
+      <td>[./server.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-dom -&gt; react-router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
+      <td>react-router-6.27.0</td>
       <td>True</td>
+      <td>False</td>
       <td>False</td>
       <td>3</td>
       <td>1</td>
@@ -912,7 +982,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt;./index.ts]</td>
+      <td>[./server.tsx -&gt; ./index.ts]</td>
+      <td>[react-router-dom -&gt; router]</td>
+      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
 </table>
@@ -920,14 +992,14 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
 
 
 
-#### Longest path for each scan - Max. longest path for each scan
+#### Longest path for each root project - Max. longest path for each root project
 
-Shows the top 20 scans with their max. longest path.
-
-
+Shows the top 20 root projects with their max. longest path.
 
 
-    sourceScan
+
+
+    sourceRootProject
     react-router-6.27.0    3
     Name: distance, dtype: int64
 
@@ -939,7 +1011,7 @@ Shows the top 20 scans with their max. longest path.
     
 
 
-#### Longest path for each scan - Bar chart (absolute)
+#### Longest path for each root project - Bar chart (absolute)
 
 
     <Figure size 640x480 with 0 Axes>
@@ -951,9 +1023,9 @@ Shows the top 20 scans with their max. longest path.
     
 
 
-#### Longest path for each scan - Bar chart (normalized)
+#### Longest path for each root project - Bar chart (normalized)
 
-Shows the top 50 scans with the highest number of dependency paths stacked by their length.
+Shows the top 50 root projects with the highest number of dependency paths stacked by their length.
 
 
 
@@ -968,7 +1040,7 @@ Shows the top 50 scans with the highest number of dependency paths stacked by th
       <th>3</th>
     </tr>
     <tr>
-      <th>sourceScan</th>
+      <th>sourceRootProject</th>
       <th></th>
       <th></th>
       <th></th>
