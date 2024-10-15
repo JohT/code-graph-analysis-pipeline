@@ -43,6 +43,7 @@ fi
 # Returns all directories (multi-line) that contain a "package.json" file within the given base directory.
 find_directories_with_package_json_file() {
     find -L "${1}" \
+        -path "${1}/package.json" -prune -o \
         -type d -name "node_modules" -prune -o \
         -type d -name "dist" -prune -o \
         -type d -name ".yalc" -prune -o \
@@ -91,10 +92,11 @@ is_valid_scan_result() {
     fi
 
     local scan_file_size; scan_file_size=$(wc -c "${scan_result_file}" | awk '{print $1}')
-    if [ "${scan_file_size}" -le "600" ]; then
-        echo "scanTypescript: Info: The scanned file ${scan_result_file} is too small: ${scan_file_size} < 600" >&2
+    if [ "${scan_file_size}" -le "900" ]; then
+        echo "scanTypescript: Info: The scanned file ${scan_result_file} is too small: ${scan_file_size} < 900" >&2
         false
     else
+        echo "scanTypescript: The scanned file size: ${scan_file_size}" >&2
         true
     fi
 }
@@ -127,6 +129,8 @@ if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_DRY_RUN}" =
 
         echo "scanTypescript: Info: Unsuccessful source directory scan. Trying to scan all contained packages individually." >&2
         contained_package_directories=$( find_directories_with_package_json_file "${source_directory}" )
+        echo "scanTypescript: contained_package_directories:" >&2
+        echo "${contained_package_directories}" >&2
         total_package_directories=$(echo "${contained_package_directories}" | wc -l | awk '{print $1}')
         processed_package_directories=0
 

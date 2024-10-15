@@ -13,6 +13,7 @@ WHERE module.globalFqn IS NOT NULL
       AND externalModule.moduleName        = module.moduleName 
       AND externalModule.namespace         = module.namespace
       AND externalModule.extensionExtended = module.extensionExtended
+      AND externalModule.globalFqn ENDS WITH module.localModulePath
        )
       )
   AND module <> externalModule

@@ -2,6 +2,7 @@
 
  MATCH (file:File)
  WHERE file.fileName IS NOT NULL
+   AND file.name IS NULL // Don't override an already existing "name" property
   WITH *
       ,file.fileName AS fileName
   WITH *

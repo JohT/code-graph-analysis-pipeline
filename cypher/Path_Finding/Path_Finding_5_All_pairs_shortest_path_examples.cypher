@@ -14,7 +14,7 @@
 OPTIONAL MATCH (sourceProject:Artifact|Project)-[:CONTAINS]->(source)
 // Optionally get the name of the scan that contained that project
 OPTIONAL MATCH (sourceScan:TS:Scan)-[:CONTAINS_PROJECT]->(sourceProject)
-   WITH *, coalesce(sourceScan, sourceProject).name AS sourceContainerName
+   WITH *, coalesce(source.rootProjectName, sourceScan.name, sourceProject.name) AS sourceContainerName
  ORDER BY distance DESC, sourceContainerName ASC
 // Only output the top 10 entries
  LIMIT 10
