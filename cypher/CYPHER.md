@@ -364,6 +364,7 @@ Script | Directory | Description
 | [Link_projects_to_npm_packages.cypher](./Typescript_Enrichment/Link_projects_to_npm_packages.cypher) | Typescript_Enrichment | Link Typescript projects to npm packages |
 | [Mark_test_modules.cypher](./Typescript_Enrichment/Mark_test_modules.cypher) | Typescript_Enrichment | Add "Test" label for modules that contain tests and test-related implementations |
 | [Remove_duplicate_CONTAINS_relations_between_files.cypher](./Typescript_Enrichment/Remove_duplicate_CONTAINS_relations_between_files.cypher) | Typescript_Enrichment | Remove duplicate CONTAINS relationships with the same properties between files |
+| [Set_localRootPath_for_modules.cypher](./Typescript_Enrichment/Set_localRootPath_for_modules.cypher) | Typescript_Enrichment |  |
 | [Verify_projects_linked_to_npm_packages.cypher](./Typescript_Enrichment/Verify_projects_linked_to_npm_packages.cypher) | Typescript_Enrichment | Verify that all Typescript projects are linked to npm packages |
 | [ValidateJavaArtifactDependencies.cypher](./Validation/ValidateJavaArtifactDependencies.cypher) | Validation | Check if there is at least one Java Artifact dependency. |
 | [ValidateJavaExternalDependencies.cypher](./Validation/ValidateJavaExternalDependencies.cypher) | Validation | Check if there is at least one external Java Type dependency. |
