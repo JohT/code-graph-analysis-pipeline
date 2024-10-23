@@ -70,7 +70,7 @@ scan_directory() {
         # Note: For later troubleshooting, the output is also copied to a dedicated log file using "tee".
         # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
         # Note: NODE_OPTIONS --max-old-space-size=4096 increases the memory for scanning larger projects
-        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.0 "${1}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
+        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.1 "${1}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
     else
         echo "scanTypescript: Skipping scan of ${source_directory_name} (${progress_information}) -----------------" >&2
     fi
