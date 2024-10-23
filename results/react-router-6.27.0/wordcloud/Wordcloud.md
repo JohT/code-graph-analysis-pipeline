@@ -97,18 +97,18 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Jacob Ebey</td>
-      <td>241</td>
+      <td>Remix Run Bot</td>
+      <td>311</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Matt Brophy</td>
-      <td>1770</td>
+      <td>1772</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Remix Run Bot</td>
-      <td>308</td>
+      <td>Jacob Ebey</td>
+      <td>241</td>
     </tr>
     <tr>
       <th>3</th>
