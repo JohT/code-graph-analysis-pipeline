@@ -71,7 +71,7 @@
 
 
 
-    There are 41221 words in the dataset for the plot titled 'Wordcloud of names in code'.
+    There are 41219 words in the dataset for the plot titled 'Wordcloud of names in code'.
 
 
 
@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Mitchell Herrijgers</td>
-      <td>287</td>
+      <td>Steven van Beelen</td>
+      <td>3681</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Steven van Beelen</td>
-      <td>3648</td>
+      <td>MATTHIAS BECHTOLD</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Weronika Trzaska</td>
-      <td>2</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>bruceaxoniq</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Christian Thiel</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Mitchell Herrijgers</td>
+      <td>288</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>Allard Buijze</td>
       <td>3092</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>7</th>
       <td>Harold D. Turyasingura</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>8</th>
       <td>Marc</td>
       <td>23</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>9</th>
       <td>Markus Hager</td>
       <td>6</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>David Gómez G.</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>David Gómez G</td>
-      <td>55</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Marc Gathier</td>
-      <td>231</td>
     </tr>
   </tbody>
 </table>
