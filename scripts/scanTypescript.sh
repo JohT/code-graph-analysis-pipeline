@@ -149,9 +149,13 @@ for source_directory in ${source_directories}; do
 
     processed_source_directories=$((processed_source_directories + 1))
     progress_info_source_dirs="${processed_source_directories}/${total_source_directories}"
-    if scan_directory "${source_directory}" "${progress_info_source_dirs}" && is_valid_scan_result "${source_directory}"; then
+
+    if [ -f "${source_directory}/tsconfig.json" ] \
+    && scan_directory "${source_directory}" "${progress_info_source_dirs}" \
+    && is_valid_scan_result "${source_directory}"
+    then
         write_change_detection_file   
-        continue # successful scan, proceed to next one.
+        continue # successfully scanned a standard Typescript project (with tsconfig.json file). proceed with next one.
     fi
 
     echo "scanTypescript: Info: Unsuccessful or skipped source directory scan. Scan all contained packages individually." >&2
