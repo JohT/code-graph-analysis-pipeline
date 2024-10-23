@@ -23,11 +23,20 @@ echo "scanTypescript: TYPESCRIPT_SCAN_HEAP_MEMORY=${TYPESCRIPT_SCAN_HEAP_MEMORY}
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "scanTypescript: SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
-# Dry run for internal testing (not intended to be accessible from the outside)
-TYPESCRIPT_SCAN_DRY_RUN=false 
+# ------ Switches for internal testing and debugging ------------
+# - Dry run for internal testing (for now not intended to be accessible from the outside)
+TYPESCRIPT_SCAN_DRY_RUN=false # Default = false
+
 if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = true ] ; then
     echo "scanTypescript: -> DRY RUN <- Scanning will only be logged, not executed." >&2
 fi
+
+# - Change detection for internal testing (for now not intended to be accessible from the outside)
+TYPESCRIPT_SCAN_CHANGE_DETECTION=true # Default = true
+if [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = false ] ; then
+    echo "scanTypescript: -> CHANGE_DETECTION OFF <- Scanning will also be done for unchanged sources." >&2
+fi
+# ---------------------------------------------------------------
 
 if [ ! -d "./${SOURCE_DIRECTORY}" ] ; then
     echo "scanTypescript: Source directory '${SOURCE_DIRECTORY}' doesn't exist. The scan will therefore be skipped." >&2
@@ -105,11 +114,11 @@ is_valid_scan_result() {
 changeDetectionHashFilePath="./${SOURCE_DIRECTORY}/typescriptFileChangeDetectionHashFile.txt"
 changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --readonly --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")
 
-if [ "${changeDetectionReturnCode}" == "0" ]; then
+if [ "${changeDetectionReturnCode}" == "0" ] && [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = true ]; then
     echo "scanTypescript: Files unchanged. Scan skipped."
 fi
 
-if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_DRY_RUN}" = true ]; then
+if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = false ]; then
     echo "scanTypescript: Detected change (${changeDetectionReturnCode}). Scanning Typescript source using @jqassistant/ts-lce."
     
     mkdir -p "./runtime/logs"
@@ -141,6 +150,7 @@ if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_DRY_RUN}" =
         done
     done
 
+    # The dry-run shouldn't write anything. Therefore, writing the change detection file is skipped regardless of TYPESCRIPT_SCAN_CHANGE_DETECTION.
     if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = false ] ; then
         changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")
     fi
