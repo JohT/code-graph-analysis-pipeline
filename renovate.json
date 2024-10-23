@@ -20,6 +20,9 @@
       },
       {
         "description": "jQAssistant Typescript Plugin",
+        "groupName": [
+          "jQAssistant TypeScript Plugin"
+        ],
         "matchSourceUrls": [
           "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
         ]
