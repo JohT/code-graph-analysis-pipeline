@@ -79,7 +79,7 @@ scan_directory() {
         # Note: For later troubleshooting, the output is also copied to a dedicated log file using "tee".
         # Note: Don't worry about the hardcoded version number. It will be updated by Renovate using a custom Manager.
         # Note: NODE_OPTIONS --max-old-space-size=4096 increases the memory for scanning larger projects
-        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.1 "${1}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${directory_name}.log" >&2
+        NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=${TYPESCRIPT_SCAN_HEAP_MEMORY}" npx --yes @jqassistant/ts-lce@1.3.0 "${1}" --extension React 2>&1 | tee "${LOG_DIRECTORY}/jqassistant-typescript-scan-${source_directory_name}.log" >&2
     else
         echo "scanTypescript: Skipping scan of ${source_directory_name} (${progress_information}) -----------------" >&2
     fi
@@ -110,48 +110,62 @@ is_valid_scan_result() {
     fi
 }
 
-# Scan and analyze Artifacts when they were changed
-changeDetectionHashFilePath="./${SOURCE_DIRECTORY}/typescriptFileChangeDetectionHashFile.txt"
-changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --readonly --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")
+is_change_detected() {
+    # Scan and analyze Typescript sources only when they had been changed
+    local source_directory_name; source_directory_name=$(basename "${source_directory}");
+    changeDetectionHashFilePath="./${SOURCE_DIRECTORY}/typescriptScanChangeDetection-${source_directory_name}.sha"
+    changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --readonly --hashfile "${changeDetectionHashFilePath}" --paths "${source_directory}")
 
-if [ "${changeDetectionReturnCode}" == "0" ] && [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = true ]; then
-    echo "scanTypescript: Files unchanged. Scan skipped."
-fi
+    if [ "${changeDetectionReturnCode}" == "0" ] && [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = true ]; then
+        true
+    else
+        false
+    fi
+}
 
-if [ "${changeDetectionReturnCode}" != "0" ] || [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = false ]; then
-    echo "scanTypescript: Detected change (${changeDetectionReturnCode}). Scanning Typescript source using @jqassistant/ts-lce."
-    
-    mkdir -p "./runtime/logs"
-    LOG_DIRECTORY="$(pwd)/runtime/logs"
-    echo "scanTypescript: LOG_DIRECTORY=${LOG_DIRECTORY}" >&2
-
-    source_directories=$( find -L "./${SOURCE_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 -r -I {} echo {} )   
-    total_source_directories=$(echo "${source_directories}" | wc -l | awk '{print $1}')
-    processed_source_directories=0
-
-    for source_directory in ${source_directories}; do
-        processed_source_directories=$((processed_source_directories + 1))
-        progress_info_source_dirs="${processed_source_directories}/${total_source_directories}"
-        if scan_directory "${source_directory}" "${progress_info_source_dirs}" && is_valid_scan_result "${source_directory}"; then
-            continue # successful scan, proceed to next one.
-        fi
-
-        echo "scanTypescript: Info: Unsuccessful source directory scan. Trying to scan all contained packages individually." >&2
-        contained_package_directories=$( find_directories_with_package_json_file "${source_directory}" )
-        echo "scanTypescript: contained_package_directories:" >&2
-        echo "${contained_package_directories}" >&2
-        total_package_directories=$(echo "${contained_package_directories}" | wc -l | awk '{print $1}')
-        processed_package_directories=0
-
-        for contained_package_directory in ${contained_package_directories}; do
-            processed_package_directories=$((processed_package_directories + 1))
-            progress_info_package_dirs="${progress_info_source_dirs}: ${processed_package_directories}/${total_package_directories}"
-            scan_directory "${contained_package_directory}" "${progress_info_package_dirs}"
-        done
-    done
-
+write_change_detection_file() {
     # The dry-run shouldn't write anything. Therefore, writing the change detection file is skipped regardless of TYPESCRIPT_SCAN_CHANGE_DETECTION.
     if [ "${TYPESCRIPT_SCAN_DRY_RUN}" = false ] ; then
-        changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --hashfile "${changeDetectionHashFilePath}" --paths "./${SOURCE_DIRECTORY}")
+        changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --hashfile "${changeDetectionHashFilePath}" --paths "${source_directory}")
+    fi    
+}
+
+mkdir -p "./runtime/logs"
+LOG_DIRECTORY="$(pwd)/runtime/logs"
+echo "scanTypescript: LOG_DIRECTORY=${LOG_DIRECTORY}" >&2
+
+source_directories=$( find -L "./${SOURCE_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -r -I {} echo {} )   
+total_source_directories=$(echo "${source_directories}" | wc -l | awk '{print $1}')
+processed_source_directories=0
+
+for source_directory in ${source_directories}; do
+    if is_change_detected; then
+        echo "scanTypescript: Files in ${source_directory} unchanged. Scan skipped."
+        continue # skipping scan since it had already be done according to change detection.
     fi
-fi
+
+    #Debugging log for change detection. "scan_directory" already logs scanning and the source directory.
+    #echo "scanTypescript: Detected change (${changeDetectionReturnCode}) in ${source_directory}. Scanning Typescript source using @jqassistant/ts-lce."
+
+    processed_source_directories=$((processed_source_directories + 1))
+    progress_info_source_dirs="${processed_source_directories}/${total_source_directories}"
+    if scan_directory "${source_directory}" "${progress_info_source_dirs}" && is_valid_scan_result "${source_directory}"; then
+        write_change_detection_file   
+        continue # successful scan, proceed to next one.
+    fi
+
+    echo "scanTypescript: Info: Unsuccessful or skipped source directory scan. Scan all contained packages individually." >&2
+    contained_package_directories=$( find_directories_with_package_json_file "${source_directory}" )
+    echo "scanTypescript: contained_package_directories:" >&2
+    echo "${contained_package_directories}" >&2
+    total_package_directories=$(echo "${contained_package_directories}" | wc -l | awk '{print $1}')
+    processed_package_directories=0
+
+    for contained_package_directory in ${contained_package_directories}; do
+        processed_package_directories=$((processed_package_directories + 1))
+        progress_info_package_dirs="${progress_info_source_dirs}: ${processed_package_directories}/${total_package_directories}"
+        scan_directory "${contained_package_directory}" "${progress_info_package_dirs}"
+    done
+
+    write_change_detection_file
+done
