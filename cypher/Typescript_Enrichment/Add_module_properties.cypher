@@ -17,7 +17,8 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
       ,nullif(reverse(split(reverse(moduleName), '.')[0]), moduleName)                      AS moduleNameExtension
       ,coalesce('@' + nullif(namespaceName, ''), '')                                        AS namespaceNameWithAtPrefixed
       ,replace(symbolName, coalesce(optionalClassName + '.', ''), '')                       AS symbolNameWithoutClassName
-    SET ts.namespace          = namespaceNameWithAtPrefixed
+      ,coalesce(split(split(ts.globalFqn, nullif(namespaceName, '') + '/')[1], '/')[0], '') AS packageName
+    SET ts.namespace          = coalesce(nullif(namespaceNameWithAtPrefixed, ''), ts.namespace, '')
        ,ts.module             = modulePathNameWithoutIndexAndDefault
        ,ts.moduleName         = moduleName
        ,ts.name               = coalesce(symbolNameWithoutClassName, indexAndExtensionOmittedName)
@@ -26,6 +27,7 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
        ,ts.isNodeModule       = isNodeModule
        ,ts.isUnresolvedImport = isUnresolvedImport
        ,ts.isExternalImport   = isNodeModule OR isUnresolvedImport
+       ,ts.packageName        = packageName
 RETURN count(*) AS updatedModules
 // For debugging
 // RETURN namespaceNameWithAtPrefixed         AS namespace

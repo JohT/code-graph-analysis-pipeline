@@ -72,15 +72,11 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Mark_test_modules.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_projects.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_scan_nodes.cypher"
 
-# Preparation - Enrich Graph for Typescript by adding relationships between Modules with the same globalFqn
-execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_modules.cypher"
-execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_declarations.cypher"
-execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
-
 # Preparation - Cleanup Graph for Typescript by removing duplicate relationships
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_between_files.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding relationships between corresponding TS:Project and NPM:Package nodes
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_npm_dependencies_to_npm_packages.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
 if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
@@ -91,6 +87,12 @@ if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCou
     # Since this is now only a warning, execution will be continued.
 fi
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_external_modules_to_corresponding_npm_dependency.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_namespace_property_on_nodes_from_linked_npm_packages.cypher"
+
+# Preparation - Enrich Graph for Typescript by adding relationships between Modules with the same globalFqn
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_modules.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_declarations.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
 execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
