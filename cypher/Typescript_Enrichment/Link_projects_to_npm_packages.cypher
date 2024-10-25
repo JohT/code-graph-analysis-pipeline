@@ -24,7 +24,7 @@ MATCH (npmPackage:NPM:Package)
  MERGE (project)-[:HAS_NPM_PACKAGE]->(npmPackage)
 // Set the "relativeFileDirectory" on the npm package to the relative directory 
 // that contains the package.json file 
-   SET npmPackage.relativeFileDirectory = relativeNpmPackageDirectory
+   SET npmPackage.relativeFileDirectory = ltrim(relativeNpmPackageDirectory, '/')
       ,project.version = npmPackage.version
  RETURN count(*) AS numberOfCreatedNpmPackageRelationships
 // Detailed results for debugging
