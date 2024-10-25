@@ -570,7 +570,7 @@ Image  | Analysis |
 | [error-graphVisualizationJavaArtifactDependencies-no-canvas-found.png](./react-router-6.27.0/graph-visualization-java-artifact-dependencies/error-graphVisualizationJavaArtifactDependencies-no-canvas-found.png) | react-router-6.27.0 |
 | [graphVisualizationTypescriptModuleDependencies-0.png](./react-router-6.27.0/graph-visualization-typescript-module-dependencies/graphVisualizationTypescriptModuleDependencies-0.png) | react-router-6.27.0 |
 | [NodeEmbeddingsTypescript_21_0.png](./react-router-6.27.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_21_0.png) | react-router-6.27.0 |
-| [NodeEmbeddingsTypescript_23_6.png](./react-router-6.27.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_23_6.png) | react-router-6.27.0 |
+| [NodeEmbeddingsTypescript_23_7.png](./react-router-6.27.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_23_7.png) | react-router-6.27.0 |
 | [NodeEmbeddingsTypescript_25_6.png](./react-router-6.27.0/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_25_6.png) | react-router-6.27.0 |
 | [ObjectOrientedDesignMetricsTypescript_28_0.png](./react-router-6.27.0/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript_files/ObjectOrientedDesignMetricsTypescript_28_0.png) | react-router-6.27.0 |
 | [OverviewGeneral_15_1.png](./react-router-6.27.0/overview-general/OverviewGeneral_files/OverviewGeneral_15_1.png) | react-router-6.27.0 |
