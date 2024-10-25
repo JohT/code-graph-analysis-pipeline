@@ -37,8 +37,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>98785</td>
-      <td>276246</td>
+      <td>98853</td>
+      <td>276421</td>
       <td>6</td>
       <td>6</td>
       <td>85</td>
@@ -138,16 +138,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router</td>
       <td>index.ts</td>
       <td>7</td>
-      <td>TypeAlias</td>
-      <td>5</td>
+      <td>Function</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>8</th>
       <td>react-router</td>
       <td>index.ts</td>
       <td>7</td>
-      <td>Function</td>
-      <td>2</td>
+      <td>TypeAlias</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>9</th>

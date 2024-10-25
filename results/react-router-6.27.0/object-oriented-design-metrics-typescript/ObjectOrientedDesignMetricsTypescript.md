@@ -49,17 +49,6 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
-      <td>23</td>
-      <td>40</td>
-      <td>0</td>
-      <td>0</td>
-      <td>3</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>19</td>
       <td>9</td>
@@ -69,7 +58,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>2</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>2</td>
@@ -80,7 +69,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>1</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom-v5-compat</td>
       <td>0</td>
@@ -91,7 +80,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>0</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>server</td>
       <td>0</td>
@@ -102,9 +91,20 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>0</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-native</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>router</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -160,7 +160,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>0</td>
       <td>0</td>
       <td>10</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -171,7 +171,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>0</td>
       <td>0</td>
       <td>8</td>
-      <td>3</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>2</th>
@@ -193,7 +193,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>0</td>
       <td>0</td>
       <td>6</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -274,7 +274,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.000000</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -292,15 +292,15 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.000000</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0</td>
-      <td>23</td>
+      <td>0.0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>3</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -310,14 +310,14 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.472222</td>
       <td>0.0</td>
       <td>0.666667</td>
-      <td>0.333333</td>
+      <td>0.0</td>
       <td>17</td>
       <td>19</td>
       <td>0</td>
       <td>0</td>
       <td>6</td>
       <td>3</td>
-      <td>1</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -328,14 +328,14 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.987013</td>
       <td>0.0</td>
       <td>0.909091</td>
-      <td>0.666667</td>
+      <td>0.5</td>
       <td>152</td>
       <td>2</td>
       <td>0</td>
       <td>0</td>
       <td>10</td>
       <td>1</td>
-      <td>2</td>
+      <td>1</td>
       <td>1</td>
     </tr>
     <tr>
@@ -346,14 +346,14 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>1.000000</td>
       <td>0.0</td>
       <td>1.000000</td>
-      <td>1.000000</td>
+      <td>1.0</td>
       <td>40</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>8</td>
       <td>0</td>
-      <td>3</td>
+      <td>2</td>
       <td>0</td>
     </tr>
     <tr>
@@ -364,7 +364,7 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>1.000000</td>
       <td>0.0</td>
       <td>1.000000</td>
-      <td>1.000000</td>
+      <td>1.0</td>
       <td>24</td>
       <td>0</td>
       <td>0</td>

@@ -125,19 +125,19 @@ Creates a in-memory projection of "TS:Module" nodes and their "DEPENDS_ON" relat
   <tbody>
     <tr>
       <th>0</th>
-      <td>5</td>
-      <td>7</td>
-      <td>0.35</td>
-      <td>2495516</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0.333333</td>
+      <td>2495496</td>
       <td>0</td>
-      <td>1.4</td>
-      <td>3</td>
+      <td>1.0</td>
+      <td>2</td>
+      <td>1</td>
       <td>1</td>
       <td>2</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -151,7 +151,7 @@ First, we'll have a look at the overall/total result of the all pairs shortest p
 
 #### All pairs shortest path in total - Longest shortest path (Graph diameter)
 
-    The diameter (longest shortest path) of the projected module dependencies Graph is: 2
+    The diameter (longest shortest path) of the projected module dependencies Graph is: 1
 
 
 #### All pairs shortest path in total - Path count per length - Table
@@ -176,17 +176,9 @@ First, we'll have a look at the overall/total result of the all pairs shortest p
       <th>0</th>
       <td>0</td>
       <td>1</td>
-      <td>7</td>
       <td>4</td>
       <td>3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -247,25 +239,6 @@ The following table shows the first 10 rows with all details of the query above.
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router</td>
-      <td>react-router-6.27.0</td>
-      <td>react-router-6.27.0</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>1</td>
-      <td>7</td>
-      <td>4</td>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./index.ts -&gt; ./index.ts]</td>
-      <td>[react-router -&gt; router]</td>
-      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
       <td>react-router-6.27.0</td>
@@ -273,9 +246,9 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>False</td>
       <td>1</td>
-      <td>7</td>
       <td>4</td>
       <td>3</td>
+      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -284,7 +257,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
       <td>react-router-6.27.0</td>
@@ -292,18 +265,18 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>False</td>
       <td>1</td>
-      <td>7</td>
       <td>4</td>
       <td>3</td>
-      <td>4</td>
       <td>2</td>
       <td>2</td>
+      <td>2</td>
+      <td>1</td>
       <td>[./index.tsx -&gt; ./index.ts, ./server.tsx -&gt; ./index.ts]</td>
-      <td>[react-router-dom -&gt; react-router, react-router-dom -&gt; router]</td>
+      <td>[react-router-dom -&gt; react-router]</td>
       <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
       <td>react-router-native</td>
       <td>react-router-6.27.0</td>
       <td>react-router-6.27.0</td>
@@ -311,33 +284,14 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>False</td>
       <td>1</td>
-      <td>7</td>
       <td>4</td>
       <td>3</td>
+      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>[./index.tsx -&gt; ./index.ts]</td>
       <td>[react-router-native -&gt; react-router]</td>
-      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>react-router-native</td>
-      <td>react-router-6.27.0</td>
-      <td>react-router-6.27.0</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./index.tsx -&gt; ./index.ts]</td>
-      <td>[react-router-native -&gt; router]</td>
       <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
@@ -380,7 +334,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
       <td>react-router-dom</td>
       <td>react-router-6.27.0</td>
       <td>react-router-6.27.0</td>
@@ -388,9 +342,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>False</td>
       <td>1</td>
-      <td>7</td>
       <td>4</td>
       <td>3</td>
+      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -501,16 +455,8 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <th>0</th>
       <td>react-router-6.27.0</td>
       <td>1</td>
-      <td>4</td>
       <td>2</td>
       <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>react-router-6.27.0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -527,7 +473,7 @@ Shows the top 20 root projects with the longest shortest path (=Graph Diameter).
 
 
     sourceRootProject
-    react-router-6.27.0    2
+    react-router-6.27.0    1
     Name: distance, dtype: int64
 
 
@@ -602,7 +548,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
 
 #### Longest path in total - Max longest path
 
-    The max. longest path of the projected module dependencies is: 3
+    The max. longest path of the projected module dependencies is: 2
 
 
 #### Longest path in total - Paths per length - Table
@@ -635,14 +581,6 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <th>1</th>
       <td>1</td>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>3</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -740,25 +678,6 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>[./server.tsx -&gt; ./index.ts]</td>
       <td>[react-router-dom -&gt; react-router]</td>
-      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.27.0</td>
-      <td>react-router-6.27.0</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.ts]</td>
-      <td>[react-router-dom -&gt; router]</td>
       <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
   </tbody>
@@ -967,25 +886,6 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[react-router-dom -&gt; react-router]</td>
       <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
     </tr>
-    <tr>
-      <th>2</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.27.0</td>
-      <td>react-router-6.27.0</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.ts]</td>
-      <td>[react-router-dom -&gt; router]</td>
-      <td>[react-router-6.27.0 -&gt; react-router-6.27.0]</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -1000,7 +900,7 @@ Shows the top 20 root projects with their max. longest path.
 
 
     sourceRootProject
-    react-router-6.27.0    3
+    react-router-6.27.0    2
     Name: distance, dtype: int64
 
 
@@ -1037,11 +937,9 @@ Shows the top 50 root projects with the highest number of dependency paths stack
       <th>distance</th>
       <th>1</th>
       <th>2</th>
-      <th>3</th>
     </tr>
     <tr>
       <th>sourceRootProject</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -1049,9 +947,8 @@ Shows the top 50 root projects with the highest number of dependency paths stack
   <tbody>
     <tr>
       <th>react-router-6.27.0</th>
-      <td>33.333333</td>
-      <td>33.333333</td>
-      <td>33.333333</td>
+      <td>50.0</td>
+      <td>50.0</td>
     </tr>
   </tbody>
 </table>
@@ -1092,12 +989,12 @@ Shows the top 50 root projects with the highest number of dependency paths stack
   <tbody>
     <tr>
       <th>0</th>
-      <td>5</td>
-      <td>0.35</td>
+      <td>4</td>
+      <td>0.333333</td>
       <td>1</td>
-      <td>3</td>
       <td>2</td>
-      <td>3</td>
+      <td>1</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>

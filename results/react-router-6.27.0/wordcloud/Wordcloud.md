@@ -71,7 +71,7 @@
 
 
 
-    There are 2268 words in the dataset for the plot titled 'Wordcloud of names in code'.
+    There are 2476 words in the dataset for the plot titled 'Wordcloud of names in code'.
 
 
 
@@ -97,18 +97,18 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Remix Run Bot</td>
-      <td>311</td>
+      <td>Jacob Ebey</td>
+      <td>225</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Matt Brophy</td>
-      <td>1772</td>
+      <td>1793</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Jacob Ebey</td>
-      <td>241</td>
+      <td>Remix Run Bot</td>
+      <td>312</td>
     </tr>
     <tr>
       <th>3</th>
