@@ -38,7 +38,9 @@ Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisi
 
 1. Move the artifacts (e.g. Java jars json files) you want to analyze into the `artifacts` directory.
 
-1. Optionally, create a `source` directory and clone the corresponding source code into it to also scan git data.
+1. If you want to analyze Typescript code, create a symbolic link inside the `source` directory that points to the Typescript project or copy the project into it.
+
+1. If you want to include git data like changed files and authors, create a symbolic link inside the `source` directory that points to the repository or clone it in the `source` directory. If you already have your Typescript project in there, you of course don't have to do it twice. If you are analyzing Java artifacts (no source needed), it is sufficient to use a bare clone that only contains the git history without the sources using `git clone --bare`.
 
 1. Alternatively to the steps above, run an already predefined download script
 
