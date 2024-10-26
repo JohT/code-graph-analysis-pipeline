@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Jacob Ebey</td>
-      <td>225</td>
+      <td>Troy Li</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Matt Brophy</td>
-      <td>1793</td>
+      <td>1795</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Remix Run Bot</td>
-      <td>312</td>
+      <td>313</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>Jacob Ebey</td>
+      <td>225</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>Shodai Suzuki</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Bilal Kazmi</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Ryan Florence</td>
       <td>1260</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>Mark Dalgleish</td>
       <td>318</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Brooks Lybrand</td>
       <td>32</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>Alex Anderson</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Oleg</td>
-      <td>4</td>
     </tr>
   </tbody>
 </table>
