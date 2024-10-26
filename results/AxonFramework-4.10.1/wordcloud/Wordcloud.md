@@ -97,13 +97,13 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>bruceaxoniq</td>
-      <td>9</td>
+      <td>Steven van Beelen</td>
+      <td>3715</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Steven van Beelen</td>
-      <td>3692</td>
+      <td>bruceaxoniq</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>2</th>

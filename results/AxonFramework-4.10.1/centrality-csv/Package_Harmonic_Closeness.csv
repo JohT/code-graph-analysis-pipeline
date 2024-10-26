@@ -37,7 +37,7 @@
 "org.axonframework.common.caching","caching","centralityHarmonic",0.1452802359882006,""
 "org.axonframework.modelling.command.inspection","inspection","centralityHarmonic",0.140117994100295,""
 "org.axonframework.eventsourcing.snapshotting","snapshotting","centralityHarmonic",0.13716814159292035,""
-"org.axonframework.eventsourcing","eventsourcing","centralityHarmonic",0.1312684365781711,""
+"org.axonframework.eventsourcing","eventsourcing","centralityHarmonic",0.13126843657817108,""
 "org.axonframework.eventhandling.scheduling","scheduling","centralityHarmonic",0.12831858407079647,""
 "org.axonframework.modelling.saga.repository","repository","centralityHarmonic",0.12389380530973451,""
 "org.axonframework.axonserver.connector","connector","centralityHarmonic",0.11946902654867257,""
