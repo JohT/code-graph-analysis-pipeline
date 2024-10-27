@@ -2,7 +2,10 @@
  MATCH (ts:TS)
  WHERE ts.globalFqn IS NOT NULL
 OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
-  WITH ts
+  WITH *
+      //In case of a path like ".../moduleName/src/index.ts", the module name is extracted into sourceIndexModuleName.
+      ,reverse(split(reverse(nullif(split(ts.globalFqn, '/src/index.')[0], ts.globalFqn)), '/')[0]) AS sourceIndexModuleName
+  WITH *
       ,replace(split(ts.globalFqn, '".')[0],'"', '')                                        AS modulePathName
       ,reverse(split(reverse(replace(split(ts.globalFqn, '".')[0],'"', '')), '/')[0])       AS moduleName
       ,replace(split(split(ts.globalFqn, '/index')[0], '.default')[0],'"', '')              AS modulePathNameWithoutIndexAndDefault
@@ -21,7 +24,7 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
     SET ts.namespace          = coalesce(nullif(namespaceNameWithAtPrefixed, ''), ts.namespace, '')
        ,ts.module             = modulePathNameWithoutIndexAndDefault
        ,ts.moduleName         = moduleName
-       ,ts.name               = coalesce(symbolNameWithoutClassName, indexAndExtensionOmittedName)
+       ,ts.name               = coalesce(sourceIndexModuleName, symbolNameWithoutClassName, indexAndExtensionOmittedName)
        ,ts.extensionExtended  = moduleNameExtensionExtended
        ,ts.extension          = moduleNameExtension
        ,ts.isNodeModule       = isNodeModule
@@ -33,7 +36,7 @@ RETURN count(*) AS updatedModules
 // RETURN namespaceNameWithAtPrefixed         AS namespace
 //        ,modulePathName                     AS module            
 //        ,moduleName                         AS moduleName        
-//        ,coalesce(symbolNameWithoutClassName, indexAndExtensionOmittedName) AS name              
+//        ,coalesce(sourceIndexModuleName, symbolNameWithoutClassName, indexAndExtensionOmittedName) AS name              
 //        ,moduleNameExtensionExtended        AS extensionExtended 
 //        ,moduleNameExtension                AS extension         
 //        ,isNodeModule                       AS isNodeModule      
