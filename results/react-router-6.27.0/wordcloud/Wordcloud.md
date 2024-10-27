@@ -97,18 +97,18 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>Remix Run Bot</td>
+      <td>314</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>Troy Li</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>Matt Brophy</td>
       <td>1795</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Remix Run Bot</td>
-      <td>313</td>
     </tr>
     <tr>
       <th>3</th>
