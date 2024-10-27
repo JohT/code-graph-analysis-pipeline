@@ -27,45 +27,50 @@ Only the top 30 entries are shown. The whole table can be found in the following
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>rootProjectName</th>
       <th>moduleName</th>
       <th>numberOfElements</th>
+      <th>numberOfGitCommits</th>
       <th>incomingDependencies</th>
       <th>outgoingDependencies</th>
-      <th>moduleFullQualifiedName</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
+      <td>420</td>
       <td>2</td>
       <td>152</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
+      <td>153</td>
       <td>0</td>
       <td>24</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
+      <td>233</td>
       <td>19</td>
       <td>17</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
+      <td>163</td>
       <td>0</td>
       <td>40</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
 </table>
@@ -85,45 +90,50 @@ The following table lists the top 30 internal modules that are used the most by 
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>rootProjectName</th>
       <th>moduleName</th>
       <th>numberOfElements</th>
+      <th>numberOfGitCommits</th>
       <th>incomingDependencies</th>
       <th>outgoingDependencies</th>
-      <th>moduleFullQualifiedName</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
+      <td>233</td>
       <td>19</td>
       <td>17</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
+      <td>420</td>
       <td>2</td>
       <td>152</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
+      <td>153</td>
       <td>0</td>
       <td>24</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
+      <td>163</td>
       <td>0</td>
       <td>40</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
 </table>
@@ -143,45 +153,50 @@ The following table lists the top 30 internal modules that are depending on the 
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>rootProjectName</th>
       <th>moduleName</th>
       <th>numberOfElements</th>
+      <th>numberOfGitCommits</th>
       <th>incomingDependencies</th>
       <th>outgoingDependencies</th>
-      <th>moduleFullQualifiedName</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
+      <td>420</td>
       <td>2</td>
       <td>152</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
+      <td>163</td>
       <td>0</td>
       <td>40</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
+      <td>153</td>
       <td>0</td>
       <td>24</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
+      <td>233</td>
       <td>19</td>
       <td>17</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
 </table>
@@ -199,45 +214,50 @@ The following table lists the top 30 internal modules that are depending on the 
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>rootProjectName</th>
       <th>moduleName</th>
       <th>numberOfElements</th>
+      <th>numberOfGitCommits</th>
       <th>incomingDependencies</th>
       <th>outgoingDependencies</th>
-      <th>moduleFullQualifiedName</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
+      <td>163</td>
       <td>0</td>
       <td>40</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
+      <td>233</td>
       <td>19</td>
       <td>17</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
+      <td>153</td>
       <td>0</td>
       <td>24</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
+      <td>420</td>
       <td>2</td>
       <td>152</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
 </table>
@@ -257,45 +277,50 @@ The following table lists the top 30 internal modules that are used the least by
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>rootProjectName</th>
       <th>moduleName</th>
       <th>numberOfElements</th>
+      <th>numberOfGitCommits</th>
       <th>incomingDependencies</th>
       <th>outgoingDependencies</th>
-      <th>moduleFullQualifiedName</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
+      <td>153</td>
       <td>0</td>
       <td>24</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
+      <td>163</td>
       <td>0</td>
       <td>40</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
+      <td>420</td>
       <td>2</td>
       <td>152</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
+      <td>233</td>
       <td>19</td>
       <td>17</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
 </table>
@@ -315,45 +340,50 @@ The following table lists the top 30 internal modules that are depending on the 
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>rootProjectName</th>
       <th>moduleName</th>
       <th>numberOfElements</th>
+      <th>numberOfGitCommits</th>
       <th>incomingDependencies</th>
       <th>outgoingDependencies</th>
-      <th>moduleFullQualifiedName</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
+      <td>233</td>
       <td>19</td>
       <td>17</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
+      <td>153</td>
       <td>0</td>
       <td>24</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
+      <td>163</td>
       <td>0</td>
       <td>40</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
+      <td>420</td>
       <td>2</td>
       <td>152</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
     </tr>
   </tbody>
 </table>
@@ -569,7 +599,7 @@ This table shows the file directory distance distribution between dependent file
       <td>3</td>
       <td>3</td>
       <td>1</td>
-      <td>[./index.tsx uses ./index.ts, ./index.tsx uses...</td>
+      <td>[./index.tsx uses ./index.ts, ./index.tsx uses ./index.ts, ./server.tsx uses ./index.ts]</td>
     </tr>
   </tbody>
 </table>
