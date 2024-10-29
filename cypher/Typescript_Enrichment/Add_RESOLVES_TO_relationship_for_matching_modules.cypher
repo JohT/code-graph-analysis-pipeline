@@ -7,7 +7,7 @@ MATCH (module:TS:Module)<-[:CONTAINS]-(package:TS:Project)
 WHERE module.globalFqn IS NOT NULL
   AND EXISTS { (module)-[:EXPORTS]->(:TS) } // only when module exports something
 MATCH (externalModule:TS:ExternalModule)
-WHERE module.globalFqn IS NOT NULL
+WHERE externalModule.globalFqn IS NOT NULL
   AND externalModule     <> module
   AND externalModule.name = module.name // Base requirement: Same module name
   AND EXISTS { (externalModule)-[:EXPORTS]->(:TS:ExternalDeclaration)<-[]-(used:TS) } // only when external declarations are used
@@ -21,13 +21,12 @@ WHERE module.globalFqn IS NOT NULL
      // Find internal and external modules with identical "globalFqn"
      ,(module.globalFqn = externalModule.globalFqn) AS equalGlobalFqn
      // Find internal and external modules with identical "module"
-     ,(module.module = externalModule.module)       AS equalModule
+     ,(module.module    = externalModule.module)    AS equalModule
      // Find matching internal and external modules within the same package and namespace
-     ,(    externalModule.namespace    > ''
+     ,(    externalModule.namespace   <> ''
        AND externalModule.namespace    = module.namespace
        AND externalModule.packageName  = package.name     
        AND normalizedExternalExtension = module.extensionExtended
-       AND externalModule.globalFqn ENDS WITH module.localModulePath
       ) AS equalNameAndNamespace
      // Find matching internal and external module without a namespace with matching local module path
      ,(    module.namespace            = ''
