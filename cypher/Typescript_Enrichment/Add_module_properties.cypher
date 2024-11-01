@@ -6,6 +6,18 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
       //In case of a path like ".../moduleName/src/index.ts", the module name is extracted into sourceIndexModuleName.
       ,reverse(split(reverse(nullif(split(ts.globalFqn, '/src/index.')[0], ts.globalFqn)), '/')[0]) AS sourceIndexModuleName
   WITH *
+      //In case of a path like ".../moduleName/dist/types/index.d.ts", the module name is extracted into distTypesIndexModuleName.
+      ,reverse(split(reverse(nullif(split(ts.globalFqn, '/dist/types/index.')[0], ts.globalFqn)), '/')[0]) AS distTypesIndexModuleName
+  WITH *
+      //In case of a path like ".../moduleName/types/index.d.ts", the module name is extracted into typesIndexModuleName.
+      ,reverse(split(reverse(nullif(split(ts.globalFqn, '/types/index.')[0], ts.globalFqn)), '/')[0]) AS typesIndexModuleName
+  WITH *
+      //In case of a path like ".../moduleName/dist/types/src/index.d.ts", the module name is extracted into distTypesSourceIndexModuleName.
+      ,reverse(split(reverse(nullif(split(ts.globalFqn, '/dist/types/src/index.')[0], ts.globalFqn)), '/')[0]) AS distTypesSourceIndexModuleName
+  WITH *
+      //Combine the cases above into "normalizedModuleName"
+      ,coalesce(distTypesIndexModuleName, typesIndexModuleName, distTypesSourceIndexModuleName, sourceIndexModuleName) AS normalizedModuleName
+  WITH *
       ,replace(split(ts.globalFqn, '".')[0],'"', '')                                        AS modulePathName
       ,reverse(split(reverse(replace(split(ts.globalFqn, '".')[0],'"', '')), '/')[0])       AS moduleName
       ,replace(split(split(ts.globalFqn, '/index')[0], '.default')[0],'"', '')              AS modulePathNameWithoutIndexAndDefault
@@ -24,7 +36,7 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
     SET ts.namespace          = coalesce(nullif(namespaceNameWithAtPrefixed, ''), ts.namespace, '')
        ,ts.module             = modulePathNameWithoutIndexAndDefault
        ,ts.moduleName         = moduleName
-       ,ts.name               = coalesce(sourceIndexModuleName, symbolNameWithoutClassName, indexAndExtensionOmittedName)
+       ,ts.name               = coalesce(symbolNameWithoutClassName, normalizedModuleName, indexAndExtensionOmittedName)
        ,ts.extensionExtended  = moduleNameExtensionExtended
        ,ts.extension          = moduleNameExtension
        ,ts.isNodeModule       = isNodeModule
@@ -33,12 +45,18 @@ OPTIONAL MATCH (class:TS:Class)-[:DECLARES]->(ts)
        ,ts.packageName        = packageName
 RETURN count(*) AS updatedModules
 // For debugging
-// RETURN namespaceNameWithAtPrefixed         AS namespace
-//        ,modulePathName                     AS module            
-//        ,moduleName                         AS moduleName        
-//        ,coalesce(sourceIndexModuleName, symbolNameWithoutClassName, indexAndExtensionOmittedName) AS name              
-//        ,moduleNameExtensionExtended        AS extensionExtended 
-//        ,moduleNameExtension                AS extension         
+// RETURN  ts.globalFqn
+//        ,namespaceNameWithAtPrefixed         AS namespace
+//        ,modulePathName                      AS module            
+//        ,moduleName                          AS moduleName        
+//        ,coalesce(symbolNameWithoutClassName, normalizedModuleName, indexAndExtensionOmittedName) AS name              
+//        ,moduleNameExtensionExtended         AS extensionExtended 
+//        ,moduleNameExtension                 AS extension         
+//        ,modulePathNameWithoutIndexAndDefault 
+//        ,symbolName 
+//        ,optionalClassName 
+//        ,normalizedModuleName 
+//        ,symbolNameWithoutClassName 
 //        ,isNodeModule                       AS isNodeModule      
 //        ,isUnresolvedImport                 AS isUnresolvedImport
 //        ,isNodeModule OR isUnresolvedImport AS isExternalImport  
