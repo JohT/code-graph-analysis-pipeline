@@ -3,7 +3,8 @@
 # This is an example for the analysis of a the Typescript project "ant-design".
 # It includes the creation of the temporary directory, the working directory, the artifacts download and the analysis itself.
 
-# Note: The first (and only) parameter is the version of "ant-design" to analyze.
+# Note: The first parameter is the version of "ant-design" to analyze.
+#       All following parameters are forwarded to the "analyze" command.
 # Note: This script is meant to be started in the root directory of this repository.
 # Note: This script requires "cURL" ( https://curl.se ) to be installed.
 
@@ -17,11 +18,20 @@ set -o errexit -o pipefail
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "analyzerAntDesign: SCRIPTS_DIR=$SCRIPTS_DIR"
 
-# Read the first input argument containing the version of the project
-projectVersion=$1
+# Read the first unnamed input argument containing the version of the project
+projectVersion=""
+case "${1}" in
+  "--"*) ;; # Skipping named command line options to forward them later to the "analyze" command
+  *) 
+    projectVersion="${1}" 
+    echo "analyzerAntDesign: Project version set to ${projectVersion}"
+    shift || true
+    ;;
+esac
+
 if [ -z "${projectVersion}" ]; then
   echo "analyzerAntDesign: Optional parameter <version> is not specified. Detecting latest version..." >&2
-  echo "analyzerAntDesign: Usage example: $0 <version>" >&2
+  echo "analyzerAntDesign: Usage example: $0 <version> <optional analysis parameter>" >&2
   projectVersion=$( "${SCRIPTS_DIR}/detectLatestGitTag.sh" --url "https://github.com/ant-design/ant-design.git" )
   echo "analyzerAntDesign: Using latest version: ${projectVersion}" >&2
 fi
@@ -47,4 +57,4 @@ mkdir -p ./artifacts
 ./../../scripts/downloader/downloadAntDesign.sh "${projectVersion}"
 
 # Start the analysis
-./../../scripts/analysis/analyze.sh
+./../../scripts/analysis/analyze.sh "${@}"

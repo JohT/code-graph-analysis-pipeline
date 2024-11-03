@@ -8,7 +8,35 @@ For more details on how the commands work in detail see [COMMANDS](./COMMANDS.md
 
 Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisites) in the [README](./README.md) file for what is required to run the scripts.
 
-## Start an analysis
+## The easiest way to get started
+
+Just run one of the following examples in the directory of this file:
+
+- [./scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) (Java event-sourcing library)
+- [./scripts/examples/analyzeAntDesign.sh](./scripts/examples/analyzeAntDesign.sh) (Typescript UI library)
+- [./scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) (Typescript React library)
+
+Use these optional command line options as you like:
+
+- (Recommended) Only create CSV reports and skip Python and Node.js dependent reports. Example:
+
+  ```shell
+  ./scripts/examples/analyzeAxonFramework.sh --report CSV
+  ```
+
+- Only explore the graph manually in the [browser](http://localhost:7474/browser). Skip all automated reports. Example:
+
+  ```shell
+  ./scripts/examples/analyzeAxonFramework.sh --explore
+  ```
+
+- Add the version number of the project to pick a specific one. Example:
+
+  ```shell
+  ./scripts/examples/analyzeAxonFramework.sh 4.10.1
+  ```
+
+## Start an own analysis
 
 1. Create a directory for all analysis projects.
 
