@@ -91,7 +91,7 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_namespace_property_on_nodes_from_li
 
 # Preparation - Enrich Graph for Typescript by adding relationships between Modules with the same globalFqn
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_modules.cypher"
-execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_declarations.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
