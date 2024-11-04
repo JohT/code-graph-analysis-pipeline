@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-# This is an example for an analysis of AxonFramework 
-# including the creation of the temporary directory, the working directory, the artifacts download and the analysis itself.
+# This is an example for the analysis of the Java event-sourcing library "AxonFramework". 
+# It includes the creation of the temporary directory, the working directory, the artifacts download and the analysis itself.
 
-# Note: The first (and only) parameter is the version of AxonFramework to analyze.
+# Note: The first parameter is the version of "AxonFramework" to analyze.
+#       All following parameters are forwarded to the "analyze" command.
 # Note: This script is meant to be started in the root directory of this repository.
+# Note: This script requires "cURL" ( https://curl.se ) to be installed.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -16,10 +18,20 @@ set -o errexit -o pipefail
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "analyzeAxonFramework: SCRIPTS_DIR=$SCRIPTS_DIR"
 
-artifactsVersion=$1
+# Read the first unnamed input argument containing the version of the project
+artifactsVersion=""
+case "${1}" in
+  "--"*) ;; # Skipping named command line options to forward them later to the "analyze" command
+  *) 
+    artifactsVersion="${1}" 
+    echo "analyzeAxonFramework: Artifact version set to ${artifactsVersion}"
+    shift || true
+    ;;
+esac
+
 if [ -z "${artifactsVersion}" ]; then
   echo "analyzeAxonFramework: Optional parameter <version> is not specified. Detecting latest version..." >&2
-  echo "analyzeAxonFramework: Usage example: $0 <version>" >&2
+  echo "analyzeAxonFramework: Usage example: $0 <version> <optional analysis parameter>" >&2
   artifactsVersion=$( "${SCRIPTS_DIR}/detectLatestGitTag.sh" --url "https://github.com/AxonFramework/AxonFramework.git" --prefix "axon-")
   echo "analyzeAxonFramework: Using latest version: ${artifactsVersion}" >&2
 fi
@@ -45,4 +57,4 @@ mkdir -p ./artifacts
 ./../../scripts/downloader/downloadAxonFramework.sh "${artifactsVersion}"
 
 # Start the analysis
-./../../scripts/analysis/analyze.sh
+./../../scripts/analysis/analyze.sh "${@}"

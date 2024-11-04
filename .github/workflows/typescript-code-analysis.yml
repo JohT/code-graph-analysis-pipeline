@@ -48,7 +48,7 @@ jobs:
         - os: ubuntu-latest
           java: 17
           python: 3.11
-          mambaforge: 24.9.0-0
+          miniforge: 24.9.0-0
 
     env: 
       CI_COMMIT_MESSAGE: Automated code structure analysis reports (CI)
@@ -69,7 +69,7 @@ jobs:
         distribution: 'adopt'
         java-version: ${{ matrix.java }}
 
-    - name: Setup Node.js
+    - name: Setup Node.js for Graph Visualization
       uses: actions/setup-node@v4
       with:
         node-version-file: 'graph-visualization/.nvmrc'
@@ -78,7 +78,7 @@ jobs:
       working-directory: graph-visualization
       run: npm ci
 
-    - name: Setup Cache for Conda package manager Mambaforge
+    - name: Setup Cache for Conda package manager Miniforge
       uses: actions/cache@v4
       env:
         # Increase this value to reset cache if etc/example-environment.yml has not changed
@@ -90,13 +90,11 @@ jobs:
           ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml', '.github/workflows/*.yml') }}
 
     # "Setup Python" can be skipped if jupyter notebook reports aren't needed
-    - name: Setup Python ${{ matrix.python }} with Conda package manager Mambaforge
+    - name: Setup Python ${{ matrix.python }} with Conda package manager Miniforge
       uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python }}
-        miniforge-variant: Mambaforge
-        miniforge-version: ${{ matrix.mambaforge }}
-        use-mamba: true
+        miniforge-version: ${{ matrix.miniforge }}
         activate-environment: codegraph
         environment-file: ./jupyter/environment.yml
         auto-activate-base: false
@@ -153,7 +151,7 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@v4
       with:
-        name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
         path: |
           ./temp/**/runtime/*
           ./temp/**/reports/*
@@ -164,7 +162,7 @@ jobs:
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+        name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
         path: ./results
         if-no-files-found: error
         retention-days: 5
@@ -175,7 +173,7 @@ jobs:
     #- name: Archive exported database
     #  uses: actions/upload-artifact@v3
     #  with:
-    #    name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-mambaforge-${{ matrix.mambaforge }}
+    #    name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
     #    path: ./temp/**/import
     #    if-no-files-found: error
     #    retention-days: 5

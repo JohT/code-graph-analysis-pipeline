@@ -3,9 +3,9 @@
 // Get the top level dependency between a Typescript module and an external modules it uses
  MATCH (source:TS:Module)
 OPTIONAL MATCH (source)-[moduleDependency:DEPENDS_ON]->(target:ExternalModule)
- WHERE NOT EXISTS {(target)-[:RESOLVES_TO]->(source)}
+ WHERE NOT EXISTS {(target)-[:IS_IMPLEMENTED_IN]->(source)}
 // Get the project of the external module if available
-OPTIONAL MATCH (projectdir:Directory)<-[:HAS_ROOT]-(project:TS:Project)-[:CONTAINS]->(:TS:Module)<-[:RESOLVES_TO]-(target)
+OPTIONAL MATCH (projectdir:Directory)<-[:HAS_ROOT]-(project:TS:Project)-[:CONTAINS]->(:TS:Module)<-[:IS_IMPLEMENTED_IN]-(target)
 // Aggregate all gathered information for each (grouped by) source module
   WITH source
       ,collect(DISTINCT projectdir.absoluteFileName) AS projectNames

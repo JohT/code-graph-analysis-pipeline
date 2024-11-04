@@ -1,6 +1,6 @@
 // Delete plain file nodes in "/.git" directory
 
-MATCH (git_metadata_file:File)<-[:CONTAINS*]-(git_directory:Directory)
+MATCH (git_metadata_file:File&!Repository)<-[:CONTAINS*]-(git_directory:Directory&!Repository)
 WHERE git_directory.fileName ENDS WITH '/.git'
  WITH git_directory.fileName AS gitDirectory
      ,count(DISTINCT git_metadata_file.fileName)          AS numberOfFiles

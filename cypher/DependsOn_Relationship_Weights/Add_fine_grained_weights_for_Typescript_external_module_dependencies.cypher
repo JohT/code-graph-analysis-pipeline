@@ -4,8 +4,8 @@
  MATCH (source:TS:Module)-[moduleDependency:DEPENDS_ON]->(target:ExternalModule)
 // Exclude all targets where an ExternalModule was found that resolves to them
 // because those are covered in the fine grained weights for "ExternalModule"s.
- WHERE NOT EXISTS { (target)-[:RESOLVES_TO]->(source) }
-OPTIONAL MATCH (source)-[resolvedModuleDependency:DEPENDS_ON]->(resolvedTarget:TS:Module)<-[:RESOLVES_TO]-(target)
+ WHERE NOT EXISTS { (target)-[:IS_IMPLEMENTED_IN]->(source) }
+OPTIONAL MATCH (source)-[resolvedModuleDependency:DEPENDS_ON]->(resolvedTarget:TS:Module)<-[:IS_IMPLEMENTED_IN]-(target)
   WITH source
       ,target
       ,moduleDependency
@@ -24,7 +24,7 @@ OPTIONAL MATCH (source)-[rd:DEPENDS_ON]->(declaration:ExternalDeclaration)<-[:EX
       ,collect(declaration)                          AS declarations
 // Get optional low coupling elements (TypeAlias, Interface) that the source module contains and defines (low level) that depend on the external module (target)
 UNWIND declarations AS declaration
-OPTIONAL MATCH (source)-[ra:DEPENDS_ON]->(declaration)-[:RESOLVES_TO]->(abstractType:TypeAlias|Interface)
+OPTIONAL MATCH (source)-[ra:DEPENDS_ON]->(declaration)-[:IS_IMPLEMENTED_IN]->(abstractType:TypeAlias|Interface)
   WITH source
       ,target
       ,moduleDependency
