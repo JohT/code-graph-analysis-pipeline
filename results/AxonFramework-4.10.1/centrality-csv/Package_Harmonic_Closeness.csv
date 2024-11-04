@@ -22,7 +22,7 @@
 "org.axonframework.messaging.correlation","correlation","centralityHarmonic",0.36430678466076694,""
 "org.axonframework.messaging.interceptors","interceptors","centralityHarmonic",0.36209439528023596,""
 "org.axonframework.eventhandling.replay","replay","centralityHarmonic",0.3613569321533924,""
-"org.axonframework.common.property","property","centralityHarmonic",0.3184365781710914,""
+"org.axonframework.common.property","property","centralityHarmonic",0.31843657817109144,""
 "org.axonframework.commandhandling.callbacks","callbacks","centralityHarmonic",0.31740412979351035,""
 "org.axonframework.messaging.responsetypes","responsetypes","centralityHarmonic",0.3019174041297935,""
 "org.axonframework.queryhandling.registration","registration","centralityHarmonic",0.2805309734513274,""

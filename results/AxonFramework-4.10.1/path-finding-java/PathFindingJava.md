@@ -649,7 +649,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>125</td>
       <td>32</td>
       <td>18</td>
-      <td>[/org/axonframework/common/jdbc -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/deadline/annotation -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/async -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/deadle...</td>
+      <td>[/org/axonframework/lifecycle -&gt; /org/axonframework/commandhandling, /org/axonframework/eventhandling/tokenstore/inmemory -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/messaging/annotation -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/messaging/correla...</td>
       <td>[axon-messaging-4.10.1 -&gt; axon-messaging-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -668,7 +668,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>7</td>
       <td>3</td>
       <td>5</td>
-      <td>[/org/axonframework/commandhandling/callbacks -&gt; /org/axonframework/common/property, /org/axonframework/commandhandling/distributed/commandfilter -&gt; /org/axonframework/common/property, /org/axonframework/commandhandling/callbacks -&gt; /org/axonframework/serialization/upcasting, /org/axonframework/...</td>
+      <td>[/org/axonframework/lifecycle -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/lifecycle -&gt; /org/axonframework/messaging/responsetypes, /org/axonframework/lifecycle -&gt; /org/axonframework/queryhandling/registration, /org/axonframework/commandhandling/callbacks -&gt; /org/axonframe...</td>
       <td>[axon-messaging-4.10.1 -&gt; axon-messaging-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -863,7 +863,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <td>0</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
     </tr>
     <tr>
@@ -957,7 +957,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -976,7 +976,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -995,7 +995,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -1033,7 +1033,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -1090,7 +1090,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>4</td>
       <td>1</td>
@@ -1130,10 +1130,10 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>13</td>
+      <td>15</td>
       <td>1</td>
-      <td>13</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/test/server, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboo...</td>
+      <td>15</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/test/server, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/commandhandling, /org/axonframework/sprin...</td>
       <td>[axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-test-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-server-connector-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-messaging-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-modelling-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -1186,7 +1186,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -1205,7 +1205,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -1243,7 +1243,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -1300,12 +1300,12 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>3</td>
-      <td>2</td>
+      <td>1</td>
       <td>3</td>
-      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/aggregate -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/saga -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
       <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -1324,7 +1324,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test/matchers]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/matchers]</td>
       <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -1343,7 +1343,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test]</td>
       <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
       <td>[]</td>
     </tr>
