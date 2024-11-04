@@ -1,6 +1,6 @@
 // Statistics about how many ExternalModule nodes were found that match internal Module nodes 
 
- MATCH (module:TS:Module)<-[resolved:RESOLVES_TO]-(external:TS:ExternalModule)
+ MATCH (module:TS:Module)<-[resolved:IS_IMPLEMENTED_IN]-(external:TS:ExternalModule)
 OPTIONAL MATCH (project:TS:Project)-[:CONTAINS]->(module)
   WITH project.name                               AS projectName
       ,count(DISTINCT module)                     AS resolvedModuleCount

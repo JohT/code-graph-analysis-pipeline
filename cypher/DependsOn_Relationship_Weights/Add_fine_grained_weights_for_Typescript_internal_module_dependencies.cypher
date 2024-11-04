@@ -7,7 +7,7 @@
  WHERE moduleDependency.declarationCount IS NULL
 // Ruling out resolved targets also filters out entries that aren't covered by the fine grained weights for "ExternalModule"s.
 // Therefore, the exists filter is commented out for now and replaced by focussing on missing detailed weight properties to catch them all.
-//WHERE NOT EXISTS { (target)<-[:RESOLVES_TO]-(resolvedTarget:ExternalModule) }
+//WHERE NOT EXISTS { (target)<-[:IS_IMPLEMENTED_IN]-(resolvedTarget:ExternalModule) }
   WITH source
       ,target
       ,moduleDependency

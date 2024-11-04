@@ -1,4 +1,4 @@
-// Adds a relation "RESOLVES_TO" from an external module to a module if their global fully qualified names match.
+// Adds a relation "IS_IMPLEMENTED_IN" from an external module to a module if their global fully qualified names match.
 // Depends on "Add_module_properties.cypher" to be run first
 // Inspired by https://github.com/jQAssistant/jqassistant/blob/4cd7face5d6d2953449d8e6ff5b484f00ffbdc2f/plugin/java/src/main/resources/META-INF/jqassistant-rules/java-classpath.xml#L5
 // Related to https://github.com/jqassistant-plugin/jqassistant-typescript-plugin/issues/35
@@ -47,7 +47,7 @@ WHERE equalGlobalFqn
    OR equalNameWithoutNamespace
    OR equalNameAndNpmPackage
  CALL {  WITH module, externalModule
-        MERGE (externalModule)-[:RESOLVES_TO]->(module)
+        MERGE (externalModule)-[:IS_IMPLEMENTED_IN]->(module)
       } IN TRANSACTIONS
 RETURN CASE WHEN equalGlobalFqn            THEN 'equalGlobalFqn'
             WHEN equalModule               THEN 'equalModule'

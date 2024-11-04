@@ -90,7 +90,7 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_external_modules_to_corresponding_
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_namespace_property_on_nodes_from_linked_npm_packages.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding relationships between Modules with the same globalFqn
-execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_RESOLVES_TO_relationship_for_matching_modules.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_matching_modules.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 

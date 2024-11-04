@@ -4,7 +4,7 @@
   WITH count(internal_module)   AS totalNumberOfInternalModules
       ,collect(internal_module) AS internal_modules
  UNWIND internal_modules AS internal_module
- MATCH (external_module:TS:ExternalModule)-[:RESOLVES_TO]->(internal_module)
+ MATCH (external_module:TS:ExternalModule)-[:IS_IMPLEMENTED_IN]->(internal_module)
  WHERE NOT external_module.isNodeModule = true
 RETURN totalNumberOfInternalModules
       ,COUNT { (all_external_modules:TS:ExternalModule) 

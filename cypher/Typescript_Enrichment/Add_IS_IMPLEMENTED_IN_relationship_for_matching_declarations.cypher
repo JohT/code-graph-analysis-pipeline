@@ -1,7 +1,7 @@
 // Link matching external to internal Typescript declarations with an IS_IMPLEMENTED_IN relationship
 
  MATCH (externalModule:TS&ExternalModule)-[:EXPORTS]->(externalDeclaration:TS&ExternalDeclaration)
- MATCH (externalModule)-[:RESOLVES_TO]->(internalModule:TS&Module)
+ MATCH (externalModule)-[:IS_IMPLEMENTED_IN]->(internalModule:TS&Module)
  MATCH (externalModule)-[:EXPORTS]->(internalDeclaration:TS&!ExternalDeclaration)
  WHERE externalDeclaration.name = internalDeclaration.name
   WITH externalDeclaration, internalDeclaration

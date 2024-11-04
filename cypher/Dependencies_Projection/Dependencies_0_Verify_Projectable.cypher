@@ -7,7 +7,7 @@
       ,(dependency[$dependencies_projection_weight_property])             AS weightPropertyValue
       ,(dependency[$dependencies_projection_weight_property] < 1)         AS nonPositiveWeightPropertyValue
       ,coalesce(dependency.resolved, false)                               AS resolvedDependency
-      ,EXISTS { (target)<-[:RESOLVES_TO]-(resolvedTarget:ExternalModule) } AS resolvedTarget
+      ,EXISTS { (target)<-[:IS_IMPLEMENTED_IN]-(resolvedTarget:ExternalModule) } AS resolvedTarget
       ,(source.incomingDependencies IS NULL OR
         target.incomingDependencies IS NULL)   AS missingIncomingDependencies
       ,(source.outgoingDependencies IS NULL OR 
