@@ -97,33 +97,33 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Remix Run Bot</td>
-      <td>322</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Mark Dalgleish</td>
-      <td>331</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>Ryan Florence</td>
       <td>1262</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Pedro Cattori</td>
-      <td>320</td>
-    </tr>
-    <tr>
-      <th>4</th>
+      <th>1</th>
       <td>Brooks Lybrand</td>
       <td>35</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>2</th>
       <td>rifaidev</td>
       <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pedro Cattori</td>
+      <td>322</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Remix Run Bot</td>
+      <td>322</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Mark Dalgleish</td>
+      <td>331</td>
     </tr>
     <tr>
       <th>6</th>
