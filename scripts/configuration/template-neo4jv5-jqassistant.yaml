@@ -35,7 +35,7 @@ jqassistant:
       version: 2.0.0
     - group-id: de.kontext-e.jqassistant.plugin
       artifact-id: jqassistant.plugin.git
-      version: 2.1.0
+      version: 2.2.2
 
 
   # The store configuration
