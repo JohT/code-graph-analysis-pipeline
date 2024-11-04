@@ -29,7 +29,7 @@ Script | Directory | Description
 | [downloadReactRouter.sh](./downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone. |
 | [downloadTypescriptProject.sh](./downloader/downloadTypescriptProject.sh) | downloader | Downloads the given version of a Typescript project from a git repository using git clone. |
 | [analyzeAntDesign.sh](./examples/analyzeAntDesign.sh) | examples | This is an example for the analysis of a the Typescript project "ant-design". |
-| [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for an analysis of AxonFramework  |
+| [analyzeAxonFramework.sh](./examples/analyzeAxonFramework.sh) | examples | This is an example for the analysis of the Java event-sourcing library "AxonFramework".  |
 | [analyzeReactRouter.sh](./examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router". |
 | [detectLatestGitTag.sh](./examples/detectLatestGitTag.sh) | examples | Returns the latest tag of a remote repository given by its url. |
 | [executeJupyterNotebook.sh](./executeJupyterNotebook.sh) |  | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF. |
