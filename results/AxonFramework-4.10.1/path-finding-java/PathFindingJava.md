@@ -592,7 +592,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/commandhandling/callbacks -&gt; /org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt; /org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt; /org/axonframework/commandhandling, /org/axonframework/comman...</td>
+      <td>[/org/axonframework/serialization -&gt; /org/axonframework/commandhandling, /org/axonframework/tracing -&gt; /org/axonframework/commandhandling, /org/axonframework/tracing/attributes -&gt; /org/axonframework/commandhandling, /org/axonframework/util -&gt; /org/axonframework/commandhandling]</td>
       <td>[axon-messaging-4.10.1 -&gt; axon-messaging-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -863,12 +863,12 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <td>0</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
+      <td>3</td>
       <td>2</td>
       <td>39</td>
       <td>3</td>
@@ -876,7 +876,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
     </tr>
     <tr>
       <th>2</th>
-      <td>5</td>
+      <td>6</td>
       <td>3</td>
       <td>18</td>
       <td>2</td>
@@ -884,7 +884,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
     </tr>
     <tr>
       <th>3</th>
-      <td>9</td>
+      <td>10</td>
       <td>4</td>
       <td>11</td>
       <td>2</td>
@@ -952,12 +952,31 @@ The following table shows the first 10 rows with all details of the query above.
       <td>axon-modelling-4.10.1</td>
       <td>None</td>
       <td>None</td>
+      <td>False</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>13</td>
+      <td>4</td>
+      <td>13</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[/org/axonframework/modelling/command/legacyjpa -&gt; /org/axonframework/modelling/command/inspection]</td>
+      <td>[axon-modelling-4.10.1 -&gt; axon-modelling-4.10.1]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>axon-modelling-4.10.1</td>
+      <td>None</td>
+      <td>None</td>
       <td>True</td>
       <td>None</td>
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -967,7 +986,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>axon-server-connector-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -976,7 +995,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -986,7 +1005,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-server-connector-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1005,7 +1024,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1014,7 +1033,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -1024,7 +1043,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1043,7 +1062,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1062,7 +1081,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1071,7 +1090,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>4</td>
       <td>1</td>
@@ -1081,7 +1100,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1100,7 +1119,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[]</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1111,30 +1130,11 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>13</td>
+      <td>15</td>
       <td>1</td>
-      <td>13</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/test/server, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboo...</td>
+      <td>15</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/test/server, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/commandhandling, /org/axonframework/sprin...</td>
       <td>[axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-test-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-server-connector-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-messaging-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-modelling-4.10.1]</td>
-      <td>[]</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>axon-spring-boot-autoconfigure-4.10.1</td>
-      <td>None</td>
-      <td>None</td>
-      <td>True</td>
-      <td>None</td>
-      <td>None</td>
-      <td>4</td>
-      <td>11</td>
-      <td>2</td>
-      <td>11</td>
-      <td>8</td>
-      <td>1</td>
-      <td>8</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/digest, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/transaction, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/deadline, /org/axonframework/springboot/a...</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-messaging-4.10.1, axon-spring-boot-autoconfigure-4.10.1 -&gt; axon-configuration-4.10.1]</td>
       <td>[]</td>
     </tr>
   </tbody>
@@ -1177,7 +1177,26 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>axon-modelling-4.10.1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>False</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>13</td>
+      <td>4</td>
+      <td>13</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[/org/axonframework/modelling/command/legacyjpa -&gt; /org/axonframework/modelling/command/inspection]</td>
+      <td>[axon-modelling-4.10.1 -&gt; axon-modelling-4.10.1]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-server-connector-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1186,7 +1205,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>1</td>
       <td>1</td>
@@ -1196,7 +1215,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[]</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>axon-server-connector-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1215,7 +1234,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[]</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1224,7 +1243,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>None</td>
       <td>1</td>
       <td>13</td>
-      <td>5</td>
+      <td>4</td>
       <td>13</td>
       <td>2</td>
       <td>1</td>
@@ -1234,7 +1253,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[]</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1253,7 +1272,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[]</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>axon-spring-boot-autoconfigure-4.10.1</td>
       <td>None</td>
       <td>None</td>
@@ -1272,25 +1291,6 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[]</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>axon-test-4.10.1</td>
-      <td>None</td>
-      <td>None</td>
-      <td>False</td>
-      <td>None</td>
-      <td>None</td>
-      <td>1</td>
-      <td>13</td>
-      <td>5</td>
-      <td>13</td>
-      <td>3</td>
-      <td>2</td>
-      <td>3</td>
-      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/aggregate -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
-      <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
-      <td>[]</td>
-    </tr>
-    <tr>
       <th>11</th>
       <td>axon-test-4.10.1</td>
       <td>None</td>
@@ -1298,14 +1298,14 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>None</td>
       <td>None</td>
-      <td>2</td>
-      <td>39</td>
+      <td>1</td>
+      <td>13</td>
+      <td>4</td>
+      <td>13</td>
       <td>3</td>
-      <td>39</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test/matchers]</td>
+      <td>3</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/saga -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
       <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -1317,6 +1317,25 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>None</td>
       <td>None</td>
+      <td>2</td>
+      <td>39</td>
+      <td>3</td>
+      <td>39</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/matchers]</td>
+      <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>axon-test-4.10.1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>False</td>
+      <td>None</td>
+      <td>None</td>
       <td>3</td>
       <td>18</td>
       <td>2</td>
@@ -1324,7 +1343,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test]</td>
       <td>[axon-test-4.10.1 -&gt; axon-test-4.10.1]</td>
       <td>[]</td>
     </tr>
@@ -1345,6 +1364,7 @@ Shows the top 20 artifacts with their max. longest path.
     axon-spring-boot-autoconfigure-4.10.1    3
     axon-test-4.10.1                         3
     axon-server-connector-4.10.1             2
+    axon-modelling-4.10.1                    1
     Name: distance, dtype: int64
 
 
@@ -1407,6 +1427,12 @@ Shows the top 50 artifacts with the highest number of dependency paths stacked b
       <th>axon-server-connector-4.10.1</th>
       <td>50.0</td>
       <td>50.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>axon-modelling-4.10.1</th>
+      <td>100.0</td>
+      <td>0.0</td>
       <td>0.0</td>
     </tr>
   </tbody>
