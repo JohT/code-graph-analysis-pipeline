@@ -85,7 +85,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.026851</td>
-      <td>[0.11787067353725433, 0.005168413743376732, 0....</td>
+      <td>[-0.16008169949054718, 0.3516629934310913, 0.2...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -94,7 +94,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[0.16625595092773438, -0.03187565505504608, 0....</td>
+      <td>[-0.13927684724330902, 0.41776955127716064, 0....</td>
     </tr>
     <tr>
       <th>2</th>
@@ -103,7 +103,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.017966</td>
-      <td>[0.12843935191631317, 0.026327721774578094, 0....</td>
+      <td>[-0.13640281558036804, 0.3645920157432556, 0.2...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -112,7 +112,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[0.1400860846042633, 0.11471225321292877, 0.22...</td>
+      <td>[-0.04397090524435043, 0.46026527881622314, 0....</td>
     </tr>
     <tr>
       <th>4</th>
@@ -121,7 +121,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012709</td>
-      <td>[0.2924308180809021, 0.18061289191246033, 0.19...</td>
+      <td>[0.018899351358413696, 0.5955367088317871, 0.2...</td>
     </tr>
   </tbody>
 </table>
@@ -142,24 +142,24 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -0.3700, 50 iterations in 0.0532 sec
-    Iteration  100, KL divergence 1.2330, 50 iterations in 0.0157 sec
-    Iteration  150, KL divergence 1.2330, 50 iterations in 0.0146 sec
-    Iteration  200, KL divergence 1.2330, 50 iterations in 0.0148 sec
-    Iteration  250, KL divergence 1.2330, 50 iterations in 0.0145 sec
-       --> Time elapsed: 0.11 seconds
+    Iteration   50, KL divergence -0.2145, 50 iterations in 0.0576 sec
+    Iteration  100, KL divergence 1.2149, 50 iterations in 0.0162 sec
+    Iteration  150, KL divergence 1.2149, 50 iterations in 0.0145 sec
+    Iteration  200, KL divergence 1.2149, 50 iterations in 0.0147 sec
+    Iteration  250, KL divergence 1.2149, 50 iterations in 0.0146 sec
+       --> Time elapsed: 0.12 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.1579, 50 iterations in 0.0528 sec
-    Iteration  100, KL divergence 0.1454, 50 iterations in 0.0497 sec
-    Iteration  150, KL divergence 0.1411, 50 iterations in 0.0455 sec
-    Iteration  200, KL divergence 0.1406, 50 iterations in 0.0448 sec
-    Iteration  250, KL divergence 0.1398, 50 iterations in 0.0453 sec
-    Iteration  300, KL divergence 0.1399, 50 iterations in 0.0452 sec
-    Iteration  350, KL divergence 0.1401, 50 iterations in 0.0447 sec
-    Iteration  400, KL divergence 0.1392, 50 iterations in 0.0441 sec
-    Iteration  450, KL divergence 0.1395, 50 iterations in 0.0446 sec
-    Iteration  500, KL divergence 0.1396, 50 iterations in 0.0440 sec
-       --> Time elapsed: 0.46 seconds
+    Iteration   50, KL divergence 0.1692, 50 iterations in 0.0494 sec
+    Iteration  100, KL divergence 0.1536, 50 iterations in 0.0474 sec
+    Iteration  150, KL divergence 0.1498, 50 iterations in 0.0440 sec
+    Iteration  200, KL divergence 0.1493, 50 iterations in 0.0437 sec
+    Iteration  250, KL divergence 0.1495, 50 iterations in 0.0434 sec
+    Iteration  300, KL divergence 0.1494, 50 iterations in 0.0449 sec
+    Iteration  350, KL divergence 0.1493, 50 iterations in 0.0451 sec
+    Iteration  400, KL divergence 0.1494, 50 iterations in 0.0442 sec
+    Iteration  450, KL divergence 0.1495, 50 iterations in 0.0441 sec
+    Iteration  500, KL divergence 0.1495, 50 iterations in 0.0437 sec
+       --> Time elapsed: 0.45 seconds
 
 
 
@@ -187,8 +187,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.026851</td>
-      <td>8.305568</td>
-      <td>1.480571</td>
+      <td>-8.888723</td>
+      <td>0.364992</td>
     </tr>
     <tr>
       <th>1</th>
@@ -196,8 +196,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>7.836555</td>
-      <td>1.582968</td>
+      <td>-8.273362</td>
+      <td>0.170201</td>
     </tr>
     <tr>
       <th>2</th>
@@ -205,8 +205,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.017966</td>
-      <td>8.295983</td>
-      <td>1.339682</td>
+      <td>-8.885327</td>
+      <td>0.264415</td>
     </tr>
     <tr>
       <th>3</th>
@@ -214,8 +214,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>8.300832</td>
-      <td>0.834546</td>
+      <td>-8.735439</td>
+      <td>-0.224923</td>
     </tr>
     <tr>
       <th>4</th>
@@ -223,8 +223,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012709</td>
-      <td>8.269986</td>
-      <td>0.394984</td>
+      <td>-8.514951</td>
+      <td>-0.561455</td>
     </tr>
   </tbody>
 </table>
@@ -268,7 +268,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.026851</td>
-      <td>[-0.6495190411806107, -2.1650634706020355, 0.2...</td>
+      <td>[0.21650634706020355, -1.7320507764816284, -1....</td>
     </tr>
     <tr>
       <th>1</th>
@@ -277,7 +277,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[-0.21650634706020355, -2.5980761647224426, -0...</td>
+      <td>[-0.4330126941204071, -2.5980761647224426, -1....</td>
     </tr>
     <tr>
       <th>2</th>
@@ -286,7 +286,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.017966</td>
-      <td>[-0.8660253882408142, -3.0310888588428497, 0.0...</td>
+      <td>[0.4330126941204071, -2.381569817662239, -0.64...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -295,7 +295,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[-0.8660253882408142, -1.948557123541832, 0.0,...</td>
+      <td>[-0.6495190411806107, -1.7320507764816284, -1....</td>
     </tr>
     <tr>
       <th>4</th>
@@ -304,7 +304,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012709</td>
-      <td>[-0.4330126941204071, -1.5155444294214249, 0.0...</td>
+      <td>[-0.8660253882408142, -1.5155444294214249, -0....</td>
     </tr>
   </tbody>
 </table>
@@ -315,30 +315,30 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     TSNE(early_exaggeration=12, random_state=47, verbose=1)
     --------------------------------------------------------------------------------
     ===> Finding 90 nearest neighbors using exact search using euclidean distance...
-       --> Time elapsed: 0.00 seconds
+       --> Time elapsed: 0.01 seconds
     ===> Calculating affinity matrix...
-       --> Time elapsed: 0.00 seconds
+       --> Time elapsed: 0.01 seconds
     ===> Calculating PCA-based initialization...
-       --> Time elapsed: 0.00 seconds
+       --> Time elapsed: 0.01 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -0.5724, 50 iterations in 0.0641 sec
-    Iteration  100, KL divergence 1.2222, 50 iterations in 0.0171 sec
-    Iteration  150, KL divergence 1.2222, 50 iterations in 0.0143 sec
-    Iteration  200, KL divergence 1.2222, 50 iterations in 0.0144 sec
-    Iteration  250, KL divergence 1.2222, 50 iterations in 0.0144 sec
-       --> Time elapsed: 0.12 seconds
+    Iteration   50, KL divergence -0.3154, 50 iterations in 0.0824 sec
+    Iteration  100, KL divergence 1.2210, 50 iterations in 0.0176 sec
+    Iteration  150, KL divergence 1.2210, 50 iterations in 0.0148 sec
+    Iteration  200, KL divergence 1.2210, 50 iterations in 0.0145 sec
+    Iteration  250, KL divergence 1.2210, 50 iterations in 0.0146 sec
+       --> Time elapsed: 0.14 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.5864, 50 iterations in 0.0501 sec
-    Iteration  100, KL divergence 0.5591, 50 iterations in 0.0481 sec
-    Iteration  150, KL divergence 0.5527, 50 iterations in 0.0470 sec
-    Iteration  200, KL divergence 0.5518, 50 iterations in 0.0461 sec
-    Iteration  250, KL divergence 0.5514, 50 iterations in 0.0463 sec
-    Iteration  300, KL divergence 0.5507, 50 iterations in 0.0455 sec
-    Iteration  350, KL divergence 0.5514, 50 iterations in 0.0457 sec
-    Iteration  400, KL divergence 0.5509, 50 iterations in 0.0461 sec
-    Iteration  450, KL divergence 0.5513, 50 iterations in 0.0454 sec
-    Iteration  500, KL divergence 0.5511, 50 iterations in 0.0453 sec
-       --> Time elapsed: 0.47 seconds
+    Iteration   50, KL divergence 0.6294, 50 iterations in 0.0598 sec
+    Iteration  100, KL divergence 0.6064, 50 iterations in 0.0467 sec
+    Iteration  150, KL divergence 0.6061, 50 iterations in 0.0458 sec
+    Iteration  200, KL divergence 0.6045, 50 iterations in 0.0465 sec
+    Iteration  250, KL divergence 0.6034, 50 iterations in 0.0463 sec
+    Iteration  300, KL divergence 0.6023, 50 iterations in 0.0480 sec
+    Iteration  350, KL divergence 0.6027, 50 iterations in 0.0472 sec
+    Iteration  400, KL divergence 0.6028, 50 iterations in 0.0467 sec
+    Iteration  450, KL divergence 0.6026, 50 iterations in 0.0466 sec
+    Iteration  500, KL divergence 0.6024, 50 iterations in 0.0458 sec
+       --> Time elapsed: 0.48 seconds
 
 
 
@@ -366,8 +366,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.026851</td>
-      <td>4.590395</td>
-      <td>-1.370429</td>
+      <td>4.372012</td>
+      <td>-2.476135</td>
     </tr>
     <tr>
       <th>1</th>
@@ -375,8 +375,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>6.373798</td>
-      <td>-1.707531</td>
+      <td>1.612987</td>
+      <td>-3.345353</td>
     </tr>
     <tr>
       <th>2</th>
@@ -384,8 +384,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.017966</td>
-      <td>4.575410</td>
-      <td>-0.916451</td>
+      <td>4.081461</td>
+      <td>-2.598350</td>
     </tr>
     <tr>
       <th>3</th>
@@ -393,8 +393,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>5.360637</td>
-      <td>-1.411142</td>
+      <td>2.915598</td>
+      <td>-2.925267</td>
     </tr>
     <tr>
       <th>4</th>
@@ -402,8 +402,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012709</td>
-      <td>5.672203</td>
-      <td>0.443218</td>
+      <td>1.396528</td>
+      <td>1.710044</td>
     </tr>
   </tbody>
 </table>
@@ -443,7 +443,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.026851</td>
-      <td>[0.6719756126403809, 0.3507736027240753, -0.15...</td>
+      <td>[0.6960683465003967, -0.18336600065231323, -0....</td>
     </tr>
     <tr>
       <th>1</th>
@@ -452,7 +452,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[0.32397207617759705, 0.24801093339920044, -0....</td>
+      <td>[0.6355610489845276, -0.11897537857294083, 0.1...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -461,7 +461,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.017966</td>
-      <td>[0.5627065896987915, 0.35883867740631104, -0.1...</td>
+      <td>[0.7791544795036316, -0.19260777533054352, 0.0...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -470,7 +470,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[0.41302183270454407, 0.5553938746452332, -0.2...</td>
+      <td>[0.720118522644043, -0.13415782153606415, 0.00...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -479,7 +479,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012709</td>
-      <td>[0.5717484354972839, 0.22899380326271057, -0.2...</td>
+      <td>[0.8286836743354797, -0.18121016025543213, 0.1...</td>
     </tr>
   </tbody>
 </table>
@@ -496,24 +496,24 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -1.2796, 50 iterations in 0.0630 sec
-    Iteration  100, KL divergence 1.1592, 50 iterations in 0.0167 sec
-    Iteration  150, KL divergence 1.1592, 50 iterations in 0.0148 sec
-    Iteration  200, KL divergence 1.1592, 50 iterations in 0.0147 sec
-    Iteration  250, KL divergence 1.1592, 50 iterations in 0.0147 sec
+    Iteration   50, KL divergence -0.3502, 50 iterations in 0.0628 sec
+    Iteration  100, KL divergence 1.1692, 50 iterations in 0.0166 sec
+    Iteration  150, KL divergence 1.1692, 50 iterations in 0.0146 sec
+    Iteration  200, KL divergence 1.1692, 50 iterations in 0.0146 sec
+    Iteration  250, KL divergence 1.1692, 50 iterations in 0.0147 sec
        --> Time elapsed: 0.12 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.3113, 50 iterations in 0.0534 sec
-    Iteration  100, KL divergence 0.2985, 50 iterations in 0.0480 sec
-    Iteration  150, KL divergence 0.2956, 50 iterations in 0.0463 sec
-    Iteration  200, KL divergence 0.2956, 50 iterations in 0.0491 sec
-    Iteration  250, KL divergence 0.2956, 50 iterations in 0.0524 sec
-    Iteration  300, KL divergence 0.2958, 50 iterations in 0.0460 sec
-    Iteration  350, KL divergence 0.2956, 50 iterations in 0.0466 sec
-    Iteration  400, KL divergence 0.2954, 50 iterations in 0.0461 sec
-    Iteration  450, KL divergence 0.2952, 50 iterations in 0.0457 sec
-    Iteration  500, KL divergence 0.2957, 50 iterations in 0.0457 sec
-       --> Time elapsed: 0.48 seconds
+    Iteration   50, KL divergence 0.3519, 50 iterations in 0.0540 sec
+    Iteration  100, KL divergence 0.3359, 50 iterations in 0.0512 sec
+    Iteration  150, KL divergence 0.3339, 50 iterations in 0.0484 sec
+    Iteration  200, KL divergence 0.3342, 50 iterations in 0.0481 sec
+    Iteration  250, KL divergence 0.3333, 50 iterations in 0.0474 sec
+    Iteration  300, KL divergence 0.3332, 50 iterations in 0.0460 sec
+    Iteration  350, KL divergence 0.3338, 50 iterations in 0.0492 sec
+    Iteration  400, KL divergence 0.3331, 50 iterations in 0.0499 sec
+    Iteration  450, KL divergence 0.3334, 50 iterations in 0.0486 sec
+    Iteration  500, KL divergence 0.3335, 50 iterations in 0.0483 sec
+       --> Time elapsed: 0.49 seconds
 
 
 
@@ -541,8 +541,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.026851</td>
-      <td>8.200458</td>
-      <td>0.357216</td>
+      <td>8.106526</td>
+      <td>4.381854</td>
     </tr>
     <tr>
       <th>1</th>
@@ -550,8 +550,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>8.210786</td>
-      <td>1.076248</td>
+      <td>8.503882</td>
+      <td>4.260622</td>
     </tr>
     <tr>
       <th>2</th>
@@ -559,8 +559,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.017966</td>
-      <td>7.471648</td>
-      <td>0.461289</td>
+      <td>7.669965</td>
+      <td>4.088724</td>
     </tr>
     <tr>
       <th>3</th>
@@ -568,8 +568,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>7.476770</td>
-      <td>-0.221455</td>
+      <td>7.233899</td>
+      <td>3.487274</td>
     </tr>
     <tr>
       <th>4</th>
@@ -577,8 +577,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-test-4.10.1</td>
       <td>0</td>
       <td>0.012709</td>
-      <td>6.506452</td>
-      <td>0.623954</td>
+      <td>6.787221</td>
+      <td>3.348749</td>
     </tr>
   </tbody>
 </table>
