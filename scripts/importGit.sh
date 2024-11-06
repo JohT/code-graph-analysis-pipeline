@@ -150,6 +150,7 @@ postGitPluginImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_sha.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_absolute_file_name.cypher"
 
   commonPostGitImport
 
