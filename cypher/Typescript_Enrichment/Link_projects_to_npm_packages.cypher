@@ -26,6 +26,7 @@ MATCH (npmPackage:NPM:Package)
 // that contains the package.json file 
    SET npmPackage.relativeFileDirectory = ltrim(relativeNpmPackageDirectory, '/')
       ,project.version = npmPackage.version
+      ,project.packageName = npmPackage.name
  RETURN count(*) AS numberOfCreatedNpmPackageRelationships
 // Detailed results for debugging
 //RETURN npmPackage.fileName                   AS npmPackageFileName
