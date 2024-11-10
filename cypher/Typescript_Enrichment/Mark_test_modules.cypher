@@ -4,6 +4,8 @@ MATCH (m:Module)
  WITH m
      ,(m.globalFqn contains '/__tests__/') OR        
       (m.globalFqn contains '/test/')      OR
+      (m.globalFqn contains '/testing/')   OR             
+      (m.globalFqn contains '-tests/')     OR             
       (m.globalFqn contains '/tests/')                  AS isInTestFolder
      ,(m.globalFqn contains '/__mocks__/') OR        
       (m.globalFqn contains '/mock/')      OR      
