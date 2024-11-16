@@ -10,6 +10,7 @@
 #            A second call without this option will be needed for the change detection to work.
 #            This is helpful to decide if an operation should be done based on changes while waiting for its success to finally save the change state.
 # --paths Comma-separated list of file- and directory-names that are used for calculating the hash based on their name and size.
+# --hashfile Path to the file that contains the hash for change detection. Default in environment variable CHANGE_DETECTION_HASH_FILE_PATH
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -88,6 +89,7 @@ file_names_and_sizes() {
           -type d -name "node_modules" -prune -o \
           -type d -name "target" -prune -o \
           -type d -name "temp" -prune -o \
+          -type d -name ".reports" -prune -o \
           -not -path "${hashFilePath}" \
           -type f \
           -exec stat -f "%N %z" {} + \
