@@ -6,7 +6,7 @@
 //       The differences are subtle but need to be thought through and tested carefully.
 //       Having separate files makes it obvious that there needs to be one for every new source code language.
 
-MATCH (code_file:!Git&File)
+MATCH (code_file:!Git&File&!Directory)
 WHERE  code_file.fileName IS NOT NULL
   // Use only original code files, no resolved duplicates
   AND NOT EXISTS { (code_file)-[:RESOLVES_TO]->(other_file:File&!Git) }
@@ -17,8 +17,10 @@ MATCH (git_file:Git&File)
      ,git_file
      ,coalesce(git_file.fileName, git_file.relativePath) AS gitFileName
 WHERE gitFileName ENDS WITH codeFileName
-MERGE (git_file)-[:RESOLVES_TO]->(code_file)
-  SET git_file.resolved = true
+ CALL { WITH git_file, code_file
+       MERGE (git_file)-[:RESOLVES_TO]->(code_file)
+          ON CREATE SET git_file.resolved = true
+      } IN TRANSACTIONS
 RETURN count(DISTINCT codeFileName)  AS numberOfCodeFiles
       ,collect(DISTINCT codeFileName + ' <-> ' + gitFileName + '\n')[0..4] AS examples
 // RETURN codeFileName, gitFileName

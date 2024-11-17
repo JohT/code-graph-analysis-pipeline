@@ -54,6 +54,12 @@ Use these optional command line options as needed:
     ./init.sh MyAnalysisProjectName
     ```
 
+- Change into the analysis directory.
+
+    ```shell
+    cd ./temp/MyAnalysisProjectName
+    ```
+
 ### 2. Prepare the code to be analyzed
 
 - Move the artifacts (e.g. Java jars json files) you want to analyze into the `artifacts` directory.

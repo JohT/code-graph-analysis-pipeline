@@ -31,6 +31,16 @@ if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
     exit 1
 fi
 
+createForwardingScript() {
+    local originalScript="${1}"
+    local scriptName;scriptName=$(basename "$originalScript")
+
+    cp -n "${originalScript}" .
+    echo "#!/usr/bin/env bash" > "./${scriptName}"
+    # shellcheck disable=SC2016
+    echo "${originalScript} \"\${@}\"" >> "./${scriptName}"
+}
+
 # Create the temporary directory for all analysis projects if it hadn't been created yet.
 mkdir -p ./temp
 cd ./temp
@@ -45,9 +55,9 @@ mkdir -p "./${ARTIFACTS_DIRECTORY}"
 # Create the source directory inside the analysis directory for source code projects/repositories if it hadn't been created yet.
 mkdir -p "./${SOURCE_DIRECTORY}"
 
-# Create symbolic links to the most common scripts for code analysis.
-ln -s "./../../scripts/analysis/analyze.sh" .
-ln -s "./../../scripts/startNeo4j.sh" .
-ln -s "./../../scripts/stopNeo4j.sh" .
+# Create forwarding scripts for the most important commands
+createForwardingScript "./../../scripts/analysis/analyze.sh"
+createForwardingScript "./../../scripts/startNeo4j.sh"
+createForwardingScript "./../../scripts/stopNeo4j.sh"
 
 echo "init: Successfully initialized analysis project ${analysisName}" >&2
