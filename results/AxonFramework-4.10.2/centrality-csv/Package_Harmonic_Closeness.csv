@@ -43,7 +43,7 @@
 "org.axonframework.axonserver.connector","connector","centralityHarmonic",0.11946902654867257,""
 "org.axonframework.messaging.deadletter","deadletter","centralityHarmonic",0.11946902654867254,""
 "org.axonframework.config","config","centralityHarmonic",0.11061946902654868,""
-"org.axonframework.modelling.saga.metamodel","metamodel","centralityHarmonic",0.09513274336283184,""
+"org.axonframework.modelling.saga.metamodel","metamodel","centralityHarmonic",0.09513274336283185,""
 "org.axonframework.modelling.saga.repository.jpa","jpa","centralityHarmonic",0.09292035398230086,""
 "org.axonframework.commandhandling.distributed","distributed","centralityHarmonic",0.08849557522123894,""
 "org.axonframework.eventhandling.tokenstore.inmemory","inmemory","centralityHarmonic",0.08849557522123894,""
