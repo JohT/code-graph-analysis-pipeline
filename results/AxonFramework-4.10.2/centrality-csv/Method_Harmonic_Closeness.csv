@@ -41,7 +41,7 @@
 "void notNull(java.lang.Object,java.util.function.Supplier)","notNull","centralityHarmonic",0.0035688793718772305,""
 "void startRecording()","startRecording","centralityHarmonic",0.0035688793718772305,""
 "java.lang.Object executeQuery(java.sql.Connection,org.axonframework.common.jdbc.JdbcUtils$SqlFunction,org.axonframework.common.jdbc.JdbcUtils$SqlResultConverter,java.util.function.Function,boolean)","executeQuery","centralityHarmonic",0.0033309540804187486,""
-"org.axonframework.eventhandling.AbstractEventBus$Builder messageMonitor(org.axonframework.monitoring.MessageMonitor)","messageMonitor","centralityHarmonic",0.003330954080418748,""
+"org.axonframework.eventhandling.AbstractEventBus$Builder messageMonitor(org.axonframework.monitoring.MessageMonitor)","messageMonitor","centralityHarmonic",0.0033309540804187486,""
 "java.util.List findModules(java.lang.Class)","findModules","centralityHarmonic",0.0032119914346895075,""
 "org.axonframework.eventsourcing.eventstore.AbstractEventStorageEngine$Builder eventSerializer(org.axonframework.serialization.Serializer)","eventSerializer","centralityHarmonic",0.0032119914346895075,""
 "org.axonframework.eventsourcing.eventstore.AbstractEventStorageEngine$Builder snapshotFilter(org.axonframework.eventsourcing.snapshotting.SnapshotFilter)","snapshotFilter","centralityHarmonic",0.0032119914346895075,""
