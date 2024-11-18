@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Zhong Junjie</td>
+      <td>Jong Taek Oh</td>
       <td>1</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Wonsuk Choi</td>
+      <td>Zhong Junjie</td>
       <td>1</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>printfn</td>
+      <td>Wonsuk Choi</td>
       <td>1</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>printfn</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>skratchdot</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Oleg</td>
       <td>5</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Andreas Ottosson</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
+      <td>Mark Dalgleish</td>
+      <td>337</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>Remix Run Bot</td>
       <td>337</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>9</th>
       <td>Pedro Cattori</td>
       <td>343</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Ryan Florence</td>
-      <td>1276</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Jacob Ebey</td>
-      <td>238</td>
     </tr>
   </tbody>
 </table>
