@@ -41,7 +41,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
-      <td>420</td>
+      <td>421</td>
       <td>2</td>
       <td>152</td>
     </tr>
@@ -50,7 +50,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
-      <td>153</td>
+      <td>154</td>
       <td>0</td>
       <td>24</td>
     </tr>
@@ -59,7 +59,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
-      <td>237</td>
+      <td>239</td>
       <td>19</td>
       <td>17</td>
     </tr>
@@ -68,7 +68,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
-      <td>163</td>
+      <td>164</td>
       <td>0</td>
       <td>40</td>
     </tr>
@@ -104,7 +104,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
-      <td>237</td>
+      <td>239</td>
       <td>19</td>
       <td>17</td>
     </tr>
@@ -113,7 +113,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
-      <td>420</td>
+      <td>421</td>
       <td>2</td>
       <td>152</td>
     </tr>
@@ -122,7 +122,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
-      <td>153</td>
+      <td>154</td>
       <td>0</td>
       <td>24</td>
     </tr>
@@ -131,7 +131,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
-      <td>163</td>
+      <td>164</td>
       <td>0</td>
       <td>40</td>
     </tr>
@@ -167,7 +167,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
-      <td>420</td>
+      <td>421</td>
       <td>2</td>
       <td>152</td>
     </tr>
@@ -176,7 +176,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
-      <td>163</td>
+      <td>164</td>
       <td>0</td>
       <td>40</td>
     </tr>
@@ -185,7 +185,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
-      <td>153</td>
+      <td>154</td>
       <td>0</td>
       <td>24</td>
     </tr>
@@ -194,7 +194,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
-      <td>237</td>
+      <td>239</td>
       <td>19</td>
       <td>17</td>
     </tr>
@@ -228,7 +228,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
-      <td>163</td>
+      <td>164</td>
       <td>0</td>
       <td>40</td>
     </tr>
@@ -237,7 +237,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
-      <td>237</td>
+      <td>239</td>
       <td>19</td>
       <td>17</td>
     </tr>
@@ -246,7 +246,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
-      <td>153</td>
+      <td>154</td>
       <td>0</td>
       <td>24</td>
     </tr>
@@ -255,7 +255,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
-      <td>420</td>
+      <td>421</td>
       <td>2</td>
       <td>152</td>
     </tr>
@@ -291,7 +291,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
-      <td>153</td>
+      <td>154</td>
       <td>0</td>
       <td>24</td>
     </tr>
@@ -300,7 +300,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
-      <td>163</td>
+      <td>164</td>
       <td>0</td>
       <td>40</td>
     </tr>
@@ -309,7 +309,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
-      <td>420</td>
+      <td>421</td>
       <td>2</td>
       <td>152</td>
     </tr>
@@ -318,7 +318,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
-      <td>237</td>
+      <td>239</td>
       <td>19</td>
       <td>17</td>
     </tr>
@@ -354,7 +354,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router</td>
       <td>7</td>
-      <td>237</td>
+      <td>239</td>
       <td>19</td>
       <td>17</td>
     </tr>
@@ -363,7 +363,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router-native</td>
       <td>12</td>
-      <td>153</td>
+      <td>154</td>
       <td>0</td>
       <td>24</td>
     </tr>
@@ -372,7 +372,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>server</td>
       <td>6</td>
-      <td>163</td>
+      <td>164</td>
       <td>0</td>
       <td>40</td>
     </tr>
@@ -381,7 +381,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.27.0</td>
       <td>react-router-dom</td>
       <td>35</td>
-      <td>420</td>
+      <td>421</td>
       <td>2</td>
       <td>152</td>
     </tr>

@@ -128,7 +128,7 @@ Creates a in-memory projection of "TS:Module" nodes and their "DEPENDS_ON" relat
       <td>4</td>
       <td>4</td>
       <td>0.333333</td>
-      <td>2495496</td>
+      <td>2495500</td>
       <td>0</td>
       <td>1.0</td>
       <td>2</td>
