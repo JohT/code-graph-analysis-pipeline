@@ -1007,6 +1007,7 @@
 "org.axonframework.tracing.opentelemetry.OpenTelemetrySpanFactory$Builder tracer(io.opentelemetry.api.trace.Tracer)","tracer","centralityCostEffectiveLazyForward",0,""
 "void accept(reactor.core.publisher.SignalType)","accept","centralityCostEffectiveLazyForward",0,""
 "void add(org.axonframework.test.matchers.FieldFilter)","add","centralityCostEffectiveLazyForward",0,""
+"void addMetaData(java.lang.Object[],java.util.Map)","addMetaData","centralityCostEffectiveLazyForward",0,""
 "void advanceTimeBy(java.time.Duration,org.axonframework.test.deadline.DeadlineConsumer)","advanceTimeBy","centralityCostEffectiveLazyForward",0,""
 "void advanceTimeBy(java.time.Duration,org.axonframework.test.eventscheduler.EventConsumer)","advanceTimeBy","centralityCostEffectiveLazyForward",0,""
 "void advanceTimeTo(java.time.Instant,org.axonframework.test.deadline.DeadlineConsumer)","advanceTimeTo","centralityCostEffectiveLazyForward",0,""
