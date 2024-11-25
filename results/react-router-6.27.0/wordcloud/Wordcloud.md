@@ -97,18 +97,18 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>Cory House</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>Tim Dorr</td>
       <td>383</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>Remix Run Bot</td>
       <td>353</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cory House</td>
-      <td>15</td>
     </tr>
     <tr>
       <th>3</th>
