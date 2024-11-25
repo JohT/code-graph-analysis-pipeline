@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>334345</td>
-      <td>1037261</td>
+      <td>335325</td>
+      <td>1040246</td>
       <td>9</td>
       <td>122</td>
       <td>2087</td>
@@ -87,36 +87,36 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>2</th>
       <td>axon-messaging-4.10.2</td>
       <td>787</td>
-      <td>Enum</td>
-      <td>19</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>3</th>
       <td>axon-messaging-4.10.2</td>
       <td>787</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Enum</td>
+      <td>19</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>axon-modelling-4.10.2</td>
-      <td>158</td>
-      <td>Interface</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>5</th>
       <td>axon-modelling-4.10.2</td>
       <td>158</td>
       <td>Class</td>
       <td>115</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
       <td>axon-modelling-4.10.2</td>
       <td>158</td>
       <td>Annotation</td>
       <td>12</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>axon-modelling-4.10.2</td>
+      <td>158</td>
+      <td>Interface</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>7</th>
@@ -157,15 +157,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>12</th>
       <td>axon-server-connector-4.10.2</td>
       <td>132</td>
-      <td>Interface</td>
-      <td>24</td>
+      <td>Class</td>
+      <td>107</td>
     </tr>
     <tr>
       <th>13</th>
       <td>axon-server-connector-4.10.2</td>
       <td>132</td>
-      <td>Class</td>
-      <td>107</td>
+      <td>Interface</td>
+      <td>24</td>
     </tr>
     <tr>
       <th>14</th>
@@ -234,14 +234,14 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>23</th>
       <td>axon-configuration-4.10.2</td>
       <td>41</td>
-      <td>Enum</td>
+      <td>Annotation</td>
       <td>1</td>
     </tr>
     <tr>
       <th>24</th>
       <td>axon-configuration-4.10.2</td>
       <td>41</td>
-      <td>Annotation</td>
+      <td>Enum</td>
       <td>1</td>
     </tr>
     <tr>
