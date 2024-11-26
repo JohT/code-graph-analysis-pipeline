@@ -2,7 +2,7 @@
 
  MATCH (externalModule:TS&ExternalModule)-[:EXPORTS]->(externalDeclaration:TS&ExternalDeclaration)
  MATCH (externalModule)-[:IS_IMPLEMENTED_IN]->(internalModule:TS&Module)
- MATCH (externalModule)-[:EXPORTS]->(internalDeclaration:TS&!ExternalDeclaration)
+ MATCH (internalModule)-[:EXPORTS]->(internalDeclaration:TS&!ExternalDeclaration)
  WHERE externalDeclaration.name = internalDeclaration.name
   WITH externalDeclaration, internalDeclaration
   CALL { WITH externalDeclaration, internalDeclaration
