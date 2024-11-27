@@ -955,7 +955,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.JSX.Element, React.ReactNode, React.Mut...</td>
+      <td>[React.JSX.Element, React.ReactNode, React.use...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -979,7 +979,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.forwardRef, React.useState, React.useEf...</td>
+      <td>[React.ReactPortal, React.ReactNode, React.Rea...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1043,7 +1043,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.JSX.Element, React.ReactNode, Touchable...</td>
+      <td>[React.JSX.Element, TouchableHighlightProps, R...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1067,7 +1067,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.forwardRef, React.useState, React.useEf...</td>
+      <td>[React.ReactPortal, React.ReactNode, React.Rea...</td>
     </tr>
     <tr>
       <th>3</th>

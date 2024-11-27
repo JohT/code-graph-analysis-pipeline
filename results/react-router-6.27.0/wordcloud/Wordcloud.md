@@ -71,7 +71,7 @@
 
 
 
-    There are 2476 words in the dataset for the plot titled 'Wordcloud of names in code'.
+    There are 2489 words in the dataset for the plot titled 'Wordcloud of names in code'.
 
 
 
