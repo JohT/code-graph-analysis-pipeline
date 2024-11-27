@@ -98,7 +98,7 @@
     <tr>
       <th>0</th>
       <td>Steven van Beelen</td>
-      <td>3810</td>
+      <td>3834</td>
     </tr>
     <tr>
       <th>1</th>
