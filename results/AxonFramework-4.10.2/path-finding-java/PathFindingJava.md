@@ -981,7 +981,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt; /org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt; /org/axonframework/axonserver/connector/heartbeat]</td>
       <td>[axon-server-connector-4.10.2 -&gt; axon-server-connector-4.10.2]</td>
       <td>[]</td>
     </tr>
@@ -1000,7 +1000,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt; /org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt; /org/axonframework/axonserver/connector/util]</td>
       <td>[axon-server-connector-4.10.2 -&gt; axon-server-connector-4.10.2]</td>
       <td>[]</td>
     </tr>
@@ -1111,10 +1111,10 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>13</td>
+      <td>15</td>
       <td>1</td>
-      <td>13</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/test/server, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboo...</td>
+      <td>15</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/test/server, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/commandhandling, /org/axonframework/sprin...</td>
       <td>[axon-spring-boot-autoconfigure-4.10.2 -&gt; axon-server-connector-4.10.2, axon-spring-boot-autoconfigure-4.10.2 -&gt; axon-test-4.10.2, axon-spring-boot-autoconfigure-4.10.2 -&gt; axon-messaging-4.10.2, axon-spring-boot-autoconfigure-4.10.2 -&gt; axon-modelling-4.10.2]</td>
       <td>[]</td>
     </tr>
@@ -1130,10 +1130,10 @@ The following table shows the first 10 rows with all details of the query above.
       <td>11</td>
       <td>2</td>
       <td>11</td>
-      <td>8</td>
+      <td>10</td>
       <td>1</td>
-      <td>8</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/config, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/digest, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/transaction, /org/axonframework/springboot/aut...</td>
+      <td>10</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/config, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/digest, /org/axonframework/springboot/autoconfig/lega...</td>
       <td>[axon-spring-boot-autoconfigure-4.10.2 -&gt; axon-configuration-4.10.2, axon-spring-boot-autoconfigure-4.10.2 -&gt; axon-messaging-4.10.2]</td>
       <td>[]</td>
     </tr>
@@ -1191,7 +1191,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt; /org/axonframework/axonserver/connector/heartbeat]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt; /org/axonframework/axonserver/connector/heartbeat]</td>
       <td>[axon-server-connector-4.10.2 -&gt; axon-server-connector-4.10.2]</td>
       <td>[]</td>
     </tr>
@@ -1210,7 +1210,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/axonserver/connector/heartbeat/connection/checker -&gt; /org/axonframework/axonserver/connector/util]</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat/source -&gt; /org/axonframework/axonserver/connector/util]</td>
       <td>[axon-server-connector-4.10.2 -&gt; axon-server-connector-4.10.2]</td>
       <td>[]</td>
     </tr>
