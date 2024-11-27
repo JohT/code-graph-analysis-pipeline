@@ -97,52 +97,52 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>ytori</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Michael Jackson</td>
+      <td>1951</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Pedro Cattori</td>
+      <td>367</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Brooks Lybrand</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>Cory House</td>
       <td>16</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>5</th>
       <td>Tim Dorr</td>
       <td>383</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>6</th>
       <td>Remix Run Bot</td>
       <td>353</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>7</th>
       <td>Ryan Florence</td>
       <td>1294</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>8</th>
       <td>Foxscotch</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>Ronald Rey</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Niklas Mollenhauer</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Brooks Lybrand</td>
-      <td>58</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Pedro Cattori</td>
-      <td>362</td>
-    </tr>
-    <tr>
       <th>9</th>
-      <td>ytori</td>
+      <td>Ronald Rey</td>
       <td>1</td>
     </tr>
   </tbody>

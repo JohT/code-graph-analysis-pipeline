@@ -599,7 +599,7 @@ This table shows the file directory distance distribution between dependent file
       <td>3</td>
       <td>3</td>
       <td>1</td>
-      <td>[./index.tsx uses ./index.ts, ./index.tsx uses ./index.ts, ./server.tsx uses ./index.ts]</td>
+      <td>[./index.tsx uses ./index.ts, ./server.tsx uses ./index.ts, ./index.tsx uses ./index.ts]</td>
     </tr>
   </tbody>
 </table>
