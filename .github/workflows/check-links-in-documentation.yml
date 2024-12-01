@@ -31,9 +31,11 @@ jobs:
         startsWith(github.event.pull_request.title, 'Update dependency AxonFramework') && 
         github.event.pull_request.user.type == 'Bot'
       run: |
-        echo "Skipping link check on AxonFramework updates since the updated links tto the reports will only be active " 
+        echo "Skipping link check on AxonFramework updates since the updated links to the reports will only be active " 
         echo "skip_link_check=true" >> $GITHUB_ENV
 
     - name: Check links in top level documentation Markdown files
       if: ${{ ! env.skip_link_check}}
-      run: npx --yes markdown-link-check@3.12.2 --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md
+      run: npx --yes markdown-link-check@3.13.6 --verbose --alive=200,202,206 --retry README.md COMMANDS.md GETTING_STARTED.md
+      # Temporarily, everything is done using command line options rather than with the config file, which doesn't seem to work.
+      # Maybe related to https://github.com/tcort/markdown-link-check/issues/379 ?
