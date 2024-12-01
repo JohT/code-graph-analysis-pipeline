@@ -11,6 +11,10 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+# Overrideable Defaults
+SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+echo "analyzerReactRouter: SOURCE_DIRECTORY=${SOURCE_DIRECTORY}"
+
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
@@ -53,8 +57,13 @@ cd "./react-router-${projectVersion}"
 # Create the artifacts directory that will contain the code to be analyzed.
 mkdir -p ./artifacts
 
-# Download AxonFramework artifacts (jar files) from Maven
+# Download react-router source code
 ./../../scripts/downloader/downloadReactRouter.sh "${projectVersion}"
+
+(
+  cd "${SOURCE_DIRECTORY}/react-router-${projectVersion}" || exit
+  pnpm install --frozen-lockfile --strict-peer-dependencies || exit
+)
 
 # Start the analysis
 ./../../scripts/analysis/analyze.sh "${@}"

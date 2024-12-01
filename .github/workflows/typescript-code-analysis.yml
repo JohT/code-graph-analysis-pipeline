@@ -118,11 +118,6 @@ jobs:
         key:
           ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
 
-    - name: Setup pnpm for react-router
-      uses: pnpm/action-setup@v4.0.0
-      with:
-        version: 8.10.5
-
     - name: Download ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
       working-directory: temp
       run: |
@@ -130,6 +125,16 @@ jobs:
         cd ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
         echo "Working directory: $( pwd -P )"
         ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }}
+
+    - name: Setup pnpm for react-router
+      uses: pnpm/action-setup@v4.0.0
+      with:
+        package_json_file: temp/${{env.PROJECT_NAME}}-${{env.REACT_ROUTER_VERSION}}/source/${{env.PROJECT_NAME}}-${{env.REACT_ROUTER_VERSION}}/package.json
+          
+    - name: Install dependencies with pnpm
+      working-directory: temp/${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}/source/${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
+      run: |
+        pnpm install --frozen-lockfile --strict-peer-dependencies
 
     - name: Analyze ${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
       working-directory: temp/${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}
