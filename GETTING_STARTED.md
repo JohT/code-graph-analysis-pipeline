@@ -24,7 +24,7 @@ Use these optional command line options as needed:
   ./scripts/examples/analyzeAxonFramework.sh --report CSV
   ```
 
-- Only explore the graph manually in the [browser](http://localhost:7474/browser). Skip all automated reports. Example:
+- Only explore the graph manually in the browser (`http://localhost:7474/browser`). Skip all automated reports. Example:
 
   ```shell
   ./scripts/examples/analyzeAxonFramework.sh --explore
@@ -108,7 +108,7 @@ Use these optional command line options as needed:
   ./../../scripts/analysis/analyze.sh --explore
   ```
 
-👉 Open your browser and login to your [local Neo4j Web UI](http://localhost:7474/browser) with "neo4j" as user and the initial password you've chosen.
+👉 Open your browser and login to your local Neo4j Web UI (`http://localhost:7474/browser`) with "neo4j" as user and the initial password you've chosen.
 
 ## GitHub Actions
 
