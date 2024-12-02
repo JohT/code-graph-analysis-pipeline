@@ -98,52 +98,52 @@
     <tr>
       <th>0</th>
       <td>Steven van Beelen</td>
-      <td>3834</td>
+      <td>3869</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>rsobies</td>
-      <td>16</td>
+      <td>Paul Kuyer</td>
+      <td>11</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>MATTHIAS BECHTOLD</td>
+      <td>Praegla, Alexander</td>
       <td>1</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>Marc</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Kursat Aktas</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>rsobies</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>MATTHIAS BECHTOLD</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
       <td>Weronika Trzaska</td>
       <td>9</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>8</th>
       <td>Christian Thiel</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>9</th>
       <td>bruceaxoniq</td>
       <td>3</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Mitchell Herrijgers</td>
-      <td>288</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Allard Buijze</td>
-      <td>3092</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Harold D. Turyasingura</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Marc</td>
-      <td>23</td>
     </tr>
   </tbody>
 </table>

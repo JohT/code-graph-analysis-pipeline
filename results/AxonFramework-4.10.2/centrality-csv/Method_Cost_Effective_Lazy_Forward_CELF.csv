@@ -894,6 +894,7 @@
 "org.axonframework.queryhandling.SimpleQueryUpdateEmitter$Builder updateMessageMonitor(org.axonframework.monitoring.MessageMonitor)","updateMessageMonitor","centralityCostEffectiveLazyForward",0,""
 "org.axonframework.queryhandling.SubscriptionQueryResult subscriptionQuery(org.axonframework.queryhandling.SubscriptionQueryMessage,int)","subscriptionQuery","centralityCostEffectiveLazyForward",0,""
 "org.axonframework.queryhandling.SubscriptionQueryUpdateMessage asUpdateMessage(java.lang.Object)","asUpdateMessage","centralityCostEffectiveLazyForward",0,""
+"org.axonframework.queryhandling.UpdateHandlerRegistration registerUpdateHandler(org.axonframework.queryhandling.SubscriptionQueryMessage,int)","registerUpdateHandler","centralityCostEffectiveLazyForward",0,""
 "org.axonframework.queryhandling.UpdateHandlerRegistration registerUpdateHandler(org.axonframework.queryhandling.SubscriptionQueryMessage,org.axonframework.queryhandling.SubscriptionQueryBackpressure,int)","registerUpdateHandler","centralityCostEffectiveLazyForward",0,""
 "org.axonframework.serialization.AbstractXStreamSerializer$Builder charset(java.nio.charset.Charset)","charset","centralityCostEffectiveLazyForward",0,""
 "org.axonframework.serialization.AbstractXStreamSerializer$Builder classLoader(java.lang.ClassLoader)","classLoader","centralityCostEffectiveLazyForward",0,""

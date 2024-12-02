@@ -131,7 +131,7 @@ Creates a in-memory projection of "Java:Package" nodes and their "DEPENDS_ON" re
       <td>114</td>
       <td>746</td>
       <td>0.05791</td>
-      <td>2990741</td>
+      <td>2990745</td>
       <td>0</td>
       <td>6.54386</td>
       <td>56</td>
@@ -1466,7 +1466,7 @@ Creates a in-memory projection of "Java:Artifact" nodes and their "DEPENDS_ON" r
       <td>9</td>
       <td>25</td>
       <td>0.347222</td>
-      <td>2726047</td>
+      <td>2726051</td>
       <td>0</td>
       <td>2.777778</td>
       <td>7</td>
