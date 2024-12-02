@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
 # Downloads the given version of a Typescript project from a git repository using git clone.
-# The cloned project is then moved into the "source" directory of the current analysis directory 
-# where its dependencies are installed by the given package manager.
-# After scanning it with jQAssistant's Typescript Plugin, the resulting JSON will be moved into the "artifacts/typescript" directory.
+# The cloned project is then moved into the "source" directory of the current analysis directory.
 
 # Command line options:
 # --url             Git clone URL (optional, default = skip clone)
 # --version         Version of the project
 # --tag             Tag to switch to after "git clone" (optional, default = version)
 # --project         Name of the project/repository (optional, default = clone url file name without .git extension)
-# --packageManager  One of "npm", "pnpm" or "yarn". (optional, default = "npm")
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
 
@@ -29,7 +26,6 @@ usage() {
   echo "          [ --tag <git-tag-for-that-version> (default=version) \\]"
   echo "          [ --url <git-clone-url> (default=skip clone)] \\"
   echo "          [ --project <name-of-the-project> (default=url file name) \\]"
-  echo "          [ --packageManager <npm/pnpm/yarn> (default=npm) ]"
   echo "Example: $0 \\"
   echo "           --url https://github.com/ant-design/ant-design.git \\"
   echo "           --version 5.19.3"
@@ -41,7 +37,6 @@ cloneUrl=""
 projectName=""
 projectVersion=""
 projectTag=""
-packageManager="npm"
 
 # Parse command line options
 while [[ $# -gt 0 ]]; do
@@ -63,10 +58,6 @@ while [[ $# -gt 0 ]]; do
       ;;
     --tag)
       projectTag="${value}"
-      shift
-      ;;
-    --packageManager)
-      packageManager="${value}"
       shift
       ;;
     *)
@@ -108,49 +99,10 @@ if [ -z "${projectTag}" ]; then
   projectTag="${projectVersion}"
 fi
 
-case "${packageManager}" in
-  npm|pnpm|yarn) 
-    echo "downloadTypescriptProject Using package manager ${packageManager}" 
-    ;;
-  *)
-    echo "downloadTypescriptProject Error: Unknown package manager: ${packageManager}"
-    usage
-    ;;
-esac
-
-if ! command -v "${packageManager}" &> /dev/null ; then
-    echo "downloadTypescriptProject Error: Package manager ${packageManager} could not be found"
-    exit 1
-fi
-
-if ! command -v "npx" &> /dev/null ; then
-    echo "downloadTypescriptProject Error: Command npx not found. It's needed to execute npm packages."
-    exit 1
-fi
-
 echo "downloadTypescriptProject: cloneUrl:       ${cloneUrl}"
 echo "downloadTypescriptProject: projectName:    ${projectName}"
 echo "downloadTypescriptProject: projectVersion: ${projectVersion}"
 echo "downloadTypescriptProject: projectTag:     ${projectTag}"
-echo "downloadTypescriptProject: packageManager: ${packageManager}"
-
-usePackageManagerToInstallDependencies() {
-  echo "downloadTypescriptProject: Installing dependencies using ${packageManager}..."
-  case "${packageManager}" in
-    npm)
-      # npm ci is not sufficient for projects like "ant-design" that rely on generating the package-lock
-      # Even if this is not standard, this is an acceptable solution since it is only used to prepare scanning.
-      # The same applies to "--force" which shouldn't be done normally.
-      npm install --ignore-scripts --force --verbose || exit
-      ;;
-    pnpm)
-      pnpm install --frozen-lockfile || exit
-      ;;
-    yarn)
-      yarn install --frozen-lockfile --ignore-scripts --non-interactive --verbose || exit
-      ;;
-  esac
-}
 
 # Create runtime logs directory if it hasn't existed yet
 mkdir -p ./runtime/logs
@@ -173,8 +125,3 @@ else
   # Source already exists. Cloning not necessary.
   echo "downloadTypescriptProject: Source already exists. Skip cloning ${cloneUrl}"
 fi
-
-(
-  cd "${fullSourceDirectory}" || exit
-  usePackageManagerToInstallDependencies
-)

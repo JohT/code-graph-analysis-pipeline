@@ -11,6 +11,10 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+# Overrideable Defaults
+SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+echo "analyzerAntDesign: SOURCE_DIRECTORY=${SOURCE_DIRECTORY}"
+
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
@@ -53,8 +57,16 @@ cd "./ant-design-${projectVersion}"
 # Create the artifacts directory that will contain the code to be analyzed.
 mkdir -p ./artifacts
 
-# Download AxonFramework artifacts (jar files) from Maven
+# Download ant-design source code
 ./../../scripts/downloader/downloadAntDesign.sh "${projectVersion}"
+
+(
+  cd "./${SOURCE_DIRECTORY}//ant-design-${projectVersion}" || exit
+  # npm ci is not sufficient for projects like "ant-design" that rely on generating the package-lock
+  # Even if this is not standard, this is an acceptable solution since it is only used to prepare scanning.
+  # The same applies to "--force" which shouldn't be done normally.
+  npm install --ignore-scripts --force --verbose || exit
+)
 
 # Start the analysis
 ./../../scripts/analysis/analyze.sh "${@}"

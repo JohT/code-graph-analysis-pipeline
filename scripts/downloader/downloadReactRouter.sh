@@ -2,7 +2,6 @@
 
 # Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone.
 # The source files are written into the "source" directory of the current analysis directory.
-# After scanning it with jQAssistant Typescript Plugin the resulting JSON will be moved into the "artifacts" directory.
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
 # Note: react-router uses pnpm as package manager which needs to be installed first
@@ -30,5 +29,4 @@ echo "downloadReactRouter: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}"
 source "${DOWNLOADER_SCRIPTS_DIR}/downloadTypescriptProject.sh" \
   --url https://github.com/remix-run/react-router.git \
   --version "${projectVersion}" \
-  --tag "react-router@${projectVersion}" \
-  --packageManager pnpm
+  --tag "react-router@${projectVersion}"

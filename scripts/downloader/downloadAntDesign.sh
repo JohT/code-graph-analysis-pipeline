@@ -2,7 +2,6 @@
 
 # Downloads the Typescript project ant-design (https://github.com/ant-design/ant-design) from GitHub using git clone.
 # The source files are written into the "source" directory of the current analysis directory.
-# After scanning it with jQAssistant Typescript Plugin the resulting JSON will be moved into the "artifacts" directory.
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
 
