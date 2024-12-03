@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>336888</td>
-      <td>1044995</td>
+      <td>336971</td>
+      <td>1045278</td>
       <td>9</td>
       <td>122</td>
       <td>2087</td>
@@ -199,15 +199,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>18</th>
       <td>axon-spring-boot-autoconfigure-4.10.2</td>
       <td>75</td>
-      <td>Enum</td>
-      <td>2</td>
+      <td>Annotation</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>19</th>
       <td>axon-spring-boot-autoconfigure-4.10.2</td>
       <td>75</td>
-      <td>Annotation</td>
-      <td>3</td>
+      <td>Enum</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>20</th>

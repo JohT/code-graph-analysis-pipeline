@@ -98,22 +98,22 @@
     <tr>
       <th>0</th>
       <td>Steven van Beelen</td>
-      <td>3869</td>
+      <td>3897</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>Marc</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>Paul Kuyer</td>
       <td>11</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>Praegla, Alexander</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Marc</td>
-      <td>24</td>
     </tr>
     <tr>
       <th>4</th>

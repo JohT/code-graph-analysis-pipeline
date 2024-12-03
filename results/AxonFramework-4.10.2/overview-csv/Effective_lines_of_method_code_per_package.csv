@@ -29,7 +29,7 @@
 "axon-messaging-4.10.2","org.axonframework.commandhandling",377,201,169,13,"MethodCommandHandlerDefinition$MethodCommandMessageHandlingMember","<init>",10,"MethodCommandHandlerDefinition$MethodCommandMessageHandlingMember","<init>","commandhandling",""
 "axon-modelling-4.10.2","org.axonframework.modelling.saga.repository.jdbc",374,111,84,38,"JdbcSagaStore","updateSaga",8,"JdbcSagaStore","updateSaga","jdbc",""
 "axon-messaging-4.10.2","org.axonframework.messaging.unitofwork",363,206,129,32,"BatchingUnitOfWork","executeWithResult",11,"BatchingUnitOfWork","executeWithResult","unitofwork",""
-"axon-test-4.10.2","org.axonframework.test.matchers",351,191,108,21,"DeepEqualsMatcher","matchingFields",8,"DeepEqualsMatcher","matchingFields","matchers",""
+"axon-test-4.10.2","org.axonframework.test.matchers",351,191,108,21,"DeepEqualsMatcher","matchingFields",8,"SequenceMatcher","matchesList","matchers",""
 "axon-messaging-4.10.2","org.axonframework.messaging",348,209,156,13,"Headers","defaultHeaders",4,"Scope","endScope","messaging",""
 "axon-messaging-4.10.2","org.axonframework.deadline.dbscheduler",321,150,103,18,"DbSchedulerDeadlineManager","execute",11,"DbSchedulerBinaryDeadlineDetails","equals","dbscheduler",""
 "axon-eventsourcing-4.10.2","org.axonframework.eventsourcing.eventstore.jpa",318,155,101,23,"JpaEventStorageEngine","fetchTrackedEvents",8,"JpaEventStorageEngine","withGapsCleaned","jpa",""
