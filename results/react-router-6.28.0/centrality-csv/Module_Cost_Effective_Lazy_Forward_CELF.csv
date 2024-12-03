@@ -1,0 +1,5 @@
+"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
+"./server.tsx","server","centralityCostEffectiveLazyForward",1.19,""
+"./index.tsx","react-router-native","centralityCostEffectiveLazyForward",1,""
+"./index.ts","react-router","centralityCostEffectiveLazyForward",0.9199999999999999,""
+"./index.tsx","react-router-dom","centralityCostEffectiveLazyForward",0.8900000000000001,""

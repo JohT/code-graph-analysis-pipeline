@@ -1,0 +1,5 @@
+"codeUnitName","shortCodeUnitName","centralityHyperlinkInducedTopicSearchAuthority","centralityHyperlinkInducedTopicSearchHub","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream_Mutated.cypher"
+"./index.ts","react-router",0.9238795325112867,0,20,17,""
+"./index.tsx","react-router-dom",0.3826834323650895,0.5000000000000001,2,153,""
+"./index.tsx","react-router-native",0,0.5000000000000001,0,24,""
+"./server.tsx","server",0,0.7071067811865475,0,40,""

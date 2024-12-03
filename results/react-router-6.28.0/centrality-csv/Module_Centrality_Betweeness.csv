@@ -1,0 +1,5 @@
+"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
+"./index.ts","react-router","centralityCloseness",1,""
+"./index.tsx","react-router-dom","centralityCloseness",0.3333333333333333,""
+"./index.tsx","react-router-native","centralityCloseness",0,""
+"./server.tsx","server","centralityCloseness",0,""
