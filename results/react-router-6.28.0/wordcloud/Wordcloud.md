@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>Brooks Lybrand</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>니콜라스</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>Ryan Florence</td>
       <td>1295</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>Charles Lavery</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>pro_shunsuke</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>sealer3</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Tosin Amuda</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>dcblair</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Amit Dahan</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>Cory House</td>
       <td>16</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Tim Dorr</td>
-      <td>383</td>
     </tr>
   </tbody>
 </table>
