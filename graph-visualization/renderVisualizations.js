@@ -2,7 +2,7 @@ import puppeteer, { Browser } from "puppeteer";
 import { basename, dirname } from "path";
 import { globSync } from "glob";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
-import jimp from "jimp";
+import { Jimp, JimpMime } from "jimp";
 
 // __filename and __dirname don't exist when using es6 modules.
 // So they will be derived from the nodejs command line argument index 1 (script filename).
@@ -17,10 +17,10 @@ console.log(`renderVisualizations.js: dirname=${__dirname}`);
  * @returns Buffer
  */
 const autoCropImageBuffer = async (buffer) => {
-  return await jimp
+  return await Jimp
     .read(buffer)
     .then((image) => image.autocrop())
-    .then((image) => image.getBufferAsync(jimp.MIME_PNG));
+    .then((image) => image.getBuffer(JimpMime.png));
 };
 
 /**
