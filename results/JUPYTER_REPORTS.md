@@ -189,3 +189,13 @@ Report | Analysis | Description
 | [PathFindingTypescript.md](./react-router-6.27.0/path-finding-typescript/PathFindingTypescript.md) | react-router-6.27.0 | Path Finding for Typescript |
 | [VisibilityMetricsTypescript.md](./react-router-6.27.0/visibility-metrics-typescript/VisibilityMetricsTypescript.md) | react-router-6.27.0 | Visibility Metrics for Typescript |
 | [Wordcloud.md](./react-router-6.27.0/wordcloud/Wordcloud.md) | react-router-6.27.0 | Wordcloud |
+| [DependenciesGraphTypescript.md](./react-router-6.28.0/dependencies-graph-typescript/DependenciesGraphTypescript.md) | react-router-6.28.0 | Artifact Dependencies |
+| [ExternalDependenciesTypescript.md](./react-router-6.28.0/external-dependencies-typescript/ExternalDependenciesTypescript.md) | react-router-6.28.0 | External Dependencies for Typescript |
+| [InternalDependenciesTypescript.md](./react-router-6.28.0/internal-dependencies-typescript/InternalDependenciesTypescript.md) | react-router-6.28.0 | Internal Dependencies |
+| [NodeEmbeddingsTypescript.md](./react-router-6.28.0/node-embeddings-typescript/NodeEmbeddingsTypescript.md) | react-router-6.28.0 | Node Embeddings |
+| [ObjectOrientedDesignMetricsTypescript.md](./react-router-6.28.0/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript.md) | react-router-6.28.0 | Object Oriented Design Quality Metrics |
+| [OverviewGeneral.md](./react-router-6.28.0/overview-general/OverviewGeneral.md) | react-router-6.28.0 | Overview in General |
+| [OverviewTypescript.md](./react-router-6.28.0/overview-typescript/OverviewTypescript.md) | react-router-6.28.0 | Overview for Typescript |
+| [PathFindingTypescript.md](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript.md) | react-router-6.28.0 | Path Finding for Typescript |
+| [VisibilityMetricsTypescript.md](./react-router-6.28.0/visibility-metrics-typescript/VisibilityMetricsTypescript.md) | react-router-6.28.0 | Visibility Metrics for Typescript |
+| [Wordcloud.md](./react-router-6.28.0/wordcloud/Wordcloud.md) | react-router-6.28.0 | Wordcloud |
