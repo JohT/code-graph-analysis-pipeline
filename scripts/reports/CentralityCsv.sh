@@ -311,7 +311,7 @@ listAllResults() {
 
     local nodeLabel
     nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
-    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_10_Summary.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_All.csv"
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_90_Summary.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_All.csv"
 }
 
 # Run all contained centrality algorithms.
