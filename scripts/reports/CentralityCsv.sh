@@ -306,6 +306,30 @@ centralityWithHyperlinkInducedTopicSearchHITS() {
     execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_1d_Label_Add.cypher" "${@}" "${writePropertyName}Hub"
 }
 
+# Apply the centrality algorithm "Bridges".
+# Requires an undirected graph projection and ignores weights. Thus, no weight property is needed.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Type"
+centralityWithBridges() {
+    local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
+    local PROJECTION_CYPHER_DIR="$CYPHER_DIR/Dependencies_Projection"
+    
+    # Statistics
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_10a_Bridges_Estimate.cypher" "${@}" "${writePropertyName}"
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_10d_Bridges_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Centrality_Bridges.csv"
+    
+    # Set "isBridge=true" on all relationships identified as Bridge
+    execute_cypher "${CENTRALITY_CYPHER_DIR}/Centrality_10e_Bridges_Write.cypher" "${@}"
+}
+
 listAllResults() {
     local CENTRALITY_CYPHER_DIR="$CYPHER_DIR/Centrality"
 
@@ -334,24 +358,46 @@ runCentralityAlgorithms() {
     listAllResults "${@}"
 }
 
+# Run all centrality algorithms that require an undirected graph projection.
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "centralityPageRank"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+runUndirectedCentralityAlgorithms() {
+    time centralityWithBridges "${@}"
+}
+
+
 # -- Java Artifact Centrality ------------------------------------
 
 ARTIFACT_PROJECTION="dependencies_projection=artifact-centrality" 
+ARTIFACT_PROJECTION_UNDIRECTED="dependencies_projection=${ARTIFACT_PROJECTION}-undirected" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 
 if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
     runCentralityAlgorithms "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 fi
+if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION_UNDIRECTED}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${ARTIFACT_PROJECTION_UNDIRECTED}" "${ARTIFACT_NODE}"
+fi
 
 # -- Java Package Centrality -------------------------------------
 
 PACKAGE_PROJECTION="dependencies_projection=package-centrality" 
+PACKAGE_PROJECTION_UNDIRECTED="dependencies_projection=${PACKAGE_PROJECTION}-undirected" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 
 if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     runCentralityAlgorithms "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+fi
+if createUndirectedDependencyProjection "${PACKAGE_PROJECTION_UNDIRECTED}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${PACKAGE_PROJECTION_UNDIRECTED}" "${PACKAGE_NODE}"
 fi
 
 # -- Java Type Centrality ----------------------------------------
@@ -378,11 +424,15 @@ fi
 
 MODULE_LANGUAGE="dependencies_projection_language=Typescript" 
 MODULE_PROJECTION="dependencies_projection=typescript-module-centrality" 
+MODULE_PROJECTION_UNDIRECTED="dependencies_projection=${MODULE_PROJECTION}-undirected" 
 MODULE_NODE="dependencies_projection_node=Module" 
 MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight"
 
 if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
     runCentralityAlgorithms "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+fi
+if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION_UNDIRECTED}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${MODULE_PROJECTION_UNDIRECTED}" "${MODULE_NODE}"
 fi
 
 # ---------------------------------------------------------------
