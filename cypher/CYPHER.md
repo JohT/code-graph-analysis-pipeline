@@ -15,7 +15,9 @@ Script | Directory | Description
 | [Set_number_of_Java_packages_and_types_on_artifacts.cypher](./Artifact_Dependencies/Set_number_of_Java_packages_and_types_on_artifacts.cypher) | Artifact_Dependencies | Set number of Java packages and types on artifacts |
 | [Usage_and_spread_of_internal_artifact_dependencies.cypher](./Artifact_Dependencies/Usage_and_spread_of_internal_artifact_dependencies.cypher) | Artifact_Dependencies | Usage and spread of internal artifact dependencies. Requires "Add_file_name and_extension.cypher". |
 | [Usage_and_spread_of_internal_artifact_dependents.cypher](./Artifact_Dependencies/Usage_and_spread_of_internal_artifact_dependents.cypher) | Artifact_Dependencies | Usage and spread of internal artifact dependents. Requires "Add_file_name and_extension.cypher". |
-| [Centrality_10_Summary.cypher](./Centrality/Centrality_10_Summary.cypher) | Centrality | Centrality Summary. Requires "Add_file_name and_extension.cypher". |
+| [Centrality_10a_Bridges_Estimate.cypher](./Centrality/Centrality_10a_Bridges_Estimate.cypher) | Centrality | Centrality 10a Bridges Estimate |
+| [Centrality_10d_Bridges_Stream.cypher](./Centrality/Centrality_10d_Bridges_Stream.cypher) | Centrality | Centrality 10d Bridges Stream |
+| [Centrality_10e_Bridges_Write.cypher](./Centrality/Centrality_10e_Bridges_Write.cypher) | Centrality | Centrality 10e Bridges Stream - Write Relationship Property "isBridge" |
 | [Centrality_1a_List_TopPercentile.cypher](./Centrality/Centrality_1a_List_TopPercentile.cypher) | Centrality | List the top centrality nodes with a 99.5 percentile or higher |
 | [Centrality_1b_List_TopPercent.cypher](./Centrality/Centrality_1b_List_TopPercent.cypher) | Centrality | List the top 2% nodes with the highest centrality score. |
 | [Centrality_1c_Label_Delete.cypher](./Centrality/Centrality_1c_Label_Delete.cypher) | Centrality | Centrality Label Delete |
@@ -48,6 +50,7 @@ Script | Directory | Description
 | [Centrality_8c_Closeness_Mutate.cypher](./Centrality/Centrality_8c_Closeness_Mutate.cypher) | Centrality | Centrality 8c Closeness Mutate |
 | [Centrality_8d_Closeness_Stream.cypher](./Centrality/Centrality_8d_Closeness_Stream.cypher) | Centrality | Centrality 8c Closeness Stream |
 | [Centrality_8e_Closeness_Write.cypher](./Centrality/Centrality_8e_Closeness_Write.cypher) | Centrality | Centrality 8d Closeness Write |
+| [Centrality_90_Summary.cypher](./Centrality/Centrality_90_Summary.cypher) | Centrality | Centrality Summary. Requires "Add_file_name and_extension.cypher". |
 | [Centrality_9a_Hyperlink_Induced_Topic_Search_HITS_Estimate.cypher](./Centrality/Centrality_9a_Hyperlink_Induced_Topic_Search_HITS_Estimate.cypher) | Centrality | Centrality 9a Hyperlink-Induced Topic Search (HITS) Memory Estimation |
 | [Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher](./Centrality/Centrality_9b_Hyperlink_Induced_Topic_Search_HITS_Statistics.cypher) | Centrality | Centrality 9b Hyperlink-Induced Topic Search (HITS) Statistics |
 | [Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Mutate.cypher](./Centrality/Centrality_9c_Hyperlink_Induced_Topic_Search_HITS_Mutate.cypher) | Centrality | Centrality 9c Hyperlink-Induced Topic Search (HITS) Mutate |
