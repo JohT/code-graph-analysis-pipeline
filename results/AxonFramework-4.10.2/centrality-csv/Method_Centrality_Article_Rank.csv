@@ -21,7 +21,7 @@
 "java.lang.Object getObject()","getObject","centralityArticleRank",0.019160009727172307,""
 "org.axonframework.eventhandling.EventMessage asEventMessage(java.lang.Object)","asEventMessage","centralityArticleRank",0.019160009727172307,""
 "boolean equals(java.lang.Object)","equals","centralityArticleRank",0.018278329465124147,""
-"org.axonframework.eventsourcing.eventstore.DomainEventStream of(java.util.stream.Stream,java.util.function.Supplier)","of","centralityArticleRank",0.017979441404637447,""
+"org.axonframework.eventsourcing.eventstore.DomainEventStream of(java.util.stream.Stream,java.util.function.Supplier)","of","centralityArticleRank",0.017979441404637444,""
 "void assertStrictPositive(long,java.lang.String)","assertStrictPositive","centralityArticleRank",0.0176894720037764,""
 "org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityArticleRank",0.017200334692405513,""
 "java.lang.Object getIdentifier()","getIdentifier","centralityArticleRank",0.016724994831031285,""
