@@ -98,7 +98,7 @@
     <tr>
       <th>0</th>
       <td>Steven van Beelen</td>
-      <td>3910</td>
+      <td>3919</td>
     </tr>
     <tr>
       <th>1</th>
@@ -132,18 +132,18 @@
     </tr>
     <tr>
       <th>7</th>
-      <td>Weronika Trzaska</td>
-      <td>9</td>
+      <td>bruceaxoniq</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Christian Thiel</td>
-      <td>1</td>
+      <td>Mitchell Herrijgers</td>
+      <td>288</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>bruceaxoniq</td>
-      <td>3</td>
+      <td>Weronika Trzaska</td>
+      <td>9</td>
     </tr>
   </tbody>
 </table>
