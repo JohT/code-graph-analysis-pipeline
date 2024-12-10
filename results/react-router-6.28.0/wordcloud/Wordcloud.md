@@ -71,7 +71,7 @@
 
 
 
-    There are 2492 words in the dataset for the plot titled 'Wordcloud of names in code'.
+    There are 2483 words in the dataset for the plot titled 'Wordcloud of names in code'.
 
 
 
@@ -102,33 +102,33 @@
     </tr>
     <tr>
       <th>1</th>
-      <td>니콜라스</td>
-      <td>1</td>
+      <td>Matt Brophy</td>
+      <td>1807</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Ryan Florence</td>
-      <td>1295</td>
+      <td>jrestall</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Remix Run Bot</td>
-      <td>361</td>
+      <td>Brooks Lybrand</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Amen</td>
-      <td>1</td>
+      <td>Remix Run Bot</td>
+      <td>362</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Brooks Lybrand</td>
-      <td>71</td>
+      <td>Piero</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Matt Brophy</td>
-      <td>1801</td>
+      <td>Amen</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>7</th>

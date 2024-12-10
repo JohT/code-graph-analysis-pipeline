@@ -1,5 +1,5 @@
 "rootProjectName","moduleName","numberOfElements","numberOfGitCommits","incomingDependencies","outgoingDependencies","Source Cypher File: Internal_Dependencies/List_all_Typescript_modules.cypher"
-"react-router-6.28.0","react-router",7,242,20,17,""
-"react-router-6.28.0","react-router-dom",35,421,2,153,""
-"react-router-6.28.0","server",6,164,0,40,""
+"react-router-6.28.0","react-router",15,242,20,17,""
+"react-router-6.28.0","react-router-dom",35,421,0,153,""
+"react-router-6.28.0","server",6,164,0,38,""
 "react-router-6.28.0","react-router-native",12,154,0,24,""

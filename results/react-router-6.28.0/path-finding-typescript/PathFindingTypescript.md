@@ -126,18 +126,18 @@ Creates a in-memory projection of "TS:Module" nodes and their "DEPENDS_ON" relat
     <tr>
       <th>0</th>
       <td>4</td>
-      <td>4</td>
-      <td>0.333333</td>
+      <td>3</td>
+      <td>0.25</td>
       <td>2495500</td>
       <td>0</td>
-      <td>1.0</td>
-      <td>2</td>
+      <td>0.75</td>
       <td>1</td>
       <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -176,9 +176,9 @@ First, we'll have a look at the overall/total result of the all pairs shortest p
       <th>0</th>
       <td>0</td>
       <td>1</td>
-      <td>4</td>
       <td>3</td>
-      <td>2</td>
+      <td>3</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -242,32 +242,13 @@ The following table shows the first 10 rows with all details of the query above.
       <td>react-router-dom</td>
       <td>react-router-6.28.0</td>
       <td>react-router-6.28.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>1</td>
-      <td>4</td>
-      <td>3</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.0</td>
-      <td>react-router-6.28.0</td>
       <td>True</td>
       <td>False</td>
       <td>False</td>
       <td>1</td>
-      <td>4</td>
       <td>3</td>
-      <td>2</td>
+      <td>3</td>
+      <td>1</td>
       <td>2</td>
       <td>2</td>
       <td>1</td>
@@ -276,7 +257,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
       <td>react-router-native</td>
       <td>react-router-6.28.0</td>
       <td>react-router-6.28.0</td>
@@ -284,9 +265,9 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>False</td>
       <td>1</td>
-      <td>4</td>
       <td>3</td>
-      <td>2</td>
+      <td>3</td>
+      <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -333,25 +314,6 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.0</td>
-      <td>react-router-6.28.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>1</td>
-      <td>4</td>
-      <td>3</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -365,28 +327,19 @@ Shows the top 20 projects with the longest shortest path (=Graph Diameter).
 
 
 
-    sourceProject
-    react-router-dom    1
-    Name: distance, dtype: int64
+    Series([], Name: distance, dtype: int64)
 
 
 
-
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_46_0.png)
-    
+    No data to plot 'Longest shortest path ("diameter") for Typescript module dependencies per project'
 
 
 #### All pairs shortest path for each project - Bar chart (absolute)
 
-
-    <Figure size 640x480 with 0 Axes>
-
+    No projected data for path finding available
 
 
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_49_1.png)
-    
+    No data to plot 'All pairs shortest path for Typescript module dependencies stacked per project (absolute, logarithmic)'
 
 
 #### All pairs shortest path for each project - Bar chart (normalized)
@@ -400,33 +353,30 @@ Shows the top 50 projects with the highest number of dependency paths stacked by
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>distance</th>
-      <th>1</th>
-    </tr>
-    <tr>
-      <th>sourceProject</th>
       <th></th>
+      <th>totalCost</th>
+      <th>sourceProject</th>
+      <th>sourceScan</th>
+      <th>sourceRootProject</th>
+      <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
+      <th>distance</th>
+      <th>distanceTotalPairCount</th>
+      <th>distanceTotalSourceCount</th>
+      <th>distanceTotalTargetCount</th>
+      <th>nodeCount</th>
+      <th>pairCount</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>react-router-dom</th>
-      <td>100.0</td>
-    </tr>
   </tbody>
 </table>
 </div>
 
 
 
-
-    <Figure size 640x480 with 0 Axes>
-
-
-
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_52_1.png)
-    
+    No data to plot 'All pairs shortest path for Typescript module dependencies stacked per project (normalized in %)'
 
 
 ### 1.1.5 All pairs shortest path for each root project
@@ -507,33 +457,30 @@ Shows the top 50 root projects with the highest number of dependency paths stack
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>distance</th>
-      <th>1</th>
-    </tr>
-    <tr>
-      <th>sourceProject</th>
       <th></th>
+      <th>totalCost</th>
+      <th>sourceProject</th>
+      <th>sourceScan</th>
+      <th>sourceRootProject</th>
+      <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
+      <th>distance</th>
+      <th>distanceTotalPairCount</th>
+      <th>distanceTotalSourceCount</th>
+      <th>distanceTotalTargetCount</th>
+      <th>nodeCount</th>
+      <th>pairCount</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>react-router-dom</th>
-      <td>100.0</td>
-    </tr>
   </tbody>
 </table>
 </div>
 
 
 
-
-    <Figure size 640x480 with 0 Axes>
-
-
-
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_63_1.png)
-    
+    No data to plot 'All pairs shortest path for Typescript module dependencies stacked per root project (normalized in %)'
 
 
 ## 1.2 Longest path
@@ -548,7 +495,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
 
 #### Longest path in total - Max longest path
 
-    The max. longest path of the projected module dependencies is: 2
+    The max. longest path of the projected module dependencies is: 1
 
 
 #### Longest path in total - Paths per length - Table
@@ -573,14 +520,6 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <th>0</th>
       <td>0</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -647,36 +586,17 @@ The following table shows the first 10 rows with all details of the query above.
       <td>react-router-dom</td>
       <td>react-router-6.28.0</td>
       <td>react-router-6.28.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.0</td>
-      <td>react-router-6.28.0</td>
       <td>True</td>
       <td>False</td>
       <td>False</td>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt; ./index.ts]</td>
+      <td>1</td>
+      <td>[./index.tsx -&gt; ./index.ts]</td>
       <td>[react-router-dom -&gt; react-router]</td>
       <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
     </tr>
@@ -719,25 +639,6 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.0</td>
-      <td>react-router-6.28.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -751,28 +652,19 @@ Shows the top 20 projects with their max. longest path.
 
 
 
-    sourceProject
-    react-router-dom    1
-    Name: distance, dtype: int64
+    Series([], Name: distance, dtype: int64)
 
 
 
-
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_81_0.png)
-    
+    No data to plot 'Max. longest path for Typescript module dependencies per project'
 
 
 #### Longest path for each project - Bar chart (absolute)
 
-
-    <Figure size 640x480 with 0 Axes>
-
+    No projected data for path finding available
 
 
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_84_1.png)
-    
+    No data to plot 'Longest path for Typescript module dependencies stacked per project (absolute, logarithmic)'
 
 
 #### Longest path for each project - Bar chart (normalized)
@@ -786,33 +678,30 @@ Shows the top 50 projects with the highest number of dependency paths stacked by
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>distance</th>
-      <th>1</th>
-    </tr>
-    <tr>
-      <th>sourceProject</th>
       <th></th>
+      <th>totalCost</th>
+      <th>sourceProject</th>
+      <th>sourceScan</th>
+      <th>sourceRootProject</th>
+      <th>isDifferentTargetProject</th>
+      <th>isDifferentTargetScan</th>
+      <th>isDifferentTargetRootProject</th>
+      <th>distance</th>
+      <th>distanceTotalPairCount</th>
+      <th>distanceTotalSourceCount</th>
+      <th>distanceTotalTargetCount</th>
+      <th>nodeCount</th>
+      <th>pairCount</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>react-router-dom</th>
-      <td>100.0</td>
-    </tr>
   </tbody>
 </table>
 </div>
 
 
 
-
-    <Figure size 640x480 with 0 Axes>
-
-
-
-    
-![png](PathFindingTypescript_files/PathFindingTypescript_87_1.png)
-    
+    No data to plot 'Longest path for Typescript module dependencies stacked per project (normalized in %)'
 
 
 ### 1.2.4 Longest path for each root project
@@ -853,36 +742,17 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>react-router-dom</td>
       <td>react-router-6.28.0</td>
       <td>react-router-6.28.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.0</td>
-      <td>react-router-6.28.0</td>
       <td>True</td>
       <td>False</td>
       <td>False</td>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./server.tsx -&gt; ./index.ts]</td>
+      <td>1</td>
+      <td>[./index.tsx -&gt; ./index.ts]</td>
       <td>[react-router-dom -&gt; react-router]</td>
       <td>[react-router-6.28.0 -&gt; react-router-6.28.0]</td>
     </tr>
@@ -900,7 +770,7 @@ Shows the top 20 root projects with their max. longest path.
 
 
     sourceRootProject
-    react-router-6.28.0    2
+    react-router-6.28.0    1
     Name: distance, dtype: int64
 
 
@@ -936,19 +806,16 @@ Shows the top 50 root projects with the highest number of dependency paths stack
     <tr style="text-align: right;">
       <th>distance</th>
       <th>1</th>
-      <th>2</th>
     </tr>
     <tr>
       <th>sourceRootProject</th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>react-router-6.28.0</th>
-      <td>50.0</td>
-      <td>50.0</td>
+      <td>100.0</td>
     </tr>
   </tbody>
 </table>
@@ -990,11 +857,11 @@ Shows the top 50 root projects with the highest number of dependency paths stack
     <tr>
       <th>0</th>
       <td>4</td>
-      <td>0.333333</td>
+      <td>0.25</td>
       <td>1</td>
-      <td>2</td>
       <td>1</td>
-      <td>2</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>

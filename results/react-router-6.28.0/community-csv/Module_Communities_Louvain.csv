@@ -1,3 +1,2 @@
 "firstCommunityId","communityId","intermediateCommunityIds","memberCount","memberNames","Source Cypher File: Community_Detection/Community_Detection_1d_Stream_Intermediate_Mutated.cypher"
-2,2,"2",2,"./index.tsx,./server.tsx",""
-3,3,"3",2,"./index.ts,./index.tsx",""
+2,2,"2",4,"./index.ts,./index.tsx,./server.tsx",""

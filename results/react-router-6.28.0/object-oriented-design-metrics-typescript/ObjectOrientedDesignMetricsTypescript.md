@@ -60,18 +60,18 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
-      <td>2</td>
-      <td>3</td>
+      <td>react-router-dom-v5-compat</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom-v5-compat</td>
+      <td>react-router-dom</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -166,12 +166,12 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>server</td>
-      <td>40</td>
-      <td>62</td>
+      <td>38</td>
+      <td>59</td>
       <td>0</td>
       <td>0</td>
-      <td>8</td>
-      <td>2</td>
+      <td>7</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
@@ -325,18 +325,18 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
-      <td>0.987097</td>
+      <td>1.000000</td>
       <td>0.0</td>
-      <td>0.909091</td>
-      <td>0.5</td>
+      <td>1.000000</td>
+      <td>1.0</td>
       <td>153</td>
-      <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>10</td>
+      <td>0</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -347,13 +347,13 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
       <td>0.0</td>
       <td>1.000000</td>
       <td>1.0</td>
-      <td>40</td>
+      <td>38</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>8</td>
+      <td>7</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
       <td>0</td>
     </tr>
     <tr>
@@ -432,9 +432,9 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router-dom</td>
+      <td>react-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
+      <td>react-router</td>
       <td>0.333333</td>
       <td>None</td>
       <td>None</td>
@@ -443,26 +443,26 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <th>3</th>
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>server</td>
+      <td>0.333333</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-dom</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>0.371429</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>react-router-native</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-native</td>
       <td>0.384615</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>react-router</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router</td>
-      <td>0.714286</td>
       <td>None</td>
       <td>None</td>
     </tr>
@@ -535,9 +535,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>react-router-dom</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./index.tsx</td>
-      <td>0.358525</td>
       <td>0.371429</td>
-      <td>0.987097</td>
+      <td>0.371429</td>
+      <td>1.000000</td>
       <td>35</td>
     </tr>
     <tr>
@@ -555,10 +555,10 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>react-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./index.ts</td>
-      <td>0.173745</td>
-      <td>0.714286</td>
+      <td>0.207207</td>
+      <td>0.333333</td>
       <td>0.459459</td>
-      <td>7</td>
+      <td>15</td>
     </tr>
   </tbody>
 </table>

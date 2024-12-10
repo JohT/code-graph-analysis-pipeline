@@ -1,6 +1,6 @@
 "fullQualifiedModuleName","sourceName","outgoingDependencies","outgoingDependenciesWeight","outgoingDependentAbstractTypes","outgoingDependentAbstractTypeWeight","outgoingDependentModules","outgoingDependentPackages","Source Cypher File: Metrics/Get_Outgoing_Typescript_Module_Dependencies.cypher"
 "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router-dom/index.tsx","react-router-dom",153,384,0,0,10,1,""
-"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router-dom/server.tsx","server",40,62,0,0,8,2,""
+"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router-dom/server.tsx","server",38,59,0,0,7,1,""
 "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router-native/index.tsx","react-router-native",24,42,0,0,7,1,""
 "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router/index.ts","react-router",17,29,0,0,6,0,""
 "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router-dom-v5-compat/index.ts","react-router-dom-v5-compat",0,0,0,0,0,0,""

@@ -62,7 +62,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>97</td>
       <td>149</td>
       <td>4</td>
-      <td>60</td>
+      <td>68</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
@@ -73,8 +73,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>14</td>
       <td>18</td>
       <td>4</td>
-      <td>60</td>
-      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
+      <td>68</td>
+      <td>[&lt;useLinkPressHandler&gt; of module &lt;react-router...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -84,7 +84,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2</td>
       <td>4</td>
       <td>4</td>
-      <td>60</td>
+      <td>68</td>
       <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
     </tr>
   </tbody>
@@ -183,7 +183,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>111</td>
       <td>167</td>
       <td>4</td>
-      <td>60</td>
+      <td>68</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
@@ -194,7 +194,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2</td>
       <td>4</td>
       <td>4</td>
-      <td>60</td>
+      <td>68</td>
       <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
     </tr>
   </tbody>
@@ -943,7 +943,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[BackHandler, BackHandlerStatic.removeEventLis...</td>
+      <td>[GestureResponderEvent, TouchableHighlightProp...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -955,7 +955,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[React.useEffect, React.useRef, React.useCallb...</td>
+      <td>[React.JSX.Element, React.ReactNode, React.use...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -979,7 +979,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.ReactPortal, React.CSSProperties, React...</td>
+      <td>[React.JSX.Element, React.MutableRefObject.cur...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -991,7 +991,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>2</td>
       <td>1</td>
       <td>33.333333</td>
-      <td>[React.ReactNode, React.JSX.Element]</td>
+      <td>[React.JSX.Element, React.ReactNode]</td>
     </tr>
     <tr>
       <th>5</th>
@@ -999,10 +999,10 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>@types/react</td>
       <td>1</td>
       <td>3</td>
-      <td>7</td>
+      <td>15</td>
       <td>1</td>
       <td>1</td>
-      <td>14.285714</td>
+      <td>6.666667</td>
       <td>[React.createElement]</td>
     </tr>
   </tbody>
@@ -1043,7 +1043,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>18</td>
       <td>3</td>
       <td>150.000000</td>
-      <td>[BackHandler, React.useEffect, BackHandlerStat...</td>
+      <td>[GestureResponderEvent, React.JSX.Element, Rea...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1067,7 +1067,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>27</td>
       <td>1</td>
       <td>77.142857</td>
-      <td>[React.ReactPortal, React.CSSProperties, React...</td>
+      <td>[React.JSX.Element, React.MutableRefObject.cur...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1079,7 +1079,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>2</td>
       <td>1</td>
       <td>33.333333</td>
-      <td>[React.ReactNode, React.JSX.Element]</td>
+      <td>[React.JSX.Element, React.ReactNode]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1087,10 +1087,10 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>@types</td>
       <td>1</td>
       <td>3</td>
-      <td>7</td>
+      <td>15</td>
       <td>1</td>
       <td>1</td>
-      <td>14.285714</td>
+      <td>6.666667</td>
       <td>[React.createElement]</td>
     </tr>
   </tbody>
@@ -1238,7 +1238,7 @@ This table lists internal elements and the modules they belong to that use many 
       <th>5</th>
       <td>react-router</td>
       <td>1</td>
-      <td>7</td>
+      <td>15</td>
     </tr>
   </tbody>
 </table>
@@ -1337,10 +1337,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>3</th>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>1</td>
       <td>1</td>
-      <td>14.285714</td>
+      <td>6.666667</td>
     </tr>
   </tbody>
 </table>
@@ -1391,7 +1391,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -1462,7 +1462,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -1533,12 +1533,12 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>1</td>
-      <td>14.285714</td>
-      <td>14.285714</td>
-      <td>14.285714</td>
-      <td>14.285714</td>
+      <td>6.666667</td>
+      <td>6.666667</td>
+      <td>6.666667</td>
+      <td>6.666667</td>
       <td>0.000000</td>
     </tr>
     <tr>

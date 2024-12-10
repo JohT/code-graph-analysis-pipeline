@@ -42,11 +42,20 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-dom</td>
       <td>35</td>
       <td>421</td>
-      <td>2</td>
+      <td>0</td>
       <td>153</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>react-router-6.28.0</td>
+      <td>react-router</td>
+      <td>15</td>
+      <td>242</td>
+      <td>20</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>react-router-6.28.0</td>
       <td>react-router-native</td>
       <td>12</td>
@@ -55,22 +64,13 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>24</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>react-router-6.28.0</td>
-      <td>react-router</td>
-      <td>7</td>
-      <td>242</td>
-      <td>20</td>
-      <td>17</td>
-    </tr>
-    <tr>
       <th>3</th>
       <td>react-router-6.28.0</td>
       <td>server</td>
       <td>6</td>
       <td>164</td>
       <td>0</td>
-      <td>40</td>
+      <td>38</td>
     </tr>
   </tbody>
 </table>
@@ -103,7 +103,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <th>0</th>
       <td>react-router-6.28.0</td>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>242</td>
       <td>20</td>
       <td>17</td>
@@ -114,7 +114,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-dom</td>
       <td>35</td>
       <td>421</td>
-      <td>2</td>
+      <td>0</td>
       <td>153</td>
     </tr>
     <tr>
@@ -133,7 +133,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>6</td>
       <td>164</td>
       <td>0</td>
-      <td>40</td>
+      <td>38</td>
     </tr>
   </tbody>
 </table>
@@ -168,7 +168,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-dom</td>
       <td>35</td>
       <td>421</td>
-      <td>2</td>
+      <td>0</td>
       <td>153</td>
     </tr>
     <tr>
@@ -178,7 +178,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>6</td>
       <td>164</td>
       <td>0</td>
-      <td>40</td>
+      <td>38</td>
     </tr>
     <tr>
       <th>2</th>
@@ -193,7 +193,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <th>3</th>
       <td>react-router-6.28.0</td>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>242</td>
       <td>20</td>
       <td>17</td>
@@ -230,19 +230,10 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>6</td>
       <td>164</td>
       <td>0</td>
-      <td>40</td>
+      <td>38</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-6.28.0</td>
-      <td>react-router</td>
-      <td>7</td>
-      <td>242</td>
-      <td>20</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>react-router-6.28.0</td>
       <td>react-router-native</td>
       <td>12</td>
@@ -251,12 +242,21 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>24</td>
     </tr>
     <tr>
+      <th>2</th>
+      <td>react-router-6.28.0</td>
+      <td>react-router</td>
+      <td>15</td>
+      <td>242</td>
+      <td>20</td>
+      <td>17</td>
+    </tr>
+    <tr>
       <th>3</th>
       <td>react-router-6.28.0</td>
       <td>react-router-dom</td>
       <td>35</td>
       <td>421</td>
-      <td>2</td>
+      <td>0</td>
       <td>153</td>
     </tr>
   </tbody>
@@ -289,6 +289,15 @@ The following table lists the top 30 internal modules that are used the least by
     <tr>
       <th>0</th>
       <td>react-router-6.28.0</td>
+      <td>react-router-dom</td>
+      <td>35</td>
+      <td>421</td>
+      <td>0</td>
+      <td>153</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-6.28.0</td>
       <td>react-router-native</td>
       <td>12</td>
       <td>154</td>
@@ -296,28 +305,19 @@ The following table lists the top 30 internal modules that are used the least by
       <td>24</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>react-router-6.28.0</td>
       <td>server</td>
       <td>6</td>
       <td>164</td>
       <td>0</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>react-router-6.28.0</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>421</td>
-      <td>2</td>
-      <td>153</td>
+      <td>38</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.0</td>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>242</td>
       <td>20</td>
       <td>17</td>
@@ -353,7 +353,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <th>0</th>
       <td>react-router-6.28.0</td>
       <td>react-router</td>
-      <td>7</td>
+      <td>15</td>
       <td>242</td>
       <td>20</td>
       <td>17</td>
@@ -374,7 +374,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>6</td>
       <td>164</td>
       <td>0</td>
-      <td>40</td>
+      <td>38</td>
     </tr>
     <tr>
       <th>3</th>
@@ -382,7 +382,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-dom</td>
       <td>35</td>
       <td>421</td>
-      <td>2</td>
+      <td>0</td>
       <td>153</td>
     </tr>
   </tbody>
@@ -530,6 +530,70 @@ This table shows the top 40 modules that are used by the highest number of diffe
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>0</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useLocation</td>
+      <td>react-router</td>
+      <td>useLocation</td>
+      <td>ExternalDeclaration</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useNavigate</td>
+      <td>react-router</td>
+      <td>useNavigate</td>
+      <td>ExternalDeclaration</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".createPath</td>
+      <td>react-router</td>
+      <td>createPath</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useBlocker</td>
+      <td>react-router</td>
+      <td>useBlocker</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useHref</td>
+      <td>react-router</td>
+      <td>useHref</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useMatches</td>
+      <td>react-router</td>
+      <td>useMatches</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useNavigation</td>
+      <td>react-router</td>
+      <td>useNavigation</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useResolvedPath</td>
+      <td>react-router</td>
+      <td>useResolvedPath</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -559,6 +623,26 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-native</td>
+      <td>react-router</td>
+      <td>2</td>
+      <td>15</td>
+      <td>0.133333</td>
+      <td>["/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useNavigate, "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/p...</td>
+      <td>[useNavigate, useLocation]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-dom</td>
+      <td>react-router</td>
+      <td>8</td>
+      <td>15</td>
+      <td>0.533333</td>
+      <td>["/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/packages/react-router".useBlocker, "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.0/source/react-router-6.28.0/pa...</td>
+      <td>[useBlocker, useNavigation, useNavigate, useResolvedPath]</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -587,19 +671,11 @@ This table shows the file directory distance distribution between dependent file
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx uses ./index.tsx]</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>4</td>
       <td>3</td>
       <td>3</td>
       <td>1</td>
-      <td>[./index.tsx uses ./index.ts, ./index.tsx uses ./index.ts, ./server.tsx uses ./index.ts]</td>
+      <td>[./index.tsx uses ./index.ts, ./server.tsx uses ./index.ts, ./index.tsx uses ./index.ts]</td>
     </tr>
   </tbody>
 </table>
