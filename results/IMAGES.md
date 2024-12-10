@@ -691,17 +691,10 @@ Image  | Analysis |
 | [OverviewTypescript_27_1.png](./react-router-6.28.0/overview-typescript/OverviewTypescript_files/OverviewTypescript_27_1.png) | react-router-6.28.0 |
 | [PathFindingTypescript_37_0.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_37_0.png) | react-router-6.28.0 |
 | [PathFindingTypescript_39_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_39_1.png) | react-router-6.28.0 |
-| [PathFindingTypescript_46_0.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_46_0.png) | react-router-6.28.0 |
-| [PathFindingTypescript_49_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_49_1.png) | react-router-6.28.0 |
-| [PathFindingTypescript_52_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_52_1.png) | react-router-6.28.0 |
 | [PathFindingTypescript_57_0.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_57_0.png) | react-router-6.28.0 |
 | [PathFindingTypescript_60_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_60_1.png) | react-router-6.28.0 |
-| [PathFindingTypescript_63_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_63_1.png) | react-router-6.28.0 |
 | [PathFindingTypescript_72_0.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_72_0.png) | react-router-6.28.0 |
 | [PathFindingTypescript_74_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_74_1.png) | react-router-6.28.0 |
-| [PathFindingTypescript_81_0.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_81_0.png) | react-router-6.28.0 |
-| [PathFindingTypescript_84_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_84_1.png) | react-router-6.28.0 |
-| [PathFindingTypescript_87_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_87_1.png) | react-router-6.28.0 |
 | [PathFindingTypescript_92_0.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_92_0.png) | react-router-6.28.0 |
 | [PathFindingTypescript_95_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_95_1.png) | react-router-6.28.0 |
 | [PathFindingTypescript_98_1.png](./react-router-6.28.0/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_98_1.png) | react-router-6.28.0 |
