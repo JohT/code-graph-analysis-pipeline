@@ -375,7 +375,7 @@ runUndirectedCentralityAlgorithms() {
 # -- Java Artifact Centrality ------------------------------------
 
 ARTIFACT_PROJECTION="dependencies_projection=artifact-centrality" 
-ARTIFACT_PROJECTION_UNDIRECTED="dependencies_projection=${ARTIFACT_PROJECTION}-undirected" 
+ARTIFACT_PROJECTION_UNDIRECTED="dependencies_projection=artifact-centrality-undirected" 
 ARTIFACT_NODE="dependencies_projection_node=Artifact" 
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight" 
 
@@ -389,7 +389,7 @@ fi
 # -- Java Package Centrality -------------------------------------
 
 PACKAGE_PROJECTION="dependencies_projection=package-centrality" 
-PACKAGE_PROJECTION_UNDIRECTED="dependencies_projection=${PACKAGE_PROJECTION}-undirected" 
+PACKAGE_PROJECTION_UNDIRECTED="dependencies_projection=package-centrality-undirected" 
 PACKAGE_NODE="dependencies_projection_node=Package" 
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces" 
 
@@ -402,17 +402,21 @@ fi
 
 # -- Java Type Centrality ----------------------------------------
 
-TYPE_PROJECTION="dependencies_projection=type-centrality" 
+TYPE_PROJECTION="dependencies_projection=type-centrality"
+TYPE_PROJECTION_UNDIRECTED="dependencies_projection=type-centrality-undirected" 
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 
 if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
     runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 fi
+if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION_UNDIRECTED}"; then
+    runUndirectedCentralityAlgorithms "${TYPE_PROJECTION_UNDIRECTED}" "${TYPE_NODE}"
+fi
 
 # -- Java Method Centrality --------------------------------------
 
-METHOD_PROJECTION="dependencies_projection=method-centrality" 
+METHOD_PROJECTION="dependencies_projection=method-centrality"
 METHOD_NODE="dependencies_projection_node=Method" 
 METHOD_WEIGHT="dependencies_projection_weight_property=" 
 
@@ -424,7 +428,7 @@ fi
 
 MODULE_LANGUAGE="dependencies_projection_language=Typescript" 
 MODULE_PROJECTION="dependencies_projection=typescript-module-centrality" 
-MODULE_PROJECTION_UNDIRECTED="dependencies_projection=${MODULE_PROJECTION}-undirected" 
+MODULE_PROJECTION_UNDIRECTED="dependencies_projection=typescript-module-centrality-undirected" 
 MODULE_NODE="dependencies_projection_node=Module" 
 MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight"
 
