@@ -1,4 +1,4 @@
-// Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream Mutated. Requires "Add_file_name and_extension.cypher".
+// Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream Mutated. Requires "Add_file_name and_extension.cypher", "Set_localRootPath_for_modules", "Set_declaring_type_on_method_nodes".
 
 CALL gds.graph.nodeProperties.stream(
      $dependencies_projection + '-cleaned'
@@ -10,10 +10,13 @@ CALL gds.graph.nodeProperties.stream(
 YIELD nodeId, propertyValue
  WITH gds.util.asNode(nodeId) AS codeUnit
      ,collect(propertyValue)  AS values
-RETURN DISTINCT coalesce(codeUnit.fqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
-     ,codeUnit.name      AS shortCodeUnitName
-     ,values[0] AS centralityHyperlinkInducedTopicSearchAuthority
-     ,values[1] AS centralityHyperlinkInducedTopicSearchHub
+  WITH *, coalesce(codeUnit.declaringType + ': ', '')        +
+          coalesce(codeUnit.rootProjectName + '/', '') +
+          coalesce(codeUnit.signature,  codeUnit.name) AS codeUnitNameWithDetails
+RETURN DISTINCT coalesce(codeUnit.fqn, codeUnitNameWithDetails, codeUnit.fileName, codeUnit.name) AS codeUnitName
+     ,codeUnit.name                 AS shortCodeUnitName
+     ,values[0]                     AS centralityHyperlinkInducedTopicSearchAuthority
+     ,values[1]                     AS centralityHyperlinkInducedTopicSearchHub
      ,codeUnit.incomingDependencies AS incomingDependencies
      ,codeUnit.outgoingDependencies AS outgoingDependencies
 ORDER BY centralityHyperlinkInducedTopicSearchAuthority DESCENDING, codeUnitName ASCENDING

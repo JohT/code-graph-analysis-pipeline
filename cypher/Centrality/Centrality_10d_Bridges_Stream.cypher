@@ -4,12 +4,10 @@ CALL gds.bridges.stream($dependencies_projection + '-cleaned')
  YIELD from, to
   WITH gds.util.asNode(from) AS fromMember
       ,gds.util.asNode(to)   AS toMember
-OPTIONAL MATCH (fromType:Type)-[:DECLARES]->(fromMember)
-  WITH *, coalesce(fromType.fqn + ': ', '')              +
+  WITH *, coalesce(fromMember.declaringType + ': ', '')  +
           coalesce(fromMember.rootProjectName + '/', '') +
           coalesce(fromMember.signature,  fromMember.name) AS fromMemberNameWithDetails
-OPTIONAL MATCH (toType:Type)-[:DECLARES]->(toMember)
-  WITH *, coalesce(toType.fqn + ': ', '')                +
+  WITH *, coalesce(toMember.declaringType + ': ', '')    +
           coalesce(toMember.rootProjectName + '/', '')   +
           coalesce(toMember.signature,  toMember.name)     AS toMemberNameWithDetails
 RETURN coalesce(fromMember.fqn, fromMemberNameWithDetails, fromMember.fileName, fromMember.name) AS fromMemberName
