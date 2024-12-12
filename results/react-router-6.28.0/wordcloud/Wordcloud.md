@@ -102,48 +102,48 @@
     </tr>
     <tr>
       <th>1</th>
-      <td>Matt Brophy</td>
-      <td>1807</td>
+      <td>Pedro Cattori</td>
+      <td>382</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jrestall</td>
-      <td>2</td>
+      <td>Matt Brophy</td>
+      <td>1815</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Brooks Lybrand</td>
-      <td>74</td>
+      <td>64</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Remix Run Bot</td>
-      <td>362</td>
+      <td>363</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Piero</td>
+      <td>Dan Barclay</td>
       <td>1</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>jrestall</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Piero</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>Amen</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>9</th>
       <td>Mark Dalgleish</td>
       <td>362</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Tomasz Tórz</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Tim Dorr</td>
-      <td>384</td>
     </tr>
   </tbody>
 </table>

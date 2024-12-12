@@ -50,7 +50,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.28.0</td>
       <td>react-router</td>
       <td>15</td>
-      <td>242</td>
+      <td>243</td>
       <td>20</td>
       <td>17</td>
     </tr>
@@ -104,7 +104,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.28.0</td>
       <td>react-router</td>
       <td>15</td>
-      <td>242</td>
+      <td>243</td>
       <td>20</td>
       <td>17</td>
     </tr>
@@ -194,7 +194,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.0</td>
       <td>react-router</td>
       <td>15</td>
-      <td>242</td>
+      <td>243</td>
       <td>20</td>
       <td>17</td>
     </tr>
@@ -246,7 +246,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.0</td>
       <td>react-router</td>
       <td>15</td>
-      <td>242</td>
+      <td>243</td>
       <td>20</td>
       <td>17</td>
     </tr>
@@ -318,7 +318,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.28.0</td>
       <td>react-router</td>
       <td>15</td>
-      <td>242</td>
+      <td>243</td>
       <td>20</td>
       <td>17</td>
     </tr>
@@ -354,7 +354,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.0</td>
       <td>react-router</td>
       <td>15</td>
-      <td>242</td>
+      <td>243</td>
       <td>20</td>
       <td>17</td>
     </tr>
