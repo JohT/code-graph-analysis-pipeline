@@ -112,6 +112,9 @@ execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_
 execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
 execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
+# Preparation - Add Java Method node property "declaringType"
+execute_cypher "${TYPES_CYPHER_DIR}/Set_declaring_type_on_method_nodes.cypher"
+
 # Preparation - Label external types and annotations
 #               "external" means that there is no byte code available, not a primitive type and not a java type
 #               "annotation" means that there is a ANNOTATED_BY to that external type
