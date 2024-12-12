@@ -85,7 +85,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.090491</td>
-      <td>[-0.1477094292640686, 0.21085438132286072, -0....</td>
+      <td>[-0.2635520100593567, -0.07643027603626251, 0....</td>
     </tr>
     <tr>
       <th>1</th>
@@ -94,7 +94,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.023323</td>
-      <td>[-0.16733047366142273, 0.18808478116989136, -0...</td>
+      <td>[-0.3331828713417053, -0.25475654006004333, 0....</td>
     </tr>
     <tr>
       <th>2</th>
@@ -103,7 +103,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.014287</td>
-      <td>[-0.16461049020290375, 0.06252828240394592, -0...</td>
+      <td>[-0.3078858256340027, -0.17394483089447021, 0....</td>
     </tr>
     <tr>
       <th>3</th>
@@ -112,7 +112,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[-0.17460857331752777, 0.04934626817703247, -0...</td>
+      <td>[-0.30563846230506897, -0.1258348673582077, 0....</td>
     </tr>
     <tr>
       <th>4</th>
@@ -121,7 +121,7 @@ The following function takes the original node embeddings with a higher dimensio
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[-0.19524262845516205, 0.05193733423948288, -0...</td>
+      <td>[-0.3289831280708313, -0.1176721453666687, 0.1...</td>
     </tr>
   </tbody>
 </table>
@@ -142,24 +142,24 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -1.4447, 50 iterations in 0.1079 sec
-    Iteration  100, KL divergence 1.2153, 50 iterations in 0.0293 sec
-    Iteration  150, KL divergence 1.2153, 50 iterations in 0.0146 sec
-    Iteration  200, KL divergence 1.2153, 50 iterations in 0.0152 sec
-    Iteration  250, KL divergence 1.2153, 50 iterations in 0.0126 sec
-       --> Time elapsed: 0.18 seconds
+    Iteration   50, KL divergence -1.0251, 50 iterations in 0.0671 sec
+    Iteration  100, KL divergence 1.2269, 50 iterations in 0.0357 sec
+    Iteration  150, KL divergence 1.2269, 50 iterations in 0.0249 sec
+    Iteration  200, KL divergence 1.2269, 50 iterations in 0.0232 sec
+    Iteration  250, KL divergence 1.2269, 50 iterations in 0.0199 sec
+       --> Time elapsed: 0.17 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.1709, 50 iterations in 0.0335 sec
-    Iteration  100, KL divergence 0.1469, 50 iterations in 0.0438 sec
-    Iteration  150, KL divergence 0.1407, 50 iterations in 0.0429 sec
-    Iteration  200, KL divergence 0.1409, 50 iterations in 0.0431 sec
-    Iteration  250, KL divergence 0.1409, 50 iterations in 0.0437 sec
-    Iteration  300, KL divergence 0.1408, 50 iterations in 0.0427 sec
-    Iteration  350, KL divergence 0.1410, 50 iterations in 0.0426 sec
-    Iteration  400, KL divergence 0.1410, 50 iterations in 0.0425 sec
-    Iteration  450, KL divergence 0.1410, 50 iterations in 0.0424 sec
-    Iteration  500, KL divergence 0.1409, 50 iterations in 0.0435 sec
-       --> Time elapsed: 0.42 seconds
+    Iteration   50, KL divergence 0.2024, 50 iterations in 0.0355 sec
+    Iteration  100, KL divergence 0.1789, 50 iterations in 0.0427 sec
+    Iteration  150, KL divergence 0.1730, 50 iterations in 0.0421 sec
+    Iteration  200, KL divergence 0.1729, 50 iterations in 0.0411 sec
+    Iteration  250, KL divergence 0.1731, 50 iterations in 0.0413 sec
+    Iteration  300, KL divergence 0.1731, 50 iterations in 0.0403 sec
+    Iteration  350, KL divergence 0.1729, 50 iterations in 0.0399 sec
+    Iteration  400, KL divergence 0.1729, 50 iterations in 0.0399 sec
+    Iteration  450, KL divergence 0.1730, 50 iterations in 0.0400 sec
+    Iteration  500, KL divergence 0.1729, 50 iterations in 0.0401 sec
+       --> Time elapsed: 0.40 seconds
 
 
 
@@ -187,8 +187,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.090491</td>
-      <td>-4.094651</td>
-      <td>4.826585</td>
+      <td>-6.203226</td>
+      <td>-0.009862</td>
     </tr>
     <tr>
       <th>1</th>
@@ -196,8 +196,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.023323</td>
-      <td>-3.933240</td>
-      <td>6.234226</td>
+      <td>-7.306515</td>
+      <td>0.432733</td>
     </tr>
     <tr>
       <th>2</th>
@@ -205,8 +205,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.014287</td>
-      <td>-4.641659</td>
-      <td>5.644521</td>
+      <td>-7.206732</td>
+      <td>-0.369182</td>
     </tr>
     <tr>
       <th>3</th>
@@ -214,8 +214,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>-4.920625</td>
-      <td>5.303860</td>
+      <td>-7.022979</td>
+      <td>-0.765134</td>
     </tr>
     <tr>
       <th>4</th>
@@ -223,8 +223,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>-4.946140</td>
-      <td>5.378057</td>
+      <td>-7.231614</td>
+      <td>-0.673063</td>
     </tr>
   </tbody>
 </table>
@@ -268,7 +268,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.090491</td>
-      <td>[1.5155444294214249, -1.0825317353010178, -1.2...</td>
+      <td>[0.0, -0.4330126941204071, 0.0, -1.29903808236...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -277,7 +277,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.023323</td>
-      <td>[0.0, -1.5155444294214249, 0.0, -1.29903808236...</td>
+      <td>[0.0, -1.5155444294214249, -0.6495190411806107...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -286,7 +286,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.014287</td>
-      <td>[1.5155444294214249, -0.6495190411806107, -0.2...</td>
+      <td>[0.4330126941204071, -1.2990380823612213, 0.21...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -295,7 +295,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[1.2990380823612213, -1.2990380823612213, -1.0...</td>
+      <td>[-0.4330126941204071, -0.8660253882408142, 0.2...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -304,7 +304,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[1.2990380823612213, -1.0825317353010178, -0.6...</td>
+      <td>[-0.21650634706020355, -1.0825317353010178, 0....</td>
     </tr>
   </tbody>
 </table>
@@ -319,26 +319,26 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating affinity matrix...
        --> Time elapsed: 0.00 seconds
     ===> Calculating PCA-based initialization...
-       --> Time elapsed: 0.00 seconds
+       --> Time elapsed: 0.01 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -0.8210, 50 iterations in 0.0651 sec
-    Iteration  100, KL divergence 1.2101, 50 iterations in 0.0169 sec
-    Iteration  150, KL divergence 1.2101, 50 iterations in 0.0144 sec
-    Iteration  200, KL divergence 1.2101, 50 iterations in 0.0146 sec
-    Iteration  250, KL divergence 1.2101, 50 iterations in 0.0145 sec
-       --> Time elapsed: 0.13 seconds
+    Iteration   50, KL divergence -0.5707, 50 iterations in 0.0683 sec
+    Iteration  100, KL divergence 1.1991, 50 iterations in 0.0166 sec
+    Iteration  150, KL divergence 1.1991, 50 iterations in 0.0251 sec
+    Iteration  200, KL divergence 1.1991, 50 iterations in 0.0144 sec
+    Iteration  250, KL divergence 1.1991, 50 iterations in 0.0144 sec
+       --> Time elapsed: 0.14 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.5813, 50 iterations in 0.0540 sec
-    Iteration  100, KL divergence 0.5738, 50 iterations in 0.0596 sec
-    Iteration  150, KL divergence 0.5716, 50 iterations in 0.0456 sec
-    Iteration  200, KL divergence 0.5715, 50 iterations in 0.0447 sec
-    Iteration  250, KL divergence 0.5714, 50 iterations in 0.0455 sec
-    Iteration  300, KL divergence 0.5712, 50 iterations in 0.0459 sec
-    Iteration  350, KL divergence 0.5709, 50 iterations in 0.0469 sec
-    Iteration  400, KL divergence 0.5710, 50 iterations in 0.0464 sec
-    Iteration  450, KL divergence 0.5710, 50 iterations in 0.0459 sec
-    Iteration  500, KL divergence 0.5713, 50 iterations in 0.0461 sec
-       --> Time elapsed: 0.48 seconds
+    Iteration   50, KL divergence 0.6301, 50 iterations in 0.0522 sec
+    Iteration  100, KL divergence 0.6179, 50 iterations in 0.0464 sec
+    Iteration  150, KL divergence 0.6155, 50 iterations in 0.0451 sec
+    Iteration  200, KL divergence 0.6140, 50 iterations in 0.0453 sec
+    Iteration  250, KL divergence 0.6142, 50 iterations in 0.0453 sec
+    Iteration  300, KL divergence 0.6145, 50 iterations in 0.0462 sec
+    Iteration  350, KL divergence 0.6139, 50 iterations in 0.0459 sec
+    Iteration  400, KL divergence 0.6140, 50 iterations in 0.0456 sec
+    Iteration  450, KL divergence 0.6129, 50 iterations in 0.0456 sec
+    Iteration  500, KL divergence 0.6129, 50 iterations in 0.0475 sec
+       --> Time elapsed: 0.47 seconds
 
 
 
@@ -366,8 +366,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.090491</td>
-      <td>-1.300901</td>
-      <td>-1.306591</td>
+      <td>-4.410166</td>
+      <td>-5.094278</td>
     </tr>
     <tr>
       <th>1</th>
@@ -375,8 +375,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.023323</td>
-      <td>0.123447</td>
-      <td>-7.780406</td>
+      <td>-1.422784</td>
+      <td>-3.684320</td>
     </tr>
     <tr>
       <th>2</th>
@@ -384,8 +384,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.014287</td>
-      <td>-0.052171</td>
-      <td>-0.871722</td>
+      <td>-0.231866</td>
+      <td>7.718200</td>
     </tr>
     <tr>
       <th>3</th>
@@ -393,8 +393,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>-0.281794</td>
-      <td>-0.207063</td>
+      <td>-0.556265</td>
+      <td>7.078770</td>
     </tr>
     <tr>
       <th>4</th>
@@ -402,8 +402,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>-0.274486</td>
-      <td>-0.446573</td>
+      <td>-0.475379</td>
+      <td>7.196335</td>
     </tr>
   </tbody>
 </table>
@@ -443,7 +443,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.090491</td>
-      <td>[-0.5771389007568359, -0.16100463271141052, 0....</td>
+      <td>[-0.06064473092556, 0.06427990645170212, -0.07...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -452,7 +452,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.023323</td>
-      <td>[-0.6524127721786499, -0.33749493956565857, 0....</td>
+      <td>[-0.1739027500152588, 0.08193299174308777, 0.1...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -461,7 +461,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.014287</td>
-      <td>[-0.574659526348114, -0.3720538914203644, 0.39...</td>
+      <td>[-0.2120210826396942, 0.11026526242494583, -0....</td>
     </tr>
     <tr>
       <th>3</th>
@@ -470,7 +470,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[-0.619826078414917, -0.05636976286768913, 0.1...</td>
+      <td>[-0.13433636724948883, 0.15800398588180542, -0...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -479,7 +479,7 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>[-0.6184789538383484, -0.44357389211654663, 0....</td>
+      <td>[-0.31243154406547546, 0.18864676356315613, -0...</td>
     </tr>
   </tbody>
 </table>
@@ -490,30 +490,30 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     TSNE(early_exaggeration=12, random_state=47, verbose=1)
     --------------------------------------------------------------------------------
     ===> Finding 90 nearest neighbors using exact search using euclidean distance...
-       --> Time elapsed: 0.01 seconds
+       --> Time elapsed: 0.00 seconds
     ===> Calculating affinity matrix...
        --> Time elapsed: 0.00 seconds
     ===> Calculating PCA-based initialization...
-       --> Time elapsed: 0.01 seconds
+       --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -1.0978, 50 iterations in 0.0729 sec
-    Iteration  100, KL divergence -2.8895, 50 iterations in 0.0183 sec
-    Iteration  150, KL divergence -2.8895, 50 iterations in 0.0163 sec
-    Iteration  200, KL divergence 1.1579, 50 iterations in 0.0147 sec
-    Iteration  250, KL divergence 1.1579, 50 iterations in 0.0146 sec
-       --> Time elapsed: 0.14 seconds
+    Iteration   50, KL divergence -1.1717, 50 iterations in 0.0640 sec
+    Iteration  100, KL divergence 1.1626, 50 iterations in 0.0170 sec
+    Iteration  150, KL divergence 1.1626, 50 iterations in 0.0147 sec
+    Iteration  200, KL divergence 1.1626, 50 iterations in 0.0146 sec
+    Iteration  250, KL divergence 1.1626, 50 iterations in 0.0148 sec
+       --> Time elapsed: 0.13 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.3264, 50 iterations in 0.0495 sec
-    Iteration  100, KL divergence 0.3150, 50 iterations in 0.0487 sec
-    Iteration  150, KL divergence 0.3062, 50 iterations in 0.0540 sec
-    Iteration  200, KL divergence 0.3033, 50 iterations in 0.0474 sec
-    Iteration  250, KL divergence 0.2994, 50 iterations in 0.0483 sec
-    Iteration  300, KL divergence 0.2996, 50 iterations in 0.0490 sec
-    Iteration  350, KL divergence 0.2997, 50 iterations in 0.0481 sec
-    Iteration  400, KL divergence 0.2996, 50 iterations in 0.0480 sec
-    Iteration  450, KL divergence 0.2997, 50 iterations in 0.0481 sec
-    Iteration  500, KL divergence 0.2996, 50 iterations in 0.0481 sec
-       --> Time elapsed: 0.49 seconds
+    Iteration   50, KL divergence 0.3342, 50 iterations in 0.0543 sec
+    Iteration  100, KL divergence 0.3211, 50 iterations in 0.0471 sec
+    Iteration  150, KL divergence 0.3202, 50 iterations in 0.0468 sec
+    Iteration  200, KL divergence 0.3207, 50 iterations in 0.0472 sec
+    Iteration  250, KL divergence 0.3205, 50 iterations in 0.0470 sec
+    Iteration  300, KL divergence 0.3207, 50 iterations in 0.0472 sec
+    Iteration  350, KL divergence 0.3206, 50 iterations in 0.0478 sec
+    Iteration  400, KL divergence 0.3206, 50 iterations in 0.0474 sec
+    Iteration  450, KL divergence 0.3209, 50 iterations in 0.0472 sec
+    Iteration  500, KL divergence 0.3209, 50 iterations in 0.0473 sec
+       --> Time elapsed: 0.48 seconds
 
 
 
@@ -541,8 +541,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.090491</td>
-      <td>-4.143264</td>
-      <td>2.841294</td>
+      <td>4.853452</td>
+      <td>-3.194808</td>
     </tr>
     <tr>
       <th>1</th>
@@ -550,8 +550,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.023323</td>
-      <td>-4.686538</td>
-      <td>4.188664</td>
+      <td>4.697537</td>
+      <td>-4.011038</td>
     </tr>
     <tr>
       <th>2</th>
@@ -559,8 +559,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.014287</td>
-      <td>-3.981728</td>
-      <td>3.755062</td>
+      <td>4.036766</td>
+      <td>-3.147425</td>
     </tr>
     <tr>
       <th>3</th>
@@ -568,8 +568,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>-1.889621</td>
-      <td>1.078839</td>
+      <td>2.267997</td>
+      <td>-1.755225</td>
     </tr>
     <tr>
       <th>4</th>
@@ -577,8 +577,8 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
       <td>axon-server-connector-4.10.2</td>
       <td>0</td>
       <td>0.012211</td>
-      <td>-4.649467</td>
-      <td>4.674107</td>
+      <td>4.068504</td>
+      <td>-2.575200</td>
     </tr>
   </tbody>
 </table>
