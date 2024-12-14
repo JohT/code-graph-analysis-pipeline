@@ -9,7 +9,7 @@
     "packageRules": [
       {
         "description": "Neo4j update settings",
-        "groupName": "Neo4j {{{newValue}}",
+        "groupName": ["Neo4j {{newVersion}}"],
         "matchDepNames": [
           "neo4j/neo4j",
           "neo4j/apoc"
