@@ -16,7 +16,7 @@
           "minor",
           "major"
         ],
-        "minimumReleaseAge": "1 month"
+        "minimumReleaseAge": "5 days"
       },
       {
         "description": "jQAssistant Typescript Plugin",
