@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Steven van Beelen</td>
-      <td>3921</td>
+      <td>Allard Buijze</td>
+      <td>3095</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Marc</td>
-      <td>25</td>
+      <td>Mitchell Herrijgers</td>
+      <td>289</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>Steven van Beelen</td>
+      <td>3922</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>Paul Kuyer</td>
       <td>11</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>Praegla, Alexander</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
+      <td>Marc</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>6</th>
       <td>Kursat Aktas</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>rsobies</td>
       <td>16</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>MATTHIAS BECHTOLD</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7</th>
+      <th>8</th>
       <td>bruceaxoniq</td>
       <td>3</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>Mitchell Herrijgers</td>
-      <td>288</td>
-    </tr>
-    <tr>
       <th>9</th>
-      <td>Weronika Trzaska</td>
-      <td>9</td>
+      <td>MATTHIAS BECHTOLD</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
