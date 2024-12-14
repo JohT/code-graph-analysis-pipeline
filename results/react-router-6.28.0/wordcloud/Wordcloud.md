@@ -102,38 +102,38 @@
     </tr>
     <tr>
       <th>1</th>
+      <td>Remix Run Bot</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>Pedro Cattori</td>
       <td>385</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>Matt Brophy</td>
       <td>1818</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>Brooks Lybrand</td>
       <td>66</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Abhijeet Pandit</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Christian Rotzoll</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>Miguel Victor</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Remix Run Bot</td>
-      <td>364</td>
     </tr>
     <tr>
       <th>8</th>
