@@ -9,7 +9,8 @@ Contained within this repository is a comprehensive and automated code graph ana
 ## :sparkles: Features
 
 - Analyze static code structure as a graph
-- **🌟New🌟:** Also supports Typescript
+- Supports Java Code Analysis
+- **🌟New🌟:** Supports Typescript Code Analysis (experimental)
 - Fully automated [pipeline for Java](./.github/workflows/java-code-analysis.yml) from tool installation to report generation
 - Fully automated [pipeline for Typescript](./.github/workflows/typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
