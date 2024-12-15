@@ -39,6 +39,17 @@ Report | Analysis | Description
 | [PathFindingJava.md](./AxonFramework-4.10.2/path-finding-java/PathFindingJava.md) | AxonFramework-4.10.2 | Path Finding for Java |
 | [VisibilityMetricsJava.md](./AxonFramework-4.10.2/visibility-metrics-java/VisibilityMetricsJava.md) | AxonFramework-4.10.2 | Visibility Metrics for Java |
 | [Wordcloud.md](./AxonFramework-4.10.2/wordcloud/Wordcloud.md) | AxonFramework-4.10.2 | Wordcloud |
+| [DependenciesGraphJava.md](./AxonFramework-4.10.3/dependencies-graph-java/DependenciesGraphJava.md) | AxonFramework-4.10.3 | Artifact Dependencies |
+| [ExternalDependenciesJava.md](./AxonFramework-4.10.3/external-dependencies-java/ExternalDependenciesJava.md) | AxonFramework-4.10.3 | External Dependencies for Java |
+| [InternalDependenciesJava.md](./AxonFramework-4.10.3/internal-dependencies-java/InternalDependenciesJava.md) | AxonFramework-4.10.3 | Internal Dependencies |
+| [MethodMetricsJava.md](./AxonFramework-4.10.3/method-metrics-java/MethodMetricsJava.md) | AxonFramework-4.10.3 | Method Metrics |
+| [NodeEmbeddingsJava.md](./AxonFramework-4.10.3/node-embeddings-java/NodeEmbeddingsJava.md) | AxonFramework-4.10.3 | Node Embeddings |
+| [ObjectOrientedDesignMetricsJava.md](./AxonFramework-4.10.3/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) | AxonFramework-4.10.3 | Object Oriented Design Quality Metrics |
+| [OverviewGeneral.md](./AxonFramework-4.10.3/overview-general/OverviewGeneral.md) | AxonFramework-4.10.3 | Overview in General |
+| [OverviewJava.md](./AxonFramework-4.10.3/overview-java/OverviewJava.md) | AxonFramework-4.10.3 | Overview for Java |
+| [PathFindingJava.md](./AxonFramework-4.10.3/path-finding-java/PathFindingJava.md) | AxonFramework-4.10.3 | Path Finding for Java |
+| [VisibilityMetricsJava.md](./AxonFramework-4.10.3/visibility-metrics-java/VisibilityMetricsJava.md) | AxonFramework-4.10.3 | Visibility Metrics for Java |
+| [Wordcloud.md](./AxonFramework-4.10.3/wordcloud/Wordcloud.md) | AxonFramework-4.10.3 | Wordcloud |
 | [ArtifactDependencies.md](./AxonFramework-4.6.8/artifact-dependencies/ArtifactDependencies.md) | AxonFramework-4.6.8 | Artifact Dependencies |
 | [ExternalDependencies.md](./AxonFramework-4.6.8/external-dependencies/ExternalDependencies.md) | AxonFramework-4.6.8 | External Dependencies |
 | [InternalDependencies.md](./AxonFramework-4.6.8/internal-dependencies/InternalDependencies.md) | AxonFramework-4.6.8 | Internal Dependencies |
