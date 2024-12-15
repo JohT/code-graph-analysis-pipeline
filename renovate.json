@@ -1,177 +1,180 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-      "config:recommended",
-      ":combinePatchMinorReleases",
-      "schedule:earlyMondays"
-    ],
-    "ignoreUnstable": false,
-    "packageRules": [
-      {
-        "description": "Neo4j update settings",
-        "groupName": ["Neo4j {{newVersion}}"],
-        "matchDepNames": [
-          "neo4j/neo4j",
-          "neo4j/apoc"
-        ],
-        "matchUpdateTypes": [
-          "minor",
-          "major"
-        ],
-        "minimumReleaseAge": "5 days"
-      },
-      {
-        "description": "jQAssistant Typescript Plugin",
-        "groupName": [
-          "jQAssistant TypeScript Plugin"
-        ],
-        "matchSourceUrls": [
-          "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
-        ]
-      }
-    ],
-    "customManagers": [
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-          "(^|\\/)action\\.ya?ml$]"
-        ],
-        "matchStrings": [
-          "AXON_FRAMEWORK_VERSION:\\s+?(?<currentValue>.*?)\\s+"
-        ],
-        "depNameTemplate": "AxonFramework/AxonFramework",
-        "datasourceTemplate": "github-releases",
-        "extractVersionTemplate": "^axon-?(?<version>.*?)$"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-          "(^|\\/)action\\.ya?ml$]"
-        ],
-        "matchStrings": [
-          "REACT_ROUTER_VERSION:\\s+?(?<currentValue>.*?)\\s+"
-        ],
-        "depNameTemplate": "remix-run/react-router",
-        "datasourceTemplate": "github-releases",
-        "extractVersionTemplate": "^react-router@?(?<version>.*?)$"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "README.md"
-        ],
-        "matchStrings": [
-          "\\/AxonFramework-?(?<currentValue>.*?)\\/"
-        ],
-        "depNameTemplate": "AxonFramework/AxonFramework",
-        "datasourceTemplate": "github-releases",
-        "extractVersionTemplate": "^axon-?(?<version>.*?)$"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-          "(^|\\/)action\\.ya?ml$]"
-        ],
-        "matchStrings": [
-          "mambaforge:\\s+?(?<currentValue>.*?)\\s+"
-        ],
-        "depNameTemplate": "conda-forge/miniforge",
-        "datasourceTemplate": "github-releases"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/profiles/Neo4jv5.*\\.sh$",
-          "^scripts/profiles/Default\\.sh$",
-          "^scripts/[^/]*\\.sh$"
-        ],
-        "matchStrings": [
-          "NEO4J_VERSION:-\\\"?(?<currentValue>5\\..*?)\\\""
-        ],
-        "depNameTemplate": "neo4j/neo4j",
-        "datasourceTemplate": "github-tags"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/profiles/Neo4jv5.*\\.sh$",
-          "^scripts/profiles/Default\\.sh$",
-          "^scripts/[^/]*\\.sh$"
-        ],
-        "matchStrings": [
-          "NEO4J_APOC_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
-        ],
-        "depNameTemplate": "neo4j/apoc",
-        "datasourceTemplate": "github-releases"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/profiles/Neo4jv5.*\\.sh$",
-          "^scripts/profiles/Default\\.sh$",
-          "^scripts/[^/]*\\.sh$"
-        ],
-        "matchStrings": [
-          "NEO4J_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
-        ],
-        "depNameTemplate": "neo4j/graph-data-science",
-        "datasourceTemplate": "github-releases"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/profiles/Neo4jv5.*\\.sh$",
-          "^scripts/profiles/Default\\.sh$",
-          "^scripts/[^/]*\\.sh$"
-        ],
-        "matchStrings": [
-          "NEO4J_OPEN_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
-        ],
-        "depNameTemplate": "JohT/open-graph-data-science-packaging",
-        "datasourceTemplate": "github-releases",
-        "extractVersionTemplate": "^v?(?<version>.*?)$",
-        "versioningTemplate": "loose"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/profiles/Neo4jv5.*\\.sh$",
-          "^scripts/profiles/Default\\.sh$",
-          "^scripts/[^/]*\\.sh$"
-        ],
-        "matchStrings": [
-          "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
-        ],
-        "depNameTemplate": "jQAssistant/jqa-commandline-tool",
-        "datasourceTemplate": "github-tags",
-        "extractVersionTemplate": "^REL-?(?<version>.*?)$"
-      },
-      {
-        "description": "Update npx command package versions",
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/[^/]*\\.sh$",
-          "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-          "(^|\\/)action\\.ya?ml$]"
-        ],
-        "matchStrings": [
-          "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)"
-        ],
-        "datasourceTemplate": "npm"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": [
-          "^scripts/configuration/[^/]+\\.ya?ml$"
-        ],
-        "matchStrings": [
-          "\\s*\\-\\s+group-id:\\s*(?<group>.*?)\\s*[\r\n]\\s*artifact-id:\\s*(?<artifact>.*?)\\s*[\r\n]\\s*version:\\s*(?<currentValue>.*?)\\s*[\r\n]"
-        ],
-        "depNameTemplate": "{{{group}}}:{{{artifact}}}",
-        "datasourceTemplate": "maven"
-      }
-    ]
+  "extends": [
+    "config:recommended",
+    ":combinePatchMinorReleases",
+    "schedule:earlyMondays"
+  ],
+  "ignoreUnstable": false,
+  "packageRules": [
+    {
+      "description": "Neo4j and APOC update settings",
+      "groupName": [
+        "Neo4j to {{newVersion}}"
+      ],
+      "matchDepNames": [
+        "neo4j/neo4j",
+        "neo4j/apoc"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "major"
+      ],
+      "minimumReleaseAge": "5 days",
+      "commitMessageExtra": ""
+    },
+    {
+      "description": "jQAssistant Typescript Plugin",
+      "groupName": [
+        "jQAssistant TypeScript Plugin"
+      ],
+      "matchSourceUrls": [
+        "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
+      ]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "AXON_FRAMEWORK_VERSION:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "AxonFramework/AxonFramework",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^axon-?(?<version>.*?)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "REACT_ROUTER_VERSION:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "remix-run/react-router",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^react-router@?(?<version>.*?)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "README.md"
+      ],
+      "matchStrings": [
+        "\\/AxonFramework-?(?<currentValue>.*?)\\/"
+      ],
+      "depNameTemplate": "AxonFramework/AxonFramework",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^axon-?(?<version>.*?)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "mambaforge:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "conda-forge/miniforge",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Default\\.sh$",
+        "^scripts/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_VERSION:-\\\"?(?<currentValue>5\\..*?)\\\""
+      ],
+      "depNameTemplate": "neo4j/neo4j",
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Default\\.sh$",
+        "^scripts/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_APOC_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "neo4j/apoc",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Default\\.sh$",
+        "^scripts/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "neo4j/graph-data-science",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Default\\.sh$",
+        "^scripts/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "NEO4J_OPEN_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "JohT/open-graph-data-science-packaging",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.*?)$",
+      "versioningTemplate": "loose"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Default\\.sh$",
+        "^scripts/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
+      ],
+      "depNameTemplate": "jQAssistant/jqa-commandline-tool",
+      "datasourceTemplate": "github-tags",
+      "extractVersionTemplate": "^REL-?(?<version>.*?)$"
+    },
+    {
+      "description": "Update npx command package versions",
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/[^/]*\\.sh$",
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$]"
+      ],
+      "matchStrings": [
+        "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)"
+      ],
+      "datasourceTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^scripts/configuration/[^/]+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "\\s*\\-\\s+group-id:\\s*(?<group>.*?)\\s*[\r\n]\\s*artifact-id:\\s*(?<artifact>.*?)\\s*[\r\n]\\s*version:\\s*(?<currentValue>.*?)\\s*[\r\n]"
+      ],
+      "depNameTemplate": "{{{group}}}:{{{artifact}}}",
+      "datasourceTemplate": "maven"
+    }
+  ]
 }
