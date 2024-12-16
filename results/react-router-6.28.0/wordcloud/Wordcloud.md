@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>Tim Dorr</td>
+      <td>384</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>Siddhant Gupta</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Remix Run Bot</td>
-      <td>365</td>
-    </tr>
-    <tr>
       <th>2</th>
-      <td>Pedro Cattori</td>
-      <td>385</td>
+      <td>Mark Dalgleish</td>
+      <td>370</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Matt Brophy</td>
-      <td>1818</td>
+      <td>Gavri (Gabriel) Guy</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Brooks Lybrand</td>
-      <td>66</td>
+      <td>Remix Run Bot</td>
+      <td>366</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Abhijeet Pandit</td>
+      <td>Vlady Veselinov</td>
       <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Christian Rotzoll</td>
-      <td>1</td>
+      <td>Pedro Cattori</td>
+      <td>385</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Miguel Victor</td>
-      <td>1</td>
+      <td>Matt Brophy</td>
+      <td>1818</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Dan Barclay</td>
-      <td>1</td>
+      <td>Brooks Lybrand</td>
+      <td>66</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jrestall</td>
-      <td>2</td>
+      <td>Abhijeet Pandit</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
