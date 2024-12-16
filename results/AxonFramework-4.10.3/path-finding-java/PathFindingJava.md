@@ -592,7 +592,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>300</td>
       <td>59</td>
       <td>41</td>
-      <td>[/org/axonframework/commandhandling/callbacks -&gt; /org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed -&gt; /org/axonframework/commandhandling, /org/axonframework/commandhandling/distributed/commandfilter -&gt; /org/axonframework/commandhandling, /org/axonframework/comman...</td>
+      <td>[/org/axonframework/serialization -&gt; /org/axonframework/commandhandling, /org/axonframework/tracing -&gt; /org/axonframework/commandhandling, /org/axonframework/tracing/attributes -&gt; /org/axonframework/commandhandling, /org/axonframework/util -&gt; /org/axonframework/commandhandling]</td>
       <td>[axon-messaging-4.10.3 -&gt; axon-messaging-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -630,7 +630,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>450</td>
       <td>51</td>
       <td>26</td>
-      <td>[/org/axonframework/monitoring -&gt; /org/axonframework/commandhandling, /org/axonframework/queryhandling/annotation -&gt; /org/axonframework/commandhandling, /org/axonframework/queryhandling/registration -&gt; /org/axonframework/commandhandling, /org/axonframework/queryhandling -&gt; /org/axonframework/com...</td>
+      <td>[/org/axonframework/common/jdbc -&gt; /org/axonframework/commandhandling, /org/axonframework/deadline/annotation -&gt; /org/axonframework/commandhandling, /org/axonframework/eventhandling/async -&gt; /org/axonframework/commandhandling, /org/axonframework/eventhandling/deadletter -&gt; /org/axonframework/com...</td>
       <td>[axon-messaging-4.10.3 -&gt; axon-messaging-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -649,7 +649,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>125</td>
       <td>32</td>
       <td>18</td>
-      <td>[/org/axonframework/monitoring -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/queryhandling/annotation -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/queryhandling/registration -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/monitorin...</td>
+      <td>[/org/axonframework/lifecycle -&gt; /org/axonframework/commandhandling, /org/axonframework/common/jdbc -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/deadline/annotation -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/async -&gt; /org/axonframewor...</td>
       <td>[axon-messaging-4.10.3 -&gt; axon-messaging-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1284,9 +1284,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>5</td>
       <td>13</td>
       <td>3</td>
-      <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/saga -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/aggregate -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
       <td>[axon-test-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1305,7 +1305,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/matchers]</td>
+      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test/matchers]</td>
       <td>[axon-test-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1324,7 +1324,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test]</td>
+      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test]</td>
       <td>[axon-test-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
