@@ -107,18 +107,18 @@
     </tr>
     <tr>
       <th>2</th>
+      <td>Remix Run Bot</td>
+      <td>367</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>Mark Dalgleish</td>
       <td>370</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>Gavri (Gabriel) Guy</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Remix Run Bot</td>
-      <td>366</td>
     </tr>
     <tr>
       <th>5</th>
