@@ -98,8 +98,10 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
     echo "setupNeo4j: Commenting out configuration properties that will later be replaced or are not needed"
     if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
         sed -i.backup '/^server\.directories\.import=/ s/^/# defined in the directory section further below #/' "${NEO4J_CONFIG}"
+        sed -i.backup '/^db\.tx_log\.rotation\.retention_policy=/ s/^/# defined in the transaction section further below #/' "${NEO4J_CONFIG}"
     else
         sed -i.backup '/^dbms\.directories\.import=/ s/^/# defined in the directory section further below #/' "${NEO4J_CONFIG}"
+        sed -i.backup '/^dbms\.tx_log\.rotation\.retention_policy=/ s/^/# defined in the transaction section further below #/' "${NEO4J_CONFIG}"
     fi
     # Remove the backup file
     rm -f "${NEO4J_CONFIG}.backup"
@@ -161,7 +163,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         } >> "${NEO4J_CONFIG}"
     fi
 
-    echo "setupNeo4j: Configuring static settings (memory, procedure permittions, ...)"
+    echo "setupNeo4j: Configuring static settings (memory, procedure permissions, ...)"
     if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
         cat "${SCRIPTS_DIR}/configuration/template-neo4j.conf" >> "${NEO4J_CONFIG}"
     else
