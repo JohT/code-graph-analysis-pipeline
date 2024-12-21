@@ -78,6 +78,17 @@ jobs:
       working-directory: graph-visualization
       run: npm ci
 
+    - name: Setup Chrome for Graph Visualization
+      uses: browser-actions/setup-chrome@v1
+      id: setup-chrome
+      with:
+        install-chromedriver: true
+    - name: Info about Chrome for Graph Visualization
+      run: |
+        echo "chrome-path: ${{ steps.setup-chrome.outputs.chrome-path }}"
+        ${{ steps.setup-chrome.outputs.chrome-path }} --version
+        export CHROME_DEVEL_SANDBOX=${{ steps.setup-chrome.outputs.chrome-path }}
+  
     - name: Setup Cache for Conda package manager Miniforge
       uses: actions/cache@v4
       env:
