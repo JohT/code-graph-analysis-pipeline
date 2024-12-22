@@ -2436,7 +2436,7 @@ The following table shows the top 30 packages with the highest cyclomatic comple
       <td>292</td>
       <td>187</td>
       <td>8</td>
-      <td>loadKeyViolationCodes</td>
+      <td>fetchTrackedEvents</td>
     </tr>
     <tr>
       <th>8</th>
