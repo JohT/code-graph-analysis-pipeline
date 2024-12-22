@@ -136,7 +136,8 @@ let browser;
       "--disable-component-extensions-with-background-pages",
       "--disable-client-side-phishing-detection",
       "--use-gl=disabled",
-      "--disable-features=Vulkan", 
+      "--disable-features=Vulkan",
+      "--no-sandbox" // See https://pptr.dev/troubleshooting#issues-with-apparmor-on-ubuntu
     ],
   }); // { headless: false } for testing
 
