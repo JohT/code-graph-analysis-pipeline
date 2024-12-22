@@ -1,2 +1,2 @@
 "firstCommunityId","communityId","intermediateCommunityIds","memberCount","memberNames","Source Cypher File: Community_Detection/Community_Detection_1d_Stream_Intermediate_Mutated.cypher"
-3,3,"3",9,"/axon-server-connector-4.10.3.jar,/axon-configuration-4.10.3.jar,/axon-disruptor-4.10.3.jar,/axon-messaging-4.10.3.jar,/axon-eventsourcing-4.10.3.jar,/axon-modelling-4.10.3.jar,/axon-spring-boot-autoconfigure-4.10.3.jar,/axon-test-4.10.3.jar,/axon-tracing-opentelemetry-4.10.3.jar",""
+3,3,"3",9,"/axon-messaging-4.10.3.jar,/axon-eventsourcing-4.10.3.jar,/axon-spring-boot-autoconfigure-4.10.3.jar,/axon-server-connector-4.10.3.jar,/axon-tracing-opentelemetry-4.10.3.jar,/axon-configuration-4.10.3.jar,/axon-modelling-4.10.3.jar,/axon-disruptor-4.10.3.jar,/axon-test-4.10.3.jar",""

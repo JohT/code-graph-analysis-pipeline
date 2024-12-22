@@ -131,7 +131,7 @@ Creates a in-memory projection of "Java:Package" nodes and their "DEPENDS_ON" re
       <td>114</td>
       <td>746</td>
       <td>0.05791</td>
-      <td>2990745</td>
+      <td>2925177</td>
       <td>0</td>
       <td>6.54386</td>
       <td>56</td>
@@ -287,8 +287,8 @@ The following table shows the first 10 rows with all details of the query above.
       <td>45</td>
       <td>1</td>
       <td>45</td>
-      <td>[/org/axonframework/config -&gt; /org/axonframework/disruptor/commandhandling, /org/axonframework/config -&gt; /org/axonframework/commandhandling, /org/axonframework/config -&gt; /org/axonframework/commandhandling/gateway, /org/axonframework/config -&gt; /org/axonframework/common]</td>
-      <td>[axon-configuration-4.10.3 -&gt; axon-disruptor-4.10.3, axon-configuration-4.10.3 -&gt; axon-messaging-4.10.3, axon-configuration-4.10.3 -&gt; axon-eventsourcing-4.10.3, axon-configuration-4.10.3 -&gt; axon-modelling-4.10.3]</td>
+      <td>[/org/axonframework/config -&gt; /org/axonframework/commandhandling, /org/axonframework/config -&gt; /org/axonframework/commandhandling/gateway, /org/axonframework/config -&gt; /org/axonframework/common, /org/axonframework/config -&gt; /org/axonframework/common/annotation]</td>
+      <td>[axon-configuration-4.10.3 -&gt; axon-messaging-4.10.3, axon-configuration-4.10.3 -&gt; axon-eventsourcing-4.10.3, axon-configuration-4.10.3 -&gt; axon-modelling-4.10.3, axon-configuration-4.10.3 -&gt; axon-disruptor-4.10.3]</td>
       <td>[]</td>
     </tr>
     <tr>
@@ -611,7 +611,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>563</td>
       <td>51</td>
       <td>30</td>
-      <td>[/org/axonframework/deadline -&gt; /org/axonframework/commandhandling, /org/axonframework/deadline/dbscheduler -&gt; /org/axonframework/commandhandling, /org/axonframework/deadline/jobrunr -&gt; /org/axonframework/commandhandling, /org/axonframework/deadline/quartz -&gt; /org/axonframework/commandhandling]</td>
+      <td>[/org/axonframework/deadline -&gt; /org/axonframework/commandhandling, /org/axonframework/eventhandling -&gt; /org/axonframework/commandhandling, /org/axonframework/deadline/dbscheduler -&gt; /org/axonframework/commandhandling, /org/axonframework/deadline/jobrunr -&gt; /org/axonframework/commandhandling]</td>
       <td>[axon-messaging-4.10.3 -&gt; axon-messaging-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -649,7 +649,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>125</td>
       <td>32</td>
       <td>18</td>
-      <td>[/org/axonframework/monitoring -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/queryhandling/annotation -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/queryhandling/registration -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/monitorin...</td>
+      <td>[/org/axonframework/lifecycle -&gt; /org/axonframework/commandhandling, /org/axonframework/common/jdbc -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/deadline/annotation -&gt; /org/axonframework/commandhandling/callbacks, /org/axonframework/eventhandling/async -&gt; /org/axonframewor...</td>
       <td>[axon-messaging-4.10.3 -&gt; axon-messaging-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1114,8 +1114,8 @@ The following table shows the first 10 rows with all details of the query above.
       <td>33</td>
       <td>1</td>
       <td>33</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector/query, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector/command, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connect...</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-server-connector-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-messaging-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-eventsourcing-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-modelling-4.10.3]</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/commandhandling/distributed, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/commandhandling/gateway, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/io, /org/axonfr...</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-messaging-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-eventsourcing-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-server-connector-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-tracing-opentelemetry-4.10.3]</td>
       <td>[]</td>
     </tr>
     <tr>
@@ -1133,8 +1133,8 @@ The following table shows the first 10 rows with all details of the query above.
       <td>13</td>
       <td>1</td>
       <td>13</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jpa, /org/axonframework/springboot...</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-server-connector-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-messaging-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-modelling-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-test-4.10.3]</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jpa, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/deadline/jobrunr, /org/axonframework/springboot/aut...</td>
+      <td>[axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-messaging-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-server-connector-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-modelling-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
   </tbody>
@@ -1492,7 +1492,7 @@ Creates a in-memory projection of "Java:Artifact" nodes and their "DEPENDS_ON" r
       <td>9</td>
       <td>25</td>
       <td>0.347222</td>
-      <td>2758835</td>
+      <td>2693267</td>
       <td>0</td>
       <td>2.777778</td>
       <td>7</td>
