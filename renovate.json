@@ -148,9 +148,8 @@
       "matchStrings": [
         "JQASSISTANT_CLI_VERSION:-\\\"?(?<currentValue>.*?)\\\""
       ],
-      "depNameTemplate": "jQAssistant/jqa-commandline-tool",
-      "datasourceTemplate": "github-tags",
-      "extractVersionTemplate": "^REL-?(?<version>.*?)$"
+      "depNameTemplate": "com.buschmais.jqassistant.cli:jqassistant-commandline-neo4jv5",
+      "datasourceTemplate": "maven"
     },
     {
       "description": "Update npx command package versions",
