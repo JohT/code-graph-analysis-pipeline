@@ -1,0 +1,7 @@
+"similarity","sourceArtifactName","sourceNodeName","sourceNodeIncomingDependencies","sourceNodeOutgoingDependencies","targetArtifactName","targetNodeName","targetNodeIncomingDependencies","targetNodeOutgoingDependencies","Source Cypher File: Similarity/Similarity_1d_Stream_Mutated.cypher"
+1.0,,"./index.tsx",0,24,,"./server.tsx",0,38,""
+1.0,,"./server.tsx",0,38,,"./index.tsx",0,24,""
+0.25,,"./index.tsx",0,153,,"./index.tsx",0,24,""
+0.25,,"./index.tsx",0,24,,"./index.tsx",0,153,""
+0.25,,"./index.tsx",0,153,,"./server.tsx",0,38,""
+0.25,,"./server.tsx",0,38,,"./index.tsx",0,153,""
