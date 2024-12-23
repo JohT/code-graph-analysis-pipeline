@@ -1,5 +1,5 @@
 "propertyName","propertyValue","codeUnits","codeUnitNames","shortCodeUnitNames","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Grouped.cypher"
-"communityMaximumKCutId",18,1,"react-router-6.28.0/react-router","react-router",""
-"communityMaximumKCutId",16,1,"react-router-6.28.0/react-router-dom","react-router-dom",""
+"communityMaximumKCutId",12,1,"react-router-6.28.0/react-router","react-router",""
+"communityMaximumKCutId",1,1,"react-router-6.28.0/react-router-dom","react-router-dom",""
 "communityMaximumKCutId",13,1,"react-router-6.28.0/server","server",""
-"communityMaximumKCutId",10,1,"react-router-6.28.0/react-router-native","react-router-native",""
+"communityMaximumKCutId",8,1,"react-router-6.28.0/react-router-native","react-router-native",""
