@@ -1130,10 +1130,10 @@ The following table shows the first 10 rows with all details of the query above.
       <td>18</td>
       <td>2</td>
       <td>18</td>
-      <td>14</td>
+      <td>13</td>
       <td>1</td>
-      <td>14</td>
-      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jpa, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/eventhandling, /org/axonframework/springboot/autoco...</td>
+      <td>13</td>
+      <td>[/org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jdbc, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/common/jpa, /org/axonframework/springboot/autoconfig/legacyjpa -&gt; /org/axonframework/deadline/jobrunr, /org/axonframework/springboot/aut...</td>
       <td>[axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-messaging-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-server-connector-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-modelling-4.10.3, axon-spring-boot-autoconfigure-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
