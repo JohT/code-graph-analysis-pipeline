@@ -9,7 +9,7 @@
 "org.axonframework.common.TypeReflectionUtils: java.lang.reflect.Type getExactSuperType(java.lang.reflect.Type,java.lang.Class)","getExactSuperType","centralityPageRank",0.03451787377835161,""
 "org.axonframework.common.Assert: void isTrue(boolean,java.util.function.Supplier)","isTrue","centralityPageRank",0.032943522673502985,""
 "org.axonframework.common.jdbc.JdbcUtils: void closeQuietly(java.sql.Connection)","closeQuietly","centralityPageRank",0.0283511760755962,""
-"org.axonframework.messaging.unitofwork.CurrentUnitOfWork: org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityPageRank",0.026501955472064295,""
+"org.axonframework.messaging.unitofwork.CurrentUnitOfWork: org.axonframework.messaging.unitofwork.UnitOfWork get()","get","centralityPageRank",0.026501955472064298,""
 "org.axonframework.common.BuilderUtils: void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityPageRank",0.02385364519631681,""
 "org.axonframework.config.Component: java.lang.Object get()","get","centralityPageRank",0.021492094631955994,""
 "org.axonframework.config.LifecycleHandlerInspector: void registerLifecycleHandlers(org.axonframework.config.Configuration,java.lang.Object)","registerLifecycleHandlers","centralityPageRank",0.019855877455220286,""
