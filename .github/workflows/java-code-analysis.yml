@@ -142,7 +142,7 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@v4
       with:
-        name: code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
+        name: java-code-analysis-logs-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
         path: |
           ./temp/**/runtime/*
           ./temp/**/reports/*
@@ -153,7 +153,7 @@ jobs:
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: code-report-results-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
+        name: java-code-analysis-results-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
         path: ./results
         if-no-files-found: error
         retention-days: 5
@@ -164,7 +164,7 @@ jobs:
     #- name: Archive exported database
     #  uses: actions/upload-artifact@v3
     #  with:
-    #    name: code-report-database-export-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
+    #    name: java-code-analysis-database-export-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
     #    path: ./temp/**/import
     #    if-no-files-found: error
     #    retention-days: 5
