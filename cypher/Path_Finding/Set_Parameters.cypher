@@ -1,4 +1,4 @@
-// Example on how to set the parameters for centrality in this case for Packages and PageRank
+// Example on how to set the parameters for path finding in this case for Packages and PageRank
 
 :params {
     "dependencies_projection": "package-path-finding",     
