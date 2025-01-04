@@ -168,7 +168,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: typescript-code-analysis-results-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
-        path: ./results
+        path: ./temp/**/reports/*
         if-no-files-found: error
         retention-days: 5
 
