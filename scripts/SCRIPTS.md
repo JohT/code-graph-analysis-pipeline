@@ -50,13 +50,15 @@ Script | Directory | Description
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports. |
-| [GraphVisualization.sh](./reports/GraphVisualization.sh) | reports | Creates the "graph-visualization" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb". |
+| [GraphVisualization.sh](./reports/GraphVisualization.sh) | reports | DEPRECATED: Creates the "graph-visualization" report using the (now deprecated) nodejs project "graph-visualization". |
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
+| [InternalDependenciesVisualization.sh](./reports/InternalDependenciesVisualization.sh) | reports | Executes selected "Internal_Dependencies" Cypher queries for GraphViz visualization. |
 | [JavaCsv.sh](./reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports. |
 | [NodeEmbeddingsCsv.sh](./reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports. |
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
 | [PathFindingCsv.sh](./reports/PathFindingCsv.sh) | reports | Uses path finding algorithms from the Graph Data Science Library of Neo4j and creates CSV reports. |
+| [PathFindingVisualization.sh](./reports/PathFindingVisualization.sh) | reports | Executes selected "Path_Finding" Cypher queries for GraphViz visualization. |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [TopologicalSortCsv.sh](./reports/TopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm for directed acyclic graphs (DAG) to order code units by their dependencies |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports. |
@@ -74,4 +76,6 @@ Script | Directory | Description
 | [sortOutExternalJavaJarFiles.sh](./sortOutExternalJavaJarFiles.sh) |  | Sorts out jar files that don't contain one of the given package names (e.g. external libraries) and moves them into the IGNORED_JARS_DIRECTORY.  |
 | [startNeo4j.sh](./startNeo4j.sh) |  | Starts the local Neo4j Graph Database.  |
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
+| [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
+| [visualizeQueryResults.sh](./visualization/visualizeQueryResults.sh) | visualization | Visualizes the Cypher query result (CSV format) using GraphViz and outputs it as SVG image. |
 | [waitForNeo4jHttpFunctions.sh](./waitForNeo4jHttpFunctions.sh) |  | Waits until the HTTP Transactions API of Neo4j Graph Database is available. |
