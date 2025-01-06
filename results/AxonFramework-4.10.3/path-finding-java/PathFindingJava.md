@@ -131,7 +131,7 @@ Creates a in-memory projection of "Java:Package" nodes and their "DEPENDS_ON" re
       <td>114</td>
       <td>746</td>
       <td>0.05791</td>
-      <td>2925181</td>
+      <td>2925185</td>
       <td>0</td>
       <td>6.54386</td>
       <td>56</td>
@@ -1284,9 +1284,9 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>5</td>
       <td>13</td>
       <td>3</td>
-      <td>2</td>
+      <td>1</td>
       <td>3</td>
-      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/aggregate -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/utils, /org/axonframework/test/saga -&gt; /org/axonframework/test/deadline, /org/axonframework/test/saga -&gt; /org/axonframework/test/eventscheduler]</td>
       <td>[axon-test-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1305,7 +1305,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test/matchers]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test/matchers]</td>
       <td>[axon-test-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1324,7 +1324,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[/org/axonframework/test/aggregate -&gt; /org/axonframework/test]</td>
+      <td>[/org/axonframework/test/saga -&gt; /org/axonframework/test]</td>
       <td>[axon-test-4.10.3 -&gt; axon-test-4.10.3]</td>
       <td>[]</td>
     </tr>
@@ -1466,7 +1466,7 @@ Creates a in-memory projection of "Java:Artifact" nodes and their "DEPENDS_ON" r
       <td>9</td>
       <td>25</td>
       <td>0.347222</td>
-      <td>2693271</td>
+      <td>2693275</td>
       <td>0</td>
       <td>2.777778</td>
       <td>7</td>

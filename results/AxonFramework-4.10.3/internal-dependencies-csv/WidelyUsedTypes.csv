@@ -426,7 +426,7 @@
 "org.axonframework.eventsourcing.eventstore.jdbc.statements.AppendSnapshotStatementBuilder","AppendSnapshotStatementBuilder","Type,File,Java,ByteCode,Interface",1,""
 "org.axonframework.modelling.saga.repository.jpa.AssociationValueEntry","AssociationValueEntry","Type,File,Java,ByteCode,Class",1,""
 "org.axonframework.springboot.autoconfig.AxonAutoConfiguration","AxonAutoConfiguration","Type,File,Java,ByteCode,Class,Mark4TopCentralityBetweenness,Mark4TopCentralityCostEffectiveLazyForward",1,""
-"org.axonframework.springboot.autoconfig.AxonServerBusAutoConfiguration","AxonServerBusAutoConfiguration","Type,File,Java,ByteCode,Class,Mark4TopCentralityCostEffectiveLazyForward",1,""
+"org.axonframework.springboot.autoconfig.AxonServerBusAutoConfiguration","AxonServerBusAutoConfiguration","Type,File,Java,ByteCode,Class",1,""
 "org.axonframework.axonserver.connector.command.AxonServerCommandDispatchException","AxonServerCommandDispatchException","Type,File,Java,ByteCode,Class",1,""
 "org.axonframework.axonserver.connector.AxonServerConfiguration$Eventhandling","AxonServerConfiguration$Eventhandling","Type,File,Java,ByteCode,Class",1,""
 "org.axonframework.axonserver.connector.AxonServerConfiguration$Eventhandling$ProcessorSettings","AxonServerConfiguration$Eventhandling$ProcessorSettings","Type,File,Java,ByteCode,Class",1,""
