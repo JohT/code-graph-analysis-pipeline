@@ -1,0 +1,17 @@
+// This is a GraphViz dot template file for the visualization of a graph in lightblue color scheme.
+// The main part of the template is marked by the comments "Begin-Template" and "End-Template".
+// It also contains a simple example graph.
+//
+strict digraph lightblue_template {
+    //Begin-Template
+    fontname = "Helvetica,Arial,sans-serif";
+    node [fontname = "Helvetica,Arial,sans-serif";];
+    edge [fontname = "Helvetica,Arial,sans-serif"; fontsize = 10;];
+    node [style = filled; fillcolor = "0.560 0.400 0.999";];
+    node [color = "0.560 0.900 0.700";];
+    edge [color = "0.560 0.900 0.700";];
+    //End-Template
+    "A" -> "B" [penwidth = 1.0; label = 1;];
+    "A" -> "C" [penwidth = 3.0; label = 4;];
+    "B" -> "V" [penwidth = 2.0; label = 2;];
+}

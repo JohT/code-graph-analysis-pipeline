@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-# Creates the "graph-visualization" report (ipynb, md, pdf) based on the Jupyter Notebook "ArtifactDependencies.ipynb".
+# DEPRECATED: Creates the "graph-visualization" report using the (now deprecated) nodejs project "graph-visualization".
 # It contains the hierarchical artifact dependencies graph
 
 # Requires executeJupyterNotebook.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
+
+echo "GraphVisualization: Graph Visualization with the nodejs project 'graph-visualization' is deprecated and will be skipped."
+return 0
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}

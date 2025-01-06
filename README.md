@@ -124,6 +124,8 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   - [openTSNE](https://github.com/pavlin-policar/openTSNE)
   - [wordcloud](https://github.com/amueller/word_cloud)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
+- [HPCC-Systems (High Performance Computing Cluster) Web-Assembly (JavaScript)](https://github.com/hpcc-systems/hpcc-js-wasm) containing a wrapper for GraphViz to visualize graph structures.
+- [GraphViz](https://gitlab.com/graphviz/graphviz) for CLI Graph Visualization
 - [Check links in markdown documentation (GitHub workflow)](./.github/workflows/check-links-in-documentation.yml) uses [markdown-link-check](https://github.com/tcort/markdown-link-check).
 
 **Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if something is missing or wrong in the list.

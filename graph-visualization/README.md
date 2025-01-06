@@ -1,6 +1,11 @@
-# Render Graph Visualizations
+# Render Graph Visualizations (Deprecated)
 
-This [node.js](https://nodejs.org/de) project provides the script [renderVisualizations.js](./renderVisualizations.js) to render all graph visualizations as image files.  
+:warning: **This package is deprecated and might get removed in future.** :warning:
+
+Visualizations are now done using [GraphViz](https://graphviz.org). Please use the new script [visualizeQueryResults.sh](./../scripts/visualization/visualizeQueryResults.sh) like it is done in [InternalDependenciesVisualization.sh](./../scripts/reports/InternalDependenciesVisualization.sh) to create Graph Visualizations.
+
+This [node.js](https://nodejs.org/de) project provides the script [renderVisualizations.js](./renderVisualizations.js) to render  graph visualizations as image files. It shows how to use [Puppeteer](https://pptr.dev) to render HTML5 Canvas elements as images,
+jimp to manipulate images and neovis to visualize Neo4j Graphs.
 
 ## Prerequisites
 
