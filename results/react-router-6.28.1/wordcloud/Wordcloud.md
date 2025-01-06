@@ -102,48 +102,48 @@
     </tr>
     <tr>
       <th>1</th>
+      <td>Pedro Cattori</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>Matt Brophy</td>
       <td>1852</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>Remix Run Bot</td>
       <td>383</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>Mark Dalgleish</td>
       <td>362</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Victor El Hajj</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Brian Boatright</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>yoshida</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Jacob Ebey</td>
       <td>239</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>bravo-kernel</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Tim Dorr</td>
-      <td>385</td>
     </tr>
   </tbody>
 </table>
