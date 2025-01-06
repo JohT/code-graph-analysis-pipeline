@@ -770,8 +770,6 @@ Image  | Analysis |
 | [ExternalDependenciesTypescript_83_1.png](./react-router-6.28.1/external-dependencies-typescript/ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_83_1.png) | react-router-6.28.1 |
 | [ExternalDependenciesTypescript_96_1.png](./react-router-6.28.1/external-dependencies-typescript/ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_96_1.png) | react-router-6.28.1 |
 | [ExternalDependenciesTypescript_98_1.png](./react-router-6.28.1/external-dependencies-typescript/ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_98_1.png) | react-router-6.28.1 |
-| [error-graphVisualizationJavaArtifactDependencies-no-canvas-found.png](./react-router-6.28.1/graph-visualization-java-artifact-dependencies/error-graphVisualizationJavaArtifactDependencies-no-canvas-found.png) | react-router-6.28.1 |
-| [graphVisualizationTypescriptModuleDependencies-0.png](./react-router-6.28.1/graph-visualization-typescript-module-dependencies/graphVisualizationTypescriptModuleDependencies-0.png) | react-router-6.28.1 |
 | [NodeEmbeddingsTypescript_21_0.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_21_0.png) | react-router-6.28.1 |
 | [NodeEmbeddingsTypescript_23_7.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_23_7.png) | react-router-6.28.1 |
 | [NodeEmbeddingsTypescript_25_6.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_25_6.png) | react-router-6.28.1 |
