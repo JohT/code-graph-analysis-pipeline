@@ -196,8 +196,6 @@ Image  | Analysis |
 | [ExternalDependenciesJava_75_1.png](./AxonFramework-4.10.3/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_75_1.png) | AxonFramework-4.10.3 |
 | [ExternalDependenciesJava_77_1.png](./AxonFramework-4.10.3/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_77_1.png) | AxonFramework-4.10.3 |
 | [ExternalDependenciesJava_99_1.png](./AxonFramework-4.10.3/external-dependencies-java/ExternalDependenciesJava_files/ExternalDependenciesJava_99_1.png) | AxonFramework-4.10.3 |
-| [graphVisualizationJavaArtifactDependencies-0.png](./AxonFramework-4.10.3/graph-visualization-java-artifact-dependencies/graphVisualizationJavaArtifactDependencies-0.png) | AxonFramework-4.10.3 |
-| [error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png](./AxonFramework-4.10.3/graph-visualization-typescript-module-dependencies/error-graphVisualizationTypescriptModuleDependencies-no-canvas-found.png) | AxonFramework-4.10.3 |
 | [MethodMetricsJava_14_1.png](./AxonFramework-4.10.3/method-metrics-java/MethodMetricsJava_files/MethodMetricsJava_14_1.png) | AxonFramework-4.10.3 |
 | [MethodMetricsJava_26_1.png](./AxonFramework-4.10.3/method-metrics-java/MethodMetricsJava_files/MethodMetricsJava_26_1.png) | AxonFramework-4.10.3 |
 | [NodeEmbeddingsJava_21_0.png](./AxonFramework-4.10.3/node-embeddings-java/NodeEmbeddingsJava_files/NodeEmbeddingsJava_21_0.png) | AxonFramework-4.10.3 |
