@@ -596,7 +596,7 @@ The following table shows the first 10 rows with all details of the query above.
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.tsx -&gt; ./index.ts]</td>
+      <td>[./server.tsx -&gt; ./index.ts]</td>
       <td>[react-router-dom -&gt; react-router]</td>
       <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
     </tr>
@@ -752,7 +752,7 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.tsx -&gt; ./index.ts]</td>
+      <td>[./server.tsx -&gt; ./index.ts]</td>
       <td>[react-router-dom -&gt; react-router]</td>
       <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
     </tr>
