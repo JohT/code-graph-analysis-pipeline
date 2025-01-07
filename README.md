@@ -46,6 +46,13 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 - [Similarity with Jaccard](./results/AxonFramework-4.10.3/similarity-csv/Package_Similarity.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
 - [Topology Sort](./results/AxonFramework-4.10.3/topology-csv/Package_Topological_Sort.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
 
+### :art: Graph Visualization
+
+Here are some fully automated graph visualizations utilizing [GraphViz](https://graphviz.org):
+
+- [Java Artifact Build Levels](./results/AxonFramework-4.10.3/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./cypher/Internal_Dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
+- [Java Artifact Longest Path Contributors](./results/AxonFramework-4.10.3/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./cypher/Path_Finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
+
 ## :book: Blog Articles
 
 - [Analyze java dependencies with jQAssistant](https://joht.github.io/johtizen/data/2021/02/21/java-jar-dependency-analysis.html)
