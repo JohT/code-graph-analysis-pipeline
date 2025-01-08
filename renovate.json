@@ -35,6 +35,7 @@
   ],
   "customManagers": [
     {
+      "description": "Update AXON_FRAMEWORK_VERSION environment variable in GitHub Actions",
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
@@ -48,6 +49,7 @@
       "extractVersionTemplate": "^axon-?(?<version>.*?)$"
     },
     {
+      "description": "Update REACT_ROUTER_VERSION environment variable in GitHub Actions",
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
@@ -61,6 +63,7 @@
       "extractVersionTemplate": "^react-router@?(?<version>.*?)$"
     },
     {
+      "description": "Update AxonFramework analysis result links in README.md",
       "customType": "regex",
       "fileMatch": [
         "README.md"
@@ -73,6 +76,7 @@
       "extractVersionTemplate": "^axon-?(?<version>.*?)$"
     },
     {
+      "description": "Update Python environment mambaforge version in GitHub Actions",
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
@@ -85,6 +89,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "description": "Update NEO4J_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
         "^scripts/profiles/Neo4jv5.*\\.sh$",
@@ -98,6 +103,7 @@
       "datasourceTemplate": "github-tags"
     },
     {
+      "description": "Update NEO4J_APOC_PLUGIN_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
         "^scripts/profiles/Neo4jv5.*\\.sh$",
@@ -111,6 +117,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "description": "Update NEO4J_GDS_PLUGIN_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
         "^scripts/profiles/Neo4jv5.*\\.sh$",
@@ -124,6 +131,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "description": "Update NEO4J_OPEN_GDS_PLUGIN_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
         "^scripts/profiles/Neo4jv5.*\\.sh$",
@@ -139,6 +147,7 @@
       "versioningTemplate": "loose"
     },
     {
+      "description": "Update JQASSISTANT_CLI_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
         "^scripts/profiles/Neo4jv5.*\\.sh$",
@@ -165,6 +174,7 @@
       "datasourceTemplate": "npm"
     },
     {
+      "description": "Update plugin versions in jQAssistant configuration files",
       "customType": "regex",
       "fileMatch": [
         "^scripts/configuration/[^/]+\\.ya?ml$"
