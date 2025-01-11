@@ -243,6 +243,12 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
   ./../../scripts/analysis/analyze.sh --profile Neo4jv5-continue-on-scan-errors
   ```
 
+- How can i reduce the memory (RAM) consumption?  
+  👉 Use the profile `Neo4jv5-low-memory` (default = `Neo4jv5`):
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --profile Neo4jv5-low-memory
+  ```
 
 ## 🕸 Web References
 

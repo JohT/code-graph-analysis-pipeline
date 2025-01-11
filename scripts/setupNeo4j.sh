@@ -27,6 +27,8 @@ NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing q
 NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"} # Neo4j HTTPS port for encrypted querying
 NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
 
+NEO4J_CONFIG_TEMPLATE=${NEO4J_CONFIG_TEMPLATE:-"template-neo4j.conf"} # Name of the template file ("configuration" folder) for the Neo4j configuration. Defaults to "template-neo4j.conf".
+
 # Internal constants
 NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
@@ -163,12 +165,8 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         } >> "${NEO4J_CONFIG}"
     fi
 
-    echo "setupNeo4j: Configuring static settings (memory, procedure permissions, ...)"
-    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
-        cat "${SCRIPTS_DIR}/configuration/template-neo4j.conf" >> "${NEO4J_CONFIG}"
-    else
-        cat "${SCRIPTS_DIR}/configuration/template-neo4j-v4.conf" >> "${NEO4J_CONFIG}"
-    fi
+    echo "setupNeo4j: Appending configuration template ${NEO4J_CONFIG_TEMPLATE} (memory, procedure permissions, ...)"
+    cat "${SCRIPTS_DIR}/configuration/${NEO4J_CONFIG_TEMPLATE}" >> "${NEO4J_CONFIG}"
 
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).
     # This needs to be done after the configuration changes.
