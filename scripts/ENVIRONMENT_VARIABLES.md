@@ -27,6 +27,7 @@ NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Ne
 IMPORT_DIRECTORY                      | import                              |  |
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin                              | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin". |
 NEO4J_VERSION                         | 4.4.20                              | Version 4.4.x is the current long term support (LTS) version (may 2023) |
+NEO4J_CONFIG_TEMPLATE                 | template-neo4j-v4-low-memory.conf   | Name of the template file ("configuration" folder) for the Neo4j configuration |
 NEO4J_HTTPS_PORT                      | 7473                                | Neo4j HTTPS port for encrypted querying |
 NEO4J_BOLT_PORT                       | 7687                                | Neo4j's own "Bolt Protocol" port |
 NEO4J_APOC_PLUGIN_VERSION             | 4.4.0.15                            | Version number matches Neo4j version |
