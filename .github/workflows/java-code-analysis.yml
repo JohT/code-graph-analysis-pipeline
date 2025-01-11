@@ -122,7 +122,7 @@ jobs:
         ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
         IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
       run: |
-        ./../../scripts/analysis/analyze.sh
+        ./../../scripts/analysis/analyze.sh --profile Neo4jv5-low-memory
 
     - name: Move reports from the temp to the results directory preserving their surrounding directory
       working-directory: temp

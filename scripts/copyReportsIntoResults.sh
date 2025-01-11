@@ -6,8 +6,6 @@
 
 # Notice that this scripts needs to be executed within the "temp" directory.
 
-# Requires generateJupyterReportReference.sh
-
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
