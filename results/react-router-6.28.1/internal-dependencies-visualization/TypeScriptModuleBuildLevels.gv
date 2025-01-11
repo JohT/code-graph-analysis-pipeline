@@ -7,7 +7,7 @@ strict digraph TypeScriptModuleBuildLevels {
     node [style = filled; fillcolor = "0.560 0.400 0.999";];
     node [color = "0.560 0.900 0.700";];
     edge [color = "0.560 0.900 0.700";];
-	"react-router-6.28.1\nserver\n(level 0/1)" [];
 	"react-router-6.28.1\nreact-router-native\n(level 0/1)" [];
+	"react-router-6.28.1\nserver\n(level 0/1)" [];
 	"react-router-6.28.1\nreact-router-dom\n(level 0/1)" [];
 }
