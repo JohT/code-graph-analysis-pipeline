@@ -97,23 +97,23 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>Remix Run Bot</td>
+      <td>392</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mark Dalgleish</td>
+      <td>380</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>Brooks Lybrand</td>
       <td>74</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Remix Run Bot</td>
-      <td>391</td>
-    </tr>
-    <tr>
-      <th>2</th>
+      <th>3</th>
       <td>Matt Brophy</td>
       <td>1861</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Mark Dalgleish</td>
-      <td>379</td>
     </tr>
     <tr>
       <th>4</th>

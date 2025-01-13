@@ -7,7 +7,7 @@ strict digraph TypeScriptModuleLongestPaths {
     node [style = filled; fillcolor = "0.560 0.400 0.999";];
     node [color = "0.560 0.900 0.700";];
     edge [color = "0.560 0.900 0.700";];
-	"react-router-dom\n(level 0/1)" -> "react-router\n(level 1/1)" [label=1; penwidth=1.0; ];
+	"react-router-dom\n(level 0/1)" -> "react-router\n(level 1/1)" [label=1; penwidth=1.0; color="red"; ];
 	"server\n(level 0/1)" -> "react-router\n(level 1/1)" [label=4; penwidth=6.0; ];
-	"react-router-native\n(level 0/1)" -> "react-router\n(level 1/1)" [label=4; penwidth=6.0; color="red"; ];
+	"react-router-native\n(level 0/1)" -> "react-router\n(level 1/1)" [label=4; penwidth=6.0; ];
 }
