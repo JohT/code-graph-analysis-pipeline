@@ -33,8 +33,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>345341</td>
-      <td>1071674</td>
+      <td>345342</td>
+      <td>1071642</td>
       <td>9</td>
       <td>122</td>
       <td>2091</td>
@@ -80,15 +80,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>1</th>
       <td>axon-messaging-4.10.3</td>
       <td>787</td>
-      <td>Annotation</td>
-      <td>26</td>
+      <td>Interface</td>
+      <td>155</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-messaging-4.10.3</td>
       <td>787</td>
-      <td>Interface</td>
-      <td>155</td>
+      <td>Annotation</td>
+      <td>26</td>
     </tr>
     <tr>
       <th>3</th>
@@ -129,15 +129,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>8</th>
       <td>axon-server-connector-4.10.3</td>
       <td>136</td>
-      <td>Interface</td>
-      <td>25</td>
+      <td>Class</td>
+      <td>110</td>
     </tr>
     <tr>
       <th>9</th>
       <td>axon-server-connector-4.10.3</td>
       <td>136</td>
-      <td>Class</td>
-      <td>110</td>
+      <td>Interface</td>
+      <td>25</td>
     </tr>
     <tr>
       <th>10</th>
@@ -157,15 +157,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>12</th>
       <td>axon-eventsourcing-4.10.3</td>
       <td>133</td>
-      <td>Annotation</td>
-      <td>1</td>
+      <td>Interface</td>
+      <td>32</td>
     </tr>
     <tr>
       <th>13</th>
       <td>axon-eventsourcing-4.10.3</td>
       <td>133</td>
-      <td>Interface</td>
-      <td>32</td>
+      <td>Annotation</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>14</th>
@@ -192,15 +192,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>17</th>
       <td>axon-spring-boot-autoconfigure-4.10.3</td>
       <td>75</td>
-      <td>Annotation</td>
-      <td>3</td>
+      <td>Class</td>
+      <td>69</td>
     </tr>
     <tr>
       <th>18</th>
       <td>axon-spring-boot-autoconfigure-4.10.3</td>
       <td>75</td>
-      <td>Class</td>
-      <td>69</td>
+      <td>Annotation</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>19</th>
@@ -227,15 +227,15 @@ The whole table can be found in the CSV report `Number_of_types_per_artifact`.
       <th>22</th>
       <td>axon-configuration-4.10.3</td>
       <td>41</td>
-      <td>Enum</td>
-      <td>1</td>
+      <td>Class</td>
+      <td>23</td>
     </tr>
     <tr>
       <th>23</th>
       <td>axon-configuration-4.10.3</td>
       <td>41</td>
-      <td>Class</td>
-      <td>23</td>
+      <td>Enum</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>24</th>
