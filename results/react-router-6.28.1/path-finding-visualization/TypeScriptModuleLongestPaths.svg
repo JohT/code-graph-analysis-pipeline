@@ -26,8 +26,8 @@
 <!-- react&#45;router&#45;dom\n(level 0/1)&#45;&gt;react&#45;router\n(level 1/1) -->
 <g id="edge1" class="edge">
 <title>react&#45;router&#45;dom\n(level 0/1)&#45;&gt;react&#45;router\n(level 1/1)</title>
-<path fill="none" stroke="red" d="M114.44,-109.87C135.69,-94.92 162.69,-75.92 184.96,-60.26"/>
-<polygon fill="red" stroke="red" points="186.78,-63.25 192.94,-54.64 182.75,-57.53 186.78,-63.25"/>
+<path fill="none" stroke="#1178b2" d="M114.44,-109.87C135.69,-94.92 162.69,-75.92 184.96,-60.26"/>
+<polygon fill="#1178b2" stroke="#1178b2" points="186.78,-63.25 192.94,-54.64 182.75,-57.53 186.78,-63.25"/>
 <text text-anchor="middle" x="159.84" y="-79.83" font-family="Helvetica,Arial,sans-serif" font-size="10.00">1</text>
 </g>
 <!-- server\n(level 0/1) -->
@@ -54,8 +54,8 @@
 <!-- react&#45;router&#45;native\n(level 0/1)&#45;&gt;react&#45;router\n(level 1/1) -->
 <g id="edge3" class="edge">
 <title>react&#45;router&#45;native\n(level 0/1)&#45;&gt;react&#45;router\n(level 1/1)</title>
-<path fill="none" stroke="#1178b2" stroke-width="6" d="M344.45,-109.6C323.45,-95.4 297.14,-77.6 274.79,-62.49"/>
-<polygon fill="#1178b2" stroke="#1178b2" stroke-width="6" points="278.04,-58.34 266.81,-57.09 272.15,-67.04 278.04,-58.34"/>
+<path fill="none" stroke="red" stroke-width="6" d="M344.45,-109.6C323.45,-95.4 297.14,-77.6 274.79,-62.49"/>
+<polygon fill="red" stroke="red" stroke-width="6" points="278.04,-58.34 266.81,-57.09 272.15,-67.04 278.04,-58.34"/>
 <text text-anchor="middle" x="312.02" y="-79.83" font-family="Helvetica,Arial,sans-serif" font-size="10.00">4</text>
 </g>
 </g>

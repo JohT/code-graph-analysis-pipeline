@@ -98,12 +98,12 @@
     <tr>
       <th>0</th>
       <td>Remix Run Bot</td>
-      <td>392</td>
+      <td>395</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Mark Dalgleish</td>
-      <td>380</td>
+      <td>383</td>
     </tr>
     <tr>
       <th>2</th>
