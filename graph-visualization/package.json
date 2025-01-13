@@ -10,7 +10,7 @@
   "author": "JohT",
   "license": "MIT",
   "dependencies": {
-    "glob": "11.0.0",
+    "glob": "11.0.1",
     "jimp": "1.6.0",
     "neovis.js": "2.1.0",
     "puppeteer": "23.11.1"
