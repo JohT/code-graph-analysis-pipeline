@@ -1,0 +1,194 @@
+# This is the public version of the code graph analysis workflow that can be used by other projects.
+name: Code Graph Analysis
+
+on:
+  workflow_call:
+    inputs:
+      analysis-name:
+        description: >
+          The name of the project to analyze.
+          Example: MyProject-1.0.0
+        required: true
+        type: string
+      artifacts-upload-name:
+        description: >
+          The name of the artifacts uploaded with 'actions/upload-artifact' 
+          containing the content of the 'artifacts' directory for the analysis.
+          Use it to analyze Java JARs, WARs, EARs, etc.
+        required: false
+        type: string
+        default: ''
+      sources-upload-name:
+        description: >
+          The name of the sources uploaded with 'actions/upload-artifact' 
+          containing the content of the 'source' directory for the analysis. 
+          Also supports sub-folders for multiple source code bases.
+        required: false
+        type: string
+        default: ''
+      ref:
+        description: >
+          The branch, tag or SHA of the code-graph-analysis-pipeline to checkout. 
+          Default: "main"
+        required: false
+        type: string
+        default: ''
+      analysis-arguments:
+        description: >
+          The arguments to pass to the analysis script.
+          Default: '--profile Neo4jv5-low-memory'
+        required: false
+        type: string
+        default: '--profile Neo4jv5-low-memory'
+      typescript-scan-heap-memory:
+        description: >
+          The heap memory size in MB to use for the TypeScript code scans (default=4096).
+          This value is only used for the TypeScript code scans and is ignored for other scans.
+        required: false
+        type: string
+        default: '4096'
+    outputs:
+      uploaded-analysis-results:
+        description: >
+          The name of the artifact uploaded with 'actions/upload-artifact' 
+          containing all analysis results.
+        value: ${{ jobs.analyze-code-graph.outputs.uploaded-analysis-results-artifact-name }}
+
+jobs:
+  analyze-code-graph:
+    runs-on: ubuntu-22.04
+    outputs:
+      uploaded-analysis-results-artifact-name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
+    strategy:
+      matrix:
+        include:
+        - os: ubuntu-22.04
+          java: 17
+          python: 3.11
+          miniforge: 24.9.0-0
+    steps:
+      - name: Assure that either artifacts-upload-name or sources-upload-name is set
+        if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
+        run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
+        
+      - name: Checkout code-graph-analysis-pipeline
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          repository: JohT/code-graph-analysis-pipeline
+          ref: ${{ inputs.ref }}
+          persist-credentials: false
+
+      - name: (Java Setup) Java Development Kit (JDK) ${{ matrix.java }}
+        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b # v4
+        with:
+          distribution: "temurin"
+          java-version: ${{ matrix.java }}
+
+      # "Setup Python" can be skipped if jupyter notebook analysis-results aren't needed
+      - name: (Python Setup) Setup Cache for Conda package manager Miniforge
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
+        env:
+          # Increase this value to reset cache if etc/example-environment.yml has not changed
+          # Reference: https://github.com/conda-incubator/setup-miniconda#caching
+          CACHE_NUMBER: 0
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-environments-${{hashFiles('**/environment.yml', '.github/workflows/*.yml') }}
+
+      - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
+        uses: conda-incubator/setup-miniconda@d2e6a045a86077fb6cad6f5adf368e9076ddaa8d # v3
+        with:
+          python-version: ${{ matrix.python }}
+          miniforge-version: ${{ matrix.miniforge }}
+          activate-environment: codegraph
+          environment-file: ./jupyter/environment.yml
+          auto-activate-base: false
+          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+      - name: (Python Setup) Conda environment info
+        shell: bash -el {0}
+        run: conda info
+
+      - name: (Code Analysis Setup) Setup Cache Analysis Downloads
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4
+        with:
+          path: ./temp/downloads
+          key:
+            ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
+
+      - name: (Code Analysis Setup) Generate Neo4j Initial Password
+        id: generate-neo4j-initial-password
+        run: |
+          generated_password=$( LC_ALL=C tr -dc '[:graph:]' </dev/urandom | head -c 12; echo )
+          echo "::add-mask::$generated_password"
+          echo "neo4j-initial-password=$generated_password" >> "$GITHUB_OUTPUT"
+            
+      - name: (Code Analysis Setup) Initialize Analysis
+        env:
+          NEO4J_INITIAL_PASSWORD: ${{ steps.generate-neo4j-initial-password.outputs.neo4j-initial-password }}
+        run: ./init.sh ${{ inputs.analysis-name }}
+
+      - name: (Code Analysis Setup) Download sources for analysis
+        if: inputs.sources-upload-name != ''
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
+        with:
+          name: ${{ inputs.sources-upload-name }}
+          path: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}
+
+      - name: (Code Analysis Setup) Download artifacts for analysis
+        if: inputs.artifacts-upload-name != ''
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
+        with:
+          name: ${{ inputs.artifacts-upload-name }}
+          path: temp/${{ inputs.analysis-name }}/artifacts
+
+      - name: (Code Analysis) Analyze ${{ inputs.analysis-name }}
+        working-directory: temp/${{ inputs.analysis-name }}
+        # Shell type can be skipped if jupyter notebook analysis-results (and therefore conda) aren't needed
+        shell: bash -el {0}
+        env:
+          NEO4J_INITIAL_PASSWORD: ${{ steps.generate-neo4j-initial-password.outputs.neo4j-initial-password }}
+          ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
+          IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
+        run: |
+          TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ inputs.analysis-arguments }}
+
+      - name: Assemble ENVIRONMENT_INFO
+        run: echo "ENVIRONMENT_INFO=-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
+    
+      - name: Set artifact name for uploaded analysis results
+        id: set-analysis-results-artifact-name
+        run: echo "uploaded-analysis-results-artifact-name=code-analysis-results-${{ env.ENVIRONMENT_INFO }}" >> $GITHUB_OUTPUT
+
+      # Upload successful analysis-results in case they are needed for troubleshooting
+      - name: (Code Analysis Results) Archive successful analysis-results
+        if: success()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
+          path: ./temp/${{ inputs.analysis-name }}/reports/*
+          if-no-files-found: error
+          retention-days: 5
+
+    
+      # Upload logs and unfinished analysis-results in case of an error for troubleshooting
+      - name: (Code Analysis Results) Archive failed run with logs and unfinished analysis-results
+        if: failure()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: code-analysis-logs-${{ env.ENVIRONMENT_INFO }}
+          path: |
+            ./temp/**/runtime/*
+            ./temp/**/reports/*
+          retention-days: 5
+
+      # Upload Database Export
+      # Only possible after an export with "./../../scripts/analysis/analyze.sh --report DatabaseCsvExport"
+      # Won't be done here because of performance and security concerns
+      #- name: Archive exported database
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: typescript-code-analysis-database-export-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}
+      #    path: ./temp/**/import
+      #    if-no-files-found: error
+      #    retention-days: 5
