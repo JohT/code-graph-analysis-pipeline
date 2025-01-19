@@ -1,4 +1,4 @@
 "communityId","conductance","modularity","memberCount","someMemberNamesShort","someMemberNames","Source Cypher File: Community_Detection/Community_Detection_9_Community_Metrics.cypher"
-2,1.0,-0.0000098357549363446,1,"axon-tracing-opentelemetry-4.10.3","/axon-tracing-opentelemetry-4.10.3.jar",""
-4,1.0,-0.008150077160493827,2,"axon-disruptor-4.10.3,axon-test-4.10.3","/axon-disruptor-4.10.3.jar,/axon-test-4.10.3.jar",""
-5,0.10303928836174944,-0.008726171378194007,6,"axon-messaging-4.10.3,axon-eventsourcing-4.10.3,axon-spring-boot-autoconfigure-4.10.3,axon-server-connector-4.10.3,axon-configuration-4.10.3,axon-modelling-4.10.3","/axon-messaging-4.10.3.jar,/axon-eventsourcing-4.10.3.jar,/axon-spring-boot-autoconfigure-4.10.3.jar,/axon-server-connector-4.10.3.jar,/axon-configuration-4.10.3.jar,/axon-modelling-4.10.3.jar",""
+2,1,-9.8357549363446e-06,1,"axon-tracing-opentelemetry-4.10.3","/axon-tracing-opentelemetry-4.10.3.jar",""
+4,1,-0.008150077160493827,2,"axon-disruptor-4.10.3,axon-test-4.10.3","/axon-disruptor-4.10.3.jar,/axon-test-4.10.3.jar",""
+5,0.10303928836174944,-0.008726171378194007,6,"axon-server-connector-4.10.3,axon-configuration-4.10.3,axon-messaging-4.10.3,axon-eventsourcing-4.10.3,axon-modelling-4.10.3,axon-spring-boot-autoconfigure-4.10.3","/axon-server-connector-4.10.3.jar,/axon-configuration-4.10.3.jar,/axon-messaging-4.10.3.jar,/axon-eventsourcing-4.10.3.jar,/axon-modelling-4.10.3.jar,/axon-spring-boot-autoconfigure-4.10.3.jar",""

@@ -7,6 +7,7 @@ strict digraph JavaArtifactLongestPathsIsolated {
     node [style = filled; fillcolor = "0.560 0.400 0.999";];
     node [color = "0.560 0.900 0.700";];
     edge [color = "0.560 0.900 0.700";];
+	"axon-spring-boot-autoconfigure-4.10.3\n(level 0/6)" -> "axon-server-connector-4.10.3\n(level 1/6)" [label=88; penwidth=1.57; ];
 	"axon-server-connector-4.10.3\n(level 1/6)" -> "axon-configuration-4.10.3\n(level 2/6)" [label=38; penwidth=1.24; ];
 	"axon-configuration-4.10.3\n(level 2/6)" -> "axon-disruptor-4.10.3\n(level 3/6)" [label=2; penwidth=1.0; ];
 	"axon-disruptor-4.10.3\n(level 3/6)" -> "axon-eventsourcing-4.10.3\n(level 4/6)" [label=30; penwidth=1.19; ];
@@ -26,7 +27,6 @@ strict digraph JavaArtifactLongestPathsIsolated {
 	"axon-configuration-4.10.3\n(level 2/6)" -> "axon-disruptor-4.10.3\n(level 3/6)" [label=2; penwidth=1.0; ];
 	"axon-spring-boot-autoconfigure-4.10.3\n(level 0/6)" -> "axon-server-connector-4.10.3\n(level 1/6)" [label=88; penwidth=1.57; ];
 	"axon-server-connector-4.10.3\n(level 1/6)" -> "axon-configuration-4.10.3\n(level 2/6)" [label=38; penwidth=1.24; ];
-	"axon-spring-boot-autoconfigure-4.10.3\n(level 0/6)" -> "axon-server-connector-4.10.3\n(level 1/6)" [label=88; penwidth=1.57; ];
-	"axon-spring-boot-autoconfigure-4.10.3\n(level 0/6)" -> "axon-tracing-opentelemetry-4.10.3\n(level 1/6)" [label=4; penwidth=1.01; ];
 	"axon-spring-boot-autoconfigure-4.10.3\n(level 0/6)" -> "axon-test-4.10.3\n(level 1/6)" [label=4; penwidth=1.01; ];
+	"axon-spring-boot-autoconfigure-4.10.3\n(level 0/6)" -> "axon-tracing-opentelemetry-4.10.3\n(level 1/6)" [label=4; penwidth=1.01; ];
 }

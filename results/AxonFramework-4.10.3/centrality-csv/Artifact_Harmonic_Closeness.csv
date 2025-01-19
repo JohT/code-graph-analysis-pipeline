@@ -1,5 +1,5 @@
 "codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"axon-messaging-4.10.3","axon-messaging-4.10.3","centralityHarmonic",1.0,""
+"axon-messaging-4.10.3","axon-messaging-4.10.3","centralityHarmonic",1,""
 "axon-modelling-4.10.3","axon-modelling-4.10.3","centralityHarmonic",0.75,""
 "axon-eventsourcing-4.10.3","axon-eventsourcing-4.10.3","centralityHarmonic",0.625,""
 "axon-configuration-4.10.3","axon-configuration-4.10.3","centralityHarmonic",0.25,""
@@ -7,4 +7,4 @@
 "axon-server-connector-4.10.3","axon-server-connector-4.10.3","centralityHarmonic",0.125,""
 "axon-test-4.10.3","axon-test-4.10.3","centralityHarmonic",0.125,""
 "axon-tracing-opentelemetry-4.10.3","axon-tracing-opentelemetry-4.10.3","centralityHarmonic",0.125,""
-"axon-spring-boot-autoconfigure-4.10.3","axon-spring-boot-autoconfigure-4.10.3","centralityHarmonic",0.0,""
+"axon-spring-boot-autoconfigure-4.10.3","axon-spring-boot-autoconfigure-4.10.3","centralityHarmonic",0,""

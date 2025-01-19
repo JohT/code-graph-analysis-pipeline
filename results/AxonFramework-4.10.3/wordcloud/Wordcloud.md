@@ -35,35 +35,35 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>messaging</td>
+      <td>server</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>maven</td>
+      <td>connector</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org</td>
+      <td>services</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>axonframework</td>
+      <td>maven</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>axon</td>
+      <td>org</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>messaging</td>
+      <td>axonframework</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>main</td>
+      <td>axon</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>manifest</td>
+      <td>server</td>
     </tr>
   </tbody>
 </table>
@@ -98,17 +98,17 @@
     <tr>
       <th>0</th>
       <td>Mateusz Nowak</td>
-      <td>51</td>
+      <td>298</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Steven van Beelen</td>
-      <td>3997</td>
+      <td>4039</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Allard Buijze</td>
-      <td>3117</td>
+      <td>3126</td>
     </tr>
     <tr>
       <th>3</th>
@@ -117,13 +117,13 @@
     </tr>
     <tr>
       <th>4</th>
-      <td>Mitchell Herrijgers</td>
-      <td>289</td>
+      <td>Lucas Campos</td>
+      <td>61</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Lucas Campos</td>
-      <td>61</td>
+      <td>Mitchell Herrijgers</td>
+      <td>289</td>
     </tr>
     <tr>
       <th>6</th>

@@ -80,48 +80,48 @@ The following function takes the original node embeddings with a higher dimensio
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>commandhandling</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>connector</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.073179</td>
-      <td>[-0.19915032386779785, 0.2427111715078354, 0.0...</td>
+      <td>0.090489</td>
+      <td>[-0.6159756183624268, -0.26816046237945557, 0....</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>callbacks</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>util</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.015708</td>
-      <td>[-0.27204856276512146, 0.17921602725982666, 0....</td>
+      <td>0.023322</td>
+      <td>[-0.719285249710083, -0.2623174488544464, 0.06...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>distributed</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>heartbeat</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.023111</td>
-      <td>[-0.20827549695968628, 0.29102134704589844, 0....</td>
+      <td>0.014287</td>
+      <td>[-0.5816870927810669, -0.2726455330848694, -0....</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>commandfilter</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>source</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013919</td>
-      <td>[-0.2752685546875, 0.07721535861492157, 0.1607...</td>
+      <td>0.012211</td>
+      <td>[-0.5031238794326782, -0.27548152208328247, -0...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>gateway</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>checker</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013360</td>
-      <td>[-0.2128840684890747, 0.24696728587150574, 0.3...</td>
+      <td>0.012211</td>
+      <td>[-0.5326924324035645, -0.2748021185398102, -0....</td>
     </tr>
   </tbody>
 </table>
@@ -142,23 +142,23 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -0.2339, 50 iterations in 0.0535 sec
-    Iteration  100, KL divergence 1.2078, 50 iterations in 0.0147 sec
-    Iteration  150, KL divergence 1.2078, 50 iterations in 0.0138 sec
-    Iteration  200, KL divergence 1.2078, 50 iterations in 0.0138 sec
-    Iteration  250, KL divergence 1.2078, 50 iterations in 0.0140 sec
-       --> Time elapsed: 0.11 seconds
+    Iteration   50, KL divergence -0.2790, 50 iterations in 0.0559 sec
+    Iteration  100, KL divergence 1.2005, 50 iterations in 0.0156 sec
+    Iteration  150, KL divergence 1.2005, 50 iterations in 0.0147 sec
+    Iteration  200, KL divergence 1.2005, 50 iterations in 0.0145 sec
+    Iteration  250, KL divergence 1.2005, 50 iterations in 0.0145 sec
+       --> Time elapsed: 0.12 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.2029, 50 iterations in 0.0512 sec
-    Iteration  100, KL divergence 0.1593, 50 iterations in 0.0575 sec
-    Iteration  150, KL divergence 0.1497, 50 iterations in 0.0431 sec
-    Iteration  200, KL divergence 0.1495, 50 iterations in 0.0408 sec
-    Iteration  250, KL divergence 0.1495, 50 iterations in 0.0410 sec
-    Iteration  300, KL divergence 0.1494, 50 iterations in 0.0424 sec
-    Iteration  350, KL divergence 0.1494, 50 iterations in 0.0434 sec
-    Iteration  400, KL divergence 0.1495, 50 iterations in 0.0427 sec
-    Iteration  450, KL divergence 0.1494, 50 iterations in 0.0412 sec
-    Iteration  500, KL divergence 0.1494, 50 iterations in 0.0402 sec
+    Iteration   50, KL divergence 0.2235, 50 iterations in 0.0479 sec
+    Iteration  100, KL divergence 0.2051, 50 iterations in 0.0454 sec
+    Iteration  150, KL divergence 0.2019, 50 iterations in 0.0430 sec
+    Iteration  200, KL divergence 0.2009, 50 iterations in 0.0427 sec
+    Iteration  250, KL divergence 0.1995, 50 iterations in 0.0412 sec
+    Iteration  300, KL divergence 0.1994, 50 iterations in 0.0426 sec
+    Iteration  350, KL divergence 0.1953, 50 iterations in 0.0444 sec
+    Iteration  400, KL divergence 0.1945, 50 iterations in 0.0445 sec
+    Iteration  450, KL divergence 0.1949, 50 iterations in 0.0437 sec
+    Iteration  500, KL divergence 0.1948, 50 iterations in 0.0433 sec
        --> Time elapsed: 0.44 seconds
 
 
@@ -183,48 +183,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.073179</td>
-      <td>3.548094</td>
-      <td>2.762297</td>
+      <td>0.090489</td>
+      <td>5.989622</td>
+      <td>0.892725</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.015708</td>
-      <td>3.565826</td>
-      <td>3.826342</td>
+      <td>0.023322</td>
+      <td>6.904597</td>
+      <td>1.739950</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.023111</td>
-      <td>2.848614</td>
-      <td>3.556917</td>
+      <td>0.014287</td>
+      <td>7.194857</td>
+      <td>0.753268</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013919</td>
-      <td>3.173666</td>
-      <td>4.217183</td>
+      <td>0.012211</td>
+      <td>7.348311</td>
+      <td>0.240877</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013360</td>
-      <td>3.706073</td>
-      <td>3.328373</td>
+      <td>0.012211</td>
+      <td>7.369737</td>
+      <td>0.348176</td>
     </tr>
   </tbody>
 </table>
@@ -263,48 +263,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>commandhandling</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>connector</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.073179</td>
-      <td>[-0.21650634706020355, -1.5155444294214249, -0...</td>
+      <td>0.090489</td>
+      <td>[-0.21650634706020355, -0.8660253882408142, -1...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>callbacks</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>util</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.015708</td>
-      <td>[0.8660253882408142, -0.8660253882408142, 0.21...</td>
+      <td>0.023322</td>
+      <td>[-0.21650634706020355, -1.2990380823612213, 0....</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>distributed</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>heartbeat</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.023111</td>
-      <td>[0.6495190411806107, -0.8660253882408142, -1.2...</td>
+      <td>0.014287</td>
+      <td>[-0.8660253882408142, -0.4330126941204071, -1....</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>commandfilter</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>source</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013919</td>
-      <td>[1.0825317353010178, 0.0, -0.4330126941204071,...</td>
+      <td>0.012211</td>
+      <td>[-0.21650634706020355, -1.2990380823612213, -0...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>gateway</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>checker</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013360</td>
-      <td>[-0.21650634706020355, -1.0825317353010178, -2...</td>
+      <td>0.012211</td>
+      <td>[-0.21650634706020355, -1.2990380823612213, -0...</td>
     </tr>
   </tbody>
 </table>
@@ -321,24 +321,24 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating PCA-based initialization...
        --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -0.5102, 50 iterations in 0.0718 sec
-    Iteration  100, KL divergence 1.2268, 50 iterations in 0.0348 sec
-    Iteration  150, KL divergence 1.2268, 50 iterations in 0.0285 sec
-    Iteration  200, KL divergence 1.2268, 50 iterations in 0.0139 sec
-    Iteration  250, KL divergence 1.2268, 50 iterations in 0.0145 sec
-       --> Time elapsed: 0.16 seconds
+    Iteration   50, KL divergence -0.6660, 50 iterations in 0.0654 sec
+    Iteration  100, KL divergence 1.2401, 50 iterations in 0.0174 sec
+    Iteration  150, KL divergence 1.2401, 50 iterations in 0.0143 sec
+    Iteration  200, KL divergence 1.2401, 50 iterations in 0.0143 sec
+    Iteration  250, KL divergence 1.2401, 50 iterations in 0.0143 sec
+       --> Time elapsed: 0.13 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.6162, 50 iterations in 0.0411 sec
-    Iteration  100, KL divergence 0.5949, 50 iterations in 0.0466 sec
-    Iteration  150, KL divergence 0.5956, 50 iterations in 0.0480 sec
-    Iteration  200, KL divergence 0.5938, 50 iterations in 0.0459 sec
-    Iteration  250, KL divergence 0.5940, 50 iterations in 0.0457 sec
-    Iteration  300, KL divergence 0.5942, 50 iterations in 0.0451 sec
-    Iteration  350, KL divergence 0.5943, 50 iterations in 0.0458 sec
-    Iteration  400, KL divergence 0.5944, 50 iterations in 0.0443 sec
-    Iteration  450, KL divergence 0.5942, 50 iterations in 0.0439 sec
-    Iteration  500, KL divergence 0.5942, 50 iterations in 0.0440 sec
-       --> Time elapsed: 0.45 seconds
+    Iteration   50, KL divergence 0.5706, 50 iterations in 0.0517 sec
+    Iteration  100, KL divergence 0.5524, 50 iterations in 0.0482 sec
+    Iteration  150, KL divergence 0.5513, 50 iterations in 0.0452 sec
+    Iteration  200, KL divergence 0.5516, 50 iterations in 0.0429 sec
+    Iteration  250, KL divergence 0.5517, 50 iterations in 0.0440 sec
+    Iteration  300, KL divergence 0.5516, 50 iterations in 0.0451 sec
+    Iteration  350, KL divergence 0.5516, 50 iterations in 0.0460 sec
+    Iteration  400, KL divergence 0.5517, 50 iterations in 0.0584 sec
+    Iteration  450, KL divergence 0.5518, 50 iterations in 0.0597 sec
+    Iteration  500, KL divergence 0.5518, 50 iterations in 0.0457 sec
+       --> Time elapsed: 0.49 seconds
 
 
 
@@ -362,48 +362,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.073179</td>
-      <td>-0.617543</td>
-      <td>7.329057</td>
+      <td>0.090489</td>
+      <td>-6.100023</td>
+      <td>4.797353</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.015708</td>
-      <td>-0.150681</td>
-      <td>7.847397</td>
+      <td>0.023322</td>
+      <td>-0.170662</td>
+      <td>-3.317157</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.023111</td>
-      <td>1.587617</td>
-      <td>8.264847</td>
+      <td>0.014287</td>
+      <td>4.473195</td>
+      <td>-5.765590</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013919</td>
-      <td>-7.177758</td>
-      <td>3.048010</td>
+      <td>0.012211</td>
+      <td>4.063878</td>
+      <td>-6.005084</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013360</td>
-      <td>-5.364855</td>
-      <td>4.103684</td>
+      <td>0.012211</td>
+      <td>4.035718</td>
+      <td>-5.982101</td>
     </tr>
   </tbody>
 </table>
@@ -438,48 +438,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>commandhandling</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>connector</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.073179</td>
-      <td>[0.8534017205238342, -0.3397902548313141, -0.0...</td>
+      <td>0.090489</td>
+      <td>[0.17033880949020386, 0.01935906708240509, 0.0...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>callbacks</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>util</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.015708</td>
-      <td>[1.0073375701904297, 0.14700788259506226, 0.00...</td>
+      <td>0.023322</td>
+      <td>[0.30458804965019226, -0.18102781474590302, 0....</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>distributed</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>heartbeat</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.023111</td>
-      <td>[0.7627725005149841, -0.5387256145477295, -0.0...</td>
+      <td>0.014287</td>
+      <td>[0.308476060628891, -0.24300681054592133, -0.0...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>commandfilter</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>source</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013919</td>
-      <td>[0.9478826522827148, -0.5061741471290588, 0.08...</td>
+      <td>0.012211</td>
+      <td>[0.09075246006250381, -0.15760785341262817, 0....</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>gateway</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>checker</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013360</td>
-      <td>[0.8754351139068604, 0.12062948197126389, -0.0...</td>
+      <td>0.012211</td>
+      <td>[0.21079717576503754, -0.279901385307312, 0.08...</td>
     </tr>
   </tbody>
 </table>
@@ -494,25 +494,25 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
     ===> Calculating affinity matrix...
        --> Time elapsed: 0.00 seconds
     ===> Calculating PCA-based initialization...
-       --> Time elapsed: 0.01 seconds
+       --> Time elapsed: 0.00 seconds
     ===> Running optimization with exaggeration=12.00, lr=9.50 for 250 iterations...
-    Iteration   50, KL divergence -0.4990, 50 iterations in 0.0646 sec
-    Iteration  100, KL divergence 1.1623, 50 iterations in 0.0169 sec
-    Iteration  150, KL divergence 1.1623, 50 iterations in 0.0149 sec
-    Iteration  200, KL divergence 1.1623, 50 iterations in 0.0150 sec
-    Iteration  250, KL divergence 1.1623, 50 iterations in 0.0149 sec
-       --> Time elapsed: 0.13 seconds
+    Iteration   50, KL divergence -1.2839, 50 iterations in 0.0621 sec
+    Iteration  100, KL divergence 1.1567, 50 iterations in 0.0165 sec
+    Iteration  150, KL divergence 1.1567, 50 iterations in 0.0148 sec
+    Iteration  200, KL divergence 1.1567, 50 iterations in 0.0147 sec
+    Iteration  250, KL divergence 1.1567, 50 iterations in 0.0144 sec
+       --> Time elapsed: 0.12 seconds
     ===> Running optimization with exaggeration=1.00, lr=114.00 for 500 iterations...
-    Iteration   50, KL divergence 0.3471, 50 iterations in 0.0516 sec
-    Iteration  100, KL divergence 0.3207, 50 iterations in 0.0464 sec
-    Iteration  150, KL divergence 0.3131, 50 iterations in 0.0445 sec
-    Iteration  200, KL divergence 0.3119, 50 iterations in 0.0453 sec
-    Iteration  250, KL divergence 0.3127, 50 iterations in 0.0462 sec
-    Iteration  300, KL divergence 0.3127, 50 iterations in 0.0437 sec
-    Iteration  350, KL divergence 0.3128, 50 iterations in 0.0446 sec
-    Iteration  400, KL divergence 0.3128, 50 iterations in 0.0449 sec
-    Iteration  450, KL divergence 0.3129, 50 iterations in 0.0462 sec
-    Iteration  500, KL divergence 0.3129, 50 iterations in 0.0463 sec
+    Iteration   50, KL divergence 0.3417, 50 iterations in 0.0531 sec
+    Iteration  100, KL divergence 0.3192, 50 iterations in 0.0463 sec
+    Iteration  150, KL divergence 0.3151, 50 iterations in 0.0461 sec
+    Iteration  200, KL divergence 0.3155, 50 iterations in 0.0454 sec
+    Iteration  250, KL divergence 0.3095, 50 iterations in 0.0442 sec
+    Iteration  300, KL divergence 0.3091, 50 iterations in 0.0458 sec
+    Iteration  350, KL divergence 0.3094, 50 iterations in 0.0474 sec
+    Iteration  400, KL divergence 0.3094, 50 iterations in 0.0453 sec
+    Iteration  450, KL divergence 0.3095, 50 iterations in 0.0445 sec
+    Iteration  500, KL divergence 0.3092, 50 iterations in 0.0443 sec
        --> Time elapsed: 0.46 seconds
 
 
@@ -537,48 +537,48 @@ This step takes the original node embeddings with a higher dimensionality, e.g. 
   <tbody>
     <tr>
       <th>0</th>
-      <td>org.axonframework.commandhandling</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.073179</td>
-      <td>-2.453859</td>
-      <td>-3.567218</td>
+      <td>0.090489</td>
+      <td>-6.732566</td>
+      <td>2.073451</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>org.axonframework.commandhandling.callbacks</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.util</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.015708</td>
-      <td>-2.801531</td>
-      <td>-4.917395</td>
+      <td>0.023322</td>
+      <td>-7.061215</td>
+      <td>0.450158</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>org.axonframework.commandhandling.distributed</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbeat</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.023111</td>
-      <td>-0.752582</td>
-      <td>-6.036107</td>
+      <td>0.014287</td>
+      <td>-6.702384</td>
+      <td>1.384077</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>org.axonframework.commandhandling.distributed....</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013919</td>
-      <td>-0.742704</td>
-      <td>-6.068603</td>
+      <td>0.012211</td>
+      <td>-0.704640</td>
+      <td>0.544546</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org.axonframework.commandhandling.gateway</td>
-      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector.heartbe...</td>
+      <td>axon-server-connector-4.10.3</td>
       <td>0</td>
-      <td>0.013360</td>
-      <td>-2.821344</td>
-      <td>-4.811228</td>
+      <td>0.012211</td>
+      <td>-6.191942</td>
+      <td>0.730120</td>
     </tr>
   </tbody>
 </table>
