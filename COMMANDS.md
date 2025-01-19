@@ -193,7 +193,7 @@ Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then 
 The following command shows how to use [markdown-link-check](https://github.com/tcort/markdown-link-check) to for example check the links in the [README.md](./README.md) file:
 
 ```script
-npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md
+npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md
 ```
 
 ## Manual Setup

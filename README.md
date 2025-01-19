@@ -14,6 +14,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Fully automated [pipeline for Java](./.github/workflows/java-code-analysis.yml) from tool installation to report generation
 - Fully automated [pipeline for Typescript](./.github/workflows/typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
+- Easy integratable in your [continuous integration pipeline](./INTEGRATION.md)
 - More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
 - Jupyter notebook reports for dependencies, metrics, visibility and many more
 - Graph structure visualization
@@ -104,6 +105,11 @@ This could be as simple as running the following command in your Typescript proj
 ## :rocket: Getting Started
 
 See [GETTING_STARTED.md](./GETTING_STARTED.md) on how to get started on your local machine.
+
+## :rocket: Integration
+
+See [INTEGRATION.md](./INTEGRATION.md) on how to integrate code analysis in your continuous integration pipeline.
+Currently (2025), only GitHub Actions are supported.
 
 ## :building_construction: Pipeline and Tools
 
