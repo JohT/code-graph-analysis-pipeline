@@ -771,6 +771,7 @@ Image  | Analysis |
 | [ExternalDependenciesTypescript_96_1.png](./react-router-6.28.1/external-dependencies-typescript/ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_96_1.png) | react-router-6.28.1 |
 | [ExternalDependenciesTypescript_98_1.png](./react-router-6.28.1/external-dependencies-typescript/ExternalDependenciesTypescript_files/ExternalDependenciesTypescript_98_1.png) | react-router-6.28.1 |
 | [NodeEmbeddingsTypescript_21_0.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_21_0.png) | react-router-6.28.1 |
+| [NodeEmbeddingsTypescript_23_6.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_23_6.png) | react-router-6.28.1 |
 | [NodeEmbeddingsTypescript_23_7.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_23_7.png) | react-router-6.28.1 |
 | [NodeEmbeddingsTypescript_25_6.png](./react-router-6.28.1/node-embeddings-typescript/NodeEmbeddingsTypescript_files/NodeEmbeddingsTypescript_25_6.png) | react-router-6.28.1 |
 | [ObjectOrientedDesignMetricsTypescript_28_0.png](./react-router-6.28.1/object-oriented-design-metrics-typescript/ObjectOrientedDesignMetricsTypescript_files/ObjectOrientedDesignMetricsTypescript_28_0.png) | react-router-6.28.1 |
@@ -786,8 +787,12 @@ Image  | Analysis |
 | [OverviewTypescript_27_1.png](./react-router-6.28.1/overview-typescript/OverviewTypescript_files/OverviewTypescript_27_1.png) | react-router-6.28.1 |
 | [PathFindingTypescript_37_0.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_37_0.png) | react-router-6.28.1 |
 | [PathFindingTypescript_39_1.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_39_1.png) | react-router-6.28.1 |
+| [PathFindingTypescript_46_0.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_46_0.png) | react-router-6.28.1 |
+| [PathFindingTypescript_49_1.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_49_1.png) | react-router-6.28.1 |
+| [PathFindingTypescript_52_1.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_52_1.png) | react-router-6.28.1 |
 | [PathFindingTypescript_57_0.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_57_0.png) | react-router-6.28.1 |
 | [PathFindingTypescript_60_1.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_60_1.png) | react-router-6.28.1 |
+| [PathFindingTypescript_63_1.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_63_1.png) | react-router-6.28.1 |
 | [PathFindingTypescript_72_0.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_72_0.png) | react-router-6.28.1 |
 | [PathFindingTypescript_74_1.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_74_1.png) | react-router-6.28.1 |
 | [PathFindingTypescript_92_0.png](./react-router-6.28.1/path-finding-typescript/PathFindingTypescript_files/PathFindingTypescript_92_0.png) | react-router-6.28.1 |
