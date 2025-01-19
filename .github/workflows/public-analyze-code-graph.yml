@@ -23,6 +23,7 @@ on:
           The name of the sources uploaded with 'actions/upload-artifact' 
           containing the content of the 'source' directory for the analysis. 
           Also supports sub-folders for multiple source code bases.
+          Please use 'include-hidden-files: true' if you also want to upload the git history.
         required: false
         type: string
         default: ''
