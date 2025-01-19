@@ -62,7 +62,7 @@ To run all analysis steps simple execute the following command:
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps for a Java Project.
 👉 See [scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) as an example script that combines all the above steps for a Typescript Project.  
-👉 See [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.
+👉 See [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.
 
 ### Command Line Options
 
@@ -152,7 +152,7 @@ Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then 
 Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateCsvReportReference.sh](./scripts/documentation/generateCsvReportReference.sh) with the following command:
 
 👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [java-code-analysis.yml](.github/workflows/java-code-analysis.yml) and doesn't need to be executed manually normally.
+which is included in the pipeline [internal-java-code-analysis.yml](.github/workflows/internal-java-code-analysis.yml) and doesn't need to be executed manually normally.
 
 ```script
 ./../scripts/documentation/generateCsvReportReference.sh
@@ -163,7 +163,7 @@ which is included in the pipeline [java-code-analysis.yml](.github/workflows/jav
 Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateJupyterReportReference.sh](./scripts/documentation/generateJupyterReportReference.sh) with the following command:
 
 👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [java-code-analysis.yml](.github/workflows/java-code-analysis.yml) and doesn't need to be executed manually normally.
+which is included in the pipeline [internal-java-code-analysis.yml](.github/workflows/internal-java-code-analysis.yml) and doesn't need to be executed manually normally.
 
 ```script
 ./../scripts/documentation/generateJupyterReportReference.sh
@@ -174,7 +174,7 @@ which is included in the pipeline [java-code-analysis.yml](.github/workflows/jav
 Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateImageReference.sh](./scripts/documentation/generateImageReference.sh) with the following command:
 
 👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [java-code-analysis.yml](.github/workflows/java-code-analysis.yml) and doesn't need to be executed manually normally.
+which is included in the pipeline [internal-java-code-analysis.yml](.github/workflows/internal-java-code-analysis.yml) and doesn't need to be executed manually normally.
 
 ```script
 ./../scripts/documentation/generateImageReference.sh

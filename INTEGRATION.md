@@ -18,8 +18,8 @@ The workflow requires the names of the uploaded artifacts (source code and build
 
 You can find examples in:
 
-- [internal-java-code-analysis.yml](./.github/workflows/internal-java-code-analysis.yml)
-- [internal-typescript-code-analysis.yml](./.github/workflows/internal-typescript-code-analysis.yml)
+- [internal-internal-java-code-analysis.yml](./.github/workflows/internal-internal-java-code-analysis.yml)
+- [internal-internal-typescript-code-analysis.yml](./.github/workflows/internal-internal-typescript-code-analysis.yml)
 
 :warning: Note: Workflows with names starting with `internal-` are private and should not be used outside this repository. They may change at any time without notice.
 

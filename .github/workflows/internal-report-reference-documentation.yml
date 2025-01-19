@@ -7,14 +7,14 @@ on:
     paths:
       - 'results/**' # Only run results have been updates
       - '!results/*.md'  # Ignore when report reference documentation itself changes
-      - '.github/workflows/report-reference-documentation.yml' # or when this file was changed
+      - '.github/workflows/internal-report-reference-documentation.yml' # or when this file was changed
   pull_request:
     branches:
       - main
     paths: 
       - 'results/**' # Only run results have been updates
       - '!results/*.md'  # Ignore when report reference documentation itself changes
-      - '.github/workflows/report-reference-documentation.yml' # or when this file was changed
+      - '.github/workflows/internal-report-reference-documentation.yml' # or when this file was changed
   
 jobs:
   reports:

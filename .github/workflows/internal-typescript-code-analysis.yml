@@ -17,7 +17,7 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
-      - '.github/workflows/java-code-analysis.yml'
+      - '.github/workflows/internal-java-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
   pull_request:
     branches:
@@ -35,7 +35,7 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
-      - '.github/workflows/java-code-analysis.yml'
+      - '.github/workflows/internal-java-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
 
 jobs:

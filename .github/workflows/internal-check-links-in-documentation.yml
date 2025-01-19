@@ -10,7 +10,7 @@ on:
       - 'COMMANDS.md'
       - 'GETTING_STARTED.md'
       - 'INTEGRATION.md'
-      - '.github/workflows/check-links-in-documentation.yml' # also run when this file was changed
+      - '.github/workflows/internal-check-links-in-documentation.yml' # also run when this file was changed
   schedule:
     - cron: "15 6 1 * *" # On the first day of each month at 6:15 o'clock
 
