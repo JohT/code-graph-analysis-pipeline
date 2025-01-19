@@ -9,6 +9,7 @@ on:
       - 'README.md'
       - 'COMMANDS.md'
       - 'GETTING_STARTED.md'
+      - 'INTEGRATION.md'
       - '.github/workflows/check-links-in-documentation.yml' # also run when this file was changed
   schedule:
     - cron: "15 6 1 * *" # On the first day of each month at 6:15 o'clock
@@ -36,6 +37,6 @@ jobs:
 
     - name: Check links in top level documentation Markdown files
       if: ${{ ! env.skip_link_check}}
-      run: npx --yes markdown-link-check@3.13.6 --verbose --alive=200,202,206 --retry README.md COMMANDS.md GETTING_STARTED.md
+      run: npx --yes markdown-link-check@3.13.6 --verbose --alive=200,202,206 --retry README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md
       # Temporarily, everything is done using command line options rather than with the config file, which doesn't seem to work.
       # Maybe related to https://github.com/tcort/markdown-link-check/issues/379 ?
