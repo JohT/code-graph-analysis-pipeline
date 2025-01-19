@@ -1,2 +1,4 @@
 "propertyName","propertyValue","codeUnits","codeUnitNames","shortCodeUnitNames","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Grouped.cypher"
-"communityKCoreDecompositionValue",1,4,"react-router-6.28.1/react-router,react-router-6.28.1/react-router-dom,react-router-6.28.1/server,react-router-6.28.1/react-router-native","react-router,react-router-dom,server,react-router-native",""
+"communityKCoreDecompositionValue",0,2,"react-router-6.28.1/About,react-router-6.28.1/App","About,App",""
+"communityKCoreDecompositionValue",1,1,"react-router-6.28.1/react-router","react-router",""
+"communityKCoreDecompositionValue",2,3,"react-router-6.28.1/react-router-dom,react-router-6.28.1/server,react-router-6.28.1/react-router-native","react-router-dom,server,react-router-native",""

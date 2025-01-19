@@ -57,34 +57,45 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>@types/react</td>
-      <td>4</td>
-      <td>34</td>
-      <td>97</td>
-      <td>149</td>
-      <td>4</td>
-      <td>68</td>
+      <td>5</td>
+      <td>35</td>
+      <td>195</td>
+      <td>584</td>
+      <td>12</td>
+      <td>109</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>@types/react-native</td>
-      <td>1</td>
-      <td>5</td>
-      <td>14</td>
-      <td>18</td>
+      <td>@remix-run/router</td>
       <td>4</td>
-      <td>68</td>
-      <td>[&lt;useLinkPressHandler&gt; of module &lt;react-router...</td>
+      <td>37</td>
+      <td>380</td>
+      <td>673</td>
+      <td>12</td>
+      <td>109</td>
+      <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>@types/react-native</td>
+      <td>1</td>
+      <td>5</td>
+      <td>28</td>
+      <td>57</td>
+      <td>12</td>
+      <td>109</td>
+      <td>[&lt;LinkProps&gt; of module &lt;react-router-native&gt; i...</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
       <td>4</td>
-      <td>4</td>
-      <td>68</td>
+      <td>8</td>
+      <td>12</td>
+      <td>109</td>
       <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
     </tr>
   </tbody>
@@ -178,23 +189,34 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>@types</td>
-      <td>4</td>
-      <td>35</td>
-      <td>111</td>
-      <td>167</td>
-      <td>4</td>
-      <td>68</td>
+      <td>5</td>
+      <td>36</td>
+      <td>223</td>
+      <td>641</td>
+      <td>12</td>
+      <td>109</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>@remix-run</td>
+      <td>4</td>
+      <td>37</td>
+      <td>380</td>
+      <td>673</td>
+      <td>12</td>
+      <td>109</td>
+      <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>@ungap</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
       <td>4</td>
-      <td>4</td>
-      <td>68</td>
+      <td>8</td>
+      <td>12</td>
+      <td>109</td>
       <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
     </tr>
   </tbody>
@@ -305,69 +327,92 @@ external package.
     <tr>
       <th>0</th>
       <td>@types/react</td>
-      <td>4</td>
-      <td>37</td>
+      <td>5</td>
+      <td>38</td>
       <td>1</td>
       <td>27</td>
-      <td>4.5</td>
-      <td>9.25</td>
-      <td>12.120919</td>
-      <td>34</td>
+      <td>2.0</td>
+      <td>7.6</td>
+      <td>11.126545</td>
+      <td>35</td>
       <td>1</td>
       <td>24</td>
-      <td>4.5</td>
-      <td>8.5</td>
-      <td>10.535654</td>
-      <td>25.0</td>
-      <td>600.0</td>
-      <td>112.5</td>
-      <td>212.5</td>
-      <td>263.391344</td>
+      <td>3.0</td>
+      <td>7.00</td>
+      <td>9.721111</td>
+      <td>8.333333</td>
+      <td>200.000000</td>
+      <td>25.000000</td>
+      <td>58.333333</td>
+      <td>81.009259</td>
       <td>[react-router, react-router-dom, server, react...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>@remix-run/router</td>
+      <td>4</td>
+      <td>128</td>
+      <td>6</td>
+      <td>88</td>
+      <td>17.0</td>
+      <td>32.0</td>
+      <td>38.401389</td>
+      <td>37</td>
+      <td>3</td>
+      <td>23</td>
+      <td>5.5</td>
+      <td>9.25</td>
+      <td>9.251126</td>
+      <td>25.000000</td>
+      <td>191.666667</td>
+      <td>45.833333</td>
+      <td>77.083333</td>
+      <td>77.092717</td>
+      <td>[react-router, react-router-dom, server, react...</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>@types/react-native</td>
       <td>1</td>
       <td>10</td>
       <td>10</td>
       <td>10</td>
       <td>10.0</td>
-      <td>10.00</td>
+      <td>10.0</td>
       <td>0.000000</td>
       <td>5</td>
       <td>5</td>
       <td>5</td>
       <td>5.0</td>
-      <td>5.0</td>
+      <td>5.00</td>
       <td>0.000000</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>125.0</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
       <td>0.000000</td>
       <td>[react-router-native]</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
-      <td>1.00</td>
+      <td>1.0</td>
       <td>0.000000</td>
       <td>2</td>
       <td>2</td>
       <td>2</td>
       <td>2.0</td>
-      <td>2.0</td>
+      <td>2.00</td>
       <td>0.000000</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
       <td>0.000000</td>
       <td>[react-router-native]</td>
     </tr>
@@ -402,31 +447,41 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>@types/react</td>
-      <td>4</td>
+      <td>5</td>
       <td>1</td>
       <td>24</td>
-      <td>4.5</td>
-      <td>8.5</td>
-      <td>10.535654</td>
+      <td>3.0</td>
+      <td>7.00</td>
+      <td>9.721111</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>@remix-run/router</td>
+      <td>4</td>
+      <td>3</td>
+      <td>23</td>
+      <td>5.5</td>
+      <td>9.25</td>
+      <td>9.251126</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>@types/react-native</td>
       <td>1</td>
       <td>5</td>
       <td>5</td>
       <td>5.0</td>
-      <td>5.0</td>
+      <td>5.00</td>
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
       <td>2.0</td>
-      <td>2.0</td>
+      <td>2.00</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -460,31 +515,41 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>@types/react</td>
-      <td>4</td>
-      <td>25.0</td>
-      <td>600.0</td>
-      <td>112.5</td>
-      <td>212.5</td>
-      <td>263.391344</td>
+      <td>5</td>
+      <td>8.333333</td>
+      <td>200.000000</td>
+      <td>25.000000</td>
+      <td>58.333333</td>
+      <td>81.009259</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>@types/react-native</td>
-      <td>1</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>0.000000</td>
+      <td>@remix-run/router</td>
+      <td>4</td>
+      <td>25.000000</td>
+      <td>191.666667</td>
+      <td>45.833333</td>
+      <td>77.083333</td>
+      <td>77.092717</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>@types/react-native</td>
+      <td>1</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -518,31 +583,41 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>@types/react</td>
-      <td>4</td>
+      <td>5</td>
       <td>1</td>
       <td>24</td>
-      <td>4.5</td>
-      <td>8.5</td>
-      <td>10.535654</td>
+      <td>3.0</td>
+      <td>7.00</td>
+      <td>9.721111</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>@remix-run/router</td>
+      <td>4</td>
+      <td>3</td>
+      <td>23</td>
+      <td>5.5</td>
+      <td>9.25</td>
+      <td>9.251126</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>@types/react-native</td>
       <td>1</td>
       <td>5</td>
       <td>5</td>
       <td>5.0</td>
-      <td>5.0</td>
+      <td>5.00</td>
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
       <td>2.0</td>
-      <td>2.0</td>
+      <td>2.00</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -576,31 +651,41 @@ This table shows the top 20 most widely spread external packages focussing on th
     <tr>
       <th>0</th>
       <td>@types/react</td>
-      <td>4</td>
-      <td>25.0</td>
-      <td>600.0</td>
-      <td>112.5</td>
-      <td>212.5</td>
-      <td>263.391344</td>
+      <td>5</td>
+      <td>8.333333</td>
+      <td>200.000000</td>
+      <td>25.000000</td>
+      <td>58.333333</td>
+      <td>81.009259</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>@types/react-native</td>
-      <td>1</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>125.0</td>
-      <td>0.000000</td>
+      <td>@remix-run/router</td>
+      <td>4</td>
+      <td>25.000000</td>
+      <td>191.666667</td>
+      <td>45.833333</td>
+      <td>77.083333</td>
+      <td>77.092717</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>@types/react-native</td>
+      <td>1</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>41.666667</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>@ungap/url-search-params</td>
       <td>1</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -731,35 +816,58 @@ Only the top 20 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>@types</td>
-      <td>4</td>
-      <td>47</td>
+      <td>5</td>
+      <td>48</td>
       <td>1</td>
       <td>27</td>
-      <td>9.5</td>
-      <td>11.75</td>
-      <td>12.526638</td>
-      <td>35</td>
+      <td>2.0</td>
+      <td>9.6</td>
+      <td>11.865918</td>
+      <td>36</td>
       <td>1</td>
       <td>24</td>
-      <td>5.0</td>
-      <td>8.75</td>
-      <td>10.468206</td>
-      <td>25.0</td>
-      <td>600.0</td>
-      <td>125.0</td>
-      <td>218.75</td>
-      <td>261.705146</td>
+      <td>3.0</td>
+      <td>7.20</td>
+      <td>9.705668</td>
+      <td>8.333333</td>
+      <td>200.000000</td>
+      <td>25.000000</td>
+      <td>60.000000</td>
+      <td>80.880570</td>
       <td>[react-router, react-router-dom, server, react...</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>@remix-run</td>
+      <td>4</td>
+      <td>128</td>
+      <td>6</td>
+      <td>88</td>
+      <td>17.0</td>
+      <td>32.0</td>
+      <td>38.401389</td>
+      <td>37</td>
+      <td>3</td>
+      <td>23</td>
+      <td>5.5</td>
+      <td>9.25</td>
+      <td>9.251126</td>
+      <td>25.000000</td>
+      <td>191.666667</td>
+      <td>45.833333</td>
+      <td>77.083333</td>
+      <td>77.092717</td>
+      <td>[react-router, react-router-dom, server, react...</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>@ungap</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
-      <td>1.00</td>
+      <td>1.0</td>
       <td>0.000000</td>
       <td>2</td>
       <td>2</td>
@@ -767,10 +875,10 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.0</td>
       <td>2.00</td>
       <td>0.000000</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.0</td>
-      <td>50.00</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
+      <td>16.666667</td>
       <td>0.000000</td>
       <td>[react-router-native]</td>
     </tr>
@@ -873,17 +981,22 @@ Only the last 20 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>@ungap/url-search-params</td>
-      <td>2</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>1</th>
       <td>@types/react-native</td>
-      <td>14</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>2</th>
       <td>@types/react</td>
-      <td>97</td>
+      <td>195</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>@remix-run/router</td>
+      <td>380</td>
     </tr>
   </tbody>
 </table>
@@ -935,75 +1048,135 @@ Only the first 40 entries are shown. The whole table can be found in the followi
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-native</td>
-      <td>@types/react-native</td>
-      <td>11</td>
-      <td>14</td>
-      <td>12</td>
-      <td>18</td>
-      <td>3</td>
-      <td>150.000000</td>
-      <td>[GestureResponderEvent, TouchableHighlightProp...</td>
+      <td>server</td>
+      <td>@remix-run/router</td>
+      <td>72</td>
+      <td>126</td>
+      <td>6</td>
+      <td>28</td>
+      <td>2</td>
+      <td>466.666667</td>
+      <td>[Action, IDLE_NAVIGATION, StaticHandlerContext...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-native</td>
+      <td>server</td>
       <td>@types/react</td>
-      <td>9</td>
-      <td>14</td>
-      <td>12</td>
-      <td>18</td>
-      <td>3</td>
-      <td>150.000000</td>
-      <td>[React.JSX.Element, React.ReactNode, React.use...</td>
+      <td>6</td>
+      <td>30</td>
+      <td>6</td>
+      <td>28</td>
+      <td>2</td>
+      <td>466.666667</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router-native</td>
-      <td>@ungap/url-search-params</td>
+      <td>react-router-dom</td>
+      <td>@remix-run/router</td>
+      <td>274</td>
+      <td>486</td>
+      <td>62</td>
+      <td>115</td>
       <td>2</td>
-      <td>4</td>
-      <td>12</td>
-      <td>18</td>
-      <td>3</td>
-      <td>150.000000</td>
-      <td>[url-search-params]</td>
+      <td>185.483871</td>
+      <td>[HTMLFormMethod.toLowerCase, useLocation, useN...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>@types/react</td>
-      <td>83</td>
-      <td>128</td>
-      <td>35</td>
-      <td>27</td>
-      <td>1</td>
-      <td>77.142857</td>
-      <td>[React.JSX.Element, React.MutableRefObject.cur...</td>
+      <td>166</td>
+      <td>496</td>
+      <td>62</td>
+      <td>115</td>
+      <td>2</td>
+      <td>185.483871</td>
+      <td>[React.JSX.Element, React.FormEvent.defaultPre...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>server</td>
-      <td>@types/react</td>
-      <td>3</td>
-      <td>3</td>
-      <td>6</td>
-      <td>2</td>
-      <td>1</td>
-      <td>33.333333</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>react-router-native</td>
+      <td>@types/react-native</td>
+      <td>22</td>
+      <td>49</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[GestureResponderEvent, TouchableHighlightProp...</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>react-router-native</td>
+      <td>@remix-run/router</td>
+      <td>18</td>
+      <td>41</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[To, useNavigate, MemoryRouterProps, useLocati...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-native</td>
+      <td>@types/react</td>
+      <td>18</td>
+      <td>49</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[React.ReactNode, React.JSX.Element, React.use...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-native</td>
+      <td>@ungap/url-search-params</td>
+      <td>4</td>
+      <td>8</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[url-search-params]</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router</td>
+      <td>@remix-run/router</td>
+      <td>16</td>
+      <td>20</td>
+      <td>7</td>
+      <td>9</td>
+      <td>2</td>
+      <td>128.571429</td>
+      <td>[DataStrategyFunction, Router.initialize, crea...</td>
+    </tr>
+    <tr>
+      <th>9</th>
       <td>react-router</td>
       <td>@types/react</td>
-      <td>1</td>
-      <td>3</td>
-      <td>15</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6.666667</td>
+      <td>2</td>
+      <td>6</td>
+      <td>7</td>
+      <td>9</td>
+      <td>2</td>
+      <td>128.571429</td>
       <td>[React.createElement]</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>App</td>
+      <td>@types/react</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100.000000</td>
+      <td>[React.JSX.Element]</td>
     </tr>
   </tbody>
 </table>
@@ -1035,63 +1208,123 @@ Only the first 40 entries are shown. The whole table can be found in the followi
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-native</td>
-      <td>@types</td>
-      <td>20</td>
+      <td>server</td>
+      <td>@remix-run</td>
+      <td>72</td>
+      <td>126</td>
+      <td>6</td>
       <td>28</td>
-      <td>12</td>
-      <td>18</td>
-      <td>3</td>
-      <td>150.000000</td>
-      <td>[GestureResponderEvent, React.JSX.Element, Rea...</td>
+      <td>2</td>
+      <td>466.666667</td>
+      <td>[Action, IDLE_NAVIGATION, StaticHandlerContext...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-native</td>
-      <td>@ungap</td>
+      <td>server</td>
+      <td>@types</td>
+      <td>6</td>
+      <td>30</td>
+      <td>6</td>
+      <td>28</td>
       <td>2</td>
-      <td>4</td>
-      <td>12</td>
-      <td>18</td>
-      <td>3</td>
-      <td>150.000000</td>
-      <td>[url-search-params]</td>
+      <td>466.666667</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
-      <td>@types</td>
-      <td>83</td>
-      <td>128</td>
-      <td>35</td>
-      <td>27</td>
-      <td>1</td>
-      <td>77.142857</td>
-      <td>[React.JSX.Element, React.MutableRefObject.cur...</td>
+      <td>@remix-run</td>
+      <td>274</td>
+      <td>486</td>
+      <td>62</td>
+      <td>115</td>
+      <td>2</td>
+      <td>185.483871</td>
+      <td>[HTMLFormMethod.toLowerCase, useLocation, useN...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>server</td>
+      <td>react-router-dom</td>
       <td>@types</td>
-      <td>3</td>
-      <td>3</td>
-      <td>6</td>
+      <td>166</td>
+      <td>496</td>
+      <td>62</td>
+      <td>115</td>
       <td>2</td>
-      <td>1</td>
-      <td>33.333333</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>185.483871</td>
+      <td>[React.JSX.Element, React.FormEvent.defaultPre...</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>react-router-native</td>
+      <td>@types</td>
+      <td>40</td>
+      <td>98</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[GestureResponderEvent, React.ReactNode, Touch...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-native</td>
+      <td>@remix-run</td>
+      <td>18</td>
+      <td>41</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[To, useNavigate, MemoryRouterProps, useLocati...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-native</td>
+      <td>@ungap</td>
+      <td>4</td>
+      <td>8</td>
+      <td>17</td>
+      <td>24</td>
+      <td>4</td>
+      <td>141.176471</td>
+      <td>[url-search-params]</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router</td>
+      <td>@remix-run</td>
+      <td>16</td>
+      <td>20</td>
+      <td>7</td>
+      <td>9</td>
+      <td>2</td>
+      <td>128.571429</td>
+      <td>[DataStrategyFunction, Router.initialize, crea...</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>react-router</td>
       <td>@types</td>
-      <td>1</td>
-      <td>3</td>
-      <td>15</td>
-      <td>1</td>
-      <td>1</td>
-      <td>6.666667</td>
+      <td>2</td>
+      <td>6</td>
+      <td>7</td>
+      <td>9</td>
+      <td>2</td>
+      <td>128.571429</td>
       <td>[React.createElement]</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>App</td>
+      <td>@types</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100.000000</td>
+      <td>[React.JSX.Element]</td>
     </tr>
   </tbody>
 </table>
@@ -1112,12 +1345,14 @@ The following table uses pivot to show the internal modules in columns, the exte
     <tr style="text-align: right;">
       <th>internalModuleName</th>
       <th>react-router-dom</th>
-      <th>react-router-native</th>
       <th>server</th>
+      <th>react-router-native</th>
       <th>react-router</th>
+      <th>App</th>
     </tr>
     <tr>
       <th>externalModuleName</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1126,23 +1361,34 @@ The following table uses pivot to show the internal modules in columns, the exte
   </thead>
   <tbody>
     <tr>
+      <th>@remix-run/router</th>
+      <td>274</td>
+      <td>72</td>
+      <td>18</td>
+      <td>16</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>@types/react</th>
-      <td>83</td>
-      <td>9</td>
-      <td>3</td>
+      <td>166</td>
+      <td>6</td>
+      <td>18</td>
+      <td>2</td>
       <td>1</td>
     </tr>
     <tr>
       <th>@types/react-native</th>
       <td>0</td>
-      <td>11</td>
+      <td>0</td>
+      <td>22</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>@ungap/url-search-params</th>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -1165,12 +1411,14 @@ The following table uses pivot to show the internal modules in columns, the exte
     <tr style="text-align: right;">
       <th>internalModuleName</th>
       <th>react-router-dom</th>
-      <th>react-router-native</th>
       <th>server</th>
+      <th>react-router-native</th>
       <th>react-router</th>
+      <th>App</th>
     </tr>
     <tr>
       <th>externalNamespaceName</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1179,16 +1427,26 @@ The following table uses pivot to show the internal modules in columns, the exte
   </thead>
   <tbody>
     <tr>
+      <th>@remix-run</th>
+      <td>274</td>
+      <td>72</td>
+      <td>18</td>
+      <td>16</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>@types</th>
-      <td>83</td>
-      <td>20</td>
-      <td>3</td>
+      <td>166</td>
+      <td>6</td>
+      <td>40</td>
+      <td>2</td>
       <td>1</td>
     </tr>
     <tr>
       <th>@ungap</th>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -1218,27 +1476,33 @@ This table lists internal elements and the modules they belong to that use many 
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-native</td>
-      <td>18</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>react-router-dom</td>
-      <td>27</td>
-      <td>35</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>server</td>
-      <td>2</td>
+      <td>28</td>
       <td>6</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>2</th>
+      <td>react-router-dom</td>
+      <td>115</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-native</td>
+      <td>24</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>react-router</td>
+      <td>9</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>App</td>
       <td>1</td>
-      <td>15</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1313,34 +1577,42 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>react-router-dom</td>
-      <td>35</td>
-      <td>1</td>
-      <td>24</td>
-      <td>68.571429</td>
+      <td>62</td>
+      <td>2</td>
+      <td>29</td>
+      <td>46.774194</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-native</td>
-      <td>12</td>
-      <td>3</td>
-      <td>8</td>
-      <td>66.666667</td>
+      <td>17</td>
+      <td>4</td>
+      <td>10</td>
+      <td>58.823529</td>
     </tr>
     <tr>
       <th>2</th>
       <td>server</td>
       <td>6</td>
-      <td>1</td>
-      <td>3</td>
-      <td>50.000000</td>
+      <td>2</td>
+      <td>6</td>
+      <td>100.000000</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router</td>
-      <td>15</td>
+      <td>7</td>
+      <td>2</td>
+      <td>3</td>
+      <td>42.857143</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>App</td>
       <td>1</td>
       <td>1</td>
-      <td>6.666667</td>
+      <td>1</td>
+      <td>100.000000</td>
     </tr>
   </tbody>
 </table>
@@ -1390,44 +1662,55 @@ Only the last 40 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router</td>
-      <td>15</td>
+      <td>App</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>1</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-dom</td>
-      <td>35</td>
+      <td>react-router</td>
+      <td>7</td>
+      <td>2</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>1</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>3</td>
+      <td>react-router-dom</td>
+      <td>62</td>
+      <td>2</td>
       <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>1</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-native</td>
+      <td>17</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>server</td>
       <td>6</td>
+      <td>2</td>
       <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>1</td>
       <td>0.0</td>
@@ -1461,47 +1744,58 @@ Only the last 40 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router</td>
-      <td>15</td>
+      <td>App</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>1.000000</td>
+      <td>1.0</td>
+      <td>1.00</td>
       <td>1</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-dom</td>
-      <td>35</td>
+      <td>react-router</td>
+      <td>7</td>
+      <td>2</td>
       <td>1</td>
-      <td>24</td>
-      <td>24</td>
-      <td>24.000000</td>
-      <td>24</td>
-      <td>0.000000</td>
+      <td>2.0</td>
+      <td>2.00</td>
+      <td>3</td>
+      <td>1.414214</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>3</td>
+      <td>react-router-dom</td>
+      <td>62</td>
       <td>2</td>
-      <td>5</td>
-      <td>4.333333</td>
-      <td>6</td>
-      <td>2.081666</td>
+      <td>23</td>
+      <td>23.5</td>
+      <td>23.50</td>
+      <td>24</td>
+      <td>0.707107</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-native</td>
+      <td>17</td>
+      <td>4</td>
+      <td>2</td>
+      <td>5.5</td>
+      <td>4.75</td>
+      <td>6</td>
+      <td>1.892969</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>server</td>
       <td>6</td>
-      <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>3</td>
-      <td>3.000000</td>
-      <td>3</td>
-      <td>0.000000</td>
+      <td>4.0</td>
+      <td>4.00</td>
+      <td>5</td>
+      <td>1.414214</td>
     </tr>
   </tbody>
 </table>
@@ -1532,47 +1826,58 @@ Only the last 40 entries are shown. The whole table can be found in the followin
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router</td>
-      <td>15</td>
+      <td>App</td>
       <td>1</td>
-      <td>6.666667</td>
-      <td>6.666667</td>
-      <td>6.666667</td>
-      <td>6.666667</td>
+      <td>1</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>1</td>
-      <td>68.571429</td>
-      <td>68.571429</td>
-      <td>68.571429</td>
-      <td>68.571429</td>
-      <td>0.000000</td>
+      <td>react-router</td>
+      <td>7</td>
+      <td>2</td>
+      <td>14.285714</td>
+      <td>28.571429</td>
+      <td>28.571429</td>
+      <td>42.857143</td>
+      <td>20.203051</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>3</td>
-      <td>16.666667</td>
-      <td>41.666667</td>
-      <td>36.111111</td>
-      <td>50.000000</td>
-      <td>17.347217</td>
+      <td>react-router-dom</td>
+      <td>62</td>
+      <td>2</td>
+      <td>37.096774</td>
+      <td>37.903226</td>
+      <td>37.903226</td>
+      <td>38.709677</td>
+      <td>1.140495</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>react-router-native</td>
+      <td>17</td>
+      <td>4</td>
+      <td>11.764706</td>
+      <td>32.352941</td>
+      <td>27.941176</td>
+      <td>35.294118</td>
+      <td>11.135114</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>server</td>
       <td>6</td>
-      <td>1</td>
+      <td>2</td>
       <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>50.000000</td>
-      <td>0.000000</td>
+      <td>66.666667</td>
+      <td>66.666667</td>
+      <td>83.333333</td>
+      <td>23.570226</td>
     </tr>
   </tbody>
 </table>

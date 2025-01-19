@@ -40,37 +40,109 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <th>0</th>
       <td>react-router-6.28.1</td>
       <td>react-router-dom</td>
-      <td>35</td>
-      <td>422</td>
+      <td>62</td>
       <td>0</td>
-      <td>153</td>
+      <td>26</td>
+      <td>308</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-6.28.1</td>
-      <td>react-router</td>
-      <td>15</td>
-      <td>247</td>
-      <td>20</td>
+      <td>react-router-native</td>
       <td>17</td>
+      <td>0</td>
+      <td>10</td>
+      <td>48</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>154</td>
+      <td>react-router</td>
+      <td>7</td>
       <td>0</td>
-      <td>24</td>
+      <td>0</td>
+      <td>34</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.1</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-6.28.1</td>
       <td>server</td>
       <td>6</td>
-      <td>164</td>
       <td>0</td>
-      <td>38</td>
+      <td>0</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-6.28.1</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-6.28.1</td>
+      <td>data</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-6.28.1</td>
+      <td>App</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-6.28.1</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-6.28.1</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -102,38 +174,110 @@ The following table lists the top 30 internal modules that are used the most by 
     <tr>
       <th>0</th>
       <td>react-router-6.28.1</td>
-      <td>react-router</td>
-      <td>15</td>
-      <td>247</td>
-      <td>20</td>
-      <td>17</td>
+      <td>react-router-dom</td>
+      <td>62</td>
+      <td>0</td>
+      <td>26</td>
+      <td>308</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>422</td>
+      <td>react-router-native</td>
+      <td>17</td>
       <td>0</td>
-      <td>153</td>
+      <td>10</td>
+      <td>48</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>154</td>
+      <td>App</td>
+      <td>1</td>
       <td>0</td>
-      <td>24</td>
+      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.1</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-6.28.1</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-6.28.1</td>
+      <td>data</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-6.28.1</td>
       <td>server</td>
       <td>6</td>
-      <td>164</td>
       <td>0</td>
-      <td>38</td>
+      <td>0</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-6.28.1</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-6.28.1</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -166,37 +310,109 @@ The following table lists the top 30 internal modules that are depending on the 
       <th>0</th>
       <td>react-router-6.28.1</td>
       <td>react-router-dom</td>
-      <td>35</td>
-      <td>422</td>
+      <td>62</td>
       <td>0</td>
-      <td>153</td>
+      <td>26</td>
+      <td>308</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-6.28.1</td>
       <td>server</td>
       <td>6</td>
-      <td>164</td>
       <td>0</td>
-      <td>38</td>
+      <td>0</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-6.28.1</td>
       <td>react-router-native</td>
-      <td>12</td>
-      <td>154</td>
+      <td>17</td>
       <td>0</td>
-      <td>24</td>
+      <td>10</td>
+      <td>48</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.1</td>
       <td>react-router</td>
-      <td>15</td>
-      <td>247</td>
-      <td>20</td>
-      <td>17</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-6.28.1</td>
+      <td>App</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-6.28.1</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-6.28.1</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-6.28.1</td>
+      <td>data</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-6.28.1</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-6.28.1</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -226,38 +442,110 @@ The following table lists the top 30 internal modules that are depending on the 
     <tr>
       <th>0</th>
       <td>react-router-6.28.1</td>
-      <td>server</td>
-      <td>6</td>
-      <td>164</td>
+      <td>App</td>
+      <td>1</td>
       <td>0</td>
-      <td>38</td>
+      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>154</td>
+      <td>auth</td>
+      <td>1</td>
       <td>0</td>
-      <td>24</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-6.28.1</td>
-      <td>react-router</td>
-      <td>15</td>
-      <td>247</td>
-      <td>20</td>
-      <td>17</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>422</td>
+      <td>images</td>
+      <td>2</td>
       <td>0</td>
-      <td>153</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-6.28.1</td>
+      <td>data</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-6.28.1</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-6.28.1</td>
+      <td>server</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-6.28.1</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router-native</td>
+      <td>17</td>
+      <td>0</td>
+      <td>10</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router-dom</td>
+      <td>62</td>
+      <td>0</td>
+      <td>26</td>
+      <td>308</td>
     </tr>
   </tbody>
 </table>
@@ -289,38 +577,110 @@ The following table lists the top 30 internal modules that are used the least by
     <tr>
       <th>0</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>422</td>
+      <td>App</td>
+      <td>1</td>
       <td>0</td>
-      <td>153</td>
+      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>154</td>
+      <td>auth</td>
+      <td>1</td>
       <td>0</td>
-      <td>24</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-6.28.1</td>
-      <td>server</td>
-      <td>6</td>
-      <td>164</td>
+      <td>auth</td>
+      <td>1</td>
       <td>0</td>
-      <td>38</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.1</td>
+      <td>data</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-6.28.1</td>
       <td>react-router</td>
-      <td>15</td>
-      <td>247</td>
-      <td>20</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-6.28.1</td>
+      <td>server</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-6.28.1</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-6.28.1</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router-native</td>
       <td>17</td>
+      <td>0</td>
+      <td>10</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router-dom</td>
+      <td>62</td>
+      <td>0</td>
+      <td>26</td>
+      <td>308</td>
     </tr>
   </tbody>
 </table>
@@ -352,38 +712,110 @@ The following table lists the top 30 internal modules that are depending on the 
     <tr>
       <th>0</th>
       <td>react-router-6.28.1</td>
-      <td>react-router</td>
-      <td>15</td>
-      <td>247</td>
-      <td>20</td>
-      <td>17</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-native</td>
-      <td>12</td>
-      <td>154</td>
+      <td>auth</td>
+      <td>1</td>
       <td>0</td>
-      <td>24</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-6.28.1</td>
-      <td>server</td>
-      <td>6</td>
-      <td>164</td>
+      <td>data</td>
+      <td>3</td>
       <td>0</td>
-      <td>38</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-6.28.1</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>422</td>
+      <td>images</td>
+      <td>2</td>
       <td>0</td>
-      <td>153</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-6.28.1</td>
+      <td>images</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-6.28.1</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-6.28.1</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-6.28.1</td>
+      <td>App</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router-native</td>
+      <td>17</td>
+      <td>0</td>
+      <td>10</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-6.28.1</td>
+      <td>server</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-6.28.1</td>
+      <td>react-router-dom</td>
+      <td>62</td>
+      <td>0</td>
+      <td>26</td>
+      <td>308</td>
     </tr>
   </tbody>
 </table>
@@ -434,6 +866,18 @@ Only the top 40 entries are shown. The whole table can be found in the following
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+      <td>[useFormAction-&gt;useLocation, NavLink-&gt;useLocation, useLinkClickHandler-&gt;useLocation, useScrollRestoration-&gt;useLocation, useSearchParams-&gt;useLocation, SetURLSearchParams-&gt;NavigateOptions, LinkProps-&gt;To, useLinkClickHandler-&gt;To, useViewTransitionState-&gt;To]</td>
+      <td>[To&lt;-LinkProps, useNavigate&lt;-useLinkPressHandler, To&lt;-useLinkPressHandler, useNavigate&lt;-useDeepLinking, useNavigate&lt;-useSearchParams, useLocation&lt;-useSearchParams, NavigateOptions&lt;-SetURLSearchParams]</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -469,6 +913,204 @@ Only the top 40 entries are shown. The whole table can be found in the following
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>To&lt;-LinkProps</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useNavigate&lt;-useLinkPressHandler</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>To&lt;-useLinkPressHandler</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useNavigate&lt;-useDeepLinking</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useNavigate&lt;-useSearchParams</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useLocation&lt;-useSearchParams</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>NavigateOptions&lt;-SetURLSearchParams</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useFormAction-&gt;useLocation</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>NavLink-&gt;useLocation</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useLinkClickHandler-&gt;useLocation</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useScrollRestoration-&gt;useLocation</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useSearchParams-&gt;useLocation</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>SetURLSearchParams-&gt;NavigateOptions</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>LinkProps-&gt;To</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useLinkClickHandler-&gt;To</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useViewTransitionState-&gt;To</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useSearchParams-&gt;useNavigate</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useLinkClickHandler-&gt;useNavigate</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -501,6 +1143,83 @@ Only the top 40 entries are shown. The whole table can be found in the following
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>To&lt;-LinkProps</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useNavigate&lt;-useLinkPressHandler</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>To&lt;-useLinkPressHandler</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useNavigate&lt;-useDeepLinking</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useNavigate&lt;-useSearchParams</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>useLocation&lt;-useSearchParams</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>react-router-dom</td>
+      <td>./index.tsx</td>
+      <td>react-router-native</td>
+      <td>./index.tsx</td>
+      <td>NavigateOptions&lt;-SetURLSearchParams</td>
+      <td>0.222222</td>
+      <td>11</td>
+      <td>7</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -532,65 +1251,73 @@ This table shows the top 40 modules that are used by the highest number of diffe
   <tbody>
     <tr>
       <th>0</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useLocation</td>
-      <td>react-router</td>
-      <td>useLocation</td>
+      <td>"@remix-run/router".NavigateOptions</td>
+      <td>router</td>
+      <td>NavigateOptions</td>
       <td>ExternalDeclaration</td>
       <td>2</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useNavigate</td>
-      <td>react-router</td>
-      <td>useNavigate</td>
+      <td>"@remix-run/router".Router</td>
+      <td>router</td>
+      <td>Router</td>
       <td>ExternalDeclaration</td>
       <td>2</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".createPath</td>
-      <td>react-router</td>
-      <td>createPath</td>
+      <td>"@remix-run/router".To</td>
+      <td>router</td>
+      <td>To</td>
       <td>ExternalDeclaration</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useBlocker</td>
-      <td>react-router</td>
-      <td>useBlocker</td>
+      <td>"@remix-run/router".useLocation</td>
+      <td>router</td>
+      <td>useLocation</td>
       <td>ExternalDeclaration</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useHref</td>
-      <td>react-router</td>
-      <td>useHref</td>
+      <td>"@remix-run/router".useNavigate</td>
+      <td>router</td>
+      <td>useNavigate</td>
       <td>ExternalDeclaration</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useMatches</td>
-      <td>react-router</td>
-      <td>useMatches</td>
+      <td>"@remix-run/router".DataStrategyFunction</td>
+      <td>router</td>
+      <td>DataStrategyFunction</td>
       <td>ExternalDeclaration</td>
       <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useNavigation</td>
-      <td>react-router</td>
-      <td>useNavigation</td>
+      <td>"@remix-run/router".RouteObject</td>
+      <td>router</td>
+      <td>RouteObject</td>
       <td>ExternalDeclaration</td>
       <td>1</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useResolvedPath</td>
-      <td>react-router</td>
-      <td>useResolvedPath</td>
+      <td>"@remix-run/router".RouteObject</td>
+      <td>router</td>
+      <td>RouteObject</td>
+      <td>ExternalDeclaration</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>"@remix-run/router".Router</td>
+      <td>router</td>
+      <td>Router</td>
       <td>ExternalDeclaration</td>
       <td>1</td>
     </tr>
@@ -625,23 +1352,43 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-native</td>
-      <td>react-router</td>
+      <td>server</td>
+      <td>react-router-dom</td>
       <td>2</td>
-      <td>15</td>
-      <td>0.133333</td>
-      <td>["/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useNavigate, "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/p...</td>
-      <td>[useNavigate, useLocation]</td>
+      <td>62</td>
+      <td>0.032258</td>
+      <td>["@remix-run/router".RouteObject, "@remix-run/router".Router]</td>
+      <td>[RouteObject, Router]</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router-dom</td>
       <td>react-router</td>
-      <td>8</td>
-      <td>15</td>
-      <td>0.533333</td>
-      <td>["/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/packages/react-router".useBlocker, "/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.28.1/source/react-router-6.28.1/pa...</td>
-      <td>[useBlocker, useNavigation, useNavigate, useResolvedPath]</td>
+      <td>react-router-dom</td>
+      <td>2</td>
+      <td>62</td>
+      <td>0.032258</td>
+      <td>["@remix-run/router".DataStrategyFunction, "@remix-run/router".Router]</td>
+      <td>[DataStrategyFunction, Router]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>react-router-native</td>
+      <td>react-router-dom</td>
+      <td>4</td>
+      <td>62</td>
+      <td>0.064516</td>
+      <td>["@remix-run/router".useNavigate, "@remix-run/router".NavigateOptions, "@remix-run/router".useLocation, "@remix-run/router".To]</td>
+      <td>[useNavigate, NavigateOptions, useLocation, To]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>react-router-dom</td>
+      <td>react-router-native</td>
+      <td>4</td>
+      <td>17</td>
+      <td>0.235294</td>
+      <td>["@remix-run/router".useLocation, "@remix-run/router".NavigateOptions, "@remix-run/router".To, "@remix-run/router".useNavigate]</td>
+      <td>[useLocation, NavigateOptions, To, useNavigate]</td>
     </tr>
   </tbody>
 </table>
@@ -671,11 +1418,19 @@ This table shows the file directory distance distribution between dependent file
   <tbody>
     <tr>
       <th>0</th>
-      <td>4</td>
-      <td>3</td>
-      <td>3</td>
+      <td>0</td>
       <td>1</td>
-      <td>[./index.tsx uses ./index.ts, ./server.tsx uses ./index.ts, ./index.tsx uses ./index.ts]</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx uses ./index.tsx]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>2</td>
+      <td>[./index.tsx uses ./index.tsx, ./index.ts uses ./index.tsx, ./server.tsx uses ./index.tsx, ./index.tsx uses ./index.tsx]</td>
     </tr>
   </tbody>
 </table>

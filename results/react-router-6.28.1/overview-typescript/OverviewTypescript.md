@@ -37,16 +37,16 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>105990</td>
-      <td>316715</td>
-      <td>6</td>
-      <td>6</td>
-      <td>85</td>
-      <td>42</td>
-      <td>16</td>
-      <td>17</td>
-      <td>1</td>
-      <td>1</td>
+      <td>6006</td>
+      <td>8796</td>
+      <td>33</td>
+      <td>46</td>
+      <td>192</td>
+      <td>137</td>
+      <td>32</td>
+      <td>37</td>
+      <td>2</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -81,89 +81,193 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <th>0</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
-      <td>35</td>
-      <td>Function</td>
-      <td>17</td>
+      <td>124</td>
+      <td>Variable</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>1</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
-      <td>35</td>
+      <td>124</td>
       <td>Interface</td>
-      <td>10</td>
+      <td>20</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
-      <td>35</td>
-      <td>Variable</td>
-      <td>5</td>
+      <td>124</td>
+      <td>Function</td>
+      <td>34</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
-      <td>35</td>
+      <td>124</td>
       <td>TypeAlias</td>
-      <td>3</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>react-router</td>
-      <td>index.ts</td>
-      <td>15</td>
-      <td>TypeAlias</td>
-      <td>5</td>
+      <td>react-router-native</td>
+      <td>index.tsx</td>
+      <td>34</td>
+      <td>Interface</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>react-router</td>
-      <td>index.ts</td>
-      <td>15</td>
+      <td>react-router-native</td>
+      <td>index.tsx</td>
+      <td>34</td>
       <td>Function</td>
-      <td>2</td>
+      <td>14</td>
     </tr>
     <tr>
       <th>6</th>
       <td>react-router-native</td>
       <td>index.tsx</td>
-      <td>12</td>
+      <td>34</td>
       <td>TypeAlias</td>
-      <td>3</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>react-router-native</td>
-      <td>index.tsx</td>
-      <td>12</td>
+      <td>react-router</td>
+      <td>index.ts</td>
+      <td>14</td>
       <td>Function</td>
-      <td>7</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>react-router-native</td>
-      <td>index.tsx</td>
-      <td>12</td>
-      <td>Interface</td>
-      <td>2</td>
+      <td>react-router</td>
+      <td>index.ts</td>
+      <td>14</td>
+      <td>TypeAlias</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>9</th>
       <td>server</td>
       <td>server.tsx</td>
-      <td>6</td>
+      <td>12</td>
       <td>Function</td>
-      <td>4</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>10</th>
       <td>server</td>
       <td>server.tsx</td>
-      <td>6</td>
+      <td>12</td>
       <td>Interface</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>todos</td>
+      <td>src/todos.ts</td>
+      <td>7</td>
+      <td>Function</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>todos</td>
+      <td>src/todos.ts</td>
+      <td>7</td>
+      <td>Variable</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>todos</td>
+      <td>src/todos.ts</td>
+      <td>7</td>
+      <td>Interface</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>snkrs</td>
+      <td>src/snkrs.ts</td>
+      <td>4</td>
+      <td>Variable</td>
       <td>2</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>snkrs</td>
+      <td>src/snkrs.ts</td>
+      <td>4</td>
+      <td>Function</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>data</td>
+      <td>src/data.js</td>
+      <td>3</td>
+      <td>Function</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>images</td>
+      <td>src/images.ts</td>
+      <td>2</td>
+      <td>Function</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>images</td>
+      <td>src/images.ts</td>
+      <td>2</td>
+      <td>Variable</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>images</td>
+      <td>src/images.ts</td>
+      <td>2</td>
+      <td>Function</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>images</td>
+      <td>src/images.ts</td>
+      <td>2</td>
+      <td>Variable</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>App</td>
+      <td>src/App.jsx</td>
+      <td>1</td>
+      <td>Function</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>auth</td>
+      <td>src/auth.ts</td>
+      <td>1</td>
+      <td>Variable</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>auth</td>
+      <td>src/auth.ts</td>
+      <td>1</td>
+      <td>Variable</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -198,35 +302,107 @@ The source data for this aggregated table can be found in the CSV report `Number
       <th>0</th>
       <td>index.tsx</td>
       <td>react-router-dom</td>
-      <td>17</td>
+      <td>34</td>
+      <td>20</td>
+      <td>6</td>
       <td>10</td>
-      <td>3</td>
-      <td>5</td>
     </tr>
     <tr>
       <th>1</th>
       <td>index.tsx</td>
       <td>react-router-native</td>
-      <td>7</td>
-      <td>2</td>
-      <td>3</td>
+      <td>14</td>
+      <td>4</td>
+      <td>6</td>
       <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>index.ts</td>
       <td>react-router</td>
-      <td>2</td>
+      <td>4</td>
       <td>0</td>
-      <td>5</td>
+      <td>10</td>
       <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>server.tsx</td>
       <td>server</td>
+      <td>8</td>
       <td>4</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>src/todos.ts</td>
+      <td>todos</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>src/snkrs.ts</td>
+      <td>snkrs</td>
       <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>src/data.js</td>
+      <td>data</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>src/App.jsx</td>
+      <td>App</td>
+      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -300,6 +476,78 @@ The source data for this aggregated table can be found in the CSV report `Number
       <td>server</td>
       <td>66.666667</td>
       <td>33.333333</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>src/todos.ts</td>
+      <td>todos</td>
+      <td>71.428571</td>
+      <td>14.285714</td>
+      <td>0.000000</td>
+      <td>14.285714</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>src/snkrs.ts</td>
+      <td>snkrs</td>
+      <td>50.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>src/data.js</td>
+      <td>data</td>
+      <td>100.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>50.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>50.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>src/App.jsx</td>
+      <td>App</td>
+      <td>100.000000</td>
+      <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
     </tr>

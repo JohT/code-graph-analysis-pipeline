@@ -64,23 +64,68 @@ Only the top 40 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>7</td>
-      <td>15</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
+      <td>30</td>
+      <td>34</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>15</td>
-      <td>12</td>
+      <td>14</td>
+      <td>14</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>5</td>
+      <td>4</td>
       <td>0.800000</td>
       <td>0.800000</td>
       <td>0.800000</td>
@@ -92,19 +137,94 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.800000</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>5</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>85</td>
-      <td>41</td>
+      <td>9</td>
+      <td>7</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>6</td>
+      <td>4</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.583333</td>
       <td>0.375000</td>
-      <td>0.507246</td>
-      <td>0.441123</td>
-      <td>0.408062</td>
-      <td>0.441123</td>
-      <td>0.474185</td>
-      <td>0.494022</td>
-      <td>0.500634</td>
-      <td>0.505924</td>
+      <td>0.750000</td>
+      <td>0.875000</td>
+      <td>0.950000</td>
+      <td>0.975000</td>
+      <td>0.995000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>170</td>
+      <td>136</td>
+      <td>0.375000</td>
+      <td>0.898551</td>
+      <td>0.636775</td>
+      <td>0.505888</td>
+      <td>0.636775</td>
+      <td>0.767663</td>
+      <td>0.846196</td>
+      <td>0.872373</td>
+      <td>0.893315</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.500000</td>
+      <td>0.250000</td>
+      <td>0.500000</td>
+      <td>0.750000</td>
+      <td>0.900000</td>
+      <td>0.950000</td>
+      <td>0.990000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
     </tr>
   </tbody>
 </table>
@@ -145,23 +265,98 @@ Only the top 40 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>85</td>
-      <td>41</td>
-      <td>0.375000</td>
-      <td>0.507246</td>
-      <td>0.441123</td>
-      <td>0.408062</td>
-      <td>0.441123</td>
-      <td>0.474185</td>
-      <td>0.494022</td>
-      <td>0.500634</td>
-      <td>0.505924</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>15</td>
-      <td>12</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.500000</td>
+      <td>0.250000</td>
+      <td>0.500000</td>
+      <td>0.750000</td>
+      <td>0.900000</td>
+      <td>0.950000</td>
+      <td>0.990000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>170</td>
+      <td>136</td>
+      <td>0.375000</td>
+      <td>0.898551</td>
+      <td>0.636775</td>
+      <td>0.505888</td>
+      <td>0.636775</td>
+      <td>0.767663</td>
+      <td>0.846196</td>
+      <td>0.872373</td>
+      <td>0.893315</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>6</td>
+      <td>4</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.583333</td>
+      <td>0.375000</td>
+      <td>0.750000</td>
+      <td>0.875000</td>
+      <td>0.950000</td>
+      <td>0.975000</td>
+      <td>0.995000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>9</td>
+      <td>7</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>5</td>
+      <td>4</td>
       <td>0.800000</td>
       <td>0.800000</td>
       <td>0.800000</td>
@@ -173,19 +368,64 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.800000</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>7</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>7</td>
-      <td>15</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
-      <td>2.142857</td>
+      <td>14</td>
+      <td>14</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>30</td>
+      <td>34</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
+      <td>1.133333</td>
     </tr>
   </tbody>
 </table>
@@ -238,36 +478,135 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>index.ts</td>
       <td>react-router</td>
-      <td>7</td>
-      <td>7</td>
+      <td>14</td>
+      <td>14</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>index.tsx</td>
-      <td>react-router-native</td>
-      <td>13</td>
-      <td>15</td>
-      <td>0.866667</td>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>index.tsx</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>69</td>
-      <td>0.507246</td>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/App.jsx</td>
+      <td>App</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>index.tsx</td>
+      <td>react-router-native</td>
+      <td>26</td>
+      <td>30</td>
+      <td>0.866667</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/snkrs.ts</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0.800000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/todos.ts</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>9</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/data.js</td>
+      <td>data</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>index.tsx</td>
+      <td>react-router-dom</td>
+      <td>70</td>
+      <td>138</td>
+      <td>0.507246</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>server.tsx</td>
       <td>server</td>
-      <td>6</td>
-      <td>16</td>
+      <td>12</td>
+      <td>32</td>
       <td>0.375000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/pages/About.tsx</td>
+      <td>About</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/main.tsx</td>
+      <td>main</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/main.jsx</td>
+      <td>main</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.000000</td>
     </tr>
   </tbody>
 </table>
@@ -302,37 +641,136 @@ Only the top 40 entries are shown. The whole table can be found in the following
     <tr>
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server.tsx</td>
-      <td>server</td>
-      <td>6</td>
-      <td>16</td>
-      <td>0.375000</td>
+      <td>src/pages/About.tsx</td>
+      <td>About</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>index.tsx</td>
-      <td>react-router-dom</td>
-      <td>35</td>
-      <td>69</td>
-      <td>0.507246</td>
+      <td>src/main.tsx</td>
+      <td>main</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>index.tsx</td>
-      <td>react-router-native</td>
-      <td>13</td>
-      <td>15</td>
-      <td>0.866667</td>
+      <td>src/main.jsx</td>
+      <td>main</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>server.tsx</td>
+      <td>server</td>
+      <td>12</td>
+      <td>32</td>
+      <td>0.375000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>index.tsx</td>
+      <td>react-router-dom</td>
+      <td>70</td>
+      <td>138</td>
+      <td>0.507246</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/data.js</td>
+      <td>data</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/todos.ts</td>
+      <td>todos</td>
+      <td>7</td>
+      <td>9</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/snkrs.ts</td>
+      <td>snkrs</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0.800000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>index.tsx</td>
+      <td>react-router-native</td>
+      <td>26</td>
+      <td>30</td>
+      <td>0.866667</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>index.ts</td>
       <td>react-router</td>
-      <td>7</td>
-      <td>7</td>
+      <td>14</td>
+      <td>14</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/images.ts</td>
+      <td>images</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/auth.ts</td>
+      <td>auth</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>src/App.jsx</td>
+      <td>App</td>
+      <td>1</td>
+      <td>1</td>
       <td>1.000000</td>
     </tr>
   </tbody>

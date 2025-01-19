@@ -49,29 +49,29 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router</td>
-      <td>20</td>
-      <td>9</td>
+      <td>react-router-dom</td>
+      <td>26</td>
+      <td>28080</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
-      <td>2</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom-v5-compat</td>
+      <td>react-router-native</td>
+      <td>10</td>
+      <td>16560</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
+      <td>auth</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -82,7 +82,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
+      <td>main</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -93,7 +93,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
+      <td>vite-env</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -104,7 +104,161 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
     <tr>
       <th>5</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
+      <td>auth</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>snkrs</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>jsurl</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>todos</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -155,50 +309,72 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
-      <td>153</td>
-      <td>384</td>
+      <td>308</td>
+      <td>216284</td>
       <td>0</td>
       <td>0</td>
-      <td>10</td>
-      <td>1</td>
+      <td>4</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>server</td>
-      <td>38</td>
-      <td>59</td>
+      <td>76</td>
+      <td>34378</td>
       <td>0</td>
       <td>0</td>
-      <td>7</td>
-      <td>1</td>
+      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-native</td>
-      <td>24</td>
-      <td>42</td>
+      <td>48</td>
+      <td>25768</td>
       <td>0</td>
       <td>0</td>
-      <td>7</td>
-      <td>1</td>
+      <td>4</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
-      <td>17</td>
-      <td>29</td>
+      <td>34</td>
+      <td>12325</td>
       <td>0</td>
       <td>0</td>
-      <td>6</td>
+      <td>3</td>
       <td>0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom-v5-compat</td>
+      <td>About</td>
+      <td>1</td>
+      <td>576</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>App</td>
+      <td>1</td>
+      <td>81</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>auth</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -207,9 +383,141 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>0</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>7</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
+      <td>main</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>auth</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>snkrs</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>jsurl</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -268,12 +576,12 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-dom-v5-compat</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom-v5-compat</td>
-      <td>0.000000</td>
+      <td>auth</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0</td>
       <td>0</td>
@@ -286,12 +594,12 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>1</th>
-      <td>router</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
-      <td>0.000000</td>
+      <td>main</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0</td>
       <td>0</td>
@@ -304,74 +612,326 @@ Since Java Packages are organized hierarchically, *Instability* can be calculate
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router</td>
-      <td>0.459459</td>
+      <td>vite-env</td>
       <td>0.0</td>
-      <td>0.666667</td>
       <td>0.0</td>
-      <td>17</td>
-      <td>20</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
       <td>0</td>
-      <td>6</td>
-      <td>3</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>react-router-dom</td>
+      <td>auth</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
-      <td>1.000000</td>
+      <td>auth</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>1.0</td>
-      <td>153</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>10</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>react-router-dom</td>
+      <td>auth</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
-      <td>1.000000</td>
+      <td>vite-env</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>1.0</td>
-      <td>38</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>7</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>react-router-native</td>
+      <td>basic-data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>1.000000</td>
+      <td>main</td>
       <td>0.0</td>
-      <td>1.000000</td>
-      <td>1.0</td>
-      <td>24</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>7</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>basic-data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>basic</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>custom-filter-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>snkrs</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>custom-filter-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>custom-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>custom-query-parsing</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>custom-query-parsing</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>jsurl</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>todos</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>error-boundaries</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>error-boundaries</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>lazy-loading-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>lazy-loading-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -417,52 +977,178 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>react-router-dom-v5-compat</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom-v5-compat</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>router</td>
+      <td>modal</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
-      <td>0.000000</td>
+      <td>images</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router</td>
+      <td>custom-filter-link</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router</td>
-      <td>0.333333</td>
+      <td>snkrs</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>react-router-dom</td>
+      <td>react-router-dom-v5-compat</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>server</td>
-      <td>0.333333</td>
+      <td>react-router-dom-v5-compat</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>react-router-dom</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom</td>
-      <td>0.371429</td>
+      <td>auth</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>react-router-native</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-native</td>
-      <td>0.384615</td>
+      <td>main</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>auth-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>custom-filter-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ssr-data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>lazy-loading</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>lazy-loading</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>About</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>notes</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>auth</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>auth</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>auth</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>view-transitions</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>custom-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>lazy-loading-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>modal</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>lazy-loading-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>router</td>
+      <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
@@ -502,63 +1188,303 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-dom-v5-compat</td>
+      <td>custom-filter-link</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./index.ts</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0</td>
+      <td>./src/snkrs.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>router</td>
+      <td>tutorial</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./index.ts</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0</td>
+      <td>./src/data.js</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router-native</td>
+      <td>modal</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./index.tsx</td>
-      <td>0.384615</td>
-      <td>0.384615</td>
-      <td>1.000000</td>
-      <td>13</td>
+      <td>./src/images.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>react-router-dom</td>
+      <td>modal-route-with-outlet</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./index.tsx</td>
-      <td>0.371429</td>
-      <td>0.371429</td>
-      <td>1.000000</td>
-      <td>35</td>
+      <td>./src/images.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>react-router-dom</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./server.tsx</td>
-      <td>0.333333</td>
-      <td>0.333333</td>
-      <td>1.000000</td>
-      <td>6</td>
+      <td>./src/auth.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>react-router</td>
+      <td>auth</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/auth.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>custom-filter-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>modal</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ssr-data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>auth-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/main.tsx</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>auth-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>lazy-loading-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/main.tsx</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>lazy-loading-router-provider</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>lazy-loading</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>notes</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>auth</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>view-transitions</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>custom-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>react-router-dom-v5-compat</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./index.ts</td>
-      <td>0.207207</td>
-      <td>0.333333</td>
-      <td>0.459459</td>
-      <td>15</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>react-router-dom-v5-compat</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./index.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./index.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./index.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>error-boundaries</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/main.tsx</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>error-boundaries</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>modal-route-with-outlet</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/main.tsx</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>modal-route-with-outlet</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/main.tsx</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>scroll-restoration</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/main.tsx</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>scroll-restoration</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
