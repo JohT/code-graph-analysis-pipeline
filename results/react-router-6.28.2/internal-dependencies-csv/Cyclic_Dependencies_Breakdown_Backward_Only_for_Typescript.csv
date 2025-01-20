@@ -1,0 +1,8 @@
+"projectFileName","moduleName","dependentProjectFileName","dependentModulePathName","dependency","forwardToBackwardBalance","numberForward","numberBackward","Source Cypher File: Cyclic_Dependencies/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.cypher"
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","To<-LinkProps",0.2222222222222222,11,7,""
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","useNavigate<-useLinkPressHandler",0.2222222222222222,11,7,""
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","To<-useLinkPressHandler",0.2222222222222222,11,7,""
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","useNavigate<-useDeepLinking",0.2222222222222222,11,7,""
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","useNavigate<-useSearchParams",0.2222222222222222,11,7,""
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","useLocation<-useSearchParams",0.2222222222222222,11,7,""
+"react-router-dom","./index.tsx","react-router-native","./index.tsx","NavigateOptions<-SetURLSearchParams",0.2222222222222222,11,7,""

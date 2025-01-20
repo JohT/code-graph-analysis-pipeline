@@ -1,0 +1,4 @@
+"localClusteringCoefficient","memberCount","memberNameExamples","Source Cypher File: Community_Detection/Community_Detection_10d_LocalClusteringCoefficient_Stream_Aggregated.cypher"
+1,2,"./server.tsx,./index.tsx",""
+0.33,1,"./index.tsx",""
+0,3,"./src/pages/About.tsx,./index.ts,./src/App.jsx",""
