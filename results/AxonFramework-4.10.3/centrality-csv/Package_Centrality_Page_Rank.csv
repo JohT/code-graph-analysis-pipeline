@@ -4,7 +4,7 @@
 "org.axonframework.eventhandling","eventhandling","centralityPageRank",0.2406388624447268,""
 "org.axonframework.serialization","serialization","centralityPageRank",0.2358450478899226,""
 "org.axonframework.messaging.unitofwork","unitofwork","centralityPageRank",0.1284997805957684,""
-"org.axonframework.messaging.annotation","annotation","centralityPageRank",0.10655398571636224,""
+"org.axonframework.messaging.annotation","annotation","centralityPageRank",0.10655398571636225,""
 "org.axonframework.axonserver.connector","connector","centralityPageRank",0.09048929114103797,""
 "org.axonframework.commandhandling","commandhandling","centralityPageRank",0.07317947174964703,""
 "org.axonframework.queryhandling","queryhandling","centralityPageRank",0.05506916553140097,""

@@ -24,7 +24,7 @@
 "org.axonframework.eventhandling.replay","replay","centralityHarmonic",0.3613569321533924,""
 "org.axonframework.common.property","property","centralityHarmonic",0.3184365781710914,""
 "org.axonframework.commandhandling.callbacks","callbacks","centralityHarmonic",0.31740412979351035,""
-"org.axonframework.messaging.responsetypes","responsetypes","centralityHarmonic",0.3019174041297935,""
+"org.axonframework.messaging.responsetypes","responsetypes","centralityHarmonic",0.30191740412979345,""
 "org.axonframework.queryhandling.registration","registration","centralityHarmonic",0.28053097345132744,""
 "org.axonframework.serialization.upcasting","upcasting","centralityHarmonic",0.2734513274336283,""
 "org.axonframework.common.jpa","jpa","centralityHarmonic",0.19174041297935102,""
