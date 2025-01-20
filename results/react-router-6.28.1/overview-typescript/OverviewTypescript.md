@@ -90,24 +90,24 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>124</td>
-      <td>Interface</td>
-      <td>20</td>
+      <td>Function</td>
+      <td>34</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>124</td>
-      <td>Function</td>
-      <td>34</td>
+      <td>TypeAlias</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>124</td>
-      <td>TypeAlias</td>
-      <td>6</td>
+      <td>Interface</td>
+      <td>20</td>
     </tr>
     <tr>
       <th>4</th>
@@ -170,16 +170,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>todos</td>
       <td>src/todos.ts</td>
       <td>7</td>
-      <td>Function</td>
-      <td>5</td>
+      <td>Variable</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>12</th>
       <td>todos</td>
       <td>src/todos.ts</td>
       <td>7</td>
-      <td>Variable</td>
-      <td>1</td>
+      <td>Function</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>13</th>

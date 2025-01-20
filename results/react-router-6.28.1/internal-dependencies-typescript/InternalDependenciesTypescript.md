@@ -1357,8 +1357,8 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
       <td>2</td>
       <td>62</td>
       <td>0.032258</td>
-      <td>["@remix-run/router".RouteObject, "@remix-run/router".Router]</td>
-      <td>[RouteObject, Router]</td>
+      <td>["@remix-run/router".Router, "@remix-run/router".RouteObject]</td>
+      <td>[Router, RouteObject]</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1430,7 +1430,7 @@ This table shows the file directory distance distribution between dependent file
       <td>4</td>
       <td>4</td>
       <td>2</td>
-      <td>[./index.tsx uses ./index.tsx, ./index.ts uses ./index.tsx, ./server.tsx uses ./index.tsx, ./index.tsx uses ./index.tsx]</td>
+      <td>[./index.ts uses ./index.tsx, ./index.tsx uses ./index.tsx, ./index.tsx uses ./index.tsx, ./server.tsx uses ./index.tsx]</td>
     </tr>
   </tbody>
 </table>

@@ -742,7 +742,7 @@ First, we'll have a look at the overall/total result of the longest path algorit
       <td>0</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
+      <td>1</td>
       <td>2</td>
     </tr>
   </tbody>
@@ -804,60 +804,60 @@ The following table shows the first 10 rows with all details of the query above.
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router</td>
-      <td>react-router</td>
+      <td>react-router-dom</td>
+      <td>react-router-dom</td>
       <td>react-router-6.28.1</td>
-      <td>True</td>
-      <td>True</td>
+      <td>False</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
-      <td>2</td>
+      <td>1</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.ts -&gt; ./index.tsx]</td>
-      <td>[react-router -&gt; react-router-dom]</td>
-      <td>[react-router -&gt; react-router-dom, react-router -&gt; react-router-6.28.1]</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router</td>
+      <td>react-router-dom</td>
       <td>react-router-6.28.1</td>
       <td>react-router-6.28.1</td>
-      <td>True</td>
-      <td>True</td>
+      <td>False</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>2</td>
+      <td>1</td>
       <td>2</td>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.ts -&gt; ./index.tsx]</td>
-      <td>[react-router -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.1 -&gt; react-router-dom]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router</td>
+      <td>react-router-dom</td>
       <td>react-router-6.28.1</td>
       <td>react-router-6.28.1</td>
       <td>True</td>
+      <td>True</td>
       <td>False</td>
-      <td>False</td>
+      <td>1</td>
+      <td>2</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
+      <td>1</td>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./index.ts -&gt; ./index.tsx]</td>
-      <td>[react-router -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom, react-router-dom -&gt; react-router-native]</td>
+      <td>[react-router-6.28.1 -&gt; react-router-dom, react-router-6.28.1 -&gt; react-router-native]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -869,14 +869,14 @@ The following table shows the first 10 rows with all details of the query above.
       <td>False</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
+      <td>3</td>
       <td>1</td>
+      <td>2</td>
       <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-native]</td>
-      <td>[react-router-dom -&gt; react-router-native, react-router-dom -&gt; react-router-6.28.1]</td>
+      <td>[react-router-dom -&gt; react-router-dom, react-router-dom -&gt; react-router-native]</td>
+      <td>[react-router-dom -&gt; react-router-6.28.1, react-router-dom -&gt; react-router-native]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -884,30 +884,11 @@ The following table shows the first 10 rows with all details of the query above.
       <td>react-router-6.28.1</td>
       <td>react-router-6.28.1</td>
       <td>True</td>
-      <td>True</td>
-      <td>False</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-native]</td>
-      <td>[react-router-6.28.1 -&gt; react-router-native]</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.1</td>
-      <td>react-router-6.28.1</td>
-      <td>True</td>
       <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
+      <td>1</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
@@ -955,6 +936,44 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>0</th>
+      <td>react-router-dom</td>
+      <td>react-router-dom</td>
+      <td>react-router-6.28.1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>react-router-dom</td>
+      <td>react-router-6.28.1</td>
+      <td>react-router-6.28.1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -968,19 +987,28 @@ Shows the top 20 projects with their max. longest path.
 
 
 
-    Series([], Name: distance, dtype: int64)
+    sourceProject
+    react-router-dom    1
+    Name: distance, dtype: int64
 
 
 
-    No data to plot 'Max. longest path for Typescript module dependencies per project'
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_81_0.png)
+    
 
 
 #### Longest path for each project - Bar chart (absolute)
 
-    No projected data for path finding available
+
+    <Figure size 640x480 with 0 Axes>
 
 
-    No data to plot 'Longest path for Typescript module dependencies stacked per project (absolute, logarithmic)'
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_84_1.png)
+    
 
 
 #### Longest path for each project - Bar chart (normalized)
@@ -994,30 +1022,33 @@ Shows the top 50 projects with the highest number of dependency paths stacked by
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th></th>
-      <th>totalCost</th>
-      <th>sourceProject</th>
-      <th>sourceScan</th>
-      <th>sourceRootProject</th>
-      <th>isDifferentTargetProject</th>
-      <th>isDifferentTargetScan</th>
-      <th>isDifferentTargetRootProject</th>
       <th>distance</th>
-      <th>distanceTotalPairCount</th>
-      <th>distanceTotalSourceCount</th>
-      <th>distanceTotalTargetCount</th>
-      <th>nodeCount</th>
-      <th>pairCount</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>sourceProject</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <th>react-router-dom</th>
+      <td>100.0</td>
+    </tr>
   </tbody>
 </table>
 </div>
 
 
 
-    No data to plot 'Longest path for Typescript module dependencies stacked per project (normalized in %)'
+
+    <Figure size 640x480 with 0 Axes>
+
+
+
+    
+![png](PathFindingTypescript_files/PathFindingTypescript_87_1.png)
+    
 
 
 ### 1.2.4 Longest path for each root project
@@ -1055,60 +1086,60 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router</td>
-      <td>react-router</td>
+      <td>react-router-dom</td>
+      <td>react-router-dom</td>
       <td>react-router-6.28.1</td>
-      <td>True</td>
-      <td>True</td>
+      <td>False</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
-      <td>2</td>
+      <td>1</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.ts -&gt; ./index.tsx]</td>
-      <td>[react-router -&gt; react-router-dom]</td>
-      <td>[react-router -&gt; react-router-dom, react-router -&gt; react-router-6.28.1]</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>react-router</td>
+      <td>react-router-dom</td>
       <td>react-router-6.28.1</td>
       <td>react-router-6.28.1</td>
-      <td>True</td>
-      <td>True</td>
+      <td>False</td>
+      <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>2</td>
+      <td>1</td>
       <td>2</td>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>[./index.ts -&gt; ./index.tsx]</td>
-      <td>[react-router -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.1 -&gt; react-router-dom]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom]</td>
+      <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>react-router</td>
+      <td>react-router-dom</td>
       <td>react-router-6.28.1</td>
       <td>react-router-6.28.1</td>
       <td>True</td>
+      <td>True</td>
       <td>False</td>
-      <td>False</td>
+      <td>1</td>
+      <td>2</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
+      <td>1</td>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./index.ts -&gt; ./index.tsx]</td>
-      <td>[react-router -&gt; react-router-dom]</td>
-      <td>[react-router-6.28.1 -&gt; react-router-6.28.1]</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-dom, react-router-dom -&gt; react-router-native]</td>
+      <td>[react-router-6.28.1 -&gt; react-router-dom, react-router-6.28.1 -&gt; react-router-native]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1120,14 +1151,14 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>False</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
+      <td>3</td>
       <td>1</td>
+      <td>2</td>
       <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-native]</td>
-      <td>[react-router-dom -&gt; react-router-native, react-router-dom -&gt; react-router-6.28.1]</td>
+      <td>[react-router-dom -&gt; react-router-dom, react-router-dom -&gt; react-router-native]</td>
+      <td>[react-router-dom -&gt; react-router-6.28.1, react-router-dom -&gt; react-router-native]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1135,30 +1166,11 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>react-router-6.28.1</td>
       <td>react-router-6.28.1</td>
       <td>True</td>
-      <td>True</td>
-      <td>False</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-native]</td>
-      <td>[react-router-6.28.1 -&gt; react-router-native]</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.1</td>
-      <td>react-router-6.28.1</td>
-      <td>True</td>
       <td>False</td>
       <td>False</td>
       <td>1</td>
       <td>2</td>
-      <td>2</td>
+      <td>1</td>
       <td>2</td>
       <td>1</td>
       <td>1</td>
