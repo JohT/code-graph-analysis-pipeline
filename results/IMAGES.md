@@ -851,3 +851,4 @@ Image  | Analysis |
 | [VisibilityMetricsTypescript_17_2.png](./react-router-6.28.2/visibility-metrics-typescript/VisibilityMetricsTypescript_files/VisibilityMetricsTypescript_17_2.png) | react-router-6.28.2 |
 | [VisibilityMetricsTypescript_24_2.png](./react-router-6.28.2/visibility-metrics-typescript/VisibilityMetricsTypescript_files/VisibilityMetricsTypescript_24_2.png) | react-router-6.28.2 |
 | [Wordcloud_14_1.png](./react-router-6.28.2/wordcloud/Wordcloud_files/Wordcloud_14_1.png) | react-router-6.28.2 |
+| [Wordcloud_17_0.png](./react-router-6.28.2/wordcloud/Wordcloud_files/Wordcloud_17_0.png) | react-router-6.28.2 |
