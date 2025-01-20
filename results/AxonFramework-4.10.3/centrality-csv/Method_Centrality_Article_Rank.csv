@@ -82,7 +82,7 @@
 "org.axonframework.modelling.saga.repository.inmemory.InMemorySagaStore: java.util.Set findSagas(java.lang.Class,org.axonframework.modelling.saga.AssociationValue)","findSagas","centralityArticleRank",0.012351080066324304,""
 "org.axonframework.axonserver.connector.AxonServerConfiguration: java.lang.Integer getNrOfNewPermits()","getNrOfNewPermits","centralityArticleRank",0.012317823371870316,""
 "org.axonframework.common.jdbc.JdbcUtils: void closeQuietly(java.sql.ResultSet)","closeQuietly","centralityArticleRank",0.01229998745705189,""
-"org.axonframework.lifecycle.Lifecycle$LifecycleRegistry: void onShutdown(int,java.lang.Runnable)","onShutdown","centralityArticleRank",0.012224506301929717,""
+"org.axonframework.lifecycle.Lifecycle$LifecycleRegistry: void onShutdown(int,java.lang.Runnable)","onShutdown","centralityArticleRank",0.012224506301929715,""
 "org.axonframework.axonserver.connector.util.GrpcMetaDataConverter: org.axonframework.messaging.MetaData convert(java.util.Map)","convert","centralityArticleRank",0.01206322519934596,""
 "org.axonframework.common.Assert: java.lang.Object nonNull(java.lang.Object,java.util.function.Supplier)","nonNull","centralityArticleRank",0.01206322519934596,""
 "org.axonframework.messaging.unitofwork.CurrentUnitOfWork: void clear(org.axonframework.messaging.unitofwork.UnitOfWork)","clear","centralityArticleRank",0.012007310174430257,""

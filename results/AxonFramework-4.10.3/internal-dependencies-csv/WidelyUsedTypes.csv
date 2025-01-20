@@ -505,7 +505,7 @@
 "org.axonframework.axonserver.connector.event.util.EventCipher","EventCipher","Type,File,Java,ByteCode,Class",1,""
 "org.axonframework.config.EventProcessingConfigurer$DeadLetteringInvokerConfiguration","EventProcessingConfigurer$DeadLetteringInvokerConfiguration","Type,File,Java,ByteCode,Interface",1,""
 "org.axonframework.config.EventProcessingConfigurer$PooledStreamingProcessorConfiguration","EventProcessingConfigurer$PooledStreamingProcessorConfiguration","Type,File,Java,ByteCode,Interface",1,""
-"org.axonframework.config.EventProcessingModule","EventProcessingModule","Type,File,Java,ByteCode,Class,Mark4TopCentralityBetweenness,Mark4TopCentralityCostEffectiveLazyForward",1,""
+"org.axonframework.config.EventProcessingModule","EventProcessingModule","Type,File,Java,ByteCode,Class,Mark4TopCentralityBetweenness",1,""
 "org.axonframework.eventhandling.EventProcessingStrategy","EventProcessingStrategy","Type,File,Java,ByteCode,Interface",1,""
 "org.axonframework.axonserver.connector.processor.EventProcessorControlService","EventProcessorControlService","Type,File,Java,ByteCode,Class",1,""
 "org.axonframework.springboot.EventProcessorProperties$DlqCache","EventProcessorProperties$DlqCache","Type,File,Java,ByteCode,Class",1,""
