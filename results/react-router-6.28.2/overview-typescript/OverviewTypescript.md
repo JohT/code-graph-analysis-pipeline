@@ -234,7 +234,7 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>images</td>
       <td>src/images.ts</td>
       <td>2</td>
-      <td>Variable</td>
+      <td>Function</td>
       <td>1</td>
     </tr>
     <tr>
@@ -242,7 +242,7 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>images</td>
       <td>src/images.ts</td>
       <td>2</td>
-      <td>Function</td>
+      <td>Variable</td>
       <td>1</td>
     </tr>
     <tr>

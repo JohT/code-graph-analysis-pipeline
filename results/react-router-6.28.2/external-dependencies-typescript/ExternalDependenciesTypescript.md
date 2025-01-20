@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, MemoryRouterProps, useLocation, Location....</td>
+      <td>[To, MemoryRouterProps, useNavigate, NavigateO...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.ReactNode, React.JSX.Element, React.use...</td>
+      <td>[React.ReactNode, React.useEffect, React.JSX.E...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1264,7 +1264,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.ReactNode, GestureResponderEvent, Touch...</td>
+      <td>[GestureResponderEvent, React.ReactNode, Touch...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, MemoryRouterProps, useLocation, Location....</td>
+      <td>[To, MemoryRouterProps, useNavigate, NavigateO...</td>
     </tr>
     <tr>
       <th>6</th>
