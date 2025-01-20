@@ -72,11 +72,6 @@ jobs:
         if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
 
-      - name: (Debug) Log all variables
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "DEBUG log all variables -> $GITHUB_CONTEXT"
-
       - name: Checkout code-graph-analysis-pipeline
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
