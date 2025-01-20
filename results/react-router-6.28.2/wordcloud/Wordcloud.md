@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
+      <td>Andrew Patton</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>Mihail  Procudin</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>Mark Dalgleish</td>
       <td>408</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>Remix Run Bot</td>
       <td>414</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>Matt Brophy</td>
       <td>1898</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Jacob Ebey</td>
       <td>245</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Pedro Cattori</td>
       <td>391</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>Simon Oxtoby</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Cam Thompson</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>Jason Miller</td>
       <td>6</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Brooks Lybrand</td>
-      <td>74</td>
     </tr>
   </tbody>
 </table>

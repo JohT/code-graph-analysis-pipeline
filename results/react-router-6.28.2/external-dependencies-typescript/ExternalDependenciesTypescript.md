@@ -1068,7 +1068,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>28</td>
       <td>2</td>
       <td>466.666667</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1080,7 +1080,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>115</td>
       <td>2</td>
       <td>185.483871</td>
-      <td>[HTMLFormMethod.toLowerCase, Router.state, Fet...</td>
+      <td>[HTMLFormMethod.toLowerCase, Router, Router.in...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, MemoryRouterProps, useNavigate, useLocati...</td>
+      <td>[To, MemoryRouterProps, useLocation, Location....</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.ReactNode, React.useEffect, React.JSX.E...</td>
+      <td>[React.ReactNode, React.JSX.Element, React.use...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1228,7 +1228,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>28</td>
       <td>2</td>
       <td>466.666667</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1240,7 +1240,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>115</td>
       <td>2</td>
       <td>185.483871</td>
-      <td>[HTMLFormMethod.toLowerCase, Router.state, Fet...</td>
+      <td>[HTMLFormMethod.toLowerCase, Router, Router.in...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1264,7 +1264,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[GestureResponderEvent, React.ReactNode, Touch...</td>
+      <td>[React.ReactNode, GestureResponderEvent, Touch...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, MemoryRouterProps, useNavigate, useLocati...</td>
+      <td>[To, MemoryRouterProps, useLocation, Location....</td>
     </tr>
     <tr>
       <th>6</th>

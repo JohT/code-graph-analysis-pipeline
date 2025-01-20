@@ -1357,8 +1357,8 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
       <td>2</td>
       <td>62</td>
       <td>0.032258</td>
-      <td>["@remix-run/router".Router, "@remix-run/router".RouteObject]</td>
-      <td>[Router, RouteObject]</td>
+      <td>["@remix-run/router".RouteObject, "@remix-run/router".Router]</td>
+      <td>[RouteObject, Router]</td>
     </tr>
     <tr>
       <th>1</th>
