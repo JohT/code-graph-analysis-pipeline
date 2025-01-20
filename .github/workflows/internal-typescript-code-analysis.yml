@@ -17,7 +17,7 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
-      - '.github/workflows/java-code-analysis.yml'
+      - '.github/workflows/internal-java-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
   pull_request:
     branches:
@@ -35,7 +35,7 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
-      - '.github/workflows/java-code-analysis.yml'
+      - '.github/workflows/internal-java-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
 
 jobs:
@@ -106,6 +106,7 @@ jobs:
       with:
         name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
         path: ./temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source
+        include-hidden-files: true
         if-no-files-found: error
         retention-days: 1
 

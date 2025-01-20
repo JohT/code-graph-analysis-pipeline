@@ -17,7 +17,7 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
-      - '.github/workflows/typescript-code-analysis.yml'
+      - '.github/workflows/internal-typescript-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
   pull_request:
     branches:
@@ -35,7 +35,7 @@ on:
       - 'renovate.json'
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
-      - '.github/workflows/typescript-code-analysis.yml'
+      - '.github/workflows/internal-typescript-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
 
 # Requires the secret NEO4J_INITIAL_PASSWORD to be configured

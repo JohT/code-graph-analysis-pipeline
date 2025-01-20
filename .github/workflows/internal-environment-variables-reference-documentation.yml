@@ -6,13 +6,13 @@ on:
       - main
     paths:
       - '**/*.sh' # Only run when script files changed
-      - '.github/workflows/environment-variables-reference-documentation.yml' # or when this file was changed
+      - '.github/workflows/environment-internal-variables-reference-documentation.yml' # or when this file was changed
   pull_request:
     branches:
       - main
     paths: 
       - '**/*.sh' # Only run when script files changed
-      - '.github/workflows/environment-variables-reference-documentation.yml' # or when this file was changed
+      - '.github/workflows/environment-internal-variables-reference-documentation.yml' # or when this file was changed
 
 jobs:
   reports:

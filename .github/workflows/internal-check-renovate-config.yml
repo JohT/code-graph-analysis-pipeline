@@ -7,6 +7,7 @@ on:
     # Only watch root level Renovate configuration changes
     paths:
       - 'renovate.json*'
+      - '.github/workflows/internal-check-renovate-config.yml' # or when this file changed
 
 jobs:
   reports:

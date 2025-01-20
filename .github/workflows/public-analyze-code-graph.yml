@@ -23,6 +23,7 @@ on:
           The name of the sources uploaded with 'actions/upload-artifact' 
           containing the content of the 'source' directory for the analysis. 
           Also supports sub-folders for multiple source code bases.
+          Please use 'include-hidden-files: true' if you also want to upload the git history.
         required: false
         type: string
         default: ''
@@ -70,7 +71,11 @@ jobs:
       - name: Assure that either artifacts-upload-name or sources-upload-name is set
         if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
-        
+
+      - name: (Debug) Log all variables
+        if: runner.debug == '1'
+        run: echo "DEBUG log all variables -> $GITHUB_CONTEXT"
+
       - name: Checkout code-graph-analysis-pipeline
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
@@ -141,6 +146,12 @@ jobs:
         with:
           name: ${{ inputs.artifacts-upload-name }}
           path: temp/${{ inputs.analysis-name }}/artifacts
+
+      - name: (Debug) Log folder structure of temp directory
+        if: runner.debug == '1'
+        working-directory: temp
+        run: |
+          ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 
       - name: (Code Analysis) Analyze ${{ inputs.analysis-name }}
         working-directory: temp/${{ inputs.analysis-name }}

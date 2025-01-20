@@ -11,8 +11,8 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Analyze static code structure as a graph
 - Supports Java Code Analysis
 - **🌟New🌟:** Supports Typescript Code Analysis (experimental)
-- Fully automated [pipeline for Java](./.github/workflows/java-code-analysis.yml) from tool installation to report generation
-- Fully automated [pipeline for Typescript](./.github/workflows/typescript-code-analysis.yml) from tool installation to report generation
+- Fully automated [pipeline for Java](./.github/workflows/internal-java-code-analysis.yml) from tool installation to report generation
+- Fully automated [pipeline for Typescript](./.github/workflows/internal-typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
 - Easy integratable in your [continuous integration pipeline](./INTEGRATION.md)
 - More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
@@ -113,7 +113,7 @@ Currently (2025), only GitHub Actions are supported.
 
 ## :building_construction: Pipeline and Tools
 
-The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
+The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:
 
 - Use [GitHub Actions](https://docs.github.com/de/actions) Linux Runner
 - [Checkout GIT Repository](https://github.com/actions/checkout)
@@ -139,7 +139,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 - [HPCC-Systems (High Performance Computing Cluster) Web-Assembly (JavaScript)](https://github.com/hpcc-systems/hpcc-js-wasm) containing a wrapper for GraphViz to visualize graph structures.
 - [GraphViz](https://gitlab.com/graphviz/graphviz) for CLI Graph Visualization
-- [Check links in markdown documentation (GitHub workflow)](./.github/workflows/check-links-in-documentation.yml) uses [markdown-link-check](https://github.com/tcort/markdown-link-check).
+- [Check links in markdown documentation (GitHub workflow)](./.github/workflows/internal-check-links-in-documentation.yml) uses [markdown-link-check](https://github.com/tcort/markdown-link-check).
 
 **Big shout-out** 📣 to all the creators and contributors of these great libraries 👍. Projects like this wouldn't be possible without them. Feel free to [create an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new/choose) if something is missing or wrong in the list.
 
@@ -193,7 +193,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.ym
 
 - How can i analyze a different code basis automatically?  
   👉 Create a new download script like the ones in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference for Java projects and [downloadReactRouter.sh](./scripts/downloader/downloadReactRouter.sh) as a reference for Typescript projects.
-  👉 After downloading, run [analyze.sh](./scripts/analysis/analyze.sh). You can find these steps also in the [pipeline](./.github/workflows/java-code-analysis.yml) as a reference.
+  👉 After downloading, run [analyze.sh](./scripts/analysis/analyze.sh). You can find these steps also in the [pipeline](./.github/workflows/internal-java-code-analysis.yml) as a reference.
 
 - How can i trigger a full re-scan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.

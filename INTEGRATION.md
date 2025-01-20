@@ -18,8 +18,8 @@ The workflow requires the names of the uploaded artifacts (source code and build
 
 You can find examples in:
 
-- [internal-java-code-analysis.yml](./.github/workflows/internal-java-code-analysis.yml)
-- [internal-typescript-code-analysis.yml](./.github/workflows/internal-typescript-code-analysis.yml)
+- [internal-internal-java-code-analysis.yml](./.github/workflows/internal-internal-java-code-analysis.yml)
+- [internal-internal-typescript-code-analysis.yml](./.github/workflows/internal-internal-typescript-code-analysis.yml)
 
 :warning: Note: Workflows with names starting with `internal-` are private and should not be used outside this repository. They may change at any time without notice.
 
@@ -30,6 +30,7 @@ The workflow parameters are as follows:
 - **analysis-name**: The name of the project to analyze. Example: MyProject-1.0.0. This parameter is required and should be a string.
 - **artifacts-upload-name**: The name of the artifacts uploaded with [actions/upload-artifact](https://github.com/actions/upload-artifact/tree/65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08) containing the content of the 'artifacts' directory for the analysis. This is used to analyze Java JARs, WARs, EARs, etc. This parameter is optional and defaults to an empty string.
 - **sources-upload-name**: The name of the sources uploaded with [actions/upload-artifact](https://github.com/actions/upload-artifact/tree/65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08) containing the content of the 'source' directory for the analysis. It also supports sub-folders for multiple source code bases. This parameter is optional and defaults to an empty string.
+Please use 'include-hidden-files: true' if you also want to upload the git history.
 - **ref**: The branch, tag, or SHA of the code-graph-analysis-pipeline to checkout. This parameter is optional and defaults to "main".
 - **analysis-arguments**: The arguments to pass to the analysis script. This parameter is optional and defaults to '--profile Neo4jv5-low-memory'.
 - **typescript-scan-heap-memory**: The heap memory size in MB to use for the TypeScript code scans. This value is only used for the TypeScript code scans and is ignored for other scans. This parameter is optional and defaults to '4096'.

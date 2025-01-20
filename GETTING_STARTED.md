@@ -112,4 +112,4 @@ Use these optional command line options as needed:
 
 ## GitHub Actions
 
-👉 See [Code Structure Analysis Pipeline](./.github/workflows/java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.
+👉 See [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.
