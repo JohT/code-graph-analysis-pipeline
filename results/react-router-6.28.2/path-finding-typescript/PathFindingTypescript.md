@@ -862,25 +862,6 @@ The following table shows the first 10 rows with all details of the query above.
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.2</td>
-      <td>True</td>
-      <td>True</td>
-      <td>False</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-native]</td>
-      <td>[react-router-dom -&gt; react-router-native, react-router-dom -&gt; react-router-6.28.2]</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>react-router-dom</td>
       <td>react-router-6.28.2</td>
       <td>react-router-6.28.2</td>
       <td>True</td>
@@ -896,6 +877,25 @@ The following table shows the first 10 rows with all details of the query above.
       <td>[./server.tsx -&gt; ./index.tsx]</td>
       <td>[react-router-dom -&gt; react-router-native]</td>
       <td>[react-router-6.28.2 -&gt; react-router-native]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-dom</td>
+      <td>react-router-dom</td>
+      <td>react-router-6.28.2</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-native]</td>
+      <td>[react-router-dom -&gt; react-router-native, react-router-dom -&gt; react-router-6.28.2]</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1113,25 +1113,6 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
-      <td>react-router-dom</td>
-      <td>react-router-6.28.2</td>
-      <td>True</td>
-      <td>True</td>
-      <td>False</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>[./server.tsx -&gt; ./index.tsx]</td>
-      <td>[react-router-dom -&gt; react-router-native]</td>
-      <td>[react-router-dom -&gt; react-router-native, react-router-dom -&gt; react-router-6.28.2]</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>react-router-dom</td>
       <td>react-router-6.28.2</td>
       <td>react-router-6.28.2</td>
       <td>True</td>
@@ -1147,6 +1128,25 @@ In this section we'll focus only on pairs of nodes that both belong to the same 
       <td>[./server.tsx -&gt; ./index.tsx]</td>
       <td>[react-router-dom -&gt; react-router-native]</td>
       <td>[react-router-6.28.2 -&gt; react-router-native]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>react-router-dom</td>
+      <td>react-router-dom</td>
+      <td>react-router-6.28.2</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>[./server.tsx -&gt; ./index.tsx]</td>
+      <td>[react-router-dom -&gt; react-router-native]</td>
+      <td>[react-router-dom -&gt; react-router-native, react-router-dom -&gt; react-router-6.28.2]</td>
     </tr>
     <tr>
       <th>5</th>

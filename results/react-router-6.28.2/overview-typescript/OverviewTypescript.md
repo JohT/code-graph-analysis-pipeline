@@ -122,16 +122,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-native</td>
       <td>index.tsx</td>
       <td>34</td>
-      <td>Function</td>
-      <td>14</td>
+      <td>TypeAlias</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>6</th>
       <td>react-router-native</td>
       <td>index.tsx</td>
       <td>34</td>
-      <td>TypeAlias</td>
-      <td>6</td>
+      <td>Function</td>
+      <td>14</td>
     </tr>
     <tr>
       <th>7</th>

@@ -96,7 +96,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>8</td>
       <td>12</td>
       <td>109</td>
-      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
+      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
     </tr>
   </tbody>
 </table>
@@ -217,7 +217,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>8</td>
       <td>12</td>
       <td>109</td>
-      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
+      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
     </tr>
   </tbody>
 </table>
@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, MemoryRouterProps, useNavigate, NavigateO...</td>
+      <td>[To, useNavigate, MemoryRouterProps, NavigateO...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.ReactNode, React.useEffect, React.JSX.E...</td>
+      <td>[React.ReactNode, React.JSX.Element, React.Mut...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, MemoryRouterProps, useNavigate, NavigateO...</td>
+      <td>[To, useNavigate, MemoryRouterProps, NavigateO...</td>
     </tr>
     <tr>
       <th>6</th>
