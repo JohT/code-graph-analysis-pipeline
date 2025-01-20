@@ -23,7 +23,7 @@
 "org.axonframework.messaging.MetaData: boolean equals(java.lang.Object)","equals","centralityArticleRank",0.020634085499691975,""
 "org.axonframework.eventsourcing.eventstore.DomainEventStream: org.axonframework.eventsourcing.eventstore.DomainEventStream of(java.util.stream.Stream,java.util.function.Supplier)","of","centralityArticleRank",0.019380478674988242,""
 "org.axonframework.serialization.Converter: org.axonframework.serialization.SerializedObject convert(org.axonframework.serialization.SerializedObject,java.lang.Class)","convert","centralityArticleRank",0.018530833972614406,""
-"org.axonframework.modelling.command.AggregateScopeDescriptor: java.lang.Object getIdentifier()","getIdentifier","centralityArticleRank",0.01801706318179314,""
+"org.axonframework.modelling.command.AggregateScopeDescriptor: java.lang.Object getIdentifier()","getIdentifier","centralityArticleRank",0.018017063181793136,""
 "org.axonframework.common.Assert: void notNull(java.lang.Object,java.util.function.Supplier)","notNull","centralityArticleRank",0.017628909737733876,""
 "org.axonframework.messaging.unitofwork.UnitOfWork: void attachTransaction(org.axonframework.common.transaction.TransactionManager)","attachTransaction","centralityArticleRank",0.01745319663820595,""
 "org.axonframework.common.ReflectionUtils: java.lang.reflect.AccessibleObject ensureAccessible(java.lang.reflect.AccessibleObject)","ensureAccessible","centralityArticleRank",0.01735252526759292,""
