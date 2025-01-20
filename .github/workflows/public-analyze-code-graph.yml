@@ -73,7 +73,6 @@ jobs:
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
 
       - name: (Debug) Log all variables
-        if: runner.debug == '1'
         run: echo "DEBUG log all variables -> $GITHUB_CONTEXT"
 
       - name: Checkout code-graph-analysis-pipeline
