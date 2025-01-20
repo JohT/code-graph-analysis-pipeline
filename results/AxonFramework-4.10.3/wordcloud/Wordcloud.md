@@ -97,18 +97,18 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Mateusz Nowak</td>
-      <td>298</td>
+      <td>Allard Buijze</td>
+      <td>3126</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Steven van Beelen</td>
-      <td>4039</td>
+      <td>Mateusz Nowak</td>
+      <td>299</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Allard Buijze</td>
-      <td>3126</td>
+      <td>Steven van Beelen</td>
+      <td>4039</td>
     </tr>
     <tr>
       <th>3</th>
