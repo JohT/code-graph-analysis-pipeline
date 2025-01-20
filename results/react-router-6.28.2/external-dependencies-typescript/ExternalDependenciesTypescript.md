@@ -1080,7 +1080,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>115</td>
       <td>2</td>
       <td>185.483871</td>
-      <td>[HTMLFormMethod.toLowerCase, History.location,...</td>
+      <td>[HTMLFormMethod.toLowerCase, Router.state, Fet...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, useNavigate, MemoryRouterProps, useLocati...</td>
+      <td>[To, MemoryRouterProps, useNavigate, useLocati...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.ReactNode, React.useEffect, React.useCa...</td>
+      <td>[React.ReactNode, React.useEffect, React.JSX.E...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1240,7 +1240,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>115</td>
       <td>2</td>
       <td>185.483871</td>
-      <td>[HTMLFormMethod.toLowerCase, History.location,...</td>
+      <td>[HTMLFormMethod.toLowerCase, Router.state, Fet...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, useNavigate, MemoryRouterProps, useLocati...</td>
+      <td>[To, MemoryRouterProps, useNavigate, useLocati...</td>
     </tr>
     <tr>
       <th>6</th>
