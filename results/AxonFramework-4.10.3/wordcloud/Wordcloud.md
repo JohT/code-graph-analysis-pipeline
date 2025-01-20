@@ -98,7 +98,7 @@
     <tr>
       <th>0</th>
       <td>Mateusz Nowak</td>
-      <td>296</td>
+      <td>298</td>
     </tr>
     <tr>
       <th>1</th>

@@ -2402,16 +2402,16 @@ The following table shows the top 40 most used combinations of methods of larger
       <th>29</th>
       <td>org.axonframework.config.Configuration</td>
       <td>9</td>
-      <td>[getComponent]</td>
-      <td>1</td>
+      <td>[upcasterChain, snapshotFilter]</td>
+      <td>2</td>
       <td>3</td>
     </tr>
     <tr>
       <th>30</th>
       <td>org.axonframework.config.Configuration</td>
       <td>9</td>
-      <td>[upcasterChain, snapshotFilter]</td>
-      <td>2</td>
+      <td>[getComponent]</td>
+      <td>1</td>
       <td>3</td>
     </tr>
     <tr>
@@ -2830,8 +2830,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>3</td>
       <td>64</td>
       <td>0.046875</td>
-      <td>[org.axonframework.messaging, org.axonframework.common, org.axonframework.tracing]</td>
-      <td>[messaging, common, tracing]</td>
+      <td>[org.axonframework.tracing, org.axonframework.messaging, org.axonframework.common]</td>
+      <td>[tracing, messaging, common]</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2860,8 +2860,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>9</td>
       <td>64</td>
       <td>0.140625</td>
-      <td>[org.axonframework.messaging.unitofwork, org.axonframework.commandhandling, org.axonframework.common.caching, org.axonframework.messaging.annotation, org.axonframework.common, org.axonframework.commandhandling.callbacks, org.axonframework.monitoring, org.axonframework.common.transaction, org.axo...</td>
-      <td>[unitofwork, commandhandling, caching, annotation, common, callbacks, monitoring, transaction, messaging]</td>
+      <td>[org.axonframework.messaging, org.axonframework.common.caching, org.axonframework.commandhandling.callbacks, org.axonframework.monitoring, org.axonframework.messaging.annotation, org.axonframework.common, org.axonframework.common.transaction, org.axonframework.messaging.unitofwork, org.axonframe...</td>
+      <td>[messaging, caching, callbacks, monitoring, annotation, common, transaction, unitofwork, commandhandling]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2870,8 +2870,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>10</td>
       <td>64</td>
       <td>0.156250</td>
-      <td>[org.axonframework.eventhandling, org.axonframework.commandhandling, org.axonframework.deadline, org.axonframework.messaging.annotation, org.axonframework.common, org.axonframework.messaging, org.axonframework.messaging.unitofwork, org.axonframework.common.stream, org.axonframework.commandhandli...</td>
-      <td>[eventhandling, commandhandling, deadline, annotation, common, messaging, unitofwork, stream, gateway, scheduling]</td>
+      <td>[org.axonframework.eventhandling, org.axonframework.messaging.annotation, org.axonframework.deadline, org.axonframework.commandhandling, org.axonframework.common, org.axonframework.common.stream, org.axonframework.messaging.unitofwork, org.axonframework.messaging, org.axonframework.commandhandli...</td>
+      <td>[eventhandling, annotation, deadline, commandhandling, common, stream, unitofwork, messaging, gateway, scheduling]</td>
     </tr>
     <tr>
       <th>5</th>
@@ -2900,8 +2900,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>2</td>
       <td>9</td>
       <td>0.222222</td>
-      <td>[org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing]</td>
-      <td>[eventstore, eventsourcing]</td>
+      <td>[org.axonframework.eventsourcing, org.axonframework.eventsourcing.eventstore]</td>
+      <td>[eventsourcing, eventstore]</td>
     </tr>
     <tr>
       <th>8</th>
@@ -2910,8 +2910,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>2</td>
       <td>9</td>
       <td>0.222222</td>
-      <td>[org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing]</td>
-      <td>[eventstore, eventsourcing]</td>
+      <td>[org.axonframework.eventsourcing, org.axonframework.eventsourcing.eventstore]</td>
+      <td>[eventsourcing, eventstore]</td>
     </tr>
     <tr>
       <th>9</th>
@@ -2920,8 +2920,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>18</td>
       <td>64</td>
       <td>0.281250</td>
-      <td>[org.axonframework.common.jpa, org.axonframework.eventhandling, org.axonframework.messaging.interceptors, org.axonframework.messaging.annotation, org.axonframework.messaging, org.axonframework.common, org.axonframework.deadline, org.axonframework.messaging.unitofwork, org.axonframework.tracing, ...</td>
-      <td>[jpa, eventhandling, interceptors, annotation, messaging, common, deadline, unitofwork, tracing, property, lock, commandhandling, caching, serialization, xml, jdbc, legacyjpa]</td>
+      <td>[org.axonframework.common.annotation, org.axonframework.deadline, org.axonframework.messaging.unitofwork, org.axonframework.messaging, org.axonframework.commandhandling, org.axonframework.eventhandling, org.axonframework.messaging.annotation, org.axonframework.tracing, org.axonframework.messagin...</td>
+      <td>[annotation, deadline, unitofwork, messaging, commandhandling, eventhandling, tracing, interceptors, lock, common, property, jpa, caching, serialization, xml, jdbc, legacyjpa]</td>
     </tr>
     <tr>
       <th>10</th>
@@ -2930,8 +2930,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>20</td>
       <td>64</td>
       <td>0.312500</td>
-      <td>[org.axonframework.common.io, org.axonframework.common.transaction, org.axonframework.common, org.axonframework.serialization, org.axonframework.common.jdbc, org.axonframework.common.jpa, org.axonframework.serialization.upcasting.event, org.axonframework.eventhandling, org.axonframework.messagin...</td>
-      <td>[io, transaction, common, serialization, jdbc, jpa, event, eventhandling, unitofwork, annotation, lock, tracing, caching, messaging, xml, lifecycle, monitoring, stream, commandhandling, legacyjpa]</td>
+      <td>[org.axonframework.common.jdbc, org.axonframework.common.transaction, org.axonframework.serialization, org.axonframework.serialization.upcasting.event, org.axonframework.eventhandling, org.axonframework.common.jpa, org.axonframework.common.io, org.axonframework.common, org.axonframework.messagin...</td>
+      <td>[jdbc, transaction, serialization, event, eventhandling, jpa, io, common, unitofwork, caching, annotation, lock, messaging, tracing, lifecycle, stream, xml, monitoring, commandhandling, legacyjpa]</td>
     </tr>
     <tr>
       <th>11</th>
@@ -2940,8 +2940,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>3</td>
       <td>9</td>
       <td>0.333333</td>
-      <td>[org.axonframework.eventsourcing, org.axonframework.eventsourcing.snapshotting, org.axonframework.eventsourcing.eventstore]</td>
-      <td>[eventsourcing, snapshotting, eventstore]</td>
+      <td>[org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing.snapshotting, org.axonframework.eventsourcing]</td>
+      <td>[eventstore, snapshotting, eventsourcing]</td>
     </tr>
     <tr>
       <th>12</th>
@@ -2950,8 +2950,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>4</td>
       <td>11</td>
       <td>0.363636</td>
-      <td>[org.axonframework.axonserver.connector, org.axonframework.axonserver.connector.query, org.axonframework.axonserver.connector.event.axon, org.axonframework.axonserver.connector.command]</td>
-      <td>[connector, query, axon, command]</td>
+      <td>[org.axonframework.axonserver.connector, org.axonframework.axonserver.connector.event.axon, org.axonframework.axonserver.connector.query, org.axonframework.axonserver.connector.command]</td>
+      <td>[connector, axon, query, command]</td>
     </tr>
     <tr>
       <th>13</th>
@@ -2960,8 +2960,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>25</td>
       <td>64</td>
       <td>0.390625</td>
-      <td>[org.axonframework.common, org.axonframework.lifecycle, org.axonframework.eventhandling, org.axonframework.messaging.unitofwork, org.axonframework.common.stream, org.axonframework.tracing, org.axonframework.eventhandling.scheduling.java, org.axonframework.monitoring, org.axonframework.eventhandl...</td>
-      <td>[common, lifecycle, eventhandling, unitofwork, stream, tracing, java, monitoring, async, jdbc, serialization, messaging, event, scheduling, xml, queryhandling, responsetypes, transaction, pooled, tokenstore, callbacks, distributed, commandhandling, util, inmemory]</td>
+      <td>[org.axonframework.messaging.unitofwork, org.axonframework.common.jdbc, org.axonframework.common, org.axonframework.serialization.upcasting.event, org.axonframework.eventhandling.async, org.axonframework.serialization.xml, org.axonframework.lifecycle, org.axonframework.eventhandling.scheduling, ...</td>
+      <td>[unitofwork, jdbc, common, event, async, xml, lifecycle, scheduling, eventhandling, tracing, stream, messaging, monitoring, serialization, java, responsetypes, queryhandling, pooled, tokenstore, transaction, commandhandling, callbacks, distributed, util, inmemory]</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2970,8 +2970,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>4</td>
       <td>9</td>
       <td>0.444444</td>
-      <td>[org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing.eventstore.jpa, org.axonframework.eventsourcing.snapshotting, org.axonframework.eventsourcing]</td>
-      <td>[eventstore, jpa, snapshotting, eventsourcing]</td>
+      <td>[org.axonframework.eventsourcing.snapshotting, org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing.eventstore.jpa, org.axonframework.eventsourcing]</td>
+      <td>[snapshotting, eventstore, jpa, eventsourcing]</td>
     </tr>
     <tr>
       <th>15</th>
@@ -2980,8 +2980,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>5</td>
       <td>10</td>
       <td>0.500000</td>
-      <td>[org.axonframework.modelling.command, org.axonframework.modelling.command.inspection, org.axonframework.modelling.saga, org.axonframework.modelling.saga.repository.inmemory, org.axonframework.modelling.saga.repository]</td>
-      <td>[command, inspection, saga, inmemory, repository]</td>
+      <td>[org.axonframework.modelling.command.inspection, org.axonframework.modelling.command, org.axonframework.modelling.saga.repository, org.axonframework.modelling.saga, org.axonframework.modelling.saga.repository.inmemory]</td>
+      <td>[inspection, command, repository, saga, inmemory]</td>
     </tr>
     <tr>
       <th>16</th>
@@ -2990,8 +2990,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>34</td>
       <td>64</td>
       <td>0.531250</td>
-      <td>[org.axonframework.eventhandling, org.axonframework.common.jdbc, org.axonframework.eventhandling.pooled, org.axonframework.monitoring, org.axonframework.eventhandling.tokenstore, org.axonframework.messaging, org.axonframework.util, org.axonframework.lifecycle, org.axonframework.eventhandling.sch...</td>
-      <td>[eventhandling, jdbc, pooled, monitoring, tokenstore, messaging, util, lifecycle, scheduling, lock, deadletter, transaction, unitofwork, annotation, xml, inmemory, commandhandling, gateway, serialization, jpa, interceptors, caching, queryhandling, deadline, common, event, correlation, async, tra...</td>
+      <td>[org.axonframework.eventhandling.tokenstore.jpa, org.axonframework.serialization.xml, org.axonframework.commandhandling, org.axonframework.common.lock, org.axonframework.common.jpa, org.axonframework.eventhandling.async, org.axonframework.eventhandling, org.axonframework.util, org.axonframework....</td>
+      <td>[jpa, xml, commandhandling, lock, async, eventhandling, util, gateway, unitofwork, annotation, monitoring, correlation, tracing, jdbc, tokenstore, scheduling, serialization, deadline, deadletter, lifecycle, interceptors, inmemory, pooled, caching, transaction, common, messaging, queryhandling, e...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -3000,8 +3000,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>5</td>
       <td>9</td>
       <td>0.555556</td>
-      <td>[org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing.eventstore.legacyjpa, org.axonframework.eventsourcing.eventstore.jpa, org.axonframework.eventsourcing, org.axonframework.eventsourcing.eventstore.jdbc]</td>
-      <td>[eventstore, legacyjpa, jpa, eventsourcing, jdbc]</td>
+      <td>[org.axonframework.eventsourcing.eventstore.legacyjpa, org.axonframework.eventsourcing.eventstore, org.axonframework.eventsourcing, org.axonframework.eventsourcing.eventstore.jpa, org.axonframework.eventsourcing.eventstore.jdbc]</td>
+      <td>[legacyjpa, eventstore, eventsourcing, jpa, jdbc]</td>
     </tr>
     <tr>
       <th>18</th>
@@ -3010,8 +3010,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.saga.repository, org.axonframework.modelling.saga.repository.legacyjpa, org.axonframework.modelling.saga.repository.jpa, org.axonframework.modelling.command, org.axonframework.modelling.saga, org.axonframework.modelling.saga.repository.jdbc]</td>
-      <td>[repository, legacyjpa, jpa, command, saga, jdbc]</td>
+      <td>[org.axonframework.modelling.saga.repository.legacyjpa, org.axonframework.modelling.saga.repository, org.axonframework.modelling.saga.repository.jpa, org.axonframework.modelling.saga, org.axonframework.modelling.command, org.axonframework.modelling.saga.repository.jdbc]</td>
+      <td>[legacyjpa, repository, jpa, saga, command, jdbc]</td>
     </tr>
     <tr>
       <th>19</th>
@@ -3030,8 +3030,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>6</td>
       <td>10</td>
       <td>0.600000</td>
-      <td>[org.axonframework.modelling.saga.repository.inmemory, org.axonframework.modelling.saga.repository.jpa, org.axonframework.modelling.saga, org.axonframework.modelling.command.inspection, org.axonframework.modelling.command, org.axonframework.modelling.saga.repository]</td>
-      <td>[inmemory, jpa, saga, inspection, command, repository]</td>
+      <td>[org.axonframework.modelling.command.inspection, org.axonframework.modelling.saga.repository.jpa, org.axonframework.modelling.saga.repository.inmemory, org.axonframework.modelling.saga.repository, org.axonframework.modelling.command, org.axonframework.modelling.saga]</td>
+      <td>[inspection, jpa, inmemory, repository, command, saga]</td>
     </tr>
     <tr>
       <th>21</th>
@@ -3040,8 +3040,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>39</td>
       <td>64</td>
       <td>0.609375</td>
-      <td>[org.axonframework.eventhandling, org.axonframework.messaging.deadletter, org.axonframework.common.jpa, org.axonframework.eventhandling.deadletter.legacyjpa, org.axonframework.common.legacyjpa, org.axonframework.eventhandling.tokenstore, org.axonframework.common.transaction, org.axonframework.se...</td>
-      <td>[eventhandling, deadletter, jpa, legacyjpa, tokenstore, transaction, serialization, jdbc, annotation, async, queryhandling, lifecycle, correlation, tracing, interceptors, pooled, commandhandling, distributed, scheduling, jobrunr, xml, dbscheduler, gateway, attributes, json, common, event, deadli...</td>
+      <td>[org.axonframework.messaging.deadletter, org.axonframework.eventhandling, org.axonframework.common.jpa, org.axonframework.common.legacyjpa, org.axonframework.eventhandling.tokenstore, org.axonframework.serialization, org.axonframework.eventhandling.deadletter.legacyjpa, org.axonframework.eventha...</td>
+      <td>[deadletter, eventhandling, jpa, legacyjpa, tokenstore, serialization, transaction, jdbc, gateway, dbscheduler, annotation, deadline, common, queryhandling, async, jobrunr, lifecycle, pooled, json, scheduling, correlation, interceptors, distributed, tracing, xml, attributes, messaging, event, co...</td>
     </tr>
     <tr>
       <th>22</th>
@@ -3050,8 +3050,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>5</td>
       <td>8</td>
       <td>0.625000</td>
-      <td>[org.axonframework.test.deadline, org.axonframework.test.matchers, org.axonframework.test, org.axonframework.test.eventscheduler, org.axonframework.test.utils]</td>
-      <td>[deadline, matchers, test, eventscheduler, utils]</td>
+      <td>[org.axonframework.test, org.axonframework.test.matchers, org.axonframework.test.deadline, org.axonframework.test.utils, org.axonframework.test.eventscheduler]</td>
+      <td>[test, matchers, deadline, utils, eventscheduler]</td>
     </tr>
     <tr>
       <th>23</th>
@@ -3060,8 +3060,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>41</td>
       <td>64</td>
       <td>0.640625</td>
-      <td>[org.axonframework.messaging.unitofwork, org.axonframework.messaging.correlation, org.axonframework.messaging.annotation, org.axonframework.common, org.axonframework.common.transaction, org.axonframework.messaging, org.axonframework.eventhandling, org.axonframework.messaging.responsetypes, org.a...</td>
-      <td>[unitofwork, correlation, annotation, common, transaction, messaging, eventhandling, responsetypes, interceptors, monitoring, registration, tracing, tokenstore, serialization, jpa, legacyjpa, stream, lifecycle, io, deadline, deadletter, jdbc, replay, event, async, upcasting, xml, scheduling, pro...</td>
+      <td>[org.axonframework.common, org.axonframework.messaging.annotation, org.axonframework.messaging.correlation, org.axonframework.messaging.unitofwork, org.axonframework.messaging, org.axonframework.common.transaction, org.axonframework.eventhandling, org.axonframework.monitoring, org.axonframework....</td>
+      <td>[common, annotation, correlation, unitofwork, messaging, transaction, eventhandling, monitoring, tracing, responsetypes, interceptors, registration, jpa, legacyjpa, tokenstore, serialization, io, stream, lifecycle, deadline, deadletter, jdbc, async, replay, event, upcasting, xml, scheduling, pro...</td>
     </tr>
     <tr>
       <th>24</th>
@@ -3080,8 +3080,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>9</td>
       <td>11</td>
       <td>0.818182</td>
-      <td>[org.axonframework.axonserver.connector.util, org.axonframework.axonserver.connector.processor, org.axonframework.axonserver.connector.event.util, org.axonframework.axonserver.connector, org.axonframework.axonserver.connector.query, org.axonframework.axonserver.connector.query.subscription, org....</td>
-      <td>[util, processor, connector, query, subscription, command, heartbeat, axon]</td>
+      <td>[org.axonframework.axonserver.connector, org.axonframework.axonserver.connector.util, org.axonframework.axonserver.connector.event.util, org.axonframework.axonserver.connector.processor, org.axonframework.axonserver.connector.query, org.axonframework.axonserver.connector.query.subscription, org....</td>
+      <td>[connector, util, processor, query, subscription, command, heartbeat, axon]</td>
     </tr>
     <tr>
       <th>26</th>
@@ -3090,8 +3090,8 @@ The whole table can be found in the CSV report `ArtifactPackageUsage`.
       <td>8</td>
       <td>9</td>
       <td>0.888889</td>
-      <td>[org.axonframework.springboot, org.axonframework.springboot.util, org.axonframework.springboot.autoconfig, org.axonframework.springboot.util.legacyjpa, org.axonframework.actuator.axonserver, org.axonframework.springboot.service.connection, org.axonframework.springboot.util.jpa, org.axonframework...</td>
-      <td>[springboot, util, autoconfig, legacyjpa, axonserver, connection, jpa, actuator]</td>
+      <td>[org.axonframework.springboot, org.axonframework.springboot.autoconfig, org.axonframework.springboot.util, org.axonframework.springboot.util.legacyjpa, org.axonframework.springboot.util.jpa, org.axonframework.actuator.axonserver, org.axonframework.springboot.service.connection, org.axonframework...</td>
+      <td>[springboot, autoconfig, util, legacyjpa, jpa, axonserver, connection, actuator]</td>
     </tr>
     <tr>
       <th>27</th>
@@ -3154,28 +3154,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
   <tbody>
     <tr>
       <th>0</th>
-      <td>axon-server-connector-4.10.3</td>
-      <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.axonserver.connector</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>1</td>
-      <td>100</td>
-      <td>0.010000</td>
-      <td>[org.axonframework.eventhandling.EventBusSpanFactory]</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>axon-modelling-4.10.3</td>
-      <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.modelling.saga.metamodel</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>1</td>
-      <td>100</td>
-      <td>0.010000</td>
-      <td>[org.axonframework.eventhandling.EventMessage]</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>axon-test-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
       <td>org.axonframework.test.matchers</td>
@@ -3186,7 +3164,18 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.eventhandling.EventMessage]</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>1</th>
+      <td>axon-server-connector-4.10.3</td>
+      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.axonserver.connector</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>1</td>
+      <td>100</td>
+      <td>0.010000</td>
+      <td>[org.axonframework.eventhandling.EventBusSpanFactory]</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>axon-spring-boot-autoconfigure-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
       <td>org.axonframework.springboot.util</td>
@@ -3197,18 +3186,18 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.eventhandling.EventMessage]</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>axon-eventsourcing-4.10.3</td>
+      <th>3</th>
+      <td>axon-modelling-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.eventsourcing.snapshotting</td>
+      <td>org.axonframework.modelling.saga.metamodel</td>
       <td>org.axonframework.eventhandling</td>
       <td>1</td>
       <td>100</td>
       <td>0.010000</td>
-      <td>[org.axonframework.eventhandling.DomainEventData]</td>
+      <td>[org.axonframework.eventhandling.EventMessage]</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
       <td>axon-spring-boot-autoconfigure-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
       <td>org.axonframework.springboot.autoconfig.legacyjpa</td>
@@ -3219,7 +3208,29 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.eventhandling.EventBus]</td>
     </tr>
     <tr>
+      <th>5</th>
+      <td>axon-eventsourcing-4.10.3</td>
+      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.eventsourcing.snapshotting</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>1</td>
+      <td>100</td>
+      <td>0.010000</td>
+      <td>[org.axonframework.eventhandling.DomainEventData]</td>
+    </tr>
+    <tr>
       <th>6</th>
+      <td>axon-eventsourcing-4.10.3</td>
+      <td>axon-modelling-4.10.3</td>
+      <td>org.axonframework.eventsourcing.conflictresolution</td>
+      <td>org.axonframework.modelling.command</td>
+      <td>1</td>
+      <td>56</td>
+      <td>0.017857</td>
+      <td>[org.axonframework.modelling.command.ConflictingAggregateVersionException]</td>
+    </tr>
+    <tr>
+      <th>7</th>
       <td>axon-server-connector-4.10.3</td>
       <td>axon-modelling-4.10.3</td>
       <td>org.axonframework.axonserver.connector</td>
@@ -3230,7 +3241,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>[org.axonframework.modelling.command.ConcurrencyException]</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>axon-eventsourcing-4.10.3</td>
       <td>axon-modelling-4.10.3</td>
       <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
@@ -3239,17 +3250,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>56</td>
       <td>0.017857</td>
       <td>[org.axonframework.modelling.command.ConcurrencyException]</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>axon-eventsourcing-4.10.3</td>
-      <td>axon-modelling-4.10.3</td>
-      <td>org.axonframework.eventsourcing.conflictresolution</td>
-      <td>org.axonframework.modelling.command</td>
-      <td>1</td>
-      <td>56</td>
-      <td>0.017857</td>
-      <td>[org.axonframework.modelling.command.ConflictingAggregateVersionException]</td>
     </tr>
     <tr>
       <th>9</th>
@@ -3264,17 +3264,6 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>10</th>
-      <td>axon-test-4.10.3</td>
-      <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.test.eventscheduler</td>
-      <td>org.axonframework.eventhandling</td>
-      <td>2</td>
-      <td>100</td>
-      <td>0.020000</td>
-      <td>[org.axonframework.eventhandling.EventMessage, org.axonframework.eventhandling.GenericEventMessage]</td>
-    </tr>
-    <tr>
-      <th>11</th>
       <td>axon-modelling-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
       <td>org.axonframework.modelling.command</td>
@@ -3283,6 +3272,17 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <td>100</td>
       <td>0.020000</td>
       <td>[org.axonframework.eventhandling.EventBus, org.axonframework.eventhandling.DomainEventSequenceAware]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>axon-test-4.10.3</td>
+      <td>axon-messaging-4.10.3</td>
+      <td>org.axonframework.test.eventscheduler</td>
+      <td>org.axonframework.eventhandling</td>
+      <td>2</td>
+      <td>100</td>
+      <td>0.020000</td>
+      <td>[org.axonframework.eventhandling.EventMessage, org.axonframework.eventhandling.GenericEventMessage]</td>
     </tr>
     <tr>
       <th>12</th>
@@ -3352,9 +3352,9 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>18</th>
-      <td>axon-test-4.10.3</td>
+      <td>axon-eventsourcing-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.test</td>
+      <td>org.axonframework.eventsourcing.conflictresolution</td>
       <td>org.axonframework.messaging</td>
       <td>1</td>
       <td>35</td>
@@ -3374,9 +3374,9 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>20</th>
-      <td>axon-eventsourcing-4.10.3</td>
+      <td>axon-test-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.eventsourcing.conflictresolution</td>
+      <td>org.axonframework.test</td>
       <td>org.axonframework.messaging</td>
       <td>1</td>
       <td>35</td>
@@ -3387,7 +3387,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <th>21</th>
       <td>axon-eventsourcing-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
+      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -3398,7 +3398,7 @@ This table shows the top 30 types that only use a few (compared to all existing)
       <th>22</th>
       <td>axon-eventsourcing-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.eventsourcing.eventstore.legacyjpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.jdbc</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -3407,9 +3407,9 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>23</th>
-      <td>axon-eventsourcing-4.10.3</td>
+      <td>axon-spring-boot-autoconfigure-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.eventsourcing.eventstore.jpa</td>
+      <td>org.axonframework.springboot.autoconfig.legacyjpa</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -3418,9 +3418,9 @@ This table shows the top 30 types that only use a few (compared to all existing)
     </tr>
     <tr>
       <th>24</th>
-      <td>axon-spring-boot-autoconfigure-4.10.3</td>
+      <td>axon-eventsourcing-4.10.3</td>
       <td>axon-messaging-4.10.3</td>
-      <td>org.axonframework.springboot.autoconfig.legacyjpa</td>
+      <td>org.axonframework.eventsourcing.eventstore.legacyjpa</td>
       <td>org.axonframework.serialization</td>
       <td>1</td>
       <td>34</td>
@@ -3786,7 +3786,7 @@ This table shows the file directory distance distribution between dependent file
       <td>90</td>
       <td>82</td>
       <td>38</td>
-      <td>[/org/axonframework/axonserver/connector/util uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/heartbeat uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/processor uses /org/axonframework/axonserver/connector, /org/axonfra...</td>
+      <td>[/org/axonframework/axonserver/connector/heartbeat uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/command uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/query uses /org/axonframework/axonserver/connector, /org/axonfram...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3794,7 +3794,7 @@ This table shows the file directory distance distribution between dependent file
       <td>2503</td>
       <td>760</td>
       <td>472</td>
-      <td>[/org/axonframework/axonserver/connector/event/util uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/heartbeat/source uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/query/subscription uses /org/axonframework/axonserver/c...</td>
+      <td>[/org/axonframework/axonserver/connector/event/axon uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/heartbeat/source uses /org/axonframework/axonserver/connector, /org/axonframework/axonserver/connector/query/subscription uses /org/axonframework/axonserver/c...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -3802,7 +3802,7 @@ This table shows the file directory distance distribution between dependent file
       <td>2594</td>
       <td>449</td>
       <td>540</td>
-      <td>[/org/axonframework/springboot/autoconfig uses /org/axonframework/axonserver/connector, /org/axonframework/actuator/axonserver uses /org/axonframework/axonserver/connector, /org/axonframework/springboot/service/connection uses /org/axonframework/axonserver/connector, /org/axonframework/springboo...</td>
+      <td>[/org/axonframework/springboot/service/connection uses /org/axonframework/axonserver/connector, /org/axonframework/springboot/autoconfig uses /org/axonframework/axonserver/connector, /org/axonframework/actuator/axonserver uses /org/axonframework/axonserver/connector, /org/axonframework/springboo...</td>
     </tr>
   </tbody>
 </table>
