@@ -49,7 +49,7 @@ jobs:
     env: 
       PROJECT_NAME: react-router
       # Version variable name matches renovate.json configuration entry
-      REACT_ROUTER_VERSION: 6.28.1
+      REACT_ROUTER_VERSION: 6.28.2
 
     steps:
     - name: (Prepare Code to Analyze) Checkout GIT repository
