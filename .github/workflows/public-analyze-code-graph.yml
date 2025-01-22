@@ -48,6 +48,13 @@ on:
         required: false
         type: string
         default: '4096'
+      retention-days:
+        description: >
+          The number of days to keep the uploaded artifacts.
+          Default: 5
+        required: false
+        type: number
+        default: 5
     outputs:
       uploaded-analysis-results:
         description: >
@@ -72,7 +79,7 @@ jobs:
         if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
 
-      - name: Checkout code-graph-analysis-pipeline
+      - name: (Code Analysis Setup) Checkout code-graph-analysis-pipeline
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           repository: JohT/code-graph-analysis-pipeline
@@ -175,7 +182,7 @@ jobs:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/reports/*
           if-no-files-found: error
-          retention-days: 5
+          retention-days: ${{ inputs.retention-days }}
 
     
       # Upload logs and unfinished analysis-results in case of an error for troubleshooting
@@ -187,7 +194,6 @@ jobs:
           path: |
             ./temp/**/runtime/*
             ./temp/**/reports/*
-          retention-days: 5
 
       # Upload Database Export
       # Only possible after an export with "./../../scripts/analysis/analyze.sh --report DatabaseCsvExport"
