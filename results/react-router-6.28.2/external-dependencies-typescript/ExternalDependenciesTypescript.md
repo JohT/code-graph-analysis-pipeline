@@ -62,7 +62,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>195</td>
       <td>584</td>
       <td>12</td>
-      <td>109</td>
+      <td>110</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
@@ -70,10 +70,10 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>@remix-run/router</td>
       <td>4</td>
       <td>37</td>
-      <td>380</td>
-      <td>673</td>
+      <td>390</td>
+      <td>687</td>
       <td>12</td>
-      <td>109</td>
+      <td>110</td>
       <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
@@ -84,8 +84,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>28</td>
       <td>57</td>
       <td>12</td>
-      <td>109</td>
-      <td>[&lt;LinkProps&gt; of module &lt;react-router-native&gt; i...</td>
+      <td>110</td>
+      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -95,8 +95,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>4</td>
       <td>8</td>
       <td>12</td>
-      <td>109</td>
-      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
+      <td>110</td>
+      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
     </tr>
   </tbody>
 </table>
@@ -194,7 +194,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>223</td>
       <td>641</td>
       <td>12</td>
-      <td>109</td>
+      <td>110</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
@@ -202,10 +202,10 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>@remix-run</td>
       <td>4</td>
       <td>37</td>
-      <td>380</td>
-      <td>673</td>
+      <td>390</td>
+      <td>687</td>
       <td>12</td>
-      <td>109</td>
+      <td>110</td>
       <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
@@ -216,8 +216,8 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>4</td>
       <td>8</td>
       <td>12</td>
-      <td>109</td>
-      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
+      <td>110</td>
+      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
     </tr>
   </tbody>
 </table>
@@ -332,7 +332,7 @@ external package.
       <td>1</td>
       <td>27</td>
       <td>2.0</td>
-      <td>7.6</td>
+      <td>7.60</td>
       <td>11.126545</td>
       <td>35</td>
       <td>1</td>
@@ -351,12 +351,12 @@ external package.
       <th>1</th>
       <td>@remix-run/router</td>
       <td>4</td>
-      <td>128</td>
+      <td>131</td>
       <td>6</td>
-      <td>88</td>
-      <td>17.0</td>
-      <td>32.0</td>
-      <td>38.401389</td>
+      <td>90</td>
+      <td>17.5</td>
+      <td>32.75</td>
+      <td>39.322385</td>
       <td>37</td>
       <td>3</td>
       <td>23</td>
@@ -378,7 +378,7 @@ external package.
       <td>10</td>
       <td>10</td>
       <td>10.0</td>
-      <td>10.0</td>
+      <td>10.00</td>
       <td>0.000000</td>
       <td>5</td>
       <td>5</td>
@@ -401,7 +401,7 @@ external package.
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>1.00</td>
       <td>0.000000</td>
       <td>2</td>
       <td>2</td>
@@ -821,7 +821,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1</td>
       <td>27</td>
       <td>2.0</td>
-      <td>9.6</td>
+      <td>9.60</td>
       <td>11.865918</td>
       <td>36</td>
       <td>1</td>
@@ -840,12 +840,12 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <th>1</th>
       <td>@remix-run</td>
       <td>4</td>
-      <td>128</td>
+      <td>131</td>
       <td>6</td>
-      <td>88</td>
-      <td>17.0</td>
-      <td>32.0</td>
-      <td>38.401389</td>
+      <td>90</td>
+      <td>17.5</td>
+      <td>32.75</td>
+      <td>39.322385</td>
       <td>37</td>
       <td>3</td>
       <td>23</td>
@@ -867,7 +867,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1</td>
       <td>1</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>1.00</td>
       <td>0.000000</td>
       <td>2</td>
       <td>2</td>
@@ -996,7 +996,7 @@ Only the last 20 entries are shown. The whole table can be found in the followin
     <tr>
       <th>3</th>
       <td>@remix-run/router</td>
-      <td>380</td>
+      <td>390</td>
     </tr>
   </tbody>
 </table>
@@ -1050,13 +1050,13 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <th>0</th>
       <td>server</td>
       <td>@remix-run/router</td>
-      <td>72</td>
-      <td>126</td>
+      <td>74</td>
+      <td>128</td>
       <td>6</td>
-      <td>28</td>
+      <td>29</td>
       <td>2</td>
-      <td>466.666667</td>
-      <td>[Action, IDLE_NAVIGATION, StaticHandlerContext...</td>
+      <td>483.333333</td>
+      <td>[Action.Pop, Action, StaticHandlerContext.erro...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1065,22 +1065,22 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>6</td>
       <td>30</td>
       <td>6</td>
-      <td>28</td>
+      <td>29</td>
       <td>2</td>
-      <td>466.666667</td>
-      <td>[React.ReactNode, React.JSX.Element]</td>
+      <td>483.333333</td>
+      <td>[React.JSX.Element, React.ReactNode]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>@remix-run/router</td>
-      <td>274</td>
-      <td>486</td>
-      <td>62</td>
-      <td>115</td>
+      <td>282</td>
+      <td>498</td>
+      <td>63</td>
+      <td>117</td>
       <td>2</td>
-      <td>185.483871</td>
-      <td>[HTMLFormMethod.toLowerCase, Router, Router.in...</td>
+      <td>185.714286</td>
+      <td>[RouteContextObject.matches, RouteObject.index...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1088,11 +1088,11 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>@types/react</td>
       <td>166</td>
       <td>496</td>
-      <td>62</td>
-      <td>115</td>
+      <td>63</td>
+      <td>117</td>
       <td>2</td>
-      <td>185.483871</td>
-      <td>[React.JSX.Element, React.FormEvent.defaultPre...</td>
+      <td>185.714286</td>
+      <td>[React.useContext, React.useEffect, React.useL...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1104,7 +1104,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[GestureResponderEvent, TouchableHighlightProp...</td>
+      <td>[BackHandler, BackHandlerStatic.addEventListen...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, useNavigate, MemoryRouterProps, NavigateO...</td>
+      <td>[Location.search, useNavigate, useLocation, To...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.ReactNode, React.JSX.Element, React.Mut...</td>
+      <td>[React.MutableRefObject.current, React.useRef,...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1152,7 +1152,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>9</td>
       <td>2</td>
       <td>128.571429</td>
-      <td>[DataStrategyFunction, Router.initialize, crea...</td>
+      <td>[Router, DataStrategyFunction, createRouter, c...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1210,13 +1210,13 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <th>0</th>
       <td>server</td>
       <td>@remix-run</td>
-      <td>72</td>
-      <td>126</td>
+      <td>74</td>
+      <td>128</td>
       <td>6</td>
-      <td>28</td>
+      <td>29</td>
       <td>2</td>
-      <td>466.666667</td>
-      <td>[Action, IDLE_NAVIGATION, StaticHandlerContext...</td>
+      <td>483.333333</td>
+      <td>[Action.Pop, Action, StaticHandlerContext.erro...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1225,22 +1225,22 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>6</td>
       <td>30</td>
       <td>6</td>
-      <td>28</td>
+      <td>29</td>
       <td>2</td>
-      <td>466.666667</td>
-      <td>[React.ReactNode, React.JSX.Element]</td>
+      <td>483.333333</td>
+      <td>[React.JSX.Element, React.ReactNode]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>@remix-run</td>
-      <td>274</td>
-      <td>486</td>
-      <td>62</td>
-      <td>115</td>
+      <td>282</td>
+      <td>498</td>
+      <td>63</td>
+      <td>117</td>
       <td>2</td>
-      <td>185.483871</td>
-      <td>[HTMLFormMethod.toLowerCase, Router, Router.in...</td>
+      <td>185.714286</td>
+      <td>[RouteContextObject.matches, RouteObject.index...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1248,11 +1248,11 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>@types</td>
       <td>166</td>
       <td>496</td>
-      <td>62</td>
-      <td>115</td>
+      <td>63</td>
+      <td>117</td>
       <td>2</td>
-      <td>185.483871</td>
-      <td>[React.JSX.Element, React.FormEvent.defaultPre...</td>
+      <td>185.714286</td>
+      <td>[React.useContext, React.useEffect, React.useL...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1264,7 +1264,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[GestureResponderEvent, React.ReactNode, Touch...</td>
+      <td>[React.MutableRefObject.current, React.useRef,...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[To, useNavigate, MemoryRouterProps, NavigateO...</td>
+      <td>[Location.search, useNavigate, useLocation, To...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1300,7 +1300,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>9</td>
       <td>2</td>
       <td>128.571429</td>
-      <td>[DataStrategyFunction, Router.initialize, crea...</td>
+      <td>[Router, DataStrategyFunction, createRouter, c...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1362,8 +1362,8 @@ The following table uses pivot to show the internal modules in columns, the exte
   <tbody>
     <tr>
       <th>@remix-run/router</th>
-      <td>274</td>
-      <td>72</td>
+      <td>282</td>
+      <td>74</td>
       <td>18</td>
       <td>16</td>
       <td>0</td>
@@ -1428,8 +1428,8 @@ The following table uses pivot to show the internal modules in columns, the exte
   <tbody>
     <tr>
       <th>@remix-run</th>
-      <td>274</td>
-      <td>72</td>
+      <td>282</td>
+      <td>74</td>
       <td>18</td>
       <td>16</td>
       <td>0</td>
@@ -1477,14 +1477,14 @@ This table lists internal elements and the modules they belong to that use many 
     <tr>
       <th>0</th>
       <td>server</td>
-      <td>28</td>
+      <td>29</td>
       <td>6</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
-      <td>115</td>
-      <td>62</td>
+      <td>117</td>
+      <td>63</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1577,10 +1577,10 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>0</th>
       <td>react-router-dom</td>
-      <td>62</td>
+      <td>63</td>
       <td>2</td>
       <td>29</td>
-      <td>46.774194</td>
+      <td>46.031746</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1685,7 +1685,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
-      <td>62</td>
+      <td>63</td>
       <td>2</td>
       <td>1</td>
       <td>1.0</td>
@@ -1767,7 +1767,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
-      <td>62</td>
+      <td>63</td>
       <td>2</td>
       <td>23</td>
       <td>23.5</td>
@@ -1849,13 +1849,13 @@ Only the last 40 entries are shown. The whole table can be found in the followin
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
-      <td>62</td>
+      <td>63</td>
       <td>2</td>
-      <td>37.096774</td>
-      <td>37.903226</td>
-      <td>37.903226</td>
-      <td>38.709677</td>
-      <td>1.140495</td>
+      <td>36.507937</td>
+      <td>37.301587</td>
+      <td>37.301587</td>
+      <td>38.095238</td>
+      <td>1.122392</td>
     </tr>
     <tr>
       <th>3</th>

@@ -71,7 +71,7 @@
 
 
 
-    There are 4514 words in the dataset for the plot titled 'Wordcloud of names in code'.
+    There are 4526 words in the dataset for the plot titled 'Wordcloud of names in code'.
 
 
 
@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Andrew Patton</td>
-      <td>2</td>
+      <td>Brooks Lybrand</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Mihail  Procudin</td>
-      <td>1</td>
+      <td>Remix Run Bot</td>
+      <td>416</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Mark Dalgleish</td>
-      <td>408</td>
+      <td>Rifai</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Remix Run Bot</td>
-      <td>414</td>
+      <td>Tim Dorr</td>
+      <td>386</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Matt Brophy</td>
-      <td>1898</td>
+      <td>1889</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Jacob Ebey</td>
-      <td>245</td>
+      <td>Abdullah Yirik</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Pedro Cattori</td>
-      <td>391</td>
+      <td>Andrew Patton</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Simon Oxtoby</td>
+      <td>Mihail  Procudin</td>
       <td>1</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Cam Thompson</td>
-      <td>1</td>
+      <td>Mark Dalgleish</td>
+      <td>379</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Jason Miller</td>
-      <td>6</td>
+      <td>Jacob Ebey</td>
+      <td>245</td>
     </tr>
   </tbody>
 </table>

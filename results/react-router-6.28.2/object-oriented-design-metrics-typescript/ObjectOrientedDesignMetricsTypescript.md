@@ -309,8 +309,8 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>0</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
-      <td>308</td>
-      <td>216284</td>
+      <td>312</td>
+      <td>218770</td>
       <td>0</td>
       <td>0</td>
       <td>4</td>
@@ -320,8 +320,8 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <th>1</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>server</td>
-      <td>76</td>
-      <td>34378</td>
+      <td>78</td>
+      <td>34788</td>
       <td>0</td>
       <td>0</td>
       <td>2</td>

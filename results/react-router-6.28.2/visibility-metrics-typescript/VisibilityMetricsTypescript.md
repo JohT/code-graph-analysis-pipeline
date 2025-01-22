@@ -170,16 +170,16 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <th>7</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>170</td>
-      <td>136</td>
+      <td>138</td>
       <td>0.375000</td>
-      <td>0.898551</td>
-      <td>0.636775</td>
-      <td>0.505888</td>
-      <td>0.636775</td>
-      <td>0.767663</td>
-      <td>0.846196</td>
-      <td>0.872373</td>
-      <td>0.893315</td>
+      <td>0.913043</td>
+      <td>0.644022</td>
+      <td>0.509511</td>
+      <td>0.644022</td>
+      <td>0.778533</td>
+      <td>0.859239</td>
+      <td>0.886141</td>
+      <td>0.907663</td>
     </tr>
     <tr>
       <th>8</th>
@@ -311,16 +311,16 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <th>3</th>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>170</td>
-      <td>136</td>
+      <td>138</td>
       <td>0.375000</td>
-      <td>0.898551</td>
-      <td>0.636775</td>
-      <td>0.505888</td>
-      <td>0.636775</td>
-      <td>0.767663</td>
-      <td>0.846196</td>
-      <td>0.872373</td>
-      <td>0.893315</td>
+      <td>0.913043</td>
+      <td>0.644022</td>
+      <td>0.509511</td>
+      <td>0.644022</td>
+      <td>0.778533</td>
+      <td>0.859239</td>
+      <td>0.886141</td>
+      <td>0.907663</td>
     </tr>
     <tr>
       <th>4</th>
