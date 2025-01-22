@@ -76,7 +76,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>720</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -87,7 +87,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>311</td>
       <td>114</td>
       <td>1444</td>
-      <td>[IdClass, MappedSuperclass, Id, Entity, Index,...</td>
+      <td>[TypedQuery, EntityManager, MappedSuperclass, ...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -98,7 +98,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>87</td>
       <td>114</td>
       <td>1444</td>
-      <td>[JsonCreator, JsonProperty, JsonTypeInfo$Id, J...</td>
+      <td>[JsonTypeInfo, JsonTypeInfo$Id, JsonGetter, Js...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -109,7 +109,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>299</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Id, MappedSuperclass, IdClass, EntityExistsEx...</td>
+      <td>[TypedQuery, EntityManager, MappedSuperclass, ...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -120,7 +120,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>273</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ErrorMessage, ErrorMessage$Builder, Instructi...</td>
+      <td>[ErrorMessage, InstructionAck$Builder, Instruc...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -131,7 +131,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>126</td>
       <td>114</td>
       <td>1444</td>
-      <td>[AxonServerConnection, AxonServerConnectionFac...</td>
+      <td>[AxonServerConnectionFactory, AxonServerConnec...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -142,7 +142,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>370</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Description, StringDescription, CoreMatchers,...</td>
+      <td>[Description, StringDescription, Matcher, Core...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -153,7 +153,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>94</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ManagedChannelBuilder, Channel, ForwardingCli...</td>
+      <td>[ManagedChannelBuilder, Channel, MethodDescrip...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -164,7 +164,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>198</td>
       <td>114</td>
       <td>1444</td>
-      <td>[SignalType, Flux, Mono, BaseSubscriber, FluxS...</td>
+      <td>[Flux, BaseSubscriber, Mono, SignalType, FluxS...</td>
     </tr>
     <tr>
       <th>10</th>
@@ -175,7 +175,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>49</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Scheduler, SchedulerState, ScheduledExecution]</td>
+      <td>[Scheduler, ScheduledExecution, SchedulerState]</td>
     </tr>
     <tr>
       <th>11</th>
@@ -186,7 +186,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>44</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Task, TaskInstanceId, TaskInstance, Execution...</td>
+      <td>[TaskWithDataDescriptor, Task, ExecutionContex...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -197,7 +197,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>27</td>
       <td>114</td>
       <td>1444</td>
-      <td>[StreamObserver, ClientResponseObserver, Clien...</td>
+      <td>[StreamObserver, ClientCallStreamObserver, Cli...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -208,7 +208,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>34</td>
       <td>114</td>
       <td>1444</td>
-      <td>[JobScheduler, JobBuilder]</td>
+      <td>[JobBuilder, JobScheduler]</td>
     </tr>
     <tr>
       <th>14</th>
@@ -219,7 +219,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>24</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Status, SimpleStatusAggregator, AbstractHealt...</td>
+      <td>[Status, AbstractHealthIndicator, Health$Build...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -230,7 +230,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>55</td>
       <td>114</td>
       <td>1444</td>
-      <td>[AutoConfigurationPackages, AutoConfigureAfter...</td>
+      <td>[AutoConfigurationPackages, AutoConfiguration,...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -252,7 +252,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>135</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Import, Conditional, ConfigurationCondition$C...</td>
+      <td>[Conditional, ConditionContext, ConfigurationC...</td>
     </tr>
     <tr>
       <th>18</th>
@@ -263,7 +263,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>75</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ObjectMapper, JsonNode, DeserializationContex...</td>
+      <td>[ObjectMapper, ObjectReader, ObjectWriter, Jso...</td>
     </tr>
     <tr>
       <th>19</th>
@@ -274,7 +274,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>39</td>
       <td>114</td>
       <td>1444</td>
-      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
+      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
     </tr>
   </tbody>
 </table>
@@ -398,7 +398,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>720</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -409,7 +409,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>199</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ObjectMapper, CBORMapper, JsonCreator, JsonPr...</td>
+      <td>[JsonTypeInfo, JsonTypeInfo$Id, JsonGetter, Js...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -420,7 +420,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>311</td>
       <td>114</td>
       <td>1444</td>
-      <td>[IdClass, MappedSuperclass, Id, Entity, Index,...</td>
+      <td>[TypedQuery, EntityManager, MappedSuperclass, ...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -431,7 +431,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>299</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Id, MappedSuperclass, IdClass, EntityExistsEx...</td>
+      <td>[TypedQuery, EntityManager, MappedSuperclass, ...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -442,7 +442,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>988</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ErrorMessage, ErrorMessage$Builder, ControlCh...</td>
+      <td>[ErrorMessage, NodeInfo$Builder, NodeInfo, Ins...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -453,7 +453,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>528</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ConfigurationProperties, Status, SimpleStatus...</td>
+      <td>[ConfigurationProperties, Status, AbstractHeal...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -464,7 +464,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>126</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ManagedChannelBuilder, StreamObserver, Channe...</td>
+      <td>[StreamObserver, ManagedChannelBuilder, SslCon...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -475,7 +475,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>370</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Description, StringDescription, CoreMatchers,...</td>
+      <td>[Description, StringDescription, Matcher, Core...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -486,7 +486,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>203</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Schedulers, Scheduler, SignalType, Flux, Mono...</td>
+      <td>[Schedulers, Scheduler, Flux, BaseSubscriber, ...</td>
     </tr>
     <tr>
       <th>10</th>
@@ -497,7 +497,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>18</td>
       <td>114</td>
       <td>1444</td>
-      <td>[ByteString, Strings, JsonArray, JsonObject, J...</td>
+      <td>[ByteString, Strings, JsonParser, JsonElement,...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -508,7 +508,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>107</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Task, Scheduler, TaskInstanceId, TaskInstance...</td>
+      <td>[Tasks$OneTimeTaskBuilder, TaskWithDataDescrip...</td>
     </tr>
     <tr>
       <th>12</th>
@@ -519,7 +519,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>121</td>
       <td>114</td>
       <td>1444</td>
-      <td>[XStream, Mapper, UnmarshallingContext, Marsha...</td>
+      <td>[XStream, HierarchicalStreamWriter, MapConvert...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -530,7 +530,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>34</td>
       <td>114</td>
       <td>1444</td>
-      <td>[JobScheduler, JobBuilder]</td>
+      <td>[JobBuilder, JobScheduler]</td>
     </tr>
     <tr>
       <th>14</th>
@@ -541,7 +541,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>59</td>
       <td>114</td>
       <td>1444</td>
-      <td>[SpringUtils, SpringAggregateSnapshotter, Spri...</td>
+      <td>[SpringUtils, GlobalMetricRegistry, MetricsCon...</td>
     </tr>
     <tr>
       <th>15</th>
@@ -552,7 +552,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>14</td>
       <td>114</td>
       <td>1444</td>
-      <td>[Statement, BeforeEachCallback, ExtensionConte...</td>
+      <td>[ExtensionContext, BeforeEachCallback, AfterEa...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -563,7 +563,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>187</td>
       <td>114</td>
       <td>1444</td>
-      <td>[JobDataMap, SchedulerException, JobDetail, Sc...</td>
+      <td>[JobDataMap, JobKey, SchedulerContext, JobDeta...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -574,7 +574,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>46</td>
       <td>114</td>
       <td>1444</td>
-      <td>[RingBuffer, Disruptor, EventHandlerGroup, Eve...</td>
+      <td>[ExceptionHandler, Disruptor, RingBuffer, Even...</td>
     </tr>
     <tr>
       <th>18</th>
@@ -596,7 +596,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>74</td>
       <td>114</td>
       <td>1444</td>
-      <td>[TextMapSetter, TextMapGetter, Scope, Span, Sp...</td>
+      <td>[Scope, SpanContext, StatusCode, SpanBuilder, ...</td>
     </tr>
   </tbody>
 </table>
@@ -737,7 +737,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>10.526316</td>
       <td>13.370198</td>
       <td>10.270014</td>
-      <td>[axon-configuration-4.10.3, axon-eventsourcing...</td>
+      <td>[axon-server-connector-4.10.3, axon-configurat...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -761,7 +761,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.077187</td>
       <td>2.292723</td>
       <td>1.251678</td>
-      <td>[axon-eventsourcing-4.10.3, axon-spring-boot-a...</td>
+      <td>[axon-messaging-4.10.3, axon-eventsourcing-4.1...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -785,7 +785,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.077187</td>
       <td>2.292723</td>
       <td>1.251678</td>
-      <td>[axon-eventsourcing-4.10.3, axon-spring-boot-a...</td>
+      <td>[axon-messaging-4.10.3, axon-eventsourcing-4.1...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -809,7 +809,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.778060</td>
       <td>1.778060</td>
       <td>1.256679</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -833,7 +833,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>0.920796</td>
       <td>0.920796</td>
       <td>0.583416</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -857,7 +857,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>0.920796</td>
       <td>0.920796</td>
       <td>0.583416</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -881,7 +881,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.587463</td>
       <td>1.587463</td>
       <td>1.526225</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -953,7 +953,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>0.920796</td>
       <td>0.920796</td>
       <td>0.583416</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
   </tbody>
 </table>
@@ -2005,7 +2005,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>10.526316</td>
       <td>13.370198</td>
       <td>10.270014</td>
-      <td>[axon-configuration-4.10.3, axon-eventsourcing...</td>
+      <td>[axon-server-connector-4.10.3, axon-configurat...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2029,7 +2029,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.077187</td>
       <td>2.292723</td>
       <td>1.251678</td>
-      <td>[axon-eventsourcing-4.10.3, axon-spring-boot-a...</td>
+      <td>[axon-messaging-4.10.3, axon-eventsourcing-4.1...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2053,7 +2053,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.077187</td>
       <td>2.292723</td>
       <td>1.251678</td>
-      <td>[axon-eventsourcing-4.10.3, axon-spring-boot-a...</td>
+      <td>[axon-messaging-4.10.3, axon-eventsourcing-4.1...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2077,7 +2077,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>2.762389</td>
       <td>2.762389</td>
       <td>1.750247</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2101,7 +2101,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.047861</td>
       <td>1.047861</td>
       <td>0.403719</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -2149,7 +2149,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1.841593</td>
       <td>1.841593</td>
       <td>1.166831</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -2197,7 +2197,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>0.920796</td>
       <td>0.920796</td>
       <td>0.583416</td>
-      <td>[axon-spring-boot-autoconfigure-4.10.3, axon-m...</td>
+      <td>[axon-messaging-4.10.3, axon-spring-boot-autoc...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -2701,7 +2701,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>16</td>
       <td>6</td>
       <td>320.000000</td>
-      <td>[Span, SpanKind, SpanBuilder, Tracer, SpanCont...</td>
+      <td>[SpanContext, StatusCode, SpanBuilder, Span, T...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2713,7 +2713,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>16</td>
       <td>6</td>
       <td>320.000000</td>
-      <td>[TextMapSetter, TextMapGetter, TextMapPropagat...</td>
+      <td>[TextMapPropagator, TextMapGetter, TextMapSett...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2737,7 +2737,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>16</td>
       <td>6</td>
       <td>320.000000</td>
-      <td>[Context, Scope]</td>
+      <td>[Scope, Context]</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2773,7 +2773,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[ConditionalOnProperty, ConditionalOnClass, Co...</td>
+      <td>[ConditionOutcome, ConditionalOnBean, Conditio...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -2785,7 +2785,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[AutoConfiguration, AutoConfigureBefore, AutoC...</td>
+      <td>[AutoConfigureAfter, AutoConfiguration, AutoCo...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -2797,7 +2797,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[Bean, ConfigurationCondition$ConfigurationPha...</td>
+      <td>[Bean, Primary, Configuration, ImportBeanDefin...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -2857,7 +2857,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[SimpleStatusAggregator, Status, AbstractHealt...</td>
+      <td>[Status, SimpleStatusAggregator, AbstractHealt...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2869,7 +2869,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[ApplicationContextAware, ApplicationContext]</td>
+      <td>[ApplicationContext, ApplicationContextAware]</td>
     </tr>
     <tr>
       <th>15</th>
@@ -2881,7 +2881,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[SpringConfigurer, SpringSagaLookup, SpringAgg...</td>
+      <td>[MessageHandlerLookup, SpringAxonConfiguration...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -2893,7 +2893,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[PersistenceContext, EntityManager, EntityMana...</td>
+      <td>[EntityManagerFactory, PersistenceContext, Ent...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -2905,7 +2905,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[EntityManagerFactory, PersistenceContext, Ent...</td>
+      <td>[PersistenceContext, EntityManager, EntityMana...</td>
     </tr>
     <tr>
       <th>18</th>
@@ -2917,7 +2917,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[InitializingBean, NoSuchBeanDefinitionExcepti...</td>
+      <td>[NoSuchBeanDefinitionException, BeanClassLoade...</td>
     </tr>
     <tr>
       <th>19</th>
@@ -2941,7 +2941,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[BeanDefinitionRegistry, BeanDefinitionBuilder...</td>
+      <td>[BeanDefinitionBuilder, BeanDefinitionRegistry...</td>
     </tr>
     <tr>
       <th>21</th>
@@ -2953,7 +2953,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[ContainerConnectionDetailsFactory, ContainerC...</td>
+      <td>[ContainerConnectionSource, ContainerConnectio...</td>
     </tr>
     <tr>
       <th>22</th>
@@ -3001,7 +3001,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[Binder, BindResult, Bindable]</td>
+      <td>[Bindable, Binder, BindResult]</td>
     </tr>
     <tr>
       <th>26</th>
@@ -3073,7 +3073,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[MetricsConfigurerModule, GlobalMetricRegistry]</td>
+      <td>[GlobalMetricRegistry, MetricsConfigurerModule]</td>
     </tr>
     <tr>
       <th>32</th>
@@ -3121,7 +3121,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[RunningService, ConnectionPorts]</td>
+      <td>[ConnectionPorts, RunningService]</td>
     </tr>
     <tr>
       <th>36</th>
@@ -3157,7 +3157,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>101</td>
       <td>47</td>
       <td>134.666667</td>
-      <td>[AnnotatedTypeMetadata, AnnotationMetadata]</td>
+      <td>[AnnotationMetadata, AnnotatedTypeMetadata]</td>
     </tr>
     <tr>
       <th>39</th>
@@ -3239,7 +3239,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.000000</td>
       <td>31.707317</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.MessageHandlerRegist...</td>
+      <td>[org.axonframework.config.Configuration$1, org...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3255,7 +3255,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.000000</td>
       <td>14.634146</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.MessageHandlerRegist...</td>
+      <td>[org.axonframework.config.AxonIQConsoleModule,...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3287,7 +3287,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>100.000000</td>
       <td>31.818182</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.B...</td>
+      <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3367,7 +3367,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>33.333333</td>
       <td>5.333333</td>
       <td>[org.axonframework.springboot.util, org.axonfr...</td>
-      <td>[org.axonframework.springboot.util.AbstractQua...</td>
+      <td>[org.axonframework.springboot.util.XStreamSecu...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -3431,7 +3431,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>33.333333</td>
       <td>24.000000</td>
       <td>[org.axonframework.springboot, org.axonframewo...</td>
-      <td>[org.axonframework.springboot.TracingPropertie...</td>
+      <td>[org.axonframework.springboot.TagsConfiguratio...</td>
     </tr>
     <tr>
       <th>13</th>
@@ -3447,7 +3447,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>33.333333</td>
       <td>40.000000</td>
       <td>[org.axonframework.springboot.util, org.axonfr...</td>
-      <td>[org.axonframework.springboot.util.RegisterDef...</td>
+      <td>[org.axonframework.springboot.util.Conditional...</td>
     </tr>
     <tr>
       <th>14</th>
@@ -3495,7 +3495,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>22.222222</td>
       <td>13.333333</td>
       <td>[org.axonframework.springboot.autoconfig, org....</td>
-      <td>[org.axonframework.springboot.autoconfig.AxonA...</td>
+      <td>[org.axonframework.springboot.autoconfig.JdbcA...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -3671,7 +3671,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>11.111111</td>
       <td>2.666667</td>
       <td>[org.axonframework.springboot.autoconfig]</td>
-      <td>[org.axonframework.springboot.autoconfig.AxonA...</td>
+      <td>[org.axonframework.springboot.autoconfig.XStre...</td>
     </tr>
     <tr>
       <th>28</th>
@@ -3687,7 +3687,7 @@ Only the last 30 entries are shown. The whole table can be found in the followin
       <td>11.111111</td>
       <td>2.666667</td>
       <td>[org.axonframework.springboot.autoconfig]</td>
-      <td>[org.axonframework.springboot.autoconfig.Persi...</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonS...</td>
     </tr>
     <tr>
       <th>29</th>
@@ -3753,7 +3753,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.000000</td>
       <td>31.707317</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.MessageHandlerRegist...</td>
+      <td>[org.axonframework.config.Configuration$1, org...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3769,7 +3769,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.000000</td>
       <td>14.634146</td>
       <td>[org.axonframework.config]</td>
-      <td>[org.axonframework.config.MessageHandlerRegist...</td>
+      <td>[org.axonframework.config.AxonIQConsoleModule,...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3801,7 +3801,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.000000</td>
       <td>31.818182</td>
       <td>[org.axonframework.disruptor.commandhandling]</td>
-      <td>[org.axonframework.disruptor.commandhandling.B...</td>
+      <td>[org.axonframework.disruptor.commandhandling.D...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3881,7 +3881,7 @@ The following table groups the external packages by their first two levels. For 
       <td>33.333333</td>
       <td>5.333333</td>
       <td>[org.axonframework.springboot.util, org.axonfr...</td>
-      <td>[org.axonframework.springboot.util.AbstractQua...</td>
+      <td>[org.axonframework.springboot.util.XStreamSecu...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -3993,7 +3993,7 @@ The following table groups the external packages by their first two levels. For 
       <td>11.111111</td>
       <td>2.666667</td>
       <td>[org.axonframework.springboot.autoconfig]</td>
-      <td>[org.axonframework.springboot.autoconfig.AxonA...</td>
+      <td>[org.axonframework.springboot.autoconfig.XStre...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -4009,7 +4009,7 @@ The following table groups the external packages by their first two levels. For 
       <td>11.111111</td>
       <td>2.666667</td>
       <td>[org.axonframework.springboot.autoconfig]</td>
-      <td>[org.axonframework.springboot.autoconfig.Persi...</td>
+      <td>[org.axonframework.springboot.autoconfig.AxonS...</td>
     </tr>
     <tr>
       <th>17</th>
@@ -4057,7 +4057,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.000000</td>
       <td>100.000000</td>
       <td>[org.axonframework.tracing.opentelemetry]</td>
-      <td>[org.axonframework.tracing.opentelemetry.Metad...</td>
+      <td>[org.axonframework.tracing.opentelemetry.OpenT...</td>
     </tr>
     <tr>
       <th>20</th>
@@ -4073,7 +4073,7 @@ The following table groups the external packages by their first two levels. For 
       <td>100.000000</td>
       <td>60.000000</td>
       <td>[org.axonframework.tracing.opentelemetry]</td>
-      <td>[org.axonframework.tracing.opentelemetry.Metad...</td>
+      <td>[org.axonframework.tracing.opentelemetry.OpenT...</td>
     </tr>
     <tr>
       <th>21</th>
@@ -4121,7 +4121,7 @@ The following table groups the external packages by their first two levels. For 
       <td>72.727273</td>
       <td>49.264706</td>
       <td>[org.axonframework.axonserver.connector, org.a...</td>
-      <td>[org.axonframework.axonserver.connector.ErrorC...</td>
+      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
     </tr>
     <tr>
       <th>24</th>
@@ -4137,7 +4137,7 @@ The following table groups the external packages by their first two levels. For 
       <td>72.727273</td>
       <td>15.441176</td>
       <td>[org.axonframework.axonserver.connector, org.a...</td>
-      <td>[org.axonframework.axonserver.connector.AxonSe...</td>
+      <td>[org.axonframework.axonserver.connector.Server...</td>
     </tr>
     <tr>
       <th>25</th>
@@ -4153,7 +4153,7 @@ The following table groups the external packages by their first two levels. For 
       <td>45.454545</td>
       <td>13.235294</td>
       <td>[org.axonframework.axonserver.connector, org.a...</td>
-      <td>[org.axonframework.axonserver.connector.Manage...</td>
+      <td>[org.axonframework.axonserver.connector.Defaul...</td>
     </tr>
     <tr>
       <th>26</th>
@@ -4923,7 +4923,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>89</td>
       <td>6</td>
       <td>[io.opentelemetry.api.trace, io.opentelemetry....</td>
-      <td>[Span, SpanKind, SpanBuilder, Tracer, SpanCont...</td>
+      <td>[SpanContext, StatusCode, SpanBuilder, Span, T...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -4936,7 +4936,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>670</td>
       <td>47</td>
       <td>[org.springframework.boot.autoconfigure.condit...</td>
-      <td>[ConditionalOnProperty, ConditionalOnClass, Co...</td>
+      <td>[ConditionOutcome, ConditionalOnBean, Conditio...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -4949,7 +4949,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>1402</td>
       <td>26</td>
       <td>[io.axoniq.axonserver.grpc, io.grpc, io.axoniq...</td>
-      <td>[SerializedObject, ErrorMessage, SerializedObj...</td>
+      <td>[SerializedObject, SerializedObject$Builder, E...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -4962,7 +4962,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>93</td>
       <td>5</td>
       <td>[org.slf4j, com.lmax.disruptor, javax.annotati...</td>
-      <td>[Logger, LoggerFactory, ExceptionHandler, Ring...</td>
+      <td>[Logger, LoggerFactory, ExceptionHandler, Wait...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -4975,7 +4975,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>500</td>
       <td>13</td>
       <td>[org.hamcrest, javax.annotation, org.testconta...</td>
-      <td>[Description, BaseMatcher, Matcher, TypeSafeMa...</td>
+      <td>[Matcher, Description, TypeSafeMatcher, BaseMa...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -4988,7 +4988,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>356</td>
       <td>5</td>
       <td>[javax.annotation, javax.persistence, jakarta....</td>
-      <td>[Nonnull, Nullable, Id, Column, Basic, Lob, En...</td>
+      <td>[Nonnull, Nullable, Basic, Id, Lob, Entity, Co...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -5001,7 +5001,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>2975</td>
       <td>42</td>
       <td>[javax.annotation, org.slf4j, com.fasterxml.ja...</td>
-      <td>[Nonnull, Nullable, LoggerFactory, Logger, Jso...</td>
+      <td>[Nonnull, Nullable, Logger, LoggerFactory, Jso...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -5014,7 +5014,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>238</td>
       <td>4</td>
       <td>[javax.annotation, org.slf4j, javax.persistenc...</td>
-      <td>[Nonnull, PreDestroy, Nullable, Logger, Logger...</td>
+      <td>[Nonnull, PreDestroy, Nullable, LoggerFactory,...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -5027,7 +5027,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>137</td>
       <td>2</td>
       <td>[javax.annotation, org.slf4j]</td>
-      <td>[Nonnull, Nullable, Logger, LoggerFactory]</td>
+      <td>[Nonnull, Nullable, LoggerFactory, Logger]</td>
     </tr>
   </tbody>
 </table>
@@ -5079,7 +5079,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>39</td>
       <td>69</td>
       <td>26</td>
-      <td>[ForwardingClientCall$SimpleForwardingClientCa...</td>
+      <td>[MethodDescriptor, CallOptions, Channel, Clien...</td>
       <td>util</td>
     </tr>
     <tr>
@@ -5090,7 +5090,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>38</td>
       <td>147</td>
       <td>24</td>
-      <td>[Matcher, TypeSafeMatcher, Description, BaseMa...</td>
+      <td>[TypeSafeMatcher, Matcher, Description, BaseMa...</td>
       <td>matchers</td>
     </tr>
     <tr>
@@ -5101,7 +5101,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>28</td>
       <td>108</td>
       <td>48</td>
-      <td>[Mono, Flux, FluxSink, Signal, Sinks$Many, Sin...</td>
+      <td>[Signal, FluxSink, Mono, MonoSink, Sinks$Many,...</td>
       <td>queryhandling</td>
     </tr>
     <tr>
@@ -5112,7 +5112,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>25</td>
       <td>124</td>
       <td>21</td>
-      <td>[QueryResponse, QueryRequest, QueryResponse$Bu...</td>
+      <td>[QueryRequest, QueryResponse, QueryResponse$Bu...</td>
       <td>query</td>
     </tr>
     <tr>
@@ -5123,7 +5123,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>21</td>
       <td>113</td>
       <td>6</td>
-      <td>[QueryUpdate, QueryResponse, QueryUpdate$Build...</td>
+      <td>[SubscriptionQuery, QueryUpdate, QueryResponse...</td>
       <td>subscription</td>
     </tr>
     <tr>
@@ -5134,7 +5134,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>20</td>
       <td>90</td>
       <td>31</td>
-      <td>[PersistentStreamSegment, PersistentStreamProp...</td>
+      <td>[AggregateEventStream, EventChannel, Persisten...</td>
       <td>axon</td>
     </tr>
     <tr>
@@ -5145,7 +5145,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>20</td>
       <td>106</td>
       <td>26</td>
-      <td>[MetaDataValue, MetaDataValue$DataCase, Serial...</td>
+      <td>[MetaDataValue$DataCase, FlowControl, FlowCont...</td>
       <td>util</td>
     </tr>
     <tr>
@@ -5156,7 +5156,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>18</td>
       <td>109</td>
       <td>4</td>
-      <td>[JobDataMap, SchedulerException, JobDetail, Sc...</td>
+      <td>[JobDataMap, JobKey, SchedulerContext, JobDeta...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -5167,7 +5167,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>17</td>
       <td>76</td>
       <td>6</td>
-      <td>[Scheduler, JobDataMap, Job, JobDetail, JobExe...</td>
+      <td>[Scheduler, JobDataMap, JobDetail, TriggerBuil...</td>
       <td>quartz</td>
     </tr>
     <tr>
@@ -5178,7 +5178,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>17</td>
       <td>53</td>
       <td>21</td>
-      <td>[ReplyChannel, FlowControl, ResultStream, Axon...</td>
+      <td>[Registration, ReplyChannel, FlowControl, Resu...</td>
       <td>query</td>
     </tr>
     <tr>
@@ -5200,7 +5200,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>15</td>
       <td>71</td>
       <td>22</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>pooled</td>
     </tr>
     <tr>
@@ -5211,7 +5211,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>15</td>
       <td>65</td>
       <td>7</td>
-      <td>[ObjectMapper, JsonNode, DeserializationContex...</td>
+      <td>[ObjectMapper, ObjectReader, ObjectWriter, Jso...</td>
       <td>json</td>
     </tr>
     <tr>
@@ -5233,7 +5233,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>11</td>
       <td>32</td>
       <td>41</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>config</td>
     </tr>
     <tr>
@@ -5255,7 +5255,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>25</td>
       <td>22</td>
-      <td>[RingBuffer, EventHandler, ExceptionHandler, W...</td>
+      <td>[ExceptionHandler, RingBuffer, EventHandler, L...</td>
       <td>commandhandling</td>
     </tr>
     <tr>
@@ -5277,7 +5277,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>52</td>
       <td>11</td>
-      <td>[CommandResponse, Command, CommandResponse$Bui...</td>
+      <td>[Command$Builder, Command, CommandResponse, Co...</td>
       <td>command</td>
     </tr>
     <tr>
@@ -5288,29 +5288,29 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>9</td>
       <td>46</td>
       <td>21</td>
-      <td>[ErrorMessage, SerializedObject, MetaDataValue...</td>
+      <td>[MetaDataValue, MetaDataValue$Builder, Process...</td>
       <td>query</td>
     </tr>
     <tr>
       <th>20</th>
       <td>axon-tracing-opentelemetry-4.10.3</td>
       <td>org.axonframework.tracing.opentelemetry</td>
-      <td>io.opentelemetry.context.propagation</td>
+      <td>io.opentelemetry.api.trace</td>
       <td>9</td>
-      <td>18</td>
+      <td>47</td>
       <td>5</td>
-      <td>[TextMapSetter, TextMapGetter, TextMapPropagat...</td>
+      <td>[SpanContext, StatusCode, SpanBuilder, Span, T...</td>
       <td>opentelemetry</td>
     </tr>
     <tr>
       <th>21</th>
       <td>axon-tracing-opentelemetry-4.10.3</td>
       <td>org.axonframework.tracing.opentelemetry</td>
-      <td>io.opentelemetry.api.trace</td>
+      <td>io.opentelemetry.context.propagation</td>
       <td>9</td>
-      <td>47</td>
+      <td>18</td>
       <td>5</td>
-      <td>[Span, SpanBuilder, SpanContext, StatusCode, S...</td>
+      <td>[TextMapSetter, ContextPropagators, TextMapGet...</td>
       <td>opentelemetry</td>
     </tr>
     <tr>
@@ -5321,7 +5321,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>15</td>
       <td>10</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>legacyjpa</td>
     </tr>
     <tr>
@@ -5332,7 +5332,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>30</td>
       <td>15</td>
-      <td>[CacheEvent, EventType, CacheEventListener, Ev...</td>
+      <td>[CacheEventListener, EventFiring, EventType, E...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -5343,7 +5343,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>26</td>
       <td>15</td>
-      <td>[CacheEntryRemovedListener, CacheEntryExpiredL...</td>
+      <td>[CacheEntryListenerException, CacheEntryRemove...</td>
       <td>caching</td>
     </tr>
     <tr>
@@ -5365,7 +5365,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>68</td>
       <td>27</td>
-      <td>[ErrorMessage, ErrorMessage$Builder, Instructi...</td>
+      <td>[ErrorMessage, InstructionAck$Builder, Instruc...</td>
       <td>connector</td>
     </tr>
     <tr>
@@ -5376,7 +5376,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>25</td>
       <td>11</td>
-      <td>[ErrorMessage, ProcessingInstruction, Processi...</td>
+      <td>[ErrorMessage, MetaDataValue$Builder, Processi...</td>
       <td>command</td>
     </tr>
     <tr>
@@ -5387,7 +5387,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>43</td>
       <td>31</td>
-      <td>[EventWithToken, Event, Confirmation, Event$Bu...</td>
+      <td>[Event, EventWithToken, Event$Builder, Confirm...</td>
       <td>axon</td>
     </tr>
     <tr>
@@ -5398,7 +5398,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>8</td>
       <td>66</td>
       <td>21</td>
-      <td>[Matcher, StringDescription, CoreMatchers, Des...</td>
+      <td>[StringDescription, Matcher, CoreMatchers, Des...</td>
       <td>saga</td>
     </tr>
     <tr>
@@ -5409,7 +5409,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>34</td>
       <td>8</td>
-      <td>[Flux, Mono]</td>
+      <td>[Mono, Flux]</td>
       <td>responsetypes</td>
     </tr>
     <tr>
@@ -5431,7 +5431,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>18</td>
       <td>31</td>
-      <td>[SerializedObject, SerializedObject$Builder, E...</td>
+      <td>[SerializedObject, InstructionAck, SerializedO...</td>
       <td>axon</td>
     </tr>
     <tr>
@@ -5442,7 +5442,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>27</td>
       <td>21</td>
-      <td>[SignalType, Flux, Mono, BaseSubscriber]</td>
+      <td>[Flux, BaseSubscriber, Mono, SignalType]</td>
       <td>query</td>
     </tr>
     <tr>
@@ -5453,7 +5453,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>7</td>
       <td>29</td>
       <td>6</td>
-      <td>[Mono, Flux, FluxSink]</td>
+      <td>[Flux, Mono, FluxSink]</td>
       <td>subscription</td>
     </tr>
     <tr>
@@ -5464,7 +5464,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6</td>
       <td>9</td>
       <td>31</td>
-      <td>[LoggerFactory, Logger]</td>
+      <td>[Logger, LoggerFactory]</td>
       <td>eventstore</td>
     </tr>
     <tr>
@@ -5475,7 +5475,7 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <td>6</td>
       <td>25</td>
       <td>5</td>
-      <td>[Logger, LoggerFactory]</td>
+      <td>[LoggerFactory, Logger]</td>
       <td>deadletter</td>
     </tr>
     <tr>
@@ -5493,22 +5493,22 @@ Only the last 40 entries are shown. The whole table can be found in the followin
       <th>38</th>
       <td>axon-messaging-4.10.3</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.converters</td>
+      <td>com.thoughtworks.xstream.io</td>
       <td>6</td>
-      <td>6</td>
+      <td>32</td>
       <td>34</td>
-      <td>[UnmarshallingContext, MarshallingContext]</td>
+      <td>[HierarchicalStreamWriter, HierarchicalStreamR...</td>
       <td>serialization</td>
     </tr>
     <tr>
       <th>39</th>
       <td>axon-messaging-4.10.3</td>
       <td>org.axonframework.serialization</td>
-      <td>com.thoughtworks.xstream.io</td>
+      <td>com.thoughtworks.xstream.converters</td>
       <td>6</td>
-      <td>32</td>
+      <td>6</td>
       <td>34</td>
-      <td>[HierarchicalStreamReader, HierarchicalStreamW...</td>
+      <td>[MarshallingContext, UnmarshallingContext]</td>
       <td>serialization</td>
     </tr>
   </tbody>
@@ -6711,27 +6711,27 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
       <td>test</td>
-      <td>True</td>
-      <td>io.projectreactor</td>
-      <td>reactor-core</td>
+      <td>False</td>
+      <td>org.hsqldb</td>
+      <td>hsqldb</td>
     </tr>
     <tr>
       <th>1</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
+      <td>test</td>
       <td>False</td>
-      <td>org.axonframework</td>
-      <td>axon-modelling</td>
+      <td>${project.groupId}</td>
+      <td>axon-messaging</td>
     </tr>
     <tr>
       <th>2</th>
       <td>axon-configuration</td>
       <td>Axon Framework - Configuration</td>
-      <td>default</td>
-      <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-eventsourcing</td>
+      <td>test</td>
+      <td>True</td>
+      <td>io.projectreactor</td>
+      <td>reactor-core</td>
     </tr>
     <tr>
       <th>3</th>
@@ -6739,8 +6739,8 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Configuration</td>
       <td>default</td>
       <td>False</td>
-      <td>org.axonframework</td>
-      <td>axon-messaging</td>
+      <td>${project.groupId}</td>
+      <td>axon-eventsourcing</td>
     </tr>
     <tr>
       <th>4</th>
@@ -6766,17 +6766,17 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <td>Axon Framework - Test Fixtures</td>
       <td>default</td>
       <td>True</td>
-      <td>org.hamcrest</td>
-      <td>hamcrest-library</td>
+      <td>junit</td>
+      <td>junit</td>
     </tr>
     <tr>
       <th>159</th>
       <td>axon-tracing-opentelemetry</td>
       <td>Axon Framework - OpenTelemetry Tracing</td>
-      <td>provided</td>
+      <td>default</td>
       <td>False</td>
-      <td>com.google.code.findbugs</td>
-      <td>jsr305</td>
+      <td>${project.groupId}</td>
+      <td>axon-messaging</td>
     </tr>
     <tr>
       <th>160</th>
@@ -6800,10 +6800,10 @@ If Maven is used as for package and dependency management and a ".pom" file is i
       <th>162</th>
       <td>axon-tracing-opentelemetry</td>
       <td>Axon Framework - OpenTelemetry Tracing</td>
-      <td>default</td>
+      <td>provided</td>
       <td>False</td>
-      <td>${project.groupId}</td>
-      <td>axon-messaging</td>
+      <td>com.google.code.findbugs</td>
+      <td>jsr305</td>
     </tr>
   </tbody>
 </table>

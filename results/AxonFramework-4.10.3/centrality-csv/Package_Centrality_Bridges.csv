@@ -1,4 +1,4 @@
 "fromMemberName","toMemberName","fromIncomingDependencies","fromOutgoingDependencies","toIncomingDependencies","toOutgoingDependencies","Source Cypher File: Centrality/Centrality_10d_Bridges_Stream.cypher"
+"org.axonframework.serialization","org.axonframework.serialization.converters",1655,176,0,7,""
 "org.axonframework.serialization.upcasting.event","org.axonframework.serialization.upcasting",45,188,11,5,""
 "org.axonframework.actuator.axonserver","org.axonframework.actuator",2,3,2,0,""
-"org.axonframework.serialization","org.axonframework.serialization.converters",1655,176,0,7,""

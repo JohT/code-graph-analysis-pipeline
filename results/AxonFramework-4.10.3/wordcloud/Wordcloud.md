@@ -35,35 +35,35 @@
     </tr>
     <tr>
       <th>2</th>
-      <td>configuration</td>
+      <td>server</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>maven</td>
+      <td>connector</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>org</td>
+      <td>services</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>axonframework</td>
+      <td>maven</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>axon</td>
+      <td>org</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>configuration</td>
+      <td>axonframework</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>main</td>
+      <td>axon</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>manifest</td>
+      <td>server</td>
     </tr>
   </tbody>
 </table>
@@ -97,13 +97,13 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Allard Buijze</td>
-      <td>3130</td>
+      <td>Mateusz Nowak</td>
+      <td>302</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Mateusz Nowak</td>
-      <td>301</td>
+      <td>Allard Buijze</td>
+      <td>3130</td>
     </tr>
     <tr>
       <th>2</th>
