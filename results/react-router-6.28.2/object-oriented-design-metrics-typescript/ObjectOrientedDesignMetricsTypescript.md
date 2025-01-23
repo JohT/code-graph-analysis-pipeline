@@ -51,7 +51,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>26</td>
-      <td>28080</td>
+      <td>4800</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
@@ -62,7 +62,7 @@ Since Java Packages are organized hierarchically, incoming dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-native</td>
       <td>10</td>
-      <td>16560</td>
+      <td>2800</td>
       <td>0</td>
       <td>0</td>
       <td>2</td>
@@ -310,7 +310,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-dom</td>
       <td>312</td>
-      <td>218770</td>
+      <td>48196</td>
       <td>0</td>
       <td>0</td>
       <td>4</td>
@@ -321,7 +321,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>server</td>
       <td>78</td>
-      <td>34788</td>
+      <td>7482</td>
       <td>0</td>
       <td>0</td>
       <td>2</td>
@@ -332,7 +332,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router-native</td>
       <td>48</td>
-      <td>25768</td>
+      <td>7819</td>
       <td>0</td>
       <td>0</td>
       <td>4</td>
@@ -343,7 +343,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>react-router</td>
       <td>34</td>
-      <td>12325</td>
+      <td>3770</td>
       <td>0</td>
       <td>0</td>
       <td>3</td>
@@ -354,7 +354,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>About</td>
       <td>1</td>
-      <td>576</td>
+      <td>529</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -365,7 +365,7 @@ Since Java Packages are organized hierarchically, outgoing dependencies can be c
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>App</td>
       <td>1</td>
-      <td>81</td>
+      <td>16</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -974,15 +974,51 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
   <tbody>
     <tr>
       <th>0</th>
-      <td>react-router-dom-v5-compat</td>
+      <td>data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom-v5-compat</td>
+      <td>main</td>
       <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>route-objects</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>navigation-blocking</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>main</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>navigation-blocking</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>modal</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>images</td>
@@ -991,44 +1027,8 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>None</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>custom-filter-link</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>snkrs</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>react-router-dom-v5-compat</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>react-router-dom-v5-compat</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>auth-router-provider</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>auth</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>auth-router-provider</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>main</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
       <th>6</th>
-      <td>auth-router-provider</td>
+      <td>modal</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>vite-env</td>
       <td>0.0</td>
@@ -1037,7 +1037,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>7</th>
-      <td>custom-filter-link</td>
+      <td>view-transitions</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>vite-env</td>
       <td>0.0</td>
@@ -1046,7 +1046,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>8</th>
-      <td>ssr-data-router</td>
+      <td>search-params</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>vite-env</td>
       <td>0.0</td>
@@ -1073,7 +1073,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>11</th>
-      <td>notes</td>
+      <td>ssr</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>vite-env</td>
       <td>0.0</td>
@@ -1082,33 +1082,6 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>12</th>
-      <td>auth</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>auth</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>auth</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>vite-env</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>view-transitions</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>vite-env</td>
-      <td>0.0</td>
-      <td>None</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>15</th>
       <td>custom-link</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>vite-env</td>
@@ -1117,8 +1090,35 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
       <td>None</td>
     </tr>
     <tr>
+      <th>13</th>
+      <td>basic</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>vite-env</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>react-router-dom-v5-compat</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>react-router-dom-v5-compat</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>react-router-dom-v5-compat</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>react-router-dom-v5-compat</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
       <th>16</th>
-      <td>lazy-loading-router-provider</td>
+      <td>basic-data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>main</td>
       <td>0.0</td>
@@ -1127,7 +1127,7 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>17</th>
-      <td>modal</td>
+      <td>basic-data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>vite-env</td>
       <td>0.0</td>
@@ -1136,18 +1136,18 @@ Since Java Packages are organized hierarchically, *Abstractness* can be calculat
     </tr>
     <tr>
       <th>18</th>
-      <td>lazy-loading-router-provider</td>
+      <td>auth</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>vite-env</td>
+      <td>auth</td>
       <td>0.0</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>router</td>
+      <td>auth</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>router</td>
+      <td>vite-env</td>
       <td>0.0</td>
       <td>None</td>
       <td>None</td>
@@ -1228,7 +1228,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>4</th>
-      <td>auth-router-provider</td>
+      <td>auth</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/auth.ts</td>
       <td>1.0</td>
@@ -1238,7 +1238,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>5</th>
-      <td>auth</td>
+      <td>auth-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/auth.ts</td>
       <td>1.0</td>
@@ -1248,9 +1248,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>6</th>
-      <td>custom-filter-link</td>
+      <td>data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/vite-env.d.ts</td>
+      <td>./src/main.tsx</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1258,7 +1258,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>7</th>
-      <td>modal</td>
+      <td>data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1268,7 +1268,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>8</th>
-      <td>ssr-data-router</td>
+      <td>route-objects</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1278,7 +1278,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>9</th>
-      <td>auth-router-provider</td>
+      <td>navigation-blocking</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/main.tsx</td>
       <td>1.0</td>
@@ -1288,7 +1288,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>10</th>
-      <td>auth-router-provider</td>
+      <td>navigation-blocking</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1298,9 +1298,9 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>11</th>
-      <td>lazy-loading-router-provider</td>
+      <td>modal</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/main.tsx</td>
+      <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1308,46 +1308,6 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>12</th>
-      <td>lazy-loading-router-provider</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/vite-env.d.ts</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>lazy-loading</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/vite-env.d.ts</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>notes</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/vite-env.d.ts</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>auth</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/vite-env.d.ts</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>view-transitions</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
@@ -1357,8 +1317,48 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>13</th>
+      <td>search-params</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>lazy-loading</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>ssr</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
       <td>custom-link</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>basic</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1388,27 +1388,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>20</th>
-      <td>router</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./index.ts</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>router</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./index.ts</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>error-boundaries</td>
+      <td>basic-data-router</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/main.tsx</td>
       <td>1.0</td>
@@ -1417,8 +1397,28 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0</td>
     </tr>
     <tr>
+      <th>21</th>
+      <td>basic-data-router</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>auth</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./src/vite-env.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>23</th>
-      <td>error-boundaries</td>
+      <td>custom-query-parsing</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1428,7 +1428,17 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>24</th>
-      <td>modal-route-with-outlet</td>
+      <td>custom-query-parsing</td>
+      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
+      <td>./types/jsurl.d.ts</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>lazy-loading-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/main.tsx</td>
       <td>1.0</td>
@@ -1437,8 +1447,8 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>modal-route-with-outlet</td>
+      <th>26</th>
+      <td>lazy-loading-router-provider</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1447,18 +1457,8 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
       <td>0</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>data-router</td>
-      <td>/home/runner/work/code-graph-analysis-pipeline...</td>
-      <td>./src/main.tsx</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
       <th>27</th>
-      <td>data-router</td>
+      <td>notes</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>
@@ -1468,7 +1468,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>28</th>
-      <td>scroll-restoration</td>
+      <td>error-boundaries</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/main.tsx</td>
       <td>1.0</td>
@@ -1478,7 +1478,7 @@ Read more details on that in [OO Design Quality Metrics](https://api.semanticsch
     </tr>
     <tr>
       <th>29</th>
-      <td>scroll-restoration</td>
+      <td>error-boundaries</td>
       <td>/home/runner/work/code-graph-analysis-pipeline...</td>
       <td>./src/vite-env.d.ts</td>
       <td>1.0</td>

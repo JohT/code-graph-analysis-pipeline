@@ -131,7 +131,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>5</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -140,7 +140,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>4</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -203,7 +203,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>5</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -212,7 +212,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>4</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -356,7 +356,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>5</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -365,7 +365,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>4</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -453,7 +453,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>5</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -462,7 +462,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>4</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -588,7 +588,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>5</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -597,7 +597,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>4</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -714,7 +714,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>5</td>
+      <td>4</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -723,7 +723,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>auth</td>
       <td>1</td>
-      <td>4</td>
+      <td>5</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -875,8 +875,8 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
-      <td>[useFormAction-&gt;useLocation, useLinkClickHandler-&gt;useLocation, NavLink-&gt;useLocation, useScrollRestoration-&gt;useLocation, useSearchParams-&gt;useLocation, SetURLSearchParams-&gt;NavigateOptions, LinkProps-&gt;To, useLinkClickHandler-&gt;To, useViewTransitionState-&gt;To]</td>
-      <td>[To&lt;-LinkProps, NavigateOptions&lt;-SetURLSearchParams, useNavigate&lt;-useSearchParams, useLocation&lt;-useSearchParams, useNavigate&lt;-useDeepLinking, useNavigate&lt;-useLinkPressHandler, To&lt;-useLinkPressHandler]</td>
+      <td>[LinkProps-&gt;To, useLinkClickHandler-&gt;To, useViewTransitionState-&gt;To, useFormAction-&gt;useLocation, NavLink-&gt;useLocation, useLinkClickHandler-&gt;useLocation, useScrollRestoration-&gt;useLocation, useSearchParams-&gt;useLocation, SetURLSearchParams-&gt;NavigateOptions]</td>
+      <td>[NavigateOptions&lt;-SetURLSearchParams, useNavigate&lt;-useDeepLinking, To&lt;-LinkProps, useNavigate&lt;-useSearchParams, useLocation&lt;-useSearchParams, useNavigate&lt;-useLinkPressHandler, To&lt;-useLinkPressHandler]</td>
     </tr>
   </tbody>
 </table>
@@ -919,7 +919,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>To&lt;-LinkProps</td>
+      <td>NavigateOptions&lt;-SetURLSearchParams</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -930,7 +930,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>NavigateOptions&lt;-SetURLSearchParams</td>
+      <td>useNavigate&lt;-useDeepLinking</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -941,7 +941,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useNavigate&lt;-useSearchParams</td>
+      <td>To&lt;-LinkProps</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -952,7 +952,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useLocation&lt;-useSearchParams</td>
+      <td>useNavigate&lt;-useSearchParams</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -963,7 +963,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useNavigate&lt;-useDeepLinking</td>
+      <td>useLocation&lt;-useSearchParams</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -996,7 +996,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useFormAction-&gt;useLocation</td>
+      <td>LinkProps-&gt;To</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1007,7 +1007,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useLinkClickHandler-&gt;useLocation</td>
+      <td>useLinkClickHandler-&gt;To</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1018,7 +1018,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>NavLink-&gt;useLocation</td>
+      <td>useViewTransitionState-&gt;To</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1029,7 +1029,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useScrollRestoration-&gt;useLocation</td>
+      <td>useFormAction-&gt;useLocation</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1040,7 +1040,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useSearchParams-&gt;useLocation</td>
+      <td>NavLink-&gt;useLocation</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1051,7 +1051,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>SetURLSearchParams-&gt;NavigateOptions</td>
+      <td>useLinkClickHandler-&gt;useLocation</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1062,7 +1062,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>LinkProps-&gt;To</td>
+      <td>useScrollRestoration-&gt;useLocation</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1073,7 +1073,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useLinkClickHandler-&gt;To</td>
+      <td>useSearchParams-&gt;useLocation</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1084,7 +1084,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useViewTransitionState-&gt;To</td>
+      <td>SetURLSearchParams-&gt;NavigateOptions</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1095,7 +1095,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useLinkClickHandler-&gt;useNavigate</td>
+      <td>useSearchParams-&gt;useNavigate</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1106,7 +1106,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useSearchParams-&gt;useNavigate</td>
+      <td>useLinkClickHandler-&gt;useNavigate</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1149,7 +1149,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>To&lt;-LinkProps</td>
+      <td>NavigateOptions&lt;-SetURLSearchParams</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1160,7 +1160,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>NavigateOptions&lt;-SetURLSearchParams</td>
+      <td>useNavigate&lt;-useDeepLinking</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1171,7 +1171,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useNavigate&lt;-useSearchParams</td>
+      <td>To&lt;-LinkProps</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1182,7 +1182,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useLocation&lt;-useSearchParams</td>
+      <td>useNavigate&lt;-useSearchParams</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1193,7 +1193,7 @@ Only the top 40 entries are shown. The whole table can be found in the following
       <td>./index.tsx</td>
       <td>react-router-native</td>
       <td>./index.tsx</td>
-      <td>useNavigate&lt;-useDeepLinking</td>
+      <td>useLocation&lt;-useSearchParams</td>
       <td>0.222222</td>
       <td>11</td>
       <td>7</td>
@@ -1367,8 +1367,8 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
       <td>2</td>
       <td>63</td>
       <td>0.031746</td>
-      <td>["@remix-run/router".Router, "@remix-run/router".DataStrategyFunction]</td>
-      <td>[Router, DataStrategyFunction]</td>
+      <td>["@remix-run/router".DataStrategyFunction, "@remix-run/router".Router]</td>
+      <td>[DataStrategyFunction, Router]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1377,8 +1377,8 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
       <td>4</td>
       <td>63</td>
       <td>0.063492</td>
-      <td>["@remix-run/router".useNavigate, "@remix-run/router".useLocation, "@remix-run/router".NavigateOptions, "@remix-run/router".To]</td>
-      <td>[useNavigate, useLocation, NavigateOptions, To]</td>
+      <td>["@remix-run/router".useNavigate, "@remix-run/router".NavigateOptions, "@remix-run/router".To, "@remix-run/router".useLocation]</td>
+      <td>[useNavigate, NavigateOptions, To, useLocation]</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1387,8 +1387,8 @@ The whole table can be found in the CSV report `ModuleElementsUsageTypescript`.
       <td>4</td>
       <td>17</td>
       <td>0.235294</td>
-      <td>["@remix-run/router".useLocation, "@remix-run/router".NavigateOptions, "@remix-run/router".To, "@remix-run/router".useNavigate]</td>
-      <td>[useLocation, NavigateOptions, To, useNavigate]</td>
+      <td>["@remix-run/router".To, "@remix-run/router".useLocation, "@remix-run/router".NavigateOptions, "@remix-run/router".useNavigate]</td>
+      <td>[To, useLocation, NavigateOptions, useNavigate]</td>
     </tr>
   </tbody>
 </table>

@@ -60,7 +60,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>5</td>
       <td>35</td>
       <td>195</td>
-      <td>584</td>
+      <td>446</td>
       <td>12</td>
       <td>110</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
@@ -71,7 +71,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>4</td>
       <td>37</td>
       <td>390</td>
-      <td>687</td>
+      <td>609</td>
       <td>12</td>
       <td>110</td>
       <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
@@ -82,10 +82,10 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>1</td>
       <td>5</td>
       <td>28</td>
-      <td>57</td>
+      <td>51</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;Link&gt; of module &lt;react-router-native&gt; import...</td>
+      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -192,7 +192,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>5</td>
       <td>36</td>
       <td>223</td>
-      <td>641</td>
+      <td>497</td>
       <td>12</td>
       <td>110</td>
       <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
@@ -203,7 +203,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>4</td>
       <td>37</td>
       <td>390</td>
-      <td>687</td>
+      <td>609</td>
       <td>12</td>
       <td>110</td>
       <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
@@ -1051,84 +1051,84 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>server</td>
       <td>@remix-run/router</td>
       <td>74</td>
-      <td>128</td>
+      <td>104</td>
       <td>6</td>
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[Action.Pop, Action, StaticHandlerContext.matc...</td>
+      <td>[Router, StaticHandlerContext, StaticHandlerCo...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>server</td>
       <td>@types/react</td>
       <td>6</td>
-      <td>30</td>
+      <td>18</td>
       <td>6</td>
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>@remix-run/router</td>
       <td>282</td>
-      <td>498</td>
+      <td>450</td>
       <td>63</td>
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[useNavigate, Location.search, UNSAFE_warning,...</td>
+      <td>[JsonValue, JsonObject, FormEncType, To, Navig...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>@types/react</td>
       <td>166</td>
-      <td>496</td>
+      <td>376</td>
       <td>63</td>
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[React.useMemo, React.useCallback, React.useRe...</td>
+      <td>[React.ForwardRefExoticComponent, React.RefAtt...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>react-router-native</td>
       <td>@types/react-native</td>
       <td>22</td>
-      <td>49</td>
+      <td>43</td>
       <td>17</td>
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[GestureResponderEvent.defaultPrevented, Gestu...</td>
+      <td>[BackHandler, BackHandlerStatic.addEventListen...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>react-router-native</td>
       <td>@remix-run/router</td>
       <td>18</td>
-      <td>41</td>
+      <td>35</td>
       <td>17</td>
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[NavigateOptions, To, useNavigate, MemoryRoute...</td>
+      <td>[MemoryRouterProps, To, NavigateOptions, useNa...</td>
     </tr>
     <tr>
       <th>6</th>
       <td>react-router-native</td>
       <td>@types/react</td>
       <td>18</td>
-      <td>49</td>
+      <td>43</td>
       <td>17</td>
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.JSX.Element, React.ReactNode, React.use...</td>
+      <td>[React.useEffect, React.ReactNode, React.useRe...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1152,7 +1152,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>9</td>
       <td>2</td>
       <td>128.571429</td>
-      <td>[Router, DataStrategyFunction, createRouter, c...</td>
+      <td>[InitialEntry, DataStrategyFunction, createMem...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1211,72 +1211,72 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>server</td>
       <td>@remix-run</td>
       <td>74</td>
-      <td>128</td>
+      <td>104</td>
       <td>6</td>
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[Action.Pop, Action, StaticHandlerContext.matc...</td>
+      <td>[Router, StaticHandlerContext, StaticHandlerCo...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>server</td>
       <td>@types</td>
       <td>6</td>
-      <td>30</td>
+      <td>18</td>
       <td>6</td>
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[React.JSX.Element, React.ReactNode]</td>
+      <td>[React.ReactNode, React.JSX.Element]</td>
     </tr>
     <tr>
       <th>2</th>
       <td>react-router-dom</td>
       <td>@remix-run</td>
       <td>282</td>
-      <td>498</td>
+      <td>450</td>
       <td>63</td>
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[useNavigate, Location.search, UNSAFE_warning,...</td>
+      <td>[JsonValue, JsonObject, FormEncType, To, Navig...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>@types</td>
       <td>166</td>
-      <td>496</td>
+      <td>376</td>
       <td>63</td>
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[React.useMemo, React.useCallback, React.useRe...</td>
+      <td>[React.ForwardRefExoticComponent, React.RefAtt...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>react-router-native</td>
       <td>@types</td>
       <td>40</td>
-      <td>98</td>
+      <td>86</td>
       <td>17</td>
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[GestureResponderEvent.defaultPrevented, React...</td>
+      <td>[BackHandler, React.useEffect, BackHandlerStat...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>react-router-native</td>
       <td>@remix-run</td>
       <td>18</td>
-      <td>41</td>
+      <td>35</td>
       <td>17</td>
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[NavigateOptions, To, useNavigate, MemoryRoute...</td>
+      <td>[MemoryRouterProps, To, NavigateOptions, useNa...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1300,7 +1300,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>9</td>
       <td>2</td>
       <td>128.571429</td>
-      <td>[Router, DataStrategyFunction, createRouter, c...</td>
+      <td>[InitialEntry, DataStrategyFunction, createMem...</td>
     </tr>
     <tr>
       <th>8</th>
