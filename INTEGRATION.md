@@ -4,7 +4,7 @@ This document describes the steps to get started as quickly as possible.
 :point_right: For more details on what else you can do see [README](./README.md).  
 :point_right: For more details on how to analyze your code locally see [GETTING_STARTED](./GETTING_STARTED.md).  
 
-## :rocket: How to use it
+## :rocket: How to integrate it
 
 This repository provides a reusable GitHub Actions Workflow to analyze code. The workflow is defined in [public-analyze-code-graph.yml](./.github/workflows/public-analyze-code-graph.yml).
 
@@ -22,6 +22,10 @@ You can find examples in:
 - [internal-internal-typescript-code-analysis.yml](./.github/workflows/internal-internal-typescript-code-analysis.yml)
 
 :warning: Note: Workflows with names starting with `internal-` are private and should not be used outside this repository. They may change at any time without notice.
+
+## :repeat: How to update it with Renovate
+
+This repository provides a Renovate presets to update the code graph analysis pipeline workflow. The presets are defined in the folder [renovate-presets](./renovate-presets). Example: [code-graph-analysis-workflow-latest-digest.json5](./renovate-presets/code-graph-analysis-workflow-latest-digest.json5). More details can be found in [renovate-presets/README.md](./renovate-presets/README.md).
 
 ## :gear: Parameters
 

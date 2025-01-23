@@ -1,0 +1,37 @@
+// References: 
+// - JSON5: https://json5.org
+// - Available configuration options: https://docs.renovatebot.com/configuration-options
+// - Shareable configuration presets: https://docs.renovatebot.com/config-presets
+// - Update of GitHub Actions: https://docs.renovatebot.com/modules/manager/github-actions
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Keep the pinned code-graph-analysis-pipeline GitHub Workflow up-to-date with the latest digest (commit hash) of a specific branch or tag",
+  "packageRules": [
+    {
+      // Keeps the GitHub Actions update of code-graph-analysis-pipeline and the update of its "ref" parameter value in sync.
+      "description": "Code Graph Analysis Pipeline Workflow",
+      "groupName": "Code Graph Analysis Pipeline Workflow",
+      "matchPackageNames": [
+        "JohT/code-graph-analysis-pipeline",
+        "https://github.com/JohT/code-graph-analysis-pipeline"
+      ]
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "Update code-graph-analysis-pipeline public shared workflow's ref parameter",
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$",
+        "(^|/)action\\.ya?ml$"
+      ],
+      "matchStringsStrategy": "combination",
+      "matchStrings": [
+        "uses: JohT/code-graph-analysis-pipeline/\\.github/workflows/public-analyze-code-graph\\.yml*\\s*",
+        "ref:\\s*(?<currentDigest>.*?)\\s+#\\s+(?<currentValue>.*?)\\s+"
+      ],
+      "packageNameTemplate": "https://github.com/JohT/code-graph-analysis-pipeline",
+      "datasourceTemplate": "git-refs"
+    }
+  ]
+}

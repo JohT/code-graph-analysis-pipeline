@@ -7,6 +7,7 @@ on:
     # Only watch root level Renovate configuration changes
     paths:
       - 'renovate.json*'
+      - 'renovate-presets/**'
       - '.github/workflows/internal-check-renovate-config.yml' # or when this file changed
 
 jobs:
@@ -20,6 +21,11 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+    
+    - name: Get the list of all renovate presets and the main renovate configuration
+      id: set-renovate-config-files
+      run: |
+        echo "RENOVATE_CONFIG_FILES=$(find renovate-presets -type f -name '*.json' -o -name '*.json5') renovate.json" >> $GITHUB_ENV
 
     - name: Run renovate-config-validator
-      run: npx --yes --package renovate@39.91.2 -- renovate-config-validator
+      run: npx --yes --package renovate@39.91.2 -- renovate-config-validator ${{ env.RENOVATE_CONFIG_FILES }}
