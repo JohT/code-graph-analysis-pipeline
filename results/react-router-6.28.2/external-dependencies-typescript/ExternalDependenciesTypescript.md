@@ -85,7 +85,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>57</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
+      <td>[&lt;Link&gt; of module &lt;react-router-native&gt; import...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -96,7 +96,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>8</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
+      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
     </tr>
   </tbody>
 </table>
@@ -217,7 +217,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>8</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;createSearchParams&gt; of module &lt;react-router-...</td>
+      <td>[&lt;useSearchParams&gt; of module &lt;react-router-nat...</td>
     </tr>
   </tbody>
 </table>
@@ -1056,7 +1056,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[Action.Pop, Action, StaticHandlerContext.erro...</td>
+      <td>[Action.Pop, Action, StaticHandlerContext.matc...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1080,7 +1080,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[RouteContextObject.matches, RouteObject.index...</td>
+      <td>[useNavigate, Location.search, UNSAFE_warning,...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1092,7 +1092,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[React.useContext, React.useEffect, React.useL...</td>
+      <td>[React.useMemo, React.useCallback, React.useRe...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1104,7 +1104,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[BackHandler, BackHandlerStatic.addEventListen...</td>
+      <td>[GestureResponderEvent.defaultPrevented, Gestu...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[Location.search, useNavigate, useLocation, To...</td>
+      <td>[NavigateOptions, To, useNavigate, MemoryRoute...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.MutableRefObject.current, React.useRef,...</td>
+      <td>[React.JSX.Element, React.ReactNode, React.use...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1216,7 +1216,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[Action.Pop, Action, StaticHandlerContext.erro...</td>
+      <td>[Action.Pop, Action, StaticHandlerContext.matc...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1240,7 +1240,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[RouteContextObject.matches, RouteObject.index...</td>
+      <td>[useNavigate, Location.search, UNSAFE_warning,...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1252,7 +1252,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[React.useContext, React.useEffect, React.useL...</td>
+      <td>[React.useMemo, React.useCallback, React.useRe...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1264,7 +1264,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.MutableRefObject.current, React.useRef,...</td>
+      <td>[GestureResponderEvent.defaultPrevented, React...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[Location.search, useNavigate, useLocation, To...</td>
+      <td>[NavigateOptions, To, useNavigate, MemoryRoute...</td>
     </tr>
     <tr>
       <th>6</th>

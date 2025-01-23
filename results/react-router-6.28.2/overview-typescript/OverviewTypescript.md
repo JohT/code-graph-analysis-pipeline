@@ -37,8 +37,8 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>109087</td>
-      <td>322562</td>
+      <td>109241</td>
+      <td>323046</td>
       <td>33</td>
       <td>46</td>
       <td>192</td>
@@ -98,16 +98,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>126</td>
-      <td>Interface</td>
-      <td>20</td>
+      <td>Variable</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>3</th>
       <td>react-router-dom</td>
       <td>index.tsx</td>
       <td>126</td>
-      <td>Variable</td>
-      <td>10</td>
+      <td>Interface</td>
+      <td>20</td>
     </tr>
     <tr>
       <th>4</th>
@@ -170,7 +170,7 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>todos</td>
       <td>src/todos.ts</td>
       <td>7</td>
-      <td>Interface</td>
+      <td>Variable</td>
       <td>1</td>
     </tr>
     <tr>
@@ -178,16 +178,16 @@ The whole table can be found in the CSV report `Number_of_elements_per_module_fo
       <td>todos</td>
       <td>src/todos.ts</td>
       <td>7</td>
-      <td>Variable</td>
-      <td>1</td>
+      <td>Function</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>13</th>
       <td>todos</td>
       <td>src/todos.ts</td>
       <td>7</td>
-      <td>Function</td>
-      <td>5</td>
+      <td>Interface</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>14</th>

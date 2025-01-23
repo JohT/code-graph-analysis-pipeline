@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Brooks Lybrand</td>
-      <td>75</td>
+      <td>Matt Brophy</td>
+      <td>1909</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Remix Run Bot</td>
-      <td>416</td>
+      <td>418</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>Justin Hall</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mark Dalgleish</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Brooks Lybrand</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>Rifai</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>6</th>
       <td>Tim Dorr</td>
       <td>386</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Matt Brophy</td>
-      <td>1889</td>
-    </tr>
-    <tr>
-      <th>5</th>
+      <th>7</th>
       <td>Abdullah Yirik</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>8</th>
       <td>Andrew Patton</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>9</th>
       <td>Mihail  Procudin</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Mark Dalgleish</td>
-      <td>379</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Jacob Ebey</td>
-      <td>245</td>
     </tr>
   </tbody>
 </table>

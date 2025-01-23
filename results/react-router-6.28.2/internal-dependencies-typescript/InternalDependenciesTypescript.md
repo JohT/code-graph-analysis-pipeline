@@ -59,7 +59,7 @@ Only the top 30 entries are shown. The whole table can be found in the following
       <td>react-router-6.28.2</td>
       <td>react-router</td>
       <td>7</td>
-      <td>250</td>
+      <td>253</td>
       <td>0</td>
       <td>34</td>
     </tr>
@@ -248,7 +248,7 @@ The following table lists the top 30 internal modules that are used the most by 
       <td>react-router-6.28.2</td>
       <td>react-router</td>
       <td>7</td>
-      <td>250</td>
+      <td>253</td>
       <td>0</td>
       <td>34</td>
     </tr>
@@ -338,7 +338,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>react-router</td>
       <td>7</td>
-      <td>250</td>
+      <td>253</td>
       <td>0</td>
       <td>34</td>
     </tr>
@@ -516,7 +516,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>react-router</td>
       <td>7</td>
-      <td>250</td>
+      <td>253</td>
       <td>0</td>
       <td>34</td>
     </tr>
@@ -633,7 +633,7 @@ The following table lists the top 30 internal modules that are used the least by
       <td>react-router-6.28.2</td>
       <td>react-router</td>
       <td>7</td>
-      <td>250</td>
+      <td>253</td>
       <td>0</td>
       <td>34</td>
     </tr>
@@ -786,7 +786,7 @@ The following table lists the top 30 internal modules that are depending on the 
       <td>react-router-6.28.2</td>
       <td>react-router</td>
       <td>7</td>
-      <td>250</td>
+      <td>253</td>
       <td>0</td>
       <td>34</td>
     </tr>
@@ -1430,7 +1430,7 @@ This table shows the file directory distance distribution between dependent file
       <td>4</td>
       <td>4</td>
       <td>2</td>
-      <td>[./index.ts uses ./index.tsx, ./index.tsx uses ./index.tsx, ./index.tsx uses ./index.tsx, ./server.tsx uses ./index.tsx]</td>
+      <td>[./index.ts uses ./index.tsx, ./index.tsx uses ./index.tsx, ./server.tsx uses ./index.tsx, ./index.tsx uses ./index.tsx]</td>
     </tr>
   </tbody>
 </table>
