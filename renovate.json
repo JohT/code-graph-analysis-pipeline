@@ -9,9 +9,7 @@
   "packageRules": [
     {
       "description": "Neo4j and APOC update settings",
-      "groupName": [
-        "Neo4j to {{newVersion}}"
-      ],
+      "groupName": "Neo4j to {{newVersion}}",
       "matchDepNames": [
         "neo4j/neo4j",
         "neo4j/apoc"
@@ -25,9 +23,7 @@
     },
     {
       "description": "jQAssistant Typescript Plugin",
-      "groupName": [
-        "jQAssistant TypeScript Plugin"
-      ],
+      "groupName": "jQAssistant TypeScript Plugin",
       "matchSourceUrls": [
         "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
       ]
