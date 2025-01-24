@@ -11,7 +11,7 @@
 "org.axonframework.config.Component: java.lang.Object get()","get","centralityArticleRank",0.046717007927692546,""
 "org.axonframework.common.BuilderUtils: void assertStrictPositive(int,java.lang.String)","assertStrictPositive","centralityArticleRank",0.04224623775208207,""
 "org.axonframework.common.transaction.TransactionManager: void executeInTransaction(java.lang.Runnable)","executeInTransaction","centralityArticleRank",0.03459354465979549,""
-"org.axonframework.common.ObjectUtils: java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityArticleRank",0.031901275801434106,""
+"org.axonframework.common.ObjectUtils: java.lang.Object getOrDefault(java.lang.Object,java.lang.Object)","getOrDefault","centralityArticleRank",0.03190127580143412,""
 "org.axonframework.common.jdbc.JdbcUtils: void closeQuietly(java.sql.Statement)","closeQuietly","centralityArticleRank",0.02919071495887954,""
 "org.axonframework.messaging.MetaData: org.axonframework.messaging.MetaData from(java.util.Map)","from","centralityArticleRank",0.02538897937064916,""
 "org.axonframework.messaging.annotation.AnnotatedHandlerInspector: java.util.stream.Stream getHandlers(java.lang.Class)","getHandlers","centralityArticleRank",0.02532527281412529,""

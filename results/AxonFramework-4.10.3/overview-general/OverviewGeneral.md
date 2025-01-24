@@ -114,7 +114,7 @@ The whole table can be found in the CSV report `Node_label_combination_count`.
     </tr>
     <tr>
       <th>13</th>
-      <td>[Java, ByteCode, TypeVariable, Bound]</td>
+      <td>[Java, ByteCode, Bound, TypeVariable]</td>
       <td>1096</td>
       <td>0.313992</td>
     </tr>
@@ -150,7 +150,7 @@ The whole table can be found in the CSV report `Node_label_combination_count`.
     </tr>
     <tr>
       <th>19</th>
-      <td>[Java, GenericDeclaration, ByteCode, Member, M...</td>
+      <td>[Java, ByteCode, Member, Method, GenericDeclar...</td>
       <td>569</td>
       <td>0.163012</td>
     </tr>
@@ -192,7 +192,7 @@ The whole table can be found in the CSV report `Node_label_combination_count`.
     </tr>
     <tr>
       <th>26</th>
-      <td>[Type, File, Java, GenericDeclaration, ByteCod...</td>
+      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
       <td>236</td>
       <td>0.067612</td>
     </tr>
@@ -278,7 +278,7 @@ Lists the 30 label combinations with the lowest number of nodes until they reach
     </tr>
     <tr>
       <th>4</th>
-      <td>[Java, GenericDeclaration, ByteCode, Member, M...</td>
+      <td>[Java, ByteCode, Member, Method, GenericDeclar...</td>
       <td>4</td>
       <td>0.001146</td>
     </tr>
@@ -428,7 +428,7 @@ Lists the 30 label combinations with the lowest number of nodes until they reach
     </tr>
     <tr>
       <th>29</th>
-      <td>[Type, File, Java, GenericDeclaration, ByteCod...</td>
+      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
       <td>85</td>
       <td>0.024352</td>
     </tr>
@@ -1422,7 +1422,7 @@ Lists the 30 node labels and their relationship types with the highest number of
       <th>22</th>
       <td>[Java, ByteCode, Bound, ParameterizedType]</td>
       <td>HAS_ACTUAL_TYPE_ARGUMENT</td>
-      <td>[Java, ByteCode, TypeVariable, Bound]</td>
+      <td>[Java, ByteCode, Bound, TypeVariable]</td>
       <td>2454</td>
       <td>7176</td>
       <td>1096</td>
@@ -1480,7 +1480,7 @@ Lists the 30 node labels and their relationship types with the highest number of
     </tr>
     <tr>
       <th>28</th>
-      <td>[Type, File, Java, GenericDeclaration, ByteCod...</td>
+      <td>[Type, File, Java, ByteCode, GenericDeclaratio...</td>
       <td>DECLARES</td>
       <td>[Java, ByteCode, Member, Method]</td>
       <td>2106</td>

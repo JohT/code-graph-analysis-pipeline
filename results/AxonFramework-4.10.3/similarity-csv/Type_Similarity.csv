@@ -2349,7 +2349,7 @@
 0.25,"axon-configuration-4.10.3","org.axonframework.config.AggregateConfiguration",5,4,"axon-modelling-4.10.3","org.axonframework.modelling.command.RepositoryProvider",21,1,""
 0.25,"axon-configuration-4.10.3","org.axonframework.config.EventProcessingConfigurer$EventProcessorBuilder",2,3,"axon-server-connector-4.10.3","org.axonframework.axonserver.connector.event.axon.PersistentStreamMessageSourceFactory",3,2,""
 0.25,"axon-configuration-4.10.3","org.axonframework.config.EventProcessingConfigurer$EventProcessorBuilder",2,3,"axon-configuration-4.10.3","org.axonframework.config.LifecycleHandlerInspector$LifecycleRegistration",1,2,""
-0.25,"axon-configuration-4.10.3","org.axonframework.config.LifecycleHandlerInspector$1",1,4,"axon-messaging-4.10.3","org.axonframework.lifecycle.Lifecycle",22,2,""
+0.25,"axon-configuration-4.10.3","org.axonframework.config.LifecycleHandlerInspector$1",1,4,"axon-messaging-4.10.3","org.axonframework.lifecycle.Lifecycle$LifecycleRegistry",26,1,""
 0.25,"axon-configuration-4.10.3","org.axonframework.config.MessageHandlerRegistrar",1,5,"axon-configuration-4.10.3","org.axonframework.config.LifecycleHandlerInspector$1",1,4,""
 0.25,"axon-messaging-4.10.3","org.axonframework.deadline.AbstractDeadlineManager",4,7,"axon-test-4.10.3","org.axonframework.test.saga.FixtureExecutionResult",5,3,""
 0.25,"axon-messaging-4.10.3","org.axonframework.deadline.DefaultDeadlineManagerSpanFactory",7,7,"axon-messaging-4.10.3","org.axonframework.tracing.NestingSpanFactory",1,6,""
