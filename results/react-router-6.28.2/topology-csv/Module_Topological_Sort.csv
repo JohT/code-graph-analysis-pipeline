@@ -1,5 +1,5 @@
 "codeUnitName","shortName","topologicalSortIndex","maxDistanceFromSource","overallMaxDistanceFromSource","incomingDependencies","outgoingDependencies","Source Cypher File: Topological_Sort/Topological_Sort_Query.cypher"
 "./server.tsx","server",0,0,0,0,78,""
 "./index.ts","react-router",1,0,0,0,34,""
-"./src/App.jsx","App",3,0,0,0,1,""
+"./src/App.jsx","App",2,0,0,0,1,""
 "./src/pages/About.tsx","About",5,0,0,0,1,""

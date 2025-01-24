@@ -74,7 +74,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>609</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
+      <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -85,7 +85,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>51</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;useHardwareBackButton&gt; of module &lt;react-rout...</td>
+      <td>[&lt;useDeepLinking&gt; of module &lt;react-router-nati...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -206,7 +206,7 @@ Only the top 20 entries are shown. The whole table can be found in the following
       <td>609</td>
       <td>12</td>
       <td>110</td>
-      <td>[&lt;createMemoryRouter&gt; of module &lt;react-router&gt;...</td>
+      <td>[&lt;mapRouteProperties&gt; of module &lt;react-router&gt;...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1056,7 +1056,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[Router, StaticHandlerContext, StaticHandlerCo...</td>
+      <td>[Action.Pop, Action, FutureConfig.v7_relativeS...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1068,7 +1068,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[React.ReactNode, React.JSX.Element]</td>
+      <td>[React.JSX.Element, React.ReactNode]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1080,7 +1080,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[JsonValue, JsonObject, FormEncType, To, Navig...</td>
+      <td>[HTMLFormMethod, HTMLFormMethod.toLowerCase, J...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1092,7 +1092,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[React.ForwardRefExoticComponent, React.RefAtt...</td>
+      <td>[React.FormEvent.currentTarget, React.ForwardR...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1104,7 +1104,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[BackHandler, BackHandlerStatic.addEventListen...</td>
+      <td>[LinkingStatic.getInitialURL, LinkingStatic.re...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1116,7 +1116,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[MemoryRouterProps, To, NavigateOptions, useNa...</td>
+      <td>[useNavigate, NavigateOptions, To, Location.se...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1128,7 +1128,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[React.useEffect, React.ReactNode, React.useRe...</td>
+      <td>[React.useEffect, React.JSX.Element, React.Rea...</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1152,7 +1152,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>9</td>
       <td>2</td>
       <td>128.571429</td>
-      <td>[InitialEntry, DataStrategyFunction, createMem...</td>
+      <td>[UNSAFE_warning, AgnosticPatchRoutesOnNavigati...</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1216,7 +1216,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[Router, StaticHandlerContext, StaticHandlerCo...</td>
+      <td>[Action.Pop, Action, FutureConfig.v7_relativeS...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1228,7 +1228,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>29</td>
       <td>2</td>
       <td>483.333333</td>
-      <td>[React.ReactNode, React.JSX.Element]</td>
+      <td>[React.JSX.Element, React.ReactNode]</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1240,7 +1240,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[JsonValue, JsonObject, FormEncType, To, Navig...</td>
+      <td>[HTMLFormMethod, HTMLFormMethod.toLowerCase, J...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1252,7 +1252,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>117</td>
       <td>2</td>
       <td>185.714286</td>
-      <td>[React.ForwardRefExoticComponent, React.RefAtt...</td>
+      <td>[React.FormEvent.currentTarget, React.ForwardR...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1264,7 +1264,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[BackHandler, React.useEffect, BackHandlerStat...</td>
+      <td>[LinkingStatic.getInitialURL, LinkingStatic.re...</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1276,7 +1276,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>24</td>
       <td>4</td>
       <td>141.176471</td>
-      <td>[MemoryRouterProps, To, NavigateOptions, useNa...</td>
+      <td>[useNavigate, NavigateOptions, To, Location.se...</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1300,7 +1300,7 @@ Only the first 40 entries are shown. The whole table can be found in the followi
       <td>9</td>
       <td>2</td>
       <td>128.571429</td>
-      <td>[InitialEntry, DataStrategyFunction, createMem...</td>
+      <td>[UNSAFE_warning, AgnosticPatchRoutesOnNavigati...</td>
     </tr>
     <tr>
       <th>8</th>

@@ -97,53 +97,53 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Matt Brophy</td>
-      <td>1913</td>
+      <td>Remix Run Bot</td>
+      <td>420</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>Pedro Cattori</td>
+      <td>392</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mark Dalgleish</td>
+      <td>389</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Matt Brophy</td>
+      <td>1892</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>Brooks Lybrand</td>
       <td>77</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>5</th>
       <td>Richard Leek</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Mark Dalgleish</td>
-      <td>387</td>
-    </tr>
-    <tr>
-      <th>4</th>
+      <th>6</th>
       <td>Tim Dorr</td>
       <td>388</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>Remix Run Bot</td>
-      <td>418</td>
-    </tr>
-    <tr>
-      <th>6</th>
+      <th>7</th>
       <td>Justin Hall</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>8</th>
       <td>Rifai</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>9</th>
       <td>Abdullah Yirik</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Andrew Patton</td>
-      <td>2</td>
     </tr>
   </tbody>
 </table>
