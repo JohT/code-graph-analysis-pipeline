@@ -1,7 +1,0 @@
-"memberName","centrality","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_7c_Harmonic_Closeness_Stream.cypher"
-"/axon-messaging-4.8.0.jar",1,5,0,""
-"/axon-modelling-4.8.0.jar",0.8,4,1,""
-"/axon-eventsourcing-4.8.0.jar",0.6,3,2,""
-"/axon-disruptor-4.8.0.jar",0.2,1,3,""
-"/axon-configuration-4.8.0.jar",0,0,4,""
-"/axon-test-4.8.0.jar",0,0,3,""

@@ -26,33 +26,35 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ### :book: Jupyter Notebook Reports
 
-Here is an overview of reports made with [Jupyter Notebooks](https://jupyter.org). For a detailed reference see [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference
+Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
 
-- [External Dependencies](./results/AxonFramework-4.10.3/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependenciesJava.ipynb)).
-- [Internal Dependencies](./results/AxonFramework-4.10.3/internal-dependencies-java/InternalDependenciesJava.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependenciesJava.ipynb)).
-- [Method Metrics](./results/AxonFramework-4.10.3/method-metrics-java/MethodMetricsJava.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
-- [Node Embeddings](./results/AxonFramework-4.10.3/node-embeddings-java/NodeEmbeddingsJava.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
-- [Object Oriented Design Quality Metrics](./results/AxonFramework-4.10.3/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./jupyter/ObjectOrientedDesignMetricsJava.ipynb)).
-- [Overview](./results/AxonFramework-4.10.3/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
-- [Visibility Metrics](./results/AxonFramework-4.10.3/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
-- [Wordcloud](./results/AxonFramework-4.10.3/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
+- [External Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependenciesJava.ipynb)).
+- [Internal Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-java/InternalDependenciesJava.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependenciesJava.ipynb)).
+- [Method Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/method-metrics-java/MethodMetricsJava.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
+- [Node Embeddings](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/node-embeddings-java/NodeEmbeddingsJava.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
+- [Object Oriented Design Quality Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./jupyter/ObjectOrientedDesignMetricsJava.ipynb)).
+- [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
+- [Visibility Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
+- [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
 
 ### :book: Graph Data Science Reports
 
-Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). For a detailed reference of all CSV reports see [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference)
+This project includes several reports that use Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). These reports are part of the [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples) repository. For a full list of reports, check out the [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference).
 
-- [Centrality with Page Rank](./results/AxonFramework-4.10.3/centrality-csv/Package_Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
-- [Community Detection with Leiden](./results/AxonFramework-4.10.3/community-csv/Package_communityLeidenId_Community__Metrics.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
-- [Node Embeddings with HashGNN](./results/AxonFramework-4.10.3/node-embeddings-csv/Package_Embeddings_HashGNN.csv) ([Source Script](./scripts/reports/NodeEmbeddingsCsv.sh))
-- [Similarity with Jaccard](./results/AxonFramework-4.10.3/similarity-csv/Package_Similarity.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
-- [Topology Sort](./results/AxonFramework-4.10.3/topology-csv/Package_Topological_Sort.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
+Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science) from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference).
+
+- [Centrality with Page Rank](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/centrality-csv/Package_Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
+- [Community Detection with Leiden](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/community-csv/Package_communityLeidenId_Community__Metrics.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
+- [Node Embeddings with HashGNN](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/node-embeddings-csv/Package_Embeddings_HashGNN.csv) ([Source Script](./scripts/reports/NodeEmbeddingsCsv.sh))
+- [Similarity with Jaccard](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/similarity-csv/Package_Similarity.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
+- [Topology Sort](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/topology-csv/Package_Topological_Sort.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
 
 ### :art: Graph Visualization
 
-Here are some fully automated graph visualizations utilizing [GraphViz](https://graphviz.org):
+Here are some fully automated graph visualizations utilizing [GraphViz](https://graphviz.org)from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples):
 
-- [Java Artifact Build Levels](./results/AxonFramework-4.10.3/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./cypher/Internal_Dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
-- [Java Artifact Longest Path Contributors](./results/AxonFramework-4.10.3/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./cypher/Path_Finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
+- [Java Artifact Build Levels](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./cypher/Internal_Dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
+- [Java Artifact Longest Path Contributors](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./cypher/Path_Finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
 
 ## :book: Blog Articles
 
@@ -149,15 +151,15 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 
 ## :page_with_curl: CSV Cypher Query Report Reference
 
-[CSV_REPORTS.md](./results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](./results) directory. It can be generated as described in [Generate CSV Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
+[CSV_REPORTS.md](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results) directory. It can be generated as described in [Generate CSV Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
 
 ## :page_with_curl: Jupyter Notebook Report Reference
 
-[JUPYTER_REPORTS.md](./results/JUPYTER_REPORTS.md) lists all Jupyter Notebook reports inside the [results](./results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-jupyter-notebook-report-reference).
+[JUPYTER_REPORTS.md](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/JUPYTER_REPORTS.md) lists all Jupyter Notebook reports inside the [results](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-jupyter-notebook-report-reference).
 
 ## :camera: Image Reference
 
-[IMAGES.md](./results/IMAGES.md) lists all PNG images inside the [results](./results) directory. It can be generated as described in [Generate Image Reference](./COMMANDS.md#generate-image-reference).
+[IMAGES.md](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/IMAGES.md) lists all PNG images inside the [results](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results) directory. It can be generated as described in [Generate Image Reference](./COMMANDS.md#generate-image-reference).
 
 ## :gear: Script Reference
 
@@ -258,6 +260,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 
 ## 🕸 Web References
 
+- [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples)
 - [Graph Data Science 101: Understanding Graphs and Graph Data Science](https://techfirst.medium.com/graph-data-science-101-understanding-graphs-and-graph-data-science-c25055a9db01)
 - [The Story behind Russian Twitter Trolls](https://neo4j.com/blog/story-behind-russian-twitter-trolls)
 - [Graphs for Data Science and Machine Learning](https://de.slideshare.net/neo4j/graphs-for-data-science-and-machine-learning)

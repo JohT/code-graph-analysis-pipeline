@@ -1,4 +1,0 @@
-"fromMemberName","toMemberName","fromIncomingDependencies","fromOutgoingDependencies","toIncomingDependencies","toOutgoingDependencies","Source Cypher File: Centrality/Centrality_10d_Bridges_Stream.cypher"
-"react-router-6.28.0/react-router","react-router-6.28.0/react-router-native",20,17,0,24,""
-"react-router-6.28.0/react-router","react-router-6.28.0/server",20,17,0,38,""
-"react-router-6.28.0/react-router","react-router-6.28.0/react-router-dom",20,17,0,153,""

@@ -14,9 +14,6 @@
 - [Generate Markdown References](#generate-markdown-references)
     - [Generate Cypher Reference](#generate-cypher-reference)
     - [Generate Script Reference](#generate-script-reference)
-    - [Generate CSV Cypher Query Report Reference](#generate-csv-cypher-query-report-reference)
-    - [Generate Jupyter Notebook Report Reference](#generate-jupyter-notebook-report-reference)
-    - [Generate Image Reference](#generate-image-reference)
     - [Generate Environment Variable Reference](#generate-environment-variable-reference)
 - [Validate Links in Markdown](#validate-links-in-markdown)
 - [Manual Setup](#manual-setup)
@@ -145,39 +142,6 @@ Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then 
 
 ```script
 ./documentation/generateScriptReference.sh
-```
-
-### Generate CSV Cypher Query Report Reference
-
-Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateCsvReportReference.sh](./scripts/documentation/generateCsvReportReference.sh) with the following command:
-
-👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [internal-java-code-analysis.yml](.github/workflows/internal-java-code-analysis.yml) and doesn't need to be executed manually normally.
-
-```script
-./../scripts/documentation/generateCsvReportReference.sh
-```
-
-### Generate Jupyter Notebook Report Reference
-
-Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateJupyterReportReference.sh](./scripts/documentation/generateJupyterReportReference.sh) with the following command:
-
-👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [internal-java-code-analysis.yml](.github/workflows/internal-java-code-analysis.yml) and doesn't need to be executed manually normally.
-
-```script
-./../scripts/documentation/generateJupyterReportReference.sh
-```
-
-### Generate Image Reference
-
-Change into the [results](./results/) directory e.g. with `cd results` and then execute the script [generateImageReference.sh](./scripts/documentation/generateImageReference.sh) with the following command:
-
-👉**Note:** This script is automatically triggered at the end of [copyReportsIntoResults.sh](./scripts/copyReportsIntoResults.sh)
-which is included in the pipeline [internal-java-code-analysis.yml](.github/workflows/internal-java-code-analysis.yml) and doesn't need to be executed manually normally.
-
-```script
-./../scripts/documentation/generateImageReference.sh
 ```
 
 ### Generate Environment Variable Reference

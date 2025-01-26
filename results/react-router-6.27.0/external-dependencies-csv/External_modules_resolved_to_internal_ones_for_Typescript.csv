@@ -1,3 +1,0 @@
-"projectName","resolvedModuleCount","totalModuleCount","resolvedModulePercentage","totalExternalModuleCount","resolvedExternalModulePercentage","resolvedExamples","Source Cypher File: External_Dependencies/List_external_modules_resolved_to_internal_ones_for_Typescript.cypher"
-"react-router",1,6,16.67,25,4,"./index.ts -> /home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.27.0/source/react-router-6.27.0/packages/react-router/index.ts",""
-"react-router-dom",1,6,16.67,25,4,"./index.tsx -> /home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.27.0/source/react-router-6.27.0/packages/react-router-dom/index.tsx",""

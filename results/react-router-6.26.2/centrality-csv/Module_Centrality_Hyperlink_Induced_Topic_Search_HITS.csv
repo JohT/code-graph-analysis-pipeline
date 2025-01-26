@@ -1,6 +1,0 @@
-"codeUnitName","shortCodeUnitName","centralityHyperlinkInducedTopicSearchAuthority","centralityHyperlinkInducedTopicSearchHub","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_9d_Hyperlink_Induced_Topic_Search_HITS_Stream_Mutated.cypher"
-"./index.ts","router",0.6738873386790492,0,23,0,""
-"./index.ts","react-router",0.673887338679049,0.2886751345948129,19,17,""
-"./index.tsx","react-router-dom",0.30290544652768625,0.5773502691896258,2,152,""
-"./index.tsx","react-router-native",0,0.28867513459481287,0,24,""
-"./server.tsx","server",0,0.7071067811865476,0,40,""

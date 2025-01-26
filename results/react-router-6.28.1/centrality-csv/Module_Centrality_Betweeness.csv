@@ -1,7 +1,0 @@
-"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"react-router-6.28.1/react-router-dom","react-router-dom","centralityCloseness",0.6,""
-"react-router-6.28.1/react-router-native","react-router-native","centralityCloseness",0.44999999999999996,""
-"react-router-6.28.1/About","About","centralityCloseness",0,""
-"react-router-6.28.1/App","App","centralityCloseness",0,""
-"react-router-6.28.1/react-router","react-router","centralityCloseness",0,""
-"react-router-6.28.1/server","server","centralityCloseness",0,""

@@ -1,7 +1,0 @@
-"artifactName","fullQualifiedName","name","distance","abstractness","instability","elementsCount","Source Cypher File: Metrics/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher"
-"react-router-dom-v5-compat","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.23.1/source/packages/react-router-dom-v5-compat/index.ts","./index.ts",1,0,0,0,""
-"router","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.23.1/source/packages/router/index.ts","./index.ts",1,0,0,0,""
-"react-router-native","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.23.1/source/packages/react-router-native/index.tsx","./index.tsx",0.3846153846153846,0.38461538461538464,1,13,""
-"react-router-dom","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.23.1/source/packages/react-router-dom/index.tsx","./index.tsx",0.3394276629570747,0.35294117647058826,0.9864864864864865,34,""
-"react-router-dom","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.23.1/source/packages/react-router-dom/server.tsx","./server.tsx",0.33333333333333326,0.3333333333333333,1,6,""
-"react-router","/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.23.1/source/packages/react-router/index.ts","./index.ts",0.04117647058823515,0.6,0.4411764705882353,5,""

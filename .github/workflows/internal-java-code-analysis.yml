@@ -6,7 +6,6 @@ on:
       - main
     # Ignore changes in documentation, general configuration and reports for push events
     paths-ignore: 
-      - 'results/**'
       - '**/*.md'
       - '**/*.txt'
       - '**/*.css'
@@ -25,7 +24,6 @@ on:
       - main
     # Ignore changes in documentation, general configuration and reports for pull request events
     paths-ignore: 
-      - 'results/**'
       - '**/*.md'
       - '**/*.txt'
       - '**/*.css'
@@ -118,44 +116,3 @@ jobs:
       analysis-name: ${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
       artifacts-upload-name: ${{ needs.prepare-code-to-analyze.outputs.artifacts-upload-name }}
       sources-upload-name: ${{ needs.prepare-code-to-analyze.outputs.sources-upload-name }}
-
-
-
-  commit-analysis-results:
-    if: github.event_name == 'push'
-    needs: [prepare-code-to-analyze, analyze-code-graph]
-    runs-on: ubuntu-latest
-
-    env: 
-      CI_COMMIT_MESSAGE: Automated code structure analysis analysis-results (CI)
-      CI_COMMIT_AUTHOR: ${{ github.event.repository.name }} Continuous Integration
-
-    steps:
-    - name: Checkout GIT Repository
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      with:
-        token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
-  
-    - name: (Code Analysis Setup) Download source code and artifacts for analysis
-      uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
-      with:
-        name: ${{ needs.analyze-code-graph.outputs.uploaded-analysis-results }}
-        path: ./results/${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
-
-    - name: Commit "results" directory containing the reports
-      # Only run when a pull request gets merged or a commit is pushed to the main branch
-      # git add parameters need to match paths-ignore parameters above
-      # Git pull before add/commit/push to reduce race conditions on parallel builds
-      run: |
-        git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
-        git config --global user.email "7671054+JohT@users.noreply.github.com"
-        git config --local http.postBuffer 524288000
-        git fetch origin
-        git status
-        git add results
-        git status
-        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-        git status
-        git rebase --strategy-option=theirs origin/main --verbose
-        git status
-        git push --verbose

@@ -1,2 +1,0 @@
-"firstCommunityId","finalCommunityId","memberCount","memberNames","intermediateCommunityIds","Source Cypher File: Community_Detection/Community_Detection_1c_Louvain_Stream.cypher"
-2,2,6,"/axon-configuration-4.8.0.jar,/axon-test-4.8.0.jar,/axon-messaging-4.8.0.jar,/axon-modelling-4.8.0.jar,/axon-disruptor-4.8.0.jar,/axon-eventsourcing-4.8.0.jar","2",""

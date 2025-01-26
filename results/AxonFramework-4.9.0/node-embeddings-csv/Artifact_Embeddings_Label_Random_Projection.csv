@@ -1,7 +1,0 @@
-"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated.cypher"
-"/axon-messaging-4.9.0.jar","axon-messaging-4.9.0","embeddingsFastRandomProjection","0.35376918,0.42255968,-0.40662342,0,0.11606225,0.28870445,0,0.7550992,-0.5914762,1.0438035,0,0.06506479,0.19919215,-0.37821668,-0.2815419,0",""
-"/axon-test-4.9.0.jar","axon-test-4.9.0","embeddingsFastRandomProjection","0.40608698,0.51986253,-0.4681626,0,0.11511792,0.347036,0,0.70444846,-0.69705606,1.0514845,0,0.059051014,0.2386572,-0.45541474,-0.12851897,0",""
-"/axon-modelling-4.9.0.jar","axon-modelling-4.9.0","embeddingsFastRandomProjection","0.44779202,0.51049733,-0.5138188,0,0.15952994,0.35907868,0,0.73605263,-0.7360541,1.0951313,0,0.08871338,0.2521965,-0.46596086,-0.15473865,0",""
-"/axon-eventsourcing-4.9.0.jar","axon-eventsourcing-4.9.0","embeddingsFastRandomProjection","0.41854817,0.5031918,-0.47952813,0,0.13646226,0.3508696,0,0.70084566,-0.7006341,1.0517151,0,0.06767859,0.24636099,-0.45537812,-0.12887011,0",""
-"/axon-disruptor-4.9.0.jar","axon-disruptor-4.9.0","embeddingsFastRandomProjection","0.422002,0.5348846,-0.48902392,0,0.12104869,0.35417318,0,0.7372402,-0.7229552,1.0914133,0,0.06782883,0.24165604,-0.46669024,-0.14913557,0",""
-"/axon-configuration-4.9.0.jar","axon-configuration-4.9.0","embeddingsFastRandomProjection","0.4127743,0.5204881,-0.47753304,0,0.12015082,0.34676814,0,0.70844567,-0.7053977,1.0552137,0,0.06600618,0.23758434,-0.45595187,-0.13381277,0",""

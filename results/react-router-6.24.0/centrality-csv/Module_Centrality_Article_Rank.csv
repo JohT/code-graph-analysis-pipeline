@@ -1,6 +1,0 @@
-"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"./index.ts","router","centralityArticleRank",0.7490989622315904,""
-"./index.ts","react-router","centralityArticleRank",0.527968984724644,""
-"./index.tsx","react-router-dom","centralityArticleRank",0.2519847888305379,""
-"./index.tsx","react-router-native","centralityArticleRank",0.21977620679956686,""
-"./server.tsx","server","centralityArticleRank",0.21977620679956686,""
