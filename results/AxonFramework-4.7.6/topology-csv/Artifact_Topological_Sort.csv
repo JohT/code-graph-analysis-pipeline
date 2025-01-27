@@ -1,7 +1,0 @@
-"codeUnitName","shortName","topologicalSortIndex","maxDistanceFromSource","overallMaxDistanceFromSource","incomingDependencies","outgoingDependencies","Source Cypher File: Topological_Sort/Topological_Sort_Query.cypher"
-"/axon-configuration-4.7.6.jar","axon-configuration-4.7.6",0,0,4,0,4,""
-"/axon-test-4.7.6.jar","axon-test-4.7.6",1,0,4,0,3,""
-"/axon-disruptor-4.7.6.jar","axon-disruptor-4.7.6",2,1,4,1,3,""
-"/axon-eventsourcing-4.7.6.jar","axon-eventsourcing-4.7.6",3,2,4,3,2,""
-"/axon-modelling-4.7.6.jar","axon-modelling-4.7.6",4,3,4,4,1,""
-"/axon-messaging-4.7.6.jar","axon-messaging-4.7.6",5,4,4,5,0,""

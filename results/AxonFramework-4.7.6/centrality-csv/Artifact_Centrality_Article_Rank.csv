@@ -1,7 +1,0 @@
-"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"/axon-messaging-4.7.6.jar","axon-messaging-4.7.6","centralityArticleRank",0.8906964768070599,""
-"/axon-modelling-4.7.6.jar","axon-modelling-4.7.6","centralityArticleRank",0.2645991323270203,""
-"/axon-eventsourcing-4.7.6.jar","axon-eventsourcing-4.7.6","centralityArticleRank",0.21207024200425745,""
-"/axon-disruptor-4.7.6.jar","axon-disruptor-4.7.6","centralityArticleRank",0.17511774782806788,""
-"/axon-configuration-4.7.6.jar","axon-configuration-4.7.6","centralityArticleRank",0.1746526155360398,""
-"/axon-test-4.7.6.jar","axon-test-4.7.6","centralityArticleRank",0.1746526155360398,""

@@ -1,7 +1,0 @@
-"artifactName","dependencyTypeIsInterface","artifactDependencies","artifactDependencyPackages","dependentPackagesRate","minPackageSpread","maxPackageSpread","avgPackageSpread","stdPackageSpread","per5PackageSpread","minPackageCount","maxPackageCount","avgPackageCount","stdPackageCount","per5PackageCount","minTypeSpread","maxTypeSpread","avgTypeSpread","stdTypeSpread","per5TypeSpread","Source Cypher File: Artifact_Dependencies/Usage_and_spread_of_internal_artifact_dependents.cypher"
-"axon-eventsourcing-4.6.8",false,2,14,75.0,50.0,100.0,75.0,35.35533905932738,50.0,4,8,6.0,2.8284271247461903,4,10.0,31.666666666666668,20.833333333333336,15.320646925708528,10.0,""
-"axon-eventsourcing-4.6.8",true,1,15,100.0,100.0,100.0,100.0,0.0,100.0,8,8,8.0,0.0,8,54.16666666666667,54.16666666666667,54.16666666666667,0.0,54.16666666666667,""
-"axon-modelling-4.6.8",true,1,13,87.5,87.5,87.5,87.5,0.0,87.5,7,7,7.0,0.0,7,54.166666666666664,54.166666666666664,54.166666666666664,0.0,54.166666666666664,""
-"axon-modelling-4.6.8",false,1,14,87.5,87.5,87.5,87.5,0.0,87.5,7,7,7.0,0.0,7,50.0,50.0,50.0,0.0,50.0,""
-"axon-test-4.6.8",false,2,13,62.5,37.5,87.5,62.5,35.35533905932738,37.5,3,7,5.0,2.8284271247461903,3,12.941176470588236,32.94117647058824,22.94117647058824,14.142135623730951,12.941176470588236,""
-"axon-test-4.6.8",true,2,13,56.25,25.0,87.5,56.25,44.19417382415922,25.0,2,7,4.5,3.5355339059327378,2,14.117647058823529,41.1764705882353,27.647058823529413,19.13347760857717,14.117647058823529,""

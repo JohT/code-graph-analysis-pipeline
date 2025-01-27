@@ -1,4 +1,0 @@
-"communityId","conductance","modularity","memberCount","someMemberNamesShort","someMemberNames","Source Cypher File: Community_Detection/Community_Detection_9_Community_Metrics.cypher"
-0,0,0,1,"About","./src/pages/About.tsx",""
-1,0,0,3,"react-router,react-router-dom,server,react-router-native","./index.ts,./index.tsx,./server.tsx",""
-2,0,0,1,"App","./src/App.jsx",""

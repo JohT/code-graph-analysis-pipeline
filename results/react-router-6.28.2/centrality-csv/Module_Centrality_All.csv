@@ -1,7 +1,0 @@
-"name","shortName","pageRank","articleRank","betweenness","costEffectiveLazyForward","harmonicCloseness","closeness","hyperlinkInducedTopicSearchAuthority","hyperlinkInducedTopicSearchHub","incomingDependencies","outgoingDependencies","Source Cypher File: Centrality/Centrality_90_Summary.cypher"
-"./src/pages/About.tsx","About",0.05694911464769331,0.060185649292030005,0,1,0,0,0,0,0,1,""
-"./index.ts","react-router",0.05694911464769331,0.060185649292030005,0,1,0,0,0,0,0,34,""
-"./index.tsx","react-router-dom",0.724553559935573,0.7245264454788426,1,0.9200000000000008,0.6,0.6,0.8506508081448733,0.8506508081448733,26,312,""
-"./server.tsx","server",0.05694911464769331,0.060185649292030005,0,1.27,0,0,0,0,0,78,""
-"./index.tsx","react-router-native",0.6797421070877275,0.6786546841207102,1,0,0.5,0.44999999999999996,0.5257311124543362,0.5257311124543362,10,48,""
-"./src/App.jsx","App",0.05694911464769331,0.060185649292030005,0,0.9999999999999996,0,0,0,0,0,1,""

@@ -1,6 +1,0 @@
-"codeUnitName","shortCodeUnitName","propertyName","propertyValue","Source Cypher File: Dependencies_Projection/Dependencies_8_Stream_Mutated_Value_Descending.cypher"
-"./index.ts","router","centralityHarmonic",0.875,""
-"./index.ts","react-router","centralityHarmonic",0.75,""
-"./index.tsx","react-router-dom","centralityHarmonic",0,""
-"./index.tsx","react-router-native","centralityHarmonic",0,""
-"./server.tsx","server.tsx","centralityHarmonic",0,""

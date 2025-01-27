@@ -1,5 +1,0 @@
-"projectPath","modulePath","moduleName","exportedElements","allElements","relativeVisibility","Source Cypher File: Visibility/Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher"
-"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.1/source/react-router-6.26.1/packages/react-router","index.ts","react-router",6,6,1,""
-"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.1/source/react-router-6.26.1/packages/react-router-native","index.tsx","react-router-native",13,15,0.8666666666666667,""
-"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.1/source/react-router-6.26.1/packages/react-router-dom","index.tsx","react-router-dom",35,69,0.5072463768115942,""
-"/home/runner/work/code-graph-analysis-pipeline/code-graph-analysis-pipeline/temp/react-router-6.26.1/source/react-router-6.26.1/packages/react-router-dom","server.tsx","server",6,16,0.375,""

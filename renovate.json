@@ -59,19 +59,6 @@
       "extractVersionTemplate": "^react-router@?(?<version>.*?)$"
     },
     {
-      "description": "Update AxonFramework analysis result links in README.md",
-      "customType": "regex",
-      "fileMatch": [
-        "README.md"
-      ],
-      "matchStrings": [
-        "\\/AxonFramework-?(?<currentValue>.*?)\\/"
-      ],
-      "depNameTemplate": "AxonFramework/AxonFramework",
-      "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^axon-?(?<version>.*?)$"
-    },
-    {
       "description": "Update Python environment mambaforge version in GitHub Actions",
       "customType": "regex",
       "fileMatch": [
