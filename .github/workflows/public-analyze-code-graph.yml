@@ -79,6 +79,9 @@ jobs:
         if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
 
+      - name: Assemble ENVIRONMENT_INFO
+        run: echo "ENVIRONMENT_INFO=-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
+      
       - name: (Code Analysis Setup) Checkout code-graph-analysis-pipeline
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
@@ -166,9 +169,6 @@ jobs:
           IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
         run: |
           TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ inputs.analysis-arguments }}
-
-      - name: Assemble ENVIRONMENT_INFO
-        run: echo "ENVIRONMENT_INFO=-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
     
       - name: Set artifact name for uploaded analysis results
         id: set-analysis-results-artifact-name
