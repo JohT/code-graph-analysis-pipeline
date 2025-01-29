@@ -1,6 +1,6 @@
-// Create filtered Type node projection without zero-degree nodes, external types, java types or duplicates. Variables: dependencies_projection. Requires 'Label_base_java_types', 'Label_buildin_java_types' and 'Label_resolved_duplicate_types' of 'Types' directory.
+// Create filtered Java Type node projection without zero-degree nodes, external types, java types or duplicates. Variables: dependencies_projection. Requires 'Label_base_java_types', 'Label_buildin_java_types' and 'Label_resolved_duplicate_types' of 'Types' directory.
 
-  MATCH (internalType:Type&!PrimitiveType&!Void&!JavaType&!ResolvedDuplicateType&!ExternalType)
+  MATCH (internalType:Java&Type&!PrimitiveType&!Void&!JavaType&!ResolvedDuplicateType&!ExternalType)
  OPTIONAL MATCH (internalType)-[typeDependency:DEPENDS_ON]->(dependentType:Type&!PrimitiveType&!Void&!JavaType&!ResolvedDuplicateType&!ExternalType)
   WITH internalType
       ,typeDependency
