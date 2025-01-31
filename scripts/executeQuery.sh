@@ -21,6 +21,10 @@ set -o errexit -o pipefail
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
 NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
 
+# Local constants
+ERROR_COLOR='\033[0;31m'
+NO_COLOR='\033[0m'
+
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
     echo "executeQuery requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'." >&2
@@ -30,13 +34,15 @@ fi
 # Input Arguments: Initialize arguments and set default values for optional ones
 cypher_query_file_name=""
 no_source_reference=false
+omit_query_error_highlighting=false
 query_parameters=""
 
 # Input Arguments: Function to print usage information
 print_usage() {
-    echo "executeQuery Usage: $0 <filename> [--no-source-reference-column]" >&2
+    echo "executeQuery Usage: $0 <filename> [--no-source-reference-column] [--omit-query-error-highlighting]" >&2
     echo "Options:" >&2
     echo "  --no-source-reference-column: Exclude the source reference column" >&2
+    echo "  --omit-query-error-highlighting: Log query errors in same color as infos" >&2
 }
 
 # Input Arguments: Parse the command-line arguments
@@ -46,6 +52,10 @@ while [[ $# -gt 0 ]]; do
     case $arg in
         --no-source-reference-column)
             no_source_reference=true
+            shift
+            ;;
+        --omit_query_error_highlighting)
+            omit_query_error_highlighting=true
             shift
             ;;
         *)
@@ -78,6 +88,13 @@ done
 
 #echo "executeQuery: query_parameters: ${query_parameters}"
 
+# Set the color for error messages
+error_message_color="${ERROR_COLOR}"
+if [ "${omit_query_error_highlighting}" = "true" ] ; then
+  error_message_color="${NO_COLOR}"
+  echo "executeQuery: Ommiting error highlighting" >&2
+fi
+
 # Read the file that contains the Cypher query
 original_cypher_query=$(<"${cypher_query_file_name}")
 #echo "executeQuery: Original Query: $original_cypher_query"
@@ -102,21 +119,18 @@ if ! cypher_query_result=$(curl --silent -S --fail-with-body -H Accept:applicati
      "http://localhost:${NEO4J_HTTP_PORT}/${NEO4J_HTTP_TRANSACTION_ENDPOINT}" \
      -d "${cypher_query_for_api}" 2>&1) ;
 then
-  redColor='\033[0;31m'
-  noColor='\033[0m'
-  echo -e "${redColor}${cypher_query_file_name}: ${cypher_query_result}${noColor}" >&2
-  echo -e "${redColor}Parameters: ${query_parameters}${noColor}" >&2
+  echo -e "${error_message_color}${cypher_query_file_name}: ${cypher_query_result}${NO_COLOR}" >&2
+  echo -e "${error_message_color}Parameters: ${query_parameters}${NO_COLOR}" >&2
   exit 1
 fi
 #echo "executeQuery: Cypher Query OK Result: ${cypher_query_result}"
 
-# If there is a error message print it to syserr >&2 in red color
+# If there is a error message print it to syserr >&2 in error color
 error_message=$( echo "${cypher_query_result}" | jq -r '.errors[0] // empty' )
-if [[ -n "${error_message}" ]]; then 
-  redColor='\033[0;31m'
-  noColor='\033[0m'
-  echo -e "${redColor}${cypher_query_file_name}: ${error_message}${noColor}" >&2
-  echo -e "${redColor}Parameters: ${query_parameters}${noColor}" >&2
+if [[ -n "${error_message}" ]]; then
+  # Set the message color to red if the query errors should be highlighted
+  echo -e "${error_message_color}${cypher_query_file_name}: ${error_message}${NO_COLOR}" >&2
+  echo -e "${error_message_color}Parameters: ${query_parameters}${NO_COLOR}" >&2
   exit 1
 fi
 

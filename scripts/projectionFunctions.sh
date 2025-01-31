@@ -238,7 +238,7 @@ createUndirectedJavaTypeDependencyProjection() {
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
 
     local projectionResult
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Type_Projection.cypher" "${@}")
+    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Java_Type_Projection.cypher" "${@}")
     if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
         true;
     else

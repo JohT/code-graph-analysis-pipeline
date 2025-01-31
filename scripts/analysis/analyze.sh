@@ -39,6 +39,8 @@ REPORT_COMPILATIONS_SCRIPTS_DIRECTORY=${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY:-"
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY=${SETTINGS_PROFILE_SCRIPTS_DIRECTORY:-"profiles"} # Repository directory that contains scripts containing settings
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Working directory containing the artifacts to be analyzed
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+LOG_GROUP_START=${LOG_GROUP_START:-"::group::"} # Prefix to start a log group. Defaults to GitHub Actions log group start command.
+LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defaults to GitHub Actions log group end command.
 
 # Function to display script usage
 usage() {
@@ -127,15 +129,21 @@ echo "analyze: Using analysis settings profile script ${SETTINGS_PROFILE_SCRIPT}
 source "${SETTINGS_PROFILE_SCRIPT}"
 
 # Setup Tools
+echo "${LOG_GROUP_START}Setup Tools";
 source "${SCRIPTS_DIR}/setupNeo4j.sh"
 source "${SCRIPTS_DIR}/setupJQAssistant.sh"
 source "${SCRIPTS_DIR}/startNeo4j.sh"
+echo "${LOG_GROUP_END}";
 
 # Scan and analyze artifacts when they were changed
+echo "${LOG_GROUP_START}Scan and Analyze Changed Artifacts";
 source "${SCRIPTS_DIR}/resetAndScanChanged.sh"
+echo "${LOG_GROUP_END}";
 
 # Prepare and validate graph database before analyzing and creating reports 
+echo "${LOG_GROUP_START}Prepare Analysis";
 source "${SCRIPTS_DIR}/prepareAnalysis.sh"
+echo "${LOG_GROUP_END}";
 
 if ${exploreMode}; then
   echo "analyze: Explore mode activated. Report generation will be skipped. Neo4j keeps running."
@@ -149,4 +157,6 @@ echo "analyze: Creating Reports with ${REPORT_COMPILATION_SCRIPT} ..."
 source "${REPORT_COMPILATION_SCRIPT}"
 
 # Stop Neo4j at the end
+echo "${LOG_GROUP_START}Finishing Analysis";
 source "${SCRIPTS_DIR}/stopNeo4j.sh"
+echo "${LOG_GROUP_END}";

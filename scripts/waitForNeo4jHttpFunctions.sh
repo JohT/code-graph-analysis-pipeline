@@ -24,13 +24,13 @@ echo "waitForNeo4jHttp: CYPHER_DIR=${CYPHER_DIR}"
 # Define functions to execute a Cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-queryDatabase() { 
-    execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher" "--no-source-reference-column"
+testDatabase() { 
+    execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher" "--no-source-reference-column" "--omit_query_error_highlighting"
 }
 
 isDatabaseQueryable() { 
     local cypher_elements_query_result
-    if cypher_elements_query_result=$(queryDatabase);
+    if cypher_elements_query_result=$(testDatabase);
     then
         echo "true"
      else
@@ -56,7 +56,7 @@ waitUntilDatabaseIsQueryable() {
             continue; # query failed -> try again
         fi
         
-        local queryResult=$(queryDatabase || true)
+        local queryResult=$(testDatabase || true)
         if [[ -n "${queryResult}" ]]; then 
             echo "waitForNeo4jHttp: Successfully accessed Neo4j HTTP API."
             echo "${queryResult}"

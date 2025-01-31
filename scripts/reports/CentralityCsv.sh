@@ -407,7 +407,7 @@ TYPE_PROJECTION_UNDIRECTED="dependencies_projection=type-centrality-undirected"
 TYPE_NODE="dependencies_projection_node=Type" 
 TYPE_WEIGHT="dependencies_projection_weight_property=weight" 
 
-if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
+if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
     runCentralityAlgorithms "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 fi
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION_UNDIRECTED}"; then
