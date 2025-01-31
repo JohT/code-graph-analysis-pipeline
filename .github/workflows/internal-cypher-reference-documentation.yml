@@ -52,6 +52,7 @@ jobs:
       # And only run when the generated document changed to avoid an empty commit or an error while committing.
       if: github.event_name == 'push' && env.generated_document_changed
       run: |
+        set -x
         git config --global user.name '${{ env.CI_COMMIT_AUTHOR }}'
         git config --global user.email "7671054+JohT@users.noreply.github.com"
         git fetch origin
@@ -61,5 +62,9 @@ jobs:
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git status
         git rebase --strategy-option=theirs origin/main --verbose
+        git status
+        git add ./cypher/CYPHER.md        
+        git status
+        git commit --amend --no-edit
         git status
         git push --verbose

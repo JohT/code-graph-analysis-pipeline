@@ -28,8 +28,9 @@ echo "VisualizationReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 # Run all visualization scripts
 for visualization_script_file in "${REPORTS_SCRIPT_DIR}"/*Visualization.sh; do 
     visualization_script_filename=$(basename -- "${visualization_script_file}")
-    
-    echo "${LOG_GROUP_START}${visualization_script_filename}";
+    visualization_script_filename="${visualization_script_filename%.*}" # Remove file extension
+
+    echo "${LOG_GROUP_START}Create Visualization Report ${visualization_script_filename}";
     echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${visualization_script_filename}...";
 
     source "${visualization_script_file}"

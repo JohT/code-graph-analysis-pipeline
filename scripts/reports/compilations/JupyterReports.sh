@@ -36,12 +36,13 @@ echo "JupyterReports: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
 # Run all jupiter notebooks
 for jupyter_notebook_file in "${JUPYTER_NOTEBOOK_DIRECTORY}"/*.ipynb; do 
     jupyter_notebook_filename=$(basename -- "${jupyter_notebook_file}")
+    jupyter_notebook_filename_without_extension="${jupyter_notebook_filename%.*}" # Remove file extension
     
-    echo "${LOG_GROUP_START}${jupyter_notebook_filename}";
-    echo "JupyterReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${jupyter_notebook_filename}...";
+    echo "${LOG_GROUP_START}Create Jupyter Notebook Report ${jupyter_notebook_filename_without_extension}";
+    echo "JupyterReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${jupyter_notebook_filename_without_extension}...";
 
     source "${SCRIPTS_DIR}/executeJupyterNotebookReport.sh" --jupyterNotebook "${jupyter_notebook_filename}"
 
-    echo "JupyterReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${jupyter_notebook_filename}";
+    echo "JupyterReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${jupyter_notebook_filename_without_extension}";
     echo "${LOG_GROUP_END}";
 done

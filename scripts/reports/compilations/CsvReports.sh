@@ -24,9 +24,10 @@ echo "CsvReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 
 # Run all report scripts
 for report_script_file in "${REPORTS_SCRIPT_DIR}"/*Csv.sh; do
-    report_script_filename=$(basename -- "${report_script_file}")
-    
-    echo "${LOG_GROUP_START}${report_script_file}";
+    report_script_filename=$(basename -- "${report_script_file}");
+    report_script_filename="${report_script_filename%.*}" # Remove file extension
+
+    echo "${LOG_GROUP_START}Create CSV Report ${report_script_filename}";
     echo "CsvReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${report_script_filename}...";
 
     source "${report_script_file}"
