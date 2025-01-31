@@ -11,6 +11,10 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+# Overrideable Constants (defaults also defined in sub scripts)
+LOG_GROUP_START=${LOG_GROUP_START:-"::group::"} # Prefix to start a log group. Defaults to GitHub Actions log group start command.
+LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defaults to GitHub Actions log group end command.
+
 ## Get this "scripts/reports/compilations" directory if not already set.
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
@@ -21,8 +25,15 @@ echo "VisualizationReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
 echo "VisualizationReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 
-# Run all report scripts
-for report_script_file in "${REPORTS_SCRIPT_DIR}"/*Visualization.sh; do 
-    echo "VisualizationReports: Starting ${report_script_file}..."; 
-    source "${report_script_file}"
+# Run all visualization scripts
+for visualization_script_file in "${REPORTS_SCRIPT_DIR}"/*Visualization.sh; do 
+    visualization_script_filename=$(basename -- "${visualization_script_file}")
+    
+    echo "${LOG_GROUP_START}${visualization_script_filename}";
+    echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${visualization_script_filename}...";
+
+    source "${visualization_script_file}"
+
+    echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${visualization_script_filename}";
+    echo "${LOG_GROUP_END}";
 done
