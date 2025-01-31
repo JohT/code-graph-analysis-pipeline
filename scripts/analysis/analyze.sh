@@ -95,6 +95,7 @@ if [ ! -d "${ARTIFACTS_DIRECTORY}" ] && [ ! -d "${SOURCE_DIRECTORY}" ] ; then
     exit 1
 fi
 
+echo "${LOG_GROUP_START}Start Analysis"
 echo "analyze: analysisReportCompilation=${analysisReportCompilation}"
 echo "analyze: settingsProfile=${settingsProfile}"
 echo "analyze: exploreMode=${exploreMode}"
@@ -127,23 +128,24 @@ fi
 # Execute the settings profile script that sets all the necessary settings variables (overrideable by environment variables).
 echo "analyze: Using analysis settings profile script ${SETTINGS_PROFILE_SCRIPT}"
 source "${SETTINGS_PROFILE_SCRIPT}"
+echo "${LOG_GROUP_END}"
 
 # Setup Tools
-echo "${LOG_GROUP_START}Setup Tools";
+echo "${LOG_GROUP_START}Setup Tools"
 source "${SCRIPTS_DIR}/setupNeo4j.sh"
 source "${SCRIPTS_DIR}/setupJQAssistant.sh"
 source "${SCRIPTS_DIR}/startNeo4j.sh"
-echo "${LOG_GROUP_END}";
+echo "${LOG_GROUP_END}"
 
 # Scan and analyze artifacts when they were changed
-echo "${LOG_GROUP_START}Scan and Analyze Changed Artifacts";
+echo "${LOG_GROUP_START}Scan and Analyze Changed Artifacts"
 source "${SCRIPTS_DIR}/resetAndScanChanged.sh"
-echo "${LOG_GROUP_END}";
+echo "${LOG_GROUP_END}"
 
 # Prepare and validate graph database before analyzing and creating reports 
-echo "${LOG_GROUP_START}Prepare Analysis";
+echo "${LOG_GROUP_START}Prepare Analysis"
 source "${SCRIPTS_DIR}/prepareAnalysis.sh"
-echo "${LOG_GROUP_END}";
+echo "${LOG_GROUP_END}"
 
 if ${exploreMode}; then
   echo "analyze: Explore mode activated. Report generation will be skipped. Neo4j keeps running."
@@ -153,10 +155,9 @@ fi
 #########################
 # Create Reports
 #########################
-echo "analyze: Creating Reports with ${REPORT_COMPILATION_SCRIPT} ..."
 source "${REPORT_COMPILATION_SCRIPT}"
 
 # Stop Neo4j at the end
-echo "${LOG_GROUP_START}Finishing Analysis";
+echo "${LOG_GROUP_START}Finishing Analysis"
 source "${SCRIPTS_DIR}/stopNeo4j.sh"
-echo "${LOG_GROUP_END}";
+echo "${LOG_GROUP_END}"
