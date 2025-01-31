@@ -13,13 +13,14 @@ REPORT_COMPILATIONS_SCRIPTS_DIRECTORY | compilations                        | Re
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY    | profiles                            | Repository directory that contains scripts containing settings |
 ARTIFACTS_DIRECTORY                   | artifacts                           | Working directory containing the artifacts to be analyzed |
 SOURCE_DIRECTORY                      | source                              |  |
+LOG_GROUP_START                       | ::group::                           | Prefix to start a log group. Defaults to GitHub Actions log group start command. |
+LOG_GROUP_END                         | ::endgroup::                        | Prefix to end a log group. Defaults to GitHub Actions log group end command. |
 NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY  | npm-package-json                    | Subdirectory of "artifacts" containing the npm package.json files to scan |
-RESULTS_DIRECTORY                     | results                             | Repository directory containing the final analysis report results |
-REPORTS_DIRECTORY                     | reports                             | Working directory where the analysis reports are written to  |
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE. |
 CHANGE_DETECTION_HASH_FILE_PATH       | ./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE} | Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option. |
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value e.g. "true" |
 JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.g. "" (no postfix), ".nbconvert" or ".output" |
+REPORTS_DIRECTORY                     | reports                             |  |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
 CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
