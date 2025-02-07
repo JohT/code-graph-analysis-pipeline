@@ -19,5 +19,6 @@ dependencies:
   - wordcloud=1.9.*
   - monotonic=1.*
   - plotly=6.0.*
+  - squarify=0.4.* # to create tree maps e.g. for git history
   - pip:
       - neo4j==5.23.*
