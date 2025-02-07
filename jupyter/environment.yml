@@ -19,5 +19,7 @@ dependencies:
   - wordcloud=1.9.*
   - monotonic=1.*
   - plotly=6.0.*
+  - python-kaleido=0.2.* # To render plotly plots. Static image export for web-based visualization libraries.
+  - squarify=0.4.* # to create tree maps e.g. for git history
   - pip:
       - neo4j==5.23.*
