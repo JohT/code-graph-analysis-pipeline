@@ -88,8 +88,9 @@ source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
 jupyter --version || exit 1
 
 # Execute the Jupyter Notebook and write it to the output file name
+# The environment variable NBCONVERT is needed to be able to detect a command line execution in the Jupyter Notebook.
 echo "executeJupyterNotebook: Executing Jupyter Notebook ${jupyter_notebook_output_file_name}..."
-jupyter nbconvert --to notebook \
+NBCONVERT=true jupyter nbconvert --to notebook \
                   --execute "${jupyter_notebook_file}" \
                   --output "$jupyter_notebook_output_file_name" \
                   --output-dir="./" \
@@ -107,7 +108,8 @@ mv -f "${jupyter_notebook_markdown_file}.nostyle" "${jupyter_notebook_markdown_f
 echo "executeJupyterNotebook: Successfully created Markdown ${jupyter_notebook_markdown_file}.."
 
 # Convert the Jupyter Notebook to PDF
+# The environment variable NBCONVERT is needed to be able to detect a command line execution in the Jupyter Notebook.
 if [ -n "${ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION}" ]; then
-    jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
+    NBCONVERT=true jupyter nbconvert --to webpdf --no-input --allow-chromium-download --disable-chromium-sandbox "$jupyter_notebook_output_file"
     echo "executeJupyterNotebook: Successfully created PDF ${jupyter_notebook_output_file}."
 fi
