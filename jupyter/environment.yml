@@ -2,16 +2,18 @@ name: codegraph
 channels:
   - conda-forge
 dependencies:
-  - python=3.11.*
-  - jupyter=1.0.*
-  - matplotlib=3.6.*
+  - python=3.12.*
+  - jupyter=1.1.*
+  - matplotlib=3.10.*
   - nbconvert=7.2.*
   - nbconvert-webpdf=7.2.*
-  - numpy=1.23.*
-  - pandas=1.5.*
-  - pip=22.3.*
+  - numpy=1.26.*
+  - pandas=2.2.*
+  - pip=25.0.*
+  - setuptools=75.8.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
+  - typing-extensions=4.12.* # Also needed for opentsne and Python >= 3.12
   - opentsne=1.0.* # to visualize node embeddings in 2D (t-SNE dimensionality reduction)
+  - wordcloud=1.9.*
+  - monotonic=1.*
   - pip:
-      - monotonic==1.*
-      - wordcloud==1.9.*
-      - neo4j==5.11.*
+      - neo4j==5.23.*
