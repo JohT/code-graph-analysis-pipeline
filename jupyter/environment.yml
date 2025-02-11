@@ -1,12 +1,14 @@
 name: codegraph
 channels:
+  - conda-forge/label/python_rc # Needed on Mac since Python >= 3.12
   - conda-forge
 dependencies:
   - python=3.12.*
+  - _python_rc=* # Needed on Mac since Python >= 3.12
   - jupyter=1.1.*
   - matplotlib=3.10.*
-  - nbconvert=7.2.*
-  - nbconvert-webpdf=7.2.*
+  - nbconvert=7.16.*
+  - nbconvert-webpdf=7.16.*
   - numpy=1.26.*
   - pandas=2.2.*
   - pip=25.0.*
