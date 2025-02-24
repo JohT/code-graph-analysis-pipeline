@@ -90,7 +90,7 @@ jobs:
 
     - name: (Prepare Code to Analyze) Upload sources to analyze
       if: success()
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+      uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4
       with:
         name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
         path: ./temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source
@@ -100,7 +100,7 @@ jobs:
 
     - name: (Prepare Code to Analyze) Upload artifacts to analyze
       if: success()
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+      uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4
       with:
         name: ${{ steps.set-artifacts-upload-name.outputs.artifacts-upload-name }}
         path: ./temp/${{ steps.set-analysis-name.outputs.analysis-name }}/artifacts
