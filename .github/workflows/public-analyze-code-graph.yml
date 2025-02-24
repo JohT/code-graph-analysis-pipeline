@@ -170,7 +170,7 @@ jobs:
       # Upload successful analysis-results in case they are needed for troubleshooting
       - name: (Code Analysis Results) Archive successful analysis-results
         if: success()
-        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4
         with:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/reports/*
@@ -181,7 +181,7 @@ jobs:
       # Upload logs and unfinished analysis-results in case of an error for troubleshooting
       - name: (Code Analysis Results) Archive failed run with logs and unfinished analysis-results
         if: failure()
-        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4
         with:
           name: code-analysis-logs-${{ env.ENVIRONMENT_INFO }}
           path: |
