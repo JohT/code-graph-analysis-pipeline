@@ -115,7 +115,7 @@ if [ ! -d "${fullSourceDirectory}" ]; then # source doesn't exist
   if [ -n "${cloneUrl}" ]; then # only clone if url is specified and source doesn't exist 
     echo "downloadTypescriptProject: Cloning ${cloneUrl} with version ${projectVersion}..."
     # A full clone is done since not only the source is scanned, but also the git log/history.
-    git clone --branch "${projectTag}" "${cloneUrl}" "${fullSourceDirectory}"
+    git clone --branch "${projectTag}" --single-branch "${cloneUrl}" "${fullSourceDirectory}"
   else
     # Source doesn't exist and no clone URL is specified.
     echo "downloadTypescriptProject: Error: Source directory ${fullSourceDirectory} for project ${projectName} not found."
