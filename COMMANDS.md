@@ -264,7 +264,7 @@ Here is the resulting schema:
 
 #### Parameter
 
-The optional parameter `--source directory-path-to-the-source-folder-containing-git-repositories` can be used to select a different directory for the repositories. By default, the `source` directory within the analysis workspace directory is used. This command only needs the git history to be present. Therefore, `git clone --bare` is sufficient. If the `source` directory is also used for code analysis (like for Typescript) then a full git clone is of course needed.
+The optional parameter `--source directory-path-to-the-source-folder-containing-git-repositories` can be used to select a different directory for the repositories. By default, the `source` directory within the analysis workspace directory is used. This command only needs the git history to be present. Therefore, `git clone --bare` is sufficient. If the `source` directory is also used for code analysis (like for Typescript) then a full git clone is of course needed. Additionally, if you want to focus on a specific version or branch, use `--branch branch-name` to checkout the branch and `--single-branch` to exclude other branches before importing the git log data.
 
 #### Environment Variable
 
