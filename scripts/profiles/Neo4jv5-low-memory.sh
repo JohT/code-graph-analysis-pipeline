@@ -3,7 +3,7 @@
 # Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 # The chosen settings are tested to be compatible and working.
 
-NEO4J_VERSION=${NEO4J_VERSION:-"5.26.2"} # Version 5.9.0 is the current version of june 2023
+NEO4J_VERSION=${NEO4J_VERSION:-"5.26.4"} # Version 5.9.0 is the current version of june 2023
 NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Since Neo4j v5 it is "db/<name>/tx/commit"
 NEO4J_CONFIG_TEMPLATE=${NEO4J_CONFIG_TEMPLATE:-"template-neo4j-low-memory.conf"} # Name of the template file ("configuration" folder) for the Neo4j configuration
 
