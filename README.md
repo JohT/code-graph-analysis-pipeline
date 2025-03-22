@@ -10,11 +10,11 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 - Analyze static code structure as a graph
 - Supports Java Code Analysis
-- **🌟New🌟:** Supports Typescript Code Analysis (experimental)
+- Supports Typescript Code Analysis (experimental)
 - Fully automated [pipeline for Java](./.github/workflows/internal-java-code-analysis.yml) from tool installation to report generation
 - Fully automated [pipeline for Typescript](./.github/workflows/internal-typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
-- Easy integratable in your [continuous integration pipeline](./INTEGRATION.md)
+- Easily integrable into your [continuous integration pipeline](./INTEGRATION.md)
 - More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
 - Jupyter notebook reports for dependencies, metrics, visibility and many more
 - Graph structure visualization
@@ -23,12 +23,14 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Tested on MacOS (zsh), Linux (bash) and Windows (Git Bash)
 - Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
+- Example analysis for [react-router](https://github.com/remix-run/react-router)
 
-### :book: Jupyter Notebook Reports
+### :notebook: Jupyter Notebook Reports
 
 Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
 
 - [External Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./jupyter/ExternalDependenciesJava.ipynb)).
+- [Git History](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/git-history-general/GitHistoryGeneral.md) contains information about the git history of the analyzed code ([Notebook](./jupyter/GitHistoryGeneral.ipynb)).
 - [Internal Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-java/InternalDependenciesJava.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./jupyter/InternalDependenciesJava.ipynb)).
 - [Method Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/method-metrics-java/MethodMetricsJava.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
 - [Node Embeddings](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/node-embeddings-java/NodeEmbeddingsJava.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
@@ -37,7 +39,7 @@ Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [co
 - [Visibility Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
 - [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
 
-### :book: Graph Data Science Reports
+### :blue_book: Graph Data Science Reports
 
 This project includes several reports that use Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). These reports are part of the [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples) repository. For a full list of reports, check out the [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference).
 
@@ -46,6 +48,7 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 - [Centrality with Page Rank](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/centrality-csv/Package_Centrality_Page_Rank.csv) ([Source Script](./scripts/reports/CentralityCsv.sh))
 - [Community Detection with Leiden](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/community-csv/Package_communityLeidenId_Community__Metrics.csv) ([Source Script](./scripts/reports/CommunityCsv.sh))
 - [Node Embeddings with HashGNN](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/node-embeddings-csv/Package_Embeddings_HashGNN.csv) ([Source Script](./scripts/reports/NodeEmbeddingsCsv.sh))
+- [Path Finding with all pairs shortest path](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/path-finding-csv/Package_all_pairs_shortest_paths_distribution_per_project.csv) ([Source Script](./scripts/reports/PathFindingCsv.sh))
 - [Similarity with Jaccard](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/similarity-csv/Package_Similarity.csv) ([Source Script](./scripts/reports/SimilarityCsv.sh))
 - [Topology Sort](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/topology-csv/Package_Topological_Sort.csv) ([Source Script](./scripts/reports/TopologicalSortCsv.sh))
 
@@ -82,7 +85,7 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 ### Additional Prerequisites for Graph Visualization
 
-These tools are needed to run the graph visualization scripts of directory [graph-visualization](./graph-visualization):
+These tools are needed to run the graph visualization scripts of directory [scripts/visualization/](./scripts/visualization/) and the deprecated scripts in [graph-visualization](./graph-visualization):
 
 - [Node.js](https://nodejs.org/en)
 - [npm](https://www.npmjs.com)
@@ -175,6 +178,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 ## :globe_with_meridians: Environment Variable Reference
 
 [ENVIRONMENT_VARIABLES.md](./scripts/ENVIRONMENT_VARIABLES.md) contains all environment variables that are supported by the scripts including default values and description. It can be generated as described in [Generate Environment Variable Reference](./COMMANDS.md#generate-environment-variable-reference).
+
+## :closed_book: Change Log
+
+[CHANGELOG.md](./CHANGELOG.md) contains all changes of this repository.
 
 ## :thinking: Questions & Answers
 
