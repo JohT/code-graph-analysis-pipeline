@@ -79,8 +79,6 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 * Introduce path finding algorithm reports by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/216
 * Add Bridges centrality algorithm report by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/283
 
----
-
 ## v1.0.1 (2023-12-16) Fix Graph Visualization
 
 For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releases/tag/v1.0.1
@@ -97,8 +95,6 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 ### 📦 Dependency Updates
 
 * Update dependency AxonFramework/AxonFramework to v4.9.1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/90
-
----
 
 ## v1.0.0 (2023-12-09) First major version release
 
@@ -139,8 +135,6 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 ### 🛠 Fixes
 
 * Fix missing Jupyter reports by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/72
-
----
 
 ## v0.9.0 (2023-06-26) Initial Release Version
 
