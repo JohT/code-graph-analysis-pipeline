@@ -57,6 +57,6 @@ source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axo
 # This makes it possible to additionally import the git log into the graph
 if [ ! -d "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git" ]; then
   echo "download${ANALYSIS_NAME}: Getting bare git history of source code repository..."
-  git clone --bare https://github.com/AxonFramework/AxonFramework.git --branch "axon-${ARTIFACTS_VERSION}" "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git"
+  git clone --bare https://github.com/AxonFramework/AxonFramework.git --branch "axon-${ARTIFACTS_VERSION}" --single-branch "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git"
 fi
 ################################################################

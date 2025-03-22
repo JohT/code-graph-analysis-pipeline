@@ -1,6 +1,7 @@
 name: codegraph
 channels:
   - conda-forge/label/python_rc # Needed on Mac since Python >= 3.12
+  - plotly
   - conda-forge
 dependencies:
   - python=3.12.*
@@ -17,5 +18,7 @@ dependencies:
   - opentsne=1.0.* # to visualize node embeddings in 2D (t-SNE dimensionality reduction)
   - wordcloud=1.9.*
   - monotonic=1.*
+  - plotly=6.0.*
+  - python-kaleido=0.2.* # To render plotly plots. Static image export for web-based visualization libraries.
   - pip:
       - neo4j==5.23.*

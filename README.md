@@ -135,6 +135,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   - [numpy](https://numpy.org)
   - [pandas](https://pandas.pydata.org)
   - [pip](https://pip.pypa.io/en/stable)
+  - [plotly](https://plotly.com/python)
   - [monotonic](https://github.com/atdt/monotonic)
   - [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver)
   - [openTSNE](https://github.com/pavlin-policar/openTSNE)

@@ -66,7 +66,7 @@ Use these optional command line options as needed:
 
 - If you want to analyze Typescript code, create a symbolic link inside the `source` directory that points to the Typescript project. Alternatively you can also copy the project into the `source` directory.
 
-- If you want to include git data like changed files and authors, create a symbolic link inside the `source` directory that points to the repository or clone it into the `source` directory. If you already have your Typescript project in there, you of course don't have to do it twice. If you are analyzing Java artifacts (full source not needed), it is sufficient to use a bare clone that only contains the git history without the sources using `git clone --bare`.
+- If you want to include git data like changed files and authors, create a symbolic link inside the `source` directory that points to the repository or clone it into the `source` directory. If you already have your Typescript project in there, you of course don't have to do it twice. If you are analyzing Java artifacts (full source not needed), it is sufficient to use a bare clone that only contains the git history without the sources using `git clone --bare`. If you want to focus on one branch, use `--branch branch-name` to checkout the branch and `--single-branch` to only fetch the history of that branch.
 
 - Alternatively to the steps above, run an already predefined download script
 
