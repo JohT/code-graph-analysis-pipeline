@@ -2,6 +2,35 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## v2.1.0 (2025-03-22) Public GitHub Actions Workflow, GraphViz Visualization and Git History Treemaps
+
+For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releases/tag/v2.1.0
+
+### 🚀 Features
+
+* Graph Visualization with GraphViz by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/301
+* Provide re-useable public workflow for code graph analysis by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/306
+* Add retention-days parameter to analysis workflows by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/310
+* Remove "results" directory in favor of the new separate code-graph-analysis-examples repository by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/317
+
+### 📈 Reports
+
+* Add git history file overview treemap by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/323
+
+### ⚙️ Optimization
+
+* Minimize Neo4j transaction log disk space utilization by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/294
+* Provide low memory profile by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/303
+* Add renovate preset to update the public reusable GitHub Workflow by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/312
+* Migrate renovate config by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/313
+* Improve Documentation by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/349
+
+### 🛠 Fixes
+
+* Fix renaming issues and missing hidden files by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/307
+* Improve Logging by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/319
+* Further improve logging by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/320
+
 ## v2.0.0 (2024-12-15) TypeScript Source Code Analysis
 
 For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releases/tag/v2.0.0
