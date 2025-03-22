@@ -221,6 +221,8 @@ Script | Directory | Description
 | [Index_file_relative_path.cypher](./GitLog/Index_file_relative_path.cypher) | GitLog | Create index for the relative file path |
 | [List_ambiguous_git_files.cypher](./GitLog/List_ambiguous_git_files.cypher) | GitLog | List ambigiously resolved git files where a single git file is attached to more than one code file for troubleshooting/testing. |
 | [List_git_files_by_resolved_label_and_extension.cypher](./GitLog/List_git_files_by_resolved_label_and_extension.cypher) | GitLog | List resolved and unresolved git files by their extension |
+| [List_git_files_per_commit_distribution.cypher](./GitLog/List_git_files_per_commit_distribution.cypher) | GitLog | List how many git commits changed one file, how mandy changed two files, .... |
+| [List_git_files_with_commit_statistics_by_author.cypher](./GitLog/List_git_files_with_commit_statistics_by_author.cypher) | GitLog | List git files with commit statistics |
 | [List_unresolved_git_files.cypher](./GitLog/List_unresolved_git_files.cypher) | GitLog | List code files not covered by imported git data for troubleshooting/testing. |
 | [Set_number_of_aggregated_git_commits.cypher](./GitLog/Set_number_of_aggregated_git_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when aggregated change spans with grouped commits are present. |
 | [Set_number_of_git_log_commits.cypher](./GitLog/Set_number_of_git_log_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when git commits are present |
@@ -378,6 +380,7 @@ Script | Directory | Description
 | [Remove_duplicate_CONTAINS_relations_between_files.cypher](./Typescript_Enrichment/Remove_duplicate_CONTAINS_relations_between_files.cypher) | Typescript_Enrichment | Remove duplicate CONTAINS relationships with the same properties between files |
 | [Set_localRootPath_for_modules.cypher](./Typescript_Enrichment/Set_localRootPath_for_modules.cypher) | Typescript_Enrichment | Set "rootProjectName" and some local path properties for Typescript modules |
 | [Verify_projects_linked_to_npm_packages.cypher](./Typescript_Enrichment/Verify_projects_linked_to_npm_packages.cypher) | Typescript_Enrichment | Verify that all Typescript projects are linked to npm packages |
+| [ValidateGitHistory.cypher](./Validation/ValidateGitHistory.cypher) | Validation | Check if there is at least one Git:Commit pointing to a Git:Change containing a Git:File from a Git:Repository |
 | [ValidateJavaArtifactDependencies.cypher](./Validation/ValidateJavaArtifactDependencies.cypher) | Validation | Check if there is at least one Java Artifact dependency. |
 | [ValidateJavaExternalDependencies.cypher](./Validation/ValidateJavaExternalDependencies.cypher) | Validation | Check if there is at least one external Java Type dependency. |
 | [ValidateJavaInternalDependencies.cypher](./Validation/ValidateJavaInternalDependencies.cypher) | Validation | Check if there is at least one Java Artifact containing a Java Package with at least one Java Type. |
