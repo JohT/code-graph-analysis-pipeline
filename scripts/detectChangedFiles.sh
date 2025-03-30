@@ -21,11 +21,17 @@ ARTIFACTS_CHANGE_DETECTION_HASH_FILE=${ARTIFACTS_CHANGE_DETECTION_HASH_FILE:-"ar
 CHANGE_DETECTION_HASH_FILE=${CHANGE_DETECTION_HASH_FILE:-"${ARTIFACTS_CHANGE_DETECTION_HASH_FILE}"} # Name of the file that contains the hash code of the file list for change detection
 CHANGE_DETECTION_HASH_FILE_PATH=${CHANGE_DETECTION_HASH_FILE_PATH:-"./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE}"} # Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option.
 
+COLOR_INFO='\033[0;30m' # dark grey
+COLOR_ERROR='\033[0;31m' # red
+COLOR_DEFAULT='\033[0m'    
+
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--readonly]"
-  echo "          [--paths <comma separated list of file and directory names> (default=artifacts)]"
-  echo "          [--hashfile <path to the file that contains the hash for change detection> (default=env var CHANGE_DETECTION_HASH_FILE_PATH)]"
+  echo -e "${COLOR_ERROR}" >&2
+  echo "Usage: $0 [--readonly]" >&2
+  echo "          [--paths <comma separated list of file and directory names> (default=artifacts)]" >&2
+  echo "          [--hashfile <path to the file that contains the hash for change detection> (default=env var CHANGE_DETECTION_HASH_FILE_PATH)]" >&2
+  echo -e "${COLOR_DEFAULT}" >&2
   exit 1
 }
 
@@ -52,24 +58,51 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     *)
-      echo "detectChangedFiles: Error: Unknown option: ${key}"
+      echo -e "${COLOR_ERROR}detectChangedFiles: Error: Unknown option: ${key}${COLOR_DEFAULT}" >&2
       usage
       ;;
   esac
   shift || true # ignore error when there are no more arguments
 done
 
+exit_failed() {
+  case "$0" in
+    */sh) return 1 ;; # Script is sourced
+    *) exit 1 ;;      # Script is executed directly
+  esac
+}
+
+exit_successful() {
+  case "$0" in
+    */sh) return 0 ;; # Script is sourced
+    *) exit 0 ;;      # Script is executed directly
+  esac
+}
+
 if ${readonlyMode}; then
-  echo "detectChangedFiles: Readonly mode activated. Change detection file won't be created." >&2
+  echo -e "${COLOR_INFO}detectChangedFiles: Readonly mode activated. Change detection file won't be created.${COLOR_DEFAULT}" >&2
 else
-  echo "detectChangedFiles: ${hashFilePath} will be used as change detection file." >&2
+  echo -e "${COLOR_INFO}detectChangedFiles: ${hashFilePath} will be used as change detection file.${COLOR_DEFAULT}" >&2
 fi
 
 # Check if the paths parameter exist
 if [ -z "${paths}" ] ; then
     echo 0 # 0=No change detected. The path list is empty. There is nothing to compare. Therefore assume that there are no changes.
-    exit 0
-fi
+    exit_successful
+  fi
+
+# Check all paths if they are valid files or valid directories
+for path in ${paths//,/ }; do
+    if [ -f "${path}" ] ; then
+      continue # Valid file
+    fi
+    if [ -d "${path}" ] ; then
+      continue # Valid directory
+    fi
+    # Neither a valid directory and file
+    echo -e "${COLOR_ERROR}detectChangedFiles: Error: Invalid path: ${path}${COLOR_DEFAULT}" >&2
+    exit_failed
+done
 
 # Function to get file size
 get_file_size() {
@@ -80,23 +113,46 @@ get_file_size() {
     fi
 }
 
+isMacOS() {
+    [ "$(uname -s)" = "Darwin" ]
+}
+
 # Function to process a single path
 file_names_and_sizes() {
     if [ -d "$1" ]; then
+        # TODO Remove after debugging
+        echo "detectChangedFiles: Checking directory $1" >&2
+        
         # If it's a directory, list all files inside 
         # except for "node_modules", "target", "temp" and the change detection file itself
-        find -L "$1" \
-          -type d -name "node_modules" -prune -o \
-          -type d -name "target" -prune -o \
-          -type d -name "temp" -prune -o \
-          -type d -name ".reports" -prune -o \
-          -not -path "${hashFilePath}" \
-          -type f \
-          -exec stat -f "%N %z" {} + \
-        | sort 
+        if isMacOS; then
+          find -L "$1" \
+            -type d -name "node_modules" -prune -o \
+            -type d -name "target" -prune -o \
+            -type d -name "temp" -prune -o \
+            -type d -name ".reports" -prune -o \
+            -not -path "${hashFilePath}" \
+            -type f \
+            -exec stat -f "%N %z" {} + \
+          | sort 
+        else
+          find -L "$1" \
+            -type d -name "node_modules" -prune -o \
+            -type d -name "target" -prune -o \
+            -type d -name "temp" -prune -o \
+            -type d -name ".reports" -prune -o \
+            -not -path "${hashFilePath}" \
+            -type f \
+            -exec stat --printf="%n %s\n" {} + \
+          | sort 
+        fi
     elif [ -f "$1" ]; then
-        # If it's a file, just echo the file path
-        stat -f "%N %z" < "$1"
+    # The path is a file. Print its path and size.
+      if isMacOS; then
+        stat -f "%N %z" "$1"
+      else
+        stat --printf="%n %s\n" "$1"
+      fi
     fi
 }
 
@@ -113,7 +169,7 @@ get_md5_checksum_of_all_file_names_and_sizes() {
       local files_and_their_size; files_and_their_size=$(file_names_and_sizes "${path}")
       all_files_and_sizes="${all_files_and_sizes}${files_and_their_size}"
       processed_paths=$((processed_paths + 1))
-      echo -ne "detectChangedFiles: Calculate checksum progress: ($processed_paths/$total_paths)\r" >&2
+      echo -ne "${COLOR_INFO}detectChangedFiles: Calculate checksum progress: ($processed_paths/$total_paths)\r${COLOR_DEFAULT}" >&2
   done
   echo "" >&2
   echo "${all_files_and_sizes}" | openssl md5 | awk '{print $2}'
@@ -133,12 +189,12 @@ if [ ! -f "${hashFilePath}" ] ; then
         mkdir -p "${hash_file_directory}"
         # Create the file containing the hash of the files list to a new file for the next call
         echo "${CURRENT_FILES_HASH}" > "${hashFilePath}"
-        echo "detectChangedFiles: Change detection file created" >&2
+        echo -e "${COLOR_INFO}detectChangedFiles: Change detection file created.${COLOR_DEFAULT}" >&2
     else
-        echo "detectChangedFiles: Skipping file creation with content (=hash) ${CURRENT_FILES_HASH}" >&2
+        echo -e "${COLOR_INFO}detectChangedFiles: Skipping file creation with content (=hash) ${CURRENT_FILES_HASH}${COLOR_DEFAULT}" >&2
     fi
     echo 1 # 1=Change detected and change detection file created
-    exit 0
+    exit_successful
 fi
 
 # Assume that there is no change if the saved hash is equal to the current one.
@@ -149,9 +205,9 @@ else
     if ! ${readonlyMode}; then
         # Write the updated hash into the file containing the hash of the files list for the next call
         echo "${CURRENT_FILES_HASH}" > "${hashFilePath}"
-        echo "detectChangedFiles: Change detection file updated" >&2
+        echo -e "${COLOR_INFO}detectChangedFiles: Change detection file updated.${COLOR_DEFAULT}" >&2
     else
-        echo "detectChangedFiles: Skipping file update with content (=hash) ${CURRENT_FILES_HASH}" >&2
+        echo -e "${COLOR_INFO}detectChangedFiles: Skipping file update with content (=hash) ${CURRENT_FILES_HASH}.${COLOR_DEFAULT}" >&2
     fi
     echo 2 # 2=Change detected and change detection file updated
 fi
