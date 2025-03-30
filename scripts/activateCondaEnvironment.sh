@@ -61,15 +61,15 @@ eval "$(${pathToConda}conda${scriptExtension} shell.bash hook)"
 echo "activateCondaEnvironment: Current conda environment after shell hook=${CONDA_DEFAULT_ENV}"
 
 # Create (if missing) and activate Conda environment for code structure graph analysis
-if { "${pathToConda}conda" env list | grep "$CODEGRAPH_CONDA_ENVIRONMENT "; } >/dev/null 2>&1; then
-    echo "activateCondaEnvironment: Conda environment $CODEGRAPH_CONDA_ENVIRONMENT already created"
+if { "${pathToConda}conda" env list | grep "${CODEGRAPH_CONDA_ENVIRONMENT} "; } >/dev/null 2>&1; then
+    echo "activateCondaEnvironment: Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT} already created"
 else
     if [ ! -f "${JUPYTER_NOTEBOOK_DIRECTORY}/environment.yml" ] ; then
-        echo "activateCondaEnvironment: Couldn't find environment file ${jupyter_notebook_file_path}/environment.yml."
+        echo "activateCondaEnvironment: Couldn't find environment file ${JUPYTER_NOTEBOOK_DIRECTORY}/environment.yml."
         exit 2
     fi
     echo "activateCondaEnvironment: Creating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
-    "${pathToConda}conda" env create --file "${jupyter_notebook_file_path}/environment.yml" --name "${CODEGRAPH_CONDA_ENVIRONMENT}"
+    "${pathToConda}conda" env create --file "${JUPYTER_NOTEBOOK_DIRECTORY}/environment.yml" --name "${CODEGRAPH_CONDA_ENVIRONMENT}"
 fi
 
 echo "activateCondaEnvironment: Activating Conda environment ${CODEGRAPH_CONDA_ENVIRONMENT}"
