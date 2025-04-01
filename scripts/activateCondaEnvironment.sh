@@ -37,14 +37,15 @@ echo "activateCondaEnvironment: CONDA_PREFIX=${CONDA_PREFIX}"
 echo "activateCondaEnvironment: Current conda environment=${CONDA_DEFAULT_ENV}"
 echo "activateCondaEnvironment: Target conda environment=${CODEGRAPH_CONDA_ENVIRONMENT}"
 
-# TODO Find out, if conda updates (when needed) should also be done here instead of just returning 0.
-# if [ "${CONDA_DEFAULT_ENV}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] ; then
-#     echo "activateCondaEnvironment: Skipping activation. Target conda environment ${CODEGRAPH_CONDA_ENVIRONMENT} is already activated."
-#     # "return" needs to be used here instead of "exit".
-#     # This script is included in another script by using "source". 
-#     # "exit" would end the main script, "return" just ends this sub script.
-#     return 0
-# fi 
+PREPARE_CONDA_ENVIRONMENT=${PREPARE_CONDA_ENVIRONMENT:-"true"} # Wether to prepare then Conda environment if needed (default, "true") or use an already prepared Conda environment ("false")
+
+if [ "${CONDA_DEFAULT_ENV}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] && [ "${PREPARE_CONDA_ENVIRONMENT}" = "false" ]; then
+    echo "activateCondaEnvironment: Skipping activation. Target conda environment ${CODEGRAPH_CONDA_ENVIRONMENT} is already activated."
+    # "return" needs to be used here instead of "exit".
+    # This script is included in another script by using "source". 
+    # "exit" would end the main script, "return" just ends this sub script.
+    return 0
+fi 
 
 # Include operation system function to for example detect Windows.
 source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
