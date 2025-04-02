@@ -66,6 +66,7 @@ Script | Directory | Description
 | [VisualizationReports.sh](./reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports. |
 | [resetAndScan.sh](./resetAndScan.sh) |  | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph. |
 | [resetAndScanChanged.sh](./resetAndScanChanged.sh) |  | Executes "resetAndScan.sh" only if "detectChangedFiles.sh" returns detected changes. |
+| [runTests.sh](./runTests.sh) |  | Runs all test scripts (no Python and Chromium required). |
 | [scanTypescript.sh](./scanTypescript.sh) |  | Executes the npm package @jqassistant/ts-lc using npx to scan the Typescript projects in the source directory and create an intermediate json data file for the jQAssistant Typescript plugin. |
 | [setupJQAssistant.sh](./setupJQAssistant.sh) |  | Installs (download and unzip) jQAssistant (https://jqassistant.github.io/jqassistant/current). |
 | [setupNeo4j.sh](./setupNeo4j.sh) |  | Installs (download, unpack, get plugins, configure) a local Neo4j Graph Database (https://neo4j.com/download-center/#community). |
@@ -73,6 +74,7 @@ Script | Directory | Description
 | [sortOutExternalJavaJarFiles.sh](./sortOutExternalJavaJarFiles.sh) |  | Sorts out jar files that don't contain one of the given package names (e.g. external libraries) and moves them into the IGNORED_JARS_DIRECTORY.  |
 | [startNeo4j.sh](./startNeo4j.sh) |  | Starts the local Neo4j Graph Database.  |
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
+| [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
 | [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
 | [visualizeQueryResults.sh](./visualization/visualizeQueryResults.sh) | visualization | Visualizes the Cypher query result (CSV format) using GraphViz and outputs it as SVG image. |
 | [waitForNeo4jHttpFunctions.sh](./waitForNeo4jHttpFunctions.sh) |  | Waits until the HTTP Transactions API of Neo4j Graph Database is available. |
