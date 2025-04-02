@@ -115,14 +115,10 @@ is_valid_scan_result() {
 }
 
 is_change_detected() {
-    local COLOR_DARK_GREY='\033[0;30m'
-    local COLOR_DEFAULT='\033[0m'    
     local source_directory_name; source_directory_name=$(basename "${source_directory}");
 
-    echo -e "${COLOR_DARK_GREY}"
     changeDetectionHashFilePath="./${SOURCE_DIRECTORY}/typescriptScanChangeDetection-${source_directory_name}.sha"
     changeDetectionReturnCode=$( source "${SCRIPTS_DIR}/detectChangedFiles.sh" --readonly --hashfile "${changeDetectionHashFilePath}" --paths "${source_directory}")
-    echo -e "${COLOR_DEFAULT}"
     
     if [ "${changeDetectionReturnCode}" == "0" ] && [ "${TYPESCRIPT_SCAN_CHANGE_DETECTION}" = true ]; then
         true

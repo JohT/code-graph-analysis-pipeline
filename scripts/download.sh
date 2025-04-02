@@ -45,11 +45,6 @@ if [[ -z ${downloadUrl} ]]; then
   exit 1
 fi
 
-if ! curl --head --fail ${downloadUrl} >/dev/null 2>&1; then
-  echo "download: Error: Invalid URL: ${downloadUrl}"
-  exit 1
-fi
-
 if [[ -z ${filename} ]]; then
   filename=$(basename -- "${downloadUrl}")
 fi
@@ -64,6 +59,14 @@ fi
 # Download the file if it doesn't exist in the shared downloads directory 
 if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" ] ; then
     echo "download: Downloading ${filename} from ${downloadUrl} into ${SHARED_DOWNLOADS_DIRECTORY}"
+
+    # Check if the URL is valid
+    # The check is deferred and not done in the input validation block at the beginning.
+    # This is because the check needs a network connection which shouldn't be required when the file had already been downloaded.
+    if ! curl --head --fail ${downloadUrl} >/dev/null 2>&1; then
+      echo "download: Error: Invalid URL: ${downloadUrl}"
+      exit 1
+    fi
 
     # Download the file
     if ! curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" "${downloadUrl}"; then

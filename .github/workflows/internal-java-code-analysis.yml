@@ -56,6 +56,10 @@ jobs:
     - name: Checkout GIT Repository
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
     
+    - name: Run script tests
+      id: script-tests
+      run: ./scripts/runTests.sh
+
     - name: Set Set output variable 'analysis-name'
       id: set-analysis-name
       run: echo "analysis-name=${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
