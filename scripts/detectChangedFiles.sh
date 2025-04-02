@@ -86,21 +86,21 @@ else
 fi
 
 # Check if the paths parameter exist
-if [ -z "${paths}" ] ; then
-    echo 0 # 0=No change detected. The path list is empty. There is nothing to compare. Therefore assume that there are no changes.
-    exit_successful
-  fi
+if [ -z "${paths}" ]; then
+  echo 0 # 0=No change detected. The path list is empty. There is nothing to compare. Therefore assume that there are no changes.
+  exit_successful
+fi
 
 # Check all paths if they are valid files or valid directories
 for path in ${paths//,/ }; do
-    if [ -f "${path}" ] ; then
+    pathWithoutProtocolPrefix=${path/#*::/}
+    if [ -f "${pathWithoutProtocolPrefix}" ] ; then
       continue # Valid file
-    fi
-    if [ -d "${path}" ] ; then
+    elif [ -d "${pathWithoutProtocolPrefix}" ] ; then
       continue # Valid directory
     fi
     # Neither a valid directory and file
-    echo -e "${COLOR_ERROR}detectChangedFiles: Error: Invalid path: ${path}${COLOR_DEFAULT}" >&2
+    echo -e "${COLOR_ERROR}detectChangedFiles: Error: Invalid path: ${pathWithoutProtocolPrefix}${COLOR_DEFAULT}" >&2
     exit_failed
 done
 
@@ -166,7 +166,8 @@ get_md5_checksum_of_all_file_names_and_sizes() {
   local processed_paths=0
 
   for path in ${paths//,/ }; do
-      local files_and_their_size; files_and_their_size=$(file_names_and_sizes "${path}")
+      pathWithoutProtocolPrefix=${path/#*::/}
+      local files_and_their_size; files_and_their_size=$(file_names_and_sizes "${pathWithoutProtocolPrefix}")
       all_files_and_sizes="${all_files_and_sizes}${files_and_their_size}"
       processed_paths=$((processed_paths + 1))
       echo -ne "${COLOR_INFO}detectChangedFiles: Calculate checksum progress: ($processed_paths/$total_paths)\r${COLOR_DEFAULT}" >&2
