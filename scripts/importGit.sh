@@ -125,6 +125,10 @@ commonPostGitImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher"
 
+  echo "importGit: Creating relationships to file nodes that where changed together..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_files.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_code_files.cypher"
+
   # Since it's currently not possible to rule out ambiguity in git<->code file matching,
   # the following verifications are only an additional info in the log rather than an error.
   echo "importGit: Running verification queries for troubleshooting (non failing)..."
