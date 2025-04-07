@@ -15,6 +15,7 @@
         "neo4j/apoc"
       ],
       "matchUpdateTypes": [
+        "patch",
         "minor",
         "major"
       ],
