@@ -12,7 +12,7 @@ set -o errexit -o pipefail
 
 # Overrideable Defaults
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.26.4"}
+NEO4J_VERSION=${NEO4J_VERSION:-"5.26.5"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j's own "Bolt Protocol" port
 
