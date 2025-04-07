@@ -10,7 +10,7 @@
     {
       "description": "Neo4j and APOC update settings",
       "groupName": "Neo4j and APOC to {{newVersion}}",
-      "matchDepNames": [
+      "matchPackageNames": [
         "neo4j/neo4j",
         "neo4j/apoc"
       ],
