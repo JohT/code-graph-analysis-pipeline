@@ -2,7 +2,8 @@
 
 MATCH (global_git_commit:Git:Commit)
  WITH count(global_git_commit) AS globalCommitCount
-MATCH (git_commit:Git:Commit)-[:CONTAINS_CHANGE]->(git_change:Git:Change:Update)-[:UPDATES]->(git_file:Git:File)MATCH (git_repository:Git&Repository)-[:HAS_FILE]->(git_file)
+MATCH (git_commit:Git:Commit)-[:CONTAINS_CHANGE]->(git_change:Git:Change)-[:UPDATES]->(git_file:Git:File)
+MATCH (git_repository:Git&Repository)-[:HAS_FILE]->(git_file)
 WHERE git_file.deletedAt IS NULL
 // Order files to assure, that pairs of distinct files are grouped together (fileA, fileB) without (fileB, fileA)
 ORDER BY git_commit.sha, git_file.relativePath
