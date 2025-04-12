@@ -229,6 +229,7 @@ Script | Directory | Description
 | [List_git_files_that_were_changed_together_with_another_file.cypher](./GitLog/List_git_files_that_were_changed_together_with_another_file.cypher) | GitLog | List git files that where frequently changed with another file. Requires "Add_CHANGED_TOGETHER_WITH_relationships_to_git_files". |
 | [List_git_files_that_were_changed_together_with_another_file_all_in_one.cypher](./GitLog/List_git_files_that_were_changed_together_with_another_file_all_in_one.cypher) | GitLog | List git files that where changed together frequently |
 | [List_git_files_with_commit_statistics_by_author.cypher](./GitLog/List_git_files_with_commit_statistics_by_author.cypher) | GitLog | List git files with commit statistics |
+| [List_pairwise_changed_files_with_dependencies.cypher](./GitLog/List_pairwise_changed_files_with_dependencies.cypher) | GitLog | List pair of files that were changed together and that have a declared dependency between each other. |
 | [List_unresolved_git_files.cypher](./GitLog/List_unresolved_git_files.cypher) | GitLog | List code files not covered by imported git data for troubleshooting/testing. |
 | [Set_number_of_aggregated_git_commits.cypher](./GitLog/Set_number_of_aggregated_git_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when aggregated change spans with grouped commits are present. |
 | [Set_number_of_git_log_commits.cypher](./GitLog/Set_number_of_git_log_commits.cypher) | GitLog | Set numberOfGitCommits property on code File nodes when git commits are present |
