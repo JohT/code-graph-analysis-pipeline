@@ -215,7 +215,7 @@ if [[ ${NEO4J_GDS_PLUGIN_EDITION} == "open" ]]; then
     neo4jGraphDataScienceReleaseArtifact="open-graph-data-science-${NEO4J_OPEN_GDS_PLUGIN_VERSION}-for-neo4j-${NEO4J_MAJOR_VERSION_NUMBER}.jar"
 else
     neo4jGraphDataScienceDownloadUrl="https://github.com/neo4j/graph-data-science/releases/download/${NEO4J_GDS_PLUGIN_VERSION}"
-    neo4jGraphDataScienceReleaseArtifact="neo4j-graph-data-science-${NEO4J_GDS_PLUGIN_VERSION}-${NEO4J_GDS_PLUGIN_EDITION}.jar"
+    neo4jGraphDataScienceReleaseArtifact="neo4j-graph-data-science-${NEO4J_GDS_PLUGIN_VERSION}.jar"
 fi
 
 if [ ! -f "${NEO4J_PLUGINS}/${neo4jGraphDataScienceReleaseArtifact}" ] ; then
