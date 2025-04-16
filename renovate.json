@@ -19,6 +19,11 @@
         "minor",
         "major"
       ],
+      "matchDatasources": [
+        "github-tags",
+        "github-releases"
+      ],
+      "versioning": "semver-coerced",
       "minimumReleaseAge": "5 days",
       "commitMessageExtra": ""
     },
