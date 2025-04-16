@@ -14,11 +14,6 @@
         "neo4j/neo4j",
         "neo4j/apoc"
       ],
-      "matchUpdateTypes": [
-        "patch",
-        "minor",
-        "major"
-      ],
       "matchDatasources": [
         "github-tags",
         "github-releases"
