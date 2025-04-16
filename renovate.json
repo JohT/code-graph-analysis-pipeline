@@ -18,7 +18,7 @@
         "github-tags",
         "github-releases"
       ],
-      "versioning": "semver-coerced",
+      "versioning": "loose",
       "minimumReleaseAge": "5 days",
       "commitMessageExtra": ""
     },
