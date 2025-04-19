@@ -2,7 +2,8 @@
 
 MATCH (firstCodeFile:File)-[dependency:DEPENDS_ON]->(secondCodeFile:File)
 MATCH (firstCodeFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondCodeFile)
-WHERE elementId(firstCodeFile) < elementId(secondCodeFile)
+//De-duplicating the pairs of files isn't necessary, because the dependency relation is directed.
+//WHERE elementId(firstCodeFile) < elementId(secondCodeFile)
  WITH  firstCodeFile.fileName      AS firstFileName
       ,secondCodeFile.fileName     AS secondFileName
       ,coalesce(dependency.weight, dependency.cardinality)    AS dependencyWeight
