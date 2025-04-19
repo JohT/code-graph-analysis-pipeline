@@ -81,7 +81,7 @@
         "^scripts/[^/]*\\.sh$"
       ],
       "matchStrings": [
-        "NEO4J_VERSION:-\\\"?(?<currentValue>5\\..*?)\\\""
+        "NEO4J_VERSION:-\\\"?(?<currentValue>.*?)\\\""
       ],
       "depNameTemplate": "neo4j/neo4j",
       "datasourceTemplate": "github-tags"
