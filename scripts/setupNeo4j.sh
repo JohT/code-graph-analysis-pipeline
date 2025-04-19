@@ -10,8 +10,8 @@
 set -o errexit -o pipefail
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.26.5"}
-NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"5.26.5"} #Awesome Procedures for Neo4j Plugin, Version needs to be compatible to Neo4j
+NEO4J_VERSION=${NEO4J_VERSION:-"2025.03.0"}
+NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"2025.03.0"} #Awesome Procedures for Neo4j Plugin, Version needs to be compatible to Neo4j
 NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"} #Awesome Procedures for Neo4j Plugin Edition (Neo4j v4.4.x "all", Neo4j >= v5 "core")
 NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"} #Awesome Procedures for Neo4j Plugin GitHub User/Repository (Neo4j v4.4.x "neo4j-contrib/neo4j-apoc-procedures", Neo4j >= v5 "neo4j/apoc")
 NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.15.0"} # Graph Data Science Plugin Version 2.4.x of is compatible with Neo4j 5.x
