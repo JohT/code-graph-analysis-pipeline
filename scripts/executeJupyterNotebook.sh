@@ -88,9 +88,12 @@ source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
 jupyter --version || exit 1
 
 # Execute the Jupyter Notebook and write it to the output file name
-# The environment variable NBCONVERT is needed to be able to detect a command line execution in the Jupyter Notebook.
+# The environment variable NBCONVERT_PATH is needed to be able to detect a command line execution in the Jupyter Notebook.
+# Additionally, it is used to store the offline rendered images in the directory "${jupyter_notebook_file_name}_files".
 echo "executeJupyterNotebook: Executing Jupyter Notebook ${jupyter_notebook_output_file_name}..."
-NBCONVERT=true jupyter nbconvert --to notebook \
+
+mkdir -p "${jupyter_notebook_file_name}_files"
+NBCONVERT_PATH="$(pwd)/${jupyter_notebook_file_name}_files" jupyter nbconvert --to notebook \
                   --execute "${jupyter_notebook_file}" \
                   --output "$jupyter_notebook_output_file_name" \
                   --output-dir="./" \
