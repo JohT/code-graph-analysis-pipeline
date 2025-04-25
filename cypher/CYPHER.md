@@ -222,6 +222,7 @@ Script | Directory | Description
 | [Index_file_name.cypher](./GitLog/Index_file_name.cypher) | GitLog | Create index for the file name |
 | [Index_file_relative_path.cypher](./GitLog/Index_file_relative_path.cypher) | GitLog | Create index for the relative file path |
 | [List_ambiguous_git_files.cypher](./GitLog/List_ambiguous_git_files.cypher) | GitLog | List ambigiously resolved git files where a single git file is attached to more than one code file for troubleshooting/testing. |
+| [List_git_file_directories_with_commit_statistics.cypher](./GitLog/List_git_file_directories_with_commit_statistics.cypher) | GitLog | List git file directories and their statistics |
 | [List_git_files_by_resolved_label_and_extension.cypher](./GitLog/List_git_files_by_resolved_label_and_extension.cypher) | GitLog | List resolved and unresolved git files by their extension |
 | [List_git_files_per_commit_distribution.cypher](./GitLog/List_git_files_per_commit_distribution.cypher) | GitLog | List how many git commits changed one file, how mandy changed two files, .... |
 | [List_git_files_that_were_changed_together.cypher](./GitLog/List_git_files_that_were_changed_together.cypher) | GitLog | List git files that where changed together frequently. Requires "Add_CHANGED_TOGETHER_WITH_relationships_to_git_files". |
