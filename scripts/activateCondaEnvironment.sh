@@ -37,10 +37,10 @@ echo "activateCondaEnvironment: CONDA_PREFIX=${CONDA_PREFIX}"
 echo "activateCondaEnvironment: Current conda environment=${CONDA_DEFAULT_ENV}"
 echo "activateCondaEnvironment: Target conda environment=${CODEGRAPH_CONDA_ENVIRONMENT}"
 
-PREPARE_CONDA_ENVIRONMENT=${PREPARE_CONDA_ENVIRONMENT:-"true"} # Wether to prepare then Conda environment if needed (default, "true") or use an already prepared Conda environment ("false")
+PREPARE_CONDA_ENVIRONMENT=${PREPARE_CONDA_ENVIRONMENT:-"true"} # Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 
-if [ "${CONDA_DEFAULT_ENV}" = "${CODEGRAPH_CONDA_ENVIRONMENT}" ] && [ "${PREPARE_CONDA_ENVIRONMENT}" = "false" ]; then
-    echo "activateCondaEnvironment: Skipping activation. Target conda environment ${CODEGRAPH_CONDA_ENVIRONMENT} is already activated."
+if [ "${PREPARE_CONDA_ENVIRONMENT}" = "false" ]; then
+    echo "activateCondaEnvironment: Skipping activation. ${PREPARE_CONDA_ENVIRONMENT} is set to false."
     # "return" needs to be used here instead of "exit".
     # This script is included in another script by using "source". 
     # "exit" would end the main script, "return" just ends this sub script.

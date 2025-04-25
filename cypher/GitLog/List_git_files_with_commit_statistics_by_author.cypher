@@ -14,6 +14,7 @@ UNWIND git_files AS git_file
 RETURN git_repository.name + '/' + git_file.relativePath AS filePath
       ,split(git_commit.author, ' <')[0]                 AS author
       ,count(DISTINCT git_commit.sha)                    AS commitCount
+      ,collect(DISTINCT git_commit.sha)                  AS commitHashes
       ,date(max(git_commit.date))                        AS lastCommitDate
       ,max(date(fileCreatedAtTimestamp))                 AS lastCreationDate
       ,max(date(fileLastModificationAtTimestamp))        AS lastModificationDate
