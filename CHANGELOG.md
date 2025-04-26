@@ -2,6 +2,91 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## v2.1.4
+
+### 🛠 Fix
+
+* [Remove debug prints](https://github.com/JohT/code-graph-analysis-pipeline/commit/4d0a419dc4344e1008ad9d08f8a572421758b191)
+
+## v2.1.3
+
+### 🚀 Feature
+
+* Improve git history rendering by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/371
+* Add git history csv reports by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/372
+  * Add git history CSV reports ([7ea6c28](https://github.com/JohT/code-graph-analysis-pipeline/pull/372/commits/7ea6c2823bdf0bda4012e13a629d5f29fd8a86c3))
+  * Use PREPARE_CONDA_ENVIRONMENT to fully skip conda ([2d0b800](https://github.com/JohT/code-graph-analysis-pipeline/pull/372/commits/2d0b800c48beb80164dd9a5c8f5d145d6923b991))
+
+### 🛠 Fix
+
+* Fix missing pairwise changed dependencies by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/368
+  * Calculate p-values only if there are enough samples ([71d3519](https://github.com/JohT/code-graph-analysis-pipeline/pull/368/commits/71d3519d50c7336e083841aaada0f3d8619fd0ec))
+* Fix git commitCount to only contain unique hashes ([14dceef](https://github.com/JohT/code-graph-analysis-pipeline/pull/372/commits/14dceef6c7eb38a376606a068b484f917cf8551b)) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/372
+
+### 📦 Dependency Updates
+
+* Update jQAssistant TypeScript Plugin to v1.4.0-M2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/364
+* Update dependency com.buschmais.jqassistant.cli:jqassistant-commandline-neo4jv5 to v2.7.0-RC1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/366
+* Update actions/setup-java digest to c5195ef by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/365
+
+## v2.1.2
+
+### 🚀 Feature
+
+[Compare pairwise changed files with their dependency weights](https://github.com/JohT/code-graph-analysis-pipeline/pull/362/commits/7e5886904bcfe503a73dfba654aa972418f064b0) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/362:   
+The [GitHistoryGeneral.ipynb](https://github.com/JohT/code-graph-analysis-pipeline/blob/cb47f814332f517807b9e144df352f68146cddfe/jupyter/GitHistoryGeneral.ipynb) notebook now includes a section that analyzes pairwise file changes alongside their code dependencies (e.g., imports). It calculates correlations, p-values, and visualizes the results using a scatter plot.
+
+### 🛠 Fix
+
+[Fix missing git changes due to not reliably present label](https://github.com/JohT/code-graph-analysis-pipeline/pull/362/commits/5242804ad517b82b928e7ebd87c9d64b1d2f8a0e) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/362
+
+### 📦 Dependency Updates
+
+* Update Node.js to v23.11.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/355
+* Update dependency com.buschmais.jqassistant.cli:jqassistant-commandline-neo4jv5 to v2.7.0-M1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/359
+* Update Neo4j and APOC to 5.26.5 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/360
+* Update dependency JohT/open-graph-data-science-packaging to v2.13.4 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/361
+
+## v2.1.1
+
+### 🚀 Features
+
+* Auto update Conda Environment by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/353
+  * [Update conda environment if its outdated compared to the `environment.yml`](https://github.com/JohT/code-graph-analysis-pipeline/pull/353/commits/7f5b2811963b94631d7bb4ef4da57bad98a8f0d4): Previously, Jupyter notebooks failed to import libraries that had been added lately. An already existing Conda environment "codegraph" was sufficient, even it was outdated. Now, it will automatically be updated if necessary so that there are no more import errors. 
+  * [Add PREPARE_CONDA_ENVIRONMENT to skip Conda environment setup](https://github.com/JohT/code-graph-analysis-pipeline/pull/353/commits/f13df113a691b55168dbc02cf5b94d5d838b688e): Previously, Conda environment activation was skipped when the `codegraph` environment was already active. Now, `PREPARE_CONDA_ENVIRONMENT="false` needs to be set additionally to explicitly skip that part. This is needed in GitHub Action pipelines because `conda init` doesn't work as expected but is taken care of by [setup-miniconda](https://github.com/marketplace/actions/setup-miniconda#important).
+  * [Introduce script testing](https://github.com/JohT/code-graph-analysis-pipeline/pull/353/commits/7b735b0abfa037e090580ca5e5cfc80835b80e16): The first (for now framework-free) script test is implemented in the pipeline 🎉.
+
+* Improve git history treemap visualizations and uncover pairwise changed files by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/352
+  * [Add CHANGED_TOGETHER_WITH edge for git file nodes](https://github.com/JohT/code-graph-analysis-pipeline/pull/352/commits/10e202e45e5d4ba602b6023277f63ddf60c97f2e): With this change, there is now the new relationship `CHANGED_TOGETHER_WITH` between `File` nodes (git as well as code) including a property `commitCount` on how often they were changed together. This adds an additional way of uncovering dependencies of files, besides code dependencies via imports.
+
+### 📈 Reports
+
+* Improve git history treemap visualizations and uncover pairwise changed files by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/352
+  * [Add plot highlighting directories with very few authors](https://github.com/JohT/code-graph-analysis-pipeline/pull/352/commits/46290acd5451ce7e4628f118cd67846bc47e535d)
+  * [Add treemap plot that shows commit counts of pairwise changed files](https://github.com/JohT/code-graph-analysis-pipeline/pull/352/commits/30349a77160acd1cde612c199c74b3c67f4cafdb): Now you can additionally see which areas in the code base where changed in conjunction with at least one other file.
+
+### ⚙️ Optimizations
+
+* Auto update Conda Environment by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/353
+  * [Improve change file detection](https://github.com/JohT/code-graph-analysis-pipeline/pull/353/commits/41260dfb02dc6ed7f4f3ff88ff463330b809efd3): 
+    * Log output is now colored (red = error, dark grey = info)
+    * Given `--paths` are now validated
+    * File statistics are now correctly extracted for MacOS and Linux
+
+* Improve git history treemap visualizations and uncover pairwise changed files by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/352
+  * [Change default svg rendering size to 1080x1080](https://github.com/JohT/code-graph-analysis-pipeline/pull/352/commits/b898b1611717497e2176b368db8ab5bd27a017e8)
+
+### 🛠 Fixes
+
+* Auto update Conda Environment by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/353
+  * [Defer download URL check for offline mode](https://github.com/JohT/code-graph-analysis-pipeline/pull/353/commits/a1d141fee5398fd32c57a453c39aa78f40b63d2c): Previously, it was not possible to get an artifact from the download script in offline mode, even if it had already been downloaded and ready to use in the cache. This is now resolved by deferring the check of the URL until right before the actual download, since it needs an internet connection.
+  * [Fix wrong variable for Jupyter notebook directory](https://github.com/JohT/code-graph-analysis-pipeline/pull/353/commits/59571c42f9b7c2f9bbb67554a08c1643deb56bb4): Conda environment creation still used an old variable from another file that kept working since these files are called consecutively. However, can break easily and is now resolved.
+
+### 📦 Dependency Updates
+
+* Update actions/download-artifact digest to 95815c3 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/351
+* Update actions/cache digest to 5a3ec84 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/350
+
 ## v2.1.0 (2025-03-22) Public GitHub Actions Workflow, GraphViz Visualization and Git History Treemaps
 
 For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releases/tag/v2.1.0
