@@ -12,9 +12,9 @@ set -o errexit -o pipefail
 
 # Overrideable Defaults
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"5.26.5"}
+NEO4J_VERSION=${NEO4J_VERSION:-"2025.03.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
-NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j's own "Bolt Protocol" port
+NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 

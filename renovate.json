@@ -76,7 +76,7 @@
       "description": "Update NEO4J_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
-        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
         "^scripts/[^/]*\\.sh$"
       ],
@@ -90,7 +90,7 @@
       "description": "Update NEO4J_APOC_PLUGIN_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
-        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
         "^scripts/[^/]*\\.sh$"
       ],
@@ -104,7 +104,7 @@
       "description": "Update NEO4J_GDS_PLUGIN_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
-        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
         "^scripts/[^/]*\\.sh$"
       ],
@@ -118,7 +118,7 @@
       "description": "Update NEO4J_OPEN_GDS_PLUGIN_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
-        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
         "^scripts/[^/]*\\.sh$"
       ],
@@ -134,7 +134,7 @@
       "description": "Update JQASSISTANT_CLI_VERSION constant in shell scripts",
       "customType": "regex",
       "fileMatch": [
-        "^scripts/profiles/Neo4jv5.*\\.sh$",
+        "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
         "^scripts/[^/]*\\.sh$"
       ],

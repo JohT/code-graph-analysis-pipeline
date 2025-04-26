@@ -259,17 +259,17 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   ```
 
 - How can i continue on errors when scanning Typescript projects instead of cancelling the whole analysis?  
-  👉 Use the profile `Neo4jv5-continue-on-scan-errors` (default = `Neo4jv5`):
+  👉 Use the profile `Neo4j-latest-continue-on-scan-errors` (default = `Neo4j-latest`):
 
   ```shell
-  ./../../scripts/analysis/analyze.sh --profile Neo4jv5-continue-on-scan-errors
+  ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-continue-on-scan-errors
   ```
 
 - How can i reduce the memory (RAM) consumption?  
-  👉 Use the profile `Neo4jv5-low-memory` (default = `Neo4jv5`):
+  👉 Use the profile `Neo4j-latest-low-memory` (default = `Neo4j-latest`):
 
   ```shell
-  ./../../scripts/analysis/analyze.sh --profile Neo4jv5-low-memory
+  ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-low-memory
   ```
 
 ## 🕸 Web References

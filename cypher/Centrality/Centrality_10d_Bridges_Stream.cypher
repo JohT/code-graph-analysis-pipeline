@@ -1,7 +1,8 @@
 // Centrality 10d Bridges Stream
 
 CALL gds.bridges.stream($dependencies_projection + '-cleaned')
- YIELD from, to
+// The field "remainingSizes" is only needed until https://github.com/neo4j/graph-data-science/issues/354 is resolved.
+ YIELD from, to, remainingSizes
   WITH gds.util.asNode(from) AS fromMember
       ,gds.util.asNode(to)   AS toMember
   WITH *, coalesce(fromMember.declaringType + ': ', '')  +
