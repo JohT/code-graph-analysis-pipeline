@@ -25,6 +25,10 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 - Example analysis for [react-router](https://github.com/remix-run/react-router)
 
+### :newspaper: News
+
+- May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
+
 ### :notebook: Jupyter Notebook Reports
 
 Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
@@ -66,7 +70,8 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 ## :hammer_and_wrench: Prerequisites
 
-- Java 17 is [required for Neo4j](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-software) (Neo4j 5.x requirement).
+- Java 21 is [required since Neo4j 2025.01](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java). See also [Changes from Neo4j 5 to 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade).
+- Java 17 is [required for Neo4j 5](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java).
 - On Windows it is recommended to use the git bash provided by [git for windows](https://github.com/git-guides/install-git#install-git-on-windows).
 - [jq](https://github.com/jqlang/jq) the "lightweight and flexible command-line JSON processor" needs to be installed. Latest releases: https://github.com/jqlang/jq/releases/latest. Check using `jq --version`.
 - Set environment variable `NEO4J_INITIAL_PASSWORD` to a password of your choice. For example:

@@ -78,7 +78,7 @@ a profile, the newest versions will be used. Other profiles can be found in the 
 
 ### Notes
 
-- Be sure to use Java 17 for Neo4j v5 and Java 11 for Neo4j v4
+- Be sure to use Java 21 for Neo4j v2025, Java 17 for v5 and Java 11 for v4. Details see [Neo4j System Requirements / Java](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java).
 - Use your own initial Neo4j password
 - For more details have a look at the script [analyze.sh](./scripts/analysis/analyze.sh)
 
