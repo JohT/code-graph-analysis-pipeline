@@ -135,14 +135,14 @@ jobs:
 
       - name: (Code Analysis Setup) Download sources for analysis
         if: inputs.sources-upload-name != ''
-        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: ${{ inputs.sources-upload-name }}
           path: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}
 
       - name: (Code Analysis Setup) Download artifacts for analysis
         if: inputs.artifacts-upload-name != ''
-        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: ${{ inputs.artifacts-upload-name }}
           path: temp/${{ inputs.analysis-name }}/artifacts
