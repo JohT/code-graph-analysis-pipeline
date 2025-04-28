@@ -26,22 +26,20 @@ REPORTS_DIRECTORY                     | reports                             |  |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
 CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
-NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
+NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
 IMPORT_DIRECTORY                      | import                              |  |
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin                              | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin". |
-NEO4J_VERSION                         | 4.4.20                              | Version 4.4.x is the current long term support (LTS) version (may 2023) |
-NEO4J_CONFIG_TEMPLATE                 | template-neo4j-v4-low-memory.conf   | Name of the template file ("configuration" folder) for the Neo4j configuration |
-NEO4J_HTTPS_PORT                      | 7473                                | Neo4j HTTPS port for encrypted querying |
-NEO4J_BOLT_PORT                       | 7687                                | Neo4j's own "Bolt Protocol" port |
-NEO4J_APOC_PLUGIN_VERSION             | 4.4.0.15                            | Version number matches Neo4j version |
-NEO4J_APOC_PLUGIN_EDITION             | all                                 | Since Neo4j v5 only the core edition is maintained |
-NEO4J_APOC_PLUGIN_GITHUB              | neo4j-contrib/neo4j-apoc-procedures | Location for the old plugins compatible to Neo4j v4 |
-NEO4J_GDS_PLUGIN_VERSION              | 2.3.4                               | Graph Data Science Plugin Version 2.3.x is compatible with Neo4j 4.4.x |
-NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.6.8                               | Open package variant of the graph-data-science plugin for Neo4j (https://github.com/JohT/open-graph-data-science-packaging). Since version 2.4. compatible with Neo4j 5.x. |
-NEO4J_GDS_PLUGIN_EDITION              | open                                | Graph Data Science Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license |
-JQASSISTANT_CLI_VERSION               | 1.12.2                              | Version number of the jQAssistant command line interface. Version 1.12.2 is compatible with Neo4j v4 |
-JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv4     |  |
-JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv4-jqassistant.yaml   | Name of the template file for the jqassistant configuration |
+NEO4J_VERSION                         | 2025.03.0                           | Neo4j Graph Database Version. Current versions: >= 2025.03.0. Version 4.4.42 and 5.26.5 are the previous LTS (long term support) versions as of April 2025. |
+NEO4J_CONFIG_TEMPLATE                 | template-neo4j.conf                 |  |
+NEO4J_APOC_PLUGIN_VERSION             | 2025.03.0                           |  |
+NEO4J_APOC_PLUGIN_EDITION             | core                                |  |
+NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
+NEO4J_GDS_PLUGIN_VERSION              | 2.16.0                              |  |
+NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.16.0                              |  |
+NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
+JQASSISTANT_CLI_VERSION               | 2.7.0-RC1                           |  |
+JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
+JQASSISTANT_CONFIG_TEMPLATE           | template-neo4j-latest-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
@@ -54,4 +52,6 @@ JQASSISTANT_CLI_DISTRIBUTION          | distribution.zip                    | Ne
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
 DATA_DIRECTORY                        | $( pwd -P )/data                    | Path where Neo4j writes its data to (outside tools dir) |
 RUNTIME_DIRECTORY                     | $( pwd -P )/runtime                 | Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir) |
+NEO4J_HTTPS_PORT                      | 7473                                | Neo4j HTTPS port for encrypted querying |
+NEO4J_BOLT_PORT                       | 7687                                | Neo4j's own "Bolt Protocol" port |
 IGNORED_JARS_DIRECTORY                | ./../ignored-jars                   | Directory to move the filtered out .jar files to |
