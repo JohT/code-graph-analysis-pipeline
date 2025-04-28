@@ -67,18 +67,19 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports. `DatabaseCsvExport` exports the whole graph database as a CSV file (performance intense, check if there are security concerns first).
 
-- `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. `Neo4jv5` will explicitly select the newest (june 2023) version 5.x of Neo4j. Without setting
-a profile, the newest versions will be used. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+- `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. Without specifying a profile, the newest versions will be used. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
-- `--profile Neo4jv5-continue-on-scan-errors` is based on the default profile (`Neo4jv5`) but uses the jQAssistant configuration template [template-neo4jv5-jqassistant-continue-on-error.yaml](./scripts/configuration/template-neo4jv5-jqassistant-continue-on-error.yaml) to continue on scan error instead of failing fast. This is temporarily useful when there is a known error that needs to be ignored. It is still recommended to use the default profile and fail fast if there is something wrong. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+- `--profile Neo4jv5` uses the older long term support (march 2025) version v5.26.x of Neo4j and suitable compatible versions of plugins and JQAssistant. Without specifying a profile, the newest versions will be used. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
-- `--profile Neo4jv5-low-memory` is based on the default profile (`Neo4jv5`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./scripts/configuration/template-neo4j-low-memory.conf). This is useful for the analysis of smaller codebases with less resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+- `--profile Neo4j-latest-continue-on-scan-errors` is based on the default profile (`Neo4j-latest`) but uses the jQAssistant configuration template [template-neo4j-remote-jqassistant-continue-on-error.yaml](./scripts/configuration/template-neo4j-remote-jqassistant-continue-on-error.yaml) to continue on scan error instead of failing fast. This is temporarily useful when there is a known error that needs to be ignored. It is still recommended to use the default profile and fail fast if there is something wrong. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+
+- `--profile Neo4j-latest-low-memory` is based on the default profile (`Neo4j-latest`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./scripts/configuration/template-neo4j-low-memory.conf). This is useful for the analysis of smaller codebases with less resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
 - `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
 ### Notes
 
-- Be sure to use Java 17 for Neo4j v5 and Java 11 for Neo4j v4
+- Be sure to use Java 21 for Neo4j v2025, Java 17 for v5 and Java 11 for v4. Details see [Neo4j System Requirements / Java](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java).
 - Use your own initial Neo4j password
 - For more details have a look at the script [analyze.sh](./scripts/analysis/analyze.sh)
 

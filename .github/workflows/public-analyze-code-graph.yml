@@ -37,10 +37,10 @@ on:
       analysis-arguments:
         description: >
           The arguments to pass to the analysis script.
-          Default: '--profile Neo4jv5-low-memory'
+          Default: '--profile Neo4j-latest-low-memory'
         required: false
         type: string
-        default: '--profile Neo4jv5-low-memory'
+        default: '--profile Neo4j-latest-low-memory'
       typescript-scan-heap-memory:
         description: >
           The heap memory size in MB to use for the TypeScript code scans (default=4096).
@@ -71,7 +71,7 @@ jobs:
       matrix:
         include:
         - os: ubuntu-22.04
-          java: 17
+          java: 21
           python: 3.12
           miniforge: 24.9.0-0
     steps:

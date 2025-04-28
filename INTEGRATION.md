@@ -36,7 +36,7 @@ The workflow parameters are as follows:
 - **sources-upload-name**: The name of the sources uploaded with [actions/upload-artifact](https://github.com/actions/upload-artifact/tree/65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08) containing the content of the 'source' directory for the analysis. It also supports sub-folders for multiple source code bases. This parameter is optional and defaults to an empty string.
 Please use 'include-hidden-files: true' if you also want to upload the git history.
 - **ref**: The branch, tag, or SHA of the code-graph-analysis-pipeline to checkout. This parameter is optional and defaults to "main".
-- **analysis-arguments**: The arguments to pass to the analysis script. This parameter is optional and defaults to '--profile Neo4jv5-low-memory'. You can find all available options in section [Command Line Options of COMMANDS.md/](./COMMANDS.md#command-line-options).
+- **analysis-arguments**: The arguments to pass to the analysis script. This parameter is optional and defaults to '--profile Neo4j-latest-low-memory'. You can find all available options in section [Command Line Options of COMMANDS.md/](./COMMANDS.md#command-line-options).
 - **typescript-scan-heap-memory**: The heap memory size in MB to use for the TypeScript code scans. This value is only used for the TypeScript code scans and is ignored for other scans. This parameter is optional and defaults to '4096'. It will set the environment variable `TYPESCRIPT_SCAN_HEAP_MEMORY` which leads to `NODE_OPTIONS` set to `--max-old-space-size=4096` for TypeScript scans. See [Questions and Answers of README.md](./README.md#thinking-questions--answers) for more information.
 
 The workflow also provides an output parameter:

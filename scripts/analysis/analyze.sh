@@ -17,7 +17,7 @@
 
 # Note: The argument "--profile" is optional. The default value is "Default". 
 #       It selects a settings profile that sets all suitable variables for the analysis.
-#       This makes it possible to run an analysis with e.g. Neo4j v4 instead of v5. Further profiles might come in future.
+#       This makes it possible to run an analysis with e.g. Neo4j v4 or v5. Further profiles might come in future.
 #       Implemented is this as a script in "scripts/profiles" that starts with the settings profile name followed by ".sh".
 
 # Note: The argument "--explore" is optional. It is a switch that is deactivated by default.
@@ -28,7 +28,7 @@
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
 
-# Requires setupNeo4j.sh,setupJQAssistant.sh,startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,stopNeo4j.sh,comilations/*.sh,profiles/*.sh
+# Requires setupNeo4j.sh,setupJQAssistant.sh,startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,stopNeo4j.sh,compilations/*.sh,profiles/*.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
