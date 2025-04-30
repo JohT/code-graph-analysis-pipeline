@@ -242,6 +242,72 @@ detectCommunitiesWithKCoreDecomposition() {
     calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
+# Node Embeddings using Fast Random Projection
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+# - dependencies_projection_node_embeddings_property=...
+#   Name of the node property that will contain the node embeddings. Example: "embeddingsFastRandomProjectionForHDBSCAN"
+nodeEmbeddingsWithFastRandomProjectionForHDBSCAN() {
+    local embeddingProperty
+    embeddingProperty=$( extractQueryParameter "dependencies_projection_node_embeddings_property" "${@}")
+
+    local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
+    local mutatePropertyName="dependencies_projection_write_property=${embeddingProperty}"
+    local embeddingsDimension="dependencies_projection_embedding_dimension=2"
+
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${NODE_EMBEDDINGS_CYPHER_DIR}/Node_Embeddings_1c_Fast_Random_Projection_Mutate.cypher" "${@}" "${mutatePropertyName}" ${embeddingsDimension}
+}
+
+# Community Detection using Hierarchical Density-Based Spatial Clustering (HDBSCAN) Algorithm
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+# 
+# Special Requirements:
+# - This algorithm needs a node property with an array of floats to compute clusters.
+#   One possible way is to use node embeddings for that (like FastRP).
+detectCommunitiesWithHDBSCAN() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=communityFastRpHdbscanLabel" 
+    local writeLabelName="dependencies_projection_write_label=HDBSCAN" 
+    local embeddingProperty="dependencies_projection_node_embeddings_property=embeddingsFastRandomProjection2dHDBSCAN"
+
+    nodeEmbeddingsWithFastRandomProjectionForHDBSCAN "${@}" ${embeddingProperty}
+    
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_11a_HDBSCAN_Estimate.cypher" "${@}" ${embeddingProperty} "${writePropertyName}" 
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_11b_HDBSCAN_Statistics.cypher" "${@}" ${embeddingProperty}
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_11c_HDBSCAN_Mutate.cypher" "${@}" ${embeddingProperty} "${writePropertyName}" 
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated_Grouped.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_HDBSCAN.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
+}
+
 # Community Detection using the Approximate Maximum k-cut Algorithm
 # 
 # Required Parameters:
@@ -402,6 +468,7 @@ detectCommunities() {
     time detectCommunitiesWithKCoreDecomposition "${@}"
     time detectCommunitiesWithApproximateMaximumKCut "${@}"
     time calculateLocalClusteringCoefficient "${@}"
+
     compareCommunityDetectionResults "${@}"
     listAllResults "${@}"
 }
@@ -415,7 +482,7 @@ ARTIFACT_GAMMA="dependencies_leiden_gamma=1.11" # default = 1.00
 ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
 if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
-    detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
+    detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}" # "${ARTIFACT_NODE_EMBEDDINGS}"
     writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 fi
 
@@ -430,7 +497,9 @@ PACKAGE_KCUT="dependencies_maxkcut=20" # default = 2
 if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
     detectCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
     writeLeidenModularity "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
-    
+
+    detectCommunitiesWithHDBSCAN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+
     # Package Community Detection - Special CSV Queries after update
     execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
 fi
@@ -444,8 +513,8 @@ TYPE_GAMMA="dependencies_leiden_gamma=5.00" # default = 1.00
 TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
-    detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
-
+    detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}" "${TYPE_NODE_EMBEDDINGS}"
+    detectCommunitiesWithHDBSCAN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
     # Type Community Detection - Special CSV Queries after update
     execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
