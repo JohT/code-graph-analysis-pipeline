@@ -35,7 +35,7 @@ NEO4J_APOC_PLUGIN_VERSION             | 2025.03.0                           |  |
 NEO4J_APOC_PLUGIN_EDITION             | core                                |  |
 NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
 NEO4J_GDS_PLUGIN_VERSION              | 2.16.0                              |  |
-NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.16.0                              |  |
+NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.17.1                              |  |
 NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
 JQASSISTANT_CLI_VERSION               | 2.7.0-RC1                           |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
