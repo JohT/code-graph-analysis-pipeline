@@ -251,17 +251,14 @@ detectCommunitiesWithKCoreDecomposition() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
-# - dependencies_projection_embedding_dimension=...
-#   Number of the dimensions and therefore size of the resulting array of floating point numbers
 nodeEmbeddingsWithFastRandomProjectionForHDBSCAN() {
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
     local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
     local mutatePropertyName="dependencies_projection_write_property=embeddingsFastRandomProjection" 
     local embeddingsDimension="dependencies_projection_embedding_dimension=2"
 
     # Statistics
-    execute_cypher "${NODE_EMBEDDINGS_CYPHER_DIR}/Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher" "${@}" "${mutatePropertyName}" ${embeddingsDimension}
-    execute_cypher "${NODE_EMBEDDINGS_CYPHER_DIR}/Node_Embeddings_1b_Fast_Random_Projection_Statistics.cypher" "${@}" ${embeddingsDimension}
+    # execute_cypher "${NODE_EMBEDDINGS_CYPHER_DIR}/Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher" "${@}" "${mutatePropertyName}" ${embeddingsDimension}
+    # execute_cypher "${NODE_EMBEDDINGS_CYPHER_DIR}/Node_Embeddings_1b_Fast_Random_Projection_Statistics.cypher" "${@}" ${embeddingsDimension}
     
     # Run the algorithm and write the result into the in-memory projection ("mutate")
     execute_cypher "${NODE_EMBEDDINGS_CYPHER_DIR}/Node_Embeddings_1c_Fast_Random_Projection_Mutate.cypher" "${@}" "${mutatePropertyName}" ${embeddingsDimension}

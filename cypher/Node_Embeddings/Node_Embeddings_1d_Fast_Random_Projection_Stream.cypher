@@ -4,6 +4,7 @@ CALL gds.fastRP.stream(
  $dependencies_projection + '-cleaned', {
       embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
      ,randomSeed: 30
+     ,normalizationStrength: 0.3
      ,relationshipWeightProperty: $dependencies_projection_weight_property
   }
 )
