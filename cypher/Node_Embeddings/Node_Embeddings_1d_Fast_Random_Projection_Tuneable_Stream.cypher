@@ -1,10 +1,11 @@
-// Node Embeddings 1d using Fast Random Projection: Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 1d using Fast Random Projection: Stream for Hyper-Parameter tuning. Requires "Add_file_name and_extension.cypher".
 
 CALL gds.fastRP.stream(
  $dependencies_projection + '-cleaned', {
       embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
-     ,randomSeed: 30
-     ,normalizationStrength: 0.3
+     ,randomSeed: toInteger($dependencies_projection_embedding_random_seed)
+     ,normalizationStrength: toFloat($dependencies_projection_fast_random_projection_normalization_strength)
+     ,iterationWeights: [0.0, 0.0, 1.0, toFloat($dependencies_projection_fast_random_projection_forth_iteration_weight)]
      ,relationshipWeightProperty: $dependencies_projection_weight_property
   }
 )

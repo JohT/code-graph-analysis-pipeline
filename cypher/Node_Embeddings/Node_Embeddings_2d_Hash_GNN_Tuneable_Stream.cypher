@@ -1,11 +1,16 @@
-// Node Embeddings 1d using Fast Random Projection: Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 2c using Hash GNN (Graph Neural Networks): Stream. Requires "Add_file_name and_extension.cypher".
 
-CALL gds.fastRP.stream(
+CALL gds.beta.hashgnn.stream(
  $dependencies_projection + '-cleaned', {
-      embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
-     ,randomSeed: 30
-     ,normalizationStrength: 0.3
-     ,relationshipWeightProperty: $dependencies_projection_weight_property
+      embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2 * toInteger($dependencies_projection_hashgnn_dimension_multiplier)
+     ,randomSeed: toInteger($dependencies_projection_embedding_random_seed)
+     ,iterations: toInteger($dependencies_projection_hashgnn_iterations)
+     ,generateFeatures: {
+         dimension: toInteger($dependencies_projection_embedding_dimension) * 4 * toInteger($dependencies_projection_hashgnn_dimension_multiplier)
+        ,densityLevel: toInteger($dependencies_projection_hashgnn_density_level)
+     }
+     ,outputDimension: toInteger($dependencies_projection_embedding_dimension)
+     ,neighborInfluence: toFloat($dependencies_projection_hashgnn_neighbor_influence)
   }
 )
 YIELD nodeId, embedding
