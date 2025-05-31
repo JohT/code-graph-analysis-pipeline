@@ -1,10 +1,17 @@
-// Node Embeddings 1d using Fast Random Projection: Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 3c using Node2Vec: Stream. Requires "Add_file_name and_extension.cypher".
 
-CALL gds.fastRP.stream(
+CALL gds.node2vec.stream(
  $dependencies_projection + '-cleaned', {
       embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
-     ,randomSeed: 30
-     ,normalizationStrength: 0.3
+     ,randomSeed: toInteger($dependencies_projection_embedding_random_seed)
+     ,iterations: toInteger($dependencies_projection_node2vec_iterations)
+     ,inOutFactor: toFloat($dependencies_projection_node2vec_in_out_factor)
+     ,returnFactor: toFloat($dependencies_projection_node2vec_return_factor)
+     ,windowSize: toInteger($dependencies_projection_node2vec_window_size)
+     ,walksPerNode: toInteger($dependencies_projection_node2vec_walks_per_node)
+     ,walkLength: toInteger($dependencies_projection_node2vec_walk_length)
+     ,negativeSamplingRate: toInteger($dependencies_projection_node2vec_negative_sampling_rate)
+     ,positiveSamplingFactor: toFloat($dependencies_projection_node2vec_positive_sampling_factor)
      ,relationshipWeightProperty: $dependencies_projection_weight_property
   }
 )
