@@ -95,3 +95,6 @@ coverage/
 
 # Python environments
 .conda
+
+# Optuna (and other) Database data
+*.db
