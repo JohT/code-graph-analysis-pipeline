@@ -20,5 +20,7 @@ dependencies:
   - monotonic=1.*
   - plotly=6.0.*
   - python-kaleido=0.2.* # To render plotly plots. Static image export for web-based visualization libraries.
+  - scikit-learn=1.6.* # To try out this HDBSCAN implementation 
+  - seaborn=0.13 # To visualize clustering results
   - pip:
       - neo4j==5.23.*
