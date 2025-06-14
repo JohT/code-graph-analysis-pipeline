@@ -21,6 +21,6 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
        ,codeUnit.name                               AS shortCodeUnitName
        ,elementId(codeUnit)                         AS nodeElementId
        ,coalesce(artifactName, projectName)         AS projectName
-       ,coalesce(codeUnit.communityLeidenId, 0)     AS communityId
+       ,coalesce(codeUnit.communityLeidenIdTuned, codeUnit.communityLeidenId, 0) AS communityId
        ,coalesce(codeUnit.centralityPageRank, 0.01) AS centrality
        ,embedding
