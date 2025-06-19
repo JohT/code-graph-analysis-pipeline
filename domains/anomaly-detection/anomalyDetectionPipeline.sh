@@ -137,65 +137,20 @@ ALGORITHM_WEIGHT="projection_weight_property"
 
 # Code independent algorithm parameters
 COMMUNITY_PROPERTY="community_property=communityLeidenIdTuned"
-
-# Query (or recalculate) features.
-# 
-# Required Parameters:
-# - projection_name=...
-#   Name prefix for the in-memory projection name. Example: "package-anomaly-detection"
-# - projection_node_label=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-anomaly_detection_features() {
-    # Query Feature: Determine the Betweenness centrality (with the directed graph projection) if not already done
-    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Betweenness-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Betweenness-Write.cypher" "${@}"
-    # Query Feature: Determine the local clustering coefficient if not already done
-    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-LocalClusteringCoefficient-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-LocalClusteringCoefficient-Write.cypher" "${@}"
-    # Query Feature: Determine the page rank if not already done
-    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageRank-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageRank-Write.cypher" "${@}"
-    # Query Feature: Determine the article rank if not already done
-    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Write.cypher" "${@}"
-}
-
-# Run the anomaly detection pipeline.
-# 
-# Required Parameters:
-# - projection_name=...
-#   Name prefix for the in-memory projection name. Example: "package-anomaly-detection"
-# - projection_node_label=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-anomaly_detection_pipeline() {
-    time anomaly_detection_features "${@}"
-    # Run Python: Get tuned Leiden communities as a reference to tune clustering
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedLeidenCommunityDetection.py" "${@}" ${verboseMode}
-    # Run Python: Tuned Fast Random Projection and tuned HDBSCAN clustering 
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedNodeEmbeddingClustering.py" "${@}" ${verboseMode}
-    
-    # Query Results: Output all collected features into a CSV file.
-    local nodeLabel
-    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection.csv"
-}
+EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClustering"
 
 # -- Java Artifact Node Embeddings -------------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}"
+    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}"
+    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
