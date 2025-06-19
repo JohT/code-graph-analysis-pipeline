@@ -337,7 +337,7 @@ calculateLocalClusteringCoefficient() {
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityLocalClusteringCoefficient" 
-    local writeLabelName="dependencies_projection_write_label=MaximumKCut" 
+    local writeLabelName="dependencies_projection_write_label=LocalClusteringCoefficient" 
 
     # Statistics
     execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_10a_LocalClusteringCoefficient_Estimate.cypher" "${@}" "${writePropertyName}"
