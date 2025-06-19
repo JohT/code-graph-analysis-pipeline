@@ -3,9 +3,6 @@
 CALL gds.pageRank.mutate(
  $dependencies_projection + '-cleaned', {
    maxIterations: 50
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
-  ,scaler: "L2Norm"
   ,relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
   ,mutateProperty: $dependencies_projection_write_property
 })
