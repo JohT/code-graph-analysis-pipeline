@@ -2,11 +2,9 @@
 
 CALL gds.articleRank.stream(
  $dependencies_projection + '-cleaned', {
-   maxIterations: 30
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
+   maxIterations: 50
   ,relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
-  ,scaler: "L2Norm"
+  ,scaler: "MinMax"
 })
  YIELD nodeId, score
   WITH gds.util.asNode(nodeId) AS member, score

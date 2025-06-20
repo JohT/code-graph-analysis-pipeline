@@ -3,10 +3,8 @@
 CALL gds.pageRank.stream(
  $dependencies_projection + '-cleaned', {
    maxIterations: 50
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
   ,relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
-  ,scaler: "L2Norm"
+  ,scaler: "MinMax"
 })
  YIELD nodeId, score
   WITH gds.util.asNode(nodeId) AS member, score
