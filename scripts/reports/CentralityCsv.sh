@@ -362,9 +362,9 @@ runCentralityAlgorithms() {
 # 
 # Required Parameters:
 # - dependencies_projection=...
-#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+#   Name prefix for the in-memory projection name for dependencies. Example: "package-centrality"
 # - dependencies_projection_node=...
-#   Label of the nodes that will be used for the projection. Example: "centralityPageRank"
+#   Label of the nodes that will be used for the projection. Example: "Package"
 # - dependencies_projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 runUndirectedCentralityAlgorithms() {
