@@ -2,11 +2,8 @@
 
 CALL gds.articleRank.stats(
  $dependencies_projection + '-cleaned', {
-   maxIterations: 30
-  ,dampingFactor: 0.85
-  ,tolerance: 0.00000001
+   maxIterations: 50
   ,relationshipWeightProperty: CASE $dependencies_projection_weight_property WHEN '' THEN null ELSE $dependencies_projection_weight_property END
-  ,scaler: "L1Norm"
 })
  YIELD ranIterations
       ,didConverge
