@@ -3,12 +3,12 @@
 # Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 # The chosen settings are tested to be compatible and working.
 
-NEO4J_VERSION=${NEO4J_VERSION:-"2025.05.0"} # Neo4j Graph Database Version. Current versions: >= 2025.03.0. Version 4.4.42 and 5.26.5 are the previous LTS (long term support) versions as of April 2025.
+NEO4J_VERSION=${NEO4J_VERSION:-"2025.05.1"} # Neo4j Graph Database Version. Current versions: >= 2025.03.0. Version 4.4.42 and 5.26.5 are the previous LTS (long term support) versions as of April 2025.
 NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"}
 NEO4J_CONFIG_TEMPLATE=${NEO4J_CONFIG_TEMPLATE:-"template-neo4j-low-memory.conf"}
 
 # Awesome Procedures (APOC) Plugin for Neo4j
-NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"2025.05.0"}
+NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"2025.05.1"}
 NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"}
 NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"}
 
