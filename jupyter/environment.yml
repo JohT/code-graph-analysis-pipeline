@@ -23,5 +23,6 @@ dependencies:
   - scikit-learn=1.6.* # To try out this HDBSCAN implementation 
   - seaborn=0.13 # To visualize clustering results
   - optuna=4.3.*
+  - umap-learn=0.5.* # to visualize node embeddings in 2D (UMAP dimensionality reduction)
   - pip:
       - neo4j==5.23.*

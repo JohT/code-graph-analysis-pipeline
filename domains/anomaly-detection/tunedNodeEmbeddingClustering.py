@@ -4,7 +4,6 @@
 # This is useful for understanding code structure, detecting modular boundaries, and identifying anomalies or outliers in large software systems without requiring manual labeling.
 # It takes the code structure as a graph in Neo4j and generates node embeddings using Fast Random Projection (FastRP).
 # These embeddings capture structural similarity and are clustered using HDBSCAN to assign labels or detect noise.
-# For visualization, the embeddings are reduced to 2D using t-SNE.
 # All results - including embeddings, cluster labels, and 2D coordinates — are written back to Neo4j for further use.
 
 # Prerequisite:
@@ -25,9 +24,7 @@ import numpy as np
 
 from neo4j import GraphDatabase, Driver
 
-from openTSNE.sklearn import TSNE
-
-from sklearn.base import BaseEstimator
+# from sklearn.base import BaseEstimator # Extend from sklearn BaseEstimator to use e.g. GridSearchCV for hyperparameter tuning.
 from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score, normalized_mutual_info_score
 from sklearn.cluster import HDBSCAN  # type: ignore
 
@@ -38,7 +35,7 @@ from optuna.trial import TrialState
 
 
 class Parameters:
-    required_parameters_ = ["projection_name", "projection_node_label", "projection_weight_property", "community_property"]
+    required_parameters_ = ["projection_name", "projection_node_label", "projection_weight_property", "community_property", "embedding_property"]
 
     def __init__(self, input_parameters: typing.Dict[str, str], verbose: bool = False):
         self.query_parameters_ = input_parameters.copy()  # copy enforces immutability
@@ -62,9 +59,6 @@ class Parameters:
 
         from sklearn import __version__ as sklearn_version
         print('scikit-learn version: {}'.format(sklearn_version))
-
-        from openTSNE import __version__ as openTSNE_version
-        print('openTSNE version: {}'.format(openTSNE_version))
 
         from neo4j import __version__ as neo4j_version
         print('neo4j version: {}'.format(neo4j_version))
@@ -115,6 +109,9 @@ class Parameters:
 
     def get_projection_node_label(self) -> str:
         return self.query_parameters_["projection_node_label"]
+
+    def get_embedding_property(self) -> str:
+        return self.query_parameters_["embedding_property"]
 
     def is_verbose(self) -> bool:
         return self.verbose_
@@ -602,7 +599,8 @@ class TuneableFastRandomProjectionNodeEmbeddings:  # (sklearn.BaseEstimator):
                  forth_iteration_weight: float = 1.0,
                  ):
         self.parameters_ = parameters
-        self.verbose = parameters.is_verbose()
+        self.verbose_ = parameters.is_verbose()
+        self.write_property_ = parameters.get_embedding_property()
 
         self.embedding_dimension = embedding_dimension
         self.random_seed = random_seed
@@ -615,7 +613,7 @@ class TuneableFastRandomProjectionNodeEmbeddings:  # (sklearn.BaseEstimator):
             "normalization_strength": str(self.normalization_strength),
             "forth_iteration_weight": str(self.forth_iteration_weight),
             "embedding_random_seed": str(self.random_seed),
-            "write_property": "embeddingsFastRandomProjectionForClustering",
+            "write_property": str(self.write_property_),
             **self.parameters_.get_query_parameters()
         }
 
@@ -623,7 +621,7 @@ class TuneableFastRandomProjectionNodeEmbeddings:  # (sklearn.BaseEstimator):
         algorithm_parameters = self.__to_algorithm_parameters()
         # For Debugging:
         # print("Generating embeddings using Neo4j Graph Data Science with the following parameters: " + str(algorithm_parameters))
-        if self.verbose:
+        if self.verbose_:
             return query_cypher_to_data_frame(self.cypher_query_for_generating_embeddings_, parameters=algorithm_parameters)
 
         return query_cypher_to_data_frame_suppress_warnings(self.cypher_query_for_generating_embeddings_, parameters=algorithm_parameters)
@@ -657,12 +655,12 @@ class TuneableFastRandomProjectionNodeEmbeddings:  # (sklearn.BaseEstimator):
         This is useful for further processing or analysis of the embeddings.
         """
         algorithm_parameters = self.__to_algorithm_parameters()
-        if self.verbose:
+        if self.verbose_:
             print("")
             print("Writing embeddings to Neo4j with the following parameters: " + str(algorithm_parameters))
             print("")
 
-        if self.verbose:
+        if self.verbose_:
             query_cypher_to_data_frame(self.cypher_query_for_writing_embeddings_, parameters=algorithm_parameters)
         else:
             query_cypher_to_data_frame_suppress_warnings(self.cypher_query_for_writing_embeddings_, parameters=algorithm_parameters)
@@ -721,58 +719,6 @@ def get_tuned_fast_random_projection_node_embeddings(parameters: Parameters) -> 
     # Run the node embeddings algorithm again with the best parameters and return it
     return TuneableFastRandomProjectionNodeEmbeddings(parameters, **study.best_params).fit()
 
-
-def prepare_node_embeddings_for_2d_visualization(embeddings: pd.DataFrame) -> pd.DataFrame:
-    """
-    Reduces the dimensionality of the node embeddings (e.g. 64 floating point numbers in an array)
-    to two dimensions for 2D visualization.
-    see https://opentsne.readthedocs.io
-    """
-
-    if embeddings.empty:
-        print("No projected data for node embeddings dimensionality reduction available")
-        return embeddings
-
-    # Calling the fit_transform method just with a list doesn't work.
-    # It leads to an error with the following message: 'list' object has no attribute 'shape'
-    # This can be solved by converting the list to a numpy array using np.array(..).
-    # See https://bobbyhadz.com/blog/python-attributeerror-list-object-has-no-attribute-shape
-    embeddings_as_numpy_array = np.array(embeddings.embedding.to_list())
-
-    # Use t-distributed Stochastic Neighbor Embedding (t-SNE) to reduce the dimensionality
-    # of the previously calculated node embeddings to 2 dimensions for visualization
-    t_distributed_stochastic_neighbor_embedding = TSNE(n_components=2, verbose=False, random_state=47)
-    two_dimension_node_embeddings = t_distributed_stochastic_neighbor_embedding.fit_transform(embeddings_as_numpy_array)
-    # display(two_dimension_node_embeddings.shape) # Display the shape of the t-SNE result
-
-    # Create a new DataFrame with the results of the 2 dimensional node embeddings
-    # and the code unit and artifact name of the query above as preparation for the plot
-    embeddings['embeddingVisualizationX'] = [value[0] for value in two_dimension_node_embeddings]
-    embeddings['embeddingVisualizationY'] = [value[1] for value in two_dimension_node_embeddings]
-
-    return embeddings
-
-
-def execute_tuned_node_embeddings_clustering(parameters: Parameters) -> None:
-    tuned_fast_random_projection = get_tuned_fast_random_projection_node_embeddings(parameters)
-    embeddings = tuned_fast_random_projection.get_embeddings()
-    clustering_results = coordinate_tuned_hierarchical_density_based_spatial_clustering(embeddings)
-    if parameters.is_verbose():
-        print("HDBSCAN clustered labels by their size descending (top 10):", clustering_results.clustering_results_distribution.head(10))
-        print("HDBSCAN clustered labels by their probability descending (top 10):", clustering_results.clustering_results_distribution.sort_values(by='probability', ascending=False).head(10))
-
-    embeddings = prepare_node_embeddings_for_2d_visualization(clustering_results.embeddings)
-
-    tuned_fast_random_projection.write_embeddings()
-    data_to_write = pd.DataFrame(data={
-        'nodeElementId': embeddings["nodeElementId"],
-        'clusteringHDBSCANLabel': embeddings['clusteringTunedHDBSCANLabel'],
-        'clusteringHDBSCANProbability': embeddings['clusteringTunedHDBSCANProbability'],
-        'clusteringHDBSCANNoise': (embeddings['clusteringTunedHDBSCANLabel'] == -1).astype(int),
-        'embeddingFastRandomProjectionVisualizationX': embeddings["embeddingVisualizationX"],
-        'embeddingFastRandomProjectionVisualizationY': embeddings["embeddingVisualizationY"],
-    })
-    write_batch_data_into_database(data_to_write, parameters.get_projection_node_label())
 
 # ------------------------------------------------------------------------------------------------------------
 #  MAIN

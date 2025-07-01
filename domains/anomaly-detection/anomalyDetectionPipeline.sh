@@ -127,6 +127,8 @@ anomaly_detection_using_python() {
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedLeidenCommunityDetection.py" "${@}" ${verboseMode}
     # Tuned Fast Random Projection and tuned HDBSCAN clustering 
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedNodeEmbeddingClustering.py" "${@}" ${verboseMode}
+    # Reduce the dimensionality of the node embeddings down to 2D for visualization using UMAP
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/umap2dNodeEmbeddings.py" "${@}" ${verboseMode}
     
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
     # Query Results: Output all collected features into a CSV file.
@@ -169,33 +171,34 @@ ALGORITHM_WEIGHT="projection_weight_property"
 
 # Code independent algorithm parameters
 COMMUNITY_PROPERTY="community_property=communityLeidenIdTuned"
+EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClustering"
 
 # -- Java Artifact Node Embeddings -------------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}"
+    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}"
+    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
 
 if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
     createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}"
+    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Typescript Module Node Embeddings ---------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}"
+    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # ---------------------------------------------------------------
