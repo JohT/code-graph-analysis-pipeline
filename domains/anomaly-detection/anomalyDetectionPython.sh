@@ -29,13 +29,12 @@ ANOMALY_DETECTION_QUERY_CYPHER_DIR=${ANOMALY_DETECTION_QUERY_CYPHER_DIR:-"${ANOM
 # Function to display script usage
 usage() {
   echo -e "${COLOR_ERROR}" >&2
-  echo "Usage: $0 [--usePython] [--verbose]" >&2
+  echo "Usage: $0 [--verbose]" >&2
   echo -e "${COLOR_DEFAULT}" >&2
   exit 1
 }
 
 # Default values
-usePython="false" # Use Python scripts for anomaly detection
 verboseMode="" # either "" or "--verbose"
 
 # Parse command line arguments
@@ -46,9 +45,6 @@ while [[ $# -gt 0 ]]; do
   case ${key} in
     --verbose)
       verboseMode="--verbose"
-      ;;
-    --usePython)
-      usePython="true"
       ;;
     *)
       echo -e "${COLOR_ERROR}anomalyDetectionPipeline: Error: Unknown option: ${key}${COLOR_DEFAULT}" >&2
@@ -89,27 +85,6 @@ anomaly_detection_features() {
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageRank-Write.cypher" "${@}"
 }
-# Run queries to find anomalies in the graph.
-# 
-# Required Parameters:
-# - projection_node_label=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-anomaly_detection_queries() {
-    local nodeLabel
-    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
-    
-    echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PotentialImbalancedRoles.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
-    
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionHiddenBridgeNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_HiddenBridgeNodes.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPopularBottlenecks.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PopularBottlenecks.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionSilentCoordinators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_SilentCoordinators.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionOverReferencesUtilities.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_OverReferencesUtilities.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionFragileStructuralBridges.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_FragileStructuralBridges.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionDependencyHungryOrchestrators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_DependencyHungryOrchestrators.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionUnexpectedCentralNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_UnexpectedCentralNodes.csv"
-}
 
 # Execute the Python scripts for anomaly detection.
 # 
@@ -145,12 +120,9 @@ anomaly_detection_using_python() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
-anomaly_detection_pipeline() {
+anomaly_detection_python_reports() {
     time anomaly_detection_features "${@}"
-    time anomaly_detection_queries "${@}"
-    if [ "${usePython}" = "true" ]; then
-        anomaly_detection_using_python "${@}"
-    fi
+    anomaly_detection_using_python "${@}"
 }
 
 # Create report directory
@@ -176,28 +148,28 @@ EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClu
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
 
 if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
     createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Typescript Module Node Embeddings ---------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # ---------------------------------------------------------------
