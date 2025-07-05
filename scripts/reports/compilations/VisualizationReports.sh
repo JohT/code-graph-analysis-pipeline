@@ -20,10 +20,12 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
-echo "VisualizationReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
-
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
+
+echo "${LOG_GROUP_START}Initialize Visualization Reports";
+echo "VisualizationReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
 echo "VisualizationReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
+echo "${LOG_GROUP_END}";
 
 # Run all visualization scripts
 for visualization_script_file in "${REPORTS_SCRIPT_DIR}"/*Visualization.sh; do 
