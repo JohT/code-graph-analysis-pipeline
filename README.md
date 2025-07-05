@@ -17,6 +17,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 - Easily integrable into your [continuous integration pipeline](./INTEGRATION.md)
 - More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
 - Jupyter notebook reports for dependencies, metrics, visibility and many more
+- Anomaly detection powered by unsupervised machine learning and explainable AI
 - Graph structure visualization
 - Automated reference document generation
 - Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
@@ -27,6 +28,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ### :newspaper: News
 
+- August 2025: Anomaly detection powered by unsupervised machine learning and explainable AI
 - May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
 
 ### :notebook: Jupyter Notebook Reports
@@ -148,6 +150,10 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   - [Neo4j Python Driver](https://neo4j.com/docs/api/python-driver)
   - [openTSNE](https://github.com/pavlin-policar/openTSNE)
   - [wordcloud](https://github.com/amueller/word_cloud)
+  - [umap](https://umap-learn.readthedocs.io)
+  - [scikit-learn](https://scikit-learn.org)
+  - [optuna](https://optuna.org)
+  - [SHAP](https://github.com/shap/shap)
 - [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 - [HPCC-Systems (High Performance Computing Cluster) Web-Assembly (JavaScript)](https://github.com/hpcc-systems/hpcc-js-wasm) containing a wrapper for GraphViz to visualize graph structures.
 - [GraphViz](https://gitlab.com/graphviz/graphviz) for CLI Graph Visualization

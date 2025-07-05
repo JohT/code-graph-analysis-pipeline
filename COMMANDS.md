@@ -8,6 +8,7 @@
     - [Examples](#examples)
         - [Start an analysis with CSV reports only](#start-an-analysis-with-csv-reports-only)
         - [Start an analysis with Jupyter reports only](#start-an-analysis-with-jupyter-reports-only)
+        - [Start an analysis with Python reports only](#start-an-analysis-with-python-reports-only)
         - [Start an analysis with PDF generation](#start-an-analysis-with-pdf-generation)
         - [Start an analysis without importing git log data](#start-an-analysis-without-importing-git-log-data)
         - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
@@ -100,6 +101,14 @@ If only the Jupyter reports are needed e.g. when the CSV reports had already bee
 
 ```shell
 ./../../scripts/analysis/analyze.sh --report Jupyter
+```
+
+#### Start an analysis with Python reports only
+
+If you only need Python reports, e.g. to skip Chromium Browser dependency, the this can be done with:
+
+```shell
+./../../scripts/analysis/analyze.sh --report Python
 ```
 
 #### Start an analysis with PDF generation
