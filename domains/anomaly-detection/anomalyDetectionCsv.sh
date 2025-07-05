@@ -19,44 +19,12 @@ REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR:-$(CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)}
-echo "anomalyDetectionPipeline: ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR}"
+echo "anomalyDetectionCsv: ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR}"
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/../../scripts"} # Repository directory containing the shell scripts
 # Get the "cypher" query directory for gathering features.
 ANOMALY_DETECTION_FEATURE_CYPHER_DIR=${ANOMALY_DETECTION_FEATURE_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/features"}
 ANOMALY_DETECTION_QUERY_CYPHER_DIR=${ANOMALY_DETECTION_QUERY_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/queries"}
-
-# Function to display script usage
-usage() {
-  echo -e "${COLOR_ERROR}" >&2
-  echo "Usage: $0 [--usePython] [--verbose]" >&2
-  echo -e "${COLOR_DEFAULT}" >&2
-  exit 1
-}
-
-# Default values
-usePython="false" # Use Python scripts for anomaly detection
-verboseMode="" # either "" or "--verbose"
-
-# Parse command line arguments
-while [[ $# -gt 0 ]]; do
-  key="$1"
-  value="${2}"
-
-  case ${key} in
-    --verbose)
-      verboseMode="--verbose"
-      ;;
-    --usePython)
-      usePython="true"
-      ;;
-    *)
-      echo -e "${COLOR_ERROR}anomalyDetectionPipeline: Error: Unknown option: ${key}${COLOR_DEFAULT}" >&2
-      usage
-      ;;
-  esac
-  shift || true # ignore error when there are no more arguments
-done
 
 # Define functions to execute a cypher query from within a given file (first and only argument) like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -74,7 +42,10 @@ source "${SCRIPTS_DIR}/projectionFunctions.sh"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
 anomaly_detection_features() {
-    echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for ${nodeLabel} nodes..."
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    
+    echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for ${nodeLabel} nodes..."
 
     # Determine the Betweenness centrality (with the directed graph projection) if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Betweenness-Exists.cypher" \
@@ -87,7 +58,7 @@ anomaly_detection_features() {
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageRank-Write.cypher" "${@}"
     # Determine the article rank if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageRank-Write.cypher" "${@}"
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Write.cypher" "${@}"
 }
 # Run queries to find anomalies in the graph.
 # 
@@ -98,7 +69,7 @@ anomaly_detection_queries() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
     
-    echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
+    echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
     execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PotentialImbalancedRoles.csv"
     execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
     
@@ -111,32 +82,6 @@ anomaly_detection_queries() {
     execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionUnexpectedCentralNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_UnexpectedCentralNodes.csv"
 }
 
-# Execute the Python scripts for anomaly detection.
-# 
-# Required Parameters:
-# - projection_name=...
-#   Name prefix for the in-memory projection name. Example: "package-anomaly-detection"
-# - projection_node_label=...
-#   Label of the nodes that will be used for the projection. Example: "Package"
-# - projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
-anomaly_detection_using_python() {
-    echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Python scripts for ${nodeLabel} nodes..."
-
-    # Get tuned Leiden communities as a reference to tune clustering
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedLeidenCommunityDetection.py" "${@}" ${verboseMode}
-    # Tuned Fast Random Projection and tuned HDBSCAN clustering 
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedNodeEmbeddingClustering.py" "${@}" ${verboseMode}
-    # Reduce the dimensionality of the node embeddings down to 2D for visualization using UMAP
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/umap2dNodeEmbeddings.py" "${@}" ${verboseMode}
-    
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
-    # Query Results: Output all collected features into a CSV file.
-    local nodeLabel
-    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetectionFeatures.csv"
-}
-
 # Run the anomaly detection pipeline.
 # 
 # Required Parameters:
@@ -146,12 +91,9 @@ anomaly_detection_using_python() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
-anomaly_detection_pipeline() {
+anomaly_detection_csv_reports() {
     time anomaly_detection_features "${@}"
     time anomaly_detection_queries "${@}"
-    if [ "${usePython}" = "true" ]; then
-        anomaly_detection_using_python "${@}"
-    fi
 }
 
 # Create report directory
@@ -177,28 +119,28 @@ EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClu
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
 
 if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
     createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Typescript Module Node Embeddings ---------------------------
 
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"
-    anomaly_detection_pipeline "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # ---------------------------------------------------------------
@@ -206,4 +148,4 @@ fi
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
-echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
+echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

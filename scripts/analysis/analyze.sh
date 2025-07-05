@@ -44,7 +44,7 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--report <All (default), Csv, Jupyter,...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--explore]"
+  echo "Usage: $0 [--report <All (default), Csv, Jupyter, Python, Visualization...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--explore]"
   exit 1
 }
 
