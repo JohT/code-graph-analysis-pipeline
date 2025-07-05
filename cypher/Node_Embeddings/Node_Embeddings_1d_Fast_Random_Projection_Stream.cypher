@@ -16,8 +16,9 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
    WITH *, last(split(projectRoot.absoluteFileName, '/')) AS projectName   
  RETURN DISTINCT 
         coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
-       ,codeUnit.name AS shortCodeUnitName
-       ,coalesce(artifactName, projectName) AS projectName
-       ,coalesce(codeUnit.communityLeidenId, 0) AS communityId
+       ,codeUnit.name                               AS shortCodeUnitName
+       ,elementId(codeUnit)                         AS nodeElementId
+       ,coalesce(artifactName, projectName)         AS projectName
+       ,coalesce(codeUnit.communityLeidenId, 0)     AS communityId
        ,coalesce(codeUnit.centralityPageRank, 0.01) AS centrality
        ,embedding
