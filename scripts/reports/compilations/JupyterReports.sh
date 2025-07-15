@@ -20,18 +20,18 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
-echo "JupyterReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
-
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
-echo "JupyterReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
-
 # Get the "scripts" directory by taking the scripts report path and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${REPORTS_SCRIPT_DIR}")}
-echo "JupyterReports: SCRIPTS_DIR=${SCRIPTS_DIR}"
-
 # Get the "jupyter" directory by taking the path of the scripts directory, going up one directory and change then into "jupyter".
 JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY:-"${SCRIPTS_DIR}/../jupyter"} # Repository directory containing the Jupyter Notebooks
+
+echo "${LOG_GROUP_START}Initialize Jupyter Notebook Reports";
+echo "JupyterReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
+echo "JupyterReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
+echo "JupyterReports: SCRIPTS_DIR=${SCRIPTS_DIR}"
 echo "JupyterReports: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
+echo "${LOG_GROUP_END}";
 
 # Run all jupiter notebooks
 for jupyter_notebook_file in "${JUPYTER_NOTEBOOK_DIRECTORY}"/*.ipynb; do 

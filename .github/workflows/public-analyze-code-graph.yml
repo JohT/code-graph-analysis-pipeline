@@ -55,6 +55,12 @@ on:
         required: false
         type: number
         default: 5
+      jupyter-pdf:
+        description: >
+          Enable PDF generation for Jupyter Notebooks ("true") or disable it ("false").
+        required: false
+        type: string
+        default: 'true'
     outputs:
       uploaded-analysis-results:
         description: >
@@ -159,7 +165,7 @@ jobs:
         shell: bash -el {0}
         env:
           NEO4J_INITIAL_PASSWORD: ${{ steps.generate-neo4j-initial-password.outputs.neo4j-initial-password }}
-          ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: "true"
+          ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: ${{ inputs.jupyter-pdf }}
           IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
           PREPARE_CONDA_ENVIRONMENT: "false" # Had already been done in step with id "prepare-conda-environment".
         run: |
