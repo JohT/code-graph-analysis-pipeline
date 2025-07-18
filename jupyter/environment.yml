@@ -24,5 +24,6 @@ dependencies:
   - seaborn=0.13 # To visualize clustering results
   - optuna=4.3.*
   - umap-learn=0.5.* # to visualize node embeddings in 2D (UMAP dimensionality reduction)
+  - shap=0.48.*
   - pip:
       - neo4j==5.23.*
