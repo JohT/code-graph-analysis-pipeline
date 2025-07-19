@@ -2,15 +2,15 @@
 
 CALL gds.beta.hashgnn.stream(
  $dependencies_projection + '-cleaned', {
-      embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2
-     ,iterations: 3
+      embeddingDensity: toInteger($dependencies_projection_embedding_dimension) * 2 * toInteger($dependencies_projection_hashgnn_dimension_multiplier)
+     ,randomSeed: toInteger($dependencies_projection_embedding_random_seed)
+     ,iterations: toInteger($dependencies_projection_hashgnn_iterations)
      ,generateFeatures: {
-         dimension: toInteger($dependencies_projection_embedding_dimension) * 4
-        ,densityLevel: 3
+         dimension: toInteger($dependencies_projection_embedding_dimension) * 4 * toInteger($dependencies_projection_hashgnn_dimension_multiplier)
+        ,densityLevel: toInteger($dependencies_projection_hashgnn_density_level)
      }
      ,outputDimension: toInteger($dependencies_projection_embedding_dimension)
-     ,neighborInfluence: 0.9
-     ,randomSeed: 30
+     ,neighborInfluence: toFloat($dependencies_projection_hashgnn_neighbor_influence)
   }
 )
 YIELD nodeId, embedding
@@ -25,6 +25,6 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
        ,codeUnit.name                               AS shortCodeUnitName
        ,elementId(codeUnit)                         AS nodeElementId
        ,coalesce(artifactName, projectName)         AS projectName
-       ,coalesce(codeUnit.communityLeidenId, 0)     AS communityId
+       ,coalesce(codeUnit.communityLeidenIdTuned, codeUnit.communityLeidenId, 0) AS communityId
        ,coalesce(codeUnit.centralityPageRank, 0.01) AS centrality
        ,embedding
