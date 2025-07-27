@@ -2,8 +2,12 @@
 
   MATCH (codeUnit)
   WHERE $projection_node_label IN labels(codeUnit)
- REMOVE codeUnit.clusteringHDBSCANLabel
+ REMOVE codeUnit.communityLeidenIdTuned 
+       ,codeUnit.clusteringHDBSCANLabel
        ,codeUnit.clusteringHDBSCANProbability
        ,codeUnit.clusteringHDBSCANNoise
        ,codeUnit.clusteringHDBSCANMedoid
        ,codeUnit.clusteringHDBSCANSize
+       ,codeUnit.clusteringHDBSCANRadiusAverage
+       ,codeUnit.clusteringHDBSCANRadiusMax
+       ,codeUnit.clusteringHDBSCANNormalizedDistanceToMedoid
