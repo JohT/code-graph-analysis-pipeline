@@ -17,6 +17,15 @@
      AND codeUnit.clusteringHDBSCANRadiusMax                  IS NOT NULL
      AND codeUnit.clusteringHDBSCANRadiusAverage              IS NOT NULL
      AND codeUnit.clusteringHDBSCANNormalizedDistanceToMedoid IS NOT NULL
+// The following columns can be null if there is not enough data or an error in the anomaly detection pipeline
+//     AND codeUnit.anomalyLabel                                IS NOT NULL
+//     AND codeUnit.anomalyScore                                IS NOT NULL
+//     AND codeUnit.anomalyTopFeature1                          IS NOT NULL
+//     AND codeUnit.anomalyTopFeature2                          IS NOT NULL
+//     AND codeUnit.anomalyTopFeature3                          IS NOT NULL
+//     AND codeUnit.anomalyTopFeatureSHAPValue1                 IS NOT NULL
+//     AND codeUnit.anomalyTopFeatureSHAPValue2                 IS NOT NULL
+//     AND codeUnit.anomalyTopFeatureSHAPValue3                 IS NOT NULL
      AND codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationX IS NOT NULL
      AND codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationY IS NOT NULL
 OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
@@ -44,5 +53,13 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
         ,codeUnit.clusteringHDBSCANRadiusMax                  AS clusteringRadiusMax
         ,codeUnit.clusteringHDBSCANRadiusAverage              AS clusteringRadiusAverage
         ,codeUnit.clusteringHDBSCANNormalizedDistanceToMedoid AS clusteringNormalizedDistanceToMedoid
+        ,codeUnit.anomalyLabel                                AS anomalyLabel
+        ,codeUnit.anomalyScore                                AS anomalyScore
+        ,codeUnit.anomalyTopFeature1                          AS anomalyTopFeature1
+        ,codeUnit.anomalyTopFeature2                          AS anomalyTopFeature2
+        ,codeUnit.anomalyTopFeature3                          AS anomalyTopFeature3
+        ,codeUnit.anomalyTopFeatureSHAPValue1                 AS anomalyTopFeatureSHAPValue1
+        ,codeUnit.anomalyTopFeatureSHAPValue2                 AS anomalyTopFeatureSHAPValue2
+        ,codeUnit.anomalyTopFeatureSHAPValue3                 AS anomalyTopFeatureSHAPValue3
         ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationX AS visualizationX
         ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationY AS visualizationY

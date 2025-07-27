@@ -108,8 +108,10 @@ anomaly_detection_using_python() {
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedNodeEmbeddingClustering.py" "${@}" ${verboseMode}
     # Reduce the dimensionality of the node embeddings down to 2D for visualization using UMAP
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/umap2dNodeEmbeddings.py" "${@}" ${verboseMode}
-    
+    # Plot the results with clustering and UMAP embeddings to reveal anomalies in rare feature combinations
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+    # Run an unsupervised anomaly detection algorithm including tuning and explainability
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedAnomalyDetectionExplained.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
     # Query Results: Output all collected features into a CSV file.
     execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_Features.csv"
 }
