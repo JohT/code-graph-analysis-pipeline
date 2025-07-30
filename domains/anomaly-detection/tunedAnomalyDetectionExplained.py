@@ -39,6 +39,7 @@ import shap  # Explainable AI tool
 
 import matplotlib.pyplot as plot
 
+from visualization import annotate_each, annotate_each_with_index, scale_marker_sizes, zoom_into_center_while_preserving_top_scores
 
 class Parameters:
     required_parameters_ = ["projection_node_label"]
@@ -419,12 +420,14 @@ def tune_anomaly_detection_models(
         if len(np.unique(pseudo_labels)) < 2:
             print("tunedAnomalyDetectionExplained: Warning: Isolation Forest did not detect any anomalies. Returning a low score.")
             return 0.0
-        
+
         # Proxy Random Forest hyperparameters
         proxy_random_forest = RandomForestClassifier(
             n_estimators=trial.suggest_int("proxy_n_estimators", 100, 500),
             max_depth=trial.suggest_int("proxy_max_depth", 4, 20),
             random_state=random_seed,
+            min_samples_leaf=1,
+            max_features="sqrt"
         )
 
         # Custom scorer that won’t fail if class 1 is absent
@@ -468,7 +471,7 @@ def tune_anomaly_detection_models(
     study.optimize(objective, n_trials=number_of_trials, timeout=optimization_timeout_in_seconds)
     output_optuna_tuning_results(study, study.study_name)
 
-    if study.best_value == 0.0:
+    if np.isclose(study.best_value, 0.0, rtol=1e-09, atol=1e-09):
         red = "\x1b[31;20m"
         reset = "\x1b[0m"
         print(f"{red}tunedAnomalyDetectionExplained: Error: No valid trials found. All trials returned a score of 0.0. No anomalies detectable. Check the data and parameters.{reset}")
@@ -484,13 +487,15 @@ def tune_anomaly_detection_models(
         random_state=random_seed
     )
     anomaly_detection_results = best_isolation_forest.fit_predict(feature_matrix)
-    anomaly_labels = (anomaly_detection_results == -1).astype(int)  # 1 = anomaly, 0 = normal
+    anomaly_labels = (anomaly_detection_results == -1).astype(int)  # 1 means "anomaly", 0 means "non-anomaly"
     anomaly_scores = best_isolation_forest.decision_function(feature_matrix) * -1  # higher = more anomalous
 
     best_proxy_random_forest = RandomForestClassifier(
         n_estimators=best_params["proxy_n_estimators"],
         max_depth=best_params["proxy_max_depth"],
-        random_state=random_seed
+        random_state=random_seed,
+        min_samples_leaf=1,
+        max_features="sqrt"
     )
     best_proxy_random_forest.fit(feature_matrix, anomaly_detection_results)
 
@@ -553,44 +558,36 @@ def plot_anomalies(
     size_column: str = "articleRank",
     x_position_column: str = 'embeddingVisualizationX',
     y_position_column: str = 'embeddingVisualizationY',
-    annotate_top_n_anomalies: int = 10,
-    annotate_top_n_non_anomalies: int = 5,
-    annotate_top_n_clusters: int = 20,
+
 ) -> None:
 
     if features_to_visualize.empty:
         print("No projected data to plot available")
         return
 
-    def truncate(text: str, max_length: int = 22):
-        if len(text) <= max_length:
-            return text
-        return text[:max_length - 3] + "..."
+    annotate_top_n_anomalies: int = 10
+    annotate_top_n_non_anomalies: int = 5
+    annotate_top_n_clusters: int = 20
 
-    # Function to compute 2D Euclidean distance from center
-    def calculate_distances_to_center(data: pd.DataFrame, x_position_column: str, y_position_column: str):
-        center_x = data[x_position_column].mean()
-        center_y = data[y_position_column].mean()
-        return np.sqrt((data[x_position_column] - center_x)**2 + (data[y_position_column] - center_y)**2)
+    features_to_visualize_zoomed=zoom_into_center_while_preserving_top_scores(
+        features_to_visualize, 
+        x_position_column, 
+        y_position_column, 
+        anomaly_score_column, 
+        annotate_top_n_anomalies
+    )
+    # Add column with scaled version of "node_size_column" for uniform marker scaling
+    features_to_visualize_zoomed = features_to_visualize_zoomed.copy()
+    features_to_visualize_zoomed.loc[:, size_column + '_scaled'] = scale_marker_sizes(features_to_visualize_zoomed[size_column])
 
-    def zoom_into_center_while_preserving_top_anomalies(
-            data: pd.DataFrame,
-            distances_to_center: np.ndarray,
-            anomaly_score_column: str,
-            percentile_of_distance_to_center: float = 0.8,
-            top_n_anomalies: int = annotate_top_n_anomalies,
-    ) -> pd.DataFrame:
-        # Keep points within a distance percentile (e.g., 80%)
-        distance_to_center_threshold = np.quantile(distances_to_center, percentile_of_distance_to_center)
-        # Additionally, keep points that contain the Get the top_n_anomalies
-        anomaly_score_threshold = data[anomaly_score_column].nlargest(top_n_anomalies).iloc[-1]
-        return data[(distances_to_center <= distance_to_center_threshold) | (data[anomaly_score_column] >= anomaly_score_threshold)]
-
-    distances_to_center = calculate_distances_to_center(features_to_visualize, x_position_column, y_position_column)
-    clustering_visualization_dataframe_zoomed = zoom_into_center_while_preserving_top_anomalies(features_to_visualize, distances_to_center, anomaly_score_column)
-
-    cluster_anomalies = clustering_visualization_dataframe_zoomed[clustering_visualization_dataframe_zoomed[anomaly_label_column] == 1]
-    cluster_without_anomalies = clustering_visualization_dataframe_zoomed[clustering_visualization_dataframe_zoomed[anomaly_label_column] != 1]
+    def get_common_plot_parameters(data: pd.DataFrame) -> dict:
+        return {
+            "x": data[x_position_column],
+            "y": data[y_position_column],
+            "s": data[size_column + '_scaled'],
+        }
+    cluster_anomalies = features_to_visualize_zoomed[features_to_visualize_zoomed[anomaly_label_column] == 1]
+    cluster_without_anomalies = features_to_visualize_zoomed[features_to_visualize_zoomed[anomaly_label_column] != 1]
     cluster_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] == -1]
     cluster_non_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] != -1]
 
@@ -599,9 +596,7 @@ def plot_anomalies(
 
     # Plot noise (from clustering)
     plot.scatter(
-        x=cluster_noise[x_position_column],
-        y=cluster_noise[y_position_column],
-        s=cluster_noise[size_column] * 60 + 2,
+        **get_common_plot_parameters(cluster_noise),
         color='lightgrey',
         alpha=0.4,
         label='Noise'
@@ -609,9 +604,7 @@ def plot_anomalies(
 
     # Plot clusters
     plot.scatter(
-        x=cluster_non_noise[x_position_column],
-        y=cluster_non_noise[y_position_column],
-        s=cluster_non_noise[size_column] * 60 + 2,
+        **get_common_plot_parameters(cluster_non_noise),
         c=cluster_non_noise[cluster_label_column],
         cmap='tab20',
         alpha=0.7,
@@ -620,52 +613,49 @@ def plot_anomalies(
 
     # Plot anomalies
     plot.scatter(
-        x=cluster_anomalies[x_position_column],
-        y=cluster_anomalies[y_position_column],
-        s=cluster_anomalies[size_column] * 60 + 10,
+        **get_common_plot_parameters(cluster_anomalies),
         c=cluster_anomalies[anomaly_score_column],
         cmap="Reds",
         alpha=0.9,
         label='Anomaly'
     )
+    
+    common_column_names_for_annotations = {
+        "name_column": code_unit_column, 
+        "x_position_column": x_position_column, 
+        "y_position_column": y_position_column
+    }
 
     # Annotate medoids of the cluster
     cluster_medoids = cluster_non_noise[cluster_non_noise[cluster_medoid_column] == 1].sort_values(by=cluster_size_column, ascending=False).head(annotate_top_n_clusters)
-    for index, row in cluster_medoids.iterrows():
-        plot.annotate(
-            text=f"{truncate(row[code_unit_column])} (cluster {row[cluster_label_column]})",
-            xy=(row[x_position_column], row[y_position_column]),
-            xytext=(5, 5),
-            alpha=0.4,
-            **plot_annotation_style
-        )
+    annotate_each(
+        cluster_medoids, 
+        using=plot.annotate, 
+        cluster_label_column=cluster_label_column,
+        **common_column_names_for_annotations,
+        alpha=0.4
+    )
 
     # Annotate top non-anomalies
     non_anomalies = cluster_without_anomalies.sort_values(by=anomaly_score_column, ascending=True).reset_index(drop=True).head(annotate_top_n_non_anomalies)
-    non_anomalies_in_reversed_order = non_anomalies.iloc[::-1]  # plot most important annotations last to overlap less important ones
-    for dataframe_index, row in non_anomalies_in_reversed_order.iterrows():
-        index = typing.cast(int, dataframe_index)
-        plot.annotate(
-            text=f"#{index + 1}: {truncate(row[code_unit_column])} ({row[anomaly_score_column]:.3f})",
-            xy=(row[x_position_column], row[y_position_column]),
-            xytext=(5, 5 + (index % 5) * 10),
-            color='green',
-            alpha=0.7,
-            **plot_annotation_style
-        )
+    annotate_each_with_index(
+        non_anomalies, 
+        using=plot.annotate, 
+        value_column=anomaly_score_column,
+        **common_column_names_for_annotations,
+        color="green",
+        alpha=0.7
+    )
 
     # Annotate top anomalies
     anomalies = cluster_anomalies.sort_values(by=anomaly_score_column, ascending=False).reset_index(drop=True).head(annotate_top_n_anomalies)
-    anomalies_in_reversed_order = anomalies.iloc[::-1]  # plot most important annotations last to overlap less important ones
-    for dataframe_index, row in anomalies_in_reversed_order.iterrows():
-        index = typing.cast(int, dataframe_index)
-        plot.annotate(
-            text=f"#{index + 1}: {truncate(row[code_unit_column])} ({row[anomaly_score_column]:.3f})",
-            xy=(row[x_position_column], row[y_position_column]),
-            xytext=(5, 5 + (index % 5) * 10),
-            color='red',
-            **plot_annotation_style
-        )
+    annotate_each_with_index(
+        anomalies, 
+        using=plot.annotate, 
+        value_column=anomaly_score_column,
+        **common_column_names_for_annotations,
+        color="red",
+    )
 
     plot.savefig(plot_file_path)
     plot.close()
@@ -834,18 +824,6 @@ def add_top_shap_features_to_anomalies(
 # ------------------------------------------------------------------------------------------------------------
 #  MAIN
 # ------------------------------------------------------------------------------------------------------------
-
-plot_annotation_style: dict = {
-    'textcoords': 'offset points',
-    'arrowprops': dict(arrowstyle='->', color='black', alpha=0.3),
-    'fontsize': 6,
-    'backgroundcolor': 'white',
-    'bbox': dict(boxstyle='round,pad=0.4',
-                 edgecolor='silver',
-                 facecolor='whitesmoke',
-                 alpha=1
-                 )
-}
 
 features_for_visualization_to_exclude_from_training: typing.List[str] = [
     'codeUnitName',
