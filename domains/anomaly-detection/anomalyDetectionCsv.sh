@@ -69,17 +69,20 @@ anomaly_detection_queries() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
     
-    echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PotentialImbalancedRoles.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
     
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionHiddenBridgeNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_HiddenBridgeNodes.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPopularBottlenecks.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_PopularBottlenecks.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionSilentCoordinators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_SilentCoordinators.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionOverReferencesUtilities.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_OverReferencesUtilities.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionFragileStructuralBridges.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_FragileStructuralBridges.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionDependencyHungryOrchestrators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_DependencyHungryOrchestrators.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionUnexpectedCentralNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}AnomalyDetection_UnexpectedCentralNodes.csv"
+    echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_PotentialImbalancedRoles.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
+    
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionHiddenBridgeNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_HiddenBridgeNodes.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPopularBottlenecks.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_PopularBottlenecks.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionSilentCoordinators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_SilentCoordinators.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionOverReferencesUtilities.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_OverReferencesUtilities.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionFragileStructuralBridges.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_FragileStructuralBridges.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionDependencyHungryOrchestrators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_DependencyHungryOrchestrators.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionUnexpectedCentralNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_UnexpectedCentralNodes.csv"
 }
 
 # Run the anomaly detection pipeline.
@@ -111,36 +114,39 @@ ALGORITHM_NODE="projection_node_label"
 PROJECTION_WEIGHT="dependencies_projection_weight_property"
 ALGORITHM_WEIGHT="projection_weight_property"
 
+PROJECTION_LANGUAGE="dependencies_projection_language"
+ALGORITHM_LANGUAGE="projection_language"
+
 # Code independent algorithm parameters
 COMMUNITY_PROPERTY="community_property=communityLeidenIdTuned"
 EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClustering"
 
 # -- Java Artifact Node Embeddings -------------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight"
-    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight" "${PROJECTION_LANGUAGE}=Java"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight" "${PROJECTION_LANGUAGE}=Java"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces"
-    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces" "${PROJECTION_LANGUAGE}=Java"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces" "${PROJECTION_LANGUAGE}=Java"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
 
 if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
     createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
-    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- Typescript Module Node Embeddings ---------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight"
-    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # ---------------------------------------------------------------

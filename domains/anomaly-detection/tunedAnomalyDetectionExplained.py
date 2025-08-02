@@ -104,6 +104,17 @@ class Parameters:
     def get_projection_node_label(self) -> str:
         return self.query_parameters_["projection_node_label"]
 
+    def __is_code_language_available(self) -> bool:
+        return "projection_language" in self.query_parameters_
+
+    def __get_projection_language(self) -> str:
+        return self.query_parameters_["projection_language"] if self.__is_code_language_available() else ""
+
+    def get_plot_prefix(self) -> str:
+        if self.__is_code_language_available():
+            return self.__get_projection_language() + " " + self.get_projection_node_label()
+        return self.get_projection_node_label()
+
     def get_report_directory(self) -> str:
         return self.report_directory
 
@@ -839,7 +850,7 @@ features_for_visualization_to_exclude_from_training: typing.List[str] = [
 ]
 
 parameters = parse_input_parameters()
-plot_type = parameters.get_projection_node_label()
+plot_prefix = parameters.get_plot_prefix()
 driver = get_graph_database_driver()
 features = query_data(parameters)
 
@@ -849,7 +860,7 @@ if parameters.is_verbose():
 validate_data(features)
 
 if features.empty:
-    print(f"tunedAnomalyDetectionExplained: Warning: No data. Skipping Anomaly Detection for {plot_type}.")
+    print(f"tunedAnomalyDetectionExplained: Warning: No data. Skipping Anomaly Detection for {plot_prefix}.")
     sys.exit(0)
 
 features_to_standardize = features.columns.drop(features_for_visualization_to_exclude_from_training + ['embedding']).to_list()
@@ -874,7 +885,7 @@ if parameters.is_verbose():
 plot_anomalies(
     features_to_visualize=features,
     title_prefix="Java Package Anomalies",
-    plot_file_path=get_file_path(f"{plot_type}_Anomalies", parameters)
+    plot_file_path=get_file_path(f"{plot_prefix}_Anomalies", parameters)
 )
 
 if parameters.is_verbose():
@@ -892,16 +903,16 @@ plot_shap_explained_beeswarm(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     prepared_features=features_prepared,
     feature_names=feature_names,
-    title_prefix=plot_type,
-    plot_file_path=get_file_path(f"{plot_type}_Anomaly_feature_importance_explained", parameters)
+    title_prefix=plot_prefix,
+    plot_file_path=get_file_path(f"{plot_prefix}_Anomaly_feature_importance_explained", parameters)
 )
 
 plot_shap_explained_top_10_feature_dependence(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     prepared_features=features_prepared,
     feature_names=feature_names,
-    title_prefix=plot_type,
-    plot_file_path=get_file_path(f"{plot_type}_Anomaly_feature_dependence_explained", parameters)
+    title_prefix=plot_prefix,
+    plot_file_path=get_file_path(f"{plot_prefix}_Anomaly_feature_dependence_explained", parameters)
 )
 
 add_top_shap_features_to_anomalies(

@@ -30,6 +30,7 @@ import seaborn
 
 from visualization import plot_annotation_style, annotate_each, annotate_each_with_index, scale_marker_sizes, zoom_into_center, zoom_into_center_while_preserving_scores_above_threshold, zoom_into_center_while_preserving_top_scores
 
+
 class Parameters:
     required_parameters_ = ["projection_node_label"]
 
@@ -88,8 +89,19 @@ class Parameters:
     def get_query_parameters(self) -> typing.Dict[str, str]:
         return self.query_parameters_.copy()  # copy enforces immutability
 
-    def get_projection_node_label(self) -> str:
+    def __get_projection_node_label(self) -> str:
         return self.query_parameters_["projection_node_label"]
+
+    def __is_code_language_available(self) -> bool:
+        return "projection_language" in self.query_parameters_
+
+    def __get_projection_language(self) -> str:
+        return self.query_parameters_["projection_language"] if self.__is_code_language_available() else ""
+
+    def get_plot_prefix(self) -> str:
+        if self.__is_code_language_available():
+            return self.__get_projection_language() + " " + self.__get_projection_node_label()
+        return self.__get_projection_node_label()
 
     def get_report_directory(self) -> str:
         return self.report_directory
@@ -451,7 +463,7 @@ def plot_clustering_coefficient_vs_page_rank(
 
     common_column_names_for_annotations = {
         "name_column": 'shortName',
-        "x_position_column": 'clusteringCoefficient', 
+        "x_position_column": 'clusteringCoefficient',
         "y_position_column": 'pageRank'
     }
 
@@ -461,8 +473,8 @@ def plot_clustering_coefficient_vs_page_rank(
     threshold_page_rank = mean_page_rank + 1.5 * standard_deviation_page_rank
     significant_points = combined_data[combined_data['pageRank'] > threshold_page_rank].sort_values(by='pageRank', ascending=False).reset_index(drop=True).head(10)
     annotate_each_with_index(
-        significant_points, 
-        using=plot.annotate, 
+        significant_points,
+        using=plot.annotate,
         value_column='pageRank',
         **common_column_names_for_annotations
     )
@@ -473,8 +485,8 @@ def plot_clustering_coefficient_vs_page_rank(
     top_clustering_coefficients = combined_data.sort_values(by='clusteringCoefficient', ascending=False).reset_index(drop=True).head(20)
     top_clustering_coefficients = top_clustering_coefficients.sort_values(by='pageRank', ascending=True).reset_index(drop=True).head(5)
     annotate_each_with_index(
-        top_clustering_coefficients, 
-        using=plot.annotate, 
+        top_clustering_coefficients,
+        using=plot.annotate,
         value_column='clusteringCoefficient',
         **common_column_names_for_annotations
     )
@@ -508,9 +520,9 @@ def plot_clusters(
     # Setup columns
     node_size_column = centrality_column_name
 
-    clustering_visualization_dataframe_zoomed=zoom_into_center(
-        clustering_visualization_dataframe, 
-        x_position_column, 
+    clustering_visualization_dataframe_zoomed = zoom_into_center(
+        clustering_visualization_dataframe,
+        x_position_column,
         y_position_column
     )
 
@@ -617,10 +629,10 @@ def plot_clusters_probabilities(
         print("No projected data to plot available")
         return
 
-    clustering_visualization_dataframe_zoomed=zoom_into_center_while_preserving_top_scores(
-        clustering_visualization_dataframe, 
-        x_position_column, 
-        y_position_column, 
+    clustering_visualization_dataframe_zoomed = zoom_into_center_while_preserving_top_scores(
+        clustering_visualization_dataframe,
+        x_position_column,
+        y_position_column,
         cluster_probability_column,
         annotate_n_lowest_probabilities,
         lowest_scores=True
@@ -636,7 +648,7 @@ def plot_clusters_probabilities(
             "y": data[y_position_column],
             "s": data[size_column + '_scaled'],
         }
-    
+
     cluster_noise = clustering_visualization_dataframe_zoomed[clustering_visualization_dataframe_zoomed[cluster_label_column] == -1]
     cluster_non_noise = clustering_visualization_dataframe_zoomed[clustering_visualization_dataframe_zoomed[cluster_label_column] != -1]
     cluster_even_labels = clustering_visualization_dataframe_zoomed[clustering_visualization_dataframe_zoomed[cluster_label_column] % 2 == 0]
@@ -800,7 +812,7 @@ def plot_cluster_noise(
 # ------------------------------------------------------------------------------------------------------------
 
 parameters = parse_input_parameters()
-plot_type = parameters.get_projection_node_label()
+plot_prefix = parameters.get_plot_prefix()
 report_directory = parameters.get_report_directory()
 
 driver = get_graph_database_driver()
@@ -813,14 +825,14 @@ plot_difference_between_article_and_page_rank(
     data['pageRank'],
     data['articleRank'],
     data['shortCodeUnitName'],
-    title=f"{plot_type} distribution of PageRank - ArticleRank differences",
-    plot_file_path=get_file_path(f"{plot_type}_PageRank_Minus_ArticleRank_Distribution", parameters)
+    title=f"{plot_prefix} distribution of PageRank - ArticleRank differences",
+    plot_file_path=get_file_path(f"{plot_prefix}_PageRank_Minus_ArticleRank_Distribution", parameters)
 )
 
 plot_clustering_coefficient_distribution(
     data['clusteringCoefficient'],
-    title=f"{plot_type} distribution of clustering coefficients",
-    plot_file_path=get_file_path(f"{plot_type}_ClusteringCoefficient_distribution", parameters)
+    title=f"{plot_prefix} distribution of clustering coefficients",
+    plot_file_path=get_file_path(f"{plot_prefix}_ClusteringCoefficient_distribution", parameters)
 )
 
 plot_clustering_coefficient_vs_page_rank(
@@ -828,16 +840,16 @@ plot_clustering_coefficient_vs_page_rank(
     data['pageRank'],
     data['shortCodeUnitName'],
     data['clusterNoise'],
-    title=f"{plot_type} clustering coefficient versus PageRank",
-    plot_file_path=get_file_path(f"{plot_type}_ClusteringCoefficient_versus_PageRank", parameters)
+    title=f"{plot_prefix} clustering coefficient versus PageRank",
+    plot_file_path=get_file_path(f"{plot_prefix}_ClusteringCoefficient_versus_PageRank", parameters)
 )
 
 if (overall_cluster_count < 20):
     print(f"anomalyDetectionFeaturePlots: Less than 20 clusters: {overall_cluster_count}. Only one plot containing all clusters will be created.")
     plot_clusters(
         clustering_visualization_dataframe=data,
-        title=f"{plot_type} all clusters overall (less than 20)",
-        plot_file_path=get_file_path(f"{plot_type}_Clusters_Overall", parameters)
+        title=f"{plot_prefix} all clusters overall (less than 20)",
+        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_Overall", parameters)
     )
 else:
     print(f"anomalyDetectionFeaturePlots: More than 20 clusters: {overall_cluster_count}. Different plots focussing on different features like cluster size will be created.")
@@ -846,8 +858,8 @@ else:
     )
     plot_clusters(
         clustering_visualization_dataframe=clusters_by_largest_size,
-        title=f"{plot_type} clusters with the largest size",
-        plot_file_path=get_file_path(f"{plot_type}_Clusters_largest_size", parameters)
+        title=f"{plot_prefix} clusters with the largest size",
+        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_largest_size", parameters)
     )
 
     clusters_by_largest_max_radius = get_clusters_by_criteria(
@@ -855,8 +867,8 @@ else:
     )
     plot_clusters(
         clustering_visualization_dataframe=clusters_by_largest_max_radius,
-        title=f"{plot_type} clusters with the largest max radius",
-        plot_file_path=get_file_path(f"{plot_type}_Clusters_largest_max_radius", parameters)
+        title=f"{plot_prefix} clusters with the largest max radius",
+        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_largest_max_radius", parameters)
     )
 
     clusters_by_largest_average_radius = get_clusters_by_criteria(
@@ -864,39 +876,39 @@ else:
     )
     plot_clusters(
         clustering_visualization_dataframe=clusters_by_largest_average_radius,
-        title=f"{plot_type} clusters with the largest average radius",
-        plot_file_path=get_file_path(f"{plot_type}_Clusters_largest_average_radius", parameters)
+        title=f"{plot_prefix} clusters with the largest average radius",
+        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_largest_average_radius", parameters)
     )
 
 plot_clusters_probabilities(
-    clustering_visualization_dataframe=data, 
-    title=f"{plot_type} clustering probabilities (red=high uncertainty)",
-    plot_file_path=get_file_path(f"{plot_type}_Cluster_probabilities", parameters)
+    clustering_visualization_dataframe=data,
+    title=f"{plot_prefix} clustering probabilities (red=high uncertainty)",
+    plot_file_path=get_file_path(f"{plot_prefix}_Cluster_probabilities", parameters)
 )
 
 plot_cluster_noise(
     clustering_visualization_dataframe=data,
-    title=f"{plot_type} clustering noise points that are surprisingly central (red) or popular (size)",
+    title=f"{plot_prefix} clustering noise points that are surprisingly central (red) or popular (size)",
     size_column_name='degree',
     color_column_name='pageRank',
-    plot_file_path=get_file_path(f"{plot_type}_ClusterNoise_highly_central_and_popular", parameters)
+    plot_file_path=get_file_path(f"{plot_prefix}_ClusterNoise_highly_central_and_popular", parameters)
 )
 
 plot_cluster_noise(
     clustering_visualization_dataframe=data,
-    title=f"{plot_type} clustering noise points that bridge flow (red) and are poorly integrated (size)",
+    title=f"{plot_prefix} clustering noise points that bridge flow (red) and are poorly integrated (size)",
     size_column_name='inverseClusteringCoefficient',
     color_column_name='betweenness',
-    plot_file_path=get_file_path(f"{plot_type}_ClusterNoise_poorly_integrated_bridges", parameters),
+    plot_file_path=get_file_path(f"{plot_prefix}_ClusterNoise_poorly_integrated_bridges", parameters),
     downscale_normal_sizes=0.4
 )
 
 plot_cluster_noise(
     clustering_visualization_dataframe=data,
-    title=f"{plot_type} clustering noise points with role inversion (size) possibly violating layering or dependency direction (red)",
+    title=f"{plot_prefix} clustering noise points with role inversion (size) possibly violating layering or dependency direction (red)",
     size_column_name='pageToArticleRankDifference',
     color_column_name='betweenness',
-    plot_file_path=get_file_path(f"{plot_type}_ClusterNoise_role_inverted_bridges", parameters)
+    plot_file_path=get_file_path(f"{plot_prefix}_ClusterNoise_role_inverted_bridges", parameters)
 )
 
 driver.close()
