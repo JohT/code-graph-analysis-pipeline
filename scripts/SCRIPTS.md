@@ -67,6 +67,7 @@ Script | Directory | Description
 | [CsvReports.sh](./reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required). |
 | [DatabaseCsvExportReports.sh](./reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all" |
 | [JupyterReports.sh](./reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts. |
+| [PythonReports.sh](./reports/compilations/PythonReports.sh) | compilations | Runs all Python report scripts (no Chromium required). |
 | [VisualizationReports.sh](./reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports. |
 | [resetAndScan.sh](./resetAndScan.sh) |  | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph. |
 | [resetAndScanChanged.sh](./resetAndScanChanged.sh) |  | Executes "resetAndScan.sh" only if "detectChangedFiles.sh" returns detected changes. |
