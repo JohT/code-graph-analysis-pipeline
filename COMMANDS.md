@@ -389,10 +389,10 @@ Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJu
   conda activate codegraph
   ```
 
-  or by using the environment file [codegraph-environment.yml](./jupyter/environment.yml):
+  or by using the codegraph environment file [environment.yml](./environment.yml):
 
   ```shell
-  conda env create --file ./jupyter/environment.yml
+  conda env create --file ./environment.yml
   conda activate codegraph
   ```
 
