@@ -11,7 +11,7 @@
 #       The original ones are typically saved with all outputs cleared to be able to better compare their changes with git diff.
 
 # Note: This script uses the conda environment defined in CODEGRAPH_CONDA_ENVIRONMENT (defaults to "codegraph").
-#       If the environment hadn't been created yet it will use "environment.yml" 
+#       If the environment hadn't been created yet it will use "conda-environment.yml" 
 #       in the same directory as the given jupyter notebook ipynb file
 #       to create the environment.
 

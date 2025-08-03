@@ -389,23 +389,23 @@ Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJu
   conda activate codegraph
   ```
 
-  or by using the codegraph environment file [environment.yml](./environment.yml):
+  or by using the codegraph environment file [conda-environment.yml](./conda-environment.yml):
 
   ```shell
-  conda env create --file ./environment.yml
+  conda env create --file ./conda-environment.yml
   conda activate codegraph
   ```
 
-- Export full environment.yml
+- Export full conda-environment.yml
 
   ```shell
-  conda env export --name codegraph > full-codegraph-environment.yml
+  conda env export --name codegraph > full-codegraph-conda-environment.yml
   ```
 
-- Export only explicit environment.yml
+- Export only explicit conda-environment.yml
 
   ```shell
-  conda env export --from-history --name codegraph | grep -v "^prefix: " > explicit-codegraph-environment.yml
+  conda env export --from-history --name codegraph | grep -v "^prefix: " > explicit-codegraph-conda-environment.yml
   ```
 
 ### Executing Jupyter Notebooks with nbconvert

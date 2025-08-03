@@ -3,7 +3,7 @@
 # Activates the Conda (Python package manager) environment "codegraph" with all packages needed to execute the Jupyter Notebooks.
 
 # Note: This script uses the conda environment defined in CODEGRAPH_CONDA_ENVIRONMENT (defaults to "codegraph").
-#       If the environment hadn't been created yet, it will use "environment.yml" from the root directory
+#       If the environment hadn't been created yet, it will use "conda-environment.yml" from the root directory
 #       in the same directory as the given jupyter notebook ipynb file
 #       to create the environment.
 
@@ -25,7 +25,7 @@ echo "activateCondaEnvironment: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DI
 
 # Get the file name of the environment description file for the conda package and environment manager 
 # that contains all dependencies and their versions.
-CONDA_ENVIRONMENT_FILE=${CONDA_ENVIRONMENT_FILE:-"${JUPYTER_NOTEBOOK_DIRECTORY}/../environment.yml"} # Conda (package manager for Python) environment file path
+CONDA_ENVIRONMENT_FILE=${CONDA_ENVIRONMENT_FILE:-"${JUPYTER_NOTEBOOK_DIRECTORY}/../conda-environment.yml"} # Conda (package manager for Python) environment file path
 if [ ! -f "${CONDA_ENVIRONMENT_FILE}" ] ; then
     echo "activateCondaEnvironment: Couldn't find environment file ${CONDA_ENVIRONMENT_FILE}."
     exit 2
