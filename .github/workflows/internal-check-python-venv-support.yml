@@ -1,0 +1,41 @@
+name: Check Python venv virtual environment
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Only watch changes related to Python virtual environment venv
+    paths:
+      - 'requirements.txt'
+      - 'scripts/activatePythonEnvironment.sh'
+      - '.github/workflows/internal-check-python-venv-support.yml' # or when this file changed
+
+jobs:
+  check-python-venv-environment:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        include:
+        - python: 3.12
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v4
+
+    - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python }}
+        cache: 'pip'
+    
+    - name: Activate virtual environment using venv and check if the required packages were installed
+      env: 
+        USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: "true"
+      # 1.  Run the script under test to create, activate and install the virtual environment
+      # 2a. Run pip in dry-run mode without installing or resolving dependencies
+      # 2b. Suppress all pip output (stderr)
+      # 2c. Check if pip *would install* anything using grep
+      # 2d. If there are missing dependencies and the environment is incomplete, return 1 (indicates all requirements already satisfied)
+      run: |
+        ./scripts/activatePythonEnvironment.sh
+        pip install --dry-run --no-deps --requirement "./requirements.txt" 2>/dev/null | grep -q "Would install" || return 1

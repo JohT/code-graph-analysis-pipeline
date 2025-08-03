@@ -12,8 +12,11 @@
 
 # Note: This script uses the conda environment defined in CODEGRAPH_CONDA_ENVIRONMENT (defaults to "codegraph").
 #       If the environment hadn't been created yet it will use "conda-environment.yml" 
-#       in the same directory as the given jupyter notebook ipynb file
-#       to create the environment.
+#       in the root directory of this repository to create the environment.
+
+# Note: Besides Conda, Python's build-in virtual environment module "venv" is also supported.
+#       If the environment hadn't been created yet it will use "requirements.txt"
+#       in the root directory of this repository to create the environment.
 
 # Requires juypter nbconvert,operatingSystemFunctions.sh
 
@@ -85,8 +88,12 @@ if [ ! -f "${jupyter_notebook_file_path}/.env" ] ; then
     echo "NEO4J_INITIAL_PASSWORD=${NEO4J_INITIAL_PASSWORD}" > "${jupyter_notebook_file_path}/.env"
 fi
 
-# Create and activate (if necessary) Conda environment as defined in environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
-source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
+# Create and activate (if necessary) a virtual environment (Conda or venv).
+# For Conda, the environment name is taken from the environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
+# and the dependencies are listed in the root directory file "conda-environment.yml".
+# For venv, the dependencies are listed in the root directory file "requirements.txt".
+time source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
+time source "${SCRIPTS_DIR}/activatePythonEnvironment.sh"
 
 jupyter --version || exit 1
 

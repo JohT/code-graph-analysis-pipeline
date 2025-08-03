@@ -22,9 +22,19 @@ echo "PythonReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
 echo "PythonReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 
+SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${REPORTS_SCRIPT_DIR}")}
+echo "PythonReports: SCRIPTS_DIR=${SCRIPTS_DIR}"
+
 # Get the "domains" directory that contains analysis and report scripts by functionality.
 DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${REPORTS_SCRIPT_DIR}/../../domains"}
 echo "PythonReports: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+
+# Create and activate (if necessary) a virtual environment (Conda or venv).
+# For Conda, the environment name is taken from the environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
+# and the dependencies are listed in the root directory file "conda-environment.yml".
+# For venv, the dependencies are listed in the root directory file "requirements.txt".
+time source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
+time source "${SCRIPTS_DIR}/activatePythonEnvironment.sh"
 
 # Run all Python report scripts (filename ending with Csv.sh) in the REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY directories.
 for directory in "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}"; do

@@ -1,16 +1,32 @@
 #!/usr/bin/env bash
 
-# Activates the Conda (Python package manager) environment "codegraph" with all packages needed to execute the Jupyter Notebooks.
+# Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Jupyter Notebooks and Python scripts.
 
 # Note: This script uses the conda environment defined in CODEGRAPH_CONDA_ENVIRONMENT (defaults to "codegraph").
-#       If the environment hadn't been created yet, it will use "conda-environment.yml" from the root directory
-#       in the same directory as the given jupyter notebook ipynb file
-#       to create the environment.
+#       If the environment hadn't been created yet, it will use "conda-environment.yml" from the root directory to create the environment.
 
 # Requires operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
+
+PREPARE_CONDA_ENVIRONMENT=${PREPARE_CONDA_ENVIRONMENT:-"true"} # Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
+
+if [ "${PREPARE_CONDA_ENVIRONMENT}" = "false" ]; then
+    echo "activateCondaEnvironment: Skipping activation. An already activated environment and installed dependencies are expected (PREPARE_CONDA_ENVIRONMENT=false)."
+    # "return" needs to be used here instead of "exit".
+    # This script is included in another script by using "source". 
+    # "exit" would end the main script, "return" just ends this sub script.
+    return 0
+fi 
+
+if [ "${USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV}" = "true" ]; then
+    echo "activateCondaEnvironment: Skipping activation. venv will be used instead of conda (USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV=true)."
+    # "return" needs to be used here instead of "exit".
+    # This script is included in another script by using "source". 
+    # "exit" would end the main script, "return" just ends this sub script.
+    return 0
+fi 
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -36,16 +52,6 @@ CODEGRAPH_CONDA_ENVIRONMENT=${CODEGRAPH_CONDA_ENVIRONMENT:-"codegraph"} # Name o
 echo "activateCondaEnvironment: CONDA_PREFIX=${CONDA_PREFIX}"
 echo "activateCondaEnvironment: Current conda environment=${CONDA_DEFAULT_ENV}"
 echo "activateCondaEnvironment: Target conda environment=${CODEGRAPH_CONDA_ENVIRONMENT}"
-
-PREPARE_CONDA_ENVIRONMENT=${PREPARE_CONDA_ENVIRONMENT:-"true"} # Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
-
-if [ "${PREPARE_CONDA_ENVIRONMENT}" = "false" ]; then
-    echo "activateCondaEnvironment: Skipping activation. ${PREPARE_CONDA_ENVIRONMENT} is set to false."
-    # "return" needs to be used here instead of "exit".
-    # This script is included in another script by using "source". 
-    # "exit" would end the main script, "return" just ends this sub script.
-    return 0
-fi 
 
 # Include operation system function to for example detect Windows.
 source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
