@@ -35,7 +35,7 @@ NEO4J_APOC_PLUGIN_VERSION             | 2025.06.2                           |  |
 NEO4J_APOC_PLUGIN_EDITION             | core                                |  |
 NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
 NEO4J_GDS_PLUGIN_VERSION              | 2.19.0                              |  |
-NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.19.0                              |  |
+NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.20.0                              |  |
 NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
 JQASSISTANT_CLI_VERSION               | 2.7.1                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
@@ -44,6 +44,7 @@ programmingLanguage                   | Java                                | Se
 SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 VISUALIZATION_SCRIPTS_DIR             | ${SCRIPTS_DIR}/visualization        | Repository directory containing the shell scripts for visualization |
+DOMAINS_DIRECTORY                     | ${REPORTS_SCRIPT_DIR}/../../domains |  |
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
 TYPESCRIPT_SCAN_HEAP_MEMORY           | 4096                                | Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB. |
