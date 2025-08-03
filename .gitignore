@@ -93,5 +93,11 @@ coverage/
 .ipynb_checkpoints
 *.nbconvert*
 
+# Python
+__pycache__/
+
 # Python environments
 .conda
+
+# Optuna (and other) Database data
+*.db

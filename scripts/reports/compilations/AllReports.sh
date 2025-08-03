@@ -25,4 +25,5 @@ echo "AllReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DI
 # then hard to parallelize them. So if coupling can be prevented, it still should.
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/CsvReports.sh"
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/JupyterReports.sh"
+source "${REPORT_COMPILATIONS_SCRIPT_DIR}/PythonReports.sh"
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/VisualizationReports.sh"

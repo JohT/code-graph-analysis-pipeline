@@ -3,8 +3,15 @@
 CALL gds.node2vec.stream(
  $dependencies_projection + '-cleaned', {
       embeddingDimension: toInteger($dependencies_projection_embedding_dimension)
-     ,iterations: 3
-     ,randomSeed: 30
+     ,randomSeed: toInteger($dependencies_projection_embedding_random_seed)
+     ,iterations: toInteger($dependencies_projection_node2vec_iterations)
+     ,inOutFactor: toFloat($dependencies_projection_node2vec_in_out_factor)
+     ,returnFactor: toFloat($dependencies_projection_node2vec_return_factor)
+     ,windowSize: toInteger($dependencies_projection_node2vec_window_size)
+     ,walksPerNode: toInteger($dependencies_projection_node2vec_walks_per_node)
+     ,walkLength: toInteger($dependencies_projection_node2vec_walk_length)
+     ,negativeSamplingRate: toInteger($dependencies_projection_node2vec_negative_sampling_rate)
+     ,positiveSamplingFactor: toFloat($dependencies_projection_node2vec_positive_sampling_factor)
      ,relationshipWeightProperty: $dependencies_projection_weight_property
   }
 )
@@ -20,6 +27,6 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
        ,codeUnit.name                               AS shortCodeUnitName
        ,elementId(codeUnit)                         AS nodeElementId
        ,coalesce(artifactName, projectName)         AS projectName
-       ,coalesce(codeUnit.communityLeidenId, 0)     AS communityId
+       ,coalesce(codeUnit.communityLeidenIdTuned, codeUnit.communityLeidenId, 0) AS communityId
        ,coalesce(codeUnit.centralityPageRank, 0.01) AS centrality
        ,embedding
