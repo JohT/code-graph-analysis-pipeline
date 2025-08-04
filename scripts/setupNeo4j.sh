@@ -10,7 +10,7 @@
 set -o errexit -o pipefail
 
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"2025.06.2"}
+NEO4J_VERSION=${NEO4J_VERSION:-"2025.07.0"}
 
 NEO4J_APOC_PLUGIN_VERSION=${NEO4J_APOC_PLUGIN_VERSION:-"2025.06.2"} # Awesome Procedures On Cypher (APOC) Plugin version number. Version needs to be compatible to Neo4j and usually matches its version number.
 NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"} # Awesome Procedures On Cypher (APOC) for Neo4j Plugin Edition (Neo4j v4.4.x "all", Neo4j >= v5 "core")
