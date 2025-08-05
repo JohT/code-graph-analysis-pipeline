@@ -60,6 +60,24 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 # Define functions to create and delete Graph Projections like "createUndirectedDependencyProjection"
 source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
+# Define functions (like is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
+is_sufficient_data_available() {
+    language=$( extractQueryParameter "projection_language" "${@}" )
+    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    
+    query_result=$( execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionNodeCount.cypher" "${@}" )
+    node_count=$(get_csv_column_value "${query_result}" "node_count")
+    if [ "${node_count}" -lt 15 ]; then
+        echo "anomalyDetectionPipeline: Warning: Skipping anomaly detection. Only ${node_count} ${language} ${nodeLabel} nodes. At least 15 required."
+        false
+    else
+        echo "anomalyDetectionPipeline: Info: Running anomaly detection with ${node_count} ${language} ${nodeLabel} nodes."
+        true
+    fi
+}
+
 # Query or recalculate features.
 # 
 # Required Parameters:
@@ -158,30 +176,38 @@ EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClu
 
 # -- Java Artifact Node Embeddings -------------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight" "${PROJECTION_LANGUAGE}=Java"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight" "${PROJECTION_LANGUAGE}=Java"
-    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if is_sufficient_data_available "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight" "${PROJECTION_LANGUAGE}=Java"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=artifact-anomaly-detection-directed" "${PROJECTION_NODE}=Artifact" "${PROJECTION_WEIGHT}=weight" "${PROJECTION_LANGUAGE}=Java"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=artifact-anomaly-detection" "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+  fi
 fi
 
 # -- Java Package Node Embeddings --------------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces" "${PROJECTION_LANGUAGE}=Java"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces" "${PROJECTION_LANGUAGE}=Java"
-    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if is_sufficient_data_available "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces" "${PROJECTION_LANGUAGE}=Java"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=package-anomaly-detection-directed" "${PROJECTION_NODE}=Package" "${PROJECTION_WEIGHT}=weight25PercentInterfaces" "${PROJECTION_LANGUAGE}=Java"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=package-anomaly-detection" "${ALGORITHM_NODE}=Package" "${ALGORITHM_WEIGHT}=weight25PercentInterfaces" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+  fi
 fi
 
 # -- Java Type Node Embeddings -----------------------------------
 
-if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
-    createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
-    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if is_sufficient_data_available "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight"; then
+  if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
+      createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+  fi
 fi
 
 # -- Typescript Module Node Embeddings ---------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
-    anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if is_sufficient_data_available "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+  fi
 fi
 
 # ---------------------------------------------------------------
