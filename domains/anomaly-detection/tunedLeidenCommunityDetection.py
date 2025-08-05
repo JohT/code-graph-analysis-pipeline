@@ -359,10 +359,10 @@ def get_tuned_leiden_community_detection_algorithm(parameters: Parameters) -> Tu
     study.enqueue_trial({'gamma': 1.14, 'theta': 0.001, 'max_levels': 10})
 
     # Execute the hyperparameter tuning
-    study.optimize(objective, n_trials=20, timeout=30)
+    study.optimize(objective, n_trials=20, timeout=20)
 
     # Output tuning results
-    print(f"Best Leiden Community Detection parameters for {parameters.get_projection_name()} (Optuna):", study.best_params)
+    print(f"Best Leiden Community Detection parameters for {parameters.get_projection_name()} after {len(study.trials)}/20 trials with best #{study.best_trial.number} (Optuna):", study.best_params)
     if parameters.is_verbose():
         output_detailed_optuna_tuning_results(study)
 

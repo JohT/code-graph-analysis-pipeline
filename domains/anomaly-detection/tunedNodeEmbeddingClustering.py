@@ -308,7 +308,7 @@ def tuned_hierarchical_density_based_spatial_clustering(embeddings: numpy_typing
 
     # Start the hyperparameter tuning
     study.optimize(objective, n_trials=20, timeout=10)
-    print(f"Best HDBSCAN parameters (Optuna):", study.best_params)
+    print(f"Best HDBSCAN parameters after {len(study.trials)}/20 trials with best #{study.best_trial.number} (Optuna):", study.best_params)
     if parameters.is_verbose():
         output_detailed_optuna_tuning_results(study, 'HDBSCAN')
 
@@ -709,10 +709,12 @@ def get_tuned_fast_random_projection_node_embeddings(parameters: Parameters) -> 
     study.enqueue_trial({'embedding_dimension': 128, 'forth_iteration_weight': 1.0, 'normalization_strength': 0.5})
     study.enqueue_trial({'embedding_dimension': 256, 'forth_iteration_weight': 0.5, 'normalization_strength': 0.3})
     study.enqueue_trial({'embedding_dimension': 256, 'forth_iteration_weight': 1.0, 'normalization_strength': 0.3})
+    study.enqueue_trial({'embedding_dimension': 64, 'normalization_strength': -0.4, 'forth_iteration_weight': 1.4})
+    study.enqueue_trial({'embedding_dimension': 256, 'normalization_strength': 0.3, 'forth_iteration_weight': 1.0})
 
     # Start the hyperparameter tuning
     study.optimize(objective, n_trials=80, timeout=40)
-    print(f"Best Fast Random Projection (FastRP) parameters for {parameters.get_projection_name()} (Optuna):", study.best_params)
+    print(f"Best Fast Random Projection (FastRP) parameters for {parameters.get_projection_name()} after {len(study.trials)}/80 trials with best #{study.best_trial.number} (Optuna):", study.best_params)
     if parameters.is_verbose():
         output_detailed_optuna_tuning_results(study, 'Fast Random Projection (FastRP)')
 
