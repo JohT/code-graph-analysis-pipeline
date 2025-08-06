@@ -6,7 +6,8 @@ This file was generated with the script [generateScriptReference.sh](./generateS
 
 Script | Directory | Description
 -------|-----------|------------
-| [activateCondaEnvironment.sh](./activateCondaEnvironment.sh) |  | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to execute the Jupyter Notebooks. |
+| [activateCondaEnvironment.sh](./activateCondaEnvironment.sh) |  | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Jupyter Notebooks and Python scripts. |
+| [activatePythonEnvironment.sh](./activatePythonEnvironment.sh) |  | Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Jupyter Notebooks and Python scripts. |
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
 | [cleanupAfterReportGeneration.sh](./cleanupAfterReportGeneration.sh) |  | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder. |
 | [copyPackageJsonFiles.sh](./copyPackageJsonFiles.sh) |  | Copies all package.json files inside the source directory into the artifacts/npm-package-json directory. |
