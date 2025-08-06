@@ -8,6 +8,7 @@ on:
     paths-ignore: 
       - '**/*.md'
       - '**/*.txt'
+      - '!requirements.txt'
       - '**/*.css'
       - '**/*.html'
       - '**/*.js'
@@ -26,6 +27,7 @@ on:
     paths-ignore: 
       - '**/*.md'
       - '**/*.txt'
+      - '!requirements.txt'
       - '**/*.css'
       - '**/*.html'
       - '**/*.js'
