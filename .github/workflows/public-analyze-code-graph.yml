@@ -61,6 +61,12 @@ on:
         required: false
         type: string
         default: 'true'
+      use-venv_virtual_python_environment:
+        description: >
+          Use venv for virtual Python environments instead of Conda ("true") or not ("false", default).
+        required: false
+        type: string
+        default: 'false'
     outputs:
       uploaded-analysis-results:
         description: >
@@ -103,16 +109,26 @@ jobs:
 
       # "Setup Python" can be skipped if jupyter notebook analysis-results aren't needed
       - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
+        if: inputs.use-venv_virtual_python_environment == 'false'
         id: prepare-conda-environment
         uses: conda-incubator/setup-miniconda@505e6394dae86d6a5c7fbb6e3fb8938e3e863830 # v3
         with:
           python-version: ${{ matrix.python }}
           miniforge-version: ${{ matrix.miniforge }}
           activate-environment: codegraph
-          environment-file: ./jupyter/environment.yml
+          environment-file: ./conda-environment.yml
           auto-activate-base: false
           show-channel-urls: true
+
+      - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
+        if: inputs.use-venv_virtual_python_environment == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: 'pip'
+
       - name: (Python Setup) Conda environment info
+        if: inputs.use-venv_virtual_python_environment == 'false'
         shell: bash -el {0}
         run: | 
           conda info
@@ -168,6 +184,7 @@ jobs:
           ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: ${{ inputs.jupyter-pdf }}
           IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
           PREPARE_CONDA_ENVIRONMENT: "false" # Had already been done in step with id "prepare-conda-environment".
+          USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: ${{ inputs.use-venv_virtual_python_environment }}
         run: |
           TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ inputs.analysis-arguments }}
     

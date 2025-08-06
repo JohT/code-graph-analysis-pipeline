@@ -86,8 +86,10 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 ### Additional Prerequisites for Python and Jupyter Notebooks
 
-- Python is required for Jupyter Notebook reports.
-- A conda package manager like [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows) is required for Jupyter Notebook reports.
+- Python is required for Jupyter Notebook and Python reports.
+- Either [Conda](https://docs.conda.io) or Python's build-in module [venv](https://docs.python.org/3/library/venv.html) a required as environment manager.
+- For Conda, use for example [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows).
+- To use venv, no additional installation is needed. For that the environment variable `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` needs to be set to `'true'`.
 - Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
 
 ### Additional Prerequisites for Graph Visualization
@@ -131,13 +133,14 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - [Checkout GIT Repository](https://github.com/actions/checkout)
 - [Setup Java](https://github.com/actions/setup-java)
 - [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
+- [Setup Python with venv](https://docs.python.org/3/library/venv.html)
 - Download artifacts and optionally source code that contain the code to be analyzed [scripts/downloader](./scripts/downloader)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.github.io/jqassistant/current) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Uses [Neo4j Graph Data Science](https://neo4j.com/product/graph-data-science) for community detection, centrality, similarity, node embeddings and topological sort ([analysis.sh](./scripts/analysis/analyze.sh))
-- Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [environment.yml](./jupyter/environment.yml):
+- Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [conda-environment.yml](./conda-environment.yml):
   - [Python](https://www.python.org)
   - [jupyter](https://jupyter.org)
   - [matplotlib](https://matplotlib.org)

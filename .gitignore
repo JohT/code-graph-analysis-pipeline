@@ -98,6 +98,8 @@ __pycache__/
 
 # Python environments
 .conda
+.venv/
+*.pyc
 
 # Optuna (and other) Database data
 *.db

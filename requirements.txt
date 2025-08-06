@@ -1,0 +1,32 @@
+# --- Core Python version ---
+# NOTE: Python version must be >= 3.12 for compatibility
+# This should be enforced by the user/environment, not pip
+
+# --- Core tools ---
+jupyter==1.1.*
+matplotlib==3.10.*
+nbconvert[webpdf]==7.16.*
+numpy==1.26.*
+pandas==2.2.*
+pip==25.0.*
+setuptools==75.8.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
+typing-extensions==4.12.* # Needed for opentsne and Python >= 3.12
+
+# --- Visualization ---
+wordcloud==1.9.*
+monotonic==1.*
+plotly[kaleido]==6.2.*
+seaborn==0.13 # To visualize clustering results
+
+# --- Machine Learning / Optimization ---
+scikit-learn==1.6.*
+optuna==4.3.*
+umap-learn==0.5.* # Dimensionality reduction to visualize node embeddings in 2D
+
+# --- Database connector ---
+neo4j==5.23.*
+
+# --- Native/scientific packages (may require compilation) ---
+# These are included but may cause install errors in pip/venv
+opentsne==1.0.*       # Dimensionality reduction to visualize node embeddings in 2D. Might get replaced by umap.
+shap==0.48.*          # For e.g. explaining anomaly detection results

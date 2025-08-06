@@ -384,10 +384,11 @@ class AnomalyDetectionResults:
 
 def tune_anomaly_detection_models(
     feature_matrix: np.ndarray,
+    parameters: Parameters,
     contamination: float | typing.Literal["auto"] = 0.05,
     random_seed: int = 42,
     number_of_trials: int = 25,
-    optimization_timeout_in_seconds: int = 60
+    optimization_timeout_in_seconds: int = 50
 ) -> AnomalyDetectionResults:
     """
     Tunes both Isolation Forest and a proxy Random Forest using Optuna, maximizing the F1 score
@@ -464,7 +465,7 @@ def tune_anomaly_detection_models(
 
     # Print the number of samples and features in the feature matrix
     n_samples = feature_matrix.shape[0]
-    print(f"tunedAnomalyDetectionExplained: Tuned Anomaly Detection: Number of samples: {n_samples}, Number of features: {feature_matrix.shape[1]}, Number of trials: {number_of_trials}")
+    print(f"tunedAnomalyDetectionExplained: Tuning Anomaly Detection: Number of samples: {n_samples}, Number of features: {feature_matrix.shape[1]}, Number of trials: {number_of_trials}")
 
     # Run Optuna optimization
     study = create_study(direction="maximize", sampler=TPESampler(seed=random_seed), study_name="AnomalyDetection_Tuning")
@@ -480,7 +481,12 @@ def tune_anomaly_detection_models(
     study.enqueue_trial({'isolation_max_samples': 0.10015063610944819, 'isolation_n_estimators': 329, 'proxy_n_estimators': 314, 'proxy_max_depth': 8})
 
     study.optimize(objective, n_trials=number_of_trials, timeout=optimization_timeout_in_seconds)
-    output_optuna_tuning_results(study, study.study_name)
+
+    # Output tuning results
+    print(f"Best Isolation & Random Forest parameters for {parameters.get_plot_prefix()} after {len(study.trials)}/{number_of_trials} trials with best #{study.best_trial.number} (Optuna):", study.best_params)
+
+    if parameters.is_verbose():
+        output_optuna_tuning_results(study, study.study_name)
 
     if np.isclose(study.best_value, 0.0, rtol=1e-09, atol=1e-09):
         red = "\x1b[31;20m"
@@ -869,7 +875,7 @@ node_embeddings_reduced = reduce_dimensionality_of_node_embeddings(features)
 features_prepared = np.hstack([features_standardized, node_embeddings_reduced])
 feature_names = list(features_to_standardize) + [f'nodeEmbeddingPCA_{i}' for i in range(node_embeddings_reduced.shape[1])]
 
-anomaly_detection_results = tune_anomaly_detection_models(features_prepared)
+anomaly_detection_results = tune_anomaly_detection_models(features_prepared, parameters)
 if anomaly_detection_results.is_empty():
     sys.exit(0)
 
