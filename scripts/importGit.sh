@@ -160,6 +160,8 @@ postGitPluginImport() {
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
+  echo "importGit: Add numberOfGitUpdateCommits property to file nodes and code nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
 }
 
 postAggregatedGitLogImport() {

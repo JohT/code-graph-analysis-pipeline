@@ -26,20 +26,36 @@ UNWIND fileCombinations AS fileCombination
 // Filter out file pairs that where changed not very often together 
 // In detail: More than 0.1 per mille compared to overall commit count
 WHERE commitCount > globalCommitCount * 0.001 
+ WITH *
+     // Get the lowest number of git update commits of both files (file pair) 
+     ,CASE WHEN fileCombination[0].numberOfGitUpdateCommits < fileCombination[1].numberOfGitUpdateCommits
+           THEN fileCombination[0].numberOfGitUpdateCommits
+           ELSE fileCombination[1].numberOfGitUpdateCommits
+      END AS minNumberOfGitUpdateCommits
  WITH fileCombination[0] AS firstFile
      ,fileCombination[1] AS secondFile
      ,commitCount
+     // Out of all the times the less frequently changed file was touched, how often did it co-occur with the other file?
+     ,toFloat(commitCount) / minNumberOfGitUpdateCommits AS minConfidence
      ,commitHashes
 // Create the new relationship "CHANGED_TOGETHER_WITH" and set the property "commitCount" on it
- CALL (firstFile, secondFile, commitCount, commitHashes) {
+ CALL (firstFile, secondFile, commitCount, minConfidence, commitHashes) {
        MERGE (firstFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondFile)
-         SET pairwiseChange.commitCount  = commitCount
-            ,pairwiseChange.commitHashes = commitHashes
+         SET pairwiseChange.commitCount   = commitCount
+            ,pairwiseChange.minConfidence = minConfidence
+            ,pairwiseChange.commitHashes  = commitHashes
        } IN TRANSACTIONS
 // Return one row with some statistics about the found pairs and their commit counts
-RETURN max(commitCount)                  AS maxCommitCount
-      ,avg(commitCount)                  AS avgCommitCount
-      ,percentileDisc(commitCount, 0.5)  AS percentile50CommitCount
-      ,percentileDisc(commitCount, 0.9)  AS percentile90CommitCount
-      ,percentileDisc(commitCount, 0.95) AS percentile95CommitCount
-      ,count(*)                          AS pairCount
+RETURN min(commitCount)                    AS minCommitCount
+      ,max(commitCount)                    AS maxCommitCount
+      ,avg(commitCount)                    AS avgCommitCount
+      ,percentileDisc(commitCount, 0.5)    AS percentile50CommitCount
+      ,percentileDisc(commitCount, 0.9)    AS percentile90CommitCount
+      ,percentileDisc(commitCount, 0.95)   AS percentile95CommitCount
+      ,min(minConfidence)                  AS minMinConfidence
+      ,max(minConfidence)                  AS maxMinConfidence
+      ,avg(minConfidence)                  AS avgMinConfidence
+      ,percentileDisc(minConfidence, 0.5)  AS percentile50MinConfidence
+      ,percentileDisc(minConfidence, 0.9)  AS percentile90MinConfidence
+      ,percentileDisc(minConfidence, 0.95) AS percentile95MinConfidence
+      ,count(*)                            AS pairCount
