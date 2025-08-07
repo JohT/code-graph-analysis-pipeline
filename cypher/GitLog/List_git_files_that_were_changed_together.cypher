@@ -6,5 +6,5 @@ MATCH (gitRepository:Git&Repository)-[:HAS_FILE]->(firstGitFile)
 MATCH (gitRepository:Git&Repository)-[:HAS_FILE]->(secondGitFile)
 RETURN gitRepository.name + '/' + firstGitFile.relativePath  AS firstFile
       ,gitRepository.name + '/' + secondGitFile.relativePath AS secondFile
-      ,gitChange.commitCount                                 AS commitCount
+      ,gitChange.updateCommitCount                           AS commitCount
 ORDER BY commitCount DESC
