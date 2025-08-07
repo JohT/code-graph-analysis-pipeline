@@ -1,6 +1,7 @@
 # --- Core Python version ---
 # NOTE: Python version must be >= 3.12 for compatibility
 # This should be enforced by the user/environment, not pip
+# NOTE: Keep this file in sync with conda-environment.yml
 
 # --- Core tools ---
 jupyter==1.1.*
@@ -9,7 +10,7 @@ nbconvert[webpdf]==7.16.*
 numpy==1.26.*
 pandas==2.2.*
 pip==25.0.*
-setuptools==75.8.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
+setuptools==80.9.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
 typing-extensions==4.12.* # Needed for opentsne and Python >= 3.12
 
 # --- Visualization ---
