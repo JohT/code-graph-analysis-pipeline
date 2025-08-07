@@ -9,7 +9,7 @@ nbconvert[webpdf]==7.16.*
 numpy==1.26.*
 pandas==2.2.*
 pip==25.0.*
-setuptools==75.8.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
+setuptools==78.1.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
 typing-extensions==4.12.* # Needed for opentsne and Python >= 3.12
 
 # --- Visualization ---
