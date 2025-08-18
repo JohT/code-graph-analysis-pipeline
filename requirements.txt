@@ -17,7 +17,7 @@ typing-extensions==4.12.* # Needed for opentsne and Python >= 3.12
 wordcloud==1.9.*
 monotonic==1.*
 plotly[kaleido]==6.2.*
-seaborn==0.13 # To visualize clustering results
+seaborn==0.13.2 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
 scikit-learn==1.6.*
