@@ -1,4 +1,4 @@
-// List pair of files that were changed together and that have a declared dependency between each other.
+// List pair of files that were changed together and that have a declared dependency between each other. Requires Add_CHANGED_TOGETHER_WITH_relationships_to_git_files.cypher and Add_CHANGED_TOGETHER_WITH_relationships_to_code_files.cypher to run first.
 
 MATCH (firstCodeFile:File)-[dependency:DEPENDS_ON]->(secondCodeFile:File)
 MATCH (firstCodeFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondCodeFile)

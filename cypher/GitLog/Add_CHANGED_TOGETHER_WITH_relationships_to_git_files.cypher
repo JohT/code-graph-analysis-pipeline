@@ -32,9 +32,8 @@ UNWIND fileCombinations AS fileCombination
       ,count(DISTINCT commitHash)      AS updateCommitCount
       ,collect(DISTINCT commitHash)    AS updateCommitHashes
 // Deactivated: 
-// Filter out file pairs that where changed not very often together 
-// In detail: More than 0.1 per mille compared to overall commit count
-// WHERE updateCommitCount > globalUpdateCommitCount * 0.001 
+// Filter out file pairs that weren't changed very often together 
+WHERE updateCommitCount > 2
  WITH *
      ,fileCombination[0] AS firstFile
      ,fileCombination[1] AS secondFile
@@ -65,7 +64,7 @@ UNWIND fileCombinations AS fileCombination
 // Create the new relationship "CHANGED_TOGETHER_WITH" and set the property "updateCommitCount" on it
  CALL (firstFile, secondFile, updateCommitCount, updateCommitHashes, updateCommitMinConfidence, updateCommitSupport, updateCommitLift, updateCommitJaccardSimilarity) {
        MERGE (firstFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondFile)
-         SET pairwiseChange.updateCommitCount             = updateCommitCount
+         SET pairwiseChange.updateCommitCount             = toInteger(updateCommitCount)
             ,pairwiseChange.updateCommitHashes            = updateCommitHashes
             ,pairwiseChange.updateCommitMinConfidence     = updateCommitMinConfidence
             ,pairwiseChange.updateCommitSupport           = updateCommitSupport

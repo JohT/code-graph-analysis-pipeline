@@ -47,8 +47,11 @@ execute_cypher "${GIT_LOG_CYPHER_DIR}/List_git_file_directories_with_commit_stat
 # Overall distribution of how many files were changed with one git commit, how many were changed with two, etc. 
 execute_cypher "${GIT_LOG_CYPHER_DIR}/List_git_files_per_commit_distribution.cypher" > "${FULL_REPORT_DIRECTORY}/List_git_files_per_commit_distribution.csv"
 
-# Data basis for finding out if there is a correlation between pairwise changed files and their dependencies
+# Find pairwise changed files that depend on each other
 execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files_with_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files_with_dependencies.csv"
+
+# List pairwise changed files with various metrics
+execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files.cypher" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
