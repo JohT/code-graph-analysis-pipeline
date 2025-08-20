@@ -51,7 +51,10 @@ execute_cypher "${GIT_LOG_CYPHER_DIR}/List_git_files_per_commit_distribution.cyp
 execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files_with_dependencies.cypher" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files_with_dependencies.csv"
 
 # List pairwise changed files with various metrics
-execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files.cypher" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files.csv"
+execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files_top_selected_metric.cypher" "selected_pair_metric=updateCommitCount" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files_top_count.csv"
+execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files_top_selected_metric.cypher" "selected_pair_metric=updateCommitMinConfidence" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files_top_min_confidence.csv"
+execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files_top_selected_metric.cypher" "selected_pair_metric=updateCommitJaccardSimilarity" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files_top_jaccard.csv"
+execute_cypher "${GIT_LOG_CYPHER_DIR}/List_pairwise_changed_files_top_selected_metric.cypher" "selected_pair_metric=updateCommitLift" > "${FULL_REPORT_DIRECTORY}/List_pairwise_changed_files_top_lift.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

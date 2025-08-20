@@ -14,7 +14,7 @@ RETURN firstFileName
       ,firstFile.extension                                    AS firstFileExtension
       ,secondFile.extension                                   AS secondFileExtension
       ,firstFile.extension + '↔' + secondFile.extension       AS fileExtensionPair
-      ,toInteger(pairwiseChange.updateCommitCount)            AS updateCommitCount
+      ,pairwiseChange.updateCommitCount                       AS updateCommitCount
       ,pairwiseChange.updateCommitMinConfidence               AS updateCommitMinConfidence
       ,pairwiseChange.updateCommitSupport                     AS updateCommitSupport
       ,pairwiseChange.updateCommitLift                        AS updateCommitLift
