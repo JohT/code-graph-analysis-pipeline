@@ -7,6 +7,7 @@
 # Note: This script needs the path to source directory that contains one or more git repositories. It defaults to SOURCE_DIRECTORY ("source"). 
 # Note: Import will be skipped without an error if the source directory doesn't any git repositories.
 # Note: This script needs git to be installed.
+# Note: IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="plugin" is default and recommended. The other options "aggregated" and "full" are not actively maintained anymore.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -134,13 +135,14 @@ commonPostGitImport() {
   echo "importGit: Running verification queries for troubleshooting (non failing)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_missing_CHANGED_TOGETHER_WITH_properties.cypher"
 }
 
 postGitLogImport() {
-  commonPostGitImport
-
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_commits.cypher"
+
+  commonPostGitImport
 }
 
 postGitPluginImport() {
@@ -149,24 +151,25 @@ postGitPluginImport() {
   # TODO: The deletion of all plain files in the "/.git" directory is needed
   #       until there is a way to exclude all files inside a directory
   #       while still being able to get them analyzed by the git plugin.
-  #       This would most likely be solved with https://github.com/jQAssistant/jqassistant/issues/410
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Delete_plain_git_directory_file_nodes.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_sha.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_absolute_file_name.cypher"
 
-  commonPostGitImport
-
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
+  echo "importGit: Add updateCommitCount property to file nodes and code nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
+
+  commonPostGitImport
 }
 
 postAggregatedGitLogImport() {
-  commonPostGitImport
-
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
+
+  commonPostGitImport
 }
 
 # Create import directory in case it doesn't exist.

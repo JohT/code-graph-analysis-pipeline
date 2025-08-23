@@ -1,10 +1,10 @@
- // Add "name", "extension" and "extensionExtended" properties to File nodes
+ // Add "name", "extension" and "extensionExtended" properties to File nodes. Supports Git:File nodes with "relativePath" property.
 
  MATCH (file:File)
- WHERE file.fileName IS NOT NULL
+ WHERE (file.fileName IS NOT NULL OR file.relativePath IS NOT NULL)
    AND file.name IS NULL // Don't override an already existing "name" property
   WITH *
-      ,file.fileName AS fileName
+      ,coalesce(file.fileName, file.relativePath) AS fileName
   WITH *
       ,last(split(fileName, '/')) AS fileNameWithoutPath
   WITH *
