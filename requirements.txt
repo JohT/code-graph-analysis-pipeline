@@ -21,7 +21,7 @@ seaborn==0.13 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
 scikit-learn==1.6.*
-optuna==4.3.*
+optuna==4.5.*
 umap-learn==0.5.* # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
