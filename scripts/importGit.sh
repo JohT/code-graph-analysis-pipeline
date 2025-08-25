@@ -141,7 +141,10 @@ commonPostGitImport() {
 postGitLogImport() {
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_commits.cypher"
-
+  
+  echo "importGit: Classify git commits (e.g. isMergeCommit, isAutomatedCommit)..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_commit_classification_properties.cypher"
+  
   commonPostGitImport
 }
 
@@ -156,6 +159,9 @@ postGitPluginImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_absolute_file_name.cypher"
+
+  echo "importGit: Classify git commits (e.g. isMergeCommit, isAutomatedCommit)..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_commit_classification_properties.cypher"
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
