@@ -17,15 +17,15 @@ typing-extensions==4.12.* # Needed for opentsne and Python >= 3.12
 wordcloud==1.9.*
 monotonic==1.*
 plotly[kaleido]==6.2.*
-seaborn==0.13 # To visualize clustering results
+seaborn==0.13.* # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
 scikit-learn==1.6.*
-optuna==4.3.*
+optuna==4.5.*
 umap-learn==0.5.* # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
-neo4j==5.23.*
+neo4j==5.28.*
 
 # --- Native/scientific packages (may require compilation) ---
 # These are included but may cause install errors in pip/venv
