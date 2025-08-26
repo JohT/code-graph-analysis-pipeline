@@ -3,11 +3,13 @@
 // Determine global file count, global file count threshold (filter out refactoring commits) and global update commits
 MATCH (git_commit_global:Git:Commit)-[:CONTAINS_CHANGE]->(:Git:Change)-[:UPDATES]->(git_file_global:Git:File)
 WHERE git_file_global.deletedAt IS NULL
+  AND git_commit_global.isManualCommit
  WITH git_commit_global, count(DISTINCT git_file_global) AS commitFileCount
  WITH percentileDisc(commitFileCount, 0.95) AS globalFileCountThreshold
      ,count(git_commit_global)              AS globalUpdateCommitCount
 // Main section
 MATCH (git_commit:Git:Commit)-[:CONTAINS_CHANGE]->(git_change:Git:Change)-[:UPDATES]->(git_file:Git:File)
+WHERE git_commit.isManualCommit
 MATCH (git_repository:Git&Repository)-[:HAS_FILE]->(git_file)
 WHERE git_file.deletedAt IS NULL
 // Order files to assure, that pairs of distinct files are grouped together (fileA, fileB) without (fileB, fileA)
