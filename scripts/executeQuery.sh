@@ -14,8 +14,17 @@
 # -> "--no_source_reference" to not append the cypher query file name as last CSV column
 # -> any following key=value arguments are used as query parameters
 
+# Requires markdown/formatQueryResultAsMarkdownTable.sh
+
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
+
+## Get this "scripts" directory if not already set
+# Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
+# CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
+# This way non-standard tools like readlink aren't needed.
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+#echo "executeQuery: SCRIPTS_DIR=$SCRIPTS_DIR" >&2
 
 # Overrideable Defaults
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
@@ -35,20 +44,21 @@ fi
 cypher_query_file_name=""
 no_source_reference=false
 omit_query_error_highlighting=false
+output_markdown_table=false
 query_parameters=""
 
 # Input Arguments: Function to print usage information
 print_usage() {
-    echo "executeQuery Usage: $0 <filename> [--no-source-reference-column] [--omit-query-error-highlighting]" >&2
+    echo "executeQuery Usage: $0 <filename> [--no-source-reference-column] [--omit-query-error-highlighting] [--output-markdown-table]" >&2
     echo "Options:" >&2
     echo "  --no-source-reference-column: Exclude the source reference column" >&2
     echo "  --omit-query-error-highlighting: Log query errors in same color as infos" >&2
+    echo "  --output-markdown-table: Output the result as markdown table instead of CSV" >&2
 }
 
 # Input Arguments: Parse the command-line arguments
 while [[ $# -gt 0 ]]; do
     arg="$1"
-
     case $arg in
         --no-source-reference-column)
             no_source_reference=true
@@ -56,6 +66,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --omit-query-error-highlighting)
             omit_query_error_highlighting=true
+            shift
+            ;;
+        --output-markdown-table)
+            output_markdown_table=true
             shift
             ;;
         *)
@@ -134,11 +148,16 @@ if [[ -n "${error_message}" ]]; then
   exit 1
 fi
 
-# Output results in CSV format
-if [ "${no_source_reference}" = true ] ; then
-  echo -n "${cypher_query_result}" | jq -r '(.results[0])? | .columns,(.data[].row)? | map(if type == "array" then join(",") else . end) | flatten | @csv'
+if [ "${output_markdown_table}" = "true" ] ; then
+  echo "executeQuery: Will output in Markdown Table Format" >&2
+  echo -n "${cypher_query_result}" | "${SCRIPTS_DIR}/markdown/formatQueryResultAsMarkdownTable.sh"
 else
-  cypher_query_file_relative_name=${cypher_query_file_name#/**/cypher/}
-  sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_relative_name}"
-  echo -n "${cypher_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
+  # Output results in CSV format
+  if [ "${no_source_reference}" = true ] ; then
+    echo -n "${cypher_query_result}" | jq -r '(.results[0])? | .columns,(.data[].row)? | map(if type == "array" then join(",") else . end) | flatten | @csv'
+  else
+    cypher_query_file_relative_name=${cypher_query_file_name#/**/cypher/}
+    sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_relative_name}"
+    echo -n "${cypher_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
+  fi
 fi
