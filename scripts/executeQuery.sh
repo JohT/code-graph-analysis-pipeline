@@ -54,7 +54,7 @@ while [[ $# -gt 0 ]]; do
             no_source_reference=true
             shift
             ;;
-        --omit_query_error_highlighting)
+        --omit-query-error-highlighting)
             omit_query_error_highlighting=true
             shift
             ;;
