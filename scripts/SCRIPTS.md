@@ -34,6 +34,10 @@ Script | Directory | Description
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [findPathsToScan.sh](./findPathsToScan.sh) |  | Finds all files and directories to scan and analyze and provides them as comma-separated list. |
 | [importGit.sh](./importGit.sh) |  | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT. |
+| [embedMarkdownIncludes.sh](./markdown/embedMarkdownIncludes.sh) | markdown | Processes a template_markdown_file markdown file, replacing placeholders like "<!-- include:intro.md -->" with the contents of the specified markdown files. The files to include needs to be in the "includes" subdirectory. |
+| [formatQueryResultAsMarkdownTable.sh](./markdown/formatQueryResultAsMarkdownTable.sh) | markdown | Takes the input stream (Cypher query result in JSON format) and formats it as a Markdown table. |
+| [testEmbedMarkdownIncludes.sh](./markdown/testEmbedMarkdownIncludes.sh) | markdown | Tests template processing for markdown by embedding includes. |
+| [testFormatQueryResultAsMarkdownTable.sh](./markdown/testFormatQueryResultAsMarkdownTable.sh) | markdown | Tests formatting of Cypher query results as Markdown table. |
 | [operatingSystemFunctions.sh](./operatingSystemFunctions.sh) |  | Provides operating system dependent functions e.g. to detect Windows. |
 | [parseCsvFunctions.sh](./parseCsvFunctions.sh) |  | Provides functions to parse strings in CSV format.  |
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
