@@ -15,18 +15,18 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
-echo "runTests: SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
+# echo "runTests: SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
 # Run all report scripts
-for test_script_file in "${SCRIPTS_DIR}"/test*.sh; do
-    test_script_filename=$(basename -- "${test_script_file}");
+find "${SCRIPTS_DIR}" -type f -name 'test*.sh' | while read -r test_script_file; do
+    test_script_filename=$(basename -- "${test_script_file}")
     test_script_filename="${test_script_filename%.*}" # Remove file extension
 
-    echo "${LOG_GROUP_START}Run ${test_script_filename}";
-    echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${test_script_filename}...";
+    echo "${LOG_GROUP_START}Run ${test_script_filename}"
+    echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${test_script_filename}..."
 
     source "${test_script_file}"
 
-    echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${test_script_filename}";
-    echo "${LOG_GROUP_END}";
+    echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${test_script_filename}"
+    echo "${LOG_GROUP_END}"
 done

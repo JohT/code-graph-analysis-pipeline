@@ -24,7 +24,6 @@ successful() {
   echo -e "testDetectChangedFiles: ${COLOR_SUCCESSFUL}Tests finished successfully.${COLOR_DEFAULT}"
 
   tearDown
-  exit 0
 }
 
 fail() {
@@ -35,7 +34,7 @@ fail() {
 
   echo -e "testDetectChangedFiles: ${COLOR_ERROR}${errorMessage}${COLOR_DEFAULT}"
   tearDown
-  exit 1
+  return 1
 }
 
 echo "testDetectChangedFiles: Starting tests...."
@@ -130,3 +129,4 @@ if [ "${changeDetectionReturnCode}" = "0" ]; then
 fi
 
 successful
+return 0

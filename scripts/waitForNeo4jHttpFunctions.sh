@@ -25,7 +25,7 @@ echo "waitForNeo4jHttp: CYPHER_DIR=${CYPHER_DIR}"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 testDatabase() { 
-    execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher" "--no-source-reference-column" "--omit_query_error_highlighting"
+    execute_cypher "${CYPHER_DIR}/Count_nodes_and_relationships.cypher" "--no-source-reference-column" "--omit-query-error-highlighting"
 }
 
 isDatabaseQueryable() { 
