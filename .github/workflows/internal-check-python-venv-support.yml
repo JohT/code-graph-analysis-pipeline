@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Checkout GIT Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
       uses: actions/setup-python@v5
