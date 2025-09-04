@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v5
 
     - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python }}
         cache: 'pip'

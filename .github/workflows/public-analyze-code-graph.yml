@@ -122,7 +122,7 @@ jobs:
 
       - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
         if: inputs.use-venv_virtual_python_environment == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
           cache: 'pip'
