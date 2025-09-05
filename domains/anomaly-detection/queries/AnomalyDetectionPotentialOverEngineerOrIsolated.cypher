@@ -1,4 +1,4 @@
-// Anomaly Detection Query: Find potential over-engineered or isolated code unit by listing the top 20 entries with the highest local clustering coefficient and a Page Rank below the 5% percentile.
+// Anomaly Detection Query: Find potential over-engineered or isolated code unit by listing the (at most) top 20 entries with the highest local clustering coefficient and a Page Rank below the 5% percentile.
 
    MATCH (codeUnit)
    WHERE $projection_node_label IN labels(codeUnit)
@@ -7,12 +7,12 @@
      AND codeUnit.incomingDependencies                IS NOT NULL
      AND codeUnit.outgoingDependencies                IS NOT NULL
     WITH collect(codeUnit) AS codeUnits
-        ,percentileDisc(codeUnit.centralityPageRank, 0.10)                  AS pageRank10PercentPercentile
-        ,percentileDisc(codeUnit.communityLocalClusteringCoefficient, 0.90) AS localClusteringCoefficient90PercentPercentile
+        ,percentileDisc(codeUnit.centralityPageRank, 0.10)                  AS pageRankThreshold
+        ,percentileDisc(codeUnit.communityLocalClusteringCoefficient, 0.90) AS localClusteringCoefficientThreshold
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
-   WHERE codeUnit.centralityPageRank                  <= pageRank10PercentPercentile
-     AND codeUnit.communityLocalClusteringCoefficient >= localClusteringCoefficient90PercentPercentile
+   WHERE codeUnit.centralityPageRank                  <= pageRankThreshold
+     AND codeUnit.communityLocalClusteringCoefficient >= localClusteringCoefficientThreshold
 OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
     WITH *, artifact.name AS artifactName
 OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)

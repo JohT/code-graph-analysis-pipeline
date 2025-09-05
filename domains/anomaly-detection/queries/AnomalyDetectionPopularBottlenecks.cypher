@@ -1,4 +1,4 @@
-// Anomaly Detection Query: Find popular bottlenecks by listing the top 20 entries with the highest Betweeenness centrality >= 90% percentile and a Page Rank >= 90% percentile.
+// Anomaly Detection Query: Find popular bottlenecks by listing the (at most) top 20 entries with the highest Betweeenness centrality >= 90% percentile and a Page Rank >= 90% percentile.
 // Shows key code that is both heavily depended on and control flow — critical hubs.
 
    MATCH (codeUnit)
@@ -8,12 +8,12 @@
      AND codeUnit.incomingDependencies                IS NOT NULL
      AND codeUnit.outgoingDependencies                IS NOT NULL
     WITH collect(codeUnit)                                                AS codeUnits
-        ,percentileDisc(codeUnit.centralityPageRank, 0.90)                AS pageRank90Percentile
-        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)             AS betweenness90Percentile
+        ,percentileDisc(codeUnit.centralityPageRank, 0.90)                AS pageRankThreshold
+        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)             AS betweennessThreshold
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
-   WHERE codeUnit.centralityPageRank    >= pageRank90Percentile
-     AND codeUnit.centralityBetweenness >= betweenness90Percentile
+   WHERE codeUnit.centralityPageRank    >= pageRankThreshold
+     AND codeUnit.centralityBetweenness >= betweennessThreshold
 OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
     WITH *, artifact.name AS artifactName
 OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)

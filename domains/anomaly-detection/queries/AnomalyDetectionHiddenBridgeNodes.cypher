@@ -1,4 +1,4 @@
-// Anomaly Detection Query: Find hidden bridge code or misplaced responsibilities by listing the top 20 entries with the highest Betweeenness centrality >= 90% percentile and a Page Rank <= 10% percentile.
+// Anomaly Detection Query: Find hidden bridge code or misplaced responsibilities by listing the (at most) top 20 entries with the highest Betweeenness centrality >= 90% percentile and a Page Rank <= 10% percentile.
 // Shows code that mediates flow, but isn’t highly depended on — structural surprise.
 
    MATCH (codeUnit)
@@ -8,12 +8,12 @@
      AND codeUnit.incomingDependencies                IS NOT NULL
      AND codeUnit.outgoingDependencies                IS NOT NULL
     WITH collect(codeUnit)                                                AS codeUnits
-        ,percentileDisc(codeUnit.centralityPageRank, 0.10)                AS pageRank10Percentile
-        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)             AS betweenness90Percentile
+        ,percentileDisc(codeUnit.centralityPageRank, 0.10)                AS pageRankThreshold
+        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)             AS betweennessThreshold
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
-   WHERE codeUnit.centralityPageRank    <= pageRank10Percentile
-     AND codeUnit.centralityBetweenness >= betweenness90Percentile
+   WHERE codeUnit.centralityPageRank    <= pageRankThreshold
+     AND codeUnit.centralityBetweenness >= betweennessThreshold
 OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
     WITH *, artifact.name AS artifactName
 OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
