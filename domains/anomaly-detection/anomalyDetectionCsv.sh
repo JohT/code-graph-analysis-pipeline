@@ -68,6 +68,8 @@ anomaly_detection_features() {
 # Required Parameters:
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Default: "Java". Example: "Typescript"
 anomaly_detection_queries() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
@@ -97,6 +99,8 @@ anomaly_detection_queries() {
 # Required Parameters:
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_labels() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
@@ -127,6 +131,8 @@ anomaly_detection_labels() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_csv_reports() {
     time anomaly_detection_features "${@}"
     time anomaly_detection_queries "${@}"
