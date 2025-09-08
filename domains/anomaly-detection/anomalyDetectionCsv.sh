@@ -67,6 +67,8 @@ anomaly_detection_features() {
 # Required Parameters:
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Default: "Java". Example: "Typescript"
 anomaly_detection_queries() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
@@ -92,6 +94,8 @@ anomaly_detection_queries() {
 # Required Parameters:
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_labels() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
@@ -109,6 +113,63 @@ anomaly_detection_labels() {
     # execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}"
 }
 
+# TODO delete if not needed anymore
+# # Initialize anomaly detail (Markdown) report. 
+# # Intended to be run the before the first call of "anomaly_detection_detail_report".
+# initialize_anomaly_detection_detail_report() {
+#   archetype_summary_directory=${FULL_REPORT_DIRECTORY}/archetype-summary-${language}-${nodeLabel}
+#   rm -rf "${archetype_summary_directory}"
+# }
+
+# Appends a Markdown table to an existing file and
+# removes redundant header + separator rows.
+#
+# Usage:
+#   cat newTable.md | append_table myMarkdownFile.md
+#
+#   append_table myMarkdownFile.md <<'EOF'
+#   | Name | Score | Archetype |
+#   | ---  | ---   | ---       |
+#   | Bar  | 0.9   | Something |
+#   EOF
+#
+# Behavior:
+#   - Keeps the first header row and its following separator row.
+#   - Removes all subsequent duplicate header + separator pairs.
+#   - Leaves all data rows untouched.
+append_to_markdown_table() {
+  local file="$1"
+
+  # Append stdin to the target file
+  cat >> "${file}"
+  
+  # Clean up duplicate headers (header row + --- row)
+  awk '!seen[$0]++ || NR <= 2' "${file}" > "${file}.tmp" && mv "${file}.tmp" "${file}"
+}
+
+# Aggregates all results in a Markdown report.
+# Note: Call "initialize_anomaly_detection_detail_report" before the first call of this function.
+#
+# Required Parameters:
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
+anomaly_detection_detail_report() {
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
+    
+    echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating ${language} ${nodeLabel} anomaly summary Markdown report..."
+    
+    archetype_summary_directory=${FULL_REPORT_DIRECTORY}/archetype-summary-${language}-${nodeLabel}
+    mkdir -p "${archetype_summary_directory}"
+    # execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeSummary.cypher" "${@}" --output-markdown-table | append_to_markdown_table "${FULL_REPORT_DIRECTORY}/TopAnomaliesByArchetype.md"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeSummary.cypher" "${@}" --output-markdown-table > "${archetype_summary_directory}/TopAnomaliesByArchetype.md"
+}
+
 # Run the anomaly detection pipeline.
 # 
 # Required Parameters:
@@ -118,10 +179,13 @@ anomaly_detection_labels() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_csv_reports() {
     time anomaly_detection_features "${@}"
     time anomaly_detection_queries "${@}"
     time anomaly_detection_labels "${@}"
+    time anomaly_detection_detail_report "${@}"
 }
 
 # Create report directory
@@ -145,6 +209,9 @@ ALGORITHM_LANGUAGE="projection_language"
 # Code independent algorithm parameters
 COMMUNITY_PROPERTY="community_property=communityLeidenIdTuned"
 EMBEDDING_PROPERTY="embedding_property=embeddingsFastRandomProjectionTunedForClustering"
+
+#TODO delete if not needed anymore
+#initialize_anomaly_detection_detail_report
 
 # -- Java Artifact Node Embeddings -------------------------------
 
