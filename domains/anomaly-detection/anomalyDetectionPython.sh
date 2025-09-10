@@ -25,6 +25,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/../../scripts"} # Re
 # Get the "cypher" query directory for gathering features.
 ANOMALY_DETECTION_FEATURE_CYPHER_DIR=${ANOMALY_DETECTION_FEATURE_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/features"}
 ANOMALY_DETECTION_QUERY_CYPHER_DIR=${ANOMALY_DETECTION_QUERY_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/queries"}
+ANOMALY_DETECTION_LABEL_CYPHER_DIR=${ANOMALY_DETECTION_LABEL_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/labels"}
 
 # Function to display script usage
 usage() {
@@ -138,6 +139,27 @@ anomaly_detection_using_python() {
     execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}AnomalyDetection_Features.csv"
 }
 
+# Label code units with top anomalies by archetype.
+# 
+# Required Parameters:
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+anomaly_detection_labels() {
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
+    
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Labelling ${language} ${nodeLabel} anomalies..."
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeRemoveLabels.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeAuthority.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBottleneck.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeHub.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBridge.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}"
+}
+
 # Run the anomaly detection pipeline.
 # 
 # Required Parameters:
@@ -150,6 +172,7 @@ anomaly_detection_using_python() {
 anomaly_detection_python_reports() {
     time anomaly_detection_features "${@}"
     anomaly_detection_using_python "${@}"
+    time anomaly_detection_labels "${@}"
 }
 
 # Create report directory
