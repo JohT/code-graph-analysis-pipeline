@@ -12,8 +12,6 @@ set -o errexit -o pipefail
 MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts for markdown
 #echo "formatQueryResultAsMarkdownTable: MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR}" >&2
 
-echo "formatQueryResultAsMarkdownTable: Will output in Markdown Table Format" >&2
-
 # Read all input (including multiline) into cypher_query_result
 cypher_query_result=$(cat)
 
