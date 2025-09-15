@@ -59,6 +59,9 @@ anomaly_detection_features() {
     # Determine the article rank if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Write.cypher" "${@}"
+    # Determine the HyperlinkInducedTopicSearch (HITS) Authority and Hub score if not already done
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-HyperlinkInducedTopicSearch-HITS-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-HyperlinkInducedTopicSearch-HITS-Write.cypher" "${@}"
 }
 # Run queries to find anomalies in the graph.
 # 
