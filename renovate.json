@@ -6,7 +6,6 @@
     "schedule:earlyMondays"
   ],
   "ignoreUnstable": false,
-  "enabledManagers": ["pip_requirements"],
   "packageRules": [
     {
       "description": "Neo4j and APOC update settings",
