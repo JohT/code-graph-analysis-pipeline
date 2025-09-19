@@ -29,7 +29,7 @@ jqassistant:
   plugins:
     - group-id: org.jqassistant.plugin.typescript
       artifact-id: jqassistant-typescript-plugin
-      version: 1.4.2
+      version: 1.4.3
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-npm-plugin
       version: 2.1.1
