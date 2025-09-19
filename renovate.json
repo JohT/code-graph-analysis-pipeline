@@ -6,6 +6,7 @@
     "schedule:earlyMondays"
   ],
   "ignoreUnstable": false,
+  "enabledManagers": ["pip_requirements"],
   "packageRules": [
     {
       "description": "Neo4j and APOC update settings",
@@ -168,6 +169,17 @@
       ],
       "depNameTemplate": "{{{group}}}:{{{artifact}}}",
       "datasourceTemplate": "maven"
+    },
+    {
+      "description": "Update conda environment for Python",
+      "customType": "regex",
+      "fileMatch": ["(^|/)conda-environment\\.yml$"],
+      "matchStrings": [
+        "\\s+-\\s+(?<depName>[a-zA-Z0-9_.-]+)=(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "conda",
+      "depNameTemplate": "{{depName}}",
+      "currentValueTemplate": "{{currentValue}}"
     }
   ]
 }
