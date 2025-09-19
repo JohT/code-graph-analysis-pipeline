@@ -177,6 +177,9 @@
         "\\s+-\\s+(?<depName>[a-zA-Z0-9_.-]+)=(?<currentValue>[^\\s]+)"
       ],
       "datasourceTemplate": "conda",
+      "versioningTemplate": "pep440",
+      "extractVersionTemplate": "{{#if (contains currentValue \".*\")}}{{replace currentValue \".*\" \"\"}}{{else}}{{currentValue}}{{/if}}",
+      "autoReplaceStringTemplate": "  - {{depName}}={{newValue}}",
       "depNameTemplate": "{{depName}}",
       "currentValueTemplate": "{{currentValue}}"
     }
