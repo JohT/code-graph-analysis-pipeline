@@ -170,16 +170,14 @@
       "datasourceTemplate": "maven"
     },
     {
-      "description": "Update conda environment for Python",
+      "description": "Update conda environment for Python in sync with requirements.txt",
       "customType": "regex",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
         "\\s+-\\s+(?<depName>[a-zA-Z0-9_.-]+)=(?<currentValue>[^\\s]+)"
       ],
-      "datasourceTemplate": "conda",
-      "versioningTemplate": "pep440",
-      "depNameTemplate": "{{depName}}",
-      "currentValueTemplate": "{{currentValue}}"
+      "datasourceTemplate": "Pypi",
+      "versioningTemplate": "pep440"
     }
   ]
 }
