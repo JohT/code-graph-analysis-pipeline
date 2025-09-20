@@ -4,30 +4,30 @@
 # NOTE: Keep this file in sync with conda-environment.yml
 
 # --- Core tools ---
-jupyter==1.1.*
-matplotlib==3.10.*
-nbconvert[webpdf]==7.16.*
-numpy==1.26.*
-pandas==2.2.*
-pip==25.0.*
-setuptools==80.9.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
-typing-extensions==4.12.* # Needed for opentsne and Python >= 3.12
+jupyter==1.1.1
+matplotlib==3.10.5
+nbconvert[webpdf]==7.16.6
+numpy==1.26.4
+pandas==2.2.3
+pip==25.0.1
+setuptools==80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
+typing-extensions==4.12.2 # Needed for opentsne and Python >= 3.12
 
 # --- Visualization ---
-wordcloud==1.9.*
-monotonic==1.*
-plotly[kaleido]==6.2.*
-seaborn==0.13.* # To visualize clustering results
+wordcloud==1.9.4
+monotonic==1.6
+plotly[kaleido]==6.2.0
+seaborn==0.13.2 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
-scikit-learn==1.6.*
-optuna==4.5.*
-umap-learn==0.5.* # Dimensionality reduction to visualize node embeddings in 2D
+scikit-learn==1.6.1
+optuna==4.5.0
+umap-learn==0.5.8 # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
-neo4j==5.28.*
+neo4j==5.28.2
 
 # --- Native/scientific packages (may require compilation) ---
 # These are included but may cause install errors in pip/venv
-opentsne==1.0.*       # Dimensionality reduction to visualize node embeddings in 2D. Might get replaced by umap.
-shap==0.48.*          # For e.g. explaining anomaly detection results
+opentsne==1.0.2       # Dimensionality reduction to visualize node embeddings in 2D. Might get replaced by umap.
+shap==0.48.0          # For e.g. explaining anomaly detection results

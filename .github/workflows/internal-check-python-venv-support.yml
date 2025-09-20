@@ -32,10 +32,17 @@ jobs:
       env: 
         USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: "true"
       # 1.  Run the script under test to create, activate and install the virtual environment
-      # 2a. Run pip in dry-run mode without installing or resolving dependencies
-      # 2b. Suppress all pip output (stderr)
-      # 2c. Check if pip *would install* anything using grep
-      # 2d. If there are missing dependencies and the environment is incomplete, return 1 (indicates all requirements already satisfied)
+      # 2.  Run pip install for the current environment in dry-mode with full output first to get all infos and fail on missing packages.
+      # 3a. The leading exclamation mark tells the shell to invert the returned exit code. 
+      #     Failing because "Would install" is missing leads to a successful execution. 
+      # 3b. Run pip install for the current environment in dry-run mode without installing or resolving dependencies
+      # 3c. Suppress all pip output (stderr)
+      # 3d. Check if pip would install anything using grep
+      # 3e. If there are missing dependencies and the environment is incomplete, 
+      #     fail with code 1 (indicates all requirements already satisfied)
+      #
+      # Output installed dependencies for troubleshooting purposes:.venv/bin/pip freeze
       run: |
-        ./scripts/activatePythonEnvironment.sh
-        pip install --dry-run --no-deps --requirement "./requirements.txt" 2>/dev/null | grep -q "Would install" || return 1
+        source ./scripts/activatePythonEnvironment.sh
+        .venv/bin/pip install --dry-run --quiet --requirement requirements.txt
+        ! .venv/bin/pip install --dry-run --requirement requirements.txt 2>/dev/null | grep -q "Would install"
