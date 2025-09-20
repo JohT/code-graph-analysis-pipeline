@@ -5,26 +5,26 @@ channels:
   - plotly
   - conda-forge
 dependencies:
-  - python=3.12.*
-  - _python_rc=* # Needed on Mac since Python >= 3.12
-  - jupyter=1.1.*
-  - matplotlib=3.10.*
-  - nbconvert=7.16.*
-  - nbconvert-webpdf=7.16.*
-  - numpy=1.26.*
-  - pandas=2.2.*
-  - pip=25.0.*
-  - setuptools=80.9.* # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
-  - typing-extensions=4.12.* # Also needed for opentsne and Python >= 3.12
-  - opentsne=1.0.* # to visualize node embeddings in 2D (t-SNE dimensionality reduction)
-  - wordcloud=1.9.*
-  - monotonic=1.*
-  - plotly=6.0.*
-  - python-kaleido=0.2.* # To render plotly plots. Static image export for web-based visualization libraries.
-  - scikit-learn=1.6.* # To try out this HDBSCAN implementation 
-  - seaborn=0.13.* # To visualize clustering results
-  - optuna=4.5.*
-  - umap-learn=0.5.* # to visualize node embeddings in 2D (UMAP dimensionality reduction)
-  - shap=0.48.*
+  - python=3.12.9
+  - _python_rc=1 # Needed on Mac since Python >= 3.12
+  - jupyter=1.1.1
+  - matplotlib=3.10.5
+  - nbconvert=7.16.6
+  - nbconvert-webpdf=7.16.6
+  - numpy=1.26.4
+  - pandas=2.2.3
+  - pip=25.0.1
+  - setuptools=80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
+  - typing-extensions=4.12.2 # Also needed for opentsne and Python >= 3.12
+  - opentsne=1.0.2 # to visualize node embeddings in 2D (t-SNE dimensionality reduction)
+  - wordcloud=1.9.4
+  - monotonic=1.6
+  - plotly=6.2.0
+  - python-kaleido=1.0.0 # To render plotly plots. Static image export for web-based visualization libraries.
+  - scikit-learn=1.6.1 # For anomaly detection HDBSCAN clustering, scores like AMI, and others 
+  - seaborn=0.13.2 # To visualize clustering results
+  - optuna=4.5.0
+  - umap-learn=0.5.9 # to visualize node embeddings in 2D (UMAP dimensionality reduction)
+  - shap=0.48.0
   - pip:
-      - neo4j==5.28.*
+      - neo4j==5.28.2
