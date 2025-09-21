@@ -197,7 +197,7 @@
       "customType": "regex",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
-        "\\s+-\\s+(?<depName>[\\w-]+)={1,2}(?<currentValue>[^\\s#]+).*"
+        "\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#]+).*"
       ],
       "datasourceTemplate": "conda",
       "registryUrlTemplate": "https://api.anaconda.org/package/conda-forge",
