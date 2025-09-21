@@ -31,25 +31,25 @@
     },
     {
       "description": "Keep core scientific stack (numpy, pandas, scipy) in sync across files",
-      "matchDatasources": ["pypi"],
+      "matchDatasources": ["Pypi"],
       "matchPackageNames": ["numpy", "pandas", "scipy"],
       "groupName": "python-scientific-core-libs"
     },
     {
       "description": "Keep Machine Learning libraries (scikit-learn, UMAP, OpenTSNE, SHAP) in sync across files",
-      "matchDatasources": ["pypi"],
+      "matchDatasources": ["Pypi"],
       "matchPackageNames": ["scikit-**", "umap-learn", "opentsne", "shap", "optuna"],
       "groupName": "python-machine-learning-libs"
     },
     {
       "description": "Keep Visualization libraries (plotly, matplotlib, seaboarn) in sync across files",
-      "matchDatasources": ["pypi"],
+      "matchDatasources": ["Pypi"],
       "matchPackageNames": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
       "groupName": "python-visualization-libs"
     },
     {
       "description": "Keep other Python libraries per dependency in sync across files",
-      "matchDatasources": ["pypi"],
+      "matchDatasources": ["Pypi"],
       "groupName": "python-update-{{depName}}"
     }
   ],
@@ -199,7 +199,7 @@
       "matchStrings": [
         "\\s+-\\s+(?<depName>[\\w-]+)={1,2}(?<currentValue>[^\\s#]+).*"
       ],
-      "datasourceTemplate": "pypi",
+      "datasourceTemplate": "Pypi",
       "versioningTemplate": "pep440"
     }
   ]
