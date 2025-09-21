@@ -200,7 +200,7 @@
         "\\s+-\\s+(?<depName>[\\w-]+)={1,2}(?<currentValue>[^\\s#]+).*"
       ],
       "datasourceTemplate": "Pypi",
-      "versioningTemplate": "pep440"
+      "versioningTemplate": "conda"
     }
   ]
 }
