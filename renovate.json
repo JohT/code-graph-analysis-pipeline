@@ -31,25 +31,25 @@
     },
     {
       "description": "Keep core scientific stack (numpy, pandas, scipy) in sync across files",
-      "matchDatasources": ["pypi"],
-      "matchPackageNames": ["numpy", "pandas", "scipy"],
+      "matchDatasources": ["pypi", "conda"],
+      "matchDepNames": ["numpy", "pandas", "scipy"],
       "groupName": "python-scientific-core-libs"
     },
     {
       "description": "Keep Machine Learning libraries (scikit-learn, UMAP, OpenTSNE, SHAP) in sync across files",
-      "matchDatasources": ["pypi"],
-      "matchPackageNames": ["scikit-**", "umap-learn", "opentsne", "shap", "optuna"],
+      "matchDatasources": ["pypi", "conda"],
+      "matchDepNames": ["scikit-**", "umap-learn", "opentsne", "shap", "optuna"],
       "groupName": "python-machine-learning-libs"
     },
     {
       "description": "Keep Visualization libraries (plotly, matplotlib, seaboarn) in sync across files",
-      "matchDatasources": ["pypi"],
-      "matchPackageNames": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
+      "matchDatasources": ["pypi", "conda"],
+      "matchDepNames": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
       "groupName": "python-visualization-libs"
     },
     {
       "description": "Keep other Python libraries per dependency in sync across files",
-      "matchDatasources": ["pypi"],
+      "matchDatasources": ["pypi", "conda"],
       "groupName": "python-update-{{depName}}"
     }
   ],
