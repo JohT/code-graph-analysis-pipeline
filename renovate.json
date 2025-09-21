@@ -30,6 +30,11 @@
       ]
     },
     {
+      "description": "Keep other Python libraries per dependency in sync across files",
+      "matchDatasources": ["pypi", "conda"],
+      "groupName": "python-update-{{packageName}}"
+    },
+    {
       "description": "Keep core scientific stack (numpy, pandas, scipy) in sync across files",
       "matchDatasources": ["pypi", "conda"],
       "matchPackageNames": ["numpy", "pandas", "scipy"],
@@ -46,11 +51,6 @@
       "matchDatasources": ["pypi", "conda"],
       "matchPackageNames": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
       "groupName": "python-visualization-libs"
-    },
-    {
-      "description": "Keep other Python libraries per dependency in sync across files",
-      "matchDatasources": ["pypi", "conda"],
-      "groupName": "python-update-{{depName}}"
     }
   ],
   "customManagers": [
