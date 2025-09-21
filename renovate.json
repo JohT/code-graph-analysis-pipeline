@@ -28,6 +28,29 @@
       "matchSourceUrls": [
         "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
       ]
+    },
+    {
+      "description": "Keep core scientific stack (numpy, pandas, scipy) in sync across files",
+      "matchDatasources": ["pypi"],
+      "matchPackagePatterns": ["^(numpy|pandas|scipy)$"],
+      "groupName": "python-scientific-core-libs"
+    },
+    {
+      "description": "Keep Machine Learning libraries (scikit-learn, UMAP, OpenTSNE, SHAP) in sync across files",
+      "matchDatasources": ["pypi"],
+      "matchPackagePatterns": ["^scikit-.*", "umap-learn", "opentsne", "shap", "optuna"],
+      "groupName": "python-machine-learning-libs"
+    },
+    {
+      "description": "Keep Visualization libraries (plotly, matplotlib, seaboarn) in sync across files",
+      "matchDatasources": ["pypi"],
+      "matchPackagePatterns": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
+      "groupName": "python-visualization-libs"
+    },
+    {
+      "description": "Keep other Python libraries per dependency in sync across files",
+      "matchDatasources": ["pypi"],
+      "groupName": "python-update-{{depName}}"
     }
   ],
   "customManagers": [
@@ -170,11 +193,11 @@
       "datasourceTemplate": "maven"
     },
     {
-      "description": "Update conda environment for Python in sync with requirements.txt",
+      "description": "Update conda environment for Python with pip version",
       "customType": "regex",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
-        "\\s+-\\s+(?<depName>[a-zA-Z0-9_.-]+)=(?<currentValue>[^\\s]+)"
+        "\\s+-\\s+(?<depName>[\\w-]+)={1,2}(?<currentValue>[^\\s#]+).*"
       ],
       "datasourceTemplate": "Pypi",
       "versioningTemplate": "pep440"
