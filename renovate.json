@@ -197,7 +197,7 @@
       "customType": "regex",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
-        "\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#=]+)[\\s#]+"
+        "\\s+-\\s+?(?<depName>[\\w-]+?)=?(?<currentValue>[^\\s#=:]+?)[\\s#]"
       ],
       "datasourceTemplate": "conda",
       "registryUrlTemplate": "https://api.anaconda.org/package/conda-forge",
@@ -207,7 +207,7 @@
       "description": "Update pip nested packages inside conda-environment.yml.",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
-        "\\s+-\\s+(?<depName>[\\w-]+)==(?<currentValue>[^\\s#=]+)[\\s#]+"
+        "\\s+-\\s+?(?<depName>[\\w-]+?)==?(?<currentValue>[^\\s#=:]+?)[\\s#]"
       ],
       "datasourceTemplate": "pypi",
       "versioningTemplate": "pep440"
