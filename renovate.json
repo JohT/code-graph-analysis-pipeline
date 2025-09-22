@@ -28,6 +28,29 @@
       "matchSourceUrls": [
         "https://github.com/jqassistant-plugin/jqassistant-typescript-plugin"
       ]
+    },
+    {
+      "description": "Keep other Python libraries per dependency in sync across files",
+      "matchDatasources": ["pypi", "conda"],
+      "groupName": "python-update-{{packageName}}"
+    },
+    {
+      "description": "Keep core scientific stack (numpy, pandas, scipy) in sync across files",
+      "matchDatasources": ["pypi", "conda"],
+      "matchPackageNames": ["numpy", "pandas", "scipy"],
+      "groupName": "python-scientific-core-libs"
+    },
+    {
+      "description": "Keep Machine Learning libraries (scikit-learn, UMAP, OpenTSNE, SHAP) in sync across files",
+      "matchDatasources": ["pypi", "conda"],
+      "matchPackageNames": ["scikit-**", "umap-learn", "opentsne", "shap", "optuna"],
+      "groupName": "python-machine-learning-libs"
+    },
+    {
+      "description": "Keep Visualization libraries (plotly, matplotlib, seaboarn) in sync across files",
+      "matchDatasources": ["pypi", "conda"],
+      "matchPackageNames": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
+      "groupName": "python-visualization-libs"
     }
   ],
   "customManagers": [
@@ -174,11 +197,22 @@
       "customType": "regex",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
-        "\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#=]+).*"
+        "^\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#=]+).*$"
       ],
+      "depNameTemplate": "{{{depName}}}",
       "datasourceTemplate": "conda",
       "registryUrlTemplate": "https://api.anaconda.org/package/conda-forge",
       "versioningTemplate": "conda"
+    },
+    {
+      "description": "Update pip nested packages inside conda-environment.yml.",
+      "fileMatch": ["(^|/)conda-environment\\.yml$"],
+      "matchStrings": [
+        "^\\s+-\\s+(?<depName>[\\w-]+)==(?<currentValue>[^\\s#=]+).*$"
+      ],
+      "depNameTemplate": "{{{depName}}}",
+      "datasourceTemplate": "pypi",
+      "versioningTemplate": "pep440"
     }
   ]
 }
