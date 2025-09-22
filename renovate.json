@@ -193,9 +193,9 @@
       "datasourceTemplate": "maven"
     },
     {
-      "description": "Update conda environment for Python with pip version",
+      "description": "DISABLED Update conda environment for Python with pip version",
       "customType": "regex",
-      "fileMatch": ["(^|/)conda-environment\\.yml$"],
+      "fileMatch": ["(^|/)conda-environment-temporarily-disabled\\.yml$"],
       "matchStrings": [
         "\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#=]+)[\\s#]+"
       ],
@@ -204,8 +204,8 @@
       "versioningTemplate": "conda"
     },
     {
-      "description": "Update pip nested packages inside conda-environment.yml.",
-      "fileMatch": ["(^|/)conda-environment\\.yml$"],
+      "description": "DISABLED Update pip nested packages inside conda-environment.yml.",
+      "fileMatch": ["(^|/)conda-environment-temporarily-disabled\\.yml$"],
       "matchStrings": [
         "\\s+-\\s+(?<depName>[\\w-]+)==(?<currentValue>[^\\s#=]+)[\\s#]+"
       ],
