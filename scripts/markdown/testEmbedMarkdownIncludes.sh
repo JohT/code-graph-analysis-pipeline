@@ -61,7 +61,7 @@ expected_test_include_content="This is the included content for the test."
 echo "${expected_test_include_content}" > "${temporaryTestDirectory}/${testIncludeFile}"
 
 # - Execute script under test
-embeddedContent=$(cd "${temporaryTestDirectory}"; "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${testMarkdownTemplate}" )
+embeddedContent=$(cat "${testMarkdownTemplate}" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${temporaryTestDirectory}/includes")
 
 # - Verify results
 if [ "${embeddedContent}" != "${expected_test_include_content}" ]; then
@@ -71,15 +71,33 @@ fi
 # ------------------------------------------------------------
 # Test case                                                 --
 # ------------------------------------------------------------
-echo "testEmbedMarkdownIncludes: 2.) A missing include file results in an error."
+echo "testEmbedMarkdownIncludes: 2.) An existing include file in the DEFAULT directory is correctly embedded."
 
 # - Setup
-testMarkdownTemplateMissingInclude="testMarkdownTemplateMissingInclude.md"
-echo "<!-- include:nonExistentFile.md -->" > "${temporaryTestDirectory}/${testMarkdownTemplateMissingInclude}"
+testIncludeFile="includes/testInclude.md"
+expected_test_include_content="This is the included content for the test."
+echo "${expected_test_include_content}" > "${temporaryTestDirectory}/${testIncludeFile}"
+
+# - Execute script under test
+embeddedContent=$(cd "${temporaryTestDirectory}"; cat "${testMarkdownTemplate}" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh")
+
+# - Verify results
+if [ "${embeddedContent}" != "${expected_test_include_content}" ]; then
+  fail "2.) Test failed: Expected embedded content to be '${expected_test_include_content}', but got '${embeddedContent}'."
+fi
+
+# ------------------------------------------------------------
+# Test case                                                 --
+# ------------------------------------------------------------
+echo "testEmbedMarkdownIncludes: 3.) A missing include file results in an error."
+
+# - Setup
+testMarkdownTemplateMissingInclude="${temporaryTestDirectory}/testMarkdownTemplateMissingInclude.md"
+echo "<!-- include:nonExistentFile.md -->" > "${testMarkdownTemplateMissingInclude}"
 
 # - Execute script under test
 set +o errexit
-errorOutput=$(cd "${temporaryTestDirectory}"; { "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${testMarkdownTemplateMissingInclude}" 2>&1 1>/dev/null; } )
+errorOutput=$( { cat "${testMarkdownTemplateMissingInclude}" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${temporaryTestDirectory}/includes" 2>&1 1>/dev/null; } )
 exitCode=$?
 set -o errexit
 
