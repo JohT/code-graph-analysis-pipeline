@@ -1,4 +1,4 @@
-// Anomaly Detection Query: Find potential imbalanced roles in the codebase by listing the top 40 most significant Page Rank to Article Rank differences.
+// Anomaly Detection Query: Find potential imbalanced roles in the codebase by listing the (at most) top 20 most significant Page Rank to Article Rank differences.
 
    MATCH (codeUnit)
    WHERE $projection_node_label IN labels(codeUnit)
@@ -31,4 +31,4 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
         //,pageToArticleRankDifferenceMean
         //,pageToArticleRankDifferenceStandardDeviation
   ORDER BY abs(pageToArticleRankDifferenceZScore) DESC
-  LIMIT 40
+  LIMIT 20

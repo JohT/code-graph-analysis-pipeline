@@ -29,6 +29,16 @@ find "${report_directory}" -type f -name "*.csv" | sort | while read -r report_f
     fi
 done
 
+# Find all Markdown (md) files in the report directory
+# and delete the ones that contain less than 3 lines.
+find "${report_directory}" -type f -name "*.md" | sort | while read -r report_file; do
+    number_of_lines=$(wc -l < "${report_file}" | awk '{print $1}')
+    if [[ "${number_of_lines}" -le 2 ]]; then
+        echo "cleanupReports: deleting empty (${number_of_lines} lines) report file ${report_file}"
+        rm -f "${report_file}"
+    fi
+done
+
 # Delete reports directory if its empty
 number_files_in_report_directory=$( find "${report_directory}" -type f | wc -l | awk '{print $1}' )
 if [[ "${number_files_in_report_directory}" -lt 1 ]]; then
