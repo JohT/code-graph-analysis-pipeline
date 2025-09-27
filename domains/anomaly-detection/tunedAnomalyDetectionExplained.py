@@ -10,6 +10,7 @@
 # - Provide the password for Neo4j in the environment variable "NEO4J_INITIAL_PASSWORD".
 # - Requires "tunedLeidenCommunityDetection.py", "tunedNodeEmbeddingClustering.py" and "umap2dNodeEmbedding.py" to be executed before this script to provide the necessary data.
 
+from re import M
 import typing
 import numpy.typing as numpy_typing
 
@@ -947,6 +948,58 @@ def add_node_embedding_shap_sum(
     return anomaly_detected_features
 
 
+def output_top_shap_explained_global_features_as_markdown_table(
+    shap_anomaly_values: np.ndarray,
+    feature_names: list[str],
+    output_file_path: str,
+    top_n_features: int = 10
+):
+    # Compute mean absolute shap value across all samples for each feature (importance ranking)
+    mean_absolute_shap_values = np.abs(shap_anomaly_values).mean(axis=0)
+
+    # Create DataFrame with feature names and mean shap values
+    feature_importance = pd.DataFrame({
+        "Feature": feature_names,
+        "Mean absolute SHAP value": mean_absolute_shap_values
+    })
+
+    # Aggregate all nodeEmbedding* features
+    mask = feature_importance["Feature"].str.startswith("nodeEmbedding")
+    node_embedding_sum = feature_importance.loc[mask, "Mean absolute SHAP value"].sum()
+
+    # Append aggregated feature
+    feature_importance = pd.concat([
+        feature_importance,
+        pd.DataFrame([{
+            "Feature": "*Node embeddings aggregated*",
+            "Mean absolute SHAP value": node_embedding_sum
+        }])
+    ])
+
+    # Sort by importance
+    top_features = feature_importance.sort_values("Mean absolute SHAP value", ascending=False).head(top_n_features + 1)
+
+    # Build markdown table manually using column names
+    headers = list(top_features.columns)
+    rows = top_features.values.tolist()
+
+    markdown_header_row =  "| " + " | ".join(headers) + " |\n"
+    markdown_table = markdown_header_row
+
+    markdown_header_separator_row = "| " + " | ".join(["---"] * len(headers)) + " |\n"
+    markdown_table += markdown_header_separator_row
+
+    for row in rows:
+        markdown_data_row = "| " + " | ".join([str(row[0]), f"{row[1]:.6f}"]) + " |\n"
+        markdown_table += markdown_data_row
+
+    # Save to file
+    with open(output_file_path, "w") as f:
+        f.write(markdown_table)
+
+    print(f"tunedAnomalyDetectionExplained: Markdown table with top {top_n_features} SHAP explained features saved to {output_file_path}")
+
+
 # ------------------------------------------------------------------------------------------------------------
 #  MAIN
 # ------------------------------------------------------------------------------------------------------------
@@ -1049,6 +1102,12 @@ add_node_embedding_shap_sum(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     feature_names=feature_names,
     anomaly_detected_features=features
+)
+
+output_top_shap_explained_global_features_as_markdown_table(
+    shap_anomaly_values=explanation_results.shap_anomaly_values,
+    feature_names=feature_names,
+    output_file_path=get_file_path(f"{plot_prefix}_Top_anomaly_features", parameters, 'md')
 )
 
 if parameters.is_verbose():
