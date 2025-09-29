@@ -105,9 +105,31 @@ set -o errexit
 if [ ${exitCode} -eq 0 ]; then
   fail "2.) Test failed: Expected an error due to missing include file, but the script succeeded."
 fi
-if [[ "${errorOutput}" != *"ERROR: missing file"* ]]; then
+if [[ "${errorOutput}" != *"ERROR: missing include file"* ]]; then
   fail "2.) Test failed: Expected error message to contain 'ERROR: missing file', but got '${errorOutput}'."
 fi
+
+# ------------------------------------------------------------
+# Test case                                                 --
+# ------------------------------------------------------------
+echo "testEmbedMarkdownIncludes: 4.) The fallback include is used when the main include is missing"
+
+# - Setup
+testFallbackIncludeFileName="testFallbackInclude.md"
+echo "<!-- include:nonExistingInclude|${testFallbackIncludeFileName} -->" > "${testMarkdownTemplate}"
+
+testFallbackIncludeFile="includes/${testFallbackIncludeFileName}"
+expected_test_include_content="This is the included content from the fallback include."
+echo "${expected_test_include_content}" > "${temporaryTestDirectory}/${testFallbackIncludeFile}"
+
+# - Execute script under test
+embeddedContent=$(cd "${temporaryTestDirectory}"; cat "${testMarkdownTemplate}" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh")
+
+# - Verify results
+if [ "${embeddedContent}" != "${expected_test_include_content}" ]; then
+  fail "4.) Test failed: Expected embedded content to be '${expected_test_include_content}', but got '${embeddedContent}'."
+fi
+
 
 successful
 return 0

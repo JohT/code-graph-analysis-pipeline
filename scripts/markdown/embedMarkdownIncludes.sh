@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Processes template markdown (sysin) replacing placeholders like "<!-- include:intro.md -->" with the contents of the specified markdown files. The files to include needs to be in the "includes" subdirectory.
+# Processes template markdown (sysin) replacing placeholders like "<!-- include:intro.md -->" or "<!-- include:intro.md|fallback.md -->" with the contents of the specified markdown files. The files to include needs to be in the "includes" subdirectory.
 # Can take an optional input for the directory that contains the markdown files to be included/embedded (defaults to "includes").
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
@@ -34,17 +34,14 @@ echo -n "${markdown_template}" | awk -v includes_directory="${includes_directory
     return 1
   }
 
-  function include_file(path,   fullpath, line) {
-    fullpath = includes_directory "/" path
-
+  function try_include(path,   fullpath, line) {
     if (!is_safe(path)) {
       print "ERROR: illegal include path: " path > "/dev/stderr"
       exit 1
     }
-
+    fullpath = includes_directory "/" path
     if ((getline test < fullpath) < 0) {
-      print "ERROR: missing file " fullpath > "/dev/stderr"
-      exit 1
+      return 0  # not found
     }
     close(fullpath)
 
@@ -52,15 +49,33 @@ echo -n "${markdown_template}" | awk -v includes_directory="${includes_directory
       print line
     }
     close(fullpath)
+    return 1
+  }
+
+  function include_file(spec,   n, parts, i, success) {
+    n = split(spec, parts, /\|/)
+    success = 0
+    for (i = 1; i <= n; i++) {
+      gsub(/^[ \t]+|[ \t]+$/, "", parts[i])   # trim
+      if (parts[i] == "") continue
+      if (try_include(parts[i])) {
+        success = 1
+        break
+      }
+    }
+    if (!success) {
+      print "ERROR: missing include file(s): " spec > "/dev/stderr"
+      exit 1
+    }
   }
 
   {
-    # Look for the include marker using index+substr (portable)
-    if ($0 ~ /<!-- include:/) {
+    # Look for the include marker
+    if ($0 ~ /<!--[ \t]*include:/) {
       start = index($0, "include:") + 8
       end   = index($0, "-->")
       fname = substr($0, start, end - start)
-      gsub(/^[ \t]+|[ \t]+$/, "", fname)   # trim spaces
+      gsub(/^[ \t]+|[ \t]+$/, "", fname)
 
       include_file(fname)
     } else {
@@ -68,5 +83,6 @@ echo -n "${markdown_template}" | awk -v includes_directory="${includes_directory
     }
   }
 '
+
 
 #echo "embedMarkdownIncludes: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished." >&2
