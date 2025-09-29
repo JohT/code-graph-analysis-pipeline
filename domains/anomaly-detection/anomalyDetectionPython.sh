@@ -125,6 +125,10 @@ anomaly_detection_using_python() {
     
     echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Python scripts for ${language} ${nodeLabel} nodes..."
 
+    # Within the absolute (full) report directory for anomaly detection, create a sub directory for every detailed type (Java_Package, Java_Type,...)
+    local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
+    mkdir -p "${detail_report_directory}"
+
     # Get tuned Leiden communities as a reference to tune clustering
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedLeidenCommunityDetection.py" "${@}" ${verboseMode}
     # Tuned Fast Random Projection and tuned HDBSCAN clustering 
@@ -132,11 +136,11 @@ anomaly_detection_using_python() {
     # Reduce the dimensionality of the node embeddings down to 2D for visualization using UMAP
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/umap2dNodeEmbeddings.py" "${@}" ${verboseMode}
     # Plot the results with clustering and UMAP embeddings to reveal anomalies in rare feature combinations
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${detail_report_directory}" ${verboseMode}
     # Run an unsupervised anomaly detection algorithm including tuning and explainability
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedAnomalyDetectionExplained.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedAnomalyDetectionExplained.py" "${@}" "--report_directory" "${detail_report_directory}" ${verboseMode}
     # Query Results: Output all collected features into a CSV file.
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}AnomalyDetection_Features.csv"
+    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${detail_report_directory}/Anomaly_Features.csv"
 }
 
 # Label code units with top anomalies by archetype.

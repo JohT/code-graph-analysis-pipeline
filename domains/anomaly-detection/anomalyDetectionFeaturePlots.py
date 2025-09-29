@@ -98,7 +98,7 @@ class Parameters:
     def __get_projection_language(self) -> str:
         return self.query_parameters_["projection_language"] if self.__is_code_language_available() else ""
 
-    def get_plot_prefix(self) -> str:
+    def get_title_prefix(self) -> str:
         if self.__is_code_language_available():
             return self.__get_projection_language() + " " + self.__get_projection_node_label()
         return self.__get_projection_node_label()
@@ -815,7 +815,7 @@ def plot_cluster_noise(
 # ------------------------------------------------------------------------------------------------------------
 
 parameters = parse_input_parameters()
-plot_prefix = parameters.get_plot_prefix()
+title_prefix = parameters.get_title_prefix()
 report_directory = parameters.get_report_directory()
 
 driver = get_graph_database_driver()
@@ -828,21 +828,21 @@ plot_difference_between_article_and_page_rank(
     data['pageRank'],
     data['articleRank'],
     data['shortCodeUnitName'],
-    title=f"{plot_prefix} distribution of PageRank - ArticleRank differences",
-    plot_file_path=get_file_path(f"{plot_prefix}_PageRank_Minus_ArticleRank_Distribution", parameters)
+    title=f"{title_prefix} distribution of PageRank - ArticleRank differences",
+    plot_file_path=get_file_path("PageRank_Minus_ArticleRank_Distribution", parameters)
 )
 
 plot_feature_distribution(
     feature_values=data['clusteringCoefficient'],
     feature_name='Clustering Coefficient',
-    title=f"{plot_prefix} clustering coefficient distribution",
+    title=f"{title_prefix} clustering coefficient distribution",
     plot_file_path=get_file_path("ClusteringCoefficient_distribution", parameters)
 )
 
 plot_feature_distribution(
     feature_values=data['betweenness'],
     feature_name='Betweenness',
-    title=f"{plot_prefix} betweenness centrality distribution",
+    title=f"{title_prefix} betweenness centrality distribution",
     plot_file_path=get_file_path("BetweennessCentrality_distribution", parameters)
 )
 
@@ -851,15 +851,15 @@ plot_clustering_coefficient_vs_page_rank(
     data['pageRank'],
     data['shortCodeUnitName'],
     data['clusterNoise'],
-    title=f"{plot_prefix} clustering coefficient versus PageRank",
-    plot_file_path=get_file_path(f"{plot_prefix}_ClusteringCoefficient_versus_PageRank", parameters)
+    title=f"{title_prefix} clustering coefficient versus PageRank",
+    plot_file_path=get_file_path("ClusteringCoefficient_versus_PageRank", parameters)
 )
 
 if (overall_cluster_count < 20):
     print(f"anomalyDetectionFeaturePlots: Less than 20 clusters: {overall_cluster_count}. Only one plot containing all clusters will be created.")
     plot_clusters(
         clustering_visualization_dataframe=data,
-        title=f"{plot_prefix} all clusters overall",
+        title=f"{title_prefix} all clusters overall",
         plot_file_path=get_file_path("Clusters_Overall", parameters)
     )
 else:
@@ -869,8 +869,8 @@ else:
     )
     plot_clusters(
         clustering_visualization_dataframe=clusters_by_largest_size,
-        title=f"{plot_prefix} clusters with the largest size",
-        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_largest_size", parameters)
+        title=f"{title_prefix} clusters with the largest size",
+        plot_file_path=get_file_path("Clusters_largest_size", parameters)
     )
 
     clusters_by_largest_max_radius = get_clusters_by_criteria(
@@ -878,8 +878,8 @@ else:
     )
     plot_clusters(
         clustering_visualization_dataframe=clusters_by_largest_max_radius,
-        title=f"{plot_prefix} clusters with the largest max radius",
-        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_largest_max_radius", parameters)
+        title=f"{title_prefix} clusters with the largest max radius",
+        plot_file_path=get_file_path("Clusters_largest_max_radius", parameters)
     )
 
     clusters_by_largest_average_radius = get_clusters_by_criteria(
@@ -887,39 +887,39 @@ else:
     )
     plot_clusters(
         clustering_visualization_dataframe=clusters_by_largest_average_radius,
-        title=f"{plot_prefix} clusters with the largest average radius",
-        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_largest_average_radius", parameters)
+        title=f"{title_prefix} clusters with the largest average radius",
+        plot_file_path=get_file_path("Clusters_largest_average_radius", parameters)
     )
 
 plot_clusters_probabilities(
     clustering_visualization_dataframe=data,
-    title=f"{plot_prefix} clustering probabilities (red=high uncertainty)",
-    plot_file_path=get_file_path(f"{plot_prefix}_Cluster_probabilities", parameters)
+    title=f"{title_prefix} clustering probabilities (red=high uncertainty)",
+    plot_file_path=get_file_path("Cluster_probabilities", parameters)
 )
 
 plot_cluster_noise(
     clustering_visualization_dataframe=data,
-    title=f"{plot_prefix} clustering noise points that are surprisingly central (red) or popular (size)",
+    title=f"{title_prefix} clustering noise points that are surprisingly central (red) or popular (size)",
     size_column_name='degree',
     color_column_name='pageRank',
-    plot_file_path=get_file_path(f"{plot_prefix}_ClusterNoise_highly_central_and_popular", parameters)
+    plot_file_path=get_file_path("ClusterNoise_highly_central_and_popular", parameters)
 )
 
 plot_cluster_noise(
     clustering_visualization_dataframe=data,
-    title=f"{plot_prefix} clustering noise points that bridge flow (red) and are poorly integrated (size)",
+    title=f"{title_prefix} clustering noise points that bridge flow (red) and are poorly integrated (size)",
     size_column_name='inverseClusteringCoefficient',
     color_column_name='betweenness',
-    plot_file_path=get_file_path(f"{plot_prefix}_ClusterNoise_poorly_integrated_bridges", parameters),
+    plot_file_path=get_file_path("ClusterNoise_poorly_integrated_bridges", parameters),
     downscale_normal_sizes=0.4
 )
 
 plot_cluster_noise(
     clustering_visualization_dataframe=data,
-    title=f"{plot_prefix} clustering noise points with role inversion (size) possibly violating layering or dependency direction (red)",
+    title=f"{title_prefix} clustering noise points with role inversion (size) possibly violating layering or dependency direction (red)",
     size_column_name='pageToArticleRankDifference',
     color_column_name='betweenness',
-    plot_file_path=get_file_path(f"{plot_prefix}_ClusterNoise_role_inverted_bridges", parameters)
+    plot_file_path=get_file_path("ClusterNoise_role_inverted_bridges", parameters)
 )
 
 driver.close()

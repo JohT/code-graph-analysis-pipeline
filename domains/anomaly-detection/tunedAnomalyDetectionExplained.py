@@ -10,7 +10,6 @@
 # - Provide the password for Neo4j in the environment variable "NEO4J_INITIAL_PASSWORD".
 # - Requires "tunedLeidenCommunityDetection.py", "tunedNodeEmbeddingClustering.py" and "umap2dNodeEmbedding.py" to be executed before this script to provide the necessary data.
 
-from re import M
 import typing
 import numpy.typing as numpy_typing
 
@@ -95,9 +94,9 @@ class Parameters:
 
     @classmethod
     def example(cls):
-        return cls(dict(
-            projection_node_label="Package",
-        ))
+        return cls({
+            "projection_node_label": "Package",
+        })
 
     def get_query_parameters(self) -> typing.Dict[str, str]:
         return self.query_parameters_.copy()  # copy enforces immutability
@@ -111,7 +110,7 @@ class Parameters:
     def __get_projection_language(self) -> str:
         return self.query_parameters_["projection_language"] if self.__is_code_language_available() else ""
 
-    def get_plot_prefix(self) -> str:
+    def get_title_prefix(self) -> str:
         if self.__is_code_language_available():
             return self.__get_projection_language() + " " + self.get_projection_node_label()
         return self.get_projection_node_label()
@@ -484,7 +483,7 @@ def tune_anomaly_detection_models(
     study.optimize(objective, n_trials=number_of_trials, timeout=optimization_timeout_in_seconds)
 
     # Output tuning results
-    print(f"Best Isolation & Random Forest parameters for {parameters.get_plot_prefix()} after {len(study.trials)}/{number_of_trials} trials with best #{study.best_trial.number} (Optuna):", study.best_params)
+    print(f"Best Isolation & Random Forest parameters for {parameters.get_title_prefix()} after {len(study.trials)}/{number_of_trials} trials with best #{study.best_trial.number} (Optuna):", study.best_params)
 
     if parameters.is_verbose():
         output_optuna_tuning_results(study, study.study_name)
@@ -818,7 +817,7 @@ def plot_all_shap_explained_local_feature_importance(
             prepared_features=prepared_features,
             feature_names=feature_names,
             title=f"{title_prefix} \"{row[code_unit_name_column]}\" anomaly #{index} explained",
-            plot_file_path=get_file_path(f"{title_prefix}_Anomaly_{index}_shap_explanation", parameters),
+            plot_file_path=get_file_path(f"Anomaly_{index}_shap_explanation", parameters),
         )
 
 
@@ -1018,17 +1017,17 @@ features_for_visualization_to_exclude_from_training: typing.List[str] = [
 ]
 
 parameters = parse_input_parameters()
-plot_prefix = parameters.get_plot_prefix()
+title_prefix = parameters.get_title_prefix()
 driver = get_graph_database_driver()
 features = query_data(parameters)
 
 if parameters.is_verbose():
-    print("tunedAnomalyDetectionExplained: Features for anomaly detection of {plot_type} (first 5 rows):", features.head(5))
+    print("tunedAnomalyDetectionExplained: Features for anomaly detection of {title_prefix} (first 5 rows):", features.head(5))
 
 validate_data(features)
 
 if features.empty:
-    print(f"tunedAnomalyDetectionExplained: Warning: No data. Skipping Anomaly Detection for {plot_prefix}.")
+    print(f"tunedAnomalyDetectionExplained: Warning: No data. Skipping Anomaly Detection for {title_prefix}.")
     sys.exit(0)
 
 features_to_standardize = features.columns.drop(features_for_visualization_to_exclude_from_training + ['embedding']).to_list()
@@ -1044,7 +1043,6 @@ if anomaly_detection_results.is_empty():
 features = add_anomaly_detection_results_to_features(features, anomaly_detection_results)
 
 if parameters.is_verbose():
-    # TODO Output CSV with anomaly detection results
     print("tunedAnomalyDetectionExplained: Top 10 anomalies:")
     print(get_top_10_anomalies(features).reset_index(drop=True))
     print("tunedAnomalyDetectionExplained: Top 10 non-anomalies:")
@@ -1053,7 +1051,7 @@ if parameters.is_verbose():
 plot_anomalies(
     features_to_visualize=features,
     title_prefix="Java Package Anomalies",
-    plot_file_path=get_file_path(f"{plot_prefix}_Anomalies", parameters)
+    plot_file_path=get_file_path("Anomalies", parameters)
 )
 
 if parameters.is_verbose():
@@ -1071,8 +1069,8 @@ plot_shap_explained_beeswarm(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     prepared_features=features_prepared,
     feature_names=feature_names,
-    title_prefix=plot_prefix,
-    plot_file_path=get_file_path(f"{plot_prefix}_Anomaly_feature_importance_explained", parameters)
+    title_prefix=title_prefix,
+    plot_file_path=get_file_path("Anomaly_feature_importance_explained", parameters)
 )
 
 plot_all_shap_explained_local_feature_importance(
@@ -1081,15 +1079,15 @@ plot_all_shap_explained_local_feature_importance(
     prepared_features=features_prepared,
     feature_names=feature_names,
     parameters=parameters,
-    title_prefix=plot_prefix
+    title_prefix=title_prefix
 )
 
 plot_shap_explained_top_10_feature_dependence(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     prepared_features=features_prepared,
     feature_names=feature_names,
-    title_prefix=plot_prefix,
-    plot_file_path=get_file_path(f"{plot_prefix}_Anomaly_feature_dependence_explained", parameters)
+    title_prefix=title_prefix,
+    plot_file_path=get_file_path("Anomaly_feature_dependence_explained", parameters)
 )
 
 add_top_shap_features_to_anomalies(
@@ -1107,7 +1105,7 @@ add_node_embedding_shap_sum(
 output_top_shap_explained_global_features_as_markdown_table(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     feature_names=feature_names,
-    output_file_path=get_file_path(f"{plot_prefix}_Top_anomaly_features", parameters, 'md')
+    output_file_path=get_file_path("Top_anomaly_features", parameters, 'md')
 )
 
 if parameters.is_verbose():
