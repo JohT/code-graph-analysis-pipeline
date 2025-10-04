@@ -378,37 +378,40 @@ def plot_difference_between_article_and_page_rank(
     plot.savefig(plot_file_path)
 
 
-def plot_clustering_coefficient_distribution(clustering_coefficients: pd.Series, title: str, plot_file_path: str) -> None:
+def plot_feature_distribution(feature_values: pd.Series, feature_name: str, title: str, plot_file_path: str) -> None:
     """
-    Plots the distribution of clustering coefficients.
-
+    Plots the distribution of feature's values.
+    
     Parameters
     ----------
-    clustering_coefficients : pd.Series
-        Series containing clustering coefficient values.
+    feature_values : pd.Series
+        Series containing feature values.
+    text_prefix: str
+        Text at the beginning of the title
     """
-    if clustering_coefficients.empty:
+    if feature_values.empty:
         print("No data available to plot.")
         return
 
     plot.figure(figsize=(10, 6))
     plot.figure(figsize=(10, 6))
-    plot.hist(clustering_coefficients, bins=40, color='blue', alpha=0.7, edgecolor='black')
+    plot.hist(feature_values, bins=40, color='blue', alpha=0.7, edgecolor='black')
     plot.title(title, pad=20)
-    plot.xlabel('Clustering Coefficient')
+    plot.xlabel(feature_name)
     plot.ylabel('Frequency')
-    plot.xlim(left=clustering_coefficients.min(), right=clustering_coefficients.max())
+    plot.xlim(left=feature_values.min(), right=feature_values.max())
     # plot.yscale('log')  # Use logarithmic scale for better visibility of differences
     plot.grid(True)
-    plot.tight_layout()
 
-    mean = clustering_coefficients.mean()
-    standard_deviation = clustering_coefficients.std()
+    mean = feature_values.mean()
+    standard_deviation = feature_values.std()
 
     # Vertical line for the mean
     plot_standard_deviation_lines('red', mean, standard_deviation, standard_deviation_factor=0)
     # Vertical line for 1 x standard deviations + mean (=z-score of 1)
-    plot_standard_deviation_lines('green', mean, standard_deviation, standard_deviation_factor=1)
+    plot_standard_deviation_lines('orange', mean, standard_deviation, standard_deviation_factor=1)
+    # Vertical line for 2 x standard deviations + mean (=z-score of 2)
+    plot_standard_deviation_lines('green', mean, standard_deviation, standard_deviation_factor=2)
 
     plot.tight_layout()
     plot.savefig(plot_file_path)
@@ -829,10 +832,18 @@ plot_difference_between_article_and_page_rank(
     plot_file_path=get_file_path(f"{plot_prefix}_PageRank_Minus_ArticleRank_Distribution", parameters)
 )
 
-plot_clustering_coefficient_distribution(
-    data['clusteringCoefficient'],
-    title=f"{plot_prefix} distribution of clustering coefficients",
-    plot_file_path=get_file_path(f"{plot_prefix}_ClusteringCoefficient_distribution", parameters)
+plot_feature_distribution(
+    feature_values=data['clusteringCoefficient'],
+    feature_name='Clustering Coefficient',
+    title=f"{plot_prefix} clustering coefficient distribution",
+    plot_file_path=get_file_path("ClusteringCoefficient_distribution", parameters)
+)
+
+plot_feature_distribution(
+    feature_values=data['betweenness'],
+    feature_name='Betweenness',
+    title=f"{plot_prefix} betweenness centrality distribution",
+    plot_file_path=get_file_path("BetweennessCentrality_distribution", parameters)
 )
 
 plot_clustering_coefficient_vs_page_rank(
@@ -848,8 +859,8 @@ if (overall_cluster_count < 20):
     print(f"anomalyDetectionFeaturePlots: Less than 20 clusters: {overall_cluster_count}. Only one plot containing all clusters will be created.")
     plot_clusters(
         clustering_visualization_dataframe=data,
-        title=f"{plot_prefix} all clusters overall (less than 20)",
-        plot_file_path=get_file_path(f"{plot_prefix}_Clusters_Overall", parameters)
+        title=f"{plot_prefix} all clusters overall",
+        plot_file_path=get_file_path("Clusters_Overall", parameters)
     )
 else:
     print(f"anomalyDetectionFeaturePlots: More than 20 clusters: {overall_cluster_count}. Different plots focussing on different features like cluster size will be created.")
