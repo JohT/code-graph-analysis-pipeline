@@ -1,4 +1,4 @@
-// Anomaly Detection Query: Find fragile structural bridges, potential boundary-spanning modules and cohesion violations by listing the top 20 entries with the highest Betweeenness centrality >= 90% percentile and a local clustering coefficient <= 10% percentile.
+// Anomaly Detection Query: Find fragile structural bridges, potential boundary-spanning modules and cohesion violations by listing the (at most) top 20 entries with the highest Betweeenness centrality >= 90% percentile and a local clustering coefficient <= 10% percentile.
 // Shows code that connects otherwise unrelated parts of the graph — potential architectural risks.
 
    MATCH (codeUnit)
@@ -8,12 +8,12 @@
      AND codeUnit.incomingDependencies                IS NOT NULL
      AND codeUnit.outgoingDependencies                IS NOT NULL
     WITH collect(codeUnit)                                                  AS codeUnits
-        ,percentileDisc(codeUnit.communityLocalClusteringCoefficient, 0.10) AS localClusteringCoefficient10Percentile
-        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)               AS betweenness90Percentile
+        ,percentileDisc(codeUnit.communityLocalClusteringCoefficient, 0.10) AS localClusteringCoefficientThreshold
+        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)               AS betweennessThreshold
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies   AS degree
-   WHERE codeUnit.communityLocalClusteringCoefficient <= localClusteringCoefficient10Percentile
-     AND codeUnit.centralityBetweenness               >= betweenness90Percentile
+   WHERE codeUnit.communityLocalClusteringCoefficient <= localClusteringCoefficientThreshold
+     AND codeUnit.centralityBetweenness               >= betweennessThreshold
 OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
     WITH *, artifact.name AS artifactName
 OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)

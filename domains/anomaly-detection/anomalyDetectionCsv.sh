@@ -25,8 +25,9 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/../../scripts"} # Re
 # Get the "cypher" query directory for gathering features.
 ANOMALY_DETECTION_FEATURE_CYPHER_DIR=${ANOMALY_DETECTION_FEATURE_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/features"}
 ANOMALY_DETECTION_QUERY_CYPHER_DIR=${ANOMALY_DETECTION_QUERY_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/queries"}
+ANOMALY_DETECTION_LABEL_CYPHER_DIR=${ANOMALY_DETECTION_LABEL_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/labels"}
 
-# Define functions to execute a cypher query from within a given file (first and only argument) like "execute_cypher"
+# Define functions to execute a cypher query from within a given file (first and only argument) like "execute_cypher" and "execute_cypher_summarized"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 # Define functions to create and delete Graph Projections like "createUndirectedDependencyProjection"
@@ -59,30 +60,68 @@ anomaly_detection_features() {
     # Determine the article rank if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-ArticleRank-Write.cypher" "${@}"
+    # Determine the HyperlinkInducedTopicSearch (HITS) Authority and Hub score if not already done
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-HyperlinkInducedTopicSearch-HITS-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-HyperlinkInducedTopicSearch-HITS-Write.cypher" "${@}"
 }
+
 # Run queries to find anomalies in the graph.
 # 
 # Required Parameters:
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Default: "Java". Example: "Typescript"
 anomaly_detection_queries() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
     
     local language
     language=$( extractQueryParameter "projection_language" "${@}" )
-    
+
+    # Within the absolute (full) report directory for anomaly detection, create a sub directory for every detailed type (Java_Package, Java_Type,...)
+    local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
+    mkdir -p "${detail_report_directory}"
+
     echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_PotentialImbalancedRoles.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_PotentialImbalancedRoles.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
     
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionHiddenBridgeNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_HiddenBridgeNodes.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPopularBottlenecks.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_PopularBottlenecks.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionSilentCoordinators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_SilentCoordinators.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionOverReferencesUtilities.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_OverReferencesUtilities.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionFragileStructuralBridges.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_FragileStructuralBridges.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionDependencyHungryOrchestrators.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_DependencyHungryOrchestrators.csv"
-    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionUnexpectedCentralNodes.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}_AnomalyDetection_UnexpectedCentralNodes.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionHiddenBridgeNodes.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_HiddenBridgeNodes.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPopularBottlenecks.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_PopularBottlenecks.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionSilentCoordinators.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_SilentCoordinators.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionOverReferencesUtilities.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_OverReferencesUtilities.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionFragileStructuralBridges.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_FragileStructuralBridges.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionDependencyHungryOrchestrators.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_DependencyHungryOrchestrators.csv"
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionUnexpectedCentralNodes.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_UnexpectedCentralNodes.csv"
+}
+
+# Label code units with top anomalies by archetype.
+# 
+# Required Parameters:
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
+anomaly_detection_labels() {
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
+    
+    # Within the absolute (full) report directory for anomaly detection, create a sub directory for every detailed type (Java_Package, Java_Type,...)
+    local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
+    mkdir -p "${detail_report_directory}"
+
+    echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Labelling ${language} ${nodeLabel} anomalies..."
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeRemoveLabels.cypher" "${@}"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeAuthority.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopAuthority.csv"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBottleneck.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopBottleneck.csv"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeHub.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopHub.csv"
+    # The following two label types require Python scripts to run first and are skipped here intentionally:
+    # execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBridge.cypher" "${@}"
+    # execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}"
 }
 
 # Run the anomaly detection pipeline.
@@ -94,9 +133,12 @@ anomaly_detection_queries() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_csv_reports() {
     time anomaly_detection_features "${@}"
     time anomaly_detection_queries "${@}"
+    time anomaly_detection_labels "${@}"
 }
 
 # Create report directory

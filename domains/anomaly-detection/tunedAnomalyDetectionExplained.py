@@ -94,9 +94,9 @@ class Parameters:
 
     @classmethod
     def example(cls):
-        return cls(dict(
-            projection_node_label="Package",
-        ))
+        return cls({
+            "projection_node_label": "Package",
+        })
 
     def get_query_parameters(self) -> typing.Dict[str, str]:
         return self.query_parameters_.copy()  # copy enforces immutability
@@ -110,7 +110,7 @@ class Parameters:
     def __get_projection_language(self) -> str:
         return self.query_parameters_["projection_language"] if self.__is_code_language_available() else ""
 
-    def get_plot_prefix(self) -> str:
+    def get_title_prefix(self) -> str:
         if self.__is_code_language_available():
             return self.__get_projection_language() + " " + self.get_projection_node_label()
         return self.get_projection_node_label()
@@ -260,7 +260,7 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,codeUnit.centralityArticleRank                                AS articleRank
              ,codeUnit.centralityPageRank - codeUnit.centralityArticleRank  AS pageToArticleRankDifference
              ,codeUnit.centralityBetweenness                                AS betweenness
-             ,codeUnit.communityLocalClusteringCoefficient                  AS locallusteringCoefficient
+             ,codeUnit.communityLocalClusteringCoefficient                  AS localClusteringCoefficient
              ,1.0 - codeUnit.clusteringHDBSCANProbability                   AS clusterApproximateOutlierScore
              ,codeUnit.clusteringHDBSCANNoise                               AS clusterNoise
              ,codeUnit.clusteringHDBSCANRadiusAverage                       AS clusterRadiusAverage
@@ -483,7 +483,7 @@ def tune_anomaly_detection_models(
     study.optimize(objective, n_trials=number_of_trials, timeout=optimization_timeout_in_seconds)
 
     # Output tuning results
-    print(f"Best Isolation & Random Forest parameters for {parameters.get_plot_prefix()} after {len(study.trials)}/{number_of_trials} trials with best #{study.best_trial.number} (Optuna):", study.best_params)
+    print(f"Best Isolation & Random Forest parameters for {parameters.get_title_prefix()} after {len(study.trials)}/{number_of_trials} trials with best #{study.best_trial.number} (Optuna):", study.best_params)
 
     if parameters.is_verbose():
         output_optuna_tuning_results(study, study.study_name)
@@ -754,6 +754,73 @@ def plot_shap_explained_beeswarm(
     plot.close()
 
 
+def plot_shap_explained_local_feature_importance(
+    index_to_explain,
+    anomalies_explanation_results: AnomaliesExplanationResults,
+    prepared_features: np.ndarray,
+    feature_names: list[str],
+    title: str,
+    plot_file_path: str,
+    rounding_precision: int = 4,
+):
+    """    
+    Uses the SHAP values for anomalies to visualize the local feature importance for a specific anomaly.
+    This function generates a force plot showing how each feature contributes to the anomaly score for a specific anomaly instance.
+    The force plot is a powerful visualization that helps to understand the impact of each feature for each as anomaly classified data point.
+    Visual breakdown of how each feature contributes to the score.
+    Highly interpretable for debugging single nodes.
+    """
+    shap_anomaly_values = anomalies_explanation_results.shap_anomaly_values
+    expected_anomaly_value = anomalies_explanation_results.shap_expected_anomaly_value
+
+    shap_values_rounded = np.round(shap_anomaly_values[index_to_explain], rounding_precision)
+    prepared_features_rounded = prepared_features[index_to_explain].round(rounding_precision)
+    base_value_rounded = np.round(expected_anomaly_value, rounding_precision)
+
+    shap.force_plot(
+        base_value_rounded,
+        shap_values_rounded,
+        prepared_features_rounded,
+        feature_names=feature_names,
+        matplotlib=True,
+        show=False,
+        contribution_threshold=0.06
+    )
+    current_figure = plot.gcf()
+
+    # Resize fonts manually (best effort, affects all text)
+    for text in current_figure.findobj(match=plot.Text):
+        text.set_fontsize(10)  # Set smaller font
+
+    plot.title(title, fontsize=16, loc='left', y=0.05)
+    plot.savefig(plot_file_path)
+    plot.close()
+
+
+def plot_all_shap_explained_local_feature_importance(
+        data: pd.DataFrame,
+        explanation_results: AnomaliesExplanationResults,
+        prepared_features: np.ndarray,
+        feature_names: list[str],
+        parameters: Parameters,
+        title_prefix: str = "",
+        code_unit_name_column: str = "codeUnitName"
+    ) -> None:
+
+    index=0
+    for row_index, row in data.iterrows():
+        row_index = typing.cast(int, row_index)
+        index=index+1
+        plot_shap_explained_local_feature_importance(
+            index_to_explain=row_index,
+            anomalies_explanation_results=explanation_results,
+            prepared_features=prepared_features,
+            feature_names=feature_names,
+            title=f"{title_prefix} \"{row[code_unit_name_column]}\" anomaly #{index} explained",
+            plot_file_path=get_file_path(f"Anomaly_{index}_shap_explanation", parameters),
+        )
+
+
 def plot_shap_explained_top_10_feature_dependence(
     shap_anomaly_values: np.ndarray,
     prepared_features: np.ndarray,
@@ -838,6 +905,100 @@ def add_top_shap_features_to_anomalies(
     return anomaly_detected_features
 
 
+def add_node_embedding_shap_sum(
+    shap_anomaly_values: np.ndarray,
+    feature_names: list[str],
+    anomaly_detected_features: pd.DataFrame,
+    anomaly_label_column: str = "anomalyLabel",
+    output_column_name: str = "anomalyNodeEmbeddingSHAPSum"
+) -> pd.DataFrame:
+    """
+    Adds a column with the sum of SHAP values for all features that start with 'nodeEmbedding'.
+    The sum is signed, so that negative values contributing to an anomaly are reduced by positive numbers indicating "normal" tendencies.
+
+    Parameters:
+    - shap_anomaly_values: SHAP values array with shape (n_samples, n_features).
+    - feature_names: List of names corresponding to the features.
+    - anomaly_detected_features: Original DataFrame containing anomaly labels.
+    - anomaly_label_column: Name of the column indicating anomalies (1 = anomaly).
+    - output_column_name: Name of the new column to store the SHAP sum.
+
+    Returns:
+    - DataFrame with an additional column containing the summed SHAP values for nodeEmbedding features.
+    """
+    # Convert SHAP values into a DataFrame for easier manipulation
+    shap_values_dataframe = pd.DataFrame(shap_anomaly_values, columns=feature_names)
+
+    # Identify all features whose names start with "nodeEmbedding"
+    node_embedding_features = [name for name in feature_names if name.startswith("nodeEmbedding")]
+
+    # Default initialize new column
+    anomaly_detected_features[output_column_name] = 0.0
+
+    # Get indices of rows marked as anomalies
+    anomaly_indices = anomaly_detected_features[anomaly_detected_features[anomaly_label_column] == 1].index
+
+    # Compute raw signed sum of SHAP values for each anomaly row
+    for row_index in anomaly_indices:
+        row_shap_values = shap_values_dataframe.loc[row_index, node_embedding_features]
+        shap_sum = row_shap_values.sum()  # signed sum
+        anomaly_detected_features.at[row_index, output_column_name] = shap_sum
+
+    return anomaly_detected_features
+
+
+def output_top_shap_explained_global_features_as_markdown_table(
+    shap_anomaly_values: np.ndarray,
+    feature_names: list[str],
+    output_file_path: str,
+    top_n_features: int = 10
+):
+    # Compute mean absolute shap value across all samples for each feature (importance ranking)
+    mean_absolute_shap_values = np.abs(shap_anomaly_values).mean(axis=0)
+
+    # Create DataFrame with feature names and mean shap values
+    feature_importance = pd.DataFrame({
+        "Feature": feature_names,
+        "Mean absolute SHAP value": mean_absolute_shap_values
+    })
+
+    # Aggregate all nodeEmbedding* features
+    mask = feature_importance["Feature"].str.startswith("nodeEmbedding")
+    node_embedding_sum = feature_importance.loc[mask, "Mean absolute SHAP value"].sum()
+
+    # Append aggregated feature
+    feature_importance = pd.concat([
+        feature_importance,
+        pd.DataFrame([{
+            "Feature": "*Node embeddings aggregated*",
+            "Mean absolute SHAP value": node_embedding_sum
+        }])
+    ])
+
+    # Sort by importance
+    top_features = feature_importance.sort_values("Mean absolute SHAP value", ascending=False).head(top_n_features + 1)
+
+    # Build markdown table manually using column names
+    headers = list(top_features.columns)
+    rows = top_features.values.tolist()
+
+    markdown_header_row =  "| " + " | ".join(headers) + " |\n"
+    markdown_table = markdown_header_row
+
+    markdown_header_separator_row = "| " + " | ".join(["---"] * len(headers)) + " |\n"
+    markdown_table += markdown_header_separator_row
+
+    for row in rows:
+        markdown_data_row = "| " + " | ".join([str(row[0]), f"{row[1]:.6f}"]) + " |\n"
+        markdown_table += markdown_data_row
+
+    # Save to file
+    with open(output_file_path, "w") as f:
+        f.write(markdown_table)
+
+    print(f"tunedAnomalyDetectionExplained: Markdown table with top {top_n_features} SHAP explained features saved to {output_file_path}")
+
+
 # ------------------------------------------------------------------------------------------------------------
 #  MAIN
 # ------------------------------------------------------------------------------------------------------------
@@ -856,17 +1017,17 @@ features_for_visualization_to_exclude_from_training: typing.List[str] = [
 ]
 
 parameters = parse_input_parameters()
-plot_prefix = parameters.get_plot_prefix()
+title_prefix = parameters.get_title_prefix()
 driver = get_graph_database_driver()
 features = query_data(parameters)
 
 if parameters.is_verbose():
-    print("tunedAnomalyDetectionExplained: Features for anomaly detection of {plot_type} (first 5 rows):", features.head(5))
+    print("tunedAnomalyDetectionExplained: Features for anomaly detection of {title_prefix} (first 5 rows):", features.head(5))
 
 validate_data(features)
 
 if features.empty:
-    print(f"tunedAnomalyDetectionExplained: Warning: No data. Skipping Anomaly Detection for {plot_prefix}.")
+    print(f"tunedAnomalyDetectionExplained: Warning: No data. Skipping Anomaly Detection for {title_prefix}.")
     sys.exit(0)
 
 features_to_standardize = features.columns.drop(features_for_visualization_to_exclude_from_training + ['embedding']).to_list()
@@ -882,7 +1043,6 @@ if anomaly_detection_results.is_empty():
 features = add_anomaly_detection_results_to_features(features, anomaly_detection_results)
 
 if parameters.is_verbose():
-    # TODO Output CSV with anomaly detection results
     print("tunedAnomalyDetectionExplained: Top 10 anomalies:")
     print(get_top_10_anomalies(features).reset_index(drop=True))
     print("tunedAnomalyDetectionExplained: Top 10 non-anomalies:")
@@ -891,7 +1051,7 @@ if parameters.is_verbose():
 plot_anomalies(
     features_to_visualize=features,
     title_prefix="Java Package Anomalies",
-    plot_file_path=get_file_path(f"{plot_prefix}_Anomalies", parameters)
+    plot_file_path=get_file_path("Anomalies", parameters)
 )
 
 if parameters.is_verbose():
@@ -909,22 +1069,43 @@ plot_shap_explained_beeswarm(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     prepared_features=features_prepared,
     feature_names=feature_names,
-    title_prefix=plot_prefix,
-    plot_file_path=get_file_path(f"{plot_prefix}_Anomaly_feature_importance_explained", parameters)
+    title_prefix=title_prefix,
+    plot_file_path=get_file_path("Anomaly_feature_importance_explained", parameters)
+)
+
+plot_all_shap_explained_local_feature_importance(
+    data=get_top_10_anomalies(features),
+    explanation_results=explanation_results,
+    prepared_features=features_prepared,
+    feature_names=feature_names,
+    parameters=parameters,
+    title_prefix=title_prefix
 )
 
 plot_shap_explained_top_10_feature_dependence(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     prepared_features=features_prepared,
     feature_names=feature_names,
-    title_prefix=plot_prefix,
-    plot_file_path=get_file_path(f"{plot_prefix}_Anomaly_feature_dependence_explained", parameters)
+    title_prefix=title_prefix,
+    plot_file_path=get_file_path("Anomaly_feature_dependence_explained", parameters)
 )
 
 add_top_shap_features_to_anomalies(
     shap_anomaly_values=explanation_results.shap_anomaly_values,
     feature_names=feature_names,
     anomaly_detected_features=features
+)
+
+add_node_embedding_shap_sum(
+    shap_anomaly_values=explanation_results.shap_anomaly_values,
+    feature_names=feature_names,
+    anomaly_detected_features=features
+)
+
+output_top_shap_explained_global_features_as_markdown_table(
+    shap_anomaly_values=explanation_results.shap_anomaly_values,
+    feature_names=feature_names,
+    output_file_path=get_file_path("Top_anomaly_features", parameters, 'md')
 )
 
 if parameters.is_verbose():
@@ -941,6 +1122,7 @@ data_to_write = pd.DataFrame(data={
     'anomalyTopFeatureSHAPValue1': features['anomalyTopFeatureSHAPValue_1'],
     'anomalyTopFeatureSHAPValue2': features['anomalyTopFeatureSHAPValue_2'],
     'anomalyTopFeatureSHAPValue3': features['anomalyTopFeatureSHAPValue_3'],
+    'anomalyNodeEmbeddingSHAPSum': features['anomalyNodeEmbeddingSHAPSum'],
 })
 write_batch_data_into_database(data_to_write, parameters.get_projection_node_label(), verbose=parameters.is_verbose())
 
