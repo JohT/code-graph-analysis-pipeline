@@ -3,6 +3,7 @@
 # Pipeline that coordinates anomaly detection using the Graph Data Science Library of Neo4j.
 # It requires an already running Neo4j graph database with already scanned and analyzed artifacts.
 # The results will be written into the sub directory reports/anomaly-detection.
+# Dynamically triggered by "PythonReports.sh".
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
