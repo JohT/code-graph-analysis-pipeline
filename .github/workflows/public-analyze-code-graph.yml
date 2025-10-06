@@ -92,7 +92,7 @@ jobs:
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
 
       - name: Assemble ENVIRONMENT_INFO
-        run: echo "ENVIRONMENT_INFO=-java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
+        run: echo "ENVIRONMENT_INFO=java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
       
       - name: (Code Analysis Setup) Checkout code-graph-analysis-pipeline
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
