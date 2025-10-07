@@ -27,6 +27,7 @@ JUPYTER_OUTPUT_FILE_POSTFIX           |                                     | e.
 REPORTS_DIRECTORY                     | reports                             |  |
 REPORTS_SCRIPT_DIR                    | ${SCRIPTS_DIR}/reports              | Repository directory containing the report scripts |
 CYPHER_DIR                            | ${SCRIPTS_DIR}/../cypher            |  |
+MARKDOWN_SCRIPTS_DIR                  | ${SCRIPTS_DIR}/markdown             |  |
 NEO4J_HTTP_PORT                       | 7474                                | Neo4j HTTP API port for executing queries |
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
 IMPORT_DIRECTORY                      | import                              |  |
@@ -43,7 +44,6 @@ JQASSISTANT_CLI_VERSION               | 2.7.1                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4j-latest-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
-SCRIPTS_DIR                           | ${REPORTS_SCRIPT_DIR}/..            | Repository directory containing the shell scripts |
 GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 VISUALIZATION_SCRIPTS_DIR             | ${SCRIPTS_DIR}/visualization        | Repository directory containing the shell scripts for visualization |
 DOMAINS_DIRECTORY                     | ${REPORTS_SCRIPT_DIR}/../../domains |  |
