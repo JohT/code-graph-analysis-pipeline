@@ -26,6 +26,9 @@ set -o errexit -o pipefail
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 #echo "executeQuery: SCRIPTS_DIR=$SCRIPTS_DIR" >&2
 
+MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR:-"${SCRIPTS_DIR}/markdown"}
+#echo "executeQuery: MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR}" >&2
+
 # Overrideable Defaults
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
 NEO4J_HTTP_TRANSACTION_ENDPOINT=${NEO4J_HTTP_TRANSACTION_ENDPOINT:-"db/neo4j/tx/commit"} # Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
@@ -149,8 +152,8 @@ if [[ -n "${error_message}" ]]; then
 fi
 
 if [ "${output_markdown_table}" = "true" ] ; then
-  echo "executeQuery: Will output in Markdown Table Format" >&2
-  echo -n "${cypher_query_result}" | "${SCRIPTS_DIR}/markdown/formatQueryResultAsMarkdownTable.sh"
+  #echo "executeQuery: Will output in Markdown Table Format" >&2
+  echo -n "${cypher_query_result}" | "${MARKDOWN_SCRIPTS_DIR}/formatQueryResultAsMarkdownTable.sh"
 else
   # Output results in CSV format
   if [ "${no_source_reference}" = true ] ; then

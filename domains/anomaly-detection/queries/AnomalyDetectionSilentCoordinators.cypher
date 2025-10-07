@@ -1,4 +1,4 @@
-// Anomaly Detection Query: Find silent coordinators by listing the top 20 entries with the highest betweeenness >= 90% percentile and a in-degree <= 10% percentile.
+// Anomaly Detection Query: Find silent coordinators by listing the (at most) top 20 entries with the highest betweeenness >= 90% percentile and a in-degree <= 10% percentile.
 // Shows code that controls lots of interactions, yet not many modules depend on it — hidden complexity
 
    MATCH (codeUnit)
@@ -7,12 +7,12 @@
      AND codeUnit.incomingDependencies                IS NOT NULL
      AND codeUnit.outgoingDependencies                IS NOT NULL
     WITH collect(codeUnit)                                                AS codeUnits
-        ,percentileDisc(codeUnit.incomingDependencies, 0.10)              AS incomingDependencies10Percentile
-        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)             AS betweenness90Percentile
+        ,percentileDisc(codeUnit.incomingDependencies, 0.10)              AS incomingDependenciesThreshold
+        ,percentileDisc(codeUnit.centralityBetweenness, 0.90)             AS betweennessThreshold
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
-   WHERE codeUnit.incomingDependencies  <= incomingDependencies10Percentile
-     AND codeUnit.centralityBetweenness <= betweenness90Percentile
+   WHERE codeUnit.incomingDependencies  <= incomingDependenciesThreshold
+     AND codeUnit.centralityBetweenness <= betweennessThreshold
 OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
     WITH *, artifact.name AS artifactName
 OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)

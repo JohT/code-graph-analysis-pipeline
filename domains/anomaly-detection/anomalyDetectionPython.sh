@@ -3,6 +3,7 @@
 # Pipeline that coordinates anomaly detection using the Graph Data Science Library of Neo4j.
 # It requires an already running Neo4j graph database with already scanned and analyzed artifacts.
 # The results will be written into the sub directory reports/anomaly-detection.
+# Dynamically triggered by "PythonReports.sh".
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
 
@@ -25,6 +26,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/../../scripts"} # Re
 # Get the "cypher" query directory for gathering features.
 ANOMALY_DETECTION_FEATURE_CYPHER_DIR=${ANOMALY_DETECTION_FEATURE_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/features"}
 ANOMALY_DETECTION_QUERY_CYPHER_DIR=${ANOMALY_DETECTION_QUERY_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/queries"}
+ANOMALY_DETECTION_LABEL_CYPHER_DIR=${ANOMALY_DETECTION_LABEL_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/labels"}
 
 # Function to display script usage
 usage() {
@@ -124,6 +126,10 @@ anomaly_detection_using_python() {
     
     echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Python scripts for ${language} ${nodeLabel} nodes..."
 
+    # Within the absolute (full) report directory for anomaly detection, create a sub directory for every detailed type (Java_Package, Java_Type,...)
+    local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
+    mkdir -p "${detail_report_directory}"
+
     # Get tuned Leiden communities as a reference to tune clustering
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedLeidenCommunityDetection.py" "${@}" ${verboseMode}
     # Tuned Fast Random Projection and tuned HDBSCAN clustering 
@@ -131,11 +137,32 @@ anomaly_detection_using_python() {
     # Reduce the dimensionality of the node embeddings down to 2D for visualization using UMAP
     time "${ANOMALY_DETECTION_SCRIPT_DIR}/umap2dNodeEmbeddings.py" "${@}" ${verboseMode}
     # Plot the results with clustering and UMAP embeddings to reveal anomalies in rare feature combinations
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/anomalyDetectionFeaturePlots.py" "${@}" "--report_directory" "${detail_report_directory}" ${verboseMode}
     # Run an unsupervised anomaly detection algorithm including tuning and explainability
-    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedAnomalyDetectionExplained.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/tunedAnomalyDetectionExplained.py" "${@}" "--report_directory" "${detail_report_directory}" ${verboseMode}
     # Query Results: Output all collected features into a CSV file.
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}AnomalyDetection_Features.csv"
+    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeatures.cypher" "${@}" > "${detail_report_directory}/Anomaly_Features.csv"
+}
+
+# Label code units with top anomalies by archetype.
+# 
+# Required Parameters:
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+anomaly_detection_labels() {
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
+    
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Labelling ${language} ${nodeLabel} anomalies..."
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeRemoveLabels.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeAuthority.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBottleneck.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeHub.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBridge.cypher" "${@}"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}"
 }
 
 # Run the anomaly detection pipeline.
@@ -150,6 +177,7 @@ anomaly_detection_using_python() {
 anomaly_detection_python_reports() {
     time anomaly_detection_features "${@}"
     anomaly_detection_using_python "${@}"
+    time anomaly_detection_labels "${@}"
 }
 
 # Create report directory
