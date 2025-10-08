@@ -1,0 +1,18 @@
+// This is a GraphViz dot template file for the visualization of a anomaly archetype graph.
+// The main part of the template is marked by the comments "Begin-Template" and "End-Template".
+// It also contains a simple example graph.
+//
+strict digraph anomaly_archetype_template {
+    //Begin-Template
+    graph [layout = "fdp"; fontname = "Helvetica,Arial,sans-serif";]
+    node [fontname = "Helvetica,Arial,sans-serif"; fontsize = 8;];
+    edge [fontname = "Helvetica,Arial,sans-serif"; fontsize = 6;];
+    node [style = "filled"; fillcolor = "0.560 0.400 0.999";];
+    node [color = "0.560 0.900 0.700";];
+    edge [color = "0.560 0.900 0.700";];
+    "hub" [shape="circle"; color = "0.990 0.950 0.70"; fillcolor = "0.999 0.350 0.970"; penwidth = 2; fontsize = 11];
+    //End-Template
+    "A" -> "hub" [penwidth = 1.0; label = 1;];
+    "A" -> "B" [penwidth = 3.0; label = 4;];
+    "B" -> "hub" [penwidth = 2.0; label = 2;];
+}
