@@ -17,7 +17,7 @@ echo "visualizeQueryResults: VISUALIZATION_SCRIPTS_DIR=${VISUALIZATION_SCRIPTS_D
 # Read the first unnamed input argument containing the version of the project
 inputCsvFileName=""
 case "${1}" in
-  "--"*) ;; # Skipping named command line options to forward them later to the "analyze" command
+  "--"*) ;; # Skipping named command line options to forward them later to the "convertQueryResultCsvToGraphVizDotFile" command
   *) 
     inputCsvFileName="${1}" 
     shift || true
