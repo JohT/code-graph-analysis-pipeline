@@ -51,6 +51,11 @@
       "matchDatasources": ["pypi", "conda"],
       "matchPackageNames": ["matplotlib", "plotly", "python-kaleido", "seaborn", "wordcloud"],
       "groupName": "python-visualization-libs"
+    },
+    {
+      "description": "Only use stable versions for Python",
+      "matchManagers": ["pip_requirements", "pip_setup", "poetry", "pipenv"],
+      "ignoreUnstable": true
     }
   ],
   "customManagers": [
