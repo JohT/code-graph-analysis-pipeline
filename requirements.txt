@@ -20,9 +20,9 @@ plotly[kaleido]==6.2.0
 seaborn==0.13.2 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
-scikit-learn==1.6.1
+scikit-learn==1.7.2
 optuna==4.5.0
-umap-learn==0.5.8 # Dimensionality reduction to visualize node embeddings in 2D
+umap-learn==0.5.9.post2 # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
 neo4j==5.28.2
