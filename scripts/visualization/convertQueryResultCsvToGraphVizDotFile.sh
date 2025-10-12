@@ -105,8 +105,13 @@ outputFilename="${inputFilePath}/${graphName}.gv"
   echo "strict digraph ${graphName} {"
   # Extract the template content from the template file and remove the begin and end markers
   sed -n '/\/\/Begin-Template/,/\/\/End-Template/{//!p;}' "${templateFile}"
-  # Remove the first (header) line of the CSV file, remove the enclosing double quotes and replace the escaped double quotes by double quotes
+  # Remove the first (header) line of the CSV file, 
+  # print the first column prefixed with a tab, 
+  # remove heading double quote
+  # remove the enclosing double quotes and 
+  # replace the escaped double quotes by double quotes
   awk -F ',' 'NR>1 {print "\t" $1}' "${inputFilename}" \
+    | sed 's/^\t\"/\t/' \
     | sed 's/^\t\"\"\"/\t"/' \
     | sed 's/^\t\"\\\"\"/\t"/' \
     | sed 's/\\\"\"/"/g' \
