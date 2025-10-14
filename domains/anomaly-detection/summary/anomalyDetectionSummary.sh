@@ -15,7 +15,7 @@ set -o errexit -o pipefail
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
-MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"}
+MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"} # Subdirectory that contains Markdown files to be included by the Markdown template for the report.
 
 ## Get this "domains/anomaly-detection/summary" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.
@@ -26,7 +26,6 @@ ANOMALY_DETECTION_SUMMARY_DIR=${ANOMALY_DETECTION_SUMMARY_DIR:-$(CDPATH=. cd -- 
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SUMMARY_DIR}/../../../scripts"} # Repository directory containing the shell scripts
 
-MARKDOWN_INCLUDES_DIRECTORY="includes"
 MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR:-"${SCRIPTS_DIR}/markdown"}
 #echo "anomalyDetectionSummary: MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR}" >&2
 
