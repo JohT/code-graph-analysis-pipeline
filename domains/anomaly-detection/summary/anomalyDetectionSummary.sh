@@ -127,7 +127,10 @@ anomaly_detection_front_matter_metadata_head() {
     current_date="$(date +'%Y-%m-%d')"
 
     local latest_tag
-    latest_tag="$(git ls-remote --tags origin | grep -v '\^{}' | tail -n1 | awk '{print $2}' | sed 's|refs/tags/||')"
+    # The latest tag can always be determined by reading the remote repository. However, this doesn't support working offline.  
+    # Therefore, git describe is used which - on the other hand - requires tags to be fetched which requires GitHub Action checkout parameter fetch-tags.
+    #latest_tag="$(git ls-remote --tags origin | grep -v '\^{}' | tail -n1 | awk '{print $2}' | sed 's|refs/tags/||')"
+    latest_tag="$(git for-each-ref --sort=-creatordate --count=1 --format '%(refname:short)' refs/tags)"
     
     local analysis_directory
     analysis_directory="${PWD##*/}"

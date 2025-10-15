@@ -100,6 +100,7 @@ jobs:
           repository: JohT/code-graph-analysis-pipeline
           ref: ${{ inputs.ref }}
           persist-credentials: false
+          fetch-tags: true
 
       - name: (Java Setup) Java Development Kit (JDK) ${{ matrix.java }}
         uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5
