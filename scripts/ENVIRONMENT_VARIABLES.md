@@ -37,7 +37,7 @@ NEO4J_CONFIG_TEMPLATE                 | template-neo4j.conf                 |  |
 NEO4J_APOC_PLUGIN_VERSION             | 2025.08.0                           |  |
 NEO4J_APOC_PLUGIN_EDITION             | core                                |  |
 NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
-NEO4J_GDS_PLUGIN_VERSION              | 2.21.0                              |  |
+NEO4J_GDS_PLUGIN_VERSION              | 2.22.0                              |  |
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.22.0                              |  |
 NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
 JQASSISTANT_CLI_VERSION               | 2.7.1                               |  |
