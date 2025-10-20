@@ -177,6 +177,7 @@
       "customType": "regex",
       "fileMatch": [
         "^scripts/[^/]*\\.sh$",
+        "^scripts/visualization/[^/]*\\.sh$",
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
         "(^|\\/)action\\.ya?ml$]"
       ],
