@@ -63,5 +63,7 @@ fi
 
 # Run GraphViz command line interface (CLI) wrapped utilizing WASM (WebAssembly) 
 # to convert the DOT file to SVG operating system independently.
+# Use "npm install" first to create local "node_modules" and be able to run it after that in offline mode.
 echo "visualizeQueryResults: Info: Using npx to run GraphViz CLI (Web Assembly Wrapper) for SVG generation."
+npm install @hpcc-js/wasm-graphviz-cli@1.2.6 --silent --no-progress --loglevel=error > /dev/null
 npx --yes @hpcc-js/wasm-graphviz-cli@1.2.6 -T svg "${inputCsvFilePath}/${graphName}.gv" > "${inputCsvFilePath}/${graphName}.svg"
