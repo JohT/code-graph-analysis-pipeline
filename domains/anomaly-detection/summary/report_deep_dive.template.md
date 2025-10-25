@@ -12,7 +12,7 @@
 
 #### Archetype Distribution
 
-<!-- include:DeepDiveArchetypes.md|report_no_data_info.template.md -->
+<!-- include:DeepDiveArchetypes.md|report_no_anomaly_detection_data.template.md -->
 
 #### Top anomalies with their local contributing features (via SHAP)
 
@@ -31,3 +31,5 @@ See [Plot Interpretation Guide](#3-plot-interpretation-guide) on how to read the
 <!-- include:report_deep_dive_cluster_noise_plots.md|empty.md -->
 
 <!-- include:report_deep_dive_feature_plots.md|report_no_anomaly_detection_data.template.md -->
+
+<!-- include:GraphVisualizationsReference.md|report_no_anomaly_detection_graphs.template.md -->

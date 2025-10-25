@@ -21,22 +21,33 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 # This way non-standard tools like readlink aren't needed.
 REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
+DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${REPORTS_SCRIPT_DIR}/../../domains"}
 
-echo "${LOG_GROUP_START}Initialize Visualization Reports";
-echo "VisualizationReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
-echo "VisualizationReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
-echo "${LOG_GROUP_END}";
+# For detailed debug output uncomment the following lines:
+#echo "${LOG_GROUP_START}Initialize Visualization Reports";
+#echo "VisualizationReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
+#echo "VisualizationReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
+#echo "VisualizationReports: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+#echo "${LOG_GROUP_END}";
 
-# Run all visualization scripts
-for visualization_script_file in "${REPORTS_SCRIPT_DIR}"/*Visualization.sh; do 
-    visualization_script_filename=$(basename -- "${visualization_script_file}")
-    visualization_script_filename="${visualization_script_filename%.*}" # Remove file extension
+# Run all visualization scripts (filename ending with Visualization.sh) in the REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY directories.
+for directory in "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}"; do
+    if [ ! -d "${directory}" ]; then
+        echo "PythonReports: Error: Directory ${directory} does not exist. Please check your REPORTS_SCRIPT_DIR and DOMAIN_DIRECTORY settings."
+        exit 1
+    fi
 
-    echo "${LOG_GROUP_START}Create Visualization Report ${visualization_script_filename}";
-    echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${visualization_script_filename}...";
+    # Run all visualization scripts in the selected directory.
+    find "${directory}" -type f -name "*Visualization.sh" | sort | while read -r visualization_script_file; do
+        visualization_script_filename=$(basename -- "${visualization_script_file}")
+        visualization_script_filename="${visualization_script_filename%.*}" # Remove file extension
 
-    source "${visualization_script_file}"
+        echo "${LOG_GROUP_START}Create Visualization Report ${visualization_script_filename}";
+        echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${visualization_script_filename}...";
 
-    echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${visualization_script_filename}";
-    echo "${LOG_GROUP_END}";
+        source "${visualization_script_file}"
+
+        echo "VisualizationReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${visualization_script_filename}";
+        echo "${LOG_GROUP_END}";
+    done
 done

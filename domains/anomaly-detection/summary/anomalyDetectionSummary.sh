@@ -15,7 +15,7 @@ set -o errexit -o pipefail
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
-MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"}
+MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"} # Subdirectory that contains Markdown files to be included by the Markdown template for the report.
 
 ## Get this "domains/anomaly-detection/summary" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.
@@ -26,7 +26,6 @@ ANOMALY_DETECTION_SUMMARY_DIR=${ANOMALY_DETECTION_SUMMARY_DIR:-$(CDPATH=. cd -- 
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SUMMARY_DIR}/../../../scripts"} # Repository directory containing the shell scripts
 
-MARKDOWN_INCLUDES_DIRECTORY="includes"
 MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR:-"${SCRIPTS_DIR}/markdown"}
 #echo "anomalyDetectionSummary: MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR}" >&2
 
@@ -76,7 +75,11 @@ anomaly_detection_deep_dive_report() {
     echo "### 2.${report_number} ${language} ${nodeLabel}" > "${detail_report_include_directory}/DeepDiveSectionTitle.md"
     echo "" > "${detail_report_include_directory}/empty.md"
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_data.template.md" "${detail_report_include_directory}/report_no_anomaly_detection_data.template.md"
+    cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_graphs.template.md" "${detail_report_include_directory}/report_no_anomaly_detection_graphs.template.md"
+    
+    # Copy
     cp -f "${detail_report_directory}/Top_anomaly_features.md" "${detail_report_include_directory}" || true
+    cp -f "${detail_report_directory}/GraphVisualizations/GraphVisualizationsReferenceForSummary.md" "${detail_report_include_directory}/GraphVisualizationsReference.md" || true
 
     # Assemble Markdown-Includes containing plots depending on their availability (fallback empty.md)
     if [ -f "${detail_report_directory}/Anomaly_feature_importance_explained.svg" ] ; then
@@ -104,6 +107,11 @@ anomaly_detection_deep_dive_report() {
     cat "${detail_report_directory}/report_deep_dive.template.md" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${detail_report_include_directory}" > "${detail_report_directory}/report_deep_dive_with_vars.md"
     sed "s/{{deep_dive_directory}}/${detail_report_directory_name}/g" "${detail_report_directory}/report_deep_dive_with_vars.md" > "${detail_report_directory}/report_deep_dive_${report_number}.md" 
 
+    # Add a page break at the end of a deep dive section
+    {
+        echo "--"
+    } >> "${detail_report_directory}/report_deep_dive_${report_number}.md" 
+
     rm -rf "${detail_report_directory}/report_deep_dive_with_vars.md"
     rm -rf "${detail_report_directory}/report_deep_dive.template.md"
     rm -rf "${detail_report_include_directory}"
@@ -128,7 +136,10 @@ anomaly_detection_front_matter_metadata_head() {
     current_date="$(date +'%Y-%m-%d')"
 
     local latest_tag
-    latest_tag="$(git ls-remote --tags origin | grep -v '\^{}' | tail -n1 | awk '{print $2}' | sed 's|refs/tags/||')"
+    # The latest tag can always be determined by reading the remote repository. However, this doesn't support working offline.  
+    # Therefore, git describe is used which - on the other hand - requires tags to be fetched which requires GitHub Action checkout parameter fetch-tags.
+    #latest_tag="$(git ls-remote --tags origin | grep -v '\^{}' | tail -n1 | awk '{print $2}' | sed 's|refs/tags/||')"
+    latest_tag="$(git for-each-ref --sort=-creatordate --count=1 --format '%(refname:short)' refs/tags)"
     
     local analysis_directory
     analysis_directory="${PWD##*/}"
