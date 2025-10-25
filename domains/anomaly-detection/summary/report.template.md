@@ -104,6 +104,24 @@ Each abstraction level includes anomaly statistics, SHAP feature importance, arc
 
 ---
 
+### 📕 Graph Visualizations (Archetype-Level Network Views)
+
+| Plot | Description | Best For | Adds | Why |
+|------|--------------|----------|------|-----|
+| **Top Hub Graph Visualization** | Displays the most connected node (e.g., **#1 Hub**) at the center, surrounded by its direct dependencies. Incoming nodes show who is dependent on the hub. | Understanding highly connected code units or components that serve as central integrators. | Highlights nodes that act as major dependency aggregators. | Helps detect over-centralized modules or potential architectural bottlenecks. |
+| **Top Bottleneck Graph Visualization** | Shows the node with the highest betweenness centrality (e.g., **#1 Bottleneck**) and its local neighborhood. | Identifying code units that control information or dependency flow. | Emphasizes nodes that mediate critical paths between modules. | Reveals single points of failure or routing constraints in dependency flow. |
+| **Top Authority Graph Visualization** | Centers the most authoritative node (e.g., **#1 Authority**) with incoming and outgoing links from dependent nodes with high PageRank and emphasized PageRank to ArticleRank difference. | Detecting key knowledge or functionality providers. | Highlights components with high centrality. | Indicates structural or semantic “sources of truth” in the system. |
+| **Top Bridge Graph Visualization** | Displays a node acting as a structural bridge between clusters (e.g., **#1 Bridge**) and its cross-cluster connections based on node embeddings encoding the Graph structure. | Understanding cross-cutting dependencies between modules. | Reveals links connecting distinct architectural domains. | Useful for spotting boundary leaks or undesired coupling between subsystems. |
+| **Top Outlier Graph Visualization** | Centers an unusual or isolated node (e.g., **#1 Outlier**) that can hardly be assigned to a cluster and visualizes its sparse or unexpected dependency patterns. | Identifying structurally or behaviorally anomalous nodes. | Highlights nodes with rare or unexpected connection patterns. | Helps pinpoint code units that deviate from established dependency norms. |
+
+> **Note:**
+> - In all Graph Visualizations, the **central node** represents the selected *Top Archetype* (e.g., *Top 1 Hub*).  
+> - **Darker nodes** indicate *incoming dependencies*, while **brighter nodes** indicate *outgoing dependencies*.  
+> - **Emphasized nodes** (thicker borders or larger size) mark particularly influential or anomalous dependencies, depending on the archetype.  
+> - These visualizations are most effective for interpreting *local dependency topology* and *role significance* of key components.
+
+---
+
 ### 📔 Summary Categories
 
 | Category | Included Plots | Typical Usage |
@@ -114,6 +132,7 @@ Each abstraction level includes anomaly statistics, SHAP feature importance, arc
 | **Cluster Noise Analysis** | Cluster Noise (3 types) | Identify special structural anomalies |
 | **Feature Distributions** | Betweenness, Clustering, Rank Difference | Assess feature-based structure patterns |
 | **Feature Relationships** | Clustering vs PageRank | Evaluate global vs local influence balance |
+| **Archetype Graphs** | Top Hub / Bottleneck / Authority / Bridge / Outlier | Visualizing key dependency roles and structural importance |
 
 ---
 

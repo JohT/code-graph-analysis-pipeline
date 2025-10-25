@@ -75,7 +75,11 @@ anomaly_detection_deep_dive_report() {
     echo "### 2.${report_number} ${language} ${nodeLabel}" > "${detail_report_include_directory}/DeepDiveSectionTitle.md"
     echo "" > "${detail_report_include_directory}/empty.md"
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_data.template.md" "${detail_report_include_directory}/report_no_anomaly_detection_data.template.md"
+    cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_graphs.template.md" "${detail_report_include_directory}/report_no_anomaly_detection_graphs.template.md"
+    
+    # Copy
     cp -f "${detail_report_directory}/Top_anomaly_features.md" "${detail_report_include_directory}" || true
+    cp -f "${detail_report_directory}/GraphVisualizations/GraphVisualizationsReferenceForSummary.md" "${detail_report_include_directory}/GraphVisualizationsReference.md" || true
 
     # Assemble Markdown-Includes containing plots depending on their availability (fallback empty.md)
     if [ -f "${detail_report_directory}/Anomaly_feature_importance_explained.svg" ] ; then
@@ -102,6 +106,11 @@ anomaly_detection_deep_dive_report() {
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_deep_dive.template.md" "${detail_report_directory}/report_deep_dive.template.md"
     cat "${detail_report_directory}/report_deep_dive.template.md" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${detail_report_include_directory}" > "${detail_report_directory}/report_deep_dive_with_vars.md"
     sed "s/{{deep_dive_directory}}/${detail_report_directory_name}/g" "${detail_report_directory}/report_deep_dive_with_vars.md" > "${detail_report_directory}/report_deep_dive_${report_number}.md" 
+
+    # Add a page break at the end of a deep dive section
+    {
+        echo "--"
+    } >> "${detail_report_directory}/report_deep_dive_${report_number}.md" 
 
     rm -rf "${detail_report_directory}/report_deep_dive_with_vars.md"
     rm -rf "${detail_report_directory}/report_deep_dive.template.md"
