@@ -4,7 +4,7 @@
  MATCH (sourceForStatistics)-[dependencyForStatistics:DEPENDS_ON]->(targetForStatistics)
  WHERE $projection_node_label IN labels(sourceForStatistics)
    AND $projection_node_label IN labels(targetForStatistics)
-  WITH max(coalesce(dependencyForStatistics.weight25PercentInterfaces, dependencyForStatistics.weight)) AS maxWeight
+  WITH max(coalesce(dependencyForStatistics[$projection_weight_property])) AS maxWeight
 // Step 2: Query selected central node
  MATCH (central)
  WHERE $projection_node_label IN labels(central)
@@ -19,12 +19,12 @@
   WITH *, "🌉 bridge #" + central.anomalyBridgeRank + "\\n" + central.name                AS centralNodeLabel
   WITH *, graphVizOutput + ["central [label=\"" + centralNodeLabel + "\"];"]              AS graphVizOutput
 // Step 3: Query direct incoming dependencies to the central node
- MATCH (source)-[dependency:DEPENDS_ON]->(central)
+OPTIONAL MATCH (source)-[dependency:DEPENDS_ON]->(central)
   WHERE $projection_node_label IN labels(source)
     AND source.outgoingDependencies > 0
-  ORDER BY dependency.weight DESC, source.name ASC
+  ORDER BY dependency[$projection_weight_property] DESC, source.name ASC
   LIMIT 40
-   WITH *, coalesce(dependency.weight25PercentInterfaces, dependency.weight, 1) AS weight
+   WITH *, coalesce(dependency[$projection_weight_property], 1)                 AS weight
    WITH *, round((toFloat(weight) / toFloat(maxWeight) * 2.5) + 0.4, 1.0)       AS penWidth
    WITH *, "label=" + weight + "; weight=" + weight + "; penwidth=" + penWidth  AS edgeAttributes
    // Add the last part of the element id to the node name to make it unique.
@@ -41,12 +41,12 @@
        ,collect(directInNode + "\"" + sourceId + "\" -> central [" + edgeAttributes + "];") AS directInEdges
    WITH *, graphVizOutput + directInEdges AS graphVizOutput
 // Step 4: Query direct outgoing dependencies from the central node
- MATCH (source)<-[dependency:DEPENDS_ON]-(central)
+OPTIONAL MATCH (source)<-[dependency:DEPENDS_ON]-(central)
   WHERE $projection_node_label IN labels(source)
     AND source.incomingDependencies > 0
-  ORDER BY dependency.weight DESC, source.name ASC
+  ORDER BY dependency[$projection_weight_property] DESC, source.name ASC
   LIMIT 40
-   WITH *, coalesce(dependency.weight25PercentInterfaces, dependency.weight, 1) AS weight
+   WITH *, coalesce(dependency[$projection_weight_property], 1)                 AS weight
    WITH *, round((toFloat(weight) / toFloat(maxWeight) * 2.5) + 0.4, 1.0)       AS penWidth
    WITH *, "label=" + weight + "; weight=" + weight + "; penwidth=" + penWidth  AS edgeAttributes
    // Use a lighter color for the target nodes of outgoing dependencies from the central node and their edges
@@ -70,16 +70,16 @@
    WITH *, incomingDependencyNodes + outgoingDependencyNodes AS directDependentNodes
 // Step 5: Query dependencies between direct dependencies outside the central node
  UNWIND directDependentNodes AS directDependentNode
-  MATCH (directDependentNode)-[dependency:DEPENDS_ON]->(anotherDirectDependentNode)
+OPTIONAL MATCH (directDependentNode)-[dependency:DEPENDS_ON]->(anotherDirectDependentNode)
   WHERE anotherDirectDependentNode IN directDependentNodes
     AND anotherDirectDependentNode <> directDependentNode
-  ORDER BY dependency.weight DESC, directDependentNode.name ASC
+  ORDER BY dependency[$projection_weight_property] DESC, directDependentNode.name ASC
    WITH graphVizOutput 
        ,directDependentNode
        ,dependency
        ,collect(anotherDirectDependentNode)[0] AS firstLinkedDependentNode
   LIMIT 140
-   WITH *, coalesce(dependency.weight25PercentInterfaces, dependency.weight, 1) AS weight
+   WITH *, coalesce(dependency[$projection_weight_property], 1)                 AS weight
    // Use a fixed small pen width for secondary dependencies for better visibility of the more important direct dependency 
    WITH *, "label=" + weight + "; weight=" + weight + "; penwidth=0.3"          AS edgeAttributes
    // Use an even lighter color for secondary dependency edges

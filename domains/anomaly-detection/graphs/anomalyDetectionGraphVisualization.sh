@@ -99,10 +99,12 @@ update_markdown_references() {
             echo ""
         } >> "${markdown_graph_visualizations_reference_file}"
     else 
-        {
-            echo "---"
-            echo ""
-        } >> "${markdown_graph_visualizations_reference_file}"
+        if [ "${index}" == "1" ]; then
+            {
+                echo "---"
+                echo ""
+            } >> "${markdown_graph_visualizations_reference_file}"
+        fi
     fi
 
     if [ "${index}" == "1" ]; then
@@ -130,6 +132,8 @@ update_markdown_references() {
 #   Name of the associated programming language. Examples: "Java", "Typescript"
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
 create_graph_visualization() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
@@ -185,6 +189,8 @@ create_graph_visualization() {
 #   Name of the associated programming language. Examples: "Java", "Typescript"
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
 anomaly_detection_graph_visualization() {
     set_required_features "${@}"
     
@@ -210,14 +216,15 @@ rm -rfv "${FULL_REPORT_DIRECTORY}"/*_*/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}/${
 
 # Query Parameter key pairs for projection and algorithm side
 QUERY_NODE="projection_node_label"
+QUERY_WEIGHT="projection_weight_property"
 QUERY_LANGUAGE="projection_language"
 
 # -- Detail Reports for each code type -------------------------------
 
-anomaly_detection_graph_visualization "${QUERY_NODE}=Artifact" "${QUERY_LANGUAGE}=Java"
-anomaly_detection_graph_visualization "${QUERY_NODE}=Package" "${QUERY_LANGUAGE}=Java"
-anomaly_detection_graph_visualization "${QUERY_NODE}=Type" "${QUERY_LANGUAGE}=Java"
-anomaly_detection_graph_visualization "${QUERY_NODE}=Module" "${QUERY_LANGUAGE}=Typescript"
+anomaly_detection_graph_visualization "${QUERY_NODE}=Artifact" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight"
+anomaly_detection_graph_visualization "${QUERY_NODE}=Package" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight25PercentInterfaces"
+anomaly_detection_graph_visualization "${QUERY_NODE}=Type" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight"
+anomaly_detection_graph_visualization "${QUERY_NODE}=Module" "${QUERY_LANGUAGE}=Typescript" "${QUERY_WEIGHT}=lowCouplingElement25PercentWeight"
 
 # ---------------------------------------------------------------
 
