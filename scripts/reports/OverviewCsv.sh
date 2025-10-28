@@ -53,6 +53,7 @@ execute_cypher "${OVERVIEW_CYPHER_DIR}/Number_of_elements_per_module_for_Typescr
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_label_count.cypher" > "${FULL_REPORT_DIRECTORY}/Node_label_count.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_label_combination_count.cypher" > "${FULL_REPORT_DIRECTORY}/Node_label_combination_count.csv"
 execute_cypher "${OVERVIEW_CYPHER_DIR}/Relationship_type_count.cypher" > "${FULL_REPORT_DIRECTORY}/Relationship_type_count.csv"
+execute_cypher "${OVERVIEW_CYPHER_DIR}/Dependency_node_labels.cypher" > "${FULL_REPORT_DIRECTORY}/Dependency_node_labels.csv"
 
 # TODO Performance needs improvement. Included (limited) in OverviewGeneral Jupyter Notebook.
 # execute_cypher "${OVERVIEW_CYPHER_DIR}/Node_labels_and_their_relationships.cypher" > "${FULL_REPORT_DIRECTORY}/Node_labels_and_their_relationships.csv"
