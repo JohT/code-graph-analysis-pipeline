@@ -24,4 +24,4 @@ ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR:-$(CDPATH=. cd -- "$
 ANOMALY_DETECTION_GRAPHS_DIR=${ANOMALY_DETECTION_GRAPHS_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/graphs"} # Contains everything (scripts, queries, templates) to create the Markdown summary report for anomaly detection
 
 # Delegate the execution to the responsible script.
-source "${ANOMALY_DETECTION_GRAPHS_DIR}/anomalyDetectionGraphVisualization.sh"
+source "${ANOMALY_DETECTION_GRAPHS_DIR}/anomalyDetectionGraphs.sh"
