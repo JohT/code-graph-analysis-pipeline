@@ -175,6 +175,7 @@ Script | Directory | Description
 | [Explore_node_properties.cypher](./Exploration/Explore_node_properties.cypher) | Exploration | Explore node properties, the labels of their nodes and their count |
 | [Explore_node_properties_non_null.cypher](./Exploration/Explore_node_properties_non_null.cypher) | Exploration | Explore non null node property counts for the selected node label. Variables: projection_node_label |
 | [Explore_node_relationships.cypher](./Exploration/Explore_node_relationships.cypher) | Exploration | Get all relationships of one specific node to explore the schema |
+| [Explore_schema.cypher](./Exploration/Explore_schema.cypher) | Exploration | Explore node labels and their relationships for a schema overview |
 | [Export_the_whole_database_as_CSV.cypher](./Export_the_whole_database_as_CSV.cypher) |  | Export the whole database as CSV |
 | [External_module_usage_overall_for_Typescript.cypher](./External_Dependencies/External_module_usage_overall_for_Typescript.cypher) | External_Dependencies | External Typescript module usage overall |
 | [External_module_usage_per_internal_module_aggregated_for_Typescript.cypher](./External_Dependencies/External_module_usage_per_internal_module_aggregated_for_Typescript.cypher) | External_Dependencies | External Typescript module usage per internal module aggregated |
@@ -344,6 +345,7 @@ Script | Directory | Description
 | [Node_Embeddings_3e_Node2Vec_Write.cypher](./Node_Embeddings/Node_Embeddings_3e_Node2Vec_Write.cypher) | Node_Embeddings | Node Embeddings 3d using Node2Vec: Write |
 | [Set_Parameters.cypher](./Node_Embeddings/Set_Parameters.cypher) | Node_Embeddings | Example on how to set the parameters for node embeddings in this case for Packages and Node2Vec |
 | [Cyclomatic_Method_Complexity_Distribution.cypher](./Overview/Cyclomatic_Method_Complexity_Distribution.cypher) | Overview | Cyclomatic Complexity Method Complexity Distribution |
+| [Dependency_node_labels.cypher](./Overview/Dependency_node_labels.cypher) | Overview | Explore DEPENDS_ON relationship node labels |
 | [Effective_Method_Line_Count_Distribution.cypher](./Overview/Effective_Method_Line_Count_Distribution.cypher) | Overview | Effective Method Line Count Distribution |
 | [Effective_lines_of_method_code_per_package.cypher](./Overview/Effective_lines_of_method_code_per_package.cypher) | Overview | Effective lines of method code per package. Requires "Add_file_name and_extension.cypher". |
 | [Effective_lines_of_method_code_per_type.cypher](./Overview/Effective_lines_of_method_code_per_type.cypher) | Overview | Effective lines of method code per type. Requires "Add_file_name and_extension.cypher". |
