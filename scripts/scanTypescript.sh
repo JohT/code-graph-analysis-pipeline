@@ -44,7 +44,7 @@ if [ ! -d "./${SOURCE_DIRECTORY}" ] ; then
 fi
 
 if ! command -v "npx" &> /dev/null ; then
-    echo "scanTypescript Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects." >&2
+    echo "scanTypescript Error: Command npx not found. It's needed to execute @jqassistant/ts-lce to scan Typescript projects. Please install Node.js." >&2
     exit 1
 fi
 
@@ -87,6 +87,13 @@ scan_directory() {
     else
         echo "scanTypescript: Skipping scan of ${source_directory_name} (${progress_information}) -----------------" >&2
     fi
+}
+
+# Returns 0 (success) if "private": true is set in package.json, otherwise 1 (false).
+# Pass the directory of the package.json file as first argument (default=.=current directory).
+is_private_package_json() {
+  directory=${1:-.}
+  node -e "process.exit(require(require('path').resolve('${directory}/package.json')).private ? 0 : 1)"
 }
 
 # Takes one parameter containing the directory to scan for Typescript projects.
@@ -156,6 +163,7 @@ for source_directory in ${source_directories}; do
     #echo "scanTypescript: Detected change (${changeDetectionReturnCode}) in ${source_directory}. Scanning Typescript source using @jqassistant/ts-lce."
 
     if [ -f "${source_directory}/tsconfig.json" ] \
+    && ! is_private_package_json "${source_directory}" \
     && scan_directory "${source_directory}" "${progress_info_source_dirs}" \
     && is_valid_scan_result "${source_directory}"
     then
@@ -163,7 +171,7 @@ for source_directory in ${source_directories}; do
         continue # successfully scanned a standard Typescript project (with tsconfig.json file). proceed with next one.
     fi
 
-    echo "scanTypescript: Info: Unsuccessful or skipped source directory scan. Scan all contained packages individually." >&2
+    echo "scanTypescript: Info: Skipped source directory scan. Scan all contained packages individually." >&2
     contained_package_directories=$( find_directories_with_package_json_file "${source_directory}" )
     #Debugging: List all package directories.
     #echo "scanTypescript: contained_package_directories:" >&2
@@ -176,7 +184,11 @@ for source_directory in ${source_directories}; do
     for contained_package_directory in ${contained_package_directories}; do
         processed_package_directories=$((processed_package_directories + 1))
         progress_info_package_dirs="${main_source_directory_name} ${progress_info_source_dirs}: ${processed_package_directories}/${total_package_directories}"
-        scan_directory "${contained_package_directory}" "${progress_info_package_dirs}"
+        if is_private_package_json "${contained_package_directory}"; then
+            echo "scanTypescript: Info: Skipping private package ${contained_package_directory}. The contained package.json is marked as private so that it won't be published." >&2
+        else
+            scan_directory "${contained_package_directory}" "${progress_info_package_dirs}"
+        fi
     done
 
     write_change_detection_file
