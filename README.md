@@ -98,7 +98,7 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 These tools are needed to run the graph visualization scripts of directory [scripts/visualization/](./scripts/visualization/) and the deprecated scripts in [graph-visualization](./graph-visualization):
 
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com)
+- [npm](https://docs.npmjs.com/about-npm)
 
 ### Additional Prerequisites for Windows
 

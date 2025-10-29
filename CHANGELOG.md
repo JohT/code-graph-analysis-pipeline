@@ -257,7 +257,7 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 ### 🚀 Features
 
 * Analyze static code structure, dependencies, metrics, ...
-* Fully automated [pipeline](./.github/workflows/code-reports.yml) from tool installation and artifact download to report generation
+* Fully automated [pipeline](./.github/workflows/public-analyze-code-graph.yml) from tool installation and artifact download to report generation
 * Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
 * Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
 * Example Analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
@@ -284,6 +284,6 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 * [External Dependencies (CSV)](./scripts/reports/ExternalDependenciesCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-csv/External_package_usage_overall.csv))
 * [Object Oriented Design Metrics (CSV)](./scripts/reports/ObjectOrientedDesignMetricsCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/object-oriented-design-metrics-csv/MainSequenceAbstractnessInstabilityDistanceJava.csv))
 * [Overview (CSV)](./scripts/reports/OverviewCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-csv/Cyclomatic_Method_Complexity.csv))
-* [Internal Dependencies - Cyclic (CSV)](./scripts/reports/PackageDependenciesCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-csv/Cyclic_Dependencies_Breakdown_Backward_Only.csv))
-* [Internal Dependencies - Interface Segregation (CSV)](./scripts/reports/PackageDependenciesCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-csv/InterfaceSegregationCandidates.csv))
+* [Internal Dependencies - Cyclic (CSV)](./scripts/reports/InternalDependenciesCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-csv/Cyclic_Dependencies_Breakdown_Backward_Only.csv))
+* [Internal Dependencies - Interface Segregation (CSV)](./scripts/reports/InternalDependenciesCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-csv/InterfaceSegregationCandidates.csv))
 * [Visibility Metrics (CSV)](./scripts/reports/VisibilityMetricsCsv.sh) ([Example](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-csv/RelativeVisibilityPerArtifact.csv))
