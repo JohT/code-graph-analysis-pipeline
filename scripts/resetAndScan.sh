@@ -13,7 +13,7 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
-JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.7.1"} # Version number of the jQAssistant command line interface. Version 1.12.2 is compatible with Neo4j v4
+JQASSISTANT_CLI_VERSION=${JQASSISTANT_CLI_VERSION:-"2.8.0"} # Version number of the jQAssistant command line interface. Version 1.12.2 is compatible with Neo4j v4
 JQASSISTANT_CLI_ARTIFACT=${JQASSISTANT_CLI_ARTIFACT:-"jqassistant-commandline-neo4jv5"} # Name of the jQAssistant Maven artifact
 JQASSISTANT_CONFIG_TEMPLATE=${JQASSISTANT_CONFIG_TEMPLATE:-"template-neo4j-remote-jqassistant.yaml"} # Name of the template file for the jqassistant configuration. Neo4j >= 2025.x: "template-neo4j-remote-jqassistant.yaml",  Neo4j v5: "template-neo4jv5-jqassistant.yaml", Neo4j v4: "template-neo4jv4-jqassistant.yaml"
 
