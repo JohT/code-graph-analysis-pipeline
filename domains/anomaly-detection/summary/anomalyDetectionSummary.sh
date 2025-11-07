@@ -177,6 +177,10 @@ anomaly_detection_finalize_report() {
     # Remove empty Markdown includes
     source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${report_include_directory}"
 
+    # Collect static Markdown includes (after cleanup to not remove one-liner)
+    cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_treemaps.template.md" "${report_include_directory}/report_no_anomaly_detection_treemaps.md"
+
+    # Assemble final report by applying includes to the main template
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report.template.md" "${FULL_REPORT_DIRECTORY}/report.template.md"
     cat "${FULL_REPORT_DIRECTORY}/report.template.md" | "${MARKDOWN_SCRIPTS_DIR}/embedMarkdownIncludes.sh" "${report_include_directory}" > "${FULL_REPORT_DIRECTORY}/anomaly_detection_report.md"
 
