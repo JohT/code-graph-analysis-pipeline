@@ -408,6 +408,7 @@ Script | Directory | Description
 | [Mark_test_modules.cypher](./Typescript_Enrichment/Mark_test_modules.cypher) | Typescript_Enrichment | Add "Test" label for modules that contain tests and test-related implementations |
 | [Remove_duplicate_CONTAINS_relations_between_files.cypher](./Typescript_Enrichment/Remove_duplicate_CONTAINS_relations_between_files.cypher) | Typescript_Enrichment | Remove duplicate CONTAINS relationships with the same properties between files |
 | [Set_localRootPath_for_modules.cypher](./Typescript_Enrichment/Set_localRootPath_for_modules.cypher) | Typescript_Enrichment | Set "rootProjectName" and some local path properties for Typescript modules |
+| [Verify_module_dependencies.cypher](./Typescript_Enrichment/Verify_module_dependencies.cypher) | Typescript_Enrichment | Verify that there are either no Typescript modules at all or that there is at least one module dependency. |
 | [Verify_projects_linked_to_npm_packages.cypher](./Typescript_Enrichment/Verify_projects_linked_to_npm_packages.cypher) | Typescript_Enrichment | Verify that all Typescript projects are linked to npm packages |
 | [ValidateAlwaysFalse.cypher](./Validation/ValidateAlwaysFalse.cypher) | Validation | Will never return any results so that the validation will always fail. This is helpful for Jupyter Notebooks that should not be executed automatically. |
 | [ValidateGitHistory.cypher](./Validation/ValidateGitHistory.cypher) | Validation | Check if there is at least one Git:Commit pointing to a Git:Change containing a Git:File from a Git:Repository |
