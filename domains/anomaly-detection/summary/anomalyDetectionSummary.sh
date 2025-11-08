@@ -178,6 +178,7 @@ anomaly_detection_finalize_report() {
     source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${report_include_directory}"
 
     # Collect static Markdown includes (after cleanup to not remove one-liner)
+    cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_dependency_data.template.md" "${report_include_directory}/report_no_dependency_data.md"
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_treemaps.template.md" "${report_include_directory}/report_no_anomaly_detection_treemaps.md"
 
     # Assemble final report by applying includes to the main template
