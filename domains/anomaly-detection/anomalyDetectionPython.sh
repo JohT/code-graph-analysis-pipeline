@@ -15,12 +15,14 @@ set -o errexit -o pipefail
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 
+MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"} # Subdirectory that contains Markdown files to be included by the Markdown template for the report.
+
 ## Get this "scripts/reports" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR:-$(CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)}
-echo "anomalyDetectionPipeline: ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR}"
+echo "anomalyDetectionPython: ANOMALY_DETECTION_SCRIPT_DIR=${ANOMALY_DETECTION_SCRIPT_DIR}"
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/../../scripts"} # Repository directory containing the shell scripts
 # Get the "cypher" query directory for gathering features.
@@ -49,7 +51,7 @@ while [[ $# -gt 0 ]]; do
       verboseMode="--verbose"
       ;;
     *)
-      echo -e "${COLOR_ERROR}anomalyDetectionPipeline: Error: Unknown option: ${key}${COLOR_DEFAULT}" >&2
+      echo -e "${COLOR_ERROR}anomalyDetectionPython: Error: Unknown option: ${key}${COLOR_DEFAULT}" >&2
       usage
       ;;
   esac
@@ -72,10 +74,10 @@ is_sufficient_data_available() {
     query_result=$( execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionNodeCount.cypher" "${@}" )
     node_count=$(get_csv_column_value "${query_result}" "node_count")
     if [ "${node_count}" -lt 15 ]; then
-        echo "anomalyDetectionPipeline: Warning: Skipping anomaly detection. Only ${node_count} ${language} ${nodeLabel} nodes. At least 15 required."
+        echo "anomalyDetectionPython: Warning: Skipping anomaly detection. Only ${node_count} ${language} ${nodeLabel} nodes. At least 15 required."
         false
     else
-        echo "anomalyDetectionPipeline: Info: Running anomaly detection with ${node_count} ${language} ${nodeLabel} nodes."
+        echo "anomalyDetectionPython: Info: Running anomaly detection with ${node_count} ${language} ${nodeLabel} nodes."
         true
     fi
 }
@@ -92,7 +94,7 @@ is_sufficient_data_available() {
 anomaly_detection_features() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
-    echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for ${nodeLabel} nodes..."
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for ${nodeLabel} nodes..."
 
     # Determine the Betweenness centrality (with the directed graph projection) if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Betweenness-Exists.cypher" \
@@ -127,7 +129,7 @@ anomaly_detection_using_python() {
     local language
     language=$( extractQueryParameter "projection_language" "${@}" )
     
-    echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Python scripts for ${language} ${nodeLabel} nodes..."
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Python scripts for ${language} ${nodeLabel} nodes..."
 
     # Within the absolute (full) report directory for anomaly detection, create a sub directory for every detailed type (Java_Package, Java_Type,...)
     local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
@@ -152,6 +154,8 @@ anomaly_detection_using_python() {
 # Required Parameters:
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_labels() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
@@ -177,10 +181,61 @@ anomaly_detection_labels() {
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
 anomaly_detection_python_reports() {
     time anomaly_detection_features "${@}"
     anomaly_detection_using_python "${@}"
     time anomaly_detection_labels "${@}"
+}
+
+# Creates the markdown file (to be included in the main summary) 
+# that contains the references to all treemap charts.
+anomaly_detection_treemap_charts_markdown_reference() {
+
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting treemap charts markdown reference generation..."
+
+    local detail_report_include_directory="${FULL_REPORT_DIRECTORY}/${MARKDOWN_INCLUDES_DIRECTORY}"
+    mkdir -p "${detail_report_include_directory}"
+
+    local markdown_reference_file_name="TreemapChartsReference.md"
+    local markdown_reference_file="${detail_report_include_directory}/${markdown_reference_file_name}"
+
+    # Write markdown references section title
+    {
+      echo "#### Treemap Charts"
+    } > "${markdown_reference_file}"
+
+    # Find all treemap chart SVG files and add them to the markdown reference file
+    find "${FULL_REPORT_DIRECTORY}" -type f -name "*Treemap*.svg" | sort | while read -r chart_file; do
+      chart_filename=$(basename -- "${chart_file}")
+      chart_filename_without_extension="${chart_filename%.*}" # Remove file extension
+      {
+        echo ""
+        echo "![${chart_filename_without_extension}](./${chart_filename})"
+      } >> "${markdown_reference_file}"
+    done
+
+    # Add a horizontal rule at the end
+    {
+      echo ""
+      echo "---"
+    } >> "${markdown_reference_file}"
+
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished treemap charts markdown reference generation..."
+}
+
+# Visualize results with treemap charts.
+# 
+# Required Parameters:
+# - projection_language=...
+#   Name of the associated programming language. Examples: "Java", "Typescript"
+anomaly_detection_treemap_charts() {
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
+    
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Visualizing ${language} results..."
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/treemapVisualizations.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
 }
 
 # Create report directory
@@ -229,6 +284,7 @@ if is_sufficient_data_available "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=we
   if createUndirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection"; then
       createDirectedJavaTypeDependencyProjection "${PROJECTION_NAME}=type-anomaly-detection-directed"
       anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=type-anomaly-detection" "${ALGORITHM_NODE}=Type" "${ALGORITHM_WEIGHT}=weight" "${ALGORITHM_LANGUAGE}=Java" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+      anomaly_detection_treemap_charts "${ALGORITHM_LANGUAGE}=Java"
   fi
 fi
 
@@ -238,12 +294,17 @@ if is_sufficient_data_available "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=
   if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"; then
       createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
       anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+      anomaly_detection_treemap_charts "${ALGORITHM_LANGUAGE}=Module"
   fi
 fi
+
+# -- Markdown summary  ---------------------------
+
+anomaly_detection_treemap_charts_markdown_reference
 
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
-echo "anomalyDetectionPipeline: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
+echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
