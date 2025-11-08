@@ -28,13 +28,13 @@ The goal is to detect potential **software quality, design, and architecture iss
 
 ### 1.3 Overview Charts
 
-<!-- include:TreemapChartsReference.md|report_no_anomaly_detection_treemaps.md> -->
+<!-- include:TreemapChartsReference.md|report_no_anomaly_detection_treemaps.md -->
 
 ## 2. Deep Dives by Abstraction Level
 
 Each abstraction level includes anomaly statistics, SHAP feature importance, archetype distribution, and example anomalies.
 
-<!-- include:AnomalyDetectionDeepDive.md -->
+<!-- include:AnomalyDetectionDeepDive.md|report_no_dependency_data.md -->
 
 ## 3. Plot Interpretation Guide
 
