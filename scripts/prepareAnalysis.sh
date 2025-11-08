@@ -94,6 +94,15 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
+dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_module_dependencies.cypher" "${@}")
+if ! is_csv_column_greater_zero "${dataVerificationResult}" "typescriptModuleDependenciesValid"; then
+    # Warning: Very small Typescript projects might not have dependencies between their modules.
+    #          Therefore, it will only be a warning even though for example anomaly detection will not lead to any useable results.
+    echo -e "${COLOR_YELLOW}prepareAnalysis: Data verification warning: Typescript module dependencies are missing! Results based on those will be missing or empty:${COLOR_DEFAULT}"
+    echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
+    # Since this is now only a warning, execution will be continued.
+fi
+
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
 execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
 execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
