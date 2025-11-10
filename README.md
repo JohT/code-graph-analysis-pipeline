@@ -28,11 +28,14 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ### :newspaper: News
 
+- November 2025: Treemap charts for anomalies and archetypes
+- October 2025: Graph visualizations for anomaly archetypes
+- October 2025: Anomaly archetypes with markdown summary
 - August 2025: Association rule learning for co-changing files in git history
 - August 2025: Anomaly detection powered by unsupervised machine learning and explainable AI
 - May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
 
-### :notebook: Jupyter Notebook Reports
+### :notebook: Jupyter Notebook and Python Reports
 
 Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
 
@@ -45,6 +48,7 @@ Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [co
 - [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
 - [Visibility Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
 - [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
+- [Java Archetypes Treemap](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/JavaTreemap2ArchetypesOverviewPerDirectory.svg) ([Python Script](./domains/anomaly-detection/treemapVisualizations.py))
 
 ### :blue_book: Graph Data Science Reports
 
@@ -65,6 +69,7 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 - [Java Artifact Build Levels](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./cypher/Internal_Dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
 - [Java Artifact Longest Path Contributors](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./cypher/Path_Finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
+- [Java Package Top #1 Authority Archetype and contributing packages](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/Java_Package/GraphVisualizations/TopAuthority1.svg) ([Query](./domains/anomaly-detection/labels/AnomalyDetectionArchetypeAuthority.cypher), [Source Script](./domains/anomaly-detection/graphs/anomalyDetectionGraphs.sh))
 
 ## :book: Blog Articles
 
