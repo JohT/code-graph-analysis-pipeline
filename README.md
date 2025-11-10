@@ -2,7 +2,11 @@
 
 <img src="./images/nano-banana GraphPipeline-1c.png" align="left" hspace="15" width="180">
 
-Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.github.io/jqassistant/current), it now also [supports Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) and is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+This repository provides an automated code graph analysis pipeline built on [jQAssistant](https://jqassistant.github.io/jqassistant/current) and [Neo4j](https://neo4j.com). It supports Java and experimental TypeScript analysis, capturing both the structure and evolution of your code base.
+
+Ever wondered which libraries matter most, how your modules build on each other, which parts have few contributors, which files change together, or where structural anomalies emerge?
+
+This project helps uncover such patterns through graph-based analysis, visualization, and machine learning — offering hundreds of expert-level reports for deep code insights.
 
 ---
 
