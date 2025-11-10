@@ -2,7 +2,11 @@
 
 <img src="./images/nano-banana GraphPipeline-1c.png" align="left" hspace="15" width="180">
 
-Contained within this repository is a comprehensive and automated code graph analysis pipeline. While initially designed to support Java through the utilization of [jQAssistant](https://jqassistant.github.io/jqassistant/current), it now also [supports Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) and is open to extension for further programming languages. The graph database [Neo4j](https://neo4j.com) serves as the foundation for storing and querying the graph, which encompasses all the structural intricacies of the analyzed code. Additionally, Neo4j's [Graph Data Science](https://neo4j.com/product/graph-data-science) provides additional algorithms like community detection to analyze the code structure. The generated reports offer flexibility, ranging from simple query results presented as CSV files to more elaborate Jupyter Notebooks converted to Markdown or PDF formats.
+This repository provides an automated code graph analysis pipeline built on [jQAssistant](https://jqassistant.github.io/jqassistant/current) and [Neo4j](https://neo4j.com). It supports Java and experimental TypeScript analysis, capturing both the structure and evolution of your code base.
+
+Ever wondered which libraries matter most, how your modules build on each other, which parts have few contributors, which files change together, or where structural anomalies emerge?
+
+This project helps uncover such patterns through graph-based analysis, visualization, and machine learning — offering hundreds of expert-level reports for deep code insights.
 
 ---
 
@@ -28,11 +32,15 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ### :newspaper: News
 
+- November 2025: Removed deprecated (since version 2.x) "graph-visualization" node package
+- November 2025: Treemap charts for anomalies and archetypes
+- October 2025: Graph visualizations for anomaly archetypes
+- October 2025: Anomaly archetypes with markdown summary
 - August 2025: Association rule learning for co-changing files in git history
 - August 2025: Anomaly detection powered by unsupervised machine learning and explainable AI
 - May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
 
-### :notebook: Jupyter Notebook Reports
+### :notebook: Jupyter Notebook and Python Reports
 
 Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
 
@@ -45,6 +53,7 @@ Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [co
 - [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
 - [Visibility Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./jupyter/VisibilityMetricsJava.ipynb)).
 - [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./jupyter/Wordcloud.ipynb)).
+- [Java Archetypes Treemap](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/JavaTreemap2ArchetypesOverviewPerDirectory.svg) ([Python Script](./domains/anomaly-detection/treemapVisualizations.py))
 
 ### :blue_book: Graph Data Science Reports
 
@@ -65,6 +74,7 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 - [Java Artifact Build Levels](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./cypher/Internal_Dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
 - [Java Artifact Longest Path Contributors](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./cypher/Path_Finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
+- [Java Package Top #1 Authority Archetype and contributing packages](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/Java_Package/GraphVisualizations/TopAuthority1.svg) ([Query](./domains/anomaly-detection/labels/AnomalyDetectionArchetypeAuthority.cypher), [Source Script](./domains/anomaly-detection/graphs/anomalyDetectionGraphs.sh))
 
 ## :book: Blog Articles
 
@@ -92,13 +102,6 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 - For Conda, use for example [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows).
 - To use venv, no additional installation is needed. For that the environment variable `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` needs to be set to `'true'`.
 - Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
-
-### Additional Prerequisites for Graph Visualization
-
-These tools are needed to run the graph visualization scripts of directory [scripts/visualization/](./scripts/visualization/) and the deprecated scripts in [graph-visualization](./graph-visualization):
-
-- [Node.js](https://nodejs.org/en)
-- [npm](https://docs.npmjs.com/about-npm)
 
 ### Additional Prerequisites for Windows
 
@@ -158,7 +161,6 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   - [scikit-learn](https://scikit-learn.org)
   - [optuna](https://optuna.org)
   - [SHAP](https://github.com/shap/shap)
-- [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 - [HPCC-Systems (High Performance Computing Cluster) Web-Assembly (JavaScript)](https://github.com/hpcc-systems/hpcc-js-wasm) containing a wrapper for GraphViz to visualize graph structures.
 - [GraphViz](https://gitlab.com/graphviz/graphviz) for CLI Graph Visualization
 - [Check links in markdown documentation (GitHub workflow)](./.github/workflows/internal-check-links-in-documentation.yml) uses [markdown-link-check](https://github.com/tcort/markdown-link-check).
