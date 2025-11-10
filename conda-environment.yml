@@ -16,14 +16,14 @@ dependencies:
   - pip=25.0.1
   - setuptools=80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
   - typing-extensions=4.12.2 # Also needed for opentsne and Python >= 3.12
-  - opentsne=1.0.2 # to visualize node embeddings in 2D (t-SNE dimensionality reduction)
+  - opentsne=1.0.4 # to visualize node embeddings in 2D (t-SNE dimensionality reduction)
   - wordcloud=1.9.4
   - monotonic=1.6
   - plotly=6.3.1
   - python-kaleido=1.0.0 # To render plotly plots. Static image export for web-based visualization libraries.
   - scikit-learn=1.6.1 # For anomaly detection HDBSCAN clustering, scores like AMI, and others 
   - seaborn=0.13.2 # To visualize clustering results
-  - optuna=4.5.0
+  - optuna=4.6.0
   - umap-learn=0.5.9 # to visualize node embeddings in 2D (UMAP dimensionality reduction)
   - shap=0.48.0
   - pip:
