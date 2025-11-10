@@ -19,7 +19,7 @@ This project helps uncover such patterns through graph-based analysis, visualiza
 - Fully automated [pipeline for Typescript](./.github/workflows/internal-typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
 - Easily integrable into your [continuous integration pipeline](./INTEGRATION.md)
-- More than 130 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
+- More than 200 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
 - Jupyter notebook reports for dependencies, metrics, visibility and many more
 - Anomaly detection powered by unsupervised machine learning and explainable AI
 - Graph structure visualization
