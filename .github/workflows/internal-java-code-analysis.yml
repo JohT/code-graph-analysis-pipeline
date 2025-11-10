@@ -52,7 +52,7 @@ jobs:
     env: 
       PROJECT_NAME: AxonFramework
       # Version variable names matches renovate.json configuration entry
-      AXON_FRAMEWORK_VERSION: 4.12.1
+      AXON_FRAMEWORK_VERSION: 4.12.2
 
     steps:
     - name: Checkout GIT Repository
