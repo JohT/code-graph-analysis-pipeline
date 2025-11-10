@@ -44,7 +44,6 @@ JQASSISTANT_CLI_VERSION               | 2.8.0                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4j-latest-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
-GRAPH_VISUALIZATION_DIRECTORY         | ${SCRIPTS_DIR}/../graph-visualization | Repository directory containing the Jupyter Notebooks |
 VISUALIZATION_SCRIPTS_DIR             | ${SCRIPTS_DIR}/visualization        | Repository directory containing the shell scripts for visualization |
 DOMAINS_DIRECTORY                     | ${REPORTS_SCRIPT_DIR}/../../domains |  |
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
