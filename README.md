@@ -8,6 +8,8 @@ Ever wondered which libraries matter most, how your modules build on each other,
 
 This project helps uncover such patterns through graph-based analysis, visualization, and machine learning — offering hundreds of expert-level reports for deep code insights.
 
+Curious? Explore the examples at [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples) and get started with [GETTING_STARTED.md](./GETTING_STARTED.md) :rocket:
+
 ---
 
 ## :sparkles: Features
