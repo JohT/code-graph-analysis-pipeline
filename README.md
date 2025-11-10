@@ -28,6 +28,7 @@ Contained within this repository is a comprehensive and automated code graph ana
 
 ### :newspaper: News
 
+- November 2025: Removed deprecated (since version 2.x) "graph-visualization" node package
 - November 2025: Treemap charts for anomalies and archetypes
 - October 2025: Graph visualizations for anomaly archetypes
 - October 2025: Anomaly archetypes with markdown summary
@@ -98,13 +99,6 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 - To use venv, no additional installation is needed. For that the environment variable `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` needs to be set to `'true'`.
 - Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
 
-### Additional Prerequisites for Graph Visualization
-
-These tools are needed to run the graph visualization scripts of directory [scripts/visualization/](./scripts/visualization/) and the deprecated scripts in [graph-visualization](./graph-visualization):
-
-- [Node.js](https://nodejs.org/en)
-- [npm](https://docs.npmjs.com/about-npm)
-
 ### Additional Prerequisites for Windows
 
 - Add this line to your `~/.bashrc` file if you are using Anaconda3: `/c/ProgramData/Anaconda3/etc/profile.d/conda.sh`. Try to find a similar script for other conda package managers or versions.
@@ -163,7 +157,6 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   - [scikit-learn](https://scikit-learn.org)
   - [optuna](https://optuna.org)
   - [SHAP](https://github.com/shap/shap)
-- [Graph Visualization](./graph-visualization/README.md) uses [node.js](https://nodejs.org/de) and the dependencies listed in [package.json](./graph-visualization/package.json).
 - [HPCC-Systems (High Performance Computing Cluster) Web-Assembly (JavaScript)](https://github.com/hpcc-systems/hpcc-js-wasm) containing a wrapper for GraphViz to visualize graph structures.
 - [GraphViz](https://gitlab.com/graphviz/graphviz) for CLI Graph Visualization
 - [Check links in markdown documentation (GitHub workflow)](./.github/workflows/internal-check-links-in-documentation.yml) uses [markdown-link-check](https://github.com/tcort/markdown-link-check).
