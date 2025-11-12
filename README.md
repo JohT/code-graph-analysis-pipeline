@@ -38,7 +38,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - November 2025: Treemap charts for anomalies and archetypes
 - October 2025: Graph visualizations for anomaly archetypes
 - October 2025: Anomaly archetypes with markdown summary
-- August 2025: Association rule learning for co-changing files in git history
+- August 2025: Association rule mining for co-changing files in git history
 - August 2025: Anomaly detection powered by unsupervised machine learning and explainable AI
 - May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
 
