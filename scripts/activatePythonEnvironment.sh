@@ -72,7 +72,7 @@ VENV_DIRECTORY=".venv"
 if [ ! -d "${ROOT_DIRECTORY}/${VENV_DIRECTORY}" ]; then
     deactivate_conda_if_necessary
     echo "activatePythonEnvironment: Creating ${VENV_DIRECTORY} environment..."
-    python3 -m venv "${ROOT_DIRECTORY}/${VENV_DIRECTORY}"
+    python -m venv "${ROOT_DIRECTORY}/${VENV_DIRECTORY}"
 else
     echo "activatePythonEnvironment: Already created ${VENV_DIRECTORY} environment."
 fi
