@@ -85,6 +85,8 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 ## :hammer_and_wrench: Prerequisites
 
+Run [scripts/checkCompatibility.sh](./scripts/checkCompatibility.sh) to check if all required dependencies are installed and available in your environment.
+
 - Java 21 is [required since Neo4j 2025.01](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java). See also [Changes from Neo4j 5 to 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade).
 - Java 17 is [required for Neo4j 5](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java).
 - On Windows it is recommended to use the git bash provided by [git for windows](https://github.com/git-guides/install-git#install-git-on-windows).
