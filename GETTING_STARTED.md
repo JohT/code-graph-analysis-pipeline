@@ -6,7 +6,7 @@ This document describes the steps to get started as quickly as possible.
 
 ## 🛠 Prerequisites
 
-Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisites) in the [README](./README.md) file for what is required to run the scripts.
+Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisites) in the [README](./README.md) file for what is required to run the scripts or simply run the [checkCompatibility.sh](./scripts/checkCompatibility.sh) script to verify that your environment is set up correctly.
 
 ## The easiest way to get started
 
@@ -39,8 +39,6 @@ Use these optional command line options as needed:
 ## Start an own analysis
 
 ### 1. Setup
-
-- Have a look at the [prerequisites](./README.md#hammer_and_wrench-prerequisites).
 
 - Choose an initial password for Neo4j if not already done.
 
@@ -96,10 +94,16 @@ Use these optional command line options as needed:
   ./../../scripts/analysis/analyze.sh --report Python
   ```
 
-- Graph visualizations when Node.js and npm are installed:
+- Graph visualizations with GraphViz installed or npx to run it indirectly:
 
   ```shell
   ./../../scripts/analysis/analyze.sh --report Visualization
+  ```
+
+- Markdown reports:
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --report Markdown
   ```
 
 - All reports with Python, Conda (or venv), Node.js and npm installed:
