@@ -1,0 +1,194 @@
+digraph AnomalyDetectionPipeline {
+    rankdir=LR;
+    node [fontname="Helvetica", fontsize=10];
+ 
+    // Leiden community detection
+    subgraph cluster_leiden {
+        label="Leiden Community Detection";
+        style=filled; color=lightblue;
+        node [shape=box, style=filled, fillcolor=white];
+        
+        Tuning_Leiden    [label="Tuning\n(Optuna)"];
+        Leiden_Gamma     [label="gamma", shape=diamond]
+        Leiden_Theta     [label="theta", shape=diamond]
+        Leiden_Algorithm [label="Leiden Community Detection"];
+        CommunityId [label="Community", shape=ellipse];
+    }
+    
+    // --- Leiden Community Detection relationships ---
+    Tuning_Leiden -> Leiden_Gamma;
+    Tuning_Leiden -> Leiden_Theta;
+    Leiden_Gamma -> Leiden_Algorithm
+    Leiden_Theta -> Leiden_Algorithm
+    Leiden_Algorithm -> Tuning_Leiden [label="modularity", style="dashed"]
+    Leiden_Algorithm -> Tuning_Leiden [label="size", style="dashed"]
+    Leiden_Algorithm -> CommunityId;
+    
+    // Fast Random Projection (FastRP)
+    subgraph cluster_fastRP {
+        label="Fast Random Projection (FastRP)";
+        style=filled; color=lightpink;
+        node [shape=box, style=filled, fillcolor=white];
+
+        Tuning_FastRP    [label="Tuning\n(Optuna)"];
+        FastRP_Dimension [label="dimension", shape=diamond];
+        FastRP_Normalization_Strength [label="normalization strength", shape="diamond"];
+        FastRP_Forth_Iteration_Weight [label="forth iteration weight", shape="diamond"];
+        FastRP_Algorithm [label="FastRP"];
+        NodeEmbeddings   [label="Node Embeddings", shape=ellipse];
+    }
+
+    // --- FastRP relationships ---
+    Tuning_FastRP -> FastRP_Dimension;
+    Tuning_FastRP -> FastRP_Normalization_Strength;
+    Tuning_FastRP -> FastRP_Forth_Iteration_Weight;
+    FastRP_Dimension -> FastRP_Algorithm;
+    FastRP_Normalization_Strength -> FastRP_Algorithm;
+    FastRP_Forth_Iteration_Weight -> FastRP_Algorithm
+    FastRP_Algorithm -> Tuning_FastRP [label="adjusted mutual info score\n(incl. preview clustering)", style="dashed"]
+    FastRP_Algorithm -> NodeEmbeddings;
+    
+    // Uniform Manifold Approximation and Projection (UMAP)
+    subgraph cluster_UMAP {
+        label="Uniform Manifold Approximation and Projection (UMAP)\nDimensionality Reduction for Visualization";
+        style=filled; color=lightgrey;
+        node [shape=box, style=filled, fillcolor=white];
+
+        UMAP_Algorithm   [label="UMAP"];
+        UMAP_Coordinates [label="2D Coordinates", shape=ellipse];
+    }
+
+    // UMAP relationships
+    NodeEmbeddings -> UMAP_Algorithm
+    UMAP_Algorithm -> UMAP_Coordinates
+
+    // HDBSCAN clustering and tuning
+    subgraph cluster_hdbscan {
+        label="Hierarchical Density-Based Spatial Clustering (HDBSCAN)";
+        style=filled; color=lightgoldenrod;
+        node [shape=box, style=filled, fillcolor=white];
+
+        Tuning_HDBSCAN      [label="Tuning\n(Optuna)"];
+        HDBSCAN_Node        [label="HDBSCAN"];
+        HDBSCAN_Min_Cluster_Size [label="Min Cluster Size", shape=diamond];
+        HDBSCAN_Min_Samples [label="Min Samples", shape=diamond];
+
+        ClusterLabel                     [label="Label", shape=ellipse];
+        ClusterRadius                    [label="Radius\n(avg,max)", shape=ellipse];
+        ClusterSize                      [label="Size", shape=ellipse];
+        NormDistToMedoid                 [label="Normalized Distance\nTo Medoid", shape=ellipse];
+        ClusterNoise                     [label="Noise\n(label=-1)", shape=ellipse];
+        ClusterProbability               [label="Probability", shape=ellipse];
+        ClusterApproximationOutlierScore [label="Approximation\nOutlierScore\n(= 1 - Probability)", shape=ellipse];
+    }
+
+    // --- Inputs into HDBSCAN ---
+    CommunityId -> Tuning_HDBSCAN [label="reference"];
+    NodeEmbeddings -> HDBSCAN_Node;
+
+    Tuning_HDBSCAN -> HDBSCAN_Min_Cluster_Size
+    Tuning_HDBSCAN -> HDBSCAN_Min_Samples
+    HDBSCAN_Min_Cluster_Size -> HDBSCAN_Node;
+    HDBSCAN_Min_Samples -> HDBSCAN_Node;
+
+    HDBSCAN_Node -> Tuning_HDBSCAN [label="adjusted mutual info score", style=dashed];
+
+    // HDBSCAN outputs (cluster features)
+    HDBSCAN_Node -> ClusterLabel;
+    HDBSCAN_Node -> ClusterNoise;
+    HDBSCAN_Node -> ClusterRadius;
+    HDBSCAN_Node -> ClusterSize;
+    HDBSCAN_Node -> NormDistToMedoid;
+    HDBSCAN_Node -> ClusterProbability;
+    HDBSCAN_Node -> ClusterApproximationOutlierScore;
+
+    // Graph algorithm based features
+    subgraph cluster_graph_features {
+        label="Graph (Algorithm) Features";
+        style=filled; color=lightcyan;
+        node [shape=ellipse, style=filled, fillcolor=white];
+        
+        ArticleRank                [label="ArticleRank"];
+        PageRank                   [label="PageRank"];
+        PageRank_minus_ArticleRank [label="PageRank -\nArticleRank"];
+        BetweennessCentrality      [label="Betweenness\nCentrality"];
+        LocalClusteringCoefficient [label="Local Clustering\nCoefficient"];
+        Degree                     [label="Degree\n(in, out, sum)"];
+    }
+
+    // Anomaly detection model area
+    subgraph cluster_anomaly {
+        label="Anomaly Detection Model";
+        style=filled; color=lightgreen; penwidth=4; pencolor=green; margin="50,50";
+        node [shape=box, style=filled, fillcolor=white];
+
+        TuningAnomaly        [label="Tuning\n(Optuna)"];
+        IsolationMinCluster  [label="Min Cluster Size", shape=diamond];
+        IsolationEstimators  [label="n estimators", shape=diamond];
+        
+        ProxyEstimators      [label="n estimators", shape=diamond];
+        ProxyMaxDepth        [label="max depth", shape=diamond];
+        
+        AnomalyStandardizer  [label="Standardizer"]
+        AnomalyPCA           [label="Principal Component\nAnalysis (PCA)"]
+        IsolationForest      [label="Isolation Forest\nAnomaly Detector", margin="0.4,0.4"];
+        ProxyRandomForest    [label="RandomForest\n(Proxy)"];
+        AnomalyScore         [label="Score", shape=ellipse];
+        AnomalyLabel         [label="Label", shape=ellipse];
+    }
+
+    // Embeddings feed anomaly model
+    NodeEmbeddings -> AnomalyPCA;
+
+    // HDBSCAN-derived features feed anomaly model
+    ClusterRadius -> AnomalyStandardizer;
+    NormDistToMedoid -> AnomalyStandardizer;
+    ClusterApproximationOutlierScore -> AnomalyStandardizer;
+
+    // Graph Algorithm Features feed anomaly model
+    ArticleRank -> AnomalyStandardizer;
+    PageRank -> AnomalyStandardizer;
+    PageRank_minus_ArticleRank -> AnomalyStandardizer;
+    BetweennessCentrality -> AnomalyStandardizer;
+    LocalClusteringCoefficient -> AnomalyStandardizer;
+    Degree -> AnomalyStandardizer;
+
+    // Proxy RandomForest used as a backing/tuning model for the Isolation Forest
+    TuningAnomaly -> IsolationMinCluster;
+    TuningAnomaly -> IsolationEstimators;
+    IsolationMinCluster -> IsolationForest
+    IsolationEstimators -> IsolationForest
+
+    TuningAnomaly -> ProxyEstimators
+    TuningAnomaly -> ProxyMaxDepth
+    ProxyEstimators -> ProxyRandomForest
+    ProxyMaxDepth -> ProxyRandomForest
+
+    AnomalyStandardizer -> IsolationForest;
+    AnomalyPCA          -> IsolationForest;
+    IsolationForest     -> ProxyRandomForest [label="reference", style="dashed"];
+    ProxyRandomForest   -> TuningAnomaly [label="f1 score\n(cross validation)", style="dashed"];
+
+    IsolationForest -> AnomalyLabel
+    IsolationForest -> AnomalyScore
+
+    // Explainable AI / SHAP
+    subgraph cluster_explainability {
+        label="Explainable AI (SHAP)";
+        style=filled; color=lavender;
+        node [shape=note, style=filled, fillcolor=white];
+        
+        SHAP [label="SHAP TreeExplainer"];
+
+        SHAP_Values [label="Top SHAP Values", shape=ellipse];
+        SHAP_Features [label="Top Features", shape=ellipse];
+        SHAP_Embedding_Sum [label="Node Embeddings\nSHAP Sum", shape=ellipse];
+    }
+
+    // Explainability connections (RandomForest -> SHAP)
+    ProxyRandomForest -> SHAP;
+    SHAP -> SHAP_Values;
+    SHAP -> SHAP_Features;
+    SHAP -> SHAP_Embedding_Sum;
+
+}
