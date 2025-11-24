@@ -87,5 +87,6 @@ Script | Directory | Description
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
 | [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
 | [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
+| [renderGraphVizSVG.sh](./visualization/renderGraphVizSVG.sh) | visualization | Renders the given GraphViz file as a SVG image. |
 | [visualizeQueryResults.sh](./visualization/visualizeQueryResults.sh) | visualization | Visualizes the Cypher query result (CSV format) using GraphViz and outputs it as SVG image. |
 | [waitForNeo4jHttpFunctions.sh](./waitForNeo4jHttpFunctions.sh) |  | Waits until the HTTP Transactions API of Neo4j Graph Database is available. |
