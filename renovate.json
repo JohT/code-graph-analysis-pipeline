@@ -178,6 +178,7 @@
       "fileMatch": [
         "^scripts/[^/]*\\.sh$",
         "^scripts/visualization/[^/]*\\.sh$",
+        "^domains/anomaly-detection/documentation/[^/]*\\.sh$",
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
         "(^|\\/)action\\.ya?ml$]"
       ],

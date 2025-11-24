@@ -23,6 +23,8 @@ MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"} # Subdire
 # This way non-standard tools like readlink aren't needed.
 ANOMALY_DETECTION_SUMMARY_DIR=${ANOMALY_DETECTION_SUMMARY_DIR:-$(CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)}
 #echo "anomalyDetectionSummary: ANOMALY_DETECTION_SUMMARY_DIR=${ANOMALY_DETECTION_SUMMARY_DIR}"
+ANOMALY_DETECTION_DOCS_DIR="${ANOMALY_DETECTION_SUMMARY_DIR}/../documentation"
+#echo "anomalyDetectionSummary: ANOMALY_DETECTION_DOCS_DIR=${ANOMALY_DETECTION_DOCS_DIR}"
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${ANOMALY_DETECTION_SUMMARY_DIR}/../../../scripts"} # Repository directory containing the shell scripts
 
@@ -180,6 +182,7 @@ anomaly_detection_finalize_report() {
     # Collect static Markdown includes (after cleanup to not remove one-liner)
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_dependency_data.template.md" "${report_include_directory}/report_no_dependency_data.md"
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report_no_anomaly_detection_treemaps.template.md" "${report_include_directory}/report_no_anomaly_detection_treemaps.md"
+    cp -f "${ANOMALY_DETECTION_DOCS_DIR}/Architecture.svg" "${FULL_REPORT_DIRECTORY}/AnomalyDetectionArchitecture.svg"
 
     # Assemble final report by applying includes to the main template
     cp -f "${ANOMALY_DETECTION_SUMMARY_DIR}/report.template.md" "${FULL_REPORT_DIRECTORY}/report.template.md"

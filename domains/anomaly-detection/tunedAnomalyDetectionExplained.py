@@ -37,9 +37,10 @@ from optuna import Study, create_study
 
 import shap  # Explainable AI tool
 
+import umap # Dimensionality reduction for visualization
 import matplotlib.pyplot as plot
 
-from visualization import annotate_each, annotate_each_with_index, scale_marker_sizes, zoom_into_center_while_preserving_top_scores
+from visualization import annotate_each, annotate_each_with_index, scale_marker_sizes, zoom_into_center_while_preserving_top_scores, plot_annotation_style
 
 class Parameters:
     required_parameters_ = ["projection_node_label"]
@@ -149,10 +150,17 @@ def get_file_path(name: str, parameters: Parameters, extension: str = 'svg') -> 
     return name
 
 
+def get_neo4j_password() -> str:
+    password = os.environ.get("NEO4J_INITIAL_PASSWORD")
+    if password is None:
+        raise RuntimeError("Environment variable NEO4J_INITIAL_PASSWORD is not set. Please set it to the Neo4j password.")
+    return password
+
+
 def get_graph_database_driver() -> Driver:
     driver = GraphDatabase.driver(
         uri="bolt://localhost:7687",
-        auth=("neo4j", os.environ.get("NEO4J_INITIAL_PASSWORD"))
+        auth=("neo4j", get_neo4j_password())
     )
     driver.verify_connectivity()
     return driver
@@ -544,6 +552,34 @@ def add_anomaly_detection_results_to_features(
     return features
 
 
+def prepare_features_for_2d_visualization(features: np.ndarray, anomaly_detection_results: pd.DataFrame) -> pd.DataFrame:
+    """
+    Reduces the dimensionality of the features down to two dimensions for 2D visualization using UMAP.
+    see https://umap-learn.readthedocs.io
+    """
+
+    # Check if features are empty
+    if features is None or len(features) == 0:
+        print("No feature data available")
+        return anomaly_detection_results
+
+    # Check if features and anomaly_detection_results have compatible lengths
+    if features.shape[0] != anomaly_detection_results.shape[0]:
+        raise ValueError("Features and anomaly_detection_results must have the same number of samples.")
+
+    # Use UMAP to reduce the dimensionality to 2D for visualization
+    umap_reducer = umap.UMAP(n_components=2, min_dist=0.3, random_state=47, n_jobs=1)
+    two_dimensional_features = umap_reducer.fit_transform(features)
+    
+    # Convert to dense numpy array (works for both sparse and dense input)
+    feature_coordinates = np.asarray(two_dimensional_features)
+
+    anomaly_detection_results['featureVisualizationX'] = feature_coordinates[:, 0]
+    anomaly_detection_results['featureVisualizationY'] = feature_coordinates[:, 1]
+
+    return anomaly_detection_results
+
+
 def get_top_10_anomalies(
         anomaly_detected_features: pd.DataFrame,
         anomaly_label_column: str = "anomalyLabel",
@@ -609,7 +645,7 @@ def plot_anomalies(
     cluster_non_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] != -1]
 
     plot.figure(figsize=(10, 10))
-    plot.title(f"{title_prefix} (size={size_column}, main-color=cluster, red=anomaly, green=non-anomaly)", pad=20)
+    plot.title(f"{title_prefix} Anomalies (size={size_column}, main-color=cluster, red=anomaly, green=non-anomaly)", pad=20)
 
     # Plot noise (from clustering)
     plot.scatter(
@@ -678,6 +714,93 @@ def plot_anomalies(
     plot.close()
 
 
+def plot_features_with_anomalies(
+    features_to_visualize: pd.DataFrame,
+    title_prefix: str,
+    plot_file_path: str,
+    code_unit_column: str = "shortCodeUnitName",
+    cluster_label_column: str = "clusterLabel",
+    anomaly_label_column: str = "anomalyLabel",
+    anomaly_score_column: str = "anomalyScore",
+    size_column: str = "articleRank",
+    x_position_column: str = 'featureVisualizationX',
+    y_position_column: str = 'featureVisualizationY',
+    annotate_top_n_anomalies: int = 5,
+    annotate_fully_top_n_anomalies: int = 3,
+) -> None:
+    
+    if features_to_visualize.empty:
+        print("No projected data to plot available")
+        return
+    
+    def truncate(text: str, max_length: int = 22):
+        if len(text) <= max_length:
+            return text
+        return text[:max_length - 3] + "..."
+
+    features_to_visualize.loc[:, size_column + '_scaled'] = scale_marker_sizes(features_to_visualize[size_column])
+    def get_common_plot_parameters(data: pd.DataFrame) -> dict:
+        return {
+            "x": data[x_position_column],
+            "y": data[y_position_column],
+            "s": data[size_column + '_scaled'],
+        }
+    cluster_anomalies = features_to_visualize[features_to_visualize[anomaly_label_column] == 1]
+    cluster_without_anomalies = features_to_visualize[features_to_visualize[anomaly_label_column] != 1]
+    cluster_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] == -1]
+    cluster_non_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] != -1]
+
+    plot.figure(figsize=(10, 10))
+    plot.title(f"{title_prefix} Anomaly Detection Features (size={size_column}, red=anomaly, blue=noise)", pad=20)
+
+    # Plot noise (from clustering)
+    plot.scatter(
+        **get_common_plot_parameters(cluster_noise),
+        color='lightblue',
+        alpha=0.4,
+        label='Noise'
+    )
+
+    # Plot clusters
+    plot.scatter(
+        **get_common_plot_parameters(cluster_non_noise),
+        color='lightgrey',
+        alpha=0.6,
+        label='Clusters'
+    )
+
+    # Plot anomalies
+    plot.scatter(
+        **get_common_plot_parameters(cluster_anomalies),
+        c=cluster_anomalies[anomaly_score_column],
+        cmap="Reds",
+        alpha=0.95,
+        label='Anomaly',
+    )
+
+    # Annotate top anomalies
+    anomalies = cluster_anomalies.sort_values(by=anomaly_score_column, ascending=False).reset_index(drop=True).head(annotate_top_n_anomalies)
+    anomalies_in_reversed_order = anomalies.iloc[::-1] # plot most important annotations last to overlap less important ones
+    for dataframe_index, row in anomalies_in_reversed_order.iterrows():
+        index = typing.cast(int, dataframe_index)
+        text = f"{index + 1}"
+        xytext = (5, 5)
+        if index < annotate_fully_top_n_anomalies:
+            text = f"{text}: {truncate(row[code_unit_column])}"
+            xytext = (5, 5 + (index % 4) * 12)
+
+        plot.annotate(
+            text=text,
+            xy=(row[x_position_column], row[y_position_column]),
+            xytext=xytext,
+            color='red',
+            **plot_annotation_style
+        )
+
+    plot.savefig(plot_file_path)
+    plot.close()
+
+    
 DType = typing.TypeVar("DType", bound=np.generic)
 Numpy_Array = numpy_typing.NDArray[DType]
 Two_Dimensional_Vector = typing.Annotated[Numpy_Array, typing.Literal[2]]
@@ -1050,8 +1173,19 @@ if parameters.is_verbose():
 
 plot_anomalies(
     features_to_visualize=features,
-    title_prefix="Java Package Anomalies",
+    title_prefix=parameters.get_title_prefix(),
     plot_file_path=get_file_path("Anomalies", parameters)
+)
+
+features = prepare_features_for_2d_visualization(
+    features_prepared,
+    features
+)
+
+plot_features_with_anomalies(
+    features_to_visualize=features,
+    title_prefix=parameters.get_title_prefix(),
+    plot_file_path=get_file_path("AnomalyDetectionFeatures", parameters),
 )
 
 if parameters.is_verbose():
