@@ -444,7 +444,7 @@ Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJu
 - [Jupyter Notebook - Using as a command line tool](https://nbconvert.readthedocs.io/en/latest/usage.html)
 - [Jupyter Notebook - Installing TeX for PDF conversion](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex)
 - [Jupyter Notebook Format - Metadata](https://ipython.readthedocs.io/en/3.x/notebook/nbformat.html#metadata)
-- [Integrate Neo4j with Jupyter Notebook](https://medium.com/@technologydata25/connect-neo4j-to-jupyter-notebook-c178f716d6d5)
+- [Bite-Sized Neo4j for Data Scientists](https://neo4j.com/video/bite-sized-neo4j-for-data-scientists)
 - [Hello World](https://nicolewhite.github.io/neo4j-jupyter/hello-world.html)
 - [Managing environments with Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 - [Neo4j - Download](https://neo4j.com/download-center)
