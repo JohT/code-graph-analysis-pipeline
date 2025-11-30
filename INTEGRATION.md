@@ -33,6 +33,7 @@ The workflow parameters are as follows:
 
 - **analysis-name**: The name of the project to analyze. Example: MyProject-1.0.0. This parameter is required and should be a string.
 - **artifacts-upload-name**: The name of the artifacts uploaded with [actions/upload-artifact](https://github.com/actions/upload-artifact/tree/65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08) containing the content of the 'artifacts' directory for the analysis. This is used to analyze Java JARs, WARs, EARs, etc. This parameter is optional and defaults to an empty string.
+- **maven-artifacts**: Comma separated list of Maven artifact coordinates (groupId:artifactId:version) to download from Maven Central for the analysis. This is used to analyze Java artifacts without having to upload them as build artifacts. This parameter is optional and defaults to an empty string.
 - **sources-upload-name**: The name of the sources uploaded with [actions/upload-artifact](https://github.com/actions/upload-artifact/tree/65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08) containing the content of the 'source' directory for the analysis. It also supports sub-folders for multiple source code bases. This parameter is optional and defaults to an empty string.
 Please use 'include-hidden-files: true' if you also want to upload the git history.
 - **ref**: The branch, tag, or SHA of the code-graph-analysis-pipeline to checkout. This parameter is optional and defaults to "main".
