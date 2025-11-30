@@ -48,6 +48,7 @@ jobs:
       analysis-name: ${{ steps.set-analysis-name.outputs.analysis-name }}
       sources-upload-name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
       artifacts-upload-name: ${{ steps.set-artifacts-upload-name.outputs.artifacts-upload-name }}
+      additional-maven-artifacts: ${{ steps.set-additional-maven-artifacts.outputs.additional-maven-artifacts }}
 
     env: 
       PROJECT_NAME: AxonFramework
@@ -94,6 +95,10 @@ jobs:
       id: set-artifacts-upload-name
       run: echo "artifacts-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-analysis-artifacts-input-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
 
+    - name: (Prepare Code to Analyze) Set output variable 'additional-maven-artifacts'
+      id: set-additional-maven-artifacts
+      run: echo "additional-maven-artifacts=org.axonframework:axon-messaging:${{ env.AXON_FRAMEWORK_VERSION }},org.axonframework:axon-modelling:${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
+
     - name: (Prepare Code to Analyze) Upload sources to analyze
       if: success()
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -120,6 +125,10 @@ jobs:
     uses: ./.github/workflows/public-analyze-code-graph.yml
     with:
       analysis-name: ${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
+      # All necessary artifacts are contained in the uploaded artifacts. 
+      # This could easily be replaced by maven-artifact parameter below, but remains here for testing purposes.
       artifacts-upload-name: ${{ needs.prepare-code-to-analyze.outputs.artifacts-upload-name }}
+      # Additional (duplicate) artifacts are only used here to test maven-artifacts parameter.
+      maven-artifacts: ${{needs.prepare-code-to-analyze.outputs.additional-maven-artifacts}}
       sources-upload-name: ${{ needs.prepare-code-to-analyze.outputs.sources-upload-name }}
       jupyter-pdf: "false"
