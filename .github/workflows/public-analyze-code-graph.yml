@@ -90,6 +90,12 @@ jobs:
       - name: Assure that either artifacts-upload-name or sources-upload-name is set
         if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
         run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
+      - name: Verify analysis-name only consists of characters safe for folder names
+        run: |
+          if [[ ! "${{ inputs.analysis-name }}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+            echo "The analysis-name '${{ inputs.analysis-name }}' contains invalid characters. Only alphanumeric characters, dots (.), underscores (_) and hyphens (-) are allowed."
+            exit 1
+          fi
 
       - name: Assemble ENVIRONMENT_INFO
         run: echo "ENVIRONMENT_INFO=java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
