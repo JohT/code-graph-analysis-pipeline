@@ -18,6 +18,14 @@ on:
         required: false
         type: string
         default: ''
+      maven-artifacts:
+        description: >
+          Comma-separated list of Maven coordinates (groupId:artifactId:version) 
+          to download from Maven Central for the analysis.
+          Example: 'org.apache.commons:commons-lang3:3.12.0,com.google.guava:guava:31.1-jre'
+        required: false
+        type: string
+        default: ''
       sources-upload-name:
         description: >
           The name of the sources uploaded with 'actions/upload-artifact' 
@@ -27,6 +35,28 @@ on:
         required: false
         type: string
         default: ''
+      source-repository:
+        description: >
+          The URL of the source repository to analyze. For now, only GitHub repositories are supported.
+          This can be used instead of 'sources-upload-name' to directly analyze a repository without uploading artifacts first.
+          It can also be used in addition to 'sources-upload-name' to analyze both uploaded sources and a repository.
+        required: false
+        type: string
+        default: ''  
+      source-repository-branch:
+        description: >
+          The branch, tag or SHA of the source repository to checkout.
+          Default: default branch of the repository
+        required: false
+        type: string
+        default: ''
+      source-repository-history-only:
+        description: >
+          Whether to clone the source repository as a bare repository ("true") or not ("false", default).
+          Bare repositories do not have a working directory and are useful for git history analysis when the sources are not needed.
+        required: false
+        type: string
+        default: 'false'      
       ref:
         description: >
           The branch, tag or SHA of the code-graph-analysis-pipeline to checkout. 
@@ -87,10 +117,15 @@ jobs:
           python: 3.12
           miniforge: 24.9.0-0
     steps:
-      - name: Assure that either artifacts-upload-name or sources-upload-name is set
-        if: inputs.artifacts-upload-name == '' && inputs.sources-upload-name == ''
-        run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'sources-upload-name'."; exit 1
-
+      - name: Assure that either artifacts-upload-name or maven-artifacts or sources-upload-name or source-repository is set
+        if: inputs.artifacts-upload-name == '' && inputs.maven-artifacts == ''  && inputs.sources-upload-name == '' && inputs.source-repository == ''
+        run: echo "Please specify either the input parameter 'artifacts-upload-name' or 'maven-artifacts' or 'sources-upload-name' or 'source-repository'."; exit 1
+      - name: Verify analysis-name only consists of characters safe for folder names
+        run: |
+          if [[ ! "${{ inputs.analysis-name }}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+            echo "The analysis-name '${{ inputs.analysis-name }}' contains invalid characters. Only alphanumeric characters, dots (.), underscores (_) and hyphens (-) are allowed."
+            exit 1
+          fi
       - name: Assemble ENVIRONMENT_INFO
         run: echo "ENVIRONMENT_INFO=java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
       
@@ -163,12 +198,22 @@ jobs:
           name: ${{ inputs.sources-upload-name }}
           path: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}
 
+      - name: (Code Analysis Setup) Clone source repository for analysis
+        if: inputs.source-repository != ''
+        working-directory: temp/${{ inputs.analysis-name }}
+        run: ./../../scripts/cloneGitRepository.sh --url "${{ inputs.source-repository }}" --branch "${{ inputs.source-repository-branch }}" --history-only "${{ inputs.source-repository-history-only }}" --target "source/${{ inputs.analysis-name }}"
+
       - name: (Code Analysis Setup) Download artifacts for analysis
         if: inputs.artifacts-upload-name != ''
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
         with:
           name: ${{ inputs.artifacts-upload-name }}
           path: temp/${{ inputs.analysis-name }}/artifacts
+
+      - name: (Code Analysis Setup) Download Maven artifacts for analysis
+        if: inputs.maven-artifacts != ''
+        working-directory: temp/${{ inputs.analysis-name }}
+        run: ./../../scripts/downloadMavenArtifacts.sh "${{ inputs.maven-artifacts }}"
 
       - name: (Debug) Log folder structure of temp directory
         if: runner.debug == '1'
