@@ -3,7 +3,7 @@
 # Runs all Python report scripts (no Chromium required).
 # It only considers scripts in the "reports" and "domains" directories and their sub directories (overridable with REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY).
 
-# Requires reports/*.sh
+# Requires activateCondaEnvironment.sh, activatePythonEnvironment.sh, reports/*.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -12,22 +12,25 @@ set -o errexit -o pipefail
 LOG_GROUP_START=${LOG_GROUP_START:-"::group::"} # Prefix to start a log group. Defaults to GitHub Actions log group start command.
 LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defaults to GitHub Actions log group end command.
 
+# Local constants
+SCRIPT_NAME=$(basename "${0}")
+
 ## Get this "scripts/reports/compilations" directory if not already set.
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
-echo "PythonReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
-
 REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR:-$(dirname -- "${REPORT_COMPILATIONS_SCRIPT_DIR}")}
-echo "PythonReports: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
-
 SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${REPORTS_SCRIPT_DIR}")}
-echo "PythonReports: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Get the "domains" directory that contains analysis and report scripts by functionality.
 DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${REPORTS_SCRIPT_DIR}/../../domains"}
-echo "PythonReports: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+
+echo "${LOG_GROUP_START}$(date +'%Y-%m-%dT%H:%M:%S') Initialize Python Reports";
+echo "${SCRIPT_NAME}: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
+echo "${SCRIPT_NAME}: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
+echo "${SCRIPT_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
+echo "${SCRIPT_NAME}: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
 
 # Create and activate (if necessary) a virtual environment (Conda or venv).
 # For Conda, the environment name is taken from the environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
@@ -36,10 +39,12 @@ echo "PythonReports: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
 time source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
 time source "${SCRIPTS_DIR}/activatePythonEnvironment.sh"
 
+echo "${LOG_GROUP_END}";
+
 # Run all Python report scripts (filename ending with Csv.sh) in the REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY directories.
 for directory in "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}"; do
     if [ ! -d "${directory}" ]; then
-        echo "PythonReports: Error: Directory ${directory} does not exist. Please check your REPORTS_SCRIPT_DIR and DOMAIN_DIRECTORY settings."
+        echo "${SCRIPT_NAME}: Error: Directory ${directory} does not exist. Please check your REPORTS_SCRIPT_DIR and DOMAIN_DIRECTORY settings."
         exit 1
     fi
 
@@ -48,12 +53,12 @@ for directory in "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}"; do
         report_script_filename=$(basename -- "${report_script_file}");
         report_script_filename="${report_script_filename%.*}" # Remove file extension
 
-        echo "${LOG_GROUP_START}Create Python Report ${report_script_filename}";
-        echo "PythonReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting ${report_script_filename}...";
+        echo "${LOG_GROUP_START}$(date +'%Y-%m-%dT%H:%M:%S') Create Python Report ${report_script_filename}";
+        echo "${SCRIPT_NAME}: $(date +'%Y-%m-%dT%H:%M:%S') Starting ${report_script_filename}...";
 
         source "${report_script_file}"
 
-        echo "PythonReports: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${report_script_filename}";
+        echo "${SCRIPT_NAME}: $(date +'%Y-%m-%dT%H:%M:%S') Finished ${report_script_filename}";
         echo "${LOG_GROUP_END}";
     done
 done

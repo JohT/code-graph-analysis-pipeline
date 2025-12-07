@@ -13,7 +13,7 @@ set -o errexit -o pipefail
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
-echo "AllReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
+#echo "AllReports: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
 
 # The reports will not be generically searched as files anymore.
 # Instead, they will be processed in order. Especially the visualization
