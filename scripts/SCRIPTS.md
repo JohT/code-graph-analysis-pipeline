@@ -11,6 +11,7 @@ Script | Directory | Description
 | [analyze.sh](./analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation. |
 | [checkCompatibility.sh](./checkCompatibility.sh) |  | Check environment dependencies and tool availability. |
 | [cleanupAfterReportGeneration.sh](./cleanupAfterReportGeneration.sh) |  | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder. |
+| [cloneGitRepository.sh](./cloneGitRepository.sh) |  | Provides safe-guarded (security checked parameters) git repository cloning. |
 | [copyPackageJsonFiles.sh](./copyPackageJsonFiles.sh) |  | Copies all package.json files inside the source directory into the artifacts/npm-package-json directory. |
 | [createAggregatedGitLogCsv.sh](./createAggregatedGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. |
 | [createGitLogCsv.sh](./createGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. |
@@ -21,6 +22,7 @@ Script | Directory | Description
 | [generateScriptReference.sh](./documentation/generateScriptReference.sh) | documentation | Generates "SCRIPTS.md" containing a reference to all scripts in this directory and its subdirectories. |
 | [download.sh](./download.sh) |  | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads"). |
 | [downloadMavenArtifact.sh](./downloadMavenArtifact.sh) |  | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central) |
+| [downloadMavenArtifacts.sh](./downloadMavenArtifacts.sh) |  | Uses Maven to download specified Maven artifacts from Maven Central. |
 | [downloadAntDesign.sh](./downloader/downloadAntDesign.sh) | downloader | Downloads the Typescript project ant-design (https://github.com/ant-design/ant-design) from GitHub using git clone. |
 | [downloadAxonFramework.sh](./downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central. |
 | [downloadReactRouter.sh](./downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone. |
@@ -85,7 +87,9 @@ Script | Directory | Description
 | [sortOutExternalJavaJarFiles.sh](./sortOutExternalJavaJarFiles.sh) |  | Sorts out jar files that don't contain one of the given package names (e.g. external libraries) and moves them into the IGNORED_JARS_DIRECTORY.  |
 | [startNeo4j.sh](./startNeo4j.sh) |  | Starts the local Neo4j Graph Database.  |
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
+| [testCloneGitRepository.sh](./testCloneGitRepository.sh) |  | Tests "cloneGitRepository.sh". |
 | [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
+| [testDownloadMavenArtifacts.sh](./testDownloadMavenArtifacts.sh) |  | Tests "downloadMavenArtifacts.sh". |
 | [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
 | [renderGraphVizSVG.sh](./visualization/renderGraphVizSVG.sh) | visualization | Renders the given GraphViz file as a SVG image. |
 | [visualizeQueryResults.sh](./visualization/visualizeQueryResults.sh) | visualization | Visualizes the Cypher query result (CSV format) using GraphViz and outputs it as SVG image. |
