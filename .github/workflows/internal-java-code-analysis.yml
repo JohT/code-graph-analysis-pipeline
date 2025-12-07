@@ -46,8 +46,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       analysis-name: ${{ steps.set-analysis-name.outputs.analysis-name }}
-      sources-upload-name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
       artifacts-upload-name: ${{ steps.set-artifacts-upload-name.outputs.artifacts-upload-name }}
+      additional-maven-artifacts: ${{ steps.set-additional-maven-artifacts.outputs.additional-maven-artifacts }}
+      source-repository-branch: ${{ steps.set-source-repository-branch.outputs.source-repository-branch }}
 
     env: 
       PROJECT_NAME: AxonFramework
@@ -58,10 +59,6 @@ jobs:
     - name: Checkout GIT Repository
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
     
-    - name: Run script tests
-      id: script-tests
-      run: ./scripts/runTests.sh
-
     - name: Set Set output variable 'analysis-name'
       id: set-analysis-name
       run: echo "analysis-name=${{ env.PROJECT_NAME }}-${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
@@ -75,7 +72,7 @@ jobs:
         mkdir -p ${{ steps.set-analysis-name.outputs.analysis-name }}
         cd ${{ steps.set-analysis-name.outputs.analysis-name }}
         echo "Working directory: $( pwd -P )"
-        ./../../scripts/downloader/downloadAxonFramework.sh ${{ env.AXON_FRAMEWORK_VERSION }}
+        ./../../scripts/downloader/downloadAxonFramework.sh ${{ env.AXON_FRAMEWORK_VERSION }} --skip-clone
 
     - name: Debug folder structure in temp directory
       if: runner.debug == '1'
@@ -86,23 +83,17 @@ jobs:
     - name: (Prepare Code to Analyze) Generate ARTIFACT_UPLOAD_ID
       run: echo "ARTIFACT_UPLOAD_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 10)" >> $GITHUB_ENV
  
-    - name: (Prepare Code to Analyze) Set sources-upload-name
-      id: set-sources-upload-name
-      run: echo "sources-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-analysis-sources_input-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
- 
     - name: (Prepare Code to Analyze) Set output variable 'artifacts-upload-name'
       id: set-artifacts-upload-name
       run: echo "artifacts-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-analysis-artifacts-input-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
 
-    - name: (Prepare Code to Analyze) Upload sources to analyze
-      if: success()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-      with:
-        name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
-        path: ./temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source
-        include-hidden-files: true
-        if-no-files-found: error
-        retention-days: 1
+    - name: (Prepare Code to Analyze) Set output variable 'additional-maven-artifacts'
+      id: set-additional-maven-artifacts
+      run: echo "additional-maven-artifacts=org.axonframework:axon-messaging:${{ env.AXON_FRAMEWORK_VERSION }},org.axonframework:axon-modelling:${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
+
+    - name: (Prepare Code to Analyze) Set output variable 'source-repository-branch'
+      id: set-source-repository-branch
+      run: echo "source-repository-branch=axon-${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
 
     - name: (Prepare Code to Analyze) Upload artifacts to analyze
       if: success()
@@ -120,6 +111,12 @@ jobs:
     uses: ./.github/workflows/public-analyze-code-graph.yml
     with:
       analysis-name: ${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
+      # All necessary artifacts are contained in the uploaded artifacts. 
+      # This could easily be replaced by maven-artifact parameter below, but remains here for testing purposes.
       artifacts-upload-name: ${{ needs.prepare-code-to-analyze.outputs.artifacts-upload-name }}
-      sources-upload-name: ${{ needs.prepare-code-to-analyze.outputs.sources-upload-name }}
+      # Additional (duplicate) artifacts are only used here to test maven-artifacts parameter.
+      maven-artifacts: ${{needs.prepare-code-to-analyze.outputs.additional-maven-artifacts}}
+      source-repository: https://github.com/AxonFramework/AxonFramework.git
+      source-repository-branch: ${{ needs.prepare-code-to-analyze.outputs.source-repository-branch}}
+      source-repository-history-only: true
       jupyter-pdf: "false"

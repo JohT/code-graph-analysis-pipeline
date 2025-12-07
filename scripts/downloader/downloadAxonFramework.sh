@@ -22,12 +22,18 @@ echo "download${ANALYSIS_NAME}: SCRIPT_FILE_NAME_WITHOUT_EXTENSION=${SCRIPT_FILE
 echo "download${ANALYSIS_NAME}: ANALYSIS_NAME=${ANALYSIS_NAME}"
 
 # Read the first input argument containing the version(s) of the artifact(s)
-if [ "$#" -ne 1 ]; then
-  echo "Error (download${ANALYSIS_NAME}): Usage: $0 <version> (e.g. 4.9.3)" >&2
+if [ "$#" -eq 0 ]; then
+  echo "Error (download${ANALYSIS_NAME}): Usage: $0 <version> (e.g. 4.9.3) [--skip-clone]" >&2
   exit 1
 fi
 ARTIFACTS_VERSION=$1
 echo "download${ANALYSIS_NAME}: ARTIFACTS_VERSION=${ARTIFACTS_VERSION}"
+
+skipClone=false
+if [ "$2" = "--skip-clone" ]; then
+  skipClone=true
+  echo "download${ANALYSIS_NAME}: Git clone of source repository will be skipped."
+fi
 
 ## Get this "scripts/downloader" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -55,7 +61,7 @@ source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axo
 
 # Download the git history (bare clone without working tree) into the "source" folder.
 # This makes it possible to additionally import the git log into the graph
-if [ ! -d "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git" ]; then
+if [ ! -d "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git" ] && [ "${skipClone}" = false ]; then
   echo "download${ANALYSIS_NAME}: Getting bare git history of source code repository..."
   git clone --bare https://github.com/AxonFramework/AxonFramework.git --branch "axon-${ARTIFACTS_VERSION}" --single-branch "${SOURCE_DIRECTORY}/AxonFramework-${ARTIFACTS_VERSION}/.git"
 fi
