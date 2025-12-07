@@ -1,0 +1,31 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+    # Only watch changes in scripts, json files containing test data and this workflow for push events
+    paths: 
+      - '**/*.sh'
+      - '**/test*.*'
+      - '.github/workflows/internal-run-tests.yml'
+  pull_request:
+    branches:
+      - main
+    # Only watch changes in scripts, json files containing test data and this workflow for push events
+    paths: 
+      - '**/*.sh'
+      - '**/test*.*'
+      - '.github/workflows/internal-run-tests.yml'
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+    
+    - name: Run script tests
+      id: script-tests
+      run: ./scripts/runTests.sh
