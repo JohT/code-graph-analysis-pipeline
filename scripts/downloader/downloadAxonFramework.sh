@@ -35,6 +35,9 @@ if [ "$2" = "--skip-clone" ]; then
   echo "download${ANALYSIS_NAME}: Git clone of source repository will be skipped."
 fi
 
+ARTIFACT_MAJOR_VERSION="${ARTIFACTS_VERSION%%.*}"
+echo "download${ANALYSIS_NAME}: ARTIFACT_MAJOR_VERSION=${ARTIFACT_MAJOR_VERSION}"
+
 ## Get this "scripts/downloader" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
@@ -46,18 +49,31 @@ echo "download${ANALYSIS_NAME}: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}
 SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${DOWNLOADER_SCRIPTS_DIR}")} # Repository directory containing the shell scripts
 echo "download${ANALYSIS_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
-################################################################
-# Download Artifacts that will be analyzed
 ARTIFACTS_GROUP="org.axonframework"
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-configuration" -v"${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-disruptor" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-eventsourcing" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-messaging" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-modelling" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-test" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-server-connector" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-spring-boot-autoconfigure" -v "${ARTIFACTS_VERSION}" || exit 2
-source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-tracing-opentelemetry" -v "${ARTIFACTS_VERSION}" || exit 2
+
+if [ -n "${ARTIFACT_MAJOR_VERSION}" ] && [ "${ARTIFACT_MAJOR_VERSION}" -lt 5 ]; then
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-configuration" -v"${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-disruptor" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-eventsourcing" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-messaging" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-modelling" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-test" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-server-connector" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-spring-boot-autoconfigure" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-tracing-opentelemetry" -v "${ARTIFACTS_VERSION}" || exit 2
+else
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-eventsourcing" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-messaging" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-modelling" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-test" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-server-connector" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-common" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-update" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}" -a "axon-conversion" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}.extensions.spring" -a "axon-spring-boot-autoconfigure" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}.extensions.tracing" -a "axon-tracing-opentelemetry" -v "${ARTIFACTS_VERSION}" || exit 2
+  source "${SCRIPTS_DIR}/downloadMavenArtifact.sh" -g "${ARTIFACTS_GROUP}.extensions.metrics" -a "axon-metrics-micrometer" -v "${ARTIFACTS_VERSION}" || exit 2
+fi
 
 # Download the git history (bare clone without working tree) into the "source" folder.
 # This makes it possible to additionally import the git log into the graph
