@@ -46,8 +46,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       analysis-name: ${{ steps.set-analysis-name.outputs.analysis-name }}
+      project-version: ${{ env.AXON_FRAMEWORK_VERSION }}
       artifacts-upload-name: ${{ steps.set-artifacts-upload-name.outputs.artifacts-upload-name }}
-      additional-maven-artifacts: ${{ steps.set-additional-maven-artifacts.outputs.additional-maven-artifacts }}
       source-repository-branch: ${{ steps.set-source-repository-branch.outputs.source-repository-branch }}
 
     env: 
@@ -87,10 +87,6 @@ jobs:
       id: set-artifacts-upload-name
       run: echo "artifacts-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-analysis-artifacts-input-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
 
-    - name: (Prepare Code to Analyze) Set output variable 'additional-maven-artifacts'
-      id: set-additional-maven-artifacts
-      run: echo "additional-maven-artifacts=org.axonframework:axon-messaging:${{ env.AXON_FRAMEWORK_VERSION }},org.axonframework:axon-modelling:${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
-
     - name: (Prepare Code to Analyze) Set output variable 'source-repository-branch'
       id: set-source-repository-branch
       run: echo "source-repository-branch=axon-${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
@@ -115,7 +111,9 @@ jobs:
       # This could easily be replaced by maven-artifact parameter below, but remains here for testing purposes.
       artifacts-upload-name: ${{ needs.prepare-code-to-analyze.outputs.artifacts-upload-name }}
       # Additional (duplicate) artifacts are only used here to test maven-artifacts parameter.
-      maven-artifacts: ${{needs.prepare-code-to-analyze.outputs.additional-maven-artifacts}}
+      maven-artifacts: >
+        org.axonframework:axon-messaging:${{ needs.prepare-code-to-analyze.outputs.project-version }},
+        org.axonframework:axon-modelling:${{ needs.prepare-code-to-analyze.outputs.project-version }}
       source-repository: https://github.com/AxonFramework/AxonFramework.git
       source-repository-branch: ${{ needs.prepare-code-to-analyze.outputs.source-repository-branch}}
       source-repository-history-only: true
