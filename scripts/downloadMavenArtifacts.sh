@@ -72,6 +72,10 @@ fi
 echo "${maven_artifacts}" | tr ',' '\n' | while read -r maven_artifact; do
     maven_artifact=$(echo "$maven_artifact" | xargs)
     
+    if [ -z "${maven_artifact}" ]; then
+        continue
+    fi
+
     # Check if the maven artifact "coordinate" contains exactly two colons
     colon_count=$(echo "${maven_artifact}" | tr -cd ':' | wc -c)
     if [ "${colon_count}" -ne 2 ]; then
