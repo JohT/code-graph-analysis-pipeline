@@ -162,14 +162,23 @@ anomaly_detection_labels() {
     
     local language
     language=$( extractQueryParameter "projection_language" "${@}" )
-    
+
     echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Labelling ${language} ${nodeLabel} anomalies..."
+    
+    # Within the absolute (full) report directory for anomaly detection, create a sub directory for every detailed type (Java_Package, Java_Type,...)
+    local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
+    mkdir -p "${detail_report_directory}"
+
     execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeRemoveLabels.cypher" "${@}"
-    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeAuthority.cypher" "${@}"
-    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBottleneck.cypher" "${@}"
-    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeHub.cypher" "${@}"
-    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBridge.cypher" "${@}"
-    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeAuthority.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopAuthority.csv"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBottleneck.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopBottleneck.csv"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeHub.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopHub.csv"
+    # The following two label types require Python scripts to run first.
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBridge.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopBridge.csv"
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopOutlier.csv"
+    # Output the top anomalies and their archetype + rank
+    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionTopAnomalies.cypher" "${@}" > "${detail_report_directory}/TopAnomalies.csv"
+
 }
 
 # Run the anomaly detection pipeline.
