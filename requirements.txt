@@ -5,7 +5,7 @@
 
 # --- Core tools ---
 jupyter==1.1.1
-matplotlib==3.10.7
+matplotlib==3.10.8
 nbconvert[webpdf]==7.16.6
 numpy==1.26.4
 pandas==2.3.3
