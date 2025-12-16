@@ -532,6 +532,7 @@ def add_anomaly_detection_results_to_features(
     anomaly_detection_results: AnomalyDetectionResults,
     anomaly_label_column: str = 'anomalyLabel',
     anomaly_score_column: str = 'anomalyScore',
+    anomaly_rank_column: str = 'anomalyRank'
 ) -> pd.DataFrame:
     """
     Adds anomaly detection results to the feature and returns the updated dataframe.
@@ -549,6 +550,7 @@ def add_anomaly_detection_results_to_features(
     # Add anomaly labels and scores to the feature matrix
     features[anomaly_label_column] = anomaly_detection_results.anomaly_labels
     features[anomaly_score_column] = anomaly_detection_results.anomaly_scores
+    features[anomaly_rank_column] = features[anomaly_score_column].rank(method='dense', ascending=False).astype(int)
     return features
 
 
@@ -1250,6 +1252,7 @@ data_to_write = pd.DataFrame(data={
     'nodeElementId': features["nodeElementId"],
     'anomalyLabel': features['anomalyLabel'].astype(int),
     'anomalyScore': features['anomalyScore'],
+    'anomalyRank': features['anomalyRank'],
     'anomalyTopFeature1': features['anomalyTopFeature_1'],
     'anomalyTopFeature2': features['anomalyTopFeature_2'],
     'anomalyTopFeature3': features['anomalyTopFeature_3'],
