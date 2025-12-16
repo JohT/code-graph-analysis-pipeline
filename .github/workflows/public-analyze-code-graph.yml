@@ -203,6 +203,11 @@ jobs:
         working-directory: temp/${{ inputs.analysis-name }}
         run: ./../../scripts/cloneGitRepository.sh --url "${{ inputs.source-repository }}" --branch "${{ inputs.source-repository-branch }}" --history-only "${{ inputs.source-repository-history-only }}" --target "source/${{ inputs.analysis-name }}"
 
+      - name: (Code Analysis Setup) Install JavaScript dependencies in cloned source repository if needed
+        if: inputs.source-repository != ''
+        working-directory: temp/${{ inputs.analysis-name }}
+        run: ./../../scripts/installJavaScriptDependencies.sh
+
       - name: (Code Analysis Setup) Download artifacts for analysis
         if: inputs.artifacts-upload-name != ''
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
