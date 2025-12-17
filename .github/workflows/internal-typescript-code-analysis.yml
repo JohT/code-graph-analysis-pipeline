@@ -46,78 +46,23 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       analysis-name: ${{ steps.set-analysis-name.outputs.analysis-name }}
-      sources-upload-name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
+      project-version: ${{ env.REACT_ROUTER_VERSION }}
 
     env: 
       PROJECT_NAME: react-router
       # Version variable name matches renovate.json configuration entry
       REACT_ROUTER_VERSION: 6.30.2
 
-    steps:
-    - name: (Prepare Code to Analyze) Checkout GIT repository
-      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
- 
-    
+    steps:   
     - name: Set Set output variable 'analysis-name'
       id: set-analysis-name
       run: echo "analysis-name=${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}" >> "$GITHUB_OUTPUT"
-    
-    - name: Setup temp directory if missing
-      run: mkdir -p ./temp
-
-    - name: Setup Cache for "temp/downloads" folder
-      uses: actions/cache@v4
-      with:
-        path: ./temp/downloads
-        key:
-          ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
-
-    - name: Download ${{ steps.set-analysis-name.outputs.analysis-name }}
-      working-directory: temp
-      run: |
-        mkdir -p ${{ steps.set-analysis-name.outputs.analysis-name }}
-        cd ${{ steps.set-analysis-name.outputs.analysis-name }}
-        echo "Working directory: $( pwd -P )"
-        ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }}
-
-    - name: (Prepare Code to Analyze) Setup pnpm for react-router
-      uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      with:
-        package_json_file: temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source/${{ steps.set-analysis-name.outputs.analysis-name }}/package.json
-          
-    - name: (Prepare Code to Analyze) Install dependencies with pnpm
-      working-directory: temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source/${{ steps.set-analysis-name.outputs.analysis-name }}
-      run: pnpm install --frozen-lockfile --strict-peer-dependencies
-
-    - name: Debug folder structure in temp directory
-      if: runner.debug == '1'
-      working-directory: temp
-      run: |
-        ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-
-    - name: (Prepare Code to Analyze) Generate ARTIFACT_UPLOAD_ID
-      run: echo "ARTIFACT_UPLOAD_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 10)" >> $GITHUB_ENV
- 
-    - name: (Prepare Code to Analyze) Set sources-upload-name
-      id: set-sources-upload-name
-      run: echo "sources-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-analysis-sources_input-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
-    
-    - name: (Prepare Code to Analyze) Upload code to analyze
-      if: success()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-      with:
-        name: ${{ steps.set-sources-upload-name.outputs.sources-upload-name }}
-        path: ./temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source
-        include-hidden-files: true
-        if-no-files-found: error
-        retention-days: 1
-
-
 
   analyze-code-graph:
     needs: [prepare-code-to-analyze]
     uses: ./.github/workflows/public-analyze-code-graph.yml
     with:
       analysis-name: ${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
-      sources-upload-name: ${{ needs.prepare-code-to-analyze.outputs.sources-upload-name }}
+      source-repository: https://github.com/remix-run/react-router.git
+      source-repository-branch: react-router@${{ needs.prepare-code-to-analyze.outputs.project-version }}
       jupyter-pdf: "false"
