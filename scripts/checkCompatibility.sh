@@ -158,7 +158,8 @@ checkRequiredCommand "pip" "Python package installer (https://pip.pypa.io/en/sta
 icon=$(allOf "python" "pip" "jupyter")
 echo ""
 echo "${icon} Python reports dependencies  (for ./analyze.sh --report Jupyter):"
-checkRequiredCommand "jupyter" "Jupyter Notebook (https://jupyter.org/) for interactive data analysis and visualization"
+# Since "jupyter" might only be available when the Python environment is activated, check for it only optionally
+checkOptionalCommand "jupyter" "Jupyter Notebook (https://jupyter.org/) for interactive data analysis and visualization (will be available when the Python environment is activated)"
 
 # Check dependencies for visualization reports
 icon=$(oneOf "npx" "dot")
