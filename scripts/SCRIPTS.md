@@ -37,6 +37,7 @@ Script | Directory | Description
 | [executeQueryFunctions.sh](./executeQueryFunctions.sh) |  | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell".  |
 | [findPathsToScan.sh](./findPathsToScan.sh) |  | Finds all files and directories to scan and analyze and provides them as comma-separated list. |
 | [importGit.sh](./importGit.sh) |  | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT. |
+| [installJavaScriptDependencies.sh](./installJavaScriptDependencies.sh) |  | This script triggers the installation of dependencies for JavaScript projects in the source folder. |
 | [embedMarkdownIncludes.sh](./markdown/embedMarkdownIncludes.sh) | markdown | Processes template markdown (sysin) replacing placeholders like "<!-- include:intro.md -->" or "<!-- include:intro.md\|fallback.md -->" with the contents of the specified markdown files. The files to include needs to be in the "includes" subdirectory. |
 | [formatQueryResultAsMarkdownTable.sh](./markdown/formatQueryResultAsMarkdownTable.sh) | markdown | Takes the input stream (Cypher query result in JSON format) and formats it as a Markdown table. |
 | [testEmbedMarkdownIncludes.sh](./markdown/testEmbedMarkdownIncludes.sh) | markdown | Tests template processing for markdown by embedding includes. |
@@ -90,6 +91,7 @@ Script | Directory | Description
 | [testCloneGitRepository.sh](./testCloneGitRepository.sh) |  | Tests "cloneGitRepository.sh". |
 | [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
 | [testDownloadMavenArtifacts.sh](./testDownloadMavenArtifacts.sh) |  | Tests "downloadMavenArtifacts.sh". |
+| [testInstallJavaScriptDependencies.sh](./testInstallJavaScriptDependencies.sh) |  | Tests "installJavaScriptDependencies.sh". |
 | [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
 | [renderGraphVizSVG.sh](./visualization/renderGraphVizSVG.sh) | visualization | Renders the given GraphViz file as a SVG image. |
 | [visualizeQueryResults.sh](./visualization/visualizeQueryResults.sh) | visualization | Visualizes the Cypher query result (CSV format) using GraphViz and outputs it as SVG image. |
