@@ -196,7 +196,7 @@ jobs:
 
       - name: (Code Analysis Setup) Download sources for analysis
         if: inputs.sources-upload-name != ''
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: ${{ inputs.sources-upload-name }}
           path: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}
@@ -237,7 +237,7 @@ jobs:
 
       - name: (Code Analysis Setup) Download artifacts for analysis
         if: inputs.artifacts-upload-name != ''
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: ${{ inputs.artifacts-upload-name }}
           path: temp/${{ inputs.analysis-name }}/artifacts
@@ -273,7 +273,7 @@ jobs:
       # Upload successful analysis-results as the main output artifact
       - name: (Code Analysis Results) Archive successful analysis-results
         if: success() && !contains(inputs.analysis-arguments, '--explore')
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/reports/*
@@ -283,7 +283,7 @@ jobs:
       # Upload logs if analysis results had been skipped ("--explore" analysis option)
       - name: (Code Analysis Results) Archive successful analysis-results
         if: success() && contains(inputs.analysis-arguments, '--explore')
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/runtime/*
@@ -294,7 +294,7 @@ jobs:
       # Upload logs and unfinished analysis-results in case of an error for troubleshooting
       - name: (Code Analysis Results) Archive failed run with logs and unfinished analysis-results
         if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: code-analysis-logs-${{ env.ENVIRONMENT_INFO }}
           path: |
