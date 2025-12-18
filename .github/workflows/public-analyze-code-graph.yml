@@ -32,6 +32,7 @@ on:
           containing the content of the 'source' directory for the analysis. 
           Also supports sub-folders for multiple source code bases.
           Please use 'include-hidden-files: true' if you also want to upload the git history.
+          Note: JavaScript dependencies will NOT be installed automatically when using this option. This needs to be done before uploading the sources.
         required: false
         type: string
         default: ''
@@ -40,6 +41,7 @@ on:
           The URL of the source repository to analyze. For now, only GitHub repositories are supported.
           This can be used instead of 'sources-upload-name' to directly analyze a repository without uploading artifacts first.
           It can also be used in addition to 'sources-upload-name' to analyze both uploaded sources and a repository.
+          If specified, JavaScript dependencies will be installed automatically if a package.json file is found in the repository.
         required: false
         type: string
         default: ''  
@@ -143,7 +145,8 @@ jobs:
           distribution: "temurin"
           java-version: ${{ matrix.java }}
 
-      # "Setup Python" can be skipped if jupyter notebook analysis-results aren't needed
+      # "Setup Python" could be skipped if jupyter notebook analysis-results aren't needed or .venv is used.
+      # However, since this is a reuseable workflow, we always do it here.
       - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
         if: inputs.use-venv_virtual_python_environment == 'false'
         id: prepare-conda-environment
@@ -203,6 +206,35 @@ jobs:
         working-directory: temp/${{ inputs.analysis-name }}
         run: ./../../scripts/cloneGitRepository.sh --url "${{ inputs.source-repository }}" --branch "${{ inputs.source-repository-branch }}" --history-only "${{ inputs.source-repository-history-only }}" --target "source/${{ inputs.analysis-name }}"
 
+      - name: (Code Analysis JavaScript Setup) Detect node version file .nvmrc in cloned source repository
+        if: inputs.source-repository != ''
+        working-directory: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}
+        run: echo "nodeVersionFileDetected=$(if [ -f ".nvmrc" ]; then echo "true"; else echo "false"; fi)" >> $GITHUB_ENV
+      - name: (Code Analysis JavaScript Setup) Detect pnpm project in cloned source repository
+        if: inputs.source-repository != ''
+        working-directory: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}
+        run: echo "pnpmDetected=$(if [ -f "pnpm-lock.yaml" ]; then echo "true"; else echo "false"; fi)" >> $GITHUB_ENV
+      - name: (Code Analysis JavaScript Setup) Setup Node.js with version in .nvmrc for cloned source repository
+        if: inputs.source-repository != '' && env.nodeVersionFileDetected == 'true'
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version-file: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}/.nvmrc
+      - name: (Code Analysis JavaScript Setup) Setup Node.js (long-term support version fallback, no .nvmrc) for cloned source repository
+        if: inputs.source-repository != '' && env.nodeVersionFileDetected != 'true'
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version: 'lts/*'
+      - name: (Code Analysis JavaScript Setup) Setup pnpm for cloned source repository
+        if: inputs.source-repository != '' && env.pnpmDetected == 'true'
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          package_json_file: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}/package.json
+          run_install: false
+      - name: (Code Analysis JavaScript Setup) Install JavaScript dependencies in cloned source repository if needed
+        if: inputs.source-repository != ''
+        working-directory: temp/${{ inputs.analysis-name }}
+        run: ./../../scripts/installJavaScriptDependencies.sh
+
       - name: (Code Analysis Setup) Download artifacts for analysis
         if: inputs.artifacts-upload-name != ''
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
@@ -238,13 +270,23 @@ jobs:
         id: set-analysis-results-artifact-name
         run: echo "uploaded-analysis-results-artifact-name=code-analysis-results-${{ env.ENVIRONMENT_INFO }}" >> $GITHUB_OUTPUT
 
-      # Upload successful analysis-results in case they are needed for troubleshooting
+      # Upload successful analysis-results as the main output artifact
       - name: (Code Analysis Results) Archive successful analysis-results
-        if: success()
+        if: success() && !contains(inputs.analysis-arguments, '--explore')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/reports/*
+          if-no-files-found: error
+          retention-days: ${{ inputs.retention-days }}
+
+      # Upload logs if analysis results had been skipped ("--explore" analysis option)
+      - name: (Code Analysis Results) Archive successful analysis-results
+        if: success() && contains(inputs.analysis-arguments, '--explore')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
+          path: ./temp/${{ inputs.analysis-name }}/runtime/*
           if-no-files-found: error
           retention-days: ${{ inputs.retention-days }}
 
