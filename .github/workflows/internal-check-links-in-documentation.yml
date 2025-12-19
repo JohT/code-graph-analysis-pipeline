@@ -38,6 +38,6 @@ jobs:
 
     - name: Check links in top level documentation Markdown files
       if: ${{ ! env.skip_link_check}}
-      run: npx --yes markdown-link-check@3.14.1 --verbose --alive=200,202,206 --retry README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md CHANGELOG.md
+      run: npx --yes markdown-link-check@3.14.2 --verbose --alive=200,202,206 --retry README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md CHANGELOG.md
       # Temporarily, everything is done using command line options rather than with the config file, which doesn't seem to work.
       # Maybe related to https://github.com/tcort/markdown-link-check/issues/379 ?
