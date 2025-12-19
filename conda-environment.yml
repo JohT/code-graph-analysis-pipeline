@@ -8,7 +8,7 @@ dependencies:
   - python=3.12.9
   - _python_rc=1 # Needed on Mac since Python >= 3.12
   - jupyter=1.1.1
-  - matplotlib=3.10.7
+  - matplotlib=3.10.8
   - nbconvert=7.16.6
   - nbconvert-webpdf=7.16.6
   - numpy=1.26.4
