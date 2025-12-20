@@ -51,7 +51,7 @@ jobs:
     env: 
       PROJECT_NAME: react-router
       # Version variable name matches renovate.json configuration entry
-      REACT_ROUTER_VERSION: 6.30.2
+      REACT_ROUTER_VERSION: 7.11.0
 
     steps:   
     - name: Set Set output variable 'analysis-name'
