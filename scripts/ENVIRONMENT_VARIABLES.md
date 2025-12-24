@@ -34,7 +34,7 @@ IMPORT_DIRECTORY                      | import                              |  |
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin                              | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin". |
 NEO4J_VERSION                         | 2025.08.0                           | Neo4j Graph Database Version. Current versions: >= 2025.03.0. Version 4.4.42 and 5.26.5 are the previous LTS (long term support) versions as of April 2025. |
 NEO4J_CONFIG_TEMPLATE                 | template-neo4j.conf                 |  |
-NEO4J_APOC_PLUGIN_VERSION             | 2025.08.0                           |  |
+NEO4J_APOC_PLUGIN_VERSION             | 2025.10.1                           |  |
 NEO4J_APOC_PLUGIN_EDITION             | core                                |  |
 NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
 NEO4J_GDS_PLUGIN_VERSION              | 2.23.0                              |  |
