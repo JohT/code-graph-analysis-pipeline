@@ -17,7 +17,7 @@ NEO4J_APOC_PLUGIN_EDITION=${NEO4J_APOC_PLUGIN_EDITION:-"core"} # Awesome Procedu
 NEO4J_APOC_PLUGIN_GITHUB=${NEO4J_APOC_PLUGIN_GITHUB:-"neo4j/apoc"} # Awesome Procedures On Cypher (APOC) for Neo4j Plugin GitHub User/Repository (Neo4j v4.4.x "neo4j-contrib/neo4j-apoc-procedures", Neo4j >= v5 "neo4j/apoc")
 
 NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.23.0"} # Graph Data Science (GDS) Plugin Version 2.4.x of is compatible with Neo4j 5.x
-NEO4J_OPEN_GDS_PLUGIN_VERSION=${NEO4J_OPEN_GDS_PLUGIN_VERSION:-"2.22.0"} # Graph Data Science (GDS) Plugin Version 2.4.x of is compatible with Neo4j 5.x
+NEO4J_OPEN_GDS_PLUGIN_VERSION=${NEO4J_OPEN_GDS_PLUGIN_VERSION:-"2.24.0"} # Graph Data Science (GDS) Plugin Version 2.4.x of is compatible with Neo4j 5.x
 NEO4J_GDS_PLUGIN_EDITION=${NEO4J_GDS_PLUGIN_EDITION:-"open"} # Graph Data Science (GDS) Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 
 DATA_DIRECTORY=${DATA_DIRECTORY:-"$( pwd -P )/data"} # Path where Neo4j writes its data to (outside tools dir)
