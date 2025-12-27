@@ -378,7 +378,16 @@ def plot_difference_between_article_and_page_rank(
     plot.savefig(plot_file_path)
 
 
-def plot_feature_distribution(feature_values: pd.Series, feature_name: str, title: str, plot_file_path: str) -> None:
+def plot_feature_distribution(
+        feature_values: pd.Series,
+        feature_name: str,
+        short_names: pd.Series,
+        title: str,
+        plot_file_path: str,
+        log_y_axis: bool = False,
+        standard_deviation_lines: bool = True,
+        number_of_outliers_to_annotate: int = 4,
+) -> None:
     """
     Plots the distribution of feature's values.
     
@@ -386,8 +395,20 @@ def plot_feature_distribution(feature_values: pd.Series, feature_name: str, titl
     ----------
     feature_values : pd.Series
         Series containing feature values.
-    text_prefix: str
-        Text at the beginning of the title
+    feature_name : str
+        Name of the feature to be displayed on the x-axis.
+    short_names : pd.Series
+        Series containing the short names of the data points for annotation.
+    title : str
+        Title of the plot.
+    plot_file_path : str
+        File path to save the plot.
+    log_y_axis : bool
+        Whether to use logarithmic scale for the y-axis.
+    standard_deviation_lines : bool
+        Whether to plot standard deviation lines.
+    number_of_outliers_to_annotate : int
+        Number of outliers to annotate on each side of the distribution.
     """
     if feature_values.empty:
         print("No data available to plot.")
@@ -400,18 +421,50 @@ def plot_feature_distribution(feature_values: pd.Series, feature_name: str, titl
     plot.xlabel(feature_name)
     plot.ylabel('Frequency')
     plot.xlim(left=feature_values.min(), right=feature_values.max())
-    # plot.yscale('log')  # Use logarithmic scale for better visibility of differences
+    if log_y_axis:
+        plot.yscale('log')  # Use logarithmic scale for better visibility of differences
     plot.grid(True)
 
     mean = feature_values.mean()
     standard_deviation = feature_values.std()
 
-    # Vertical line for the mean
-    plot_standard_deviation_lines('red', mean, standard_deviation, standard_deviation_factor=0)
-    # Vertical line for 1 x standard deviations + mean (=z-score of 1)
-    plot_standard_deviation_lines('orange', mean, standard_deviation, standard_deviation_factor=1)
-    # Vertical line for 2 x standard deviations + mean (=z-score of 2)
-    plot_standard_deviation_lines('green', mean, standard_deviation, standard_deviation_factor=2)
+    if standard_deviation_lines:
+        # Vertical line for the mean
+        plot_standard_deviation_lines('red', mean, standard_deviation, standard_deviation_factor=0)
+        # Vertical line for 1 x standard deviations + mean (=z-score of 1)
+        plot_standard_deviation_lines('orange', mean, standard_deviation, standard_deviation_factor=1)
+        # Vertical line for 2 x standard deviations + mean (=z-score of 2)
+        plot_standard_deviation_lines('green', mean, standard_deviation, standard_deviation_factor=2)
+
+    def annotate_distribution_outliers(
+        outliers: pd.Series,
+        names: pd.Series,
+    ) -> None:
+        if outliers.empty:
+            return
+        rank = 0
+        for item_index, value in outliers.items():
+            index = typing.cast(int, item_index)
+            rank = rank + 1
+            short_name = names[index]
+            
+            x_index_offset = (rank % 6) * 10
+            if value > mean:
+                x_index_offset = -x_index_offset
+
+            plot.annotate(
+                text=f'{short_name}',
+                xy=(value, 1),
+                xytext=(x_index_offset, 60),  # offset in points (uses 'textcoords': 'offset points')
+                rotation=90,
+                **plot_annotation_style,
+            )
+
+    positive_outliers = feature_values.sort_values(ascending=False).head(number_of_outliers_to_annotate)
+    annotate_distribution_outliers(positive_outliers, short_names)
+
+    negative_outliers = feature_values.sort_values(ascending=True).head(number_of_outliers_to_annotate)
+    annotate_distribution_outliers(negative_outliers, short_names)
 
     plot.tight_layout()
     plot.savefig(plot_file_path)
@@ -835,15 +888,46 @@ plot_difference_between_article_and_page_rank(
 plot_feature_distribution(
     feature_values=data['clusteringCoefficient'],
     feature_name='Clustering Coefficient',
+    short_names=data['shortCodeUnitName'],
     title=f"{title_prefix} clustering coefficient distribution",
-    plot_file_path=get_file_path("ClusteringCoefficient_distribution", parameters)
+    standard_deviation_lines=False,
+    plot_file_path=get_file_path("ClusteringCoefficient_distribution", parameters),
 )
 
 plot_feature_distribution(
     feature_values=data['betweenness'],
     feature_name='Betweenness',
+    short_names=data['shortCodeUnitName'],
     title=f"{title_prefix} betweenness centrality distribution",
+    log_y_axis=True,
     plot_file_path=get_file_path("BetweennessCentrality_distribution", parameters)
+)
+
+plot_feature_distribution(
+    feature_values=data['degree'],
+    feature_name='Degree',
+    short_names=data['shortCodeUnitName'],
+    title=f"{title_prefix} degree distribution",
+    log_y_axis=True,
+    plot_file_path=get_file_path("Degree_distribution", parameters)
+)
+
+plot_feature_distribution(
+    feature_values=data['incomingDependencies'],
+    feature_name='incomingDependencies',
+    short_names=data['shortCodeUnitName'],
+    title=f"{title_prefix} incoming dependencies distribution",
+    log_y_axis=True,
+    plot_file_path=get_file_path("IncomingDependencies_distribution", parameters)
+)
+
+plot_feature_distribution(
+    feature_values=data['outgoingDependencies'],
+    feature_name='outgoingDependencies',
+    short_names=data['shortCodeUnitName'],
+    title=f"{title_prefix} outgoing dependencies distribution",
+    log_y_axis=True,
+    plot_file_path=get_file_path("OutgoingDependencies_distribution", parameters)
 )
 
 plot_clustering_coefficient_vs_page_rank(

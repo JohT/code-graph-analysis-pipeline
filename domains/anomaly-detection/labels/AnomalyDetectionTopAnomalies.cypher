@@ -21,6 +21,7 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
         ,coalesce(codeUnit.anomalyBridgeRank, 0)           AS bridgeRank
         ,coalesce(codeUnit.anomalyHubRank, 0)              AS hubRank
         ,coalesce(codeUnit.anomalyOutlierRank, 0)          AS outlierRank
+        ,coalesce(codeUnit.dependencyDegreeRank, 0)        AS degreeRank
         ,codeUnit.anomalyTopFeature1                       AS topFeature1
         ,codeUnit.anomalyTopFeature2                       AS topFeature2
         ,codeUnit.anomalyTopFeature3                       AS topFeature3

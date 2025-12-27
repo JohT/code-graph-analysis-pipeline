@@ -121,6 +121,10 @@ execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_
 execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
 execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
+# Preparation - Language agnostic node properties "dependencyDegree", "dependencyDegreeWeighted", "dependencyDegreeRank"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Dependency_Degree.cypher"
+execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Dependency_DegreeRank.cypher"
+
 # Preparation - Add Java Method node property "declaringType"
 execute_cypher "${TYPES_CYPHER_DIR}/Set_declaring_type_on_method_nodes.cypher"
 
