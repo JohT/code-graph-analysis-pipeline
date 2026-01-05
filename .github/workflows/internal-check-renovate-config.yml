@@ -28,4 +28,4 @@ jobs:
         echo "RENOVATE_CONFIG_FILES=$(find renovate-presets -type f -name '*.json' -o -name '*.json5') renovate.json" >> $GITHUB_ENV
 
     - name: Run renovate-config-validator
-      run: npx --yes --package renovate@42.69.2 -- renovate-config-validator ${{ env.RENOVATE_CONFIG_FILES }}
+      run: npx --yes --package renovate@42.71.0 -- renovate-config-validator ${{ env.RENOVATE_CONFIG_FILES }}
