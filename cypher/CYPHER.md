@@ -329,6 +329,8 @@ Script | Directory | Description
 | [Get_Graph_Data_Science_System_Information.cypher](./Miscellaneous/Get_Graph_Data_Science_System_Information.cypher) | Miscellaneous | Get Graph Data Science System Information |
 | [Set_artifactName_property_on_every_Package_node.cypher](./Miscellaneous/Set_artifactName_property_on_every_Package_node.cypher) | Miscellaneous | Set artifactName property on every Package node. Requires "Add_file_name and_extension.cypher". |
 | [Node_Embeddings_0a_Query_Calculated.cypher](./Node_Embeddings/Node_Embeddings_0a_Query_Calculated.cypher) | Node_Embeddings | Query already calculated and written node embeddings on nodes with label in parameter $dependencies_projection_node including a communityId and centrality. Variables: dependencies_projection_node, dependencies_projection_write_property. Requires "Add_file_name and_extension.cypher". |
+| [Node_Embeddings_0b_Prepare_Degree.cypher](./Node_Embeddings/Node_Embeddings_0b_Prepare_Degree.cypher) | Node_Embeddings | Node Embeddings 0b: Prepare: Calculate Degree Property. |
+| [Node_Embeddings_0c_Drop_Model.cypher](./Node_Embeddings/Node_Embeddings_0c_Drop_Model.cypher) | Node_Embeddings | Node Embeddings 0b: Prepare: Calculate Degree Property. |
 | [Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher](./Node_Embeddings/Node_Embeddings_1a_Fast_Random_Projection_Estimate.cypher) | Node_Embeddings | Node Embeddings 1a using Fast Random Projection: Estimate |
 | [Node_Embeddings_1b_Fast_Random_Projection_Statistics.cypher](./Node_Embeddings/Node_Embeddings_1b_Fast_Random_Projection_Statistics.cypher) | Node_Embeddings | Node Embeddings 1b using Fast Random Projection: Statistics |
 | [Node_Embeddings_1c_Fast_Random_Projection_Mutate.cypher](./Node_Embeddings/Node_Embeddings_1c_Fast_Random_Projection_Mutate.cypher) | Node_Embeddings | Node Embeddings 1c using Fast Random Projection: Mutate |
@@ -345,6 +347,8 @@ Script | Directory | Description
 | [Node_Embeddings_3d_Node2Vec_Stream.cypher](./Node_Embeddings/Node_Embeddings_3d_Node2Vec_Stream.cypher) | Node_Embeddings | Node Embeddings 3c using Node2Vec: Stream. Requires "Add_file_name and_extension.cypher". |
 | [Node_Embeddings_3d_Node2Vec_Tuneable_Stream.cypher](./Node_Embeddings/Node_Embeddings_3d_Node2Vec_Tuneable_Stream.cypher) | Node_Embeddings | Node Embeddings 3c using Node2Vec: Stream. Requires "Add_file_name and_extension.cypher". |
 | [Node_Embeddings_3e_Node2Vec_Write.cypher](./Node_Embeddings/Node_Embeddings_3e_Node2Vec_Write.cypher) | Node_Embeddings | Node Embeddings 3d using Node2Vec: Write |
+| [Node_Embeddings_4b_GraphSAGE_Train.cypher](./Node_Embeddings/Node_Embeddings_4b_GraphSAGE_Train.cypher) | Node_Embeddings | Node Embeddings 4c using GraphSAGE (Graph Neural Networks): Train. Requires: "Node_Embeddings_0b_Prepare_Degree.cypher". |
+| [Node_Embeddings_4d_GraphSAGE_Stream.cypher](./Node_Embeddings/Node_Embeddings_4d_GraphSAGE_Stream.cypher) | Node_Embeddings | Node Embeddings 4d using GraphSAGE: Stream. Requires "Add_file_name and_extension.cypher". |
 | [Set_Parameters.cypher](./Node_Embeddings/Set_Parameters.cypher) | Node_Embeddings | Example on how to set the parameters for node embeddings in this case for Packages and Node2Vec |
 | [Cyclomatic_Method_Complexity_Distribution.cypher](./Overview/Cyclomatic_Method_Complexity_Distribution.cypher) | Overview | Cyclomatic Complexity Method Complexity Distribution |
 | [Dependency_node_labels.cypher](./Overview/Dependency_node_labels.cypher) | Overview | Explore DEPENDS_ON relationship node labels |
