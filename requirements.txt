@@ -11,7 +11,6 @@ numpy==1.26.4
 pandas==2.3.3
 pip==25.3
 setuptools==80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
-typing-extensions==4.15.0 # Needed for opentsne and Python >= 3.12
 
 # --- Visualization ---
 wordcloud==1.9.4
@@ -29,5 +28,4 @@ neo4j==5.28.2
 
 # --- Native/scientific packages (may require compilation) ---
 # These are included but may cause install errors in pip/venv
-opentsne==1.0.4       # Dimensionality reduction to visualize node embeddings in 2D. Might get replaced by umap.
 shap==0.49.1          # For e.g. explaining anomaly detection results
