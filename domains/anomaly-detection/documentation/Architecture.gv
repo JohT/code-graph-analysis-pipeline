@@ -114,6 +114,7 @@ digraph AnomalyDetectionPipeline {
         BetweennessCentrality      [label="Betweenness\nCentrality"];
         LocalClusteringCoefficient [label="Local Clustering\nCoefficient"];
         Degree                     [label="Degree\n(in, out, sum)"];
+        Abstractness               [label="Abstractness\n(Robert C. Martin)"];
     }
 
     // Anomaly detection model area
@@ -152,6 +153,7 @@ digraph AnomalyDetectionPipeline {
     BetweennessCentrality -> AnomalyStandardizer;
     LocalClusteringCoefficient -> AnomalyStandardizer;
     Degree -> AnomalyStandardizer;
+    Abstractness -> AnomalyStandardizer;
 
     // Proxy RandomForest used as a backing/tuning model for the Isolation Forest
     TuningAnomaly -> IsolationMinCluster;

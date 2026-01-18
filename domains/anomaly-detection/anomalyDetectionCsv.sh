@@ -64,6 +64,13 @@ anomaly_detection_features() {
     # Determine the normalized difference between Page Rank and Article Rank if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageToArticleRank-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-PageToArticleRank-Write.cypher" "${@}"
+    # Determine the "abstractness" (interfaces = 100%, abstract classes = 70%, classes & functions = 0%)
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_Java.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_JavaType.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_TypeScriptModules.cypher" "${@}"
 }
 
 # Run queries to find anomalies in the graph.
