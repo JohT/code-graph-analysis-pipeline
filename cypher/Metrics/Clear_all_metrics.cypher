@@ -28,6 +28,7 @@ REMOVE package.incomingDependencies
       ,package.abstractness
       ,package.numberOfTypes
       ,package.numberOfAbstractTypes
+      ,package.numberOfAbstractClasses
       ,package.abstractnessIncludingSubpackages
       ,package.numberOfAbstractTypesIncludingSubpackages
       ,package.numberOfTypesIncludingSubpackages
