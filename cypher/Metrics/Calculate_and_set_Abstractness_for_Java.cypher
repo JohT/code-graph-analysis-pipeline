@@ -9,16 +9,20 @@ MATCH (artifact:Artifact)-[:CONTAINS]->(package)
      ,count{(package)-[:CONTAINS]->(:Annotation)}              AS numberAnnotations
      ,count{(package)-[:CONTAINS]->(:Interface)}               AS numberInterfaces
  WITH *
-     ,numberInterfaces + numberAnnotations + numberAbstractClasses AS numberAbstractTypes
+     ,numberInterfaces + numberAnnotations +  numberAbstractClasses        AS numberAbstractTypes
+     ,numberInterfaces + numberAnnotations + (numberAbstractClasses * 0.7) AS weightedAbstractTypes
  WITH *
-     ,toFloat(numberAbstractTypes) / (numberTypes + 1E-38) AS abstractness
-  SET package.abstractness          = abstractness
-     ,package.numberOfAbstractTypes = numberAbstractTypes
-     ,package.numberOfTypes         = numberTypes
+     ,toFloat(weightedAbstractTypes) / (numberTypes + 1E-38) AS abstractness
+  SET package.abstractness            = abstractness
+     ,package.numberOfAbstractTypes   = numberAbstractTypes
+     ,package.numberOfAbstractClasses = numberAbstractClasses
+     ,package.numberOfTypes           = numberTypes
 RETURN artifactName
       ,package.fqn  AS fullQualifiedPackageName
       ,package.name AS packageName
       ,abstractness
       ,numberAbstractTypes
       ,numberTypes
+      ,numberAbstractClasses
+      ,weightedAbstractTypes
 ORDER BY abstractness ASC, numberTypes DESC
