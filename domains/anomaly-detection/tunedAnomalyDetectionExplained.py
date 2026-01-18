@@ -621,8 +621,8 @@ def plot_anomalies(
         return
 
     annotate_top_n_anomalies: int = 10
-    annotate_top_n_non_anomalies: int = 5
-    annotate_top_n_clusters: int = 20
+    annotate_top_n_non_anomalies: int = 3
+    annotate_top_n_clusters: int = 10
 
     features_to_visualize_zoomed=zoom_into_center_while_preserving_top_scores(
         features_to_visualize, 
@@ -647,8 +647,11 @@ def plot_anomalies(
     cluster_non_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] != -1]
 
     plot.figure(figsize=(10, 10))
-    plot.title(f"{title_prefix} Anomalies (size={size_column}, main-color=cluster, red=anomaly, green=non-anomaly)", pad=20)
-
+    plot.title(
+        label=f"{title_prefix} Anomalies (size={size_column}, main-color=cluster, red=anomaly, green=non-anomaly)", 
+        pad=30,
+        bbox=dict(facecolor='white', edgecolor='none', pad=2, alpha=0.6)
+    )
     # Plot noise (from clustering)
     plot.scatter(
         **get_common_plot_parameters(cluster_noise),
@@ -712,6 +715,9 @@ def plot_anomalies(
         color="red",
     )
 
+    plot.tight_layout(pad=0.2)
+    plot.axis('off')
+    
     plot.savefig(plot_file_path)
     plot.close()
 
