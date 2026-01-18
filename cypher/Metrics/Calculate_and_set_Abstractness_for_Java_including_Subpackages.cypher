@@ -13,10 +13,14 @@ MATCH (artifact:Artifact)-[:CONTAINS]->(package)
      ,package
      ,sum(subpackage.numberOfTypes)            AS numberTypes
      ,sum(subpackage.numberOfAbstractTypes)    AS numberAbstractTypes
+     ,sum(subpackage.numberOfAbstractClasses)  AS numberAbstractClasses
      ,count(path) - 1                          AS numberOfIncludedSubPackages
      ,max(length(path))                        AS maxSubpackageDepth
  WITH *
-     ,toFloat(numberAbstractTypes) / (numberTypes + 1E-38) AS abstractness
+      // Calculate abstract classes out of abstract types and then add 70% of them back in (weighted)
+     ,numberAbstractTypes - (numberAbstractClasses * 0.3) AS weightedAbstractTypes
+ WITH *
+     ,toFloat(weightedAbstractTypes) / (numberTypes + 1E-38) AS abstractness
   SET package.abstractnessIncludingSubpackages          = abstractness
      ,package.numberOfAbstractTypesIncludingSubpackages = numberAbstractTypes
      ,package.numberOfTypesIncludingSubpackages         = numberTypes
@@ -26,6 +30,8 @@ RETURN artifactName
       ,abstractness
       ,numberAbstractTypes
       ,numberTypes
+      ,numberAbstractClasses
+      ,weightedAbstractTypes
       ,numberOfIncludedSubPackages
       ,maxSubpackageDepth
 ORDER BY abstractness ASC, maxSubpackageDepth DESC, numberTypes DESC
