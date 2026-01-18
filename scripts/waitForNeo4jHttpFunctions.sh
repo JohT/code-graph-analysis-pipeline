@@ -40,7 +40,7 @@ isDatabaseQueryable() {
 
 waitUntilDatabaseIsQueryable() { 
     # List of wait times in seconds per retry
-    local WAIT_TIMES="16 1 1 2 4 8 16 32 64"
+    local WAIT_TIMES="4 1 1 1 1 2 2 4 8 16 32"
     local retries=0
     local isDatabaseReady="false"
 
