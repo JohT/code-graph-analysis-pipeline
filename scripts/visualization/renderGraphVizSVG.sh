@@ -50,4 +50,4 @@ fi
 # Use "npm install" first to create local "node_modules" and be able to run it after that in offline mode.
 echo "${SCRIPT_NAME}: Info: Rendering ${inputGvFileName} using npx to run GraphViz CLI Web Assembly Wrapper..."
 npm install @hpcc-js/wasm-graphviz-cli@1.2.6 --silent --no-progress --loglevel=error > /dev/null
-npx --yes @hpcc-js/wasm-graphviz-cli@1.8.1 -T svg "${inputGvFilePath}/${graphName}.gv" > "${inputGvFilePath}/${graphName}.svg"
+npx --yes @hpcc-js/wasm-graphviz-cli@1.8.4 -T svg "${inputGvFilePath}/${graphName}.gv" > "${inputGvFilePath}/${graphName}.svg"
