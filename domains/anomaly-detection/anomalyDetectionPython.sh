@@ -118,6 +118,15 @@ anomaly_detection_features() {
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_JavaType.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_TypeScriptModules.cypher" "${@}"
+    # Determines strongly connected components if not already done
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Write.cypher" "${@}"
+    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-CreateNode.cypher" "${@}"
+    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-CreateDependency.cypher" "${@}"
+    # Determines weakly connected components if not already done
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-Write.cypher" "${@}"
+    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-CreateNode.cypher" "${@}"
 }
 
 # Execute the Python scripts for anomaly detection.

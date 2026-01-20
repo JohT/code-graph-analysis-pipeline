@@ -115,6 +115,8 @@ digraph AnomalyDetectionPipeline {
         LocalClusteringCoefficient [label="Local Clustering\nCoefficient"];
         Degree                     [label="Degree\n(in, out, sum)"];
         Abstractness               [label="Abstractness\n(Robert C. Martin)"];
+        StronglyConnectedComponents[label="StronglyConnectedComponents\n(member count)"]
+        WeaklyConnectedComponents  [label="WeaklyConnectedComponents\n(median members size)"]
     }
 
     // Anomaly detection model area
@@ -154,6 +156,8 @@ digraph AnomalyDetectionPipeline {
     LocalClusteringCoefficient -> AnomalyStandardizer;
     Degree -> AnomalyStandardizer;
     Abstractness -> AnomalyStandardizer;
+    StronglyConnectedComponents -> AnomalyStandardizer;
+    WeaklyConnectedComponents -> AnomalyStandardizer;
 
     // Proxy RandomForest used as a backing/tuning model for the Isolation Forest
     TuningAnomaly -> IsolationMinCluster;

@@ -255,6 +255,8 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,coalesce(codeUnit.outgoingDependencies, 0) AS outgoingDependencies
              ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
              ,coalesce(artifactName, projectName, "")    AS projectName
+     OPTIONAL MATCH (codeUnit)-[:IN_STRONGLY_CONNECTED_COMPONENT]->(stronglyConnectedComponent:StronglyConnectedComponent)
+     OPTIONAL MATCH (codeUnit)-[:IN_WEAKLY_CONNECTED_COMPONENT]->(weaklyConnectedComponent:WeaklyConnectedComponent)
        RETURN DISTINCT 
               codeUnitName
              ,codeUnit.name                                                 AS shortCodeUnitName
@@ -277,6 +279,7 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,codeUnit.clusteringHDBSCANSize                                AS clusterSize
              ,codeUnit.clusteringHDBSCANLabel                               AS clusterLabel
              ,codeUnit.clusteringHDBSCANMedoid                              AS clusterMedoid
+             ,coalesce(stronglyConnectedComponent.size / weaklyConnectedComponent.stronglyConnectedComponentSizePercentile50, 1.0) AS stronglyConnectedComponentSizeRatio
              ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationX          AS embeddingVisualizationX
              ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationY          AS embeddingVisualizationY
         """
@@ -500,6 +503,7 @@ def tune_anomaly_detection_models(
     study.enqueue_trial({'isolation_max_samples': 0.42726366840740576, 'isolation_n_estimators': 141, 'proxy_n_estimators': 190, 'proxy_max_depth': 5})
     study.enqueue_trial({'isolation_max_samples': 0.40638732079782663, 'isolation_n_estimators': 108, 'proxy_n_estimators': 191, 'proxy_max_depth': 9})
     
+    study.enqueue_trial({'isolation_max_samples': 0.10105966483207725, 'isolation_n_estimators': 271, 'proxy_n_estimators': 237, 'proxy_max_depth': 9})
     study.enqueue_trial({'isolation_max_samples': 0.10010443935999927, 'isolation_n_estimators': 350, 'proxy_n_estimators': 344, 'proxy_max_depth': 8})
     study.enqueue_trial({'isolation_max_samples': 0.10015063610944819, 'isolation_n_estimators': 329, 'proxy_n_estimators': 314, 'proxy_max_depth': 8})
 
