@@ -280,6 +280,7 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,codeUnit.clusteringHDBSCANLabel                               AS clusterLabel
              ,codeUnit.clusteringHDBSCANMedoid                              AS clusterMedoid
              ,coalesce(stronglyConnectedComponent.size / weaklyConnectedComponent.stronglyConnectedComponentSizePercentile50, 1.0) AS stronglyConnectedComponentSizeRatio
+             ,coalesce(stronglyConnectedComponent.topologicalSortMaxDistanceFromSource, 0)     AS topologicalComponentLayer
              ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationX          AS embeddingVisualizationX
              ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationY          AS embeddingVisualizationY
         """

@@ -117,7 +117,11 @@ digraph AnomalyDetectionPipeline {
         Abstractness               [label="Abstractness\n(Robert C. Martin)"];
         StronglyConnectedComponents[label="StronglyConnectedComponents\n(member count)"]
         WeaklyConnectedComponents  [label="WeaklyConnectedComponents\n(median members size)"]
+        TopologicalSort            [label="TopologicalSort\n(max component distance from source)"]
     }
+
+    // Inter graph algorithm feature connections
+    StronglyConnectedComponents -> TopologicalSort
 
     // Anomaly detection model area
     subgraph cluster_anomaly {
@@ -158,6 +162,7 @@ digraph AnomalyDetectionPipeline {
     Abstractness -> AnomalyStandardizer;
     StronglyConnectedComponents -> AnomalyStandardizer;
     WeaklyConnectedComponents -> AnomalyStandardizer;
+    TopologicalSort -> AnomalyStandardizer;
 
     // Proxy RandomForest used as a backing/tuning model for the Isolation Forest
     TuningAnomaly -> IsolationMinCluster;
