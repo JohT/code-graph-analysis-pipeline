@@ -296,6 +296,20 @@ def standardize_features(features: pd.DataFrame, feature_list: list[str]) -> num
     return scaler.fit_transform(features_to_scale)
 
 
+def remove_constant_features(features: pd.DataFrame, feature_names: list[str], is_verbose: bool = False) -> list[str]:
+    """
+    Removes constant features from the feature list.
+    """
+    non_constant_features = []
+    for feature in feature_names:
+        if features[feature].nunique() > 1:
+            non_constant_features.append(feature)
+        else:
+            if is_verbose:
+                print("tunedAnomalyDetectionExplained: Removing constant feature {feature}")
+    return non_constant_features
+
+
 def reduce_dimensionality_of_node_embeddings(
         features: pd.DataFrame,
         min_dimensions: int = 20,
@@ -1162,6 +1176,7 @@ if features.empty:
     sys.exit(0)
 
 features_to_standardize = features.columns.drop(features_for_visualization_to_exclude_from_training + ['embedding']).to_list()
+features_to_standardize = remove_constant_features(features, features_to_standardize, is_verbose=parameters.is_verbose())
 features_standardized = standardize_features(features, features_to_standardize)
 node_embeddings_reduced = reduce_dimensionality_of_node_embeddings(features)
 features_prepared = np.hstack([features_standardized, node_embeddings_reduced])
