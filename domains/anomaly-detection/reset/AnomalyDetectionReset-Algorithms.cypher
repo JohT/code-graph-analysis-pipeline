@@ -6,3 +6,5 @@
        ,codeUnit.centralityArticleRank
        ,codeUnit.centralityPageRank
        ,codeUnit.centralityBetweenness
+       ,codeUnit.communityStronglyConnectedComponentId
+       ,codeUnit.communityWeaklyConnectedComponentId

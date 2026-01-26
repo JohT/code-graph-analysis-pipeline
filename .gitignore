@@ -103,3 +103,7 @@ __pycache__/
 
 # Optuna (and other) Database data
 *.db
+
+# Documentation generation
+domains/**/documentation/package.json
+domains/**/documentation/package-lock.json

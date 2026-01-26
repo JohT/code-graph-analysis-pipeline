@@ -255,6 +255,8 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,coalesce(codeUnit.outgoingDependencies, 0) AS outgoingDependencies
              ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
              ,coalesce(artifactName, projectName, "")    AS projectName
+     OPTIONAL MATCH (codeUnit)-[:IN_STRONGLY_CONNECTED_COMPONENT]->(stronglyConnectedComponent:StronglyConnectedComponent)
+     OPTIONAL MATCH (codeUnit)-[:IN_WEAKLY_CONNECTED_COMPONENT]->(weaklyConnectedComponent:WeaklyConnectedComponent)
        RETURN DISTINCT 
               codeUnitName
              ,codeUnit.name                                                 AS shortCodeUnitName
@@ -263,6 +265,7 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,incomingDependencies
              ,outgoingDependencies
              ,incomingDependencies + outgoingDependencies                   AS degree
+             ,coalesce(codeUnit.abstractness, 0.0)                          AS abstractness
              ,codeUnit.embeddingsFastRandomProjectionTunedForClustering     AS embedding
              ,codeUnit.centralityPageRank                                   AS pageRank
              ,codeUnit.centralityArticleRank                                AS articleRank
@@ -276,6 +279,8 @@ def query_data(input_parameters: Parameters = Parameters.example()) -> pd.DataFr
              ,codeUnit.clusteringHDBSCANSize                                AS clusterSize
              ,codeUnit.clusteringHDBSCANLabel                               AS clusterLabel
              ,codeUnit.clusteringHDBSCANMedoid                              AS clusterMedoid
+             ,coalesce(stronglyConnectedComponent.size / weaklyConnectedComponent.stronglyConnectedComponentSizePercentile50, 1.0) AS stronglyConnectedComponentSizeRatio
+             ,coalesce(stronglyConnectedComponent.topologicalSortMaxDistanceFromSource, 0)     AS topologicalComponentLayer
              ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationX          AS embeddingVisualizationX
              ,codeUnit.embeddingsFastRandomProjectionTunedForClusteringVisualizationY          AS embeddingVisualizationY
         """
@@ -294,6 +299,20 @@ def standardize_features(features: pd.DataFrame, feature_list: list[str]) -> num
     features_to_scale = features[feature_list]
     scaler = StandardScaler()
     return scaler.fit_transform(features_to_scale)
+
+
+def remove_constant_features(features: pd.DataFrame, feature_names: list[str], is_verbose: bool = False) -> list[str]:
+    """
+    Removes constant features from the feature list.
+    """
+    non_constant_features = []
+    for feature in feature_names:
+        if features[feature].nunique() > 1:
+            non_constant_features.append(feature)
+        else:
+            if is_verbose:
+                print("tunedAnomalyDetectionExplained: Removing constant feature {feature}")
+    return non_constant_features
 
 
 def reduce_dimensionality_of_node_embeddings(
@@ -485,6 +504,7 @@ def tune_anomaly_detection_models(
     study.enqueue_trial({'isolation_max_samples': 0.42726366840740576, 'isolation_n_estimators': 141, 'proxy_n_estimators': 190, 'proxy_max_depth': 5})
     study.enqueue_trial({'isolation_max_samples': 0.40638732079782663, 'isolation_n_estimators': 108, 'proxy_n_estimators': 191, 'proxy_max_depth': 9})
     
+    study.enqueue_trial({'isolation_max_samples': 0.10105966483207725, 'isolation_n_estimators': 271, 'proxy_n_estimators': 237, 'proxy_max_depth': 9})
     study.enqueue_trial({'isolation_max_samples': 0.10010443935999927, 'isolation_n_estimators': 350, 'proxy_n_estimators': 344, 'proxy_max_depth': 8})
     study.enqueue_trial({'isolation_max_samples': 0.10015063610944819, 'isolation_n_estimators': 329, 'proxy_n_estimators': 314, 'proxy_max_depth': 8})
 
@@ -582,22 +602,24 @@ def prepare_features_for_2d_visualization(features: np.ndarray, anomaly_detectio
     return anomaly_detection_results
 
 
-def get_top_10_anomalies(
+def get_top_n_anomalies(
         anomaly_detected_features: pd.DataFrame,
         anomaly_label_column: str = "anomalyLabel",
-        anomaly_score_column: str = "anomalyScore"
+        anomaly_score_column: str = "anomalyScore",
+        top_n: int = 10
 ) -> pd.DataFrame:
     anomalies = anomaly_detected_features[anomaly_detected_features[anomaly_label_column] == 1]
-    return anomalies.sort_values(by=anomaly_score_column, ascending=False).head(10)
+    return anomalies.sort_values(by=anomaly_score_column, ascending=False).head(top_n)
 
 
-def get_top_10_non_anomalies(
+def get_top_n_non_anomalies(
         anomaly_detected_features: pd.DataFrame,
         anomaly_label_column: str = "anomalyLabel",
-        anomaly_score_column: str = "anomalyScore"
+        anomaly_score_column: str = "anomalyScore",
+        top_n: int = 10
 ) -> pd.DataFrame:
     anomalies = anomaly_detected_features[anomaly_detected_features[anomaly_label_column] != 1]
-    return anomalies.sort_values(by=anomaly_score_column, ascending=True).head(10)
+    return anomalies.sort_values(by=anomaly_score_column, ascending=True).head(top_n)
 
 
 def plot_anomalies(
@@ -621,8 +643,8 @@ def plot_anomalies(
         return
 
     annotate_top_n_anomalies: int = 10
-    annotate_top_n_non_anomalies: int = 5
-    annotate_top_n_clusters: int = 20
+    annotate_top_n_non_anomalies: int = 3
+    annotate_top_n_clusters: int = 10
 
     features_to_visualize_zoomed=zoom_into_center_while_preserving_top_scores(
         features_to_visualize, 
@@ -647,8 +669,11 @@ def plot_anomalies(
     cluster_non_noise = cluster_without_anomalies[cluster_without_anomalies[cluster_label_column] != -1]
 
     plot.figure(figsize=(10, 10))
-    plot.title(f"{title_prefix} Anomalies (size={size_column}, main-color=cluster, red=anomaly, green=non-anomaly)", pad=20)
-
+    plot.title(
+        label=f"{title_prefix} Anomalies (size={size_column}, main-color=cluster, red=anomaly, green=non-anomaly)", 
+        pad=30,
+        bbox=dict(facecolor='white', edgecolor='none', pad=2, alpha=0.6)
+    )
     # Plot noise (from clustering)
     plot.scatter(
         **get_common_plot_parameters(cluster_noise),
@@ -712,6 +737,9 @@ def plot_anomalies(
         color="red",
     )
 
+    plot.tight_layout(pad=0.2)
+    plot.axis('off')
+    
     plot.savefig(plot_file_path)
     plot.close()
 
@@ -1156,6 +1184,7 @@ if features.empty:
     sys.exit(0)
 
 features_to_standardize = features.columns.drop(features_for_visualization_to_exclude_from_training + ['embedding']).to_list()
+features_to_standardize = remove_constant_features(features, features_to_standardize, is_verbose=parameters.is_verbose())
 features_standardized = standardize_features(features, features_to_standardize)
 node_embeddings_reduced = reduce_dimensionality_of_node_embeddings(features)
 features_prepared = np.hstack([features_standardized, node_embeddings_reduced])
@@ -1168,10 +1197,10 @@ if anomaly_detection_results.is_empty():
 features = add_anomaly_detection_results_to_features(features, anomaly_detection_results)
 
 if parameters.is_verbose():
-    print("tunedAnomalyDetectionExplained: Top 10 anomalies:")
-    print(get_top_10_anomalies(features).reset_index(drop=True))
-    print("tunedAnomalyDetectionExplained: Top 10 non-anomalies:")
-    print(get_top_10_non_anomalies(features).reset_index(drop=True))
+    print("tunedAnomalyDetectionExplained: Top 20 anomalies:")
+    print(get_top_n_anomalies(features, top_n=20).reset_index(drop=True))
+    print("tunedAnomalyDetectionExplained: Top 20 non-anomalies:")
+    print(get_top_n_non_anomalies(features, top_n=20).reset_index(drop=True))
 
 plot_anomalies(
     features_to_visualize=features,
@@ -1192,8 +1221,8 @@ plot_features_with_anomalies(
 
 if parameters.is_verbose():
     feature_importances = pd.Series(anomaly_detection_results.feature_importances, index=feature_names).sort_values(ascending=False)
-    print("tunedAnomalyDetectionExplained: Most influential features for anomaly detection according to the proxy model directly without SHAP (top 10):")
-    print(feature_importances.head(10))
+    print("tunedAnomalyDetectionExplained: Most influential features for anomaly detection according to the proxy model directly without SHAP (top 20):")
+    print(feature_importances.head(20))
 
 explanation_results = explain_anomalies_with_shap(
     random_forest_model=anomaly_detection_results.random_forest_classifier,
@@ -1210,7 +1239,7 @@ plot_shap_explained_beeswarm(
 )
 
 plot_all_shap_explained_local_feature_importance(
-    data=get_top_10_anomalies(features),
+    data=get_top_n_anomalies(features),
     explanation_results=explanation_results,
     prepared_features=features_prepared,
     feature_names=feature_names,

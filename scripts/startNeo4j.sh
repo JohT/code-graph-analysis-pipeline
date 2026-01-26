@@ -23,6 +23,12 @@ NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "startNeo4j: SCRIPTS_DIR=$SCRIPTS_DIR"
 
+# Check if environment variable NEO4J_INITIAL_PASSWORD is set
+if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then
+    echo "startNeo4j: Error: Requires environment variable NEO4J_INITIAL_PASSWORD to be set first. Use 'export NEO4J_INITIAL_PASSWORD=<your-own-password>'."
+    exit 1
+fi
+
 # Check if TOOLS_DIRECTORY variable is set
 if [ -z "${TOOLS_DIRECTORY}" ]; then
     echo "startNeo4j: Requires variable TOOLS_DIRECTORY to be set. If it is the current directory, then use a dot to reflect that."
