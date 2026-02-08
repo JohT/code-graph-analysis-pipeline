@@ -108,6 +108,8 @@ anomaly_detection_queries() {
     mkdir -p "${detail_report_directory}"
 
     echo "anomalyDetectionCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Executing Queries for ${nodeLabel} nodes..."
+    execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionProjectionStatistics.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_GraphProjectionStatistics.csv"
+
     execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialImbalancedRoles.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_PotentialImbalancedRoles.csv"
     execute_cypher "${ANOMALY_DETECTION_QUERY_CYPHER_DIR}/AnomalyDetectionPotentialOverEngineerOrIsolated.cypher" "${@}" > "${detail_report_directory}/AnomalyDetection_PotentialOverEngineerOrIsolated.csv"
     
