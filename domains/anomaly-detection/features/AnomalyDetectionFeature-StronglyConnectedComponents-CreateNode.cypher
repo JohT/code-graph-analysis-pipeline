@@ -13,7 +13,7 @@
 // 3) Create or update the StronglyConnectedComponent node with member type label e.g. ("TypeMembers") 
 //    - size: number of code units in the component
 //    - name: derived from the highest PageRank member
-   MERGE (component:StronglyConnectedComponent {id: componentId})
+   MERGE (component:StronglyConnectedComponent {id: componentId, memberType: $projection_node_label})
     WITH *
         ,CASE componentSize WHEN = 1 THEN 'Component ' ELSE 'Cycle around ' END AS componentNamePrefix
     CALL apoc.create.addLabels(component, [$projection_node_label + 'Members']) YIELD node
