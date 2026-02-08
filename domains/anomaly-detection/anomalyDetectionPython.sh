@@ -129,6 +129,8 @@ anomaly_detection_features() {
     execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-CreateNode.cypher" "${@}"
     # Determines topological sort max distance from source for strongly connected components if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Delete-Projection.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Projection.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Write.cypher" "${@}"

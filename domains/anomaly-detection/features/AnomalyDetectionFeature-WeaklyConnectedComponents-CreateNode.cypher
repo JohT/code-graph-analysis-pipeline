@@ -12,7 +12,7 @@
 // 3) Create or update the WeaklyConnectedComponent node with member type label e.g. ("TypeMembers") 
 //    - size: number of code units in the component
 //    - name: derived from the highest PageRank member
-   MERGE (component:WeaklyConnectedComponent {id: componentId})
+   MERGE (component:WeaklyConnectedComponent {id: componentId, memberType: $projection_node_label})
     WITH *
     CALL apoc.create.addLabels(component, [$projection_node_label + 'Members']) YIELD node
      SET component.size = size(members)
