@@ -40,7 +40,7 @@ NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
 NEO4J_GDS_PLUGIN_VERSION              | 2.24.0                              |  |
 NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.24.0                              |  |
 NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
-JQASSISTANT_CLI_VERSION               | 2.9.0-RC1                           |  |
+JQASSISTANT_CLI_VERSION               | 2.9.0                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4j-latest-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
