@@ -15,10 +15,10 @@ dependencies:
   - pandas=2.2.3
   - pip=25.0.1
   - setuptools=80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
-  - wordcloud=1.9.4
+  - wordcloud=1.9.6
   - monotonic=1.6
-  - plotly=6.5.0
-  - python-kaleido=1.1.0 # To render plotly plots. Static image export for web-based visualization libraries.
+  - plotly=6.5.2
+  - python-kaleido=1.2.0 # To render plotly plots. Static image export for web-based visualization libraries.
   - scikit-learn=1.6.1 # For anomaly detection HDBSCAN clustering, scores like AMI, and others 
   - seaborn=0.13.2 # To visualize clustering results
   - optuna=4.6.0

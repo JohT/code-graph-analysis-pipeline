@@ -13,9 +13,9 @@ pip==25.3
 setuptools==80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
 
 # --- Visualization ---
-wordcloud==1.9.4
+wordcloud==1.9.6
 monotonic==1.6
-plotly[kaleido]==6.5.0
+plotly[kaleido]==6.5.2
 seaborn==0.13.2 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
