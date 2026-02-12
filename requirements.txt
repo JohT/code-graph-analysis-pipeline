@@ -19,13 +19,13 @@ plotly[kaleido]==6.5.2
 seaborn==0.13.2 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
-scikit-learn==1.7.2
-optuna==4.6.0
-umap-learn==0.5.9.post2 # Dimensionality reduction to visualize node embeddings in 2D
+scikit-learn==1.8.0
+optuna==4.7.0
+umap-learn==0.5.11 # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
 neo4j==5.28.2
 
 # --- Native/scientific packages (may require compilation) ---
 # These are included but may cause install errors in pip/venv
-shap==0.49.1          # For e.g. explaining anomaly detection results
+shap==0.50.0          # For e.g. explaining anomaly detection results
