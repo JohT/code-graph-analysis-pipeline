@@ -24,7 +24,7 @@ optuna==4.6.0
 umap-learn==0.5.9.post2 # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
-neo4j==5.28.2
+neo4j==5.28.3
 
 # --- Native/scientific packages (may require compilation) ---
 # These are included but may cause install errors in pip/venv
