@@ -216,12 +216,12 @@ jobs:
         run: echo "pnpmDetected=$(if [ -f "pnpm-lock.yaml" ]; then echo "true"; else echo "false"; fi)" >> $GITHUB_ENV
       - name: (Code Analysis JavaScript Setup) Setup Node.js with version in .nvmrc for cloned source repository
         if: inputs.source-repository != '' && env.nodeVersionFileDetected == 'true'
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@v6.2.0
         with:
           node-version-file: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}/.nvmrc
       - name: (Code Analysis JavaScript Setup) Setup Node.js (long-term support version fallback, no .nvmrc) for cloned source repository
         if: inputs.source-repository != '' && env.nodeVersionFileDetected != 'true'
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@v6.2.0
         with:
           node-version: 'lts/*'
       - name: (Code Analysis JavaScript Setup) Setup pnpm for cloned source repository
