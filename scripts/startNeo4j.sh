@@ -12,7 +12,7 @@ set -o errexit -o pipefail
 
 # Overrideable Defaults
 NEO4J_EDITION=${NEO4J_EDITION:-"community"} # Choose "community" or "enterprise"
-NEO4J_VERSION=${NEO4J_VERSION:-"2025.11.2"}
+NEO4J_VERSION=${NEO4J_VERSION:-"2026.01.4"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
 NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"}
 
