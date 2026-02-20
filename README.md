@@ -83,6 +83,11 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 - [Analyze java dependencies with jQAssistant](https://joht.github.io/johtizen/data/2021/02/21/java-jar-dependency-analysis.html)
 - [Analyze java package metrics in a graph database (Part 2)](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html)
 
+## :mega: Talks
+
+- [Unleashing the Power of Graphs in Java Code Structure Analysis](https://github.com/JohT/code-graph-analysis-examples/blob/main/talks/2023-12-14-Engineering_Kiosk_Alps_Meetup-Code_Structure_Graph_Analysis.pdf) - Engineering Kiosk Alps Meetup, December 2023
+- [How anomalous is your code?](https://github.com/JohT/code-graph-analysis-examples/blob/main/talks/2026-02-25_AI_Meetup_Austria_How_Anomalous_Is_Your_Code.pdf) - AI Meetup Austria, February 2026
+
 ## :hammer_and_wrench: Prerequisites
 
 Run [scripts/checkCompatibility.sh](./scripts/checkCompatibility.sh) to check if all required dependencies are installed and available in your environment.
