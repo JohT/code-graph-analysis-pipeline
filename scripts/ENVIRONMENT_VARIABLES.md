@@ -32,13 +32,13 @@ NEO4J_HTTP_PORT                       | 7474                                | Ne
 NEO4J_HTTP_TRANSACTION_ENDPOINT       | db/neo4j/tx/commit                  | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit" |
 IMPORT_DIRECTORY                      | import                              |  |
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin                              | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin". |
-NEO4J_VERSION                         | 2025.11.2                           | Neo4j Graph Database Version. Current versions: >= 2025.03.0. Version 4.4.42 and 5.26.5 are the previous LTS (long term support) versions as of April 2025. |
+NEO4J_VERSION                         | 2026.01.4                           | Neo4j Graph Database Version. Current versions: >= 2025.03.0. Version 4.4.42 and 5.26.5 are the previous LTS (long term support) versions as of April 2025. |
 NEO4J_CONFIG_TEMPLATE                 | template-neo4j.conf                 |  |
-NEO4J_APOC_PLUGIN_VERSION             | 2025.11.2                           |  |
+NEO4J_APOC_PLUGIN_VERSION             | 2026.01.4                           |  |
 NEO4J_APOC_PLUGIN_EDITION             | core                                |  |
 NEO4J_APOC_PLUGIN_GITHUB              | neo4j/apoc                          |  |
 NEO4J_GDS_PLUGIN_VERSION              | 2.24.0                              |  |
-NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.24.0                              |  |
+NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.26.0                              |  |
 NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
 JQASSISTANT_CLI_VERSION               | 2.9.0                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
