@@ -11,7 +11,7 @@ dependencies:
   - matplotlib=3.10.8
   - nbconvert=7.16.6
   - nbconvert-webpdf=7.16.6
-  - numpy=1.26.4
+  - numpy=2.2.5
   - pandas=2.2.3
   - pip=26.0.1
   - setuptools=80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
@@ -19,10 +19,10 @@ dependencies:
   - monotonic=1.6
   - plotly=6.5.2
   - python-kaleido=1.2.0 # To render plotly plots. Static image export for web-based visualization libraries.
-  - scikit-learn=1.6.1 # For anomaly detection HDBSCAN clustering, scores like AMI, and others 
+  - scikit-learn=1.8.0 # For anomaly detection HDBSCAN clustering, scores like AMI, and others 
   - seaborn=0.13.2 # To visualize clustering results
-  - optuna=4.6.0
-  - umap-learn=0.5.9 # to visualize node embeddings in 2D (UMAP dimensionality reduction)
-  - shap=0.48.0
+  - optuna=4.7.0
+  - umap-learn=0.5.11 # to visualize node embeddings in 2D (UMAP dimensionality reduction)
+  - shap=0.50.0
   - pip:
       - neo4j==5.28.2

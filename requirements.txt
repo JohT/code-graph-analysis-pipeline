@@ -7,7 +7,7 @@
 jupyter==1.1.1
 matplotlib==3.10.8
 nbconvert[webpdf]==7.16.6
-numpy==1.26.4
+numpy==2.2.5
 pandas==2.3.3
 pip==26.0.1
 setuptools==80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
@@ -19,13 +19,13 @@ plotly[kaleido]==6.5.2
 seaborn==0.13.2 # To visualize clustering results
 
 # --- Machine Learning / Optimization ---
-scikit-learn==1.7.2
-optuna==4.6.0
-umap-learn==0.5.9.post2 # Dimensionality reduction to visualize node embeddings in 2D
+scikit-learn==1.8.0
+optuna==4.7.0
+umap-learn==0.5.11 # Dimensionality reduction to visualize node embeddings in 2D
 
 # --- Database connector ---
 neo4j==5.28.2
 
 # --- Native/scientific packages (may require compilation) ---
 # These are included but may cause install errors in pip/venv
-shap==0.49.1          # For e.g. explaining anomaly detection results
+shap==0.50.0          # For e.g. explaining anomaly detection results
