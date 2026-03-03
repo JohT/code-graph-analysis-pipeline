@@ -76,6 +76,8 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--profile Neo4j-latest-low-memory` is based on the default profile (`Neo4j-latest`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./scripts/configuration/template-neo4j-low-memory.conf). This is useful for the analysis of smaller codebases with less resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
+- `--profile Neo4j-latest-high-memory` is based on the default profile (`Neo4j-latest`) but uses more memory (RAM) as configured in [template-neo4j-high-memory.conf](./scripts/configuration/template-neo4j-high-memory.conf). This is useful for the analysis of larger codebases with more resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+
 - `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
 ### Notes
