@@ -17,6 +17,10 @@ SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository direc
 IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"import"}
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
 
+# Local constants
+COLOR_YELLOW='\033[0;33m'
+COLOR_DEFAULT='\033[0m'
+
 # Default and initial values for command line options
 source="${SOURCE_DIRECTORY}"
 
@@ -136,6 +140,15 @@ commonPostGitImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_missing_CHANGED_TOGETHER_WITH_properties.cypher"
+
+  dataVerificationResult=$( execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_missing_create_date.cypher")
+  if ! is_csv_column_greater_zero "${dataVerificationResult}" "numberOfMissingCreateDateEntires"; then
+      # Warning: The git file creation date must not be missing. However, this is not important enough to stop the analysis.
+      #          Therefore, it will only be a warning and subsequent queries will use a default date in these cases.
+      echo -e "${COLOR_YELLOW}importGit: Data verification warning: Git:File nodes with missing createdAtEpoch property detected! Affected number of nodes:${COLOR_DEFAULT}"
+      echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
+      # Since this is now only a warning, execution will be continued.
+  fi
 }
 
 postGitLogImport() {
