@@ -47,6 +47,7 @@ Script | Directory | Description
 | [prepareAnalysis.sh](./prepareAnalysis.sh) |  | Prepares and validates the graph database before analysis  |
 | [Default.sh](./profiles/Default.sh) | profiles | Sets (if any) settings variables for a default analysis. |
 | [Neo4j-latest-continue-on-scan-errors.sh](./profiles/Neo4j-latest-continue-on-scan-errors.sh) | profiles | Sets all settings variables for an analysis with the latest version of Neo4j. |
+| [Neo4j-latest-high-memory.sh](./profiles/Neo4j-latest-high-memory.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
 | [Neo4j-latest-low-memory.sh](./profiles/Neo4j-latest-low-memory.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023). |
 | [Neo4j-latest.sh](./profiles/Neo4j-latest.sh) | profiles | Sets all settings variables for an analysis with the latest version of Neo4j. |
 | [Neo4jv4-low-memory.sh](./profiles/Neo4jv4-low-memory.sh) | profiles | Sets all settings variables for an analysis with Neo4j v4.4.x (long term support (LTS) version as of may 2023). |
@@ -91,6 +92,7 @@ Script | Directory | Description
 | [testCloneGitRepository.sh](./testCloneGitRepository.sh) |  | Tests "cloneGitRepository.sh". |
 | [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
 | [testDownloadMavenArtifacts.sh](./testDownloadMavenArtifacts.sh) |  | Tests "downloadMavenArtifacts.sh". |
+| [testFilenameReferences.sh](./testFilenameReferences.sh) |  | Tests: scan all *.sh files (current directory including subdirectories) |
 | [testInstallJavaScriptDependencies.sh](./testInstallJavaScriptDependencies.sh) |  | Tests "installJavaScriptDependencies.sh". |
 | [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
 | [renderGraphVizSVG.sh](./visualization/renderGraphVizSVG.sh) | visualization | Renders the given GraphViz file as a SVG image. |
