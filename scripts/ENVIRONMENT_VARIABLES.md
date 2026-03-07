@@ -42,7 +42,7 @@ NEO4J_OPEN_GDS_PLUGIN_VERSION         | 2.26.0                              |  |
 NEO4J_GDS_PLUGIN_EDITION              | open                                |  |
 JQASSISTANT_CLI_VERSION               | 2.9.0                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
-JQASSISTANT_CONFIG_TEMPLATE           | template-neo4j-latest-jqassistant-continue-on-error.yaml |  |
+JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv5-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
 VISUALIZATION_SCRIPTS_DIR             | ${SCRIPTS_DIR}/visualization        | Repository directory containing the shell scripts for visualization |
 DOMAINS_DIRECTORY                     | ${REPORTS_SCRIPT_DIR}/../../domains |  |
