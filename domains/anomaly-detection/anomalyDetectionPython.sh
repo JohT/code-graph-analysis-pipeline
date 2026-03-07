@@ -117,7 +117,7 @@ anomaly_detection_features() {
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_JavaType.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_TypeScriptModules.cypher" "${@}"
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_TypeScriptModule.cypher" "${@}"
     # Determines strongly connected components if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Write.cypher" "${@}"

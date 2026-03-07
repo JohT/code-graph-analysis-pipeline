@@ -293,6 +293,13 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-low-memory
   ```
 
+- How can i increase the memory (RAM) consumption?  
+  👉 Use the profile `Neo4j-latest-high-memory` (default = `Neo4j-latest`):
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-high-memory
+  ```
+
 ## 🕸 Web References
 
 - [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples)
