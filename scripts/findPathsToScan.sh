@@ -28,6 +28,21 @@ appendNonEmpty() {
     fi
 }
 
+findPackageJsonFiles() {
+  find -L "${1}" \
+      -type d -name "node_modules" -prune -o \
+      -type d -name "dist" -prune -o \
+      -type d -name ".yalc" -prune -o \
+      -type d -name "target" -prune -o \
+      -type d -name "temp" -prune -o \
+      -type d -name "lib" -prune -o \
+      -type d -name "libs" -prune -o \
+      -type d -name ".git" -prune -o \
+      -name 'package.json' \
+      -print0 | \
+      xargs -0 -r -I {} echo {}
+}
+
 # Collect all files and directories to scan
 directoriesAndFilesToScan=""
 
@@ -45,6 +60,7 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
                                     -type d -name "dist" -prune -o \
                                     -type d -name "target" -prune -o \
                                     -type d -name ".yalc" -prune -o \
+                                    -type d -name ".git" -prune -o \
                                     -type d -name "temp" -prune -o \
                                     -type f -path "*/.reports/jqa/ts-output.json" \
                                     -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
@@ -54,12 +70,12 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
     fi
 
     # Scan package.json files for npm (nodes package manager) in the source directory
-    # # TODO The following lines can be reactivated when the following issue is resolved:
+    # Since the following issue had been resolved, the scan be done here again:
     # https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
-    #npmPackageJsonFiles="$(find -L "${SOURCE_DIRECTORY}" -type d -name node_modules -prune -o -name 'package.json' -print0 | xargs -0 -r -I {} | tr '\n' ',' | sed 's/,$/\n/')"
-    #if [ -n "${npmPackageJsonFiles}" ]; then
-    #    directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
-    #fi
+    npmPackageJsonFiles="$(findPackageJsonFiles "./${SOURCE_DIRECTORY}")"
+    if [ -n "${npmPackageJsonFiles}" ]; then
+       directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
+    fi
 
     # Scan git repositories in the artifacts directory
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ] ; then
