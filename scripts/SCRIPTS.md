@@ -12,7 +12,6 @@ Script | Directory | Description
 | [checkCompatibility.sh](./checkCompatibility.sh) |  | Check environment dependencies and tool availability. |
 | [cleanupAfterReportGeneration.sh](./cleanupAfterReportGeneration.sh) |  | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder. |
 | [cloneGitRepository.sh](./cloneGitRepository.sh) |  | Provides safe-guarded (security checked parameters) git repository cloning. |
-| [copyPackageJsonFiles.sh](./copyPackageJsonFiles.sh) |  | Copies all package.json files inside the source directory into the artifacts/npm-package-json directory. |
 | [createAggregatedGitLogCsv.sh](./createAggregatedGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. |
 | [createGitLogCsv.sh](./createGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. |
 | [detectChangedFiles.sh](./detectChangedFiles.sh) |  | Detect changed files in the artifacts directory or in a given list of paths  |
