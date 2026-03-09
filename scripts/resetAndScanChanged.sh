@@ -4,7 +4,7 @@
 
 # Note: "resetAndScan" expects jQAssistant to be installed in the "tools" directory.
 
-# Requires resetAndScan.sh, copyPackageJsonFiles.sh, scanTypescript.sh, detectChangedFiles.sh, findPathsToScan.sh
+# Requires resetAndScan.sh, scanTypescript.sh, detectChangedFiles.sh, findPathsToScan.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -17,9 +17,6 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 echo "resetAndScanChanged SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Prepare scan
-# TODO "copyPackageJsonFiles.sh" can be deleted here when the following issue is resolved:
-# https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
-source "${SCRIPTS_DIR}/copyPackageJsonFiles.sh"
 source "${SCRIPTS_DIR}/scanTypescript.sh"
 
 filesAndDirectoriesToScan=$( source "${SCRIPTS_DIR}/findPathsToScan.sh" )
