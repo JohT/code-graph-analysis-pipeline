@@ -1,6 +1,6 @@
-// Community Detection Label Propagation Estimate
+// Community Detection Weakly Connected Components
 
-CALL gds.labelPropagation.write.estimate(
+CALL gds.wcc.write.estimate(
  $dependencies_projection + '-cleaned', {
       relationshipWeightProperty: $dependencies_projection_weight_property
      ,writeProperty: $dependencies_projection_write_property
