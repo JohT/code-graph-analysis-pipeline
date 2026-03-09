@@ -132,6 +132,41 @@ detectCommunitiesWithLeiden() {
     calculateCommunityMetrics "${@}" "${writePropertyName}"
 }
 
+# Community Detection using the Strongly Connected Components Algorithm
+# 
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "package"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+detectCommunitiesWithStronglyConnectedComponents() {
+    local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
+    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
+
+    local writePropertyName="dependencies_projection_write_property=communityStronglyConnectedComponentId" 
+    local writeLabelName="dependencies_projection_write_label=StronglyConnectedComponent" 
+
+    # Statistics
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3a_StronglyConnectedComponents_Estimate.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3b_StronglyConnectedComponents_Statistics.cypher" "${@}"
+    
+    # Run the algorithm and write the result into the in-memory projection ("mutate")
+    execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3c_StronglyConnectedComponents_Mutate.cypher" "${@}" "${writePropertyName}"
+
+    # Stream to CSV
+    local nodeLabel
+    nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}")
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated_Grouped.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Strongly_Connected_Components.csv"
+    #execute_cypher "${COMMUNITY_DETECTION_CYPHER_DIR}/Community_Detection_3d_StronglyConnectedComponents_Stream.cypher" "${@}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Communities_Strongly_Connected_Components.csv"
+    
+    # Update Graph (node properties and labels) using the already mutated property projection
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_10_Delete_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_11_Add_Label.cypher" "${@}" "${writePropertyName}" "${writeLabelName}"
+
+    calculateCommunityMetrics "${@}" "${writePropertyName}"
+}
+
 # Community Detection using the Weakly Connected Components Algorithm
 # 
 # Required Parameters:
@@ -139,8 +174,6 @@ detectCommunitiesWithLeiden() {
 #   Name prefix for the in-memory projection name for dependencies. Example: "package"
 # - dependencies_projection_node=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
-# - dependencies_projection_weight_property=...
-#   Name of the node property that contains the dependency weight. Example: "weight"
 detectCommunitiesWithWeaklyConnectedComponents() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${CYPHER_DIR}/Community_Detection"
     local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
@@ -470,7 +503,10 @@ detectCommunities() {
     time calculateLocalClusteringCoefficient "${@}"
 
     compareCommunityDetectionResults "${@}"
-    listAllResults "${@}"
+}
+
+detectDirectedCommunities() {
+    time detectCommunitiesWithStronglyConnectedComponents "${@}"
 }
 
 # -- Java Artifact Community Detection ---------------------------
@@ -482,8 +518,14 @@ ARTIFACT_GAMMA="dependencies_leiden_gamma=1.11" # default = 1.00
 ARTIFACT_KCUT="dependencies_maxkcut=5" # default = 2
 
 if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
-    detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}" # "${ARTIFACT_NODE_EMBEDDINGS}"
+    detectCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
     writeLeidenModularity "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+
+    if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
+        detectDirectedCommunities "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+    fi
+
+    listAllResults "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_GAMMA}" "${ARTIFACT_KCUT}"
 fi
 
 # -- Java Package Community Detection -------------------------------
@@ -500,6 +542,11 @@ if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}
 
     detectCommunitiesWithHDBSCAN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 
+    if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
+        detectDirectedCommunities "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+    fi
+    listAllResults "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_GAMMA}" "${PACKAGE_KCUT}"
+    
     # Package Community Detection - Special CSV Queries after update
     execute_cypher "${CYPHER_DIR}/Community_Detection/Which_package_community_spans_several_artifacts_and_how_are_the_packages_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Package_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
 fi
@@ -513,12 +560,18 @@ TYPE_GAMMA="dependencies_leiden_gamma=5.00" # default = 1.00
 TYPE_KCUT="dependencies_maxkcut=100" # default = 2
 
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
-    detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}" "${TYPE_NODE_EMBEDDINGS}"
+    detectCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
     detectCommunitiesWithHDBSCAN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+    
     # Type Community Detection - Special CSV Queries after update
     execute_cypher "${CYPHER_DIR}/Community_Detection/Which_type_community_spans_several_artifacts_and_how_are_the_types_distributed.cypher" > "${FULL_REPORT_DIRECTORY}/Type_Communities_Leiden_That_Span_Multiple_Artifacts.csv"
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_with_few_members_in_foreign_packages.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_with_few_members_in_foreign_packages.csv"
     execute_cypher "${CYPHER_DIR}/Community_Detection/Type_communities_that_span_the_most_packages_with_type_statistics.cypher" > "${FULL_REPORT_DIRECTORY}/Type_communities_that_span_the_most_packages_with_type_statistics.csv"
+    
+    if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
+        detectDirectedCommunities "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+    fi
+    listAllResults "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_GAMMA}" "${TYPE_KCUT}"
 fi
 
 # -- Typescript Module Community Detection -----------------------
@@ -532,6 +585,10 @@ MODULE_KCUT="dependencies_maxkcut=20" # default = 2
 
 if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
     detectCommunities "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_GAMMA}" "${MODULE_KCUT}"
+    if createDirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
+        detectDirectedCommunities "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+    fi
+    listAllResults "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_GAMMA}" "${MODULE_KCUT}"
 fi
 
 # ---------------------------------------------------------------
