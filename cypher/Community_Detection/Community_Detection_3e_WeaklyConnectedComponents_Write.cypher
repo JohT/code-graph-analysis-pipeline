@@ -2,8 +2,7 @@
 
 CALL gds.wcc.write(
  $dependencies_projection + '-cleaned', {
-       relationshipWeightProperty: $dependencies_projection_weight_property
-      ,consecutiveIds: true
+       consecutiveIds: true
       ,writeProperty: 'communityWeaklyConnectedComponentId'
 })
 YIELD componentCount

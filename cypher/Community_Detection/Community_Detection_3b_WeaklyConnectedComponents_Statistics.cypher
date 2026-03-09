@@ -2,8 +2,7 @@
 
 CALL gds.wcc.stats(
  $dependencies_projection + '-cleaned', {
-      relationshipWeightProperty: $dependencies_projection_weight_property
-     ,consecutiveIds: true
+     consecutiveIds: true
 })
  YIELD componentCount
       ,preProcessingMillis

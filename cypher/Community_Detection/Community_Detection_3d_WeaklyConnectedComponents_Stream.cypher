@@ -2,8 +2,7 @@
 
 CALL gds.wcc.stream(
  $dependencies_projection + '-cleaned', {
-      relationshipWeightProperty: $dependencies_projection_weight_property,
-      consecutiveIds: true
+    consecutiveIds: true
 })
  YIELD nodeId, componentId
   WITH componentId

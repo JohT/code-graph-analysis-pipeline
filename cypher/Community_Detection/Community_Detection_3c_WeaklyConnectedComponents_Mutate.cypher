@@ -2,8 +2,7 @@
 
 CALL gds.wcc.mutate(
  $dependencies_projection + '-cleaned', {
-      relationshipWeightProperty: $dependencies_projection_weight_property
-     ,mutateProperty: $dependencies_projection_write_property
+      mutateProperty: $dependencies_projection_write_property
      ,consecutiveIds: true
 })
  YIELD componentCount
