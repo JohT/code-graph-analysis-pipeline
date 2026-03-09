@@ -3,8 +3,8 @@
 
  MATCH (module:TS:Module)-[dependsOn:DEPENDS_ON]->(externalModule:TS:ExternalModule)
  MATCH (externalModule)-[:IS_IMPLEMENTED_IN]->(resolvedModule:TS:Module)
- OPTIONAL MATCH (module)-[existingDependency:DEPENDS_ON]->(resolvedModule)
  WHERE module <> resolvedModule
+ OPTIONAL MATCH (module)-[existingDependency:DEPENDS_ON]->(resolvedModule)
   CALL {  WITH module, dependsOn, resolvedModule, existingDependency
          MERGE (module)-[resolvedDependsOn:DEPENDS_ON]->(resolvedModule)
             ON CREATE SET resolvedDependsOn             = dependsOn
