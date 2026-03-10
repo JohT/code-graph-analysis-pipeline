@@ -19,7 +19,6 @@ ARTIFACTS_DIRECTORY                   | artifacts                           | Wo
 SOURCE_DIRECTORY                      | source                              |  |
 LOG_GROUP_START                       | ::group::                           | Prefix to start a log group. Defaults to GitHub Actions log group start command. |
 LOG_GROUP_END                         | ::endgroup::                        | Prefix to end a log group. Defaults to GitHub Actions log group end command. |
-NPM_PACKAGE_JSON_ARTIFACTS_DIRECTORY  | npm-package-json                    | Subdirectory of "artifacts" containing the npm package.json files to scan |
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE  | artifactsChangeDetectionHash.txt    | !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE. |
 CHANGE_DETECTION_HASH_FILE_PATH       | ./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE} | Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option. |
 ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |                                     | Enable PDF generation for Jupyter Notebooks if set to any non empty value like "true" or disable it with "" or "false". |
