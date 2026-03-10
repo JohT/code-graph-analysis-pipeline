@@ -1,6 +1,6 @@
-// Community Detection Weakly Connected Components
+// Community Detection Strongly Connected Components Estimate
 
-CALL gds.wcc.write.estimate(
+CALL gds.scc.write.estimate(
  $dependencies_projection + '-cleaned', {
       writeProperty: $dependencies_projection_write_property
      ,consecutiveIds: true

@@ -1,23 +1,23 @@
-// Community Detection Weakly Connected Components Mutate
+// Community Detection Strongly Connected Components write node property communityStronglyConnectedComponentId
 
-CALL gds.wcc.mutate(
+CALL gds.scc.write(
  $dependencies_projection + '-cleaned', {
-      mutateProperty: $dependencies_projection_write_property
-     ,consecutiveIds: true
+       consecutiveIds: true
+      ,writeProperty: 'communityStronglyConnectedComponentId'
 })
- YIELD componentCount
-      ,nodePropertiesWritten
-      ,preProcessingMillis
-      ,computeMillis
-      ,mutateMillis
-      ,postProcessingMillis
-      ,componentDistribution
+YIELD componentCount
+     ,preProcessingMillis
+     ,computeMillis
+     ,writeMillis
+     ,postProcessingMillis
+     ,nodePropertiesWritten
+     ,componentDistribution
 RETURN componentCount
-      ,nodePropertiesWritten
       ,preProcessingMillis
       ,computeMillis
-      ,mutateMillis
+      ,writeMillis
       ,postProcessingMillis
+      ,nodePropertiesWritten
       ,componentDistribution.min
       ,componentDistribution.mean
       ,componentDistribution.max

@@ -1,6 +1,6 @@
-// Community Detection Weakly Connected Components Mutate
+// Community Detection Strongly Connected Components Mutate
 
-CALL gds.wcc.mutate(
+CALL gds.scc.mutate(
  $dependencies_projection + '-cleaned', {
       mutateProperty: $dependencies_projection_write_property
      ,consecutiveIds: true

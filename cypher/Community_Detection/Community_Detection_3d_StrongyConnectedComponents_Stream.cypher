@@ -1,8 +1,8 @@
-// Community Detection Weakly Connected Components Stream
+// Community Detection Strongly Connected Components Stream
 
-CALL gds.wcc.stream(
+CALL gds.scc.stream(
  $dependencies_projection + '-cleaned', {
-    consecutiveIds: true
+      consecutiveIds: true
 })
  YIELD nodeId, componentId
   WITH componentId
