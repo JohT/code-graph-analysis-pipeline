@@ -7,7 +7,7 @@
 jupyter==1.1.1
 matplotlib==3.10.8
 nbconvert[webpdf]==7.17.0
-numpy==2.2.5
+numpy==2.4.3
 pandas==2.3.3
 pip==26.0.1
 setuptools==80.9.0 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
