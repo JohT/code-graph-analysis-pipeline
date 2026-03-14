@@ -4,7 +4,7 @@
 
 # Note: The environment variable NEO4J_INITIAL_PASSWORD needs to be set.
 
-# Requires download.sh,setupNeo4jInitialPassword.sh,operatingSystemFunctions.sh
+# Requires download.sh,configureNeo4j.sh,setupNeo4jInitialPassword.sh,operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -20,22 +20,12 @@ NEO4J_GDS_PLUGIN_VERSION=${NEO4J_GDS_PLUGIN_VERSION:-"2.26.0"} # Graph Data Scie
 NEO4J_OPEN_GDS_PLUGIN_VERSION=${NEO4J_OPEN_GDS_PLUGIN_VERSION:-"2.26.0"} # Graph Data Science (GDS) Plugin Version 2.4.x of is compatible with Neo4j 5.x
 NEO4J_GDS_PLUGIN_EDITION=${NEO4J_GDS_PLUGIN_EDITION:-"open"} # Graph Data Science (GDS) Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 
-DATA_DIRECTORY=${DATA_DIRECTORY:-"$( pwd -P )/data"} # Path where Neo4j writes its data to (outside tools dir)
-RUNTIME_DIRECTORY=${RUNTIME_DIRECTORY:-"$( pwd -P )/runtime"} # Path where Neo4j puts runtime data to (e.g. logs) (outside tools dir)
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults to "tools")
-IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"$( pwd -P )/import"} # The name of the directory that is used to import data (e.g. CSV) files. Defaults to "import".
 SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/downloads}"
-
-NEO4J_HTTP_PORT=${NEO4J_HTTP_PORT:-"7474"} # Neo4j HTTP API port for executing queries
-NEO4J_HTTPS_PORT=${NEO4J_HTTPS_PORT:-"7473"} # Neo4j HTTPS port for encrypted querying
-NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
-
-NEO4J_CONFIG_TEMPLATE=${NEO4J_CONFIG_TEMPLATE:-"template-neo4j.conf"} # Name of the template file ("configuration" folder) for the Neo4j configuration. Defaults to "template-neo4j.conf".
 
 # Internal constants
 NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
-NEO4J_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/neo4j.conf"
 NEO4J_PLUGINS="${NEO4J_INSTALLATION_DIRECTORY}/plugins"
 NEO4J_APOC_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/apoc.conf"
 NEO4J_APOC_PLUGIN_ARTIFACT="apoc-${NEO4J_APOC_PLUGIN_VERSION}-${NEO4J_APOC_PLUGIN_EDITION}.jar"
@@ -100,76 +90,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         exit 1
     fi
 
-    echo "setupNeo4j: Commenting out configuration properties that will later be replaced or are not needed"
-    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
-        sed -i.backup '/^server\.directories\.import=/ s/^/# defined in the directory section further below #/' "${NEO4J_CONFIG}"
-        sed -i.backup '/^db\.tx_log\.rotation\.retention_policy=/ s/^/# defined in the transaction section further below #/' "${NEO4J_CONFIG}"
-    else
-        sed -i.backup '/^dbms\.directories\.import=/ s/^/# defined in the directory section further below #/' "${NEO4J_CONFIG}"
-        sed -i.backup '/^dbms\.tx_log\.rotation\.retention_policy=/ s/^/# defined in the transaction section further below #/' "${NEO4J_CONFIG}"
-    fi
-    # Remove the backup file
-    rm -f "${NEO4J_CONFIG}.backup"
-
-    # Configure all paths with data that changes (database data, logs, ...) to be in the outside "data" directory
-    # instead of inside the neo4j directory
-    echo "setupNeo4j: Configuring dynamic settings (data directories, ports, ...)"
-
-    neo4jDataPath=$(convertPosixToWindowsPathIfNecessary "${DATA_DIRECTORY}")
-    neo4jLogsPath=$(convertPosixToWindowsPathIfNecessary "${RUNTIME_DIRECTORY}/logs")
-    neo4jDumpsPath=$(convertPosixToWindowsPathIfNecessary "${RUNTIME_DIRECTORY}/dumps")
-    neo4jRunPath=$(convertPosixToWindowsPathIfNecessary "${RUNTIME_DIRECTORY}/run")
-    neo4jTransactionsPath=$(convertPosixToWindowsPathIfNecessary "${DATA_DIRECTORY}/transactions")
-    neo4jImportPath=$(convertPosixToWindowsPathIfNecessary "${IMPORT_DIRECTORY}")
-    
-    # Create import directory in case it doesn't exist.
-    # The import needs to be configured even if its not used since it will be configured below and validated by Neo4j.
-    mkdir -p "${IMPORT_DIRECTORY}"
-
-    if [[ "$NEO4J_MAJOR_VERSION_NUMBER" -ge 5 ]]; then
-        echo "setupNeo4j: Neo4j v5 or higher detected"
-        {
-            echo ""
-            echo "# Paths of data directories in the installation (> v5)"
-            echo "server.directories.data=${neo4jDataPath}"
-            echo "server.directories.logs=${neo4jLogsPath}"
-            echo "server.directories.dumps.root=${neo4jDumpsPath}"
-            echo "server.directories.run=${neo4jRunPath}"
-            echo "server.directories.transaction.logs.root=${neo4jTransactionsPath}"
-            echo "server.directories.import=${neo4jImportPath}"
-            echo ""
-            echo "# Ports Configuration (> v5)"
-            echo "server.bolt.listen_address=:${NEO4J_BOLT_PORT}"
-            echo "server.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
-            echo "server.http.listen_address=:${NEO4J_HTTP_PORT}"
-            echo "server.http.advertised_address=:${NEO4J_HTTP_PORT}"
-            echo "server.https.listen_address=:${NEO4J_HTTPS_PORT}"
-            echo "server.https.advertised_address=:${NEO4J_HTTPS_PORT}"
-        } >> "${NEO4J_CONFIG}"    
-    else
-        echo "setupNeo4j: Neo4j v4 or lower detected"
-        {
-            echo ""
-            echo "# Paths of data directories in the installation"
-            echo "dbms.directories.data=${neo4jDataPath}"
-            echo "dbms.directories.logs=${neo4jLogsPath}"
-            echo "dbms.directories.dumps.root=${neo4jDumpsPath}"
-            echo "dbms.directories.run=${neo4jRunPath}"
-            echo "dbms.directories.transaction.logs.root=${neo4jTransactionsPath}"
-            echo "dbms.directories.import=${neo4jImportPath}"
-            echo ""
-            echo "# Ports Configuration"
-            echo "dbms.connector.bolt.listen_address=:${NEO4J_BOLT_PORT}"
-            echo "dbms.connector.bolt.advertised_address=:${NEO4J_BOLT_PORT}"
-            echo "dbms.connector.http.listen_address=:${NEO4J_HTTP_PORT}"
-            echo "dbms.connector.http.advertised_address=:${NEO4J_HTTP_PORT}"
-            echo "dbms.connector.https.listen_address=:${NEO4J_HTTPS_PORT}"
-            echo "dbms.connector.https.advertised_address=:${NEO4J_HTTPS_PORT}"
-        } >> "${NEO4J_CONFIG}"
-    fi
-
-    echo "setupNeo4j: Appending configuration template ${NEO4J_CONFIG_TEMPLATE} (memory, procedure permissions, ...)"
-    cat "${SCRIPTS_DIR}/configuration/${NEO4J_CONFIG_TEMPLATE}" >> "${NEO4J_CONFIG}"
+    source "${SCRIPTS_DIR}/configureNeo4j.sh"
 
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).
     # This needs to be done after the configuration changes.
@@ -213,7 +134,7 @@ else
 fi
 
 # Download and install the Neo4j plugin "Graph Data Science" (GDS)
-if [[ ${NEO4J_GDS_PLUGIN_EDITION} == "open" ]]; then
+if [ ${NEO4J_GDS_PLUGIN_EDITION} == "open" ]; then
     neo4jGraphDataScienceDownloadUrl="https://github.com/JohT/open-graph-data-science-packaging/releases/download/v${NEO4J_OPEN_GDS_PLUGIN_VERSION}"
     neo4jGraphDataScienceReleaseArtifact="open-graph-data-science-${NEO4J_OPEN_GDS_PLUGIN_VERSION}-for-neo4j-${NEO4J_MAJOR_VERSION_NUMBER}.jar"
 else
