@@ -300,6 +300,13 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-high-memory
   ```
 
+- How can i increase the memory (RAM) consumption afterwards, when the setup is already done?  
+  👉 Simply run `useNeo4jHighMemoryProfile.sh` in your analysis working directory, or:
+
+  ```shell
+  ./../../scripts/useNeo4jHighMemoryProfile.sh
+  ```
+
 ## 🕸 Web References
 
 - [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples)
