@@ -78,7 +78,7 @@ downloadMavenArtifactsExpectingFailureUnderTest() {
 info "Starting tests...."
 
 # Create testing resources
-temporaryTestDirectory=$(mktemp -d 2>/dev/null || mktemp -d -t 'temporaryTestDirectory_${SCRIPT_NAME}')
+temporaryTestDirectory=$(mktemp -d 2>/dev/null || mktemp -d -t "temporaryTestDirectory_${SCRIPT_NAME}")
 mkdir -p "${temporaryTestDirectory}/artifacts"
 
 # ------- Integration Test Case
