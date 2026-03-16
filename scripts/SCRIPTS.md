@@ -12,6 +12,7 @@ Script | Directory | Description
 | [checkCompatibility.sh](./checkCompatibility.sh) |  | Check environment dependencies and tool availability. |
 | [cleanupAfterReportGeneration.sh](./cleanupAfterReportGeneration.sh) |  | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder. |
 | [cloneGitRepository.sh](./cloneGitRepository.sh) |  | Provides safe-guarded (security checked parameters) git repository cloning. |
+| [configureNeo4j.sh](./configureNeo4j.sh) |  | Configures a (local) Neo4j Community Edition Graph Database (https://neo4j.com/download-center/#community). |
 | [createAggregatedGitLogCsv.sh](./createAggregatedGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed. |
 | [createGitLogCsv.sh](./createGitLogCsv.sh) |  | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it. |
 | [detectChangedFiles.sh](./detectChangedFiles.sh) |  | Detect changed files in the artifacts directory or in a given list of paths  |
@@ -89,10 +90,12 @@ Script | Directory | Description
 | [startNeo4j.sh](./startNeo4j.sh) |  | Starts the local Neo4j Graph Database.  |
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
 | [testCloneGitRepository.sh](./testCloneGitRepository.sh) |  | Tests "cloneGitRepository.sh". |
+| [testConfigureNeo4j.sh](./testConfigureNeo4j.sh) |  | Tests "configureNeo4j.sh". |
 | [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
 | [testDownloadMavenArtifacts.sh](./testDownloadMavenArtifacts.sh) |  | Tests "downloadMavenArtifacts.sh". |
 | [testFilenameReferences.sh](./testFilenameReferences.sh) |  | Tests: scan all *.sh files (current directory including subdirectories) |
 | [testInstallJavaScriptDependencies.sh](./testInstallJavaScriptDependencies.sh) |  | Tests "installJavaScriptDependencies.sh". |
+| [useNeo4jHighMemoryProfile.sh](./useNeo4jHighMemoryProfile.sh) |  | Use the high memory profile and apply its configuration template on the local  |
 | [convertQueryResultCsvToGraphVizDotFile.sh](./visualization/convertQueryResultCsvToGraphVizDotFile.sh) | visualization | Converts a Cypher query result in CSV format to a GraphViz DOT (https://graphviz.org/doc/info/lang.html) file for Visualization including layout templates. |
 | [renderGraphVizSVG.sh](./visualization/renderGraphVizSVG.sh) | visualization | Renders the given GraphViz file as a SVG image. |
 | [visualizeQueryResults.sh](./visualization/visualizeQueryResults.sh) | visualization | Visualizes the Cypher query result (CSV format) using GraphViz and outputs it as SVG image. |
