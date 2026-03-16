@@ -27,6 +27,13 @@ successful() {
   echo ""
   echo -e "${COLOR_DE_EMPHASIZED}${SCRIPT_NAME}:${COLOR_DEFAULT} ${COLOR_SUCCESSFUL}✅ Tests finished successfully.${COLOR_DEFAULT}"
   tearDown
+
+  # If sourced, return to caller; if executed directly, exit.
+  if [ "${BASH_SOURCE[0]}" != "$0" ]; then
+    return 0
+  else
+    exit 0
+  fi
 }
 
 info() {
@@ -143,4 +150,3 @@ if ! echo "${output}" | grep -q "git clone --bare"; then
 fi
 
 successful
-return 0

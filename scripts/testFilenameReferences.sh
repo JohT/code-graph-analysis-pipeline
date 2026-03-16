@@ -28,6 +28,12 @@ tearDown() {
 successful() {
   echo -e "${COLOR_DE_EMPHASIZED}${SCRIPT_NAME}:${COLOR_DEFAULT} ${COLOR_SUCCESSFUL}✅ Tests finished successfully.${COLOR_DEFAULT}"
   tearDown
+  # If sourced, return to caller; if executed directly, exit.
+  if [ "${BASH_SOURCE[0]}" != "$0" ]; then
+    return 0
+  else
+    exit 0
+  fi
 }
 
 info() {
@@ -140,4 +146,3 @@ info "${test_case_number}.) Scan all .sh files for '/...*.yaml' references and v
 find_missing_file_references "yaml"
 
 successful
-return 0

@@ -26,6 +26,12 @@ successful() {
   echo -e "testFormatQueryResultAsMarkdownTable: ${COLOR_SUCCESSFUL}Tests finished successfully.${COLOR_DEFAULT}"
 
   tearDown
+  # If sourced, return to caller; if executed directly, exit.
+  if [ "${BASH_SOURCE[0]}" != "$0" ]; then
+    return 0
+  else
+    exit 0
+  fi
 }
 
 fail() {
@@ -75,4 +81,3 @@ if [ "${embeddedContent}" != "${expected_result}" ]; then
 fi
 
 successful
-return 0
