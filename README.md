@@ -249,7 +249,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
   ```
 
-- How can i disable git log data import?  
+- How can I disable git log data import?  
   👉 Set environment variable `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` to `none`. Example:  
 
   ```shell
@@ -272,32 +272,39 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   👉 The custom Jupyter Notebook metadata property `code_graph_analysis_pipeline_data_validation` can be set to choose a query from [cypher/Validation](./cypher/Validation) that will be executed preliminary to the notebook. If the query leads to at least one result, the validation succeeds and the notebook will be run. If the query leads to no result, the notebook will be skipped.
   For more details see [Data Availability Validation](./COMMANDS.md#data-availability-validation).
 
-- How can i increase the heap memory when scanning large Typescript projects?  
+- How can I increase the heap memory when scanning large Typescript projects?  
   👉 Use the environment variable TYPESCRIPT_SCAN_HEAP_MEMORY in megabyte (default = 4096):
 
   ```shell
   TYPESCRIPT_SCAN_HEAP_MEMORY=16384 ./../../scripts/analysis/analyze.sh
   ```
 
-- How can i continue on errors when scanning Typescript projects instead of cancelling the whole analysis?  
+- How can I continue on errors when scanning Typescript projects instead of cancelling the whole analysis?  
   👉 Use the profile `Neo4j-latest-continue-on-scan-errors` (default = `Neo4j-latest`):
 
   ```shell
   ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-continue-on-scan-errors
   ```
 
-- How can i reduce the memory (RAM) consumption?  
+- How can I reduce the memory (RAM) consumption?  
   👉 Use the profile `Neo4j-latest-low-memory` (default = `Neo4j-latest`):
 
   ```shell
   ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-low-memory
   ```
 
-- How can i increase the memory (RAM) consumption?  
+- How can I increase the memory (RAM) consumption?  
   👉 Use the profile `Neo4j-latest-high-memory` (default = `Neo4j-latest`):
 
   ```shell
   ./../../scripts/analysis/analyze.sh --profile Neo4j-latest-high-memory
+  ```
+
+- How can i increase the memory (RAM) consumption afterwards, when the setup is already done?  
+  👉 Simply run `useNeo4jHighMemoryProfile.sh` in your analysis working directory, or:
+
+  ```shell
+  ./../../scripts/useNeo4jHighMemoryProfile.sh
   ```
 
 ## 🕸 Web References

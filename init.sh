@@ -79,6 +79,7 @@ mkdir -p "./${SOURCE_DIRECTORY}"
 createForwardingScript "./../../scripts/analysis/analyze.sh"
 createForwardingScript "./../../scripts/startNeo4j.sh"
 createForwardingScript "./../../scripts/stopNeo4j.sh"
+createForwardingScript "./../../scripts/useNeo4jHighMemoryProfile.sh"
 
 source "${SCRIPTS_DIR}/scripts/checkCompatibility.sh"
 

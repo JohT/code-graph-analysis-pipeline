@@ -19,6 +19,7 @@
 - [Validate Links in Markdown](#validate-links-in-markdown)
 - [Manual Setup](#manual-setup)
     - [Setup Neo4j Graph Database](#setup-neo4j-graph-database)
+    - [Change Neo4j configuration template](#change-neo4j-configuration-template)
     - [Start Neo4j Graph Database](#start-neo4j-graph-database)
     - [Setup jQAssistant Java Code Analyzer](#setup-jqassistant-java-code-analyzer)
     - [Download Maven Artifacts to analyze](#download-maven-artifacts-to-analyze)
@@ -51,12 +52,15 @@
 
 ## Start an Analysis
 
-An analysis is started with the script [analyze.sh](./scripts/analysis/analyze.sh).
+Before starting an analysis, setup your analysis as described in the [Getting Started](./GETTING_STARTED.md) guide.
+An analysis is then started with the script [analyze.sh](./scripts/analysis/analyze.sh).
 To run all analysis steps simple execute the following command:
 
 ```shell
 ./../../scripts/analysis/analyze.sh
 ```
+
+**Hint:** Within the analysis workspace directory you can simply run `analyze.sh` directly without the `../../` prefix since the script is also available in the analysis workspace.
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps for a Java Project.
 👉 See [scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) as an example script that combines all the above steps for a Typescript Project.  
@@ -183,10 +187,22 @@ If any of the script are not allowed to be executed use `chmod +x ./scripts/` fo
 Use [setupNeo4j.sh](./scripts/setupNeo4j.sh) to download [Neo4j](https://neo4j.com/download-center) and install the plugins [APOC](https://neo4j.com/labs/apoc/4.4) and [Graph Data Science](https://neo4j.com/product/graph-data-science).
 This script requires the environment variable NEO4J_INITIAL_PASSWORD to be set. It sets the initial password with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
 
+### Change Neo4j configuration template
+
+Use [configureNeo4j.sh](./scripts/configureNeo4j.sh) to apply a different Neo4j configuration template from the [scripts/configuration](./scripts/configuration/) directory. This can be useful to optimize Neo4j for different workloads. Example:
+
+```shell
+NEO4J_CONFIG_TEMPLATE=template-neo4j-high-memory.conf ./scripts/configureNeo4j.sh
+```
+
+**Hint:** In case you want to switch to the high memory profile as in the example, there is a simpler solution. Just run `useNeo4jHighMemoryProfile.sh` from the analysis workspace directory which will set the environment variable `NEO4J_CONFIG_TEMPLATE` and run `configureNeo4j.sh` for you.
+
 ### Start Neo4j Graph Database
 
 Use [startNeo4j.sh](./scripts/startNeo4j.sh) to start the locally installed [Neo4j](https://neo4j.com/download-center) Graph database.
 It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
+
+**Hint:** Within the analysis workspace directory you can simply run `startNeo4j.sh` directly without the `../../` prefix since the script is also available in the analysis workspace.
 
 ### Setup jQAssistant Java Code Analyzer
 
@@ -345,6 +361,8 @@ execute_cypher ./cypher/Get_Graph_Data_Science_Library_Version.cypher a=1
 ## Stop Neo4j
 
 Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Graph Database. It does nothing if the database is already stopped. It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
+
+**Hint:** Within the analysis workspace directory you can run `stopNeo4j.sh` directly without the `../../` prefix since the script is also directly available in the analysis workspace.
 
 ## Jupyter Notebook
 

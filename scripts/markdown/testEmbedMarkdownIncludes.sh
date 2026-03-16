@@ -26,6 +26,12 @@ successful() {
   echo -e "testEmbedMarkdownIncludes: ${COLOR_SUCCESSFUL}Tests finished successfully.${COLOR_DEFAULT}"
 
   tearDown
+  # If sourced, return to caller; if executed directly, exit.
+  if [ "${BASH_SOURCE[0]}" != "$0" ]; then
+    return 0
+  else
+    exit 0
+  fi
 }
 
 fail() {
@@ -132,4 +138,3 @@ fi
 
 
 successful
-return 0

@@ -27,6 +27,13 @@ successful() {
   echo ""
   echo -e "${COLOR_DE_EMPHASIZED}${SCRIPT_NAME}:${COLOR_DEFAULT} ${COLOR_SUCCESSFUL}✅ Tests finished successfully.${COLOR_DEFAULT}"
   tearDown
+
+  # If sourced, return to caller; if executed directly, exit.
+  if [ "${BASH_SOURCE[0]}" != "$0" ]; then
+    return 0
+  else
+    exit 0
+  fi
 }
 
 info() {
@@ -78,7 +85,7 @@ downloadMavenArtifactsExpectingFailureUnderTest() {
 info "Starting tests...."
 
 # Create testing resources
-temporaryTestDirectory=$(mktemp -d 2>/dev/null || mktemp -d -t 'temporaryTestDirectory_${SCRIPT_NAME}')
+temporaryTestDirectory=$(mktemp -d 2>/dev/null || mktemp -d -t "temporaryTestDirectory_${SCRIPT_NAME}")
 mkdir -p "${temporaryTestDirectory}/artifacts"
 
 # ------- Integration Test Case
@@ -147,4 +154,3 @@ info "${test_case_number}.) Should fail when the artifact coordinate has a wrong
 downloadMavenArtifactsExpectingFailureUnderTest "--dry-run" "org.apache.commons:commons-lang3-3.12.0"
 
 successful
-return 0
