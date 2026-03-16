@@ -17,8 +17,9 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 # echo "runTests: SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
-# Run all report scripts
-find "${SCRIPTS_DIR}" -type f -name 'test*.sh' | while read -r test_script_file; do
+## Run all test scripts without using a pipe to the while loop so that an
+## `exit` inside a sourced test script will terminate this runner (fail-fast).
+while IFS= read -r test_script_file; do
     test_script_filename=$(basename -- "${test_script_file}")
     test_script_filename="${test_script_filename%.*}" # Remove file extension
 
@@ -29,4 +30,4 @@ find "${SCRIPTS_DIR}" -type f -name 'test*.sh' | while read -r test_script_file;
 
     echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${test_script_filename}"
     echo "${LOG_GROUP_END}"
-done
+done < <(find "${SCRIPTS_DIR}" -type f -name 'test*.sh')
