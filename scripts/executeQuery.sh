@@ -159,7 +159,8 @@ else
   if [ "${no_source_reference}" = true ] ; then
     echo -n "${cypher_query_result}" | jq -r '(.results[0])? | .columns,(.data[].row)? | map(if type == "array" then join(",") else . end) | flatten | @csv'
   else
-    cypher_query_file_relative_name=${cypher_query_file_name#/**/cypher/}
+    repository_root="$(CDPATH=. cd -- "${SCRIPTS_DIR}/.." && pwd -P)"
+    cypher_query_file_relative_name="${cypher_query_file_name#${repository_root}/}"
     sourceFileReferenceInfo="Source Cypher File: ${cypher_query_file_relative_name}"
     echo -n "${cypher_query_result}" | jq -r --arg sourceReference "${sourceFileReferenceInfo}" '(.results[0])? | .columns + [$sourceReference], (.data[].row)? + [""]  | map(if type == "array" then join(",") else . end) | flatten | @csv'
   fi
