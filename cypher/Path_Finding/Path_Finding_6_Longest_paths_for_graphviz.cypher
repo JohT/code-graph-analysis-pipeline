@@ -20,9 +20,11 @@
   WITH *, toFloat(weight - minWeight) * weightNormalizationFactor AS normalizedWeight
   WITH *, round((normalizedWeight * 5) + 1, 2) AS penWidth
   WITH *, coalesce("\\n(level " + startNode.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS startNodeLevelInfo
+  WITH *, coalesce("\\n" + startNode.rootProjectName, "")                                        AS startNodeProjectInfo
   WITH *, coalesce("\\n(level " + endNode.maxDistanceFromSource + "/" + maxLevel + ")", "")      AS endNodeLevelInfo
-  WITH *, startNode.name + startNodeLevelInfo                                                    AS startNodeTitle
-  WITH *, endNode.name + endNodeLevelInfo                                                        AS endNodeTitle
+  WITH *, coalesce("\\n" + endNode.rootProjectName, "")                                          AS endNodeProjectInfo
+  WITH *, startNode.name + startNodeProjectInfo + startNodeLevelInfo                             AS startNodeTitle
+  WITH *, endNode.name + endNodeProjectInfo + endNodeLevelInfo                                   AS endNodeTitle
   WITH *, "[label=" + weight  + "; penwidth=" + penWidth + "; ];"    AS graphVizEdgeAttributes
   WITH *, "\"" + startNodeTitle +  "\" -> \"" + endNodeTitle + "\" " + graphVizEdgeAttributes    AS graphVizDotNotationLine
 RETURN graphVizDotNotationLine
