@@ -439,6 +439,21 @@ if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTIO
     runUndirectedCentralityAlgorithms "${MODULE_PROJECTION_UNDIRECTED}" "${MODULE_NODE}"
 fi
 
+# -- NPM Package Centrality ---------------------------------------
+
+NPM_LANGUAGE="dependencies_projection_language=NPM"
+NPM_PROJECTION="dependencies_projection=npm-package-centrality" 
+NPM_PROJECTION_UNDIRECTED="dependencies_projection=npm-package-centrality-undirected" 
+NPM_NODE="dependencies_projection_node=Package" 
+NPM_WEIGHT="dependencies_projection_weight_property=weightByDependencyType" 
+
+if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"; then
+    runCentralityAlgorithms "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"
+fi
+if createUndirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION_UNDIRECTED}" "${NPM_NODE}" "${NPM_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${NPM_PROJECTION_UNDIRECTED}" "${NPM_NODE}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

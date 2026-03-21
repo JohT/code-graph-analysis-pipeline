@@ -1,4 +1,4 @@
-// Path Finding - Longest path - Stream - List all dependencies for nodes contributing to longest paths and highlight those paths in the Visualization with GraphViz.
+// Path Finding - Longest path - Stream - List all dependencies for nodes contributing to longest paths and highlight those paths in the Visualization with GraphViz. Recommended prerequisite: Topological_Sort_Write.cypher
 
 // Gather global statistics about dependency weights and levels for normalization and node details
  MATCH (sourceNodeForStatistics)-[dependencyForStatistics:DEPENDS_ON]->(targetNodeForStatistics)
@@ -55,8 +55,10 @@
   WITH *, dependency[$dependencies_projection_weight_property]    AS weight
   WITH *, toFloat(weight - minWeight) * weightNormalizationFactor AS normalizedWeight
   WITH *, round((normalizedWeight * 5) + 1, 2)                    AS penWidth
-  WITH *, source.name + "\\n(level " + source.maxDistanceFromSource + "/" + maxLevel + ")"    AS startNodeTitle
-  WITH *, target.name   + "\\n(level " + target.maxDistanceFromSource + "/" + maxLevel + ")"  AS endNodeTitle
+  WITH *, coalesce("\\n(level " + source.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS startNodeLevelInfo
+  WITH *, coalesce("\\n(level " + target.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS endNodeLevelInfo
+  WITH *, source.name + startNodeLevelInfo                                                    AS startNodeTitle
+  WITH *, target.name + endNodeLevelInfo                                                      AS endNodeTitle
                // The longest path will be highlighted in red.
   WITH *, CASE WHEN isPartOfLongestPath       THEN "; color=\"red\"" 
                // Dependencies contributing to the longest path will be highlighted in dark orange.

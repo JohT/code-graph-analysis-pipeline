@@ -1,9 +1,11 @@
-// Link npm dependencies to the npm package that describe them if it exists
+// Link npm dependencies to the npm package that describes them, if it exists
 
 MATCH (npm_dependency:NPM:Dependency)
 MATCH (npm_package:NPM:Package)
 WHERE  npm_package.name = npm_dependency.name
   AND  npm_package     <> npm_dependency
+  AND  NOT npm_package.name CONTAINS '{{' 
+  AND  NOT npm_package.name CONTAINS '}}' 
  CALL { WITH npm_package, npm_dependency
        MERGE (npm_dependency)-[:IS_DESCRIBED_IN_NPM_PACKAGE]->(npm_package)
       } IN TRANSACTIONS

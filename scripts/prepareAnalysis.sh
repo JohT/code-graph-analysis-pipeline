@@ -75,8 +75,10 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_scan_nodes.cyph
 # Preparation - Cleanup Graph for Typescript by removing duplicate relationships
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_between_files.cypher"
 
-# Preparation - Enrich Graph for Typescript by adding relationships between corresponding TS:Project and NPM:Package nodes
+# Preparation - Enrich Graph for Typescript NPM data (link dependencies to packages, add package-to-package DEPENDS_ON relationships, enrich dependency counts, and link TS:Project nodes to NPM:Package nodes)
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_npm_dependencies_to_npm_packages.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_npm_packages_with_depends_on_relationships.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Enrich_npm_packages_with_dependency_counts.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
 if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
