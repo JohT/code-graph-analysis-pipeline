@@ -20,7 +20,7 @@ WHERE gitFileName ENDS WITH codeFileName
  CALL { WITH git_file, code_file
        MERGE (git_file)-[:RESOLVES_TO]->(code_file)
           ON CREATE SET git_file.resolved = true
-      } IN TRANSACTIONS
+      } IN TRANSACTIONS OF 1000 ROWS
 RETURN count(DISTINCT codeFileName)  AS numberOfCodeFiles
       ,collect(DISTINCT codeFileName + ' <-> ' + gitFileName + '\n')[0..4] AS examples
 // RETURN codeFileName, gitFileName

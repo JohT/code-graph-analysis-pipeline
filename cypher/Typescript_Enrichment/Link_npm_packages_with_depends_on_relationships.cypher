@@ -21,7 +21,7 @@ WITH source
  CALL { WITH source, target, weightByDependencyType
        MERGE (source)-[dependsOnRelationship:DEPENDS_ON]->(target)
          SET dependsOnRelationship.weightByDependencyType = weightByDependencyType
-      } IN TRANSACTIONS
+      } IN TRANSACTIONS OF 1000 ROWS
 RETURN count(*)                          AS numberOfWrittenRelationships
       ,count(DISTINCT source)            AS numberOfDistinctSourcePackages
       ,count(DISTINCT target)            AS numberOfDistinctTargetPackages

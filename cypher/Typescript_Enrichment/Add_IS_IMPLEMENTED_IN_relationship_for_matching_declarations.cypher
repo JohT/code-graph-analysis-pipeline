@@ -7,7 +7,7 @@
   WITH externalDeclaration, internalDeclaration
   CALL { WITH externalDeclaration, internalDeclaration
         MERGE (externalDeclaration)-[:IS_IMPLEMENTED_IN]->(internalDeclaration)
-       } IN TRANSACTIONS
+       } IN TRANSACTIONS OF 1000 ROWS
 RETURN count(  DISTINCT externalDeclaration.globalFqn + ' -> ' + internalDeclaration.globalFqn)       AS linkedDeclarationCount
       ,collect(DISTINCT externalDeclaration.globalFqn + ' -> ' + internalDeclaration.globalFqn)[0..4] AS linkedDeclarationExamples
 //Debugging

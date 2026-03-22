@@ -12,5 +12,5 @@
             ON MATCH  SET resolvedDependsOn             = dependsOn // Overwrites existing properties
                          ,resolvedDependsOn.cardinality = existingDependency.cardinality + dependsOn.cardinality // Add cardinalities
                          ,resolvedDependsOn.updated     = true
-       } IN TRANSACTIONS
+       } IN TRANSACTIONS OF 1000 ROWS
 RETURN count(*) as resolvedDependencies

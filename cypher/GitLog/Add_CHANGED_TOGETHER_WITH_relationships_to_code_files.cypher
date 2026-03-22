@@ -8,5 +8,5 @@ WHERE firstGitFile <> secondGitFile
  CALL (firstCodeFile, secondCodeFile, gitChange) {
        MERGE (firstCodeFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondCodeFile)
          SET pairwiseChange = properties(gitChange)
-      } IN TRANSACTIONS
+      } IN TRANSACTIONS OF 750 ROWS
 RETURN count(*) AS pairCount

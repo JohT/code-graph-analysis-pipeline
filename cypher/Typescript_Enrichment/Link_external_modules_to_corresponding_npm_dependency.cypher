@@ -11,7 +11,7 @@ UNWIND external_modules         AS external_module
         MERGE (external_module)-[:PROVIDED_BY_NPM_DEPENDENCY]->(npm_dependency)
           SET external_module.npmPackage        = npm_dependency.name
              ,external_module.npmPackageVersion = npm_dependency.dependency
-      } IN TRANSACTIONS
+      } IN TRANSACTIONS OF 1000 ROWS
 RETURN totalNumberOfExternalModules
       ,count(DISTINCT external_module.globalFqn) AS numberOfLinkedExternalModules
       ,count(DISTINCT project.name)              AS numberOfProjects
