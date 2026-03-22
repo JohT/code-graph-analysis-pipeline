@@ -59,7 +59,6 @@ Script | Directory | Description
 | [ArtifactDependenciesCsv.sh](./reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports. |
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [ExternalDependenciesCsv.sh](./reports/ExternalDependenciesCsv.sh) | reports | Executes "External_Dependencies" Cypher queries to get the "external-dependencies-csv" CSV reports. |
 | [GitHistoryCsv.sh](./reports/GitHistoryCsv.sh) | reports | Executes "GitLog" Cypher queries to get the "git-history-csv" CSV reports. |
 | [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
 | [InternalDependenciesVisualization.sh](./reports/InternalDependenciesVisualization.sh) | reports | Executes selected "Internal_Dependencies" Cypher queries for GraphViz visualization. |
