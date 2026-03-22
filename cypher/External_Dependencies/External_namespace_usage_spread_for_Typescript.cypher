@@ -23,7 +23,7 @@ UNWIND internalElementList AS internalElement
       ,COLLECT(DISTINCT externalDeclaration.globalFqn )[0..9] AS externalDeclarationsExamples
       ,count  (DISTINCT internalElement.globalFqn)            AS internalElementsCount
       ,COLLECT(DISTINCT internalElement.globalFqn )[0..9]     AS internalElementsExamples
-      ,100.0 / internalModulesCountOverall 
+      ,100.0 / internalElementsCountOverall 
              * count(DISTINCT internalElement.globalFqn)      AS internalElementsCallingExternalRate
 
 // Group by external module namespace
