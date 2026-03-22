@@ -4,8 +4,8 @@
 OPTIONAL MATCH (project:TS:Project)-[:CONTAINS]->(module)
   WITH project.name                               AS projectName
       ,count(DISTINCT module)                     AS resolvedModuleCount
-      ,COUNT { (modules:Module) }                 AS totalModuleCount
-      ,COUNT { (externalModules:ExternalModule) } AS totalExternalModuleCount
+      ,COUNT { (project)-[:CONTAINS]->(modules:TS:Module) }                 AS totalModuleCount
+      ,COUNT { (ext:TS:ExternalModule)-[:IS_IMPLEMENTED_IN]->(m:TS:Module)<-[:CONTAINS]-(project) } AS totalExternalModuleCount
       ,collect(DISTINCT module.fileName + ' -> ' + external.globalFqn)[0..4] AS resolvedExamples
 RETURN projectName
       ,resolvedModuleCount

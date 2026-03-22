@@ -15,7 +15,6 @@ UNWIND typeList AS type
       ,count(externalDependency)                              AS numberOfExternalTypeCalls
       ,sum(externalDependency.weight)                         AS numberOfExternalTypeCallsWeighted
       ,collect(DISTINCT externalType.name)                    AS externalTypeNames
-where numberOfExternalTypeCalls <> numberOfExternalCallerTypes
 RETURN externalSecondLevelPackageName
       ,numberOfExternalCallerPackages
       ,numberOfExternalCallerTypes

@@ -1,4 +1,4 @@
-// External Typescript namespace usage spread
+// External Typescript module usage spread
 
 // Get the overall internal modules statistics first
  MATCH (internalModule:TS:Module)-[:EXPORTS]->(internalElement:TS)
@@ -15,7 +15,7 @@ UNWIND internalElementList AS internalElement
  MATCH (externalModule:TS:ExternalModule)-[:EXPORTS]->(externalDeclaration)
   WITH internalModulesCountOverall
       ,internalElementsCountOverall
-      ,coalesce(nullif(externalModule.namespace, ''), 'no namespace') AS externalModuleNamespace
+      ,coalesce(nullIf(externalModule.namespace, '') + '/' + externalModule.name, externalModule.name) AS externalModuleName
       ,coalesce(nullIf(internalModule.namespace, '') + '/' + internalModule.name, internalModule.name) AS internalModuleName
       
       // Gathering counts for every internal element and the external module it uses
@@ -23,11 +23,11 @@ UNWIND internalElementList AS internalElement
       ,COLLECT(DISTINCT externalDeclaration.globalFqn )[0..9] AS externalDeclarationsExamples
       ,count  (DISTINCT internalElement.globalFqn)            AS internalElementsCount
       ,COLLECT(DISTINCT internalElement.globalFqn )[0..9]     AS internalElementsExamples
-      ,100.0 / internalModulesCountOverall 
+      ,100.0 / internalElementsCountOverall 
              * count(DISTINCT internalElement.globalFqn)      AS internalElementsCallingExternalRate
 
-// Group by external module namespace
-RETURN externalModuleNamespace
+// Group by external module
+RETURN externalModuleName
       ,count(DISTINCT internalModuleName)             AS numberOfInternalModules
 
       // Statistics about how many internal modules are using that external module
@@ -55,5 +55,5 @@ RETURN externalModuleNamespace
 
       ,collect(DISTINCT internalModuleName)[0..4]     AS internalModuleExamples
       
-// Order the results descending by the number of internal modules that use the external namespace
-ORDER BY numberOfInternalModules DESC, externalModuleNamespace ASC
+// Order the results descending by the number of internal modules that use the external module
+ORDER BY numberOfInternalModules DESC, externalModuleName ASC

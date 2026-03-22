@@ -13,7 +13,7 @@
 UNWIND typeList AS type
  MATCH (type)-[:DEPENDS_ON]->(externalType:ExternalType)
  MATCH (typePackage:Package)-[:CONTAINS]->(type)
-// Filter out dependencies to exxternal annotations
+// Filter out dependencies to external annotations
  WHERE NOT externalType:ExternalAnnotation
   WITH artifactName
       ,leidenCommunityId
