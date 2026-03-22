@@ -1,4 +1,4 @@
-// Path Finding - Longest path - Stream - Find the top 100 dependencies contributing to the longest paths for Visualization with GraphViz
+// Path Finding - Longest path - Stream - Find the top 100 dependencies contributing to the longest paths for Visualization with GraphViz. Recommended prerequisite: Topological_Sort_Write.cypher
 
  MATCH (sourceNodeForStatistics)-[dependencyForStatistics:DEPENDS_ON]->(targetNodeForStatistics)
  WHERE $dependencies_projection_node IN LABELS(sourceNodeForStatistics)
@@ -19,8 +19,12 @@
   WITH *, dependency[$dependencies_projection_weight_property] AS weight
   WITH *, toFloat(weight - minWeight) * weightNormalizationFactor AS normalizedWeight
   WITH *, round((normalizedWeight * 5) + 1, 2) AS penWidth
-  WITH *, startNode.name + "\\n(level " + startNode.maxDistanceFromSource + "/" + maxLevel + ")" AS startNodeTitle
-  WITH *, endNode.name   + "\\n(level " + endNode.maxDistanceFromSource + "/" + maxLevel + ")"   AS endNodeTitle
+  WITH *, coalesce("\\n(level " + startNode.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS startNodeLevelInfo
+  WITH *, coalesce("\\n" + startNode.rootProjectName, "")                                        AS startNodeProjectInfo
+  WITH *, coalesce("\\n(level " + endNode.maxDistanceFromSource + "/" + maxLevel + ")", "")      AS endNodeLevelInfo
+  WITH *, coalesce("\\n" + endNode.rootProjectName, "")                                          AS endNodeProjectInfo
+  WITH *, startNode.name + startNodeProjectInfo + startNodeLevelInfo                             AS startNodeTitle
+  WITH *, endNode.name + endNodeProjectInfo + endNodeLevelInfo                                   AS endNodeTitle
   WITH *, "[label=" + weight  + "; penwidth=" + penWidth + "; ];"    AS graphVizEdgeAttributes
   WITH *, "\"" + startNodeTitle +  "\" -> \"" + endNodeTitle + "\" " + graphVizEdgeAttributes    AS graphVizDotNotationLine
 RETURN graphVizDotNotationLine

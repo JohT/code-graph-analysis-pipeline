@@ -103,7 +103,16 @@ if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}
     time topologicalSort "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
 fi
 
-# ---------------------------------------------------------------
+# -- NPM Package Topology ---------------------------------------
+
+NPM_LANGUAGE="dependencies_projection_language=NPM"
+NPM_PROJECTION="dependencies_projection=npm-package-topology" 
+NPM_NODE="dependencies_projection_node=Package" 
+NPM_WEIGHT="dependencies_projection_weight_property=weightByDependencyType" 
+
+if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"; then
+    time topologicalSort "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"
+fi
 
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

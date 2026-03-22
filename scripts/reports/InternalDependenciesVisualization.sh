@@ -52,5 +52,10 @@ reportName="${FULL_REPORT_DIRECTORY}/TypeScriptModuleBuildLevels"
 execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/Typescript_Module_build_levels_for_graphviz.cypher" > "${reportName}.csv"
 source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${reportName}.csv"
 
+# NPM Packages: Dependencies Visualization
+reportName="${FULL_REPORT_DIRECTORY}/NpmPackageBuildLevels"
+execute_cypher "${INTERNAL_DEPENDENCIES_CYPHER_DIR}/NPM_Package_build_levels_for_graphviz.cypher" > "${reportName}.csv"
+source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${reportName}.csv"
+
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"

@@ -48,7 +48,7 @@ WHERE equalGlobalFqn
    OR equalNameAndNpmPackage
  CALL {  WITH module, externalModule
         MERGE (externalModule)-[:IS_IMPLEMENTED_IN]->(module)
-      } IN TRANSACTIONS
+      } IN TRANSACTIONS OF 1000 ROWS
 RETURN CASE WHEN equalGlobalFqn            THEN 'equalGlobalFqn'
             WHEN equalModule               THEN 'equalModule'
             WHEN equalNameWithoutNamespace THEN 'equalNameWithoutNamespace'
