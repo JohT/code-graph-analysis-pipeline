@@ -1,0 +1,56 @@
+name: Draft Release v3.3.3
+
+on:
+  workflow_dispatch:
+
+jobs:
+  draft-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Write release notes
+      run: |
+        cat > /tmp/release-notes.md << 'RELEASE_NOTES_EOF'
+        ## 🚀 Features
+
+        * [Add external dependencies analysis modularized as domain](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/3ee0a10421f46d410375801b505886bae8f5413a): The new external-dependencies "domain" (vertical-slice) packages Cypher queries, CSV/Markdown report generation, and Python-based SVG chart generation for analyzing external dependency usage for Java and TypeScript codebases. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+        * [Remove legacy external dependencies reports and notebooks](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/f036e6a99592a3491aa8ed625e13e212038024f0) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+        * [Analyze npm package dependencies](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/ea6d2db0c8877fc1e7ac8f116876c505361c6dca): Adds NPM package-level dependency analysis alongside the existing TypeScript module analysis. Initially implements longest dependency-path detection and topological sorting to provide a fast, package-level overview of the project's architecture and dependency chains. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+        * [Add TypeScript module project info to longest path visualization](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/d53826ce56126be17340cf900f88a38ffbaadbe2) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+        * [Modularize Neo4j configuration and support profile changes](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/e582aaa2a3f51afc3f6026b20f99475983a12c2f): With `useNeo4jHighMemoryProfile.sh` you can now switch to the new high memory profile without redoing the whole analysis. This is helpful when you reach memory limits within your first analysis attempt and want to fix that in a simple way. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+
+        ## ⚙️ Optimizations
+
+        * [Add batch sizes to all transactional write operations for memory management](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/d32fbe64b2088ec73576f1f579910709a34e00b6) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+        * [Improved fail-fast when running all tests](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/052c0e20cd091d8af5714e050335b5173e0a4dac) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+        * [Support direct and sourced test runs](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/53721dc45f19443473e97173acbfd7f32ffe95b4): You can now run each test case directly without getting an error that the script needs to be sourced. The sourced run of all tests with `runTests.sh` is not affected and runs as usual. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+
+        ## 🛠 Fixes
+
+        * [Fix wrong denominator for external module usage](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/4315584a95dceecff4721d317e48d77647d6c31c) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+        * [Fix misleading project scoped percentage](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/13fc50841e9966362fbe2bdd96855f78c8a61db3) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+        * [Fix missing cases in external package usage](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/70128faddfdb8fb41bc3877a13543b96c7691578) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+        * [Avoid self-loops in CHANGED_TOGETHER_WITH edges](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/47fb79c8c3b98d35369279815238077bba0fbd3b) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+        * [Fix temporary directory name in maven test](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/8faf9c2ebf2cf6a3a80772075d6f2b514bf0744b) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+        * [Fix documentation grammar issues](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/68c78123684f401228ba663c57fe7ca868a308e5) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+
+        ## 📦 Dependency Updates
+
+        * Update actions/setup-node action to v6.3.0 by @renovate[bot] in https://github.com/JohT/code-graph-analysis-pipeline/pull/536
+        * Update dependency AxonFramework/AxonFramework to v5.0.3 by @renovate[bot] in https://github.com/JohT/code-graph-analysis-pipeline/pull/531
+
+        **Full Changelog**: https://github.com/JohT/code-graph-analysis-pipeline/compare/v3.3.2...v3.3.3
+        RELEASE_NOTES_EOF
+
+    - name: Create draft release v3.3.3
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh release create v3.3.3 \
+          --repo "${{ github.repository }}" \
+          --title "v3.3.3 External Dependencies Domain + NPM Package Analysis" \
+          --draft \
+          --target main \
+          --notes-file /tmp/release-notes.md
