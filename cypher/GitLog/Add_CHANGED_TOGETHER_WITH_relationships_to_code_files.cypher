@@ -4,6 +4,7 @@ MATCH (firstGitFile:Git&File&!Repository)-[gitChange:CHANGED_TOGETHER_WITH]-(sec
 WHERE elementId(firstGitFile) < elementId(secondGitFile)
 MATCH (firstGitFile)-[:RESOLVES_TO]->(firstCodeFile:File&!Git&!Repository)
 MATCH (secondGitFile)-[:RESOLVES_TO]->(secondCodeFile:File&!Git&!Repository)
+WHERE firstGitFile <> secondGitFile
  CALL (firstCodeFile, secondCodeFile, gitChange) {
        MERGE (firstCodeFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondCodeFile)
          SET pairwiseChange = properties(gitChange)

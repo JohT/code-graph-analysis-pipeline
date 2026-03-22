@@ -39,6 +39,7 @@ WHERE updateCommitCount > 2
  WITH *
      ,fileCombination[0] AS firstFile
      ,fileCombination[1] AS secondFile
+ WHERE firstFile <> secondFile
  WITH *
      // Get the lowest number of git update commits of both files (file pair) 
      ,CASE WHEN firstFile.updateCommitCount < secondFile.updateCommitCount
