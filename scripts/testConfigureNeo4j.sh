@@ -203,7 +203,7 @@ mkdir -p "${temporaryTestDirectory}/tools"
 mkdir -p "${temporaryTestDirectory}/downloads"
 
 # Provide minimal neo4j installation dir expected by the script
-NEO4J_INSTALLATION_NAME="neo4j-community-2026.01.4"
+NEO4J_INSTALLATION_NAME="neo4j-community-2026.02.2"
   mkdir -p "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf"
   create_base_neo4j_configuration "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf/neo4j.conf"
 
