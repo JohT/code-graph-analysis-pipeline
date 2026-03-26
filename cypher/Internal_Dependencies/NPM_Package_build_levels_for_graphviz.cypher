@@ -16,8 +16,10 @@
   WITH *, round((normalizedWeight * 5) + 1, 2) AS penWidth
   WITH *, "\\n(level " + coalesce(source.maxDistanceFromSource + "/" + maxLevel, "?") + ")" AS sourceLevelInfo
   WITH *, "\\n(level " + coalesce(target.maxDistanceFromSource + "/" + maxLevel, "?") + ")" AS targetLevelInfo
-  WITH *, source.name + sourceLevelInfo AS fullSourceName
-  WITH *, target.name + targetLevelInfo AS fullTargetName
+  WITH *, CASE WHEN source:NpmDevPackage THEN "\\n[dev]" ELSE "" END AS sourceDevDependencyInfo
+  WITH *, CASE WHEN target:NpmDevPackage THEN "\\n[dev]" ELSE "" END AS targetDevDependencyInfo
+  WITH *, source.name + sourceLevelInfo + sourceDevDependencyInfo AS fullSourceName
+  WITH *, target.name + targetLevelInfo + targetDevDependencyInfo AS fullTargetName
   WITH *, "\" -> \"" + fullTargetName 
                    + "\" [label = "  + dependency.weightByDependencyType + ";"
                    + " penwidth = "  + penWidth + ";"

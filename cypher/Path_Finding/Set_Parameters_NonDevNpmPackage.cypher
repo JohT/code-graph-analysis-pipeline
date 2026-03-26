@@ -2,7 +2,7 @@
 
 :params {
     "dependencies_projection_language":"NPM",
-    "dependencies_projection": "npm-package-path-finding",     
-    "dependencies_projection_node": "Package",
+    "dependencies_projection": "npm-non-dev-package-path-finding",     
+    "dependencies_projection_node": "NpmNonDevPackage",
     "dependencies_projection_weight_property": "weightByDependencyType",
 }
