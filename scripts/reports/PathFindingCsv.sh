@@ -140,16 +140,28 @@ if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}
     runPathFindingAlgorithms "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
 fi
 
-# -- NPM Package Path Finding -------------------------------
+# -- Non Dev NPM Package Path Finding -------------------------------
 
 NPM_LANGUAGE="dependencies_projection_language=NPM"
-NPM_PROJECTION="dependencies_projection=npm-package-path-finding"
-NPM_NODE="dependencies_projection_node=Package"
+NPM_PROJECTION="dependencies_projection=npm-non-dev-package-path-finding"
+NPM_NODE="dependencies_projection_node=NpmNonDevPackage"
 NPM_WEIGHT="dependencies_projection_weight_property=weightByDependencyType"
 
 if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"; then
     runPathFindingAlgorithms "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"
 fi
+
+# -- Dev NPM Package Path Finding -------------------------------
+
+NPM_DEV_LANGUAGE="dependencies_projection_language=NPM"
+NPM_DEV_PROJECTION="dependencies_projection=npm-dev-package-path-finding"
+NPM_DEV_NODE="dependencies_projection_node=NpmDevPackage"
+NPM_DEV_WEIGHT="dependencies_projection_weight_property=weightByDependencyType" 
+
+if createDirectedDependencyProjection "${NPM_DEV_LANGUAGE}" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"; then
+    runPathFindingAlgorithms "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
+fi
+
 # ---------------------------------------------------------------
 
 # Clean-up after report generation. Empty reports will be deleted.

@@ -90,10 +90,10 @@ if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}
     source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
 fi
 
-# NPM Packages: Longest Paths Visualization
+# Non Dev NPM Packages: Longest Paths Visualization
 NPM_LANGUAGE="dependencies_projection_language=NPM"
-NPM_PROJECTION="dependencies_projection=npm-package-path-finding"
-NPM_NODE="dependencies_projection_node=Package"
+NPM_PROJECTION="dependencies_projection=npm-non-dev-package-path-finding"
+NPM_NODE="dependencies_projection_node=NpmNonDevPackage"
 NPM_WEIGHT="dependencies_projection_weight_property=weightByDependencyType"
 
 if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"; then
@@ -101,14 +101,37 @@ if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${N
     execute_cypher_queries_until_results "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Exists.cypher" \
                                          "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Write.cypher" "${NPM_PROJECTION}" "${NPM_NODE}"
     
-    reportName="NpmPackageLongestPathsIsolated"
+    reportName="NpmNonDevPackageLongestPathsIsolated"
     echo "${SCRIPT_NAME}: Creating visualization ${reportName}..."
     execute_cypher "${PATH_FINDINGS_CYPHER_DIR}/Path_Finding_6_Longest_paths_for_graphviz.cypher" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}" > "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
     source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
     
-    reportName="NpmPackageLongestPaths"
+    reportName="NpmNonDevPackageLongestPaths"
     echo "${SCRIPT_NAME}: Creating visualization ${reportName}..."
     execute_cypher "${PATH_FINDINGS_CYPHER_DIR}/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}" > "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
+fi
+
+# Dev NPM Packages: Longest Paths Visualization
+
+NPM_DEV_LANGUAGE="dependencies_projection_language=NPM"
+NPM_DEV_PROJECTION="dependencies_projection=npm-dev-package-path-finding"
+NPM_DEV_NODE="dependencies_projection_node=NpmDevPackage"
+NPM_DEV_WEIGHT="dependencies_projection_weight_property=weightByDependencyType" 
+
+if createDirectedDependencyProjection "${NPM_DEV_LANGUAGE}" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"; then
+    # Determines topological sort max distance from source if not already done for level info in visualization.
+    execute_cypher_queries_until_results "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Exists.cypher" \
+                                         "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Write.cypher" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}"
+    
+    reportName="NpmDevPackageLongestPathsIsolated"
+    echo "${SCRIPT_NAME}: Creating visualization ${reportName}..."
+    execute_cypher "${PATH_FINDINGS_CYPHER_DIR}/Path_Finding_6_Longest_paths_for_graphviz.cypher" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}" > "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
+    
+    reportName="NpmDevPackageLongestPaths"
+    echo "${SCRIPT_NAME}: Creating visualization ${reportName}..."
+    execute_cypher "${PATH_FINDINGS_CYPHER_DIR}/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}" > "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
     source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${FULL_REPORT_DIRECTORY}/${reportName}.csv"
 fi
 

@@ -439,12 +439,12 @@ if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTIO
     runUndirectedCentralityAlgorithms "${MODULE_PROJECTION_UNDIRECTED}" "${MODULE_NODE}"
 fi
 
-# -- NPM Package Centrality ---------------------------------------
+# -- Non Dev NPM Package Centrality ---------------------------------------
 
 NPM_LANGUAGE="dependencies_projection_language=NPM"
-NPM_PROJECTION="dependencies_projection=npm-package-centrality" 
-NPM_PROJECTION_UNDIRECTED="dependencies_projection=npm-package-centrality-undirected" 
-NPM_NODE="dependencies_projection_node=Package" 
+NPM_PROJECTION="dependencies_projection=npm-non-dev-package-centrality" 
+NPM_PROJECTION_UNDIRECTED="dependencies_projection=npm-non-dev-package-centrality-undirected" 
+NPM_NODE="dependencies_projection_node=NpmNonDevPackage" 
 NPM_WEIGHT="dependencies_projection_weight_property=weightByDependencyType" 
 
 if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"; then

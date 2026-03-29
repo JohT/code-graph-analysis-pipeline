@@ -79,6 +79,8 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_bet
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_npm_dependencies_to_npm_packages.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_npm_packages_with_depends_on_relationships.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Enrich_npm_packages_with_dependency_counts.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_npm_dependency_type_labels.cypher"
+execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Label_npm_packages_by_dep_type.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
 if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
