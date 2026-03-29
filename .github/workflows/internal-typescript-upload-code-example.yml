@@ -1,44 +1,8 @@
 name: Typescript Code Upload Example for Graph Analysis
 
+# Temporarily disabled automatic triggers. Use manual dispatch to run.
 on:
-  push:
-    branches:
-      - main
-    # Ignore changes in documentation, general configuration and reports for push events
-    paths-ignore: 
-      - '**/*.md'
-      - '**/*.txt'
-      - '!requirements.txt'
-      - '**/*.css'
-      - '**/*.html'
-      - '**/*.js'
-      - '.gitignore'
-      - '.gitattributes'
-      - 'renovate.json'
-      - 'renovate-presets/**'
-      - 'changelogTemplate.mustache'
-      - '**.code-workspace'
-      - '.github/workflows/internal-java-code-analysis.yml'
-      - '.github/workflows/*documentation.yml'
-  pull_request:
-    branches:
-      - main
-    # Ignore changes in documentation, general configuration and reports for pull request events
-    paths-ignore: 
-      - '**/*.md'
-      - '**/*.txt'
-      - '!requirements.txt'
-      - '**/*.css'
-      - '**/*.html'
-      - '**/*.js'
-      - '.gitignore'
-      - '.gitattributes'
-      - 'renovate.json'
-      - 'renovate-presets/**'
-      - 'changelogTemplate.mustache'
-      - '**.code-workspace'
-      - '.github/workflows/internal-java-code-analysis.yml'
-      - '.github/workflows/*documentation.yml'
+  workflow_dispatch: {}
 
 jobs:
 

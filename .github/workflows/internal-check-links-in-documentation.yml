@@ -1,19 +1,8 @@
 name: Check links in documentation
 
+# Temporarily disabled automatic triggers. Use manual dispatch to run.
 on:
-  pull_request:
-    branches:
-      - main
-    # Only watch root level Markdown documentation file changes
-    paths:
-      - 'README.md'
-      - 'COMMANDS.md'
-      - 'GETTING_STARTED.md'
-      - 'INTEGRATION.md'
-      - 'CHANGELOG.md'
-      - '.github/workflows/internal-check-links-in-documentation.yml' # also run when this file was changed
-  schedule:
-    - cron: "42 7 * * 1" # Every week at 07:40 AM on Monday 
+  workflow_dispatch: {}
 
 jobs:
   reports:

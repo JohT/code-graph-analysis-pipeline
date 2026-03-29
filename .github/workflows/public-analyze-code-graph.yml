@@ -157,35 +157,36 @@ jobs:
           distribution: "temurin"
           java-version: ${{ matrix.java }}
 
+      # Disable Python Setup temporarily to speed up troubleshooting.
       # "Setup Python" could be skipped if jupyter notebook analysis-results aren't needed or .venv is used.
       # However, since this is a reuseable workflow, we always do it here.
-      - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
-        if: inputs.use-venv_virtual_python_environment == 'false'
-        id: prepare-conda-environment
-        uses: conda-incubator/setup-miniconda@fc2d68f6413eb2d87b895e92f8584b5b94a10167 # v3
-        with:
-          python-version: ${{ matrix.python }}
-          miniforge-version: ${{ matrix.miniforge }}
-          activate-environment: codegraph
-          environment-file: ./conda-environment.yml
-          auto-activate-base: false
-          show-channel-urls: true
+      # - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
+      #   if: inputs.use-venv_virtual_python_environment == 'false'
+      #   id: prepare-conda-environment
+      #   uses: conda-incubator/setup-miniconda@fc2d68f6413eb2d87b895e92f8584b5b94a10167 # v3
+      #   with:
+      #     python-version: ${{ matrix.python }}
+      #     miniforge-version: ${{ matrix.miniforge }}
+      #     activate-environment: codegraph
+      #     environment-file: ./conda-environment.yml
+      #     auto-activate-base: false
+      #     show-channel-urls: true
 
-      - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
-        if: inputs.use-venv_virtual_python_environment == 'true'
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python }}
-          cache: 'pip'
+      # - name: (Python Setup) Use version ${{ matrix.python }} with venv environment management module
+      #   if: inputs.use-venv_virtual_python_environment == 'true'
+      #   uses: actions/setup-python@v6
+      #   with:
+      #     python-version: ${{ matrix.python }}
+      #     cache: 'pip'
 
-      - name: (Python Setup) Conda environment info
-        if: inputs.use-venv_virtual_python_environment == 'false'
-        shell: bash -el {0}
-        run: | 
-          conda info
-          conda list
-          conda config --show-sources
-          conda config --show
+      # - name: (Python Setup) Conda environment info
+      #   if: inputs.use-venv_virtual_python_environment == 'false'
+      #   shell: bash -el {0}
+      #   run: | 
+      #     conda info
+      #     conda list
+      #     conda config --show-sources
+      #     conda config --show
 
       - name: (Code Analysis Setup) Setup Cache Analysis Downloads
         uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5

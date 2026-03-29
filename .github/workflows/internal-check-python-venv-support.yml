@@ -1,14 +1,8 @@
 name: Check Python venv virtual environment
 
+# Temporarily disabled automatic triggers. Use manual dispatch to run.
 on:
-  pull_request:
-    branches:
-      - main
-    # Only watch changes related to Python virtual environment venv
-    paths:
-      - 'requirements.txt'
-      - 'scripts/activatePythonEnvironment.sh'
-      - '.github/workflows/internal-check-python-venv-support.yml' # or when this file changed
+  workflow_dispatch: {}
 
 jobs:
   check-python-venv-environment:
