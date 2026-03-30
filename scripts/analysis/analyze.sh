@@ -60,15 +60,31 @@ settingsProfile="Default"
 selectedAnalysisDomain=""
 exploreMode=false
 
+# Function to check if a parameter value is missing (either empty or another option starting with --)
+is_missing_value_parameter() {
+  case "${2:-}" in
+    ''|--*) return 0 ;; # missing value
+    *) return 1 ;; # value is present
+  esac
+}
+
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
     --report)
+      if is_missing_value_parameter "$1" "$2"; then
+        echo "analyze: Error: --report requires a value."
+        usage
+      fi
       analysisReportCompilation="$2"
       shift
       ;;
     --profile)
+      if is_missing_value_parameter "$1" "$2"; then
+        echo "analyze: Error: --profile requires a value."
+        usage
+      fi
       settingsProfile="$2"
       shift
       ;;
@@ -77,6 +93,10 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     --domain)
+      if is_missing_value_parameter "$1" "$2"; then
+        echo "analyze: Error: --domain requires a value."
+        usage
+      fi
       selectedAnalysisDomain="$2"
       shift
       ;;
