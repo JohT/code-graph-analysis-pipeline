@@ -118,6 +118,18 @@ Use these optional command line options as needed:
   ./../../scripts/analysis/analyze.sh --explore
   ```
 
+- Only run the reports of one specific domain (vertical slice):
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --domain anomaly-detection
+  ```
+
+- Only run the CSV reports of one specific domain:
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --domain anomaly-detection --report Csv
+  ```
+
 👉 Open your browser and login to your local Neo4j Web UI (`http://localhost:7474/browser`) with "neo4j" as user and the initial password you've chosen.
 
 ## GitHub Actions

@@ -86,6 +86,8 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
+- `--domain anomaly-detection` selects a single analysis domain (a subdirectory of [domains/](./domains/)) to run reports for, following a vertical-slice approach. When set, only that domain's report scripts run; core reports from `scripts/reports/` and other domains are skipped. The domain option composes with `--report` to further narrow down which reports are generated, e.g. `--domain anomaly-detection --report Csv`. When not specified, all domains and reports run unchanged. The selected domain name is passed to report compilation scripts via the environment variable `ANALYSIS_DOMAIN`. Available domains can be found in the [domains/](./domains/) directory.
+
 ### Notes
 
 - Be sure to use Java 21 for Neo4j v2025, Java 17 for v5 and Java 11 for v4. Details see [Neo4j System Requirements / Java](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java).
@@ -142,6 +144,22 @@ without report generation use this command:
 
 ```shell
 ./../../scripts/analysis/analyze.sh --explore
+```
+
+#### Only run the reports of one specific domain
+
+To only run the reports of a single analysis domain (vertical slice, no additional Python or Node.js dependencies for core reports):
+
+```shell
+./../../scripts/analysis/analyze.sh --domain anomaly-detection
+```
+
+#### Only run the CSV reports of one specific domain
+
+To further narrow down to only one report type within a specific domain:
+
+```shell
+./../../scripts/analysis/analyze.sh --domain anomaly-detection --report Csv
 ```
 
 ## Generate Markdown References
