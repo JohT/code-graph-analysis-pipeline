@@ -89,6 +89,7 @@ Script | Directory | Description
 | [sortOutExternalJavaJarFiles.sh](./sortOutExternalJavaJarFiles.sh) |  | Sorts out jar files that don't contain one of the given package names (e.g. external libraries) and moves them into the IGNORED_JARS_DIRECTORY.  |
 | [startNeo4j.sh](./startNeo4j.sh) |  | Starts the local Neo4j Graph Database.  |
 | [stopNeo4j.sh](./stopNeo4j.sh) |  | Stops the local Neo4j Graph Database.  |
+| [testAnalyzeDomainOption.sh](./testAnalyzeDomainOption.sh) |  | Tests "--domain" command line option of "analyze.sh". |
 | [testCloneGitRepository.sh](./testCloneGitRepository.sh) |  | Tests "cloneGitRepository.sh". |
 | [testConfigureNeo4j.sh](./testConfigureNeo4j.sh) |  | Tests "configureNeo4j.sh". |
 | [testDetectChangedFiles.sh](./testDetectChangedFiles.sh) |  | Tests "detectChangedFiles.sh". |
