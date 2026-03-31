@@ -19,6 +19,7 @@ ARTIFACTS_DIRECTORY                   | artifacts                           | Wo
 SOURCE_DIRECTORY                      | source                              |  |
 LOG_GROUP_START                       | ::group::                           | Prefix to start a log group. Defaults to GitHub Actions log group start command. |
 LOG_GROUP_END                         | ::endgroup::                        | Prefix to end a log group. Defaults to GitHub Actions log group end command. |
+DOMAINS_DIRECTORY                     | ${SCRIPTS_DIR}/../domains           |  |
 NEO4J_EDITION                         | community                           | Choose "community" or "enterprise" |
 NEO4J_VERSION                         | 2026.01.4                           |  |
 DATA_DIRECTORY                        | $( pwd -P )/data                    | Path where Neo4j writes its data to (outside tools dir) |
@@ -49,7 +50,6 @@ JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv5-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
 VISUALIZATION_SCRIPTS_DIR             | ${SCRIPTS_DIR}/visualization        | Repository directory containing the shell scripts for visualization |
-DOMAINS_DIRECTORY                     | ${REPORTS_SCRIPT_DIR}/../../domains |  |
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
 TYPESCRIPT_SCAN_HEAP_MEMORY           | 4096                                | Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB. |
