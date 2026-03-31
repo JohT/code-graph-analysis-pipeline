@@ -36,6 +36,13 @@ echo "${SCRIPT_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
 echo "${SCRIPT_NAME}: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
 echo "${LOG_GROUP_END}";
 
+# Jupyter Notebook reports are not domain-scoped. Skip them when a specific analysis domain is selected.
+if [ -n "${ANALYSIS_DOMAIN}" ]; then
+    echo "${SCRIPT_NAME}: Skipping Jupyter Notebook reports because a specific analysis domain is selected (ANALYSIS_DOMAIN=${ANALYSIS_DOMAIN})."
+    echo "${SCRIPT_NAME}: Jupyter Notebook reports are not domain-scoped and cannot be run for a specific domain."
+    return 0 2>/dev/null || exit 0
+fi
+
 # Run all jupiter notebooks
 for jupyter_notebook_file in "${JUPYTER_NOTEBOOK_DIRECTORY}"/*.ipynb; do 
     jupyter_notebook_filename=$(basename -- "${jupyter_notebook_file}")

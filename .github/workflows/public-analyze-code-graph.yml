@@ -73,6 +73,18 @@ on:
         required: false
         type: string
         default: '--profile Neo4j-latest-low-memory'
+      domain:
+        description: >
+          The name of an analysis domain to run.
+          Must match a subdirectory name in the 'domains/' directory
+          (e.g. 'anomaly-detection', 'external-dependencies').
+          When set, only that domain's report scripts run;
+          core reports from 'scripts/reports/' and other domains are skipped.
+          Can be combined with 'analysis-arguments' to further narrow the reports.
+          Default: '' (all domains and reports run unchanged)
+        required: false
+        type: string
+        default: ''
       typescript-scan-heap-memory:
         description: >
           The heap memory size in MB to use for the TypeScript code scans (default=4096).
@@ -252,7 +264,8 @@ jobs:
         working-directory: temp
         run: |
           ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-
+      - name: Assemble DOMAIN_ARGUMENT
+        run: echo "domainAnalysisArgument=${{ inputs.domain != '' && format('--domain {0} ', inputs.domain) || '' }}" >> $GITHUB_ENV
       - name: (Code Analysis) Analyze ${{ inputs.analysis-name }}
         working-directory: temp/${{ inputs.analysis-name }}
         # Shell type can be skipped if jupyter notebook analysis-results (and therefore conda) aren't needed
@@ -264,7 +277,7 @@ jobs:
           PREPARE_CONDA_ENVIRONMENT: "false" # Had already been done in step with id "prepare-conda-environment".
           USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: ${{ inputs.use-venv_virtual_python_environment }}
         run: |
-          TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ inputs.analysis-arguments }}
+          TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ env.domainAnalysisArgument }}${{ inputs.analysis-arguments }}
     
       - name: Set artifact name for uploaded analysis results
         id: set-analysis-results-artifact-name

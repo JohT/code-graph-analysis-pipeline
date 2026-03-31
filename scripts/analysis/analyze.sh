@@ -24,6 +24,12 @@
 #       It activates "explore" mode where no reports are executed and Neo4j keeps running (skip stop step).
 #       This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
+# Note: The argument "--domain" is optional. The default value is "" (empty = all domains run unchanged).
+#       It selects a single analysis domain (a subdirectory of "domains/") to run reports for, following a vertical-slice approach.
+#       When set, only that domain's report scripts run; core reports from "scripts/reports/" and other domains are skipped.
+#       The domain option can be combined with "--report" e.g. "--domain anomaly-detection --report Csv".
+#       Only a single domain can be selected. The domain name must match a subdirectory of the "domains" directory.
+
 # Note: The script and its sub scripts are designed to be as efficient as possible 
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
@@ -44,29 +50,54 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--report <All (default), Csv, Jupyter, Python, Visualization...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--explore]"
+  echo "Usage: $0 [--report <All (default), Csv, Jupyter, Python, Visualization...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--domain <domain-name>] [--explore]"
   exit 1
 }
 
 # Default values
 analysisReportCompilation="All"
 settingsProfile="Default"
+selectedAnalysisDomain=""
 exploreMode=false
+
+# Function to check if a parameter value is missing (either empty or another option starting with --)
+is_missing_value_parameter() {
+  case "${2:-}" in
+    ''|--*) return 0 ;; # missing value
+    *) return 1 ;; # value is present
+  esac
+}
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
     --report)
+      if is_missing_value_parameter "$1" "$2"; then
+        echo "analyze: Error: --report requires a value."
+        usage
+      fi
       analysisReportCompilation="$2"
       shift
       ;;
     --profile)
+      if is_missing_value_parameter "$1" "$2"; then
+        echo "analyze: Error: --profile requires a value."
+        usage
+      fi
       settingsProfile="$2"
       shift
       ;;
     --explore)
       exploreMode=true
+      shift
+      ;;
+    --domain)
+      if is_missing_value_parameter "$1" "$2"; then
+        echo "analyze: Error: --domain requires a value."
+        usage
+      fi
+      selectedAnalysisDomain="$2"
       shift
       ;;
     *)
@@ -89,6 +120,16 @@ if ! [[ ${settingsProfile} =~ ^[-[:alnum:]]+$ ]]; then
   exit 1
 fi
 
+# Assure that the selected analysis domain only consists of letters, numbers, and hyphens (if specified).
+if [ -n "${selectedAnalysisDomain}" ]; then
+  case "${selectedAnalysisDomain}" in
+    *[!A-Za-z0-9-]*)
+      echo "analyze: Error: Domain '${selectedAnalysisDomain}' can only contain letters, numbers, and hyphens."
+      exit 1
+      ;;
+  esac
+fi
+
 # Check if there is something to scan and analyze
 if [ ! -d "${ARTIFACTS_DIRECTORY}" ] && [ ! -d "${SOURCE_DIRECTORY}" ] ; then
     echo "analyze: Neither ${ARTIFACTS_DIRECTORY} nor the ${SOURCE_DIRECTORY} directory exist. Please download artifacts/sources first."
@@ -98,6 +139,7 @@ fi
 echo "${LOG_GROUP_START}Start Analysis"
 echo "analyze: analysisReportCompilation=${analysisReportCompilation}"
 echo "analyze: settingsProfile=${settingsProfile}"
+echo "analyze: selectedAnalysisDomain=${selectedAnalysisDomain}"
 echo "analyze: exploreMode=${exploreMode}"
 
 ## Get this "scripts/analysis" directory if not already set
@@ -110,6 +152,24 @@ echo "analyze: ANALYSIS_SCRIPT_DIR=${ANALYSIS_SCRIPT_DIR}"
 # Get the "scripts" directory by taking the path of this script and going one directory up.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$(dirname -- "${ANALYSIS_SCRIPT_DIR}")} # Repository directory containing the shell scripts
 echo "analyze: SCRIPTS_DIR=${SCRIPTS_DIR}"
+
+# Resolve the analysis domains directory. Can be overridden by the environment variable DOMAINS_DIRECTORY.
+DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${SCRIPTS_DIR}/../domains"}
+echo "analyze: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+
+# When a specific analysis domain is selected, validate that it matches an existing subdirectory of the domains directory.
+# ANALYSIS_DOMAIN is empty when no domain is selected, causing all domains to run unchanged.
+ANALYSIS_DOMAIN=""
+if [ -n "${selectedAnalysisDomain}" ]; then
+  if [ ! -d "${DOMAINS_DIRECTORY}/${selectedAnalysisDomain}" ]; then
+    availableAnalysisDomains=$(find "${DOMAINS_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; 2>/dev/null | sort | tr '\n' ' ')
+    echo "analyze: Error: Selected domain '${selectedAnalysisDomain}' does not match any subdirectory in ${DOMAINS_DIRECTORY}."
+    echo "analyze: Available domains: ${availableAnalysisDomains}"
+    exit 1
+  fi
+  ANALYSIS_DOMAIN="${selectedAnalysisDomain}"
+  echo "analyze: ANALYSIS_DOMAIN=${ANALYSIS_DOMAIN}"
+fi
 
 # Assure that there is a report compilation script for the given report argument.
 REPORT_COMPILATION_SCRIPT="${SCRIPTS_DIR}/${REPORTS_SCRIPTS_DIRECTORY}/${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY}/${analysisReportCompilation}Reports.sh"

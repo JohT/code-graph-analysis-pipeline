@@ -29,12 +29,21 @@ echo "${LOG_GROUP_START}$(date +'%Y-%m-%dT%H:%M:%S') Initialize Markdown Reports
 echo "${SCRIPT_NAME}: REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR}"
 echo "${SCRIPT_NAME}: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 echo "${SCRIPT_NAME}: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+echo "${SCRIPT_NAME}: ANALYSIS_DOMAIN=${ANALYSIS_DOMAIN}"
 echo "${LOG_GROUP_END}";
 
 # Run all Markdown report scripts (filename ending with Markdown.sh or Summary.sh) in the REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY directories.
-for directory in "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}"; do
+# When a specific analysis domain is selected, only run reports for that domain's directory.
+# Otherwise, run reports from both the general reports directory and all domains.
+if [ -n "${ANALYSIS_DOMAIN}" ]; then
+    analysisReportScriptDirectories=( "${DOMAINS_DIRECTORY}/${ANALYSIS_DOMAIN}" )
+else
+    analysisReportScriptDirectories=( "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}" )
+fi
+
+for directory in "${analysisReportScriptDirectories[@]}"; do
     if [ ! -d "${directory}" ]; then
-        echo "${SCRIPT_NAME}: Error: Directory ${directory} does not exist. Please check your REPORTS_SCRIPT_DIR and DOMAIN_DIRECTORY settings."
+        echo "${SCRIPT_NAME}: Error: Directory ${directory} does not exist. Please check your REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY settings."
         exit 1
     fi
 
