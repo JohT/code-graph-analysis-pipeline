@@ -51,15 +51,15 @@ else
     exit 1
 fi
 
-# Include operation system function to for example detect Windows.
+# Include operation system function to for example detect Windows like isWindows.
 source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
 
-# Include functions to check or wait for the database to be ready
+# Include functions to check or wait for the database to be ready like isDatabaseQueryable.
 source "${SCRIPTS_DIR}/waitForNeo4jHttpFunctions.sh"
 
 # Check if Neo4j is stopped (not running) using a temporary NEO4J_HOME environment variable that points to the current installation
 isDatabaseReady=$(isDatabaseQueryable)
-if [[ ${isDatabaseReady} == "false" ]]; then
+if [ "${isDatabaseReady}" = "false" ]; then
     echo "stopNeo4j: ${neo4j_directory} already stopped"
     exit 0
 else
@@ -71,9 +71,9 @@ else
     fi
 fi
 
-# Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
+#Check if Neo4j is still not running using a temporary NEO4J_HOME environment variable that points to the current installation
 isDatabaseReady=$(isDatabaseQueryable)
-if [[ ${isDatabaseReady} == "false" ]]; then
+if [ "${isDatabaseReady}" = "false" ]; then
     echo "stopNeo4j: Successfully stopped ${neo4j_directory}"
 else
     if ! isWindows; then
@@ -86,11 +86,24 @@ fi
 if isWindows; then
     echo "stopNeo4j: Skipping detection of processes listening to port ${NEO4J_HTTP_PORT} on Windows"
 else
-    port_listener_process_id=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN || true )
-    if [ -n "${port_listener_process_id}" ]; then
-        echo "stopNeo4j: Terminating the following process that still listens to port ${NEO4J_HTTP_PORT}"
-        ps -p "${port_listener_process_id}"
-        # Terminate the process that is listening to the Neo4j HTTP port
-        kill -9 "${port_listener_process_id}"
+    port_listener_process_ids=$( lsof -t -i:"${NEO4J_HTTP_PORT}" -sTCP:LISTEN 2>/dev/null || true )
+    if [ -n "${port_listener_process_ids}" ]; then
+        echo "stopNeo4j: Gracefully terminating process(es) listening to port ${NEO4J_HTTP_PORT}"
+        # Display process info
+        echo "${port_listener_process_ids}" | tr '\n' ',' | sed 's/,$//' | xargs -I {} ps -p {} || true
+        # Try graceful shutdown first with SIGTERM on each PID
+        echo "${port_listener_process_ids}" | while read -r pid; do
+            [ -n "${pid}" ] && kill -TERM "${pid}" 2>/dev/null || true
+        done
+        sleep 20
+        # Check if process(es) are still alive and force kill if necessary
+        echo "${port_listener_process_ids}" | while read -r pid; do
+            [ -n "${pid}" ] && kill -0 "${pid}" 2>/dev/null && {
+                echo "stopNeo4j: Process ${pid} still alive after SIGTERM — sending SIGKILL"
+                kill -KILL "${pid}" 2>/dev/null || true
+            } || true
+        done
+    else
+        echo "stopNeo4j: No processes listening to port ${NEO4J_HTTP_PORT} detected. Assuming Neo4j is stopped."
     fi
 fi
