@@ -2,6 +2,259 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## v3.5.0 Select analysis domain and npm dev dependency awareness
+
+### ✨ Highlight
+
+* Add `--domain` option to `analyze.sh` for domain-specific analysis by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/551
+  * Now you can use --domain to run analysis for a single domain (vertical slice), skipping core reports and other domains. This enables focused, domain-specific analysis that's faster and more resource-efficient. The option works with --report to further narrow the scope (e.g. --domain anomaly-detection --report Csv), and is available in both the CLI and GitHub Actions workflow.
+
+### 🚀 Features
+
+* Distinguish between dev and non dev NPM package dependencies by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/547
+* [Add Neo4j-latest-low-memory-continue-on-scan-errors profile for troubleshooting](https://github.com/JohT/code-graph-analysis-pipeline/pull/547/commits/b8ab8b6845bfdb9db7c3c09765cf9bafe4728f3d) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/547
+
+### ⚙️ Optimizations
+
+* [Scan npm package.json before Typescript code](https://github.com/JohT/code-graph-analysis-pipeline/pull/547/commits/b43da5fe87ee2cb48ff778690d33fc1905856e8e) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/547
+  * This fixes the data dependent XOException where jqassistant-typescript-plugin creates multiple :File nodes with the same fileName property, leading to an exception in jqassistant-npm-plugin
+
+### 📦 Dependency Updates
+
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.8.8 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/543
+* Update actions/cache digest to 6682284 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/542
+* Update jQAssistant TypeScript Plugin to v1.4.4 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/550
+* Update dependency remix-run/react-router to v7.13.2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/549
+* Update dependency neo4j/graph-data-science to v2.27.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/545
+
+## v3.4.0 NPM package insights and modularized external dependencies analysis
+
+### ✨ Highlight
+
+* [Analyze npm package dependencies](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/ea6d2db0c8877fc1e7ac8f116876c505361c6dca): Adds NPM package-level dependency analysis alongside the existing TypeScript module analysis. Initially implements longest dependency-path detection and topological sorting to provide a fast, package-level overview of the project's architecture and dependency chains. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+
+### 🚀 Features
+
+* [Add external dependencies analysis modularized as domain](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/3ee0a10421f46d410375801b505886bae8f5413a): The new external-dependencies "domain" (vertical-slice) packages Cypher queries, CSV/Markdown report generation, and Python-based SVG chart generation for analyzing external dependency usage for Java and TypeScript codebases. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+* [Modularize Neo4j configuration and support profile changes](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/e582aaa2a3f51afc3f6026b20f99475983a12c2f): With `useNeo4jHighMemoryProfile.sh` you can now switch to the new high memory profile without redoing the whole analysis. This is helpful when you reach memory limits within your first analysis attempt and want to fix that in a simple way. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+
+### ⚙️ Optimizations
+
+* [Add TypeScript module project info to longest path visualization](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/d53826ce56126be17340cf900f88a38ffbaadbe2) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+* [Add batch sizes to all transactional write operations for memory management](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/d32fbe64b2088ec73576f1f579910709a34e00b6) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+* [Improved fail-fast when running all tests](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/052c0e20cd091d8af5714e050335b5173e0a4dac) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+* [Support direct and sourced test runs](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/53721dc45f19443473e97173acbfd7f32ffe95b4): You can now run each test case directly without getting an error that the script needs to be sourced. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+
+### 🛠 Fixes
+
+* [Fix wrong denominator for external module usage](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/4315584a95dceecff4721d317e48d77647d6c31c) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+* [Fix misleading project scoped percentage](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/13fc50841e9966362fbe2bdd96855f78c8a61db3) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+* [Fix missing cases in external package usage](https://github.com/JohT/code-graph-analysis-pipeline/pull/538/commits/70128faddfdb8fb41bc3877a13543b96c7691578) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/538
+* [Avoid self-loops in CHANGED_TOGETHER_WITH edges](https://github.com/JohT/code-graph-analysis-pipeline/pull/539/commits/47fb79c8c3b98d35369279815238077bba0fbd3b) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/539
+* [Fix temporary directory name in maven test](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/8faf9c2ebf2cf6a3a80772075d6f2b514bf0744b) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+* [Fix documentation grammar issues](https://github.com/JohT/code-graph-analysis-pipeline/pull/535/commits/68c78123684f401228ba663c57fe7ca868a308e5) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/535
+
+### 📦 Dependency Updates
+
+* Update actions/setup-node action to v6.3.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/536
+* Update dependency AxonFramework/AxonFramework to v5.0.3 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/531
+
+## v3.3.2 Add Strongly Connected Components Detection + Stability Fixes
+
+### 🚀 Features
+
+* [Add strongly connected components community detection](https://github.com/JohT/code-graph-analysis-pipeline/pull/534/commits/40999467686cce303f76f3db880ebf2372b7f82c) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/534
+* [Add high-memory profile for large codebases](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/56cb4a4845e7b05a077798a03d6687b450920efb): This new profile configures Neo4j to use more memory (24 GB heap, 18 GB transaction memory, 3 GB page cache) and is intended for large codebases. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+
+### ⚙️ Optimizations
+
+* [Remove weight property for weakly connected components](https://github.com/JohT/code-graph-analysis-pipeline/pull/534/commits/94648f7f320acd3e1545b8285f3d88290e302d28) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/534
+* Remove workaround for npm packages by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/533
+* [Add test that verifies file name references](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/4b0c3744dc853914e313113b422d1b9ed2a2b0ee): Some of the bugs below were caused by misspelled file name references. This new test checks the scripts and fails if referenced Cypher or YAML files are missing. By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+
+### 🛠 Fixes
+
+* [Fix typos in weakly connected components estimation](https://github.com/JohT/code-graph-analysis-pipeline/pull/534/commits/4b211a11ebaa790c3fa8e65fea31678281eedabe) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/534
+* Fix TypeScript module `DEPENDS_ON` loop and missing weights by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/532
+* [Disable usage reports by default](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/8ebe2487c2ad27a0863b725601c208b4ebcaffb1): `dbms.usage_report.enabled=false` is now added to the configuration to explicitly disable usage reporting.
+* [Fix typo in module dependency relationship name](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/4e7bfe3c287472e1d99baef8d44b8d0994deea73) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+* [Fix incorrect jqassistant config file name](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/dc623353c8a927506b0d3f8516b245dfc70e2b32) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+* [Fix Cypher file name for setting degreeRank properties](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/e3cbe9dc77735bb042402b66191c5bd4dab087be) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+* [Verify missing Git:File property createdAtEpoch](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/baa2356ba96e0866dec45bdb713e69389dce5a70) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+* [Fix misspelled Cypher file in anomaly detection for TypeScript](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/e5253393f3a47378369301189ac0f2bf08b0a0e1) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+* [Fix overwritten cardinality when updating existing module dependencies](https://github.com/JohT/code-graph-analysis-pipeline/pull/529/commits/9aa6d95a03857ad3befe3e780dcc3f691b85163d) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/529
+
+### 📦 Dependency Updates
+
+* Update actions/setup-node action to v6.2.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/521
+* Update Neo4j and APOC to 2026.01.4 (major) by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/522
+* Update dependency pip to v26 [SECURITY] by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/515
+* Update dependency neo4j/graph-data-science to v2.26.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/524
+* Update dependency pip to v26.0.1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/525
+* Update python-machine-learning-libs by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/481
+* Update dependency nbconvert to v7.17.0 [SECURITY] by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/519
+* Update dependency neo4j to v6 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/505
+* Update dependency remix-run/react-router to v7.13.1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/527
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.8.7 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/530
+
+## v3.3.1 Topological Sort Correction and Report Upgrades for Anomaly Detection
+
+### 🛠 Fix
+
+* Fix topological sort only applied to connected components of one member type by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/516
+
+### 🚀 Feature
+
+* [Add overall graph projection statistics to anomaly detection reports](https://github.com/JohT/code-graph-analysis-pipeline/pull/516/commits/ed63d69a1444b18cf166572c3eb7aff79787ac2e) in https://github.com/JohT/code-graph-analysis-pipeline/pull/516
+
+### 📦 Dependency Updates
+
+* Update dependency remix-run/react-router to v7.13.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/507
+* Update actions/cache digest to cdf6c1f by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/509
+* Update dependency AxonFramework/AxonFramework to v5.0.2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/514
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.8.6 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/513
+* Update dependency com.buschmais.jqassistant.cli:jqassistant-commandline-neo4jv5 to v2.9.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/518
+* Update actions/checkout digest to de0fac2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/517
+* Update python-visualization-libs by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/495
+
+## v3.3.0 Improved Anomaly Detection with Architectural Code Metrics
+
+### 🚀 Improved Anomaly Detection with Architectural Code Metrics
+
+* Introduces new anomaly detection features based on code semantics and graph structure, including abstractness (Robert C. Martin metrics) and weakly/strongly connected components.
+* Refines abstractness modeling by weighting abstract classes at 70%, better reflecting real-world inheritance and implementation patterns.
+* Adds hierarchical and architectural insights via topological ordering of strongly connected components, enabling layer-based analysis of code dependencies.
+* Improves data quality by automatically removing constant, non-informative features during data preparation.
+
+### 📦 Dependency Updates
+
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.8.4 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/510
+* Update dependency com.buschmais.jqassistant.cli:jqassistant-commandline-neo4jv5 to v2.9.0-RC1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/506
+* Update conda-incubator/setup-miniconda digest to fc2d68f by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/512
+* Update actions/setup-java digest to be666c2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/511
+
+## v3.2.0 Improved node embeddings
+
+### 🚀 New Features
+
+* Improve Node Embeddings by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/503 for Java & TypeScript demos
+  * Introduced GraphSAGE node embedding algorithm
+  * Added UMAP-based projections (replacing t-SNE; removed related dependencies)
+  * Improved embedding comparison plots with better coloring and annotations
+  * Integrated community metrics directly into embedding visualizations
+  * Optimized projection creation performance for faster analysis
+
+### 📦 Dependency Updates
+
+* Update Neo4j and APOC to 2025.11.2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/500
+* Update dependency typing-extensions to v4.15.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/499
+* Update dependency neo4j/graph-data-science to v2.24.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/496
+* Update dependency renovate to v42 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/502
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.8.1 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/501
+* Update dependency renovate to v42.71.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/504
+
+## v3.1.2 Enhanced Anomaly Detection and Dependency Metrics
+
+### 🚀 New Features
+
+#### 📊 CSV Query Reports for Anomaly Detection
+
+By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/485
+
+* Added CSV query reports to anomaly detection outputs.
+* For every node with an `anomalyScore`, a corresponding `anomalyRank` is now generated.
+* Introduced `TopAnomalies.csv`, listing the highest-anomaly nodes of the same kind.
+* Included `AnomalyArchetypeTopOutlier.csv` and `AnomalyArchetypeTopBridge.csv`, now aligned with the other archetype reports.
+
+#### 📦 Automatic JavaScript Dependency Installation
+
+By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/486
+
+* JavaScript dependencies are now installed automatically when cloning a source repository.
+* When the reusable GitHub Actions workflow is triggered with the `source-repository` input, dependencies are installed as needed.
+* Supports npm, pnpm, and yarn.
+
+#### 📈 Enhanced Anomaly Detection Distributions
+
+By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/497
+
+* Improved feature distribution plots for anomaly detection.
+* Added degree distribution plots, including outlier examples for better insight.
+
+#### 🔗 New Connectivity Metrics for Code Nodes
+
+By @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/497
+
+* `dependencyDegree` — Sum of `incomingDependencies` and `outgoingDependencies`.
+* `dependencyDegreeWeighted` — Sum of `incomingDependenciesWeight` and `outgoingDependenciesWeight`.
+* `dependencyDegreeRank` — Rank by degree (1 = highest degree, 2 = second highest, etc.).
+
+### 📦 Dependency Updates
+
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.8.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/484
+* Update GitHub Artifact Actions (major) by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/491
+* Update dependency matplotlib to v3.10.8 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/483
+* Update dependency markdown-link-check to v3.14.2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/476
+* Update conda-incubator/setup-miniconda digest to 8352349 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/487
+* Update pnpm/action-setup action to v4.2.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/488
+* Update actions/cache action to v5 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/489
+* Update actions/setup-node action to v6 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/490
+* Update dependency remix-run/react-router to v7 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/493
+* Update actions/checkout action to v6 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/492
+* Update dependency neo4j/apoc by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/494
+
+## v3.1.1 Ignore empty maven artifacts
+
+### 🛠 Fix
+
+* Ignore empty maven artifacts by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/482
+
+### 📦 Dependency Updates
+
+* Update dependency plotly to v6.5.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/479
+* Update dependency AxonFramework/AxonFramework to v5 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/410
+
+## v3.1.0 New Input Parameters for Maven Artifacts and Git Repositories
+
+### 🚀 New Features
+
+#### Input Parameters for Maven Artifacts
+
+You can now analyze already published Maven artifacts without manually downloading and uploading them. Simply provide comma-separated Maven coordinates via the new `maven-artifacts` input parameter.
+
+#### Input Parameters for Git Source Repositories
+
+Including a repository's Git history or adding a repo to the `source` folder is now much easier. Use the new parameters to automatically clone a repository as part of the workflow:
+
+* `source-repository`
+* `source-repository-branch`
+* `source-repository-history-only`
+
+These options eliminate manual repository downloads and enable more automated, repeatable analyses. Details see https://github.com/JohT/code-graph-analysis-pipeline/pull/477
+
+### 📦 Dependency Updates
+
+* Update dependency @hpcc-js/wasm-graphviz-cli to v1.7.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/478
+* Update actions/setup-java digest to f2beeb2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/480
+
+## v3.0.2 Machine Learning Insights with improved documentation
+
+### 🚀 Feature
+
+* [Add anomaly detector input feature visualization](https://github.com/JohT/code-graph-analysis-pipeline/pull/474/commits/a53aa52deca0a9a6193e7dcff4c2157ddd0a716c) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/474
+  * Adds a 2D scatter plot that projects the Isolation Forest model's input features into two dimensions and highlights detected anomalies in red — so you can "see what the anomaly detector sees."
+
+### 📖 Documentation
+
+* [Add pipeline architecture overview to Markdown summary report](https://github.com/JohT/code-graph-analysis-pipeline/pull/474/commits/98c842564291b63ede4d9ab5aac6e9b67bce68f0) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/474
+  * The report now includes an appendix section with a visualization of the anomaly detection pipeline architecture.
+
+### 📦 Dependency Updates
+
+* Update dependency neo4j/graph-data-science to v2.23.0 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/473
+* Update dependency remix-run/react-router to v6.30.2 by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/472
+* Update actions/checkout digest to 93cb6ef by @renovate in https://github.com/JohT/code-graph-analysis-pipeline/pull/475
+
 ## v2.1.4
 
 ### 🛠 Fix
