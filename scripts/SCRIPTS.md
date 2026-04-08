@@ -61,16 +61,11 @@ Script | Directory | Description
 | [CentralityCsv.sh](./reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [CommunityCsv.sh](./reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [GitHistoryCsv.sh](./reports/GitHistoryCsv.sh) | reports | Executes "GitLog" Cypher queries to get the "git-history-csv" CSV reports. |
-| [InternalDependenciesCsv.sh](./reports/InternalDependenciesCsv.sh) | reports | Executes "Internal_Dependencies" Cypher queries to get the "internal-dependencies-csv" CSV reports. |
-| [InternalDependenciesVisualization.sh](./reports/InternalDependenciesVisualization.sh) | reports | Executes selected "Internal_Dependencies" Cypher queries for GraphViz visualization. |
 | [JavaCsv.sh](./reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports. |
 | [NodeEmbeddingsCsv.sh](./reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports. |
 | [ObjectOrientedDesignMetricsCsv.sh](./reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports. |
 | [OverviewCsv.sh](./reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports. |
-| [PathFindingCsv.sh](./reports/PathFindingCsv.sh) | reports | Uses path finding algorithms from the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [PathFindingVisualization.sh](./reports/PathFindingVisualization.sh) | reports | Executes selected "Path_Finding" Cypher queries for GraphViz visualization. |
 | [SimilarityCsv.sh](./reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports. |
-| [TopologicalSortCsv.sh](./reports/TopologicalSortCsv.sh) | reports | Applies the Topological Sorting algorithm for directed acyclic graphs (DAG) to order code units by their dependencies |
 | [VisibilityMetricsCsv.sh](./reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports. |
 | [AllReports.sh](./reports/compilations/AllReports.sh) | compilations | Runs all report scripts. |
 | [CsvReports.sh](./reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required). |
