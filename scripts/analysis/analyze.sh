@@ -50,7 +50,7 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--report <All (default), Csv, Jupyter, Python, Visualization...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--domain <domain-name>] [--explore]"
+  echo "Usage: $0 [--report <All (default), Csv, Jupyter, Python, Visualization...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--domain <domain-name>] [--explore] [--keep-running]"
   exit 1
 }
 
@@ -59,6 +59,7 @@ analysisReportCompilation="All"
 settingsProfile="Default"
 selectedAnalysisDomain=""
 exploreMode=false
+keepRunning=false
 
 # Function to check if a parameter value is missing (either empty or another option starting with --)
 is_missing_value_parameter() {
@@ -90,6 +91,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --explore)
       exploreMode=true
+      shift
+      ;;
+    --keep-running)
+      keepRunning=true
       shift
       ;;
     --domain)
@@ -141,6 +146,12 @@ echo "analyze: analysisReportCompilation=${analysisReportCompilation}"
 echo "analyze: settingsProfile=${settingsProfile}"
 echo "analyze: selectedAnalysisDomain=${selectedAnalysisDomain}"
 echo "analyze: exploreMode=${exploreMode}"
+echo "analyze: keepRunning=${keepRunning}"
+
+# Print warning if --explore and --keep-running are used together
+if ${exploreMode} && ${keepRunning}; then
+  echo "analyze: Warning: --explore implies --keep-running. The --keep-running option is redundant."
+fi
 
 ## Get this "scripts/analysis" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -217,7 +228,11 @@ fi
 #########################
 source "${REPORT_COMPILATION_SCRIPT}"
 
-# Stop Neo4j at the end
+# Stop Neo4j at the end (unless --keep-running is set)
 echo "${LOG_GROUP_START}Finishing Analysis"
-source "${SCRIPTS_DIR}/stopNeo4j.sh"
+if ${keepRunning}; then
+  echo "analyze: Neo4j will keep running (--keep-running is set)."
+else
+  source "${SCRIPTS_DIR}/stopNeo4j.sh"
+fi
 echo "${LOG_GROUP_END}"

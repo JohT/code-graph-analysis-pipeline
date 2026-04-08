@@ -112,6 +112,23 @@ verifyDataReadyForProjection() {
     fi
 }
 
+# Checks if the projection already exists.
+# Returns true  (=0) if the projection exists.
+# Returns false (=1) if the projection doesn't exist.
+# Exits with an error if there are technical issues.
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "type-centrality"
+projectionExists() {
+    local verificationResult
+    verificationResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projection_Exists.cypher" "${@}")
+    if is_csv_column_greater_zero "${verificationResult}" "projectionCount"; then
+        true;
+    else
+        false;
+    fi
+}
+
 # Creates a directed Graph projection for dependencies between nodes specified by the parameter "dependencies_projection_node".
 # Nodes without incoming and outgoing dependencies will be filtered out using a subgraph.
 #
