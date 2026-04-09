@@ -49,7 +49,6 @@ JQASSISTANT_CLI_VERSION               | 2.9.0                               |  |
 JQASSISTANT_CLI_ARTIFACT              | jqassistant-commandline-neo4jv5     |  |
 JQASSISTANT_CONFIG_TEMPLATE           | template-neo4jv5-jqassistant-continue-on-error.yaml |  |
 programmingLanguage                   | Java                                | Set to default value "Java" if not set since it is optional |
-VISUALIZATION_SCRIPTS_DIR             | ${SCRIPTS_DIR}/visualization        | Repository directory containing the shell scripts for visualization |
 NEO4J_INITIAL_PASSWORD                |                                     | Neo4j login password that was set to replace the temporary initial password |
 TOOLS_DIRECTORY                       | tools                               | Get the tools directory (defaults to "tools") |
 TYPESCRIPT_SCAN_HEAP_MEMORY           | 4096                                | Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB. |
