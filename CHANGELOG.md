@@ -511,8 +511,8 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 
 * Analyze static code structure, dependencies, metrics, ...
 * Fully automated [pipeline](./.github/workflows/public-analyze-code-graph.yml) from tool installation and artifact download to report generation
-* Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
-* Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
+* Runtime and library independent automation using [shell scripts](./SCRIPTS.md)
+* Comprehensive list of [Cypher queries](./CYPHER.md)
 * Example Analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 
 ### 📖 Jupyter Notebook Reports

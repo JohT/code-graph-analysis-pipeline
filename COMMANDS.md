@@ -166,10 +166,10 @@ To further narrow down to only one report type within a specific domain:
 
 ### Generate Cypher Reference
 
-Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) with the following command:
+Execute the script [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) from the root directory with the following command:
 
 ```script
-./../scripts/documentation/generateCypherReference.sh
+./scripts/documentation/generateCypherReference.sh
 ```
 
 ### Generate Script Reference

@@ -26,9 +26,9 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Anomaly detection powered by unsupervised machine learning and explainable AI
 - Graph structure visualization
 - Automated reference document generation
-- Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
+- Runtime and library independent automation using [shell scripts](./SCRIPTS.md)
 - Tested on MacOS (zsh), Linux (bash) and Windows (Git Bash)
-- Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
+- Comprehensive list of [Cypher queries](./CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 - Example analysis for [react-router](https://github.com/remix-run/react-router)
 
@@ -194,16 +194,16 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 
 ## :gear: Script Reference
 
-[SCRIPTS.md](./scripts/SCRIPTS.md) lists all shell scripts of this repository including their first comment line as a description. It can be generated as described in [Generate Script Reference](./COMMANDS.md#generate-script-reference).
+[SCRIPTS.md](./SCRIPTS.md) lists all shell scripts of this repository including their first comment line as a description. It can be generated as described in [Generate Script Reference](./COMMANDS.md#generate-script-reference).
 
 ## :mag: Cypher Query Reference
 
-[CYPHER.md](./cypher/CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#generate-cypher-reference).
+[CYPHER.md](./CYPHER.md) lists all Cypher queries of this repository including their first comment line as a description. It can be generated as described in [Generate Cypher Reference](./COMMANDS.md#generate-cypher-reference).
 > [Cypher](https://neo4j.com/docs/getting-started/cypher-intro) is Neo4j’s graph query language that lets you retrieve data from the graph.
 
 ## :globe_with_meridians: Environment Variable Reference
 
-[ENVIRONMENT_VARIABLES.md](./scripts/ENVIRONMENT_VARIABLES.md) contains all environment variables that are supported by the scripts including default values and description. It can be generated as described in [Generate Environment Variable Reference](./COMMANDS.md#generate-environment-variable-reference).
+[ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) contains all environment variables that are supported by the scripts including default values and description. It can be generated as described in [Generate Environment Variable Reference](./COMMANDS.md#generate-environment-variable-reference).
 
 ## :closed_book: Change Log
 
