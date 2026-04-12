@@ -15,12 +15,13 @@ TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults 
 NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
 
-## Get this "scripts" directory if not already set
+## Get this domain directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
-echo "startNeo4j: SCRIPTS_DIR=$SCRIPTS_DIR"
+NEO4J_MANAGEMENT_DIR=${NEO4J_MANAGEMENT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Domain directory containing the neo4j management scripts
+SCRIPTS_DIR=${SCRIPTS_DIR:-"${NEO4J_MANAGEMENT_DIR}/../../scripts"} # Repository directory containing the shared shell scripts
+echo "setupNeo4jInitialPassword: SCRIPTS_DIR=$SCRIPTS_DIR"
 
 # Check if environment variable is set
 if [ -z "${NEO4J_INITIAL_PASSWORD}" ]; then

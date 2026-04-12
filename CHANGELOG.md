@@ -2,6 +2,22 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## (unreleased) Introduce neo4j-management domain
+
+### ✨ Highlight
+
+* Introduce `domains/neo4j-management/` as a vertical-slice domain that owns all Neo4j lifecycle management (install, configure, start, stop).
+
+### 🚀 Features
+
+* Move Neo4j management scripts from `scripts/` to `domains/neo4j-management/`:
+  `setupNeo4j.sh`, `setupNeo4jInitialPassword.sh`, `configureNeo4j.sh`, `startNeo4j.sh`, `stopNeo4j.sh`,
+  `detectNeo4j.sh`, `detectNeo4jWindows.sh`, `waitForNeo4jHttpFunctions.sh`, `useNeo4jHighMemoryProfile.sh`, `testConfigureNeo4j.sh`
+* Move Neo4j configuration templates from `scripts/configuration/` to `domains/neo4j-management/configuration/`:
+  `template-neo4j.conf`, `template-neo4j-high-memory.conf`, `template-neo4j-low-memory.conf`, `template-neo4j-v4.conf`, `template-neo4j-v4-low-memory.conf`
+* Keep `scripts/startNeo4j.sh` and `scripts/stopNeo4j.sh` as **backward-compatible redirect stubs** so existing analysis workspaces continue to work without migration.
+* Extend `runTests.sh` to also discover and run test scripts in `domains/` subdirectories.
+
 ## v3.5.0 Select analysis domain and npm dev dependency awareness
 
 ### ✨ Highlight

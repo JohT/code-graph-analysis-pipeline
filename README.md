@@ -304,7 +304,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   👉 Simply run `useNeo4jHighMemoryProfile.sh` in your analysis working directory, or:
 
   ```shell
-  ./../../scripts/useNeo4jHighMemoryProfile.sh
+  ./../../domains/neo4j-management/useNeo4jHighMemoryProfile.sh
   ```
 
 ## 🕸 Web References

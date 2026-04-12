@@ -15,6 +15,7 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${SCRIPTS_DIR}/../domains"} # Repository directory containing the domain scripts
 # echo "runTests: SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
 ## Run all test scripts without using a pipe to the while loop so that an
@@ -30,4 +31,4 @@ while IFS= read -r test_script_file; do
 
     echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${test_script_filename}"
     echo "${LOG_GROUP_END}"
-done < <(find "${SCRIPTS_DIR}" -type f -name 'test*.sh')
+done < <(find "${SCRIPTS_DIR}" "${DOMAINS_DIR}" -type f -name 'test*.sh' | sort)

@@ -31,11 +31,12 @@ NEO4J_APOC_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/apoc.conf"
 NEO4J_APOC_PLUGIN_ARTIFACT="apoc-${NEO4J_APOC_PLUGIN_VERSION}-${NEO4J_APOC_PLUGIN_EDITION}.jar"
 NEO4J_MAJOR_VERSION_NUMBER=$(echo "$NEO4J_VERSION" | cut -d'.' -f1) # First part of the version number (=major version number)
 
-## Get this "scripts" directory if not already set
+## Get this domain directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+NEO4J_MANAGEMENT_DIR=${NEO4J_MANAGEMENT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Domain directory containing the neo4j management scripts
+SCRIPTS_DIR=${SCRIPTS_DIR:-"${NEO4J_MANAGEMENT_DIR}/../../scripts"} # Repository directory containing the shared shell scripts
 echo "setupNeo4j: SCRIPTS_DIR=$SCRIPTS_DIR"
 
 # Check if TOOLS_DIRECTORY variable is set
@@ -90,11 +91,11 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
         exit 1
     fi
 
-    source "${SCRIPTS_DIR}/configureNeo4j.sh"
+    source "${NEO4J_MANAGEMENT_DIR}/configureNeo4j.sh"
 
     # Set initial password for user "neo4j" otherwise the default password "neo4j" would need to be changed immediately (prompt).
     # This needs to be done after the configuration changes.
-    source "${SCRIPTS_DIR}/setupNeo4jInitialPassword.sh"
+    source "${NEO4J_MANAGEMENT_DIR}/setupNeo4jInitialPassword.sh"
 
     echo "setupNeo4j: Installed successfully"
 else

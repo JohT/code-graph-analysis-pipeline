@@ -3,7 +3,7 @@
 # Configures a (local) Neo4j Community Edition Graph Database (https://neo4j.com/download-center/#community).
 # 
 # Main input is the environment variable NEO4J_CONFIG_TEMPLATE: 
-# - The name of the template file ("scripts/configuration" folder) for the Neo4j configuration. 
+# - The name of the template file ("domains/neo4j-management/configuration" folder) for the Neo4j configuration. 
 # - Defaults to "template-neo4j.conf". 
 # - The template configuration will be appended to the end of the Neo4j configuration file.
 #
@@ -13,7 +13,7 @@
 # - The tools directory has been created
 #
 # Example Usage:
-# - NEO4J_CONFIG_TEMPLATE=template-neo4j-high-memory.conf ./../../scripts/configureNeo4j.sh
+# - NEO4J_CONFIG_TEMPLATE=template-neo4j-high-memory.conf ./../../domains/neo4j-management/configureNeo4j.sh
 #
 # When run for the first time, the original configuration will be backed up and all configuration entries will be set.
 # When run again (re-configuration), the template configuration at the end if the script is executed again.
@@ -48,11 +48,12 @@ NEO4J_BOLT_PORT=${NEO4J_BOLT_PORT:-"7687"} # Neo4j's own "Bolt Protocol" port
 
 NEO4J_CONFIG_TEMPLATE=${NEO4J_CONFIG_TEMPLATE:-"template-neo4j.conf"} # Name of the template file ("configuration" folder) for the Neo4j configuration. Defaults to "template-neo4j.conf".
 
-## Get this "scripts" directory if not already set
+## Get this domain directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+NEO4J_MANAGEMENT_DIR=${NEO4J_MANAGEMENT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Domain directory containing the neo4j management scripts
+SCRIPTS_DIR=${SCRIPTS_DIR:-"${NEO4J_MANAGEMENT_DIR}/../../scripts"} # Repository directory containing the shared shell scripts
 SCRIPT_NAME="configureNeo4j"
 #echo "${SCRIPT_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
@@ -61,7 +62,7 @@ NEO4J_INSTALLATION_NAME="neo4j-${NEO4J_EDITION}-${NEO4J_VERSION}"
 NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
 NEO4J_CONFIG="${NEO4J_INSTALLATION_DIRECTORY}/conf/neo4j.conf"
 NEO4J_MAJOR_VERSION_NUMBER=$(echo "${NEO4J_VERSION}" | cut -d'.' -f1) # First part of the version number (=major version number)
-NEO4J_CONFIG_TEMPLATE_PATH="${SCRIPTS_DIR}/configuration/${NEO4J_CONFIG_TEMPLATE}"
+NEO4J_CONFIG_TEMPLATE_PATH="${NEO4J_MANAGEMENT_DIR}/configuration/${NEO4J_CONFIG_TEMPLATE}"
 
 # Include operation system functions like "convertPosixToWindowsPathIfNecessary".
 source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
@@ -151,7 +152,7 @@ if [ ! -d "${NEO4J_INSTALLATION_DIRECTORY}" ] ; then
 fi
 
 if [ ! -f "${NEO4J_CONFIG_TEMPLATE_PATH}" ]; then
-    fail "Configuration template file ${NEO4J_CONFIG_TEMPLATE} does not exist in the scripts/configuration folder. Please make sure it exists and is correctly named:\n${NEO4J_CONFIG_TEMPLATE_PATH}"
+    fail "Configuration template file ${NEO4J_CONFIG_TEMPLATE} does not exist in the domains/neo4j-management/configuration folder. Please make sure it exists and is correctly named:\n${NEO4J_CONFIG_TEMPLATE_PATH}"
 fi
 
 # Create a backup of the original configuration file before any modification in case there is none yet.
