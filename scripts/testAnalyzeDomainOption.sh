@@ -117,14 +117,21 @@ mkdir -p "${temporaryMinimalScriptsDirectory}/profiles"
 for placeholderScriptFile in \
     "reports/compilations/AllReports.sh" \
     "profiles/Default.sh" \
-    "setupNeo4j.sh" \
     "setupJQAssistant.sh" \
-    "startNeo4j.sh" \
     "resetAndScanChanged.sh" \
-    "prepareAnalysis.sh" \
-    "stopNeo4j.sh"; do
+    "prepareAnalysis.sh"; do
     printf '#!/usr/bin/env bash\n# Minimal placeholder script for testing - does nothing\n' \
         > "${temporaryMinimalScriptsDirectory}/${placeholderScriptFile}"
+done
+
+# Create placeholder scripts for the neo4j-management domain scripts now sourced from DOMAINS_DIRECTORY.
+mkdir -p "${temporaryDomainsDirectory}/neo4j-management"
+for placeholderDomainScriptFile in \
+    "setupNeo4j.sh" \
+    "startNeo4j.sh" \
+    "stopNeo4j.sh"; do
+    printf '#!/usr/bin/env bash\n# Minimal placeholder script for testing - does nothing\n' \
+        > "${temporaryDomainsDirectory}/neo4j-management/${placeholderDomainScriptFile}"
 done
 
 # -------- Test case 1 --------

@@ -12,6 +12,8 @@
         - [Start an analysis with PDF generation](#start-an-analysis-with-pdf-generation)
         - [Start an analysis without importing git log data](#start-an-analysis-without-importing-git-log-data)
         - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
+        - [Only run the reports of one specific domain](#only-run-the-reports-of-one-specific-domain)
+        - [Only run the CSV reports of one specific domain](#only-run-the-csv-reports-of-one-specific-domain)
 - [Generate Markdown References](#generate-markdown-references)
     - [Generate Cypher Reference](#generate-cypher-reference)
     - [Generate Script Reference](#generate-script-reference)
@@ -78,11 +80,11 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--profile Neo4j-latest-continue-on-scan-errors` is based on the default profile (`Neo4j-latest`) but uses the jQAssistant configuration template [template-neo4jv5-jqassistant-continue-on-error.yaml](./scripts/configuration/template-neo4jv5-jqassistant-continue-on-error.yaml) to continue on scan error instead of failing fast. This is temporarily useful when there is a known error that needs to be ignored. It is still recommended to use the default profile and fail fast if there is something wrong. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
-- `--profile Neo4j-latest-low-memory` is based on the default profile (`Neo4j-latest`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./scripts/configuration/template-neo4j-low-memory.conf). This is useful for the analysis of smaller codebases with less resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+- `--profile Neo4j-latest-low-memory` is based on the default profile (`Neo4j-latest`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./domains/neo4j-management/configuration/template-neo4j-low-memory.conf). This is useful for the analysis of smaller codebases with less resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
-- `--profile Neo4j-latest-low-memory-continue-on-scan-errors` is based on the default profile (`Neo4j-latest`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./scripts/configuration/template-neo4j-low-memory.conf) and the jQAssistant configuration template [template-neo4jv5-jqassistant-continue-on-error.yaml](./scripts/configuration/template-neo4jv5-jqassistant-continue-on-error.yaml) to continue on scan error instead of failing fast. This is temporarily useful when there is a known error that needs to be ignored. It is still recommended to use the default profile and fail fast if there is something wrong. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+- `--profile Neo4j-latest-low-memory-continue-on-scan-errors` is based on the default profile (`Neo4j-latest`) but uses only half of the memory (RAM) as configured in [template-neo4j-low-memory.conf](./domains/neo4j-management/configuration/template-neo4j-low-memory.conf) and the jQAssistant configuration template [template-neo4jv5-jqassistant-continue-on-error.yaml](./scripts/configuration/template-neo4jv5-jqassistant-continue-on-error.yaml) to continue on scan error instead of failing fast. This is temporarily useful when there is a known error that needs to be ignored. It is still recommended to use the default profile and fail fast if there is something wrong. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
-- `--profile Neo4j-latest-high-memory` is based on the default profile (`Neo4j-latest`) but uses more memory (RAM) as configured in [template-neo4j-high-memory.conf](./scripts/configuration/template-neo4j-high-memory.conf). This is useful for the analysis of larger codebases with more resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
+- `--profile Neo4j-latest-high-memory` is based on the default profile (`Neo4j-latest`) but uses more memory (RAM) as configured in [template-neo4j-high-memory.conf](./domains/neo4j-management/configuration/template-neo4j-high-memory.conf). This is useful for the analysis of larger codebases with more resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
 - `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
 
@@ -166,10 +168,10 @@ To further narrow down to only one report type within a specific domain:
 
 ### Generate Cypher Reference
 
-Change into the [cypher](./cypher/) directory e.g. with `cd cypher` and then execute the script [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) with the following command:
+Execute the script [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) from the root directory with the following command:
 
 ```script
-./../scripts/documentation/generateCypherReference.sh
+./scripts/documentation/generateCypherReference.sh
 ```
 
 ### Generate Script Reference
@@ -204,22 +206,22 @@ If any of the script are not allowed to be executed use `chmod +x ./scripts/` fo
 
 ### Setup Neo4j Graph Database
 
-Use [setupNeo4j.sh](./scripts/setupNeo4j.sh) to download [Neo4j](https://neo4j.com/download-center) and install the plugins [APOC](https://neo4j.com/labs/apoc/4.4) and [Graph Data Science](https://neo4j.com/product/graph-data-science).
+Use [setupNeo4j.sh](./domains/neo4j-management/setupNeo4j.sh) to download [Neo4j](https://neo4j.com/download-center) and install the plugins [APOC](https://neo4j.com/labs/apoc/4.4) and [Graph Data Science](https://neo4j.com/product/graph-data-science).
 This script requires the environment variable NEO4J_INITIAL_PASSWORD to be set. It sets the initial password with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
 
 ### Change Neo4j configuration template
 
-Use [configureNeo4j.sh](./scripts/configureNeo4j.sh) to apply a different Neo4j configuration template from the [scripts/configuration](./scripts/configuration/) directory. This can be useful to optimize Neo4j for different workloads. Example:
+Use [configureNeo4j.sh](./domains/neo4j-management/configureNeo4j.sh) to apply a different Neo4j configuration template from the [domains/neo4j-management/configuration](./domains/neo4j-management/configuration/) directory. This can be useful to optimize Neo4j for different workloads. Example:
 
 ```shell
-NEO4J_CONFIG_TEMPLATE=template-neo4j-high-memory.conf ./scripts/configureNeo4j.sh
+NEO4J_CONFIG_TEMPLATE=template-neo4j-high-memory.conf ./domains/neo4j-management/configureNeo4j.sh
 ```
 
 **Hint:** In case you want to switch to the high memory profile as in the example, there is a simpler solution. Just run `useNeo4jHighMemoryProfile.sh` from the analysis workspace directory which will set the environment variable `NEO4J_CONFIG_TEMPLATE` and run `configureNeo4j.sh` for you.
 
 ### Start Neo4j Graph Database
 
-Use [startNeo4j.sh](./scripts/startNeo4j.sh) to start the locally installed [Neo4j](https://neo4j.com/download-center) Graph database.
+Use [startNeo4j.sh](./domains/neo4j-management/startNeo4j.sh) to start the locally installed [Neo4j](https://neo4j.com/download-center) Graph database.
 It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
 
 **Hint:** Within the analysis workspace directory you can simply run `startNeo4j.sh` directly without the `../../` prefix since the script is also available in the analysis workspace.
@@ -380,7 +382,7 @@ execute_cypher ./cypher/Get_Graph_Data_Science_Library_Version.cypher a=1
 
 ## Stop Neo4j
 
-Use [stopNeo4j.sh](./scripts/stopNeo4j.sh) to stop the locally running Neo4j Graph Database. It does nothing if the database is already stopped. It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
+Use [stopNeo4j.sh](./domains/neo4j-management/stopNeo4j.sh) to stop the locally running Neo4j Graph Database. It does nothing if the database is already stopped. It runs the script with a temporary `NEO4J_HOME` environment variable to not interfere with a possibly globally installed Neo4j installation.
 
 **Hint:** Within the analysis workspace directory you can run `stopNeo4j.sh` directly without the `../../` prefix since the script is also directly available in the analysis workspace.
 

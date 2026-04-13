@@ -28,9 +28,8 @@ jobs:
         token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
   
     - name: Generate scripts reference document
-      working-directory: scripts
       run: |
-        ./documentation/generateScriptReference.sh
+        ./scripts/documentation/generateScriptReference.sh
 
     - name: Use git to detect changes in the regenerated document and set generated_document_changed
       run: git diff --quiet || echo "generated_document_changed=true" >> $GITHUB_ENV
@@ -43,7 +42,7 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         name: scripts-reference-document
-        path: ./scripts/SCRIPTS.md
+        path: ./SCRIPTS.md
         if-no-files-found: error
         retention-days: 5
 
@@ -57,13 +56,13 @@ jobs:
         git config --global user.email "7671054+JohT@users.noreply.github.com"
         git fetch origin
         git status
-        git add ./scripts/SCRIPTS.md
+        git add ./SCRIPTS.md
         git status
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git status
         git rebase --strategy-option=theirs origin/main --verbose
         git status
-        git add ./scripts/SCRIPTS.md
+        git add ./SCRIPTS.md
         git status
         git commit --amend --no-edit
         git status

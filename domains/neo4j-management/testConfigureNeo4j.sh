@@ -4,16 +4,16 @@
 #
 # Usage
 #   # Run full test suite using a deterministic temporary directory:
-#   TEST_TMPDIR=./tmp/tmpdir bash scripts/testConfigureNeo4j.sh
+#   TEST_TMPDIR=./tmp/tmpdir bash domains/neo4j-management/testConfigureNeo4j.sh
 #
 #   # Capture console output to a log file (recommended for CI or debugging):
-#   TEST_TMPDIR=./tmp/tmpdir bash scripts/testConfigureNeo4j.sh &> test_run.log || true
+#   TEST_TMPDIR=./tmp/tmpdir bash domains/neo4j-management/testConfigureNeo4j.sh &> test_run.log || true
 #
 # Troubleshooting
 #   - To enable a shell trace: run with `bash -x`:
-#       TEST_TMPDIR=./tmp/tmpdir bash -x scripts/testConfigureNeo4j.sh &> trace.log || true
+#       TEST_TMPDIR=./tmp/tmpdir bash -x domains/neo4j-management/testConfigureNeo4j.sh &> trace.log || true
 #   - The harness writes per-test logs into the test tempdir as:
-#       $TEST_TMPDIR/$(basename scripts/testConfigureNeo4j.sh)-<case>.log
+#       $TEST_TMPDIR/$(basename domains/neo4j-management/testConfigureNeo4j.sh)-<case>.log
 #     (If you redirect console output to a file, those per-test logs are preserved
 #     inside the test_run.log capture and can also be inspected directly while the
 #     test is running.)
@@ -42,8 +42,8 @@ COLOR_DE_EMPHASIZED='\033[0;90m' # dark gray
 COLOR_SUCCESSFUL="\033[0;32m" # green 
 COLOR_DEFAULT='\033[0m'
 
-## Get this "scripts" directory if not already set
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+## Get this domain directory if not already set
+NEO4J_MANAGEMENT_DIR=${NEO4J_MANAGEMENT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
 
 tearDown() {
   rm -rf "${temporaryTestDirectory}"
@@ -103,7 +103,8 @@ configureNeo4jExpectingSuccessUnderTest() {
     logFile="${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log"
     : >"${logFile}"
     # Run configure in a clean bash with controlled env; redirect all output to the log file.
-    env SCRIPTS_DIR="${temporaryTestDirectory}/scripts" \
+    env NEO4J_MANAGEMENT_DIR="${temporaryTestDirectory}/neo4j-management" \
+      SCRIPTS_DIR="${temporaryTestDirectory}/scripts" \
       TOOLS_DIRECTORY="${TOOLS_DIRECTORY}" \
       SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY}" \
       DATA_DIRECTORY="${DATA_DIRECTORY}" \
@@ -127,7 +128,8 @@ configureNeo4jExpectingFailureUnderTest() {
     # Ensure log file exists
     logFile="${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log"
     : >"${logFile}"
-    env SCRIPTS_DIR="${temporaryTestDirectory}/scripts" \
+    env NEO4J_MANAGEMENT_DIR="${temporaryTestDirectory}/neo4j-management" \
+      SCRIPTS_DIR="${temporaryTestDirectory}/scripts" \
       TOOLS_DIRECTORY="${TOOLS_DIRECTORY}" \
       SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY}" \
       DATA_DIRECTORY="${DATA_DIRECTORY}" \
@@ -153,23 +155,24 @@ fi
 # Normalize to absolute path to avoid relative-path duplication when cd'ing into it
 temporaryTestDirectory=$(cd "${temporaryTestDirectory}" && pwd -P)
 
-# The test will source the repository's configureNeo4j.sh but override SCRIPTS_DIR so that the script
+# The test will source the repository's configureNeo4j.sh but override SCRIPTS_DIR and NEO4J_MANAGEMENT_DIR so that the script
 # picks up test-provided helper files (operatingSystemFunctions.sh) and template files from the temp dir.
 # Compute repository scripts dir explicitly and path to the configure script.
-REPO_SCRIPTS_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
-REPO_CONFIGURE_SCRIPT="${REPO_SCRIPTS_DIR}/configureNeo4j.sh"
+REPO_NEO4J_MANAGEMENT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+REPO_CONFIGURE_SCRIPT="${REPO_NEO4J_MANAGEMENT_DIR}/configureNeo4j.sh"
 
-mkdir -p "${temporaryTestDirectory}/scripts/configuration"
+mkdir -p "${temporaryTestDirectory}/scripts"
+mkdir -p "${temporaryTestDirectory}/neo4j-management/configuration"
 
 # Use the real operatingSystemFunctions.sh from the repo but disable its
 # interactive/stderr print (printWindows) to avoid noisy output during tests.
-if [ -r "${REPO_SCRIPTS_DIR}/operatingSystemFunctions.sh" ]; then
+if [ -r "${REPO_NEO4J_MANAGEMENT_DIR}/../../scripts/operatingSystemFunctions.sh" ]; then
   mkdir -p "${temporaryTestDirectory}/scripts"
-  if sed -e 's/^printWindows\s*$/#printWindows/' "${REPO_SCRIPTS_DIR}/operatingSystemFunctions.sh" > "${temporaryTestDirectory}/scripts/operatingSystemFunctions.sh" 2>/dev/null; then
+  if sed -e 's/^printWindows\s*$/#printWindows/' "${REPO_NEO4J_MANAGEMENT_DIR}/../../scripts/operatingSystemFunctions.sh" > "${temporaryTestDirectory}/scripts/operatingSystemFunctions.sh" 2>/dev/null; then
     :
   else
     # fallback to a minimal copy if sed failed for some reason
-    cp "${REPO_SCRIPTS_DIR}/operatingSystemFunctions.sh" "${temporaryTestDirectory}/scripts/operatingSystemFunctions.sh" 2>/dev/null || true
+    cp "${REPO_NEO4J_MANAGEMENT_DIR}/../../scripts/operatingSystemFunctions.sh" "${temporaryTestDirectory}/scripts/operatingSystemFunctions.sh" 2>/dev/null || true
   fi
 else
   # Fallback: minimal implementation if the repo file is missing
@@ -208,7 +211,7 @@ NEO4J_INSTALLATION_NAME="neo4j-community-2026.01.4"
   create_base_neo4j_configuration "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf/neo4j.conf"
 
 # Create template with minimal entries expected by tests (v5 entries)
-cat > "${temporaryTestDirectory}/scripts/configuration/template-neo4j.conf" <<'EOF'
+cat > "${temporaryTestDirectory}/neo4j-management/configuration/template-neo4j.conf" <<'EOF'
 # Template for tests
 server.directories.import=/some/import/path
 db.tx_log.rotation.retention_policy=7 days
@@ -287,7 +290,7 @@ info "${test_case_number}.) it should fail when the configuration template file 
 # Recreate the installation and conf
   mkdir -p "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf"
   create_base_neo4j_configuration "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf/neo4j.conf"
-rm -f "${temporaryTestDirectory}/scripts/configuration/${NEO4J_CONFIG_TEMPLATE:-template-neo4j.conf}"
+rm -f "${temporaryTestDirectory}/neo4j-management/configuration/${NEO4J_CONFIG_TEMPLATE:-template-neo4j.conf}"
 configureNeo4jExpectingFailureUnderTest
 
 # ------- Integration Test Case: re-configuration path (backup exists)
@@ -296,7 +299,7 @@ echo ""
 info "${test_case_number}.) it should re-configure (append/replace template) when original backup exists."
 
 # Create template again
-cat > "${temporaryTestDirectory}/scripts/configuration/template-neo4j.conf" <<'EOF'
+cat > "${temporaryTestDirectory}/neo4j-management/configuration/template-neo4j.conf" <<'EOF'
 # Template for re-configuration test
 server.directories.import=/another/import
 db.tx_log.rotation.retention_policy=14 days
@@ -331,7 +334,7 @@ mkdir -p "${temporaryTestDirectory}/tools/neo4j-community-4.4.0/conf"
 touch "${temporaryTestDirectory}/tools/neo4j-community-4.4.0/conf/neo4j.conf.original.backup"
 
 # Use a template that contains dbms.* keys
-cat > "${temporaryTestDirectory}/scripts/configuration/template-neo4j.conf" <<'EOF'
+cat > "${temporaryTestDirectory}/neo4j-management/configuration/template-neo4j.conf" <<'EOF'
 # v4 template
 dbms.directories.import=/v4/import
 dbms.tx_log.rotation.retention_policy=10 days

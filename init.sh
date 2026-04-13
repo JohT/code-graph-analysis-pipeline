@@ -4,7 +4,7 @@
 
 # Note: This script needs to be executed in the root of this directory (= same directory as this file)
 
-# Requires analyze.sh, startNeo4j.sh, stopNeo4j.sh, checkCompatibility.sh
+# Requires analyze.sh, domains/neo4j-management/startNeo4j.sh, domains/neo4j-management/stopNeo4j.sh, checkCompatibility.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -77,9 +77,9 @@ mkdir -p "./${SOURCE_DIRECTORY}"
 
 # Create forwarding scripts for the most important commands
 createForwardingScript "./../../scripts/analysis/analyze.sh"
-createForwardingScript "./../../scripts/startNeo4j.sh"
-createForwardingScript "./../../scripts/stopNeo4j.sh"
-createForwardingScript "./../../scripts/useNeo4jHighMemoryProfile.sh"
+createForwardingScript "./../../domains/neo4j-management/startNeo4j.sh"
+createForwardingScript "./../../domains/neo4j-management/stopNeo4j.sh"
+createForwardingScript "./../../domains/neo4j-management/useNeo4jHighMemoryProfile.sh"
 
 source "${SCRIPTS_DIR}/scripts/checkCompatibility.sh"
 

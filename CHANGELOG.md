@@ -2,6 +2,22 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## (unreleased) Introduce neo4j-management domain
+
+### ✨ Highlight
+
+* Introduce `domains/neo4j-management/` as a vertical-slice domain that owns all Neo4j lifecycle management (install, configure, start, stop).
+
+### 🚀 Features
+
+* Move Neo4j management scripts from `scripts/` to `domains/neo4j-management/`:
+  `setupNeo4j.sh`, `setupNeo4jInitialPassword.sh`, `configureNeo4j.sh`, `startNeo4j.sh`, `stopNeo4j.sh`,
+  `detectNeo4j.sh`, `detectNeo4jWindows.sh`, `waitForNeo4jHttpFunctions.sh`, `useNeo4jHighMemoryProfile.sh`, `testConfigureNeo4j.sh`
+* Move Neo4j configuration templates from `scripts/configuration/` to `domains/neo4j-management/configuration/`:
+  `template-neo4j.conf`, `template-neo4j-high-memory.conf`, `template-neo4j-low-memory.conf`, `template-neo4j-v4.conf`, `template-neo4j-v4-low-memory.conf`
+* Keep `scripts/startNeo4j.sh` and `scripts/stopNeo4j.sh` as **backward-compatible redirect stubs** so existing analysis workspaces continue to work without migration.
+* Extend `runTests.sh` to also discover and run test scripts in `domains/` subdirectories.
+
 ## v3.5.0 Select analysis domain and npm dev dependency awareness
 
 ### ✨ Highlight
@@ -511,8 +527,8 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 
 * Analyze static code structure, dependencies, metrics, ...
 * Fully automated [pipeline](./.github/workflows/public-analyze-code-graph.yml) from tool installation and artifact download to report generation
-* Runtime and library independent automation using [shell scripts](./scripts/SCRIPTS.md)
-* Comprehensive list of [Cypher queries](./cypher/CYPHER.md)
+* Runtime and library independent automation using [shell scripts](./SCRIPTS.md)
+* Comprehensive list of [Cypher queries](./CYPHER.md)
 * Example Analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 
 ### 📖 Jupyter Notebook Reports

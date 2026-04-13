@@ -34,7 +34,7 @@
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
 
-# Requires setupNeo4j.sh,setupJQAssistant.sh,startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,stopNeo4j.sh,compilations/*.sh,profiles/*.sh
+# Requires domains/neo4j-management/setupNeo4j.sh,setupJQAssistant.sh,domains/neo4j-management/startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,domains/neo4j-management/stopNeo4j.sh,compilations/*.sh,profiles/*.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -203,9 +203,9 @@ echo "${LOG_GROUP_END}"
 
 # Setup Tools
 echo "${LOG_GROUP_START}Setup Tools"
-source "${SCRIPTS_DIR}/setupNeo4j.sh"
+source "${DOMAINS_DIRECTORY}/neo4j-management/setupNeo4j.sh"
 source "${SCRIPTS_DIR}/setupJQAssistant.sh"
-source "${SCRIPTS_DIR}/startNeo4j.sh"
+source "${DOMAINS_DIRECTORY}/neo4j-management/startNeo4j.sh"
 echo "${LOG_GROUP_END}"
 
 # Scan and analyze artifacts when they were changed
@@ -233,6 +233,6 @@ echo "${LOG_GROUP_START}Finishing Analysis"
 if ${keepRunning}; then
   echo "analyze: Neo4j will keep running (--keep-running is set)."
 else
-  source "${SCRIPTS_DIR}/stopNeo4j.sh"
+  source "${DOMAINS_DIRECTORY}/neo4j-management/stopNeo4j.sh"
 fi
 echo "${LOG_GROUP_END}"
