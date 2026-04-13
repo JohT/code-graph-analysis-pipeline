@@ -1,6 +1,6 @@
 # Scripts Reference
 
-This document serves as a reference for all scripts in the current directory and its subdirectories.
+This document serves as a reference for all scripts in the repository and its subdirectories.
 It provides a table listing each script file and its corresponding description found in the first comment line.
 This file was generated with the script [generateScriptReference.sh](./scripts/documentation/generateScriptReference.sh).
 
@@ -44,16 +44,16 @@ Script | Directory | Description
 [createGitLogCsv.sh](./scripts/createGitLogCsv.sh) | scripts | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it.
 [detectChangedFiles.sh](./scripts/detectChangedFiles.sh) | scripts | Detect changed files in the artifacts directory or in a given list of paths 
 [appendEnvironmentVariables.sh](./scripts/documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns.
-[generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in this directory and its subdirectories.
+[generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in all directories and subdirectories.
 [generateEnvironmentVariableReference.sh](./scripts/documentation/generateEnvironmentVariableReference.sh) | documentation | Runs "appendEnvironmentVariables.sh" for every script file in all directories and subdirectories.
 [generateScriptReference.sh](./scripts/documentation/generateScriptReference.sh) | documentation | Generates "SCRIPTS.md" containing a reference to all scripts in all directories and subdirectories.
 [download.sh](./scripts/download.sh) | scripts | Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads").
+[downloadMavenArtifact.sh](./scripts/downloadMavenArtifact.sh) | scripts | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central)
+[downloadMavenArtifacts.sh](./scripts/downloadMavenArtifacts.sh) | scripts | Uses Maven to download specified Maven artifacts from Maven Central.
 [downloadAntDesign.sh](./scripts/downloader/downloadAntDesign.sh) | downloader | Downloads the Typescript project ant-design (https://github.com/ant-design/ant-design) from GitHub using git clone.
 [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) | downloader | Downloads AxonFramework (https://developer.axoniq.io/axon-framework) artifacts from Maven Central.
 [downloadReactRouter.sh](./scripts/downloader/downloadReactRouter.sh) | downloader | Downloads react-router (https://github.com/remix-run/react-router) from GitHub using git clone.
 [downloadTypescriptProject.sh](./scripts/downloader/downloadTypescriptProject.sh) | downloader | Downloads the given version of a Typescript project from a git repository using git clone.
-[downloadMavenArtifact.sh](./scripts/downloadMavenArtifact.sh) | scripts | Downloads an artifact from Maven Central (https://mvnrepository.com/repos/central)
-[downloadMavenArtifacts.sh](./scripts/downloadMavenArtifacts.sh) | scripts | Uses Maven to download specified Maven artifacts from Maven Central.
 [analyzeAntDesign.sh](./scripts/examples/analyzeAntDesign.sh) | examples | This is an example for the analysis of a the Typescript project "ant-design".
 [analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) | examples | This is an example for the analysis of the Java event-sourcing library "AxonFramework". 
 [analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router".
@@ -87,13 +87,6 @@ Script | Directory | Description
 [ArtifactDependenciesCsv.sh](./scripts/reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports.
 [CentralityCsv.sh](./scripts/reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
 [CommunityCsv.sh](./scripts/reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports.
-[AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
-[CsvReports.sh](./scripts/reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required).
-[DatabaseCsvExportReports.sh](./scripts/reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all"
-[JupyterReports.sh](./scripts/reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts.
-[MarkdownReports.sh](./scripts/reports/compilations/MarkdownReports.sh) | compilations | Runs all Markdown report scripts (no Chromium required, no Python required).
-[PythonReports.sh](./scripts/reports/compilations/PythonReports.sh) | compilations | Runs all Python report scripts (no Chromium required).
-[VisualizationReports.sh](./scripts/reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports.
 [GitHistoryCsv.sh](./scripts/reports/GitHistoryCsv.sh) | reports | Executes "GitLog" Cypher queries to get the "git-history-csv" CSV reports.
 [JavaCsv.sh](./scripts/reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports.
 [NodeEmbeddingsCsv.sh](./scripts/reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports.
@@ -101,6 +94,13 @@ Script | Directory | Description
 [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 [SimilarityCsv.sh](./scripts/reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports.
 [VisibilityMetricsCsv.sh](./scripts/reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports.
+[AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
+[CsvReports.sh](./scripts/reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required).
+[DatabaseCsvExportReports.sh](./scripts/reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all"
+[JupyterReports.sh](./scripts/reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts.
+[MarkdownReports.sh](./scripts/reports/compilations/MarkdownReports.sh) | compilations | Runs all Markdown report scripts (no Chromium required, no Python required).
+[PythonReports.sh](./scripts/reports/compilations/PythonReports.sh) | compilations | Runs all Python report scripts (no Chromium required).
+[VisualizationReports.sh](./scripts/reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports.
 [resetAndScan.sh](./scripts/resetAndScan.sh) | scripts | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph.
 [resetAndScanChanged.sh](./scripts/resetAndScanChanged.sh) | scripts | Executes "resetAndScan.sh" only if "detectChangedFiles.sh" returns detected changes.
 [runTests.sh](./scripts/runTests.sh) | scripts | Runs all test scripts (no Python and Chromium required).
