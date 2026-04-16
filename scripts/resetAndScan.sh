@@ -28,6 +28,9 @@ TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults 
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "resetAndScan: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
+DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${SCRIPTS_DIR}/../domains"} # Domains directory containing domain-specific analysis scripts
+echo "resetAndScan: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+
 # Internal constants
 JQASSISTANT_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_BIN="${JQASSISTANT_DIRECTORY}/bin"
@@ -86,4 +89,7 @@ echo "resetAndScan: Analyzing using jQAssistant CLI version ${JQASSISTANT_CLI_VE
 "${JQASSISTANT_BIN}"/jqassistant.sh analyze
 
 # Scan all git repositories within the "source" (default) folder and import their git log (history) if configured.
-time source "${SCRIPTS_DIR}/importGit.sh"
+# Uses domain-local importGit.sh which resolves Cypher queries from domains/git-history/queries/enrichment/
+# TODO: This sources the git-history domain (domains/git-history/import/importGit.sh). The dependency direction (core → domain) should be revisited
+#       in a future cleanup task to determine the canonical location for importGit.sh.
+time source "${DOMAINS_DIRECTORY}/git-history/import/importGit.sh"

@@ -53,14 +53,20 @@ echo "importGit: source directory to look for git repositories=${source}"
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
+GIT_HISTORY_IMPORT_DIR=${GIT_HISTORY_IMPORT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # This "import" directory
+echo "importGit: GIT_HISTORY_IMPORT_DIR=${GIT_HISTORY_IMPORT_DIR}"
+
+# Get the central "scripts" directory by navigating three levels up from this domain's import directory.
+SCRIPTS_DIR=${SCRIPTS_DIR:-"${GIT_HISTORY_IMPORT_DIR}/../../../scripts"}
 echo "importGit: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
-# Get the "cypher" directory by taking the path of this script and going two directory up and then to "cypher".
-CYPHER_DIR=${CYPHER_DIR:-"${SCRIPTS_DIR}/../cypher"}
-echo "importGit: CYPHER_DIR=${CYPHER_DIR}"
+# Cypher enrichment queries are in this domain's queries/enrichment directory.
+GIT_LOG_CYPHER_DIR="${GIT_HISTORY_IMPORT_DIR}/../queries/enrichment"
+echo "importGit: GIT_LOG_CYPHER_DIR=${GIT_LOG_CYPHER_DIR}"
 
-GIT_LOG_CYPHER_DIR="${CYPHER_DIR}/GitLog"
+# Cypher validation queries are in this domain's queries/validation directory.
+GIT_LOG_VALIDATION_CYPHER_DIR="${GIT_HISTORY_IMPORT_DIR}/../queries/validation"
+echo "importGit: GIT_LOG_VALIDATION_CYPHER_DIR=${GIT_LOG_VALIDATION_CYPHER_DIR}"
 
 # Define functions (like execute_cypher and execute_cypher_summarized) to execute cypher queries from within a given file
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -137,11 +143,11 @@ commonPostGitImport() {
   # Since it's currently not possible to rule out ambiguity in git<->code file matching,
   # the following verifications are only an additional info in the log rather than an error.
   echo "importGit: Running verification queries for troubleshooting (non failing)..."
-  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
-  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
-  execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_missing_CHANGED_TOGETHER_WITH_properties.cypher"
+  execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
+  execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
+  execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_CHANGED_TOGETHER_WITH_properties.cypher"
 
-  dataVerificationResult=$( execute_cypher "${GIT_LOG_CYPHER_DIR}/Verify_git_missing_create_date.cypher")
+  dataVerificationResult=$( execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_create_date.cypher")
   if ! is_csv_column_greater_zero "${dataVerificationResult}" "numberOfMissingCreateDateEntries"; then
       # Warning: The git file creation date must not be missing. However, this is not important enough to stop the analysis.
       #          Therefore, it will only be a warning and subsequent queries will use a default date in these cases.
@@ -216,12 +222,12 @@ if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT
 
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
-        (cd "${repository}" && source "${SCRIPTS_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
+        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
         importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
         postAggregatedGitLogImport 
     else
     # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full" (default)
-        (cd "${repository}" && source "${SCRIPTS_DIR}/createGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
+        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
         importGitLog "git_repository_absolute_directory_name=${full_repository_path}"
         postGitLogImport 
     fi
