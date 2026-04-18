@@ -54,18 +54,7 @@ else
 fi
 
 if [ -d "./${SOURCE_DIRECTORY}" ] ; then
-    # Scan package.json files for npm (nodes package manager) in the source directory
-    # Since the following issue had been resolved, the scan can be done here again:
-    # https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
-    npmPackageJsonFiles="$(findPackageJsonFiles "./${SOURCE_DIRECTORY}")"
-    if [ -n "${npmPackageJsonFiles}" ]; then
-       directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
-    fi
-    
     # Scan Typescript analysis json data files in the source directory
-    # Since Typescript scan might produce duplicate fileName properties on File nodes,
-    # it is done after the npm package.json scan, that breaks the scan on duplicate fileName properties.
-    # This order fixes "XOException: Expected exactly one result, but got CompositeRowObject".
     typescriptAnalysisFiles="$(find -L "./${SOURCE_DIRECTORY}" \
                                     -type d -name "node_modules" -prune -o \
                                     -type d -name "dist" -prune -o \
@@ -78,6 +67,14 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
 
     if [ -n "${typescriptAnalysisFiles}" ]; then
         directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${typescriptAnalysisFiles}"
+    fi
+
+    # Scan package.json files for npm (nodes package manager) in the source directory
+    # Since the following issue had been resolved, the scan be done here again:
+    # https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
+    npmPackageJsonFiles="$(findPackageJsonFiles "./${SOURCE_DIRECTORY}")"
+    if [ -n "${npmPackageJsonFiles}" ]; then
+       directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
     fi
 
     # Scan git repositories in the artifacts directory

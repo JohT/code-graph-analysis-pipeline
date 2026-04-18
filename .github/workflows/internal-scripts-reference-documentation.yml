@@ -1,18 +1,8 @@
 name: Generate scripts reference documentation
 
+# Temporarily disabled automatic triggers. Use manual dispatch to run.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.sh' # Only run when script files changed
-      - '.github/workflows/internal-scripts-reference-documentation.yml' # or when this file was changed
-  pull_request:
-    branches:
-      - main
-    paths: 
-      - '**/*.sh' # Only run when script files changed
-      - '.github/workflows/internal-scripts-reference-documentation.yml' # or when this file was changed
+  workflow_dispatch: {}
 
 jobs:
   reports:
