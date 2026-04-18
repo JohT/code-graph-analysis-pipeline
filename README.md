@@ -47,7 +47,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
 
 - [External Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./domains/external-dependencies/explore/ExternalDependenciesJava.ipynb)).
-- [Git History](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/git-history-general/GitHistoryGeneral.md) contains information about the git history of the analyzed code ([Notebook](./jupyter/GitHistoryGeneral.ipynb)).
+- [Git History](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/git-history-general/GitHistoryGeneral.md) contains information about the git history of the analyzed code ([Notebook](./domains/git-history/explore/GitHistoryGeneralExploration.ipynb)).
 - [Internal Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-java/InternalDependenciesJava.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./domains/internal-dependencies/explore/InternalDependenciesJava.ipynb)).
 - [Method Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/method-metrics-java/MethodMetricsJava.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./jupyter/MethodMetricsJava.ipynb)).
 - [Node Embeddings](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/node-embeddings-java/NodeEmbeddingsJava.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./jupyter/NodeEmbeddingsJava.ipynb)).
@@ -127,7 +127,7 @@ This could be as simple as running the following command in your Typescript proj
   npx --yes @jqassistant/ts-lce
   ```
 
-- The cloned repository or source project needs to be copied into the directory called `source` within the analysis workspace, so that it will also be picked up during scan by [resetAndScan.sh](./scripts/resetAndScan.sh) and optional [importGit.sh](./scripts/importGit.sh).
+- The cloned repository or source project needs to be copied into the directory called `source` within the analysis workspace, so that it will also be picked up during scan by [resetAndScan.sh](./scripts/resetAndScan.sh) and optional [importGit.sh](./domains/git-history/import/importGit.sh).
 
 ## :rocket: Getting Started
 
