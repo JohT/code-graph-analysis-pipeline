@@ -4,13 +4,16 @@ on:
   pull_request:
     branches:
       - main
-    # Only watch root level Markdown documentation file changes
+    # Watch root level Markdown documentation files and agent/instruction changes
     paths:
       - 'README.md'
       - 'COMMANDS.md'
       - 'GETTING_STARTED.md'
       - 'INTEGRATION.md'
       - 'CHANGELOG.md'
+      - 'AGENTS.md'
+      - '.github/instructions/**'
+      - '.github/skills/**'
       - '.github/workflows/internal-check-links-in-documentation.yml' # also run when this file was changed
   schedule:
     - cron: "42 7 * * 1" # Every week at 07:40 AM on Monday 
@@ -38,4 +41,4 @@ jobs:
 
     - name: Check links in top level documentation Markdown files
       if: ${{ ! env.skip_link_check}}
-      run: npx --yes markdown-link-check@3.14.2 --config markdown-lint-check-config.json --quiet README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md CHANGELOG.md
+      run: npx --yes markdown-link-check@3.14.2 --config markdown-lint-check-config.json --quiet README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md CHANGELOG.md AGENTS.md ./.github/instructions ./.github/skills
