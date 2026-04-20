@@ -18,6 +18,10 @@ VISUALIZATION_SCRIPTS_DIR | ${SCRIPTS_DIR}/visualization | Repository directory 
 MARKDOWN_SCRIPTS_DIR | ${SCRIPTS_DIR}/markdown | 
 EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries | 
 EXTERNAL_DEPENDENCIES_SUMMARY_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for external dependencies
+GIT_HISTORY_SUMMARY_DIR | ${GIT_HISTORY_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
+SOURCE_DIRECTORY | source | Get the source repository directory (defaults to "source")
+IMPORT_DIRECTORY | import | 
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
 INTERNAL_DEPENDENCIES_SUMMARY_DIR | ${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
 INTERNAL_DEPENDENCIES_GRAPHS_DIR | ${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/graphs | Contains everything (scripts, queries) to create graph visualizations
 NEO4J_EDITION | community | Choose "community" or "enterprise"
@@ -36,7 +40,6 @@ NEO4J_GDS_PLUGIN_VERSION | 2.27.0 | Graph Data Science (GDS) Plugin Version 2.4.
 NEO4J_OPEN_GDS_PLUGIN_VERSION | 2.26.0 | Graph Data Science (GDS) Plugin Version 2.4.x of is compatible with Neo4j 5.x
 NEO4J_GDS_PLUGIN_EDITION | open | Graph Data Science (GDS) Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 ARTIFACTS_DIRECTORY | artifacts | 
-SOURCE_DIRECTORY | source | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 JUPYTER_NOTEBOOK_DIRECTORY | ${SCRIPTS_DIR}/../jupyter | Repository directory containing the Jupyter Notebooks
 CONDA_ENVIRONMENT_FILE | ${JUPYTER_NOTEBOOK_DIRECTORY}/../conda-environment.yml | Conda (package manager for Python) environment file path
@@ -55,8 +58,6 @@ ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |  | Enable PDF generation for Jupyter No
 JUPYTER_OUTPUT_FILE_POSTFIX |  | e.g. "" (no postfix), ".nbconvert" or ".output"
 REPORTS_SCRIPT_DIR | ${SCRIPTS_DIR}/reports | Repository directory containing the report scripts
 NEO4J_HTTP_TRANSACTION_ENDPOINT | db/neo4j/tx/commit | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
-IMPORT_DIRECTORY | import | 
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
 JQASSISTANT_CLI_VERSION | 2.9.0 | 
 JQASSISTANT_CLI_ARTIFACT | jqassistant-commandline-neo4jv5 | 
 JQASSISTANT_CONFIG_TEMPLATE | template-neo4jv5-jqassistant-continue-on-error.yaml | 
