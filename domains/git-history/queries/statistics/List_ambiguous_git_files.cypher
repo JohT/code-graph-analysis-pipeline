@@ -1,4 +1,4 @@
-// List ambigiously resolved git files where a single git file is attached to more than one code file for troubleshooting/testing.
+// List ambiguously resolved git files where a single git file is attached to more than one code file for troubleshooting/testing.
 
 MATCH (file:File&!Git)<-[:RESOLVES_TO]-(git_file:File&Git)
 OPTIONAL MATCH (artifact:Artifact:Archive)-[:CONTAINS_CHANGED]->(file)

@@ -1,4 +1,4 @@
-// Classify git commits and set properties like isMergeCommit, isAutomationCommit (=isBotCommit or isMavenCommit).
+// Classify git commits and set properties like isMergeCommit, isAutomatedCommit (=isBotAuthor or isMavenCommit).
 
 MATCH (git_commit:Git:Commit)
 WITH git_commit,

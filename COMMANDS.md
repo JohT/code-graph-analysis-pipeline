@@ -282,7 +282,7 @@ Be aware that this script deletes all previous relationships and nodes in the lo
 
 ### Import git data
 
-Use [importGit.sh](./scripts/importGit.sh) to import git data into the Graph.
+Use [importGit.sh](./domains/git-history/import/importGit.sh) to import git data into the Graph.
 It uses `git log` to extract commits, their authors and the names of the files changed with them. These are stored in an intermediate CSV file and are then imported into Neo4j with the following schema:
 
 ```Cypher
@@ -300,7 +300,7 @@ It uses `git log` to extract commits, their authors and the names of the files c
 Instead of importing every single commit, changes can be grouped by month including their commit count. This is in many cases sufficient and reduces data size and processing time significantly. To do this, set the environment variable `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` to `aggregated`. If you don't want to set the environment variable globally, then you can also prepend the command with it like this (inside the analysis workspace directory contained within temp):
 
 ```shell
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated" ./../../scripts/importGit.sh
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated" ./../../domains/git-history/import/importGit.sh
 ```
 
 Here is the resulting schema:
@@ -322,9 +322,9 @@ The optional parameter `--source directory-path-to-the-source-folder-containing-
 
 #### Resolving git files to code files
 
-After git log data has been imported successfully, [Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher](./cypher/GitLog/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher) is used to try to resolve the imported git file names to  code files. This first attempt will cover most cases, but not all of them. With this approach it is, for example, not possible to distinguish identical file names in different Java jars from the git source files of a mono repo.
+After git log data has been imported successfully, [Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher](./domains/git-history/queries/enrichment/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher) is used to try to resolve the imported git file names to  code files. This first attempt will cover most cases, but not all of them. With this approach it is, for example, not possible to distinguish identical file names in different Java jars from the git source files of a mono repo.
 
-You can use [List_unresolved_git_files.cypher](./cypher/GitLog/List_unresolved_git_files.cypher) to find code files that couldn't be matched to git file names and [List_ambiguous_git_files.cypher](./cypher/GitLog/List_ambiguous_git_files.cypher) to find ambiguously resolved git files. If you have any idea on how to improve this feel free to [open an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new).
+You can use [List_unresolved_git_files.cypher](./domains/git-history/queries/statistics/List_unresolved_git_files.cypher) to find code files that couldn't be matched to git file names and [List_ambiguous_git_files.cypher](./domains/git-history/queries/statistics/List_ambiguous_git_files.cypher) to find ambiguously resolved git files. If you have any idea on how to improve this feel free to [open an issue](https://github.com/JohT/code-graph-analysis-pipeline/issues/new).
 
 ## Database Queries
 
