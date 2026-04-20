@@ -17,6 +17,13 @@ Script | Directory | Description
 [externalDependenciesMarkdown.sh](./domains/external-dependencies/externalDependenciesMarkdown.sh) | external-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [externalDependenciesPython.sh](./domains/external-dependencies/externalDependenciesPython.sh) | external-dependencies | Generates external dependency charts as SVG files using Python.
 [externalDependenciesSummary.sh](./domains/external-dependencies/summary/externalDependenciesSummary.sh) | summary | Creates a Markdown report summarising all external dependency analysis results.
+[gitHistoryCsv.sh](./domains/git-history/gitHistoryCsv.sh) | git-history | Executes GitLog Cypher statistics queries to produce git history CSV reports.
+[gitHistoryMarkdown.sh](./domains/git-history/gitHistoryMarkdown.sh) | git-history | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[gitHistoryPython.sh](./domains/git-history/gitHistoryPython.sh) | git-history | Generates git history charts as SVG files using Python.
+[createAggregatedGitLogCsv.sh](./domains/git-history/import/createAggregatedGitLogCsv.sh) | import | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed.
+[createGitLogCsv.sh](./domains/git-history/import/createGitLogCsv.sh) | import | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it.
+[importGit.sh](./domains/git-history/import/importGit.sh) | import | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT.
+[gitHistorySummary.sh](./domains/git-history/summary/gitHistorySummary.sh) | summary | Creates a Markdown report summarising all git history analysis results.
 [internalDependenciesGraphs.sh](./domains/internal-dependencies/graphs/internalDependenciesGraphs.sh) | graphs | Executes internal dependency and path finding Cypher queries for GraphViz visualization.
 [internalDependenciesCsv.sh](./domains/internal-dependencies/internalDependenciesCsv.sh) | internal-dependencies | Pipeline that coordinates internal dependency analysis using Cypher queries and the
 [internalDependenciesMarkdown.sh](./domains/internal-dependencies/internalDependenciesMarkdown.sh) | internal-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
@@ -40,8 +47,6 @@ Script | Directory | Description
 [checkCompatibility.sh](./scripts/checkCompatibility.sh) | scripts | Check environment dependencies and tool availability.
 [cleanupAfterReportGeneration.sh](./scripts/cleanupAfterReportGeneration.sh) | scripts | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder.
 [cloneGitRepository.sh](./scripts/cloneGitRepository.sh) | scripts | Provides safe-guarded (security checked parameters) git repository cloning.
-[createAggregatedGitLogCsv.sh](./scripts/createAggregatedGitLogCsv.sh) | scripts | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed.
-[createGitLogCsv.sh](./scripts/createGitLogCsv.sh) | scripts | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it.
 [detectChangedFiles.sh](./scripts/detectChangedFiles.sh) | scripts | Detect changed files in the artifacts directory or in a given list of paths 
 [appendEnvironmentVariables.sh](./scripts/documentation/appendEnvironmentVariables.sh) | documentation | Extracts the environment variable declarations including default values from a script file and appends it to a markdown file as table columns.
 [generateCypherReference.sh](./scripts/documentation/generateCypherReference.sh) | documentation | Generates "CYPHER.md" containing a reference to all Cypher files in all directories and subdirectories.
@@ -63,7 +68,6 @@ Script | Directory | Description
 [executeQuery.sh](./scripts/executeQuery.sh) | scripts | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format.
 [executeQueryFunctions.sh](./scripts/executeQueryFunctions.sh) | scripts | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell". 
 [findPathsToScan.sh](./scripts/findPathsToScan.sh) | scripts | Finds all files and directories to scan and analyze and provides them as comma-separated list.
-[importGit.sh](./scripts/importGit.sh) | scripts | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT.
 [installJavaScriptDependencies.sh](./scripts/installJavaScriptDependencies.sh) | scripts | This script triggers the installation of dependencies for JavaScript projects in the source folder.
 [embedMarkdownIncludes.sh](./scripts/markdown/embedMarkdownIncludes.sh) | markdown | Processes template markdown (sysin) replacing placeholders like "<!-- include:intro.md -->" or "<!-- include:intro.md\|fallback.md -->" with the contents of the specified markdown files. The files to include needs to be in the "includes" subdirectory.
 [formatQueryResultAsMarkdownTable.sh](./scripts/markdown/formatQueryResultAsMarkdownTable.sh) | markdown | Takes the input stream (Cypher query result in JSON format) and formats it as a Markdown table.
@@ -87,7 +91,6 @@ Script | Directory | Description
 [ArtifactDependenciesCsv.sh](./scripts/reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports.
 [CentralityCsv.sh](./scripts/reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
 [CommunityCsv.sh](./scripts/reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports.
-[GitHistoryCsv.sh](./scripts/reports/GitHistoryCsv.sh) | reports | Executes "GitLog" Cypher queries to get the "git-history-csv" CSV reports.
 [JavaCsv.sh](./scripts/reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports.
 [NodeEmbeddingsCsv.sh](./scripts/reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports.
 [ObjectOrientedDesignMetricsCsv.sh](./scripts/reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports.
