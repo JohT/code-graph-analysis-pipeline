@@ -34,6 +34,8 @@ INTERNAL_DEPS_QUERY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/
 CYCLIC_DEPS_QUERY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/cyclic-dependencies"
 TOPOLOGICAL_SORT_SUMMARY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/topological-sort"
 PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/path-finding"
+OBJECT_ORIENTED_DESIGN_METRICS_SUMMARY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/object-oriented-design-metrics"
+VISIBILITY_SUMMARY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/visibility"
 
 # Define functions to execute a cypher query from within a given file (first and only argument) like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -369,6 +371,79 @@ assemble_internal_dependencies_report() {
         "${TOPOLOGICAL_SORT_SUMMARY_CYPHER_DIR}/Topological_Sort_Critical_Path_Length.cypher" \
         "" \
         "${report_include_directory}/Topological_Sort_Critical_Path_Length.md"
+
+    # ── Object Oriented Design metrics SVG chart references ────────────────────────────
+
+    # Java Packages (without sub-packages)
+    include_svg_if_exists "Java_Package/Java_Package_MainSequence.svg" \
+        "Java Package Main Sequence" \
+        > "${report_include_directory}/Java_Package_MainSequence.md"
+    include_svg_if_exists "Java_Package/Java_Package_IncomingDependencies_Bar.svg" \
+        "Java Package Incoming Dependencies" \
+        > "${report_include_directory}/Java_Package_IncomingDependencies_Bar.md"
+    include_svg_if_exists "Java_Package/Java_Package_OutgoingDependencies_Bar.svg" \
+        "Java Package Outgoing Dependencies" \
+        > "${report_include_directory}/Java_Package_OutgoingDependencies_Bar.md"
+
+    # Java Packages (including sub-packages)
+    include_svg_if_exists "Java_Package/Java_Package_IncludingSubpackages_MainSequence.svg" \
+        "Java Package (Including Sub-packages) Main Sequence" \
+        > "${report_include_directory}/Java_Package_IncludingSubpackages_MainSequence.md"
+    include_svg_if_exists "Java_Package/Java_Package_IncludingSubpackages_IncomingDependencies_Bar.svg" \
+        "Java Package (Including Sub-packages) Incoming Dependencies" \
+        > "${report_include_directory}/Java_Package_IncludingSubpackages_IncomingDependencies_Bar.md"
+    include_svg_if_exists "Java_Package/Java_Package_IncludingSubpackages_OutgoingDependencies_Bar.svg" \
+        "Java Package (Including Sub-packages) Outgoing Dependencies" \
+        > "${report_include_directory}/Java_Package_IncludingSubpackages_OutgoingDependencies_Bar.md"
+
+    # TypeScript Modules Object-Oriented Design
+    include_svg_if_exists "Typescript_Module/Typescript_Module_MainSequence.svg" \
+        "TypeScript Module Main Sequence" \
+        > "${report_include_directory}/Typescript_Module_MainSequence.md"
+    include_svg_if_exists "Typescript_Module/Typescript_Module_IncomingDependencies_Bar.svg" \
+        "TypeScript Module Incoming Dependencies" \
+        > "${report_include_directory}/Typescript_Module_IncomingDependencies_Bar.md"
+    include_svg_if_exists "Typescript_Module/Typescript_Module_OutgoingDependencies_Bar.svg" \
+        "TypeScript Module Outgoing Dependencies" \
+        > "${report_include_directory}/Typescript_Module_OutgoingDependencies_Bar.md"
+
+    # ── Visibility metrics SVG chart references ────────────────────────────
+
+    {
+        include_svg_if_exists "Java_Artifact/Java_Artifact_VisibilityPercentiles.svg" \
+            "Java Artifact Visibility Percentiles"
+    } > "${report_include_directory}/Java_Artifact_VisibilityPercentiles.md"
+
+    {
+        include_svg_if_exists "Java_Artifact/Java_Artifact_RelativeVisibility.svg" \
+            "Java Artifact Relative Visibility"
+    } > "${report_include_directory}/Java_Artifact_RelativeVisibility.md"
+
+    {
+        include_svg_if_exists "Java_Package/Java_Package_RelativeVisibility.svg" \
+            "Java Package Relative Visibility"
+    } > "${report_include_directory}/Java_Package_RelativeVisibility.md"
+
+    {
+        include_svg_if_exists "Typescript_Module/Typescript_Module_VisibilityPercentiles.svg" \
+            "TypeScript Module Visibility Percentiles"
+    } > "${report_include_directory}/Typescript_Module_VisibilityPercentiles.md"
+
+    {
+        include_svg_if_exists "Typescript_Module/Typescript_Project_RelativeVisibility.svg" \
+            "TypeScript Project Relative Visibility"
+    } > "${report_include_directory}/Typescript_Project_RelativeVisibility.md"
+
+    {
+        include_svg_if_exists "Typescript_Module/Typescript_Module_RelativeVisibility.svg" \
+            "TypeScript Module Relative Visibility"
+    } > "${report_include_directory}/Typescript_Module_RelativeVisibility.md"
+
+    # ── Code vocabulary wordcloud SVG reference ────────────────────────────
+
+    {
+        include_svg_if_exists "CodeNamesWordcloud.svg" "Code Names Wordcloud"
+    } > "${report_include_directory}/CodeNamesWordcloud.md"
 
     # -- Remove empty Markdown includes ------------------------------------
     source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${report_include_directory}"

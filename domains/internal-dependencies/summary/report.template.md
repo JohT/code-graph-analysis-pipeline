@@ -26,6 +26,9 @@ This report analyses how **internal packages, artifacts, TypeScript modules, and
 1. [Topological Sort](#6-topological-sort)
 1. [Graph Visualizations](#7-graph-visualizations)
 1. [Glossary and Column Definitions](#8-glossary-and-column-definitions)
+1. [Object Oriented Design Metrics](#9-object-oriented-design-metrics)
+1. [Visibility Metrics](#10-visibility-metrics)
+1. [Code Vocabulary](#11-code-vocabulary)
 
 ---
 
@@ -310,3 +313,95 @@ Build level and longest path graphs for NPM packages (both production and develo
 | `pairCount` | Number of node pairs at a given path distance. |
 | `distanceTotalPairCount` | Total number of connected node pairs across all distances (used for normalisation). |
 | `isDifferentTargetProject` | Whether the source and target node belong to different projects/artifacts. |
+| `Instability` | Ratio of outgoing to total (incoming + outgoing) dependencies for a package or module. 0 = fully stable (no outgoing couplings); 1 = fully unstable (no incoming). Stable components are harder to change; unstable ones are easier. |
+| `Abstractness` | Ratio of abstract types (abstract classes + interfaces) to total types in a package or module. 0 = fully concrete; 1 = fully abstract. Abstract components are more flexible but require concrete implementations elsewhere. |
+| `Distance from Main Sequence` | How far a component is from the ideal balance line `A + I = 1` (the "Main Sequence"). Distance 0 = perfectly balanced; higher values indicate components in the Zone of Pain or Zone of Uselessness. |
+| `Zone of Pain` | Low abstractness + low instability — components that are concrete yet stable. Difficult to extend and difficult to remove; changes have a wide blast radius. |
+| `Zone of Uselessness` | High abstractness + high instability — abstract components with no stable consumers. Effectively dead abstractions that could be removed. |
+
+---
+
+## 9. Object-Oriented Design Metrics
+
+**Object-Oriented Design metrics** measure how well packages and modules conform to Robert C. Martin's _Stable Abstractions Principle_: _"A component should be as abstract as it is stable."_ Components that are stable (many dependents, few dependencies of their own) should rely heavily on abstractions so that they can still be extended. Concrete components should be unstable so they can be changed freely.
+
+The scatter chart plots every component on the **Abstractness vs. Instability** plane. The green dashed diagonal is the **Main Sequence** (`A + I = 1`). Components near the line are well-balanced; those far from it occupy one of two problem zones:
+
+- **Zone of Pain** (bottom-left corner): concrete and stable — cannot be changed or extended easily.
+- **Zone of Uselessness** (top-right corner): abstract and unstable — nobody depends on these abstractions.
+
+**Bar charts** show the top packages/modules by incoming and outgoing dependency counts, making it easy to spot the most heavily connected elements.
+
+### 9.1 Java Packages (without sub-packages)
+
+<!-- include:Java_Package_MainSequence.md|report_no_java_data.template.md -->
+
+<!-- include:Java_Package_IncomingDependencies_Bar.md|report_no_java_data.template.md -->
+
+<!-- include:Java_Package_OutgoingDependencies_Bar.md|report_no_java_data.template.md -->
+
+### 9.2 Java Packages (including sub-packages)
+
+<!-- include:Java_Package_IncludingSubpackages_MainSequence.md|report_no_java_data.template.md -->
+
+<!-- include:Java_Package_IncludingSubpackages_IncomingDependencies_Bar.md|report_no_java_data.template.md -->
+
+<!-- include:Java_Package_IncludingSubpackages_OutgoingDependencies_Bar.md|report_no_java_data.template.md -->
+
+### 9.3 TypeScript Modules
+
+<!-- include:Typescript_Module_MainSequence.md|report_no_typescript_data.template.md -->
+
+<!-- include:Typescript_Module_IncomingDependencies_Bar.md|report_no_typescript_data.template.md -->
+
+<!-- include:Typescript_Module_OutgoingDependencies_Bar.md|report_no_typescript_data.template.md -->
+
+---
+
+## 10. Visibility Metrics
+
+**Visibility metrics** measure how much of a component's API is exposed publicly versus kept internal. A high relative visibility means most types or elements are public — potentially exposing more than necessary. A low relative visibility means a tightly encapsulated API.
+
+The **percentile subplots** display three percentile levels of relative visibility (p25, p50, p75) against the artifact or project's total type/element count on a log scale. This reveals whether large, complex artifacts tend to expose more or less of their API compared to smaller ones.
+
+The **artifact/project scatter** plots each artifact or project as a single point using its median (p50) relative visibility versus its size — a quick view for identifying outliers at the coarsest granularity.
+
+The **package/module scatter** shows relative visibility for every individual package or module against its type/element count — useful for identifying outlier packages with unusually high or low visibility.
+
+### 10.1 Java Visibility
+
+#### 10.1.1 Artifact-Level Visibility Percentiles
+
+<!-- include:Java_Artifact_VisibilityPercentiles.md|report_no_java_data.template.md -->
+
+#### 10.1.2 Artifact-Level Relative Visibility
+
+<!-- include:Java_Artifact_RelativeVisibility.md|report_no_java_data.template.md -->
+
+#### 10.1.3 Package-Level Relative Visibility
+
+<!-- include:Java_Package_RelativeVisibility.md|report_no_java_data.template.md -->
+
+### 10.2 TypeScript Visibility
+
+#### 10.2.1 Project-Level Visibility Percentiles
+
+<!-- include:Typescript_Module_VisibilityPercentiles.md|report_no_typescript_data.template.md -->
+
+#### 10.2.2 Project-Level Relative Visibility
+
+<!-- include:Typescript_Project_RelativeVisibility.md|report_no_typescript_data.template.md -->
+
+#### 10.2.3 Module-Level Relative Visibility
+
+<!-- include:Typescript_Module_RelativeVisibility.md|report_no_typescript_data.template.md -->
+
+---
+
+## 11. Code Vocabulary
+
+The **word cloud** visualises the vocabulary used across all code element names — package names, class names, method names, type names, module names. Frequently occurring words appear larger.
+
+Common generic words (`builder`, `handler`, `util`, `factory`, `type`, `module`, `get`, `set`, …) are filtered out so that domain-specific and project-specific words stand out. Words that dominate the cloud reveal the core domain concepts and architectural patterns in use. Unexpected clusters of non-domain words may indicate naming inconsistencies or missing abstraction layers.
+
+<!-- include:CodeNamesWordcloud.md|empty.md -->

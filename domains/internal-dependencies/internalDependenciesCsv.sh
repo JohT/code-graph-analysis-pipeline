@@ -32,6 +32,8 @@ INTERNAL_DEPS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/internal-d
 CYCLIC_DEPS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/cyclic-dependencies"
 PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/path-finding"
 TOPOLOGICAL_SORT_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/topological-sort"
+OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/object-oriented-design-metrics"
+VISIBILITY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/visibility"
 
 # Define functions to execute a cypher query from within a given file like "execute_cypher" and "execute_cypher_queries_until_results"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -285,6 +287,80 @@ NPM_DEV_WEIGHT="dependencies_projection_weight_property=weightByDependencyType"
 if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"; then
     time topologicalSort "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
 fi
+
+# ── Object-Oriented Design Metrics ───────────────────────────────────────────────────────
+
+echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing Object-Oriented design metrics..."
+
+# Prerequisite: count and set abstract type flags before running abstractness queries.
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Count_and_set_abstract_types.cypher"
+
+# -- Java Packages without sub-packages --------------------------------------
+
+execute_cypher_queries_until_results \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Incoming_Java_Package_Dependencies.cypher" \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/IncomingPackageDependenciesJava.csv"
+execute_cypher_queries_until_results \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Outgoing_Java_Package_Dependencies.cypher" \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/OutgoingPackageDependenciesJava.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Java.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/InstabilityJava.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Java.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/AbstractnessJava.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Java.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/MainSequenceAbstractnessInstabilityDistanceJava.csv"
+
+# -- Java Packages including sub-packages ------------------------------------
+
+execute_cypher_queries_until_results \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher" \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/IncomingPackageDependenciesIncludingSubpackagesJava.csv"
+execute_cypher_queries_until_results \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher" \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/OutgoingPackageDependenciesIncludingSubpackagesJava.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Java_Including_Subpackages.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/InstabilityIncludingSubpackagesJava.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Java_including_Subpackages.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/AbstractnessIncludingSubpackagesJava.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Java_including_subpackages.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/MainSequenceAbstractnessInstabilityDistanceIncludingSubpackagesJava.csv"
+
+# -- TypeScript Modules -------------------------------------------------------
+
+execute_cypher_queries_until_results \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Incoming_Typescript_Module_Dependencies.cypher" \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/IncomingPackageDependenciesTypescript.csv"
+execute_cypher_queries_until_results \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Outgoing_Typescript_Module_Dependencies.cypher" \
+    "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/OutgoingPackageDependenciesTypescript.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_Typescript.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/InstabilityTypescript.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_Typescript.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/AbstractnessTypescript.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/MainSequenceAbstractnessInstabilityDistanceTypescript.csv"
+
+# ── Visibility Metrics ────────────────────────────────────────────────────────
+
+echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing visibility metrics..."
+
+# Java
+execute_cypher "${VISIBILITY_CYPHER_DIR}/Global_relative_visibility_statistics_for_types.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Artifact/RelativeVisibilityPerArtifact.csv"
+execute_cypher "${VISIBILITY_CYPHER_DIR}/Relative_visibility_public_types_to_all_types_per_package.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Java_Package/RelativeVisibilityPerPackage.csv"
+
+# TypeScript
+execute_cypher "${VISIBILITY_CYPHER_DIR}/Global_relative_visibility_statistics_for_elements_for_Typescript.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/RelativeVisibilityPerTypescriptProject.csv"
+execute_cypher "${VISIBILITY_CYPHER_DIR}/Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/RelativeVisibilityPerTypescriptModule.csv"
 
 # ── Final clean-up ────────────────────────────────────────────────────────────
 
