@@ -1,20 +1,20 @@
 # Neo4j Management — Troubleshooting
 
-Reference for edge cases where Neo4j is running but the analysis workspace cannot be determined automatically.
+Edge cases: Neo4j running, workspace auto-detection failed.
 
 ## Path found but workspace unknown
 
-Neo4j is running in a path that does not follow the standard `temp/<workspace>/tools/...` layout.
+Neo4j running in path not following standard `temp/<workspace>/tools/...` layout.
 
-**Step 1:** Ask the user:
+**Step 1:** Ask user:
 
-> "Neo4j is running in `<path>` but I could not determine the analysis workspace automatically. Do you know which workspace directory this belongs to?"
+> "Neo4j running in `<path>` but workspace auto-detection failed. Do you know which workspace directory this belongs to?"
 
-- If the user provides the workspace → `cd` into it and continue normally with `startNeo4j.sh` / `stopNeo4j.sh`.
+- User provides workspace \u2192 `cd` into it, continue normally with `startNeo4j.sh` / `stopNeo4j.sh`.
 
-**Step 2:** If the user does not know or says Neo4j is running outside the pipeline, help with manual control:
+**Step 2:** User unknown or Neo4j outside pipeline \u2014 manual control:
 
-Locate the `bin/` directory inside the detected path (contains `neo4j` or `neo4j.bat`), then:
+Locate `bin/` dir (contains `neo4j` or `neo4j.bat`), then:
 
 ```shell
 # Stop (Linux/macOS)
@@ -44,9 +44,9 @@ Get-CimInstance Win32_Process -Filter "Name='java.exe'" |
 
 ## Path undetermined
 
-Neo4j is running but the detect script could not read the path from the process.
+Neo4j running, detect script couldn't read path from process.
 
-**Step 1:** Ask the user to run the appropriate command to find the process:
+**Step 1:** Ask user to run:
 
 ```shell
 # Linux/macOS
@@ -60,9 +60,9 @@ Get-CimInstance Win32_Process -Filter "Name='java.exe'" |
   Select-Object ProcessId, CommandLine
 ```
 
-**Step 2:** From the command output help the user identify the Neo4j home path:
+**Step 2:** From output, help user identify Neo4j home path:
 - Look for `--home-dir=<path>` in the command line (Neo4j 5+)
 - Or `-Dneo4j.home=<path>` (Neo4j 4)
-- Or a classpath entry ending in `/lib/*` — strip `/lib/*` to get the home
+- Or classpath entry ending in `/lib/*` — strip `/lib/*` = home
 
-**Step 3:** Once the path is known, follow the "Path found but workspace unknown" section above.
+**Step 3:** Path known → follow "Path found but workspace unknown" above.

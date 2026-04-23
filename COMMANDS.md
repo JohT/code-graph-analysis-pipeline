@@ -14,6 +14,7 @@
         - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
         - [Only run the reports of one specific domain](#only-run-the-reports-of-one-specific-domain)
         - [Only run the CSV reports of one specific domain](#only-run-the-csv-reports-of-one-specific-domain)
+        - [Rerun reports without restarting Neo4j](#rerun-reports-without-restarting-neo4j)
 - [Generate Markdown References](#generate-markdown-references)
     - [Generate Cypher Reference](#generate-cypher-reference)
     - [Generate Script Reference](#generate-script-reference)
@@ -87,6 +88,8 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 - `--profile Neo4j-latest-high-memory` is based on the default profile (`Neo4j-latest`) but uses more memory (RAM) as configured in [template-neo4j-high-memory.conf](./domains/neo4j-management/configuration/template-neo4j-high-memory.conf). This is useful for the analysis of larger codebases with more resources. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
 - `--explore` activates the "explore" mode where no reports are generated. Furthermore, Neo4j won't be stopped at the end of the script and will therefore continue running.  This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
+
+- `--keep-running` skips the Neo4j stop step at the end of the script. Neo4j keeps running after analysis completes. Useful when running reports repeatedly (e.g. during development) to avoid the overhead of stopping and restarting Neo4j each time. Note: `--explore` implies `--keep-running`; combining both is redundant.
 
 - `--domain anomaly-detection` selects a single analysis domain (a subdirectory of [domains/](./domains/)) to run reports for, following a vertical-slice approach. When set, only that domain's report scripts run; core reports from `scripts/reports/` and other domains are skipped. The domain option composes with `--report` to further narrow down which reports are generated, e.g. `--domain anomaly-detection --report Csv`. When not specified, all domains and reports run unchanged. The selected domain name is passed to report compilation scripts via the environment variable `ANALYSIS_DOMAIN`. Available domains can be found in the [domains/](./domains/) directory.
 
@@ -162,6 +165,14 @@ To further narrow down to only one report type within a specific domain:
 
 ```shell
 ./../../scripts/analysis/analyze.sh --domain anomaly-detection --report Csv
+```
+
+#### Rerun reports without restarting Neo4j
+
+When iterating on reports during development, use `--keep-running` to skip the Neo4j stop step and avoid the overhead of restarting it on the next run:
+
+```shell
+./../../scripts/analysis/analyze.sh --domain git-history --report Csv --keep-running
 ```
 
 ## Generate Markdown References
