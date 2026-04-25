@@ -74,16 +74,61 @@ Excluded: `Cyclic_Dependencies_Concatenated.cypher` and `Cyclic_Dependencies_as_
 | `cypher/Topological_Sort/Topological_Sort_Query.cypher` | `queries/topological-sort/Topological_Sort_Query.cypher` |
 | `cypher/Topological_Sort/Topological_Sort_Write.cypher` | `queries/topological-sort/Topological_Sort_Write.cypher` |
 
-### Exploration Queries (2 files — not executed by CSV entry point)
+### Exploration Queries (3 files — not executed by CSV entry point)
 
 | Original | Copy |
 |----------|------|
 | `cypher/Artifact_Dependencies/Artifacts_with_duplicate_packages.cypher` | `queries/exploration/Artifacts_with_duplicate_packages.cypher` |
 | `cypher/Java/Annotated_code_elements.cypher` | `queries/exploration/Annotated_code_elements.cypher` |
+| `cypher/Overview/Words_for_universal_Wordcloud.cypher` | `queries/exploration/Words_for_universal_Wordcloud.cypher` |
+
+### Object-Oriented Design Metrics (28 files)
+
+Queries compute Instability, Abstractness, and Distance from Main Sequence for Java packages (with and without sub-packages) and TypeScript modules — based on the patterns in `ObjectOrientedDesignMetricsCsv.sh` and the `ObjectOrientedDesignMetricsJava/Typescript.ipynb` notebooks.
+
+| Original | Copy |
+|----------|------|
+| `cypher/Metrics/Count_and_set_abstract_types.cypher` | `queries/object-oriented-design-metrics/Count_and_set_abstract_types.cypher` |
+| `cypher/Metrics/Get_Incoming_Java_Package_Dependencies.cypher` | `queries/object-oriented-design-metrics/Get_Incoming_Java_Package_Dependencies.cypher` |
+| `cypher/Metrics/Set_Incoming_Java_Package_Dependencies.cypher` | `queries/object-oriented-design-metrics/Set_Incoming_Java_Package_Dependencies.cypher` |
+| `cypher/Metrics/Get_Outgoing_Java_Package_Dependencies.cypher` | `queries/object-oriented-design-metrics/Get_Outgoing_Java_Package_Dependencies.cypher` |
+| `cypher/Metrics/Set_Outgoing_Java_Package_Dependencies.cypher` | `queries/object-oriented-design-metrics/Set_Outgoing_Java_Package_Dependencies.cypher` |
+| `cypher/Metrics/Get_Instability_for_Java.cypher` | `queries/object-oriented-design-metrics/Get_Instability_for_Java.cypher` |
+| `cypher/Metrics/Calculate_and_set_Instability_for_Java.cypher` | `queries/object-oriented-design-metrics/Calculate_and_set_Instability_for_Java.cypher` |
+| `cypher/Metrics/Get_Abstractness_for_Java.cypher` | `queries/object-oriented-design-metrics/Get_Abstractness_for_Java.cypher` |
+| `cypher/Metrics/Calculate_and_set_Abstractness_for_Java.cypher` | `queries/object-oriented-design-metrics/Calculate_and_set_Abstractness_for_Java.cypher` |
+| `cypher/Metrics/Calculate_distance_between_abstractness_and_instability_for_Java.cypher` | `queries/object-oriented-design-metrics/Calculate_distance_between_abstractness_and_instability_for_Java.cypher` |
+| `cypher/Metrics/Get_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Get_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher` |
+| `cypher/Metrics/Set_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Set_Incoming_Java_Package_Dependencies_Including_Subpackages.cypher` |
+| `cypher/Metrics/Get_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Get_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher` |
+| `cypher/Metrics/Set_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Set_Outgoing_Java_Package_Dependencies_Including_Subpackages.cypher` |
+| `cypher/Metrics/Get_Instability_for_Java_Including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Get_Instability_for_Java_Including_Subpackages.cypher` |
+| `cypher/Metrics/Calculate_and_set_Instability_for_Java_Including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Calculate_and_set_Instability_for_Java_Including_Subpackages.cypher` |
+| `cypher/Metrics/Get_Abstractness_for_Java_including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Get_Abstractness_for_Java_including_Subpackages.cypher` |
+| `cypher/Metrics/Calculate_and_set_Abstractness_for_Java_including_Subpackages.cypher` | `queries/object-oriented-design-metrics/Calculate_and_set_Abstractness_for_Java_including_Subpackages.cypher` |
+| `cypher/Metrics/Calculate_distance_between_abstractness_and_instability_for_Java_including_subpackages.cypher` | `queries/object-oriented-design-metrics/Calculate_distance_between_abstractness_and_instability_for_Java_including_subpackages.cypher` |
+| `cypher/Metrics/Get_Incoming_Typescript_Module_Dependencies.cypher` | `queries/object-oriented-design-metrics/Get_Incoming_Typescript_Module_Dependencies.cypher` |
+| `cypher/Metrics/Set_Incoming_Typescript_Module_Dependencies.cypher` | `queries/object-oriented-design-metrics/Set_Incoming_Typescript_Module_Dependencies.cypher` |
+| `cypher/Metrics/Get_Outgoing_Typescript_Module_Dependencies.cypher` | `queries/object-oriented-design-metrics/Get_Outgoing_Typescript_Module_Dependencies.cypher` |
+| `cypher/Metrics/Set_Outgoing_Typescript_Module_Dependencies.cypher` | `queries/object-oriented-design-metrics/Set_Outgoing_Typescript_Module_Dependencies.cypher` |
+| `cypher/Metrics/Get_Instability_for_Typescript.cypher` | `queries/object-oriented-design-metrics/Get_Instability_for_Typescript.cypher` |
+| `cypher/Metrics/Calculate_and_set_Instability_for_Typescript.cypher` | `queries/object-oriented-design-metrics/Calculate_and_set_Instability_for_Typescript.cypher` |
+| `cypher/Metrics/Get_Abstractness_for_Typescript.cypher` | `queries/object-oriented-design-metrics/Get_Abstractness_for_Typescript.cypher` |
+| `cypher/Metrics/Calculate_and_set_Abstractness_for_Typescript.cypher` | `queries/object-oriented-design-metrics/Calculate_and_set_Abstractness_for_Typescript.cypher` |
+| `cypher/Metrics/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher` | `queries/object-oriented-design-metrics/Calculate_distance_between_abstractness_and_instability_for_Typescript.cypher` |
+
+### Visibility Metrics (4 files)
+
+| Original | Copy |
+|----------|------|
+| `cypher/Visibility/Global_relative_visibility_statistics_for_types.cypher` | `queries/visibility/Global_relative_visibility_statistics_for_types.cypher` |
+| `cypher/Visibility/Relative_visibility_public_types_to_all_types_per_package.cypher` | `queries/visibility/Relative_visibility_public_types_to_all_types_per_package.cypher` |
+| `cypher/Visibility/Global_relative_visibility_statistics_for_elements_for_Typescript.cypher` | `queries/visibility/Global_relative_visibility_statistics_for_elements_for_Typescript.cypher` |
+| `cypher/Visibility/Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher` | `queries/visibility/Relative_visibility_exported_elements_to_all_elements_per_module_for_Typescript.cypher` |
 
 ---
 
-## Jupyter Notebooks (4 files)
+## Jupyter Notebooks (11 files)
 
 | Original | Copy | Metadata Change |
 |----------|------|-----------------|
@@ -91,6 +136,15 @@ Excluded: `Cyclic_Dependencies_Concatenated.cypher` and `Cyclic_Dependencies_as_
 | `jupyter/InternalDependenciesTypescript.ipynb` | `explore/InternalDependenciesTypescript.ipynb` | `ValidateTypescriptModuleDependencies` → `ValidateAlwaysFalse` |
 | `jupyter/PathFindingJava.ipynb` | `explore/PathFindingJava.ipynb` | `ValidateJavaPackageDependencies` → `ValidateAlwaysFalse` |
 | `jupyter/PathFindingTypescript.ipynb` | `explore/PathFindingTypescript.ipynb` | `ValidateTypescriptModuleDependencies` → `ValidateAlwaysFalse` |
+| `jupyter/DependenciesGraphExplorationJava.ipynb` | `explore/DependenciesGraphExplorationJava.ipynb` | Already `ValidateAlwaysFalse` — no change |
+| `jupyter/DependenciesGraphExplorationTypescript.ipynb` | `explore/DependenciesGraphExplorationTypescript.ipynb` | Already `ValidateAlwaysFalse` — no change |
+| `jupyter/ObjectOrientedDesignMetricsJava.ipynb` | `explore/ObjectOrientedDesignMetricsJava.ipynb` | `ValidateJavaPackageDependencies` → `ValidateAlwaysFalse` |
+| `jupyter/ObjectOrientedDesignMetricsTypescript.ipynb` | `explore/ObjectOrientedDesignMetricsTypescript.ipynb` | `ValidateTypescriptModuleDependencies` → `ValidateAlwaysFalse` |
+| `jupyter/VisibilityMetricsJava.ipynb` | `explore/VisibilityMetricsJava.ipynb` | `ValidateJavaTypes` → `ValidateAlwaysFalse` |
+| `jupyter/VisibilityMetricsTypescript.ipynb` | `explore/VisibilityMetricsTypescript.ipynb` | `ValidateTypescriptModuleDependencies` → `ValidateAlwaysFalse` |
+| `jupyter/Wordcloud.ipynb` | `explore/Wordcloud.ipynb` | Validation key set to `ValidateAlwaysFalse` |
+
+**Note on `Wordcloud.ipynb`**: Only the "Wordcloud of names in code" section is replicated as the automated `wordcloudChart.py` script. The "Wordcloud of git authors" section is explore-only and is not included in any automated report.
 
 ---
 

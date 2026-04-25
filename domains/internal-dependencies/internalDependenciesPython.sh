@@ -63,6 +63,24 @@ time python "${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/pathFindingCharts.py" \
     --report_directory "${FULL_REPORT_DIRECTORY}" \
     ${verboseMode}
 
+echo "internalDependenciesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting object-oriented design metrics chart generation..."
+
+time python "${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/objectOrientedDesignMetricsCharts.py" \
+    --report_directory "${FULL_REPORT_DIRECTORY}" \
+    ${verboseMode}
+
+echo "internalDependenciesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting visibility metrics chart generation..."
+
+time python "${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/visibilityMetricsCharts.py" \
+    --report_directory "${FULL_REPORT_DIRECTORY}" \
+    ${verboseMode}
+
+echo "internalDependenciesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting code names wordcloud generation..."
+
+time python "${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/wordcloudChart.py" \
+    --report_directory "${FULL_REPORT_DIRECTORY}" \
+    ${verboseMode}
+
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
