@@ -1,4 +1,4 @@
-// Read a property from projected nodes ordered by their value descending. Variables: dependencies_projection, dependencies_projection_write_property. Requires "Add_file_name and_extension.cypher", "Set_localRootPath_for_modules", "Set_declaring_type_on_method_nodes".
+// Read a property from projected nodes ordered by their value descending. Variables: dependencies_projection, dependencies_projection_write_property. Requires "Add_file_name_and_extension.cypher", "Set_localRootPath_for_modules", "Set_declaring_type_on_method_nodes".
 
 CALL gds.graph.nodeProperties.stream(
      $dependencies_projection + '-cleaned'

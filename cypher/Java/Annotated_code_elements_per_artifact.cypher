@@ -1,4 +1,4 @@
-// Annotated code elements per artifact and element type with some examples. Requires "Add_file_name and_extension.cypher".
+// Annotated code elements per artifact and element type with some examples. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (annotatedElement:Annotation|Parameter|Field|Method|Type&!ExternalType&!JavaType)-[:ANNOTATED_BY]->()-[]->(annotation:Type)
 OPTIONAL MATCH (annotatedElementArtifact:Artifact)-[:CONTAINS]->(annotatedElement)

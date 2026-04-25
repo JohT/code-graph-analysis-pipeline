@@ -1,4 +1,4 @@
-// Global relative visibility statistics for types. Requires "Add_file_name and_extension.cypher".
+// Global relative visibility statistics for types. Requires "Add_file_name_and_extension.cypher".
 
          MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
          MATCH (package)-[:CONTAINS]->(anyType:Type)

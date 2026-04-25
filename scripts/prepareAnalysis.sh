@@ -59,7 +59,7 @@ execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_full_qualified_name.cy
 execute_cypher "${CYPHER_DIR}/Create_Typescript_index_for_name.cypher"
 
 # Preparation - General Enrichment - Add properties "name" and "extension" to all File nodes
-execute_cypher "${GENERAL_ENRICHMENT_CYPHER_DIR}/Add_file_name and_extension.cypher"
+execute_cypher "${GENERAL_ENRICHMENT_CYPHER_DIR}/Add_file_name_and_extension.cypher"
 
 # Preparation - Enrich Graph for Typescript by adding "module" and "name" properties
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Index_module_name.cypher"

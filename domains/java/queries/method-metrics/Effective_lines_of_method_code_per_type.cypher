@@ -1,4 +1,4 @@
-// Effective lines of method code per type. Requires "Add_file_name and_extension.cypher".
+// Effective lines of method code per type. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)

@@ -1,4 +1,4 @@
-// Set artifactName property on every Package node. Requires "Add_file_name and_extension.cypher".
+// Set artifactName property on every Package node. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (a:Artifact:File)-[:CONTAINS]->(p:Package)
 WHERE a.fileName IS NOT NULL

@@ -1,4 +1,4 @@
-// Communities that span the most packages. Requires "Add_file_name and_extension.cypher".
+// Communities that span the most packages. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (a:Artifact)-[:CONTAINS]->(p:Package)-[:CONTAINS]->(t:Type)
   WITH a.name AS artifactName

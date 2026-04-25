@@ -1,4 +1,4 @@
-// Spring Web Request Annotations. Requires "Add_file_name and_extension.cypher".
+// Spring Web Request Annotations. Requires "Add_file_name_and_extension.cypher".
 //
 // --- Method HTTP Annotation ---
 MATCH (method:Method)-[:ANNOTATED_BY]->(httpMethodLink:Annotation)-[:OF_TYPE]->(httpMethodAnnotation:Type)

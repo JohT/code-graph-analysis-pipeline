@@ -1,4 +1,4 @@
-// How many classes compared to all existing in the same package are used by dependent packages across different artifacts. Requires "Add_file_name and_extension.cypher".
+// How many classes compared to all existing in the same package are used by dependent packages across different artifacts. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)-[:CONTAINS]->(type:Type)-[:DEPENDS_ON]->(dependentType:Type)<-[:CONTAINS]-(dependentPackage:Package)<-[:CONTAINS]-(dependentArtifact:Artifact)
 MATCH (dependentPackage)-[:CONTAINS]->(dependentPackageType:Type)

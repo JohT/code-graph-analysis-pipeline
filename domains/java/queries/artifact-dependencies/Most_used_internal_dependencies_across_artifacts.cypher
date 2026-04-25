@@ -1,4 +1,4 @@
-// Most used internal dependencies across artifacts. Requires "Add_file_name and_extension.cypher".
+// Most used internal dependencies across artifacts. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (type:Type)-[:DEPENDS_ON]->(dependencyType:Type)
 MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)-[:CONTAINS]->(type:Type)

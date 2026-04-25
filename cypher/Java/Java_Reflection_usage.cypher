@@ -1,4 +1,4 @@
-// Query Java Reflection usage combined with invocations of "Class.forName". Requires "Add_file_name and_extension.cypher".
+// Query Java Reflection usage combined with invocations of "Class.forName". Requires "Add_file_name_and_extension.cypher".
 
    MATCH (dependentArtifact:Artifact)-[:CONTAINS]-(dependentType:Type)
     WITH dependentArtifact.name AS dependentArtifactName

@@ -1,4 +1,4 @@
-// Usage and spread of internal artifact dependencies. Requires "Add_file_name and_extension.cypher".
+// Usage and spread of internal artifact dependencies. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(packageInArtifact:Package)
 MATCH (packageInArtifact)-[:CONTAINS]->(typeInPackage:Type)

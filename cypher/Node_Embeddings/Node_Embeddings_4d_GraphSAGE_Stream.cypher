@@ -1,4 +1,4 @@
-// Node Embeddings 4d using GraphSAGE: Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 4d using GraphSAGE: Stream. Requires "Add_file_name_and_extension.cypher".
 
 CALL gds.beta.graphSage.stream(
  $dependencies_projection + '-cleaned', {

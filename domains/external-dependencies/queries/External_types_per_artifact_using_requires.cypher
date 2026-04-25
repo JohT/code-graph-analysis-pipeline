@@ -1,4 +1,4 @@
-// External types per artifact using requires. Requires "Add_file_name and_extension.cypher".
+// External types per artifact using requires. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:REQUIRES]->(externalType:ExternalType)
 MATCH (artifact)-[:CONTAINS]->(caller:Type)

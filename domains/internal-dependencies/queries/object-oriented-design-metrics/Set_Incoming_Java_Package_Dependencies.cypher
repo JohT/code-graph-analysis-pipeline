@@ -1,4 +1,4 @@
-// Set Incoming Package Dependencies. Requires "Add_file_name and_extension.cypher".
+// Set Incoming Package Dependencies. Requires "Add_file_name_and_extension.cypher".
 
    MATCH (p:Java:Package)
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)

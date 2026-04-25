@@ -1,4 +1,4 @@
-//Calculate and set Abstractness for Java Packages including sub-packages. Requires "Add_file_name and_extension.cypher".
+//Calculate and set Abstractness for Java Packages including sub-packages. Requires "Add_file_name_and_extension.cypher".
 
 MATCH path = (package:Java:Package)-[:CONTAINS*0..]->(subpackage:Java:Package)
  WITH *

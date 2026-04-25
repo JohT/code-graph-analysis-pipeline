@@ -1,4 +1,4 @@
-// Calculate distance between abstractness and instability. Requires "Add_file_name and_extension.cypher".
+// Calculate distance between abstractness and instability. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(package:Java:Package)
 RETURN artifact.name AS artifactName

@@ -1,4 +1,4 @@
-// Node Embeddings 1d using Fast Random Projection: Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 1d using Fast Random Projection: Stream. Requires "Add_file_name_and_extension.cypher".
 
 CALL gds.fastRP.stream(
  $dependencies_projection + '-cleaned', {

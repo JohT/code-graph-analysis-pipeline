@@ -1,4 +1,4 @@
-// Artifacts with dependencies to other artifacts. Requires "Add_file_name and_extension.cypher".
+// Artifacts with dependencies to other artifacts. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(packageInArtifact:Package)
 MATCH (packageInArtifact)-[:CONTAINS]->(typeInPackage:Type)

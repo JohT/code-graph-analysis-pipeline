@@ -1,4 +1,4 @@
-// Get Java Packages with the lowest Instability (outgoing / all dependencies) first (if set before). Requires "Add_file_name and_extension.cypher".
+// Get Java Packages with the lowest Instability (outgoing / all dependencies) first (if set before). Requires "Add_file_name_and_extension.cypher".
 // Instability = outgoing / (outgoing + incoming) Dependencies
 
  MATCH (p:Java:Package)

@@ -1,4 +1,4 @@
-// External package usage per type. Requires "Add_file_name and_extension.cypher".
+// External package usage per type. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (package)-[:CONTAINS]->(type:Type)

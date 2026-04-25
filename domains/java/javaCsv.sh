@@ -7,7 +7,7 @@
 # Dynamically triggered by "CsvReports.sh".
 
 # Note that "scripts/prepareAnalysis.sh" is required to run prior to this script.
-# Note that "cypher/General_Enrichment/Add_file_name and_extension.cypher" must have run
+# Note that "cypher/General_Enrichment/Add_file_name_and_extension.cypher" must have run
 # before this script to ensure the name and extension properties are set on File nodes.
 # If no Java artifacts are present, all queries return empty results and
 # cleanupAfterReportGeneration.sh will remove the empty CSV files — no report directory is created.

@@ -1,4 +1,4 @@
-//Cyclic Dependencies Breakdown Backward Only. Requires "Add_file_name and_extension.cypher".
+//Cyclic Dependencies Breakdown Backward Only. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (package:Package)-[:CONTAINS]->(forwardSource:Type)-[:DEPENDS_ON]->(forwardTarget:Type)<-[:CONTAINS]-(dependentPackage:Package)
 MATCH (dependentPackage)-[:CONTAINS]->(backwardSource:Type)-[:DEPENDS_ON]->(backwardTarget:Type)<-[:CONTAINS]-(package)

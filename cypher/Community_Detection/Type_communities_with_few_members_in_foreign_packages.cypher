@@ -1,4 +1,4 @@
-// Type communities with few members in foreign packages. Requires "Add_file_name and_extension.cypher".
+// Type communities with few members in foreign packages. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (t:Type)
   WITH t.communityLeidenId   AS communityId

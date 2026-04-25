@@ -1,4 +1,4 @@
-// List all non deprecated elements (types, members) that call deprecated elements. Requires "Add_file_name and_extension.cypher".
+// List all non deprecated elements (types, members) that call deprecated elements. Requires "Add_file_name_and_extension.cypher".
 
          MATCH (annotated)-[:ANNOTATED_BY]->(:Annotation)-[:OF_TYPE]->(:Type{fqn:'java.lang.Deprecated'})
 OPTIONAL MATCH (artifactReadsDeprecated:Artifact)-[:CONTAINS]->(typeReadsDeprecated:Type)-[:DECLARES]->(readsDeprecated:Method)-[:READS]->(annotated:Field)

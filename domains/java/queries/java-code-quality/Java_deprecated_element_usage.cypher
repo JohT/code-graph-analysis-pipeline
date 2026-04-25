@@ -1,4 +1,4 @@
-// Query deprecated type and member usage by non deprecated elements. Requires "Add_file_name and_extension.cypher".
+// Query deprecated type and member usage by non deprecated elements. Requires "Add_file_name_and_extension.cypher".
 
          MATCH (annotated)-[:ANNOTATED_BY]->(:Annotation)-[:OF_TYPE]->(:Type{fqn:'java.lang.Deprecated'})
 OPTIONAL MATCH (artifactReadsDeprecated:Artifact)-[:CONTAINS]->(typeReadsDeprecated:Type)-[:DECLARES]->(readsDeprecated:Method)-[:READS]->(annotated:Field)

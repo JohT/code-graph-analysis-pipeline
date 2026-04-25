@@ -1,4 +1,4 @@
-// Get Java Packages with the most outgoing dependencies first (if set before). Requires "Add_file_name and_extension.cypher".
+// Get Java Packages with the most outgoing dependencies first (if set before). Requires "Add_file_name_and_extension.cypher".
 
 MATCH (p:Java:Package)
 WHERE p.outgoingDependencies IS NOT NULL

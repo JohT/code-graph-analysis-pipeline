@@ -1,4 +1,4 @@
-// Get Java Packages including their sub packages with the lowest abstractness first (if set before). Requires "Add_file_name and_extension.cypher".
+// Get Java Packages including their sub packages with the lowest abstractness first (if set before). Requires "Add_file_name_and_extension.cypher".
 
  MATCH path = (package:Java:Package)-[:CONTAINS*0..]->(subpackage:Java:Package)
  WHERE package.abstractnessIncludingSubpackages IS NOT NULL

@@ -154,7 +154,7 @@ domains/java/
 - [ ] Complete `PREREQUISITES.md`:
   1. **Neo4j Running** with scanned Java artifacts
   2. **jQAssistant scan completed** — creates `Java:Artifact`, `Java:Package`, `Type`, `Method`, `Field`, `Parameter` nodes
-  3. **Central enrichment prerequisite**: `cypher/General_Enrichment/Add_file_name and_extension.cypher` must run before this domain (provides `name`, `extension` properties used by artifact dependency and method metrics queries; not copied — referenced as prerequisite)
+  3. **Central enrichment prerequisite**: `cypher/General_Enrichment/Add_file_name_and_extension.cypher` must run before this domain (provides `name`, `extension` properties used by artifact dependency and method metrics queries; not copied — referenced as prerequisite)
   4. **Own enrichment** — run automatically by entry point scripts:
      - `Set_number_of_Java_packages_and_types_on_artifacts.cypher` — sets `numberOfPackages`, `numberOfTypes` on `Artifact`
      - `Incoming_Java_Artifact_Dependencies.cypher` — sets `incomingDependencies`, `incomingDependenciesWeight`

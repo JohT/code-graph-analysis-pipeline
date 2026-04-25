@@ -1,4 +1,4 @@
-// Community Detection Modularity Members. Requires "Add_file_name and_extension.cypher".
+// Community Detection Modularity Members. Requires "Add_file_name_and_extension.cypher".
 
 CALL gds.modularity.stream(
  $dependencies_projection + '-cleaned', {

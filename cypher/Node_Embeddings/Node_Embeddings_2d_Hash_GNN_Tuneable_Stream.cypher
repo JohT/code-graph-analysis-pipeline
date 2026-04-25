@@ -1,4 +1,4 @@
-// Node Embeddings 2c using Hash GNN (Graph Neural Networks): Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 2c using Hash GNN (Graph Neural Networks): Stream. Requires "Add_file_name_and_extension.cypher".
 
 CALL gds.beta.hashgnn.stream(
  $dependencies_projection + '-cleaned', {

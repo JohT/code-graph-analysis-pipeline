@@ -1,4 +1,4 @@
-// Get Java Packages including their sub packages with the lowest Instability. Requires "Add_file_name and_extension.cypher".
+// Get Java Packages including their sub packages with the lowest Instability. Requires "Add_file_name_and_extension.cypher".
 // Instability = outgoing / (outgoing + incoming) Dependencies
 
  MATCH (p:Java:Package)
