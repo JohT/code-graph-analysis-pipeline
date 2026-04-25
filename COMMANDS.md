@@ -407,7 +407,7 @@ The script [executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookRep
 - data availability validation using [executeQueryFunctions.sh](#executequeryfunctionssh)
 - executing and converting the given Notebook using [executeJupyterNotebook.sh](#execute-a-notebook-with-executejupyternotebooksh)
 
-Here is an example on how to run the report [Wordcloud.ipynb](./jupyter/Wordcloud.ipynb):
+Here is an example on how to run the report [Wordcloud.ipynb](./domains/internal-dependencies/explore/Wordcloud.ipynb):
 
 ```shell
 ./scripts/executeJupyterNotebookReport.sh  --jupyterNotebook Wordcloud.ipynb
@@ -425,10 +425,10 @@ You can search the messages `Validation succeeded` or `Validation failed` inside
 
 [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) executes a Jupyter Notebook in the command line and convert it to different formats like Markdown and PDF (optionally). It takes care of [setting up the environment](#manually-setup-the-environment-using-conda) and [uses nbconvert](#executing-jupyter-notebooks-with-nbconvert) to execute the notebook and convert it to other file formats under the hood.
 
-Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) to for example run [Wordcloud.ipynb](./jupyter/Wordcloud.ipynb):
+Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) to for example run [Wordcloud.ipynb](./domains/internal-dependencies/explore/Wordcloud.ipynb):
 
 ```shell
-./scripts/executeJupyterNotebook.sh ./jupyter/Wordcloud.ipynb
+./scripts/executeJupyterNotebook.sh ./domains/internal-dependencies/explore/Wordcloud.ipynb
 ```
 
 ### Manually setup the environment using Conda
