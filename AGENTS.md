@@ -51,7 +51,7 @@ analyze.sh --domain <domain-name> --report <report-type> --keep-running
 
 **Report types** — one script per type in [scripts/reports/compilations/](./scripts/reports/compilations/): `All` (default), `Csv`, `Jupyter`, `Python`, `Markdown`, `Visualization`, `DatabaseCsvExport`.
 
-**Domains** — one directory per domain in [domains/](./domains/): `anomaly-detection`, `external-dependencies`, `git-history`, `internal-dependencies`.
+**Domains** — one directory per domain in [domains/](./domains/): `anomaly-detection`, `external-dependencies`, `git-history`, `internal-dependencies`, `java`.
 
 See [COMMANDS.md](./COMMANDS.md) for all options including `--profile`, `--explore`.
 

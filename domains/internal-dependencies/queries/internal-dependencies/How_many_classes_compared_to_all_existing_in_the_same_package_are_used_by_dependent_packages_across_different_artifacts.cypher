@@ -6,17 +6,17 @@ WHERE type <> dependentType
   AND artifact <> dependentArtifact
   WITH artifact.name AS artifactName
       ,dependentArtifact.name AS dependentArtifactName
-      ,package
-      ,dependentPackage
+      ,package.fqn            AS fullPackageName
+      ,dependentPackage.fqn   AS fullDependentPackageName
       ,COUNT(DISTINCT dependentType)        AS dependentTypes
       ,COUNT(DISTINCT dependentPackageType) AS dependentPackageTypes
-      ,collect(DISTINCT dependentType.fqn)  AS dependentTypeNames
+      ,collect(DISTINCT dependentType.fqn)[0..9] AS dependentTypeNameExamples
 RETURN artifactName
       ,dependentArtifactName
-      ,package.fqn as packageName
-      ,dependentPackage.fqn
+      ,fullPackageName
+      ,fullDependentPackageName
       ,dependentTypes
       ,dependentPackageTypes
-      ,toFloat(dependentTypes) / (dependentPackageTypes + 1E-38) AS typeUsagePercentage
-      ,dependentTypeNames
+      ,round(toFloat(dependentTypes) / (dependentPackageTypes + 1E-38), 4) AS typeUsagePercentage
+      ,dependentTypeNameExamples
 ORDER BY typeUsagePercentage ASC
