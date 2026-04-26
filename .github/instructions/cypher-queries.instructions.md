@@ -5,7 +5,7 @@ applyTo: "**/*.cypher"
 
 ## Style
 
-- **First line: description comment** — format: `// Description sentence. Requires "Other_Query.cypher".`
+- **First line: description comment** — format: `// Description sentence. Requires "Other_Query.cypher".` (Requires clause optional)
   Used in generated [CYPHER.md](../../CYPHER.md) reference
 - Blank line between comment and statement
 - One statement per file — no combining without explicit approval
