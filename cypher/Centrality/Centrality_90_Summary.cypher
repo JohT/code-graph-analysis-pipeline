@@ -1,4 +1,4 @@
-// Centrality Summary. Requires "Add_file_name and_extension.cypher".
+// Centrality Summary. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (codeUnit)
 WHERE (codeUnit.incomingDependencies > 0 OR codeUnit.outgoingDependencies > 0)

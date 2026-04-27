@@ -1,4 +1,4 @@
-// Which type community spans several artifacts and how are the types distributed? Requires "Add_file_name and_extension.cypher".
+// Which type community spans several artifacts and how are the types distributed? Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)-[:CONTAINS]->(type:Type)
  MATCH (externalArtifact:Artifact)-[:CONTAINS]->(externalPackage:Package)-[:CONTAINS]->(externalType:Type)

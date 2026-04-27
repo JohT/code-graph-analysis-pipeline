@@ -1,4 +1,4 @@
-// Query already calculated and written node embeddings on nodes with label in parameter $dependencies_projection_node including a communityId and centrality. Variables: dependencies_projection_node, dependencies_projection_write_property. Requires "Add_file_name and_extension.cypher".
+// Query already calculated and written node embeddings on nodes with label in parameter $dependencies_projection_node including a communityId and centrality. Variables: dependencies_projection_node, dependencies_projection_write_property. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (codeUnit)
  WHERE $dependencies_projection_node IN LABELS(codeUnit)

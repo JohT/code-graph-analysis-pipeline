@@ -1,4 +1,4 @@
-// Calculate and set Instability for Java. Requires "Add_file_name and_extension.cypher".
+// Calculate and set Instability for Java. Requires "Add_file_name_and_extension.cypher".
 // Instability = outgoing / (outgoing + incoming) Dependencies
 
  MATCH (p:Java:Package)

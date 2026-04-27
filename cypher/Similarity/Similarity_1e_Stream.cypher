@@ -1,4 +1,4 @@
-// Similarity Stream. Requires "Add_file_name and_extension.cypher".
+// Similarity Stream. Requires "Add_file_name_and_extension.cypher".
 
  CALL gds.nodeSimilarity.stream(
   $dependencies_projection + '-cleaned', {

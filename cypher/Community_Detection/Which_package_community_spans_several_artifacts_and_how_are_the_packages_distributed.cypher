@@ -1,4 +1,4 @@
-// Which package community spans several artifacts and how are the packages distributed? Requires "Add_file_name and_extension.cypher".
+// Which package community spans several artifacts and how are the packages distributed? Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
  MATCH (externalArtifact:Artifact)-[:CONTAINS]->(externalPackage:Package)

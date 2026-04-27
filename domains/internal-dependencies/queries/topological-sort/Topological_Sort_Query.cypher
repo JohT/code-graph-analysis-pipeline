@@ -1,4 +1,4 @@
-// Topological Sort to query the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) for each code unit node in topologicalSortIndex order. Requires "Add_file_name and_extension.cypher".
+// Topological Sort to query the properties topologicalSortIndex (e.g. build order) and maxDistanceFromSource (build level) for each code unit node in topologicalSortIndex order. Requires "Add_file_name_and_extension.cypher".
 // Needs graph-data-science plugin version >= 2.5.0
 
 MATCH (codeUnit)

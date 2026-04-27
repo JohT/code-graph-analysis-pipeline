@@ -1,4 +1,4 @@
-// Incoming Package Dependencies including sub-packages. Requires "Add_file_name and_extension.cypher".
+// Incoming Package Dependencies including sub-packages. Requires "Add_file_name_and_extension.cypher".
 
    MATCH (p:Package)
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)

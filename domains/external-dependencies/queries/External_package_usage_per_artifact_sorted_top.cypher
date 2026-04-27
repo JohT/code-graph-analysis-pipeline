@@ -1,4 +1,4 @@
-// External package usage per artifact top externals. Requires "Add_file_name and_extension.cypher".
+// External package usage per artifact top externals. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact:Archive)-[:CONTAINS]->(type:Type)
  OPTIONAL MATCH (type)-[:DEPENDS_ON]->(externalType:ExternalType)

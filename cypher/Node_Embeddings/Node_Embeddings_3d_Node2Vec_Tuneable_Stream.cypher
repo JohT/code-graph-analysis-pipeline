@@ -1,4 +1,4 @@
-// Node Embeddings 3c using Node2Vec: Stream. Requires "Add_file_name and_extension.cypher".
+// Node Embeddings 3c using Node2Vec: Stream. Requires "Add_file_name_and_extension.cypher".
 
 CALL gds.node2vec.stream(
  $dependencies_projection + '-cleaned', {

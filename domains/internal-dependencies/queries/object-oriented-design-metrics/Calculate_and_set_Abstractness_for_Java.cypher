@@ -1,4 +1,4 @@
-//Calculate and set Abstractness for Java Packages including Counts. Requires "Add_file_name and_extension.cypher".
+//Calculate and set Abstractness for Java Packages including Counts. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (package:Java:Package)
 MATCH (artifact:Artifact)-[:CONTAINS]->(package)

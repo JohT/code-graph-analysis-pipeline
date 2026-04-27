@@ -1,4 +1,4 @@
-// Community Detection Summary. Variables: dependencies_projection_node ("Artifact", "Package", "Type"). Requires "Add_file_name and_extension.cypher".
+// Community Detection Summary. Variables: dependencies_projection_node ("Artifact", "Package", "Type"). Requires "Add_file_name_and_extension.cypher".
 
 MATCH (codeUnit)
 WHERE (codeUnit.incomingDependencies > 0 OR codeUnit.outgoingDependencies > 0)

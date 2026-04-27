@@ -1,4 +1,4 @@
-// External package usage per artifact and external package. Requires "Add_file_name and_extension.cypher".
+// External package usage per artifact and external package. Requires "Add_file_name_and_extension.cypher".
 
 // Get the overall artifact statistics first
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)

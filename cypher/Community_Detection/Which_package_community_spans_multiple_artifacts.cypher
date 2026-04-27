@@ -1,4 +1,4 @@
-// Which package community spans multiple artifacts? Requires "Add_file_name and_extension.cypher".
+// Which package community spans multiple artifacts? Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(package:Package)
   WITH package.communityLeidenId AS communityId

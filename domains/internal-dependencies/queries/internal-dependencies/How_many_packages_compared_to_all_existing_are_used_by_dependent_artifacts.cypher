@@ -1,4 +1,4 @@
-// How many packages compared to all existing are used by dependent artifacts? Requires "Add_file_name and_extension.cypher".
+// How many packages compared to all existing are used by dependent artifacts? Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]-(package:Package)-[:DEPENDS_ON]->(dependentPackage:Package)<-[:CONTAINS]-(dependentArtifact:Artifact)
 MATCH (dependentArtifact)-[:CONTAINS]->(dependentArtifactPackage:Package)-[:CONTAINS]->(dependentArtifactType:Type)

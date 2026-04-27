@@ -1,4 +1,4 @@
-// Read the similarity relationship from the projection. Variables: dependencies_projection. Requires "Add_file_name and_extension.cypher".
+// Read the similarity relationship from the projection. Variables: dependencies_projection. Requires "Add_file_name_and_extension.cypher".
 
 CALL gds.graph.relationshipProperty.stream(
      $dependencies_projection + '-cleaned'

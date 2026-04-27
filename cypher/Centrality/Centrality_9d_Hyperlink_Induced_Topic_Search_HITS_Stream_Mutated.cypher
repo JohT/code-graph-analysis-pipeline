@@ -1,4 +1,4 @@
-// Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream Mutated. Requires "Add_file_name and_extension.cypher", "Set_localRootPath_for_modules", "Set_declaring_type_on_method_nodes".
+// Centrality 9d Hyperlink-Induced Topic Search (HITS) Stream Mutated. Requires "Add_file_name_and_extension.cypher", "Set_localRootPath_for_modules", "Set_declaring_type_on_method_nodes".
 
 CALL gds.graph.nodeProperties.stream(
      $dependencies_projection + '-cleaned'

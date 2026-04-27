@@ -1,4 +1,4 @@
-// Usage and spread of internal artifact dependencies. Requires "Add_file_name and_extension.cypher".
+// Usage and spread of internal artifact dependents. Requires "Add_file_name_and_extension.cypher".
 
 MATCH (artifact:Artifact)-[:CONTAINS]->(packageInArtifact:Package)
 MATCH (packageInArtifact)-[:CONTAINS]->(typeInPackage:Type)
@@ -29,11 +29,12 @@ WHERE artifact.fileName <> dependencyArtifact.fileName
 // Filter out empty dependency sets
 WHERE dependencyPackagesCount > 0
   AND packagesCount > 1
-RETURN dependencyArtifactName
+RETURN artifactName
      ,dependencyTypeIsInterface
-     ,COUNT(DISTINCT artifactName)       AS usedInArtifacts
-     ,SUM(packagesCount)                 AS usedInPackages
-
+     ,COUNT(DISTINCT dependencyArtifactName)   AS artifactDependencies
+     ,SUM(dependencyPackagesCount)             AS artifactDependencyPackages
+     ,100.0 / SUM(packagesInArtifactCount) * SUM(packagesCount) AS dependentPackagesRate
+     
      ,MIN(packageSpread)                 AS minPackageSpread
      ,MAX(packageSpread)                 AS maxPackageSpread
      ,AVG(packageSpread)                 AS avgPackageSpread
@@ -51,4 +52,4 @@ RETURN dependencyArtifactName
      ,AVG(typesSpread)                   AS avgTypeSpread
      ,stDev(typesSpread)                 AS stdTypeSpread
      ,percentileDisc(typesSpread, 0.5)   AS per5TypeSpread
-ORDER BY toLower(dependencyArtifactName) ASC
+ORDER BY toLower(artifactName) ASC

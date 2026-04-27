@@ -1,4 +1,4 @@
-// Number of types per artifact. Requires "Add_file_name and_extension.cypher".
+// Number of types per artifact. Requires "Add_file_name_and_extension.cypher".
 
  MATCH (artifact:Artifact)-[:CONTAINS]->(type:Type) 
   WITH artifact.name AS artifactName
