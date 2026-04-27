@@ -93,10 +93,8 @@ Script | Directory | Description
 [CommunityCsv.sh](./scripts/reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports.
 [JavaCsv.sh](./scripts/reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports.
 [NodeEmbeddingsCsv.sh](./scripts/reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports.
-[ObjectOrientedDesignMetricsCsv.sh](./scripts/reports/ObjectOrientedDesignMetricsCsv.sh) | reports | Executes "Metrics" Cypher queries to get the "object-oriented-design-metrics-csv" CSV reports.
 [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 [SimilarityCsv.sh](./scripts/reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports.
-[VisibilityMetricsCsv.sh](./scripts/reports/VisibilityMetricsCsv.sh) | reports | Executes "Visibility" Cypher queries to get the "visibility-metrics-csv" CSV reports.
 [AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
 [CsvReports.sh](./scripts/reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required).
 [DatabaseCsvExportReports.sh](./scripts/reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all"
