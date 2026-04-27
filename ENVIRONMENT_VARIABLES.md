@@ -24,6 +24,7 @@ IMPORT_DIRECTORY | import |
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
 INTERNAL_DEPENDENCIES_SUMMARY_DIR | ${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
 INTERNAL_DEPENDENCIES_GRAPHS_DIR | ${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/graphs | Contains everything (scripts, queries) to create graph visualizations
+JAVA_SUMMARY_DIR | ${JAVA_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
 NEO4J_EDITION | community | Choose "community" or "enterprise"
 NEO4J_VERSION | 2026.01.4 | 
 DATA_DIRECTORY | $( pwd -P )/data | Path where Neo4j writes its data to (outside tools dir)
