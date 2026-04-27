@@ -46,7 +46,7 @@ The following weight properties must exist on `DEPENDS_ON` relationships:
 | `weightInterfaces` | Dependency weight counting only interface types |
 | `weight25PercentInterfaces` | Blended weight: 75% class + 25% interface weight |
 
-**Cypher source:** [`cypher/DependsOn_Relationship_Weights/`](../../cypher/DependsOn_Relationship_Weights/)
+**Cypher source:** [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_Enrichment/)
 
 ---
 

@@ -1,4 +1,4 @@
-// Set outgoing Typscript Module dependencies
+// Set outgoing Typescript Module dependencies
 
 // Get the top level dependency between a Typescript module and an external modules it uses
  MATCH (source:TS:Module)

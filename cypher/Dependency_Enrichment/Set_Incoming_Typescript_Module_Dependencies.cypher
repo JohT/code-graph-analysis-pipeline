@@ -1,4 +1,4 @@
-// Set incoming Typscript Module dependencies
+// Set incoming Typescript Module dependencies
 
 // Get the top level dependency between a Typescript module and other modules that uses it
  MATCH (source:TS:Module)

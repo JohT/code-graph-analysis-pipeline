@@ -34,8 +34,7 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
 # Local Constants
-DEPENDS_ON_CYPHER_DIR="$CYPHER_DIR/DependsOn_Relationship_Weights"
-METRICS_CYPHER_DIR="$CYPHER_DIR/Metrics"
+DEPENDENCY_ENRICHMENT_CYPHER_DIR="$CYPHER_DIR/Dependency_Enrichment"
 JAVA_CYPHER_DIR="$CYPHER_DIR/Java"
 ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
@@ -108,26 +107,26 @@ if ! is_csv_column_greater_zero "${dataVerificationResult}" "typescriptModuleDep
 fi
 
 # Preparation - Add weights to Java Package DEPENDS_ON relationships 
-execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
-execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher" 
-execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Add_weight_property_for_Java_Interface_Dependencies_to_Package_DEPENDS_ON_Relationship.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Add_weight_property_to_Java_Package_DEPENDS_ON_Relationship.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Add_weight25PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher" 
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Add_weight10PercentInterfaces_to_Java_Package_DEPENDS_ON_relationships.cypher"
 
 # Preparation - Add weights to Typescript Module DEPENDS_ON relationships
-execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
-execute_cypher_summarized "${DEPENDS_ON_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_external_module_dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Add_fine_grained_weights_for_Typescript_internal_module_dependencies.cypher"
 
 # Preparation - Add Typescript Module node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Typescript_Module_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Typescript_Module_Dependencies.cypher"
 
 # Preparation - Add Java Package node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
 # Preparation - Language agnostic node properties "dependencyDegree", "dependencyDegreeWeighted", "dependencyDegreeRank"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Dependency_Degree.cypher"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
 
 # Preparation - Add Java Method node property "declaringType"
 execute_cypher "${TYPES_CYPHER_DIR}/Set_declaring_type_on_method_nodes.cypher"
@@ -149,7 +148,7 @@ execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Art
 execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_maven_artifact_version.cypher"
 
 # Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
-execute_cypher_summarized "${METRICS_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
 
 echo "prepareAnalysis: Preparation successful"
