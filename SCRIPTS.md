@@ -30,6 +30,11 @@ Script | Directory | Description
 [internalDependenciesPython.sh](./domains/internal-dependencies/internalDependenciesPython.sh) | internal-dependencies | Generates path finding charts as SVG files using Python.
 [internalDependenciesVisualization.sh](./domains/internal-dependencies/internalDependenciesVisualization.sh) | internal-dependencies | This script is dynamically triggered by "VisualizationReports.sh" when report "All" or "Visualization" is enabled.
 [internalDependenciesSummary.sh](./domains/internal-dependencies/summary/internalDependenciesSummary.sh) | summary | Creates a Markdown report summarising all internal dependency analysis results.
+[artifactDependenciesCsv.sh](./domains/java/artifactDependenciesCsv.sh) | java | Executes artifact dependency Cypher queries to produce CSV reports for Java artifact analysis.
+[javaCsv.sh](./domains/java/javaCsv.sh) | java | Executes Java code quality and method metrics Cypher queries to produce CSV reports.
+[javaMarkdown.sh](./domains/java/javaMarkdown.sh) | java | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[javaPython.sh](./domains/java/javaPython.sh) | java | Generates Java analysis charts as SVG files using Python.
+[javaSummary.sh](./domains/java/summary/javaSummary.sh) | summary | Creates a Markdown report summarising all Java code quality, method metrics, and artifact dependency analysis results.
 [configureNeo4j.sh](./domains/neo4j-management/configureNeo4j.sh) | neo4j-management | Configures a (local) Neo4j Community Edition Graph Database (https://neo4j.com/download-center/#community).
 [detectNeo4j.sh](./domains/neo4j-management/detectNeo4j.sh) | neo4j-management | Detects if Neo4j is running and outputs its installation directory.
 [detectNeo4jWindows.sh](./domains/neo4j-management/detectNeo4jWindows.sh) | neo4j-management | Detects if Neo4j is running on Windows from WSL or Git Bash.
@@ -88,10 +93,8 @@ Script | Directory | Description
 [Neo4jv5-low-memory.sh](./scripts/profiles/Neo4jv5-low-memory.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 [Neo4jv5.sh](./scripts/profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 [projectionFunctions.sh](./scripts/projectionFunctions.sh) | scripts | Provides functions to create and delete Graph Projections for Neo4j Graph Data Science.
-[ArtifactDependenciesCsv.sh](./scripts/reports/ArtifactDependenciesCsv.sh) | reports | Executes "Artifact_Dependencies" Cypher queries to get the "artifact-dependencies-csv" CSV reports.
 [CentralityCsv.sh](./scripts/reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
 [CommunityCsv.sh](./scripts/reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports.
-[JavaCsv.sh](./scripts/reports/JavaCsv.sh) | reports | Executes "Java" Cypher queries to get the "java-csv" CSV reports.
 [NodeEmbeddingsCsv.sh](./scripts/reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports.
 [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 [SimilarityCsv.sh](./scripts/reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports.
