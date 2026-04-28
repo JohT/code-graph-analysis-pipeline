@@ -36,7 +36,6 @@ source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 # Local Constants
 DEPENDENCY_ENRICHMENT_CYPHER_DIR="$CYPHER_DIR/Dependency_Enrichment"
 JAVA_CYPHER_DIR="$CYPHER_DIR/Java"
-ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 TYPESCRIPT_CYPHER_DIR="$CYPHER_DIR/Typescript_Enrichment"
 GENERAL_ENRICHMENT_CYPHER_DIR="${CYPHER_DIR}/General_Enrichment"
@@ -124,6 +123,10 @@ execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Type
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
+# Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+
 # Preparation - Language agnostic node properties "dependencyDegree", "dependencyDegreeWeighted", "dependencyDegreeRank"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
@@ -143,12 +146,8 @@ execute_cypher "${JAVA_CYPHER_DIR}/Remove_external_type_and_annotation_labels.cy
 execute_cypher "${JAVA_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
 
 # Preparation - Add Java Artifact node properties "incomingDependencies", "outgoingDependencies" and "version"
-execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
-execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
-execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_maven_artifact_version.cypher"
-
-# Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
-execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_maven_artifact_version.cypher"
 
 echo "prepareAnalysis: Preparation successful"
