@@ -144,6 +144,10 @@ execute_cypher "${TYPES_CYPHER_DIR}/Label_resolved_duplicate_types.cypher"
 
 execute_cypher "${JAVA_CYPHER_DIR}/Remove_external_type_and_annotation_labels.cypher"
 execute_cypher "${JAVA_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Label_internal_java_types.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Remove_internal_java_type_labels.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Label_connected_internal_java_types.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Remove_connected_internal_java_type_labels.cypher"
 
 # Preparation - Add Java Artifact node properties "incomingDependencies", "outgoingDependencies" and "version"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
