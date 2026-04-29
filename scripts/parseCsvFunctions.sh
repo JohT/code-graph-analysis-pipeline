@@ -87,7 +87,7 @@ is_csv_column_greater_zero() {
 #   $2: Column name with a numeric value
 is_result_and_csv_column_greater_zero() {
     local csv_string_number_of_lines
-    csv_string_number_of_lines=$(echo "${1}'" | wc -l | tr -d ' ')
+    csv_string_number_of_lines=$(echo "${1}" | wc -l | tr -d ' ')
     if [ "${csv_string_number_of_lines}" -lt 2 ]; then
         return 1; # false, no results
     fi
