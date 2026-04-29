@@ -8,6 +8,16 @@
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
+logError() {
+    local errorMessage="${1}"
+    
+    local COLOR_ERROR='\033[0;31m' # red
+    local COLOR_DEFAULT='\033[0m'
+
+    echo -e "${COLOR_ERROR}parseCsvFunctions: Error: ${errorMessage}${COLOR_DEFAULT}" >&2
+    exit 1
+}
+
 # Function to get the value of a specific column in a CSV string
 # that only consists of a header line with the column names and a second line of values. 
 # 
@@ -17,6 +27,11 @@ set -o errexit -o pipefail
 get_csv_column_value() {
     csv_string="$1"
     column_name="$2"
+
+    csv_string_number_of_lines=$(echo "${csv_string}" | wc -l | tr -d ' ')
+    if [ "${csv_string_number_of_lines}" -ne 2 ]; then
+        logError "CSV string must contain exactly two lines (header and values), not ${csv_string_number_of_lines}"
+    fi
 
     # Remove leading and trailing double quotes, and spaces
     csv_string=$(echo "$csv_string" | sed 's/"//g' | tr -d ' ')
@@ -39,8 +54,7 @@ get_csv_column_value() {
     done
 
     if [ "$index" -eq -1 ]; then
-        echo "Error: Column '$column_name' not found"
-        exit 1
+        logError "Column '$column_name' not found"
     else
         # Print the value at the corresponding index
         echo "${values_array[$index]}"
@@ -53,10 +67,33 @@ get_csv_column_value() {
 #   $1: CSV string (two lines)
 #   $2: Column name with a numeric value
 is_csv_column_greater_zero() {
-    columnValue=$(get_csv_column_value "${@}")
-    if [[ "${columnValue}" -gt 0 ]]; then
+    local columnValue
+    if ! columnValue=$(get_csv_column_value "${@}"); then
+        logError "Failed to get column value for column '${2}' from CSV string '${1}'"
+    fi
+    if [ "${columnValue}" -gt 0 ]; then
         true;
     else
         false;
+    fi
+}
+
+# Function to get the value of a specific column in a CSV string and check if its greater than zero.
+# If the CSV string does not contain at least two lines (header and values), then this function returns false, as if the value was zero.
+# This is useful for example to check if a cypher query returned results AND if a specific column in the results contains a value greater than zero.
+# 
+# Parameters:
+#   $1: CSV string (two lines)
+#   $2: Column name with a numeric value
+is_result_and_csv_column_greater_zero() {
+    local csv_string_number_of_lines
+    csv_string_number_of_lines=$(echo "${1}'" | wc -l | tr -d ' ')
+    if [ "${csv_string_number_of_lines}" -lt 2 ]; then
+        return 1; # false, no results
+    fi
+    if is_csv_column_greater_zero "${@}"; then
+        return 0; # true
+    else
+        return 1; # false
     fi
 }

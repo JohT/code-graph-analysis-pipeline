@@ -31,7 +31,7 @@ echo "projectionFunctions: PROJECTION_CYPHER_DIR=${PROJECTION_CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+# Define function(s) (e.g. is_csv_column_greater_zero or is_result_and_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
 # Writes a log entry when the creation of the projection starts.
@@ -103,7 +103,7 @@ logDataVerificationFailedForProjection() {
 verifyDataReadyForProjection() {
     local verificationResult
     verificationResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Verify_Projectable.cypher" "${@}")
-    if is_csv_column_greater_zero "${verificationResult}" "numberOfRelationships"; then
+    if is_result_and_csv_column_greater_zero "${verificationResult}" "numberOfRelationships"; then
         logDataVerificationFailedForProjection "${@}" "verificationResult=${verificationResult}"
         redColor='\033[0;31m'
         noColor='\033[0m'
