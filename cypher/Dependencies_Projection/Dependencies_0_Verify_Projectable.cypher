@@ -3,11 +3,6 @@
  MATCH (source)-[dependency:DEPENDS_ON]->(target)
  WHERE $dependencies_projection_node            IN labels(source)
    AND $dependencies_projection_node            IN labels(target)
-   // Only check types directly in a Java package (inner classes, anonymous classes and synthetic types
-   // are not contained by a package and are not covered by the incoming/outgoing enrichment queries)
-   // This check only applies when verifying Type nodes
-   AND ($dependencies_projection_node <> 'Type' OR EXISTS { (:Java:Package)-[:CONTAINS]->(source) })
-   AND ($dependencies_projection_node <> 'Type' OR EXISTS { (:Java:Package)-[:CONTAINS]->(target) })
   WITH (NOT $dependencies_projection_weight_property IN keys(dependency)) AS missingWeightProperty
       ,(dependency[$dependencies_projection_weight_property])             AS weightPropertyValue
       ,(dependency[$dependencies_projection_weight_property] < 1)         AS nonPositiveWeightPropertyValue
