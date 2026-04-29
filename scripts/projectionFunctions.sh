@@ -208,8 +208,9 @@ createUndirectedDependencyProjection() {
     fi
 }
 
-# Creates a directed Graph projection specialized on Java Type dependencies. 
-# Zero-degree nodes, external types, java types and duplicates are filtered out using a Cypher projection.
+# Creates a directed Graph projection specialized on Java Type dependencies.
+# Uses ConnectedInternalJavaType nodes (internal, connected, non-test Java types)
+# and delegates to the generic createDirectedDependencyProjection.
 #
 # Returns true  (=0) if the projection has been created successfully.
 # Returns false (=1) if the projection couldn't be created because of missing data.
@@ -221,23 +222,12 @@ createUndirectedDependencyProjection() {
 # - dependencies_projection_language=...
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaTypeDependencyProjection() {
-    logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Type" "dependencies_projection_weight_property=weight"
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
-    
-    local projectionResult
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Java_Type_Projection.cypher" "${@}")
-    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
-        true;
-    else
-        logNoDataForProjection "${@}"
-        false;
-    fi
+    createDirectedDependencyProjection "${@}" "dependencies_projection_node=ConnectedInternalJavaType" "dependencies_projection_weight_property=weight"
 }
 
-# Creates an undirected Graph projection specialized on Java Type dependencies. 
-# Zero-degree nodes, external types, java types and duplicates are filtered out using a Cypher projection.
+# Creates an undirected Graph projection specialized on Java Type dependencies.
+# Uses ConnectedInternalJavaType nodes (internal, connected, non-test Java types)
+# and delegates to the generic createUndirectedDependencyProjection.
 #
 # Returns true  (=0) if the projection has been created successfully.
 # Returns false (=1) if the projection couldn't be created because of missing data.
@@ -249,19 +239,7 @@ createDirectedJavaTypeDependencyProjection() {
 # - dependencies_projection_language=...
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedJavaTypeDependencyProjection() {
-    logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Type" "dependencies_projection_weight_property=weight"
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
-
-    local projectionResult
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Java_Type_Projection.cypher" "${@}")
-    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
-        true;
-    else
-        logNoDataForProjection "${@}"
-        false;
-    fi
+    createUndirectedDependencyProjection "${@}" "dependencies_projection_node=ConnectedInternalJavaType" "dependencies_projection_weight_property=weight"
 }
 
 # Creates a directed Graph projection specialized on Java Method dependencies. 
