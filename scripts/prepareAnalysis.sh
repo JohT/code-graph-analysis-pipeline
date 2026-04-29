@@ -81,7 +81,7 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_npm_dependency_type_labels.cyphe
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Label_npm_packages_by_dep_type.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
-if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
+if is_result_and_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
     # Warning: There are Typescript projects that are not linked to NPM Packages (unresolvedProjectsCount is greater than zero).
     #          It is possible to have projects with a tsconfig.json file but without a package.json e.g. for testing purposes.
     echo -e "${COLOR_YELLOW}prepareAnalysis: Data verification warning: There are Typescript projects that are not linked to a npm package:${COLOR_DEFAULT}"
