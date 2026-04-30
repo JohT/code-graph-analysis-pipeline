@@ -147,13 +147,14 @@ projectionExists() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedDependencyProjection() {
     logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}"
 
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
     if [ "${projectionCheckResult}" -lt 1 ]; then
         logNoDataForProjection "${@}"
         return 1
     fi
+    verifyDataReadyForProjection "${@}"
+
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Prepare_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
@@ -187,12 +188,13 @@ createDirectedDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedDependencyProjection() {
     logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}"
 
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
     if [ "${projectionCheckResult}" -lt 1 ]; then
         return 1
     fi
+    verifyDataReadyForProjection "${@}"
+
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Prepare_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
@@ -256,7 +258,6 @@ createUndirectedJavaTypeDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaMethodDependencyProjection() {
     logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Method" "dependencies_projection_weight_property=weight"
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
 
