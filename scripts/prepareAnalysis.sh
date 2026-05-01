@@ -36,7 +36,6 @@ source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 # Local Constants
 DEPENDENCY_ENRICHMENT_CYPHER_DIR="$CYPHER_DIR/Dependency_Enrichment"
 JAVA_CYPHER_DIR="$CYPHER_DIR/Java"
-ARTIFACT_DEPENDENCIES_CYPHER_DIR="$CYPHER_DIR/Artifact_Dependencies"
 TYPES_CYPHER_DIR="$CYPHER_DIR/Types"
 TYPESCRIPT_CYPHER_DIR="$CYPHER_DIR/Typescript_Enrichment"
 GENERAL_ENRICHMENT_CYPHER_DIR="${CYPHER_DIR}/General_Enrichment"
@@ -82,7 +81,7 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_npm_dependency_type_labels.cyphe
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Label_npm_packages_by_dep_type.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
 dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
-if is_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
+if is_result_and_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
     # Warning: There are Typescript projects that are not linked to NPM Packages (unresolvedProjectsCount is greater than zero).
     #          It is possible to have projects with a tsconfig.json file but without a package.json e.g. for testing purposes.
     echo -e "${COLOR_YELLOW}prepareAnalysis: Data verification warning: There are Typescript projects that are not linked to a npm package:${COLOR_DEFAULT}"
@@ -124,6 +123,10 @@ execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Type
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Package_Dependencies.cypher"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Package_Dependencies.cypher"
 
+# Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+
 # Preparation - Language agnostic node properties "dependencyDegree", "dependencyDegreeWeighted", "dependencyDegreeRank"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
@@ -141,14 +144,14 @@ execute_cypher "${TYPES_CYPHER_DIR}/Label_resolved_duplicate_types.cypher"
 
 execute_cypher "${JAVA_CYPHER_DIR}/Remove_external_type_and_annotation_labels.cypher"
 execute_cypher "${JAVA_CYPHER_DIR}/Label_external_types_and_annotations.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Remove_internal_java_type_labels.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Label_internal_java_types.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Remove_connected_internal_java_type_labels.cypher"
+execute_cypher "${JAVA_CYPHER_DIR}/Label_connected_internal_java_types.cypher"
 
 # Preparation - Add Java Artifact node properties "incomingDependencies", "outgoingDependencies" and "version"
-execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
-execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
-execute_cypher_summarized "${ARTIFACT_DEPENDENCIES_CYPHER_DIR}/Set_maven_artifact_version.cypher"
-
-# Preparation - Add Java Type node properties "incomingDependencies" and "outgoingDependencies"
-execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Incoming_Java_Type_Dependencies.cypher"
-execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Outgoing_Java_Type_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Incoming_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Outgoing_Java_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_maven_artifact_version.cypher"
 
 echo "prepareAnalysis: Preparation successful"

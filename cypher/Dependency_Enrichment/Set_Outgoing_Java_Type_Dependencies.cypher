@@ -1,11 +1,11 @@
 //Set Outgoing Type Dependencies
 
-   MATCH (p:Java:Package)
-OPTIONAL MATCH (p)-[:CONTAINS]->(it:Java:Type)-[r:DEPENDS_ON]->(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
-OPTIONAL MATCH (it)-[:DEPENDS_ON]->(eti:Type:Interface)
-   WHERE it <> et
+   MATCH (p:Java:Package)-[:CONTAINS]->(it:Java:Type)
+   WHERE it.outgoingDependencies IS NULL // comment out to recalculate
+OPTIONAL MATCH (it)-[r:DEPENDS_ON]->(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
+   WHERE it     <> et
      AND it.fqn <> et.fqn
-     AND it.outgoingDependencies IS NULL // comment out to recalculate
+OPTIONAL MATCH (it)-[:DEPENDS_ON]->(eti:Type:Interface)
     WITH p.fqn                       AS packageName
         ,it
         ,it.fqn                      AS typeName

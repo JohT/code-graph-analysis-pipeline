@@ -31,7 +31,7 @@ echo "projectionFunctions: PROJECTION_CYPHER_DIR=${PROJECTION_CYPHER_DIR}"
 # Define functions to execute a cypher query from within the given file (first and only argument)
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
-# Define function(s) (e.g. is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+# Define function(s) (e.g. is_csv_column_greater_zero or is_result_and_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
 source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
 
 # Writes a log entry when the creation of the projection starts.
@@ -103,7 +103,7 @@ logDataVerificationFailedForProjection() {
 verifyDataReadyForProjection() {
     local verificationResult
     verificationResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Verify_Projectable.cypher" "${@}")
-    if is_csv_column_greater_zero "${verificationResult}" "numberOfRelationships"; then
+    if is_result_and_csv_column_greater_zero "${verificationResult}" "numberOfRelationships"; then
         logDataVerificationFailedForProjection "${@}" "verificationResult=${verificationResult}"
         redColor='\033[0;31m'
         noColor='\033[0m'
@@ -147,13 +147,14 @@ projectionExists() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedDependencyProjection() {
     logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}"
 
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
     if [ "${projectionCheckResult}" -lt 1 ]; then
         logNoDataForProjection "${@}"
         return 1
     fi
+    verifyDataReadyForProjection "${@}"
+
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Prepare_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
@@ -187,12 +188,13 @@ createDirectedDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedDependencyProjection() {
     logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}"
 
     projectionCheckResult=$( execute_cypher_http_number_of_lines_in_result "${PROJECTION_CYPHER_DIR}/Dependencies_0_Check_Projectable.cypher" "${@}" )
     if [ "${projectionCheckResult}" -lt 1 ]; then
         return 1
     fi
+    verifyDataReadyForProjection "${@}"
+
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_0_Prepare_Projection.cypher" "${@}"
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_1_Delete_Projection.cypher" "${@}" >/dev/null
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
@@ -208,8 +210,9 @@ createUndirectedDependencyProjection() {
     fi
 }
 
-# Creates a directed Graph projection specialized on Java Type dependencies. 
-# Zero-degree nodes, external types, java types and duplicates are filtered out using a Cypher projection.
+# Creates a directed Graph projection specialized on Java Type dependencies.
+# Uses ConnectedInternalJavaType nodes (internal, connected, non-test Java types)
+# and delegates to the generic createDirectedDependencyProjection.
 #
 # Returns true  (=0) if the projection has been created successfully.
 # Returns false (=1) if the projection couldn't be created because of missing data.
@@ -221,23 +224,12 @@ createUndirectedDependencyProjection() {
 # - dependencies_projection_language=...
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaTypeDependencyProjection() {
-    logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Type" "dependencies_projection_weight_property=weight"
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
-    
-    local projectionResult
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_3c_Create_Java_Type_Projection.cypher" "${@}")
-    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
-        true;
-    else
-        logNoDataForProjection "${@}"
-        false;
-    fi
+    createDirectedDependencyProjection "${@}" "dependencies_projection_node=ConnectedInternalJavaType" "dependencies_projection_weight_property=weight"
 }
 
-# Creates an undirected Graph projection specialized on Java Type dependencies. 
-# Zero-degree nodes, external types, java types and duplicates are filtered out using a Cypher projection.
+# Creates an undirected Graph projection specialized on Java Type dependencies.
+# Uses ConnectedInternalJavaType nodes (internal, connected, non-test Java types)
+# and delegates to the generic createUndirectedDependencyProjection.
 #
 # Returns true  (=0) if the projection has been created successfully.
 # Returns false (=1) if the projection couldn't be created because of missing data.
@@ -249,19 +241,7 @@ createDirectedJavaTypeDependencyProjection() {
 # - dependencies_projection_language=...
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createUndirectedJavaTypeDependencyProjection() {
-    logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Type" "dependencies_projection_weight_property=weight"
-
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
-
-    local projectionResult
-    projectionResult=$( execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_4c_Create_Undirected_Java_Type_Projection.cypher" "${@}")
-    if is_csv_column_greater_zero "${projectionResult}" "relationshipCount"; then
-        true;
-    else
-        logNoDataForProjection "${@}"
-        false;
-    fi
+    createUndirectedDependencyProjection "${@}" "dependencies_projection_node=ConnectedInternalJavaType" "dependencies_projection_weight_property=weight"
 }
 
 # Creates a directed Graph projection specialized on Java Method dependencies. 
@@ -278,7 +258,6 @@ createUndirectedJavaTypeDependencyProjection() {
 #   Optional name of the associated programming language for logging details. Default: "Java". Example: "Typescript"
 createDirectedJavaMethodDependencyProjection() {
     logProjectionCreationStart "${@}"
-    verifyDataReadyForProjection "${@}" "dependencies_projection_node=Method" "dependencies_projection_weight_property=weight"
 
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_2_Delete_Subgraph.cypher" "${@}" >/dev/null
 

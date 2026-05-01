@@ -8,6 +8,6 @@
    AND source.name <> '<init>'
    AND target.name <> '<init>'
   WITH gds.graph.project($dependencies_projection + '-cleaned', source, target) AS projection
-RETURN projection.graphName         AS graphName
-      ,projection.nodeCount         AS nodeCount
-      ,projection.relationshipCount AS relationshipCount
+RETURN projection.graphName                      AS graphName
+      ,coalesce(projection.nodeCount, 0)         AS nodeCount
+      ,coalesce(projection.relationshipCount, 0) AS relationshipCount
