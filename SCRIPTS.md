@@ -45,6 +45,10 @@ Script | Directory | Description
 [testConfigureNeo4j.sh](./domains/neo4j-management/testConfigureNeo4j.sh) | neo4j-management | Tests "configureNeo4j.sh".
 [useNeo4jHighMemoryProfile.sh](./domains/neo4j-management/useNeo4jHighMemoryProfile.sh) | neo4j-management | Use the high memory profile and apply its configuration template on the local 
 [waitForNeo4jHttpFunctions.sh](./domains/neo4j-management/waitForNeo4jHttpFunctions.sh) | neo4j-management | Waits until the HTTP Transactions API of Neo4j Graph Database is available.
+[nodeEmbeddingsCsv.sh](./domains/node-embeddings/nodeEmbeddingsCsv.sh) | node-embeddings | Generates node embeddings using the Neo4j Graph Data Science Library and writes CSV reports.
+[nodeEmbeddingsMarkdown.sh](./domains/node-embeddings/nodeEmbeddingsMarkdown.sh) | node-embeddings | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[nodeEmbeddingsPython.sh](./domains/node-embeddings/nodeEmbeddingsPython.sh) | node-embeddings | Generates 2D UMAP scatter plots of node embeddings stored in Neo4j as SVG files.
+[nodeEmbeddingsSummary.sh](./domains/node-embeddings/summary/nodeEmbeddingsSummary.sh) | summary | Creates a Markdown report summarising node embedding properties present in the graph.
 [init.sh](./init.sh) |  | Initializes a new analysis project by creating all necessary directories based on the given input parameter with the analysis name. 
 [activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Jupyter Notebooks and Python scripts.
 [activatePythonEnvironment.sh](./scripts/activatePythonEnvironment.sh) | scripts | Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Jupyter Notebooks and Python scripts.
@@ -95,7 +99,6 @@ Script | Directory | Description
 [projectionFunctions.sh](./scripts/projectionFunctions.sh) | scripts | Provides functions to create and delete Graph Projections for Neo4j Graph Data Science.
 [CentralityCsv.sh](./scripts/reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
 [CommunityCsv.sh](./scripts/reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports.
-[NodeEmbeddingsCsv.sh](./scripts/reports/NodeEmbeddingsCsv.sh) | reports | Generates node embeddings using the Graph Data Science Library of Neo4j and creates CSV reports.
 [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 [SimilarityCsv.sh](./scripts/reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports.
 [AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
