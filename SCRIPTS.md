@@ -24,6 +24,11 @@ Script | Directory | Description
 [createGitLogCsv.sh](./domains/git-history/import/createGitLogCsv.sh) | import | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it.
 [importGit.sh](./domains/git-history/import/importGit.sh) | import | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT.
 [gitHistorySummary.sh](./domains/git-history/summary/gitHistorySummary.sh) | summary | Creates a Markdown report summarising all git history analysis results.
+[centralityCsv.sh](./domains/graph-algorithms/centralityCsv.sh) | graph-algorithms | Applies centrality algorithms using the Neo4j Graph Data Science Library and writes CSV reports.
+[communityCsv.sh](./domains/graph-algorithms/communityCsv.sh) | graph-algorithms | Detects communities using the Neo4j Graph Data Science Library and writes CSV reports.
+[graphAlgorithmsMarkdown.sh](./domains/graph-algorithms/graphAlgorithmsMarkdown.sh) | graph-algorithms | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[similarityCsv.sh](./domains/graph-algorithms/similarityCsv.sh) | graph-algorithms | Applies node similarity (Jaccard) using the Neo4j Graph Data Science Library and writes CSV reports.
+[graphAlgorithmsSummary.sh](./domains/graph-algorithms/summary/graphAlgorithmsSummary.sh) | summary | Creates a Markdown report summarising centrality, community detection, and similarity results.
 [internalDependenciesGraphs.sh](./domains/internal-dependencies/graphs/internalDependenciesGraphs.sh) | graphs | Executes internal dependency and path finding Cypher queries for GraphViz visualization.
 [internalDependenciesCsv.sh](./domains/internal-dependencies/internalDependenciesCsv.sh) | internal-dependencies | Pipeline that coordinates internal dependency analysis using Cypher queries and the
 [internalDependenciesMarkdown.sh](./domains/internal-dependencies/internalDependenciesMarkdown.sh) | internal-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
@@ -97,10 +102,7 @@ Script | Directory | Description
 [Neo4jv5-low-memory.sh](./scripts/profiles/Neo4jv5-low-memory.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 [Neo4jv5.sh](./scripts/profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 [projectionFunctions.sh](./scripts/projectionFunctions.sh) | scripts | Provides functions to create and delete Graph Projections for Neo4j Graph Data Science.
-[CentralityCsv.sh](./scripts/reports/CentralityCsv.sh) | reports | Looks for centrality using the Graph Data Science Library of Neo4j and creates CSV reports.
-[CommunityCsv.sh](./scripts/reports/CommunityCsv.sh) | reports | Detects communities using the Graph Data Science Library of Neo4j and creates CSV reports.
 [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
-[SimilarityCsv.sh](./scripts/reports/SimilarityCsv.sh) | reports | Looks for similarity using the Graph Data Science Library of Neo4j and creates CSV reports.
 [AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
 [CsvReports.sh](./scripts/reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required).
 [DatabaseCsvExportReports.sh](./scripts/reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all"
