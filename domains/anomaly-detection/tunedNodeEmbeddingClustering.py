@@ -587,8 +587,8 @@ class TuneableFastRandomProjectionNodeEmbeddings:  # (sklearn.BaseEstimator):
             }
         )
     """
-    cypher_file_for_read_ = "../cypher/Node_Embeddings/Node_Embeddings_1d_Fast_Random_Projection_Tuneable_Stream.cypher"
-    cypher_file_for_write_ = "../cypher/Node_Embeddings/Node_Embeddings_1e_Fast_Random_Projection_Tuneable_Write.cypher"
+    cypher_file_for_read_ = "queries/node-embeddings/Node_Embeddings_1d_Fast_Random_Projection_Tuneable_Stream.cypher"
+    cypher_file_for_write_ = "queries/node-embeddings/Node_Embeddings_1e_Fast_Random_Projection_Tuneable_Write.cypher"
 
     def __init__(self,
                  parameters: Parameters = Parameters.example(),

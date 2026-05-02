@@ -30,9 +30,8 @@ echo "communityCsv: GRAPH_ALGORITHMS_SCRIPT_DIR=${GRAPH_ALGORITHMS_SCRIPT_DIR}"
 # Get the "scripts" directory by navigating two levels up from this domain directory.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${GRAPH_ALGORITHMS_SCRIPT_DIR}/../../scripts"}
 
-# Get the central "cypher" directory — still needed for Dependencies_Projection utilities
-# and for the Node_Embeddings queries used as preprocessing in HDBSCAN community detection.
-CYPHER_DIR=${CYPHER_DIR:-"${GRAPH_ALGORITHMS_SCRIPT_DIR}/../../cypher"}
+# Get the central "cypher/Dependencies_Projection" directory — still needed for Dependencies_Projection utilities.
+PROJECTION_CYPHER_DIR=${PROJECTION_CYPHER_DIR:-"${GRAPH_ALGORITHMS_SCRIPT_DIR}/../../cypher/Dependencies_Projection"}
 
 # Domain-local query directories within this domain
 GRAPH_ALGORITHMS_QUERIES_DIR="${GRAPH_ALGORITHMS_SCRIPT_DIR}/queries"
@@ -88,7 +87,6 @@ echo "communityCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing community detectio
 # - dependencies_projection_weight_property=...
 detectCommunitiesWithLouvain() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityLouvainId"
     local writePropertyNameIntermediate="dependencies_projection_write_property=communityLouvainIntermediateIds"
@@ -128,7 +126,6 @@ detectCommunitiesWithLouvain() {
 # - dependencies_projection_weight_property=...
 detectCommunitiesWithLeiden() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityLeidenId"
     local writePropertyNameIntermediate="dependencies_projection_write_property=communityLeidenIntermediateIds"
@@ -168,7 +165,6 @@ detectCommunitiesWithLeiden() {
 # - dependencies_projection_node=...
 detectCommunitiesWithStronglyConnectedComponents() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityStronglyConnectedComponentId"
     local writeLabelName="dependencies_projection_write_label=StronglyConnectedComponent"
@@ -200,7 +196,6 @@ detectCommunitiesWithStronglyConnectedComponents() {
 # - dependencies_projection_node=...
 detectCommunitiesWithWeaklyConnectedComponents() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityWeaklyConnectedComponentId"
     local writeLabelName="dependencies_projection_write_label=WeaklyConnectedComponent"
@@ -233,7 +228,6 @@ detectCommunitiesWithWeaklyConnectedComponents() {
 # - dependencies_projection_weight_property=...
 detectCommunitiesWithLabelPropagation() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityLabelPropagationId"
     local writeLabelName="dependencies_projection_write_label=LabelPropagation"
@@ -266,7 +260,6 @@ detectCommunitiesWithLabelPropagation() {
 # - dependencies_projection_weight_property=...
 detectCommunitiesWithKCoreDecomposition() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityKCoreDecompositionValue"
     local writeLabelName="dependencies_projection_write_label=KCoreDecomposition"
@@ -293,8 +286,6 @@ detectCommunitiesWithKCoreDecomposition() {
 
 # Generates a 2-dimensional FastRP node embedding used as input for HDBSCAN clustering.
 # The embedding property is written into the in-memory projection only (mutate).
-# Node_Embeddings queries are sourced from the central cypher/ directory because the
-# graph-algorithms domain uses them purely as preprocessing — they are not its primary output.
 #
 # Required Parameters:
 # - dependencies_projection=...
@@ -305,8 +296,7 @@ nodeEmbeddingsWithFastRandomProjectionForHDBSCAN() {
     local embeddingProperty
     embeddingProperty=$(extractQueryParameter "dependencies_projection_node_embeddings_property" "${@}")
 
-    # Node_Embeddings queries stay central — used only as HDBSCAN preprocessing input here
-    local NODE_EMBEDDINGS_CYPHER_DIR="${CYPHER_DIR}/Node_Embeddings"
+    local NODE_EMBEDDINGS_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/node-embeddings"
     local mutatePropertyName="dependencies_projection_write_property=${embeddingProperty}"
     local embeddingsDimension="dependencies_projection_embedding_dimension=2"
 
@@ -323,7 +313,6 @@ nodeEmbeddingsWithFastRandomProjectionForHDBSCAN() {
 # - dependencies_projection_weight_property=...
 detectCommunitiesWithHDBSCAN() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityFastRpHdbscanLabel"
     local writeLabelName="dependencies_projection_write_label=HDBSCAN"
@@ -359,7 +348,6 @@ detectCommunitiesWithHDBSCAN() {
 # - dependencies_projection_weight_property=...
 detectCommunitiesWithApproximateMaximumKCut() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityMaximumKCutId"
     local writeLabelName="dependencies_projection_write_label=MaximumKCut"
@@ -427,7 +415,6 @@ calculateCommunityMetrics() {
 # - dependencies_projection_weight_property=...
 calculateLocalClusteringCoefficient() {
     local COMMUNITY_DETECTION_CYPHER_DIR="${GRAPH_ALGORITHMS_QUERIES_DIR}/community-detection"
-    local PROJECTION_CYPHER_DIR="${CYPHER_DIR}/Dependencies_Projection"
 
     local writePropertyName="dependencies_projection_write_property=communityLocalClusteringCoefficient"
     local writeLabelName="dependencies_projection_write_label=LocalClusteringCoefficient"

@@ -33,9 +33,6 @@ The graph projection functions used by this domain are sourced from:
 
 These are **not** copied into this domain — they are referenced from the central `cypher/` and `scripts/` directories.
 
-## Note: HDBSCAN Preprocessing
-
-The HDBSCAN community detection algorithm in `communityCsv.sh` uses FastRP node embeddings as preprocessing input. These embeddings are generated on-the-fly using queries from [`cypher/Node_Embeddings/`](../../cypher/Node_Embeddings/). This is the only cross-domain reference and is documented in the script with a comment.
 
 ## Optional: Type Labels
 
