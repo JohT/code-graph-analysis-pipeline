@@ -201,6 +201,95 @@ nodeEmbeddingsWithGraphSAGE() {
 }
 
 
+# Checks whether a given node property has been written on nodes with the given label.
+# Returns true (=0) if at least one node has the property set, false (=1) otherwise.
+#
+# Required Parameters:
+# - dependencies_projection_node=...
+#   Label of the nodes to check. Example: "Package"
+# - dependencies_projection_write_property=...
+#   Name of the property to check. Example: "centralityPageRank"
+isNodePropertyCalculated() {
+    local checkResult
+    checkResult=$(execute_cypher "${NODE_EMBEDDINGS_QUERIES_DIR}/node-embeddings/Node_Embeddings_0d_Check_Node_Property.cypher" "${@}")
+    if is_result_and_csv_column_greater_zero "${checkResult}" "nodeCount"; then
+        true
+    else
+        false
+    fi
+}
+
+# Writes PageRank centrality scores to nodes as 'centralityPageRank' if not already present.
+# Runs on the already-created in-memory projection for the given node layer.
+#
+# Required Parameters:
+# - dependencies_projection=...
+# - dependencies_projection_node=...
+# - dependencies_projection_weight_property=...
+ensureCentralityPageRankWritten() {
+    local nodeLabel
+    nodeLabel=$(extractQueryParameter "dependencies_projection_node" "${@}")
+    local checkProperty="dependencies_projection_write_property=centralityPageRank"
+
+    if isNodePropertyCalculated "${@}" "${checkProperty}"; then
+        echo "nodeEmbeddingsCsv: centralityPageRank already exists for ${nodeLabel} nodes — skipping."
+        return
+    fi
+    echo "nodeEmbeddingsCsv: centralityPageRank not found for ${nodeLabel} nodes — computing now."
+    execute_cypher "${NODE_EMBEDDINGS_QUERIES_DIR}/node-embeddings/Node_Embeddings_0e_Write_Centrality_Page_Rank.cypher" "${@}"
+}
+
+# Writes Leiden community IDs to nodes as 'communityLeidenId' if not already present.
+# Runs on the already-created in-memory projection for the given node layer.
+#
+# Required Parameters:
+# - dependencies_projection=...
+# - dependencies_projection_node=...
+# - dependencies_projection_weight_property=...
+ensureCommunityLeidenIdWritten() {
+    local nodeLabel
+    nodeLabel=$(extractQueryParameter "dependencies_projection_node" "${@}")
+    local checkProperty="dependencies_projection_write_property=communityLeidenId"
+
+    if isNodePropertyCalculated "${@}" "${checkProperty}"; then
+        echo "nodeEmbeddingsCsv: communityLeidenId already exists for ${nodeLabel} nodes — skipping."
+        return
+    fi
+    echo "nodeEmbeddingsCsv: communityLeidenId not found for ${nodeLabel} nodes — computing now."
+    execute_cypher "${NODE_EMBEDDINGS_QUERIES_DIR}/node-embeddings/Node_Embeddings_0f_Write_Community_Leiden_Id.cypher" "${@}"
+}
+
+# Runs all node embedding algorithms for a given architectural layer.
+# Ensures centrality and community properties exist first, then computes embeddings.
+#
+# Required Parameters:
+# - dependencies_projection=...
+#   Name prefix for the in-memory projection name for dependencies. Example: "artifact-embeddings"
+# - dependencies_projection_node=...
+#   Label of the nodes that will be used for the projection. Example: "Artifact"
+# - dependencies_projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+# - dependencies_projection_embedding_dimension=...
+#   Number of dimensions for FastRP and Node2Vec. Example: "16"
+# - dependencies_projection_embedding_dimension_hashgnn=...
+#   Number of dimensions for HashGNN (typically larger). Example: "32"
+runNodeEmbeddingsForLayer() {
+    local projection="$1"
+    local node="$2"
+    local weight="$3"
+    local dimensions="$4"
+    local dimensions_hashgnn="$5"
+
+    ensureCentralityPageRankWritten "${projection}" "${node}" "${weight}"
+    ensureCommunityLeidenIdWritten "${projection}" "${node}" "${weight}"
+    time nodeEmbeddingsWithFastRandomProjection "${projection}" "${node}" "${weight}" "${dimensions}"
+    time nodeEmbeddingsWithHashGNN "${projection}" "${node}" "${weight}" "${dimensions_hashgnn}"
+    time nodeEmbeddingsWithNode2Vec "${projection}" "${node}" "${weight}" "${dimensions}"
+    # GraphSAGE is very computationally expensive so it is currently optional and can be enabled if desired.
+    # time nodeEmbeddingsWithGraphSAGE "${projection}" "${node}" "${weight}" "${dimensions}"
+}
+
+
 # ── Java Artifact Node Embeddings ─────────────────────────────────────────────
 
 ARTIFACT_PROJECTION="dependencies_projection=artifact-embeddings"
@@ -210,11 +299,7 @@ ARTIFACT_DIMENSIONS="dependencies_projection_embedding_dimension=16"
 ARTIFACT_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=32"
 
 if createUndirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
-    time nodeEmbeddingsWithFastRandomProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS_HASHGNN}"
-    time nodeEmbeddingsWithNode2Vec "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
-    # GraphSAGE is very computationally expensive so it is currently optional and can be enabled if desired.
-    # time nodeEmbeddingsWithGraphSAGE "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}"
+    runNodeEmbeddingsForLayer "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}" "${ARTIFACT_DIMENSIONS}" "${ARTIFACT_DIMENSIONS_HASHGNN}"
 fi
 
 # ── Java Package Node Embeddings ──────────────────────────────────────────────
@@ -226,11 +311,7 @@ PACKAGE_DIMENSIONS="dependencies_projection_embedding_dimension=32"
 PACKAGE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
 
 if createUndirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
-    time nodeEmbeddingsWithFastRandomProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS_HASHGNN}"
-    time nodeEmbeddingsWithNode2Vec "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
-    # GraphSAGE is very computationally expensive so it is currently optional and can be enabled if desired.
-    # time nodeEmbeddingsWithGraphSAGE "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}"
+    runNodeEmbeddingsForLayer "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}" "${PACKAGE_DIMENSIONS}" "${PACKAGE_DIMENSIONS_HASHGNN}"
 fi
 
 # ── Java Type Node Embeddings ─────────────────────────────────────────────────
@@ -242,11 +323,7 @@ TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
 TYPE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"
 
 if createUndirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}"; then
-    time nodeEmbeddingsWithFastRandomProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS_HASHGNN}"
-    time nodeEmbeddingsWithNode2Vec "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
-    # GraphSAGE is very computationally expensive, especially for the larger Type node set, so it is currently optional and can be enabled if desired.
-    # time nodeEmbeddingsWithGraphSAGE "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}"
+    runNodeEmbeddingsForLayer "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}" "${TYPE_DIMENSIONS}" "${TYPE_DIMENSIONS_HASHGNN}"
 fi
 
 # ── TypeScript Module Node Embeddings ─────────────────────────────────────────
@@ -258,11 +335,7 @@ MODULE_DIMENSIONS="dependencies_projection_embedding_dimension=32"
 MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=32"
 
 if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
-    time nodeEmbeddingsWithFastRandomProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
-    time nodeEmbeddingsWithHashGNN "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS_HASHGNN}"
-    time nodeEmbeddingsWithNode2Vec "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
-    # GraphSAGE is very computationally expensive, especially for the larger Module node set, so it is currently optional and can be enabled if desired.
-    # time nodeEmbeddingsWithGraphSAGE "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}"
+    runNodeEmbeddingsForLayer "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}" "${MODULE_DIMENSIONS_HASHGNN}"
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
