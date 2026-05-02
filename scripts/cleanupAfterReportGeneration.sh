@@ -39,8 +39,13 @@ find "${report_directory}" -type f -name "*.md" | sort | while read -r report_fi
     fi
 done
 
+# Delete empty subdirectories (e.g., empty node-type folders like Typescript_Module when TypeScript is not analyzed).
+# Use -mindepth 1 to exclude the root report directory itself from deletion, so the subsequent check can proceed reliably.
+# Use -depth (process directories depth-first) to ensure nested directories become empty and are deleted after their children.
+find "${report_directory}" -mindepth 1 -depth -type d -empty -delete
+
 # Delete reports directory if its empty
-number_files_in_report_directory=$( find "${report_directory}" -type f | wc -l | awk '{print $1}' )
+number_files_in_report_directory=$( find "${report_directory}" -type f 2>/dev/null | wc -l | awk '{print $1}' )
 if [[ "${number_files_in_report_directory}" -lt 1 ]]; then
     echo "cleanupReports: deleting empty (${number_files_in_report_directory} files) directory ${report_directory}"
     rm -rf "${report_directory}"
