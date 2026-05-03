@@ -1,4 +1,4 @@
-// Node count for each label separate. Doesn_t sum up to the number of total labels since one node can have multiple labels.
+// Node count for each label. Doesn't sum up to the number of total labels since one node can have multiple labels.
 
  MATCH (allNodes)
   WITH COUNT(allNodes) AS totalNodeCount

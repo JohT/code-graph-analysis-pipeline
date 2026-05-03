@@ -45,6 +45,11 @@ fi
 
 # Run all jupiter notebooks
 for jupyter_notebook_file in "${JUPYTER_NOTEBOOK_DIRECTORY}"/*.ipynb; do 
+    if [ ! -e "$jupyter_notebook_file" ]; then
+        echo "${SCRIPT_NAME}: Warning: No Jupyter Notebook files found in ${JUPYTER_NOTEBOOK_DIRECTORY}." >&2
+        continue # Handle the case where no .ipynb files are found to prevent the loop from running with the literal pattern as filename.
+    fi
+
     jupyter_notebook_filename=$(basename -- "${jupyter_notebook_file}")
     jupyter_notebook_filename_without_extension="${jupyter_notebook_filename%.*}" # Remove file extension
     
