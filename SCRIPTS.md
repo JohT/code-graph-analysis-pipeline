@@ -54,6 +54,10 @@ Script | Directory | Description
 [nodeEmbeddingsMarkdown.sh](./domains/node-embeddings/nodeEmbeddingsMarkdown.sh) | node-embeddings | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [nodeEmbeddingsPython.sh](./domains/node-embeddings/nodeEmbeddingsPython.sh) | node-embeddings | Generates 2D UMAP scatter plots of node embeddings stored in Neo4j as SVG files.
 [nodeEmbeddingsSummary.sh](./domains/node-embeddings/summary/nodeEmbeddingsSummary.sh) | summary | Creates a Markdown report summarising node embedding properties present in the graph.
+[overviewCsv.sh](./domains/overview/overviewCsv.sh) | overview | Executes "Overview" Cypher queries to generate CSV reports for node labels, relationship types,
+[overviewMarkdown.sh](./domains/overview/overviewMarkdown.sh) | overview | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[overviewPython.sh](./domains/overview/overviewPython.sh) | overview | Generates overview charts as SVG files by executing overviewCharts.py.
+[overviewSummary.sh](./domains/overview/summary/overviewSummary.sh) | summary | Creates a Markdown report summarising overview metrics: node label and relationship type
 [init.sh](./init.sh) |  | Initializes a new analysis project by creating all necessary directories based on the given input parameter with the analysis name. 
 [activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Jupyter Notebooks and Python scripts.
 [activatePythonEnvironment.sh](./scripts/activatePythonEnvironment.sh) | scripts | Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Jupyter Notebooks and Python scripts.
@@ -102,7 +106,6 @@ Script | Directory | Description
 [Neo4jv5-low-memory.sh](./scripts/profiles/Neo4jv5-low-memory.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 [Neo4jv5.sh](./scripts/profiles/Neo4jv5.sh) | profiles | Sets all settings variables for an analysis with Neo4j v5.x (newest version as of june 2023).
 [projectionFunctions.sh](./scripts/projectionFunctions.sh) | scripts | Provides functions to create and delete Graph Projections for Neo4j Graph Data Science.
-[OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) | reports | Executes "Overview" Cypher queries to get the "overview-csv" CSV reports.
 [AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
 [CsvReports.sh](./scripts/reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required).
 [DatabaseCsvExportReports.sh](./scripts/reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all"
