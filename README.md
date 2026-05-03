@@ -52,7 +52,7 @@ Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [co
 - [Method Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/method-metrics-java/MethodMetricsJava.md)  shows how the effective number of lines of code and the cyclomatic complexity are distributed across the methods in the code ([Notebook](./domains/java/explore/MethodMetricsJavaExploration.ipynb)).
 - [Node Embeddings](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/node-embeddings-java/NodeEmbeddingsJava.md) shows how to generate node embeddings and to further reduce their dimensionality to be able to visualize them in a 2D plot ([Notebook](./domains/node-embeddings/explore/NodeEmbeddingsJavaExploration.ipynb)).
 - [Object Oriented Design Quality Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./domains/internal-dependencies/explore/ObjectOrientedDesignMetricsJava.ipynb)).
-- [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
+- [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./domains/overview/explore/OverviewJavaExploration.ipynb)).
 - [Visibility Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./domains/internal-dependencies/explore/VisibilityMetricsJava.ipynb)).
 - [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./domains/internal-dependencies/explore/Wordcloud.ipynb)).
 - [Java Archetypes Treemap](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/JavaTreemap2ArchetypesOverviewPerDirectory.svg) ([Python Script](./domains/anomaly-detection/treemapVisualizations.py))
@@ -221,11 +221,11 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 
 - How can i add a CSV report to the pipeline?  
   👉 Put your new cypher query into the [cypher](./cypher) directory or a suitable (new) sub directory.  
-  👉 Create a new CSV report script in the [scripts/reports](./scripts/reports/) directory. Take for example [OverviewCsv.sh](./scripts/reports/OverviewCsv.sh) as a reference.  
+  👉 Create a new CSV report script in a domain directory under [domains](./domains/) or in [scripts/reports](./scripts/reports/). Take for example [overviewCsv.sh](./domains/overview/overviewCsv.sh) as a reference.  
   👉 The script will automatically be included because of the directory and its name ending with "Csv.sh".
 
 - How can i add a Jupyter Notebook report to the pipeline?  
-  👉 Put your new notebook into the [jupyter](./jupyter) directory.  
+  👉 Put your new notebook into the `./jupyter` directory.  
   👉 The file will then automatically be picked up by [executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookReport.sh).
 
 - How can i analyze a different code basis automatically?  

@@ -302,7 +302,7 @@ These options eliminate manual repository downloads and enable more automated, r
 
 ### 🚀 Feature
 
-[Compare pairwise changed files with their dependency weights](https://github.com/JohT/code-graph-analysis-pipeline/pull/362/commits/7e5886904bcfe503a73dfba654aa972418f064b0) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/362:   
+[Compare pairwise changed files with their dependency weights](https://github.com/JohT/code-graph-analysis-pipeline/pull/362/commits/7e5886904bcfe503a73dfba654aa972418f064b0) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/362:  
 The [GitHistoryGeneral.ipynb](https://github.com/JohT/code-graph-analysis-pipeline/blob/cb47f814332f517807b9e144df352f68146cddfe/jupyter/GitHistoryGeneral.ipynb) notebook now includes a section that analyzes pairwise file changes alongside their code dependencies (e.g., imports). It calculates correlations, p-values, and visualizes the results using a scatter plot.
 
 ### 🛠 Fix
@@ -535,7 +535,7 @@ For all details see: https://github.com/JohT/code-graph-analysis-pipeline/releas
 
 * [External Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./domains/external-dependencies/explore/ExternalDependenciesJava.ipynb)).
 * [Object Oriented Design Quality Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/object-oriented-design-metrics-java/ObjectOrientedDesignMetricsJava.md) is based on [OO Design Quality Metrics by Robert Martin](https://api.semanticscholar.org/CorpusID:18246616) ([Notebook](./domains/internal-dependencies/explore/ObjectOrientedDesignMetricsJava.ipynb)).
-* [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./jupyter/OverviewJava.ipynb)).
+* [Overview](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/overview-java/OverviewJava.md) contains overall statistics and details about methods and their complexity. ([Notebook](./domains/overview/explore/OverviewJavaExploration.ipynb)).
 * [Internal Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-java/InternalDependenciesJava.md) is based on [Analyze java package metrics in a graph database](https://joht.github.io/johtizen/data/2023/04/21/java-package-metrics-analysis.html) and also includes cyclic dependencies ([Notebook](./domains/internal-dependencies/explore/InternalDependenciesJava.ipynb)).
 * [Visibility Metrics](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/visibility-metrics-java/VisibilityMetricsJava.md) ([Notebook](./domains/internal-dependencies/explore/VisibilityMetricsJava.ipynb)).
 * [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./domains/internal-dependencies/explore/Wordcloud.ipynb)).
