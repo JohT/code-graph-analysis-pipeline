@@ -94,21 +94,6 @@ Script | Directory | Description
 | [Get_Graph_Data_Science_Library_Version.cypher](./cypher/Miscellaneous/Get_Graph_Data_Science_Library_Version.cypher) | Miscellaneous | Get Graph Data Science Library Version |
 | [Get_Graph_Data_Science_System_Information.cypher](./cypher/Miscellaneous/Get_Graph_Data_Science_System_Information.cypher) | Miscellaneous | Get Graph Data Science System Information |
 | [Set_artifactName_property_on_every_Package_node.cypher](./cypher/Miscellaneous/Set_artifactName_property_on_every_Package_node.cypher) | Miscellaneous | Set artifactName property on every Package node. Requires "Add_file_name_and_extension.cypher". |
-| [Cyclomatic_Method_Complexity_Distribution.cypher](./cypher/Overview/Cyclomatic_Method_Complexity_Distribution.cypher) | Overview | Cyclomatic Complexity Method Complexity Distribution |
-| [Dependency_node_labels.cypher](./cypher/Overview/Dependency_node_labels.cypher) | Overview | Explore DEPENDS_ON relationship node labels |
-| [Effective_Method_Line_Count_Distribution.cypher](./cypher/Overview/Effective_Method_Line_Count_Distribution.cypher) | Overview | Effective Method Line Count Distribution |
-| [Effective_lines_of_method_code_per_package.cypher](./cypher/Overview/Effective_lines_of_method_code_per_package.cypher) | Overview | Effective lines of method code per package. Requires "Add_file_name_and_extension.cypher". |
-| [Effective_lines_of_method_code_per_type.cypher](./cypher/Overview/Effective_lines_of_method_code_per_type.cypher) | Overview | Effective lines of method code per type. Requires "Add_file_name_and_extension.cypher". |
-| [Node_label_combination_count.cypher](./cypher/Overview/Node_label_combination_count.cypher) | Overview | Node count for each label combination. Sums up to the total number of nodes. |
-| [Node_label_count.cypher](./cypher/Overview/Node_label_count.cypher) | Overview | Node count for each label separate. Doesn_t sum up to the number of total labels since one node can have multiple labels. |
-| [Node_labels_and_their_relationships.cypher](./cypher/Overview/Node_labels_and_their_relationships.cypher) | Overview | List node labels and their relationship types, their count and their density. |
-| [Number_of_elements_per_module_for_Typescript.cypher](./cypher/Overview/Number_of_elements_per_module_for_Typescript.cypher) | Overview | Number of elements per module for Typescript |
-| [Number_of_packages_per_artifact.cypher](./cypher/Overview/Number_of_packages_per_artifact.cypher) | Overview | Number of packages per artifact. Requires "Add_file_name_and_extension.cypher". |
-| [Number_of_types_per_artifact.cypher](./cypher/Overview/Number_of_types_per_artifact.cypher) | Overview | Number of types per artifact. Requires "Add_file_name_and_extension.cypher". |
-| [Overview_size.cypher](./cypher/Overview/Overview_size.cypher) | Overview | Overview size |
-| [Overview_size_for_Typescript.cypher](./cypher/Overview/Overview_size_for_Typescript.cypher) | Overview | Overview size for Typescript |
-| [Relationship_type_count.cypher](./cypher/Overview/Relationship_type_count.cypher) | Overview | Relationship count for each type separate. Sums up to the total number of relationships (100%). |
-| [Words_for_Wordcloud.cypher](./cypher/Overview/Words_for_Wordcloud.cypher) | Overview | Words for Wordcloud |
 | [Label_base_java_types.cypher](./cypher/Types/Label_base_java_types.cypher) | Types | Label primitive Java types and void |
 | [Label_buildin_java_types.cypher](./cypher/Types/Label_buildin_java_types.cypher) | Types | Label build-in Java types |
 | [Label_resolved_duplicate_types.cypher](./cypher/Types/Label_resolved_duplicate_types.cypher) | Types | Label resolved duplicate types. |
@@ -546,3 +531,18 @@ Script | Directory | Description
 | [Set_Parameters.cypher](./domains/node-embeddings/queries/node-embeddings/Set_Parameters.cypher) | node-embeddings | Example on how to set the parameters for node embeddings in this case for Packages and Node2Vec |
 | [Embedding_properties_overview.cypher](./domains/node-embeddings/queries/statistics/Embedding_properties_overview.cypher) | statistics | Overview of codeUnit node embedding properties in the graph. Shows which embedding properties are set and how many nodes have them. Reads embeddingsFastRandomProjection, embeddingsHashGNN, embeddingsNode2Vec properties written by nodeEmbeddingsCsv.sh. |
 | [Node_embeddings_with_community_and_centrality.cypher](./domains/node-embeddings/queries/statistics/Node_embeddings_with_community_and_centrality.cypher) | statistics | List nodes that have both codeUnit embedding properties and community or centrality properties set. Reads embeddingsFastRandomProjection, communityLeidenId, centralityPageRank written by nodeEmbeddingsCsv.sh and graphAlgorithmsCsv.sh. |
+| [Cyclomatic_Method_Complexity_Distribution.cypher](./domains/overview/queries/overview/Cyclomatic_Method_Complexity_Distribution.cypher) | overview | Cyclomatic Complexity Method Complexity Distribution |
+| [Dependency_node_labels.cypher](./domains/overview/queries/overview/Dependency_node_labels.cypher) | overview | Explore DEPENDS_ON relationship node labels |
+| [Effective_Method_Line_Count_Distribution.cypher](./domains/overview/queries/overview/Effective_Method_Line_Count_Distribution.cypher) | overview | Effective Method Line Count Distribution |
+| [Effective_lines_of_method_code_per_package.cypher](./domains/overview/queries/overview/Effective_lines_of_method_code_per_package.cypher) | overview | Effective lines of method code per package. Requires "Add_file_name_and_extension.cypher". |
+| [Effective_lines_of_method_code_per_type.cypher](./domains/overview/queries/overview/Effective_lines_of_method_code_per_type.cypher) | overview | Effective lines of method code per type. Requires "Add_file_name_and_extension.cypher". |
+| [Node_label_combination_count.cypher](./domains/overview/queries/overview/Node_label_combination_count.cypher) | overview | Node count for each label combination. Sums up to the total number of nodes. |
+| [Node_label_count.cypher](./domains/overview/queries/overview/Node_label_count.cypher) | overview | Node count for each label. Doesn't sum up to the number of total labels since one node can have multiple labels. |
+| [Node_labels_and_their_relationships.cypher](./domains/overview/queries/overview/Node_labels_and_their_relationships.cypher) | overview | List node labels and their relationship types, their count and their density. |
+| [Number_of_elements_per_module_for_Typescript.cypher](./domains/overview/queries/overview/Number_of_elements_per_module_for_Typescript.cypher) | overview | Number of elements per module for Typescript |
+| [Number_of_packages_per_artifact.cypher](./domains/overview/queries/overview/Number_of_packages_per_artifact.cypher) | overview | Number of packages per artifact. Requires "Add_file_name_and_extension.cypher". |
+| [Number_of_types_per_artifact.cypher](./domains/overview/queries/overview/Number_of_types_per_artifact.cypher) | overview | Number of types per artifact. Requires "Add_file_name_and_extension.cypher". |
+| [Overview_size.cypher](./domains/overview/queries/overview/Overview_size.cypher) | overview | Overview size |
+| [Overview_size_for_Typescript.cypher](./domains/overview/queries/overview/Overview_size_for_Typescript.cypher) | overview | Overview size for Typescript |
+| [Relationship_type_count.cypher](./domains/overview/queries/overview/Relationship_type_count.cypher) | overview | Relationship count for each type separate. Sums up to the total number of relationships (100%). |
+| [Words_for_Wordcloud.cypher](./domains/overview/queries/overview/Words_for_Wordcloud.cypher) | overview | Words for Wordcloud |
