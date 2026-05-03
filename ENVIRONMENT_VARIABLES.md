@@ -43,6 +43,7 @@ NEO4J_GDS_PLUGIN_VERSION | 2.27.0 | Graph Data Science (GDS) Plugin Version 2.4.
 NEO4J_OPEN_GDS_PLUGIN_VERSION | 2.26.0 | Graph Data Science (GDS) Plugin Version 2.4.x of is compatible with Neo4j 5.x
 NEO4J_GDS_PLUGIN_EDITION | open | Graph Data Science (GDS) Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 NODE_EMBEDDINGS_SUMMARY_DIR | ${NODE_EMBEDDINGS_SCRIPT_DIR}/summary | 
+OVERVIEW_SUMMARY_DIR | ${OVERVIEW_SCRIPT_DIR}/summary | 
 ARTIFACTS_DIRECTORY | artifacts | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 JUPYTER_NOTEBOOK_DIRECTORY | ${SCRIPTS_DIR}/../jupyter | Repository directory containing the Jupyter Notebooks
