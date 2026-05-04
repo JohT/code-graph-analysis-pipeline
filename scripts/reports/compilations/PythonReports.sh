@@ -32,6 +32,7 @@ echo "${SCRIPT_NAME}: REPORTS_SCRIPT_DIR=${REPORTS_SCRIPT_DIR}"
 echo "${SCRIPT_NAME}: SCRIPTS_DIR=${SCRIPTS_DIR}"
 echo "${SCRIPT_NAME}: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
 echo "${SCRIPT_NAME}: ANALYSIS_DOMAIN=${ANALYSIS_DOMAIN}"
+echo "${SCRIPT_NAME}: ANALYSIS_DOMAINS_TO_SKIP=${ANALYSIS_DOMAINS_TO_SKIP:-}"
 
 # Create and activate (if necessary) a virtual environment (Conda or venv).
 # For Conda, the environment name is taken from the environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
@@ -42,11 +43,17 @@ time source "${SCRIPTS_DIR}/activatePythonEnvironment.sh"
 
 echo "${LOG_GROUP_END}";
 
-# Run all Python report scripts (filename ending with Csv.sh) in the REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY directories.
+# Run all Python report scripts (filename ending with Python.sh or Python.py) in the REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY directories.
 # When a specific analysis domain is selected, only run reports for that domain's directory.
 # Otherwise, run reports from both the general reports directory and all domains.
 if [ -n "${ANALYSIS_DOMAIN}" ]; then
-    analysisReportScriptDirectories=( "${DOMAINS_DIRECTORY}/${ANALYSIS_DOMAIN}" )
+    # Skip if the selected domain is also in the exclusion list
+    if [[ ",${ANALYSIS_DOMAINS_TO_SKIP:-}," == *",${ANALYSIS_DOMAIN},"* ]]; then
+        echo "${SCRIPT_NAME}: Skipping domain '${ANALYSIS_DOMAIN}' (listed in ANALYSIS_DOMAINS_TO_SKIP)."
+        analysisReportScriptDirectories=()
+    else
+        analysisReportScriptDirectories=( "${DOMAINS_DIRECTORY}/${ANALYSIS_DOMAIN}" )
+    fi
 else
     analysisReportScriptDirectories=( "${REPORTS_SCRIPT_DIR}" "${DOMAINS_DIRECTORY}" )
 fi
@@ -61,6 +68,22 @@ for directory in "${analysisReportScriptDirectories[@]}"; do
     find "${directory}" -type f \( -name "*Python.sh" -o -name "*Python.py" \) | sort | while read -r report_script_file; do
         report_script_filename=$(basename -- "${report_script_file}");
         report_script_filename="${report_script_filename%.*}" # Remove file extension
+
+        # Skip scripts belonging to an excluded domain
+        if [ -n "${ANALYSIS_DOMAINS_TO_SKIP:-}" ]; then
+            IFS=',' read -ra domainsToSkip <<< "${ANALYSIS_DOMAINS_TO_SKIP}"
+            skipThisScript=false
+            for domainToSkip in "${domainsToSkip[@]}"; do
+                if [[ "${report_script_file}" == *"/${domainToSkip}/"* ]]; then
+                    echo "${SCRIPT_NAME}: Skipping ${report_script_filename} (domain '${domainToSkip}' is in ANALYSIS_DOMAINS_TO_SKIP)."
+                    skipThisScript=true
+                    break
+                fi
+            done
+            if ${skipThisScript}; then
+                continue
+            fi
+        fi
 
         echo "${LOG_GROUP_START}$(date +'%Y-%m-%dT%H:%M:%S') Create Python Report ${report_script_filename}";
         echo "${SCRIPT_NAME}: $(date +'%Y-%m-%dT%H:%M:%S') Starting ${report_script_filename}...";

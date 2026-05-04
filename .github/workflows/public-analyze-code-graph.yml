@@ -85,6 +85,24 @@ on:
         required: false
         type: string
         default: ''
+      run-all-domains:
+        description: >
+          When true, all analysis domains run including those skipped by default (anomaly-detection, node-embeddings, graph-algorithms).
+          Equivalent to passing '--exclude-domain ""' via 'analysis-arguments', but without the quoting complexity.
+          Takes priority over the 'exclude-domain' input when both are set.
+          Default: false (analyze.sh smart defaults apply)
+        required: false
+        type: boolean
+        default: false
+      exclude-domain:
+        description: >
+          Comma-separated list of domain names to exclude from the analysis.
+          Must match subdirectory names in the 'domains/' directory (e.g. 'anomaly-detection,node-embeddings').
+          Overrides the analyze.sh smart defaults when set.
+          Default: '' (analyze.sh smart defaults apply: anomaly-detection, node-embeddings, graph-algorithms are skipped)
+        required: false
+        type: string
+        default: ''
       typescript-scan-heap-memory:
         description: >
           The heap memory size in MB to use for the TypeScript code scans (default=4096).
@@ -259,6 +277,15 @@ jobs:
           ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
       - name: Assemble DOMAIN_ARGUMENT
         run: echo "domainAnalysisArgument=${{ inputs.domain != '' && format('--domain {0} ', inputs.domain) || '' }}" >> $GITHUB_ENV
+      - name: Assemble EXCLUDE_DOMAIN_ARGUMENT
+        run: |
+          if [[ "${{ inputs.run-all-domains }}" == "true" ]]; then
+            echo 'excludeDomainArgument=--exclude-domain "" ' >> $GITHUB_ENV
+          elif [[ -n "${{ inputs.exclude-domain }}" ]]; then
+            echo "excludeDomainArgument=--exclude-domain \"${{ inputs.exclude-domain }}\" " >> $GITHUB_ENV
+          else
+            echo "excludeDomainArgument=" >> $GITHUB_ENV
+          fi
       - name: (Code Analysis) Analyze ${{ inputs.analysis-name }}
         working-directory: temp/${{ inputs.analysis-name }}
         shell: bash -el {0}
@@ -268,7 +295,7 @@ jobs:
           PREPARE_CONDA_ENVIRONMENT: "false" # Had already been done in step with id "prepare-conda-environment".
           USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: ${{ inputs.use-venv_virtual_python_environment }}
         run: |
-          TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ env.domainAnalysisArgument }}${{ inputs.analysis-arguments }}
+          TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ env.domainAnalysisArgument }}${{ env.excludeDomainArgument }}${{ inputs.analysis-arguments }}
     
       - name: Set artifact name for uploaded analysis results
         id: set-analysis-results-artifact-name

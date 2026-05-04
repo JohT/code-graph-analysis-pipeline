@@ -30,6 +30,13 @@
 #       The domain option can be combined with "--report" e.g. "--domain anomaly-detection --report Csv".
 #       Only a single domain can be selected. The domain name must match a subdirectory of the "domains" directory.
 
+# Note: The argument "--exclude-domain" is optional.
+#       It accepts a comma-separated list of domain names (subdirectories of "domains/") to skip during report generation.
+#       When not set and no --domain is specified, the default skipped domains are: anomaly-detection,node-embeddings,graph-algorithms.
+#       When not set and --domain is specified, no domains are skipped by default.
+#       Pass an empty string "" to disable all exclusions. Domain names must match subdirectories under "domains/".
+#       Results in the exported environment variable ANALYSIS_DOMAINS_TO_SKIP (comma-separated).
+
 # Note: The script and its sub scripts are designed to be as efficient as possible 
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
@@ -50,8 +57,41 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--report <All (default), Csv, Python, Visualization, Markdown...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--domain <domain-name>] [--explore] [--keep-running]"
-  exit 1
+  local exitCode="${1:-1}"
+  echo "Usage: $0 [--report <type>] [--profile <name>] [--domain <name>] [--exclude-domain <list>] [--explore] [--keep-running] [--help]"
+  echo ""
+  echo "Options:"
+  echo "  --report <type>           Report compilation to run. Default: All"
+  echo "                            Available types: All, Csv, Python, Visualization, Markdown, ..."
+  echo "                            Implemented as scripts/reports/compilations/<type>Reports.sh"
+  echo "  --profile <name>          Settings profile to use. Default: Default"
+  echo "                            Available profiles: Default, Neo4jv5, Neo4jv4, ..."
+  echo "                            Implemented as scripts/profiles/<name>.sh"
+  echo "  --domain <name>           Run only this domain's reports (vertical-slice). Default: all domains"
+  echo "                            Must match a subdirectory of the domains/ directory."
+  echo "  --exclude-domain <list>   Comma-separated list of domain names to skip. Default (no --domain): anomaly-detection,node-embeddings,graph-algorithms"
+  echo "                            Default (with --domain): empty (no exclusions). Pass \"\" to skip nothing."
+  echo "                            Exported as ANALYSIS_DOMAINS_TO_SKIP."
+  echo "  --explore                 Skip report generation and keep Neo4j running for manual exploration."
+  echo "  --keep-running            Keep Neo4j running after the analysis completes."
+  echo "  --help                    Print this usage information and exit."
+  echo ""
+  echo "Environment variables (optional, overrideable):"
+  echo "  REPORTS_SCRIPTS_DIRECTORY, REPORT_COMPILATIONS_SCRIPTS_DIRECTORY, SETTINGS_PROFILE_SCRIPTS_DIRECTORY"
+  echo "  ARTIFACTS_DIRECTORY, SOURCE_DIRECTORY, LOG_GROUP_START, LOG_GROUP_END"
+  echo ""
+  echo "Examples:"
+  echo "  $0"
+  echo "    # Full analysis with all defaults (ANALYSIS_DOMAINS_TO_SKIP=anomaly-detection,node-embeddings,graph-algorithms)"
+  echo "  $0 --domain git-history --report Csv --keep-running"
+  echo "    # Run only CSV reports for git-history domain, keep Neo4j running"
+  echo "  $0 --exclude-domain \"anomaly-detection,node-embeddings\""
+  echo "    # Run all domains except anomaly-detection and node-embeddings"
+  echo "  $0 --exclude-domain \"\""
+  echo "    # Run all domains (override default exclusions)"
+  echo "  $0 --help"
+  echo "    # Print this help and exit 0"
+  exit "${exitCode}"
 }
 
 # Default values
@@ -60,6 +100,8 @@ settingsProfile="Default"
 selectedAnalysisDomain=""
 exploreMode=false
 keepRunning=false
+excludeDomainsExplicitlySet=false
+selectedExcludedDomains=""
 
 # Function to check if a parameter value is missing (either empty or another option starting with --)
 is_missing_value_parameter() {
@@ -105,6 +147,18 @@ while [[ $# -gt 0 ]]; do
       selectedAnalysisDomain="$2"
       shift
       ;;
+    --exclude-domain)
+      if [[ $# -lt 2 ]] || [[ "${2:-}" == --* ]]; then
+        echo "analyze: Error: --exclude-domain requires a value (use \"\" for none)."
+        usage
+      fi
+      excludeDomainsExplicitlySet=true
+      selectedExcludedDomains="${2}"
+      shift
+      ;;
+    --help)
+      usage 0
+      ;;
     *)
       echo "analyze: Error: Unknown option: ${key}"
       usage
@@ -133,6 +187,26 @@ if [ -n "${selectedAnalysisDomain}" ]; then
       exit 1
       ;;
   esac
+fi
+
+# Validate --exclude-domain format: each segment must match ^[A-Za-z0-9-]+$ (empty string is allowed)
+if [ -n "${selectedExcludedDomains}" ]; then
+  # Detect empty segments from leading/trailing commas or double commas before splitting
+  case "${selectedExcludedDomains}" in
+    ,*|*,|*,,*)
+      echo "analyze: Error: --exclude-domain contains an empty segment (check for leading/trailing commas or double commas)."
+      exit 1
+      ;;
+  esac
+  IFS=',' read -ra excludedDomainSegments <<< "${selectedExcludedDomains}"
+  for excludedDomainSegment in "${excludedDomainSegments[@]}"; do
+    case "${excludedDomainSegment}" in
+      *[!A-Za-z0-9-]*)
+        echo "analyze: Error: Excluded domain segment '${excludedDomainSegment}' can only contain letters, numbers, and hyphens (no spaces or special characters)."
+        exit 1
+        ;;
+    esac
+  done
 fi
 
 # Check if there is something to scan and analyze
@@ -181,6 +255,44 @@ if [ -n "${selectedAnalysisDomain}" ]; then
   ANALYSIS_DOMAIN="${selectedAnalysisDomain}"
   echo "analyze: ANALYSIS_DOMAIN=${ANALYSIS_DOMAIN}"
 fi
+
+# Resolve the effective domain exclusion list.
+# Priority:
+# 1. --exclude-domain was explicitly set (even if empty) → use as-is
+# 2. --domain was set → no default skipping (empty)
+# 3. Otherwise → apply default slow/optional domains to skip
+if ${excludeDomainsExplicitlySet}; then
+  resolvedExcludedDomains="${selectedExcludedDomains}"
+elif [ -n "${ANALYSIS_DOMAIN}" ]; then
+  resolvedExcludedDomains=""
+else
+  resolvedExcludedDomains="anomaly-detection,node-embeddings,graph-algorithms"
+fi
+
+# Validate excluded domain names (explicit --exclude-domain only). Fail-fast like --domain does.
+if ${excludeDomainsExplicitlySet} && [ -n "${resolvedExcludedDomains}" ]; then
+  IFS=',' read -ra excludedDomainNamesToCheck <<< "${resolvedExcludedDomains}"
+  for excludedDomainNameToCheck in "${excludedDomainNamesToCheck[@]}"; do
+    if [ ! -d "${DOMAINS_DIRECTORY}/${excludedDomainNameToCheck}" ]; then
+      availableAnalysisDomains=$(find "${DOMAINS_DIRECTORY}" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; 2>/dev/null | sort | tr '\n' ' ')
+      echo "analyze: Error: Excluded domain '${excludedDomainNameToCheck}' does not match any subdirectory in ${DOMAINS_DIRECTORY}."
+      echo "analyze: Available domains: ${availableAnalysisDomains}"
+      exit 1
+    fi
+  done
+fi
+
+# Warn if --domain and --exclude-domain both reference the same domain (exclude wins)
+if [ -n "${ANALYSIS_DOMAIN}" ] && [ -n "${resolvedExcludedDomains}" ]; then
+  if [[ ",${resolvedExcludedDomains}," == *",${ANALYSIS_DOMAIN},"* ]]; then
+    echo "analyze: Warning: Selected domain '${ANALYSIS_DOMAIN}' is also in the exclude list. The domain will be skipped."
+  fi
+fi
+
+# Export resolved exclusion list so compilation scripts can filter domains
+export ANALYSIS_DOMAINS_TO_SKIP="${resolvedExcludedDomains}"
+export ANALYSIS_DOMAIN
+echo "analyze: ANALYSIS_DOMAINS_TO_SKIP=${ANALYSIS_DOMAINS_TO_SKIP}"
 
 # Assure that there is a report compilation script for the given report argument.
 REPORT_COMPILATION_SCRIPT="${SCRIPTS_DIR}/${REPORTS_SCRIPTS_DIRECTORY}/${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY}/${analysisReportCompilation}Reports.sh"
