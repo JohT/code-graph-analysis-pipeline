@@ -13,7 +13,6 @@ Supports Java and experimental TypeScript analysis.
 ├── domains/                         # Vertical-slice domains (self-contained analysis areas)
 │   └── <domain-name>/               # One dir per domain — see domains/ for current list
 ├── cypher/                          # Core Cypher queries (enrichment, projections, types)
-├── jupyter/                         # Legacy Jupyter notebooks (migrating into domains)
 ├── scripts/
 │   ├── reports/compilations/        # One *Reports.sh per report type — source of truth
 │   ├── reports/                     # Core report scripts
@@ -49,7 +48,7 @@ analyze.sh
 analyze.sh --domain <domain-name> --report <report-type> --keep-running
 ```
 
-**Report types** — one script per type in [scripts/reports/compilations/](./scripts/reports/compilations/): `All` (default), `Csv`, `Jupyter`, `Python`, `Markdown`, `Visualization`, `DatabaseCsvExport`.
+**Report types** — one script per type in [scripts/reports/compilations/](./scripts/reports/compilations/): `All` (default), `Csv`, `Python`, `Markdown`, `Visualization`, `DatabaseCsvExport`.
 
 **Domains** — one directory per domain in [domains/](./domains/): `anomaly-detection`, `external-dependencies`, `git-history`, `internal-dependencies`, `java`.
 
@@ -107,7 +106,7 @@ analyze.sh --domain anomaly-detection --report Python --keep-running
 
 - **Vertical slicing** — each domain self-contained: queries, scripts, charts, templates
 - **No generic abstractions** — no "util", "helper", "common", "shared"; share only meaningful domain concepts
-- **Progressive automation** — CSV needs no Python; Python/Jupyter add richer output; full pipeline does all
+- **Progressive automation** — CSV needs no Python; Python add richer output; full pipeline does all
 - **Graceful degradation** — domains handle missing data (e.g. no git history) with fallback reports or silent skip
 - **Cross-platform** — macOS (zsh), Linux (bash), Windows (Git Bash/WSL)
 

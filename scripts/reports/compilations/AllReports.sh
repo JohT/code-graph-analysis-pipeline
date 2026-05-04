@@ -19,12 +19,10 @@ REPORT_COMPILATIONS_SCRIPT_DIR=${REPORT_COMPILATIONS_SCRIPT_DIR:-$( CDPATH=. cd 
 # Instead, they will be processed in order. Especially the visualization
 # needs to be done as a last step to be able to use properties
 # and data written to the Graph in the CsvReports.
-# Additionally, Jupyter notebooks can then use precalculated properties from
-# the CSV reports. The drawback of this approach is that the introduced
+# The drawback of this approach is that the introduced
 # dependencies take away the self-containment of those reports and make it
 # then hard to parallelize them. So if coupling can be prevented, it still should.
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/CsvReports.sh"
-source "${REPORT_COMPILATIONS_SCRIPT_DIR}/JupyterReports.sh"
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/PythonReports.sh"
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/VisualizationReports.sh"
 source "${REPORT_COMPILATIONS_SCRIPT_DIR}/MarkdownReports.sh"

@@ -67,9 +67,3 @@ Applies to Jupyter notebooks, standalone `.py` scripts.
 - Public functions require docstring (triple double quotes)
 - First line imperative, period: `"""Compute distances from center."""`
 - Multi-line: blank line after summary, then `Args:`, `Returns:`, `Raises:` sections as needed
-
-## Notebook to Script Conversion
-
-- Extract charts and tables into standalone `.py` script with `main()` entry point
-- Original notebook → `explore/` with metadata `"code_graph_analysis_pipeline_data_validation": "ValidateAlwaysFalse"` and "Exploration" added to title
-- Charts → SVG, tables → CSV, descriptions → Markdown summary report

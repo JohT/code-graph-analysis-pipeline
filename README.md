@@ -22,7 +22,8 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Fully automated [local run](./GETTING_STARTED.md)
 - Easily integrable into your [continuous integration pipeline](./INTEGRATION.md)
 - More than 200 CSV reports for dependencies, metrics, cycles, annotations, algorithms and many more
-- Jupyter notebook reports for dependencies, metrics, visibility and many more
+- Python generated charts for dependencies, metrics, visibility and many more
+- Markdown summary reports for anomalies, archetypes, git history and many more
 - Anomaly detection powered by unsupervised machine learning and explainable AI
 - Graph structure visualization
 - Automated reference document generation
@@ -42,9 +43,9 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - August 2025: Anomaly detection powered by unsupervised machine learning and explainable AI
 - May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
 
-### :notebook: Jupyter Notebook and Python Reports
+### :notebook: Python Reports
 
-Here is an overview of [Jupyter Notebooks](https://jupyter.org) reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [Jupyter Notebook Report Reference](#page_with_curl-jupyter-notebook-report-reference).
+Here is an overview of Python and Markdown reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples).
 
 - [External Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./domains/external-dependencies/explore/ExternalDependenciesJava.ipynb)).
 - [Git History](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/git-history-general/GitHistoryGeneral.md) contains information about the git history of the analyzed code ([Notebook](./domains/git-history/explore/GitHistoryGeneralExploration.ipynb)).
@@ -104,13 +105,12 @@ Run [scripts/checkCompatibility.sh](./scripts/checkCompatibility.sh) to check if
 
   To run Jupyter notebooks, create an `.env` file in the folder from where you open the notebook containing for example: `NEO4J_INITIAL_PASSWORD=neo4j_password_of_my_choice`
 
-### Additional Prerequisites for Python and Jupyter Notebooks
+### Additional Prerequisites for Python
 
-- Python is required for Jupyter Notebook and Python reports.
+- Python is required for Python reports.
 - Either [Conda](https://docs.conda.io) or Python's build-in module [venv](https://docs.python.org/3/library/venv.html) a required as environment manager.
 - For Conda, use for example [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows).
 - To use venv, no additional installation is needed. For that the environment variable `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` needs to be set to `'true'`.
-- Chromium will automatically be downloaded if needed for Jupyter Notebook PDF reports generation.
 
 ### Additional Prerequisites for Windows
 
@@ -153,11 +153,9 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Uses [Neo4j Graph Data Science](https://neo4j.com/product/graph-data-science) for community detection, centrality, similarity, node embeddings and topological sort ([analysis.sh](./scripts/analysis/analyze.sh))
-- Generate [Jupyter Notebook](https://jupyter.org) reports using these libraries specified in the [conda-environment.yml](./conda-environment.yml):
+- Generate Python and Markdown reports using these libraries specified in the [conda-environment.yml](./conda-environment.yml):
   - [Python](https://www.python.org)
-  - [jupyter](https://jupyter.org)
   - [matplotlib](https://matplotlib.org)
-  - [nbconvert](https://nbconvert.readthedocs.io)
   - [numpy](https://numpy.org)
   - [pandas](https://pandas.pydata.org)
   - [pip](https://pip.pypa.io/en/stable)
@@ -183,10 +181,6 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 ## :page_with_curl: CSV Cypher Query Report Reference
 
 [CSV_REPORTS.md](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/CSV_REPORTS.md) lists all CSV Cypher query result reports inside the [results](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results) directory. It can be generated as described in [Generate CSV Report Reference](./COMMANDS.md#generate-csv-cypher-query-report-reference).
-
-## :page_with_curl: Jupyter Notebook Report Reference
-
-[JUPYTER_REPORTS.md](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/JUPYTER_REPORTS.md) lists all Jupyter Notebook reports inside the [results](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results) directory. It can be generated as described in [Generate Jupyter Notebook Report Reference](./COMMANDS.md#generate-jupyter-notebook-report-reference).
 
 ## :camera: Image Reference
 
@@ -224,10 +218,6 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   👉 Create a new CSV report script in a domain directory under [domains](./domains/) or in [scripts/reports](./scripts/reports/). Take for example [overviewCsv.sh](./domains/overview/overviewCsv.sh) as a reference.  
   👉 The script will automatically be included because of the directory and its name ending with "Csv.sh".
 
-- How can i add a Jupyter Notebook report to the pipeline?  
-  👉 Put your new notebook into the `./jupyter` directory.  
-  👉 The file will then automatically be picked up by [executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookReport.sh).
-
 - How can i analyze a different code basis automatically?  
   👉 Create a new download script like the ones in the [scripts/downloader](./scripts/downloader/) directory. Take for example [downloadAxonFramework.sh](./scripts/downloader/downloadAxonFramework.sh) as a reference for Java projects and [downloadReactRouter.sh](./scripts/downloader/downloadReactRouter.sh) as a reference for Typescript projects.
   👉 After downloading, run [analyze.sh](./scripts/analysis/analyze.sh). You can find these steps also in the [pipeline](./.github/workflows/internal-java-code-analysis.yml) as a reference.
@@ -235,19 +225,6 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - How can i trigger a full re-scan of all artifacts?  
   👉 Delete the file `artifactsChangeDetectionHash.txt` in the `artifacts` directory.
   👉 Delete the file `typescriptFileChangeDetectionHashFile.txt` in the `source` directory to additionally re-scan Typescript projects.
-
-- How can i enable PDF generation for Jupyter Notebooks (depends on chromium, takes more time)?  
-  👉 Set environment variable `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION` to anything except an empty string. Example:  
-
-  ```shell
-  export ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION="true"
-  ```
-
-  👉 Alternatively prepend your command with `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION="true"` like:  
-  
-  ```shell
-  ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
-  ```
 
 - How can I disable git log data import?  
   👉 Set environment variable `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` to `none`. Example:  
@@ -268,9 +245,11 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="aggregated" ./../../scripts/analysis/analyze.sh
   ```
 
-- Why are some Jupyter Notebook reports skipped?
-  👉 The custom Jupyter Notebook metadata property `code_graph_analysis_pipeline_data_validation` can be set to choose a query from [cypher/Validation](./cypher/Validation) that will be executed preliminary to the notebook. If the query leads to at least one result, the validation succeeds and the notebook will be run. If the query leads to no result, the notebook will be skipped.
-  For more details see [Data Availability Validation](./COMMANDS.md#data-availability-validation).
+- What changed in version 4 regarding report generation?  
+  👉 Jupyter notebook execution, PDF generation (`ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION`) and `--report Jupyter` have been removed.  
+  👉 Use `--report All` to generate every report (recommended). `--report Markdown` produces Markdown summaries but is not always a drop-in replacement for the removed Jupyter pipeline on a fresh workspace: some Markdown summaries depend on prior CSV or Python outputs (for example, [domains/overview/summary/overviewSummary.sh](domains/overview/summary/overviewSummary.sh#L11) and [domains/external-dependencies/summary/externalDependenciesSummary.sh](domains/external-dependencies/summary/externalDependenciesSummary.sh#L9)). To get complete Markdown reports on a fresh workspace either run `--report Csv` or `--report Python` for the affected domains first, or use `--report All`.  
+  👉 The 25 `explore/*.ipynb` notebooks in `domains/*/explore/` remain available for interactive exploration but are no longer executed automatically.  
+  👉 `nbconvert` is no longer required for automatic report generation and can be uninstalled. If you still want to open the `explore/*.ipynb` notebooks interactively you may still keep (or install) `jupyter` separately.
 
 - How can I increase the heap memory when scanning large Typescript projects?  
   👉 Use the environment variable TYPESCRIPT_SCAN_HEAP_MEMORY in megabyte (default = 4096):

@@ -120,6 +120,5 @@ jobs:
     with:
       analysis-name: ${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
       sources-upload-name: ${{ needs.prepare-code-to-analyze.outputs.sources-upload-name }}
-      jupyter-pdf: "false"
       domain: "external-dependencies" # For testing purposes: only run the external-dependencies domain (vertical slice)
       analysis-arguments: "--report Csv" # For testing purposes: only generate CSV reports

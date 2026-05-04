@@ -91,7 +91,6 @@ coverage/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*.nbconvert*
 
 # Python
 __pycache__/

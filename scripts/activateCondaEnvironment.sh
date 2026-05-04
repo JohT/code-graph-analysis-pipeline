@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Jupyter Notebooks and Python scripts.
+# Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Python scripts.
 
 # Note: This script uses the conda environment defined in CODEGRAPH_CONDA_ENVIRONMENT (defaults to "codegraph").
 #       If the environment hadn't been created yet, it will use "conda-environment.yml" from the root directory to create the environment.
@@ -35,13 +35,9 @@ fi
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "activateCondaEnvironment: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
-# Get the "jupyter" directory by taking the path of this script and going two directory up and then to "jupyter".
-JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY:-"${SCRIPTS_DIR}/../jupyter"} # Repository directory containing the Jupyter Notebooks
-echo "activateCondaEnvironment: JUPYTER_NOTEBOOK_DIRECTORY=${JUPYTER_NOTEBOOK_DIRECTORY}"
-
 # Get the file name of the environment description file for the conda package and environment manager 
 # that contains all dependencies and their versions.
-CONDA_ENVIRONMENT_FILE=${CONDA_ENVIRONMENT_FILE:-"${JUPYTER_NOTEBOOK_DIRECTORY}/../conda-environment.yml"} # Conda (package manager for Python) environment file path
+CONDA_ENVIRONMENT_FILE=${CONDA_ENVIRONMENT_FILE:-"${SCRIPTS_DIR}/../conda-environment.yml"} # Conda (package manager for Python) environment file path
 if [ ! -f "${CONDA_ENVIRONMENT_FILE}" ] ; then
     echo "activateCondaEnvironment: Couldn't find environment file ${CONDA_ENVIRONMENT_FILE}."
     exit 2

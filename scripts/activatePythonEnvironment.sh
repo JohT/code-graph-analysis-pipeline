@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Jupyter Notebooks and Python scripts.
+# Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Python scripts.
 
 # Note: If the environment hadn't been created yet, it will use "requirements.txt" from the root directory to create the environment.
 
@@ -27,7 +27,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 echo "activatePythonEnvironment: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Get the root directory by taking the path of this script and going one directory up.
-ROOT_DIRECTORY=${ROOT_DIRECTORY:-"$(dirname "${SCRIPTS_DIR}")"} # Repository directory containing the Jupyter Notebooks
+ROOT_DIRECTORY=${ROOT_DIRECTORY:-"$(dirname "${SCRIPTS_DIR}")"}  # Repository root directory
 echo "activatePythonEnvironment: ROOT_DIRECTORY=${ROOT_DIRECTORY}"
 
 # Get the file name of the environment description file for the conda package and environment manager 

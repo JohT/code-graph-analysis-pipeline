@@ -117,4 +117,3 @@ jobs:
       source-repository: https://github.com/AxonFramework/AxonFramework.git
       source-repository-branch: ${{ needs.prepare-code-to-analyze.outputs.source-repository-branch}}
       source-repository-history-only: true
-      jupyter-pdf: "false"

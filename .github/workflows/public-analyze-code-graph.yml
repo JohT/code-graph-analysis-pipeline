@@ -99,12 +99,6 @@ on:
         required: false
         type: number
         default: 5
-      jupyter-pdf:
-        description: >
-          Enable PDF generation for Jupyter Notebooks ("true") or disable it ("false").
-        required: false
-        type: string
-        default: 'true'
       use-venv_virtual_python_environment:
         description: >
           Use venv for virtual Python environments instead of Conda ("true") or not ("false", default).
@@ -157,8 +151,7 @@ jobs:
           distribution: "temurin"
           java-version: ${{ matrix.java }}
 
-      # "Setup Python" could be skipped if jupyter notebook analysis-results aren't needed or .venv is used.
-      # However, since this is a reuseable workflow, we always do it here.
+      # Python setup is always performed here since this is a reusable workflow.
       - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
         if: inputs.use-venv_virtual_python_environment == 'false'
         id: prepare-conda-environment
@@ -268,11 +261,9 @@ jobs:
         run: echo "domainAnalysisArgument=${{ inputs.domain != '' && format('--domain {0} ', inputs.domain) || '' }}" >> $GITHUB_ENV
       - name: (Code Analysis) Analyze ${{ inputs.analysis-name }}
         working-directory: temp/${{ inputs.analysis-name }}
-        # Shell type can be skipped if jupyter notebook analysis-results (and therefore conda) aren't needed
         shell: bash -el {0}
         env:
           NEO4J_INITIAL_PASSWORD: ${{ steps.generate-neo4j-initial-password.outputs.neo4j-initial-password }}
-          ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION: ${{ inputs.jupyter-pdf }}
           IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
           PREPARE_CONDA_ENVIRONMENT: "false" # Had already been done in step with id "prepare-conda-environment".
           USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: ${{ inputs.use-venv_virtual_python_environment }}
