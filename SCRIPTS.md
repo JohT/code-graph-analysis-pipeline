@@ -59,8 +59,8 @@ Script | Directory | Description
 [overviewPython.sh](./domains/overview/overviewPython.sh) | overview | Generates overview charts as SVG files by executing overviewCharts.py.
 [overviewSummary.sh](./domains/overview/summary/overviewSummary.sh) | summary | Creates a Markdown report summarising overview metrics: node label and relationship type
 [init.sh](./init.sh) |  | Initializes a new analysis project by creating all necessary directories based on the given input parameter with the analysis name. 
-[activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Jupyter Notebooks and Python scripts.
-[activatePythonEnvironment.sh](./scripts/activatePythonEnvironment.sh) | scripts | Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Jupyter Notebooks and Python scripts.
+[activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Python scripts.
+[activatePythonEnvironment.sh](./scripts/activatePythonEnvironment.sh) | scripts | Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Python scripts.
 [analyze.sh](./scripts/analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation.
 [checkCompatibility.sh](./scripts/checkCompatibility.sh) | scripts | Check environment dependencies and tool availability.
 [cleanupAfterReportGeneration.sh](./scripts/cleanupAfterReportGeneration.sh) | scripts | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder.
@@ -81,8 +81,6 @@ Script | Directory | Description
 [analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) | examples | This is an example for the analysis of the Java event-sourcing library "AxonFramework". 
 [analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router".
 [detectLatestGitTag.sh](./scripts/examples/detectLatestGitTag.sh) | examples | Returns the latest tag of a remote repository given by its url.
-[executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) | scripts | Executes all steps in the given Jupyter Notebook (ipynb), stores it and converts it to Markdown (md) and PDF.
-[executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookReport.sh) | scripts | Executes the given Jupyter Notebook and puts all resulting files (ipynb, md, pdf) into an accordingly named directory within the "results" directory.
 [executeQuery.sh](./scripts/executeQuery.sh) | scripts | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format.
 [executeQueryFunctions.sh](./scripts/executeQueryFunctions.sh) | scripts | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell". 
 [findPathsToScan.sh](./scripts/findPathsToScan.sh) | scripts | Finds all files and directories to scan and analyze and provides them as comma-separated list.
@@ -109,7 +107,6 @@ Script | Directory | Description
 [AllReports.sh](./scripts/reports/compilations/AllReports.sh) | compilations | Runs all report scripts.
 [CsvReports.sh](./scripts/reports/compilations/CsvReports.sh) | compilations | Runs all CSV report scripts (no Python and Chromium required).
 [DatabaseCsvExportReports.sh](./scripts/reports/compilations/DatabaseCsvExportReports.sh) | compilations | Exports the whole graph database as a CSV file using the APOC procedure "apoc.export.csv.all"
-[JupyterReports.sh](./scripts/reports/compilations/JupyterReports.sh) | compilations | Runs all Jupyter Notebook report scripts.
 [MarkdownReports.sh](./scripts/reports/compilations/MarkdownReports.sh) | compilations | Runs all Markdown report scripts (no Chromium required, no Python required).
 [PythonReports.sh](./scripts/reports/compilations/PythonReports.sh) | compilations | Runs all Python report scripts (no Chromium required).
 [VisualizationReports.sh](./scripts/reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports.
