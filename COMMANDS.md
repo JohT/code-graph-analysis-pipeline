@@ -7,9 +7,7 @@
     - [Notes](#notes)
     - [Examples](#examples)
         - [Start an analysis with CSV reports only](#start-an-analysis-with-csv-reports-only)
-        - [Start an analysis with Jupyter reports only](#start-an-analysis-with-jupyter-reports-only)
         - [Start an analysis with Python reports only](#start-an-analysis-with-python-reports-only)
-        - [Start an analysis with PDF generation](#start-an-analysis-with-pdf-generation)
         - [Start an analysis without importing git log data](#start-an-analysis-without-importing-git-log-data)
         - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
         - [Only run the reports of one specific domain](#only-run-the-reports-of-one-specific-domain)
@@ -39,12 +37,6 @@
     - [HTTP API](#http-api)
     - [executeQueryFunctions.sh](#executequeryfunctionssh)
 - [Stop Neo4j](#stop-neo4j)
-- [Jupyter Notebook](#jupyter-notebook)
-    - [Create a report with executeJupyterNotebookReport.sh](#create-a-report-with-executejupyternotebookreportsh)
-        - [Data Availability Validation](#data-availability-validation)
-    - [Execute a Notebook with executeJupyterNotebook.sh](#execute-a-notebook-with-executejupyternotebooksh)
-    - [Manually setup the environment using Conda](#manually-setup-the-environment-using-conda)
-    - [Executing Jupyter Notebooks with nbconvert](#executing-jupyter-notebooks-with-nbconvert)
 - [References](#references)
 - [Other Commands](#other-commands)
     - [Information about a process that listens to a specific local port](#information-about-a-process-that-listens-to-a-specific-local-port)
@@ -73,7 +65,7 @@ To run all analysis steps simple execute the following command:
 
 The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command line options:
 
-- `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python, Jupyter Notebook or any other related dependencies. The default value os `All` to generate all reports. `Jupiter` will only generate Jupyter Notebook reports. `DatabaseCsvExport` exports the whole graph database as a CSV file (performance intense, check if there are security concerns first).
+- `--report Csv` only generates CSV reports. This speeds up the report generation and doesn't depend on Python or any other related dependencies. The default value is `All` to generate all reports. `DatabaseCsvExport` exports the whole graph database as a CSV file (performance intense, check if there are security concerns first).
 
 - `--profile Neo4jv4` uses the older long term support (june 2023) version v4.4.x of Neo4j and suitable compatible versions of plugins and JQAssistant. Without specifying a profile, the newest versions will be used. Other profiles can be found in the directory [scripts/profiles](./scripts/profiles/).
 
@@ -110,28 +102,12 @@ the analysis can be speeded up with:
 ./../../scripts/analysis/analyze.sh --report Csv
 ```
 
-#### Start an analysis with Jupyter reports only
-
-If only the Jupyter reports are needed e.g. when the CSV reports had already been generated, the this can be done with:
-
-```shell
-./../../scripts/analysis/analyze.sh --report Jupyter
-```
-
 #### Start an analysis with Python reports only
 
-If you only need Python reports, e.g. to skip Chromium Browser dependency, the this can be done with:
+If you only need Python reports, e.g. to get expressive charts, you can run the Python reports independently with:
 
 ```shell
 ./../../scripts/analysis/analyze.sh --report Python
-```
-
-#### Start an analysis with PDF generation
-
-Note: Generating a PDF from a Jupyter notebook using [nbconvert](https://nbconvert.readthedocs.io) takes some time and might even fail due to a timeout error.
-
-```shell
-ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION=true ./../../scripts/analysis/analyze.sh
 ```
 
 #### Start an analysis without importing git log data
@@ -397,108 +373,11 @@ Use [stopNeo4j.sh](./domains/neo4j-management/stopNeo4j.sh) to stop the locally 
 
 **Hint:** Within the analysis workspace directory you can run `stopNeo4j.sh` directly without the `../../` prefix since the script is also directly available in the analysis workspace.
 
-## Jupyter Notebook
-
-### Create a report with executeJupyterNotebookReport.sh
-
-The script [executeJupyterNotebookReport.sh](./scripts/executeJupyterNotebookReport.sh) combines:
-
-- creating a directory within the "reports" directory
-- data availability validation using [executeQueryFunctions.sh](#executequeryfunctionssh)
-- executing and converting the given Notebook using [executeJupyterNotebook.sh](#execute-a-notebook-with-executejupyternotebooksh)
-
-Here is an example on how to run the report [Wordcloud.ipynb](./domains/internal-dependencies/explore/Wordcloud.ipynb):
-
-```shell
-./scripts/executeJupyterNotebookReport.sh  --jupyterNotebook Wordcloud.ipynb
-```
-
-#### Data Availability Validation
-
-[Jupyter Notebooks](https://jupyter.org) can have additional custom tags within their [metadata section](https://ipython.readthedocs.io/en/3.x/notebook/nbformat.html#metadata). Opening these files with a text editor unveils that typically at the end of the file. Some editors also support editing them directly. Here, the optional metadata property `code_graph_analysis_pipeline_data_validation` is used to specify which data validation query in the [cypher/Validation](./cypher/Validation/) directory should be used. Without this property, the data validation step is skipped. If a validation is specified, it will be executed before the Jupyter Notebook is executed. If the query has at least one result, the validation is seen as successful. Otherwise, the Jupyter Notebook will not be executed.
-
-This is helpful for Jupyter Notebook reports that are specific to a programming language or other specific data prerequisites. The Notebook will be skipped if there is no data available which would otherwise lead to confusing and distracting reports with empty tables and figures.
-
-You can search the messages `Validation succeeded` or `Validation failed` inside the log to get detailed information which Notebook had been skipped for which reason.
-
-### Execute a Notebook with executeJupyterNotebook.sh
-
-[executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) executes a Jupyter Notebook in the command line and convert it to different formats like Markdown and PDF (optionally). It takes care of [setting up the environment](#manually-setup-the-environment-using-conda) and [uses nbconvert](#executing-jupyter-notebooks-with-nbconvert) to execute the notebook and convert it to other file formats under the hood.
-
-Here is an example on how to use [executeJupyterNotebook.sh](./scripts/executeJupyterNotebook.sh) to for example run [Wordcloud.ipynb](./domains/internal-dependencies/explore/Wordcloud.ipynb):
-
-```shell
-./scripts/executeJupyterNotebook.sh ./domains/internal-dependencies/explore/Wordcloud.ipynb
-```
-
-### Manually setup the environment using Conda
-
-[Conda](https://conda.io) provides package, dependency, and environment management for any language. Here, it is used to setup the environment for Juypter Notebooks.
-
-- Setup environment
-
-  ```shell
-  conda create --name codegraph jupyter numpy matplotlib nbconvert nbconvert-webpdf
-  conda activate codegraph
-  ```
-
-  or by using the codegraph environment file [conda-environment.yml](./conda-environment.yml):
-
-  ```shell
-  conda env create --file ./conda-environment.yml
-  conda activate codegraph
-  ```
-
-- Export full conda-environment.yml
-
-  ```shell
-  conda env export --name codegraph > full-codegraph-conda-environment.yml
-  ```
-
-- Export only explicit conda-environment.yml
-
-  ```shell
-  conda env export --from-history --name codegraph | grep -v "^prefix: " > explicit-codegraph-conda-environment.yml
-  ```
-
-### Executing Jupyter Notebooks with nbconvert
-
-[nbconvert](https://nbconvert.readthedocs.io) converts Jupyter Notebooks to other static formats including HTML, LaTeX, PDF, Markdown, reStructuredText, and more.
-
-- Install pandoc used by nbconvert for LaTeX support (Mac)
-
-  ```shell
-  brew install pandoc mactex
-  ```
-
-- Start Jupyter Notebook
-
-  ```shell
-  jupyter notebook
-  ```
-
-- Create new Notebook with executed cells
-
-  ```shell
-  jupyter nbconvert --to notebook --execute ./jupyter/first-neo4j-tryout.ipynb
-  ```
-
-- Convert Notebook with executed cells to PDF
-
-  ```shell
-  jupyter nbconvert --to pdf ./jupyter/first-neo4j-tryout.nbconvert.ipynb
-  ```
-
 ## References
 
 - [Conda](https://conda.io)
 - [jQAssistant](https://jqassistant.github.io/jqassistant/current)
-- [Jupyter Notebook](https://jupyter.org)
-- [Jupyter Notebook - Using as a command line tool](https://nbconvert.readthedocs.io/en/latest/usage.html)
-- [Jupyter Notebook - Installing TeX for PDF conversion](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex)
-- [Jupyter Notebook Format - Metadata](https://ipython.readthedocs.io/en/3.x/notebook/nbformat.html#metadata)
 - [Bite-Sized Neo4j for Data Scientists](https://neo4j.com/video/bite-sized-neo4j-for-data-scientists)
-- [Hello World](https://nicolewhite.github.io/neo4j-jupyter/hello-world.html)
 - [Managing environments with Conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 - [Neo4j - Download](https://neo4j.com/download-center)
 - [Neo4j - HTTP API](https://neo4j.com/docs/http-api/current/query)

@@ -65,4 +65,3 @@ jobs:
       analysis-name: ${{ needs.prepare-code-to-analyze.outputs.analysis-name }}
       source-repository: https://github.com/remix-run/react-router.git
       source-repository-branch: react-router@${{ needs.prepare-code-to-analyze.outputs.project-version }}
-      jupyter-pdf: "false"

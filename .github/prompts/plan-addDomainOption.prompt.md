@@ -18,8 +18,7 @@ Add an optional `--domain <name>` CLI option to `analyze.sh` that selects a sing
 5. **Modify [PythonReports.sh](scripts/reports/compilations/PythonReports.sh)** — same pattern (Python env activation still runs)
 6. **Modify [VisualizationReports.sh](scripts/reports/compilations/VisualizationReports.sh)** — same pattern
 7. **Modify [MarkdownReports.sh](scripts/reports/compilations/MarkdownReports.sh)** — same pattern
-8. **Modify [JupyterReports.sh](scripts/reports/compilations/JupyterReports.sh)** — add early return with log message when `ANALYSIS_DOMAIN` is set (domains don't include Jupyter notebooks in the compilation path)
-9. **No changes to `AllReports.sh`** (chains the above scripts, filtering cascades) or **`DatabaseCsvExportReports.sh`** (special case, invoked explicitly only)
+8. **No changes to `AllReports.sh`** (chains the above scripts, filtering cascades) or **`DatabaseCsvExportReports.sh`** (special case, invoked explicitly only)
 
 ### Phase 3: GitHub Actions workflow (*depends on Phase 1*)
 
@@ -47,7 +46,6 @@ Add an optional `--domain <name>` CLI option to `analyze.sh` that selects a sing
 - `scripts/reports/compilations/PythonReports.sh` — same conditional filtering
 - `scripts/reports/compilations/VisualizationReports.sh` — same conditional filtering
 - `scripts/reports/compilations/MarkdownReports.sh` — same conditional filtering
-- `scripts/reports/compilations/JupyterReports.sh` — early exit when `ANALYSIS_DOMAIN` is set
 - `.github/workflows/public-analyze-code-graph.yml` — add `domain` input, pass through
 - `COMMANDS.md` — document `--domain` option and `ANALYSIS_DOMAIN` environment variable
 - `GETTING_STARTED.md` — add usage examples
@@ -56,7 +54,7 @@ Add an optional `--domain <name>` CLI option to `analyze.sh` that selects a sing
 **Verification**
 1. Run `analyze.sh --domain nonexistent` → clear error listing available domains
 2. Run `--domain anomaly-detection --report Csv` → only `anomalyDetectionCsv.sh` runs (no core CSV, no `externalDependenciesCsv.sh`)
-3. Run `--domain anomaly-detection` (default `--report All`) → only anomaly-detection scripts for Csv/Python/Visualization/Markdown; Jupyter skipped
+3. Run `--domain anomaly-detection` (default `--report All`) → only anomaly-detection scripts for Csv/Python/Visualization/Markdown run
 4. Run without `--domain` → all reports + all domains execute unchanged (backward compat)
 5. Run `--domain "../../etc"` → regex rejects it
 6. Run example script with `--domain anomaly-detection` → argument passes through via `"${@}"`
@@ -64,7 +62,6 @@ Add an optional `--domain <name>` CLI option to `analyze.sh` that selects a sing
 **Decisions**
 - `--domain` and `--report` compose: report selects type (horizontal), domain selects scope (vertical)
 - When `--domain` is set, core reports from `scripts/reports/` are **skipped** — only the domain's scripts run
-- JupyterReports.sh skipped when a domain is selected (no domain-scoped notebooks)
 - Only a single domain selectable (not comma-separated)
 - Propagated via `ANALYSIS_DOMAIN` shell variable (no `export`) from `analyze.sh` to compilation scripts — an env var (not script arguments) because compilation scripts are `source`d (not subprocesses), positional params would conflict in nested sourcing, and it follows the established convention (`DOMAINS_DIRECTORY`, `REPORTS_SCRIPT_DIR`, etc.)
 - **Not exported** — `export` would leak the variable into all child processes (Python, Java/jQAssistant, Neo4j, npm/node) where it could collide with unrelated programs outside this project's control. Since all compilation scripts are `source`d (same shell), `export` is unnecessary

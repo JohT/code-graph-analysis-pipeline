@@ -143,23 +143,17 @@ checkRequiredCommand "npm" "Node.js package manager (https://docs.npmjs.com/) fo
 # Check dependencies for Python environments
 icon=$(oneOf "conda" "venv")
 echo ""
-echo "${icon} Python environment dependencies (for ./analyze.sh --report Python/Jupyter):"
+echo "${icon} Python environment dependencies (for ./analyze.sh --report Python):"
 checkOptionalCommand "conda" "Conda package and environment manager (https://docs.conda.io/en/latest/)"
 checkOptionalCommand "virtualenv" "Python virtual environment module (https://docs.python.org/3/library/venv.html)"
 
 # Check dependencies for Python reports
 icon=$(allOf "python" "pip")
 echo ""
-echo "${icon} Python reports dependencies (for ./analyze.sh --report Python/Jupyter):"
+echo "${icon} Python reports dependencies (for ./analyze.sh --report Python):"
 checkRequiredCommand "python" "Python interpreter (https://www.python.org/) for running Python scripts"
 checkRequiredCommand "pip" "Python package installer (https://pip.pypa.io/en/stable/) for installing Python packages"
-
-# Check dependencies for Jupyter Notebook reports
-icon=$(allOf "python" "pip" "jupyter")
-echo ""
-echo "${icon} Python reports dependencies  (for ./analyze.sh --report Jupyter):"
-# Since "jupyter" might only be available when the Python environment is activated, check for it only optionally
-checkOptionalCommand "jupyter" "Jupyter Notebook (https://jupyter.org/) for interactive data analysis and visualization (will be available when the Python environment is activated)"
+checkOptionalCommand "jupyter" "Jupyter Notebook (https://jupyter.org/) for manual interactive data analysis and visualization (will be available when the Python environment is activated)"
 
 # Check dependencies for visualization reports
 icon=$(oneOf "npx" "dot")

@@ -10,7 +10,7 @@ Applies to [requirements.txt](../../requirements.txt), [conda-environment.yml](.
 Both files must stay **in sync**: same packages, same pinned versions. Package in one must be in other.
 
 Exceptions (document inline with comment if they differ):
-- `conda-environment.yml` may split packages (e.g. `nbconvert` + `nbconvert-webpdf` vs. `nbconvert[webpdf]` in pip)
+- `conda-environment.yml` may split packages (e.g. `plotly[kaleido]` in pip vs. `plotly` + `python-kaleido` in conda)
 - `conda-environment.yml` may use `pip:` block for packages not on conda-forge
 
 ## Versioning

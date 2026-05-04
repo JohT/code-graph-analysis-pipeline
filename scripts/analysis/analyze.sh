@@ -11,7 +11,7 @@
 #       and change into it prior to starting this script.
 
 # Note: The argument "--report" is optional. The default value is "All". 
-#       It selects the report compilation, a named group of reports. Besides the default "All" there are e.g. "Csv" and "Jupyter".
+#       It selects the report compilation, a named group of reports. Besides the default "All" there are e.g. "Csv" and "Markdown".
 #       This makes it possible to run only a subset of the reports. For example "Csv" won't need python to be set up and runs therefore much faster.
 #       Implemented is this as a script in "scripts/reports/compilations" that starts with the report compilation name followed by "Reports.sh".
 
@@ -50,7 +50,7 @@ LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defa
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 [--report <All (default), Csv, Jupyter, Python, Visualization...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--domain <domain-name>] [--explore] [--keep-running]"
+  echo "Usage: $0 [--report <All (default), Csv, Python, Visualization, Markdown...>] [--profile <Default, Neo4jv5, Neo4jv4,...>] [--domain <domain-name>] [--explore] [--keep-running]"
   exit 1
 }
 

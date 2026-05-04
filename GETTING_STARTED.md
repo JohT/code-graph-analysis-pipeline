@@ -82,13 +82,7 @@ Use these optional command line options as needed:
   ./../../scripts/analysis/analyze.sh --report Csv
   ```
 
-- Jupyter notebook reports when Python and Conda (or venv) are installed (and Chromium Browser for PDF generation):
-
-  ```shell
-  ./../../scripts/analysis/analyze.sh --report Jupyter
-  ```
-
-- Python reports when Python and Conda (or venv) are installed (without Chromium Browser for PDF generation):
+- Python reports when Python and Conda (or venv) are installed:
 
   ```shell
   ./../../scripts/analysis/analyze.sh --report Python
