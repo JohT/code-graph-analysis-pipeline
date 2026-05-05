@@ -46,8 +46,7 @@ NODE_EMBEDDINGS_SUMMARY_DIR | ${NODE_EMBEDDINGS_SCRIPT_DIR}/summary |
 OVERVIEW_SUMMARY_DIR | ${OVERVIEW_SCRIPT_DIR}/summary | 
 ARTIFACTS_DIRECTORY | artifacts | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
-JUPYTER_NOTEBOOK_DIRECTORY | ${SCRIPTS_DIR}/../jupyter | Repository directory containing the Jupyter Notebooks
-CONDA_ENVIRONMENT_FILE | ${JUPYTER_NOTEBOOK_DIRECTORY}/../conda-environment.yml | Conda (package manager for Python) environment file path
+CONDA_ENVIRONMENT_FILE | ${SCRIPTS_DIR}/../conda-environment.yml | Conda (package manager for Python) environment file path
 CODEGRAPH_CONDA_ENVIRONMENT | codegraph | Name of the conda environment to use for code graph analysis
 USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV | false | Use "venv" for virtual Python environments ("true") or use an already prepared (e.g. conda) environment (default, "false").
 PYTHON_ENVIRONMENT_FILE | ${ROOT_DIRECTORY}/requirements.txt | Pip (package manager for Python) environment file path
@@ -59,9 +58,6 @@ LOG_GROUP_END | ::endgroup:: | Prefix to end a log group. Defaults to GitHub Act
 DOMAINS_DIRECTORY | ${SCRIPTS_DIR}/../domains | 
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE | artifactsChangeDetectionHash.txt | !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE.
 CHANGE_DETECTION_HASH_FILE_PATH | ./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE} | Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option.
-ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION |  | Enable PDF generation for Jupyter Notebooks if set to any non empty value like "true" or disable it with "" or "false".
-JUPYTER_OUTPUT_FILE_POSTFIX |  | e.g. "" (no postfix), ".nbconvert" or ".output"
-REPORTS_SCRIPT_DIR | ${SCRIPTS_DIR}/reports | Repository directory containing the report scripts
 NEO4J_HTTP_TRANSACTION_ENDPOINT | db/neo4j/tx/commit | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
 JQASSISTANT_CLI_VERSION | 2.9.0 | 
 JQASSISTANT_CLI_ARTIFACT | jqassistant-commandline-neo4jv5 | 
