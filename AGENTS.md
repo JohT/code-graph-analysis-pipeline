@@ -86,6 +86,23 @@ Instruction files auto-applied per file type:
 | `requirements.txt`, `conda-environment.yml` | [.github/instructions/python-dependencies.instructions.md](./.github/instructions/python-dependencies.instructions.md) |
 | `CYPHER.md`, `SCRIPTS.md`, `ENVIRONMENT_VARIABLES.md` | [.github/instructions/generated-reference-docs.instructions.md](./.github/instructions/generated-reference-docs.instructions.md) |
 | `.github/skills/`, `.github/instructions/`, `AGENTS.md` | [.github/instructions/agent-files.instructions.md](./.github/instructions/agent-files.instructions.md) |
+| `.github/workflows/*.yml` | [.github/instructions/github-workflows.instructions.md](./.github/instructions/github-workflows.instructions.md) |
+
+---
+
+## CI/CD Conventions
+
+### Internal Workflows
+
+`internal-*.yml` test pipeline itself — all domains run including `analyze.sh` defaults-skipped ones (`anomaly-detection`, `node-embeddings`, `graph-algorithms`). Purpose: smoke test end-to-end. Always set `run-all-domains: true`. Never restrict domains.
+
+### Public Reusable Workflow
+
+`public-analyze-code-graph.yml` external-facing. Used by other projects via `workflow_call`. Treat like public API:
+- No breaking changes (no removal/rename of inputs or outputs)
+- New params: `required: false` with safe defaults only
+- Descriptions self-contained — external users have no repo context
+- Prefer boolean params over raw string flags (avoids quoting fragility)
 
 ---
 
