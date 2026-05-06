@@ -1,8 +1,8 @@
 # AI Agent Instructions
 
-Fully automated pipeline for static code graph analysis.
+Automated pipeline for static code graph analysis.
 Built on [jQAssistant](https://jqassistant.github.io/jqassistant/current) and [Neo4j](https://neo4j.com).
-Supports Java and experimental TypeScript analysis.
+Java + experimental TypeScript.
 
 **Keywords:** java, automation, neo4j, graph, static-code-analysis, code-analysis, cypher, git-history, graph-analysis, anomaly-detection, jqassistant, association-rule-mining, machine-learning-pipeline, code-dependency-analysis
 
@@ -22,7 +22,7 @@ Supports Java and experimental TypeScript analysis.
     └── skills/                      # Agent skills (caveman, neo4j-management)
 ```
 
-Each domain: vertical slice with own entry points, queries, scripts, report templates. See domain `README.md` (e.g. [domains/internal-dependencies/README.md](./domains/internal-dependencies/README.md)).
+Each domain: vertical slice with own entry points, queries, scripts, templates. See domain `README.md` (e.g. [domains/internal-dependencies/README.md](./domains/internal-dependencies/README.md)).
 
 ## Key Docs
 
@@ -38,7 +38,7 @@ Each domain: vertical slice with own entry points, queries, scripts, report temp
 
 ## Running Pipeline
 
-Main entry: `analyze.sh`. Run from analysis workspace directory:
+Main entry: `analyze.sh`. Run from analysis workspace directory. Repo scripts + domains discovered automatically:
 
 ```shell
 # Full analysis
@@ -46,21 +46,24 @@ analyze.sh
 
 # Scoped: single domain + report type. Add --keep-running to skip Neo4j stop/start on repeated runs.
 analyze.sh --domain <domain-name> --report <report-type> --keep-running
+
+# Skip specific domains during analysis
+analyze.sh --exclude-domain "anomaly-detection,node-embeddings"
 ```
 
-**Report types** — one script per type in [scripts/reports/compilations/](./scripts/reports/compilations/): `All` (default), `Csv`, `Python`, `Markdown`, `Visualization`, `DatabaseCsvExport`.
+**Report types** — [scripts/reports/compilations/](./scripts/reports/compilations/): `All` (default), `Csv`, `Python`, `Markdown`, `Visualization`, `DatabaseCsvExport`.
 
-**Domains** — one directory per domain in [domains/](./domains/): `anomaly-detection`, `external-dependencies`, `git-history`, `internal-dependencies`, `java`.
+**Domains** — [domains/](./domains/): `anomaly-detection`, `external-dependencies`, `git-history`, `internal-dependencies`, `java`.
 
-See [COMMANDS.md](./COMMANDS.md) for all options including `--profile`, `--explore`.
+All options: [COMMANDS.md](./COMMANDS.md).
 
 ## Neo4j Management
 
-Neo4j must run before queries or reports. Use [.github/skills/neo4j-management/SKILL.md](./.github/skills/neo4j-management/SKILL.md) to detect, start, stop, configure. Always detect running workspace first.
+Neo4j required. Use [.github/skills/neo4j-management/SKILL.md](./.github/skills/neo4j-management/SKILL.md) to detect, start, stop, configure.
 
 ## Domain Entry Points
 
-Domains discovered by filename pattern in [scripts/reports/compilations/](./scripts/reports/compilations/):
+Filename pattern in [scripts/reports/compilations/](./scripts/reports/compilations/):
 
 | Pattern | Report type |
 |---------|------------|
@@ -73,7 +76,7 @@ Domains discovered by filename pattern in [scripts/reports/compilations/](./scri
 
 ## Coding Conventions
 
-Scoped instruction files — auto-applied by GitHub Copilot per file type:
+Instruction files auto-applied per file type:
 
 | File type | Instruction file |
 |-----------|-----------------|
@@ -83,12 +86,29 @@ Scoped instruction files — auto-applied by GitHub Copilot per file type:
 | `requirements.txt`, `conda-environment.yml` | [.github/instructions/python-dependencies.instructions.md](./.github/instructions/python-dependencies.instructions.md) |
 | `CYPHER.md`, `SCRIPTS.md`, `ENVIRONMENT_VARIABLES.md` | [.github/instructions/generated-reference-docs.instructions.md](./.github/instructions/generated-reference-docs.instructions.md) |
 | `.github/skills/`, `.github/instructions/`, `AGENTS.md` | [.github/instructions/agent-files.instructions.md](./.github/instructions/agent-files.instructions.md) |
+| `.github/workflows/*.yml` | [.github/instructions/github-workflows.instructions.md](./.github/instructions/github-workflows.instructions.md) |
+
+---
+
+## CI/CD Conventions
+
+### Internal Workflows
+
+`internal-*.yml` test pipeline itself — all domains run including `analyze.sh` defaults-skipped ones (`anomaly-detection`, `node-embeddings`, `graph-algorithms`). Purpose: smoke test end-to-end. Always set `run-all-domains: true`. Never restrict domains.
+
+### Public Reusable Workflow
+
+`public-analyze-code-graph.yml` external-facing. Used by other projects via `workflow_call`. Treat like public API:
+- No breaking changes (no removal/rename of inputs or outputs)
+- New params: `required: false` with safe defaults only
+- Descriptions self-contained — external users have no repo context
+- Prefer boolean params over raw string flags (avoids quoting fragility)
 
 ---
 
 ## Verification
 
-Scope verification to domain + report type — avoids full pipeline run:
+Test single domain + report type (faster than full pipeline):
 
 ```shell
 # Detect Neo4j workspace first (see neo4j-management skill above)
@@ -104,16 +124,16 @@ analyze.sh --domain anomaly-detection --report Python --keep-running
 
 ## Design Principles
 
-- **Vertical slicing** — each domain self-contained: queries, scripts, charts, templates
-- **No generic abstractions** — no "util", "helper", "common", "shared"; share only meaningful domain concepts
-- **Progressive automation** — CSV needs no Python; Python add richer output; full pipeline does all
-- **Graceful degradation** — domains handle missing data (e.g. no git history) with fallback reports or silent skip
-- **Cross-platform** — macOS (zsh), Linux (bash), Windows (Git Bash/WSL)
+- **Vertical slicing** — domains self-contained: queries, scripts, charts, templates
+- **No generic abstractions** — no "util", "helper", "common"; share only meaningful concepts
+- **Progressive automation** — CSV (no Python) → Python (richer) → all reports
+- **Graceful degradation** — domains handle missing data (e.g. no git history) with fallbacks
+- **Cross-platform** — macOS, Linux, Windows (Git Bash/WSL)
 
-## Ask Before Assuming
+## Before Proposing Changes
 
-- Ask before making assumptions on architecture, naming, scope
-- Read domain READMEs and linked docs before proposing changes
-- Check [COMMANDS.md](./COMMANDS.md) for CLI options
-- Check [ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) for configuration
-- Use plan prompts in [.github/prompts/](./.github/prompts/) for domain creation context
+- Verify architecture, naming, scope assumptions
+- Read domain READMEs + linked docs
+- Check [COMMANDS.md](./COMMANDS.md) CLI options
+- Check [ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) config
+- Use plan prompts in [.github/prompts/](./.github/prompts/) for domain context

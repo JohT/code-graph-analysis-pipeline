@@ -13,6 +13,8 @@
         - [Only run the reports of one specific domain](#only-run-the-reports-of-one-specific-domain)
         - [Only run the CSV reports of one specific domain](#only-run-the-csv-reports-of-one-specific-domain)
         - [Rerun reports without restarting Neo4j](#rerun-reports-without-restarting-neo4j)
+        - [Run all reports except slow/optional domains](#run-all-reports-except-slowoptional-domains)
+        - [Run all domains except specific ones](#run-all-domains-except-specific-ones)
 - [Generate Markdown References](#generate-markdown-references)
     - [Generate Cypher Reference](#generate-cypher-reference)
     - [Generate Script Reference](#generate-script-reference)
@@ -85,6 +87,8 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--domain anomaly-detection` selects a single analysis domain (a subdirectory of [domains/](./domains/)) to run reports for, following a vertical-slice approach. When set, only that domain's report scripts run; core reports from `scripts/reports/` and other domains are skipped. The domain option composes with `--report` to further narrow down which reports are generated, e.g. `--domain anomaly-detection --report Csv`. When not specified, all domains and reports run unchanged. The selected domain name is passed to report compilation scripts via the environment variable `ANALYSIS_DOMAIN`. Available domains can be found in the [domains/](./domains/) directory.
 
+- `--exclude-domain anomaly-detection,node-embeddings` specifies a comma-separated list of domain names to skip during report generation. By default (when neither `--domain` nor `--exclude-domain` is set), slow/optional domains are skipped: `anomaly-detection`, `node-embeddings`, and `graph-algorithms`. When `--domain` is specified, no domains are excluded by default (only the selected domain runs). Pass an empty string `--exclude-domain ""` to override defaults and skip nothing. The domain names must match subdirectories under [domains/](./domains/). Unrecognized domains are warned about but do not cause errors. The list is exported as the environment variable `ANALYSIS_DOMAINS_TO_SKIP` to all report compilation scripts.
+
 ### Notes
 
 - Be sure to use Java 21 for Neo4j v2025, Java 17 for v5 and Java 11 for v4. Details see [Neo4j System Requirements / Java](https://neo4j.com/docs/operations-manual/current/installation/requirements/#deployment-requirements-java).
@@ -149,6 +153,22 @@ When iterating on reports during development, use `--keep-running` to skip the N
 
 ```shell
 ./../../scripts/analysis/analyze.sh --domain git-history --report Csv --keep-running
+```
+
+#### Run all reports except slow/optional domains
+
+To run analysis with all domains enabled (overriding the default exclusions of anomaly-detection, node-embeddings, and graph-algorithms):
+
+```shell
+./../../scripts/analysis/analyze.sh --exclude-domain ""
+```
+
+#### Run all domains except specific ones
+
+To skip specific domains during analysis (e.g., skip anomaly-detection and node-embeddings but run everything else):
+
+```shell
+./../../scripts/analysis/analyze.sh --exclude-domain "anomaly-detection,node-embeddings"
 ```
 
 ## Generate Markdown References
