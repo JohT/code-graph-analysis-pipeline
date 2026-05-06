@@ -118,6 +118,7 @@ Script | Directory | Description
 [sortOutExternalJavaJarFiles.sh](./scripts/sortOutExternalJavaJarFiles.sh) | scripts | Sorts out jar files that don't contain one of the given package names (e.g. external libraries) and moves them into the IGNORED_JARS_DIRECTORY. 
 [startNeo4j.sh](./scripts/startNeo4j.sh) | scripts | Deprecated: startNeo4j.sh has been moved to domains/neo4j-management/.
 [stopNeo4j.sh](./scripts/stopNeo4j.sh) | scripts | Deprecated: stopNeo4j.sh has been moved to domains/neo4j-management/.
+[testAnalyzeCliOptions.sh](./scripts/testAnalyzeCliOptions.sh) | scripts | Tests "--exclude-domain" and "--help" command line options of "analyze.sh".
 [testAnalyzeDomainOption.sh](./scripts/testAnalyzeDomainOption.sh) | scripts | Tests "--domain" command line option of "analyze.sh".
 [testCloneGitRepository.sh](./scripts/testCloneGitRepository.sh) | scripts | Tests "cloneGitRepository.sh".
 [testDetectChangedFiles.sh](./scripts/testDetectChangedFiles.sh) | scripts | Tests "detectChangedFiles.sh".
