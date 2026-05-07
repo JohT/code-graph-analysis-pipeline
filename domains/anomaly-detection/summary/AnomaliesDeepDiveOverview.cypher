@@ -14,19 +14,13 @@ OPTIONAL MATCH (codeUnit)-[dependency:DEPENDS_ON]-(target)
       ,collect(DISTINCT codeUnit) AS codeUnits
 UNWIND codeUnits                  AS codeUnit
   WITH sum(codeUnit.anomalyLabel)                AS anomalyCount
-      ,sum(sign(codeUnit.anomalyAuthorityRank))  AS authorityCount
-      ,sum(sign(codeUnit.anomalyBottleneckRank)) AS bottleNeckCount
       ,sum(sign(codeUnit.anomalyBridgeRank))     AS bridgeCount
-      ,sum(sign(codeUnit.anomalyHubRank))        AS hubCount
       ,sum(sign(codeUnit.anomalyOutlierRank))    AS outlierCount
       ,count(codeUnit)                           AS nodeCount
       ,relationshipCount
       //,collect(codeUnit.name)[0..4]              AS exampleNames
 RETURN anomalyCount      AS `Anomalies`
-      ,authorityCount    AS `Authorities`
-      ,bottleNeckCount   AS `Bottlenecks`
       ,bridgeCount       AS `Bridges`
-      ,hubCount          AS `Hubs`
       ,outlierCount      AS `Outliers`
       ,nodeCount         AS `CodeUnits`
       ,relationshipCount AS `Dependencies`

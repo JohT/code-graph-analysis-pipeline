@@ -1,4 +1,4 @@
-// Anomaly Detection Labels: Label code units of archetype "Bottleneck" by looking for the top 20 entries with the highest Betweeenness centrality >= 90% percentile.  Requires features/*.cypher to be run first.
+// Archetypes Labels: Label code units of archetype "Bottleneck" by looking for the top 20 entries with the highest Betweeenness centrality >= 90% percentile. Requires features/*.cypher to be run first.
 // Shows key code that is both heavily depended on and control flow — critical hubs.
 // Potentially an unintended dependency concentration: if removed, communication between modules breaks.
 
@@ -22,11 +22,11 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
     WITH codeUnitIndex + 1           AS codeUnitIndex
         ,results[codeUnitIndex][0]   AS codeUnit
         ,results[codeUnitIndex][1]   AS projectName
-     SET codeUnit:Mark4TopAnomalyBottleneck
-        ,codeUnit.anomalyBottleneckRank = codeUnitIndex
+     SET codeUnit:Mark4TopArchetypeBottleneck
+        ,codeUnit.archetypeBottleneckRank = codeUnitIndex
   RETURN DISTINCT 
          projectName
         ,codeUnit.name                                AS shortCodeUnitName
         ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
         ,codeUnit.centralityBetweenness               AS betweenness
-        ,codeUnit.anomalyBottleneckRank               AS rank
+        ,codeUnit.archetypeBottleneckRank             AS rank

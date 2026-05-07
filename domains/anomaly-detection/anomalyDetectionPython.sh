@@ -192,10 +192,7 @@ anomaly_detection_labels() {
     local detail_report_directory="${FULL_REPORT_DIRECTORY}/${language}_${nodeLabel}"
     mkdir -p "${detail_report_directory}"
 
-    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeRemoveLabels.cypher" "${@}"
-    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeAuthority.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopAuthority.csv"
-    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBottleneck.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopBottleneck.csv"
-    execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeHub.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopHub.csv"
+    execute_cypher_summarized "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionAnomalyRemoveLabels.cypher" "${@}"
     # The following two label types require Python scripts to run first.
     execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeBridge.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopBridge.csv"
     execute_cypher "${ANOMALY_DETECTION_LABEL_CYPHER_DIR}/AnomalyDetectionArchetypeOutlier.cypher" "${@}" > "${detail_report_directory}/AnomalyArchetypeTopOutlier.csv"

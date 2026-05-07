@@ -53,7 +53,7 @@ analyze.sh --exclude-domain "anomaly-detection,node-embeddings"
 
 **Report types** — [scripts/reports/compilations/](./scripts/reports/compilations/): `All` (default), `Csv`, `Python`, `Markdown`, `Visualization`, `DatabaseCsvExport`.
 
-**Domains** — [domains/](./domains/): `anomaly-detection`, `external-dependencies`, `git-history`, `internal-dependencies`, `java`.
+**Domains** — [domains/](./domains/): `anomaly-detection`, `archetypes`, `external-dependencies`, `git-history`, `internal-dependencies`, `java`.
 
 All options: [COMMANDS.md](./COMMANDS.md).
 
@@ -129,6 +129,7 @@ analyze.sh --domain anomaly-detection --report Python --keep-running
 - **Progressive automation** — CSV (no Python) → Python (richer) → all reports
 - **Graceful degradation** — domains handle missing data (e.g. no git history) with fallbacks
 - **Cross-platform** — macOS, Linux, Windows (Git Bash/WSL)
+- **Fail-fast** — clear errors on missing dependencies, misconfigurations, unsupported environments
 
 ## Before Proposing Changes
 

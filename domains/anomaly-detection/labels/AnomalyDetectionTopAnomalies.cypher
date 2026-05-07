@@ -16,10 +16,7 @@ OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS
         ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
         ,codeUnit.anomalyRank                              AS anomalyRank
         ,codeUnit.anomalyScore                             AS anomalyScore
-        ,coalesce(codeUnit.anomalyAuthorityRank, 0)        AS authorityRank
-        ,coalesce(codeUnit.anomalyBottleneckRank, 0)       AS bottleneckRank
         ,coalesce(codeUnit.anomalyBridgeRank, 0)           AS bridgeRank
-        ,coalesce(codeUnit.anomalyHubRank, 0)              AS hubRank
         ,coalesce(codeUnit.anomalyOutlierRank, 0)          AS outlierRank
         ,coalesce(codeUnit.dependencyDegreeRank, 0)        AS degreeRank
         ,codeUnit.anomalyTopFeature1                       AS topFeature1

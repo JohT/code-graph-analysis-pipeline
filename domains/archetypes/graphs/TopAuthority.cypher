@@ -1,4 +1,4 @@
-// Anomaly Detection Graphs: Find top nodes marked as "Authority" including their incoming and outgoing dependencies, sizes based on PageRank and thick outline for nodes with high Page Rank to Article Rank difference in Graphviz format.
+// Archetypes Graphs: Find top nodes marked as "Authority" including their incoming and outgoing dependencies, sizes based on PageRank and thick outline for nodes with high Page Rank to Article Rank difference in Graphviz format.
 
 // Step 1: Query overall statistics, e.g. min/max weight for later normalization
  MATCH (sourceForStatistics)-[dependencyForStatistics:DEPENDS_ON]->(targetForStatistics)
@@ -10,7 +10,7 @@
 // Step 2: Query selected central node
  MATCH (central)
  WHERE $projection_node_label IN labels(central)
-   AND central.anomalyAuthorityRank = toInteger($projection_node_rank)
+   AND central.archetypeAuthorityRank = toInteger($projection_node_rank)
   WITH maxWeight
       ,pageToArticleRankThreshold
       ,pageRankThreshold
@@ -23,7 +23,7 @@
   WITH *, graphLegend + "large circle: > 80% percentile of Page Rank\\n"                             AS graphLegend
   WITH *, graphLegend + "thick outline: > 80% percentile of Page Rank to Article Rank Difference\\n" AS graphLegend
   WITH *, ["graph   [label=\"" + graphLabel + targetName + graphLegend + "\\n\"];"]       AS graphVizOutput
-  WITH *, "🏛️ authority #" + central.anomalyAuthorityRank + "\\n" + central.name          AS centralNodeLabel
+  WITH *, "🏛️ authority #" + central.archetypeAuthorityRank + "\\n" + central.name        AS centralNodeLabel
   WITH *, graphVizOutput + ["central [label=\"" + centralNodeLabel + "\"];"]              AS graphVizOutput
 // Step 3: Query direct incoming dependencies to the central node
 OPTIONAL MATCH (source)-[dependency:DEPENDS_ON]->(central)
