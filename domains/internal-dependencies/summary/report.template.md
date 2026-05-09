@@ -4,17 +4,15 @@
 
 ## 1. Executive Overview
 
-This report analyses how **internal packages, artifacts, TypeScript modules, and NPM packages depend on each other** within the codebase. It covers three interconnected topics:
+Analyzes internal dependencies: packages, artifacts, modules, NPM packages within codebase.
+
+**Topics**:
 
 - **Internal structure** — interface segregation, widely used types, and usage ratios between modules
 - **Path finding** — shortest and longest path distributions revealing dependency chain depth and complexity
 - **Topological sort** — build ordering derived from the acyclic view of the dependency graph
 
-> **Cyclic dependency analysis** is in the dedicated `cyclic-dependencies` domain.
-
-> **What to act on first?**  
-> After eliminating cycles (see `cyclic-dependencies` domain), use path finding results to identify and reduce excessive transitive depth.  
-> **Reading the tables**: Rows are sorted by priority — the **first rows are the most critical** and should be addressed first.
+> Cyclic analysis is in `cyclic-dependencies` domain. Rows sorted by priority (highest first).
 
 ## 📚 Table of Contents
 
@@ -35,7 +33,7 @@ This report analyses how **internal packages, artifacts, TypeScript modules, and
 
 ### 2.1 Java Artifact Listing
 
-All Java artifacts (JARs) sorted by their number of packages, types, and incoming/outgoing dependencies. Reveals the largest and most connected components in the build. Large incoming dependency counts indicate widely shared libraries; large outgoing counts indicate aggregator or application-level modules.
+Artifacts by size and connectivity. High incoming = shared library; high outgoing = aggregator/app-level.
 
 <!-- include:List_all_Java_artifacts.md|empty.md -->
 
@@ -43,54 +41,37 @@ All Java artifacts (JARs) sorted by their number of packages, types, and incomin
 
 Based on Robert C. Martin's **Interface Segregation Principle** — _"Clients should not be forced to depend upon interfaces that they do not use."_
 
-This table lists Java interfaces that declare many public methods while one or more groups of callers invoke only a small subset. Each row is one such interface: how many methods it declares in total (including inherited), how many distinct callers actually use, the `usageRatio` (lower = stronger candidate), the number of distinct caller types, and the actual method names they call. Together these tell you precisely which focused sub-interface to extract.
+Interfaces with many declared methods but callers use only a subset. Extract focused sub-interfaces.
 
-**Rows are sorted by priority — the first rows (lowest `usageRatio`, highest `callerCount`) are the most critical candidates.**
-
-Interpretation guidance:
-
-- `usageRatio` near 0 means callers use almost none of the API — strong extraction candidate.
-- High `callerCount` with low `usageRatio` signals that extracting a small sub-interface benefits many callers (higher priority).
-- `exampleCalledMethods` is the concrete set of methods to expose on the new interface.
-
+`usageRatio` (lower = stronger candidate), `callerCount` (high + low ratio = high priority). `exampleCalledMethods` shows methods to extract.
 
 <!-- include:Candidates_for_Interface_Segregation.md|empty.md -->
 
 ### 2.3 Widely Used Java Types
 
-Types used by the highest number of _different_ packages. These are typically cross-cutting concerns, core domain objects, or shared utilities. A very high usage count means that changes to these types will ripple across many calling packages.
-
-**Rows are sorted by priority — the first rows (most widely used types) carry the highest risk for ripple effects.**
+Types used by most packages (high ripple risk on changes). Sorted by usage count descending.
 
 <!-- include:List_types_that_are_used_by_many_different_packages.md|empty.md -->
 
 ### 2.4 Overly Broad Artifact Dependencies
 
-Identifies potentially unnecessary or over-broad artifact dependencies. For each artifact, shows which other artifacts depend on it and what percentage of its packages are actually used by those dependents. 
+Artifact dependencies where dependents use only a small `usedPackagesPercent`. Low % = optimization/removal candidate.
 
-A low `usedPackagesPercent` indicates that a dependent artifact imports only a small fraction of the artifact's packages—suggesting the dependency might be unnecessarily broad. In such cases, the dependent artifact may only need to import a focused subset of the target artifact's packages, or might not need the dependency at all.
-
-**Rows are sorted by priority — the first rows (lowest `usedPackagesPercent`) are the best candidates for optimization or removal.**
+A low `usedPackagesPercent` indicates that a dependent artifact imports only a small fraction of the artifact's packages.
 
 <!-- include:How_many_packages_used_by_dependent_artifacts.md|empty.md -->
 
 ### 2.5 Class Usage Across Artifacts
 
-Classes that are used by multiple different artifacts — candidates for extraction into a shared library. High cross-artifact reuse indicates that a type has grown beyond its original module boundary.
+Classes used across artifacts — extraction candidates. High reuse = type grown beyond original boundary.
 
-**Rows are sorted by priority — the first rows (most reused classes across artifacts) are the highest-value extraction candidates.**
+> Rows are sorted by priority — most reused classes across artifacts first.
 
 <!-- include:How_many_classes_used_by_dependent_packages.md|empty.md -->
 
 ### 2.6 File Distance Distribution
 
-The **file distance** between a source file and the dependency it uses is the minimum number of `cd` (change directory) commands required to navigate from one to the other in the filesystem. It provides an intuitive measure of physical co-location:
-
-- **Distance 0**: Both files are in the same directory — tightly co-located.
-- **Distance 1**: One directory apart — closely related.
-- **Distance N**: N traversals required — the files are in very different parts of the source tree.
-
-High average distances indicate that architectural boundaries do not align with the directory structure.
+**File distance** = min directory changes to reach dependency. High distance = misalignment between architecture and folder structure. Distance 0 = same directory.
 
 <!-- include:File_distance_distribution.md|empty.md -->
 
@@ -100,23 +81,19 @@ High average distances indicate that architectural boundaries do not align with 
 
 ### 3.1 TypeScript Module Listing
 
-All TypeScript modules sorted by their number of elements (functions, classes, interfaces), and incoming/outgoing dependency counts. Reveals the most central and most complex modules.
+Modules by element count and dependency connectivity. Reveals central and complex modules.
 
 <!-- include:List_all_Typescript_modules.md|report_no_typescript_data.template.md -->
 
 ### 3.2 Widely Used TypeScript Elements
 
-TypeScript elements (functions, classes, interfaces, type aliases) that are imported by the highest number of different modules. High usage counts indicate shared utilities or core domain concepts that many modules rely on.
-
-**Rows are sorted by priority — the first rows (most widely used elements) carry the highest risk for ripple effects.**
+Elements imported by most modules (high ripple risk). Shared utilities or core domain concepts.
 
 <!-- include:List_elements_used_by_many_modules.md|report_no_typescript_data.template.md -->
 
 ### 3.3 Module Element Usage by Dependent Modules
 
-For each TypeScript module, which other modules import it and how many of its exposed elements do they actually use? A low `usedElementsPercent` signals that the module's public API is wider than what callers need — a candidate for splitting into a leaner interface.
-
-**Rows are sorted by priority — the first rows (lowest `usedElementsPercent`) are the strongest candidates for a narrower API.**
+Low `usedElementsPercent` = public API wider than needed. Candidates for narrower interface.
 
 <!-- include:How_many_elements_used_by_dependent_modules.md|report_no_typescript_data.template.md -->
 
@@ -124,28 +101,27 @@ For each TypeScript module, which other modules import it and how many of its ex
 
 ## 4. Path Finding
 
-Path finding algorithms reveal the **depth and complexity of dependency chains**.
+Reveals dependency chain **depth and complexity**.
 
-- **All Pairs Shortest Path (APSP)**: For every connected pair of nodes, computes the minimum number of hops (direct dependency = distance 1, one intermediary = distance 2, etc.). The **graph diameter** — the longest shortest path — is the key complexity metric: a diameter of 6 means at least one pair of modules requires a chain of 6 transitive dependencies to connect.
-- **Longest Path** (for directed acyclic graphs): The maximum-length directed path through the dependency graph. Relevant for build ordering — a node can only be built after all its transitive dependencies. A long longest path means a deep sequential build chain.
+**All Pairs Shortest Path (APSP)**: Graph diameter = longest shortest path. Metric of structural depth.
 
-> **Note on Longest Path**: The algorithm requires a Directed Acyclic Graph (DAG). Results are unreliable when cyclic dependencies exist. Eliminate cycles first for accurate results.
+**Longest Path**: Max directed path in DAG. Critical for build ordering. Requires acyclic graph — run after cyclic-dependencies domain.
 
 ### 4.1 Java Package Path Finding
 
 Dependency path analysis at the Java package level. Intra-artifact pairs (both source and target in the same artifact) are highlighted; intermediate paths may cross artifact boundaries, reflecting real-world transitive coupling.
 
-#### 5.1.1 All Pairs Shortest Path
+#### 4.1.1 All Pairs Shortest Path
 
-The graph diameter reveals the longest shortest path among all package pairs. Higher values indicate deeper transitive dependencies and more interconnectedness.
+Graph diameter = longest shortest path. Higher = deeper transitive dependencies.
 
 <!-- include:JavaPackageAllPairsShortestPathDistribution.md|report_no_java_data.template.md -->
 
 <!-- include:JavaPackageAllPairsShortestPathCharts.md|empty.md -->
 
-#### 5.1.2 Longest Path
+#### 4.1.2 Longest Path
 
-The maximum-length path through the dependency graph shows the deepest sequential dependency chain. For Java packages, this represents the worst-case build order depth if dependencies cannot be parallelized.
+Deepest sequential dependency chain. Worst-case build depth if non-parallelized.
 
 <!-- include:JavaPackageLongestPathDistribution.md|report_no_java_data.template.md -->
 
@@ -153,19 +129,19 @@ The maximum-length path through the dependency graph shows the deepest sequentia
 
 ### 4.2 Java Artifact Path Finding
 
-Dependency path analysis at the artifact (JAR) level — the coarsest view. Useful for understanding build parallelism and maximum sequential build depth.
+Coarsest view — artifact (JAR) level. Build parallelism and max sequential depth.
 
-#### 5.2.1 All Pairs Shortest Path
+#### 4.2.1 All Pairs Shortest Path
 
-The graph diameter at the artifact level. Artifact-level cycles are rare, so this metric is reliable for understanding transitive build dependencies.
+Artifact-level graph diameter. Cycles rare at this level.
 
 <!-- include:JavaArtifactAllPairsShortestPathDistribution.md|report_no_java_data.template.md -->
 
 <!-- include:JavaArtifactAllPairsShortestPathCharts.md|empty.md -->
 
-#### 5.2.2 Longest Path
+#### 4.2.2 Longest Path
 
-The longest dependency sequence at the artifact level—the critical path for sequential artifact building.
+Critical path for sequential artifact building.
 
 <!-- include:JavaArtifactLongestPathDistribution.md|report_no_java_data.template.md -->
 
@@ -173,19 +149,19 @@ The longest dependency sequence at the artifact level—the critical path for se
 
 ### 4.3 TypeScript Module Path Finding
 
-Dependency path analysis for TypeScript modules. Comparable to the Java Package view; a long longest path indicates deep sequential import chains.
+TypeScript module dependency chains. Comparable to Java Package view.
 
-#### 5.3.1 All Pairs Shortest Path
+#### 4.3.1 All Pairs Shortest Path
 
-The graph diameter reveals the longest shortest path among all TypeScript module pairs. Higher values indicate deeper transitive import dependencies.
+Graph diameter = longest shortest path among module pairs. Higher = deeper transitive imports.
 
 <!-- include:TypescriptModuleAllPairsShortestPathDistribution.md|report_no_typescript_data.template.md -->
 
 <!-- include:TypescriptModuleAllPairsShortestPathCharts.md|empty.md -->
 
-#### 5.3.2 Longest Path
+#### 4.3.2 Longest Path
 
-The maximum-length path through the dependency graph shows the deepest sequential import chain for TypeScript modules.
+Deepest sequential TypeScript import chain.
 
 <!-- include:TypescriptModuleLongestPathDistribution.md|report_no_typescript_data.template.md -->
 
@@ -195,18 +171,13 @@ The maximum-length path through the dependency graph shows the deepest sequentia
 
 ## 5. Topological Sort
 
-Topological sorting assigns a **build level** to every node in the dependency graph:
+Assigns **build level** to each node: Level 0 (no dependencies) → Level N (depends on level N−1).
 
-- **Level 0**: No dependencies — can be built first, in parallel with all other level-0 nodes.
-- **Level N**: Depends on at least one node at level N−1. Must be built after all lower levels.
-
-The maximum level is the **critical path length** — the minimum number of sequential build steps even with full parallelism. Reducing this number (by removing unnecessary dependencies) directly speeds up builds.
-
-> **Interpretation of extremes**: The node at the **highest level** is the most central — all others (transitively) must be built before it. The node at **level 0** is the most peripheral — it depends on nothing.
+**Critical path** = max level = min sequential build steps with full parallelism. Highest-level node = most central.
 
 ### 5.1 Critical Path Lengths
 
-The table below summarises the maximum build level (critical path length) and the total number of sorted nodes per abstraction level. A higher `maxBuildLevel` means a deeper mandatory sequential build chain.
+Max build level per abstraction. Higher = deeper sequential chain.
 
 <!-- include:Topological_Sort_Critical_Path_Length.md|empty.md -->
 
@@ -216,28 +187,23 @@ Full topological sort results (node-level build order and level assignments) are
 
 ## 6. Graph Visualizations
 
-Directed dependency graphs showing build levels (node color = level) and longest path structures.
-Each graph uses the topological sort level to color nodes: darker colors indicate higher levels (more transitive dependencies above them).
+Directed graphs: node color = build level (darker = higher level = more transitive deps above).
 
 ### 6.1 Java Artifact Graphs
 
-**Build levels graph**: Directed graph of Java artifacts where node color corresponds to build level. Level-0 artifacts (no dependencies) appear in the lightest color. Reveals the full artifact dependency hierarchy.
-
-**Longest paths graphs**: Isolated view shows only the nodes and edges on the longest dependency chain. Contributor view adds all artifacts that feed into (contribute to) that chain.
+**Build levels**: Full artifact hierarchy. **Longest paths**: Isolated chain + contributor view.
 
 <!-- include:JavaArtifactGraphVisualizations.md|empty.md -->
 
 ### 6.2 TypeScript Module Graphs
 
-**Build levels graph**: TypeScript module dependency graph, colored by topological sort level. Useful for understanding module layering and identifying circular or overly deep dependency chains.
-
-**Longest paths graphs**: Isolated and contributor views of the longest TypeScript dependency chain.
+**Build levels**: Module layering view. **Longest paths**: Isolated chain + contributor view.
 
 <!-- include:TypescriptModuleGraphVisualizations.md|report_no_typescript_data.template.md -->
 
 ### 6.3 NPM Package Graphs
 
-Build level and longest path graphs for NPM packages (both production and development dependencies).
+Build levels and longest paths for NPM packages (prod + dev dependencies).
 
 <!-- include:NpmPackageGraphVisualizations.md|report_no_typescript_data.template.md -->
 
@@ -247,34 +213,30 @@ Build level and longest path graphs for NPM packages (both production and develo
 
 | Term | Definition |
 |------|-----------|
-| `Graph Diameter` | The longest shortest path across all pairs in the dependency graph. A measure of structural depth and complexity. Higher values indicate more transitive coupling. |
-| `Longest Path` | Maximum-length directed path through the DAG — the worst-case dependency chain and the critical build path. |
-| `File Distance` | Minimum number of directory traversals between a source file and the file it depends on. Distance 0 = same directory; Distance N = N `cd` commands required. |
-| `Build Level` | Topological sort level. Level 0 = no dependencies; Level N = depends on nodes at levels 0 through N−1. Minimum sequential build steps = max level + 1. |
-| `usedTypesPercent` | Percentage of a package's types that dependent packages actually use. Low values indicate Interface Segregation violations. |
-| `usedPackagesPercent` | Percentage of packages within an artifact that dependent artifacts actually import. Low values indicate wide API surfaces. |
-| `usedElementsPercent` | Percentage of TypeScript module elements that dependent modules actually import. |
-| `pairCount` | Number of node pairs at a given path distance. |
-| `distanceTotalPairCount` | Total number of connected node pairs across all distances (used for normalisation). |
-| `isDifferentTargetProject` | Whether the source and target node belong to different projects/artifacts. |
-| `Instability` | Ratio of outgoing to total (incoming + outgoing) dependencies for a package or module. 0 = fully stable (no outgoing couplings); 1 = fully unstable (no incoming). Stable components are harder to change; unstable ones are easier. |
-| `Abstractness` | Ratio of abstract types (abstract classes + interfaces) to total types in a package or module. 0 = fully concrete; 1 = fully abstract. Abstract components are more flexible but require concrete implementations elsewhere. |
-| `Distance from Main Sequence` | How far a component is from the ideal balance line `A + I = 1` (the "Main Sequence"). Distance 0 = perfectly balanced; higher values indicate components in the Zone of Pain or Zone of Uselessness. |
-| `Zone of Pain` | Low abstractness + low instability — components that are concrete yet stable. Difficult to extend and difficult to remove; changes have a wide blast radius. |
-| `Zone of Uselessness` | High abstractness + high instability — abstract components with no stable consumers. Effectively dead abstractions that could be removed. |
+| `Graph Diameter` | Longest shortest path. Structural depth metric. |
+| `Longest Path` | Max directed path in DAG; critical build path. |
+| `File Distance` | Min directory changes to dependency. |
+| `Build Level` | Topological sort level (0 = no deps). |
+| `usedTypesPercent` | % of package types actually used by dependents. Low = ISP violation. |
+| `usedPackagesPercent` | % of artifact packages used by dependents. Low = wide API. |
+| `usedElementsPercent` | % of module elements imported by dependents. |
+| `Instability` | Outgoing / (incoming + outgoing) deps. 0 = stable; 1 = unstable. |
+| `Abstractness` | (Abstract types) / (total types). 0 = concrete; 1 = abstract. |
+| `Distance from Main Sequence` | Gap from ideal balance `A + I = 1`. High = pain or uselessness. |
+| `Zone of Pain` | Concrete + stable = hard to change/remove. |
+| `Zone of Uselessness` | Abstract + unstable = unused abstractions. |
 
 ---
 
 ## 8. Object-Oriented Design Metrics
 
-**Object-Oriented Design metrics** measure how well packages and modules conform to Robert C. Martin's _Stable Abstractions Principle_: _"A component should be as abstract as it is stable."_ Components that are stable (many dependents, few dependencies of their own) should rely heavily on abstractions so that they can still be extended. Concrete components should be unstable so they can be changed freely.
+Measures conformance to Stable Abstractions Principle(Robert C. Martin): stable components should be abstract; concrete ones unstable.
 
-The scatter chart plots every component on the **Abstractness vs. Instability** plane. The green dashed diagonal is the **Main Sequence** (`A + I = 1`). Components near the line are well-balanced; those far from it occupy one of two problem zones:
+**Scatter chart**: Abstractness vs. Instability. Green diagonal = Main Sequence (`A + I = 1`). Far off = problem zone.
 
-- **Zone of Pain** (bottom-left corner): concrete and stable — cannot be changed or extended easily.
-- **Zone of Uselessness** (top-right corner): abstract and unstable — nobody depends on these abstractions.
+**Problem zones**: Zone of Pain (concrete + stable) | Zone of Uselessness (abstract + unstable).
 
-**Bar charts** show the top packages/modules by incoming and outgoing dependency counts, making it easy to spot the most heavily connected elements.
+**Bar charts**: Top connected packages/modules.
 
 ### 8.1 Java Packages (without sub-packages)
 
@@ -304,13 +266,11 @@ The scatter chart plots every component on the **Abstractness vs. Instability** 
 
 ## 9. Visibility Metrics
 
-**Visibility metrics** measure how much of a component's API is exposed publicly versus kept internal. A high relative visibility means most types or elements are public — potentially exposing more than necessary. A low relative visibility means a tightly encapsulated API.
+Measures public vs. internal API exposure. High visibility = exposed more than necessary; low = tightly encapsulated.
 
-The **percentile subplots** display three percentile levels of relative visibility (p25, p50, p75) against the artifact or project's total type/element count on a log scale. This reveals whether large, complex artifacts tend to expose more or less of their API compared to smaller ones.
+**Percentile plots** (p25, p50, p75) vs. size (log scale): large artifacts vs. small visibility patterns.
 
-The **artifact/project scatter** plots each artifact or project as a single point using its median (p50) relative visibility versus its size — a quick view for identifying outliers at the coarsest granularity.
-
-The **package/module scatter** shows relative visibility for every individual package or module against its type/element count — useful for identifying outlier packages with unusually high or low visibility.
+**Scatter charts**: Artifact/project median visibility vs. size • Package/module individual visibility vs. size.
 
 ### 9.1 Java Visibility
 
@@ -344,8 +304,6 @@ The **package/module scatter** shows relative visibility for every individual pa
 
 ## 10. Code Vocabulary
 
-The **word cloud** visualises the vocabulary used across all code element names — package names, class names, method names, type names, module names. Frequently occurring words appear larger.
-
-Common generic words (`builder`, `handler`, `util`, `factory`, `type`, `module`, `get`, `set`, …) are filtered out so that domain-specific and project-specific words stand out. Words that dominate the cloud reveal the core domain concepts and architectural patterns in use. Unexpected clusters of non-domain words may indicate naming inconsistencies or missing abstraction layers.
+**Word cloud**: Vocabulary from all code element names (filtered for generic words). Reveals domain concepts and naming patterns.
 
 <!-- include:CodeNamesWordcloud.md|empty.md -->

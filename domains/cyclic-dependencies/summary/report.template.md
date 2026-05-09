@@ -4,15 +4,13 @@
 
 ## 1. Executive Overview
 
-This report analyses **cyclic dependencies** within the codebase — mutual dependency cycles between Java packages, Java artifacts, and TypeScript modules.
+Analyzes **cyclic dependencies**: mutual cycles between Java packages, artifacts, and TypeScript modules.
 
-A **cycle group** is a set of code units (packages, modules) that mutually depend on each other — A depends on B and B depends on A, directly or transitively. Cyclic dependencies prevent independent compilation, complicate testing, and make architectural layering impossible.
+**Cycle group**: Set of code units that depend on each other (A → B → A, directly or transitively). Prevents modular decomposition.
 
-The `forwardToBackwardBalance` metric identifies the easiest fix path: dependencies within a cycle are classified as _forward_ (in the direction of the cycle group majority) or _backward_ (against it). Removing or reversing a backward dependency dissolves the cycle. A balance near 1.0 means almost all dependencies are forward — there are very few backward ones to remove. A balance near 0.0 means many backward dependencies exist, making the cycle harder to resolve.
+**Key metric**: `forwardToBackwardBalance` = ratio of forward to backward dependencies. Near 1.0 = easy fix (few backward deps to remove); near 0.0 = hard (many backward deps). Backward dependencies are removal candidates.
 
-> **What to act on first?**  
-> Cyclic dependencies are the highest-priority structural smell — they make modular decomposition impossible.  
-> **Reading the tables**: Rows are sorted by priority — the **first rows are the most critical** and should be addressed first.
+**Priority**: Rows sorted by `forwardToBackwardBalance` descending — highest priority first.
 
 ## 📚 Table of Contents
 
@@ -27,25 +25,25 @@ The `forwardToBackwardBalance` metric identifies the easiest fix path: dependenc
 
 ### 2.1 Java Package Cyclic Dependencies (Overview)
 
-Each row represents one cycle group. `numberForward` counts how many dependencies flow in the direction of the cycle; `numberBackward` counts those going against it. Sorted by `forwardToBackwardBalance` descending — the top rows are the easiest to fix (fewest backward dependencies to remove).
+`numberForward`: dependencies in cycle majority direction. `numberBackward`: against majority (removal candidates).
 
 <!-- include:Cyclic_Dependencies.md|report_no_cycles_data.template.md -->
 
 ### 2.2 Java Package Cyclic Dependencies (Breakdown)
 
-Expands each cycle group into individual dependency pairs in `type1 → type2` format, showing both forward and backward dependencies. Use this to understand the concrete classes involved in each cycle.
+Individual dependency pairs per cycle group: concrete types involved.
 
 <!-- include:Cyclic_Dependencies_Breakdown.md|report_no_cycles_data.template.md -->
 
 ### 2.3 Java Package Cyclic Dependencies (Backward Only)
 
-Shows only the _backward_ dependencies — those going against the majority flow within the cycle group. These are the highest-value candidates for removal or reversal to break the cycle entirely.
+Backward dependencies only — primary candidates for removal/reversal to break cycles.
 
 <!-- include:Cyclic_Dependencies_Breakdown_Backward_Only.md|report_no_cycles_data.template.md -->
 
 ### 2.4 Java Artifact Cyclic Dependencies
 
-Cyclic dependencies at the artifact (JAR) level — the coarsest and most critical abstraction. Each row is one dependency that participates in a cycle between artifacts.
+Artifact (JAR) level cycles — coarsest and most critical abstraction.
 
 <!-- include:Cyclic_Dependencies_between_Artifacts.md|report_no_cycles_data.template.md -->
 
@@ -55,19 +53,19 @@ Cyclic dependencies at the artifact (JAR) level — the coarsest and most critic
 
 ### 3.1 TypeScript Module Cyclic Dependencies (Overview)
 
-Cycle groups among TypeScript modules. Interpretation is identical to the Java package view: sorted by `forwardToBackwardBalance` descending, easiest fixes at the top.
+TypeScript module cycles. Sorted by `forwardToBackwardBalance` descending (easiest fixes first).
 
 <!-- include:Cyclic_Dependencies_for_Typescript.md|report_no_typescript_data.template.md -->
 
 ### 3.2 TypeScript Module Cyclic Dependencies (Breakdown)
 
-Individual dependency pairs within each TypeScript cycle group.
+Individual TypeScript module dependency pairs per cycle group.
 
 <!-- include:Cyclic_Dependencies_Breakdown_for_Typescript.md|report_no_typescript_data.template.md -->
 
 ### 3.3 TypeScript Module Cyclic Dependencies (Backward Only)
 
-Backward TypeScript module dependencies — the most effective candidates for breaking cycles.
+Backward TypeScript dependencies — highest-value cycle breakers.
 
 <!-- include:Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.md|report_no_typescript_data.template.md -->
 
@@ -77,9 +75,9 @@ Backward TypeScript module dependencies — the most effective candidates for br
 
 | Term | Definition |
 |------|-----------|
-| **cycle group** | A set of code units (packages, modules) that mutually depend on each other — directly or transitively. |
-| **forwardToBackwardBalance** | Ratio of forward to backward dependencies within a cycle group. Values near 1.0 = mostly forward (few backward dependencies to remove to break the cycle); near 0.0 = mostly backward (harder to fix). |
-| **numberForward** | Count of dependencies flowing in the majority direction within a cycle group. |
-| **numberBackward** | Count of dependencies flowing against the majority direction — primary refactoring targets. |
-| **forward dependency** | A dependency flowing in the direction of the cycle group majority. |
-| **backward dependency** | A dependency going against the majority flow within the cycle group — highest-value candidate for removal to break the cycle. |
+| **cycle group** | Set of code units that mutually depend on each other (directly or transitively). |
+| **forwardToBackwardBalance** | Ratio of forward:backward dependencies. ~1.0 = easy fix; ~0.0 = hard. |
+| **numberForward** | Forward dependencies in cycle majority direction. |
+| **numberBackward** | Backward dependencies — removal candidates. |
+| **forward dependency** | Dependency in cycle group majority direction. |
+| **backward dependency** | Dependency against majority flow — highest-value removal candidate. |
