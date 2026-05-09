@@ -16,6 +16,11 @@ MARKDOWN_INCLUDES_DIRECTORY | includes | Subdirectory that contains Markdown fil
 ANOMALY_DETECTION_GRAPHS_DIR | ${ANOMALY_DETECTION_SCRIPT_DIR}/graphs | Contains everything (scripts, queries, templates) to create the Markdown summary report for anomaly detection
 VISUALIZATION_SCRIPTS_DIR | ${SCRIPTS_DIR}/visualization | Repository directory containing the shell scripts for visualization
 MARKDOWN_SCRIPTS_DIR | ${SCRIPTS_DIR}/markdown | 
+ARCHETYPES_FEATURE_CYPHER_DIR | ${ARCHETYPES_SCRIPT_DIR}/features | 
+ARCHETYPES_QUERY_CYPHER_DIR | ${ARCHETYPES_SCRIPT_DIR}/queries | 
+ARCHETYPES_LABEL_CYPHER_DIR | ${ARCHETYPES_SCRIPT_DIR}/labels | 
+ARCHETYPES_SUMMARY_DIR | ${ARCHETYPES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for archetypes
+ARCHETYPES_GRAPHS_DIR | ${ARCHETYPES_SCRIPT_DIR}/graphs | Contains everything (scripts, queries, templates) to create GraphViz visualizations for archetypes
 EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries | 
 EXTERNAL_DEPENDENCIES_SUMMARY_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for external dependencies
 GIT_HISTORY_SUMMARY_DIR | ${GIT_HISTORY_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
