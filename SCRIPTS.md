@@ -13,6 +13,12 @@ Script | Directory | Description
 [renderArchitecture.sh](./domains/anomaly-detection/documentation/renderArchitecture.sh) | documentation | Renders the described Graph in Architecture.gv as a SVG image.
 [anomalyDetectionGraphs.sh](./domains/anomaly-detection/graphs/anomalyDetectionGraphs.sh) | graphs | Executes selected anomaly detection Cypher queries for GraphViz visualization.
 [anomalyDetectionSummary.sh](./domains/anomaly-detection/summary/anomalyDetectionSummary.sh) | summary | Creates a Markdown report that contains all results of all the anomaly detection methods.
+[archetypesCsv.sh](./domains/archetypes/archetypesCsv.sh) | archetypes | Pipeline that coordinates archetype classification using the Graph Data Science Library of Neo4j.
+[archetypesMarkdown.sh](./domains/archetypes/archetypesMarkdown.sh) | archetypes | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[archetypesPython.sh](./domains/archetypes/archetypesPython.sh) | archetypes | Pipeline that creates treemap visualizations for structural archetype classification results.
+[archetypesVisualization.sh](./domains/archetypes/archetypesVisualization.sh) | archetypes | This script is dynamically triggered by "VisualizationReports.sh" when report "All" or "Visualization" is enabled.
+[archetypesGraphs.sh](./domains/archetypes/graphs/archetypesGraphs.sh) | graphs | Executes selected archetypes Cypher queries for GraphViz visualization.
+[archetypesSummary.sh](./domains/archetypes/summary/archetypesSummary.sh) | summary | Creates a Markdown report that contains all results of archetype classification.
 [externalDependenciesCsv.sh](./domains/external-dependencies/externalDependenciesCsv.sh) | external-dependencies | Executes Cypher queries to generate external dependency CSV reports.
 [externalDependenciesMarkdown.sh](./domains/external-dependencies/externalDependenciesMarkdown.sh) | external-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [externalDependenciesPython.sh](./domains/external-dependencies/externalDependenciesPython.sh) | external-dependencies | Generates external dependency charts as SVG files using Python.
