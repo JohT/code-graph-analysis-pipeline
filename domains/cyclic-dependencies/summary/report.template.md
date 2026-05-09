@@ -47,6 +47,12 @@ Artifact (JAR) level cycles — coarsest and most critical abstraction.
 
 <!-- include:Cyclic_Dependencies_between_Artifacts.md|report_no_cycles_data.template.md -->
 
+### 2.5 Java Package Cyclic Dependencies (Graph Visualizations)
+
+Top cycle pairs visualized as graphs. Blue solid arrows: forward dependencies. Red dashed arrows: backward dependencies (removal candidates). Nodes are grouped by package.
+
+<!-- include:GraphVisualizationsJavaPackageReference.md|empty.md -->
+
 ---
 
 ## 3. TypeScript Cyclic Dependencies
@@ -68,6 +74,12 @@ Individual TypeScript module dependency pairs per cycle group.
 Backward TypeScript dependencies — highest-value cycle breakers.
 
 <!-- include:Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.md|report_no_typescript_data.template.md -->
+
+### 3.4 TypeScript Module Cyclic Dependencies (Graph Visualizations)
+
+Top TypeScript cycle pairs visualized as graphs. Blue solid arrows: forward dependencies. Red dashed arrows: backward dependencies (removal candidates). Nodes are grouped by module.
+
+<!-- include:GraphVisualizationsTypescriptModuleReference.md|empty.md -->
 
 ---
 

@@ -1,0 +1,34 @@
+// This is a GraphViz dot template file for the visualization of cyclic dependency graphs.
+// Forward dependencies (blue solid arrows) show the dominant cycle direction.
+// Backward dependencies (red dashed arrows) are the candidates to remove to break the cycle.
+// Package or module clusters group type nodes by their containing code unit.
+// The main part of the template is marked by the comments "Begin-Template" and "End-Template".
+// It also contains a simple example graph.
+//
+strict digraph cycle_template {
+    //Begin-Template
+    graph [layout = "fdp"; start = "7"; splines = "curved"; pad = "0.8,0.4"; outputorder = "edgesfirst";];
+    graph [fontname = "Helvetica,Arial,sans-serif"; labelloc = "t";];
+    node [fontname = "Helvetica,Arial,sans-serif"; style = "filled"; fillcolor = "white";];
+    node [fontsize = 11; margin = "0.05,0.05";];
+    edge [fontsize = 9; arrowsize = "0.6";];
+    //End-Template
+
+    subgraph cluster_package {
+        label = "com.example.package";
+        style = "filled";
+        fillcolor = "lightblue";
+        "TypeA";
+        "TypeB";
+    }
+
+    subgraph cluster_dependent {
+        label = "com.example.dependent";
+        style = "filled";
+        fillcolor = "peachpuff";
+        "TypeC";
+    }
+
+    "TypeA" -> "TypeC" [color = "#6699CC"; penwidth = "0.5"];
+    "TypeC" -> "TypeB" [color = "red"; penwidth = "2.5"; style = "dashed";];
+}
