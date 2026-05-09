@@ -2,12 +2,13 @@
 
 This directory contains the implementation and resources for analysing **internal dependencies** within the Code Graph Analysis Pipeline. It follows the vertical-slice domain pattern: all Cypher queries, Python chart scripts, shell scripts, and report templates needed for this analysis live here.
 
-This domain covers four related analysis areas:
+This domain covers three related analysis areas:
 
 - **Internal Dependencies**: How packages, artifacts, and TypeScript modules depend on each other — interface segregation, widely used types, usage ratios, and file distances.
-- **Cyclic Dependencies**: Mutual dependency cycles between Java packages, Java artifacts, and TypeScript modules — with metrics to prioritise which backward dependencies to remove.
 - **Path Finding**: All-pairs shortest path and longest path algorithms — revealing dependency depth, graph diameter, and worst-case transitive chains.
 - **Topological Sort**: Build ordering across all abstraction levels — packages, artifacts, types, modules, and NPM packages.
+
+> **Cyclic dependency analysis** has been extracted into its own dedicated domain: [`cyclic-dependencies`](../cyclic-dependencies/README.md).
 
 ## Entry Points
 
@@ -37,7 +38,6 @@ domains/internal-dependencies/
 │   └── PathFindingTypescript.ipynb
 ├── queries/
 │   ├── internal-dependencies/             # 14 Cypher queries (internal structure)
-│   ├── cyclic-dependencies/               # 7 Cypher queries (cycle analysis)
 │   ├── path-finding/                      # 15 Cypher queries (path algorithms)
 │   ├── topological-sort/                  # 5 Cypher queries (build ordering)
 │   └── exploration/                       # 2 Cypher queries (explore notebooks only)
@@ -75,7 +75,6 @@ All output goes into `reports/internal-dependencies/`, organised by abstraction 
 reports/internal-dependencies/
 ├── Distance_distribution_between_dependent_files.csv
 ├── Java_Artifact/
-│   ├── CyclicArtifactDependenciesUnwinded.csv
 │   ├── List_all_Java_artifacts.csv
 │   ├── ArtifactPackageUsage.csv
 │   ├── ClassesPerPackageUsageAcrossArtifacts.csv
@@ -87,9 +86,6 @@ reports/internal-dependencies/
 │       ├── JavaArtifactLongestPathsIsolated.{csv,dot,svg}
 │       └── JavaArtifactLongestPaths.{csv,dot,svg}
 ├── Java_Package/
-│   ├── Cyclic_Dependencies.csv
-│   ├── Cyclic_Dependencies_Breakdown.csv
-│   ├── Cyclic_Dependencies_Breakdown_Backward_Only.csv
 │   ├── InterfaceSegregationCandidates.csv
 │   ├── WidelyUsedTypes.csv
 │   ├── Package_all_pairs_shortest_paths_distribution_per_project.csv
@@ -98,9 +94,6 @@ reports/internal-dependencies/
 ├── Java_Type/
 │   └── Type_Topological_Sort.csv
 ├── Typescript_Module/
-│   ├── Cyclic_Dependencies_for_Typescript.csv
-│   ├── Cyclic_Dependencies_Breakdown_for_Typescript.csv
-│   ├── Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.csv
 │   ├── List_all_Typescript_modules.csv
 │   ├── WidelyUsedTypescriptElements.csv
 │   ├── ModuleElementsUsageTypescript.csv

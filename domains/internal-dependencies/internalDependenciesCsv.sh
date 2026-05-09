@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Pipeline that coordinates internal dependency analysis using Cypher queries and the
-# Graph Data Science Library of Neo4j. It covers internal dependencies, cyclic dependencies,
+# Graph Data Science Library of Neo4j. It covers internal dependencies,
 # path finding, and topological sort across multiple abstraction levels.
 # It requires an already running Neo4j graph database with already scanned and analyzed artifacts.
 # The results will be written into the sub directory reports/internal-dependencies.
@@ -29,7 +29,6 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/../../scripts"}
 
 # Cypher query directories within this domain
 INTERNAL_DEPS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/internal-dependencies"
-CYCLIC_DEPS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/cyclic-dependencies"
 PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/path-finding"
 TOPOLOGICAL_SORT_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/topological-sort"
 OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/object-oriented-design-metrics"
@@ -62,15 +61,6 @@ execute_cypher_queries_until_results \
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing internal dependencies for Java..."
 
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Java_Package/Cyclic_Dependencies.csv"
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Java_Package/Cyclic_Dependencies_Breakdown.csv"
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Java_Package/Cyclic_Dependencies_Breakdown_Backward_Only.csv"
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_between_Artifacts_as_unwinded_List.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Java_Artifact/CyclicArtifactDependenciesUnwinded.csv"
-
 execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/Candidates_for_Interface_Segregation.cypher" \
     > "${FULL_REPORT_DIRECTORY}/Java_Package/InterfaceSegregationCandidates.csv"
 
@@ -84,13 +74,6 @@ execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/How_many_classes_compared_to_all_exi
     > "${FULL_REPORT_DIRECTORY}/Java_Artifact/ClassesPerPackageUsageAcrossArtifacts.csv"
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing internal dependencies for TypeScript..."
-
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_for_Typescript.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/Cyclic_Dependencies_for_Typescript.csv"
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_Typescript.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/Cyclic_Dependencies_Breakdown_for_Typescript.csv"
-execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/Typescript_Module/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.csv"
 
 execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/List_all_Typescript_modules.cypher" \
     > "${FULL_REPORT_DIRECTORY}/Typescript_Module/List_all_Typescript_modules.csv"
