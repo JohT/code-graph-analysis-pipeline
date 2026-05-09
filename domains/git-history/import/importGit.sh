@@ -79,7 +79,15 @@ deleteExistingGitData() {
 # Creates one (Git:Repository) node with information about the repository.  
 # The first and only parameter is the absolute/full repository directory path.
 create_git_repository_node() {
-    local full_local_repository_path=${1}
+    local full_local_repository_path="${1:-}"
+    if [ -z "${full_local_repository_path}" ]; then
+        echo "importGit: Error: create_git_repository_node() requires a repository path argument" >&2
+        return 1
+    fi
+    if [ ! -d "${full_local_repository_path}" ]; then
+        echo "importGit: Error: Repository directory does not exist: ${full_local_repository_path}" >&2
+        return 1
+    fi
     echo "importGit:   - full_local_repository_path=${full_local_repository_path}"
 
     local_repository=$(basename "${full_local_repository_path}")

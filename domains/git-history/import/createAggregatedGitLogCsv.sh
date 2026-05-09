@@ -7,9 +7,9 @@
 # Note: This script needs git to be installed.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
 
-CSV_OUTPUT_FILE_PATH=${1}
+CSV_OUTPUT_FILE_PATH=${1:-}
 
 # Check if the current directory is a git repository
 if [ ! -d "./.git" ]; then

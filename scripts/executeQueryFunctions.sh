@@ -18,7 +18,11 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 # All following arguments are the "key=value" parameters.
 # Example: `extractQueryParameter "b" "a=1" "b=2" "c=3"` returns `2`
 extractQueryParameter() {
-    target_key=${1}
+    local target_key="${1:-}"
+    if [ -z "${target_key}" ]; then
+        echo "extractQueryParameter: Error: target_key parameter is required" >&2
+        return 1
+    fi
     shift # skip first argument containing the target key
 
     for arg in "${@}"; do
@@ -26,9 +30,11 @@ extractQueryParameter() {
         value=$(echo "$arg" | cut -d'=' -f2)
         if [ "${key}" = "${target_key}" ]; then
             echo "${value}"
-            break
+            return 0
         fi
     done
+    # Key not found; return silently (consistent with existing behavior of not echoing anything)
+    return 0
 }
 
 # Function to execute a cypher query from the given file (first argument) with the default method
