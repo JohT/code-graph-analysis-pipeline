@@ -1,4 +1,4 @@
-// Anomaly Detection Graphs: Find top nodes marked as "Hub" including their incoming and outgoing dependencies and output them in Graphviz format.
+// Archetypes Graphs: Find top nodes marked as "Hub" including their incoming and outgoing dependencies and output them in Graphviz format.
 
 // Step 1: Query overall statistics, e.g. min/max weight for later normalization
  MATCH (sourceForStatistics)-[dependencyForStatistics:DEPENDS_ON]->(targetForStatistics)
@@ -9,7 +9,7 @@
 // Step 2: Query selected central node
  MATCH (central)
  WHERE $projection_node_label IN labels(central)
-   AND central.anomalyHubRank = toInteger($projection_node_rank)
+   AND central.archetypeHubRank = toInteger($projection_node_rank)
   WITH maxWeight
       ,localClusteringCoefficientLowThreshold
       ,central
@@ -17,9 +17,9 @@
       ,coalesce(central.fqn, central.globalFqn, central.fileName, central.signature, central.name)                   AS targetName
   WITH *, "\\n\\nnodes: incoming dependencies (limited max. 40)\\n"                                  AS graphLegend
   WITH *, graphLegend + "node value: local clustering coefficient\\n"                                AS graphLegend
-  WITH *, graphLegend + "thick outline: <1 0% percentile of local clustering coefficient\\n"         AS graphLegend
+  WITH *, graphLegend + "thick outline: <10% percentile of local clustering coefficient\\n"          AS graphLegend
   WITH *, ["graph   [label=\"" + graphLabel + targetName + graphLegend + "\\n\"];"]       AS graphVizOutput
-  WITH *, "🎡 hub #" + central.anomalyHubRank + "\\n" + central.name                      AS centralNodeLabel
+  WITH *, "🎡 hub #" + central.archetypeHubRank + "\\n" + central.name                    AS centralNodeLabel
   WITH *, centralNodeLabel + "\\n(in-degree=" + central.incomingDependencies + ")"        AS centralNodeLabel                    
   WITH *, graphVizOutput + ["central [label=\"" + centralNodeLabel + "\"];"]              AS graphVizOutput
 // Step 3: Query direct incoming dependencies to the central node

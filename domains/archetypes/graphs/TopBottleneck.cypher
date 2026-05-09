@@ -1,4 +1,4 @@
-// Anomaly Detection Graphs: Find top nodes marked as "Bottleneck" including their incoming and outgoing dependencies and output them in Graphviz format.
+// Archetypes Graphs: Find top nodes marked as "Bottleneck" including their incoming and outgoing dependencies and output them in Graphviz format.
 
 // Step 1: Query overall statistics, e.g. min/max weight for later normalization
  MATCH (sourceForStatistics)-[dependencyForStatistics:DEPENDS_ON]->(targetForStatistics)
@@ -9,7 +9,7 @@
 // Step 2: Query selected central node
  MATCH (central)
  WHERE $projection_node_label IN labels(central)
-   AND central.anomalyBottleneckRank = toInteger($projection_node_rank)
+   AND central.archetypeBottleneckRank = toInteger($projection_node_rank)
   WITH maxWeight
       ,betweennessThreshold
       ,central
@@ -20,7 +20,7 @@
   WITH *, graphLegend + "node value: Betweenness centrality\\n"                                      AS graphLegend
   WITH *, graphLegend + "thick outline: > 90% percentile of Betweenness centrality\\n"    AS graphLegend
   WITH *, ["graph   [label=\"" + graphLabel + targetName + graphLegend + "\\n\"];"]       AS graphVizOutput
-  WITH *, "🔒 bottleneck #" + central.anomalyBottleneckRank + "\\n" + central.name        AS centralNodeLabel
+  WITH *, "🔒 bottleneck #" + central.archetypeBottleneckRank + "\\n" + central.name      AS centralNodeLabel
   WITH *, graphVizOutput + ["central [label=\"" + centralNodeLabel + "\"];"]              AS graphVizOutput
 // Step 3: Query direct incoming dependencies to the central node
 OPTIONAL MATCH (source)-[dependency:DEPENDS_ON]->(central)

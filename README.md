@@ -77,7 +77,7 @@ Here are some fully automated graph visualizations utilizing [GraphViz](https://
 
 - [Java Artifact Build Levels](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./domains/internal-dependencies/queries/internal-dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
 - [Java Artifact Longest Path Contributors](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./domains/internal-dependencies/queries/path-finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
-- [Java Package Top #1 Authority Archetype and contributing packages](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/Java_Package/GraphVisualizations/TopAuthority1.svg) ([Query](./domains/anomaly-detection/labels/AnomalyDetectionArchetypeAuthority.cypher), [Source Script](./domains/anomaly-detection/graphs/anomalyDetectionGraphs.sh))
+- [Java Package Top #1 Authority Archetype and contributing packages](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/Java_Package/GraphVisualizations/TopAuthority1.svg) ([Query](./domains/archetypes/labels/ArchetypeAuthority.cypher), [Source Script](./domains/archetypes/graphs/archetypesGraphs.sh))
 
 ## :book: Blog Articles
 

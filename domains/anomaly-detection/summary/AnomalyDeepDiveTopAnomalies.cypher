@@ -4,16 +4,13 @@
  WHERE $projection_node_label IN labels(codeUnit)
    AND codeUnit.anomalyScore > 0
 ORDER BY codeUnit.anomalyScore DESC
-UNWIND keys(codeUnit) AS codeUnitProperty
+UNWIND ['anomalyBridgeRank', 'anomalyOutlierRank'] AS codeUnitProperty
   WITH codeUnit
-      ,CASE WHEN codeUnitProperty STARTS WITH 'anomaly'  
-             AND codeUnitProperty ENDS   WITH 'Rank'
-            THEN split(split(codeUnitProperty, 'anomaly')[1], 'Rank')[0]
+      ,CASE WHEN codeUnitProperty = 'anomalyBridgeRank'
+            THEN 'Bridge'
+            ELSE 'Outlier'
         END AS archetype
-      ,CASE WHEN codeUnitProperty STARTS WITH 'anomaly'  
-             AND codeUnitProperty ENDS   WITH 'Rank'
-            THEN codeUnit[codeUnitProperty]
-        END AS archetypeRank
+      ,codeUnit[codeUnitProperty] AS archetypeRank
 ORDER BY codeUnit.anomalyScore DESC, archetypeRank ASC
   WITH codeUnit
       ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName

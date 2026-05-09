@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# This Python script uses Plotly Treemap Charts (https://plotly.com/python/treemaps) to visualize anomaly detection results.
+# This Python script uses Plotly Treemap Charts (https://plotly.com/python/treemaps) to visualize structural archetype classification results.
 
 from typing import Any, Dict, List, Tuple, Literal, LiteralString, Optional, cast
 
@@ -52,11 +52,6 @@ class Parameters:
 
     @classmethod
     def from_input_parameters(cls, input_parameters: Dict[str, str], report_directory: str = "", verbose: bool = False):
-        """
-        Creates a Parameters instance from a dictionary of input parameters.
-        The dictionary must contain the following keys:
-         - "projection_node_label": The node type of the projection.
-        """
         missing_parameters = [parameter for parameter in cls.required_parameters_ if parameter not in input_parameters]
         if missing_parameters:
             raise ValueError("Missing parameters:", missing_parameters)
@@ -95,7 +90,7 @@ def parse_input_parameters() -> Parameters:
         return param_dict
 
     parser = argparse.ArgumentParser(
-        description="Unsupervised clustering to assign labels to code units (Java packages, types,...) and their dependencies based on how structurally similar they are within a software system.")
+        description="Treemap visualization for structural archetypes (Authority, Bottleneck, Hub) across the file structure.")
     parser.add_argument('--verbose', action='store_true', help='Enable verbose mode to log all details')
     parser.add_argument('--report_directory', type=str, default="", help='Path to the report directory')
     parser.add_argument('query_parameters', nargs='*', type=str, help='List of key=value Cypher query parameters')
@@ -153,11 +148,6 @@ plotly_treemap_marker_base_style = {
     "cornerradius": 5
 }
 
-plotly_treemap_marker_base_color_scale = dict(
-    **plotly_treemap_marker_base_style,
-    colorscale='Hot_r',
-)
-
 
 # ----------------------------------------
 # Base functions for Treemap chart visualization
@@ -167,11 +157,6 @@ plotly_treemap_marker_base_color_scale = dict(
 logging.getLogger("kaleido").setLevel(logging.WARNING)
 
 def get_plotly_figure_write_image_settings(name: str, path: str):
-    """
-    Returns the settings for the plotly figure write_image method
-    :param name: Name of the figure
-    :return: Dictionary with settings for the write_image method
-    """
     return {
         "file": path + "/" + name + "." + image_rendering_settings['format'],
         "format": image_rendering_settings['format'],
@@ -181,17 +166,12 @@ def get_plotly_figure_write_image_settings(name: str, path: str):
 
 
 def create_treemap_settings(data_frame: pd.DataFrame, element_path_column: str = 'elementPath', element_name_column: str = "elementName") -> plotly_graph_objects.Treemap:
-    """
-    Creates a Plotly Treemap with the given settings and data frame.
-    data_frame : pd.DataFrame : The input data frame
-    return :plotly_graph_objects.Treemap : The prepared Plotly Treemap
-    """
     return plotly_graph_objects.Treemap(
         labels=data_frame[element_name_column],
         parents=data_frame['directoryParentPath'],
         ids=data_frame[element_path_column],
-        customdata=data_frame[['fileCount', 'absoluteAnomalyScore', 'normalizedBridgeRank', 'normalizedOutlierRank', 'elementPath']],
-        hovertemplate='<b>%{label}</b><br>Highlighted anomalies: %{customdata[0]}<br>Anomaly Score: %{customdata[1]:.4f}<br>Bridge: %{customdata[2]}, Outlier: %{customdata[3]}<br>Path: %{customdata[4]}',
+        customdata=data_frame[['fileCount', 'normalizedAuthorityRank', 'normalizedBottleneckRank', 'normalizedHubRank', 'elementPath']],
+        hovertemplate='<b>%{label}</b><br>Highlighted archetypes: %{customdata[0]}<br>Authority: %{customdata[1]}, Bottleneck: %{customdata[2]}, Hub: %{customdata[3]}<br>Path: %{customdata[4]}',
         maxdepth=-1,
         root_color="lightgrey",
         marker=dict(**plotly_treemap_marker_base_style),
@@ -204,11 +184,6 @@ def create_treemap_settings(data_frame: pd.DataFrame, element_path_column: str =
 
 
 def remove_last_path_file_extension(file_path_elements: list) -> list:
-    """
-    Removes the file extension of the last element of the file path so that only the file name remains.
-    file_path_elements : list : The list of file path elements where the last one contains the file name with extension
-    return : list : The list of the directories + the file name without extension as last element.
-    """
     if not file_path_elements:
         return ['']
     if len(file_path_elements) == 1:
@@ -217,74 +192,42 @@ def remove_last_path_file_extension(file_path_elements: list) -> list:
 
 
 def join_path_elements(file_path_elements: list) -> list:
-    """
-    Joins the file path elements (and removes the file extension).
-    file_path_elements : list : The list of levels to convert
-    return : list : The list of directories
-    """
     prepared_path_elements = remove_last_path_file_extension(file_path_elements)
     return ['/'.join(prepared_path_elements[:i+1]) for i in range(len(prepared_path_elements))]
 
 
 def add_element_path_column(input_dataframe: pd.DataFrame, file_path_column: str, element_path_column: str = 'elementPath'):
-    """
-    Adds a directory column to the input DataFrame based on the file path column.
-    input_dataframe : pd.DataFrame : The input DataFrame
-    file_path_column : str : The name of the file path column
-    directory_column : str : The name of the directory column to be added
-    return : pd.DataFrame : The DataFrame with added directory column
-    """
     if element_path_column in input_dataframe.columns:
-        return input_dataframe # Column already exists
-    
+        return input_dataframe  # Column already exists
+
     input_dataframe.insert(0, element_path_column, input_dataframe[file_path_column].str.split('/').apply(join_path_elements))
     input_dataframe = input_dataframe.explode(element_path_column)
     return input_dataframe
 
 
 def add_element_name_column(input_dataframe: pd.DataFrame, element_path_column: str = 'elementPath', element_name_column: str = 'elementName'):
-    """
-    Adds a directory name column to the input DataFrame based on the directory column.
-    input_dataframe : pd.DataFrame : The input DataFrame
-    directory_column : str : The name of the directory column
-    directory_name_column : str : The name of the directory name column to be added
-    return : pd.DataFrame : The DataFrame with added directory name column
-    """
     if element_name_column in input_dataframe.columns:
-        return input_dataframe # Column already exists
-    
+        return input_dataframe  # Column already exists
+
     splitted_directories = input_dataframe[element_path_column].str.rsplit('/', n=1)
     input_dataframe.insert(1, element_name_column, splitted_directories.apply(lambda x: (x[-1])))
     return input_dataframe
 
 
 def add_parent_directory_column(input_dataframe: pd.DataFrame, element_path_column: str = 'elementPath', directory_parent_column: str = 'directoryParentPath'):
-    """
-    Adds a directory parent column to the input DataFrame based on the directory column.
-    input_dataframe : pd.DataFrame : The input DataFrame
-    directory_column : str : The name of the directory column
-    directory_parent_column : str : The name of the directory parent column to be added
-    return : pd.DataFrame : The DataFrame with added directory parent column
-    """
     if directory_parent_column in input_dataframe.columns:
-        return input_dataframe # Column already exists
-    
+        return input_dataframe  # Column already exists
+
     # Remove last path element from directory_column to get the directory_parent_column
     splitted_directories = input_dataframe[element_path_column].str.rsplit('/', n=1)
     input_dataframe.insert(1, directory_parent_column, splitted_directories.apply(lambda x: (x[0])))
-    
-    # Clear parent (set to empty string) when it equal to the directory
+
+    # Clear parent (set to empty string) when it equals the directory
     input_dataframe.loc[input_dataframe[directory_parent_column] == input_dataframe[element_path_column], directory_parent_column] = ''
     return input_dataframe
 
 
 def count_unique_aggregated_values(values: pd.Series):
-    """
-    Return the number of unique values from an array of array of strings.
-    Meant to be used as an aggregation function for dataframe grouping.
-    values : Series : The pandas Series of values
-    return : int : The number of files
-    """
     return len(np.unique(np.concatenate(values.to_list())))
 
 
@@ -293,41 +236,37 @@ def prepare_data_for_treemap(data: pd.DataFrame, debug: bool = False) -> pd.Data
         print("1. query result ---------------------")
         print(data)
 
-    # 3. Add multiple rows for each file path containing all its directories paths in the new column 'elementPath'
+    # Add multiple rows for each file path containing all its directories paths in the new column 'elementPath'
     data = add_element_path_column(data, 'filePath', 'elementPath')
 
     if debug:
         print("3. added elementPath --------------")
         print(data)
 
-    # Group the files by their directory and count the number of files of each directory (across all levels).
+    # Group the files by their directory and take the max rank per directory across all levels.
     common_named_aggregation = {
-        "absoluteAnomalyScore": pd.NamedAgg(column="absoluteAnomalyScore", aggfunc="mean"),
-        "normalizedBridgeRank": pd.NamedAgg(column="normalizedBridgeRank", aggfunc="max"),
-        "normalizedOutlierRank": pd.NamedAgg(column="normalizedOutlierRank", aggfunc="max"),
+        "normalizedAuthorityRank": pd.NamedAgg(column="normalizedAuthorityRank", aggfunc="max"),
+        "normalizedBottleneckRank": pd.NamedAgg(column="normalizedBottleneckRank", aggfunc="max"),
+        "normalizedHubRank": pd.NamedAgg(column="normalizedHubRank", aggfunc="max"),
     }
 
     data = data.groupby(['elementPath']).aggregate(
         filePaths=pd.NamedAgg(column="filePath", aggfunc=np.unique),
         firstFile=pd.NamedAgg(column="filePath", aggfunc="first"),
-        maxAnomalyScore=pd.NamedAgg(column="absoluteAnomalyScore", aggfunc="max"),
         **common_named_aggregation
     )
 
-    # Sort the grouped and aggregated entries by the name of the directory ascending and the anomaly score descending.
-    # The author with the most commits will then be listed first for each directory.
-    data = data.sort_values(by=['elementPath', 'absoluteAnomalyScore'], ascending=[True, False])
+    data = data.sort_values(by=['elementPath'], ascending=[True])
     data = data.reset_index()
 
     if debug:
         print("4. grouped by elementPath --------------")
         print(data)
 
-    # Group the entries again now only by their directory path to get the aggregated number of anomalies and ranks.
+    # Group the entries again now only by their directory path to get the aggregated number of archetypes and ranks.
     data = data.groupby('elementPath').aggregate(
         fileCount=pd.NamedAgg(column="filePaths", aggfunc=count_unique_aggregated_values),
         firstFile=pd.NamedAgg(column="firstFile", aggfunc="first"),
-        maxAnomalyScore=pd.NamedAgg(column="maxAnomalyScore", aggfunc="max"),
         **common_named_aggregation
     )
     data = data.reset_index()
@@ -352,7 +291,7 @@ def prepare_data_for_treemap(data: pd.DataFrame, debug: bool = False) -> pd.Data
         elementPath=pd.NamedAgg(column="elementPath", aggfunc="last"),
     )
 
-    # Reorder the column positions so that the directory path is again the first column. 
+    # Reorder the column positions so that the directory path is again the first column.
     all_column_names_with_the_directory_path_first = ['elementPath', 'directoryParentPath', 'elementName'] + all_column_names_except_for_the_directory_path
     data = data.reset_index()[all_column_names_with_the_directory_path_first]
 
@@ -361,7 +300,7 @@ def prepare_data_for_treemap(data: pd.DataFrame, debug: bool = False) -> pd.Data
         print(data)
         print("Statistics --------------")
         data.describe()
-    
+
     return data
 
 
@@ -373,21 +312,21 @@ def mutual_exclusive_ranks(data: pd.DataFrame) -> pd.DataFrame:
     return : pd.DataFrame : The modified data frame with mutual exclusive ranks
     """
     modified_data = data.copy()
-    
+
     for dataframe_index, row in modified_data.iterrows():
         index = cast(int, dataframe_index)
         max_rank_value = 0
         max_rank_column = None
-        
+
         for column in archetype_columns:
             if row[column] > max_rank_value:
                 max_rank_value = row[column]
                 max_rank_column = column
-        
+
         for column in archetype_columns:
             if column != max_rank_column:
                 modified_data.at[index, column] = 0
-    
+
     return modified_data
 
 
@@ -395,23 +334,13 @@ def mutual_exclusive_ranks(data: pd.DataFrame) -> pd.DataFrame:
 # Archetypes
 # ----------------------------------------
 
-Archetypes = Literal["Bridge", "Outlier"]
-archetype_names: List[Archetypes] = ["Bridge", "Outlier"]
+Archetypes = Literal["Authority", "Bottleneck", "Hub"]
+archetype_names: List[Archetypes] = ["Authority", "Bottleneck", "Hub"]
 
 def get_archetype_column_name(archetype: Archetypes) -> str:
-    """
-    Returns the column name for the given archetype.
-    archetype : Archetypes : The archetype name
-    return : str : The column name for the given archetype
-    """
     return f"normalized{archetype}Rank"
 
 def get_archetype_index(archetype: Archetypes) -> int:
-    """
-    Returns the index of the given archetype.
-    archetype : Archetypes : The archetype name
-    return : int : The index of the given archetype
-    """
     return archetype_names.index(archetype)
 
 archetype_columns = [get_archetype_column_name(name) for name in archetype_names]
@@ -426,10 +355,10 @@ ColorPair = Tuple[Color, Color]  # Low and high color pair
 
 def interpolate_color(low: Color, high: Color, normalized_value: float) -> str:
     """Linear interpolation between two RGB tuples, returns rgba string."""
-    
+
     def linear_interpolation_of_color_component(color_component: int) -> int:
         return int(low[color_component] + (high[color_component] - low[color_component]) * normalized_value)
-    
+
     red = linear_interpolation_of_color_component(0)
     green = linear_interpolation_of_color_component(1)
     blue = linear_interpolation_of_color_component(2)
@@ -470,10 +399,11 @@ def get_rank_color_for_archetype(dataframe: pd.DataFrame, archetype: Archetypes)
 
 def get_coloring_pairs() -> List[Tuple[Tuple[int, int, int], Tuple[int, int, int]]]:
     """Define the coloring scheme for each archetype."""
-    assert len(archetype_names) == 2, "Expected exactly 2 archetypes."
+    assert len(archetype_names) == 3, "Expected exactly 3 archetypes."
     return [
-        ((239, 237, 245), (106, 81, 163)), # Bridge: Purple shades
-        ((240, 240, 240), (82, 82, 82)),   # Outlier: Gray shades
+        ((222, 235, 247), (33, 113, 181)),  # Authority: Blue shades
+        ((254, 230, 206), (217, 72, 1)),    # Bottleneck: Orange shades
+        ((254, 224, 210), (165, 15, 21)),   # Hub: Red shades
     ]
 
 # ----------------------------------------
@@ -482,27 +412,35 @@ def get_coloring_pairs() -> List[Tuple[Tuple[int, int, int], Tuple[int, int, int
 
 def query_data() -> pd.DataFrame:
     query: LiteralString = """
-        MATCH (anomalyScoreStats:File&!Directory&!Archive)
-        WHERE anomalyScoreStats.anomalyScore < 0
-        ORDER BY anomalyScoreStats.anomalyScore ASCENDING
-        LIMIT 150 // n largest negative anomaly scores as threshold
-         WITH collect(anomalyScoreStats.anomalyScore)[-1] AS anomalyScoreThreshold
-        MATCH (anomalyRankStats:File&!Directory&!Archive)
-         WITH anomalyScoreThreshold
-             ,max(anomalyRankStats.anomalyBridgeRank)     AS maxAnomalyBridgeRank
-             ,max(anomalyRankStats.anomalyOutlierRank)    AS maxAnomalyOutlierRank
-        MATCH (anomalous:File&!Directory&!Archive)
-        WHERE (anomalous.anomalyScore < anomalyScoreThreshold
-           OR  anomalous.anomalyOutlierRank    IS NOT NULL
-           OR  anomalous.anomalyBridgeRank     IS NOT NULL)
-        OPTIONAL MATCH (project:Artifact|Project)-[:CONTAINS]->(anomalous)
+        MATCH (archetypeRankStats:File&!Directory&!Archive)
+         WITH max(archetypeRankStats.archetypeAuthorityRank)  AS maxArchetypeAuthorityRank
+             ,max(archetypeRankStats.archetypeBottleneckRank) AS maxArchetypeBottleneckRank
+             ,max(archetypeRankStats.archetypeHubRank)        AS maxArchetypeHubRank
+        MATCH (archetypeNode:File&!Directory&!Archive)
+        WHERE archetypeNode.archetypeAuthorityRank  IS NOT NULL
+           OR archetypeNode.archetypeBottleneckRank IS NOT NULL
+           OR archetypeNode.archetypeHubRank        IS NOT NULL
+        OPTIONAL MATCH (archetypeParent)-[:CONTAINS]->(archetypeNode)
+         WITH maxArchetypeAuthorityRank, maxArchetypeBottleneckRank, maxArchetypeHubRank
+             ,collect(DISTINCT archetypeParent) AS archetypeParents
+        MATCH (f:File&!Directory&!Archive)
+        WHERE (   f.archetypeAuthorityRank  IS NOT NULL
+               OR f.archetypeBottleneckRank IS NOT NULL
+               OR f.archetypeHubRank        IS NOT NULL
+              )
+           OR EXISTS {
+                MATCH (p)-[:CONTAINS]->(f)
+                WHERE p IN archetypeParents
+                  AND NOT p:Archive
+              }
+        OPTIONAL MATCH (project:Artifact|Project)-[:CONTAINS]->(f)
           WITH *
-              ,coalesce(project.name + '/', '')                     AS projectName
-              ,coalesce(anomalous.fileName, anomalous.relativePath) AS fileName
-        RETURN replace(projectName + fileName, '//', '/')   AS filePath
-              ,CASE WHEN anomalous.anomalyScore < 0 THEN abs(anomalous.anomalyScore) ELSE 0 END AS absoluteAnomalyScore
-              ,coalesce(toFloat(anomalous.anomalyBridgeRank) / maxAnomalyBridgeRank, 0)         AS normalizedBridgeRank
-              ,coalesce(toFloat(anomalous.anomalyOutlierRank) / maxAnomalyOutlierRank, 0)       AS normalizedOutlierRank
+              ,coalesce(project.name + '/', '')                         AS projectName
+              ,coalesce(f.fileName, f.relativePath)                     AS fileName
+        RETURN replace(projectName + fileName, '//', '/')               AS filePath
+              ,coalesce(toFloat(f.archetypeAuthorityRank)  / maxArchetypeAuthorityRank,  0) AS normalizedAuthorityRank
+              ,coalesce(toFloat(f.archetypeBottleneckRank) / maxArchetypeBottleneckRank, 0) AS normalizedBottleneckRank
+              ,coalesce(toFloat(f.archetypeHubRank)        / maxArchetypeHubRank,        0) AS normalizedHubRank
         ORDER BY filePath ASCENDING
         """
     return query_cypher_to_data_frame(query)
@@ -517,33 +455,21 @@ parameters = parse_input_parameters()
 title_prefix = parameters.get_title_prefix()
 driver = get_graph_database_driver()
 
-print(f"treemapVisualizations: Querying {title_prefix} data for treemap visualization...")
-anomaly_file_paths = query_data()
+print(f"treemapVisualizations: Querying {title_prefix} archetype data for treemap visualization...")
+archetype_file_paths = query_data()
 
-print(f"treemapVisualizations: Preparing {title_prefix} data for treemap visualization...")
-anomaly_file_paths = prepare_data_for_treemap(anomaly_file_paths)
+if archetype_file_paths.empty:
+    print(f"treemapVisualizations: No archetype data found for {title_prefix}. Skipping treemap visualizations.")
+    driver.close()
+    exit(0)
 
-# --- Visualizing Anomaly Scores
+print(f"treemapVisualizations: Preparing {title_prefix} archetype data for treemap visualization...")
+archetype_file_paths = prepare_data_for_treemap(archetype_file_paths)
 
-print(f"treemapVisualizations: Creating {title_prefix} anomaly scores treemap visualization...")
-figure = plotly_graph_objects.Figure(plotly_graph_objects.Treemap(
-    create_treemap_settings(anomaly_file_paths),
-    marker=dict(
-        **plotly_treemap_marker_base_color_scale,
-        colors=anomaly_file_paths['absoluteAnomalyScore'], 
-        colorbar={"title": "score"},
-    ),
-))
-figure.update_layout(
-    **plotly_treemap_layout_base_settings, # type: ignore
-    title=f'Average {title_prefix} anomaly score per directory',
-)
-figure.write_image(**get_plotly_figure_write_image_settings(f"{title_prefix}Treemap1AverageAnomalyScorePerDirectory", parameters.get_report_directory()))
-
-# --- Visualizing Archetypes
+# --- Visualizing Archetypes Overview
 
 print(f"treemapVisualizations: Creating {title_prefix} archetypes overview treemap visualization...")
-mutual_exclusive_archetype_ranks_data = mutual_exclusive_ranks(anomaly_file_paths)
+mutual_exclusive_archetype_ranks_data = mutual_exclusive_ranks(archetype_file_paths)
 
 coloring_pairs = get_coloring_pairs()
 combined_colors = combine_rank_colors(mutual_exclusive_archetype_ranks_data, archetype_columns, coloring_pairs)
@@ -558,7 +484,7 @@ figure.add_trace(plotly_graph_objects.Treemap(
         showscale=False,
         colors=combined_colors,
     ),
-    name="Anomalies",
+    name="Archetypes",
     opacity=0.8
 ))
 
@@ -578,7 +504,7 @@ for name, (low, high) in zip(archetype_names, coloring_pairs):
 
 figure.update_layout(
     **plotly_treemap_layout_base_settings, # type: ignore
-    title=f'Overview of all {title_prefix} detected anomaly archetypes per directory',
+    title=f'Overview of all {title_prefix} structural archetypes per directory',
     legend={
         "orientation": "h", # horizontal legend
         "yanchor": "bottom",
@@ -589,16 +515,11 @@ figure.update_layout(
 )
 figure.update_xaxes(visible=False)
 figure.update_yaxes(visible=False)
-figure.write_image(**get_plotly_figure_write_image_settings(f"{title_prefix}Treemap2ArchetypesOverviewPerDirectory", parameters.get_report_directory()))
+figure.write_image(**get_plotly_figure_write_image_settings(f"{title_prefix}Treemap1ArchetypesOverviewPerDirectory", parameters.get_report_directory()))
 
 # --- Visualizing Archetypes individually
 
 def plot_single_archetype_treemap(archetype: Archetypes, title_prefix: str, file_index: int, data: pd.DataFrame):
-    """
-    Plots a treemap for the given archetype using the provided data.
-    archetype : Archetypes : The archetype to plot
-    data : pd.DataFrame : The input data frame
-    """
     print(f"treemapVisualizations: Creating {title_prefix} archetype '{archetype}' treemap visualization...")
     data_to_display = data.copy()
     data_to_display = data_to_display[data_to_display[archetype_columns].sum(axis=1) > 0]
@@ -620,8 +541,9 @@ def plot_single_archetype_treemap(archetype: Archetypes, title_prefix: str, file
     )
     figure.write_image(**get_plotly_figure_write_image_settings(f"{title_prefix}Treemap{file_index}Archetype{archetype}PerDirectory", parameters.get_report_directory()))
 
-plot_single_archetype_treemap("Bridge", title_prefix, 3, anomaly_file_paths)
-plot_single_archetype_treemap("Outlier", title_prefix, 4, anomaly_file_paths)
+plot_single_archetype_treemap("Authority", title_prefix, 2, archetype_file_paths)
+plot_single_archetype_treemap("Bottleneck", title_prefix, 3, archetype_file_paths)
+plot_single_archetype_treemap("Hub", title_prefix, 4, archetype_file_paths)
 
 driver.close()
 print("treemapVisualizations: Successfully created treemap visualizations.")
