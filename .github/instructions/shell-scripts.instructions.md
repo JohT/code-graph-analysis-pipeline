@@ -14,7 +14,7 @@ Target: **bash**. Must work on macOS, Linux, Windows (WSL/Git Bash).
 ## Shebang and Strict Mode
 
 - First executable line: `#!/usr/bin/env bash`
-- Enable strict mode immediately after: `set -euo pipefail`
+- Enable strict mode immediately after: `set -o errexit -o pipefail -o nounset`
 - Set safe word-splitting: `IFS=$'\n\t'`
 - `pipefail` propagates pipe failures — `set -e` bypassed in subshells and command groups; document where this applies
 
