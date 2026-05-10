@@ -4,6 +4,7 @@
 # NOTE: Keep this file in sync with conda-environment.yml
 
 # --- Core tools ---
+ipykernel==7.2.0
 matplotlib==3.10.8
 numpy==2.2.5
 pandas==2.3.3
