@@ -106,3 +106,7 @@ __pycache__/
 # Documentation generation
 domains/**/documentation/package.json
 domains/**/documentation/package-lock.json
+
+# Graph Visualization
+package-lock.json
+package.json

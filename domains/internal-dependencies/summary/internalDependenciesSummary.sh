@@ -31,7 +31,6 @@ MARKDOWN_SCRIPTS_DIR=${MARKDOWN_SCRIPTS_DIR:-"${SCRIPTS_DIR}/markdown"}
 
 # Cypher query directories within this domain
 INTERNAL_DEPS_QUERY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/internal-dependencies"
-CYCLIC_DEPS_QUERY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/cyclic-dependencies"
 TOPOLOGICAL_SORT_SUMMARY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/topological-sort"
 PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/path-finding"
 OBJECT_ORIENTED_DESIGN_METRICS_SUMMARY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/../queries/object-oriented-design-metrics"
@@ -125,45 +124,6 @@ assemble_internal_dependencies_report() {
 
     # -- Write front matter ------------------------------------------------
     internal_dependencies_front_matter > "${report_include_directory}/InternalDependenciesReportFrontMatter.md"
-
-    # ── Java cyclic dependencies ───────────────────────────────────────────
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies.cypher" \
-        "Java_Package/Cyclic_Dependencies.csv" \
-        "${report_include_directory}/Cyclic_Dependencies.md"
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_Breakdown.cypher" \
-        "Java_Package/Cyclic_Dependencies_Breakdown.csv" \
-        "${report_include_directory}/Cyclic_Dependencies_Breakdown.md"
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only.cypher" \
-        "Java_Package/Cyclic_Dependencies_Breakdown_Backward_Only.csv" \
-        "${report_include_directory}/Cyclic_Dependencies_Breakdown_Backward_Only.md"
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_between_Artifacts_as_unwinded_List.cypher" \
-        "Java_Artifact/CyclicArtifactDependenciesUnwinded.csv" \
-        "${report_include_directory}/Cyclic_Dependencies_between_Artifacts.md"
-
-    # ── TypeScript cyclic dependencies ────────────────────────────────────
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_for_Typescript.cypher" \
-        "Typescript_Module/Cyclic_Dependencies_for_Typescript.csv" \
-        "${report_include_directory}/Cyclic_Dependencies_for_Typescript.md"
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_Typescript.cypher" \
-        "Typescript_Module/Cyclic_Dependencies_Breakdown_for_Typescript.csv" \
-        "${report_include_directory}/Cyclic_Dependencies_Breakdown_for_Typescript.md"
-
-    execute_limited_table \
-        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.cypher" \
-        "Typescript_Module/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.csv" \
-        "${report_include_directory}/Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.md"
 
     # ── Java internal structure ────────────────────────────────────────────
 
@@ -458,10 +418,6 @@ assemble_internal_dependencies_report() {
     # -- Copy no-TypeScript-data fallback template --------------------------
     cp -f "${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/report_no_typescript_data.template.md" \
         "${report_include_directory}/report_no_typescript_data.template.md"
-
-    # -- Copy no-cycles fallback template ----------------------------------
-    cp -f "${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/report_no_cycles_data.template.md" \
-        "${report_include_directory}/report_no_cycles_data.template.md"
 
     # -- Assemble final report from template --------------------------------
     cp -f "${INTERNAL_DEPENDENCIES_SUMMARY_DIR}/report.template.md" "${FULL_REPORT_DIRECTORY}/report.template.md"

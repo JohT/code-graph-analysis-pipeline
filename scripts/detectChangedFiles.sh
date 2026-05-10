@@ -160,7 +160,7 @@ file_names_and_sizes() {
 # finds all files in the directories 
 # and calculates the md5 hash for every of these .
 get_md5_checksum_of_all_file_names_and_sizes() {
-  local paths=${1}
+  local paths=${1:-}
   local total_paths; total_paths=$(echo "${paths}" | awk -F '[\t,]' '{print NF}')
   local all_files_and_sizes=""
   local processed_paths=0
