@@ -21,6 +21,7 @@ ARCHETYPES_QUERY_CYPHER_DIR | ${ARCHETYPES_SCRIPT_DIR}/queries |
 ARCHETYPES_LABEL_CYPHER_DIR | ${ARCHETYPES_SCRIPT_DIR}/labels | 
 ARCHETYPES_SUMMARY_DIR | ${ARCHETYPES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for archetypes
 ARCHETYPES_GRAPHS_DIR | ${ARCHETYPES_SCRIPT_DIR}/graphs | Contains everything (scripts, queries, templates) to create GraphViz visualizations for archetypes
+CYCLIC_DEPENDENCIES_SUMMARY_DIR | ${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for cyclic dependencies
 EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries | 
 EXTERNAL_DEPENDENCIES_SUMMARY_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for external dependencies
 GIT_HISTORY_SUMMARY_DIR | ${GIT_HISTORY_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
