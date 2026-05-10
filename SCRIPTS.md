@@ -19,6 +19,10 @@ Script | Directory | Description
 [archetypesVisualization.sh](./domains/archetypes/archetypesVisualization.sh) | archetypes | This script is dynamically triggered by "VisualizationReports.sh" when report "All" or "Visualization" is enabled.
 [archetypesGraphs.sh](./domains/archetypes/graphs/archetypesGraphs.sh) | graphs | Executes selected archetypes Cypher queries for GraphViz visualization.
 [archetypesSummary.sh](./domains/archetypes/summary/archetypesSummary.sh) | summary | Creates a Markdown report that contains all results of archetype classification.
+[cyclicDependenciesCsv.sh](./domains/cyclic-dependencies/cyclicDependenciesCsv.sh) | cyclic-dependencies | Executes all Cypher queries for cyclic dependency analysis across Java packages, Java artifacts, and TypeScript modules.
+[cyclicDependenciesMarkdown.sh](./domains/cyclic-dependencies/cyclicDependenciesMarkdown.sh) | cyclic-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
+[cyclicDependenciesVisualization.sh](./domains/cyclic-dependencies/cyclicDependenciesVisualization.sh) | cyclic-dependencies | Generates GraphViz SVG graph visualizations for the top cyclic dependency cycle groups.
+[cyclicDependenciesSummary.sh](./domains/cyclic-dependencies/summary/cyclicDependenciesSummary.sh) | summary | Creates a Markdown report summarising all cyclic dependency analysis results for Java packages, Java artifacts, and TypeScript modules.
 [externalDependenciesCsv.sh](./domains/external-dependencies/externalDependenciesCsv.sh) | external-dependencies | Executes Cypher queries to generate external dependency CSV reports.
 [externalDependenciesMarkdown.sh](./domains/external-dependencies/externalDependenciesMarkdown.sh) | external-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [externalDependenciesPython.sh](./domains/external-dependencies/externalDependenciesPython.sh) | external-dependencies | Generates external dependency charts as SVG files using Python.
