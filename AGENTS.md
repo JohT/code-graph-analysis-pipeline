@@ -87,6 +87,7 @@ Instruction files auto-applied per file type:
 | `CYPHER.md`, `SCRIPTS.md`, `ENVIRONMENT_VARIABLES.md` | [.github/instructions/generated-reference-docs.instructions.md](./.github/instructions/generated-reference-docs.instructions.md) |
 | `.github/skills/`, `.github/instructions/`, `AGENTS.md` | [.github/instructions/agent-files.instructions.md](./.github/instructions/agent-files.instructions.md) |
 | `.github/workflows/*.yml` | [.github/instructions/github-workflows.instructions.md](./.github/instructions/github-workflows.instructions.md) |
+| `renovate.json` | [.github/instructions/renovate.instructions.md](./.github/instructions/renovate.instructions.md) |
 
 ---
 

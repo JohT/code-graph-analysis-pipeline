@@ -202,7 +202,7 @@
     {
       "description": "Update conda packages in conda-environment.yml (conda packages only, pip block excluded)",
       "customType": "regex",
-      "fileMatch": ["(^|/)conda-environment\.yml$"],
+      "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
         "\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#=]+)[\\s#]+"
       ],
@@ -212,6 +212,7 @@
     },
     {
       "description": "DISABLED Update pip nested packages inside conda-environment.yml.",
+      "customType": "regex",
       "fileMatch": ["(^|/)conda-environment-temporarily-disabled\\.yml$"],
       "matchStrings": [
         "\\s+-\\s+(?<depName>[\\w-]+)==(?<currentValue>[^\\s#=]+)[\\s#]+"
