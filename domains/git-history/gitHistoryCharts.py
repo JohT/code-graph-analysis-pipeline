@@ -36,6 +36,13 @@ from plotly.subplots import make_subplots
 
 SCRIPT_NAME = "gitHistoryCharts"
 
+
+# ── Plotly serialization ──────────────────────────────────────────────────────
+
+def plotly_values(data: pd.Series | pd.DataFrame) -> list:
+    """Returns pandas column(s) as a plain Python list for Plotly/orjson serialization."""
+    return data.to_numpy().tolist()
+
 # ── Plotly layout constants ───────────────────────────────────────────────────
 
 PLOTLY_MAIN_LAYOUT_BASE_SETTINGS: dict[str, Any] = dict(
@@ -337,11 +344,11 @@ def prepare_directory_commit_statistics(commit_statistics_data: pd.DataFrame) ->
 
 def create_treemap_commit_statistics_settings(data_frame: pd.DataFrame) -> plotly_graph_objects.Treemap:
     """Creates a Plotly Treemap with the given settings and data frame."""
-    return plotly_graph_objects.Treemap(
-        labels=data_frame["directoryName"],
-        parents=data_frame["directoryParentPath"],
-        ids=data_frame["directoryPath"],
-        customdata=data_frame[
+    params = dict(
+        labels=plotly_values(data_frame["directoryName"]),
+        parents=plotly_values(data_frame["directoryParentPath"]),
+        ids=plotly_values(data_frame["directoryPath"]),
+        customdata=plotly_values(data_frame[
             [
                 "fileCount",
                 "mostFrequentFileExtension",
@@ -357,7 +364,7 @@ def create_treemap_commit_statistics_settings(data_frame: pd.DataFrame) -> plotl
                 "daysSinceLastModification",
                 "directoryPath",
             ]
-        ],
+        ]),
         hovertemplate=(
             "<b>%{label}</b><br>"
             "Files: %{customdata[0]} (%{customdata[1]})<br>"
@@ -372,6 +379,7 @@ def create_treemap_commit_statistics_settings(data_frame: pd.DataFrame) -> plotl
         root_color="lightgrey",
         marker=dict(**PLOTLY_TREEMAP_MARKER_BASE_STYLE),
     )
+    return plotly_graph_objects.Treemap(**params)
 
 
 def create_rank_colorbar_for_graph_objects_treemap_marker(data_frame: pd.DataFrame, name_column: str, rank_column: str) -> dict:
@@ -379,13 +387,13 @@ def create_rank_colorbar_for_graph_objects_treemap_marker(data_frame: pd.DataFra
     inverse_ranked = data_frame[rank_column].max() + 1 - data_frame[rank_column]
     return dict(
         cornerradius=5,
-        colors=inverse_ranked,
+        colors=plotly_values(inverse_ranked),
         colorscale=plotly_colors.qualitative.G10,
         colorbar=dict(
             title="Rank",
             tickmode="array",
-            ticktext=data_frame[name_column],
-            tickvals=inverse_ranked,
+            ticktext=plotly_values(data_frame[name_column]),
+            tickvals=plotly_values(inverse_ranked),
             tickfont_size=10,
         ),
     )
@@ -410,7 +418,7 @@ def generate_directory_commit_statistic_treemaps(
     # 1. Number of files per directory
     figure = plotly_graph_objects.Figure(plotly_graph_objects.Treemap(
         create_treemap_commit_statistics_settings(git_files_with_commit_statistics),
-        values=git_files_with_commit_statistics["fileCount"],
+        values=plotly_values(git_files_with_commit_statistics["fileCount"]),
     ))
     figure.update_layout(**PLOTLY_MAIN_LAYOUT_BASE_SETTINGS, title="Directories and their file count")
     write_image_and_log(figure, report_directory, "NumberOfFilesPerDirectory", verbose)
@@ -437,7 +445,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_count_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_count_per_directory["commitCount_limited"],
+            colors=plotly_values(git_commit_count_per_directory["commitCount_limited"]),
             colorbar=dict(title="Commits"),
         ),
     ))
@@ -450,7 +458,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_authors_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_authors_per_directory["authorCount_limited"],
+            colors=plotly_values(git_commit_authors_per_directory["authorCount_limited"]),
             colorbar=dict(title="Authors"),
         ),
     ))
@@ -459,13 +467,13 @@ def generate_directory_commit_statistic_treemaps(
 
     # 5. Directories with very few different authors (low bus-factor, focus = few authors)
     git_commit_authors_per_directory_low_focus = add_quantile_limited_column(git_files_with_commit_statistics, "authorCount", 0.33)
-    author_count_top_limit = git_commit_authors_per_directory_low_focus["authorCount_limited"].max().astype(int).astype(str)
+    author_count_top_limit = str(int(git_commit_authors_per_directory_low_focus["authorCount_limited"].max()))
     author_count_top_limit_label_alias = {author_count_top_limit: author_count_top_limit + " or more"}
     figure = plotly_graph_objects.Figure(plotly_graph_objects.Treemap(
         create_treemap_commit_statistics_settings(git_commit_authors_per_directory_low_focus),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_authors_per_directory_low_focus["authorCount_limited"],
+            colors=plotly_values(git_commit_authors_per_directory_low_focus["authorCount_limited"]),
             colorbar=dict(
                 title="Authors",
                 tickmode="auto",
@@ -518,7 +526,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_days_since_last_commit_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_days_since_last_commit_per_directory["daysSinceLastCommit_limited"],
+            colors=plotly_values(git_commit_days_since_last_commit_per_directory["daysSinceLastCommit_limited"]),
             colorbar=dict(title="Days"),
         ),
     ))
@@ -531,7 +539,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_days_since_last_commit_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_days_since_last_commit_per_directory["daysSinceLastCommit_rank"],
+            colors=plotly_values(git_commit_days_since_last_commit_per_directory["daysSinceLastCommit_rank"]),
             colorbar=dict(title="Rank"),
         ),
     ))
@@ -544,7 +552,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_days_since_last_file_creation_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_days_since_last_file_creation_per_directory["daysSinceLastCreation_limited"],
+            colors=plotly_values(git_commit_days_since_last_file_creation_per_directory["daysSinceLastCreation_limited"]),
             colorbar=dict(title="Days"),
         ),
     ))
@@ -557,7 +565,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_days_since_last_file_creation_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_days_since_last_file_creation_per_directory["daysSinceLastCreation_rank"],
+            colors=plotly_values(git_commit_days_since_last_file_creation_per_directory["daysSinceLastCreation_rank"]),
             colorbar=dict(title="Rank"),
         ),
     ))
@@ -570,7 +578,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_days_since_last_file_modification_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_days_since_last_file_modification_per_directory["daysSinceLastModification_limited"],
+            colors=plotly_values(git_commit_days_since_last_file_modification_per_directory["daysSinceLastModification_limited"]),
             colorbar=dict(title="Days"),
         ),
     ))
@@ -583,7 +591,7 @@ def generate_directory_commit_statistic_treemaps(
         create_treemap_commit_statistics_settings(git_commit_days_since_last_file_modification_per_directory),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=git_commit_days_since_last_file_modification_per_directory["daysSinceLastModification_rank"],
+            colors=plotly_values(git_commit_days_since_last_file_modification_per_directory["daysSinceLastModification_rank"]),
             colorbar=dict(title="Rank"),
         ),
     ))
@@ -633,7 +641,7 @@ def generate_cochange_treemaps(
         create_treemap_commit_statistics_settings(data_to_display),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=data_to_display["pairwiseChangeCommitCount_limited"],
+            colors=plotly_values(data_to_display["pairwiseChangeCommitCount_limited"]),
             colorbar=dict(title="Co-Changes"),
         ),
     ))
@@ -646,7 +654,7 @@ def generate_cochange_treemaps(
         create_treemap_commit_statistics_settings(data_to_display),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=data_to_display["pairwiseChangeMaxLift_limited"],
+            colors=plotly_values(data_to_display["pairwiseChangeMaxLift_limited"]),
             colorbar=dict(title="Co-Change Lift"),
         ),
     ))
@@ -662,7 +670,7 @@ def generate_cochange_treemaps(
         create_treemap_commit_statistics_settings(data_to_display),
         marker=dict(
             **PLOTLY_TREEMAP_MARKER_BASE_COLORSCALE,
-            colors=data_to_display["pairwiseChangeAverageLift_limited"],
+            colors=plotly_values(data_to_display["pairwiseChangeAverageLift_limited"]),
             colorbar=dict(title="Co-Change Lift"),
         ),
     ))
@@ -685,8 +693,8 @@ def generate_files_per_commit_bar_chart(
             print(f"{SCRIPT_NAME}: Skipping files-per-commit bar chart — no data")
         return
     figure = plotly_graph_objects.Figure(plotly_graph_objects.Bar(
-        x=git_file_count_per_commit["filesPerCommit"].head(30),
-        y=git_file_count_per_commit["commitCount"].head(30),
+        x=plotly_values(git_file_count_per_commit["filesPerCommit"].head(30)),
+        y=plotly_values(git_file_count_per_commit["commitCount"].head(30)),
     ))
     figure.update_layout(
         **PLOTLY_MAIN_LAYOUT_BASE_SETTINGS,
