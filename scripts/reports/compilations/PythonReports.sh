@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
 # Runs all Python report scripts (no Chromium required).
-# It only considers scripts in the "reports" and "domains" directories and their sub directories (overridable with REPORTS_SCRIPT_DIR and DOMAINS_DIRECTORY).
-
-# Requires activateCondaEnvironment.sh, activatePythonEnvironment.sh, reports/*.sh
+# Discovers and executes Python report scripts matching *Python.sh or *Python.py patterns
+# from the "reports" directory (REPORTS_SCRIPT_DIR) and all "domains" subdirectories (DOMAINS_DIRECTORY),
+# recursively throughout their directory trees.
+# When ANALYSIS_DOMAIN is set, runs only reports from that specific domain.
+# Skips domains listed in ANALYSIS_DOMAINS_TO_SKIP.
+#
+# Requires: activateCondaEnvironment.sh, activateUvEnvironment.sh, and Python scripts matching:
+#   ${REPORTS_SCRIPT_DIR}/**/*Python.sh or ${REPORTS_SCRIPT_DIR}/**/*Python.py
+#   ${DOMAINS_DIRECTORY}/**/*Python.sh or ${DOMAINS_DIRECTORY}/**/*Python.py
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -34,12 +40,12 @@ echo "${SCRIPT_NAME}: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
 echo "${SCRIPT_NAME}: ANALYSIS_DOMAIN=${ANALYSIS_DOMAIN}"
 echo "${SCRIPT_NAME}: ANALYSIS_DOMAINS_TO_SKIP=${ANALYSIS_DOMAINS_TO_SKIP:-}"
 
-# Create and activate (if necessary) a virtual environment (Conda or venv).
+# Create and activate (if necessary) a virtual environment (Conda or uv).
 # For Conda, the environment name is taken from the environment variable CODEGRAPH_CONDA_ENVIRONMENT (default "codegraph")
 # and the dependencies are listed in the root directory file "conda-environment.yml".
-# For venv, the dependencies are listed in the root directory file "requirements.txt".
+# For uv (default), the dependencies are listed in the root directory file "pyproject.toml".
 time source "${SCRIPTS_DIR}/activateCondaEnvironment.sh"
-time source "${SCRIPTS_DIR}/activatePythonEnvironment.sh"
+time source "${SCRIPTS_DIR}/activateUvEnvironment.sh"
 
 echo "${LOG_GROUP_END}";
 

@@ -156,6 +156,12 @@ plotly_treemap_marker_base_style = {
 # Ignore kaleido logging noise when writing images
 logging.getLogger("kaleido").setLevel(logging.WARNING)
 
+
+def plotly_values(data: pd.Series | pd.DataFrame) -> list:
+    """Returns pandas column(s) as a plain Python list for Plotly/orjson serialization."""
+    return data.to_numpy().tolist()
+
+
 def get_plotly_figure_write_image_settings(name: str, path: str):
     return {
         "file": path + "/" + name + "." + image_rendering_settings['format'],
@@ -167,10 +173,10 @@ def get_plotly_figure_write_image_settings(name: str, path: str):
 
 def create_treemap_settings(data_frame: pd.DataFrame, element_path_column: str = 'elementPath', element_name_column: str = "elementName") -> plotly_graph_objects.Treemap:
     return plotly_graph_objects.Treemap(
-        labels=data_frame[element_name_column],
-        parents=data_frame['directoryParentPath'],
-        ids=data_frame[element_path_column],
-        customdata=data_frame[['fileCount', 'normalizedAuthorityRank', 'normalizedBottleneckRank', 'normalizedHubRank', 'elementPath']],
+        labels=plotly_values(data_frame[element_name_column]),
+        parents=plotly_values(data_frame['directoryParentPath']),
+        ids=plotly_values(data_frame[element_path_column]),
+        customdata=plotly_values(data_frame[['fileCount', 'normalizedAuthorityRank', 'normalizedBottleneckRank', 'normalizedHubRank', 'elementPath']]),
         hovertemplate='<b>%{label}</b><br>Highlighted archetypes: %{customdata[0]}<br>Authority: %{customdata[1]}, Bottleneck: %{customdata[2]}, Hub: %{customdata[3]}<br>Path: %{customdata[4]}',
         maxdepth=-1,
         root_color="lightgrey",

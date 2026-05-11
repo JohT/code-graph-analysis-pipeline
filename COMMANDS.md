@@ -211,6 +211,35 @@ The manual setup is only documented for completeness. It isn't needed since the 
 
 If any of the script are not allowed to be executed use `chmod +x ./scripts/` followed by the script file name to grant execution.
 
+### Setup Python Environment with uv (default)
+
+[uv](https://docs.astral.sh/uv/) is the default Python package manager. Install it once:
+
+```shell
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Then sync all dependencies from `pyproject.toml` into a local `.venv`:
+
+```shell
+uv sync --frozen
+```
+
+To verify the lockfile is consistent with `pyproject.toml`:
+
+```shell
+uv lock --check
+```
+
+### Setup Python Environment with Conda (optional)
+
+Set `PYTHON_PACKAGE_MANAGER=conda` to use Conda instead of uv. Create and activate the environment manually:
+
+```shell
+conda env update --file conda-environment.yml --prune
+conda activate codegraph
+```
+
 ### Setup Neo4j Graph Database
 
 Use [setupNeo4j.sh](./domains/neo4j-management/setupNeo4j.sh) to download [Neo4j](https://neo4j.com/download-center) and install the plugins [APOC](https://neo4j.com/labs/apoc/4.4) and [Graph Data Science](https://neo4j.com/product/graph-data-science).
@@ -395,6 +424,8 @@ Use [stopNeo4j.sh](./domains/neo4j-management/stopNeo4j.sh) to stop the locally 
 
 ## References
 
+- [uv - Python package manager](https://docs.astral.sh/uv/)
+- [uv - Installation](https://docs.astral.sh/uv/getting-started/installation/)
 - [Conda](https://conda.io)
 - [jQAssistant](https://jqassistant.github.io/jqassistant/current)
 - [Bite-Sized Neo4j for Data Scientists](https://neo4j.com/video/bite-sized-neo4j-for-data-scientists)

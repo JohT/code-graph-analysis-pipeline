@@ -1,0 +1,38 @@
+name: Check Python uv environment
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Only watch changes related to Python uv environment
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'scripts/activateUvEnvironment.sh'
+      - '.github/workflows/internal-check-python-uv-support.yml' # or when this file changed
+
+jobs:
+  check-python-uv-environment:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        include:
+        - python: 3.12
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v6
+
+    - name: (uv Setup) Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: (uv Setup) Sync dependencies from lockfile
+      run: uv sync --frozen
+
+    - name: Verify activation script and required packages
+      run: |
+        source ./scripts/activateUvEnvironment.sh
+        python -c "import ipykernel, pandas, sklearn, umap, shap, neo4j, plotly, optuna"
+        echo "✓ Activation script and imports successful"

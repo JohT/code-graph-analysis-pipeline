@@ -166,6 +166,12 @@ plotly_treemap_marker_base_color_scale = dict(
 # Ignore kaleido logging noise when writing images
 logging.getLogger("kaleido").setLevel(logging.WARNING)
 
+
+def plotly_values(data: pd.Series | pd.DataFrame) -> list:
+    """Returns pandas column(s) as a plain Python list for Plotly/orjson serialization."""
+    return data.to_numpy().tolist()
+
+
 def get_plotly_figure_write_image_settings(name: str, path: str):
     """
     Returns the settings for the plotly figure write_image method
@@ -187,10 +193,10 @@ def create_treemap_settings(data_frame: pd.DataFrame, element_path_column: str =
     return :plotly_graph_objects.Treemap : The prepared Plotly Treemap
     """
     return plotly_graph_objects.Treemap(
-        labels=data_frame[element_name_column],
-        parents=data_frame['directoryParentPath'],
-        ids=data_frame[element_path_column],
-        customdata=data_frame[['fileCount', 'absoluteAnomalyScore', 'normalizedBridgeRank', 'normalizedOutlierRank', 'elementPath']],
+        labels=plotly_values(data_frame[element_name_column]),
+        parents=plotly_values(data_frame['directoryParentPath']),
+        ids=plotly_values(data_frame[element_path_column]),
+        customdata=plotly_values(data_frame[['fileCount', 'absoluteAnomalyScore', 'normalizedBridgeRank', 'normalizedOutlierRank', 'elementPath']]),
         hovertemplate='<b>%{label}</b><br>Highlighted anomalies: %{customdata[0]}<br>Anomaly Score: %{customdata[1]:.4f}<br>Bridge: %{customdata[2]}, Outlier: %{customdata[3]}<br>Path: %{customdata[4]}',
         maxdepth=-1,
         root_color="lightgrey",
@@ -530,7 +536,7 @@ figure = plotly_graph_objects.Figure(plotly_graph_objects.Treemap(
     create_treemap_settings(anomaly_file_paths),
     marker=dict(
         **plotly_treemap_marker_base_color_scale,
-        colors=anomaly_file_paths['absoluteAnomalyScore'], 
+        colors=plotly_values(anomaly_file_paths['absoluteAnomalyScore']),
         colorbar={"title": "score"},
     ),
 ))

@@ -20,8 +20,11 @@ if [ "${PREPARE_CONDA_ENVIRONMENT}" = "false" ]; then
     return 0
 fi 
 
-if [ "${USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV}" = "true" ]; then
-    echo "activateCondaEnvironment: Skipping activation. venv will be used instead of conda (USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV=true)."
+PYTHON_PACKAGE_MANAGER=${PYTHON_PACKAGE_MANAGER:-"uv"} # Python package manager to use. Options: "uv" (default), "conda". Use "conda" to activate the Conda environment.
+# DEPRECATED: USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV — use PYTHON_PACKAGE_MANAGER instead.
+
+if [ "${PYTHON_PACKAGE_MANAGER}" != "conda" ]; then
+    echo "activateCondaEnvironment: Skipping activation. PYTHON_PACKAGE_MANAGER=${PYTHON_PACKAGE_MANAGER} (expected 'conda')."
     # "return" needs to be used here instead of "exit".
     # This script is included in another script by using "source". 
     # "exit" would end the main script, "return" just ends this sub script.

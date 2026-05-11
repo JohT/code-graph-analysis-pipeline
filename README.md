@@ -108,14 +108,9 @@ Run [scripts/checkCompatibility.sh](./scripts/checkCompatibility.sh) to check if
 ### Additional Prerequisites for Python
 
 - Python is required for Python reports.
-- Either [Conda](https://docs.conda.io) or Python's build-in module [venv](https://docs.python.org/3/library/venv.html) a required as environment manager.
-- For Conda, use for example [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download)(Recommended for Windows).
-- To use venv, no additional installation is needed. For that the environment variable `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` needs to be set to `'true'`.
-
-### Additional Prerequisites for Windows
-
-- Add this line to your `~/.bashrc` file if you are using Anaconda3: `/c/ProgramData/Anaconda3/etc/profile.d/conda.sh`. Try to find a similar script for other conda package managers or versions.
-- Run `conda init` in the git bash opened as administrator. Running it in normal mode usually leads to an error message.
+- [uv](https://docs.astral.sh/uv/) is the primary Python package manager (default). Install from [https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/).
+- [Conda](https://docs.conda.io) is a supported optional path. Use for example [Miniconda](https://docs.conda.io/projects/miniconda/en/latest) or [Anaconda](https://www.anaconda.com/download) (Recommended for Windows). Set `PYTHON_PACKAGE_MANAGER=conda` to activate.
+- For Conda on Windows, add this line to your `~/.bashrc`: `/c/ProgramData/Anaconda3/etc/profile.d/conda.sh`. Run `conda init` in Git Bash as administrator.
 
 ### Additional Prerequisites for analyzing Typescript
 
@@ -145,8 +140,8 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - Use [GitHub Actions](https://docs.github.com/de/actions) Linux Runner
 - [Checkout GIT Repository](https://github.com/actions/checkout)
 - [Setup Java](https://github.com/actions/setup-java)
-- [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
-- [Setup Python with venv](https://docs.python.org/3/library/venv.html)
+- [Setup uv](https://github.com/astral-sh/setup-uv) — Primary Python package manager
+- [Setup Python with Conda](https://github.com/conda-incubator/setup-miniconda) package manager [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge) — Optional alternative
 - Download artifacts and optionally source code that contain the code to be analyzed [scripts/downloader](./scripts/downloader)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.github.io/jqassistant/current) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))

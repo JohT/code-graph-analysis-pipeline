@@ -141,18 +141,16 @@ checkRequiredCommand "npx" "Tool to run npm packages without installing them glo
 checkRequiredCommand "npm" "Node.js package manager (https://docs.npmjs.com/) for managing JavaScript packages"
 
 # Check dependencies for Python environments
-icon=$(oneOf "conda" "venv")
+icon=$(oneOf "uv" "conda")
 echo ""
 echo "${icon} Python environment dependencies (for ./analyze.sh --report Python):"
+checkOptionalCommand "uv" "Python package manager (https://docs.astral.sh/uv/) for managing Python packages and environments"
 checkOptionalCommand "conda" "Conda package and environment manager (https://docs.conda.io/en/latest/)"
-checkOptionalCommand "virtualenv" "Python virtual environment module (https://docs.python.org/3/library/venv.html)"
 
 # Check dependencies for Python reports
-icon=$(allOf "python" "pip")
 echo ""
-echo "${icon} Python reports dependencies (for ./analyze.sh --report Python):"
-checkRequiredCommand "python" "Python interpreter (https://www.python.org/) for running Python scripts"
-checkRequiredCommand "pip" "Python package installer (https://pip.pypa.io/en/stable/) for installing Python packages"
+echo "ℹ️  Python reports dependencies (for ./analyze.sh --report Python):"
+echo "    Python and pip are managed by uv or conda — no separate installation needed."
 checkOptionalCommand "jupyter" "Jupyter Notebook (https://jupyter.org/) for manual interactive data analysis and visualization (will be available when the Python environment is activated)"
 
 # Check dependencies for visualization reports

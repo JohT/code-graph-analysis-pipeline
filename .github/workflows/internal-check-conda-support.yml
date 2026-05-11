@@ -1,0 +1,49 @@
+name: Check Python Conda environment
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Only watch changes related to the Conda environment
+    paths:
+      - 'conda-environment.yml'
+      - 'scripts/activateCondaEnvironment.sh'
+      - '.github/workflows/internal-check-conda-support.yml' # or when this file changed
+
+jobs:
+  check-conda-environment:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        include:
+        - python: 3.12
+          miniforge: 24.9.0-0
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v6
+
+    - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: ${{ matrix.python }}
+        miniforge-version: ${{ matrix.miniforge }}
+        activate-environment: codegraph
+        environment-file: ./conda-environment.yml
+        auto-activate-base: false
+        show-channel-urls: true
+
+    - name: (Python Setup) Conda environment info
+      shell: bash -el {0}
+      run: |
+        conda info
+        conda list
+
+    - name: Activate Conda environment and verify required packages are importable
+      env:
+        PYTHON_PACKAGE_MANAGER: "conda"
+        PREPARE_CONDA_ENVIRONMENT: "false" # Already prepared above
+      shell: bash -el {0}
+      run: |
+        source ./scripts/activateCondaEnvironment.sh
+        python -c "import ipykernel, pandas, sklearn, umap, shap, neo4j, plotly, optuna"
