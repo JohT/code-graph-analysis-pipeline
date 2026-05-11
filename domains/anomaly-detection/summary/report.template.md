@@ -38,85 +38,81 @@ Each abstraction level includes anomaly statistics, SHAP feature importance, arc
 
 ## 3. Plot Interpretation Guide
 
-> **Purpose:** Understand each plot type’s diagnostic value.  
 > **Applies to:** All abstraction levels.
 
-| Plot Type | Best For | Adds | Why It Matters |
-| --- | --- | --- | --- |
-| **Anomalies Plot** | Seeing distribution of anomalies in clusters | Context of clusters & outliers | Reveals isolation or cluster-based anomalies |
-| **SHAP Summary** | Global feature importance | Feature impact direction | Shows what drives anomalies overall |
-| **Local SHAP Force** | Explaining a single anomaly | Feature contribution breakdown | Useful for debugging individual outliers |
-| **Dependence Plot** | Understanding feature influence | Interaction visualization | Reveals nonlinear feature effects |
-| **Cluster Metrics** | Cluster characteristics | Radius, cohesion, noise | Identifies weakly defined or noisy clusters |
+| Plot | Purpose |
+|------|----------|
+| **Anomalies Plot** | 2D visualization showing clusters & anomalies. Guides investigation. |
+| **SHAP Summary** | Global feature importance ranked by impact magnitude & direction. |
+| **Local SHAP Force** | Per-sample feature contributions. Explains individual anomalies. |
+| **Dependence Plot** | Feature–anomaly relationships revealing nonlinear effects. |
+| **Cluster Metrics** | Cluster cohesion, size, noise; identifies weak groupings. |
 
-## 3. Plot Interpretation Guide
-
-> **Purpose:** Provide a direct mapping between all plots and their analytical meaning.  
-> **Scope:** Applies to plots for *Java Type*, *Java Package*, and similar abstraction levels.  
-> **Format:** Each entry includes `Best for`, `Adds`, and `Why`, matching the in-report descriptions.
+> **Scope:** Applies to plots for *Java Type*, *Java Package*, and similar abstraction levels.
 
 ---
 
 ### 📘 Main Plots
 
-| Plot | Description | Best For | Adds | Why |
-|------|--------------|----------|------|-----|
-| **Anomalies** | 2D visualization of all code units showing clusters and anomalies. | Understanding the overall distribution of anomalies in relation to clusters. | Context of clusters and outliers. | Reveals whether anomalies are isolated or cluster-based, guiding investigation. |
-| **Global Feature Importance (SHAP Summary)** | Mean absolute SHAP values ranking global feature impact. | Global understanding of which features drive anomalies. | Direction of impact (color shows feature value). | Explains which metrics consistently influence anomaly detection. |
-| **Feature Dependence (Top Important Features)** | Shows how specific feature values affect anomaly score; colored by interacting feature. | Understanding how one feature affects anomaly scores. | Color shows feature interaction or threshold effect. | Helps identify nonlinear relationships and feature interactions. |
+| Plot | Purpose |
+|------|----------|
+| **Anomalies** | 2D visualization of all code units showing clusters and anomalies. Reveals isolated vs cluster-based anomalies. |
+| **Global Feature Importance (SHAP Summary)** | Mean absolute SHAP values ranking global feature impact. Shows what drives anomalies consistently. |
+| **Feature Dependence (Top Important Features)** | Shows how specific feature values affect anomaly score. Identifies nonlinear relationships & interactions. |
 
 ---
 
 ### 📙 Local Explanation Plots
 
-| Plot | Description | Best For | Adds | Why |
-|------|--------------|----------|------|-----|
-| **Local SHAP Force Plots (Top Anomalies 1–6)** | Visualizes per-feature contributions to each anomaly’s score relative to baseline. | Explaining *why a specific data point* is anomalous. | Visual breakdown of how each feature contributes to anomaly score. | Enables debugging of individual anomalies through transparent explanation. |
+| Plot | Purpose |
+|------|----------|
+| **Local SHAP Force Plots (Top Anomalies 1–6)** | Per-feature contributions to each anomaly's score relative to baseline. Enables case-by-case debugging. |
 
 ---
 
 ### 📗 Cluster-Level Diagnostic Plots
 
-| Plot | Description | Best For | Adds | Why |
-|------|--------------|----------|------|-----|
-| **Clusters – Overall** | Shows all clusters since they all fit into one plot. | Gaining a holistic view of cluster characteristics in the dataset. | An overall summary of how all clusters are distributed and their key metrics. | Understanding the general structure and properties of clusters can help identify patterns and potential anomalies in the data. |
-| **Clusters – Largest Average Radius** | Ranks clusters by mean distance of members from their centroid. | Getting an overview of clusters that are more dispersed. | Identifies clusters with internal variability. | Large average radius suggests less cohesion and potential outliers. |
-| **Clusters – Largest Max Radius** | Shows clusters with the farthest outlying member. | Identifying clusters that have members farthest from cluster center. | Highlights clusters containing extreme outliers. | Indicates clusters that may contain hidden anomalies. |
-| **Clusters – Largest Size** | Displays cluster membership counts. | Understanding which clusters contain the most code units. | Provides sense of frequency of code structures. | Large clusters may represent common design patterns; small clusters are specialized. |
-| **Cluster Probabilities** | Distribution of HDBSCAN membership probabilities. | Detecting code units that don’t strongly belong to any cluster. | Measures how well-defined clusters are. | Highlights noisy or weakly defined clusters. |
+| Plot | Purpose |
+|------|----------|
+| **Clusters – Overall** | All clusters in one view. Holistic summary of distribution & key metrics. |
+| **Clusters – Largest Radius (Avg)** | Ranks by mean member distance from centroid. Identifies dispersed clusters. |
+| **Clusters – Largest Radius (Max)** | Shows farthest outlying member per cluster. Highlights extreme members. |
+| **Clusters – Largest Size** | Membership counts per cluster. Reveals common design patterns vs. specialized groups. |
+| **Cluster Probabilities** | HDBSCAN membership strength distribution. Detects weakly-defined or noisy clusters. |
+
 
 ---
 
 ### 📒 Cluster Noise & Bridge Diagnostics
 
-| Plot | Description | Best For | Adds | Why |
-|------|--------------|----------|------|-----|
-| **Cluster Noise – Highly Central and Popular** | Central nodes that don’t fit any cluster. | Detecting code units that are highly connected but anomalous. | Reveals influential but misfit nodes. | Such nodes may be key but unstable integration points. |
-| **Cluster Noise – Poorly Integrated Bridges** | Nodes connecting clusters but weakly integrated. | Detecting code units that bridge modules unusually. | Identifies cross-cutting or leaking dependencies. | May reveal architectural boundary violations. |
-| **Cluster Noise – Role Inverted Bridges** | Bridges with reversed structural roles compared to expected topology. | Detecting code units connecting clusters in unexpected ways. | Highlights anomalous coupling roles. | Indicates architectural inversion or misuse of interfaces. |
+| Plot | Purpose |
+|------|----------|
+| **Cluster Noise – Highly Central and Popular** | Central nodes that don't fit any cluster. May be key but unstable integration points. |
+| **Cluster Noise – Poorly Integrated Bridges** | Nodes connecting clusters but weakly integrated. May reveal boundary violations. |
+| **Cluster Noise – Role Inverted Bridges** | Bridges with reversed structural roles. Indicates architectural inversion. |
 
 ---
 
 ### 📙 Feature Distribution & Relationship Plots
 
-| Plot | Description | Best For | Adds | Why |
-|------|--------------|----------|------|-----|
-| **Betweenness Centrality Distribution** | Histogram of betweenness values. | Identifying code units that act as structural bridges. | Insight into flow of dependency control. | Detects potential bottlenecks or single points of failure. |
-| **Clustering Coefficient Distribution** | Histogram of local clustering coefficients. | Identifying modularity and local cohesion. | Insight into how tightly code units cluster. | Reveals how cohesive or isolated different regions of the graph are. |
-| **PageRank – ArticleRank Difference Distribution** | Distribution of `PageRank - ArticleRank`. | Identifying influential nodes beyond local connectivity. | Shows imbalance between influence and popularity. | Highlights components with disproportionate architectural impact. |
-| **Clustering Coefficient vs PageRank** | Scatterplot comparing local clustering to global influence. | Identifying relationships between cohesion and centrality. | Visualizes trade-offs between modularity and reach. | Helps spot code units that are both locally and globally critical. |
+| Plot | Purpose |
+|------|----------|
+| **Betweenness Centrality Distribution** | Histogram of betweenness values. Detects bottlenecks & single points of failure. |
+| **Clustering Coefficient Distribution** | Histogram of local clustering coefficients. Reveals cohesion in different graph regions. |
+| **PageRank – ArticleRank Difference Distribution** | Distribution of influence vs popularity. Highlights disproportionate architectural impact. |
+| **Clustering Coefficient vs PageRank** | Scatterplot: local vs global influence trade-offs. Finds units both locally & globally critical. |
 
 ---
 
 ### 📕 Graph Visualizations (Archetype-Level Network Views)
 
-| Plot | Description | Best For | Adds | Why |
-|------|--------------|----------|------|-----|
-| **Top Hub Graph Visualization** | Displays the most connected node (e.g., **#1 Hub**) at the center, surrounded by its direct dependencies. Incoming nodes show who is dependent on the hub. | Understanding highly connected code units or components that serve as central integrators. | Highlights nodes that act as major dependency aggregators. | Helps detect over-centralized modules or potential architectural bottlenecks. |
-| **Top Bottleneck Graph Visualization** | Shows the node with the highest betweenness centrality (e.g., **#1 Bottleneck**) and its local neighborhood. | Identifying code units that control information or dependency flow. | Emphasizes nodes that mediate critical paths between modules. | Reveals single points of failure or routing constraints in dependency flow. |
-| **Top Authority Graph Visualization** | Centers the most authoritative node (e.g., **#1 Authority**) with incoming and outgoing links from dependent nodes with high PageRank and emphasized PageRank to ArticleRank difference. | Detecting key knowledge or functionality providers. | Highlights components with high centrality. | Indicates structural or semantic “sources of truth” in the system. |
-| **Top Bridge Graph Visualization** | Displays a node acting as a structural bridge between clusters (e.g., **#1 Bridge**) and its cross-cluster connections based on node embeddings encoding the Graph structure. | Understanding cross-cutting dependencies between modules. | Reveals links connecting distinct architectural domains. | Useful for spotting boundary leaks or undesired coupling between subsystems. |
-| **Top Outlier Graph Visualization** | Centers an unusual or isolated node (e.g., **#1 Outlier**) that can hardly be assigned to a cluster and visualizes its sparse or unexpected dependency patterns. | Identifying structurally or behaviorally anomalous nodes. | Highlights nodes with rare or unexpected connection patterns. | Helps pinpoint code units that deviate from established dependency norms. |
+| Plot | Purpose |
+|------|----------|
+| **Top Hub** | Most-connected node with dependencies. Detects over-centralization & bottlenecks. |
+| **Top Bottleneck** | Highest betweenness: controls information flow. Reveals single points of failure. |
+| **Top Authority** | Most authoritative (high PageRank). Indicates "sources of truth" in system. |
+| **Top Bridge** | Cross-cluster connector. Identifies boundary leaks & undesired coupling. |
+| **Top Outlier** | Anomalous isolated node. Highlights deviations from dependency norms. |
 
 > **Note:**
 > - In all Graph Visualizations, the **central node** represents the selected *Top Archetype* (e.g., *Top 1 Hub*).  
@@ -155,50 +151,6 @@ Each abstraction level includes anomaly statistics, SHAP feature importance, arc
 
 ---
 
-### 📄 Structured Form (YAML Summary)
-
-You can include this in your appendix for machine-readable mapping:
-
-```yaml
-plots:
-  main:
-    - name: Anomalies
-      purpose: Distribution of anomalies and clusters
-    - name: Global Feature Importance (SHAP)
-      purpose: Global feature ranking
-    - name: Feature Dependence
-      purpose: Feature–score relationship
-  local:
-    - name: Local SHAP Force Plots
-      purpose: Local explanations for top anomalies
-  cluster:
-    - name: Clusters Largest Average Radius
-      purpose: Identify dispersed clusters
-    - name: Clusters Largest Max Radius
-      purpose: Identify extreme outlier clusters
-    - name: Clusters Largest Size
-      purpose: Identify dominant cluster types
-    - name: Cluster Probabilities
-      purpose: Assess cluster definition strength
-  cluster_noise:
-    - name: Cluster Noise – Highly Central and Popular
-      purpose: Central anomalies without cluster fit
-    - name: Cluster Noise – Poorly Integrated Bridges
-      purpose: Weakly integrated bridges
-    - name: Cluster Noise – Role Inverted Bridges
-      purpose: Inverted bridge roles
-  feature_distributions:
-    - name: Betweenness Centrality Distribution
-      purpose: Bridge and bottleneck detection
-    - name: Clustering Coefficient Distribution
-      purpose: Cohesion and modularity measurement
-    - name: PageRank – ArticleRank Difference Distribution
-      purpose: Influence vs popularity analysis
-  feature_relationships:
-    - name: Clustering Coefficient vs PageRank
-      purpose: Local vs global influence comparison
-```
-
 ## 4. Taxonomy of Anomaly Archetypes
 
 | Archetype | Feature Profile | Architectural Risk |
@@ -208,27 +160,6 @@ plots:
 | **Outlier** | High cluster distance, small cluster size | Misfit or irregular dependency pattern |
 | **Authority** | High PageRank, low ArticleRank | Over-relied utility; low local stability |
 | **Bridge** | Cross-cluster connection | Risky coupling; weak modular boundaries |
-
-**Structured form (for LLM parsing):**
-
-```yaml
-archetypes:
-  - name: Hub
-    profile: High degree, low clustering coefficient
-    risk: Central dependency, fragile hotspot
-  - name: Bottleneck
-    profile: High betweenness, low redundancy
-    risk: Single point of failure
-  - name: Outlier
-    profile: High cluster distance, small cluster size
-    risk: Misfit component
-  - name: Authority
-    profile: High PageRank, low ArticleRank
-    risk: Over-relied utility
-  - name: Bridge
-    profile: Cross-cluster connector
-    risk: Risky coupling
-```
 
 ---
 

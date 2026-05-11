@@ -13,9 +13,7 @@ This report analyses the **git commit history** of the codebase. It covers:
 - **Data quality** — ambiguous or unresolved file references in the git log
 - **Git author wordcloud** — visual overview of contributor activity
 
-> **Reading the tables**: Rows are sorted by priority — the **first rows are the most critical**.  
-> High commit frequency in a directory can indicate hotspots that benefit from refactoring attention.  
-> Files that always change together may be candidates for co-location or module consolidation.
+> High commit frequency in a directory = refactoring hotspot. Files that always change together = co-location or module consolidation candidates.
 
 ## 📚 Table of Contents
 
@@ -33,7 +31,7 @@ This report analyses the **git commit history** of the codebase. It covers:
 
 ## 2. Directory Commit Statistics
 
-Shows how often each directory has been changed in git history and how many distinct authors contributed to it. High values in `commits` and `authors` point to active, potentially complex directories.
+Commit frequency and author count per directory. High values = active, potentially complex.
 
 ### 2.1 Directory Commit Statistics (Table)
 
@@ -47,7 +45,7 @@ Shows how often each directory has been changed in git history and how many dist
 
 ## 3. Co-Changed Files
 
-Files that are frequently committed together are said to be _co-changed_. High co-change frequency between two files is a signal of logical coupling — they may belong to the same conceptual unit or have a shared concern that could be refactored.
+Files committed together = logical coupling signal. May belong to the same conceptual unit or share a concern.
 
 ### 3.1 Co-Changed File Pairs
 
@@ -77,7 +75,7 @@ Shows all files that were changed together with another particular file.
 
 ## 4. File Change Distribution
 
-Shows the distribution of how many files are changed per commit. A high proportion of large commits (many files changed at once) can indicate low commit granularity.
+Files changed per commit. High proportion of large commits = low commit granularity.
 
 ### 4.1 Files per Commit Distribution
 
@@ -91,7 +89,7 @@ Shows the distribution of how many files are changed per commit. A high proporti
 
 ## 5. Pairwise Changed Files
 
-Direct pairwise co-change analysis between individual files, showing commit overlap counts and related dependency information.
+Commit overlap counts and dependency info between file pairs.
 
 ### 5.1 Pairwise Changed Files
 
@@ -99,7 +97,7 @@ Direct pairwise co-change analysis between individual files, showing commit over
 
 ### 5.2 Pairwise Changed Files (Top by Lift)
 
-Filing pairs with the highest _commit lift_ — pairs that co-change more often than random chance (lift > 1).
+File pairs that co-change more often than random chance (lift > 1).
 
 <!-- include:List_pairwise_changed_files_top_selected_metric.md|report_no_git_data.template.md -->
 
@@ -117,7 +115,7 @@ Files that are co-changed and also have a structural dependency relationship bet
 
 ## 6. Files by Author
 
-Shows the files each author has contributed to, including per-author commit statistics per file. Useful for identifying knowledge boundaries and bus-factor risks.
+Per-author file commit stats. Useful for knowledge boundaries and bus-factor risk.
 
 ### 6.1 Files with Commit Statistics by Author
 
@@ -127,23 +125,23 @@ Shows the files each author has contributed to, including per-author commit stat
 
 ## 7. Data Quality
 
-Identifies potential issues in the git log data: files referenced in commits that cannot be resolved to a known codebase file (unresolved), or that match more than one candidate (ambiguous). These affect the reliability of all co-change metrics.
+Files in git log that are unresolved (not found in codebase) or ambiguous (multiple matches). Affects reliability of co-change metrics.
 
 ### 7.1 File Resolution Summary
 
-Overview of file resolution by extension: how many files are resolved vs. ambiguous vs. unresolved per file type.
+Resolved vs. ambiguous vs. unresolved files by extension.
 
 <!-- include:List_git_files_by_resolved_label_and_extension.md|report_no_git_data.template.md -->
 
 ### 7.2 Ambiguous Git Files
 
-Files in the git log that match multiple candidates in the scanned codebase. These are excluded from co-change analysis.
+Match multiple codebase files — excluded from co-change analysis.
 
 <!-- include:List_ambiguous_git_files.md|report_no_git_data.template.md -->
 
 ### 7.3 Unresolved Git Files
 
-Files referenced in git commits but not found in the scanned codebase. May indicate deleted files, renames, or files outside the scan scope.
+Not found in scanned codebase. May indicate deleted files, renames, or out-of-scope paths.
 
 <!-- include:List_unresolved_git_files.md|report_no_git_data.template.md -->
 
