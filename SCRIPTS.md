@@ -70,7 +70,7 @@ Script | Directory | Description
 [overviewSummary.sh](./domains/overview/summary/overviewSummary.sh) | summary | Creates a Markdown report summarising overview metrics: node label and relationship type
 [init.sh](./init.sh) |  | Initializes a new analysis project by creating all necessary directories based on the given input parameter with the analysis name. 
 [activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Python scripts.
-[activatePythonEnvironment.sh](./scripts/activatePythonEnvironment.sh) | scripts | Activates the .venv environment (Python build-in virtual environments) with all packages necessary to run the included Python scripts.
+[activateUvEnvironment.sh](./scripts/activateUvEnvironment.sh) | scripts | Activates the uv-managed .venv environment with all packages from pyproject.toml necessary to run the included Python scripts.
 [analyze.sh](./scripts/analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation.
 [checkCompatibility.sh](./scripts/checkCompatibility.sh) | scripts | Check environment dependencies and tool availability.
 [cleanupAfterReportGeneration.sh](./scripts/cleanupAfterReportGeneration.sh) | scripts | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder.
