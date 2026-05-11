@@ -54,7 +54,7 @@
     },
     {
       "description": "Only use stable versions for Python",
-      "matchManagers": ["pip_requirements", "pip_setup", "poetry", "pipenv"],
+      "matchManagers": ["uv", "pip_setup", "poetry", "pipenv"],
       "ignoreUnstable": true
     }
   ],
@@ -200,9 +200,9 @@
       "datasourceTemplate": "maven"
     },
     {
-      "description": "DISABLED Update conda environment for Python with pip version",
+      "description": "Update conda packages in conda-environment.yml (conda packages only, pip block excluded)",
       "customType": "regex",
-      "fileMatch": ["(^|/)conda-environment-temporarily-disabled\\.yml$"],
+      "fileMatch": ["(^|/)conda-environment\.yml$"],
       "matchStrings": [
         "\\s+-\\s+(?<depName>[\\w-]+)=(?<currentValue>[^\\s#=]+)[\\s#]+"
       ],

@@ -1,4 +1,4 @@
-# NOTE: Keep this file in sync with requirements.txt
+# NOTE: Keep this file in sync with pyproject.toml
 name: codegraph
 channels:
   - conda-forge/label/python_rc # Needed on Mac since Python >= 3.12
@@ -10,7 +10,7 @@ dependencies:
   - ipykernel=7.2.0
   - matplotlib=3.10.8
   - numpy=2.2.5
-  - pandas=2.2.3
+  - pandas=2.3.3
   - pip=26.0.1
   - setuptools=80.10.2 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
   - wordcloud=1.9.6
@@ -23,4 +23,4 @@ dependencies:
   - umap-learn=0.5.11 # to visualize node embeddings in 2D (UMAP dimensionality reduction)
   - shap=0.50.0
   - pip:
-      - neo4j==5.28.2
+      - neo4j==6.1.0

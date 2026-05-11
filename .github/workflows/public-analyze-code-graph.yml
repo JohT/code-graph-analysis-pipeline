@@ -119,10 +119,21 @@ on:
         default: 5
       use-venv_virtual_python_environment:
         description: >
-          Use venv for virtual Python environments instead of Conda ("true") or not ("false", default).
+          Deprecated and ignored. venv support has been removed in favor of uv (default) or conda.
+          Use the `python-package-manager` input to select either "uv" or "conda".
         required: false
         type: string
         default: 'false'
+      python-package-manager:
+        description: >
+          Python package manager to use for Python reports.
+          Options: "uv" (default) or "conda".
+          "uv" uses pyproject.toml + uv.lock for a reproducible virtual environment.
+          "conda" uses conda-environment.yml and requires Conda (e.g. Miniforge) to be available.
+          Callers previously relying on the conda default via use-venv_virtual_python_environment=false must now explicitly set python-package-manager: 'conda'.
+        required: false
+        type: string
+        default: 'uv'
     outputs:
       uploaded-analysis-results:
         description: >
@@ -152,6 +163,10 @@ jobs:
             echo "The analysis-name '${{ inputs.analysis-name }}' contains invalid characters. Only alphanumeric characters, dots (.), underscores (_) and hyphens (-) are allowed."
             exit 1
           fi
+      - name: Warn about deprecated use-venv_virtual_python_environment parameter
+        if: inputs.use-venv_virtual_python_environment == 'true'
+        run: |
+          echo "::warning::The 'use-venv_virtual_python_environment' input is deprecated. Use 'python-package-manager: uv' instead. This warning will become an error in a future release."
       - name: Assemble ENVIRONMENT_INFO
         run: echo "ENVIRONMENT_INFO=java-${{ matrix.java }}-python-${{ matrix.python }}-miniforge-${{ matrix.miniforge }}" >> $GITHUB_ENV
       
@@ -170,8 +185,14 @@ jobs:
           java-version: ${{ matrix.java }}
 
       # Python setup is always performed here since this is a reusable workflow.
+      - name: (Python Setup) Install uv
+        if: inputs.python-package-manager != 'conda'
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+
       - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
-        if: inputs.use-venv_virtual_python_environment == 'false'
+        if: inputs.python-package-manager == 'conda'
         id: prepare-conda-environment
         uses: conda-incubator/setup-miniconda@fc2d68f6413eb2d87b895e92f8584b5b94a10167 # v3
         with:
@@ -190,7 +211,7 @@ jobs:
           cache: 'pip'
 
       - name: (Python Setup) Conda environment info
-        if: inputs.use-venv_virtual_python_environment == 'false'
+        if: inputs.python-package-manager == 'conda'
         shell: bash -el {0}
         run: | 
           conda info
@@ -293,7 +314,8 @@ jobs:
           NEO4J_INITIAL_PASSWORD: ${{ steps.generate-neo4j-initial-password.outputs.neo4j-initial-password }}
           IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT: "" # Options: "none", "aggregated", "full". default = "plugin" or ""
           PREPARE_CONDA_ENVIRONMENT: "false" # Had already been done in step with id "prepare-conda-environment".
-          USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: ${{ inputs.use-venv_virtual_python_environment }}
+          PYTHON_PACKAGE_MANAGER: ${{ inputs.python-package-manager }}
+          USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV: ${{ inputs.use-venv_virtual_python_environment }} # Deprecated: use PYTHON_PACKAGE_MANAGER instead.
         run: |
           TYPESCRIPT_SCAN_HEAP_MEMORY=${{ inputs.typescript-scan-heap-memory }} ./../../scripts/analysis/analyze.sh ${{ env.domainAnalysisArgument }}${{ env.excludeDomainArgument }}${{ inputs.analysis-arguments }}
     
