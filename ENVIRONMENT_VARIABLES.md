@@ -52,10 +52,9 @@ NODE_EMBEDDINGS_SUMMARY_DIR | ${NODE_EMBEDDINGS_SCRIPT_DIR}/summary |
 OVERVIEW_SUMMARY_DIR | ${OVERVIEW_SCRIPT_DIR}/summary | 
 ARTIFACTS_DIRECTORY | artifacts | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
+PYTHON_PACKAGE_MANAGER | uv | Python package manager to use. Options: "uv" (default), "conda". Use "conda" to activate the Conda environment.
 CONDA_ENVIRONMENT_FILE | ${SCRIPTS_DIR}/../conda-environment.yml | Conda (package manager for Python) environment file path
 CODEGRAPH_CONDA_ENVIRONMENT | codegraph | Name of the conda environment to use for code graph analysis
-USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV | false | Use "venv" for virtual Python environments ("true") or use an already prepared (e.g. conda) environment (default, "false").
-PYTHON_ENVIRONMENT_FILE | ${ROOT_DIRECTORY}/requirements.txt | Pip (package manager for Python) environment file path
 REPORTS_SCRIPTS_DIRECTORY | reports | Working directory containing the generated reports
 REPORT_COMPILATIONS_SCRIPTS_DIRECTORY | compilations | Repository directory that contains scripts that execute selected report generation scripts
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY | profiles | Repository directory that contains scripts containing settings
