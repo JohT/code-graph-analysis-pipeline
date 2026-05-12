@@ -4,9 +4,7 @@
 
 ## 1. Overview
 
-This report provides a high-level summary of the graph database contents after scanning code artifacts.
-
-It covers the **general graph structure** (node label combinations, individual node labels, and relationship type distributions), followed by a **Java overview** (artifact sizes, type composition, and package counts), and a **TypeScript overview** (module element counts and element type composition).
+High-level summary of graph database contents: general graph structure (node labels, relationships), Java artifacts, and TypeScript modules.
 
 ## 📚 Table of Contents
 

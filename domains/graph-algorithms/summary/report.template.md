@@ -4,12 +4,11 @@
 
 ## 1. Overview
 
-This report summarises graph algorithm results computed from the code graph stored in Neo4j.
-It covers centrality scores, community detection assignments, and node similarity.
+Graph algorithm results from the code graph: centrality, community detection, and node similarity.
 
-- **Centrality** — which nodes (packages, types, artifacts) are most influential in the dependency graph
-- **Community Detection** — how code units cluster into communities based on their dependencies
-- **Similarity** — which code units are structurally most similar to each other (Jaccard)
+- **Centrality** — which nodes (packages, types, artifacts) are most influential
+- **Community Detection** — how code units cluster based on dependencies
+- **Similarity** — which code units share the most common dependencies (Jaccard)
 
 > **Reading the tables**: Rows are sorted by algorithm score — the **first rows are the most significant**.
 
@@ -24,9 +23,7 @@ It covers centrality scores, community detection assignments, and node similarit
 
 ## 2. Centrality
 
-Centrality scores indicate how important a node is in the dependency graph.
-High PageRank scores indicate nodes that are depended on by many other important nodes.
-High betweenness scores indicate nodes that act as bridges between different parts of the graph.
+High PageRank = depended on by many important nodes. High betweenness = bridge between graph parts.
 
 ### 2.1 Top Nodes by PageRank
 
@@ -44,9 +41,7 @@ High betweenness scores indicate nodes that act as bridges between different par
 
 ## 3. Community Detection
 
-Community detection algorithms group code units that are tightly connected to each other.
-High community sizes may indicate large, monolithic modules.
-Many small communities may indicate well-modularised code.
+High community sizes may indicate monolithic modules; many small = well-modularised.
 
 ### 3.1 Leiden Communities Overview
 
@@ -54,8 +49,7 @@ Many small communities may indicate well-modularised code.
 
 ### 3.2 Strongly Connected Components (SCC)
 
-Strongly connected components identify cycles in directed dependency graphs.
-Components with more than one member indicate circular dependencies.
+Components with more than one member = circular dependencies.
 
 <!-- include:StronglyConnectedComponentsOverview.md|report_no_graph_data.template.md -->
 
@@ -67,8 +61,7 @@ Weakly connected components identify isolated clusters of code units.
 
 ### 3.4 Local Clustering Coefficient
 
-The local clustering coefficient measures how tightly interconnected a node's neighbours are.
-High values indicate a node whose dependencies are also heavily dependent on each other.
+How tightly interconnected a node's neighbours are. High = dependencies are also mutually dependent.
 
 <!-- include:LCCNodesByCoefficient.md|report_no_graph_data.template.md -->
 
@@ -76,8 +69,7 @@ High values indicate a node whose dependencies are also heavily dependent on eac
 
 ## 4. Similarity
 
-Node similarity (Jaccard) identifies code units that share many common dependencies.
-High similarity scores may indicate duplicated or closely related functionality.
+Jaccard similarity: code units sharing common dependencies. High = potential duplication or related functionality.
 
 ### 4.1 Top Jaccard Similarity Pairs
 

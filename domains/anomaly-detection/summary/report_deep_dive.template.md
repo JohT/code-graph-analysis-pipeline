@@ -20,8 +20,6 @@
 
 #### Visualizations
 
-See [Plot Interpretation Guide](#3-plot-interpretation-guide) on how to read the plots in detail.
-
 <!-- include:report_deep_dive_anomaly_plots.md|empty.md -->
 
 <!-- include:report_deep_dive_cluster_overall_plot.md|empty.md -->

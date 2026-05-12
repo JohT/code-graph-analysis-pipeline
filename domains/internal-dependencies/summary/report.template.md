@@ -39,11 +39,9 @@ Artifacts by size and connectivity. High incoming = shared library; high outgoin
 
 ### 2.2 Interface Segregation Principle Candidates
 
-Based on Robert C. Martin's **Interface Segregation Principle** — _"Clients should not be forced to depend upon interfaces that they do not use."_
+ISP (Robert C. Martin): Interfaces declaring many methods but callers use only a subset — extract focused sub-interfaces.
 
-Interfaces with many declared methods but callers use only a subset. Extract focused sub-interfaces.
-
-`usageRatio` (lower = stronger candidate), `callerCount` (high + low ratio = high priority). `exampleCalledMethods` shows methods to extract.
+`usageRatio` (lower = stronger candidate), `callerCount` (high + low ratio = higher priority). `exampleCalledMethods` shows methods to extract.
 
 <!-- include:Candidates_for_Interface_Segregation.md|empty.md -->
 
@@ -56,8 +54,6 @@ Types used by most packages (high ripple risk on changes). Sorted by usage count
 ### 2.4 Overly Broad Artifact Dependencies
 
 Artifact dependencies where dependents use only a small `usedPackagesPercent`. Low % = optimization/removal candidate.
-
-A low `usedPackagesPercent` indicates that a dependent artifact imports only a small fraction of the artifact's packages.
 
 <!-- include:How_many_packages_used_by_dependent_artifacts.md|empty.md -->
 
@@ -109,7 +105,7 @@ Reveals dependency chain **depth and complexity**.
 
 ### 4.1 Java Package Path Finding
 
-Dependency path analysis at the Java package level. Intra-artifact pairs (both source and target in the same artifact) are highlighted; intermediate paths may cross artifact boundaries, reflecting real-world transitive coupling.
+Intra-artifact pairs highlighted; intermediate paths may cross artifact boundaries.
 
 #### 4.1.1 All Pairs Shortest Path
 
