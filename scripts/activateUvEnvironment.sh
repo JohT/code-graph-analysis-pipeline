@@ -10,6 +10,14 @@ IFS=$'\n\t'
 
 PYTHON_PACKAGE_MANAGER=${PYTHON_PACKAGE_MANAGER:-"uv"} # Python package manager to use. Options: "uv" (default), "conda". Use "conda" to switch to the Conda-based activation.
 
+# Print deprecation warnings for removed environment variables (v4.0.0)
+if [[ -n "${USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV:-}" ]]; then
+    echo "activateUvEnvironment: WARNING - USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV is deprecated (v4.0.0) and ignored. The default is now 'uv'. Only set PYTHON_PACKAGE_MANAGER='conda' explicitly if you want to use Conda."
+fi
+if [[ -n "${PYTHON_ENVIRONMENT_FILE:-}" ]]; then
+    echo "activateUvEnvironment: WARNING - PYTHON_ENVIRONMENT_FILE is removed (v4.0.0). Use PYTHON_PACKAGE_MANAGER='conda' and specify a conda environment via other means if needed."
+fi
+
 if [[ "${PYTHON_PACKAGE_MANAGER}" != "uv" ]]; then
     echo "activateUvEnvironment: Skipping. PYTHON_PACKAGE_MANAGER=${PYTHON_PACKAGE_MANAGER} (expected 'uv')."
     # "return" needs to be used here instead of "exit".
