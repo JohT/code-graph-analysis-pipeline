@@ -37,7 +37,7 @@ esac
 if [ -z "${artifactsVersion}" ]; then
   echo "${SCRIPT_NAME}: Optional parameter <version> is not specified. Detecting latest version..." >&2
   echo "${SCRIPT_NAME}: Usage example: $0 <version> <optional analysis parameter>" >&2
-  artifactsVersion=$( "${EXAMPLE_SCRIPTS_DIR}/detectLatestGitTag.sh" --url "https://github.com/AxonFramework/AxonFramework.git" --prefix "axon-")
+  artifactsVersion=$( "${EXAMPLE_SCRIPTS_DIR}/detectLatestGitTag.sh" --url "https://github.com/AxonIQ/AxonFramework.git" --prefix "axon-")
   echo "${SCRIPT_NAME}: Using latest version: ${artifactsVersion}" >&2
 fi
 
