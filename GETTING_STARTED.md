@@ -38,6 +38,8 @@ Use these optional command line options as needed:
 
 ## Start an own analysis
 
+**Tip:** Use the `start-new-analysis` skill in your IDE to automate these steps.
+
 ### 1. Setup
 
 - Choose an initial password for Neo4j if not already done.
