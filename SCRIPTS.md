@@ -72,6 +72,7 @@ Script | Directory | Description
 [activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Python scripts.
 [activateUvEnvironment.sh](./scripts/activateUvEnvironment.sh) | scripts | Activates the uv-managed .venv environment with all packages from pyproject.toml necessary to run the included Python scripts.
 [analyze.sh](./scripts/analysis/analyze.sh) | analysis | Coordinates the end-to-end analysis process, encompassing tool installation, graph generation, and report generation.
+[renderDocumentationGraphs.sh](./scripts/analysis/renderDocumentationGraphs.sh) | analysis | Renders all documentation graphs (.gv files) as SVG images.
 [checkCompatibility.sh](./scripts/checkCompatibility.sh) | scripts | Check environment dependencies and tool availability.
 [cleanupAfterReportGeneration.sh](./scripts/cleanupAfterReportGeneration.sh) | scripts | Cleans up after report generation. This includes deleting empty files or in case no file is left deleting the report folder.
 [cloneGitRepository.sh](./scripts/cloneGitRepository.sh) | scripts | Provides safe-guarded (security checked parameters) git repository cloning.
