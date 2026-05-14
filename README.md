@@ -35,6 +35,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 
 ### :newspaper: News
 
+- May 2026: Version 4.0.0 introduces **independently-runnable analysis domains**. Select specific domains via `--domain` or exclude with `--exclude-domain`. No more monolithic execution. See [MIGRATION.md](./MIGRATION.md) for details.
 - November 2025: Removed deprecated (since version 2.x) "graph-visualization" node package
 - November 2025: Treemap charts for anomalies and archetypes
 - October 2025: Graph visualizations for anomaly archetypes
@@ -43,9 +44,36 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - August 2025: Anomaly detection powered by unsupervised machine learning and explainable AI
 - May 2025: Migrated to [Neo4j 2025.x](https://neo4j.com/docs/upgrade-migration-guide/current/version-2025/upgrade) and Java 21.
 
-### :notebook: Python Reports
+## :compass: Domains
 
-Here is an overview of Python and Markdown reports from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples).
+The repository is organized first by problem space. Most functionality lives in self-contained domains under [domains](./domains/), each bundling the scripts, Cypher queries, templates, and exploratory notebooks for one analysis area.
+
+The report types `Csv`, `Python`, `Markdown`, and `Visualization` are secondary execution modes selected via `--report`. They cut across domains, while `--domain` narrows a run to one domain. Not every domain implements every report type.
+
+If you think in architecture terms: domains are the vertical slices, report types are the cross-cutting execution modes.
+
+**By default**, three compute-intensive domains are **deactivated** to reduce analysis time: `anomaly-detection`, `node-embeddings`, and `graph-algorithms`. Activate them individually via `--domain` or include them with `--exclude-domain ""` to run all domains.
+
+### Analysis Domains
+
+- [Overview](./domains/overview/README.md) - High-level project structure, composition, counts, and complexity distributions.
+- [External Dependencies](./domains/external-dependencies/README.md) - Usage of external libraries, packages, modules, and namespaces.
+- [Internal Dependencies](./domains/internal-dependencies/README.md) - Internal dependency structure, path finding, topological order, OOD metrics, visibility metrics, and word clouds.
+- [Cyclic Dependencies](./domains/cyclic-dependencies/README.md) - Dedicated cycle analysis for Java artifacts, Java packages, and TypeScript modules.
+- [Java](./domains/java/README.md) - Java code quality, method metrics, annotations, and artifact dependency analysis.
+- [Git History](./domains/git-history/README.md) - Change frequency, co-change patterns, authorship, and repository evolution.
+- [Graph Algorithms](./domains/graph-algorithms/README.md) - Centrality, communities, similarity, and other Graph Data Science results.
+- [Node Embeddings](./domains/node-embeddings/README.md) - Graph embeddings and 2D projections for structural exploration.
+- [Anomaly Detection](./domains/anomaly-detection/README.md) - Machine-learning-supported structural anomaly detection.
+- [Archetypes](./domains/archetypes/README.md) - Structural roles such as authority, bottleneck, and hub.
+
+### Support Domain
+
+- [Neo4j Management](./domains/neo4j-management/README.md) - Neo4j setup, configuration, start, stop, and memory profile management. Usually used indirectly through [analyze.sh](./scripts/analysis/analyze.sh).
+
+### :notebook: Example Reports
+
+Here is a curated overview of report examples and exploratory notebooks from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). These examples are grouped by user-facing output, not by domain.
 
 - [External Dependencies](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/external-dependencies-java/ExternalDependenciesJava.md) contains detailed information about external library usage ([Notebook](./domains/external-dependencies/explore/ExternalDependenciesJava.ipynb)).
 - [Git History](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/git-history-general/GitHistoryGeneral.md) contains information about the git history of the analyzed code ([Notebook](./domains/git-history/explore/GitHistoryGeneralExploration.ipynb)).
@@ -58,11 +86,9 @@ Here is an overview of Python and Markdown reports from [code-graph-analysis-exa
 - [Wordcloud](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/wordcloud/Wordcloud.md) contains a visual representation of package and class names ([Notebook](./domains/internal-dependencies/explore/Wordcloud.ipynb)).
 - [Java Archetypes Treemap](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/anomaly-detection/JavaTreemap2ArchetypesOverviewPerDirectory.svg) ([Python Script](./domains/anomaly-detection/treemapVisualizations.py))
 
-### :blue_book: Graph Data Science Reports
+### :blue_book: Graph Data Science Examples
 
-This project includes several reports that use Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science). These reports are part of the [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples) repository. For a full list of reports, check out the [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference).
-
-Here are some reports that utilize Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science) from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples). For a complete list, see the [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference).
+These examples show selected outputs powered by Neo4j's [Graph Data Science Library](https://neo4j.com/product/graph-data-science) across several domains. For a complete list, see the [CSV Cypher Query Report Reference](#page_with_curl-csv-cypher-query-report-reference).
 
 - [Centrality with Page Rank](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/centrality-csv/Package_Centrality_Page_Rank.csv) ([Source Script](./domains/graph-algorithms/centralityCsv.sh))
 - [Community Detection with Leiden](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/community-csv/Package_communityLeidenId_Community__Metrics.csv) ([Source Script](./domains/graph-algorithms/communityCsv.sh))
@@ -71,9 +97,9 @@ Here are some reports that utilize Neo4j's [Graph Data Science Library](https://
 - [Similarity with Jaccard](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/similarity-csv/Package_Similarity.csv) ([Source Script](./domains/graph-algorithms/similarityCsv.sh))
 - [Topology Sort](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/topology-csv/Package_Topological_Sort.csv) ([Source Script](./domains/internal-dependencies/internalDependenciesCsv.sh))
 
-### :art: Graph Visualization
+### :art: Graph Visualization Examples
 
-Here are some fully automated graph visualizations utilizing [GraphViz](https://graphviz.org)from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples):
+Here are some fully automated graph visualizations utilizing [GraphViz](https://graphviz.org) from [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples):
 
 - [Java Artifact Build Levels](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/internal-dependencies-visualization/JavaArtifactBuildLevels.svg) ([Query](./domains/internal-dependencies/queries/internal-dependencies/Java_Artifact_build_levels_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))
 - [Java Artifact Longest Path Contributors](https://github.com/JohT/code-graph-analysis-examples/blob/main/analysis-results/AxonFramework/latest/path-finding-visualization/JavaArtifactLongestPaths.svg) ([Query](./domains/internal-dependencies/queries/path-finding/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher), [Source Script](./scripts/visualization/visualizeQueryResults.sh))

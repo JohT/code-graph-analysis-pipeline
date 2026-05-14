@@ -2,21 +2,74 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
-## (unreleased) Introduce neo4j-management domain
+## v4.0.0 - Vertical slice domains, uv as Python package manager, Jupyter removed
 
-### ✨ Highlight
+### ✨ Highlights
 
-* Introduce `domains/neo4j-management/` as a vertical-slice domain that owns all Neo4j lifecycle management (install, configure, start, stop).
+* **Vertical slice domains**: Nine self-contained analysis domains are now the primary way to run analysis. Each domain owns its Cypher queries, scripts, charts, and templates. New domains: `internal-dependencies`, `git-history`, `java`, `overview`, `graph-algorithms`, `node-embeddings`, `archetypes`, `cyclic-dependencies` and `neo4j-management` (see details below).
+* **`analyze.sh` gains `--exclude-domain` and `--help`**: Skip specific domains without modifying the pipeline.
+* **`uv` replaces `venv`/`conda` as default Python package manager**: `pyproject.toml` + `uv.lock` replace `requirements.txt`. Set `PYTHON_PACKAGE_MANAGER=conda` to keep using conda.
+* **Jupyter pipeline removed**: Jupyter notebook execution (`--report Jupyter`), nbconvert and with that PDF reports are removed from the pipeline. The 25 `explore/` notebooks remain for interactive use only.
 
 ### 🚀 Features
 
-* Move Neo4j management scripts from `scripts/` to `domains/neo4j-management/`:
-  `setupNeo4j.sh`, `setupNeo4jInitialPassword.sh`, `configureNeo4j.sh`, `startNeo4j.sh`, `stopNeo4j.sh`,
-  `detectNeo4j.sh`, `detectNeo4jWindows.sh`, `waitForNeo4jHttpFunctions.sh`, `useNeo4jHighMemoryProfile.sh`, `testConfigureNeo4j.sh`
-* Move Neo4j configuration templates from `scripts/configuration/` to `domains/neo4j-management/configuration/`:
-  `template-neo4j.conf`, `template-neo4j-high-memory.conf`, `template-neo4j-low-memory.conf`, `template-neo4j-v4.conf`, `template-neo4j-v4-low-memory.conf`
-* Keep `scripts/startNeo4j.sh` and `scripts/stopNeo4j.sh` as **backward-compatible redirect stubs** so existing analysis workspaces continue to work without migration.
-* Extend `runTests.sh` to also discover and run test scripts in `domains/` subdirectories.
+#### New Analysis Domains
+
+* **`domains/internal-dependencies/`** — Internal dependency analysis (packages, artifacts, types, TypeScript modules, NPM packages) combining internal deps, path finding, and topological sort. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/552
+* **`domains/git-history/`** — Full git history analysis (change frequency, churn, coupling). by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/559
+* **`domains/java/`** — Java artifact and type metrics, including artifact dependency graphs. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/568
+* **`domains/overview/`** — High-level project overview reports. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/574
+* **`domains/graph-algorithms/`** — Graph algorithm results (PageRank, community detection, centrality). by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/573
+* **`domains/node-embeddings/`** — Node embedding generation and analysis. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/572
+* **`domains/archetypes/`** — Authority, Bottleneck, and Hub archetype detection, split out from `anomaly-detection`. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/580
+* **`domains/cyclic-dependencies/`** — Cyclic dependency detection and SVG visualizations of top cycles, split out from `internal-dependencies`. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/581
+
+#### New Technical Domains
+
+* **`domains/neo4j-management/`** — All Neo4j lifecycle scripts (install, configure, start, stop) and configuration templates. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/555
+
+#### CLI & Workflow
+
+* Add `--keep-running` option to `analyze.sh` to skip Neo4j stop/start between repeated runs by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/552
+* Add `--exclude-domain` argument (comma-separated) to skip specific domains by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/578
+* Add `--help` flag to `analyze.sh` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/578
+* Add `run-all-domains` and `exclude-domain` inputs to GitHub Actions public workflow by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/578
+
+#### Python & Tooling
+
+* Migrate to `uv` as primary Python package manager: `pyproject.toml` + `uv.lock` replace `requirements.txt`, `scripts/activateUvEnvironment.sh` replaces `scripts/activatePythonEnvironment.sh` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+* Add `PYTHON_PACKAGE_MANAGER` environment variable (`uv` default, `conda` supported) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+* Add `python-package-manager` input to GitHub Actions public workflow by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+
+#### Other
+
+* Add `domains/internal-dependencies/` Object-oriented design metrics, visibility metrics, and word cloud reports by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/566
+* Move reference docs to repo root: `SCRIPTS.md`, `CYPHER.md`, `ENVIRONMENT_VARIABLES.md` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/555
+* Add `AGENTS.md` at repo root and coding agent instruction files under `.github/instructions/` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/564
+* Add `cyclicDependenciesVisualization.sh` generating SVG graphs of the top 5 cyclic dependency clusters by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/581
+* Make all domain summary Markdown templates compact and LLM-context-friendly (2-column `| Plot | Purpose |` layout) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/585
+* Extend `runTests.sh` to discover and run test scripts in `domains/` subdirectories by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/555
+
+### ⚠️ Breaking Changes
+
+* **Output directory changes** — Multiple report output paths have changed; see [MIGRATION.md](./MIGRATION.md) for the full mapping.
+* **Python package manager** — Default changes from `conda` to `uv`. `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` is ignored (deprecated). `PYTHON_ENVIRONMENT_FILE` is removed. GitHub Actions users: omit `use-venv_virtual_python_environment: true` or replace it with `python-package-manager: 'uv'` (uv is the new default); former conda users (previously relying on `use-venv_virtual_python_environment: false`) must now set `python-package-manager: 'conda'` explicitly.
+* **Jupyter pipeline removed** — `--report Jupyter` is no longer available. `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION` and `JUPYTER_NOTEBOOK_DIRECTORY` environment variables are removed. GitHub Actions `jupyter-pdf` input is removed.
+* **Cyclic dependencies domain split out** — Cyclic dependency CSVs move from `reports/internal-dependencies/*/Cyclic_Dependencies*.csv` to `reports/cyclic-dependencies/*/`.
+* **Archetypes domain split out** — Neo4j node properties `Mark4TopAnomalyAuthority`, `Mark4TopAnomalyBottleneck`, `Mark4TopAnomalyHub` renamed to `Mark4TopArchetypeAuthority`, `Mark4TopArchetypeBottleneck`, `Mark4TopArchetypeHub`. Rank properties `anomalyAuthorityRank`, `anomalyBottleneckRank`, `anomalyHubRank` renamed to `archetypeAuthorityRank`, `archetypeBottleneckRank`, `archetypeHubRank`.
+* **Neo4j configuration templates moved** — Templates moved from `scripts/configuration/` to `domains/neo4j-management/configuration/`.
+
+### 🗑️ Removed
+
+* `scripts/activatePythonEnvironment.sh` — replaced by `scripts/activateUvEnvironment.sh` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+* `requirements.txt` — replaced by `pyproject.toml` + `uv.lock` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+* `USE_VIRTUAL_PYTHON_ENVIRONMENT_VENV` environment variable (deprecated, ignored with warning) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+* `PYTHON_ENVIRONMENT_FILE` environment variable by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
+* `--report Jupyter` pipeline option by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/577
+* `scripts/reports/compilations/JupyterReports.sh`, `scripts/executeJupyterNotebook.sh`, `scripts/executeJupyterNotebookReport.sh` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/577
+* `ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION` and `JUPYTER_NOTEBOOK_DIRECTORY` environment variables by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/577
+* GitHub Actions `jupyter-pdf` input by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/577
+* Legacy internal-dependencies, path-finding, topology, git-history, and java reports and notebooks (replaced by domain equivalents) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/552, https://github.com/JohT/code-graph-analysis-pipeline/pull/559, https://github.com/JohT/code-graph-analysis-pipeline/pull/568
 
 ## v3.5.0 Select analysis domain and npm dev dependency awareness
 
