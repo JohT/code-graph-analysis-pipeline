@@ -1,0 +1,182 @@
+digraph ScriptDependencies {
+    graph [
+        rankdir=LR,
+        bgcolor="transparent",
+        fontname="Helvetica",
+        fontsize=12,
+        labelloc="top",
+        label="Analysis Script Call Dependencies (scripts/analysis/analyze.sh)"
+    ];
+    
+    node [
+        shape=box,
+        style="rounded,filled",
+        fontname="Helvetica",
+        fontsize=10,
+        margin="0.2,0.1"
+    ];
+    
+    edge [
+        fontname="Helvetica",
+        fontsize=9,
+        color="#333333",
+        penwidth=1.5,
+        arrowsize=1.2
+    ];
+
+    // Main entry point
+    analyze [label="analyze.sh", fillcolor="#FFD700", fontcolor="black", fontweight="bold", shape="ellipse", fontsize=12];
+    
+    // Profile selection
+    profile [label="Settings\nProfile", fillcolor="#E6F3FF"];
+    
+    // Setup phase - subgraph
+    subgraph cluster_setup {
+        label="Setup Phase";
+        fontname="Helvetica";
+        fontsize=11;
+        style="filled";
+        fillcolor="#F0F8FF";
+        color="#4169E1";
+        margin=10;
+        
+        setupNeo4j [label="setupNeo4j.sh", fillcolor="#87CEEB"];
+        setupJQAssistant [label="setupJQAssistant.sh", fillcolor="#87CEEB"];
+        startNeo4j [label="startNeo4j.sh", fillcolor="#87CEEB"];
+        download [label="download.sh", fillcolor="#ADD8E6"];
+    }
+    
+    // Scan phase - subgraph
+    subgraph cluster_scan {
+        label="Scan & Analysis Phase";
+        fontname="Helvetica";
+        fontsize=11;
+        style="filled";
+        fillcolor="#F0FFF0";
+        color="#228B22";
+        margin=10;
+        
+        resetAndScanChanged [label="resetAndScanChanged.sh", fillcolor="#90EE90"];
+        scanTypescript [label="scanTypescript.sh", fillcolor="#7CFC00"];
+        findPathsToScan [label="findPathsToScan.sh", fillcolor="#90EE90"];
+        detectChangedFiles [label="detectChangedFiles.sh", fillcolor="#98FB98"];
+        resetAndScan [label="resetAndScan.sh", fillcolor="#90EE90"];
+        importGit [label="importGit.sh", fillcolor="#9ACD32"];
+    }
+    
+    // Prepare phase - subgraph
+    subgraph cluster_prepare {
+        label="Prepare Phase";
+        fontname="Helvetica";
+        fontsize=11;
+        style="filled";
+        fillcolor="#FFF8F0";
+        color="#FF8C00";
+        margin=10;
+        
+        prepareAnalysis [label="prepareAnalysis.sh", fillcolor="#FFB6C1"];
+        executeQueryFunctions [label="executeQueryFunctions.sh", fillcolor="#FFE4C4"];
+        executeQuery [label="executeQuery.sh", fillcolor="#FFDAB9"];
+        parseCsvFunctions [label="parseCsvFunctions.sh", fillcolor="#FFE4C4"];
+    }
+    
+    // Report generation phase - subgraph
+    subgraph cluster_reports {
+        label="Report Generation Phase";
+        fontname="Helvetica";
+        fontsize=11;
+        style="filled";
+        fillcolor="#F0E6FF";
+        color="#8B008B";
+        margin=10;
+        
+        reportCompilation [label="Report\nCompilation", fillcolor="#DDA0DD", fontweight="bold"];
+        csvReports [label="CsvReports.sh", fillcolor="#EE82EE"];
+        pythonReports [label="PythonReports.sh", fillcolor="#DDA0DD"];
+        visualizationReports [label="VisualizationReports.sh", fillcolor="#DA70D6"];
+        markdownReports [label="MarkdownReports.sh", fillcolor="#EE82EE"];
+    }
+    
+    // Cleanup phase
+    stopNeo4j [label="stopNeo4j.sh", fillcolor="#FFB6C6", shape="box"];
+    
+    // Domain report scripts - subgraph
+    subgraph cluster_domains {
+        label="Domain Report Scripts\n(dynamically discovered & sourced)";
+        fontname="Helvetica";
+        fontsize=11;
+        style="filled";
+        fillcolor="#F0E6FF";
+        color="#8B008B";
+        margin=10;
+        
+        subgraph cluster_domain_anomaly {
+            label="anomaly-detection (example)";
+            fontsize=10;
+            style="filled";
+            fillcolor="#E6CCFF";
+            color="#663399";
+            
+            anomalyCsv [label="anomalyDetectionCsv.sh", fillcolor="#DDA0DD"];
+            anomalyPython [label="anomalyDetectionPython.sh", fillcolor="#EE82EE"];
+            anomalyVisualization [label="anomalyDetectionVisualization.sh", fillcolor="#DA70D6"];
+            anomalyMarkdown [label="anomalyDetectionMarkdown.sh", fillcolor="#DDA0DD"];
+        }
+        
+        // Other domains indicator
+        moreDomains [label="... other domains\n(git-history, archetypes,\nexternal-dependencies,\ninternal-dependencies,\ncyclic-dependencies,\nnode-embeddings,\ngraph-algorithms, etc.)", shape="note", fillcolor="#E6D9FF", fontsize=9];
+    }
+
+    // Main flow edges
+    analyze -> profile [color="#FFD700", penwidth=2];
+    analyze -> setupNeo4j [color="#4169E1", penwidth=2];
+    analyze -> setupJQAssistant [color="#4169E1", penwidth=2];
+    analyze -> startNeo4j [color="#4169E1", penwidth=2];
+    analyze -> resetAndScanChanged [color="#228B22", penwidth=2];
+    analyze -> prepareAnalysis [color="#FF8C00", penwidth=2];
+    analyze -> reportCompilation [color="#8B008B", penwidth=2];
+    analyze -> stopNeo4j [color="#FF6B9D", penwidth=2];
+    
+    // Setup phase edges
+    setupJQAssistant -> download;
+    
+    // Scan phase edges
+    resetAndScanChanged -> scanTypescript;
+    resetAndScanChanged -> findPathsToScan;
+    resetAndScanChanged -> detectChangedFiles;
+    resetAndScanChanged -> resetAndScan;
+    
+    scanTypescript -> detectChangedFiles [style="dashed"];
+    
+    resetAndScan -> importGit;
+    
+    // Prepare phase edges
+    prepareAnalysis -> executeQueryFunctions;
+    prepareAnalysis -> parseCsvFunctions;
+    
+    executeQueryFunctions -> executeQuery;
+    
+    // Report generation edges
+    reportCompilation -> csvReports;
+    reportCompilation -> pythonReports;
+    reportCompilation -> visualizationReports;
+    reportCompilation -> markdownReports;
+    
+    // Domain report script edges (dynamically discovered via find and sourced)
+    // Example: anomaly-detection domain
+    // CSV Reports
+    csvReports -> anomalyCsv [style="dashed", color="#8B008B", label="dynamic\ndiscovery"];
+    csvReports -> moreDomains [style="dotted", color="#9966BB"];
+    
+    // Python Reports
+    pythonReports -> anomalyPython [style="dashed", color="#8B008B", label="find\n*.sh"];
+    pythonReports -> moreDomains [style="dotted", color="#9966BB"];
+    
+    // Visualization Reports
+    visualizationReports -> anomalyVisualization [style="dashed", color="#8B008B", label="source\neach"];
+    visualizationReports -> moreDomains [style="dotted", color="#9966BB"];
+    
+    // Markdown Reports
+    markdownReports -> anomalyMarkdown [style="dashed", color="#8B008B"];
+    markdownReports -> moreDomains [style="dotted", color="#9966BB"];
+}

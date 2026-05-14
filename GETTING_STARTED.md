@@ -8,7 +8,7 @@ This document describes the steps to get started as quickly as possible.
 
 Please read through the [Prerequisites](./README.md#hammer_and_wrench-prerequisites) in the [README](./README.md) file for what is required to run the scripts or simply run the [checkCompatibility.sh](./scripts/checkCompatibility.sh) script to verify that your environment is set up correctly.
 
-## The easiest way to get started
+## :rocket: The easiest way to get started
 
 Just run one of the following examples in the directory of this file:
 
@@ -36,7 +36,11 @@ Use these optional command line options as needed:
   ./scripts/examples/analyzeAxonFramework.sh 4.10.1
   ```
 
-## Start an own analysis
+## :arrow_forward: Start your own analysis
+
+Here's a quick visual reference for the steps you'll follow:
+
+![Getting Started Flow](./scripts/analysis/getting_started_flow.svg) [Source: getting_started_flow.gv](./scripts/analysis/getting_started_flow.gv)
 
 **Tip:** Use the `start-new-analysis` skill in your IDE to automate these steps.
 
@@ -48,7 +52,7 @@ Use these optional command line options as needed:
     export NEO4J_INITIAL_PASSWORD=theinitialpasswordthatihavechosenforneo4j
     ```
 
-- Initialize you analysis project using [./init.sh](./init.sh).
+- Initialize your analysis project using [./init.sh](./init.sh).
 
     ```shell
     ./init.sh MyAnalysisProjectName
@@ -76,7 +80,7 @@ Use these optional command line options as needed:
 
 - Optionally use a script to download artifacts from Maven ([details](./COMMANDS.md#download-maven-artifacts-to-analyze)).
 
-### Start the analysis
+### 3. Start the analysis
 
 - Without any additional dependencies:
 
@@ -128,6 +132,6 @@ Use these optional command line options as needed:
 
 👉 Open your browser and login to your local Neo4j Web UI (`http://localhost:7474/browser`) with "neo4j" as user and the initial password you've chosen.
 
-## GitHub Actions
+## :octocat: GitHub Actions
 
 👉 See [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-analysis.yml) on how to do this within a GitHub Actions Workflow.
