@@ -12,6 +12,8 @@ on:
       - '**/*.css'
       - '**/*.html'
       - '**/*.js'
+      - '**/*.gv'
+      - '**/*.svg'
       - '.gitignore'
       - '.gitattributes'
       - 'renovate.json'
@@ -20,6 +22,8 @@ on:
       - '**.code-workspace'
       - '.github/workflows/internal-java-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
+      - 'domains/anomaly-detection/documentation/renderArchitecture.sh'
+      - 'scripts/analysis/renderDocumentationGraphs.sh'
   pull_request:
     branches:
       - main
@@ -31,6 +35,8 @@ on:
       - '**/*.css'
       - '**/*.html'
       - '**/*.js'
+      - '**/*.gv'
+      - '**/*.svg'
       - '.gitignore'
       - '.gitattributes'
       - 'renovate.json'
@@ -39,6 +45,8 @@ on:
       - '**.code-workspace'
       - '.github/workflows/internal-java-code-analysis.yml'
       - '.github/workflows/*documentation.yml'
+      - 'domains/anomaly-detection/documentation/renderArchitecture.sh'
+      - 'scripts/analysis/renderDocumentationGraphs.sh'
 
 jobs:
 

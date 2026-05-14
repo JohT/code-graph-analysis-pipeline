@@ -159,6 +159,12 @@ See [GETTING_STARTED.md](./GETTING_STARTED.md) on how to get started on your loc
 See [INTEGRATION.md](./INTEGRATION.md) on how to integrate code analysis in your continuous integration pipeline.
 Currently (2025), only GitHub Actions are supported.
 
+## :gear: How the Pipeline Works
+
+![Analysis Process Graph](./scripts/analysis/analysis_process_graph.svg) [Source: analysis_process_graph.gv](./scripts/analysis/analysis_process_graph.gv)
+
+The analysis script [analyze.sh](./scripts/analysis/analyze.sh) orchestrates 5 phases: **Setup** (Neo4j/jQAssistant), **Scan & Analysis** (code scanning), **Prepare** (graph enrichment), **Report Generation** (domain-specific reports), and **Cleanup**. See [COMMANDS.md](./COMMANDS.md) for CLI options and detailed flow.
+
 ## :building_construction: Pipeline and Tools
 
 The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-analysis.yml) utilizes [GitHub Actions](https://docs.github.com/de/actions) to automate the whole analysis process:

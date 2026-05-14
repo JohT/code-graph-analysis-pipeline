@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [Start an Analysis](#start-an-analysis)
+        - [Process Overview](#process-overview)
     - [Command Line Options](#command-line-options)
     - [Notes](#notes)
     - [Examples](#examples)
@@ -21,6 +22,8 @@
     - [Generate Environment Variable Reference](#generate-environment-variable-reference)
 - [Validate Links in Markdown](#validate-links-in-markdown)
 - [Manual Setup](#manual-setup)
+    - [Setup Python Environment with uv default](#setup-python-environment-with-uv-default)
+    - [Setup Python Environment with Conda optional](#setup-python-environment-with-conda-optional)
     - [Setup Neo4j Graph Database](#setup-neo4j-graph-database)
     - [Change Neo4j configuration template](#change-neo4j-configuration-template)
     - [Start Neo4j Graph Database](#start-neo4j-graph-database)
@@ -58,6 +61,20 @@ To run all analysis steps simple execute the following command:
 ```
 
 **Hint:** Within the analysis workspace directory you can simply run `analyze.sh` directly without the `../../` prefix since the script is also available in the analysis workspace.
+
+#### Process Overview
+
+The visualization below shows how `analyze.sh` orchestrates the entire analysis pipeline:
+
+![Analysis Process Graph](./scripts/analysis/analysis_process_graph.svg) [Source: analysis_process_graph.gv](./scripts/analysis/analysis_process_graph.gv)
+
+The diagram illustrates:
+
+- **Setup Phase** (blue): Neo4j and JQAssistant initialization
+- **Scan & Analysis Phase** (green): Code scanning and change detection
+- **Prepare Phase** (orange): Database enrichment and validation
+- **Report Generation Phase** (purple): Dynamic discovery and execution of domain-specific reports
+- Each domain (e.g., anomaly-detection) provides its own report scripts which are automatically discovered and sourced
 
 👉 See [scripts/examples/analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) as an example script that combines all the above steps for a Java Project.
 👉 See [scripts/examples/analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) as an example script that combines all the above steps for a Typescript Project.  

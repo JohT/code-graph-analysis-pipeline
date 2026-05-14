@@ -1,0 +1,134 @@
+digraph GettingStartedFlow {
+  // Graph settings
+  rankdir=LR
+  compound=true
+  fontname="Arial"
+  fontsize=12
+  bgcolor="white"
+
+  // Edge styling
+  edge [color="#333333" fontname="Arial" fontsize=10]
+  
+  // Node defaults
+  node [style=filled fontname="Arial" fontsize=11 shape=box]
+
+  // ============ Prerequisites Cluster ============
+  subgraph cluster_prerequisites {
+    label="Prerequisites"
+    fontname="Arial" fontsize=12 style="rounded,filled" fillcolor="#E3F2FD" color="#1976D2" penwidth=2
+
+    neo4j [label="Neo4j" fillcolor="#4A90E2" fontcolor="white" shape=box]
+    java [label="Java" fillcolor="#4A90E2" fontcolor="white" shape=box]
+    jqassistant [label="jQAssistant" fillcolor="#4A90E2" fontcolor="white" shape=box]
+    bash [label="Bash Shell" fillcolor="#4A90E2" fontcolor="white" shape=box]
+    
+    optional_python [label="Optional:\nPython + Conda/uv" fillcolor="#90CAF9" fontcolor="#333333" shape=box style="filled,dashed"]
+    optional_node [label="Optional:\nNode.js + npm" fillcolor="#90CAF9" fontcolor="#333333" shape=box style="filled,dashed"]
+    optional_graphviz [label="Optional:\nGraphViz" fillcolor="#90CAF9" fontcolor="#333333" shape=box style="filled,dashed"]
+  }
+
+  // ============ Setup Phase Cluster ============
+  subgraph cluster_setup {
+    label="Setup Phase"
+    fontname="Arial" fontsize=12 style="rounded,filled" fillcolor="#E8F5E9" color="#388E3C" penwidth=2
+
+    neo4j_password [label="Export NEO4J_INITIAL_PASSWORD" fillcolor="#66BB6A" fontcolor="white" shape=box]
+    init_script [label="init.sh MyProjectName" fillcolor="#66BB6A" fontcolor="white" shape=ellipse]
+    cd_analysis [label="cd temp/MyProjectName" fillcolor="#66BB6A" fontcolor="white" shape=box]
+  }
+
+  // ============ Prepare Code Phase Cluster ============
+  subgraph cluster_prepare {
+    label="Prepare Code Phase"
+    fontname="Arial" fontsize=12 style="rounded,filled" fillcolor="#FFF3E0" color="#F57C00" penwidth=2
+
+    prepare_java [label="Java Artifacts" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    artifacts_dir [label="Put JARs in\n./artifacts" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    
+    prepare_typescript [label="TypeScript Code" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    ts_option [label="Symlink or copy to\n./source" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    
+    prepare_git [label="Git History" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    git_option [label="Symlink or clone to\n./source\n(use --bare for Java)" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    
+    download_alt [label="Alternative:\nDownload Scripts" fillcolor="#FFD54F" fontcolor="#333333" shape=box style="filled,dashed"]
+  }
+
+  // ============ Analysis Phase Cluster ============
+  subgraph cluster_analysis {
+    label="Analysis Phase"
+    fontname="Arial" fontsize=12 style="rounded,filled" fillcolor="#F3E5F5" color="#7B1FA2" penwidth=2
+
+    analyze_script [label="analyze.sh" fillcolor="#BA68C8" fontcolor="white" shape=ellipse]
+    
+    report_csv [label="--report Csv\n(no dependencies)" fillcolor="#CE93D8" fontcolor="white" shape=box]
+    report_python [label="--report Python\n(requires Python)" fillcolor="#CE93D8" fontcolor="white" shape=box]
+    report_viz [label="--report Visualization\n(requires GraphViz)" fillcolor="#CE93D8" fontcolor="white" shape=box]
+    report_markdown [label="--report Markdown" fillcolor="#CE93D8" fontcolor="white" shape=box]
+    report_all [label="--report All\n(all dependencies)" fillcolor="#CE93D8" fontcolor="white" shape=box]
+    
+    explore_only [label="--explore\n(manual Neo4j)" fillcolor="#E1BEE7" fontcolor="#333333" shape=box style="filled,dashed"]
+    
+    domain_filter [label="--domain <name>\n(optional)" fillcolor="#E1BEE7" fontcolor="#333333" shape=box style="filled,dashed"]
+  }
+
+  // ============ Output Phase Cluster ============
+  subgraph cluster_output {
+    label="Access Results"
+    fontname="Arial" fontsize=12 style="rounded,filled" fillcolor="#FCE4EC" color="#C2185B" penwidth=2
+
+    neo4j_web [label="Neo4j Web UI\nhttp://localhost:7474/browser" fillcolor="#EC407A" fontcolor="white" shape=box]
+    username [label="User: neo4j" fillcolor="#F48FB1" fontcolor="white" shape=box]
+    password_use [label="Password:\nNEO4J_INITIAL_PASSWORD" fillcolor="#F48FB1" fontcolor="white" shape=box]
+    reports [label="Generated Reports\n(CSV/Python/Viz/Markdown)" fillcolor="#EC407A" fontcolor="white" shape=box]
+  }
+
+  // ============ Prerequisites to Setup ============
+  neo4j -> neo4j_password [label="check"]
+  java -> neo4j_password [label="check"]
+  jqassistant -> neo4j_password [label="check"]
+  bash -> neo4j_password [label="check"]
+  optional_python -> neo4j_password [label="if needed" style=dashed]
+  optional_node -> neo4j_password [label="if needed" style=dashed]
+  optional_graphviz -> neo4j_password [label="if needed" style=dashed]
+
+  neo4j_password -> init_script
+  init_script -> cd_analysis [label="creates workspace"]
+
+  // ============ Setup to Prepare ============
+  cd_analysis -> prepare_java
+  cd_analysis -> prepare_typescript
+  cd_analysis -> prepare_git
+  cd_analysis -> download_alt [style=dashed label="alternative"]
+
+  // ============ Prepare Phase ============
+  prepare_java -> artifacts_dir
+  prepare_typescript -> ts_option
+  prepare_git -> git_option
+  
+  artifacts_dir -> analyze_script
+  ts_option -> analyze_script
+  git_option -> analyze_script
+  download_alt -> analyze_script [style=dashed]
+
+  // ============ Analysis Phase ============
+  analyze_script -> report_csv
+  analyze_script -> report_python
+  analyze_script -> report_viz
+  analyze_script -> report_markdown
+  analyze_script -> report_all
+  analyze_script -> explore_only [style=dashed]
+  
+  analyze_script -> domain_filter [style=dashed label="optional filter"]
+
+  // ============ Analysis to Output ============
+  report_csv -> reports [constraint=false]
+  report_python -> reports [constraint=false]
+  report_viz -> reports [constraint=false]
+  report_markdown -> reports [constraint=false]
+  report_all -> reports [constraint=false]
+  explore_only -> neo4j_web [constraint=false style=dashed]
+  
+  neo4j_web -> username
+  neo4j_web -> password_use
+}

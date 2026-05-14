@@ -7,9 +7,11 @@ Target: **bash**. Must work on macOS, Linux, Windows (WSL/Git Bash).
 
 ## Header
 
-- **First line: description comment** — used by [SCRIPTS.md](../../SCRIPTS.md). Format: `# Description sentence. Requires "other_script.sh".`
+- **Line 1: Shebang** — `#!/usr/bin/env bash` (must be absolute first line)
+- **Line 2: Blank line** — required separator
+- **Line 3+: Description comment** — used by [SCRIPTS.md](../../SCRIPTS.md). Format: `# Description sentence. Requires "other_script.sh".`
 - Include required env vars, required tools, usage examples in description or `usage()` function
-- Blank line after initial comment before code starts
+- Blank line after comment block before code starts
 
 ## Shebang and Strict Mode
 
