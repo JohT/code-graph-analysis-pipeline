@@ -39,7 +39,7 @@ jobs:
 
     - name: Archive generated cypher reference document
       if: env.generated_document_changed
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: cypher-reference-document
         path: ./CYPHER.md
