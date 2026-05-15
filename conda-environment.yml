@@ -8,14 +8,14 @@ dependencies:
   - python=3.12.9
   - _python_rc=1 # Needed on Mac since Python >= 3.12
   - ipykernel=7.2.0
-  - matplotlib=3.10.8
+  - matplotlib=3.10.9
   - numpy=2.2.5
   - pandas=2.3.3
-  - pip=26.0.1
+  - pip=26.1
   - setuptools=80.10.2 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
   - wordcloud=1.9.6
   - monotonic=1.6
-  - plotly=6.5.2
+  - plotly=6.6.0 # v6.7.0 in pyproject.toml not yet available in conda-forge
   - python-kaleido=1.2.0 # To render plotly plots. Static image export for web-based visualization libraries.
   - scikit-learn=1.8.0 # For anomaly detection HDBSCAN clustering, scores like AMI, and others 
   - seaborn=0.13.2 # To visualize clustering results
@@ -23,4 +23,4 @@ dependencies:
   - umap-learn=0.5.11 # to visualize node embeddings in 2D (UMAP dimensionality reduction)
   - shap=0.50.0
   - pip:
-      - neo4j==6.1.0
+      - neo4j==6.2.0
