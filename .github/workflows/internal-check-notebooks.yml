@@ -1,0 +1,92 @@
+name: Check Jupyter Notebooks
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Run when notebooks, Python dependencies, or this workflow change
+    paths:
+      - 'domains/**/explore/*.ipynb'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'scripts/activateUvEnvironment.sh'
+      - '.github/workflows/internal-check-notebooks.yml'
+
+jobs:
+  check-notebook-syntax-and-imports:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@v6
+
+    - name: (uv Setup) Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: '3.12'
+
+    - name: (uv Setup) Sync dependencies from lockfile
+      run: uv sync --frozen
+
+    - name: Check notebook syntax and imports
+      # For each notebook: parse each Python code cell as Python AST to catch SyntaxErrors,
+      # then collect every unique import statement across all notebooks and run them
+      # in a single Python process to catch ModuleNotFoundError / ImportError.
+      # Cell magics (%%html, %%bash, …) and line magics (%matplotlib, …) are skipped —
+      # they are not Python and would cause false-positive SyntaxErrors.
+      # No kernel execution — no Neo4j needed, finishes in seconds.
+      run: |
+        uv run python3 - <<'PYEOF'
+        import ast, json, sys
+        from pathlib import Path
+
+        notebooks = sorted(Path("domains").glob("**/explore/*.ipynb"))
+        import_lines = set()
+        syntax_failures = []
+
+        for notebook in notebooks:
+            print(f"Parsing {notebook}", flush=True)
+            nb = json.loads(notebook.read_text())
+            for cell in nb["cells"]:
+                if cell["cell_type"] != "code":
+                    continue
+                source = "".join(cell["source"]).strip()
+                if not source:
+                    continue
+                # Skip cell magics (%%html, %%bash, etc.) — not Python code
+                if source.startswith("%%"):
+                    continue
+                # Remove line magics (%matplotlib, %time, etc.) — not valid Python syntax
+                python_source = "\n".join(line for line in source.split("\n") if not line.lstrip().startswith("%"))
+                if not python_source.strip():
+                    continue
+                try:
+                    tree = ast.parse(python_source)
+                except SyntaxError as e:
+                    syntax_failures.append(f"{notebook}: SyntaxError line {e.lineno}: {e.msg}")
+                    continue
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Import):
+                        for alias in node.names:
+                            import_lines.add(f"import {alias.name}")
+                    elif isinstance(node, ast.ImportFrom) and node.module:
+                        names = ", ".join(a.name for a in node.names)
+                        import_lines.add(f"from {node.module} import {names}")
+
+        if syntax_failures:
+            print("Syntax errors found:", file=sys.stderr)
+            for f in syntax_failures:
+                print(f"  {f}", file=sys.stderr)
+            sys.exit(1)
+
+        import_script = "\n".join(sorted(import_lines))
+        print(f"\nRunning {len(import_lines)} unique import statements from {len(notebooks)} notebooks...", flush=True)
+        try:
+            exec(import_script)  # noqa: S102
+        except Exception as e:
+            print("Import check failed:", file=sys.stderr)
+            print(str(e), file=sys.stderr)
+            sys.exit(1)
+
+        print(f"All {len(notebooks)} notebooks OK: syntax valid, {len(import_lines)} unique imports resolved.")
+        PYEOF
