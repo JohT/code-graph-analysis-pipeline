@@ -8,6 +8,7 @@ dependencies:
   - python=3.12.9
   - _python_rc=1 # Needed on Mac since Python >= 3.12
   - ipykernel=7.2.0
+  - nbformat=5.10.4 # For Jupyter notebook environments. Required for plotly to render plots in notebooks.
   - matplotlib=3.10.9
   - numpy=2.2.5
   - pandas=2.3.3
