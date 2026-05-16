@@ -41,6 +41,10 @@ This document describes the changes to the Code Graph Analysis Pipeline. The cha
 * Add `PYTHON_PACKAGE_MANAGER` environment variable (`uv` default, `conda` supported) by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
 * Add `python-package-manager` input to GitHub Actions public workflow by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/584
 
+#### Documentation
+
+* Add Graphviz-based process flow diagrams for `analyze.sh` orchestration and getting-started workflow under `scripts/analysis/` and embed them into `README.md`, `COMMANDS.md`, and `GETTING_STARTED.md` by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/587
+
 #### Other
 
 * Add `domains/internal-dependencies/` Object-oriented design metrics, visibility metrics, and word cloud reports by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/566
