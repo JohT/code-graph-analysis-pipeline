@@ -182,8 +182,10 @@ def filter_entries_below_percentage_threshold(
     threshold_percent: float,
 ) -> pd.DataFrame:
     """
-    Returns only rows whose percentage share of the *original* total is strictly
-    below threshold_percent. Used to drill down into the 'others' slice.
+    Returns only rows whose percentage share of the *original* total is below
+    threshold_percent. Used to drill down into the 'others' slice.
+    Matches the grouping logic of group_small_values_into_others (< not <=)
+    to avoid double-counting at the threshold boundary.
     """
     result = add_percentage_column(data_frame, value_column)
     percent_column = value_column + "Percent"
@@ -452,9 +454,8 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
 
     # ── Top external packages (Table 1 equivalent) ────────────────────────────
     if not overall_data.empty:
-        top20 = overall_data.head(20)
         save_pie_chart_pair(
-            source_data=top20,
+            source_data=overall_data,
             value_column="numberOfExternalCallerTypes",
             name_column="externalPackageName",
             chart_name_prefix="Java_Top_external_packages_by_types",
@@ -463,7 +464,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20,
+            source_data=overall_data,
             value_column="numberOfExternalCallerPackages",
             name_column="externalPackageName",
             chart_name_prefix="Java_Top_external_packages_by_packages",
@@ -474,9 +475,8 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
 
     # ── Second-level package grouping (Table 2 equivalent) ────────────────────
     if not second_level_overall_data.empty:
-        top20_second_level = second_level_overall_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_second_level,
+            source_data=second_level_overall_data,
             value_column="numberOfExternalCallerTypes",
             name_column="externalSecondLevelPackageName",
             chart_name_prefix="Java_Top_second_level_packages_by_types",
@@ -485,7 +485,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_second_level,
+            source_data=second_level_overall_data,
             value_column="numberOfExternalCallerPackages",
             name_column="externalSecondLevelPackageName",
             chart_name_prefix="Java_Top_second_level_packages_by_packages",
@@ -496,9 +496,8 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
 
     # ── Most spread external packages (Table 3 equivalent) ────────────────────
     if not spread_data.empty:
-        top20_spread = spread_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_spread,
+            source_data=spread_data,
             value_column="sumNumberOfTypes",
             name_column="externalPackageName",
             chart_name_prefix="Java_Most_spread_packages_by_types",
@@ -507,7 +506,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_spread,
+            source_data=spread_data,
             value_column="sumNumberOfPackages",
             name_column="externalPackageName",
             chart_name_prefix="Java_Most_spread_packages_by_packages",
@@ -518,9 +517,8 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
 
     # ── Most spread second-level packages (Table 4 equivalent) ────────────────
     if not second_level_spread_data.empty:
-        top20_second_level_spread = second_level_spread_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_second_level_spread,
+            source_data=second_level_spread_data,
             value_column="sumNumberOfTypes",
             name_column="externalSecondLevelPackageName",
             chart_name_prefix="Java_Most_spread_second_level_packages_by_types",
@@ -529,7 +527,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_second_level_spread,
+            source_data=second_level_spread_data,
             value_column="sumNumberOfPackages",
             name_column="externalSecondLevelPackageName",
             chart_name_prefix="Java_Most_spread_second_level_packages_by_packages",
@@ -633,9 +631,8 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
 
     # ── Module usage overall ───────────────────────────────────────────────────
     if not module_overall_data.empty:
-        top20_modules = module_overall_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_modules,
+            source_data=module_overall_data,
             value_column="numberOfExternalCallerElements",
             name_column="externalModuleName",
             chart_name_prefix="Typescript_Top_external_modules_by_elements",
@@ -644,7 +641,7 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_modules,
+            source_data=module_overall_data,
             value_column="numberOfExternalCallerModules",
             name_column="externalModuleName",
             chart_name_prefix="Typescript_Top_external_modules_by_modules",
@@ -655,9 +652,8 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
 
     # ── Namespace usage overall ────────────────────────────────────────────────
     if not namespace_overall_data.empty:
-        top20_namespaces = namespace_overall_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_namespaces,
+            source_data=namespace_overall_data,
             value_column="numberOfExternalCallerElements",
             name_column="externalNamespaceName",
             chart_name_prefix="Typescript_Top_external_namespaces_by_elements",
@@ -666,7 +662,7 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_namespaces,
+            source_data=namespace_overall_data,
             value_column="numberOfExternalCallerModules",
             name_column="externalNamespaceName",
             chart_name_prefix="Typescript_Top_external_namespaces_by_modules",
@@ -677,9 +673,8 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
 
     # ── Module spread ──────────────────────────────────────────────────────────
     if not module_spread_data.empty:
-        top20_module_spread = module_spread_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_module_spread,
+            source_data=module_spread_data,
             value_column="sumNumberOfUsedExternalDeclarations",
             name_column="externalModuleName",
             chart_name_prefix="Typescript_Most_spread_modules_by_declarations",
@@ -688,7 +683,7 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_module_spread,
+            source_data=module_spread_data,
             value_column="numberOfInternalModules",
             name_column="externalModuleName",
             chart_name_prefix="Typescript_Most_spread_modules_by_modules",
@@ -699,9 +694,8 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
 
     # ── Namespace spread ───────────────────────────────────────────────────────
     if not namespace_spread_data.empty:
-        top20_namespace_spread = namespace_spread_data.head(20)
         save_pie_chart_pair(
-            source_data=top20_namespace_spread,
+            source_data=namespace_spread_data,
             value_column="sumNumberOfUsedExternalDeclarations",
             name_column="externalModuleNamespace",
             chart_name_prefix="Typescript_Most_spread_namespaces_by_declarations",
@@ -710,7 +704,7 @@ def generate_typescript_charts(queries_directory: str, report_directory: str, ve
             verbose=verbose,
         )
         save_pie_chart_pair(
-            source_data=top20_namespace_spread,
+            source_data=namespace_spread_data,
             value_column="numberOfInternalModules",
             name_column="externalModuleNamespace",
             chart_name_prefix="Typescript_Most_spread_namespaces_by_modules",

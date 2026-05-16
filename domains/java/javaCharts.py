@@ -44,6 +44,9 @@ TOP_RESULTS_LIMIT = 20
 TOP_ANNOTATION_LIMIT = 15
 
 HORIZONTAL_BAR_COLOR = "steelblue"
+LINE_COUNT_DISTRIBUTION_MAX_ARTIFACTS = 20
+CYCLOMATIC_DISTRIBUTION_MAX_ARTIFACTS = 15
+DISTRIBUTION_CHART_COLORMAP = "nipy_spectral"
 
 
 # ── Parameters ────────────────────────────────────────────────────────────────
@@ -236,28 +239,91 @@ def generate_spread_per_dependent_chart(report_directory: str, verbose: bool) ->
 
 # ── Method metrics charts ─────────────────────────────────────────────────────
 
-def generate_method_line_count_distribution_chart(report_directory: str, verbose: bool) -> None:
-    """Generate a histogram showing the distribution of effective method line counts."""
-    data_frame = load_csv(report_directory, "EffectiveMethodLineCountDistribution.csv", verbose)
+def generate_normalized_distribution_chart(
+    report_directory: str,
+    verbose: bool,
+    *,
+    csv_filename: str,
+    index_column: str,
+    max_artifacts: int,
+    empty_message: str,
+    x_ticks: list[int],
+    x_lim: tuple[float, float],
+    y_lim: tuple[float, float],
+    x_label: str,
+    y_label: str,
+    title: str,
+    output_filename: str,
+    y_scale: str = "linear",
+    y_ticks: list[int] | None = None,
+) -> None:
+    """Generate a normalized per-artifact line chart of a distribution from a CSV file."""
+    data_frame = load_csv(report_directory, csv_filename, verbose)
     if data_frame.empty:
         return
 
-    # Aggregate across all artifacts: sum method counts per line count
-    distribution = data_frame.groupby("effectiveLineCount")["methods"].sum().reset_index()
-    figure, axis = plot.subplots(figsize=(FIGURE_WIDTH, FIGURE_HEIGHT))
-    axis.bar(
-        distribution["effectiveLineCount"],
-        distribution["methods"],
-        width=1.0,
-        color=HORIZONTAL_BAR_COLOR,
-        edgecolor="white",
-        linewidth=0.3,
+    distribution = (
+        data_frame
+        .pivot(index=index_column, columns="artifactName", values="methods")
+        .fillna(0)
+        .astype(int)
     )
-    axis.set_xlabel("Effective Line Count")
-    axis.set_ylabel("Number of Methods")
-    axis.set_title("Effective Method Line Count Distribution")
+    artifact_totals = distribution.sum()
+    top_artifacts = artifact_totals.sort_values(ascending=False).index[:max_artifacts]
+    distribution = distribution[top_artifacts]
 
-    save_figure(figure, report_directory, "MethodMetrics_LineCountDistribution_Histogram", verbose)
+    # Filter out columns with zero sum to prevent NaN/Inf after normalization.
+    non_zero_columns = distribution.columns[distribution.sum(axis=0) > 0]
+    distribution = distribution[non_zero_columns]
+
+    if distribution.empty:
+        print(f"{SCRIPT_NAME}: {empty_message}")
+        return
+
+    normalized = distribution.div(distribution.sum(axis=0), axis=1).multiply(100)
+
+    colormap = matplotlib.colormaps[DISTRIBUTION_CHART_COLORMAP]
+    num_artifacts = len(normalized.columns)
+    colors = [colormap(i / max(num_artifacts - 1, 1)) for i in range(num_artifacts)]
+
+    figure, axis = plot.subplots(figsize=(10, 6))
+    for i, column in enumerate(normalized.columns):
+        axis.plot(normalized.index, normalized[column], label=column, color=colors[i], linewidth=2)
+
+    axis.set_xscale("log")
+    axis.set_yscale(y_scale)
+    axis.set_xlim(*x_lim)
+    axis.set_ylim(*y_lim)
+    axis.set_xticks(x_ticks)
+    axis.set_xticklabels([str(t) for t in x_ticks])
+    if y_ticks is not None:
+        axis.set_yticks(y_ticks)
+        axis.set_yticklabels([str(t) for t in y_ticks])
+    axis.set_xlabel(x_label)
+    axis.set_ylabel(y_label)
+    axis.set_title(title)
+    axis.grid(True)
+    axis.legend(bbox_to_anchor=(1.05, 1), loc="upper left", fontsize=7)
+
+    save_figure(figure, report_directory, output_filename, verbose)
+
+
+def generate_method_line_count_distribution_chart(report_directory: str, verbose: bool) -> None:
+    """Generate a normalized per-artifact line chart of effective method line count distribution."""
+    generate_normalized_distribution_chart(
+        report_directory, verbose,
+        csv_filename="EffectiveMethodLineCountDistribution.csv",
+        index_column="effectiveLineCount",
+        max_artifacts=LINE_COUNT_DISTRIBUTION_MAX_ARTIFACTS,
+        empty_message="No data for method line count distribution, skipping chart.",
+        x_ticks=list(range(2, 21)),
+        x_lim=(2, 20),
+        y_lim=(0, 20),
+        x_label="Effective Line Count",
+        y_label="Percent of Methods",
+        title="Effective Method Line Count Distribution (Normalized)",
+        output_filename="MethodMetrics_LineCountDistribution_Histogram",
+    )
 
 
 def generate_top_types_by_loc_chart(report_directory: str, verbose: bool) -> None:
@@ -296,6 +362,26 @@ def generate_top_packages_by_loc_chart(report_directory: str, verbose: bool) -> 
     axis.tick_params(axis="y", labelsize=8)
 
     save_figure(figure, report_directory, "MethodMetrics_TopPackagesLOC_Bar", verbose)
+
+
+def generate_cyclomatic_complexity_distribution_chart(report_directory: str, verbose: bool) -> None:
+    """Generate a normalized per-artifact line chart of cyclomatic method complexity distribution."""
+    generate_normalized_distribution_chart(
+        report_directory, verbose,
+        csv_filename="CyclomaticMethodComplexityDistribution.csv",
+        index_column="cyclomaticComplexity",
+        max_artifacts=CYCLOMATIC_DISTRIBUTION_MAX_ARTIFACTS,
+        empty_message="No data for cyclomatic complexity distribution, skipping chart.",
+        x_ticks=list(range(1, 12)),
+        x_lim=(1, 11),
+        y_lim=(1, 100),
+        x_label="Cyclomatic Complexity",
+        y_label="Percentage of Methods",
+        title="Cyclomatic Complexity Distribution of Methods (Normalized)",
+        output_filename="MethodMetrics_CyclomaticComplexityDistribution_Normalized",
+        y_scale="log",
+        y_ticks=[1, 2, 3, 4, 5, 7, 10, 20, 30, 40, 50, 100],
+    )
 
 
 # ── Java code quality charts ──────────────────────────────────────────────────
@@ -430,6 +516,7 @@ def generate_all_charts(report_directory: str, verbose: bool) -> None:
     generate_spread_per_dependency_chart(report_directory, verbose)
     generate_spread_per_dependent_chart(report_directory, verbose)
     generate_method_line_count_distribution_chart(report_directory, verbose)
+    generate_cyclomatic_complexity_distribution_chart(report_directory, verbose)
     generate_top_types_by_loc_chart(report_directory, verbose)
     generate_top_packages_by_loc_chart(report_directory, verbose)
     generate_annotation_type_distribution_chart(report_directory, verbose)

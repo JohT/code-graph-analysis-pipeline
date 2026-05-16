@@ -83,6 +83,9 @@ execute_cypher "${JAVA_CODE_QUALITY_CYPHER_DIR}/JakartaEE_REST_Annotations.cyphe
 execute_cypher "${METHOD_METRICS_CYPHER_DIR}/Effective_Method_Line_Count_Distribution.cypher" \
     > "${FULL_REPORT_DIRECTORY}/EffectiveMethodLineCountDistribution.csv"
 
+execute_cypher "${METHOD_METRICS_CYPHER_DIR}/Cyclomatic_Method_Complexity_Distribution.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/CyclomaticMethodComplexityDistribution.csv"
+
 execute_cypher "${METHOD_METRICS_CYPHER_DIR}/Effective_lines_of_method_code_per_type.cypher" \
     > "${FULL_REPORT_DIRECTORY}/EffectiveLinesOfMethodCodePerType.csv"
 
