@@ -118,7 +118,6 @@ dependencies = [
     { name = "plotly", extra = ["kaleido"] },
     { name = "scikit-learn" },
     { name = "seaborn" },
-    { name = "setuptools" },
     { name = "shap" },
     { name = "umap-learn" },
     { name = "wordcloud" },
@@ -138,7 +137,6 @@ requires-dist = [
     { name = "plotly", extras = ["kaleido"], specifier = "==6.7.0" },
     { name = "scikit-learn", specifier = "==1.8.0" },
     { name = "seaborn", specifier = "==0.13.2" },
-    { name = "setuptools", specifier = "==80.10.2" },
     { name = "shap", specifier = "==0.50.0" },
     { name = "umap-learn", specifier = "==0.5.11" },
     { name = "wordcloud", specifier = "==1.9.6" },
@@ -1296,15 +1294,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/86/59/a451d7420a77ab0b98f7affa3a1d78a313d2f7281a57afb1a34bae8ab412/seaborn-0.13.2.tar.gz", hash = "sha256:93e60a40988f4d65e9f4885df477e2fdaff6b73a9ded434c1ab356dd57eefff7", size = 1457696, upload-time = "2024-01-25T13:21:52.551Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/83/11/00d3c3dfc25ad54e731d91449895a79e4bf2384dc3ac01809010ba88f6d5/seaborn-0.13.2-py3-none-any.whl", hash = "sha256:636f8336facf092165e27924f223d3c62ca560b1f2bb5dff7ab7fad265361987", size = 294914, upload-time = "2024-01-25T13:21:49.598Z" },
-]
-
-[[package]]
-name = "setuptools"
-version = "80.10.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/76/95/faf61eb8363f26aa7e1d762267a8d602a1b26d4f3a1e758e92cb3cb8b054/setuptools-80.10.2.tar.gz", hash = "sha256:8b0e9d10c784bf7d262c4e5ec5d4ec94127ce206e8738f29a437945fbc219b70", size = 1200343, upload-time = "2026-01-25T22:38:17.252Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/b8/f1f62a5e3c0ad2ff1d189590bfa4c46b4f3b6e49cef6f26c6ee4e575394d/setuptools-80.10.2-py3-none-any.whl", hash = "sha256:95b30ddfb717250edb492926c92b5221f7ef3fbcc2b07579bcd4a27da21d0173", size = 1064234, upload-time = "2026-01-25T22:38:15.216Z" },
 ]
 
 [[package]]
