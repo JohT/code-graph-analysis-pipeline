@@ -183,7 +183,8 @@
         "(^|\\/)action\\.ya?ml$]"
       ],
       "matchStrings": [
-        "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)"
+        "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)",
+        "npm\\s+install\\s+(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)"
       ],
       "datasourceTemplate": "npm"
     },
