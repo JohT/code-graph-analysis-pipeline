@@ -2,6 +2,14 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## v4.0.1 Improve charts to look more similar to previous Jupyter notebook charts and add pipeline to validate Jupyter notebooks
+
+### 🎨 Improvements
+
+* **Python charts improved** — Python charts now look more similar to the previous Jupyter notebooks with improved visual presentation by @JohT
+* **Jupyter notebook validation pipeline** — Add pipeline to quickly validate Jupyter notebooks by @JohT
+* **Python dependency improvements** — Add `nbformat` library for plotly support in Jupyter notebooks and remove `setuptools` dependency since opentsne is removed by @JohT
+
 ## v4.0.0 - Vertical slice domains, uv as Python package manager, Jupyter removed
 
 ### ✨ Highlights
