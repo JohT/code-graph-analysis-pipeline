@@ -8,11 +8,11 @@ dependencies:
   - python=3.12.9
   - _python_rc=1 # Needed on Mac since Python >= 3.12
   - ipykernel=7.2.0
+  - nbformat=5.10.4 # For Jupyter notebook environments. Required for plotly to render plots in notebooks.
   - matplotlib=3.10.9
   - numpy=2.2.5
   - pandas=2.3.3
   - pip=26.1
-  - setuptools=80.10.2 # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?) 
   - wordcloud=1.9.6
   - monotonic=1.6
   - plotly=6.6.0 # v6.7.0 in pyproject.toml not yet available in conda-forge

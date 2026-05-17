@@ -1,15 +1,16 @@
 [project]
 name = "code-graph-analysis-pipeline"
-version = "4.0.0"
+version = "4.0.1"
 requires-python = ">=3.12,<3.14"
 dependencies = [
     # --- Jupyter (for notebook environments) ---
     "ipykernel==7.2.0",
+    "nbformat==5.10.4", # Required for plotly to render plots in notebooks.
+    # --- Data manipulation and plotting ---
     "matplotlib==3.10.9",
     "numpy==2.2.5",
     "pandas==2.3.3",
     "pip==26.1",
-    "setuptools==80.10.2", # opentsne uses sklearn.base uses joblib uses distutils missing in Python >= 12 (TODO use native openTSNE?)
     # --- Visualization ---
     "wordcloud==1.9.6",
     "monotonic==1.6",
