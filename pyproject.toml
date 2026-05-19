@@ -7,7 +7,7 @@ dependencies = [
     "ipykernel==7.2.0",
     "nbformat==5.10.4", # Required for plotly to render plots in notebooks.
     # --- Data manipulation and plotting ---
-    "matplotlib==3.10.9",
+    "matplotlib==3.11.0rc2",
     "numpy==2.4.6",
     "pandas==2.3.3",
     "pip==26.1.1",
