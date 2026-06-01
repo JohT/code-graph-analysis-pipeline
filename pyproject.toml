@@ -10,7 +10,7 @@ dependencies = [
     "matplotlib==3.10.9",
     "numpy==2.4.6",
     "pandas==2.3.3",
-    "pip==26.1.1",
+    "pip==26.1.2",
     # --- Visualization ---
     "wordcloud==1.9.6",
     "monotonic==1.6",
