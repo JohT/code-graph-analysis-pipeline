@@ -53,7 +53,17 @@
       "groupName": "python-visualization-libs"
     },
     {
-      "description": "Only use stable versions for Python",
+      "description": "Only use stable versions for PyPI packages (no RCs, alphas, betas)",
+      "matchDatasources": ["pypi"],
+      "ignoreUnstable": true
+    },
+    {
+      "description": "Only use stable versions for Conda packages (no RCs, alphas, betas)",
+      "matchDatasources": ["conda"],
+      "ignoreUnstable": true
+    },
+    {
+      "description": "Only use stable versions for Python package managers",
       "matchManagers": ["uv", "pip_setup", "poetry", "pipenv"],
       "ignoreUnstable": true
     }
