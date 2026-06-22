@@ -49,5 +49,5 @@ fi
 # to convert the DOT file to SVG operating system independently.
 # Use "npm install" first to create local "node_modules" and be able to run it after that in offline mode.
 echo "${SCRIPT_NAME}: Info: Rendering ${inputGvFileName} using npx to run GraphViz CLI Web Assembly Wrapper..."
-npm install @hpcc-js/wasm-graphviz-cli@1.9.0 --silent --no-progress --loglevel=error > /dev/null
-npx --yes @hpcc-js/wasm-graphviz-cli@1.9.0 -T svg "${inputGvFilePath}/${graphName}.gv" > "${inputGvFilePath}/${graphName}.svg"
+npm install @hpcc-js/wasm-graphviz-cli@1.9.2 --silent --no-progress --loglevel=error > /dev/null
+npx --yes @hpcc-js/wasm-graphviz-cli@1.9.2 -T svg "${inputGvFilePath}/${graphName}.gv" > "${inputGvFilePath}/${graphName}.svg"
