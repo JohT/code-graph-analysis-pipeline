@@ -68,6 +68,32 @@ Applies to Jupyter notebooks, standalone `.py` scripts.
 - First line imperative, period: `"""Compute distances from center."""`
 - Multi-line: blank line after summary, then `Args:`, `Returns:`, `Raises:` sections as needed
 
+## Design Principles
+
+### Single Responsibility
+
+- One thing, one reason to change. If "and" describes it, split it.
+- Keep side effects (I/O, mutation, logging) in dedicated functions.
+
+### Open/Closed
+
+- Extend via parameters, callbacks, protocols — not by editing existing code.
+- Don't hardcode decisions; pass behavior in.
+
+### Composition Over Inheritance
+
+- Compose, don't subclass. Only inherit from external superclasses (libraries, frameworks) when unavoidable.
+- If tempted to subclass for code reuse, extract a function or compose instead.
+
+### YAGNI — You Aren't Gonna Need It
+
+- Build only what's needed now. Delete speculative code.
+
+### Law of Demeter
+
+- Depend only on direct collaborators. Avoid `a.b.c.method()` chains.
+- Pass in dependencies directly; don't navigate to them.
+
 ## Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**

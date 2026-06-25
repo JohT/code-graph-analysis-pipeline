@@ -79,6 +79,27 @@ Target: **bash**. Must work on macOS, Linux, Windows (WSL/Git Bash).
 - Document `shellcheck` exceptions inline with justification: `# shellcheck disable=SC2xxx — reason`
 - Test scripts: name with prefix `test` (e.g. `testMyFeature.sh`) — `runTests.sh` auto-discovers in `scripts/` and `domains/` dirs
 
+## Design Principles
+
+### Single Responsibility
+
+- One thing, one reason to change. If "and" describes it, split it.
+- Keep side effects (I/O, logging) in dedicated functions.
+
+### Open/Closed (Adapted)
+
+- Configurable via parameters and env vars — not modified for different use cases.
+- Extend via new flags, not by rewriting existing logic.
+
+### YAGNI — You Aren't Gonna Need It
+
+- Build only what's needed now. Delete speculative functions.
+
+### Law of Demeter (Adapted)
+
+- Depend only on direct collaborators. Avoid deep call chains through other scripts.
+- Accept output as arguments; don't transitively source distant functions.
+
 ## Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
