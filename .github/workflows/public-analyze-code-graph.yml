@@ -194,7 +194,7 @@ jobs:
       - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
         if: inputs.python-package-manager == 'conda'
         id: prepare-conda-environment
-        uses: conda-incubator/setup-miniconda@fc2d68f6413eb2d87b895e92f8584b5b94a10167 # v3
+        uses: conda-incubator/setup-miniconda@8ee1f361103df19b6f8c8655fd3967a8ecb162d5 # v4
         with:
           python-version: ${{ matrix.python }}
           miniforge-version: ${{ matrix.miniforge }}
