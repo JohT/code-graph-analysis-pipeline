@@ -270,7 +270,7 @@ jobs:
           node-version: 'lts/*'
       - name: (Code Analysis JavaScript Setup) Setup pnpm for cloned source repository
         if: inputs.source-repository != '' && env.pnpmDetected == 'true'
-        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
         with:
           package_json_file: temp/${{ inputs.analysis-name }}/source/${{ inputs.analysis-name }}/package.json
           run_install: false
