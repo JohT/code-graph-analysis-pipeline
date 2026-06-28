@@ -187,7 +187,7 @@ jobs:
       # Python setup is always performed here since this is a reusable workflow.
       - name: (Python Setup) Install uv
         if: inputs.python-package-manager != 'conda'
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@v8.2.0
         with:
           python-version: ${{ matrix.python }}
 
