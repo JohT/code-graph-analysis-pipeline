@@ -8,7 +8,7 @@ dependencies = [
     "nbformat==5.10.4", # Required for plotly to render plots in notebooks.
     # --- Data manipulation and plotting ---
     "matplotlib==3.10.9",
-    "numpy==2.4.6",
+    "numpy==2.5.0",
     "pandas==2.3.3",
     "pip==26.1.2",
     # --- Visualization ---
