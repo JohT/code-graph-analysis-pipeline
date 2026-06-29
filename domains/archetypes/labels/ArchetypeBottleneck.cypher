@@ -10,11 +10,7 @@
   UNWIND codeUnits AS codeUnit
     WITH *
    WHERE codeUnit.centralityBetweenness >= betweennessThreshold
-OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
-    WITH *, artifact.name AS artifactName
-OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
-    WITH *, last(split(projectRoot.absoluteFileName, '/')) AS projectName   
-    WITH *, coalesce(artifactName, projectName)            AS projectName
+    WITH *, coalesce(codeUnit.projectName, '') AS projectName
    ORDER BY codeUnit.centralityBetweenness DESC
    LIMIT 10
     WITH collect([codeUnit, projectName]) AS results

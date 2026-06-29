@@ -6,11 +6,7 @@
      AND codeUnit.anomalyLabel = 1
    ORDER BY codeUnit.anomalyScore DESC
    LIMIT 50
-OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
-    WITH *, artifact.name AS artifactName
-OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
-    WITH *, last(split(projectRoot.absoluteFileName, '/')) AS projectName
-    WITH *, coalesce(artifactName, projectName)            AS projectName
+    WITH *, coalesce(codeUnit.projectName, '') AS projectName
   RETURN projectName
         ,codeUnit.name                                     AS shortCodeUnitName
         ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName

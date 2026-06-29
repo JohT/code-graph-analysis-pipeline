@@ -15,13 +15,7 @@ ORDER BY codeUnit.anomalyScore DESC, archetypeRank ASC
   WITH codeUnit
       ,coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
       ,apoc.text.join(collect(DISTINCT archetype), ', ') AS archetypes
-OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
-    WITH *, artifact.name                                             AS artifactName
-OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
-    WITH *, last(split(projectRoot.absoluteFileName, '/'))            AS projectName
-OPTIONAL MATCH (codeDirectory:File:Directory)-[:CONTAINS]->(codeUnit)
-    WITH *, split(replace(codeDirectory.fileName, './', ''), '/')[-2] AS directoryName
-    WITH *, coalesce(artifactName, projectName, directoryName, "")    AS projectName
+    WITH *, coalesce(codeUnit.projectName, '')                        AS projectName
 RETURN codeUnitName                                                           AS `Name`
       ,projectName                                                            AS `Contained in`
       ,round(codeUnit.anomalyScore, 4, 'HALF_UP')                             AS `Anomaly Score`

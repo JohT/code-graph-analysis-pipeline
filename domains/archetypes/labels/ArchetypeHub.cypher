@@ -14,11 +14,7 @@
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
    WHERE degree                                       >= degreeThreshold
      AND codeUnit.communityLocalClusteringCoefficient <= localClusteringCoefficientThreshold
-OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
-    WITH *, artifact.name AS artifactName
-OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
-    WITH *, last(split(projectRoot.absoluteFileName, '/')) AS projectName
-    WITH *, coalesce(artifactName, projectName)            AS projectName
+    WITH *, coalesce(codeUnit.projectName, '') AS projectName
    ORDER BY codeUnit.communityLocalClusteringCoefficient ASC, degree DESC
    LIMIT 10
     WITH collect([codeUnit, projectName]) AS results

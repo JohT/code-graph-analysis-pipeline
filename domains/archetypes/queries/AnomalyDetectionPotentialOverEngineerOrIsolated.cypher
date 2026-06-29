@@ -13,14 +13,10 @@
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
    WHERE codeUnit.centralityPageRank                  <= pageRankThreshold
      AND codeUnit.communityLocalClusteringCoefficient >= localClusteringCoefficientThreshold
-OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
-    WITH *, artifact.name AS artifactName
-OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
-    WITH *, last(split(projectRoot.absoluteFileName, '/')) AS projectName   
   RETURN DISTINCT 
          coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
         ,codeUnit.name                                AS shortCodeUnitName
-        ,coalesce(artifactName, projectName)          AS projectName
+        ,coalesce(codeUnit.projectName, '')           AS projectName
         ,codeUnit.communityLocalClusteringCoefficient AS localClusteringCoefficient
         ,codeUnit.centralityPageRank                  AS pageRank
         ,degree

@@ -14,14 +14,10 @@
              pageToArticleRankDifferenceStandardDeviation                    AS pageToArticleRankDifferenceZScore
 // Only include code units with a PageRank vs ArticleRank difference more than 2 (z-score) standard deviations from the mean
 WHERE abs(pageToArticleRankDifferenceZScore) > 2.0
-OPTIONAL MATCH (artifact:Java:Artifact)-[:CONTAINS]->(codeUnit)
-    WITH *, artifact.name AS artifactName
-OPTIONAL MATCH (projectRoot:Directory)<-[:HAS_ROOT]-(proj:TS:Project)-[:CONTAINS]->(codeUnit)
-    WITH *, last(split(projectRoot.absoluteFileName, '/')) AS projectName
   RETURN DISTINCT 
          coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
         ,codeUnit.name                       AS shortCodeUnitName
-        ,coalesce(artifactName, projectName) AS projectName
+        ,coalesce(codeUnit.projectName, '')  AS projectName
         ,sign(pageToArticleRankDifference)   AS pageToArticleRankSign
         ,pageToArticleRankDifferenceZScore
         ,pageToArticleRankDifference
