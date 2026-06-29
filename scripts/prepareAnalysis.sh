@@ -70,6 +70,11 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Mark_test_modules.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_projects.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_name_to_property_on_scan_nodes.cypher"
 
+# Preparation - Set "projectName" property on Java and Typescript code unit nodes for uniform access without label traversal
+execute_cypher "${GENERAL_ENRICHMENT_CYPHER_DIR}/Set_projectName_for_Java_code_units.cypher"
+execute_cypher "${GENERAL_ENRICHMENT_CYPHER_DIR}/Set_projectName_for_Java_methods.cypher"
+execute_cypher "${GENERAL_ENRICHMENT_CYPHER_DIR}/Set_projectName_for_Typescript_modules.cypher"
+
 # Preparation - Cleanup Graph for Typescript by removing duplicate relationships
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_duplicate_CONTAINS_relations_between_files.cypher"
 
