@@ -2,7 +2,7 @@
 
 This directory contains the implementation and resources related to the Anomaly Detection domain within the Code Graph Analysis Pipeline project.
 
-The Anomaly Detection domain uses machine learning (Graph Neural Networks + XGBoost) to detect structural anomalies. It identifies **Bridge** nodes (structural vulnerability points) and **Outlier** nodes (structurally unusual code units).
+The Anomaly Detection domain uses machine learning (Graph Neural Networks + Isolation Forest) to detect structural anomalies. It identifies **Bridge** nodes (structural vulnerability points) and **Outlier** nodes (structurally unusual code units).
 
 **Note:** Structural archetypes like Authority, Bottleneck, and Hub are managed by the separate [archetypes domain](../archetypes/). This domain focuses exclusively on ML-detected anomalies.
 
@@ -32,7 +32,8 @@ The following scripts serve as entry points for various anomaly detection tasks 
 - **Archetypes Domain** owns: Authority, Bottleneck, Hub (structural patterns)
 
 For structural insights at different code levels (Package, Type, Module), run both domains via:
-```
+
+```shell
 analyze.sh --domain archetypes,anomaly-detection
 ```
 
