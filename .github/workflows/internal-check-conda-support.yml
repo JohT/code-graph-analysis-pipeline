@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout GIT Repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: (Python Setup) Use version ${{ matrix.python }} with Conda package manager Miniforge
       uses: conda-incubator/setup-miniconda@v4
