@@ -4,7 +4,7 @@ This directory contains the implementation and resources for generating and visu
 
 This domain covers:
 
-- **Node Embedding Generation**: Computes fixed-length vector representations of code units using three GDS algorithms — FastRP, HashGNN, Node2Vec. GraphSAGE queries are present in `queries/node-embeddings/` and may be wired in a future iteration.
+- **Node Embedding Generation**: Computes fixed-length vector representations of code units using three GDS algorithms — FastRP, HashGNN, Node2Vec. Supports Java artifacts, packages, types, TypeScript modules, and SCIP types. GraphSAGE queries are present in `queries/node-embeddings/` and may be wired in a future iteration.
 - **UMAP Visualisation**: Reduces embedding vectors to 2D via UMAP and generates scatter plots coloured by Leiden community (when available) or PageRank (fallback).
 - **Interactive Exploration**: Jupyter notebooks for exploring embeddings and tuning UMAP parameters interactively.
 

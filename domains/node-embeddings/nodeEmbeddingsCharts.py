@@ -200,7 +200,15 @@ EMBEDDING_PROPERTIES: dict[str, str] = {
 }
 
 # Node labels to generate charts for.
-NODE_LABELS: list[str] = ["Artifact", "Package", "Type", "Module"]
+NODE_LABELS: list[str] = [
+    "Artifact",
+    "Package",
+    "Type",
+    "Module",
+    "InternalType",
+    "SemanticCodeIndexModule",
+    "SemanticCodeIndexArtifact",
+]
 
 
 def load_embeddings(
