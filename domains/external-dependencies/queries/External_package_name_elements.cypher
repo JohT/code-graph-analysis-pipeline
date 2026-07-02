@@ -1,6 +1,6 @@
 // External package name elements
 
-MATCH (externalType:ExternalType)
+MATCH (externalType:Java:ExternalType)
  WITH replace(externalType.fqn, '.' + externalType.name, '') AS packageName
  WITH size(split(packageName,'.'))                           AS packageNameElements
       ,count(DISTINCT packageName)                           AS packageCount

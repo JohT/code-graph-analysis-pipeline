@@ -1,6 +1,6 @@
 // External package levels
 
-MATCH (externalType:ExternalType)
+MATCH (externalType:Java:ExternalType)
  WITH replace(externalType.fqn, '.' + externalType.name, '') AS externalPackageName
  WITH  count(DISTINCT split(externalPackageName, '.')[0])    AS externalFirstLevelPackages
       ,count(DISTINCT split(externalPackageName, '.')[0..1]) AS externalSecondLevelPackages
