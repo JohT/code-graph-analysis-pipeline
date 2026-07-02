@@ -466,6 +466,58 @@ if createUndirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION_UNDI
     runUndirectedCentralityAlgorithms "${NPM_PROJECTION_UNDIRECTED}" "${NPM_NODE}"
 fi
 
+# ── SCIP Internal Type Centrality ─────────────────────────────────────────────
+
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Type/centrality"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-centrality"
+SCIP_TYPE_PROJECTION_UNDIRECTED="dependencies_projection=scip-type-centrality-undirected"
+SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+    runCentralityAlgorithms "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+fi
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION_UNDIRECTED}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${SCIP_TYPE_PROJECTION_UNDIRECTED}" "${SCIP_TYPE_NODE}"
+fi
+
+# ── SCIP Module Centrality ─────────────────────────────────────────────────────
+
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Module/centrality"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-centrality"
+SCIP_MODULE_PROJECTION_UNDIRECTED="dependencies_projection=scip-module-centrality-undirected"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    runCentralityAlgorithms "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+fi
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION_UNDIRECTED}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${SCIP_MODULE_PROJECTION_UNDIRECTED}" "${SCIP_MODULE_NODE}"
+fi
+
+# ── SCIP Artifact Centrality ───────────────────────────────────────────────────
+
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Artifact/centrality"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-centrality"
+SCIP_ARTIFACT_PROJECTION_UNDIRECTED="dependencies_projection=scip-artifact-centrality-undirected"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    runCentralityAlgorithms "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+fi
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION_UNDIRECTED}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${SCIP_ARTIFACT_PROJECTION_UNDIRECTED}" "${SCIP_ARTIFACT_NODE}"
+fi
+
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Clean up after report generation. Empty reports will be deleted.

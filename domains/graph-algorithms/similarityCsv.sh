@@ -153,6 +153,40 @@ if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}
     time similarity "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
 fi
 
+# ── SCIP Internal Type Similarity ─────────────────────────────────────────────
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Type/similarity"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-similarity"
+SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+    time similarity "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+fi
+
+# ── SCIP Module Similarity ─────────────────────────────────────────────
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Module/similarity"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-similarity"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    time similarity "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+fi
+
+# -- SCIP Artifact Similarity ─────────────────────────────────────────────
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Artifact/similarity"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-similarity"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    time similarity "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+fi
+
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Clean up after report generation. Empty reports will be deleted.

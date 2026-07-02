@@ -574,6 +574,60 @@ if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTIO
     listCommunityDetectionResults "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_GAMMA}" "${MODULE_KCUT}"
 fi
 
+# ── SCIP Internal Type Community Detection ────────────────────────────────────
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Type/communities"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-community"
+SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_TYPE_GAMMA="dependencies_leiden_gamma=5.00"
+SCIP_TYPE_KCUT="dependencies_maxkcut=100"
+
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+    detectCommunities "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}" "${SCIP_TYPE_GAMMA}" "${SCIP_TYPE_KCUT}"
+    if createDirectedDependencyProjection "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+        detectDirectedCommunities "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+    fi
+    listCommunityDetectionResults "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}" "${SCIP_TYPE_GAMMA}" "${SCIP_TYPE_KCUT}"
+fi
+
+# ── SCIP Module Community Detection ──────────────────────────────────────────────────
+
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Module/communities"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-community"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_MODULE_GAMMA="dependencies_leiden_gamma=1.00"
+SCIP_MODULE_KCUT="dependencies_maxkcut=50"
+
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    detectCommunities "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" "${SCIP_MODULE_GAMMA}" "${SCIP_MODULE_KCUT}"
+    if createDirectedDependencyProjection "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+        detectDirectedCommunities "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+    fi
+    listCommunityDetectionResults "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" "${SCIP_MODULE_GAMMA}" "${SCIP_MODULE_KCUT}"
+fi
+
+# ── SCIP Artifact Community Detection ────────────────────────────────────────────────
+
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Artifact/communities"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-community"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_ARTIFACT_GAMMA="dependencies_leiden_gamma=1.00"
+SCIP_ARTIFACT_KCUT="dependencies_maxkcut=50"
+
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    detectCommunities "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" "${SCIP_ARTIFACT_GAMMA}" "${SCIP_ARTIFACT_KCUT}"
+    if createDirectedDependencyProjection "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+        detectDirectedCommunities "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+    fi
+    listCommunityDetectionResults "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" "${SCIP_ARTIFACT_GAMMA}" "${SCIP_ARTIFACT_KCUT}"
+fi
+
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Clean up after report generation. Empty reports will be deleted.
