@@ -4,7 +4,7 @@ This directory contains the implementation and resources for analysing **code gr
 
 This domain covers three related analysis areas:
 
-- **Centrality**: Which nodes (packages, types, artifacts, TypeScript modules) are most influential in the dependency graph — PageRank, ArticleRank, Betweenness, Harmonic, Closeness, HITS, Bridges, CELF.
+- **Centrality**: Which nodes (packages, types, artifacts, TypeScript modules, SCIP types) are most influential in the dependency graph — PageRank, ArticleRank, Betweenness, Harmonic, Closeness, HITS, Bridges, CELF.
 - **Community Detection**: How code units cluster into communities — Louvain, Leiden, Strongly Connected Components, Weakly Connected Components, Label Propagation, K-Core, Approximate Maximum k-cut, HDBSCAN, Local Clustering Coefficient.
 - **Similarity**: Which code units share the most common dependencies — Jaccard Node Similarity.
 
@@ -65,7 +65,7 @@ See [PREREQUISITES.md](./PREREQUISITES.md) for full details. Key requirements:
 
 All output goes into `reports/graph-algorithms/`:
 
-- `reports/graph-algorithms/<NodeType>/centrality/` — centrality scores per node type and algorithm (e.g., Java_Package, Java_Type, Typescript_Module)
+- `reports/graph-algorithms/<NodeType>/centrality/` — centrality scores per node type and algorithm (e.g., Java_Package, Java_Type, Typescript_Module, SCIP_Type)
 - `reports/graph-algorithms/<NodeType>/communities/` — community assignments per node type and algorithm
 - `reports/graph-algorithms/<NodeType>/similarity/` — top similar node pairs per node type
 - `reports/graph-algorithms/` — assembled Markdown report (`graph_algorithms_report.md`)
