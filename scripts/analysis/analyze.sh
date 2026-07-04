@@ -53,6 +53,7 @@ REPORT_COMPILATIONS_SCRIPTS_DIRECTORY=${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY:-"
 SETTINGS_PROFILE_SCRIPTS_DIRECTORY=${SETTINGS_PROFILE_SCRIPTS_DIRECTORY:-"profiles"} # Repository directory that contains scripts containing settings
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"} # Working directory containing the artifacts to be analyzed
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+INDICES_DIRECTORY=${INDICES_DIRECTORY:-"indices"} # Working directory containing *.scip.json index files for SCIP-based analysis
 LOG_GROUP_START=${LOG_GROUP_START:-"::group::"} # Prefix to start a log group. Defaults to GitHub Actions log group start command.
 LOG_GROUP_END=${LOG_GROUP_END:-"::endgroup::"} # Prefix to end a log group. Defaults to GitHub Actions log group end command.
 
@@ -79,7 +80,8 @@ usage() {
   echo ""
   echo "Environment variables (optional, overrideable):"
   echo "  REPORTS_SCRIPTS_DIRECTORY, REPORT_COMPILATIONS_SCRIPTS_DIRECTORY, SETTINGS_PROFILE_SCRIPTS_DIRECTORY"
-  echo "  ARTIFACTS_DIRECTORY, SOURCE_DIRECTORY, LOG_GROUP_START, LOG_GROUP_END"
+  echo "  ARTIFACTS_DIRECTORY, SOURCE_DIRECTORY, INDICES_DIRECTORY (default: indices — must contain only *.scip.json files)"
+  echo "  LOG_GROUP_START, LOG_GROUP_END"
   echo ""
   echo "Examples:"
   echo "  $0"
@@ -88,6 +90,8 @@ usage() {
   echo "    # Run only CSV reports for git-history domain, keep Neo4j running"
   echo "  $0 --exclude-domain \"anomaly-detection,node-embeddings\""
   echo "    # Run all domains except anomaly-detection and node-embeddings"
+  echo "  $0 --exclude-domain \"scip-index-import\""
+  echo "    # Skip SCIP index import even when indices/ contains .scip.json files"
   echo "  $0 --exclude-domain \"\""
   echo "    # Run all domains (override default exclusions)"
   echo "  $0 --help"
@@ -210,9 +214,23 @@ if [ -n "${selectedExcludedDomains}" ]; then
   done
 fi
 
+# Fail fast if INDICES_DIRECTORY exists but contains unsupported files (only *.scip.json and *.sha allowed)
+if [ -d "${INDICES_DIRECTORY}" ]; then
+    non_scip_json_files=$(find "${INDICES_DIRECTORY}" -maxdepth 1 -type f ! -name '*.scip.json' ! -name '*.sha' 2>/dev/null | sort || true)
+    if [ -n "${non_scip_json_files}" ]; then
+        echo "analyze: Error: INDICES_DIRECTORY '${INDICES_DIRECTORY}' contains unsupported files (only *.scip.json and *.sha allowed):" >&2
+        while IFS= read -r bad_file; do
+            echo "analyze:   - ${bad_file}" >&2
+        done <<< "${non_scip_json_files}"
+        echo "analyze: Convert binary .scip files using: scip print --json index.scip > index.scip.json" >&2
+        exit 1
+    fi
+fi
+
 # Check if there is something to scan and analyze
-if [ ! -d "${ARTIFACTS_DIRECTORY}" ] && [ ! -d "${SOURCE_DIRECTORY}" ] ; then
-    echo "analyze: Neither ${ARTIFACTS_DIRECTORY} nor the ${SOURCE_DIRECTORY} directory exist. Please download artifacts/sources first."
+has_scip_indices=$(find "${INDICES_DIRECTORY}" -maxdepth 1 -name '*.scip.json' -type f 2>/dev/null | head -1 || true)
+if [ ! -d "${ARTIFACTS_DIRECTORY}" ] && [ ! -d "${SOURCE_DIRECTORY}" ] && [ -z "${has_scip_indices}" ]; then
+    echo "analyze: Nothing to analyze: no ${ARTIFACTS_DIRECTORY}/, no ${SOURCE_DIRECTORY}/, and no *.scip.json in ${INDICES_DIRECTORY}/. Please provide input first."
     exit 1
 fi
 
@@ -293,7 +311,9 @@ fi
 # Export resolved exclusion list so compilation scripts can filter domains
 export ANALYSIS_DOMAINS_TO_SKIP="${resolvedExcludedDomains}"
 export ANALYSIS_DOMAIN
+export INDICES_DIRECTORY
 echo "analyze: ANALYSIS_DOMAINS_TO_SKIP=${ANALYSIS_DOMAINS_TO_SKIP}"
+echo "analyze: INDICES_DIRECTORY=${INDICES_DIRECTORY}"
 
 # Assure that there is a report compilation script for the given report argument.
 REPORT_COMPILATION_SCRIPT="${SCRIPTS_DIR}/${REPORTS_SCRIPTS_DIRECTORY}/${REPORT_COMPILATIONS_SCRIPTS_DIRECTORY}/${analysisReportCompilation}Reports.sh"
@@ -325,6 +345,20 @@ echo "${LOG_GROUP_END}"
 echo "${LOG_GROUP_START}Scan and Analyze Changed Artifacts"
 source "${SCRIPTS_DIR}/resetAndScanChanged.sh"
 echo "${LOG_GROUP_END}"
+
+# Import SCIP index data when indices/ contains *.scip.json files and the domain is not excluded.
+# Note: scip-index-import is a cross-cutting concern that runs automatically when SCIP files exist,
+# unless explicitly excluded via ANALYSIS_DOMAINS_TO_SKIP. It is independent of --domain selection.
+scip_index_file=$(find "${INDICES_DIRECTORY}" -maxdepth 1 -name '*.scip.json' -type f 2>/dev/null | head -1 || true)
+if [ -n "${scip_index_file}" ]; then
+    if [[ ",${ANALYSIS_DOMAINS_TO_SKIP}," == *",scip-index-import,"* ]]; then
+        echo "analyze: Skipping scip-index-import (excluded via ANALYSIS_DOMAINS_TO_SKIP)."
+    else
+        echo "${LOG_GROUP_START}Import SCIP Index Data"
+        source "${DOMAINS_DIRECTORY}/scip-index-import/importScipIndexData.sh"
+        echo "${LOG_GROUP_END}"
+    fi
+fi
 
 # Prepare and validate graph database before analyzing and creating reports 
 echo "${LOG_GROUP_START}Prepare Analysis"

@@ -193,7 +193,7 @@ function extract_type_nodes() {
                 ($index[0].symbol_to_doc_first_line[$symbol] // "")  as $doc_line  |
                 code_unit_type($kind; $sig_text; $doc_line)        as $cu_type   |
 
-                ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module |
+                ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
 
                 {
                     symbol:          short_symbol($symbol),
@@ -204,7 +204,7 @@ function extract_type_nodes() {
                     package_id:      $pkg_id,
                     package_manager: $manager,
                     version:         $version,
-                    module:          $module,
+                    module:          $module_name,
                     is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end)
                 }
             ]
@@ -248,7 +248,7 @@ function extract_type_nodes() {
                 $tokens[1] as $manager |
                 $tokens[2] as $pkg_id |
                 $tokens[3] as $version |
-                ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module |
+                ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
 
                 {
                     symbol:          ("__file__ " + $file),
@@ -259,7 +259,7 @@ function extract_type_nodes() {
                     package_id:      $pkg_id,
                     package_manager: $manager,
                     version:         $version,
-                    module:          $module,
+                    module:          $module_name,
                     is_abstract:     "false"
                 }
             ]
@@ -310,7 +310,7 @@ function extract_external_type_nodes() {
             ($index[0].symbol_to_doc_first_line[$symbol] // "") as $doc_line  |
             code_unit_type($kind; $sig_text; $doc_line)       as $cu_type  |
 
-            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module |
+            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
 
             {
                 symbol:          short_symbol($symbol),
@@ -321,7 +321,7 @@ function extract_external_type_nodes() {
                 package_id:      $pkg_id,
                 package_manager: $manager,
                 version:         $version,
-                module:          $module,
+                module:          $module_name,
                 is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end)
             }
         ] |

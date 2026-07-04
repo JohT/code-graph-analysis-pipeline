@@ -12,6 +12,7 @@ set -o errexit -o pipefail
 # Overrideable Defaults
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+INDICES_DIRECTORY=${INDICES_DIRECTORY:-"indices"}
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -75,6 +76,9 @@ mkdir -p "./${ARTIFACTS_DIRECTORY}"
 # Create the source directory inside the analysis directory for source code projects/repositories if it hadn't been created yet.
 mkdir -p "./${SOURCE_DIRECTORY}"
 
+# Create the indices directory inside the analysis directory for SCIP JSON index files if it hadn't been created yet.
+mkdir -p "./${INDICES_DIRECTORY}"
+
 # Create forwarding scripts for the most important commands
 createForwardingScript "./../../scripts/analysis/analyze.sh"
 createForwardingScript "./../../domains/neo4j-management/startNeo4j.sh"
@@ -91,5 +95,8 @@ echo "${SCRIPT_NAME}:   1) Place your artifacts (e.g., Java jar/ear files) into 
 echo "${SCRIPT_NAME}:      $(pwd)/${ARTIFACTS_DIRECTORY}"
 echo "${SCRIPT_NAME}:   2) (Optional) Place your source code projects/repositories into this directory:"
 echo "${SCRIPT_NAME}:      $(pwd)/${SOURCE_DIRECTORY}"
-echo "${SCRIPT_NAME}:   3) Run './analyze.sh' inside 'temp/${analysisName}' to start the analysis."
+echo "${SCRIPT_NAME}:   3) (Optional) Place your SCIP index files (.scip.json) into this directory:"
+echo "${SCRIPT_NAME}:      $(pwd)/${INDICES_DIRECTORY}"
+echo "${SCRIPT_NAME}:      See SCIP.md for how to generate SCIP index files."
+echo "${SCRIPT_NAME}:   4) Run './analyze.sh' inside 'temp/${analysisName}' to start the analysis."
 echo ""

@@ -1,26 +1,81 @@
 # SCIP Index Import Domain
 
-Imports SCIP type-graph data from CSV into Neo4j and enriches it for analysis.
-[SCIP](https://github.com/sourcegraph/scip) (Sourcegraph Code Intelligence Protocol) provides a language-agnostic type dependency graph.
+Converts SCIP JSON index files to Neo4j import CSVs, imports them into Neo4j, and enriches the graph for analysis.
+[SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) provides a language-agnostic type dependency graph.
 
 Supported languages: Go, Java, TypeScript, Rust, C++, Ruby, Python, C#.
 
+See [SCIP.md](../../SCIP.md) for how to generate `.scip.json` files outside the pipeline.
+
+## How It Works
+
+1. You place `.scip.json` files in the `indices/` directory of your analysis workspace.
+2. `analyze.sh` calls `importScipIndexData.sh` automatically when it detects `*.scip.json` files.
+3. `importScipIndexData.sh` first runs `convertScipIndexToCsvForNeo4jImport.sh` to convert the JSON to Neo4j import CSVs.
+4. The Cypher queries then import and enrich the graph.
+
 ## When to use
 
-Run this domain after generating `scip_type_nodes.csv` and `scip_type_edges.csv` and placing them in the Neo4j import directory.
+This domain is triggered **automatically** by `analyze.sh` when `indices/*.scip.json` files exist.
+To run it manually: place `.scip.json` files in `indices/` and execute `importScipIndexData.sh`.
 
-## Entry Point
+## Entry Points
 
 | Script | Purpose |
 |--------|---------|
-| [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline — run this directly |
+| [installScipCli.sh](./installScipCli.sh) | Downloads and installs the scip CLI binary (optional if scip is already globally available) |
+| [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline (sourced by `analyze.sh`) |
+| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to `scip_type_nodes.csv` and `scip_type_edges.csv` |
+
+## Input
+
+Place `.scip.json` files generated outside this pipeline into the `indices/` directory:
+
+```
+temp/my-project/indices/
+  my-project.scip.json        ← output of: scip print --json index.scip
+```
+
+**Only `.scip.json` (JSON format) files are supported.** Binary `.scip` files must be converted first:
+```shell
+scip print --json index.scip > my-project.scip.json
+```
+
+Required tools for conversion (outside pipeline): `jq` (included in `convertScipIndexToCsvForNeo4jImport.sh`), `scip` CLI.
+
+### Installing the scip CLI
+
+The `scip` CLI is required to convert binary `.scip` files to JSON format. Use the `installScipCli.sh` script:
+
+```shell
+# From analysis workspace (temp/<project-name>/):
+./../../domains/scip-index-import/installScipCli.sh
+
+# Or from repository root:
+domains/scip-index-import/installScipCli.sh --bin-dir /path/to/bin
+```
+
+**Features:**
+- Detects and installs for your platform (macOS, Linux, Windows via Git Bash/WSL)
+- Checks if `scip` is already available globally before downloading
+- Installs to analysis workspace `./tools/scip-cli/` by default
+- Supports version pinning: `SCIP_VERSION=0.8.0 installScipCli.sh`
+
+## Environment Variables
+
+| Variable           | Default    | Description |
+|--------------------|------------|-------------|
+| `INDICES_DIRECTORY`| `./indices` | Directory containing `*.scip.json` files |
+| `IMPORT_DIRECTORY` | `./import`  | Neo4j import directory for generated CSVs |
 
 ## Folder Structure
 
 ```text
 domains/scip-index-import/
 ├── README.md                              # This file
-├── importScipIndexData.sh                 # Entry point: orchestrates full import pipeline
+├── importScipIndexData.sh                 # Entry point: orchestrates CSV conversion + import
+├── convertScipIndexToCsvForNeo4jImport.sh # Converts *.scip.json → scip_type_nodes.csv + scip_type_edges.csv
+├── testConvertScipIndexToCsvForNeo4jImport.sh # Tests for convertScipIndexToCsvForNeo4jImport.sh
 └── queries/
     ├── import/                            # Phase 1: setup and import
     │   ├── Cleanup_SCIP_Type_Nodes.cypher
@@ -53,17 +108,6 @@ domains/scip-index-import/
         ├── Cyclic_SCIP_Type_Dependencies.cypher
         └── External_SCIP_Type_Package_Usage_Overall.cypher
 ```
-
-## Prerequisites
-
-Two CSV files must be present in the Neo4j import directory before running:
-
-| File | Columns |
-|------|---------|
-| `scip_type_nodes.csv` | `symbol`, `display_name`, `file`, `scheme`, `type_name`, `package_id`, `package_manager`, `version`, `module`, `is_abstract` |
-| `scip_type_edges.csv` | `source_symbol`, `target_symbol`, `reference_count` |
-
-Internal types have a non-empty `file` column. External types have an empty `file` column.
 
 ## Import Phases
 

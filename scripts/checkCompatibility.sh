@@ -181,5 +181,11 @@ checkOptionalCommand "npx" "Tool to run npm packages without installing them glo
 checkOptionalCommand "npm" "Node.js package manager (https://docs.npmjs.com/) for managing JavaScript packages"
 checkOptionalCommand "dot" "Graph visualization tool from GraphViz (https://graphviz.org/) for visualizing query results as graphs"
 
+# Check dependencies for SCIP semantic index import
+icon=$(oneOf "scip")
+echo ""
+echo "${icon} SCIP semantic index import dependencies (for ./analyze.sh --domain scip-index-import):"
+checkOptionalCommand "scip" "SCIP CLI tool (https://github.com/scip-code/scip/releases) for converting SCIP indices"
+
 echo "--------------------------------"
 echo ""

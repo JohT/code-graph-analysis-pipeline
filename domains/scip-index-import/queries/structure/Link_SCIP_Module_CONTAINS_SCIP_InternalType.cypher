@@ -2,7 +2,11 @@
 
 MATCH (t:SCIP:InternalType)
  WITH t
-     ,left(t.file, size(t.file) - size(split(t.file, '/')[-1]) - 1) AS directoryPath
+     ,CASE 
+        WHEN t.file CONTAINS '/'
+        THEN left(t.file, size(t.file) - size(split(t.file, '/')[-1]) - 1)
+        ELSE null
+      END AS directoryPath
 MATCH (m:SCIP:SemanticCodeIndexModule {fqn: directoryPath})
 MERGE (m)-[:CONTAINS]->(t)
 RETURN count(*) AS writtenRelationships

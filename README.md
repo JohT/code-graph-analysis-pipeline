@@ -17,6 +17,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Analyze static code structure as a graph
 - Supports Java Code Analysis
 - Supports Typescript Code Analysis (experimental)
+- Supports multi-language analysis via [SCIP](https://scip.dev) (Go, Rust, C++, Ruby, Python, C# + more) — see [SCIP.md](SCIP.md)
 - Fully automated [pipeline for Java](./.github/workflows/internal-java-code-analysis.yml) from tool installation to report generation
 - Fully automated [pipeline for Typescript](./.github/workflows/internal-typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
@@ -32,6 +33,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Comprehensive list of [Cypher queries](./CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 - Example analysis for [react-router](https://github.com/remix-run/react-router)
+- Example SCIP-based analysis via [analyzeReactRouterScip.sh](./scripts/examples/analyzeReactRouterScip.sh)
 
 ### :newspaper: News
 
