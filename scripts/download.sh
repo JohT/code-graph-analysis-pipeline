@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 # Downloads a file into the directory of the environment variable SHARED_DOWNLOADS_DIRECTORY (or default "../downloads").
-# Does nothing if the file already exists.
+# Does nothing if the file already exists. SHA256 is only verified on fresh downloads, not on cache hits.
 
 # Command line options:
-# --url Download URL (required)
-# --filename Target file name with extension without path (optional, default = basename of download URL)
+# --url          Download URL (required)
+# --filename     Target file name with extension without path (optional, default = basename of download URL)
+# --sha256-url   URL of the SHA256 checksum file (optional, verified on fresh download only)
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -13,13 +14,14 @@ IFS=$'\n\t'
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 --url https://my.download.url [--filename download-file-name-without-path.ext> (default=url filename)]"
+  echo "Usage: $0 --url https://my.download.url [--filename download-file-name-without-path.ext] (default=url filename) [--sha256-url https://checksum.url]"
   exit 1
 }
 
 # Default values
 downloadUrl=""
 filename=""
+sha256Url=""
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -31,6 +33,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --filename)
       filename="$2"
+      shift
+      ;;
+    --sha256-url)
+      sha256Url="$2"
       shift
       ;;
     *)
@@ -73,6 +79,32 @@ if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" ] ; then
         echo "download: Error: Failed to download ${filename}"
         rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}"
         exit 1
+    fi
+
+    # Verify SHA256 checksum if --sha256-url was provided (only on fresh download, not on cache hit)
+    if [ -n "${sha256Url}" ]; then
+        echo "download: Verifying SHA256 checksum..."
+        sha256_tmp=$(mktemp)
+        if curl -fsSL "${sha256Url}" -o "${sha256_tmp}" 2>/dev/null; then
+            expected_sha256=$(awk '{print $1}' "${sha256_tmp}")
+            if command -v shasum >/dev/null 2>&1; then
+                actual_sha256=$(shasum -a 256 "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" | awk '{print $1}')
+            elif command -v sha256sum >/dev/null 2>&1; then
+                actual_sha256=$(sha256sum "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" | awk '{print $1}')
+            else
+                echo "download: Warning: SHA256 verification tool (shasum/sha256sum) not found. Skipping."
+                actual_sha256="${expected_sha256}"
+            fi
+            if [ "${actual_sha256}" != "${expected_sha256}" ]; then
+                rm -f "${sha256_tmp}" "${SHARED_DOWNLOADS_DIRECTORY}/${filename}"
+                echo "download: Error: SHA256 mismatch for ${filename}. Removing cached file."
+                exit 1
+            fi
+            echo "download: SHA256 verified."
+        else
+            echo "download: Warning: Could not download SHA256 checksum. Skipping verification."
+        fi
+        rm -f "${sha256_tmp}"
     fi
 else
     echo "download: ${filename} already downloaded"
