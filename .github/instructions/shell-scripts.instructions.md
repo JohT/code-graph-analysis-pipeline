@@ -40,7 +40,7 @@ Target: **bash**. Must work on macOS, Linux, Windows (WSL/Git Bash).
 - `local` for function-scoped variables
 - `readonly` for constants
 - `${VAR:-default}` for defaults
-- `[[ ]]` over `[ ]`
+- `[ ]` over `[[ ]]` except for regex or `==` string comparison 
 - Quote all paths: `"${directory}/${filename}"`
 
 ## Argument Parsing
