@@ -3,7 +3,8 @@
 # Returns the latest tag of a remote repository given by its url.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
+IFS=$'\n\t'
 
 # Display how this command is intended to be used including an example when wrong input parameters were detected
 usage() {
@@ -47,6 +48,7 @@ if [ -n "${url}" ]; then
   fi
 else
   echo "detectLatestVersion: Error: Please specify an url." >&2
+  exit 1
 fi
 
 if [ -n "${prefix}" ]; then

@@ -8,7 +8,8 @@
 # --filename Target file name with extension without path (optional, default = basename of download URL)
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
+IFS=$'\n\t'
 
 # Function to display script usage
 usage() {
@@ -40,12 +41,11 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-if [[ -z ${downloadUrl} ]]; then
-  echo "${USAGE}"
-  exit 1
+if [ -z "${downloadUrl}" ]; then
+  usage
 fi
 
-if [[ -z ${filename} ]]; then
+if [ -z "${filename}" ]; then
   filename=$(basename -- "${downloadUrl}")
 fi
 
@@ -53,7 +53,7 @@ fi
 SHARED_DOWNLOADS_DIRECTORY="${SHARED_DOWNLOADS_DIRECTORY:-$(dirname "$( pwd )")/downloads}"
 if [ ! -d "${SHARED_DOWNLOADS_DIRECTORY}" ] ; then
   echo "download: Creating shared downloads directory ${SHARED_DOWNLOADS_DIRECTORY}"
-  mkdir -p ${SHARED_DOWNLOADS_DIRECTORY}
+  mkdir -p "${SHARED_DOWNLOADS_DIRECTORY}"
 fi
 
 # Download the file if it doesn't exist in the shared downloads directory 
@@ -63,7 +63,7 @@ if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" ] ; then
     # Check if the URL is valid
     # The check is deferred and not done in the input validation block at the beginning.
     # This is because the check needs a network connection which shouldn't be required when the file had already been downloaded.
-    if ! curl --head --fail ${downloadUrl} >/dev/null 2>&1; then
+    if ! curl --head --fail "${downloadUrl}" >/dev/null 2>&1; then
       echo "download: Error: Invalid URL: ${downloadUrl}"
       exit 1
     fi
@@ -80,7 +80,7 @@ fi
 
 # Check downloaded file size to be at least 600 bytes or otherwise delete the invalid file
 downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" | awk '{print $1}')
-if [[ "${downloaded_file_size}" -le 600 ]]; then
+if [ "${downloaded_file_size}" -le 600 ]; then
     echo "download: Error: Failed to download ${filename}: Filesize: ${downloaded_file_size} < 600 bytes"
     rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}"
     exit 1

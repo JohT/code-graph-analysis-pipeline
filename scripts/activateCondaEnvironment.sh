@@ -8,7 +8,8 @@
 # Requires operatingSystemFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
+IFS=$'\n\t'
 
 PREPARE_CONDA_ENVIRONMENT=${PREPARE_CONDA_ENVIRONMENT:-"true"} # Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 

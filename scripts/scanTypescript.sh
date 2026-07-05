@@ -14,6 +14,7 @@ ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
 
 TYPESCRIPT_SCAN_HEAP_MEMORY=${TYPESCRIPT_SCAN_HEAP_MEMORY:-"4096"} # Heap memory in megabytes for Typescript scanning with (Node.js process). Defaults to 4096 MB.
+NODE_OPTIONS=${NODE_OPTIONS:-}
 echo "scanTypescript: TYPESCRIPT_SCAN_HEAP_MEMORY=${TYPESCRIPT_SCAN_HEAP_MEMORY}" >&2
 
 ## Get this "scripts" directory if not already set

@@ -44,7 +44,8 @@
 # Requires domains/neo4j-management/setupNeo4j.sh,setupJQAssistant.sh,domains/neo4j-management/startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,domains/neo4j-management/stopNeo4j.sh,compilations/*.sh,profiles/*.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
+IFS=$'\n\t'
 
 # Overrideable variables with directory names
 REPORTS_SCRIPTS_DIRECTORY=${REPORTS_SCRIPTS_DIRECTORY:-"reports"} # Working directory containing the generated reports
@@ -148,7 +149,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     --exclude-domain)
-      if [[ $# -lt 2 ]] || [[ "${2:-}" == --* ]]; then
+      if [ $# -lt 2 ] || [[ "${2:-}" == --* ]]; then
         echo "analyze: Error: --exclude-domain requires a value (use \"\" for none)."
         usage
       fi
