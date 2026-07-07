@@ -31,4 +31,4 @@ while IFS= read -r test_script_file; do
 
     echo "runTests: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished ${test_script_filename}"
     echo "${LOG_GROUP_END}"
-done < <(find "${SCRIPTS_DIR}" "${DOMAINS_DIR}" -type f -name 'test*.sh' | sort)
+done < <(find "${SCRIPTS_DIR}" "${DOMAINS_DIRECTORY}" -type f -name 'test*.sh' | sort)
