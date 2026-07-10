@@ -14,6 +14,11 @@ set -o errexit -o pipefail
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 #echo "checkCompatibility: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
+getCommandVersion() {
+    local cmd="$1"
+    "${cmd}" --version 2>&1 | head -1
+}
+
 checkCommand() {
     local cmd="$1"
     local description="$2"
@@ -24,6 +29,20 @@ checkCommand() {
         echo "  ${present_icon} ${cmd} - ${description}"
     else
         echo "  ${missing_icon} ${cmd} - ${description}"
+    fi
+}
+
+checkCommandWithVersion() {
+    local cmd="$1"
+    local description="$2"
+    
+    if command -v "${cmd}" &> /dev/null; then
+        local version
+        version=$(getCommandVersion "${cmd}" 2>/dev/null || echo "")
+        [ -n "${version}" ] && description="${description} (${version})" 
+        echo "  ✅ ${cmd} - ${description}"
+    else
+        echo "  ❌ ${cmd} - ${description}"
     fi
 }
 
@@ -113,16 +132,17 @@ echo ""
 echo "--------------------------------"
 
 # Check required main dependencies
-icon=$(allOf "bash" "awk" "wc" "sed" "grep" "curl" "jq" "git" "java")
+icon=$(allOf "bash" "awk" "wc" "sed" "grep" "curl" "jq" "git" "java" "tar")
 echo "${icon} Minimum required dependencies:"
 checkRequiredCommand "bash" "Bourne Again SHell (https://www.gnu.org/software/bash/) for running the shell scripts"
 checkRequiredCommand "awk" "Text processing tool (https://www.gnu.org/software/gawk/) for processing text files"
 checkRequiredCommand "wc" "Word, line, character, byte count tool (https://www.gnu.org/software/coreutils/wc/) for counting lines in files"
 checkRequiredCommand "sed" "Stream editor (https://www.gnu.org/software/sed/) for parsing and transforming text"
 checkRequiredCommand "grep" "Text search tool (https://www.gnu.org/software/grep/) for text searching with regular expressions"
-checkRequiredCommand "curl" "Command line tool for transferring data with URLs (https://curl.se/) for HTTP requests to Neo4j"
-checkRequiredCommand "jq" "Command-line JSON processor (https://stedolan.github.io/jq/) for parsing JSON results from Neo4j"
-checkRequiredCommand "git" "Version control system (https://git-scm.com/) for managing source code repositories"
+checkCommandWithVersion "curl" "Command line tool for transferring data with URLs"
+checkCommandWithVersion "jq" "Command-line JSON processor (https://stedolan.github.io/jq/)"
+checkCommandWithVersion "git" "Version control system (https://git-scm.com/)"
+checkRequiredCommand "tar" "Archiver tool (https://www.gnu.org/software/tar/) for extracting compressed archives"
 checkRequiredJavaVersion "21"
 
 if isFailed "${icon}"; then
@@ -138,7 +158,7 @@ icon=$(allOf "npx" "npm")
 echo ""
 echo "${icon} Typescript project analysis dependencies:"
 checkRequiredCommand "npx" "Tool to run npm packages without installing them globally (https://docs.npmjs.com/cli/v9/commands/npx)"
-checkRequiredCommand "npm" "Node.js package manager (https://docs.npmjs.com/) for managing JavaScript packages"
+checkCommandWithVersion "npm" "Node.js package manager (https://docs.npmjs.com/)"
 
 # Check dependencies for Python environments
 icon=$(oneOf "uv" "conda")
