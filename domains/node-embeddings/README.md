@@ -57,7 +57,7 @@ See [PREREQUISITES.md](./PREREQUISITES.md) for full details. Key requirements:
 
 All output goes into `reports/node-embeddings/`:
 
-- `<NodeLabel>_Embeddings_Label_Random_Projection.csv` — FastRP embedding vectors
+- `<NodeLabel>_Embeddings_Fast_Random_Projection.csv` — FastRP embedding vectors
 - `<NodeLabel>_Embeddings_HashGNN.csv` — HashGNN embedding vectors
 - `<NodeLabel>_Embeddings_Node2Vec.csv` — Node2Vec embedding vectors
 - `<NodeLabel>_Embeddings_<Algorithm>_UMAP2D_Scatter.svg` — 2D scatter plots

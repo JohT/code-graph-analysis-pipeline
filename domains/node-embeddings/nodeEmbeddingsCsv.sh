@@ -106,7 +106,7 @@ nodeEmbeddingsWithFastRandomProjection() {
     # Stream to CSV
     local nodeLabel
     nodeLabel=$(extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Embeddings_Label_Random_Projection.csv"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Embeddings_Fast_Random_Projection.csv"
 
     # Update Graph (node properties) using the already mutated property projection
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
