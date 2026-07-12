@@ -289,6 +289,25 @@ assert_contains "Bar→Foo reference_count is 3" ",3" "${multi_edges}"
 echo ""
 
 # ---------------------------------------------------------------------------
+# Test: .sha change-detection file ignored (created by change detection)
+# ---------------------------------------------------------------------------
+
+echo "Test: .sha file tolerance (change detection)"
+sha_indices_dir="${tmp_test_dir}/sha_indices"
+sha_import_dir="${tmp_test_dir}/sha_import"
+mkdir -p "${sha_indices_dir}"
+
+create_minimal_java_scip_json > "${sha_indices_dir}/app.scip.json"
+echo "abc123def456" > "${sha_indices_dir}/scipIndexChangeDetection.sha"
+
+run_script_with_env "${sha_indices_dir}" "${sha_import_dir}"
+assert_exit_code "exits 0 with .sha file present" "0" "${exit_code}"
+
+sha_nodes_csv="${sha_import_dir}/scip_type_nodes.csv"
+assert_file_exists "creates scip_type_nodes.csv despite .sha file" "${sha_nodes_csv}"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 

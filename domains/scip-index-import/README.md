@@ -68,6 +68,39 @@ domains/scip-index-import/installScipCli.sh --bin-dir /path/to/bin
 | `INDICES_DIRECTORY`| `./indices` | Directory containing `*.scip.json` files |
 | `IMPORT_DIRECTORY` | `./import`  | Neo4j import directory for generated CSVs |
 
+## Change Detection and Optimization
+
+`importScipIndexData.sh` includes **change detection** to skip re-import and enrichment when indices have not changed. This saves significant time on repeated `analyze.sh` runs, especially for large indices.
+
+### How It Works
+
+- On first run or when `indices/` contains changes, the script converts and imports all SCIP data.
+- After successful import, a hash file (`./scipIndexChangeDetection.sha`) is written to track the indices state.
+- On subsequent runs, if the hash matches, the entire import and enrichment process is **skipped** (fast path).
+- If indices change, the hash is recalculated and the import runs again (slow path).
+
+### Graph Reset
+
+When `scripts/resetAndScan.sh` is executed (graph reset via `analyze.sh`), the change detection hash file is automatically deleted. This forces SCIP indices to be re-imported on the next run, keeping the SCIP graph in sync with the reset database.
+
+**Typical workflow:**
+```shell
+# First run: full analysis including SCIP import
+analyze.sh
+
+# Subsequent runs: faster (skip unchanged indices)
+analyze.sh
+
+# Graph reset and full re-import:
+analyze.sh  # Updates artifacts/ → triggers resetAndScan → deletes hash → re-imports SCIP
+```
+
+### Hash File Location
+
+- **Path:** `indices/scipIndexChangeDetection.sha` (in the analysis workspace's indices directory)
+- **Purpose:** Tracks SHA hash of all files in `indices/` directory
+- **Behavior:** Auto-deleted on graph reset; regenerated after successful import
+
 ## Folder Structure
 
 ```text

@@ -3,8 +3,9 @@
 # Imports SCIP type-graph CSV data into Neo4j and enriches it for projection compatibility.
 # Creates SemanticCodeIndexType, InternalType, ExternalType, SemanticCodeIndexArtifact, and SemanticCodeIndexModule nodes.
 # Also creates structural CONTAINS links between artifacts, modules, and types.
+# Skips import and enrichment if indices/ hasn't changed since last successful import (change detection via hash file).
 # Assumes scip_type_nodes.csv and scip_type_edges.csv are already placed in the Neo4j import directory.
-# Requires executeQueryFunctions.sh
+# Requires executeQueryFunctions.sh, detectChangedFiles.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -30,6 +31,9 @@ STRUCTURE_QUERIES_DIR="${QUERIES_DIR}/structure"
 
 # Dependency enrichment queries in the shared cypher directory
 DEPENDENCY_ENRICHMENT_CYPHER_DIR="${SCRIPTS_DIR}/../cypher/Dependency_Enrichment"
+
+# Change detection for SCIP indices (stored in indices directory alongside source files)
+SCIP_INDEX_CHANGE_DETECTION_HASH_FILE="${INDICES_DIRECTORY}/scipIndexChangeDetection.sha"
 
 # Define functions to execute a cypher query from within a given file like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -142,3 +146,6 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency deg
 execute_cypher "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') SCIP index import complete."
+
+# Write change detection hash file after successful import
+write_scip_index_change_detection_file
