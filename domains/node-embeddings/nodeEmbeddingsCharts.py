@@ -259,6 +259,8 @@ def apply_umap(embeddings_data: pd.DataFrame, verbose: bool) -> pd.DataFrame:
         A copy of the input DataFrame with additional columns 'umap_x' and 'umap_y'.
     """
     embedding_matrix = np.array(embeddings_data["embedding"].tolist(), dtype=np.float32)
+    # Add small jitter to avoid UMAP spectral initialization issues with small/uniform datasets
+    embedding_matrix = embedding_matrix + np.random.RandomState(42).normal(0, 1e-6, embedding_matrix.shape)
     n_neighbors = min(15, len(embedding_matrix) - 1)
     reducer = umap.UMAP(n_components=2, n_neighbors=n_neighbors, random_state=42, n_jobs=1)
     coordinates = reducer.fit_transform(embedding_matrix)
