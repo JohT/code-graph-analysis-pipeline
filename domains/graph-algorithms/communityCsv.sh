@@ -579,7 +579,7 @@ FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
 SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-community"
-SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
 SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 SCIP_TYPE_GAMMA="dependencies_leiden_gamma=5.00"
 SCIP_TYPE_KCUT="dependencies_maxkcut=100"

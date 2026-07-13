@@ -158,7 +158,7 @@ FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
 SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-similarity"
-SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
 SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then

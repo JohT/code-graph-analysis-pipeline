@@ -205,7 +205,7 @@ NODE_LABELS: list[str] = [
     "Package",
     "Type",
     "Module",
-    "InternalType",
+    "SemanticCodeIndexInternalType",
     "SemanticCodeIndexModule",
     "SemanticCodeIndexArtifact",
 ]

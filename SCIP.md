@@ -21,7 +21,7 @@ The pipeline supports multi-language static code analysis via [SCIP](https://git
 2. You place the `.scip.json` file(s) in the `indices/` directory of your analysis workspace.
 3. `analyze.sh` detects the files automatically and imports them into Neo4j before running reports.
 
-The pipeline creates `:SCIP:SemanticCodeIndexType:InternalType` and `:SCIP:SemanticCodeIndexType:ExternalType` nodes with `DEPENDS_ON` relationships, fully compatible with archetype, cyclic dependency, and external dependency analyses.
+The pipeline creates `:SCIP:SemanticCodeIndexInternalType` and `:SCIP:SemanticCodeIndexExternalType` nodes with `DEPENDS_ON` relationships, fully compatible with archetype, cyclic dependency, and external dependency analyses.
 
 ## User Workflow
 

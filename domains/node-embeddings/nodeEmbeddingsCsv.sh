@@ -342,7 +342,7 @@ fi
 
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
 SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-embeddings"
-SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
 SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 SCIP_TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
 SCIP_TYPE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"

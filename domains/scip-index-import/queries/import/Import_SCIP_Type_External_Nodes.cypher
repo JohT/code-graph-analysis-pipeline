@@ -1,8 +1,8 @@
-// Import external SCIP type nodes from 'scip_type_nodes.csv'. Requires "Create_SCIP_Type_Constraint.cypher".
+// Import external SCIP type nodes from 'scip_type_nodes.csv'. Requires "Create_SCIP_External_Type_Constraint.cypher".
 
 LOAD CSV WITH HEADERS FROM 'file:///scip_type_nodes.csv' AS row
 WITH row WHERE row.file = ''
-MERGE (node:SCIP:SemanticCodeIndexType:ExternalType {symbol: row.symbol})
+MERGE (node:SCIP:SemanticCodeIndexExternalType {symbol: row.symbol})
 SET node.fqn            = row.symbol,
     node.name           = row.display_name,
     node.scheme         = row.scheme,

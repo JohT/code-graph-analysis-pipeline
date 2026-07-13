@@ -1,6 +1,6 @@
-// Set "projectName" property on SemanticCodeIndexType nodes using the module property set during import.
+// Set "projectName" property on SemanticCodeIndexInternalType and SemanticCodeIndexExternalType nodes using the module property set during import.
 
-MATCH (n:SemanticCodeIndexType)
+MATCH (n:SCIP&SemanticCodeIndexInternalType|SCIP&SemanticCodeIndexExternalType)
 WHERE n.module IS NOT NULL
   AND n.projectName IS NULL
   SET n.projectName = n.module

@@ -1,6 +1,6 @@
-// Create SemanticCodeIndexModule nodes from unique directory portions of source file paths on InternalType nodes. Requires "Import_SCIP_Type_Internal_Nodes.cypher".
+// Create SemanticCodeIndexModule nodes from unique directory portions of source file paths on SemanticCodeIndexInternalType nodes. Requires "Import_SCIP_Type_Internal_Nodes.cypher".
 
-MATCH (t:SCIP:InternalType)
+MATCH (t:SCIP:SemanticCodeIndexInternalType)
  WITH DISTINCT CASE 
   WHEN NOT t.file CONTAINS '/' 
   THEN null

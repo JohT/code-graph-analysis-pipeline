@@ -112,7 +112,8 @@ domains/scip-index-import/
 └── queries/
     ├── import/                            # Phase 1: setup and import
     │   ├── Cleanup_SCIP_Type_Nodes.cypher
-    │   ├── Create_SCIP_Type_Constraint.cypher
+    │   ├── Create_SCIP_Internal_Type_Constraint.cypher
+    │   ├── Create_SCIP_External_Type_Constraint.cypher
     │   ├── Import_SCIP_Type_Internal_Nodes.cypher
     │   ├── Import_SCIP_Type_External_Nodes.cypher
     │   └── Import_SCIP_Type_Edges.cypher
@@ -151,7 +152,8 @@ domains/scip-index-import/
 | Query | Purpose |
 |-------|---------|
 | [Cleanup_SCIP_Type_Nodes.cypher](./queries/import/Cleanup_SCIP_Type_Nodes.cypher) | Delete all existing SCIP nodes — clean slate before re-import |
-| [Create_SCIP_Type_Constraint.cypher](./queries/import/Create_SCIP_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexType.symbol` |
+| [Create_SCIP_Internal_Type_Constraint.cypher](./queries/import/Create_SCIP_Internal_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexInternalType.symbol` |
+| [Create_SCIP_External_Type_Constraint.cypher](./queries/import/Create_SCIP_External_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexExternalType.symbol` |
 | [Import_SCIP_Type_Internal_Nodes.cypher](./queries/import/Import_SCIP_Type_Internal_Nodes.cypher) | Import internal types (own source files); sets `isTest` from file path patterns |
 | [Import_SCIP_Type_External_Nodes.cypher](./queries/import/Import_SCIP_Type_External_Nodes.cypher) | Import external types (library dependencies) |
 | [Import_SCIP_Type_Edges.cypher](./queries/import/Import_SCIP_Type_Edges.cypher) | Import `DEPENDS_ON` relationships between types |
@@ -164,10 +166,10 @@ Build module and artifact hierarchy, plus dependency relationships.
 |-------|---------|
 | [Create_SCIP_Module_Nodes_For_Internal_Types.cypher](./queries/structure/Create_SCIP_Module_Nodes_For_Internal_Types.cypher) | Create `SemanticCodeIndexModule` nodes — one per unique source directory |
 | [Create_SCIP_Artifact_Nodes.cypher](./queries/structure/Create_SCIP_Artifact_Nodes.cypher) | Create `SemanticCodeIndexArtifact` nodes — one per unique module+version combination |
-| [Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexModule -[:CONTAINS]-> InternalType` |
+| [Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexModule -[:CONTAINS]-> SemanticCodeIndexInternalType` |
 | [Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> SemanticCodeIndexModule` |
-| [Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> ExternalType` |
-| [Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> InternalType` — direct artifact-to-type link (optimization for projections) |
+| [Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> SemanticCodeIndexExternalType` |
+| [Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> SemanticCodeIndexInternalType` — direct artifact-to-type link (optimization for projections) |
 | [Link_SCIP_Module_DEPENDS_ON_SCIP_Module.cypher](./queries/structure/Link_SCIP_Module_DEPENDS_ON_SCIP_Module.cypher) | `SemanticCodeIndexModule -[:DEPENDS_ON]-> SemanticCodeIndexModule` — aggregated from type dependencies |
 | [Link_SCIP_Artifact_DEPENDS_ON_SCIP_Artifact.cypher](./queries/structure/Link_SCIP_Artifact_DEPENDS_ON_SCIP_Artifact.cypher) | `SemanticCodeIndexArtifact -[:DEPENDS_ON]-> SemanticCodeIndexArtifact` — aggregated from module dependencies |
 
@@ -221,8 +223,8 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 
 | Label | Description |
 |-------|-------------|
-| `SCIP:SemanticCodeIndexType:InternalType` | Type from own source code; has `isTest`, `testMarkerInteger`, `file` |
-| `SCIP:SemanticCodeIndexType:ExternalType` | Type from an external library; `isTest = false` |
+| `SCIP:SemanticCodeIndexInternalType` | Type from own source code; has `isTest`, `testMarkerInteger`, `file` |
+| `SCIP:SemanticCodeIndexExternalType` | Type from an external library; `isTest = false` |
 | `SCIP:SemanticCodeIndexModule` | Source directory; has `isTest`, `testMarkerInteger` |
 | `SCIP:SemanticCodeIndexArtifact` | Module + version package; groups types and modules |
 
@@ -230,18 +232,18 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 
 | Relationship | From → To | Description |
 |--------------|-----------|-------------|
-| `DEPENDS_ON` | `SemanticCodeIndexType → SemanticCodeIndexType` | Type-level dependency with `referenceCount` |
-| `CONTAINS` | `SemanticCodeIndexModule → InternalType` | Module contains its source types |
+| `DEPENDS_ON` | `SemanticCodeIndexInternalType|SemanticCodeIndexExternalType → SemanticCodeIndexInternalType|SemanticCodeIndexExternalType` | Type-level dependency with `referenceCount` |
+| `CONTAINS` | `SemanticCodeIndexModule → SemanticCodeIndexInternalType` | Module contains its source types |
 | `CONTAINS` | `SemanticCodeIndexArtifact → SemanticCodeIndexModule` | Artifact contains its modules |
-| `CONTAINS` | `SemanticCodeIndexArtifact → ExternalType` | Artifact contains its external types |
+| `CONTAINS` | `SemanticCodeIndexArtifact → SemanticCodeIndexExternalType` | Artifact contains its external types |
 
 ### Key Properties
 
 | Property | Nodes | Description |
 |----------|-------|-------------|
-| `isTest` | `InternalType`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
-| `testMarkerInteger` | `SemanticCodeIndexType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
-| `language` | `SemanticCodeIndexType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
+| `isTest` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
+| `testMarkerInteger` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
+| `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
 | `incomingDependencies` | `SCIPType` | Number of types that depend on this type |
 | `outgoingDependencies` | `SCIPType` | Number of types this type depends on |
 

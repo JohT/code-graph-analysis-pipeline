@@ -9,7 +9,7 @@ Integrate `domains/scip-index-import` as an on-by-default pipeline step in `anal
 - Example: new standalone `scripts/examples/analyzeReactRouterScip.sh` with pre-generated SCIP JSON files
 - Documentation: new `SCIP.md` file documenting user workflow for generating SCIP indices externally
 - `scip` CLI: **NOT required in pipeline** — user provides pre-converted `.scip.json` files
-- Correct SCIP node labels: `:SCIP:SemanticCodeIndexType:InternalType` / `:SCIP:SemanticCodeIndexType:ExternalType` (prompt had a typo: "SemanticIndexType")
+- Correct SCIP node labels: `:SCIP:SemanticCodeIndexInternalType` / `:SCIP:SemanticCodeIndexExternalType` (old labels were `:SCIP:SemanticCodeIndexType:InternalType` / `:SCIP:SemanticCodeIndexType:ExternalType`)
 - **Fail-Fast Principle**: validate inputs early, reject non-JSON files in `indices/`, fail immediately with clear errors
 
 ---
@@ -123,9 +123,9 @@ Integrate `domains/scip-index-import` as an on-by-default pipeline step in `anal
       execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
                                            "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_Scip.cypher" "${@}"
       ```
-    - After the existing node-type archetype_features() calls, add an InternalType call:
+    - After the existing node-type archetype_features() calls, add a SemanticCodeIndexInternalType call:
       - projection_name=`scip-type-archetypes`
-      - projection_node_label=`InternalType`
+      - projection_node_label=`SemanticCodeIndexInternalType`
       - projection_weight_property=`referenceCount`
       - Output dir: `${REPORTS_DIRECTORY}/archetypes/Scip_Type/`
 
@@ -268,7 +268,7 @@ Integrate `domains/scip-index-import` as an on-by-default pipeline step in `anal
 - `domains/scip-index-import/importScipIndexData.sh` — add call to convertScipIndexToCsvForNeo4jImport.sh
 - `scripts/analysis/analyze.sh` — add indices/ support, fail-fast validation for non-JSON files
 - `init.sh` — create indices/ directory, update guidance
-- `domains/archetypes/archetypesCsv.sh` — add InternalType support
+- `domains/archetypes/archetypesCsv.sh` — add SemanticCodeIndexInternalType support
 - `domains/cyclic-dependencies/cyclicDependenciesCsv.sh` — add SCIP module queries
 - `domains/external-dependencies/externalDependenciesCsv.sh` — add SCIP external type queries
 - `.github/workflows/public-analyze-code-graph.yml` — add indices-upload-name input, validation
@@ -292,7 +292,7 @@ Integrate `domains/scip-index-import` as an on-by-default pipeline step in `anal
 - `/Users/johnny/Repositories/git/getting-started-with-scip/` — referenced in SCIP.md for user guidance on generating indices externally
 
 **Key patterns to reference:**
-- `domains/graph-algorithms/` — how InternalType was added to projections (commit ec578293)
+- `domains/graph-algorithms/` — how SemanticCodeIndexInternalType was added to projections (commit ec578293)
 - `domains/archetypes/features/ArchetypeFeature_Abstractness_JavaType.cypher` — abstractness query pattern
 - `domains/cyclic-dependencies/cyclicDependenciesCsv.sh` — TypeScript section as template for SCIP section
 - `scripts/examples/analyzeReactRouter.sh` — template for new SCIP example script
@@ -322,7 +322,7 @@ Integrate `domains/scip-index-import` as an on-by-default pipeline step in `anal
 
 2. **Non-JSON file validation**: The pipeline must catch and reject `.scip` binary files (or any non-JSON) in `indices/` immediately, with a clear message telling the user to convert them or remove them. This fail-fast approach prevents confusing errors later in processing.
 
-3. **`archetypesCsv.sh` InternalType call**: The `archetype_features()` function accepts `projection_node_label` and `projection_weight_property`. For `InternalType` with `referenceCount`, verify `createDirectedDependencyProjection` in `projectionFunctions.sh` handles it without special-casing. If not, add a new `createDirectedSCIPInternalTypeDependencyProjection()` function.
+3. **`archetypesCsv.sh` SemanticCodeIndexInternalType call**: The `archetype_features()` function accepts `projection_node_label` and `projection_weight_property`. For `SemanticCodeIndexInternalType` with `referenceCount`, verify `createDirectedDependencyProjection` in `projectionFunctions.sh` handles it without special-casing. If not, add a new `createDirectedSCIPInternalTypeDependencyProjection()` function.
 
 4. **GitHub Actions**: The CI workflow (`internal-scip-index-code-example.yml`) may need pre-generated SCIP JSON files committed to the repo (or uploaded as artifacts in job 1). Ensure the workflow doesn't require the `scip` CLI unless the user explicitly wants to generate indices (outside the pipeline).
 

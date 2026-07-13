@@ -1,6 +1,6 @@
-// Link SemanticCodeIndexModule nodes to their contained InternalType nodes via CONTAINS. Requires "Create_SCIP_Module_Nodes_For_Internal_Types.cypher" and "Import_SCIP_Type_Internal_Nodes.cypher".
+// Link SemanticCodeIndexModule nodes to their contained SemanticCodeIndexInternalType nodes via CONTAINS. Requires "Create_SCIP_Module_Nodes_For_Internal_Types.cypher" and "Import_SCIP_Type_Internal_Nodes.cypher".
 
-MATCH (t:SCIP:InternalType)
+MATCH (t:SCIP:SemanticCodeIndexInternalType)
  WITH t
      ,CASE 
         WHEN t.file CONTAINS '/'

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Imports SCIP type-graph CSV data into Neo4j and enriches it for projection compatibility.
-# Creates SemanticCodeIndexType, InternalType, ExternalType, SemanticCodeIndexArtifact, and SemanticCodeIndexModule nodes.
+# Creates SemanticCodeIndexInternalType, SemanticCodeIndexExternalType, SemanticCodeIndexArtifact, and SemanticCodeIndexModule nodes.
 # Also creates structural CONTAINS links between artifacts, modules, and types.
 # Skips import and enrichment if indices/ hasn't changed since last successful import (change detection via hash file).
 # Assumes scip_type_nodes.csv and scip_type_edges.csv are already placed in the Neo4j import directory.
@@ -70,8 +70,9 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Cleaning up existing SCIP type nodes..."
 execute_cypher "${IMPORT_QUERIES_DIR}/Cleanup_SCIP_Type_Nodes.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP type uniqueness constraint..."
-execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Type_Constraint.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP type uniqueness constraints..."
+execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Internal_Type_Constraint.cypher"
+execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP internal type nodes..."
 execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_Internal_Nodes.cypher"

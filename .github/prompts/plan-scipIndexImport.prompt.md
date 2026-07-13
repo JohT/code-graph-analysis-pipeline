@@ -20,9 +20,9 @@ Files in `domains/scip-index-import/queries/`:
 
 ## Phase 2: Projection-Compatibility Enrichment
 
-6. `Set_Incoming_SCIP_Type_Dependencies.cypher`: MATCH `(target:SemanticCodeIndexType)` WHERE `incomingDependencies IS NULL`; OPTIONAL MATCH source nodes; SET `incomingDependencies`, `incomingDependenciesWeight`
+6. `Set_Incoming_SCIP_Type_Dependencies.cypher`: MATCH `(target:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType)` WHERE `incomingDependencies IS NULL`; OPTIONAL MATCH source nodes; SET `incomingDependencies`, `incomingDependenciesWeight`
 7. `Set_Outgoing_SCIP_Type_Dependencies.cypher`: mirror of above for outgoing
-8. `Set_SCIP_Type_Test_Marker_Integer.cypher`: `SET n.testMarkerInteger = CASE WHEN n.isTest THEN 1 ELSE 0 END` WHERE `n.testMarkerInteger IS NULL`; MATCH `(n:SemanticCodeIndexType)`
+8. `Set_SCIP_Type_Test_Marker_Integer.cypher`: `SET n.testMarkerInteger = CASE WHEN n.isTest THEN 1 ELSE 0 END` WHERE `n.testMarkerInteger IS NULL`; MATCH `(n:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType)`
 
 *Script reuses `cypher/Dependency_Enrichment/Set_Dependency_Degree.cypher` and `Set_Dependency_Degree_Rank.cypher` directly — no copies.*
 
@@ -30,18 +30,18 @@ Files in `domains/scip-index-import/queries/`:
 
 Structural nodes carry only SCIP-specific labels to avoid collision with jQAssistant data. No `:Type`, `:Package`, `:Artifact`, or `:ExternalType` labels are added.
 
-9. `Create_SCIP_Artifact_Nodes.cypher`: MERGE `:SCIP:SemanticCodeIndexArtifact` nodes from unique `(module, version, packageManager)` on SemanticCodeIndexType; `fqn = module + ' ' + version`, `name = module`, `fileName = packageId`
-10. `Create_SCIP_Module_Nodes_For_Internal_Types.cypher`: MERGE `:SCIP:SemanticCodeIndexModule` nodes from unique directory portion of `file` on `:InternalType` nodes; `fqn` = raw directory path (language-agnostic: `left(file, size(file) - size(split(file, '/')[-1]) - 1)`); no language-specific stripping
-11. `Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher`: MATCH SemanticCodeIndexModule by `fqn` equal to the derived directory of `file`, MATCH InternalType, MERGE `(module)-[:CONTAINS]->(type)`
+9. `Create_SCIP_Artifact_Nodes.cypher`: MERGE `:SCIP:SemanticCodeIndexArtifact` nodes from unique `(module, version, packageManager)` on `SemanticCodeIndexInternalType|SemanticCodeIndexExternalType`; `fqn = module + ' ' + version`, `name = module`, `fileName = packageId`
+10. `Create_SCIP_Module_Nodes_For_Internal_Types.cypher`: MERGE `:SCIP:SemanticCodeIndexModule` nodes from unique directory portion of `file` on `:SemanticCodeIndexInternalType` nodes; `fqn` = raw directory path (language-agnostic: `left(file, size(file) - size(split(file, '/')[-1]) - 1)`); no language-specific stripping
+11. `Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher`: MATCH SemanticCodeIndexModule by `fqn` equal to the derived directory of `file`, MATCH `SemanticCodeIndexInternalType`, MERGE `(module)-[:CONTAINS]->(type)`
 12. `Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher`: MATCH SemanticCodeIndexArtifact by module+version, MATCH SemanticCodeIndexModule by module, MERGE `(artifact)-[:CONTAINS]->(module)`
-13. `Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher`: External types have no package path; link SemanticCodeIndexArtifact directly to ExternalType via CONTAINS
+13. `Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher`: External types have no package path; link SemanticCodeIndexArtifact directly to `SemanticCodeIndexExternalType` via CONTAINS
 
 ## Phase 4: SCIP-specific Domain Query Variants
 
 Existing domain queries use `:Package`, `:Type`, `:Artifact`, `:ExternalType` — labels not present on SCIP nodes. SCIP variants are placed in `domains/scip-index-import/queries/` for now (domain not yet integrated).
 
-14. `Cyclic_SCIP_Type_Dependencies.cypher`: adapted from `domains/cyclic-dependencies/queries/Cyclic_Dependencies.cypher`; replace `:Package` with `:SemanticCodeIndexModule`, `:Type` with `:SemanticCodeIndexType`, `:Artifact` with `:SemanticCodeIndexArtifact`; same logic and output columns
-15. `External_SCIP_Type_Package_Usage_Overall.cypher`: adapted from `domains/external-dependencies/queries/External_package_usage_overall.cypher`; replace `:ExternalType` with `:ExternalType`, `:Package` with `:SemanticCodeIndexModule`, `:Type` with `:SemanticCodeIndexType`; same logic and output columns
+14. `Cyclic_SCIP_Type_Dependencies.cypher`: adapted from `domains/cyclic-dependencies/queries/Cyclic_Dependencies.cypher`; replace `:Package` with `:SemanticCodeIndexModule`, `:Type` with `:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType`, `:Artifact` with `:SemanticCodeIndexArtifact`; same logic and output columns
+15. `External_SCIP_Type_Package_Usage_Overall.cypher`: adapted from `domains/external-dependencies/queries/External_package_usage_overall.cypher`; replace `:ExternalType` with `:SemanticCodeIndexExternalType`, `:Package` with `:SemanticCodeIndexModule`, `:Type` with `:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType`; same logic and output columns
 
 ## Phase 5: Entry-point Shell Script
 
@@ -57,17 +57,17 @@ Existing domain queries use `:Package`, `:Type`, `:Artifact`, `:ExternalType` �
 
 1. `shellcheck domains/scip-index-import/importScipIndexData.sh`
 2. Copy test CSVs from `temp/simple-project-for-scip-java-comparision/import/` to Neo4j import dir; run script
-3. Verify nodes exist: `MATCH (n:SemanticCodeIndexType) RETURN count(n)`
-4. Verify projection readiness: run `Dependencies_0_Verify_Projectable.cypher` with params `dependencies_projection_node=SemanticCodeIndexType`, `dependencies_projection_weight_property=referenceCount`
+3. Verify nodes exist: `MATCH (n:SemanticCodeIndexInternalType) RETURN count(n)`
+4. Verify projection readiness: run `Dependencies_0_Verify_Projectable.cypher` with params `dependencies_projection_node=SemanticCodeIndexInternalType`, `dependencies_projection_weight_property=referenceCount`
 5. Verify cyclic-deps SCIP variant: `domains/scip-index-import/queries/Cyclic_SCIP_Type_Dependencies.cypher`
 6. Verify external-deps SCIP variant: `domains/scip-index-import/queries/External_SCIP_Type_Package_Usage_Overall.cypher`
 
 ## Gap Analysis
 
 ✅ Enabled after this plan:
-- `projectionFunctions.sh` with `SemanticCodeIndexType` node + `referenceCount` property (graph algorithms, anomaly detection, node embeddings)
-- `Cyclic_SCIP_Type_Dependencies.cypher`: via SemanticCodeIndexModule/SemanticCodeIndexArtifact/CONTAINS + SemanticCodeIndexType
-- `External_SCIP_Type_Package_Usage_Overall.cypher`: via ExternalType + SemanticCodeIndexModule/SemanticCodeIndexType
+- `projectionFunctions.sh` with `SemanticCodeIndexInternalType` node + `referenceCount` property (graph algorithms, anomaly detection, node embeddings)
+- `Cyclic_SCIP_Type_Dependencies.cypher`: via SemanticCodeIndexModule/SemanticCodeIndexArtifact/CONTAINS + SemanticCodeIndexInternalType|SemanticCodeIndexExternalType
+- `External_SCIP_Type_Package_Usage_Overall.cypher`: via SemanticCodeIndexExternalType + SemanticCodeIndexModule/SemanticCodeIndexInternalType|SemanticCodeIndexExternalType
 
 ❌ Still missing (not in this plan):
 - Internal-deps queries use `:Java:Package`, `:Java:Type` - SCIP-specific variants not planned here

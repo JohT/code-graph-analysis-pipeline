@@ -1,8 +1,8 @@
 // Set incoming SCIP type dependencies. Requires "Import_SCIP_Type_Edges.cypher".
 
-   MATCH (n:SemanticCodeIndexType)
+   MATCH (n:SCIP&SemanticCodeIndexInternalType|SCIP&SemanticCodeIndexExternalType)
    WHERE n.incomingDependencies IS NULL
-OPTIONAL MATCH (n)<-[r:DEPENDS_ON]-(source:SemanticCodeIndexType)
+OPTIONAL MATCH (n)<-[r:DEPENDS_ON]-(source:SCIP&SemanticCodeIndexInternalType|SCIP&SemanticCodeIndexExternalType)
    WHERE n <> source
     WITH n
         ,count(DISTINCT source.symbol) AS incomingDependencies

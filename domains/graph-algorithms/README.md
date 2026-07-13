@@ -65,7 +65,7 @@ See [PREREQUISITES.md](./PREREQUISITES.md) for full details. Key requirements:
 
 All output goes into `reports/graph-algorithms/`:
 
-- `reports/graph-algorithms/<NodeType>/centrality/` — centrality scores per node type and algorithm (e.g., Java_Package, Java_Type, Typescript_Module, InternalType)
+- `reports/graph-algorithms/<NodeType>/centrality/` — centrality scores per node type and algorithm (e.g., Java_Package, Java_Type, Typescript_Module, SemanticCodeIndexInternalType)
 - `reports/graph-algorithms/<NodeType>/communities/` — community assignments per node type and algorithm
 - `reports/graph-algorithms/<NodeType>/similarity/` — top similar node pairs per node type
 - `reports/graph-algorithms/` — assembled Markdown report (`graph_algorithms_report.md`)

@@ -277,7 +277,7 @@ CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Type"
 mkdir -p "${CURRENT_LEVEL_DIR}"
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
 SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-topology"
-SCIP_TYPE_NODE="dependencies_projection_node=InternalType"
+SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
 SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
