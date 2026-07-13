@@ -70,7 +70,11 @@ execute_cypher_http() {
 # Function to execute a cypher query from the given file (first and only argument) 
 # and returning number of resulting lines using Neo4j's HTTP API
 execute_cypher_http_number_of_lines_in_result() {
-    results=$( execute_cypher_http "${@}" | wc -l | awk '{print $1}' ) # "${@}"= Get all function arguments and forward them
+    local temp_output
+    if ! temp_output=$( execute_cypher_http "${@}" ); then # "${@}"= Get all function arguments and forward them
+        return 1
+    fi
+    results=$( echo "${temp_output}" | wc -l | awk '{print $1}' )
     results=$((results - 1))
     echo "${results}"
 }
