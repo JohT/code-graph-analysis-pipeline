@@ -56,11 +56,6 @@ while [[ $# -gt 0 ]]; do
   shift || true # ignore error when there are no more arguments
 done
 
-# Report directory
-REPORT_NAME="git-history"
-FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
-mkdir -p "${FULL_REPORT_DIRECTORY}"
-
 echo "gitHistoryPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting git history chart generation..."
 
 # If the primary CSV is missing, generate CSVs now so this report type is self-contained.
@@ -70,6 +65,11 @@ if [ ! -f "${PRIMARY_CSV}" ]; then
     echo "gitHistoryPython: Primary CSV not found — running gitHistoryCsv.sh first to generate CSV data."
     source "${GIT_HISTORY_SCRIPT_DIR}/gitHistoryCsv.sh"
 fi
+
+# Report directory
+REPORT_NAME="git-history"
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
 
 time python "${GIT_HISTORY_SCRIPT_DIR}/gitHistoryCharts.py" \
     --report_directory "${FULL_REPORT_DIRECTORY}" \
