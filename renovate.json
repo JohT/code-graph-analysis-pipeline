@@ -74,7 +74,7 @@
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "AXON_FRAMEWORK_VERSION:\\s+?(?<currentValue>.*?)\\s+"
@@ -88,7 +88,7 @@
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "REACT_ROUTER_VERSION:\\s+?(?<currentValue>.*?)\\s+"
@@ -102,7 +102,7 @@
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "mambaforge:\\s+?(?<currentValue>.*?)\\s+"
@@ -216,7 +216,7 @@
         "^scripts/examples/[^/]*\\.sh$",
         "^domains/anomaly-detection/documentation/[^/]*\\.sh$",
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)",
