@@ -35,6 +35,16 @@ echo "resetAndScan: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
 JQASSISTANT_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_BIN="${JQASSISTANT_DIRECTORY}/bin"
 JQASSISTANT_CONFIG_TEMPLATE_PATH="${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}"
+SCIP_INDEX_CHANGE_DETECTION_HASH_FILE="${INDICES_DIRECTORY}/scipIndexChangeDetection.sha"
+
+# Clean up SCIP index change detection file so re-import is forced after graph reset
+# TODO: This uses internal knowledge of "domains/scip-index-import" and its change detection mechanism. 
+#       Ideally, this should be refactored in a future cleanup task to avoid cross-domain dependencies.
+#       One idea would be to emit an event (e.g. by writing a file) that the scip-index-import domain can listen to and then clean up its own change detection file.
+if [ -f "${SCIP_INDEX_CHANGE_DETECTION_HASH_FILE}" ]; then
+    rm "${SCIP_INDEX_CHANGE_DETECTION_HASH_FILE}"
+    echo "resetAndScan: Cleaned up SCIP index change detection file to force re-import after graph reset."
+fi
 
 # Parse the single parameter that contains the comma-separated file and directory names to scan.
 if [ "$#" -eq 0 ]; then

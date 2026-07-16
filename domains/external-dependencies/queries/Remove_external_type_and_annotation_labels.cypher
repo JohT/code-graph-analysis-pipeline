@@ -1,4 +1,5 @@
 // Remove external type and annotation labels
 
-  MATCH (externalType:ExternalType)
- REMOVE externalType:ExternalType:ExternalAnnotation
+  MATCH (externalType:Java:ExternalType)
+ REMOVE externalType:ExternalType
+ REMOVE externalType:ExternalAnnotation

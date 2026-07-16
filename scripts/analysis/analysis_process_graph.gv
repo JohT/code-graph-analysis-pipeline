@@ -75,6 +75,7 @@ digraph ScriptDependencies {
         margin=10;
         
         prepareAnalysis [label="prepareAnalysis.sh", fillcolor="#FFB6C1"];
+        importScipIndex [label="importScipIndexData.sh\n(SCIP type graph)", fillcolor="#FFCAB6"];
         executeQueryFunctions [label="executeQueryFunctions.sh", fillcolor="#FFE4C4"];
         executeQuery [label="executeQuery.sh", fillcolor="#FFDAB9"];
         parseCsvFunctions [label="parseCsvFunctions.sh", fillcolor="#FFE4C4"];
@@ -151,6 +152,7 @@ digraph ScriptDependencies {
     resetAndScan -> importGit;
     
     // Prepare phase edges
+    prepareAnalysis -> importScipIndex [label="if indices/\nfound", style="dashed", color="#FF8C00"];
     prepareAnalysis -> executeQueryFunctions;
     prepareAnalysis -> parseCsvFunctions;
     

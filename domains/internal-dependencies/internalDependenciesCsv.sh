@@ -271,6 +271,43 @@ if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_DEV_PROJECTION}" 
     time topologicalSort "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
 fi
 
+# -- SCIP Internal Type Topological Sort ----------------------------------
+
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Type"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-topology"
+SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
+SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+    time topologicalSort "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+fi
+
+# -- SCIP Module Topological Sort -----------------------------------------
+
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-topology"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    time topologicalSort "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+fi
+
+# -- SCIP Artifact Topological Sort ----------------------------------------
+
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-topology"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    time topologicalSort "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+fi
+
 # ── Object-Oriented Design Metrics ───────────────────────────────────────────────────────
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing Object-Oriented design metrics..."

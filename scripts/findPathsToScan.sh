@@ -10,6 +10,7 @@ set -o errexit -o pipefail
 
 ARTIFACTS_DIRECTORY=${ARTIFACTS_DIRECTORY:-"artifacts"}
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"}
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"}
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -19,13 +20,12 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 echo "findPathsToScan SCRIPTS_DIR=${SCRIPTS_DIR}" >&2
 
 # This function returns the argument followed by a comma (separator) if it is not empty 
-# and just an empty string otherwise.
+# and just an empty string otherwise. Always returns 0 to work with set -o errexit.
 appendNonEmpty() {
     if [ -n "${1}" ] ; then
-        echo "${1},"
-    else
-        echo ""
+        printf "%s," "${1}"
     fi
+    return 0
 }
 
 findPackageJsonFiles() {
@@ -40,7 +40,7 @@ findPackageJsonFiles() {
       -type d -name ".git" -prune -o \
       -name 'package.json' \
       -print0 | \
-      xargs -0 -r -I {} echo {}
+      xargs -0 -r -n1 echo
 }
 
 # Collect all files and directories to scan
@@ -57,7 +57,8 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
     # Scan package.json files for npm (nodes package manager) in the source directory
     # Since the following issue had been resolved, the scan can be done here again:
     # https://github.com/jqassistant-plugin/jqassistant-npm-plugin/issues/5
-    npmPackageJsonFiles="$(findPackageJsonFiles "./${SOURCE_DIRECTORY}")"
+    npmPackageJsonFiles="$(findPackageJsonFiles "./${SOURCE_DIRECTORY}" | tr '\n' ',')"
+    npmPackageJsonFiles="${npmPackageJsonFiles%,}"  # Remove trailing comma
     if [ -n "${npmPackageJsonFiles}" ]; then
        directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${npmPackageJsonFiles}"
     fi
@@ -74,20 +75,22 @@ if [ -d "./${SOURCE_DIRECTORY}" ] ; then
                                     -type d -name ".git" -prune -o \
                                     -type d -name "temp" -prune -o \
                                     -type f -path "*/.reports/jqa/ts-output.json" \
-                                    -exec echo typescript:project::{} \; | tr '\n' ',' | sed 's/,$/\n/')"
+                                    -exec echo typescript:project::{} \; | tr '\n' ',')"
+    typescriptAnalysisFiles="${typescriptAnalysisFiles%,}"  # Remove trailing comma
 
     if [ -n "${typescriptAnalysisFiles}" ]; then
         directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${typescriptAnalysisFiles}"
     fi
 
     # Scan git repositories in the artifacts directory
-    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "plugin" ] ; then
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" = "" ] || [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" = "plugin" ] ; then
         gitDirectories="$(find -L "./${SOURCE_DIRECTORY}" \
                                 -type d -name "node_modules" -prune -o \
                                 -type d -name "dist" -prune -o \
                                 -type d -name "target" -prune -o \
                                 -type d -name "temp" -prune -o \
-                                -type d -name ".git" -exec echo {} \; | tr '\n' ',' | sed 's/,$/\n/')"
+                                -type d -name ".git" -exec echo {} \; | tr '\n' ',')"
+        gitDirectories="${gitDirectories%,}"  # Remove trailing comma
         if [ -n "${gitDirectories}" ]; then
             directoriesAndFilesToScan="$(appendNonEmpty "${directoriesAndFilesToScan}")${gitDirectories}"
         fi
@@ -96,4 +99,4 @@ else
     echo "findPathsToScan: Source directory ${SOURCE_DIRECTORY} doesn't exist and will therefore be skipped." >&2
 fi
 
-echo -n "${directoriesAndFilesToScan}"
+printf "%s" "${directoriesAndFilesToScan}"

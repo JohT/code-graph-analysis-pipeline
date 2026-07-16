@@ -92,7 +92,15 @@ if [ -z "${paths}" ]; then
 fi
 
 # Check all paths if they are valid files or valid directories
-for path in ${paths//,/ }; do
+# NOTE: Must use array-based iteration (not simple word splitting with ${paths//,/ })
+# because parent scripts set IFS=$'\n\t' which breaks space-based word splitting.
+# Convert comma-separated string to array
+oldIFS="$IFS"
+IFS=','
+read -ra paths_array <<< "${paths}"
+IFS="${oldIFS}"
+
+for path in "${paths_array[@]}"; do
     pathWithoutProtocolPrefix=${path/#*::/}
     if [ -f "${pathWithoutProtocolPrefix}" ] ; then
       continue # Valid file
@@ -165,7 +173,14 @@ get_md5_checksum_of_all_file_names_and_sizes() {
   local all_files_and_sizes=""
   local processed_paths=0
 
-  for path in ${paths//,/ }; do
+  # Must use array-based iteration (not simple word splitting with ${paths//,/ })
+  # because parent scripts set IFS=$'\n\t' which breaks space-based word splitting.
+  local oldIFS="$IFS"
+  IFS=','
+  read -ra paths_array <<< "$paths"
+  IFS="$oldIFS"
+
+  for path in "${paths_array[@]}"; do
       pathWithoutProtocolPrefix=${path/#*::/}
       local files_and_their_size; files_and_their_size=$(file_names_and_sizes "${pathWithoutProtocolPrefix}")
       all_files_and_sizes="${all_files_and_sizes}${files_and_their_size}"

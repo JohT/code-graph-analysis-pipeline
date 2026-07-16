@@ -112,7 +112,7 @@ assemble_node_embeddings_report() {
 
     {
         cypher_table "${STATISTICS_CYPHER_DIR}/Embedding_properties_overview.cypher"
-        csv_link "Package_Embeddings_Label_Random_Projection.csv"
+        csv_link "Package_Embeddings_Fast_Random_Projection.csv"
     } > "${report_include_directory}/EmbeddingPropertiesOverview.md"
 
     # ── Combined embeddings + community + centrality ───────────────────────

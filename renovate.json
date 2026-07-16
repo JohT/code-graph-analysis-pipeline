@@ -74,7 +74,7 @@
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "AXON_FRAMEWORK_VERSION:\\s+?(?<currentValue>.*?)\\s+"
@@ -88,7 +88,7 @@
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "REACT_ROUTER_VERSION:\\s+?(?<currentValue>.*?)\\s+"
@@ -102,7 +102,7 @@
       "customType": "regex",
       "fileMatch": [
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "mambaforge:\\s+?(?<currentValue>.*?)\\s+"
@@ -183,14 +183,40 @@
       "datasourceTemplate": "maven"
     },
     {
+      "description": "Update SCIP_VERSION environment variable in GitHub Actions workflows",
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "SCIP_VERSION:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "scip-code/scip",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "description": "Update SCIP_VERSION constant in shell scripts within scip-index-import domain",
+      "customType": "regex",
+      "fileMatch": [
+        "^domains/scip-index-import/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "SCIP_VERSION=\\$\\{SCIP_VERSION:-\\\"?(?<currentValue>.*?)\\\"?\\}"
+      ],
+      "depNameTemplate": "scip-code/scip",
+      "datasourceTemplate": "github-releases"
+    },
+    {
       "description": "Update npx command package versions",
       "customType": "regex",
       "fileMatch": [
         "^scripts/[^/]*\\.sh$",
         "^scripts/visualization/[^/]*\\.sh$",
+        "^scripts/examples/[^/]*\\.sh$",
         "^domains/anomaly-detection/documentation/[^/]*\\.sh$",
         "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
-        "(^|\\/)action\\.ya?ml$]"
+        "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
         "npx\\s+--yes\\s+(--package\\s+)?(-p\\s+)?(?<depName>@?[^@]+)@(?<currentValue>.*?)($|\\s+)",

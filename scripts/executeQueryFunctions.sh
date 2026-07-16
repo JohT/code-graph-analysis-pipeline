@@ -5,7 +5,11 @@
 # Requires executeQuery.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+# Treat unbound variables as errors ("nounset")
+set -o errexit -o pipefail -o nounset
+
+# Set safe word-splitting
+IFS=$'\n\t'
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -66,7 +70,11 @@ execute_cypher_http() {
 # Function to execute a cypher query from the given file (first and only argument) 
 # and returning number of resulting lines using Neo4j's HTTP API
 execute_cypher_http_number_of_lines_in_result() {
-    results=$( execute_cypher_http "${@}" | wc -l | awk '{print $1}' ) # "${@}"= Get all function arguments and forward them
+    local temp_output
+    if ! temp_output=$( execute_cypher_http "${@}" ); then # "${@}"= Get all function arguments and forward them
+        return 1
+    fi
+    results=$( echo "${temp_output}" | wc -l | awk '{print $1}' )
     results=$((results - 1))
     echo "${results}"
 }
@@ -95,6 +103,7 @@ execute_cypher_http_expect_results() {
 # Takes one or more filenames as first arguments followed by optional query parameters (key=value).
 execute_cypher_http_queries_until_results() {
     local cypherFileNames=""
+    local remaining=""
     
     while [[ $# -gt 0 ]]; do
         arg="${1}" # Get the value of the current argument
@@ -103,23 +112,26 @@ execute_cypher_http_queries_until_results() {
             # The argument doesn't contain an equal sign and 
             # is therefore considered to be a filename (first arguments).
             cypherFileNames+="\n${arg}"
+            shift # iterate to the next argument
         else
             # The argument contains an equal sign and is therefore the first query parameter.
-            # Keep the argument pointer unchanged (no shift) to use ${@} for all remaining arguments.
+            # Save remaining arguments for use in subshell, then stop processing filenames.
+            remaining="${*}"
             break;
         fi
-        shift # iterate to the next argument
     done
     cypherFileNames="${cypherFileNames#'\n'}" # remove the leading new line character
 
     # echo -e "debug execute_cypher_http_queries_until_results: ------------------"
     # echo -e "debug execute_cypher_http_queries_until_results: cypherFileNames=${cypherFileNames}"
-    # echo -e "debug execute_cypher_http_queries_until_results: additional arguments=${*}"
+    # echo -e "debug execute_cypher_http_queries_until_results: remaining=${remaining}"
     # echo -e "debug execute_cypher_http_queries_until_results: ------------------"
 
     echo -e "${cypherFileNames}" | while read -r cypherFileName; do
         # echo "debug execute_cypher_until_results: execute cypherFileName=${cypherFileName}"
-        results=$( execute_cypher_http "${cypherFileName}" "${@}" )
+        # Word splitting intentional: expanding remaining parameters as separate arguments
+        # shellcheck disable=SC2086
+        results=$( execute_cypher_http "${cypherFileName}" ${remaining} )
         # echo "debug execute_cypher_http_queries_until_results: results=${results}"
 
         resultsCount=$(echo "${results}" | wc -l)

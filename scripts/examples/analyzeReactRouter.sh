@@ -11,7 +11,8 @@
 # Requires: init.sh, downloadReactRouter.sh, analyze.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
+IFS=$'\n\t'
 
 # Local constants
 SCRIPT_NAME=$(basename "${0}")

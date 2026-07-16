@@ -17,6 +17,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Analyze static code structure as a graph
 - Supports Java Code Analysis
 - Supports Typescript Code Analysis (experimental)
+- Supports multi-language analysis via [SCIP](https://scip.dev) (Go, Rust, C++, Ruby, Python, C# + more) — see [SCIP.md](SCIP.md)
 - Fully automated [pipeline for Java](./.github/workflows/internal-java-code-analysis.yml) from tool installation to report generation
 - Fully automated [pipeline for Typescript](./.github/workflows/internal-typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
@@ -32,6 +33,7 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Comprehensive list of [Cypher queries](./CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 - Example analysis for [react-router](https://github.com/remix-run/react-router)
+- Example SCIP-based analysis via [analyzeReactRouterScip.sh](./scripts/examples/analyzeReactRouterScip.sh)
 
 ### :newspaper: News
 
@@ -180,6 +182,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - Download artifacts and optionally source code that contain the code to be analyzed [scripts/downloader](./scripts/downloader)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.github.io/jqassistant/current) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
+- Setup [SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) for multi-language type graph import ([SCIP.md](./SCIP.md))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Uses [Neo4j Graph Data Science](https://neo4j.com/product/graph-data-science) for community detection, centrality, similarity, node embeddings and topological sort ([analysis.sh](./scripts/analysis/analyze.sh))

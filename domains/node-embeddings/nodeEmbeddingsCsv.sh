@@ -106,7 +106,7 @@ nodeEmbeddingsWithFastRandomProjection() {
     # Stream to CSV
     local nodeLabel
     nodeLabel=$(extractQueryParameter "dependencies_projection_node" "${@}")
-    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Embeddings_Label_Random_Projection.csv"
+    execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_8_Stream_Mutated.cypher" "${@}" "${writePropertyName}" > "${FULL_REPORT_DIRECTORY}/${nodeLabel}_Embeddings_Fast_Random_Projection.csv"
 
     # Update Graph (node properties) using the already mutated property projection
     execute_cypher "${PROJECTION_CYPHER_DIR}/Dependencies_9_Write_Mutated.cypher" "${@}" "${writePropertyName}"
@@ -336,6 +336,43 @@ MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=32"
 
 if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
     runNodeEmbeddingsForLayer "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}" "${MODULE_DIMENSIONS_HASHGNN}"
+fi
+
+# ── SCIP Internal Type Node Embeddings ────────────────────────────────────────
+
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-embeddings"
+SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
+SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
+SCIP_TYPE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"
+
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
+    runNodeEmbeddingsForLayer "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}" "${SCIP_TYPE_DIMENSIONS}" "${SCIP_TYPE_DIMENSIONS_HASHGNN}"
+fi
+
+# ── SCIP Module Node Embeddings ───────────────────────────────────────────────────
+
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-embeddings"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_MODULE_DIMENSIONS="dependencies_projection_embedding_dimension=32"
+SCIP_MODULE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
+
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    runNodeEmbeddingsForLayer "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" "${SCIP_MODULE_DIMENSIONS}" "${SCIP_MODULE_DIMENSIONS_HASHGNN}"
+fi
+
+# ── SCIP Artifact Node Embeddings ──────────────────────────────────────────────────
+
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-embeddings"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_ARTIFACT_DIMENSIONS="dependencies_projection_embedding_dimension=32"
+SCIP_ARTIFACT_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=64"
+
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    runNodeEmbeddingsForLayer "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" "${SCIP_ARTIFACT_DIMENSIONS}" "${SCIP_ARTIFACT_DIMENSIONS_HASHGNN}"
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────

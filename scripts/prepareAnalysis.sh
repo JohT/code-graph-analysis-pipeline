@@ -5,7 +5,8 @@
 # Requires executeQueryFunctions.sh, parseCsvFunctions.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
+IFS=$'\n\t'
 
 # Overrideable Defaults
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"full"} # Select how to import git log data. Options: "none", "aggregated", "full". Default="full".
@@ -45,7 +46,7 @@ COLOR_YELLOW='\033[0;33m'
 COLOR_DEFAULT='\033[0m'
 
 # Preparation - Data verification: DEPENDS_ON relationships
-dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPENDS_ON_relationships.cypher" "${@}")
+dataVerificationResult=$( execute_cypher "${CYPHER_DIR}/Data_verification_DEPENDS_ON_relationships.cypher" ${@:+"${@}"})
 if ! is_csv_column_greater_zero "${dataVerificationResult}" "sourceNodeCount"; then
     echo -e "${COLOR_RED}prepareAnalysis: Error: Data verification failed. At least one DEPENDS_ON relationship is required. Check if the artifacts directory is empty or if the scan failed.${COLOR_DEFAULT}"
     echo -e "${COLOR_RED}${dataVerificationResult}${COLOR_DEFAULT}"
@@ -85,7 +86,7 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Enrich_npm_packages_with_dependency_cou
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Remove_npm_dependency_type_labels.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Label_npm_packages_by_dep_type.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Link_projects_to_npm_packages.cypher"
-dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" "${@}")
+dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_projects_linked_to_npm_packages.cypher" ${@:+\"${@}\"})
 if is_result_and_csv_column_greater_zero "${dataVerificationResult}" "unresolvedProjectsCount"; then
     # Warning: There are TypeScript projects that are not linked to NPM Packages (unresolvedProjectsCount is greater than zero).
     #          It is possible to have projects with a tsconfig.json file but without a package.json e.g. for testing purposes.
@@ -101,7 +102,7 @@ execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_IS_IMPLEMENTED_IN_relationship_for_matching_declarations.cypher"
 execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Add_DEPENDS_ON_relationship_to_resolved_modules.cypher"
 
-dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_module_dependencies.cypher" "${@}")
+dataVerificationResult=$( execute_cypher "${TYPESCRIPT_CYPHER_DIR}/Verify_module_dependencies.cypher" ${@:+\"${@}\"})
 if ! is_csv_column_greater_zero "${dataVerificationResult}" "typescriptModuleDependenciesValid"; then
     # Warning: Very small TypeScript projects might not have dependencies between their modules.
     #          Therefore, it will only be a warning even though for example anomaly detection will not lead to any useable results.

@@ -47,11 +47,11 @@ fi
 # Internal constants
 JQASSISTANT_INSTALLATION_NAME="${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_INSTALLATION_NAME}"
+jqassistant_cli_fulldownload_file="${JQASSISTANT_INSTALLATION_NAME}.zip"
 
 # Download and unpack jQAssistant
 if [ ! -d "${JQASSISTANT_INSTALLATION_DIRECTORY}" ] ; then    
     jqassistant_cli_fulldownload_url=${JQASSISTANT_CLI_DOWNLOAD_URL}/${JQASSISTANT_CLI_ARTIFACT}/${JQASSISTANT_CLI_VERSION}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}-${JQASSISTANT_CLI_DISTRIBUTION}
-    jqassistant_cli_fulldownload_file="${JQASSISTANT_INSTALLATION_NAME}.zip"
     source "${SCRIPTS_DIR}/download.sh" --url "${jqassistant_cli_fulldownload_url}" --filename "${jqassistant_cli_fulldownload_file}"
 
     # Unpack the ZIP file (-q option for less verbose output)

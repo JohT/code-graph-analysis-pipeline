@@ -1,0 +1,12 @@
+// Link SemanticCodeIndexModule nodes to their contained SemanticCodeIndexInternalType nodes via CONTAINS. Requires "Create_SCIP_Module_Nodes_For_Internal_Types.cypher" and "Import_SCIP_Type_Internal_Nodes.cypher".
+
+MATCH (t:SCIP:SemanticCodeIndexInternalType)
+ WITH t
+     ,CASE 
+        WHEN t.file CONTAINS '/'
+        THEN left(t.file, size(t.file) - size(split(t.file, '/')[-1]) - 1)
+        ELSE null
+      END AS directoryPath
+MATCH (m:SCIP:SemanticCodeIndexModule {fqn: directoryPath})
+MERGE (m)-[:CONTAINS]->(t)
+RETURN count(*) AS writtenRelationships
