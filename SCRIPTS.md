@@ -68,6 +68,10 @@ Script | Directory | Description
 [overviewMarkdown.sh](./domains/overview/overviewMarkdown.sh) | overview | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [overviewPython.sh](./domains/overview/overviewPython.sh) | overview | Generates overview charts as SVG files by executing overviewCharts.py.
 [overviewSummary.sh](./domains/overview/summary/overviewSummary.sh) | summary | Creates a Markdown report summarising overview metrics: node label and relationship type
+[convertScipIndexToCsvForNeo4jImport.sh](./domains/scip-index-import/convertScipIndexToCsvForNeo4jImport.sh) | scip-index-import | Converts SCIP JSON index files (*.scip.json) in INDICES_DIRECTORY to Neo4j import CSVs in IMPORT_DIRECTORY.
+[importScipIndexData.sh](./domains/scip-index-import/importScipIndexData.sh) | scip-index-import | Imports SCIP type-graph CSV data into Neo4j and enriches it for projection compatibility.
+[installScipCli.sh](./domains/scip-index-import/installScipCli.sh) | scip-index-import | Downloads the scip CLI binary to BIN_DIR (default: TOOLS_DIRECTORY/scip-cli within analysis workspace).
+[testConvertScipIndexToCsvForNeo4jImport.sh](./domains/scip-index-import/testConvertScipIndexToCsvForNeo4jImport.sh) | scip-index-import | Tests convertScipIndexToCsvForNeo4jImport.sh: validation, CSV columns, multi-file merge.
 [init.sh](./init.sh) |  | Initializes a new analysis project by creating all necessary directories based on the given input parameter with the analysis name. 
 [activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Python scripts.
 [activateUvEnvironment.sh](./scripts/activateUvEnvironment.sh) | scripts | Activates the uv-managed .venv environment with all packages from pyproject.toml necessary to run the included Python scripts.
@@ -91,6 +95,8 @@ Script | Directory | Description
 [analyzeAntDesign.sh](./scripts/examples/analyzeAntDesign.sh) | examples | This is an example for the analysis of a the Typescript project "ant-design".
 [analyzeAxonFramework.sh](./scripts/examples/analyzeAxonFramework.sh) | examples | This is an example for the analysis of the Java event-sourcing library "AxonFramework". 
 [analyzeReactRouter.sh](./scripts/examples/analyzeReactRouter.sh) | examples | This is an example for the analysis of a the Typescript project "react-router".
+[analyzeReactRouterScip.sh](./scripts/examples/analyzeReactRouterScip.sh) | examples | Analyzes the TypeScript project "react-router" using SCIP-based type graph analysis.
+[createScipIndexTypescript.sh](./scripts/examples/createScipIndexTypescript.sh) | examples | Generates a SCIP index for a TypeScript project using scip-typescript (via npx).
 [detectLatestGitTag.sh](./scripts/examples/detectLatestGitTag.sh) | examples | Returns the latest tag of a remote repository given by its url.
 [executeQuery.sh](./scripts/executeQuery.sh) | scripts | Utilizes Neo4j's HTTP API to execute a Cypher query from an input file and provides the results in CSV format.
 [executeQueryFunctions.sh](./scripts/executeQueryFunctions.sh) | scripts | Provides functions to execute Cypher queries using either "executeQuery.sh" or Neo4j's "cypher-shell". 
