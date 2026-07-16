@@ -48,6 +48,9 @@ digraph GettingStartedFlow {
     prepare_typescript [label="TypeScript Code" fillcolor="#FFB74D" fontcolor="white" shape=box]
     ts_option [label="Symlink or copy to\n./source" fillcolor="#FFB74D" fontcolor="white" shape=box]
     
+    prepare_scip [label="SCIP Indices\n(Multi-language)" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    scip_option [label="Place .scip.json in\n./indices" fillcolor="#FFB74D" fontcolor="white" shape=box]
+    
     prepare_git [label="Git History" fillcolor="#FFB74D" fontcolor="white" shape=box]
     git_option [label="Symlink or clone to\n./source\n(use --bare for Java)" fillcolor="#FFB74D" fontcolor="white" shape=box]
     
@@ -98,16 +101,19 @@ digraph GettingStartedFlow {
   // ============ Setup to Prepare ============
   cd_analysis -> prepare_java
   cd_analysis -> prepare_typescript
+  cd_analysis -> prepare_scip
   cd_analysis -> prepare_git
   cd_analysis -> download_alt [style=dashed label="alternative"]
 
   // ============ Prepare Phase ============
   prepare_java -> artifacts_dir
   prepare_typescript -> ts_option
+  prepare_scip -> scip_option
   prepare_git -> git_option
   
   artifacts_dir -> analyze_script
   ts_option -> analyze_script
+  scip_option -> analyze_script
   git_option -> analyze_script
   download_alt -> analyze_script [style=dashed]
 

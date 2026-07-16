@@ -182,6 +182,7 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - Download artifacts and optionally source code that contain the code to be analyzed [scripts/downloader](./scripts/downloader)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.github.io/jqassistant/current) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
+- Setup [SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) for multi-language type graph import ([SCIP.md](./SCIP.md))
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Uses [Neo4j Graph Data Science](https://neo4j.com/product/graph-data-science) for community detection, centrality, similarity, node embeddings and topological sort ([analysis.sh](./scripts/analysis/analyze.sh))
