@@ -50,6 +50,9 @@ NEO4J_OPEN_GDS_PLUGIN_VERSION | 2.26.0 | Graph Data Science (GDS) Plugin Version
 NEO4J_GDS_PLUGIN_EDITION | open | Graph Data Science (GDS) Plugin Edition: "open" for OpenGDS, "full" for the full version with Neo4j license
 NODE_EMBEDDINGS_SUMMARY_DIR | ${NODE_EMBEDDINGS_SCRIPT_DIR}/summary | 
 OVERVIEW_SUMMARY_DIR | ${OVERVIEW_SCRIPT_DIR}/summary | 
+INDICES_DIRECTORY | ./indices | 
+SCIP_VERSION | 0.9.0 | 
+BIN_DIR | ${TOOLS_DIRECTORY}/scip-cli | 
 ARTIFACTS_DIRECTORY | artifacts | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 PYTHON_PACKAGE_MANAGER | uv | Python package manager to use. Options: "uv" (default), "conda". Use "conda" to activate the Conda environment.
@@ -63,6 +66,7 @@ LOG_GROUP_END | ::endgroup:: | Prefix to end a log group. Defaults to GitHub Act
 DOMAINS_DIRECTORY | ${SCRIPTS_DIR}/../domains | 
 ARTIFACTS_CHANGE_DETECTION_HASH_FILE | artifactsChangeDetectionHash.txt | !DEPRECATED! Use CHANGE_DETECTION_HASH_FILE.
 CHANGE_DETECTION_HASH_FILE_PATH | ./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE} | Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option.
+SCIP_BINARY | ${TOOLS_DIRECTORY}/scip-cli/scip | 
 NEO4J_HTTP_TRANSACTION_ENDPOINT | db/neo4j/tx/commit | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
 JQASSISTANT_CLI_VERSION | 2.9.0 | 
 JQASSISTANT_CLI_ARTIFACT | jqassistant-commandline-neo4jv5 | 
