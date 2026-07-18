@@ -171,7 +171,13 @@ postGitLogImport() {
   
   echo "importGit: Classify git commits (e.g. isMergeCommit, isAutomatedCommit)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_commit_classification_properties.cypher"
-  
+
+  echo "importGit: Add updateCommitCount property to file nodes and code nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_file_update_commits.cypher"
+
+  echo "importGit: Creating relationships to file nodes that were changed together (CSV log schema)..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher"
+
   commonPostGitImport
 }
 
