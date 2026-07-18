@@ -20,6 +20,11 @@
 #       This makes it possible to run an analysis with e.g. Neo4j v4 or v5. Further profiles might come in future.
 #       Implemented is this as a script in "scripts/profiles" that starts with the settings profile name followed by ".sh".
 
+# Note: The argument "--skip-jqassistant" is optional. It is a switch that is deactivated by default.
+#       When activated, jQAssistant download, setup, and scan are skipped entirely.
+#       RECOMMENDED for SCIP index analysis (already jQA-free). Combine with CSV git history from the source/ directory.
+#       Use only when you have *.scip.json files in indices/ and do not need Java/TypeScript artifact scanning.
+
 # Note: The argument "--explore" is optional. It is a switch that is deactivated by default.
 #       It activates "explore" mode where no reports are executed and Neo4j keeps running (skip stop step).
 #       This makes it easy to just set everything up but then use the running Neo4j server to explore the data manually.
@@ -42,6 +47,7 @@
 #       Existing downloads, installations, scans and processes will be detected.
 
 # Requires domains/neo4j-management/setupNeo4j.sh,setupJQAssistant.sh,domains/neo4j-management/startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,domains/neo4j-management/stopNeo4j.sh,compilations/*.sh,profiles/*.sh
+# Optional: --skip-jqassistant skips setupJQAssistant.sh and resetAndScanChanged.sh; exports SKIP_JQASSISTANT=true
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -74,6 +80,9 @@ usage() {
   echo "  --exclude-domain <list>   Comma-separated list of domain names to skip. Default (no --domain): anomaly-detection,node-embeddings,graph-algorithms"
   echo "                            Default (with --domain): empty (no exclusions). Pass \"\" to skip nothing."
   echo "                            Exported as ANALYSIS_DOMAINS_TO_SKIP."
+  echo "  --skip-jqassistant        (RECOMMENDED for SCIP) Skip jQAssistant download, setup, and scan."
+  echo "                            Use for SCIP index analysis (*.scip.json in indices/) without Java/TypeScript artifacts."
+  echo "                            Exports SKIP_JQASSISTANT=true for downstream scripts."
   echo "  --explore                 Skip report generation and keep Neo4j running for manual exploration."
   echo "  --keep-running            Keep Neo4j running after the analysis completes."
   echo "  --help                    Print this usage information and exit."
@@ -94,6 +103,8 @@ usage() {
   echo "    # Skip SCIP index import even when indices/ contains .scip.json files"
   echo "  $0 --exclude-domain \"\""
   echo "    # Run all domains (override default exclusions)"
+  echo "  $0 --skip-jqassistant --report Csv"
+  echo "    # SCIP index or git-only analysis without jQAssistant"
   echo "  $0 --help"
   echo "    # Print this help and exit 0"
   exit "${exitCode}"
@@ -105,6 +116,7 @@ settingsProfile="Default"
 selectedAnalysisDomain=""
 exploreMode=false
 keepRunning=false
+skipJQAssistant=false
 excludeDomainsExplicitlySet=false
 selectedExcludedDomains=""
 
@@ -136,13 +148,14 @@ while [[ $# -gt 0 ]]; do
       settingsProfile="$2"
       shift
       ;;
+    --skip-jqassistant)
+      skipJQAssistant=true
+      ;;
     --explore)
       exploreMode=true
-      shift
       ;;
     --keep-running)
       keepRunning=true
-      shift
       ;;
     --domain)
       if is_missing_value_parameter "$1" "$2"; then
@@ -240,6 +253,7 @@ echo "analyze: settingsProfile=${settingsProfile}"
 echo "analyze: selectedAnalysisDomain=${selectedAnalysisDomain}"
 echo "analyze: exploreMode=${exploreMode}"
 echo "analyze: keepRunning=${keepRunning}"
+echo "analyze: skipJQAssistant=${skipJQAssistant}"
 
 # Print warning if --explore and --keep-running are used together
 if ${exploreMode} && ${keepRunning}; then
@@ -334,16 +348,28 @@ echo "analyze: Using analysis settings profile script ${SETTINGS_PROFILE_SCRIPT}
 source "${SETTINGS_PROFILE_SCRIPT}"
 echo "${LOG_GROUP_END}"
 
+# Export skip flag for downstream scripts
+export SKIP_JQASSISTANT="${skipJQAssistant}"
+echo "analyze: SKIP_JQASSISTANT=${SKIP_JQASSISTANT}"
+
 # Setup Tools
 echo "${LOG_GROUP_START}Setup Tools"
 source "${DOMAINS_DIRECTORY}/neo4j-management/setupNeo4j.sh"
-source "${SCRIPTS_DIR}/setupJQAssistant.sh"
+if ! ${skipJQAssistant}; then
+  source "${SCRIPTS_DIR}/setupJQAssistant.sh"
+else
+  echo "analyze: Skipping jQAssistant setup (--skip-jqassistant is set)."
+fi
 source "${DOMAINS_DIRECTORY}/neo4j-management/startNeo4j.sh"
 echo "${LOG_GROUP_END}"
 
 # Scan and analyze artifacts when they were changed
 echo "${LOG_GROUP_START}Scan and Analyze Changed Artifacts"
-source "${SCRIPTS_DIR}/resetAndScanChanged.sh"
+if ! ${skipJQAssistant}; then
+  source "${SCRIPTS_DIR}/resetAndScanChanged.sh"
+else
+  echo "analyze: Skipping jQAssistant scan (--skip-jqassistant is set)."
+fi
 echo "${LOG_GROUP_END}"
 
 # Import SCIP index data when indices/ contains *.scip.json files and the domain is not excluded.

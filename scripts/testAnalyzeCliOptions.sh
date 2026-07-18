@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Tests "--exclude-domain" and "--help" command line options of "analyze.sh".
+# Tests "--exclude-domain", "--skip-jqassistant", and "--help" command line options of "analyze.sh".
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail
@@ -287,6 +287,39 @@ info "${test_case_number}.) --exclude-domain with comma-separated list including
 analyzeExpectingFailureUnderTest --exclude-domain "valid-test-domain,nonexistent-domain"
 if ! grep -q "Error" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
   fail "${test_case_number}.) Test failed: Expected error for unknown excluded domain 'nonexistent-domain' in list."
+fi
+
+# -------- Test case 14 --------
+test_case_number=14
+echo ""
+info "${test_case_number}.) --skip-jqassistant alone should be accepted (exit 0) and set SKIP_JQASSISTANT=true."
+
+analyzeExpectingSuccessUnderTest --skip-jqassistant
+if ! grep -q "SKIP_JQASSISTANT=true" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected SKIP_JQASSISTANT=true in log output."
+fi
+
+# -------- Test case 15 --------
+test_case_number=15
+echo ""
+info "${test_case_number}.) --skip-jqassistant combined with --domain should be accepted (exit 0)."
+
+analyzeExpectingSuccessUnderTest --skip-jqassistant --domain "valid-test-domain" --explore
+if ! grep -q "SKIP_JQASSISTANT=true" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected SKIP_JQASSISTANT=true in log output."
+fi
+if ! grep -q "ANALYSIS_DOMAIN=valid-test-domain" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected ANALYSIS_DOMAIN=valid-test-domain in log output."
+fi
+
+# -------- Test case 16 --------
+test_case_number=16
+echo ""
+info "${test_case_number}.) --help output should document --skip-jqassistant."
+
+analyzeExpectingExitCodeUnderTest 0 --help
+if ! grep -q "\-\-skip-jqassistant" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected usage output to document --skip-jqassistant but it did not."
 fi
 
 successful

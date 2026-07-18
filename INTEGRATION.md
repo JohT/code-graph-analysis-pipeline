@@ -20,6 +20,8 @@ You can find examples in:
 
 - [internal-java-code-analysis.yml](./.github/workflows/internal-java-code-analysis.yml)
 - [internal-typescript-code-analysis.yml](./.github/workflows/internal-typescript-code-analysis.yml)
+- [internal-scip-index-code-example.yml](./.github/workflows/internal-scip-index-code-example.yml) — Tests SCIP index analysis with git history and CSV reports (recommended SCIP use case)
+- [internal-scip-jqassistant-typescript-code-example.yml](./.github/workflows/internal-scip-jqassistant-typescript-code-example.yml) — Tests SCIP combined with jQAssistant TypeScript scanning
 
 :warning: Note: Workflows with names starting with `internal-` are private and should not be used outside this repository. They may change at any time without notice.
 
