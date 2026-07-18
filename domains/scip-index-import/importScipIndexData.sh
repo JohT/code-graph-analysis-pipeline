@@ -129,22 +129,22 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP artifact 
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Artifact_Is_External.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP module dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Module_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Module_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP module dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Module_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Module_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP artifact dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Artifact_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP artifact dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Artifact_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency degree..."
-execute_cypher "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency degree rank..."
-execute_cypher "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') SCIP index import complete."
 
