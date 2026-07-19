@@ -360,6 +360,15 @@ if ! ${skipJQAssistant}; then
 else
   echo "analyze: Skipping jQAssistant setup (--skip-jqassistant is set)."
 fi
+
+# Pre-start bulk SCIP import (fast path when DB is empty and neo4j-admin is available)
+# Only attempt when --skip-jqassistant is set, since resetAndScanChanged.sh would invalidate the import
+# by deleting the SCIP change detection hash. Also requires SCIP index files and domain not skipped.
+scip_index_file_prestart=$(find "${INDICES_DIRECTORY}" -maxdepth 1 -name '*.scip.json' -type f 2>/dev/null | head -1 || true)
+if [ -n "${scip_index_file_prestart}" ] && [[ ",${ANALYSIS_DOMAINS_TO_SKIP}," != *",scip-index-import,"* ]] && ${skipJQAssistant}; then
+    source "${DOMAINS_DIRECTORY}/scip-index-import/importScipIndexDataWithAdminImport.sh"
+fi
+
 source "${DOMAINS_DIRECTORY}/neo4j-management/startNeo4j.sh"
 echo "${LOG_GROUP_END}"
 

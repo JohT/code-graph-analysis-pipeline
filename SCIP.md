@@ -104,6 +104,14 @@ If you pass a binary `.scip` file by mistake, convert it first:
 scip print --json index.scip > index.scip.json
 ```
 
+## Performance
+
+For the **initial import** (empty database), the pipeline uses `neo4j-admin database import full` **before Neo4j starts** when all conditions are met (Neo4j v5+, `neo4j-admin` executable, empty database, indices changed). This writes the native store format directly — measurably faster than LOAD CSV for large indices.
+
+On repeat runs (unchanged index) or when the database already has data, the fast path is skipped automatically. The regular LOAD CSV path always runs as a fallback.
+
+See [domains/scip-index-import/README.md](domains/scip-index-import/README.md#fast-import-via-neo4j-admin) for full details.
+
 ## Troubleshooting
 
 **`jq` not found**
