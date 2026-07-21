@@ -70,6 +70,30 @@ This domain requires the following to be in place before running. See [PREREQUIS
 - `isMergeCommit`, `isAutomatedCommit` classification properties on commits
 - General enrichment: `name`, `extension` properties on `File` nodes
 
+## Git Import Modes and Enrichment
+
+The `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` environment variable controls how git data is imported:
+
+| Mode | Description |
+|------|-------------|
+| `plugin` (default) | jQAssistant git plugin — recommended; schema: `(Git:Commit)-[:CONTAINS_CHANGE]->(Git:Change)-[:UPDATES]->(Git:File)`, property: `relativePath` |
+| `full` | CSV git log with every commit — schema: `(Git:Log:Commit)-[:CONTAINS_CHANGED]->(Git:Log:File)`, property: `fileName` |
+| `aggregated` | Pre-aggregated CSV git log — no commit-level granularity; `CHANGED_TOGETHER_WITH` cannot be computed |
+| `none` | Skip git import entirely |
+
+### CSV `full` Mode Enrichment (`postGitLogImport`)
+
+When `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (CSV mode), the following enrichment steps run in `importGit.sh`:
+
+1. `Set_number_of_git_log_commits.cypher` — sets `numberOfGitCommits` on matching code file nodes.
+2. `Set_commit_classification_properties.cypher` — sets `isMergeCommit`, `isAutomatedCommit` on `Git:Log:Commit` nodes.
+3. `Set_number_of_git_log_file_update_commits.cypher` — sets `updateCommitCount` on `Git:Log:File` and resolved code file nodes.
+4. `Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher` — computes pairwise co-change metrics (confidence, lift, Jaccard, support) and creates `CHANGED_TOGETHER_WITH` relationships between `Git:Log:File` nodes.
+
+The CSV `full` mode queries adapt to the CSV schema (`Git:Log:Commit`, `[:CONTAINS_CHANGED]`, `git_commit.hash`) rather than the plugin schema (`Git:Commit`, `[:CONTAINS_CHANGE]->[:UPDATES]`, `git_commit.sha`). The `commonPostGitImport` function then adds `RESOLVES_TO` relationships and runs validation.
+
+The CSV `full` mode is used automatically when `--skip-jqassistant` is set in `analyze.sh` and a source directory with `.git` is present (default `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` from `prepareAnalysis.sh`).
+
 ## Output
 
 All output is written to `reports/git-history/` relative to the working directory.

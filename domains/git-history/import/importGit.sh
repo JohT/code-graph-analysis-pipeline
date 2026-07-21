@@ -166,13 +166,21 @@ commonPostGitImport() {
 }
 
 postGitLogImport() {
-  echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
-  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_commits.cypher"
-  
+  # Classify commits first: isManualCommit must be set before commonPostGitImport runs CHANGED_TOGETHER_WITH.
   echo "importGit: Classify git commits (e.g. isMergeCommit, isAutomatedCommit)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_commit_classification_properties.cypher"
-  
+
+  # RESOLVES_TO relationships must be created before the number-of-commits and update-count queries.
   commonPostGitImport
+  
+  echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_commits.cypher"
+
+  echo "importGit: Add updateCommitCount property to file nodes and code nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_file_update_commits.cypher"
+
+  echo "importGit: Creating relationships to file nodes that were changed together (CSV log schema)..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher"
 }
 
 postGitPluginImport() {
@@ -187,22 +195,29 @@ postGitPluginImport() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_relative_path.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_absolute_file_name.cypher"
 
+  # Classify commits first: isManualCommit must be set before commonPostGitImport runs CHANGED_TOGETHER_WITH.
   echo "importGit: Classify git commits (e.g. isMergeCommit, isAutomatedCommit)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_commit_classification_properties.cypher"
 
-  echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
-  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
-  echo "importGit: Add updateCommitCount property to file nodes and code nodes with matching file names..."
+  # Set updateCommitCount on git files before CHANGED_TOGETHER_WITH computation needs it
+  echo "importGit: Add updateCommitCount property to git file nodes..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
 
+  # RESOLVES_TO relationships must be created before the number-of-commits and update-count queries.
   commonPostGitImport
+
+  echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
+  echo "importGit: Add updateCommitCount property to code file nodes via RESOLVES_TO..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
 }
 
 postAggregatedGitLogImport() {
+  # RESOLVES_TO relationships must be created first, as they are needed by subsequent queries
+  commonPostGitImport
+  
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
-
-  commonPostGitImport
 }
 
 # Create import directory in case it doesn't exist.

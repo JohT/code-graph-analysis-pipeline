@@ -74,6 +74,7 @@ Here's a quick visual reference for the steps you'll follow:
 - **For multi-language via SCIP:**
   - Generate a SCIP index for your project (see [SCIP.md](./SCIP.md) for instructions).
   - Place the `.scip.json` file(s) in the `indices/` directory. The pipeline detects and imports them automatically.
+  - When analyzing SCIP indices without Java/TypeScript artifacts (no jQAssistant scan needed), use `--skip-jqassistant` to skip jQAssistant download, setup, and scan. See [SCIP Index Analysis Without jQAssistant](#scip-index-analysis-without-jqassistant) below.
 
 - **For git history:**
   - Create a symbolic link inside the `source` directory that points to the repository or clone it into the `source` directory. If you are analyzing Java artifacts (full source not needed), it is sufficient to use a bare clone that only contains the git history without the sources using `git clone --bare`. If you want to focus on one branch, use `--branch branch-name` to checkout the branch and `--single-branch` to only fetch the history of that branch.
@@ -137,6 +138,20 @@ Here's a quick visual reference for the steps you'll follow:
   ```
 
 👉 Open your browser and login to your local Neo4j Web UI (`http://localhost:7474/browser`) with "neo4j" as user and the initial password you've chosen.
+
+## SCIP Index Analysis Without jQAssistant
+
+When analyzing a SCIP index (e.g. TypeScript project) without Java/TypeScript artifact scanning, use `--skip-jqassistant` to skip jQAssistant download, setup, and scan entirely:
+
+1. Place `.scip.json` file(s) in `indices/`.
+2. Optionally, place the repository in `source/` for git history analysis.
+3. Run:
+
+   ```shell
+   ./../../scripts/analysis/analyze.sh --skip-jqassistant --report Csv
+   ```
+
+When a source directory with a `.git` folder is present, git history is automatically imported as CSV (coupling stats, commit counts, `CHANGED_TOGETHER_WITH` relationships). See [domains/scip-index-import/README.md](./domains/scip-index-import/README.md) for SCIP details.
 
 ## :octocat: GitHub Actions
 

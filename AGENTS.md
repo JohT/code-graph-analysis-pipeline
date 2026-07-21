@@ -19,7 +19,7 @@ Java + experimental TypeScript.
 │   └── visualization/              # GraphViz visualization scripts
 └── .github/
     ├── prompts/                     # Planning prompts for domain work
-    └── skills/                      # Agent skills (caveman, neo4j-management)
+    └── skills/                      # Agent skills (neo4j-management)
 ```
 
 Each domain: vertical slice with own entry points, queries, scripts, templates. See domain `README.md` (e.g. [domains/internal-dependencies/README.md](./domains/internal-dependencies/README.md)).

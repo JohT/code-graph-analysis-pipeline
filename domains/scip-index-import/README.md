@@ -68,6 +68,50 @@ domains/scip-index-import/installScipCli.sh --bin-dir /path/to/bin
 | `INDICES_DIRECTORY`| `./indices` | Directory containing `*.scip.json` files |
 | `IMPORT_DIRECTORY` | `./import`  | Neo4j import directory for generated CSVs |
 
+## Fast Import via `neo4j-admin`
+
+For the **initial import** (empty database), `analyze.sh` attempts a fast path using `neo4j-admin database import full` **before Neo4j starts**. This bypasses the transaction log and writes the native store format directly — significantly faster than LOAD CSV for large indices.
+
+### Conditions
+
+All four conditions must be met for the fast path to activate:
+
+| Condition | Details |
+|-----------|---------|
+| SCIP indices changed | Hash check (same as regular change detection) — skips if unchanged |
+| Neo4j v5 or higher | `neo4j-admin database import full` not available on v4 |
+| `neo4j-admin` executable | Found at `${NEO4J_INSTALLATION_DIRECTORY}/bin/neo4j-admin` |
+| Empty database | `${DATA_DIRECTORY}/databases/neo4j/` absent or contains no files |
+
+If **any** condition fails, the fast path is skipped silently and the regular LOAD CSV path runs unchanged.
+
+### What Happens
+
+1. **Pre-start** (`importScipIndexDataWithAdminImport.sh`, sourced before `startNeo4j.sh`):
+   - Converts `*.scip.json` to `scip_type_nodes_admin.csv` and `scip_type_edges_admin.csv` via `convertScipIndexToCsvForNeo4jAdminImport.sh`
+   - `language` and `isTest` are computed in jq (not via Cypher after import)
+   - Runs `neo4j-admin database import full` with the generated CSVs
+   - Exports `SCIP_ADMIN_IMPORT_DONE=true` on success
+
+2. **Post-start** (`importScipIndexData.sh`):
+   - Detects `SCIP_ADMIN_IMPORT_DONE=true`
+   - Skips CSV conversion, cleanup, and LOAD CSV queries
+   - Still creates uniqueness constraints and runs all enrichment/structure queries
+
+### Fallback Behavior
+
+| Scenario | Result |
+|----------|--------|
+| DB already populated | Admin import skipped; LOAD CSV runs (cleanup + re-import) |
+| `neo4j-admin` missing | Admin import skipped; LOAD CSV runs normally |
+| CSV conversion fails | Admin import skipped; LOAD CSV runs normally |
+| `neo4j-admin` command fails | Admin import skipped; LOAD CSV runs normally |
+| Repeat run (unchanged index) | Both paths skipped entirely (hash unchanged) |
+
+### `SCIP_ADMIN_IMPORT_DONE`
+
+Environment variable exported by `importScipIndexDataWithAdminImport.sh` on success. Read by `importScipIndexData.sh` to skip LOAD CSV. Always `unset` at the end of `importScipIndexData.sh` regardless of which path ran.
+
 ## Change Detection and Optimization
 
 `importScipIndexData.sh` includes **change detection** to skip re-import and enrichment when indices have not changed. This saves significant time on repeated `analyze.sh` runs, especially for large indices.
@@ -107,8 +151,11 @@ analyze.sh  # Updates artifacts/ → triggers resetAndScan → deletes hash → 
 domains/scip-index-import/
 ├── README.md                              # This file
 ├── importScipIndexData.sh                 # Entry point: orchestrates CSV conversion + import
-├── convertScipIndexToCsvForNeo4jImport.sh # Converts *.scip.json → scip_type_nodes.csv + scip_type_edges.csv
+├── importScipIndexDataWithAdminImport.sh  # Pre-start fast import via neo4j-admin (sourced by analyze.sh)
+├── convertScipIndexToCsvForNeo4jImport.sh # Converts *.scip.json → scip_type_nodes.csv + scip_type_edges.csv (LOAD CSV)
+├── convertScipIndexToCsvForNeo4jAdminImport.sh # Converts *.scip.json → admin import CSV format
 ├── testConvertScipIndexToCsvForNeo4jImport.sh # Tests for convertScipIndexToCsvForNeo4jImport.sh
+├── testConvertScipIndexToCsvForNeo4jAdminImport.sh # Tests for convertScipIndexToCsvForNeo4jAdminImport.sh
 └── queries/
     ├── import/                            # Phase 1: setup and import
     │   ├── Cleanup_SCIP_Type_Nodes.cypher

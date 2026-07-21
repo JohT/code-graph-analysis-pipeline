@@ -59,29 +59,37 @@ write_scip_index_change_detection_file() {
 # Check if indices have changed before proceeding
 if ! is_scip_index_change_detected; then
     echo "importScipIndexData: SCIP indices unchanged. Import and enrichment skipped."
+    unset SCIP_ADMIN_IMPORT_DONE
     return 0
 fi
 
-# Convert SCIP JSON index files to Neo4j import CSVs before importing
-# Execute as subprocess to avoid trap/variable side effects from leaking into the calling shell
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV..."
-( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_INDEX_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jImport.sh" )
+# Fast path: admin import already populated the database — skip CSV conversion and LOAD CSV.
+# Constraints are still required before enrichment queries can run.
+if [[ "${SCIP_ADMIN_IMPORT_DONE:-false}" == "true" ]]; then
+    echo "importScipIndexData: Admin import completed. Running constraints and enrichment only."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Internal_Type_Constraint.cypher"
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
+else
+    # LOAD CSV path: convert, clean up, apply constraints, then import nodes and edges
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV..."
+    ( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_INDEX_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jImport.sh" )
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Cleaning up existing SCIP type nodes..."
-execute_cypher "${IMPORT_QUERIES_DIR}/Cleanup_SCIP_Type_Nodes.cypher"
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Cleaning up existing SCIP type nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Cleanup_SCIP_Type_Nodes.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP type uniqueness constraints..."
-execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Internal_Type_Constraint.cypher"
-execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP type uniqueness constraints..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Internal_Type_Constraint.cypher"
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP internal type nodes..."
-execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_Internal_Nodes.cypher"
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP internal type nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_Internal_Nodes.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP external type nodes..."
-execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_External_Nodes.cypher"
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP external type nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_External_Nodes.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP type dependency edges..."
-execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_Edges.cypher"
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP type dependency edges..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_Edges.cypher"
+fi
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP type project name..."
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Type_Project_Name.cypher"
@@ -129,24 +137,25 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP artifact 
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Artifact_Is_External.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP module dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Module_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Module_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP module dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Module_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Module_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP artifact dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Artifact_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP artifact dependencies..."
-execute_cypher "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Artifact_Dependencies.cypher"
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Artifact_Dependencies.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency degree..."
-execute_cypher "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency degree rank..."
-execute_cypher "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
+execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') SCIP index import complete."
 
 # Write change detection hash file after successful import
 write_scip_index_change_detection_file
+unset SCIP_ADMIN_IMPORT_DONE

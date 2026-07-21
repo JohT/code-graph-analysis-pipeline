@@ -1,4 +1,4 @@
-name: SCIP Index Code Example for Graph Analysis - Smoke Test (main use case)
+name: SCIP Index + jQAssistant TypeScript Code Example - Smoke Test
 
 on:
   push:
@@ -21,7 +21,7 @@ on:
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
       - '.github/workflows/*.yml'
-      - '!.github/workflows/internal-scip-index-code-example.yml'
+      - '!.github/workflows/internal-scip-jqassistant-typescript-code-example.yml'
       - 'domains/anomaly-detection/documentation/renderArchitecture.sh'
       - 'scripts/analysis/renderDocumentationGraphs.sh'
   pull_request:
@@ -44,13 +44,13 @@ on:
       - 'changelogTemplate.mustache'
       - '**.code-workspace'
       - '.github/workflows/*.yml'
-      - '!.github/workflows/internal-scip-index-code-example.yml'
+      - '!.github/workflows/internal-scip-jqassistant-typescript-code-example.yml'
       - 'domains/anomaly-detection/documentation/renderArchitecture.sh'
       - 'scripts/analysis/renderDocumentationGraphs.sh'
 
 jobs:
 
-  prepare-scip-and-git-source:
+  prepare-scip-index:
     runs-on: ubuntu-latest
     outputs:
       analysis-name: ${{ steps.set-analysis-name.outputs.analysis-name }}
@@ -64,12 +64,12 @@ jobs:
       SCIP_VERSION: 0.9.0
 
     steps:
-      - name: (Prepare SCIP + Git) Checkout GIT repository
+      - name: (Prepare SCIP Index) Checkout GIT repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Set output variable 'analysis-name'
         id: set-analysis-name
-        run: echo "analysis-name=${{ env.PROJECT_NAME }}-scip-git-${{ env.REACT_ROUTER_VERSION }}" >> "$GITHUB_OUTPUT"
+        run: echo "analysis-name=${{ env.PROJECT_NAME }}-scip-${{ env.REACT_ROUTER_VERSION }}" >> "$GITHUB_OUTPUT"
 
       - name: Set source path variable
         run: echo "SOURCE_PATH=temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source/${{ env.PROJECT_NAME }}-${{ env.REACT_ROUTER_VERSION }}" >> "$GITHUB_ENV"
@@ -84,73 +84,70 @@ jobs:
           key:
             ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
 
-      - name: Download react-router ${{ env.REACT_ROUTER_VERSION }} with git history
-        # Use --depth 200 for enough history to compute meaningful CHANGED_TOGETHER_WITH coupling stats.
-        # Clone directly here instead of using downloadReactRouter.sh because the downloader script
-        # does not support shallow clones (--depth) and we need git history for the CSV git log import.
+      - name: Download react-router ${{ env.REACT_ROUTER_VERSION }}
+        working-directory: temp
         run: |
-          mkdir -p ${{ env.SOURCE_PATH }}
-          git clone --depth 200 --branch "react-router@${{ env.REACT_ROUTER_VERSION }}" \
-            https://github.com/remix-run/react-router.git \
-            "${{ env.SOURCE_PATH }}"
+          mkdir -p ${{ steps.set-analysis-name.outputs.analysis-name }}
+          cd ${{ steps.set-analysis-name.outputs.analysis-name }}
+          ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }}
 
-      - name: (Prepare SCIP + Git) Detect node version file .nvmrc in react-router
+      - name: (Prepare SCIP Index) Detect node version file .nvmrc in react-router
         working-directory: ${{ env.SOURCE_PATH }}
         run: echo "nodeVersionFileDetected=$(if [ -f ".nvmrc" ]; then echo "true"; else echo "false"; fi)" >> $GITHUB_ENV
 
-      - name: (Prepare SCIP + Git) Setup Node.js with version in .nvmrc for react-router
+      - name: (Prepare SCIP Index) Setup Node.js with version in .nvmrc for react-router
         if: env.nodeVersionFileDetected == 'true'
-        uses: actions/setup-node@v6.5.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version-file: ${{ env.SOURCE_PATH }}/.nvmrc
 
-      - name: (Prepare SCIP + Git) Setup Node.js (long-term support version fallback, no .nvmrc) for react-router
+      - name: (Prepare SCIP Index) Setup Node.js (long-term support version fallback, no .nvmrc) for react-router
         if: env.nodeVersionFileDetected != 'true'
-        uses: actions/setup-node@v6.5.0
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: 'lts/*'
 
-      - name: (Prepare SCIP + Git) Setup pnpm for react-router
+      - name: (Prepare SCIP Index) Setup pnpm for react-router
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
         with:
           package_json_file: ${{ env.SOURCE_PATH }}/package.json
           run_install: false
 
-      - name: (Prepare SCIP + Git) Install pnpm dependencies for react-router
+      - name: (Prepare SCIP Index) Install pnpm dependencies for react-router
         working-directory: ${{ env.SOURCE_PATH }}
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
-      - name: (Prepare SCIP + Git) Install scip CLI
+      - name: (Prepare SCIP Index) Install scip CLI
         run: ./domains/scip-index-import/installScipCli.sh
 
-      - name: (Prepare SCIP + Git) Generate SCIP index with scip-typescript using createScipIndexTypescript script
+      - name: (Prepare SCIP Index) Generate SCIP index with scip-typescript using createScipIndexTypescript script
         run: |
           ./scripts/examples/createScipIndexTypescript.sh temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source/react-router-${{ env.REACT_ROUTER_VERSION }} --pnpm-workspaces
 
-      - name: (Prepare SCIP + Git) Generate ARTIFACT_UPLOAD_ID
+      - name: (Prepare SCIP Index) Generate ARTIFACT_UPLOAD_ID
         run: echo "ARTIFACT_UPLOAD_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 10)" >> $GITHUB_ENV
 
       - name: Set output variable 'indices-upload-name'
         id: set-indices-upload-name
         run: echo "indices-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-scip-indices-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
 
-      - name: (Prepare SCIP + Git) Upload SCIP JSON index as artifact
+      - name: (Prepare SCIP Index) Upload SCIP JSON index as artifact
         if: success()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: ${{ steps.set-indices-upload-name.outputs.indices-upload-name }}
           path: ${{ env.SOURCE_PATH }}/index.scip.json
 
+
   analyze-code-graph:
-    needs: [prepare-scip-and-git-source]
+    needs: [prepare-scip-index]
     uses: ./.github/workflows/public-analyze-code-graph.yml
     with:
-      analysis-name: ${{ needs.prepare-scip-and-git-source.outputs.analysis-name }}
-      indices-upload-name: ${{ needs.prepare-scip-and-git-source.outputs.indices-upload-name }}
+      analysis-name: ${{ needs.prepare-scip-index.outputs.analysis-name }}
+      indices-upload-name: ${{ needs.prepare-scip-index.outputs.indices-upload-name }}
       source-repository: https://github.com/remix-run/react-router.git
-      source-repository-branch: react-router@${{ needs.prepare-scip-and-git-source.outputs.source-repository-branch }}
-      source-repository-history-only: 'true'
-      # Recommended SCIP use case: fast index import + git history analysis without jQAssistant.
-      # Csv report type is fastest and sufficient for smoke testing git history coupling stats.
-      analysis-arguments: "--skip-jqassistant --report Csv"
+      source-repository-branch: react-router@${{ needs.prepare-scip-index.outputs.source-repository-branch }}
       run-all-domains: true
+      # Test SCIP indices combined with jQAssistant scanning of TypeScript sources.
+      # All domains and report types enabled for broadest smoke test coverage.
+      analysis-arguments: "--report All"
