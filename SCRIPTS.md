@@ -68,9 +68,12 @@ Script | Directory | Description
 [overviewMarkdown.sh](./domains/overview/overviewMarkdown.sh) | overview | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [overviewPython.sh](./domains/overview/overviewPython.sh) | overview | Generates overview charts as SVG files by executing overviewCharts.py.
 [overviewSummary.sh](./domains/overview/summary/overviewSummary.sh) | summary | Creates a Markdown report summarising overview metrics: node label and relationship type
+[convertScipIndexToCsvForNeo4jAdminImport.sh](./domains/scip-index-import/convertScipIndexToCsvForNeo4jAdminImport.sh) | scip-index-import | Converts SCIP JSON index files (*.scip.json) in INDICES_DIRECTORY to neo4j-admin import CSVs in IMPORT_DIRECTORY.
 [convertScipIndexToCsvForNeo4jImport.sh](./domains/scip-index-import/convertScipIndexToCsvForNeo4jImport.sh) | scip-index-import | Converts SCIP JSON index files (*.scip.json) in INDICES_DIRECTORY to Neo4j import CSVs in IMPORT_DIRECTORY.
 [importScipIndexData.sh](./domains/scip-index-import/importScipIndexData.sh) | scip-index-import | Imports SCIP type-graph CSV data into Neo4j and enriches it for projection compatibility.
+[importScipIndexDataWithAdminImport.sh](./domains/scip-index-import/importScipIndexDataWithAdminImport.sh) | scip-index-import | Pre-start bulk SCIP import via "neo4j-admin database import full" before Neo4j starts.
 [installScipCli.sh](./domains/scip-index-import/installScipCli.sh) | scip-index-import | Downloads the scip CLI binary to BIN_DIR (default: TOOLS_DIRECTORY/scip-cli within analysis workspace).
+[testConvertScipIndexToCsvForNeo4jAdminImport.sh](./domains/scip-index-import/testConvertScipIndexToCsvForNeo4jAdminImport.sh) | scip-index-import | Tests convertScipIndexToCsvForNeo4jAdminImport.sh: validation, CSV columns, multi-file merge, admin-specific fields.
 [testConvertScipIndexToCsvForNeo4jImport.sh](./domains/scip-index-import/testConvertScipIndexToCsvForNeo4jImport.sh) | scip-index-import | Tests convertScipIndexToCsvForNeo4jImport.sh: validation, CSV columns, multi-file merge.
 [init.sh](./init.sh) |  | Initializes a new analysis project by creating all necessary directories based on the given input parameter with the analysis name. 
 [activateCondaEnvironment.sh](./scripts/activateCondaEnvironment.sh) | scripts | Activates the Conda (Python package manager) environment "codegraph" with all packages needed to run the included Python scripts.
@@ -135,7 +138,7 @@ Script | Directory | Description
 [sortOutExternalJavaJarFiles.sh](./scripts/sortOutExternalJavaJarFiles.sh) | scripts | Sorts out jar files that don't contain one of the given package names (e.g. external libraries) and moves them into the IGNORED_JARS_DIRECTORY. 
 [startNeo4j.sh](./scripts/startNeo4j.sh) | scripts | Deprecated: startNeo4j.sh has been moved to domains/neo4j-management/.
 [stopNeo4j.sh](./scripts/stopNeo4j.sh) | scripts | Deprecated: stopNeo4j.sh has been moved to domains/neo4j-management/.
-[testAnalyzeCliOptions.sh](./scripts/testAnalyzeCliOptions.sh) | scripts | Tests "--exclude-domain" and "--help" command line options of "analyze.sh".
+[testAnalyzeCliOptions.sh](./scripts/testAnalyzeCliOptions.sh) | scripts | Tests "--exclude-domain", "--skip-jqassistant", and "--help" command line options of "analyze.sh".
 [testAnalyzeDomainOption.sh](./scripts/testAnalyzeDomainOption.sh) | scripts | Tests "--domain" command line option of "analyze.sh".
 [testCloneGitRepository.sh](./scripts/testCloneGitRepository.sh) | scripts | Tests "cloneGitRepository.sh".
 [testDetectChangedFiles.sh](./scripts/testDetectChangedFiles.sh) | scripts | Tests "detectChangedFiles.sh".
