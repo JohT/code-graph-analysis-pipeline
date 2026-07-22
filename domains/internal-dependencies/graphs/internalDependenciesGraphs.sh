@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Executes internal dependency and path finding Cypher queries for GraphViz visualization.
-# Visualizes Java Artifact, TypeScript Module, and NPM Package dependencies with build levels
-# and longest paths.
+# Visualizes Java Artifact, TypeScript Module, NPM Package, and SCIP Artifact dependencies
+# with build levels and longest paths.
 #
 # Build level graphs use the topological sort level to colour nodes (showing dependency hierarchy).
 # Longest path graphs highlight the worst-case dependency chains.
@@ -193,6 +193,38 @@ fi
 # Clean-up NPM Dev Package graph visualizations
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${NPM_DEV_GRAPH_VIZ_DIR}"
 
+# ── SCIP Semantic Index Artifact Visualizations ───────────────────────────────
+
+SCIP_ARTIFACT_GRAPH_VIZ_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact/Graph_Visualizations"
+mkdir -p "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}"
+
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-path-finding"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    # Ensure topological sort level exists on nodes.
+    execute_cypher_queries_until_results \
+        "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Exists.cypher" \
+        "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Write.cypher" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipArtifactLongestPathsIsolated..."
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/Path_Finding_6_Longest_paths_for_graphviz.cypher" \
+        "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" \
+        > "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPathsIsolated.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPathsIsolated.csv"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipArtifactLongestPaths..."
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/Path_Finding_6_Longest_paths_contributors_for_graphviz.cypher" \
+        "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" \
+        > "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPaths.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPaths.csv"
+fi
+
+# Clean-up SCIP Artifact graph visualizations
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}"
+
 # Clean-up empty level directories.
 # These may have been recreated by mkdir -p above even if there was no data,
 # in which case cleanupAfterReportGeneration.sh deletes them since they are empty.
@@ -200,5 +232,6 @@ source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/Typescript_Module"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_NonDevPackage"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_DevPackage"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 
 echo "${SCRIPT_NAME}: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

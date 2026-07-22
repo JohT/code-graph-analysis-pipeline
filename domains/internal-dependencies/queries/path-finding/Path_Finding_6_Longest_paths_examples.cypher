@@ -11,15 +11,9 @@
   WITH *
       ,gds.util.asNode(sourceNodeId) AS source
       ,gds.util.asNode(targetNodeId) AS target   
-// Optionally get the project (e.g. Java Artifact, Typescript Project) the source and target belong to
-OPTIONAL MATCH (sourceProject:Artifact|Project)-[:CONTAINS]->(source)
-OPTIONAL MATCH (targetProject:Artifact|Project)-[:CONTAINS]->(target)
-// Optionally get the name of the scan that contained that project
-OPTIONAL MATCH (sourceScan:TS:Scan)-[:CONTAINS_PROJECT]->(sourceProject)
-OPTIONAL MATCH (targetScan:TS:Scan)-[:CONTAINS_PROJECT]->(targetProject)
-   WITH *, coalesce(source.rootProjectName, sourceScan.name, sourceProject.name) AS sourceContainerName
+   WITH *, coalesce(source.rootProjectName, source.projectName, source.name) AS sourceContainerName
  ORDER BY distance DESC, sourceContainerName ASC
 // Only output the top 10 entries
  LIMIT 10
 // Group by project name, if the target project is the same and the distance. Return those as result.
-RETURN distance, index, sourceContainerName, sourceProject, sourceScan, path
+RETURN distance, index, sourceContainerName, source.projectName, path

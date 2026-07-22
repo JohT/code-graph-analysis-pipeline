@@ -10,14 +10,10 @@
       ,targetNodeId
       ,gds.util.asNode(sourceNodeId) AS source
       ,gds.util.asNode(targetNodeId) AS target
-// Optionally get the project (e.g. Java Artifact, Typescript Project) the source and target belong to
-OPTIONAL MATCH (sourceProject:Artifact|Project)-[:CONTAINS]->(source)
-// Optionally get the name of the scan that contained that project
-OPTIONAL MATCH (sourceScan:TS:Scan)-[:CONTAINS_PROJECT]->(sourceProject)
-   WITH *, coalesce(source.rootProjectName, sourceScan.name, sourceProject.name) AS sourceContainerName
+   WITH *, coalesce(source.rootProjectName, source.projectName, source.name) AS sourceContainerName
  ORDER BY distance DESC, sourceContainerName ASC
 // Only output the top 10 entries
  LIMIT 10
 // Get the shortest path for the source and target node
  MATCH path = SHORTEST 1 (source)-[:DEPENDS_ON]->+(target)
-RETURN distance, sourceContainerName, sourceProject, sourceScan, path
+RETURN distance, sourceContainerName, source.projectName, path

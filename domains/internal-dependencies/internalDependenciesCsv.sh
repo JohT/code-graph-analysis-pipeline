@@ -182,6 +182,32 @@ if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_DEV_PROJECTION}" 
     runPathFindingAlgorithms "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
 fi
 
+# -- SCIP Semantic Index Module Path Finding ------
+
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_MODULE_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-path-finding"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_MODULE_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    runPathFindingAlgorithms "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+fi
+
+# -- SCIP Semantic Index Artifact Path Finding ---
+
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_ARTIFACT_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-path-finding"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_ARTIFACT_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    runPathFindingAlgorithms "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+fi
+
 # ── Topological Sort ──────────────────────────────────────────────────────────
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting topological sort..."

@@ -56,9 +56,9 @@
   WITH *, toFloat(weight - minWeight) * weightNormalizationFactor AS normalizedWeight
   WITH *, round((normalizedWeight * 5) + 1, 2)                    AS penWidth
   WITH *, coalesce("\\n(level " + source.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS startNodeLevelInfo
-  WITH *, coalesce("\\n" + source.rootProjectName, "")                                        AS startNodeProjectInfo
+  WITH *, coalesce("\\n" + source.rootProjectName, "\\n" + source.projectName, "")            AS startNodeProjectInfo
   WITH *, coalesce("\\n(level " + target.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS endNodeLevelInfo
-  WITH *, coalesce("\\n" + target.rootProjectName, "")                                        AS endNodeProjectInfo
+  WITH *, coalesce("\\n" + target.rootProjectName, "\\n" + target.projectName, "")            AS endNodeProjectInfo
   WITH *, source.name + startNodeProjectInfo + startNodeLevelInfo                             AS startNodeTitle
   WITH *, target.name + endNodeProjectInfo + endNodeLevelInfo                                 AS endNodeTitle
                // The longest path will be highlighted in red.

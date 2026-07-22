@@ -22,18 +22,20 @@ UNWIND sourcesAndTargets AS sourceAndTarget
       ,gds.util.asNode(sourceNodeId) AS source
       ,gds.util.asNode(targetNodeId) AS target
 // Optionally get the project (e.g. Java Artifact, Typescript Project) the source and target belong to
-OPTIONAL MATCH (sourceProject:Artifact|Project)-[:CONTAINS]->(source)
-OPTIONAL MATCH (targetProject:Artifact|Project)-[:CONTAINS]->(target)
+OPTIONAL MATCH (sourceProject:Artifact|Project|SemanticCodeIndexArtifact)-[:CONTAINS]->(source)
+OPTIONAL MATCH (targetProject:Artifact|Project|SemanticCodeIndexArtifact)-[:CONTAINS]->(target)
 // Optionally get the name of the scan that contained that project
 OPTIONAL MATCH (sourceScan:TS:Scan)-[:CONTAINS_PROJECT]->(sourceProject)
 OPTIONAL MATCH (targetScan:TS:Scan)-[:CONTAINS_PROJECT]->(targetProject)
 // Group by project name, if the target project is the same and the distance. Return those as result.
-RETURN sourceProject.name               AS sourceProject
-      ,sourceScan.name                  AS sourceScan
-      ,source.rootProjectName           AS sourceRootProject
+  WITH *
+      ,coalesce(source.rootProjectName, source.projectName, source.fileName) AS sourceRootProject
+      ,coalesce(target.rootProjectName, target.projectName, target.fileName) AS targetRootProject
+RETURN source.projectName               AS sourceProject
+      ,sourceRootProject
       ,(targetProject <> sourceProject) AS isDifferentTargetProject
       ,(targetScan <> sourceScan)       AS isDifferentTargetScan
-      ,(target.rootProjectName <> source.rootProjectName) AS isDifferentTargetRootProject
+      ,(targetRootProject <> sourceRootProject) AS isDifferentTargetRootProject
       ,distance
       ,distanceTotalPairCount
       ,distanceTotalSourceCount
