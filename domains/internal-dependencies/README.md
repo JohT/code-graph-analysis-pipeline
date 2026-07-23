@@ -21,7 +21,7 @@ The following scripts are discovered and invoked automatically by the central co
 
 ## Folder Structure
 
-```
+```text
 domains/internal-dependencies/
 ├── README.md                              # This file
 ├── PREREQUISITES.md                       # Detailed prerequisite documentation
@@ -42,9 +42,9 @@ domains/internal-dependencies/
 │   │   ├── Set_Parameters*.cypher         # Parameter templates for all path-finding node types
 │   │   └── Path_Finding_*.cypher          # Path-finding algorithms (shortest path, longest path)
 │   ├── topological-sort/                  # 6 core Cypher queries (build ordering)
-│   │   └── strongly-connected-components/ # 9 queries: SCC detection → component sort → propagation
-│   │       ├── SCC_*.cypher               # Strongly Connected Component queries
-│   │       └── SCC_TopologicalSort_*.cypher # Component-level topological sort
+│   └── strongly-connected-components/     # 9 queries: SCC detection → component sort → propagation
+│       ├── SCC_*.cypher                   # Strongly Connected Component queries
+│       └── SCC_TopologicalSort_*.cypher   # Component-level topological sort
 │   └── exploration/                       # 2 Cypher queries (explore notebooks only)
 ├── graphs/
 │   └── internalDependenciesGraphs.sh      # Graph visualization orchestration
@@ -78,6 +78,17 @@ The standard `gds.dag.topologicalSort` algorithm only works on directed acyclic 
 
 Result: All nodes receive topological sort values, including those in cycles. Nodes within a cycle share the same sort index (representing their component's position in the build order).
 
+## Path Finding: SCC-based Longest Path for SCIP Nodes
+
+The standard `gds.dag.longestPath` algorithm requires a DAG and fails on projections with cyclic edges. Java, TypeScript, and NPM projections use a `-cleaned` subgraph that removes cycles. SCIP semantic index data may contain cyclic dependencies and the `-cleaned` subgraph is therefore empty or incomplete.
+
+For SCIP Module and Artifact nodes, longest path is computed at the SCC component level:
+
+- The `-components` projection (a DAG of SCC components) created during topological sort is reused
+- `gds.dag.longestPath` runs on `-components`, operating on `StronglyConnectedComponent` nodes
+- Cycle components appear as single nodes labelled `"Cycle (N) around ModuleName"` in GraphViz output
+- Results are written by `longestPathOnSCC` in `internalDependenciesCsv.sh` immediately after `topologicalSortOnSCC`, reusing the same projection without recreation
+
 ## Execution Order
 
 1. **`internalDependenciesCsv.sh`** — runs Cypher queries, writes CSV files
@@ -99,6 +110,7 @@ reports/internal-dependencies/
 │   ├── Artifact_all_pairs_shortest_paths_distribution_per_project.csv
 │   ├── Artifact_longest_paths_distribution.csv
 │   ├── Artifact_Topological_Sort.csv  # Includes nodes from cycles
+│   ├── Artifact_StronglyConnectedComponents_longest_paths_distribution.csv
 │   └── Graph_Visualizations/
 │       ├── JavaArtifactBuildLevels.{csv,dot,svg}
 │       ├── JavaArtifactLongestPathsIsolated.{csv,dot,svg}
@@ -108,9 +120,11 @@ reports/internal-dependencies/
 │   ├── WidelyUsedTypes.csv
 │   ├── Package_all_pairs_shortest_paths_distribution_per_project.csv
 │   ├── Package_longest_paths_distribution.csv
-│   └── Package_Topological_Sort.csv  # Includes nodes from cycles
+│   ├── Package_Topological_Sort.csv  # Includes nodes from cycles
+│   └── Package_StronglyConnectedComponents_longest_paths_distribution.csv
 ├── Java_Type/
-│   └── Type_Topological_Sort.csv
+│   ├── Type_Topological_Sort.csv
+│   └── Type_StronglyConnectedComponents_longest_paths_distribution.csv
 ├── Typescript_Module/
 │   ├── List_all_Typescript_modules.csv
 │   ├── WidelyUsedTypescriptElements.csv
@@ -118,6 +132,7 @@ reports/internal-dependencies/
 │   ├── Module_all_pairs_shortest_paths_distribution_per_project.csv
 │   ├── Module_longest_paths_distribution.csv
 │   ├── Module_Topological_Sort.csv
+│   ├── Module_StronglyConnectedComponents_longest_paths_distribution.csv
 │   └── Graph_Visualizations/
 │       ├── TypeScriptModuleBuildLevels.{csv,dot,svg}
 │       ├── TypeScriptModuleLongestPathsIsolated.{csv,dot,svg}
@@ -126,6 +141,7 @@ reports/internal-dependencies/
 │   ├── NpmNonDevPackage_all_pairs_shortest_paths_distribution_per_project.csv
 │   ├── NpmNonDevPackage_longest_paths_distribution.csv
 │   ├── NpmNonDevPackage_Topological_Sort.csv
+│   ├── NpmNonDevPackage_StronglyConnectedComponents_longest_paths_distribution.csv
 │   └── Graph_Visualizations/
 │       ├── NpmPackageBuildLevels.{csv,dot,svg}
 │       ├── NpmNonDevPackageLongestPathsIsolated.{csv,dot,svg}
@@ -133,15 +149,25 @@ reports/internal-dependencies/
 ├── NPM_DevPackage/
 │   ├── NpmDevPackage_all_pairs_shortest_paths_distribution_per_project.csv
 │   ├── NpmDevPackage_longest_paths_distribution.csv
-│   └── NpmDevPackage_Topological_Sort.csv
-├── SCIP_Semantic_Index_Module/  # NEW: SCIP semantic index support
+│   ├── NpmDevPackage_Topological_Sort.csv
+│   └── NpmDevPackage_StronglyConnectedComponents_longest_paths_distribution.csv
+├── SCIP_Semantic_Index_Type/
+│   ├── SemanticCodeIndexInternalType_Topological_Sort.csv
+│   └── SemanticCodeIndexInternalType_StronglyConnectedComponents_longest_paths_distribution.csv
+├── SCIP_Semantic_Index_Module/
 │   ├── SemanticCodeIndexModule_all_pairs_shortest_paths_distribution_per_project.csv
-│   ├── SemanticCodeIndexModule_longest_paths_distribution.csv
-│   └── SemanticCodeIndexModule_Topological_Sort.csv
-└── SCIP_Semantic_Index_Artifact/  # NEW: SCIP semantic index support
+│   ├── SemanticCodeIndexModule_Topological_Sort.csv
+│   ├── SemanticCodeIndexModule_StronglyConnectedComponents_longest_paths_distribution.csv
+│   └── Graph_Visualizations/
+│       ├── ScipModuleLongestPathsIsolated.{csv,dot,svg}
+│       └── ScipModuleLongestPaths.{csv,dot,svg}
+└── SCIP_Semantic_Index_Artifact/
     ├── SemanticCodeIndexArtifact_all_pairs_shortest_paths_distribution_per_project.csv
-    ├── SemanticCodeIndexArtifact_longest_paths_distribution.csv
-    └── SemanticCodeIndexArtifact_Topological_Sort.csv
+    ├── SemanticCodeIndexArtifact_Topological_Sort.csv
+    ├── SemanticCodeIndexArtifact_StronglyConnectedComponents_longest_paths_distribution.csv
+    └── Graph_Visualizations/
+        ├── ScipArtifactLongestPathsIsolated.{csv,dot,svg}
+        └── ScipArtifactLongestPaths.{csv,dot,svg}
 ```
 
 ### SVG Charts (`reports/internal-dependencies/`)
