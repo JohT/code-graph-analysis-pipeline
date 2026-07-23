@@ -3,13 +3,13 @@
 # Renders the given GraphViz file as a SVG image.
 #
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
 
 # Local constants
 SCRIPT_NAME=$(basename "${0}")
 
 # Read the first unnamed input argument containing the version of the project
-inputGvFileName="${1}"
+inputGvFileName="${1:-}"
 
 if [ -z "${inputGvFileName}" ]; then
   echo "${SCRIPT_NAME}: Error: Please specify the GraphViz *.gv file as input parameter."
