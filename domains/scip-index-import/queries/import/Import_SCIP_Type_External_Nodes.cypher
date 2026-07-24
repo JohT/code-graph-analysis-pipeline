@@ -1,4 +1,4 @@
-// Import external SCIP type nodes from 'scip_type_nodes.csv'. Requires "Create_SCIP_External_Type_Constraint.cypher".
+// Import external SCIP type nodes from 'scip_type_nodes.csv'. External types carry no project association. Requires "Create_SCIP_External_Type_Constraint.cypher".
 
 LOAD CSV WITH HEADERS FROM 'file:///scip_type_nodes.csv' AS row
 WITH row WHERE row.file = ''
@@ -25,3 +25,4 @@ SET node.fqn            = row.symbol,
     node.module         = row.module,
     node.isAbstract     = (row.is_abstract = 'true'),
     node.isTest         = false
+RETURN count(*) AS writtenRelationships

@@ -98,6 +98,8 @@ function try_admin_import() {
     absolute_import_dir=$( CDPATH=. cd -- "${IMPORT_DIRECTORY}" && pwd -P )
     local nodes_csv="${absolute_import_dir}/scip_type_nodes_admin.csv"
     local edges_csv="${absolute_import_dir}/scip_type_edges_admin.csv"
+    local projects_csv="${absolute_import_dir}/scip_projects_admin.csv"
+    local links_csv="${absolute_import_dir}/scip_type_project_links_admin.csv"
 
     # Ensure logs directory exists before neo4j-admin writes its report
     mkdir -p "${RUNTIME_DIRECTORY}/logs"
@@ -107,7 +109,7 @@ function try_admin_import() {
     # The --path-pattern-style flag is only needed for pattern matching and is only
     # supported in Neo4j 2026.01+, so we omit it for compatibility.
     local neo4j_admin_import_command
-    neo4j_admin_import_command="database import full --nodes=${nodes_csv} --relationships=${edges_csv} --report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report neo4j"
+    neo4j_admin_import_command="database import full --nodes=${nodes_csv} --nodes=${projects_csv} --relationships=${edges_csv} --relationships=${links_csv} --report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report neo4j"
 
     # Run neo4j-admin database import full
     echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Running neo4j-admin database import full..."
