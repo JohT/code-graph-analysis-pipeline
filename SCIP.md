@@ -27,7 +27,7 @@ The pipeline creates `:SCIP:SemanticCodeIndexInternalType` and `:SCIP:SemanticCo
 
 ### Prerequisites
 
-- [scip CLI](https://github.com/scip-code/scip/releases) — required for JSON conversion (see install instructions below)
+- [scip CLI](https://github.com/scip-code/scip/releases). Required for JSON conversion (see install instructions below)
 - Language-specific SCIP indexer (see table above)
 
 ### Step-by-Step
@@ -106,9 +106,16 @@ scip print --json index.scip > index.scip.json
 
 ## Performance
 
-For the **initial import** (empty database), the pipeline uses `neo4j-admin database import full` **before Neo4j starts** when all conditions are met (Neo4j v5+, `neo4j-admin` executable, empty database, indices changed). This writes the native store format directly — measurably faster than LOAD CSV for large indices.
+For the **initial import** (empty database), the pipeline uses `neo4j-admin database import full` **before Neo4j starts** when all conditions are met (Neo4j v5+, `neo4j-admin` executable, indices changed). This writes the native store format directly. Measurably faster than LOAD CSV for large indices.
 
-On repeat runs (unchanged index) or when the database already has data, the fast path is skipped automatically. The regular LOAD CSV path always runs as a fallback.
+The pipeline automatically:
+
+- Stops Neo4j if it's running (required for admin import)
+- Performs a fast `neo4j-admin database import full` import
+- Falls back gracefully to LOAD CSV if any issues occur
+- Uses Cypher-based cleanup (not filesystem manipulation) for any data re-import
+
+On repeat runs (unchanged index) or when the fast path fails, the regular LOAD CSV path runs as a fallback.
 
 See [domains/scip-index-import/README.md](domains/scip-index-import/README.md#fast-import-via-neo4j-admin) for full details.
 
