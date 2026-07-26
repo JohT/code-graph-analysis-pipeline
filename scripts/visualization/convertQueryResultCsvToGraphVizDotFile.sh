@@ -7,7 +7,7 @@
 # If no template is specified, "templates/default.template.gv" is used.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
 
 ## Get this "scripts/visualization" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -56,13 +56,13 @@ done
 
 if [ -z "${inputFilename}" ]; then
   echo "convertQueryResultCsvToGraphVizDotFile: Error: Missing required option: --filename"
-  echo "${USAGE}"
+  usage
   exit 1
 fi
 
 if [ ! -f "${inputFilename}" ]; then
   echo "convertQueryResultCsvToGraphVizDotFile: Error: CSV file not found: ${inputFilename}"
-  echo "${USAGE}"
+  usage
   exit 1
 fi
 
@@ -88,7 +88,7 @@ fi
 
 if [ ! -f "${templateFile}" ]; then
   echo "convertQueryResultCsvToGraphVizDotFile: Error: Template file not found: ${templateFile}"
-  echo "${USAGE}"
+  usage
   exit 1
 fi
 

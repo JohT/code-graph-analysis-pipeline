@@ -5,3 +5,4 @@ MATCH (source:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType {symbo
 MATCH (target:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType {symbol: row.target_symbol})
 MERGE (source)-[relationship:DEPENDS_ON]->(target)
 SET relationship.referenceCount = toInteger(row.reference_count)
+RETURN count(*) AS writtenRelationships

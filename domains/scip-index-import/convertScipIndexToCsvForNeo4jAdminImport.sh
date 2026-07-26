@@ -450,11 +450,124 @@ function extract_depends_on_edges_admin() {
 # Process a single .scip.json file to temporary per-file CSVs
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Extract SCIP project metadata from one input file for admin import
+# Neo4j admin format: id:ID, property1, property2, :LABEL
+# ---------------------------------------------------------------------------
+
+function extract_project_metadata_admin() {
+    local input_file="${1}"
+    local emit_header="${2}"  # "true" to include header, "false" to skip
+
+    local header='fqn:ID(ScipNode),projectRoot,toolName,toolVersion,:LABEL'
+    
+    if [ "$emit_header" = "true" ]; then
+        echo "${header}"
+    fi
+    
+    jq -r '
+        select(.metadata != null and .metadata.project_root != null) |
+        .metadata as $meta |
+        (
+            if ($meta.project_root | test("file://")) then
+                ($meta.project_root | gsub("^file://"; ""))
+            else
+                $meta.project_root
+            end
+        ) as $project_root |
+        (
+            # Create a stable FQN from the project root, suitable as node ID
+            $project_root | gsub("[^A-Za-z0-9._-]"; "_")
+        ) as $project_fqn |
+        [
+            $project_fqn,
+            $project_root,
+            ($meta.tool_info.name // "unknown"),
+            ($meta.tool_info.version // "unknown"),
+            "SCIP:SemanticCodeIndexProject"
+        ] | @csv
+    ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 4 — Extract BELONGS_TO link rows for admin import (no header)
+# Emits one row per internal type (including __file__ nodes): type_id -> project_fqn
+# Edge CSV columns: :START_ID(ScipNode),:END_ID(ScipNode),:TYPE
+# ---------------------------------------------------------------------------
+
+function extract_type_project_links_admin() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+
+        ($index[0].internal_package_ids) as $internal_pkg_ids |
+
+        select(.metadata != null and .metadata.project_root != null) |
+        (
+            if (.metadata.project_root | test("file://")) then
+                (.metadata.project_root | gsub("^file://"; ""))
+            else
+                .metadata.project_root
+            end
+            | gsub("[^A-Za-z0-9._-]"; "_")
+        ) as $project_fqn |
+
+        (
+            [
+                .documents[] |
+                .occurrences[] |
+                select((.symbol_roles // 0) % 2 == 1) |
+                select(.symbol | startswith("local ") | not) |
+                select((.symbol | split(" ") | length) >= 5) |
+                select(is_type_descriptor(.symbol)) |
+                select(is_type_parameter_descriptor(.symbol) | not) |
+                short_symbol(.symbol)
+            ]
+            +
+            [
+                .documents[] |
+                .relative_path as $file |
+                [.occurrences[] |
+                 select((.symbol_roles // 0) % 2 == 1) |
+                 select(.symbol | startswith("local ") | not) |
+                 select((.symbol | split(" ") | length) >= 5) |
+                 select(is_type_descriptor(.symbol)) |
+                 select(is_type_parameter_descriptor(.symbol) | not) |
+                 .symbol
+                ] as $defined_type_symbols |
+                [.occurrences[] |
+                 select((.symbol_roles // 0) % 2 == 0) |
+                 select(.symbol | startswith("local ") | not) |
+                 select((.symbol | split(" ") | length) >= 5) |
+                 select(is_type_descriptor(.symbol)) |
+                 select(is_type_parameter_descriptor(.symbol) | not) |
+                 .symbol
+                ] as $referenced_type_symbols |
+                ([.occurrences[] |
+                  select(.symbol | startswith("local ") | not) |
+                  select((.symbol | split(" ") | length) >= 5) |
+                  .symbol as $s |
+                  ($s | split(" ") | .[2]) as $pkg_id |
+                  select(($internal_pkg_ids | index($pkg_id)) != null) |
+                  $s
+                 ] | first) as $first_internal_symbol |
+                select(($defined_type_symbols | length) == 0) |
+                select(($referenced_type_symbols | length) > 0) |
+                select($first_internal_symbol != null) |
+                ("__file__ " + $file)
+            ]
+        ) |
+        unique[] |
+        [., $project_fqn, "BELONGS_TO"] | @csv
+    ' "${input_file}"
+}
+
 function process_single_index_admin() {
     local input_file="${1}"
     local nodes_temp="${2}"
     local edges_temp="${3}"
-    local emit_header="${4}"  # "true" to include header, "false" to skip
+    local links_temp="${4}"
+    local emit_header="${5}"  # "true" to include header, "false" to skip
 
     echo "convertScipIndexToCsvForNeo4jAdminImport: Processing '${input_file}'..."
 
@@ -478,6 +591,7 @@ function process_single_index_admin() {
     extract_external_type_nodes_admin "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
 
     extract_depends_on_edges_admin "${symbol_index_file}" "${input_file}" > "${edges_temp}"
+    extract_type_project_links_admin "${symbol_index_file}" "${input_file}" > "${links_temp}"
 }
 
 # ---------------------------------------------------------------------------
@@ -556,6 +670,70 @@ function merge_edge_csvs_admin() {
 }
 
 # ---------------------------------------------------------------------------
+# Merge per-file project metadata CSVs: deduplicate by fqn (first column)
+# Input: directory containing *_admin_projects.csv files (header in first file only)
+# ---------------------------------------------------------------------------
+
+function merge_project_csvs_admin() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    # Collect project files in sorted order for deterministic output
+    local project_files=()
+    while IFS= read -r project_file; do
+        project_files+=("${project_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_admin_projects.csv" | sort)
+
+    if [ ${#project_files[@]} -eq 0 ]; then
+        # No project metadata found; create empty CSV with admin header
+        echo 'fqn:ID(ScipNode),projectRoot,toolName,toolVersion,:LABEL' > "${output_file}"
+        return
+    fi
+
+    # Concatenate all rows (header already handled per file), then deduplicate by fqn (first column)
+    # awk: parse CSV first field (unquoted or quoted), keep first occurrence per fqn
+    cat "${project_files[@]}" | awk -F',' '
+        NR == 1 { print; next }
+        {
+            # Extract the fqn field (first CSV column, may be quoted)
+            fqn = $1
+            gsub(/^"/, "", fqn)
+            gsub(/"$/, "", fqn)
+            if (!seen[fqn]++) { print }
+        }
+    ' > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Merge per-file BELONGS_TO link CSVs: deduplicate by (type_id, project_fqn)
+# Input: directory containing *_admin_links.csv files
+# ---------------------------------------------------------------------------
+
+function merge_belongs_to_links_admin() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local link_files=()
+    while IFS= read -r link_file; do
+        link_files+=("${link_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_admin_links.csv" | sort)
+
+    {
+        # Emit header for relationship CSV
+        echo ':START_ID(ScipNode),:END_ID(ScipNode),:TYPE'
+
+        if [ ${#link_files[@]} -gt 0 ]; then
+            cat "${link_files[@]}" | awk -F',' '
+                {
+                    key = $1 SUBSEP $2
+                    if (!seen[key]++) { print }
+                }
+            '
+        fi
+    } > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -575,12 +753,19 @@ while IFS= read -r index_file; do
     file_stem=$(basename "${index_file}" .scip.json | tr -cs 'A-Za-z0-9_-' '_')
     nodes_temp="${tmp_dir}/${file_stem}_admin_nodes.csv"
     edges_temp="${tmp_dir}/${file_stem}_admin_edges.csv"
-    process_single_index_admin "${index_file}" "${nodes_temp}" "${edges_temp}" "${first_file}"
+    projects_temp="${tmp_dir}/${file_stem}_admin_projects.csv"
+    links_temp="${tmp_dir}/${file_stem}_admin_links.csv"
+
+    process_single_index_admin "${index_file}" "${nodes_temp}" "${edges_temp}" "${links_temp}" "${first_file}"
+    extract_project_metadata_admin "${index_file}" "${first_file}" >> "${projects_temp}"
+
     first_file=false
 done < <(find "${INDICES_DIRECTORY}" -maxdepth 1 -name "*.scip.json" -type f | sort)
 
 nodes_output="${IMPORT_DIRECTORY}/scip_type_nodes_admin.csv"
 edges_output="${IMPORT_DIRECTORY}/scip_type_edges_admin.csv"
+projects_output="${IMPORT_DIRECTORY}/scip_projects_admin.csv"
+links_output="${IMPORT_DIRECTORY}/scip_type_project_links_admin.csv"
 
 echo "convertScipIndexToCsvForNeo4jAdminImport: Merging node CSVs → '${nodes_output}'..."
 merge_node_csvs_admin "${tmp_dir}" "${nodes_output}"
@@ -588,6 +773,14 @@ merge_node_csvs_admin "${tmp_dir}" "${nodes_output}"
 echo "convertScipIndexToCsvForNeo4jAdminImport: Merging edge CSVs → '${edges_output}'..."
 merge_edge_csvs_admin "${tmp_dir}" "${edges_output}"
 
+echo "convertScipIndexToCsvForNeo4jAdminImport: Merging project metadata CSVs → '${projects_output}'..."
+merge_project_csvs_admin "${tmp_dir}" "${projects_output}"
+
+echo "convertScipIndexToCsvForNeo4jAdminImport: Merging BELONGS_TO link CSVs → '${links_output}'..."
+merge_belongs_to_links_admin "${tmp_dir}" "${links_output}"
+
 node_count=$(( $(wc -l < "${nodes_output}") - 1 ))
-  edge_count=$(( $(wc -l < "${edges_output}") - 1 ))
-echo "convertScipIndexToCsvForNeo4jAdminImport: Done. ${node_count} node(s), ${edge_count} edge(s)."
+project_count=$(( $(wc -l < "${projects_output}") - 1 ))
+edge_count=$(( $(wc -l < "${edges_output}") - 1 ))
+link_count=$(( $(wc -l < "${links_output}") - 1 ))
+echo "convertScipIndexToCsvForNeo4jAdminImport: Done. ${node_count} node(s), ${project_count} project(s), ${edge_count} edge(s), ${link_count} link(s)."

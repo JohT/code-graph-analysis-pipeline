@@ -1,4 +1,4 @@
-// Import internal SCIP type nodes from 'scip_type_nodes.csv'. Requires "Create_SCIP_Internal_Type_Constraint.cypher".
+// Import internal SCIP type nodes from 'scip_type_nodes.csv' and link each to its SemanticCodeIndexProject via BELONGS_TO. Requires "Create_SCIP_Internal_Type_Constraint.cypher" and "Import_SCIP_Project_Nodes.cypher".
 
 LOAD CSV WITH HEADERS FROM 'file:///scip_type_nodes.csv' AS row
 WITH row WHERE row.file <> ''
@@ -36,3 +36,7 @@ SET node.fqn            = row.symbol,
                             row.file CONTAINS '\\tests\\' OR
                             row.file CONTAINS '\\spec\\'
                           )
+WITH node, row.project_root AS projectRoot
+MATCH (p:SCIP:SemanticCodeIndexProject {fqn: projectRoot})
+MERGE (node)-[:BELONGS_TO]->(p)
+RETURN count(*) AS writtenRelationships

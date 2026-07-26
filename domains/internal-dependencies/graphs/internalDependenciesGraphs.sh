@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Executes internal dependency and path finding Cypher queries for GraphViz visualization.
-# Visualizes Java Artifact, TypeScript Module, and NPM Package dependencies with build levels
-# and longest paths.
+# Visualizes Java Artifact, TypeScript Module, NPM Package, and SCIP Artifact dependencies
+# with build levels and longest paths.
 #
 # Build level graphs use the topological sort level to colour nodes (showing dependency hierarchy).
 # Longest path graphs highlight the worst-case dependency chains.
@@ -37,12 +37,43 @@ VISUALIZATION_SCRIPTS_DIR=${VISUALIZATION_SCRIPTS_DIR:-"${SCRIPTS_DIR}/visualiza
 INTERNAL_DEPS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/internal-dependencies"
 PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/path-finding"
 TOPOLOGICAL_SORT_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/topological-sort"
+SCC_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/strongly-connected-components"
 
 # Define functions to execute cypher queries from within a given file
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 # Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
 source "${SCRIPTS_DIR}/projectionFunctions.sh"
+
+# Prepare the SCC component graph and -components projection for SCIP GraphViz visualizations.
+# The -components projection is always recreated since the visualization script uses a different
+# projection name than internalDependenciesCsv.sh and the projection may not be in GDS memory.
+# Topological sort values on SCC component nodes are written only if not already done.
+#
+# Required Parameters:
+# - dependencies_projection=...      Name prefix for the in-memory projection
+# - dependencies_projection_node=... Node label (e.g., "SemanticCodeIndexModule")
+# - dependencies_projection_weight_property=... Weight property name
+setupStronglyConnectedComponentsForSccVisualization() {
+    # Create SCC nodes (idempotent: skips SCC detection if already computed by CSV phase)
+    execute_cypher_queries_until_results \
+        "${SCC_CYPHER_DIR}/SCC_Exists.cypher" \
+        "${SCC_CYPHER_DIR}/SCC_Write.cypher" \
+        "${@}"
+    # Create component nodes and component-level dependencies (idempotent MERGE operations)
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateNode.cypher" "${@}"
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateDependency.cypher" "${@}"
+    # Always recreate the -components projection: the CSV phase uses a different projection name
+    # so this projection is not in GDS memory. The delete is a safe no-op if not present.
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Delete_Projection.cypher" "${@}"
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Projection.cypher" "${@}"
+    # Ensure topological sort values exist on SCC component nodes for level labels in the graph.
+    # Skip if already written (e.g., by the CSV phase using a different projection name).
+    execute_cypher_queries_until_results \
+        "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Exists.cypher" \
+        "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Write.cypher" \
+        "${@}"
+}
 
 # Main report directory
 REPORT_NAME="internal-dependencies"
@@ -193,6 +224,64 @@ fi
 # Clean-up NPM Dev Package graph visualizations
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${NPM_DEV_GRAPH_VIZ_DIR}"
 
+# ── SCIP Semantic Index Module Visualizations ─────────────────────────────────
+
+SCIP_MODULE_GRAPH_VIZ_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Graph_Visualizations"
+mkdir -p "${SCIP_MODULE_GRAPH_VIZ_DIR}"
+
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-path-finding"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    setupStronglyConnectedComponentsForSccVisualization "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipModuleLongestPathsIsolated..."
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_for_graphviz.cypher" \
+        "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" \
+        > "${SCIP_MODULE_GRAPH_VIZ_DIR}/ScipModuleLongestPathsIsolated.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_MODULE_GRAPH_VIZ_DIR}/ScipModuleLongestPathsIsolated.csv"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipModuleLongestPaths..."
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_contributors_for_graphviz.cypher" \
+        "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" \
+        > "${SCIP_MODULE_GRAPH_VIZ_DIR}/ScipModuleLongestPaths.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_MODULE_GRAPH_VIZ_DIR}/ScipModuleLongestPaths.csv"
+fi
+
+# Clean-up SCIP Module graph visualizations
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${SCIP_MODULE_GRAPH_VIZ_DIR}"
+
+# ── SCIP Semantic Index Artifact Visualizations ───────────────────────────────
+
+SCIP_ARTIFACT_GRAPH_VIZ_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact/Graph_Visualizations"
+mkdir -p "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}"
+
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-path-finding"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    setupStronglyConnectedComponentsForSccVisualization "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipArtifactLongestPathsIsolated..."
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_for_graphviz.cypher" \
+        "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" \
+        > "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPathsIsolated.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPathsIsolated.csv"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipArtifactLongestPaths..."
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_contributors_for_graphviz.cypher" \
+        "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" \
+        > "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPaths.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactLongestPaths.csv"
+fi
+
+# Clean-up SCIP Artifact graph visualizations
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}"
+
 # Clean-up empty level directories.
 # These may have been recreated by mkdir -p above even if there was no data,
 # in which case cleanupAfterReportGeneration.sh deletes them since they are empty.
@@ -200,5 +289,7 @@ source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/Typescript_Module"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_NonDevPackage"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_DevPackage"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 
 echo "${SCRIPT_NAME}: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

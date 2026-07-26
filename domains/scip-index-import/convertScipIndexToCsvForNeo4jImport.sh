@@ -166,6 +166,14 @@ function extract_type_nodes() {
     jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
 
         ($index[0].internal_package_ids) as $internal_pkg_ids |
+        (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+        ) as $project_root |
 
         (
             [
@@ -205,7 +213,8 @@ function extract_type_nodes() {
                     package_manager: $manager,
                     version:         $version,
                     module:          $module_name,
-                    is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end)
+                    is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
+                    project_root:    $project_root
                 }
             ]
             +
@@ -260,15 +269,16 @@ function extract_type_nodes() {
                     package_manager: $manager,
                     version:         $version,
                     module:          $module_name,
-                    is_abstract:     "false"
+                    is_abstract:     "false",
+                    project_root:    $project_root
                 }
             ]
         ) |
         unique_by(.symbol) |
         sort_by(.file, .display_name) |
 
-        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract"]),
-        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract])
+        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root"]),
+        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root])
         | @csv
         ' "${input_file}"
 }
@@ -283,6 +293,14 @@ function extract_external_type_nodes() {
     jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
 
         ($index[0].internal_package_ids) as $internal_pkg_ids |
+        (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+        ) as $project_root |
         [
             .documents[] |
             .occurrences[] |
@@ -322,12 +340,13 @@ function extract_external_type_nodes() {
                 package_manager: $manager,
                 version:         $version,
                 module:          $module_name,
-                is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end)
+                is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
+                project_root:    $project_root
             }
         ] |
         unique_by(.symbol) |
         sort_by(.package_id, .display_name) |
-        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract]
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
         | @csv
         ' "${input_file}"
 }
@@ -409,6 +428,39 @@ function extract_depends_on_edges() {
         .[] | [.source_symbol, .target_symbol, (.reference_count | tostring)]
         | @csv
         ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Extract SCIP project metadata from one input file (header on first call only)
+# Extracts project_root and tool_info from metadata; creates unique project node per index
+# ---------------------------------------------------------------------------
+
+function extract_project_metadata() {
+    local input_file="${1}"
+    local emit_header="${2}"  # "true" to include header, "false" to skip
+
+    local header='project_root,tool_name,tool_version'
+    
+    if [ "$emit_header" = "true" ]; then
+        echo "${header}"
+    fi
+    
+    jq -r '
+        select(.metadata != null and .metadata.project_root != null) |
+        .metadata as $meta |
+        (
+            if ($meta.project_root | test("file://")) then
+                ($meta.project_root | gsub("^file://"; ""))
+            else
+                $meta.project_root
+            end
+        ) as $project_root |
+        [
+            $project_root,
+            ($meta.tool_info.name // "unknown"),
+            ($meta.tool_info.version // "unknown")
+        ] | @csv
+    ' "${input_file}"
 }
 
 # ---------------------------------------------------------------------------
@@ -520,6 +572,41 @@ function merge_edge_csvs() {
 }
 
 # ---------------------------------------------------------------------------
+# Merge per-file project metadata CSVs: deduplicate by project_root
+# Input: directory containing *_projects.csv files (header in first file only)
+# ---------------------------------------------------------------------------
+
+function merge_project_csvs() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    # Collect project files in sorted order for deterministic output
+    local project_files=()
+    while IFS= read -r project_file; do
+        project_files+=("${project_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_projects.csv" | sort)
+
+    if [ ${#project_files[@]} -eq 0 ]; then
+        # No project metadata found; create empty CSV with header
+        echo '"project_root","tool_name","tool_version"' > "${output_file}"
+        return
+    fi
+
+    # Concatenate all rows (header already handled per file), then deduplicate by project_root (first column)
+    # awk: parse CSV first field (unquoted or quoted), keep first occurrence per project_root
+    cat "${project_files[@]}" | awk -F',' '
+        NR == 1 { print; next }
+        {
+            # Extract the project_root field (first CSV column, may be quoted)
+            project_root = $1
+            gsub(/^"/, "", project_root)
+            gsub(/"$/, "", project_root)
+            if (!seen[project_root]++) { print }
+        }
+    ' > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -539,12 +626,17 @@ while IFS= read -r index_file; do
     file_stem=$(basename "${index_file}" .scip.json | tr -cs 'A-Za-z0-9_-' '_')
     nodes_temp="${tmp_dir}/${file_stem}_nodes.csv"
     edges_temp="${tmp_dir}/${file_stem}_edges.csv"
+    projects_temp="${tmp_dir}/${file_stem}_projects.csv"
+    
     process_single_index "${index_file}" "${nodes_temp}" "${edges_temp}" "${first_file}"
+    extract_project_metadata "${index_file}" "${first_file}" >> "${projects_temp}"
+    
     first_file=false
 done < <(find "${INDICES_DIRECTORY}" -maxdepth 1 -name "*.scip.json" -type f | sort)
 
 nodes_output="${IMPORT_DIRECTORY}/scip_type_nodes.csv"
 edges_output="${IMPORT_DIRECTORY}/scip_type_edges.csv"
+projects_output="${IMPORT_DIRECTORY}/scip_projects.csv"
 
 echo "convertScipIndexToCsv: Merging node CSVs → '${nodes_output}'..."
 merge_node_csvs "${tmp_dir}" "${nodes_output}"
@@ -552,6 +644,10 @@ merge_node_csvs "${tmp_dir}" "${nodes_output}"
 echo "convertScipIndexToCsv: Merging edge CSVs → '${edges_output}'..."
 merge_edge_csvs "${tmp_dir}" "${edges_output}"
 
+echo "convertScipIndexToCsv: Merging project metadata CSVs → '${projects_output}'..."
+merge_project_csvs "${tmp_dir}" "${projects_output}"
+
 node_count=$(( $(wc -l < "${nodes_output}") - 1 ))
 edge_count=$(( $(wc -l < "${edges_output}") - 1 ))
-echo "convertScipIndexToCsv: Done. ${node_count} node(s), ${edge_count} edge(s)."
+project_count=$(( $(wc -l < "${projects_output}") - 1 ))
+echo "convertScipIndexToCsv: Done. ${node_count} node(s), ${edge_count} edge(s), ${project_count} project(s)."

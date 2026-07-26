@@ -74,39 +74,48 @@ For the **initial import** (empty database), `analyze.sh` attempts a fast path u
 
 ### Conditions
 
-All four conditions must be met for the fast path to activate:
+The fast path activates when all conditions are met:
 
 | Condition | Details |
 |-----------|---------|
 | SCIP indices changed | Hash check (same as regular change detection) — skips if unchanged |
 | Neo4j v5 or higher | `neo4j-admin database import full` not available on v4 |
 | `neo4j-admin` executable | Found at `${NEO4J_INSTALLATION_DIRECTORY}/bin/neo4j-admin` |
-| Empty database | `${DATA_DIRECTORY}/databases/neo4j/` absent or contains no files |
 
-If **any** condition fails, the fast path is skipped silently and the regular LOAD CSV path runs unchanged.
+If any condition fails, the fast path is skipped silently and the regular LOAD CSV path runs unchanged.
+
+**Note:** Neo4j is automatically stopped before the admin import attempt (if running), then restarted by the standard pipeline flow.
 
 ### What Happens
 
 1. **Pre-start** (`importScipIndexDataWithAdminImport.sh`, sourced before `startNeo4j.sh`):
-   - Converts `*.scip.json` to `scip_type_nodes_admin.csv` and `scip_type_edges_admin.csv` via `convertScipIndexToCsvForNeo4jAdminImport.sh`
+   - Stops Neo4j if it's running (required for admin import)
+   - Converts `*.scip.json` to admin import CSVs via `convertScipIndexToCsvForNeo4jAdminImport.sh`
    - `language` and `isTest` are computed in jq (not via Cypher after import)
-   - Runs `neo4j-admin database import full` with the generated CSVs
-   - Exports `SCIP_ADMIN_IMPORT_DONE=true` on success
+   - Attempts `neo4j-admin database import full`
+   - **If successful:** Exports `SCIP_ADMIN_IMPORT_DONE=true`
+   - **If fails:** Returns silently (LOAD CSV will run as fallback)
 
-2. **Post-start** (`importScipIndexData.sh`):
-   - Detects `SCIP_ADMIN_IMPORT_DONE=true`
-   - Skips CSV conversion, cleanup, and LOAD CSV queries
-   - Still creates uniqueness constraints and runs all enrichment/structure queries
+2. **Standard flow** (always runs):
+   - `startNeo4j.sh` starts Neo4j (or does nothing if already running)
+   - `importScipIndexData.sh` runs:
+     - If `SCIP_ADMIN_IMPORT_DONE=true`: Skips CSV conversion and LOAD CSV, runs only constraints and enrichment
+     - If not set (fallback): Converts CSVs, cleans existing data via Cypher, imports via LOAD CSV, runs enrichment
 
 ### Fallback Behavior
 
-| Scenario | Result |
-|----------|--------|
-| DB already populated | Admin import skipped; LOAD CSV runs (cleanup + re-import) |
+When admin import cannot proceed (any guard fails) or fails to complete:
+
+| Scenario | Behavior |
+|----------|----------|
+| Indices unchanged | Admin import skipped; LOAD CSV skipped; enrichment skipped |
+| Neo4j v4 | Admin import skipped; LOAD CSV runs normally |
 | `neo4j-admin` missing | Admin import skipped; LOAD CSV runs normally |
 | CSV conversion fails | Admin import skipped; LOAD CSV runs normally |
-| `neo4j-admin` command fails | Admin import skipped; LOAD CSV runs normally |
-| Repeat run (unchanged index) | Both paths skipped entirely (hash unchanged) |
+| `neo4j-admin` command fails | Admin import skipped; LOAD CSV runs normally (cleans via Cypher) |
+| Database already has data | Admin import fails; LOAD CSV runs (cleans existing data via Cypher before re-importing) |
+
+**Important:** Neo4j is always started after the pre-start phase, so LOAD CSV has access to the HTTP API regardless of success/failure.
 
 ### `SCIP_ADMIN_IMPORT_DONE`
 

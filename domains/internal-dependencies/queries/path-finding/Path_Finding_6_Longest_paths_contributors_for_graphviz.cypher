@@ -7,7 +7,8 @@
   WITH min(dependencyForStatistics[$dependencies_projection_weight_property]) AS minWeight
       ,max(dependencyForStatistics[$dependencies_projection_weight_property]) AS maxWeight
       ,max(targetNodeForStatistics.maxDistanceFromSource)                     AS maxLevel
-   WITH *, 1.0 / toFloat(maxWeight - minWeight)                               AS weightNormalizationFactor
+// 1E-38 is added to avoid division by zero in case all weights are equal
+   WITH *, 1.0 / toFloat(maxWeight - minWeight) + 1E-38                       AS weightNormalizationFactor
    WITH { minWeight: minWeight, maxLevel: maxLevel, weightNormalizationFactor: weightNormalizationFactor } AS statistics
 // -> Main call to execute "longest path" algorithm
    CALL gds.dag.longestPath.stream($dependencies_projection + '-cleaned')
@@ -56,9 +57,9 @@
   WITH *, toFloat(weight - minWeight) * weightNormalizationFactor AS normalizedWeight
   WITH *, round((normalizedWeight * 5) + 1, 2)                    AS penWidth
   WITH *, coalesce("\\n(level " + source.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS startNodeLevelInfo
-  WITH *, coalesce("\\n" + source.rootProjectName, "")                                        AS startNodeProjectInfo
+  WITH *, coalesce("\\n" + source.rootProjectName, "\\n" + source.projectName, "")            AS startNodeProjectInfo
   WITH *, coalesce("\\n(level " + target.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS endNodeLevelInfo
-  WITH *, coalesce("\\n" + target.rootProjectName, "")                                        AS endNodeProjectInfo
+  WITH *, coalesce("\\n" + target.rootProjectName, "\\n" + target.projectName, "")            AS endNodeProjectInfo
   WITH *, source.name + startNodeProjectInfo + startNodeLevelInfo                             AS startNodeTitle
   WITH *, target.name + endNodeProjectInfo + endNodeLevelInfo                                 AS endNodeTitle
                // The longest path will be highlighted in red.

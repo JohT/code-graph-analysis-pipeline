@@ -4,6 +4,105 @@ This document describes breaking changes introduced in each major version and ho
 
 ---
 
+## Migrating to v5.0.0
+
+v5 introduces several breaking changes, particularly around path-finding queries, report naming conventions, SCIP index support enhancements, and Python version requirements. The sections below describe each breaking change and the steps to migrate.
+
+---
+
+### 1. Path Finding query output column changes
+
+**What changed (Commit [4cf08f8f9](https://github.com/JohT/code-graph-analysis-pipeline/commit/4cf08f8f9), [2a06f18a2](https://github.com/JohT/code-graph-analysis-pipeline/commit/2a06f18a2), [11b193dc4](https://github.com/JohT/code-graph-analysis-pipeline/commit/11b193dc4)):**
+
+The Path Finding queries have been refactored to simplify the returned columns and add support for SCIP indices. The following changes affect CSV report output:
+
+#### Path_Finding_5_All_pairs_shortest_path_examples.cypher
+
+| Before | After |
+|--------|-------|
+| Columns: `distance`, `sourceContainerName`, `sourceProject`, `sourceScan`, `path` | Columns: `distance`, `sourceContainerName`, `source.projectName`, `path` |
+| Queries optional project/scan nodes | Uses direct property access only |
+
+#### Path_Finding_6_Longest_paths_examples.cypher
+
+| Before | After |
+|--------|-------|
+| Columns: `distance`, `index`, `sourceContainerName`, `sourceProject`, `sourceScan`, `path` | Columns: `distance`, `index`, `sourceContainerName`, `source.projectName`, `path` |
+| Queries optional project/scan nodes | Uses direct property access only |
+
+Additionally, path finding algorithms now use **strongly connected components** to untangle cycles before computing longest paths, which may result in different path results for cyclic dependencies.
+
+**Migration steps:**
+
+1. **Update CSV consumers:** If you parse `Path_Finding_5_*.csv` or `Path_Finding_6_*.csv` reports:
+   - Rename column references from `sourceProject` to `source.projectName`
+   - Remove any references to the `sourceScan` column (no longer present)
+   - Update any downstream dashboards or aggregations accordingly
+
+2. **Update Cypher queries:** If you've extended or customized these path-finding queries:
+   - Remove `OPTIONAL MATCH` clauses querying `(sourceProject:Artifact|Project)-[:CONTAINS]->(source)` and `(sourceScan:TS:Scan)-[:CONTAINS_PROJECT]->(sourceProject)`
+   - Replace with direct property access: `coalesce(source.rootProjectName, source.projectName, source.name)`
+
+3. **Validate path results:** Run path-finding reports and validate that longest paths are consistent with your expectations. The inclusion of strongly connected component detection may surface new or different cycles.
+
+---
+
+### 2. Node Embeddings FastRP report name correction
+
+**What changed (Commit [5b25bcf01](https://github.com/JohT/code-graph-analysis-pipeline/commit/5b25bcf01)):**
+
+The FastRP (Fast Random Projection) embedding report filename was corrected from a typo:
+
+| Before | After |
+|--------|-------|
+| `<NodeLabel>_Embeddings_Label_Random_Projection.csv` | `<NodeLabel>_Embeddings_Fast_Random_Projection.csv` |
+
+**Migration steps:**
+
+1. **Update report consumers:** Update any scripts, dashboards, or CI jobs that read or archive embedding reports:
+   - Search for references to `*_Label_Random_Projection.csv`
+   - Replace with `*_Fast_Random_Projection.csv`
+
+2. **Update archival/publishing:** If you publish embedding reports to external systems:
+   - Update file paths and naming patterns accordingly
+
+---
+
+### 3. Git history: New CHANGED_TOGETHER_WITH relationships
+
+**What changed (Commit [d451a21cf](https://github.com/JohT/code-graph-analysis-pipeline/commit/d451a21cf)):**
+
+Git log import now creates `CHANGED_TOGETHER_WITH` relationships between file nodes that were modified in the same commit. This enables new analysis capabilities for co-change patterns.
+
+**New Neo4j relationship:**
+
+- `(file1:File)-[:CHANGED_TOGETHER_WITH]->(file2:File)` — created when both files are changed in the same commit
+
+**Migration steps:**
+
+1. **Update custom git history queries:** If you query git log data:
+   - Consider leveraging the new `CHANGED_TOGETHER_WITH` relationship for co-change analysis
+   - Existing queries are not affected and will continue to work
+
+2. **New analysis opportunities:**
+   - Identify files that frequently change together
+   - Find co-change patterns that may indicate tight coupling
+   - See [domains/git-history/README.md](./domains/git-history/README.md) for example usage
+
+---
+
+## Summary of v5.0.0 Breaking Changes
+
+| Area | Breaking Change | Impact | Migration Effort |
+|------|-----------------|--------|------------------|
+| Path Finding Queries | Output columns changed | CSV column names differ | Medium |
+| FastRP Embeddings | Filename corrected | Report filename changed | Low |
+| Git History | New CHANGED_TOGETHER_WITH relationships | Enhanced data model | Low (backward compatible) |
+
+For assistance, see [GETTING_STARTED.md](./GETTING_STARTED.md), [COMMANDS.md](./COMMANDS.md), or check the relevant domain READMEs.
+
+---
+
 ## Migrating to v4.0.0
 
 v4 is a major release that reorganizes the pipeline into vertical-slice domains and removes several legacy features. The sections below describe each breaking change and the steps to migrate.

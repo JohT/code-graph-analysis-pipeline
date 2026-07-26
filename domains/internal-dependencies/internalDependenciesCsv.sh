@@ -31,6 +31,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/../../scripts"}
 INTERNAL_DEPS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/internal-dependencies"
 PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/path-finding"
 TOPOLOGICAL_SORT_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/topological-sort"
+SCC_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/strongly-connected-components"
 OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/object-oriented-design-metrics"
 VISIBILITY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/visibility"
 
@@ -182,25 +183,97 @@ if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_DEV_PROJECTION}" 
     runPathFindingAlgorithms "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
 fi
 
-# ── Topological Sort ──────────────────────────────────────────────────────────
+# -- SCIP Semantic Index Module Path Finding ------
+# Note: longestPath is omitted here for SCIP nodes because the projection may contain cycles.
+# runLongestPathOnStronglyConnectedComponents is used in the topological sort section instead.
 
-echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting topological sort..."
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_MODULE_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-path-finding"
+SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
+SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
-# Apply the algorithm "Topological Sort" and write results to the current level directory.
+if createDirectedDependencyProjection "${SCIP_MODULE_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
+    time allPairsShortestPath "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+fi
+
+# -- SCIP Semantic Index Artifact Path Finding ---
+# Note: longestPath is omitted here for SCIP nodes because the projection may contain cycles.
+# runLongestPathOnStronglyConnectedComponents is used in the topological sort section instead.
+
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
+mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_ARTIFACT_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
+SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-path-finding"
+SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
+SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
+
+if createDirectedDependencyProjection "${SCIP_ARTIFACT_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
+    time allPairsShortestPath "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+fi
+
+# ── Strongly Connected Components, Topological Sort, Longest Path ─────────────
+
+echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting topological sort of strongly connected components..."
+
+# STEP 1: Detect and write Strongly Connected Components to the graph database.
+# Idempotent: skips detection if communityStronglyConnectedComponentId is already written.
+# StronglyConnectedComponent nodes and DEPENDS_ON edges use MERGE, so they are always safe to call.
+# Uses the -cleaned projection created by createDirectedDependencyProjection.
 #
 # Required Parameters:
-# - dependencies_projection=...   Name prefix for the in-memory projection. Example: "package-topology"
-# - dependencies_projection_node=...   Node label. Example: "Package"
-# - dependencies_projection_weight_property=...   Weight property name. Example: "weight"
-topologicalSort() {
+# - dependencies_projection=...      Name prefix for the in-memory projection
+# - dependencies_projection_node=... Node label (e.g., "Artifact", "Package")
+# - dependencies_projection_weight_property=... Weight property name
+runStronglyConnectedComponents() {
+    execute_cypher_queries_until_results \
+        "${SCC_CYPHER_DIR}/SCC_Exists.cypher" \
+        "${SCC_CYPHER_DIR}/SCC_Write.cypher" \
+        "${@}"
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateNode.cypher" "${@}"
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateDependency.cypher" "${@}"
+}
+
+# STEP 2: Drop and recreate the in-memory -components projection from StronglyConnectedComponent nodes.
+# Always runs unconditionally — GDS in-memory projections are ephemeral and not persisted across restarts.
+# Prerequisite: runStronglyConnectedComponents must have run at least once for the given node type.
+#
+# Required Parameters: same as runStronglyConnectedComponents
+recreateStronglyConnectedComponentsProjection() {
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Delete_Projection.cypher" "${@}" >/dev/null
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Projection.cypher" "${@}"
+}
+
+# STEP 3: Compute Topological Sort on the SCC component DAG, propagate to member nodes, and write CSV.
+# Auto-triggers runStronglyConnectedComponents if communityStronglyConnectedComponentId is missing.
+# Recreates the -components projection unconditionally (ephemeral in-memory resource).
+# Topological sort write is idempotent: skipped if topologicalSortIndex is already written.
+#
+# Required Parameters: same as runStronglyConnectedComponents
+runTopologicalSortOnStronglyConnectedComponents() {
     local nodeLabel; nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
-
-    # Write topological sort level as a node property (required for graph visualizations)
-    execute_cypher "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Write.cypher" "${@}"
-
-    # Stream to CSV
+    runStronglyConnectedComponents "${@}"
+    recreateStronglyConnectedComponentsProjection "${@}"
+    execute_cypher_queries_until_results \
+        "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Exists.cypher" \
+        "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Write.cypher" \
+        "${@}"
+    execute_cypher "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Propagate.cypher" "${@}"
     execute_cypher "${TOPOLOGICAL_SORT_CYPHER_DIR}/Topological_Sort_Query.cypher" "${@}" \
         > "${CURRENT_LEVEL_DIR}/${nodeLabel}_Topological_Sort.csv"
+}
+
+# STEP 4: Compute Longest Path on the SCC component DAG and write distribution CSV.
+# Uses the -components projection already in GDS memory.
+# Must be called after runTopologicalSortOnStronglyConnectedComponents, which creates the projection.
+# Works for data with cyclic dependencies: each cycle is condensed into a single component node.
+#
+# Required Parameters: same as runStronglyConnectedComponents
+runLongestPathOnStronglyConnectedComponents() {
+    local nodeLabel; nodeLabel=$( extractQueryParameter "dependencies_projection_node" "${@}" )
+    execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_distribution_per_project.cypher" "${@}" \
+        > "${CURRENT_LEVEL_DIR}/${nodeLabel}_StronglyConnectedComponents_longest_paths_distribution.csv"
 }
 
 # -- Java Artifact Topological Sort ----------------------------------------
@@ -211,7 +284,8 @@ ARTIFACT_NODE="dependencies_projection_node=Artifact"
 ARTIFACT_WEIGHT="dependencies_projection_weight_property=weight"
 
 if createDirectedDependencyProjection "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"; then
-    time topologicalSort "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${ARTIFACT_PROJECTION}" "${ARTIFACT_NODE}" "${ARTIFACT_WEIGHT}"
 fi
 
 # -- Java Package Topological Sort -----------------------------------------
@@ -222,7 +296,8 @@ PACKAGE_NODE="dependencies_projection_node=Package"
 PACKAGE_WEIGHT="dependencies_projection_weight_property=weight25PercentInterfaces"
 
 if createDirectedDependencyProjection "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"; then
-    time topologicalSort "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${PACKAGE_PROJECTION}" "${PACKAGE_NODE}" "${PACKAGE_WEIGHT}"
 fi
 
 # -- Java Type Topological Sort --------------------------------------------
@@ -233,7 +308,8 @@ TYPE_NODE="dependencies_projection_node=Type"
 TYPE_WEIGHT="dependencies_projection_weight_property=weight"
 
 if createDirectedJavaTypeDependencyProjection "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"; then
-    time topologicalSort "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${TYPE_PROJECTION}" "${TYPE_NODE}" "${TYPE_WEIGHT}"
 fi
 
 # -- TypeScript Module Topological Sort ------------------------------------
@@ -245,7 +321,8 @@ MODULE_NODE="dependencies_projection_node=Module"
 MODULE_WEIGHT="dependencies_projection_weight_property=lowCouplingElement25PercentWeight"
 
 if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"; then
-    time topologicalSort "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
 fi
 
 # -- Non-Dev NPM Package Topological Sort ----------------------------------
@@ -257,7 +334,8 @@ NPM_NODE="dependencies_projection_node=NpmNonDevPackage"
 NPM_WEIGHT="dependencies_projection_weight_property=weightByDependencyType"
 
 if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"; then
-    time topologicalSort "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${NPM_PROJECTION}" "${NPM_NODE}" "${NPM_WEIGHT}"
 fi
 
 # -- Dev NPM Package Topological Sort --------------------------------------
@@ -268,7 +346,8 @@ NPM_DEV_NODE="dependencies_projection_node=NpmDevPackage"
 NPM_DEV_WEIGHT="dependencies_projection_weight_property=weightByDependencyType"
 
 if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"; then
-    time topologicalSort "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
 fi
 
 # -- SCIP Internal Type Topological Sort ----------------------------------
@@ -281,31 +360,36 @@ SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
 SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    time topologicalSort "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
 fi
 
-# -- SCIP Module Topological Sort -----------------------------------------
+# -- SCIP Module Topological Sort + Longest Path ---------------------------
 
 CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
 mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
 SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-topology"
 SCIP_MODULE_NODE="dependencies_projection_node=SemanticCodeIndexModule"
 SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
-    time topologicalSort "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
 fi
 
-# -- SCIP Artifact Topological Sort ----------------------------------------
+# -- SCIP Artifact Topological Sort + Longest Path -------------------------
 
 CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 mkdir -p "${CURRENT_LEVEL_DIR}"
+SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
 SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-topology"
 SCIP_ARTIFACT_NODE="dependencies_projection_node=SemanticCodeIndexArtifact"
 SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
-    time topologicalSort "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+    time runTopologicalSortOnStronglyConnectedComponents "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
 fi
 
 # ── Object-Oriented Design Metrics ───────────────────────────────────────────────────────
@@ -390,6 +474,8 @@ source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/Typescript_Module"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_NonDevPackage"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_DevPackage"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

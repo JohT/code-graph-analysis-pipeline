@@ -6,7 +6,8 @@
   WITH min(dependencyForStatistics[$dependencies_projection_weight_property]) AS minWeight
       ,max(dependencyForStatistics[$dependencies_projection_weight_property]) AS maxWeight
       ,max(targetNodeForStatistics.maxDistanceFromSource)                     AS maxLevel
-   WITH *, 1.0 / toFloat(maxWeight - minWeight)  AS weightNormalizationFactor
+// 1E-38 is added to avoid division by zero in case all weights are equal
+   WITH *, 1.0 / toFloat(maxWeight - minWeight) + 1E-38                       AS weightNormalizationFactor
   CALL gds.dag.longestPath.stream($dependencies_projection + '-cleaned')
  YIELD index, totalCost, path
   WITH *, toInteger(totalCost) AS distance
@@ -20,9 +21,9 @@
   WITH *, toFloat(weight - minWeight) * weightNormalizationFactor AS normalizedWeight
   WITH *, round((normalizedWeight * 5) + 1, 2) AS penWidth
   WITH *, coalesce("\\n(level " + startNode.maxDistanceFromSource + "/" + maxLevel + ")", "")    AS startNodeLevelInfo
-  WITH *, coalesce("\\n" + startNode.rootProjectName, "")                                        AS startNodeProjectInfo
+  WITH *, coalesce("\\n" + startNode.rootProjectName, "\\n" + startNode.projectName, "")         AS startNodeProjectInfo
   WITH *, coalesce("\\n(level " + endNode.maxDistanceFromSource + "/" + maxLevel + ")", "")      AS endNodeLevelInfo
-  WITH *, coalesce("\\n" + endNode.rootProjectName, "")                                          AS endNodeProjectInfo
+  WITH *, coalesce("\\n" + endNode.rootProjectName, "\\n" + endNode.projectName, "")             AS endNodeProjectInfo
   WITH *, startNode.name + startNodeProjectInfo + startNodeLevelInfo                             AS startNodeTitle
   WITH *, endNode.name + endNodeProjectInfo + endNodeLevelInfo                                   AS endNodeTitle
   WITH *, "[label=" + weight  + "; penwidth=" + penWidth + "; ];"    AS graphVizEdgeAttributes

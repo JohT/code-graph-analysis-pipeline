@@ -5,7 +5,7 @@
 # Requires convertQueryResultCsvToGraphVizDotFile.sh
 #
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
-set -o errexit -o pipefail
+set -o errexit -o pipefail -o nounset
 
 ## Get this "scripts/visualization" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -16,10 +16,10 @@ echo "visualizeQueryResults: VISUALIZATION_SCRIPTS_DIR=${VISUALIZATION_SCRIPTS_D
 
 # Read the first unnamed input argument containing the version of the project
 inputCsvFileName=""
-case "${1}" in
+case "${1:-}" in
   "--"*) ;; # Skipping named command line options to forward them later to the "convertQueryResultCsvToGraphVizDotFile" command
   *) 
-    inputCsvFileName="${1}" 
+    inputCsvFileName="${1:-}" 
     shift || true
     ;;
 esac
@@ -48,7 +48,11 @@ graphName=${graphName//-/_} # Replace all dashes in the graphName by underscores
 inputCsvFilePath=$(dirname "${inputCsvFileName}")
 
 echo "visualizeQueryResults: Generating Visualization files ${inputCsvFilePath}/${graphName}.* ..."
-source "${VISUALIZATION_SCRIPTS_DIR}/convertQueryResultCsvToGraphVizDotFile.sh" "--filename" "${inputCsvFileName}" "${@}"
+if [ $# -gt 0 ]; then
+  source "${VISUALIZATION_SCRIPTS_DIR}/convertQueryResultCsvToGraphVizDotFile.sh" "--filename" "${inputCsvFileName}" "${@}"
+else
+  source "${VISUALIZATION_SCRIPTS_DIR}/convertQueryResultCsvToGraphVizDotFile.sh" "--filename" "${inputCsvFileName}"
+fi
 
 if command -v "dot" &> /dev/null ; then
     echo "visualizeQueryResults: Info: Using already installed GraphViz."

@@ -36,6 +36,8 @@ Each domain: vertical slice with own entry points, queries, scripts, templates. 
 | [CYPHER.md](./CYPHER.md) | Generated Cypher query reference |
 | [ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) | All env vars with defaults |
 
+Writing or editing documentation? See [documentation conventions](./.github/instructions/documentation.instructions.md).
+
 ## Running Pipeline
 
 Main entry: `analyze.sh`. Run from analysis workspace directory. Repo scripts + domains discovered automatically:
@@ -86,6 +88,7 @@ Instruction files auto-applied per file type:
 | `*.gv`, `*.dot` | [.github/instructions/graphviz.instructions.md](./.github/instructions/graphviz.instructions.md) |
 | `pyproject.toml`, `conda-environment.yml` | [.github/instructions/python-dependencies.instructions.md](./.github/instructions/python-dependencies.instructions.md) |
 | `CYPHER.md`, `SCRIPTS.md`, `ENVIRONMENT_VARIABLES.md` | [.github/instructions/generated-reference-docs.instructions.md](./.github/instructions/generated-reference-docs.instructions.md) |
+| `README.md`, `COMMANDS.md`, `CHANGELOG.md`, `INTEGRATION.md`, `MIGRATION.md`, `SCIP.md`, `PREREQUISITES.md` | [.github/instructions/documentation.instructions.md](./.github/instructions/documentation.instructions.md) |
 | `.github/skills/`, `.github/instructions/`, `AGENTS.md` | [.github/instructions/agent-files.instructions.md](./.github/instructions/agent-files.instructions.md) |
 | `.github/workflows/*.yml` | [.github/instructions/github-workflows.instructions.md](./.github/instructions/github-workflows.instructions.md) |
 | `renovate.json` | [.github/instructions/renovate.instructions.md](./.github/instructions/renovate.instructions.md) |

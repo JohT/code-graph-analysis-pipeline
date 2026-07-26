@@ -115,3 +115,22 @@ Dependency degree calculations (incoming/outgoing `DEPENDS_ON` counts) are used 
 by several internal dependency queries.
 
 **Cypher source:** [`cypher/Metrics/`](../../cypher/Metrics/)
+
+---
+
+## 10. SCIP Semantic Index Nodes and Relationships
+
+For analyses of SCIP-indexed code (`SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`,
+`SemanticCodeIndexInternalType`), the SCIP import domain must have been run first to populate
+the graph with SCIP nodes and their `DEPENDS_ON` relationships.
+
+SCIP dependency data may contain **cyclic dependencies** — modules that mutually depend on each
+other. The standard `gds.dag.longestPath` algorithm requires a directed acyclic graph (DAG) and
+cannot be applied directly to these projections. This domain handles cycles for SCIP Module and
+Artifact nodes by running longest path at the level of Strongly Connected Components:
+
+- Each group of mutually dependent nodes is collapsed into a single `StronglyConnectedComponent` node
+- The component graph is always a DAG and supports `gds.dag.longestPath`
+- Cycle components appear in GraphViz output labelled `"Cycle (N) around ModuleName"` so readers can immediately identify cyclic nodes and their size
+
+**Import source:** [`domains/scip-index-import/`](../../domains/scip-index-import/)

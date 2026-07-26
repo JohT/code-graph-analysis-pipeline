@@ -7,8 +7,8 @@
 #   - SCIP indices unchanged since last import
 #   - Neo4j v4 (not supported)
 #   - neo4j-admin binary absent or not executable
-#   - Neo4j database already populated (not empty)
 #   - CSV conversion or admin import command fails
+# If fallback occurs, Neo4j is started by analyze.sh's startNeo4j.sh step, and LOAD CSV runs post-start.
 # Requires convertScipIndexToCsvForNeo4jAdminImport.sh, detectChangedFiles.sh, operatingSystemFunctions.sh.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
@@ -77,14 +77,25 @@ function try_admin_import() {
         return 0
     fi
 
-    # Guard 4: database directory must be absent or empty (initial import only)
-    local neo4j_db_dir="${DATA_DIRECTORY}/databases/neo4j"
-    if [ -d "${neo4j_db_dir}" ]; then
-        if find "${neo4j_db_dir}" -mindepth 1 -maxdepth 1 2>/dev/null | grep -q .; then
-            echo "importScipIndexDataWithAdminImport: Neo4j database '${neo4j_db_dir}' is not empty. Falling back to LOAD CSV."
-            return 0
+    # Guard 4: Stop Neo4j if it's running (admin import requires stopped database)
+    # Source the stop script which handles graceful shutdown
+    local neo4j_stop_script="${SCIP_ADMIN_IMPORT_SCRIPT_DIR}/../../neo4j-management/stopNeo4j.sh"
+    if [ -f "${neo4j_stop_script}" ]; then
+        echo "importScipIndexDataWithAdminImport: Checking if Neo4j is running..."
+        # Suppress output to keep logs clean; stopNeo4j already echoes what it's doing
+        # Only source if needed (if Neo4j happens to be running from a previous session)
+        if NEO4J_EDITION="${NEO4J_EDITION}" NEO4J_VERSION="${NEO4J_VERSION}" TOOLS_DIRECTORY="${TOOLS_DIRECTORY}" bash "${neo4j_stop_script}" &>/dev/null; then
+            : # Successfully stopped (or was already stopped)
+        else
+            # If stopNeo4j fails, log it but continue (might fail for OS-specific reasons like Windows)
+            echo "importScipIndexDataWithAdminImport: Note: Could not verify Neo4j stopped state. Continuing with admin import."
         fi
     fi
+
+    # Note: neo4j-admin database import full will fail if the database already exists,
+    # but this is acceptable — the failure triggers fallback to LOAD CSV. The LOAD CSV path
+    # will clean existing data via Cypher (Cleanup_SCIP_Type_Nodes.cypher) before re-importing.
+    # We do not pre-delete database files here as that would manipulate Neo4j's internal state.
 
     # Convert SCIP index files to neo4j-admin import CSVs
     echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to admin import CSV..."
@@ -98,22 +109,30 @@ function try_admin_import() {
     absolute_import_dir=$( CDPATH=. cd -- "${IMPORT_DIRECTORY}" && pwd -P )
     local nodes_csv="${absolute_import_dir}/scip_type_nodes_admin.csv"
     local edges_csv="${absolute_import_dir}/scip_type_edges_admin.csv"
+    local projects_csv="${absolute_import_dir}/scip_projects_admin.csv"
+    local links_csv="${absolute_import_dir}/scip_type_project_links_admin.csv"
 
     # Ensure logs directory exists before neo4j-admin writes its report
     mkdir -p "${RUNTIME_DIRECTORY}/logs"
 
-    # Build neo4j-admin command with absolute file paths
-    # Note: We use concrete absolute paths, so regex pattern style (default) works fine.
-    # The --path-pattern-style flag is only needed for pattern matching and is only
-    # supported in Neo4j 2026.01+, so we omit it for compatibility.
-    local neo4j_admin_import_command
-    neo4j_admin_import_command="database import full --nodes=${nodes_csv} --relationships=${edges_csv} --report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report neo4j"
+    # Build neo4j-admin command with absolute file paths using array
+    # Arrays preserve argument boundaries and prevent word splitting issues
+    local -a neo4j_admin_cmd_args
+    neo4j_admin_cmd_args=(
+        "database"
+        "import"
+        "full"
+        "--nodes=${nodes_csv}"
+        "--nodes=${projects_csv}"
+        "--relationships=${edges_csv}"
+        "--relationships=${links_csv}"
+        "--report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report"
+        "neo4j"
+    )
 
     # Run neo4j-admin database import full
     echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Running neo4j-admin database import full..."
-    # Word splitting intentional: expand neo4j_admin_import_command arguments
-    # shellcheck disable=SC2086
-    if ! NEO4J_HOME="${NEO4J_INSTALLATION_DIRECTORY}" "${neo4j_admin_bin}" ${neo4j_admin_import_command}; then
+    if ! NEO4J_HOME="${NEO4J_INSTALLATION_DIRECTORY}" "${neo4j_admin_bin}" "${neo4j_admin_cmd_args[@]}"; then
         echo "importScipIndexDataWithAdminImport: neo4j-admin import failed. Falling back to LOAD CSV." >&2
         return 0
     fi
