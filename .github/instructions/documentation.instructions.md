@@ -54,4 +54,4 @@ npx --yes markdownlint-cli2 \
 ```
 
 Checks syntax, link validity, heading consistency, spacing. Fix
-warnings. Errors block merge.
+warnings. Errors block merge. Ignore line length.
