@@ -22,15 +22,19 @@ UNWIND sourcesAndTargets AS sourceAndTarget
      ,sourceAndTarget.target AS target
 // Resolve project context via one representative member of the source component
 OPTIONAL MATCH (sourceMember)-[:IN_STRONGLY_CONNECTED_COMPONENT]->(source)
+OPTIONAL MATCH (targetMember)-[:IN_STRONGLY_CONNECTED_COMPONENT]->(target)
  WITH distance
      ,distanceTotalPairCount
      ,distanceTotalSourceCount
      ,distanceTotalTargetCount
      ,source
      ,target
-     ,head(collect(sourceMember)) AS representativeMember
-OPTIONAL MATCH (sourceProject:Project|Artifact|SemanticCodeIndexArtifact)-[:CONTAINS]->(representativeMember)
-RETURN coalesce(sourceProject.name, source.name) AS sourceProject
+     ,head(collect(DISTINCT sourceMember)) AS representativeSourceMember
+     ,head(collect(DISTINCT targetMember)) AS representativeTargetMember
+OPTIONAL MATCH (sourceProject:Project|Artifact|SemanticCodeIndexProject|SemanticCodeIndexArtifact)-[:CONTAINS]->(representativeSourceMember)
+OPTIONAL MATCH (targetProject:Project|Artifact|SemanticCodeIndexProject|SemanticCodeIndexArtifact)-[:CONTAINS]->(representativeTargetMember)
+RETURN coalesce(sourceProject.name, source.name)         AS sourceProject
+      ,coalesce((targetProject <> sourceProject), false) AS isDifferentTargetProject
       ,distance
       ,distanceTotalPairCount
       ,distanceTotalSourceCount
@@ -40,4 +44,4 @@ RETURN coalesce(sourceProject.name, source.name) AS sourceProject
       ,count(DISTINCT target) AS targetNodeCount
       ,collect(DISTINCT source.name + ' -> ' + target.name)[0..4] AS examples
       ,collect(DISTINCT sourceProject.name)[0..4] AS exampleProjects
-ORDER BY sourceProject, distance
+ORDER BY sourceProject, isDifferentTargetProject, distance

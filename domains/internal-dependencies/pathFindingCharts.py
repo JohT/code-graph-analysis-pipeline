@@ -40,6 +40,13 @@ ABSTRACTION_LEVELS = [
     ("NPM_DevPackage",   "NpmDevPackage",    "NPM Dev Package"),
 ]
 
+# SCIP Semantic Index abstraction levels: (subdirectory, nodeLabel, description)
+# Uses SCC-based longest path CSV (cycles condensed into components before path finding).
+SCIP_ABSTRACTION_LEVELS = [
+    ("SCIP_Semantic_Index_Module",   "SemanticCodeIndexModule",   "SCIP Semantic Index Module"),
+    ("SCIP_Semantic_Index_Artifact", "SemanticCodeIndexArtifact", "SCIP Semantic Index Artifact"),
+]
+
 # Colormap matching the original PathFindingJava.ipynb notebook
 MAIN_COLOR_MAP = "nipy_spectral"
 
@@ -431,6 +438,128 @@ def generate_charts_for_level(
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 
+def generate_scip_charts_for_level(
+    subdirectory: str,
+    node_label: str,
+    description: str,
+    report_directory: str,
+    verbose: bool,
+) -> None:
+    """Generates path finding charts for a single SCIP abstraction level.
+
+    Differs from generate_charts_for_level() in that the longest path CSV
+    uses the SCC-based file name (_StronglyConnectedComponents_longest_paths_distribution.csv)
+    because SCIP graphs may contain cycles — path finding runs on the condensed SCC component DAG.
+    APSP charts use the same pattern as the standard levels.
+
+    Silently skips if the level directory or any CSV file does not exist.
+    Fails fast on unexpected data structure issues.
+    """
+    level_directory = os.path.join(report_directory, subdirectory)
+    if not os.path.isdir(level_directory):
+        if verbose:
+            print(f"{SCRIPT_NAME}: Skipping {description} — directory not found: {level_directory}")
+        return
+
+    all_pairs_shortest_paths_csv = os.path.join(
+        level_directory,
+        f"{node_label}_all_pairs_shortest_paths_distribution_per_project.csv",
+    )
+    # SCIP longest path runs on the SCC component DAG, not directly on member nodes
+    scc_longest_csv = os.path.join(
+        level_directory,
+        f"{node_label}_StronglyConnectedComponents_longest_paths_distribution.csv",
+    )
+
+    # ── All pairs shortest path charts ────────────────────────────────────────
+    all_pairs_shortest_paths_data = load_csv(all_pairs_shortest_paths_csv, verbose)
+    if all_pairs_shortest_paths_data is not None and not all_pairs_shortest_paths_data.empty:
+        print(f"{SCRIPT_NAME}: Generating SCIP All Pairs Shortest Path charts for {description}...")
+
+        total_all_pairs_shortest_paths = aggregate_total_distribution(all_pairs_shortest_paths_data)
+
+        if not total_all_pairs_shortest_paths.empty:
+            plot_distribution_bar(
+                total_all_pairs_shortest_paths, DISTANCE_COLUMN, PAIR_COUNT_COLUMN,
+                f"{description} — All Pairs Shortest Path Distribution",
+                chart_file_path(f"{subdirectory}_AllPairsShortestPath_Bar", level_directory, verbose),
+            )
+            plot_distribution_pie(
+                total_all_pairs_shortest_paths, DISTANCE_COLUMN, PAIR_COUNT_COLUMN,
+                f"{description} — All Pairs Shortest Path by Distance",
+                chart_file_path(f"{subdirectory}_AllPairsShortestPath_Pie", level_directory, verbose),
+            )
+
+        pivoted = pivot_distribution_by_project(all_pairs_shortest_paths_data, DISTANCE_COLUMN, PAIR_COUNT_COLUMN, SOURCE_PROJECT_COLUMN)
+        if not pivoted.empty:
+            plot_per_project_stacked_bar(
+                pivoted,
+                f"{description} — All Pairs Shortest Path per Project (absolute, log scale)",
+                chart_file_path(f"{subdirectory}_AllPairsShortestPath_StackedBar_Log", level_directory, verbose),
+                use_log_scale=True,
+            )
+            normalized = normalize_distribution_by_project(pivoted)
+            plot_per_project_normalized_bar(
+                normalized,
+                f"{description} — All Pairs Shortest Path per Project (normalised)",
+                chart_file_path(f"{subdirectory}_AllPairsShortestPath_StackedBar_Normalised", level_directory, verbose),
+            )
+
+        diameter_data = max_distance_per_project(all_pairs_shortest_paths_data)
+        if not diameter_data.empty:
+            plot_diameter_bar(
+                diameter_data, SOURCE_PROJECT_COLUMN, "diameter",
+                f"{description} — Graph Diameter per Project",
+                chart_file_path(f"{subdirectory}_GraphDiameter_per_Project", level_directory, verbose),
+            )
+
+    # ── SCC-based longest path charts ─────────────────────────────────────────
+    # The SCC longest path CSV may be absent when no SCIP nodes exist — silently skip.
+    scc_longest_data = load_csv(scc_longest_csv, verbose)
+    if scc_longest_data is not None and not scc_longest_data.empty:
+        print(f"{SCRIPT_NAME}: Generating SCIP SCC Longest Path charts for {description}...")
+
+        total_longest = aggregate_total_distribution(scc_longest_data)
+
+        if not total_longest.empty:
+            plot_distribution_bar(
+                total_longest, DISTANCE_COLUMN, PAIR_COUNT_COLUMN,
+                f"{description} — SCC Longest Path Distribution",
+                chart_file_path(f"{subdirectory}_LongestPath_Bar", level_directory, verbose),
+            )
+            plot_distribution_pie(
+                total_longest, DISTANCE_COLUMN, PAIR_COUNT_COLUMN,
+                f"{description} — SCC Longest Path by Distance",
+                chart_file_path(f"{subdirectory}_LongestPath_Pie", level_directory, verbose),
+            )
+
+        pivoted_longest = pivot_distribution_by_project(scc_longest_data, DISTANCE_COLUMN, PAIR_COUNT_COLUMN, SOURCE_PROJECT_COLUMN)
+        if not pivoted_longest.empty:
+            plot_per_project_stacked_bar(
+                pivoted_longest,
+                f"{description} — SCC Longest Path per Project (absolute, log scale)",
+                chart_file_path(f"{subdirectory}_LongestPath_StackedBar_Log", level_directory, verbose),
+                use_log_scale=True,
+            )
+            normalized_longest = normalize_distribution_by_project(pivoted_longest)
+            plot_per_project_normalized_bar(
+                normalized_longest,
+                f"{description} — SCC Longest Path per Project (normalised)",
+                chart_file_path(f"{subdirectory}_LongestPath_StackedBar_Normalised", level_directory, verbose),
+            )
+
+        max_longest = max_distance_per_project(scc_longest_data)
+        if not max_longest.empty:
+            plot_diameter_bar(
+                max_longest, SOURCE_PROJECT_COLUMN, "diameter",
+                f"{description} — Max SCC Longest Path per Project",
+                chart_file_path(f"{subdirectory}_MaxLongestPath_per_Project", level_directory, verbose),
+            )
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+
 def main() -> None:
     parameters = parse_parameters()
 
@@ -453,6 +582,15 @@ def main() -> None:
 
     for subdirectory, node_label, description in ABSTRACTION_LEVELS:
         generate_charts_for_level(
+            subdirectory=subdirectory,
+            node_label=node_label,
+            description=description,
+            report_directory=parameters.report_directory,
+            verbose=parameters.verbose,
+        )
+
+    for subdirectory, node_label, description in SCIP_ABSTRACTION_LEVELS:
+        generate_scip_charts_for_level(
             subdirectory=subdirectory,
             node_label=node_label,
             description=description,

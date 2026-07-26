@@ -19,11 +19,15 @@ Analyzes internal dependencies: packages, artifacts, modules, NPM packages withi
 1. [Executive Overview](#1-executive-overview)
 1. [Java Internal Structure](#2-java-internal-structure)
 1. [TypeScript Internal Structure](#3-typescript-internal-structure)
+1. [SCIP Semantic Index Structure](#34-scip-semantic-index-structure)
 1. [Path Finding](#4-path-finding)
+1. [SCIP Semantic Index Path Finding](#44-scip-semantic-index-path-finding)
 1. [Topological Sort](#5-topological-sort)
 1. [Graph Visualizations](#6-graph-visualizations)
+1. [SCIP Semantic Index Graphs](#64-scip-semantic-index-graphs)
 1. [Glossary and Column Definitions](#7-glossary-and-column-definitions)
 1. [Object Oriented Design Metrics](#8-object-oriented-design-metrics)
+1. [SCIP Semantic Index OO Design Metrics](#84-scip-semantic-index-oo-design-metrics)
 1. [Visibility Metrics](#9-visibility-metrics)
 1. [Code Vocabulary](#10-code-vocabulary)
 
@@ -92,6 +96,30 @@ Elements imported by most modules (high ripple risk). Shared utilities or core d
 Low `usedElementsPercent` = public API wider than needed. Candidates for narrower interface.
 
 <!-- include:How_many_elements_used_by_dependent_modules.md|report_no_typescript_data.template.md -->
+
+---
+
+## 3.4 SCIP Semantic Index Structure
+
+SCIP (Semantic Code Intelligence Protocol) indexes represent language-agnostic dependency graphs for TypeScript, Go, Rust, and other supported languages. Modules map to source directories; artifacts to package identifiers.
+
+### 3.4.1 SCIP Module Listing
+
+Modules by type count and dependency connectivity. High incoming = widely imported; high outgoing = broad consumer.
+
+<!-- include:List_all_SCIP_modules.md|empty.md -->
+
+### 3.4.2 SCIP Artifact Listing
+
+Artifacts (package + version) by dependency count. `isExternal = true` = no internal source types.
+
+<!-- include:List_all_SCIP_artifacts.md|empty.md -->
+
+### 3.4.3 SCIP Internal Types
+
+SCIP internal types are numerous and fine-grained — a live table would be impractical. Topological sort results (build order and level) are available in the CSV files below. Type-level visualization is intentionally omitted; use the module-level graphs for structural overview.
+
+<!-- include:ScipInternalTypesTopologicalSort.md|empty.md -->
 
 ---
 
@@ -165,6 +193,48 @@ Deepest sequential TypeScript import chain.
 
 ---
 
+## 4.4 SCIP Semantic Index Path Finding
+
+SCIP graphs may contain cycles; path finding runs on the SCC condensed DAG. Each SCC component represents either a single module or a cycle. Longest paths operate on the component graph.
+
+### 4.4.1 SCIP Module Path Finding
+
+#### 4.4.1.1 All Pairs Shortest Path
+
+Graph diameter over SCIP modules. Higher = deeper transitive dependency chains.
+
+<!-- include:ScipModuleAllPairsShortestPathDistribution.md|empty.md -->
+
+<!-- include:ScipModuleAllPairsShortestPathCharts.md|empty.md -->
+
+#### 4.4.1.2 SCC Longest Path
+
+Longest path through the condensed module DAG. Pre-computed from CSV — SCC projection is ephemeral.
+
+<!-- include:ScipModuleSccLongestPathDistribution.md|empty.md -->
+
+<!-- include:ScipModuleSccLongestPathCharts.md|empty.md -->
+
+### 4.4.2 SCIP Artifact Path Finding
+
+#### 4.4.2.1 All Pairs Shortest Path
+
+Artifact-level graph diameter.
+
+<!-- include:ScipArtifactAllPairsShortestPathDistribution.md|empty.md -->
+
+<!-- include:ScipArtifactAllPairsShortestPathCharts.md|empty.md -->
+
+#### 4.4.2.2 SCC Longest Path
+
+Longest path through the condensed artifact DAG.
+
+<!-- include:ScipArtifactSccLongestPathDistribution.md|empty.md -->
+
+<!-- include:ScipArtifactSccLongestPathCharts.md|empty.md -->
+
+---
+
 ## 5. Topological Sort
 
 Assigns **build level** to each node: Level 0 (no dependencies) → Level N (depends on level N−1).
@@ -202,6 +272,19 @@ Directed graphs: node color = build level (darker = higher level = more transiti
 Build levels and longest paths for NPM packages (prod + dev dependencies).
 
 <!-- include:NpmPackageGraphVisualizations.md|report_no_typescript_data.template.md -->
+
+---
+
+## 6.4 SCIP Semantic Index Graphs
+
+SCC-based build level graphs and longest path visualizations for SCIP modules and artifacts.
+Types are excluded: at the type granularity the graph becomes too large and detailed to be useful — use the module-level graphs for structural overview. Topological sort CSV data for types is available in the CSV report directories.
+
+### 6.4.1 SCIP Module Graphs
+
+**Build levels**: SCC component hierarchy. **Longest paths**: Isolated chain + contributor view (cycle nodes condensed).
+
+<!-- include:ScipGraphVisualizations.md|empty.md -->
 
 ---
 
@@ -257,6 +340,20 @@ Measures conformance to Stable Abstractions Principle(Robert C. Martin): stable 
 <!-- include:Typescript_Module_IncomingDependencies_Bar.md|report_no_typescript_data.template.md -->
 
 <!-- include:Typescript_Module_OutgoingDependencies_Bar.md|report_no_typescript_data.template.md -->
+
+---
+
+## 8.4 SCIP Semantic Index OO Design Metrics
+
+Same principle as Java/TypeScript. Abstractness = abstract types / total types per module. Instability = outgoing / (incoming + outgoing) module dependencies. Visibility metrics are omitted for SCIP (not applicable).
+
+### 8.4.1 SCIP Semantic Index Modules
+
+<!-- include:SCIP_Module_MainSequence.md|empty.md -->
+
+<!-- include:SCIP_Module_IncomingDependencies_Bar.md|empty.md -->
+
+<!-- include:SCIP_Module_OutgoingDependencies_Bar.md|empty.md -->
 
 ---
 

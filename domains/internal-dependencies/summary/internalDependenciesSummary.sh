@@ -174,6 +174,26 @@ assemble_internal_dependencies_report() {
         "Typescript_Module/ModuleElementsUsageTypescript.csv" \
         "${report_include_directory}/How_many_elements_used_by_dependent_modules.md"
 
+    # ── SCIP Semantic Index internal structure ─────────────────────────────
+
+    execute_limited_table \
+        "${INTERNAL_DEPS_QUERY_CYPHER_DIR}/List_all_SCIP_modules.cypher" \
+        "SCIP_Semantic_Index_Module/List_all_SCIP_modules.csv" \
+        "${report_include_directory}/List_all_SCIP_modules.md"
+
+    execute_limited_table \
+        "${INTERNAL_DEPS_QUERY_CYPHER_DIR}/List_all_SCIP_artifacts.cypher" \
+        "SCIP_Semantic_Index_Artifact/List_all_SCIP_artifacts.csv" \
+        "${report_include_directory}/List_all_SCIP_artifacts.md"
+
+    # SCIP Internal Types: topological sort CSV link only (no live query — too large for table)
+    {
+        if [ -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Type/SemanticCodeIndexInternalType_Topological_Sort.csv" ]; then
+            echo ""
+            echo "[Full topological sort data](./SCIP_Semantic_Index_Type/SemanticCodeIndexInternalType_Topological_Sort.csv)"
+        fi
+    } > "${report_include_directory}/ScipInternalTypesTopologicalSort.md"
+
     # ── Path finding tables (Java Artifact) ──────────────────────────────────
     # Guard: only run if Java Artifact path finding projection exists.
     ARTIFACT_PROJECTION="dependencies_projection=artifact-path-finding"
@@ -291,6 +311,80 @@ assemble_internal_dependencies_report() {
         include_svgs_matching "${FULL_REPORT_DIRECTORY}/Typescript_Module" "Typescript_Module_MaxLongestPath_per_Project.svg"
     } > "${report_include_directory}/TypescriptModuleLongestPathCharts.md"
 
+    # ── Path finding tables (SCIP Module) ─────────────────────────────────
+    # Guard: only run if SCIP module path-finding projection exists.
+    SCIP_MODULE_PROJECTION="dependencies_projection=scip-module-path-finding"
+    if projectionExists "${SCIP_MODULE_PROJECTION}"; then
+        {
+            execute_cypher "${PATH_FINDING_CYPHER_DIR}/Path_Finding_5_All_pairs_shortest_path_distribution_overall.cypher" \
+                "${SCIP_MODULE_PROJECTION}" \
+                --output-markdown-table | limit_markdown_table
+            if [ -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/SemanticCodeIndexModule_all_pairs_shortest_paths_distribution_per_project.csv" ]; then
+                echo ""
+                echo "[Full data per project](./SCIP_Semantic_Index_Module/SemanticCodeIndexModule_all_pairs_shortest_paths_distribution_per_project.csv)"
+            fi
+        } > "${report_include_directory}/ScipModuleAllPairsShortestPathDistribution.md"
+    fi
+
+    # SCIP SCC longest path: CSV link only — projection is ephemeral and not available here
+    {
+        if [ -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/SemanticCodeIndexModule_StronglyConnectedComponents_longest_paths_distribution.csv" ]; then
+            echo ""
+            echo "[Full SCC longest path data per project](./SCIP_Semantic_Index_Module/SemanticCodeIndexModule_StronglyConnectedComponents_longest_paths_distribution.csv)"
+        fi
+    } > "${report_include_directory}/ScipModuleSccLongestPathDistribution.md"
+
+    # ── Path finding SVG chart references (SCIP Module) ───────────────────
+    {
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_AllPairsShortestPath_Bar.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_AllPairsShortestPath_Pie.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_AllPairsShortestPath_StackedBar_Log.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_AllPairsShortestPath_StackedBar_Normalised.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_GraphDiameter_per_Project.svg"
+    } > "${report_include_directory}/ScipModuleAllPairsShortestPathCharts.md"
+
+    {
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_LongestPath_Bar.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_LongestPath_Pie.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_LongestPath_StackedBar_Log.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_LongestPath_StackedBar_Normalised.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module" "SCIP_Semantic_Index_Module_MaxLongestPath_per_Project.svg"
+    } > "${report_include_directory}/ScipModuleSccLongestPathCharts.md"
+
+    # ── Path finding tables (SCIP Artifact) ───────────────────────────────
+    # Guard: only run if SCIP artifact path-finding projection exists.
+    SCIP_ARTIFACT_PROJECTION="dependencies_projection=scip-artifact-path-finding"
+    if projectionExists "${SCIP_ARTIFACT_PROJECTION}"; then
+        {
+            execute_cypher "${PATH_FINDING_CYPHER_DIR}/Path_Finding_5_All_pairs_shortest_path_distribution_overall.cypher" \
+                "${SCIP_ARTIFACT_PROJECTION}" \
+                --output-markdown-table | limit_markdown_table
+            if [ -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact/SemanticCodeIndexArtifact_all_pairs_shortest_paths_distribution_per_project.csv" ]; then
+                echo ""
+                echo "[Full data per project](./SCIP_Semantic_Index_Artifact/SemanticCodeIndexArtifact_all_pairs_shortest_paths_distribution_per_project.csv)"
+            fi
+        } > "${report_include_directory}/ScipArtifactAllPairsShortestPathDistribution.md"
+    fi
+
+    # SCIP Artifact SCC longest path: CSV link only
+    {
+        if [ -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact/SemanticCodeIndexArtifact_StronglyConnectedComponents_longest_paths_distribution.csv" ]; then
+            echo ""
+            echo "[Full SCC longest path data per project](./SCIP_Semantic_Index_Artifact/SemanticCodeIndexArtifact_StronglyConnectedComponents_longest_paths_distribution.csv)"
+        fi
+    } > "${report_include_directory}/ScipArtifactSccLongestPathDistribution.md"
+
+    # ── Path finding SVG chart references (SCIP Artifact) ─────────────────
+    {
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact" "SCIP_Semantic_Index_Artifact_AllPairsShortestPath_Bar.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact" "SCIP_Semantic_Index_Artifact_AllPairsShortestPath_Pie.svg"
+    } > "${report_include_directory}/ScipArtifactAllPairsShortestPathCharts.md"
+
+    {
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact" "SCIP_Semantic_Index_Artifact_LongestPath_Bar.svg"
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact" "SCIP_Semantic_Index_Artifact_LongestPath_Pie.svg"
+    } > "${report_include_directory}/ScipArtifactSccLongestPathCharts.md"
+
     # ── Graph visualization SVG references (Java Artifact) ────────────────
     {
         include_svg_if_exists "Java_Artifact/Graph_Visualizations/JavaArtifactBuildLevels.svg" \
@@ -324,6 +418,22 @@ assemble_internal_dependencies_report() {
         include_svg_if_exists "NPM_DevPackage/Graph_Visualizations/NpmDevPackageLongestPaths.svg" \
             "NPM Dev Package Longest Paths (with contributors)"
     } > "${report_include_directory}/NpmPackageGraphVisualizations.md"
+
+    # ── Graph visualization SVG references (SCIP Semantic Index) ──────────
+    {
+        include_svg_if_exists "SCIP_Semantic_Index_Module/Graph_Visualizations/ScipModuleBuildLevels.svg" \
+            "SCIP Module Build Levels"
+        include_svg_if_exists "SCIP_Semantic_Index_Module/Graph_Visualizations/ScipModuleLongestPathsIsolated.svg" \
+            "SCIP Module Longest Paths (Isolated)"
+        include_svg_if_exists "SCIP_Semantic_Index_Module/Graph_Visualizations/ScipModuleLongestPaths.svg" \
+            "SCIP Module Longest Paths (with contributors)"
+        include_svg_if_exists "SCIP_Semantic_Index_Artifact/Graph_Visualizations/ScipArtifactBuildLevels.svg" \
+            "SCIP Artifact Build Levels"
+        include_svg_if_exists "SCIP_Semantic_Index_Artifact/Graph_Visualizations/ScipArtifactLongestPathsIsolated.svg" \
+            "SCIP Artifact Longest Paths (Isolated)"
+        include_svg_if_exists "SCIP_Semantic_Index_Artifact/Graph_Visualizations/ScipArtifactLongestPaths.svg" \
+            "SCIP Artifact Longest Paths (with contributors)"
+    } > "${report_include_directory}/ScipGraphVisualizations.md"
 
     # ── Topological sort critical path length KPI ─────────────────────────
 
@@ -366,6 +476,17 @@ assemble_internal_dependencies_report() {
     include_svg_if_exists "Typescript_Module/Typescript_Module_OutgoingDependencies_Bar.svg" \
         "TypeScript Module Outgoing Dependencies" \
         > "${report_include_directory}/Typescript_Module_OutgoingDependencies_Bar.md"
+
+    # SCIP Semantic Index Modules Object-Oriented Design
+    include_svg_if_exists "SCIP_Semantic_Index_Module/SCIP_Module_MainSequence.svg" \
+        "SCIP Module Main Sequence" \
+        > "${report_include_directory}/SCIP_Module_MainSequence.md"
+    include_svg_if_exists "SCIP_Semantic_Index_Module/SCIP_Module_IncomingDependencies_Bar.svg" \
+        "SCIP Module Incoming Dependencies" \
+        > "${report_include_directory}/SCIP_Module_IncomingDependencies_Bar.md"
+    include_svg_if_exists "SCIP_Semantic_Index_Module/SCIP_Module_OutgoingDependencies_Bar.svg" \
+        "SCIP Module Outgoing Dependencies" \
+        > "${report_include_directory}/SCIP_Module_OutgoingDependencies_Bar.md"
 
     # ── Visibility metrics SVG chart references ────────────────────────────
 

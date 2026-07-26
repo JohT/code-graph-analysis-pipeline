@@ -237,6 +237,12 @@ SCIP_MODULE_WEIGHT="dependencies_projection_weight_property=referenceCount"
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"; then
     setupStronglyConnectedComponentsForSccVisualization "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}"
 
+    echo "${SCRIPT_NAME}: Creating visualization ScipModuleBuildLevels..."
+    execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/SCIP_SCC_Module_build_levels_for_graphviz.cypher" \
+        "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" \
+        > "${SCIP_MODULE_GRAPH_VIZ_DIR}/ScipModuleBuildLevels.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_MODULE_GRAPH_VIZ_DIR}/ScipModuleBuildLevels.csv"
+
     echo "${SCRIPT_NAME}: Creating visualization ScipModuleLongestPathsIsolated..."
     execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_for_graphviz.cypher" \
         "${SCIP_MODULE_PROJECTION}" "${SCIP_MODULE_NODE}" "${SCIP_MODULE_WEIGHT}" \
@@ -265,6 +271,12 @@ SCIP_ARTIFACT_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
 if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"; then
     setupStronglyConnectedComponentsForSccVisualization "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}"
+
+    echo "${SCRIPT_NAME}: Creating visualization ScipArtifactBuildLevels..."
+    execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/SCIP_SCC_Artifact_build_levels_for_graphviz.cypher" \
+        "${SCIP_ARTIFACT_PROJECTION}" "${SCIP_ARTIFACT_NODE}" "${SCIP_ARTIFACT_WEIGHT}" \
+        > "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactBuildLevels.csv"
+    source "${VISUALIZATION_SCRIPTS_DIR}/visualizeQueryResults.sh" "${SCIP_ARTIFACT_GRAPH_VIZ_DIR}/ScipArtifactBuildLevels.csv"
 
     echo "${SCRIPT_NAME}: Creating visualization ScipArtifactLongestPathsIsolated..."
     execute_cypher "${PATH_FINDING_CYPHER_DIR}/SCC_Longest_paths_for_graphviz.cypher" \
