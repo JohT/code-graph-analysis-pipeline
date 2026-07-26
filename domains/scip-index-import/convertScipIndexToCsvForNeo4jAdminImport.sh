@@ -484,7 +484,7 @@ function extract_project_metadata_admin() {
             $project_root,
             ($meta.tool_info.name // "unknown"),
             ($meta.tool_info.version // "unknown"),
-            "SCIP:SemanticCodeIndexProject"
+            "SCIP;SemanticCodeIndexProject"
         ] | @csv
     ' "${input_file}"
 }
