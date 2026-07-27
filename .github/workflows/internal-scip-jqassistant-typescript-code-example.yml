@@ -97,13 +97,13 @@ jobs:
 
       - name: (Prepare SCIP Index) Setup Node.js with version in .nvmrc for react-router
         if: env.nodeVersionFileDetected == 'true'
-        uses: actions/setup-node@v6.4.0
+        uses: actions/setup-node@v6.5.0
         with:
           node-version-file: ${{ env.SOURCE_PATH }}/.nvmrc
 
       - name: (Prepare SCIP Index) Setup Node.js (long-term support version fallback, no .nvmrc) for react-router
         if: env.nodeVersionFileDetected != 'true'
-        uses: actions/setup-node@v6.4.0
+        uses: actions/setup-node@v6.5.0
         with:
           node-version: 'lts/*'
 
