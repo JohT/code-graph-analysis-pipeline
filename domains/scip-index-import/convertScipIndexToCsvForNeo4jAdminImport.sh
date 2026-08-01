@@ -474,6 +474,7 @@ function extract_project_metadata_admin() {
             else
                 $meta.project_root
             end
+            | gsub("/$"; "")
         ) as $project_root |
         (
             # Create a stable FQN from the project root, suitable as node ID
@@ -509,6 +510,7 @@ function extract_type_project_links_admin() {
             else
                 .metadata.project_root
             end
+            | gsub("/$"; "")
             | gsub("[^A-Za-z0-9._-]"; "_")
         ) as $project_fqn |
 

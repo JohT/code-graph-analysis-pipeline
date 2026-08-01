@@ -173,6 +173,7 @@ function extract_type_nodes() {
             else
                 $project_root_raw
             end
+            | gsub("/$"; "")
         ) as $project_root |
 
         (
@@ -300,6 +301,7 @@ function extract_external_type_nodes() {
             else
                 $project_root_raw
             end
+            | gsub("/$"; "")
         ) as $project_root |
         [
             .documents[] |
@@ -454,6 +456,7 @@ function extract_project_metadata() {
             else
                 $meta.project_root
             end
+            | gsub("/$"; "")
         ) as $project_root |
         [
             $project_root,
