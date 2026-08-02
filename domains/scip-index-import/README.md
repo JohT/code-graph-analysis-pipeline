@@ -167,7 +167,7 @@ domains/scip-index-import/
 ├── testConvertScipIndexToCsvForNeo4jAdminImport.sh # Tests for convertScipIndexToCsvForNeo4jAdminImport.sh
 └── queries/
     ├── import/                            # Phase 1: setup and import
-    │   ├── Cleanup_SCIP_Type_Nodes.cypher
+    │   ├── Cleanup_All_SCIP_Nodes.cypher
     │   ├── Create_SCIP_Internal_Type_Constraint.cypher
     │   ├── Create_SCIP_External_Type_Constraint.cypher
     │   ├── Import_SCIP_Type_Internal_Nodes.cypher
@@ -207,7 +207,7 @@ domains/scip-index-import/
 
 | Query | Purpose |
 |-------|---------|
-| [Cleanup_SCIP_Type_Nodes.cypher](./queries/import/Cleanup_SCIP_Type_Nodes.cypher) | Delete all existing SCIP nodes — clean slate before re-import |
+| [Cleanup_All_SCIP_Nodes.cypher](./queries/import/Cleanup_All_SCIP_Nodes.cypher) | Delete all existing SCIP-labeled nodes (types, modules, artifacts, projects) — ensures clean slate before re-import |
 | [Create_SCIP_Internal_Type_Constraint.cypher](./queries/import/Create_SCIP_Internal_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexInternalType.symbol` |
 | [Create_SCIP_External_Type_Constraint.cypher](./queries/import/Create_SCIP_External_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexExternalType.symbol` |
 | [Import_SCIP_Type_Internal_Nodes.cypher](./queries/import/Import_SCIP_Type_Internal_Nodes.cypher) | Import internal types (own source files); sets `isTest` from file path patterns |

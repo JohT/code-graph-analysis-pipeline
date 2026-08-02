@@ -3,7 +3,6 @@
 
 MATCH (p:SCIP:SemanticCodeIndexProject)
 WHERE p.projectRoot IS NOT NULL
-  AND p.name IS NULL
 SET p.name = CASE 
               WHEN p.projectRoot CONTAINS '/' 
               THEN REVERSE(SPLIT(REVERSE(p.projectRoot), '/')[0])
