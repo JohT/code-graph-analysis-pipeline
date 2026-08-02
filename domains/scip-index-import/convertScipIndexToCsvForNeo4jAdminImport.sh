@@ -65,10 +65,33 @@ JQ_ADMIN_FUNCTIONS='
         symbol | split(" ") | if length >= 5 then .[4] else "" end;
 
     def is_type_descriptor(symbol):
+        descriptor(symbol) | (contains("#") and (endswith("]") | not));
+
+    def is_base_type_descriptor(symbol):
         descriptor(symbol) | endswith("#");
 
     def is_type_parameter_descriptor(symbol):
         descriptor(symbol) | endswith("]");
+
+    def normalize_descriptor(symbol):
+        descriptor(symbol) | split("#")[0] + "#";
+
+    def normalize_symbol(symbol):
+        symbol | split(" ") | 
+        if length >= 5 then
+            .[0:4] as $prefix | 
+            (.[4] | split("#")[0] + "#") as $norm_desc |
+            ($prefix + [$norm_desc]) | join(" ")
+        else
+            symbol
+        end;
+
+    def short_symbol_normalized(s):
+        normalize_symbol(s) | split(" ") | if length >= 5 then
+            .[2:5] | join(" ")
+        else
+            .
+        end;
 
     def null_kind_fallback(signature_text; doc_first_line):
         if (signature_text // "" | test("^public final ")) then "Record"
@@ -200,7 +223,7 @@ function extract_type_nodes_admin() {
 
                 .symbol as $symbol |
 
-                select(is_type_descriptor($symbol)) |
+                select(is_base_type_descriptor($symbol)) |
                 select(is_type_parameter_descriptor($symbol) | not) |
 
                 ($symbol | split(" ")) as $tokens |
@@ -242,7 +265,7 @@ function extract_type_nodes_admin() {
                  select((.symbol_roles // 0) % 2 == 1) |
                  select(.symbol | startswith("local ") | not) |
                  select((.symbol | split(" ") | length) >= 5) |
-                 select(is_type_descriptor(.symbol)) |
+                 select(is_base_type_descriptor(.symbol)) |
                  select(is_type_parameter_descriptor(.symbol) | not) |
                  .symbol
                 ] as $defined_type_symbols |
@@ -323,7 +346,7 @@ function extract_external_type_nodes_admin() {
 
             .symbol as $symbol |
 
-            select(is_type_descriptor($symbol)) |
+            select(is_base_type_descriptor($symbol)) |
             select(is_type_parameter_descriptor($symbol) | not) |
 
             ($symbol | split(" ")) as $tokens |
@@ -378,71 +401,65 @@ function extract_depends_on_edges_admin() {
 
         ($index[0].symbol_to_file)       as $sym_to_file       |
         ($index[0].internal_package_ids) as $internal_pkg_ids  |
-        [
-            .documents[] |
-            .relative_path as $source_file |
 
-                [.occurrences[] |
-                 select((.symbol_roles // 0) % 2 == 1) |
-                 select(.symbol | startswith("local ") | not) |
-                 select((.symbol | split(" ") | length) >= 5) |
-                 select(is_type_descriptor(.symbol)) |
-                 select(is_type_parameter_descriptor(.symbol) | not) |
-                 .symbol
-                ] as $source_type_symbols |
+        .documents[] |
+        .relative_path as $source_file |
 
-                [.occurrences[] |
-                 select((.symbol_roles // 0) % 2 == 0) |
-                 select(.symbol | startswith("local ") | not) |
-                 select((.symbol | split(" ") | length) >= 5) |
-                 .symbol as $ref_symbol |
-                 select(is_type_descriptor($ref_symbol)) |
-                 select(is_type_parameter_descriptor($ref_symbol) | not) |
-                 $sym_to_file[$ref_symbol] as $target_file |
-                 ($ref_symbol | split(" ") | .[2]) as $ref_pkg_id |
-                 (($target_file != null and $target_file != $source_file)
-                  or ($target_file == null
-                        and ($internal_pkg_ids | index($ref_pkg_id)) == null
-                        and $ref_pkg_id != ".")) as $is_valid_target |
-                 select($is_valid_target) |
-                 $ref_symbol
-                ] as $valid_ref_symbols |
+            # Filter and categorize all valid occurrences first (single pass)
+            [.occurrences[] |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             select(is_type_descriptor(.symbol)) |
+             select(is_type_parameter_descriptor(.symbol) | not) |
+             {symbol: .symbol, role: ((.symbol_roles // 0) % 2)}
+            ] as $valid_occurrences |
 
-                ([.occurrences[] |
-                  select(.symbol | startswith("local ") | not) |
-                  select((.symbol | split(" ") | length) >= 5) |
-                  .symbol as $s |
-                  ($s | split(" ") | .[2]) as $pkg_id |
-                  select(($internal_pkg_ids | index($pkg_id)) != null) |
-                  $s
-                 ] | first) as $first_internal_symbol |
+            # Extract sources (role 1) and raw references (role 0)
+            [$valid_occurrences[] | select(.role == 1) | .symbol] as $source_type_symbols |
+            [$valid_occurrences[] | select(.role == 0) | .symbol] as $all_ref_symbols |
 
-                (if ($source_type_symbols | length) > 0 then
-                     ($source_type_symbols | map(short_symbol(.)))
-                 elif ($valid_ref_symbols | length) > 0 and $first_internal_symbol != null then
-                     [("__file__ " + $source_file)]
-                 else
-                     []
-                 end) as $source_symbols |
+            # Pre-aggregate valid refs by normalized type target, with occurrence count
+            (
+                $all_ref_symbols |
+                group_by(normalize_symbol(.)) |
+                map(
+                    normalize_symbol(.[0]) as $norm |
+                    $sym_to_file[$norm] as $target_file |
+                    (.[0] | split(" ") | .[2]) as $ref_pkg_id |
+                    select(
+                        ($target_file != null and $target_file != $source_file)
+                        or ($target_file == null
+                              and ($internal_pkg_ids | index($ref_pkg_id)) == null
+                              and $ref_pkg_id != ".")
+                    ) |
+                    { target: ($norm | split(" ") | .[2:5] | join(" ")), count: length }
+                )
+            ) as $valid_ref_groups |
 
-                select(($source_symbols | length) > 0) |
-                select(($valid_ref_symbols | length) > 0) |
+            # Find first internal symbol for __file__ fallback
+            ([$valid_occurrences[] |
+              .symbol as $s |
+              ($s | split(" ") | .[2]) as $pkg_id |
+              select(($internal_pkg_ids | index($pkg_id)) != null) |
+              $s
+             ] | first) as $first_internal_symbol |
 
-                $source_symbols[] as $source_symbol |
-                $valid_ref_symbols[] as $ref_symbol |
-                { source_symbol: $source_symbol, target_symbol: short_symbol($ref_symbol) }
-        ] |
+            (if ($source_type_symbols | length) > 0 then
+                 ($source_type_symbols | map(short_symbol(.)))
+             elif ($valid_ref_groups | length) > 0 and $first_internal_symbol != null then
+                 [("__file__ " + $source_file)]
+             else
+                 []
+             end) as $source_symbols |
 
-        group_by([.source_symbol, .target_symbol]) |
-        map(. as $group | {
-            source_symbol:   $group[0].source_symbol,
-            target_symbol:   $group[0].target_symbol,
-            reference_count: ($group | length)
-        }) |
-        sort_by(.source_symbol, .target_symbol) |
+            select(($source_symbols | length) > 0) |
+            select(($valid_ref_groups | length) > 0) |
 
-        .[] | [.source_symbol, .target_symbol, "DEPENDS_ON", .reference_count]
-        | @csv
+            $source_symbols[] as $source_symbol |
+            $valid_ref_groups[] as $ref_group |
+            select($source_symbol != $ref_group.target) |
+            [$source_symbol, $ref_group.target, "DEPENDS_ON", $ref_group.count]
+            | @csv
         ' "${input_file}"
 }
 
