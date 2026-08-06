@@ -229,7 +229,7 @@ function extract_type_nodes() {
 
                 {
                     symbol:          short_symbol($symbol),
-                    display_name:    ($descriptor | gsub("#"; "") | split("/") | last | gsub("`"; "")),
+                    display_name:    ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
                     scheme:          scheme($symbol),
                     type_name:       $cu_type,
                     file:            $file,
@@ -357,7 +357,7 @@ function extract_external_type_nodes() {
 
             {
                 symbol:          short_symbol($symbol),
-                display_name:    ($descriptor | gsub("#"; "") | split("/") | last | gsub("`"; "")),
+                display_name:    ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
                 scheme:          scheme($symbol),
                 type_name:       $cu_type,
                 file:            "",

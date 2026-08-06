@@ -242,7 +242,7 @@ function extract_type_nodes_admin() {
                 {
                     id:             short_symbol($symbol),
                     fqn:            short_symbol($symbol),
-                    name:           ($descriptor | gsub("#"; "") | split("/") | last | gsub("`"; "")),
+                    name:           ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
                     language:       scheme_to_language(scheme($symbol)),
                     scheme:         scheme($symbol),
                     typeName:       $cu_type,
@@ -368,7 +368,7 @@ function extract_external_type_nodes_admin() {
             {
                 id:             short_symbol($symbol),
                 fqn:            short_symbol($symbol),
-                name:           ($descriptor | gsub("#"; "") | split("/") | last | gsub("`"; "")),
+                name:           ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
                 language:       scheme_to_language(scheme($symbol)),
                 scheme:         scheme($symbol),
                 typeName:       $cu_type,
