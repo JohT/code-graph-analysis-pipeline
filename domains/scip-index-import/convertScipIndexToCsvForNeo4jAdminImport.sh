@@ -65,7 +65,7 @@ JQ_ADMIN_FUNCTIONS='
         symbol | split(" ") | if length >= 5 then .[4] else "" end;
 
     def is_type_descriptor(symbol):
-        descriptor(symbol) | (contains("#") and (endswith("]") | not));
+        descriptor(symbol) | (endswith("#") or (test("^.*#\\[") and endswith("]")));
 
     def is_base_type_descriptor(symbol):
         descriptor(symbol) | endswith("#");
@@ -154,7 +154,8 @@ JQ_ADMIN_FUNCTIONS='
 
 function build_symbol_information_index() {
     local input_file="${1}"
-    jq '{
+    local jq_program
+    jq_program="${JQ_ADMIN_FUNCTIONS}"'{
         symbol_to_file: [
             .documents[] |
             .relative_path as $file |
@@ -162,20 +163,20 @@ function build_symbol_information_index() {
             select((.symbol_roles // 0) % 2 == 1) |
             select(.symbol | startswith("local ") | not) |
             { key: .symbol, value: $file }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_kind: [
             .documents[].symbols[]? |
             select(.symbol != null) |
             { key: .symbol, value: (.kind // null) }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_signature_text: [
             .documents[].symbols[]? |
             select(.symbol != null) |
             select(.signature_documentation.text != null) |
             { key: .symbol, value: .signature_documentation.text }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_doc_first_line: [
             .documents[].symbols[]? |
@@ -185,7 +186,7 @@ function build_symbol_information_index() {
             select($doc | startswith("```")) |
             { key: .symbol,
               value: ($doc | split("\n") | .[1] // "") }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         internal_package_ids: [
             .documents[].occurrences[] |
@@ -193,8 +194,20 @@ function build_symbol_information_index() {
             select(.symbol | startswith("local ") | not) |
             select((.symbol | split(" ") | length) >= 5) |
             .symbol | split(" ") | .[2]
-        ] | unique
-    }' "${input_file}"
+        ] | unique,
+        
+        anonymous_classes: [
+            ([.documents[].symbols[]? | select(.symbol != null) | select(.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol] | unique) as $local_classes_with_methods |
+            .documents[] as $doc |
+            $doc.relative_path as $file |
+            ($doc.symbols // []) as $all_symbols |
+            ([$doc.occurrences[]? | select((.symbol_roles // 0) % 2 == 1) | select(.symbol | startswith("local ") | not) | select((.symbol | split(" ") | length) >= 5) | select(is_base_type_descriptor(.symbol)) | .symbol] | first) as $doc_first_type |
+            select($doc_first_type != null) |
+            ($doc_first_type | split(" ")) as $enc_tokens |
+            ([($all_symbols[] | select(.symbol != null and (.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80)) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol as $enc | select(($local_classes_with_methods | index($enc)) != null))] | group_by(.enclosing_symbol)[] | (first(.[] | select(.relationships != null and (.relationships | length > 0))) // .[0]) as $first_method | [.[] | .relationships // []] as $all_relationships | $first_method.enclosing_symbol as $anon_class_sym | ([$all_symbols[] | select(.symbol == $anon_class_sym) | .enclosing_symbol] | first // $doc_first_type) as $anon_class_enclosing_symbol | ($anon_class_sym | sub("^local"; "") | (tonumber? // 0)) as $min_local_num | ((short_symbol($anon_class_enclosing_symbol) | gsub("[.#.]$"; "")) + "$anonymous" + ($min_local_num | tostring) + "#") as $anon_id | {file: $file, anon_id: $anon_id, enclosing_symbol: $doc_first_type, pkg_id: $enc_tokens[2], version: (if ($enc_tokens | length > 3) then $enc_tokens[3] else "." end), manager: (if ($enc_tokens | length > 1) then $enc_tokens[1] else "." end), min_local_num: $min_local_num, relationships: ($all_relationships | flatten // [])})
+        ]
+    }'
+    jq "$jq_program" "${input_file}"
 }
 
 # ---------------------------------------------------------------------------
@@ -351,9 +364,13 @@ function extract_external_type_nodes_admin() {
 
             ($symbol | split(" ")) as $tokens |
             $tokens[1] as $manager    |
-            $tokens[2] as $pkg_id     |
+            $tokens[2] as $pkg_id_from_symbol |
             $tokens[3] as $version    |
             $tokens[4] as $descriptor |
+            
+            # For external types (where pkg_id is "."), extract package from descriptor
+            ($descriptor | split("/")[0:2] | join("/")) as $pkg_from_descriptor |
+            (if $pkg_id_from_symbol == "." then $pkg_from_descriptor else $pkg_id_from_symbol end) as $pkg_id |
 
             select(($internal_pkg_ids | index($pkg_id)) == null) |
             select($pkg_id != ".") |
@@ -581,6 +598,69 @@ function extract_type_project_links_admin() {
     ' "${input_file}"
 }
 
+function extract_anonymous_class_nodes_admin() {
+    local symbol_index_file="${1}"
+    echo "null" | jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+        [
+            ($index[0].anonymous_classes // [])[] |
+            {
+                id:             .anon_id,
+                fqn:            .anon_id,
+                name:           (.anon_id | split("$") | .[0] | split("/") | last | gsub("#$"; "")),
+                language:       "Java",
+                scheme:         "semanticdb",
+                typeName:       "AnonymousClass",
+                file:           .file,
+                packageId:      .pkg_id,
+                packageManager: .manager,
+                version:        .version,
+                module:         ((.pkg_id // "") | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end),
+                isAbstract:     "false",
+                isTest:         (if is_test(.file) then "true" else "false" end),
+                label:          "SCIP;SemanticCodeIndexAnonymousType;SemanticCodeIndexInternalType"
+            }
+        ] |
+        unique_by(.id) |
+        .[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .isAbstract, .isTest, .label]
+        | @csv
+    '
+}
+
+function extract_anonymous_class_edges_admin() {
+    local symbol_index_file="${1}"
+    echo "null" | jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+        ($index[0].anonymous_classes // [])[] |
+        .anon_id as $anon_id |
+        .relationships[] |
+        select((.is_reference == true) or (.is_implementation == true)) |
+        (.symbol | gsub("#.*"; "#")) as $target |
+        select($target | test("^semanticdb")) |
+        [$anon_id, short_symbol($target), "DEPENDS_ON", 1] | @csv
+    '
+}
+
+function extract_anonymous_class_project_links_admin() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    echo "null" | jq --slurpfile index "${symbol_index_file}" --slurpfile input_doc "${input_file}" "${JQ_ADMIN_FUNCTIONS}"'
+        select(($input_doc[0].metadata // null) != null and ($input_doc[0].metadata.project_root // null) != null) |
+        (
+            if ($input_doc[0].metadata.project_root | test("file://")) then
+                ($input_doc[0].metadata.project_root | gsub("^file://"; ""))
+            else
+                $input_doc[0].metadata.project_root
+            end
+            | gsub("/$"; "")
+            | gsub("[^A-Za-z0-9._-]"; "_")
+        ) as $project_fqn |
+        [
+            ($index[0].anonymous_classes // [])[] |
+            .anon_id |
+            [., $project_fqn, "BELONGS_TO"] | @csv
+        ][]
+    ' -r
+}
+
 function process_single_index_admin() {
     local input_file="${1}"
     local nodes_temp="${2}"
@@ -591,7 +671,14 @@ function process_single_index_admin() {
     echo "convertScipIndexToCsvForNeo4jAdminImport: Processing '${input_file}'..."
 
     local symbol_index_json
-    symbol_index_json="$(build_symbol_information_index "${input_file}")"
+    local build_exit_code=0
+    symbol_index_json="$(build_symbol_information_index "${input_file}")" || { build_exit_code=$?; }
+    
+    if [ "${build_exit_code}" -ne 0 ]; then
+        echo "ERROR: build_symbol_information_index failed with exit code ${build_exit_code}" >&2
+        echo "JSON output from jq: ${symbol_index_json}" >&2
+        return "${build_exit_code}"
+    fi
 
     # Write JSON to temporary file to avoid "Argument list too long" error with large indices
     local symbol_index_file
@@ -608,9 +695,14 @@ function process_single_index_admin() {
     fi
     # External nodes never emit a header
     extract_external_type_nodes_admin "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
+    
+    extract_anonymous_class_nodes_admin "${symbol_index_file}" >> "${nodes_temp}"
 
     extract_depends_on_edges_admin "${symbol_index_file}" "${input_file}" > "${edges_temp}"
+    extract_anonymous_class_edges_admin "${symbol_index_file}" >> "${edges_temp}"
+    
     extract_type_project_links_admin "${symbol_index_file}" "${input_file}" > "${links_temp}"
+    extract_anonymous_class_project_links_admin "${symbol_index_file}" "${input_file}" >> "${links_temp}"
 }
 
 # ---------------------------------------------------------------------------
@@ -724,6 +816,79 @@ function merge_project_csvs_admin() {
 }
 
 # ---------------------------------------------------------------------------
+# Validate that all edge node references exist in the nodes CSV
+# Input: nodes CSV file and edges CSV file
+# Returns: 0 if valid, 1 if missing nodes found; prints detailed error message
+# ---------------------------------------------------------------------------
+
+function validate_edge_node_references() {
+    local nodes_file="${1}"
+    local edges_file="${2}"
+
+    # Build set of all valid node IDs from nodes CSV (skip header)
+    local valid_nodes_file
+    valid_nodes_file=$(mktemp)
+    # Extract first column (quoted or unquoted) from nodes CSV and deduplicate
+    tail -n +2 "${nodes_file}" | awk -F',' '{
+        node_id = $1
+        gsub(/^"/, "", node_id)
+        gsub(/"$/, "", node_id)
+        print node_id
+    }' | sort -u > "${valid_nodes_file}"
+
+    # Check edges for missing node references
+    local missing_nodes_file
+    missing_nodes_file=$(mktemp)
+    trap "rm -f '${valid_nodes_file}' '${missing_nodes_file}'" RETURN
+
+    local missing_count=0
+    tail -n +2 "${edges_file}" | awk -F',' -v nodes_file="${valid_nodes_file}" '
+        BEGIN {
+            while ((getline node_line < nodes_file) > 0) {
+                valid_nodes[node_line] = 1
+            }
+            close(nodes_file)
+        }
+        {
+            start_id = $1
+            end_id = $2
+            gsub(/^"/, "", start_id)
+            gsub(/"$/, "", start_id)
+            gsub(/^"/, "", end_id)
+            gsub(/"$/, "", end_id)
+            
+            if (!(start_id in valid_nodes)) {
+                print "START_NODE: " start_id
+            }
+            if (!(end_id in valid_nodes)) {
+                print "END_NODE: " end_id
+            }
+        }
+    ' | sort -u > "${missing_nodes_file}"
+
+    if [ -s "${missing_nodes_file}" ]; then
+        echo "convertScipIndexToCsvForNeo4jAdminImport: ERROR: Found missing node references in edges CSV." >&2
+        echo "convertScipIndexToCsvForNeo4jAdminImport: These edge references point to nodes that don't exist:" >&2
+        head -20 "${missing_nodes_file}" | sed 's/^/  /' >&2
+        local total_missing
+        total_missing=$(wc -l < "${missing_nodes_file}")
+        if [ "${total_missing}" -gt 20 ]; then
+            echo "  ... and $(( total_missing - 20 )) more" >&2
+        fi
+        echo "" >&2
+        echo "convertScipIndexToCsvForNeo4jAdminImport: This usually means:" >&2
+        echo "  - Method/constructor symbols are being referenced as edges but not created as nodes" >&2
+        echo "  - Symbol normalization is inconsistent between node and edge extraction" >&2
+        echo "" >&2
+        echo "convertScipIndexToCsvForNeo4jAdminImport: Nodes CSV: ${nodes_file}" >&2
+        echo "convertScipIndexToCsvForNeo4jAdminImport: Edges CSV: ${edges_file}" >&2
+        return 1
+    fi
+
+    return 0
+}
+
+# ---------------------------------------------------------------------------
 # Merge per-file BELONGS_TO link CSVs: deduplicate by (type_id, project_fqn)
 # Input: directory containing *_admin_links.csv files
 # ---------------------------------------------------------------------------
@@ -797,6 +962,13 @@ merge_project_csvs_admin "${tmp_dir}" "${projects_output}"
 
 echo "convertScipIndexToCsvForNeo4jAdminImport: Merging BELONGS_TO link CSVs → '${links_output}'..."
 merge_belongs_to_links_admin "${tmp_dir}" "${links_output}"
+
+# Validate that all edge references point to existing nodes
+echo "convertScipIndexToCsvForNeo4jAdminImport: Validating edge-node references..."
+if ! validate_edge_node_references "${nodes_output}" "${edges_output}"; then
+    echo "convertScipIndexToCsvForNeo4jAdminImport: Validation FAILED. Cannot proceed with Neo4j import." >&2
+    exit 1
+fi
 
 node_count=$(( $(wc -l < "${nodes_output}") - 1 ))
 project_count=$(( $(wc -l < "${projects_output}") - 1 ))

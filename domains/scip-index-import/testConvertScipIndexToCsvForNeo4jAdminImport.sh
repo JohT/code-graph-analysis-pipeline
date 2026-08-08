@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Tests convertScipIndexToCsvForNeo4jAdminImport.sh: validation, CSV columns, multi-file merge, admin-specific fields.
+# Tests convertScipIndexToCsvForNeo4jAdminImport.sh: validation, CSV columns, multi-file merge, admin-specific fields, anonymous inner classes.
 # Follows testConvertScipIndexToCsvForNeo4jImport.sh structure and assertion helpers.
 # Requires jq to be installed for the core test cases.
 
@@ -28,9 +28,11 @@ function assert_exit_code() {
         echo "  PASS: ${description}"
         PASS_COUNT=$((PASS_COUNT + 1))
     else
-        echo "  FAIL: ${description}"
-        echo "        Expected exit code: ${expected_exit}, got: ${actual_exit}"
-        FAIL_COUNT=$((FAIL_COUNT + 1))
+        echo "  FAIL: exits ${expected_exit} for ${description}" >&2
+        echo "        Expected exit code: ${expected_exit}, got: ${actual_exit}" >&2
+        echo "        Script output (first 50 lines):" >&2
+        echo "${output:-<empty>}" | head -50 | sed 's/^/        /' >&2
+        test_failed
     fi
 }
 
@@ -764,6 +766,181 @@ assert_exit_code "exits 0 for node dedup test" "0" "${exit_code}"
 node_dedup_nodes_csv="${node_dedup_import_dir}/scip_type_nodes_admin.csv"
 assert_file_exists "creates admin node CSV" "${node_dedup_nodes_csv}"
 assert_no_duplicate_nodes "no duplicate nodes (base types only, admin)" "${node_dedup_nodes_csv}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Fixture: Java class with one anonymous inner class implementing Callback.
+# local 3 has enclosing_symbol + relationships.is_implementation to verify
+# anonymous class node creation and DEPENDS_ON edge generation.
+# ---------------------------------------------------------------------------
+
+function create_anonymous_class_scip_json() {
+    cat << 'EOF'
+{
+  "metadata": {
+    "project_root": "file:///tmp/test-anon-project",
+    "tool_info": {"name": "test-indexer", "version": "1.0"}
+  },
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/Manager.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Manager#",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "semanticdb maven jdk 11 com/example/Callback#",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Manager#",
+          "kind": 7
+        },
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Manager#execute().",
+          "kind": 26
+        },
+        {
+          "symbol": "local 0",
+          "kind": null,
+          "enclosing_symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Manager#execute()."
+        },
+        {
+          "symbol": "local 3",
+          "display_name": "run",
+          "kind": 26,
+          "enclosing_symbol": "local 0",
+          "relationships": [
+            {
+              "symbol": "semanticdb maven jdk 11 com/example/Callback#run().",
+              "is_implementation": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: anonymous inner class node creation (admin import)
+# ---------------------------------------------------------------------------
+
+echo "Test: anonymous inner class node (admin import)"
+anon_indices_dir="${tmp_test_dir}/anon_indices"
+anon_import_dir="${tmp_test_dir}/anon_import"
+mkdir -p "${anon_indices_dir}"
+create_anonymous_class_scip_json > "${anon_indices_dir}/manager.scip.json"
+
+run_script_with_env "${anon_indices_dir}" "${anon_import_dir}"
+if [ "${exit_code}" -ne 0 ]; then
+    echo "❌ Script failed with exit code ${exit_code}. Output:"
+    echo "${output}"
+fi
+assert_exit_code "exits 0 for anonymous class fixture" "0" "${exit_code}"
+
+anon_nodes_csv="${anon_import_dir}/scip_type_nodes_admin.csv"
+assert_file_exists "creates admin node CSV for anonymous class fixture" "${anon_nodes_csv}"
+
+anon_nodes=$(cat "${anon_nodes_csv}")
+assert_contains "anonymous class node has \$anonymous in ID"          '$anonymous'                                              "${anon_nodes}"
+assert_contains "anonymous class node has typeName=AnonymousClass"    '"AnonymousClass"'                                        "${anon_nodes}"
+assert_contains "anonymous class node has AnonymousType label"        "SemanticCodeIndexAnonymousType"                          "${anon_nodes}"
+assert_contains "anonymous class node has InternalType label"         "SemanticCodeIndexInternalType"                           "${anon_nodes}"
+assert_contains "anonymous class node has language=Java"              '"Java"'                                                  "${anon_nodes}"
+assert_contains "anonymous class node has isAbstract:boolean=false"   '"false"'                                                 "${anon_nodes}"
+assert_contains "enclosing class Manager also exists as node"         "com/example/Manager#"                                    "${anon_nodes}"
+assert_no_duplicate_nodes "no duplicate nodes with anonymous class"   "${anon_nodes_csv}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: anonymous inner class DEPENDS_ON edge to implemented interface (admin)
+# ---------------------------------------------------------------------------
+
+echo "Test: anonymous inner class DEPENDS_ON edge (admin import)"
+anon_edges_csv="${anon_import_dir}/scip_type_edges_admin.csv"
+assert_file_exists "creates admin edge CSV for anonymous class fixture" "${anon_edges_csv}"
+
+anon_edges=$(cat "${anon_edges_csv}")
+assert_contains "anonymous class depends on Callback interface" '$anonymous'              "${anon_edges}"
+assert_contains "anonymous DEPENDS_ON edge targets Callback#"  "com/example/Callback#"  "${anon_edges}"
+assert_contains "edge has DEPENDS_ON relationship type"        "DEPENDS_ON"              "${anon_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: anonymous inner class BELONGS_TO project link (admin import)
+# ---------------------------------------------------------------------------
+
+echo "Test: anonymous inner class BELONGS_TO link (admin import)"
+anon_links_csv="${anon_import_dir}/scip_type_project_links_admin.csv"
+assert_file_exists "creates admin link CSV for anonymous class fixture" "${anon_links_csv}"
+
+anon_links=$(cat "${anon_links_csv}")
+assert_contains "anonymous class node has BELONGS_TO link" '$anonymous' "${anon_links}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: local symbol without methods inside must NOT produce anonymous class node
+# Covers the false-positive case: local variables with enclosing_symbol but no
+# methods (kind=26/66/67/80) nested inside them. Only true anonymous inner classes
+# (with methods inside) should be detected.
+# ---------------------------------------------------------------------------
+
+echo "Test: no anonymous class node for local symbol without methods (admin)"
+no_anon_indices_dir="${tmp_test_dir}/no_anon_indices"
+no_anon_import_dir="${tmp_test_dir}/no_anon_import"
+mkdir -p "${no_anon_indices_dir}"
+cat << 'EOF' > "${no_anon_indices_dir}/constructor.scip.json"
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/MyException.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/MyException#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/MyException#",
+          "kind": 7
+        },
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/MyException#`<init>`(+1).",
+          "kind": 26
+        },
+        {
+          "symbol": "local 1",
+          "display_name": "message",
+          "kind": 13,
+          "enclosing_symbol": "semanticdb maven maven/com.example/app 1.0 com/example/MyException#`<init>`(+1)."
+        }
+      ]
+    }
+  ]
+}
+EOF
+
+run_script_with_env "${no_anon_indices_dir}" "${no_anon_import_dir}"
+assert_exit_code "exits 0 for no-is_implementation fixture" "0" "${exit_code}"
+
+no_anon_nodes_csv="${no_anon_import_dir}/scip_type_nodes_admin.csv"
+assert_file_exists "creates admin node CSV" "${no_anon_nodes_csv}"
+
+no_anon_nodes=$(cat "${no_anon_nodes_csv}")
+if echo "${no_anon_nodes}" | grep -qF '$anonymous'; then
+    echo "  FAIL: local symbol without methods inside should NOT create anonymous class node"
+    FAIL_COUNT=$((FAIL_COUNT + 1))
+else
+    echo "  PASS: no anonymous class node for local symbol without methods"
+    PASS_COUNT=$((PASS_COUNT + 1))
+fi
 echo ""
 
 # ---------------------------------------------------------------------------

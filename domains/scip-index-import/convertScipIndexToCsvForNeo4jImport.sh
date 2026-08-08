@@ -135,7 +135,7 @@ JQ_SHARED_FUNCTIONS='
 
 function build_symbol_information_index() {
     local input_file="${1}"
-    jq '{
+    jq "${JQ_SHARED_FUNCTIONS}"'{
         symbol_to_file: [
             .documents[] |
             .relative_path as $file |
@@ -143,20 +143,20 @@ function build_symbol_information_index() {
             select((.symbol_roles // 0) % 2 == 1) |
             select(.symbol | startswith("local ") | not) |
             { key: .symbol, value: $file }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_kind: [
             .documents[].symbols[]? |
             select(.symbol != null) |
             { key: .symbol, value: (.kind // null) }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_signature_text: [
             .documents[].symbols[]? |
             select(.symbol != null) |
             select(.signature_documentation.text != null) |
             { key: .symbol, value: .signature_documentation.text }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_doc_first_line: [
             .documents[].symbols[]? |
@@ -166,7 +166,7 @@ function build_symbol_information_index() {
             select($doc | startswith("```")) |
             { key: .symbol,
               value: ($doc | split("\n") | .[1] // "") }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         internal_package_ids: [
             .documents[].occurrences[] |
@@ -174,7 +174,28 @@ function build_symbol_information_index() {
             select(.symbol | startswith("local ") | not) |
             select((.symbol | split(" ") | length) >= 5) |
             .symbol | split(" ") | .[2]
-        ] | unique
+        ] | unique,
+
+        project_root: (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+            | gsub("/$"; "")
+        ),
+
+        anonymous_classes: [
+            ([.documents[].symbols[]? | select(.symbol != null) | select(.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol] | unique) as $local_classes_with_methods |
+            .documents[] as $doc |
+            $doc.relative_path as $file |
+            ($doc.symbols // []) as $all_symbols |
+            ([$doc.occurrences[]? | select((.symbol_roles // 0) % 2 == 1) | select(.symbol | startswith("local ") | not) | select((.symbol | split(" ") | length) >= 5) | select(is_base_type_descriptor(.symbol)) | .symbol] | first) as $doc_first_type |
+            select($doc_first_type != null) |
+            ($doc_first_type | split(" ")) as $enc_tokens |
+            ([($all_symbols[] | select(.symbol != null and (.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80)) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol as $enc | select(($local_classes_with_methods | index($enc)) != null))] | group_by(.enclosing_symbol)[] | (first(.[] | select(.relationships != null and (.relationships | length > 0))) // .[0]) as $first_method | [.[] | .relationships // []] as $all_relationships | $first_method.enclosing_symbol as $anon_class_sym | ([$all_symbols[] | select(.symbol == $anon_class_sym) | .enclosing_symbol] | first // $doc_first_type) as $anon_class_enclosing_symbol | ($anon_class_sym | sub("^local"; "") | (tonumber? // 0)) as $min_local_num | ((short_symbol($anon_class_enclosing_symbol) | gsub("[.#.]$"; "")) + "$anonymous" + ($min_local_num | tostring) + "#") as $anon_id | {file: $file, anon_id: $anon_id, enclosing_symbol: $doc_first_type, pkg_id: $enc_tokens[2], version: (if ($enc_tokens | length > 3) then $enc_tokens[3] else "." end), manager: (if ($enc_tokens | length > 1) then $enc_tokens[1] else "." end), min_local_num: $min_local_num, relationships: ($all_relationships | flatten // [])})
+        ]
     }' "${input_file}"
 }
 
@@ -483,6 +504,44 @@ function extract_project_metadata() {
     ' "${input_file}"
 }
 
+function extract_anonymous_class_nodes() {
+    local symbol_index_file="${1}"
+    echo "null" | jq -r --slurpfile index "${symbol_index_file}" '
+        [
+            ($index[0].anonymous_classes // [])[] |
+            {
+                symbol:          .anon_id,
+                display_name:    (.anon_id | split("$") | .[0] | split("/") | last | gsub("#$"; "")),
+                scheme:          "semanticdb",
+                type_name:       "AnonymousClass",
+                file:            .file,
+                package_id:      .pkg_id,
+                package_manager: .manager,
+                version:         .version,
+                module:          ((.pkg_id // "") | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end),
+                is_abstract:     "false",
+                project_root:    ($index[0].project_root // "")
+            }
+        ] |
+        unique_by(.symbol) |
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
+        | @csv
+    '
+}
+
+function extract_anonymous_class_edges() {
+    local symbol_index_file="${1}"
+    echo "null" | jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+        ($index[0].anonymous_classes // [])[] |
+        .anon_id as $anon_id |
+        .relationships[] |
+        select((.is_reference == true) or (.is_implementation == true)) |
+        (.symbol | gsub("#.*"; "#")) as $target |
+        select($target | test("^semanticdb")) |
+        [$anon_id, short_symbol($target), 1] | @csv
+    '
+}
+
 # ---------------------------------------------------------------------------
 # Process a single .scip.json file to temporary per-file CSVs
 # ---------------------------------------------------------------------------
@@ -512,8 +571,11 @@ function process_single_index() {
     fi
     # External nodes never emit a header
     extract_external_type_nodes "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
+    
+    extract_anonymous_class_nodes "${symbol_index_file}" >> "${nodes_temp}"
 
     extract_depends_on_edges "${symbol_index_file}" "${input_file}" > "${edges_temp}"
+    extract_anonymous_class_edges "${symbol_index_file}" >> "${edges_temp}"
 }
 
 # ---------------------------------------------------------------------------
