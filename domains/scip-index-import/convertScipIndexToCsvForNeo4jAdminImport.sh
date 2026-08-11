@@ -19,6 +19,13 @@ IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"./import"}
 CONVERT_SCIP_ADMIN_SCRIPT_DIR=${CONVERT_SCIP_ADMIN_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
 echo "convertScipIndexToCsvForNeo4jAdminImport: CONVERT_SCIP_ADMIN_SCRIPT_DIR=${CONVERT_SCIP_ADMIN_SCRIPT_DIR}"
 
+_SCIP_ADMIN_DEBUG=false
+
+function debug_log() {
+    [ "${_SCIP_ADMIN_DEBUG}" = "true" ] || return 0
+    echo "convertScipIndexToCsvForNeo4jAdminImport: DEBUG: $*" >&2
+}
+
 function validate_prerequisites() {
     if ! command -v jq >/dev/null 2>&1; then
         echo "convertScipIndexToCsvForNeo4jAdminImport: Error: jq is required but not found in PATH." >&2
@@ -685,24 +692,90 @@ function process_single_index_admin() {
     symbol_index_file=$(mktemp)
     # shellcheck disable=SC2064
     trap "rm -f '${symbol_index_file}'" RETURN
+    
+    debug_log "Writing symbol index to temporary file: ${symbol_index_file}"
     echo "${symbol_index_json}" > "${symbol_index_file}"
+    
+    # Verify the index file was written and is not empty
+    local index_size
+    index_size=$(wc -c < "${symbol_index_file}")
+    debug_log "Symbol index file size: ${index_size} bytes"
+    if [ "${index_size}" -lt 10 ]; then
+        echo "ERROR: Symbol index file is too small (${index_size} bytes)" >&2
+        return 3
+    fi
+    
+    if [ "${_SCIP_ADMIN_DEBUG}" = "true" ]; then
+        echo "convertScipIndexToCsvForNeo4jAdminImport: DEBUG: First 500 chars of symbol_index_file:" >&2
+        head -c 500 "${symbol_index_file}" >&2
+        echo "" >&2
+    fi
+    debug_log "Validating JSON syntax..."
+    if ! jq empty "${symbol_index_file}" 2>&1; then
+        echo "ERROR: Symbol index file contains invalid JSON" >&2
+        echo "Full content of symbol index file:" >&2
+        cat "${symbol_index_file}" >&2
+        return 3
+    fi
+    debug_log "JSON syntax is valid"
 
+    debug_log "Extracting internal type nodes (emit_header=${emit_header})..."
     if [ "${emit_header}" = "true" ]; then
-        extract_type_nodes_admin "${symbol_index_file}" "${input_file}" > "${nodes_temp}"
+        extract_output=$(extract_type_nodes_admin "${symbol_index_file}" "${input_file}" 2>&1)
+        extract_exit=$?
+        if [ "${extract_exit}" -ne 0 ]; then
+            echo "ERROR: extract_type_nodes_admin failed with exit code ${extract_exit}" >&2
+            echo "Output from extract_type_nodes_admin:" >&2
+            echo "${extract_output}" >&2
+            return "${extract_exit}"
+        fi
+        echo "${extract_output}" > "${nodes_temp}"
     else
         # Skip the header line (first line) from internal nodes
-        extract_type_nodes_admin "${symbol_index_file}" "${input_file}" | tail -n +2 > "${nodes_temp}"
+        extract_output=$(extract_type_nodes_admin "${symbol_index_file}" "${input_file}" 2>&1)
+        extract_exit=$?
+        if [ "${extract_exit}" -ne 0 ]; then
+            echo "ERROR: extract_type_nodes_admin failed with exit code ${extract_exit}" >&2
+            echo "Output from extract_type_nodes_admin:" >&2
+            echo "${extract_output}" >&2
+            return "${extract_exit}"
+        fi
+        echo "${extract_output}" | tail -n +2 > "${nodes_temp}"
     fi
-    # External nodes never emit a header
-    extract_external_type_nodes_admin "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
+    local nodes_after_internal=$(wc -l < "${nodes_temp}" 2>/dev/null || echo "0")
+    debug_log "Internal nodes written: ${nodes_after_internal} lines"
     
-    extract_anonymous_class_nodes_admin "${symbol_index_file}" >> "${nodes_temp}"
+    debug_log "Extracting external type nodes..."
+    extract_external_type_nodes_admin "${symbol_index_file}" "${input_file}" >> "${nodes_temp}" 2>&1
+    local nodes_after_external=$(wc -l < "${nodes_temp}" 2>/dev/null || echo "0")
+    debug_log "Total nodes after external: ${nodes_after_external} lines"
+    
+    debug_log "Extracting anonymous class nodes..."
+    extract_anonymous_class_nodes_admin "${symbol_index_file}" >> "${nodes_temp}" 2>&1
+    local nodes_final=$(wc -l < "${nodes_temp}" 2>/dev/null || echo "0")
+    debug_log "Total nodes after anonymous classes: ${nodes_final} lines"
 
-    extract_depends_on_edges_admin "${symbol_index_file}" "${input_file}" > "${edges_temp}"
-    extract_anonymous_class_edges_admin "${symbol_index_file}" >> "${edges_temp}"
+    debug_log "Extracting DEPENDS_ON edges..."
+    extract_depends_on_edges_admin "${symbol_index_file}" "${input_file}" > "${edges_temp}" 2>&1
+    local edges_count=$(wc -l < "${edges_temp}" 2>/dev/null || echo "0")
+    debug_log "DEPENDS_ON edges written: ${edges_count} lines"
     
-    extract_type_project_links_admin "${symbol_index_file}" "${input_file}" > "${links_temp}"
-    extract_anonymous_class_project_links_admin "${symbol_index_file}" "${input_file}" >> "${links_temp}"
+    debug_log "Extracting anonymous class edges..."
+    extract_anonymous_class_edges_admin "${symbol_index_file}" >> "${edges_temp}" 2>&1
+    local edges_final=$(wc -l < "${edges_temp}" 2>/dev/null || echo "0")
+    debug_log "Total edges after anonymous classes: ${edges_final} lines"
+    
+    debug_log "Extracting type project links..."
+    extract_type_project_links_admin "${symbol_index_file}" "${input_file}" > "${links_temp}" 2>&1
+    local links_count=$(wc -l < "${links_temp}" 2>/dev/null || echo "0")
+    debug_log "Project links written: ${links_count} lines"
+    
+    debug_log "Extracting anonymous class project links..."
+    extract_anonymous_class_project_links_admin "${symbol_index_file}" "${input_file}" >> "${links_temp}" 2>&1
+    local links_final=$(wc -l < "${links_temp}" 2>/dev/null || echo "0")
+    debug_log "Total project links: ${links_final} lines"
+    
+    debug_log "Successfully completed processing of '${input_file}'"
 }
 
 # ---------------------------------------------------------------------------
@@ -933,18 +1006,31 @@ tmp_dir=$(mktemp -d)
 trap "rm -rf '${tmp_dir}'" EXIT
 
 first_file=true
+debug_log "Starting processing of SCIP index files"
 while IFS= read -r index_file; do
+    debug_log "Processing index file: ${index_file}"
     file_stem=$(basename "${index_file}" .scip.json | tr -cs 'A-Za-z0-9_-' '_')
     nodes_temp="${tmp_dir}/${file_stem}_admin_nodes.csv"
     edges_temp="${tmp_dir}/${file_stem}_admin_edges.csv"
     projects_temp="${tmp_dir}/${file_stem}_admin_projects.csv"
     links_temp="${tmp_dir}/${file_stem}_admin_links.csv"
 
-    process_single_index_admin "${index_file}" "${nodes_temp}" "${edges_temp}" "${links_temp}" "${first_file}"
+    debug_log "Calling process_single_index_admin with file_stem=${file_stem}"
+    _exit_code=0
+    process_single_index_admin "${index_file}" "${nodes_temp}" "${edges_temp}" "${links_temp}" "${first_file}" || { _exit_code=$?; }
+    if [ "${_exit_code}" -ne 0 ]; then
+        echo "ERROR: process_single_index_admin failed with exit code ${_exit_code}" >&2
+        exit "${_exit_code}"
+    fi
+    debug_log "process_single_index_admin completed successfully"
+    
+    debug_log "Calling extract_project_metadata_admin"
     extract_project_metadata_admin "${index_file}" "${first_file}" >> "${projects_temp}"
+    debug_log "extract_project_metadata_admin completed"
 
     first_file=false
 done < <(find "${INDICES_DIRECTORY}" -maxdepth 1 -name "*.scip.json" -type f | sort)
+debug_log "Finished processing all SCIP index files"
 
 nodes_output="${IMPORT_DIRECTORY}/scip_type_nodes_admin.csv"
 edges_output="${IMPORT_DIRECTORY}/scip_type_edges_admin.csv"
