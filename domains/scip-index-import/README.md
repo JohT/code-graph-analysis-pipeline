@@ -5,6 +5,8 @@ Converts SCIP JSON index files to Neo4j import CSVs, imports them into Neo4j, an
 
 Supported languages: Go, Java, TypeScript, Rust, C++, Ruby, Python, C#.
 
+Anonymous inner classes are detected automatically when the SCIP indexer sets `enclosing_symbol` and `relationships[].is_implementation` on local symbols. See [Anonymous Inner Class Support](#anonymous-inner-class-support) below.
+
 See [SCIP.md](../../SCIP.md) for how to generate `.scip.json` files outside the pipeline.
 
 ## How It Works
@@ -154,10 +156,40 @@ analyze.sh  # Updates artifacts/ → triggers resetAndScan → deletes hash → 
 - **Purpose:** Tracks SHA hash of all files in `indices/` directory
 - **Behavior:** Auto-deleted on graph reset; regenerated after successful import
 
-## Folder Structure
+## Anonymous Inner Class Support
 
-```text
-domains/scip-index-import/
+SCIP represents anonymous inner classes as `local` method symbols within their enclosing method, not as top-level type symbols. This pipeline detects and imports them as first-class nodes when the SCIP indexer provides sufficient metadata.
+
+### Requirements
+
+The SCIP indexer must populate two fields on each local symbol that is a method of an anonymous class:
+
+- `enclosing_symbol` — qualified symbol of the enclosing method (e.g. `semanticdb maven ... Manager#execute().`)
+- `relationships[].is_implementation: true` — symbol of the interface method being overridden (e.g. `... Callback#run().`)
+
+Java indexers that use `semanticdb` typically provide both fields. Support for other languages depends on the indexer.
+
+### What Gets Imported
+
+One anonymous class node is created per unique `enclosing_symbol` within a document. If a method contains more than one anonymous class, they share a single node (known limitation — SCIP does not distinguish multiple anonymous classes within the same method).
+
+| Field | Value |
+|-------|-------|
+| `typeName` | `AnonymousClass` |
+| `:LABEL` (admin import) | `SCIP;SemanticCodeIndexInternalType;SemanticCodeIndexAnonymousType` |
+| `isAbstract` | `false` |
+| `isTest` | Derived from file path (same as other internal types) |
+| Node ID format | `<pkg_id> <version> <EnclosingClass>#<method>()$anonymous<N>#` |
+
+Example node ID: `maven/com.example/app 1.0 com/example/Manager#execute()$anonymous3#`
+
+### Edges
+
+Each anonymous class node gets:
+- A `DEPENDS_ON` edge to every type it implements (derived from `relationships[].is_implementation`)
+- A `BELONGS_TO` edge to the project node (admin import only)
+
+## Folder Structure
 ├── README.md                              # This file
 ├── importScipIndexData.sh                 # Entry point: orchestrates CSV conversion + import
 ├── importScipIndexDataWithAdminImport.sh  # Pre-start fast import via neo4j-admin (sourced by analyze.sh)
@@ -167,7 +199,7 @@ domains/scip-index-import/
 ├── testConvertScipIndexToCsvForNeo4jAdminImport.sh # Tests for convertScipIndexToCsvForNeo4jAdminImport.sh
 └── queries/
     ├── import/                            # Phase 1: setup and import
-    │   ├── Cleanup_SCIP_Type_Nodes.cypher
+    │   ├── Cleanup_All_SCIP_Nodes.cypher
     │   ├── Create_SCIP_Internal_Type_Constraint.cypher
     │   ├── Create_SCIP_External_Type_Constraint.cypher
     │   ├── Import_SCIP_Type_Internal_Nodes.cypher
@@ -207,7 +239,7 @@ domains/scip-index-import/
 
 | Query | Purpose |
 |-------|---------|
-| [Cleanup_SCIP_Type_Nodes.cypher](./queries/import/Cleanup_SCIP_Type_Nodes.cypher) | Delete all existing SCIP nodes — clean slate before re-import |
+| [Cleanup_All_SCIP_Nodes.cypher](./queries/import/Cleanup_All_SCIP_Nodes.cypher) | Delete all existing SCIP-labeled nodes (types, modules, artifacts, projects) — ensures clean slate before re-import |
 | [Create_SCIP_Internal_Type_Constraint.cypher](./queries/import/Create_SCIP_Internal_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexInternalType.symbol` |
 | [Create_SCIP_External_Type_Constraint.cypher](./queries/import/Create_SCIP_External_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexExternalType.symbol` |
 | [Import_SCIP_Type_Internal_Nodes.cypher](./queries/import/Import_SCIP_Type_Internal_Nodes.cypher) | Import internal types (own source files); sets `isTest` from file path patterns |

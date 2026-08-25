@@ -23,7 +23,7 @@ SET node.fqn            = row.symbol,
     node.packageManager = row.package_manager,
     node.version        = row.version,
     node.module         = row.module,
-    node.isAbstract     = (row.is_abstract = 'true'),
+    node.isAbstract     = (row.is_abstract = 'true') OR (row.display_name = 'package-info.java'),
     node.isTest         = (
                             row.file CONTAINS '/test/'    OR
                             row.file CONTAINS '/tests/'   OR

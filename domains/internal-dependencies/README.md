@@ -37,21 +37,29 @@ domains/internal-dependencies/
 │   ├── PathFindingJava.ipynb
 │   └── PathFindingTypescript.ipynb
 ├── queries/
-│   ├── internal-dependencies/             # 14 Cypher queries (internal structure)
+│   ├── internal-dependencies/             # 16 Cypher queries (internal structure, including SCIP)
 │   ├── path-finding/                      # 15 Cypher queries (path algorithms)
 │   │   ├── Set_Parameters*.cypher         # Parameter templates for all path-finding node types
 │   │   └── Path_Finding_*.cypher          # Path-finding algorithms (shortest path, longest path)
 │   ├── topological-sort/                  # 6 core Cypher queries (build ordering)
+│   ├── object-oriented-design-metrics/    # 28 queries: Java, TypeScript, SCIP abstractness/instability
 │   └── strongly-connected-components/     # 9 queries: SCC detection → component sort → propagation
 │       ├── SCC_*.cypher                   # Strongly Connected Component queries
 │       └── SCC_TopologicalSort_*.cypher   # Component-level topological sort
 │   └── exploration/                       # 2 Cypher queries (explore notebooks only)
-├── graphs/
-│   └── internalDependenciesGraphs.sh      # Graph visualization orchestration
-└── summary/
-    ├── internalDependenciesSummary.sh     # Markdown assembly logic
-    └── report.template.md                 # Main report template
-```
+├── explore/                               # Jupyter notebooks for interactive exploration
+│   ├── InternalDependenciesJava.ipynb
+│   ├── InternalDependenciesTypescript.ipynb
+│   ├── InternalDependenciesScip.ipynb     # SCIP module + artifact listing tables
+│   ├── PathFindingJava.ipynb
+│   ├── PathFindingTypescript.ipynb
+│   ├── PathFindingScip.ipynb              # SCIP APSP + SCC-based longest path
+│   ├── ObjectOrientedDesignMetricsJava.ipynb
+│   ├── ObjectOrientedDesignMetricsTypescript.ipynb
+│   ├── ObjectOrientedDesignMetricsScip.ipynb  # SCIP Main Sequence analysis
+│   ├── VisibilityMetricsJava.ipynb
+│   ├── VisibilityMetricsTypescript.ipynb
+│   └── Wordcloud.ipynb
 
 ## Prerequisites
 
@@ -155,17 +163,26 @@ reports/internal-dependencies/
 │   ├── SemanticCodeIndexInternalType_Topological_Sort.csv
 │   └── SemanticCodeIndexInternalType_StronglyConnectedComponents_longest_paths_distribution.csv
 ├── SCIP_Semantic_Index_Module/
+│   ├── List_all_SCIP_modules.csv
 │   ├── SemanticCodeIndexModule_all_pairs_shortest_paths_distribution_per_project.csv
 │   ├── SemanticCodeIndexModule_Topological_Sort.csv
 │   ├── SemanticCodeIndexModule_StronglyConnectedComponents_longest_paths_distribution.csv
+│   ├── AbstractnessScip.csv
+│   ├── InstabilityScip.csv
+│   ├── MainSequenceAbstractnessInstabilityDistanceScip.csv
+│   ├── IncomingPackageDependenciesScip.csv
+│   ├── OutgoingPackageDependenciesScip.csv
 │   └── Graph_Visualizations/
+│       ├── ScipModuleBuildLevels.{csv,dot,svg}   # SCC-based build level graph
 │       ├── ScipModuleLongestPathsIsolated.{csv,dot,svg}
 │       └── ScipModuleLongestPaths.{csv,dot,svg}
 └── SCIP_Semantic_Index_Artifact/
+    ├── List_all_SCIP_artifacts.csv
     ├── SemanticCodeIndexArtifact_all_pairs_shortest_paths_distribution_per_project.csv
     ├── SemanticCodeIndexArtifact_Topological_Sort.csv
     ├── SemanticCodeIndexArtifact_StronglyConnectedComponents_longest_paths_distribution.csv
     └── Graph_Visualizations/
+        ├── ScipArtifactBuildLevels.{csv,dot,svg}   # SCC-based build level graph
         ├── ScipArtifactLongestPathsIsolated.{csv,dot,svg}
         └── ScipArtifactLongestPaths.{csv,dot,svg}
 ```
@@ -178,10 +195,33 @@ Python-generated charts from [pathFindingCharts.py](./pathFindingCharts.py):
 - **Java Artifact**: all-pairs shortest path (bar, pie) + longest path (bar, pie)
 - **TypeScript Module**: all-pairs shortest path and longest path charts (same set as Java Package)
 - **NPM packages**: same chart pattern where data exists
+- **SCIP Module**: all-pairs shortest path charts + SCC-based longest path charts (bar, pie, stacked log, stacked normalised, max per project)
+- **SCIP Artifact**: all-pairs shortest path (bar, pie) + SCC-based longest path (bar, pie)
+
+Python-generated charts from [objectOrientedDesignMetricsCharts.py](./objectOrientedDesignMetricsCharts.py):
+
+- **Java Package**: Main Sequence scatter plot + incoming/outgoing dependency bar charts (with and without sub-packages)
+- **TypeScript Module**: Main Sequence scatter plot + incoming/outgoing dependency bar charts
+- **SCIP Module**: Main Sequence scatter plot (`SCIP_Module_MainSequence.svg`) + incoming/outgoing dependency bar charts
 
 ### Markdown Summary (`reports/internal-dependencies/internal_dependencies_report.md`)
 
-A structured report covering cyclic dependencies, internal structure analysis, path finding insights, topological build levels, graph visualizations, and a glossary.
+A structured report covering internal structure, path finding insights, topological build levels, graph visualizations, OO design metrics, visibility metrics, and a glossary.
+
+Sections:
+- **Section 2**: Java internal structure (artifact listing, ISP candidates, widely used types)
+- **Section 3**: TypeScript internal structure (module listing, widely used elements)
+- **Section 3.4**: SCIP Semantic Index structure (module listing, artifact listing, internal types topological sort CSV link)
+- **Section 4**: Path finding (APSP + longest path for Java, TypeScript, NPM)
+- **Section 4.4**: SCIP Semantic Index path finding (APSP + SCC-based longest path for modules and artifacts)
+- **Section 5**: Topological sort critical path lengths (all abstraction levels including SCIP)
+- **Section 6**: Graph visualizations (Java, TypeScript, NPM)
+- **Section 6.4**: SCIP Semantic Index graphs (SCC build level graphs + longest path visualizations; types excluded - too large)
+- **Section 7**: Glossary and column definitions
+- **Section 8**: OO Design Metrics (Java packages, TypeScript modules)
+- **Section 8.4**: SCIP Semantic Index OO Design Metrics (Main Sequence scatter + dependency bar charts for modules)
+- **Section 9**: Visibility metrics (Java, TypeScript)
+- **Section 10**: Code vocabulary word cloud
 
 ## Breaking Change Note
 

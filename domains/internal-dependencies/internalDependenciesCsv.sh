@@ -83,6 +83,18 @@ execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/List_elements_that_are_used_by_many_
 execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/How_many_elements_compared_to_all_existing_are_used_by_dependent_modules_for_Typescript.cypher" \
     > "${FULL_REPORT_DIRECTORY}/Typescript_Module/ModuleElementsUsageTypescript.csv"
 
+echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing internal dependencies for SCIP..."
+
+SCIP_MODULE_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+mkdir -p "${SCIP_MODULE_DIR}"
+SCIP_ARTIFACT_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
+mkdir -p "${SCIP_ARTIFACT_DIR}"
+
+execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/List_all_SCIP_modules.cypher" \
+    > "${SCIP_MODULE_DIR}/List_all_SCIP_modules.csv"
+execute_cypher "${INTERNAL_DEPS_CYPHER_DIR}/List_all_SCIP_artifacts.cypher" \
+    > "${SCIP_ARTIFACT_DIR}/List_all_SCIP_artifacts.csv"
+
 # ── Path Finding ──────────────────────────────────────────────────────────────
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting path finding..."
@@ -399,6 +411,22 @@ echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing Object-
 # Prerequisite: count and set abstract type flags before running abstractness queries.
 execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Count_and_set_abstract_types.cypher"
 
+# -- SCIP Semantic Index Modules ----------------------------------------------
+
+SCIP_MODULE_OO_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Count_and_set_abstract_types_for_SCIP.cypher"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Abstractness_for_SCIP.cypher" \
+    > "${SCIP_MODULE_OO_DIR}/AbstractnessScip.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_and_set_Instability_for_SCIP.cypher" \
+    > "${SCIP_MODULE_OO_DIR}/InstabilityScip.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Calculate_distance_between_abstractness_and_instability_for_SCIP.cypher" \
+    > "${SCIP_MODULE_OO_DIR}/MainSequenceAbstractnessInstabilityDistanceScip.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Incoming_SCIP_Module_Dependencies.cypher" \
+    > "${SCIP_MODULE_OO_DIR}/IncomingPackageDependenciesScip.csv"
+execute_cypher "${OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR}/Get_Outgoing_SCIP_Module_Dependencies.cypher" \
+    > "${SCIP_MODULE_OO_DIR}/OutgoingPackageDependenciesScip.csv"
+
 # -- Java Packages without sub-packages --------------------------------------
 
 execute_cypher_queries_until_results \
@@ -476,6 +504,7 @@ source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_DevPackage"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Type"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

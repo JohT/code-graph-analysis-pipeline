@@ -65,10 +65,33 @@ JQ_SHARED_FUNCTIONS='
         symbol | split(" ") | if length >= 5 then .[4] else "" end;
 
     def is_type_descriptor(symbol):
+        descriptor(symbol) | (contains("#") and (endswith("]") | not));
+
+    def is_base_type_descriptor(symbol):
         descriptor(symbol) | endswith("#");
 
     def is_type_parameter_descriptor(symbol):
         descriptor(symbol) | endswith("]");
+
+    def normalize_descriptor(symbol):
+        descriptor(symbol) | split("#")[0] + "#";
+
+    def normalize_symbol(symbol):
+        symbol | split(" ") | 
+        if length >= 5 then
+            .[0:4] as $prefix | 
+            (.[4] | split("#")[0] + "#") as $norm_desc |
+            ($prefix + [$norm_desc]) | join(" ")
+        else
+            symbol
+        end;
+
+    def short_symbol_normalized(s):
+        normalize_symbol(s) | split(" ") | if length >= 5 then
+            .[2:5] | join(" ")
+        else
+            .
+        end;
 
     def null_kind_fallback(signature_text; doc_first_line):
         if (signature_text // "" | test("^public final ")) then "Record"
@@ -112,7 +135,7 @@ JQ_SHARED_FUNCTIONS='
 
 function build_symbol_information_index() {
     local input_file="${1}"
-    jq '{
+    jq "${JQ_SHARED_FUNCTIONS}"'{
         symbol_to_file: [
             .documents[] |
             .relative_path as $file |
@@ -120,20 +143,20 @@ function build_symbol_information_index() {
             select((.symbol_roles // 0) % 2 == 1) |
             select(.symbol | startswith("local ") | not) |
             { key: .symbol, value: $file }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_kind: [
             .documents[].symbols[]? |
             select(.symbol != null) |
             { key: .symbol, value: (.kind // null) }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_signature_text: [
             .documents[].symbols[]? |
             select(.symbol != null) |
             select(.signature_documentation.text != null) |
             { key: .symbol, value: .signature_documentation.text }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         symbol_to_doc_first_line: [
             .documents[].symbols[]? |
@@ -143,7 +166,7 @@ function build_symbol_information_index() {
             select($doc | startswith("```")) |
             { key: .symbol,
               value: ($doc | split("\n") | .[1] // "") }
-        ] | from_entries,
+        ] | (reduce .[] as $kv ({}; .[$kv.key] = $kv.value)),
 
         internal_package_ids: [
             .documents[].occurrences[] |
@@ -151,7 +174,28 @@ function build_symbol_information_index() {
             select(.symbol | startswith("local ") | not) |
             select((.symbol | split(" ") | length) >= 5) |
             .symbol | split(" ") | .[2]
-        ] | unique
+        ] | unique,
+
+        project_root: (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+            | gsub("/$"; "")
+        ),
+
+        anonymous_classes: [
+            ([.documents[].symbols[]? | select(.symbol != null) | select(.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol] | unique) as $local_classes_with_methods |
+            .documents[] as $doc |
+            $doc.relative_path as $file |
+            ($doc.symbols // []) as $all_symbols |
+            ([$doc.occurrences[]? | select((.symbol_roles // 0) % 2 == 1) | select(.symbol | startswith("local ") | not) | select((.symbol | split(" ") | length) >= 5) | select(is_base_type_descriptor(.symbol)) | .symbol] | first) as $doc_first_type |
+            select($doc_first_type != null) |
+            ($doc_first_type | split(" ")) as $enc_tokens |
+            ([($all_symbols[] | select(.symbol != null and (.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80)) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol as $enc | select(($local_classes_with_methods | index($enc)) != null))] | group_by(.enclosing_symbol)[] | (first(.[] | select(.relationships != null and (.relationships | length > 0))) // .[0]) as $first_method | [.[] | .relationships // []] as $all_relationships | $first_method.enclosing_symbol as $anon_class_sym | ([$all_symbols[] | select(.symbol == $anon_class_sym) | .enclosing_symbol] | first // $doc_first_type) as $anon_class_enclosing_symbol | ($anon_class_sym | sub("^local"; "") | (tonumber? // 0)) as $min_local_num | ((short_symbol($anon_class_enclosing_symbol) | gsub("[.#.]$"; "")) + "$anonymous" + ($min_local_num | tostring) + "#") as $anon_id | {file: $file, anon_id: $anon_id, enclosing_symbol: $doc_first_type, pkg_id: $enc_tokens[2], version: (if ($enc_tokens | length > 3) then $enc_tokens[3] else "." end), manager: (if ($enc_tokens | length > 1) then $enc_tokens[1] else "." end), min_local_num: $min_local_num, relationships: ($all_relationships | flatten // [])})
+        ]
     }' "${input_file}"
 }
 
@@ -173,6 +217,7 @@ function extract_type_nodes() {
             else
                 $project_root_raw
             end
+            | gsub("/$"; "")
         ) as $project_root |
 
         (
@@ -187,7 +232,7 @@ function extract_type_nodes() {
 
                 .symbol as $symbol |
 
-                select(is_type_descriptor($symbol)) |
+                select(is_base_type_descriptor($symbol)) |
                 select(is_type_parameter_descriptor($symbol) | not) |
 
                 ($symbol | split(" ")) as $tokens |
@@ -205,7 +250,7 @@ function extract_type_nodes() {
 
                 {
                     symbol:          short_symbol($symbol),
-                    display_name:    ($descriptor | gsub("#"; "") | split("/") | last | gsub("`"; "")),
+                    display_name:    ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
                     scheme:          scheme($symbol),
                     type_name:       $cu_type,
                     file:            $file,
@@ -226,7 +271,7 @@ function extract_type_nodes() {
                  select((.symbol_roles // 0) % 2 == 1) |
                  select(.symbol | startswith("local ") | not) |
                  select((.symbol | split(" ") | length) >= 5) |
-                 select(is_type_descriptor(.symbol)) |
+                 select(is_base_type_descriptor(.symbol)) |
                  select(is_type_parameter_descriptor(.symbol) | not) |
                  .symbol
                 ] as $defined_type_symbols |
@@ -300,6 +345,7 @@ function extract_external_type_nodes() {
             else
                 $project_root_raw
             end
+            | gsub("/$"; "")
         ) as $project_root |
         [
             .documents[] |
@@ -332,7 +378,7 @@ function extract_external_type_nodes() {
 
             {
                 symbol:          short_symbol($symbol),
-                display_name:    ($descriptor | gsub("#"; "") | split("/") | last | gsub("`"; "")),
+                display_name:    ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
                 scheme:          scheme($symbol),
                 type_name:       $cu_type,
                 file:            "",
@@ -362,71 +408,65 @@ function extract_depends_on_edges() {
 
         ($index[0].symbol_to_file)       as $sym_to_file       |
         ($index[0].internal_package_ids) as $internal_pkg_ids  |
-        [
-            .documents[] |
-            .relative_path as $source_file |
 
-                [.occurrences[] |
-                 select((.symbol_roles // 0) % 2 == 1) |
-                 select(.symbol | startswith("local ") | not) |
-                 select((.symbol | split(" ") | length) >= 5) |
-                 select(is_type_descriptor(.symbol)) |
-                 select(is_type_parameter_descriptor(.symbol) | not) |
-                 .symbol
-                ] as $source_type_symbols |
+        .documents[] |
+        .relative_path as $source_file |
 
-                [.occurrences[] |
-                 select((.symbol_roles // 0) % 2 == 0) |
-                 select(.symbol | startswith("local ") | not) |
-                 select((.symbol | split(" ") | length) >= 5) |
-                 .symbol as $ref_symbol |
-                 select(is_type_descriptor($ref_symbol)) |
-                 select(is_type_parameter_descriptor($ref_symbol) | not) |
-                 $sym_to_file[$ref_symbol] as $target_file |
-                 ($ref_symbol | split(" ") | .[2]) as $ref_pkg_id |
-                 (($target_file != null and $target_file != $source_file)
-                  or ($target_file == null
-                        and ($internal_pkg_ids | index($ref_pkg_id)) == null
-                        and $ref_pkg_id != ".")) as $is_valid_target |
-                 select($is_valid_target) |
-                 $ref_symbol
-                ] as $valid_ref_symbols |
+            # Filter and categorize all valid occurrences first (single pass)
+            [.occurrences[] |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             select(is_type_descriptor(.symbol)) |
+             select(is_type_parameter_descriptor(.symbol) | not) |
+             {symbol: .symbol, role: ((.symbol_roles // 0) % 2)}
+            ] as $valid_occurrences |
 
-                ([.occurrences[] |
-                  select(.symbol | startswith("local ") | not) |
-                  select((.symbol | split(" ") | length) >= 5) |
-                  .symbol as $s |
-                  ($s | split(" ") | .[2]) as $pkg_id |
-                  select(($internal_pkg_ids | index($pkg_id)) != null) |
-                  $s
-                 ] | first) as $first_internal_symbol |
+            # Extract sources (role 1) and raw references (role 0)
+            [$valid_occurrences[] | select(.role == 1) | .symbol] as $source_type_symbols |
+            [$valid_occurrences[] | select(.role == 0) | .symbol] as $all_ref_symbols |
 
-                (if ($source_type_symbols | length) > 0 then
-                     ($source_type_symbols | map(short_symbol(.)))
-                 elif ($valid_ref_symbols | length) > 0 and $first_internal_symbol != null then
-                     [("__file__ " + $source_file)]
-                 else
-                     []
-                 end) as $source_symbols |
+            # Pre-aggregate valid refs by normalized type target, with occurrence count
+            (
+                $all_ref_symbols |
+                group_by(normalize_symbol(.)) |
+                map(
+                    normalize_symbol(.[0]) as $norm |
+                    $sym_to_file[$norm] as $target_file |
+                    (.[0] | split(" ") | .[2]) as $ref_pkg_id |
+                    select(
+                        ($target_file != null and $target_file != $source_file)
+                        or ($target_file == null
+                              and ($internal_pkg_ids | index($ref_pkg_id)) == null
+                              and $ref_pkg_id != ".")
+                    ) |
+                    { target: ($norm | split(" ") | .[2:5] | join(" ")), count: length }
+                )
+            ) as $valid_ref_groups |
 
-                select(($source_symbols | length) > 0) |
-                select(($valid_ref_symbols | length) > 0) |
+            # Find first internal symbol for __file__ fallback
+            ([$valid_occurrences[] |
+              .symbol as $s |
+              ($s | split(" ") | .[2]) as $pkg_id |
+              select(($internal_pkg_ids | index($pkg_id)) != null) |
+              $s
+             ] | first) as $first_internal_symbol |
 
-                $source_symbols[] as $source_symbol |
-                $valid_ref_symbols[] as $ref_symbol |
-                { source_symbol: $source_symbol, target_symbol: short_symbol($ref_symbol) }
-        ] |
+            (if ($source_type_symbols | length) > 0 then
+                 ($source_type_symbols | map(short_symbol(.)))
+             elif ($valid_ref_groups | length) > 0 and $first_internal_symbol != null then
+                 [("__file__ " + $source_file)]
+             else
+                 []
+             end) as $source_symbols |
 
-        group_by([.source_symbol, .target_symbol]) |
-        map(. as $group | {
-            source_symbol:   $group[0].source_symbol,
-            target_symbol:   $group[0].target_symbol,
-            reference_count: ($group | length)
-        }) |
-        sort_by(.source_symbol, .target_symbol) |
+            select(($source_symbols | length) > 0) |
+            select(($valid_ref_groups | length) > 0) |
 
-        .[] | [.source_symbol, .target_symbol, (.reference_count | tostring)]
-        | @csv
+            $source_symbols[] as $source_symbol |
+            $valid_ref_groups[] as $ref_group |
+            select($source_symbol != $ref_group.target) |
+            [$source_symbol, $ref_group.target, ($ref_group.count | tostring)]
+            | @csv
         ' "${input_file}"
 }
 
@@ -454,6 +494,7 @@ function extract_project_metadata() {
             else
                 $meta.project_root
             end
+            | gsub("/$"; "")
         ) as $project_root |
         [
             $project_root,
@@ -461,6 +502,44 @@ function extract_project_metadata() {
             ($meta.tool_info.version // "unknown")
         ] | @csv
     ' "${input_file}"
+}
+
+function extract_anonymous_class_nodes() {
+    local symbol_index_file="${1}"
+    echo "null" | jq -r --slurpfile index "${symbol_index_file}" '
+        [
+            ($index[0].anonymous_classes // [])[] |
+            {
+                symbol:          .anon_id,
+                display_name:    (.anon_id | split("$") | .[0] | split("/") | last | gsub("#$"; "")),
+                scheme:          "semanticdb",
+                type_name:       "AnonymousClass",
+                file:            .file,
+                package_id:      .pkg_id,
+                package_manager: .manager,
+                version:         .version,
+                module:          ((.pkg_id // "") | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end),
+                is_abstract:     "false",
+                project_root:    ($index[0].project_root // "")
+            }
+        ] |
+        unique_by(.symbol) |
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
+        | @csv
+    '
+}
+
+function extract_anonymous_class_edges() {
+    local symbol_index_file="${1}"
+    echo "null" | jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+        ($index[0].anonymous_classes // [])[] |
+        .anon_id as $anon_id |
+        .relationships[] |
+        select((.is_reference == true) or (.is_implementation == true)) |
+        (.symbol | gsub("#.*"; "#")) as $target |
+        select($target | test("^semanticdb")) |
+        [$anon_id, short_symbol($target), 1] | @csv
+    '
 }
 
 # ---------------------------------------------------------------------------
@@ -492,8 +571,11 @@ function process_single_index() {
     fi
     # External nodes never emit a header
     extract_external_type_nodes "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
+    
+    extract_anonymous_class_nodes "${symbol_index_file}" >> "${nodes_temp}"
 
     extract_depends_on_edges "${symbol_index_file}" "${input_file}" > "${edges_temp}"
+    extract_anonymous_class_edges "${symbol_index_file}" >> "${edges_temp}"
 }
 
 # ---------------------------------------------------------------------------

@@ -3,6 +3,5 @@
 
 MATCH (p:SCIP:SemanticCodeIndexProject)-[:CONTAINS]->(a:SCIP:SemanticCodeIndexArtifact)
 WHERE p.name IS NOT NULL
-  AND a.projectName IS NULL
 SET a.projectName = p.name
 RETURN count(*) AS updatedNodes

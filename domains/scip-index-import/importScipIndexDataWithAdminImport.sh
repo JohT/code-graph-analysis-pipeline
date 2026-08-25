@@ -94,7 +94,7 @@ function try_admin_import() {
 
     # Note: neo4j-admin database import full will fail if the database already exists,
     # but this is acceptable — the failure triggers fallback to LOAD CSV. The LOAD CSV path
-    # will clean existing data via Cypher (Cleanup_SCIP_Type_Nodes.cypher) before re-importing.
+    # will clean existing data via Cypher (Cleanup_All_SCIP_Nodes.cypher) before re-importing.
     # We do not pre-delete database files here as that would manipulate Neo4j's internal state.
 
     # Convert SCIP index files to neo4j-admin import CSVs

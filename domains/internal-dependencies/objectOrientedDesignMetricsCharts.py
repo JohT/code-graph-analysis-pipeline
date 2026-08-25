@@ -74,6 +74,18 @@ OUTGOING_CHART_PREFIX = {
 
 TOP_DEPENDENCIES_COUNT = 30
 
+# ── SCIP configuration ─────────────────────────────────────────────────────────
+# SCIP OO Design Metrics cover modules only (instability + abstractness via isAbstract flag).
+# CSV file names produced by internalDependenciesCsv.sh for the SCIP module level.
+SCIP_MODULE_SUBDIRECTORY = "SCIP_Semantic_Index_Module"
+SCIP_MODULE_DESCRIPTION = "SCIP Semantic Index Modules"
+SCIP_MODULE_MAIN_SEQUENCE_CSV = "MainSequenceAbstractnessInstabilityDistanceScip.csv"
+SCIP_MODULE_INCOMING_CSV = "IncomingPackageDependenciesScip.csv"
+SCIP_MODULE_OUTGOING_CSV = "OutgoingPackageDependenciesScip.csv"
+SCIP_CHART_MAIN_SEQUENCE_PREFIX = "SCIP_Module_MainSequence"
+SCIP_CHART_INCOMING_PREFIX = "SCIP_Module_IncomingDependencies_Bar"
+SCIP_CHART_OUTGOING_PREFIX = "SCIP_Module_OutgoingDependencies_Bar"
+
 
 class Parameters:
     def __init__(
@@ -434,6 +446,57 @@ def generate_charts_for_level(
     generate_outgoing_dependencies_chart(level_directory, description, outgoing_csv, verbose)
 
 
+def generate_scip_oo_design_metrics_charts(report_directory: str, verbose: bool) -> None:
+    """Generates all OO Design Metric charts for SCIP Semantic Index modules.
+
+    SCIP modules expose abstractness (via isAbstract flag on contained types) and instability
+    (via inter-module DEPENDS_ON counts). This covers Main Sequence analysis and
+    incoming/outgoing dependency bar charts. Silently skips when no SCIP data is present.
+    """
+    level_directory = os.path.join(report_directory, SCIP_MODULE_SUBDIRECTORY)
+    if not os.path.isdir(level_directory):
+        if verbose:
+            print(f"{SCRIPT_NAME}: Skipping SCIP OO metrics — directory not found: {level_directory}")
+        return
+
+    print(f"{SCRIPT_NAME}: Processing {SCIP_MODULE_DESCRIPTION}...")
+
+    main_sequence_csv = os.path.join(level_directory, SCIP_MODULE_MAIN_SEQUENCE_CSV)
+    incoming_csv = os.path.join(level_directory, SCIP_MODULE_INCOMING_CSV)
+    outgoing_csv = os.path.join(level_directory, SCIP_MODULE_OUTGOING_CSV)
+
+    main_sequence_data = load_csv(main_sequence_csv, verbose)
+    if main_sequence_data is not None and not main_sequence_data.empty:
+        plot_main_sequence_scatter(
+            data_frame=main_sequence_data,
+            title=f'Abstractness vs. Instability ("Main Sequence")\n{SCIP_MODULE_DESCRIPTION}',
+            file_path=chart_file_path(SCIP_CHART_MAIN_SEQUENCE_PREFIX, level_directory, verbose),
+            verbose=verbose,
+        )
+
+    incoming_data = load_csv(incoming_csv, verbose)
+    if incoming_data is not None and not incoming_data.empty:
+        numeric_cols = incoming_data.select_dtypes(include="number").columns.tolist()
+        count_column = numeric_cols[0] if numeric_cols else ""
+        plot_top_dependencies_bar(
+            data_frame=incoming_data,
+            title=f"Top {TOP_DEPENDENCIES_COUNT} by Incoming Dependencies\n{SCIP_MODULE_DESCRIPTION}",
+            file_path=chart_file_path(SCIP_CHART_INCOMING_PREFIX, level_directory, verbose),
+            count_column=count_column,
+        )
+
+    outgoing_data = load_csv(outgoing_csv, verbose)
+    if outgoing_data is not None and not outgoing_data.empty:
+        numeric_cols = outgoing_data.select_dtypes(include="number").columns.tolist()
+        count_column = numeric_cols[0] if numeric_cols else ""
+        plot_top_dependencies_bar(
+            data_frame=outgoing_data,
+            title=f"Top {TOP_DEPENDENCIES_COUNT} by Outgoing Dependencies\n{SCIP_MODULE_DESCRIPTION}",
+            file_path=chart_file_path(SCIP_CHART_OUTGOING_PREFIX, level_directory, verbose),
+            count_column=count_column,
+        )
+
+
 def main() -> None:
     """Generates all Object Oriented Design metrics charts for all abstraction levels."""
     parameters = parse_parameters()
@@ -455,6 +518,11 @@ def main() -> None:
             outgoing_csv_name=outgoing_csv_name,
             verbose=parameters.verbose,
         )
+
+    generate_scip_oo_design_metrics_charts(
+        report_directory=parameters.report_directory,
+        verbose=parameters.verbose,
+    )
 
     print(f"{SCRIPT_NAME}: Successfully finished.")
 

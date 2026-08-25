@@ -19,6 +19,16 @@ CALL {
     RETURN 'TypeScript Module' AS abstractionLevel
           ,max(n.maxDistanceFromSource) AS maxBuildLevel
           ,count(n)                     AS nodeCount
+    UNION ALL
+    MATCH (n:SemanticCodeIndexModule) WHERE n.maxDistanceFromSource IS NOT NULL
+    RETURN 'SCIP Module'       AS abstractionLevel
+          ,max(n.maxDistanceFromSource) AS maxBuildLevel
+          ,count(n)                     AS nodeCount
+    UNION ALL
+    MATCH (n:SemanticCodeIndexArtifact) WHERE n.maxDistanceFromSource IS NOT NULL
+    RETURN 'SCIP Artifact'     AS abstractionLevel
+          ,max(n.maxDistanceFromSource) AS maxBuildLevel
+          ,count(n)                     AS nodeCount
 }
 RETURN abstractionLevel
       ,nodeCount
