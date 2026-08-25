@@ -60,7 +60,7 @@ jobs:
     env:
       PROJECT_NAME: react-router
       # Version variables below are covered by renovate.json configuration
-      REACT_ROUTER_VERSION: 7.15.1
+      REACT_ROUTER_VERSION: 7.18.2
       SCIP_VERSION: 0.9.0
 
     steps:
