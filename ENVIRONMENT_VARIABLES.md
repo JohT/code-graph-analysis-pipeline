@@ -68,7 +68,7 @@ ARTIFACTS_CHANGE_DETECTION_HASH_FILE | artifactsChangeDetectionHash.txt | !DEPRE
 CHANGE_DETECTION_HASH_FILE_PATH | ./${ARTIFACTS_DIRECTORY}/${CHANGE_DETECTION_HASH_FILE} | Default path of the file that contains the hash code of the file list for change detection. Can be overridden by a command line option.
 SCIP_BINARY | ${TOOLS_DIRECTORY}/scip-cli/scip | 
 NEO4J_HTTP_TRANSACTION_ENDPOINT | db/neo4j/tx/commit | Since Neo4j v5: "db/<name>/tx/commit", Neo4j v4: "db/data/transaction/commit"
-JQASSISTANT_CLI_VERSION | 2.9.0 | 
+JQASSISTANT_CLI_VERSION | 2.10.0-M3 | 
 JQASSISTANT_CLI_ARTIFACT | jqassistant-commandline-neo4jv5 | 
 JQASSISTANT_CONFIG_TEMPLATE | template-neo4jv5-jqassistant-continue-on-error.yaml | 
 programmingLanguage | Java | Set to default value "Java" if not set since it is optional
