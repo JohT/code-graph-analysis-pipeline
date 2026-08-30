@@ -3,7 +3,6 @@
    MATCH (p:Java:Package)
    MATCH (artifact:Artifact)-[:CONTAINS]->(p)
 OPTIONAL MATCH (p)-[:CONTAINS]->(it:Java:Type)<-[r:DEPENDS_ON]-(et:Java:Type)<-[:CONTAINS]-(ep:Package)<-[:CONTAINS]-(ea:Artifact)
-OPTIONAL MATCH (it)<-[:DEPENDS_ON]-(eti:Java:Type:Interface)
    WHERE p <> ep
      AND p.fqn <> ep.fqn
      // AND p.incomingDependencies IS NULL // comment out to recalculate
@@ -12,7 +11,8 @@ OPTIONAL MATCH (it)<-[:DEPENDS_ON]-(eti:Java:Type:Interface)
         ,COUNT(et)               AS incomingDependencies
         ,SUM(r.weight)           AS incomingDependenciesWeight
         ,COUNT(DISTINCT et)      AS incomingDependentTypes 
-        ,COUNT(DISTINCT eti)     AS incomingDependentInterfaces // also included in dependent types
+         // Count interface types. They are also included in dependent types.
+        ,COUNT{ MATCH (it)-[:DEPENDS_ON]->(eti:Java:Type:Interface) RETURN DISTINCT eti } AS incomingDependentInterfaces
         ,COUNT(DISTINCT ep)      AS incomingDependentPackages
         ,COUNT(DISTINCT ea)  - 1 AS incomingDependentArtifacts
 ORDER BY incomingDependencies DESC, p.fqn ASC // package with most incoming dependencies first
