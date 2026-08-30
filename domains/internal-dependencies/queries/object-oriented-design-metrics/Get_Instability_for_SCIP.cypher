@@ -9,7 +9,9 @@ RETURN m.projectName                  AS projectName
       ,m.instabilityModules             AS instabilityModules
       ,m.instabilityArtifacts           AS instabilityArtifacts
       ,m.outgoingDependencies           AS outgoingDependencies
+      ,m.outgoingDependenciesWeight     AS outgoingDependenciesWeight
       ,m.incomingDependencies           AS incomingDependencies
+      ,m.incomingDependenciesWeight     AS incomingDependenciesWeight
       ,m.outgoingDependentArtifacts     AS outgoingDependentArtifacts
       ,m.incomingDependentArtifacts     AS incomingDependentArtifacts
 ORDER BY instability ASC, fullQualifiedModuleName ASC
