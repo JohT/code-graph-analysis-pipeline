@@ -7,9 +7,9 @@
  OPTIONAL MATCH (module)-[existingDependency:DEPENDS_ON]->(resolvedModule)
   CALL {  WITH module, dependsOn, resolvedModule, existingDependency
          MERGE (module)-[resolvedDependsOn:DEPENDS_ON]->(resolvedModule)
-            ON CREATE SET resolvedDependsOn             = dependsOn
+            ON CREATE SET resolvedDependsOn             = properties(dependsOn)
                          ,resolvedDependsOn.resolved    = true
-            ON MATCH  SET resolvedDependsOn             = dependsOn // Overwrites existing properties
+            ON MATCH  SET resolvedDependsOn             = properties(dependsOn) // Overwrites existing properties
                          ,resolvedDependsOn.cardinality = existingDependency.cardinality + dependsOn.cardinality // Add cardinalities
                          ,resolvedDependsOn.updated     = true
        } IN TRANSACTIONS OF 1000 ROWS
