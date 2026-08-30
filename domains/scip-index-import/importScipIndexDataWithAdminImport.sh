@@ -27,7 +27,7 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${SCIP_ADMIN_IMPORT_SCRIPT_DIR}/../../scripts"}
 # Variable defaults — settings profile is already sourced at this point in analyze.sh;
 # these defaults handle edge cases and direct invocation.
 NEO4J_EDITION=${NEO4J_EDITION:-"community"}
-NEO4J_VERSION=${NEO4J_VERSION:-"2026.01.4"}
+NEO4J_VERSION=${NEO4J_VERSION:-"2026.07.0"}
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"}
 DATA_DIRECTORY=${DATA_DIRECTORY:-"$( pwd -P )/data"}
 RUNTIME_DIRECTORY=${RUNTIME_DIRECTORY:-"$( pwd -P )/runtime"}
