@@ -119,6 +119,165 @@ On repeat runs (unchanged index) or when the fast path fails, the regular LOAD C
 
 See [domains/scip-index-import/README.md](domains/scip-index-import/README.md#fast-import-via-neo4j-admin) for full details.
 
+## Known Limitations
+
+### SCIP-Java Only Captures Explicit Type References
+
+**Limitation**: SCIP-Java (and other SCIP indexers) only captures **explicit type references** in source code. This means:
+
+- ✅ **Captured**: Direct method calls, field access, type annotations, inheritance declarations
+
+  ```java
+  MyClass obj = new MyClass();           // ✅ captured
+  obj.method();                          // ✅ captured
+  List<String> list;                     // ✅ captured
+  class Child extends Parent { }         // ✅ captured
+  ```
+
+- ❌ **Not captured**: Implicit or compiler-generated references
+  - Inner class access to outer class members (implicit `this` binding)
+  - Javadoc `@link` or `@see` tags (documentation references)
+  - Reflection-based references
+  - Metaprogramming constructs
+
+### Inner Class Dependencies Are Incomplete
+
+**Impact**: Non-static inner classes do not record dependencies on their enclosing class, even though they have implicit access to all private members at runtime.
+
+**Example**:
+
+```java
+class Coordinator {
+    private EventSource eventSource;
+    private TokenStore tokenStore;
+    
+    // Inner class can access all Coordinator private members implicitly
+    private class CoordinationTask implements Runnable {
+        public void run() {
+            eventSource.getEvents();      // Implicit access via compiler-generated Coordinator.this
+            tokenStore.store(token);      // Not visible as explicit reference in SCIP
+        }
+    }
+}
+```
+
+In the SCIP index:
+
+- ✅ `Coordinator → CoordinationTask` edge exists (explicit instantiation)
+- ❌ `CoordinationTask → Coordinator` edge **missing** (implicit dependency not recorded)
+
+**Implications**:
+
+- Dependency graphs are incomplete for nested class structures
+- Cycle detection may miss cycles that involve inner classes
+- Architecture analysis may undercount dependencies in codebases with heavy use of inner classes
+
+**Workaround**: Consider refactoring inner classes to package-private or public top-level classes if dependency tracking is critical for your analysis.
+
+### Anonymous Inner Class Names won't necessarily match between Java and SCIP
+
+**Limitation**: Anonymous inner classes in Java are assigned names like `OuterClass$1`, `OuterClass$2`, etc. However, SCIP is imported as `OuterClass$anonymous0`, `OuterClass$anonymous1`, etc., with no guaranteed matching numbers.
+
+**Impact**: Dependencies involving anonymous inner classes may appear missing in SCIP data when trying to match by name between Java and SCIP.
+
+**Workaround**: There is no reliable workaround other than being aware of this limitation when analyzing dependencies involving anonymous inner classes.
+
+### JavaDoc References
+
+**Limitation**: References in Javadoc comments using `@link` or `@see` tags are not captured as dependencies in SCIP.
+
+**Impact**: Dependencies that are only mentioned in documentation may appear missing in SCIP data.
+
+**Workaround**: There is no direct workaround; consider adding explicit code references if tracking these dependencies is important.
+
+### Generic Type Parameters and Type Annotations
+
+**Limitation**: Type references in generic type parameters and certain type annotations may not be captured as symbol occurrences in SCIP.
+
+**Example**:
+
+```java
+// Method with generic type parameter
+public <T extends ProcessingContext> void process(T context) {  // ❌ ProcessingContext may not be captured
+    context.handle();
+}
+
+// Field with generic type that should depend on inner type
+private final Set<Cache.EntryListener> adapters;  // ✅ Sometimes captured, ❌ sometimes not
+
+// Field using inner type in complex generics
+private Map<String, ? extends ProcessingContext> handlers;  // ❌ Likely not captured
+```
+
+**Impact**: Type dependencies involving generic type parameters or complex type annotations may be missing from SCIP data even though jQAssistant (bytecode/AST-based analysis) captures them.
+
+**Evidence**: In AxonFramework analysis, `DefaultDispatchInterceptorRegistry` references `ProcessingContext` (confirmed by jQAssistant), but this reference does not appear in SCIP index (520 occurrences checked, none contain ProcessingContext).
+
+**Root Cause**: SCIP indexers (particularly scip-java) may treat type parameters and certain annotation contexts as implicit/contextual and not record them as explicit symbol occurrences.
+
+**Workaround**: There is no reliable workaround in the conversion pipeline. This is an upstream SCIP indexer limitation that would require:
+
+- Enhancement to the SCIP indexer (scip-java) to capture these references
+- Post-processing in the conversion script to infer these dependencies (complex and error-prone)
+
+### Static Factory Method Return Types
+
+**Limitation**: When a static factory method is called, SCIP records the class that owns the method but not the return type.
+
+**Example**:
+
+```java
+return MessageStream.empty();  // ✅ MessageStream# captured, ❌ MessageStream.Empty# not captured
+return MessageStream.single(message);  // ✅ MessageStream# captured, ❌ MessageStream.Single# not captured
+```
+
+**Impact**: Type dependencies on inner types that are only reachable through static factory method return types are missing. jQAssistant captures these from bytecode (the compiled return type descriptor is explicit).
+
+### Lambda Inferred Parameter Types
+
+**Limitation**: Lambda parameter types inferred from the functional interface signature are not recorded as symbol occurrences by SCIP.
+
+**Example**:
+
+```java
+// Lambda parameter types (p: ProcessingContext, phase: ProcessingLifecycle.Phase) are inferred
+processingLifecycle.runOnPreInvocation(pc -> {
+    pc.onError((p, phase, e) -> rollback());  // ❌ ProcessingLifecycle.Phase not captured
+});
+```
+
+**Impact**: Type dependencies that only appear as inferred lambda parameter types are missing. jQAssistant captures these from bytecode where the compiled lambda class contains the explicit parameter types.
+
+### Type Inference (Ternary Expressions and `var`)
+
+**Limitation**: When the Java compiler infers a common supertype for a ternary expression or `var` variable, SCIP does not record that inferred type as an occurrence.
+
+**Example**:
+
+```java
+// Java compiler infers Converter as the least-upper-bound type for `converter`
+var converter = isEvent ? context.component(EventConverter.class)
+                        : context.component(MessageConverter.class);
+// ✅ EventConverter# and MessageConverter# captured, ❌ Converter# (inferred LCA) not captured
+```
+
+**Impact**: Type dependencies on shared supertypes that appear only through type inference are missing. jQAssistant captures these from bytecode where the compiled local variable has the inferred type.
+
+### Field Types Used Only as Method Arguments
+
+**Limitation**: When a field of type `T` is passed as a method argument, SCIP records the field reference but not the field's declared type.
+
+**Example**:
+
+```java
+context.getResource(LegacyResources.AGGREGATE_IDENTIFIER_KEY);
+// ✅ context#getResource(). method captured
+// ✅ LegacyResources#AGGREGATE_IDENTIFIER_KEY. field captured
+// ❌ Context.ResourceKey (the field's declared type) not captured
+```
+
+**Impact**: Type dependencies that are transitively implied by field types used as method arguments are missing from SCIP data.
+
 ## Troubleshooting
 
 **`jq` not found**

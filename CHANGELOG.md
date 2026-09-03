@@ -2,6 +2,16 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## Unreleased
+
+### 🐛 Bug Fixes
+
+* **SCIP inner type dependencies fixed** — Inner type references (e.g., `Cache#EntryListener#`) are now correctly preserved instead of being collapsed to their enclosing type. Applies across all SCIP-supported languages. Regression tests added.
+
+### 📋 Known Limitations - Documented
+
+* **Generic type parameters and type annotations** — SCIP indexers do not capture type references in generic type parameters or complex type annotations (e.g., `<T extends ProcessingContext>`). See [SCIP.md Known Limitations](SCIP.md#generic-type-parameters-and-type-annotations) for details.
+
 ## v4.0.1 Improve charts to look more similar to previous Jupyter notebook charts and add pipeline to validate Jupyter notebooks
 
 ### 🎨 Improvements
