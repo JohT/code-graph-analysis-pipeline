@@ -61,6 +61,20 @@ function assert_contains() {
     fi
 }
 
+function assert_not_contains() {
+    local description="${1}"
+    local needle="${2}"
+    local haystack="${3}"
+    if ! echo "${haystack}" | grep -qF "${needle}"; then
+        echo "  PASS: ${description}"
+        PASS_COUNT=$((PASS_COUNT + 1))
+    else
+        echo "  FAIL: ${description}"
+        echo "        Expected NOT to find: ${needle}"
+        FAIL_COUNT=$((FAIL_COUNT + 1))
+    fi
+}
+
 function assert_equals() {
     local description="${1}"
     local expected="${2}"
@@ -756,6 +770,106 @@ else
     echo "  PASS: no anonymous class node for local symbol without methods"
     PASS_COUNT=$((PASS_COUNT + 1))
 fi
+echo ""
+
+# ---------------------------------------------------------------------------
+# Fixture: outer interface with inner interface, and a class referencing the inner.
+# Models the AxonFramework Cache#EntryListener# pattern:
+#   - Cache.java defines Cache# (outer) and Cache#EntryListener# (inner interface)
+#   - WeakReferenceCache.java references Cache#EntryListener# (null role = reference)
+#     and calls a method Cache#EntryListener#onEntryExpired(). (role 0 = usage)
+# Before the normalize_symbol fix, both would collapse to Cache# (wrong).
+# After the fix, both correctly point to Cache#EntryListener#.
+# ---------------------------------------------------------------------------
+
+function create_inner_type_reference_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/org/example/Cache.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven . . org/example/Cache#",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "semanticdb maven . . org/example/Cache#EntryListener#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven . . org/example/Cache#",
+          "kind": 21
+        },
+        {
+          "symbol": "semanticdb maven . . org/example/Cache#EntryListener#",
+          "kind": 21
+        }
+      ]
+    },
+    {
+      "relative_path": "src/main/java/org/example/WeakReferenceCache.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven . . org/example/WeakReferenceCache#",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "semanticdb maven . . org/example/Cache#EntryListener#"
+        },
+        {
+          "symbol": "semanticdb maven . . org/example/Cache#EntryListener#onEntryExpired().",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven . . org/example/WeakReferenceCache#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: inner type references (e.g. Cache#EntryListener#) create edges to the
+# inner type itself, not the outer type.
+# Regression test for normalize_symbol incorrectly stripping inner type paths.
+# ---------------------------------------------------------------------------
+
+echo "Test: inner type reference creates edge to inner type, not outer type"
+inner_type_ref_indices_dir="${tmp_test_dir}/inner_type_ref_indices"
+inner_type_ref_import_dir="${tmp_test_dir}/inner_type_ref_import"
+mkdir -p "${inner_type_ref_indices_dir}"
+
+create_inner_type_reference_scip_json > "${inner_type_ref_indices_dir}/inner_type_ref.scip.json"
+
+run_script_with_env "${inner_type_ref_indices_dir}" "${inner_type_ref_import_dir}"
+assert_exit_code "exits 0 for inner type reference fixture" "0" "${exit_code}"
+
+inner_type_nodes_csv="${inner_type_ref_import_dir}/scip_type_nodes.csv"
+inner_type_edges_csv="${inner_type_ref_import_dir}/scip_type_edges.csv"
+assert_file_exists "creates node CSV for inner type fixture" "${inner_type_nodes_csv}"
+assert_file_exists "creates edge CSV for inner type fixture" "${inner_type_edges_csv}"
+
+inner_type_nodes=$(cat "${inner_type_nodes_csv}")
+assert_contains "inner interface Cache#EntryListener# is a node" "Cache#EntryListener#" "${inner_type_nodes}"
+
+inner_type_edges=$(cat "${inner_type_edges_csv}")
+# WeakReferenceCache references Cache#EntryListener# (null role) and calls a method on it (role 0).
+# Both should normalize to Cache#EntryListener# — reference count is 2.
+assert_contains "WeakReferenceCache depends on inner type Cache#EntryListener#" "Cache#EntryListener#" "${inner_type_edges}"
+# The full target symbol '. . org/example/Cache#' (closed by quote + comma) must not appear:
+# 'WeakReferenceCache#"' contains 'Cache#"' as a substring, but not '"Cache#",' (full quoted value).
+assert_not_contains "inner type Cache#EntryListener# not collapsed to outer Cache#" '". . org/example/Cache#",' "${inner_type_edges}"
+
+inner_edge=$(echo "${inner_type_edges}" | grep "WeakReferenceCache#" | grep "Cache#EntryListener#" || true)
+assert_contains "WeakReferenceCache→Cache#EntryListener# reference count is 2" ",2" "${inner_edge}"
 echo ""
 
 # ---------------------------------------------------------------------------

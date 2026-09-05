@@ -87,7 +87,12 @@ JQ_ADMIN_FUNCTIONS='
         symbol | split(" ") | 
         if length >= 5 then
             .[0:4] as $prefix | 
-            (.[4] | split("#")[0] + "#") as $norm_desc |
+            .[4] as $descriptor_value |
+            (if ($descriptor_value | endswith("#")) then
+                $descriptor_value
+             else
+                 ($descriptor_value | split("#") | .[:-1] | join("#") + "#")
+             end) as $norm_desc |
             ($prefix + [$norm_desc]) | join(" ")
         else
             symbol
