@@ -119,6 +119,77 @@ On repeat runs (unchanged index) or when the fast path fails, the regular LOAD C
 
 See [domains/scip-index-import/README.md](domains/scip-index-import/README.md#fast-import-via-neo4j-admin) for full details.
 
+## Known Limitations
+
+### SCIP-Java Only Captures Explicit Type References
+
+**Limitation**: SCIP-Java (and other SCIP indexers) only captures **explicit type references** in source code. This means:
+
+- ✅ **Captured**: Direct method calls, field access, type annotations, inheritance declarations
+
+  ```java
+  MyClass obj = new MyClass();           // ✅ captured
+  obj.method();                          // ✅ captured
+  List<String> list;                     // ✅ captured
+  class Child extends Parent { }         // ✅ captured
+  ```
+
+- ❌ **Not captured**: Implicit or compiler-generated references
+  - Inner class access to outer class members (implicit `this` binding)
+  - Javadoc `@link` or `@see` tags (documentation references)
+  - Reflection-based references
+  - Metaprogramming constructs
+
+### Inner Class Dependencies Are Incomplete
+
+**Impact**: Non-static inner classes do not record dependencies on their enclosing class, even though they have implicit access to all private members at runtime.
+
+**Example**:
+
+```java
+class Coordinator {
+    private EventSource eventSource;
+    private TokenStore tokenStore;
+    
+    // Inner class can access all Coordinator private members implicitly
+    private class CoordinationTask implements Runnable {
+        public void run() {
+            eventSource.getEvents();      // Implicit access via compiler-generated Coordinator.this
+            tokenStore.store(token);      // Not visible as explicit reference in SCIP
+        }
+    }
+}
+```
+
+In the SCIP index:
+
+- ✅ `Coordinator → CoordinationTask` edge exists (explicit instantiation)
+- ❌ `CoordinationTask → Coordinator` edge **missing** (implicit dependency not recorded)
+
+**Implications**:
+
+- Dependency graphs are incomplete for nested class structures
+- Cycle detection may miss cycles that involve inner classes
+- Architecture analysis may undercount dependencies in codebases with heavy use of inner classes
+
+**Workaround**: Consider refactoring inner classes to package-private or public top-level classes if dependency tracking is critical for your analysis.
+
+### Anonymous Inner Class Names won't necessarily match between Java and SCIP
+
+**Limitation**: Anonymous inner classes in Java are assigned names like `OuterClass$1`, `OuterClass$2`, etc. However, SCIP is imported as `OuterClass$anonymous0`, `OuterClass$anonymous1`, etc., with no guaranteed matching numbers.
+
+**Impact**: Dependencies involving anonymous inner classes may appear missing in SCIP data when trying to match by name between Java and SCIP.
+
+**Workaround**: There is no reliable workaround other than being aware of this limitation when analyzing dependencies involving anonymous inner classes.
+
+### JavaDoc References
+
+**Limitation**: References in Javadoc comments using `@link` or `@see` tags are not captured as dependencies in SCIP.
+
+**Impact**: Dependencies that are only mentioned in documentation may appear missing in SCIP data.
+
+**Workaround**: There is no direct workaround; consider adding explicit code references if tracking these dependencies is important.
+
 ## Troubleshooting
 
 **`jq` not found**
