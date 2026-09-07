@@ -7,10 +7,13 @@ This document describes the changes to the Code Graph Analysis Pipeline. The cha
 ### 🐛 Bug Fixes
 
 * **SCIP inner type dependencies fixed** — Inner type references (e.g., `Cache#EntryListener#`) are now correctly preserved instead of being collapsed to their enclosing type. Applies across all SCIP-supported languages. Regression tests added.
+* **SCIP sibling inner class dependencies fixed** - Dependencies between inner types defined in the same file (e.g., `WorkPackage$BatchProcessingEntry` depending on `WorkPackage$ProcessingEntry`) are now captured. Previously, the same-file filter in edge extraction dropped all same-file references. Regression tests added.
+* **SCIP inheritance and implementation dependencies captured** - The conversion script now processes `symbols[].relationships` with `is_implementation: true` to capture type dependencies from interface inheritance and class implementations that are not recorded as explicit symbol occurrences (e.g., transitive interface supertypes). Regression tests added.
 
 ### 📋 Known Limitations - Documented
 
 * **Generic type parameters and type annotations** — SCIP indexers do not capture type references in generic type parameters or complex type annotations (e.g., `<T extends ProcessingContext>`). See [SCIP.md Known Limitations](SCIP.md#generic-type-parameters-and-type-annotations) for details.
+* **Additional SCIP limitations identified** — Static factory method return types, lambda inferred parameter types, type inference (ternary/`var`), and field types used only as method arguments are not captured as dependencies by SCIP indexers. See [SCIP.md Known Limitations](SCIP.md#static-factory-method-return-types) for details.
 
 ## v4.0.1 Improve charts to look more similar to previous Jupyter notebook charts and add pipeline to validate Jupyter notebooks
 

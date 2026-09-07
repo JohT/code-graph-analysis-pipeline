@@ -426,8 +426,8 @@ function extract_depends_on_edges() {
              {symbol: .symbol, role: ((.symbol_roles // 0) % 2)}
             ] as $valid_occurrences |
 
-            # Extract sources (role 1) and raw references (role 0)
-            [$valid_occurrences[] | select(.role == 1) | .symbol] as $source_type_symbols |
+            # Extract sources (role 1, base type descriptors only) and raw references (role 0)
+            [$valid_occurrences[] | select(.role == 1) | select(is_base_type_descriptor(.symbol)) | .symbol] as $source_type_symbols |
             [$valid_occurrences[] | select(.role == 0) | .symbol] as $all_ref_symbols |
 
             # Pre-aggregate valid refs by normalized type target, with occurrence count
@@ -439,7 +439,7 @@ function extract_depends_on_edges() {
                     $sym_to_file[$norm] as $target_file |
                     (.[0] | split(" ") | .[2]) as $ref_pkg_id |
                     select(
-                        ($target_file != null and $target_file != $source_file)
+                        ($target_file != null)
                         or ($target_file == null
                               and ($internal_pkg_ids | index($ref_pkg_id)) == null
                               and $ref_pkg_id != ".")
@@ -472,6 +472,49 @@ function extract_depends_on_edges() {
             select($source_symbol != $ref_group.target) |
             [$source_symbol, $ref_group.target, ($ref_group.count | tostring)]
             | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 3b — Extract DEPENDS_ON edges from SCIP symbol relationships (no header)
+# Processes documents[].symbols[].relationships[] where is_implementation=true
+# to capture inheritance and interface-implementation type dependencies that
+# do not appear as explicit occurrences (e.g. transitive interface inheritance).
+# ---------------------------------------------------------------------------
+
+function extract_relationship_edges() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+
+        ($index[0].symbol_to_file) as $sym_to_file |
+
+        .documents[] |
+        .relative_path as $source_file |
+
+        (.symbols // [])[] |
+        select(.symbol != null) |
+        .symbol as $source_symbol |
+        select(is_base_type_descriptor($source_symbol)) |
+        select(is_type_parameter_descriptor($source_symbol) | not) |
+
+        $sym_to_file[$source_symbol] as $source_file_lookup |
+        select($source_file_lookup == $source_file) |
+
+        (.relationships // [])[] |
+        select(.is_implementation == true) |
+        .symbol as $target_symbol |
+        select(is_base_type_descriptor($target_symbol)) |
+        select(is_type_parameter_descriptor($target_symbol) | not) |
+
+        $sym_to_file[$target_symbol] as $target_file |
+        select($target_file != null) |
+        select($target_file != $source_file) |
+
+        (short_symbol($source_symbol)) as $src |
+        (short_symbol($target_symbol)) as $tgt |
+        select($src != $tgt) |
+        [$src, $tgt, "1"] | @csv
         ' "${input_file}"
 }
 
@@ -580,6 +623,7 @@ function process_single_index() {
     extract_anonymous_class_nodes "${symbol_index_file}" >> "${nodes_temp}"
 
     extract_depends_on_edges "${symbol_index_file}" "${input_file}" > "${edges_temp}"
+    extract_relationship_edges "${symbol_index_file}" "${input_file}" >> "${edges_temp}"
     extract_anonymous_class_edges "${symbol_index_file}" >> "${edges_temp}"
 }
 

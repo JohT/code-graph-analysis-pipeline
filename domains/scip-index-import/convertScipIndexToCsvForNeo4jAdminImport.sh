@@ -456,7 +456,7 @@ function extract_depends_on_edges_admin() {
                     $sym_to_file[$norm] as $target_file |
                     (.[0] | split(" ") | .[2]) as $ref_pkg_id |
                     select(
-                        ($target_file != null and $target_file != $source_file)
+                        ($target_file != null)
                         or ($target_file == null
                               and ($internal_pkg_ids | index($ref_pkg_id)) == null
                               and $ref_pkg_id != ".")
@@ -489,6 +489,49 @@ function extract_depends_on_edges_admin() {
             select($source_symbol != $ref_group.target) |
             [$source_symbol, $ref_group.target, "DEPENDS_ON", $ref_group.count]
             | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 3b — Extract DEPENDS_ON edges from SCIP symbol relationships (no header)
+# Processes documents[].symbols[].relationships[] where is_implementation=true
+# to capture inheritance and interface-implementation type dependencies that
+# do not appear as explicit occurrences (e.g. transitive interface inheritance).
+# ---------------------------------------------------------------------------
+
+function extract_relationship_edges_admin() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+
+        ($index[0].symbol_to_file) as $sym_to_file |
+
+        .documents[] |
+        .relative_path as $source_file |
+
+        (.symbols // [])[] |
+        select(.symbol != null) |
+        .symbol as $source_symbol |
+        select(is_base_type_descriptor($source_symbol)) |
+        select(is_type_parameter_descriptor($source_symbol) | not) |
+
+        $sym_to_file[$source_symbol] as $source_file_lookup |
+        select($source_file_lookup == $source_file) |
+
+        (.relationships // [])[] |
+        select(.is_implementation == true) |
+        .symbol as $target_symbol |
+        select(is_base_type_descriptor($target_symbol)) |
+        select(is_type_parameter_descriptor($target_symbol) | not) |
+
+        $sym_to_file[$target_symbol] as $target_file |
+        select($target_file != null) |
+        select($target_file != $source_file) |
+
+        (short_symbol($source_symbol)) as $src |
+        (short_symbol($target_symbol)) as $tgt |
+        select($src != $tgt) |
+        [$src, $tgt, "DEPENDS_ON", "1"] | @csv
         ' "${input_file}"
 }
 
@@ -764,6 +807,11 @@ function process_single_index_admin() {
     extract_depends_on_edges_admin "${symbol_index_file}" "${input_file}" > "${edges_temp}" 2>&1
     local edges_count=$(wc -l < "${edges_temp}" 2>/dev/null || echo "0")
     debug_log "DEPENDS_ON edges written: ${edges_count} lines"
+
+    debug_log "Extracting relationship edges..."
+    extract_relationship_edges_admin "${symbol_index_file}" "${input_file}" >> "${edges_temp}" 2>&1
+    local edges_after_rels=$(wc -l < "${edges_temp}" 2>/dev/null || echo "0")
+    debug_log "Total edges after relationships: ${edges_after_rels} lines"
     
     debug_log "Extracting anonymous class edges..."
     extract_anonymous_class_edges_admin "${symbol_index_file}" >> "${edges_temp}" 2>&1

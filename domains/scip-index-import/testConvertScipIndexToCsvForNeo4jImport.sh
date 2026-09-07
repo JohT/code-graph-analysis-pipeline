@@ -782,6 +782,57 @@ echo ""
 # After the fix, both correctly point to Cache#EntryListener#.
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Fixture: two sibling inner types defined in the same file, one referencing the other.
+# Models e.g. PessimisticLockFactory$DisposableLock depending on $PubliclyOwnedReentrantLock.
+# Both are inner types of the same outer class and live in the same Java source file.
+# Before BUG 1 fix: same-file filter dropped this edge.
+# After fix: edge is correctly emitted.
+# ---------------------------------------------------------------------------
+
+function create_sibling_inner_type_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/org/example/Outer.java",
+      "occurrences": [
+        {"symbol": "semanticdb maven . . org/example/Outer#", "symbol_roles": 1},
+        {"symbol": "semanticdb maven . . org/example/Outer#InnerA#", "symbol_roles": 1},
+        {"symbol": "semanticdb maven . . org/example/Outer#InnerB#", "symbol_roles": 1},
+        {"symbol": "semanticdb maven . . org/example/Outer#InnerB#doSomething().", "symbol_roles": 0}
+      ],
+      "symbols": [
+        {"symbol": "semanticdb maven . . org/example/Outer#", "kind": 7},
+        {"symbol": "semanticdb maven . . org/example/Outer#InnerA#", "kind": 7},
+        {"symbol": "semanticdb maven . . org/example/Outer#InnerB#", "kind": 7}
+      ]
+    }
+  ]
+}
+EOF
+}
+
+echo "Test: sibling inner types in same file create edges between each other"
+sibling_inner_indices_dir="${tmp_test_dir}/sibling_inner_indices"
+sibling_inner_import_dir="${tmp_test_dir}/sibling_inner_import"
+mkdir -p "${sibling_inner_indices_dir}"
+
+create_sibling_inner_type_scip_json > "${sibling_inner_indices_dir}/sibling_inner.scip.json"
+run_script_with_env "${sibling_inner_indices_dir}" "${sibling_inner_import_dir}"
+assert_exit_code "exits 0 for sibling inner type fixture" "0" "${exit_code}"
+
+sibling_inner_edges=$(cat "${sibling_inner_import_dir}/scip_type_edges.csv")
+# InnerA has a method reference to InnerB (doSomething), so InnerA should depend on InnerB.
+assert_contains "InnerA depends on sibling InnerB (same-file edge)" \
+    '. . org/example/Outer#InnerA#' "${sibling_inner_edges}"
+assert_contains "InnerB is the target of the sibling edge" \
+    '. . org/example/Outer#InnerB#' "${sibling_inner_edges}"
+# No self-loop: InnerB must not appear as depending on itself
+assert_not_contains "no InnerB self-loop" \
+    '". . org/example/Outer#InnerB#",". . org/example/Outer#InnerB#"' "${sibling_inner_edges}"
+echo ""
+
 function create_inner_type_reference_scip_json() {
     cat << 'EOF'
 {
@@ -870,6 +921,68 @@ assert_not_contains "inner type Cache#EntryListener# not collapsed to outer Cach
 
 inner_edge=$(echo "${inner_type_edges}" | grep "WeakReferenceCache#" | grep "Cache#EntryListener#" || true)
 assert_contains "WeakReferenceCache→Cache#EntryListener# reference count is 2" ",2" "${inner_edge}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Fixture: class implementing an interface defined in a different file,
+# captured only via symbols[].relationships (is_implementation=true), not occurrences.
+# Models e.g. SimpleQueryBus implements QueryHandlerRegistry:
+#   - Interface.java defines Interface#
+#   - Impl.java defines Impl# with a relationship to Interface# (is_implementation)
+#   - Impl.java has no occurrence of Interface# (only via inheritance)
+# Before BUG 2 fix: no edge created (relationships not processed).
+# After fix: edge Impl# → Interface# is created with count=1.
+# ---------------------------------------------------------------------------
+
+function create_relationship_dependency_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/org/example/MyInterface.java",
+      "occurrences": [
+        {"symbol": "semanticdb maven . . org/example/MyInterface#", "symbol_roles": 1}
+      ],
+      "symbols": [
+        {"symbol": "semanticdb maven . . org/example/MyInterface#", "kind": 21}
+      ]
+    },
+    {
+      "relative_path": "src/main/java/org/example/MyImpl.java",
+      "occurrences": [
+        {"symbol": "semanticdb maven . . org/example/MyImpl#", "symbol_roles": 1}
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven . . org/example/MyImpl#",
+          "kind": 7,
+          "relationships": [
+            {"symbol": "semanticdb maven . . org/example/MyInterface#", "is_implementation": true}
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+echo "Test: symbols.relationships with is_implementation creates edge to implemented interface"
+rel_dep_indices_dir="${tmp_test_dir}/rel_dep_indices"
+rel_dep_import_dir="${tmp_test_dir}/rel_dep_import"
+mkdir -p "${rel_dep_indices_dir}"
+
+create_relationship_dependency_scip_json > "${rel_dep_indices_dir}/rel_dep.scip.json"
+run_script_with_env "${rel_dep_indices_dir}" "${rel_dep_import_dir}"
+assert_exit_code "exits 0 for relationship dependency fixture" "0" "${exit_code}"
+
+rel_dep_edges=$(cat "${rel_dep_import_dir}/scip_type_edges.csv")
+assert_contains "MyImpl depends on MyInterface via relationship" \
+    '. . org/example/MyInterface#' "${rel_dep_edges}"
+assert_contains "MyImpl is the source of the relationship edge" \
+    '. . org/example/MyImpl#' "${rel_dep_edges}"
+rel_dep_edge=$(echo "${rel_dep_edges}" | grep "MyImpl#" | grep "MyInterface#" || true)
+assert_contains "relationship edge has count 1" ",1" "${rel_dep_edge}"
 echo ""
 
 # ---------------------------------------------------------------------------
