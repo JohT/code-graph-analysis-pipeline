@@ -279,8 +279,8 @@ Set dependency counts and derived properties on nodes.
 | Query | Purpose |
 |-------|---------|
 | [Set_SCIP_Module_Is_Test_And_Marker_Integer.cypher](./queries/enrichment/Set_SCIP_Module_Is_Test_And_Marker_Integer.cypher) | Set `isTest` and `testMarkerInteger` on modules — true if any contained type is a test |
-| [Set_Incoming_SCIP_Module_Dependencies.cypher](./queries/enrichment/Set_Incoming_SCIP_Module_Dependencies.cypher) | Set `incomingDependencies` and `incomingDependenciesWeight` on modules |
-| [Set_Outgoing_SCIP_Module_Dependencies.cypher](./queries/enrichment/Set_Outgoing_SCIP_Module_Dependencies.cypher) | Set `outgoingDependencies` and `outgoingDependenciesWeight` on modules |
+| [Set_Incoming_SCIP_Module_Dependencies.cypher](./queries/enrichment/Set_Incoming_SCIP_Module_Dependencies.cypher) | Set `incomingDependencies` (COUNT), `incomingDependenciesWeight` (SUM), `incomingDependentModules`, and `incomingDependentArtifacts` on modules (includes all sources: test and non-test) |
+| [Set_Outgoing_SCIP_Module_Dependencies.cypher](./queries/enrichment/Set_Outgoing_SCIP_Module_Dependencies.cypher) | Set `outgoingDependencies` (COUNT), `outgoingDependenciesWeight` (SUM), `outgoingDependentModules`, and `outgoingDependentArtifacts` on modules (includes all targets: test and non-test) |
 
 **Artifact Enrichment:**
 
@@ -334,6 +334,26 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 | `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
 | `incomingDependencies` | `SCIPType` | Number of types that depend on this type |
 | `outgoingDependencies` | `SCIPType` | Number of types this type depends on |
+| `incomingDependencies` | `SCIPModule` | **COUNT** of type-level DEPENDS_ON edges into types in this module (aggregated from type level) |
+| `incomingDependenciesWeight` | `SCIPModule` | **SUM** of `referenceCount` from those edges (edge magnitude) |
+| `outgoingDependencies` | `SCIPModule` | **COUNT** of type-level DEPENDS_ON edges from types in this module |
+| `outgoingDependenciesWeight` | `SCIPModule` | **SUM** of `referenceCount` from those edges |
+
+### Module Dependency Semantics
+
+**Important Note:** SCIP module dependency metrics use a **different edge model** than Java Packages:
+
+- **SCIP:** One edge per unique type pair (no edge multiplicity) — each distinct (source type → target type) pair creates exactly one DEPENDS_ON edge
+- **Java:** Can have multiple DEPENDS_ON edges between the same type pair (richer detail but more edges)
+
+This structural difference means SCIP typically reports ~42–60% fewer edges than equivalent Java Package nodes, even when analyzing the same code.
+
+**Example:** AxonFramework `messaging/core` module:
+- **SCIP:** 4,908 type-level edges (unique type pairs)
+- **Java Package:** 11,673 type-level edges (including multiple edges per pair)
+- **Gap:** ~59% difference due to edge model, not missing data
+
+Both representations are valid; they just capture dependencies at different granularities.
 
 ### Test Detection
 
