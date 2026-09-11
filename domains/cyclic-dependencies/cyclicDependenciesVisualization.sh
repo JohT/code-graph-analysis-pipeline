@@ -2,8 +2,8 @@
 
 # Generates GraphViz SVG graph visualizations for the top cyclic dependency cycle groups.
 # Reads from already-generated CSV reports produced by "cyclicDependenciesCsv.sh".
-# Produces one SVG per top cycle pair for Java packages and TypeScript modules.
-# The SVG files will be written into reports/cyclic-dependencies/{Java_Package,Typescript_Module}/Graph_Visualizations/.
+# Produces one SVG per top cycle pair for Java packages, TypeScript modules, and SCIP Semantic Index modules.
+# The SVG files will be written into reports/cyclic-dependencies/{Java_Package,Typescript_Module,SCIP_Semantic_Index_Module}/Graph_Visualizations/.
 # Dynamically triggered by "VisualizationReports.sh".
 
 # Requires renderGraphVizSVG.sh
@@ -300,5 +300,15 @@ process_language_cycle_graphs \
     "TypescriptModuleCyclicDependencies" \
     "Typescript_Module/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}" \
     "TypeScript Module"
+
+# ── SCIP Semantic Index Module Cyclic Dependencies ────────────────────────────
+
+process_language_cycle_graphs \
+    "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_for_SCIP_Module.csv" \
+    "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_Breakdown_for_SCIP_Module.csv" \
+    "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}" \
+    "ScipModuleCyclicDependencies" \
+    "SCIP_Semantic_Index_Module/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}" \
+    "SCIP Semantic Index Module"
 
 echo "cyclicDependenciesVisualization: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

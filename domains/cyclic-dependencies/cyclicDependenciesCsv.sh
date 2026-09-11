@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Executes all Cypher queries for cyclic dependency analysis across Java packages, Java artifacts, and TypeScript modules.
+# Executes all Cypher queries for cyclic dependency analysis across Java packages, Java artifacts, TypeScript modules, and SCIP Semantic Index modules and artifacts.
 # It requires an already running Neo4j graph database with already scanned and analyzed artifacts.
 # The results will be written into the sub directory reports/cyclic-dependencies.
 # Dynamically triggered by "CsvReports.sh".
@@ -39,6 +39,8 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 mkdir -p "${FULL_REPORT_DIRECTORY}/Java_Artifact"
 mkdir -p "${FULL_REPORT_DIRECTORY}/Java_Package"
 mkdir -p "${FULL_REPORT_DIRECTORY}/Typescript_Module"
+mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 
 # ── Java Cyclic Dependencies ──────────────────────────────────────────────────
 
@@ -68,5 +70,22 @@ execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/Java_Artifact"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/Java_Package"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/Typescript_Module"
+
+# ── SCIP Semantic Index Cyclic Dependencies ───────────────────────────────────
+
+echo "cyclicDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing cyclic dependencies for SCIP Semantic Index..."
+
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_for_SCIP_Module.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_for_SCIP_Module.csv"
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_SCIP_Module.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_Breakdown_for_SCIP_Module.csv"
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.csv"
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact/Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.csv"
+
+# Clean up empty CSV files (when no SCIP data exists)
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 
 echo "cyclicDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
