@@ -15,7 +15,8 @@ Analyzes which external packages, modules, and namespaces the codebase depends o
 1. [Java External Dependencies](#2-java-external-dependencies)
 1. [TypeScript External Dependencies](#3-typescript-external-dependencies)
 1. [Package Management](#4-package-management)
-1. [Glossary](#5-glossary)
+1. [SCIP External Dependencies](#5-scip-external-dependencies)
+1. [Glossary](#6-glossary)
 
 ---
 
@@ -106,7 +107,59 @@ Node.js dependencies declared in `package.json` files, ranked by occurrence acro
 
 ---
 
-## 5. Glossary
+## 5. SCIP External Dependencies
+
+Language-agnostic external dependency analysis based on SCIP index data. Groups by external artifact (`module` property). Applicable to any language with a SCIP indexer.
+
+### 5.1 Most Used External Artifacts
+
+External artifacts ranked by the number of distinct internal caller modules.
+
+<!-- include:External_artifact_usage_overall_for_Scip.md|empty.md -->
+
+#### 5.1.1 Most Used External Artifacts — Excluding Tests
+
+<!-- include:External_artifact_usage_overall_excluding_tests_for_Scip.md|empty.md -->
+
+#### 5.1.2 Most Used External Artifacts — Normalized Names
+
+Groups by `packageId` (slashes replaced with dots) instead of `module`. Resolves ambiguous single-segment names such as `core` → `reactor.core`.
+
+<!-- include:External_artifact_usage_overall_normalized_for_Scip.md|empty.md -->
+
+### 5.2 Most Spread External Artifacts
+
+External artifacts referenced from the highest number of distinct internal artifacts. High spread is a candidate for an Anti-Corruption Layer.
+
+<!-- include:External_artifact_usage_spread_for_Scip.md|empty.md -->
+
+#### 5.2.1 Most Spread External Artifacts — Excluding Tests
+
+<!-- include:External_artifact_usage_spread_excluding_tests_for_Scip.md|empty.md -->
+
+#### 5.2.2 Most Spread External Artifacts — Normalized Names
+
+<!-- include:External_artifact_usage_spread_normalized_for_Scip.md|empty.md -->
+
+### 5.3 External Artifact Usage per Internal Artifact (Top)
+
+Internal artifacts ranked by the rate of modules with external dependencies.
+
+<!-- include:External_artifact_usage_per_internal_artifact_sorted_top_for_Scip.md|empty.md -->
+
+### 5.4 External Artifact Usage per Internal Module
+
+Internal modules ranked by the number of distinct external artifacts they depend on.
+
+<!-- include:External_artifact_usage_per_internal_module_sorted_for_Scip.md|empty.md -->
+
+### 5.5 SCIP Charts
+
+<!-- include:ScipExternalDependencyCharts.md|empty.md -->
+
+---
+
+## 6. Glossary
 
 | Term | Definition |
 |------|-----------|
