@@ -153,6 +153,29 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/Package_json_dependenc
 execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/Package_json_dependencies_combinations_with_versions.cypher" \
     > "${FULL_REPORT_DIRECTORY}/Package_json_dependencies_combinations_with_versions.csv"
 
+# -- SCIP External Artifact Reports ----------------------------------------
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_overall_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_overall_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_spread_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_spread_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_artifact_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_artifact_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_artifact_sorted_top_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_artifact_sorted_top_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_module_sorted_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_module_sorted_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_module_aggregated_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_module_aggregated_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_type_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_type_for_Scip.csv"
+
 # --------------------------------------------------------------------------
 
 # Clean up: delete empty CSV files that were generated when no data was available
