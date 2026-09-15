@@ -177,6 +177,9 @@ archetypes_report "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_LANGUAGE}=Java"
 archetypes_report "${ALGORITHM_NODE}=Package" "${ALGORITHM_LANGUAGE}=Java"
 archetypes_report "${ALGORITHM_NODE}=Type" "${ALGORITHM_LANGUAGE}=Java"
 archetypes_report "${ALGORITHM_NODE}=Module" "${ALGORITHM_LANGUAGE}=Typescript"
+archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_LANGUAGE}=SCIP"
+archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_LANGUAGE}=SCIP"
+archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_LANGUAGE}=SCIP"
 
 # ---------------------------------------------------------------
 
