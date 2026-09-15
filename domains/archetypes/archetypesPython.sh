@@ -98,6 +98,12 @@ archetype_features() {
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_JavaType.cypher" "${@}"
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_TypeScriptModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
+                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipInternalType.cypher" "${@}"
+    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
+                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
+                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipArtifact.cypher" "${@}"
     # Determines strongly connected components if not already done
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-Write.cypher" "${@}"
@@ -192,6 +198,12 @@ archetypes_treemap_charts_markdown_reference() {
     echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished treemap charts markdown reference generation..."
 }
 
+# Visualize SCIP archetype results with treemap charts using SemanticCodeIndexInternalType.file paths.
+scip_archetypes_treemap_charts() {
+    echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Visualizing SCIP archetypes as treemaps..."
+    time "${ARCHETYPES_SCRIPT_DIR}/scipTreemapVisualizations.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+}
+
 # Visualize archetype results with treemap charts.
 #
 # Required Parameters:
@@ -251,6 +263,28 @@ if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-ar
     createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-archetypes-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
     archetype_python_reports "${ALGORITHM_PROJECTION}=typescript-module-archetypes" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript"
     archetypes_treemap_charts "${ALGORITHM_LANGUAGE}=Typescript"
+fi
+
+# -- SCIP InternalType Archetypes ---------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetype_python_reports "${ALGORITHM_PROJECTION}=scip-type-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
+    scip_archetypes_treemap_charts "${ALGORITHM_LANGUAGE}=SCIP"
+fi
+
+# -- SCIP Module Archetypes ---------------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-module-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-module-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetype_python_reports "${ALGORITHM_PROJECTION}=scip-module-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
+fi
+
+# -- SCIP Artifact Archetypes -------------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetype_python_reports "${ALGORITHM_PROJECTION}=scip-artifact-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
 fi
 
 # -- Markdown summary  ---------------------------

@@ -71,6 +71,12 @@ archetype_features() {
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_JavaType.cypher" "${@}"
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_TypeScriptModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
+                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipInternalType.cypher" "${@}"
+    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
+                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
+                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipArtifact.cypher" "${@}"
     # Determines strongly connected components if not already done
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-Write.cypher" "${@}"
@@ -211,6 +217,27 @@ fi
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-archetypes" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-archetypes-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
     archetypes_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-archetypes" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript"
+fi
+
+# -- SCIP InternalType Archetypes ---------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetypes_csv_reports "${ALGORITHM_PROJECTION}=scip-type-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
+fi
+
+# -- SCIP Module Archetypes ---------------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-module-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-module-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetypes_csv_reports "${ALGORITHM_PROJECTION}=scip-module-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
+fi
+
+# -- SCIP Artifact Archetypes -------------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetypes_csv_reports "${ALGORITHM_PROJECTION}=scip-artifact-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
 fi
 
 # ---------------------------------------------------------------
