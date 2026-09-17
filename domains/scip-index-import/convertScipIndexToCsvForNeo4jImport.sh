@@ -367,9 +367,12 @@ function extract_external_type_nodes() {
 
             ($symbol | split(" ")) as $tokens |
             $tokens[1] as $manager    |
-            $tokens[2] as $pkg_id     |
+            $tokens[2] as $pkg_id_from_symbol |
             $tokens[3] as $version    |
             $tokens[4] as $descriptor |
+            # For external types (where pkg_id is "."), extract package from descriptor
+            ($descriptor | split("/")[0:2] | join("/")) as $pkg_from_descriptor |
+            (if $pkg_id_from_symbol == "." then $pkg_from_descriptor else $pkg_id_from_symbol end) as $pkg_id |
 
             select(($internal_pkg_ids | index($pkg_id)) == null) |
             select($pkg_id != ".") |
@@ -437,7 +440,10 @@ function extract_depends_on_edges() {
                 map(
                     normalize_symbol(.[0]) as $norm |
                     $sym_to_file[$norm] as $target_file |
-                    (.[0] | split(" ") | .[2]) as $ref_pkg_id |
+                    # For external types (where pkg_id is "."), extract package from descriptor
+                    (.[0] | split(" ") | .[2]) as $pkg_id_from_symbol |
+                    (.[0] | split(" ") | .[4] | split("/")[0:2] | join("/")) as $pkg_from_descriptor |
+                    (if $pkg_id_from_symbol == "." then $pkg_from_descriptor else $pkg_id_from_symbol end) as $ref_pkg_id |
                     select(
                         ($target_file != null)
                         or ($target_file == null
