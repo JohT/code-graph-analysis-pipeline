@@ -13,19 +13,18 @@
 #  - SemanticCodeIndexInternalType and SemanticCodeIndexExternalType nodes must exist.
 #  - NEO4J_INITIAL_PASSWORD environment variable must be set.
 
+from __future__ import annotations
+
 import os
 import sys
 import argparse
 import typing
-from typing import LiteralString, cast
+from typing import LiteralString, cast, TYPE_CHECKING
 
 import pandas as pd
 
-import matplotlib
-matplotlib.use('Agg')  # Non-interactive backend - required for headless script execution
-import matplotlib.pyplot as plot
-
-from neo4j import GraphDatabase, Driver
+if TYPE_CHECKING:
+    from neo4j.driver import Driver
 
 SCRIPT_NAME = "externalScipDependencyCharts"
 CHART_PREFIX = "Scip_"
@@ -97,6 +96,8 @@ def parse_parameters() -> Parameters:
 
 
 def connect_to_graph_database() -> Driver:
+    from neo4j import GraphDatabase
+
     password = os.environ.get("NEO4J_INITIAL_PASSWORD")
     if not password:
         print(
@@ -238,6 +239,10 @@ def save_pie_chart(grouped_data: pd.DataFrame, title: str, file_path: str) -> No
     Renders a pie chart from a grouped DataFrame (index=name, columns=[value, percent]) and saves as SVG.
     Skips silently when the input is empty.
     """
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plot
+
     if grouped_data.empty:
         print(f"{SCRIPT_NAME}: No data for '{title}', skipping chart.")
         return
@@ -281,6 +286,10 @@ def save_stacked_bar_chart(
     Renders a stacked bar chart (transposed pivot: internal artifacts on x-axis, external artifacts stacked).
     Skips silently when the input is empty.
     """
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plot
+
     if pivot_data.empty:
         print(f"{SCRIPT_NAME}: No data for '{title}', skipping chart.")
         return
@@ -313,6 +322,8 @@ def annotate_scip_scatter_point(
     Annotates one artifact in the current scatter plot with an arrow and label.
     The artifact is selected by sorting the DataFrame: columns in sort_by_highest descend, others ascend.
     """
+    import matplotlib.pyplot as plot
+
     sort_columns = [x_column, y_column, "artifactModules", "internalArtifactName"]
     ascending = [column not in sort_by_highest for column in sort_columns]
     row = data_frame.sort_values(by=sort_columns, ascending=ascending).iloc[0]
@@ -348,6 +359,10 @@ def save_scatter_chart(
     for selecting one annotation point.
     Skips silently when the input is empty.
     """
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plot
+
     if data_frame.empty:
         print(f"{SCRIPT_NAME}: No data for '{title}', skipping chart.")
         return
