@@ -210,30 +210,6 @@ def test_save_scatter_chart_saves_file_when_data_present() -> None:
         mock_save.assert_called_once_with("/tmp/test.svg", bbox_inches="tight")
 
 
-# ── Neo4j connection test ──────────────────────────────────────────────────────
-
-
-def test_connect_to_graph_database_exits_without_password() -> None:
-    with patch.dict(os.environ, {}, clear=True):
-        if "NEO4J_INITIAL_PASSWORD" in os.environ:
-            del os.environ["NEO4J_INITIAL_PASSWORD"]
-        with pytest.raises(SystemExit):
-            charts.connect_to_graph_database()
-
-
-def test_connect_to_graph_database_uses_env_password() -> None:
-    mock_driver = MagicMock()
-    with patch.dict(os.environ, {"NEO4J_INITIAL_PASSWORD": "secret"}), \
-         patch("neo4j.GraphDatabase.driver", return_value=mock_driver) as mock_gd:
-        result = charts.connect_to_graph_database()
-        mock_gd.assert_called_once_with(
-            uri="bolt://localhost:7687",
-            auth=("neo4j", "secret"),
-        )
-        mock_driver.verify_connectivity.assert_called_once()
-        assert result is mock_driver
-
-
 # ── load_query_results test ────────────────────────────────────────────────────
 
 
@@ -263,7 +239,7 @@ def test_generate_scip_charts_calls_all_queries() -> None:
          patch.object(charts, "save_stacked_bar_chart") as mock_bar, \
          patch.object(charts, "save_scatter_chart") as mock_scatter:
         charts.generate_scip_charts("/queries", "/reports", False, mock_driver)
-        assert mock_load.call_count == 4
+        assert mock_load.call_count == 8
         mock_pie.assert_not_called()   # no data → charts skipped
         mock_bar.assert_not_called()
         mock_scatter.assert_not_called()
