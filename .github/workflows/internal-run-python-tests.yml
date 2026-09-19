@@ -1,0 +1,37 @@
+name: Run Python Tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.py'
+      - 'scripts/runPythonTests.sh'
+      - '.github/workflows/internal-run-python-tests.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.py'
+      - 'scripts/runPythonTests.sh'
+      - '.github/workflows/internal-run-python-tests.yml'
+
+jobs:
+  run-python-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout GIT Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+
+    - name: Install pytest and test dependencies
+      run: pip install pytest pandas matplotlib
+
+    - name: Run Python tests
+      id: python-tests
+      run: ./scripts/runPythonTests.sh

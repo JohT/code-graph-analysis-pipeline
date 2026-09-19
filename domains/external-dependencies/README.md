@@ -1,6 +1,6 @@
 # External Dependencies Domain
 
-This directory contains the implementation and resources for analysing external dependencies within the Code Graph Analysis Pipeline. It follows the vertical-slice domain pattern: all Cypher queries, Python chart scripts, and report templates needed for this analysis live here.
+This directory contains the implementation and resources for analyzing external dependencies within the Code Graph Analysis Pipeline. It follows the vertical-slice domain pattern: all Cypher queries, Python chart scripts, and report templates needed for this analysis live here.
 
 ## Entry Points
 
@@ -14,6 +14,9 @@ The following scripts are discovered and invoked automatically by the central co
 
 - [explore](./explore/): Original Jupyter notebooks for interactive, exploratory analysis. Marked with `code_graph_analysis_pipeline_data_validation: ValidateAlwaysFalse` so they are not automatically executed by the pipeline.
 - [queries](./queries/): All Cypher queries for identifying and quantifying external dependencies. These are self-contained copies from [cypher/External_Dependencies/](../../cypher/External_Dependencies/).
+  - Java queries: `External_package_usage_*.cypher`, `External_second_level_package_usage_*.cypher`, `Label_external_types_and_annotations.cypher`
+  - TypeScript queries: `External_module_usage_*.cypher`, `External_namespace_usage_*.cypher`
+  - SCIP queries: `External_artifact_usage_*_for_Scip.cypher`
 - [summary](./summary/): Markdown template and assembly script for the summary report.
 
 ## Prerequisites
@@ -30,10 +33,10 @@ This domain requires the following to be in place before running. These are prov
 
 The following labels must exist on `Type` nodes before external dependency analysis can run. They are created by Cypher queries in [cypher/Types/](../../cypher/Types/):
 
-- `PrimitiveType` — primitive types like `int`, `boolean`
-- `Void` — void return type
-- `JavaType` — built-in Java standard library types (e.g. `java.lang.*`, `java.util.*`)
-- `ResolvedDuplicateType` — deduplicated types that appear in multiple jars
+- `PrimitiveType`:  primitive types like `int`, `boolean`
+- `Void`:  void return type
+- `JavaType`:  built-in Java standard library types (e.g. `java.lang.*`, `java.util.*`)
+- `ResolvedDuplicateType`:  deduplicated types that appear in multiple jars
 
 Without these labels, `Label_external_types_and_annotations.cypher` cannot correctly distinguish external types from internal and built-in ones.
 
@@ -41,8 +44,8 @@ Without these labels, `Label_external_types_and_annotations.cypher` cannot corre
 
 The following properties must exist on `DEPENDS_ON` relationships between `Package` nodes. They are set by Cypher queries in [cypher/DependsOn_Relationship_Weights/](../../cypher/DependsOn_Relationship_Weights/):
 
-- `weight` — sum of type-level dependency weights between two packages
-- `weightInterfaces` — subset of `weight` attributable to interface dependencies
+- `weight`:  sum of type-level dependency weights between two packages
+- `weightInterfaces`:  subset of `weight` attributable to interface dependencies
 
 ### TypeScript enrichment
 
@@ -53,9 +56,20 @@ For TypeScript projects, the following must be completed by [cypher/Typescript_E
 - `DEPENDS_ON` relationships propagated to resolved modules
 - NPM packages linked to their corresponding `ExternalModule` nodes via `PROVIDED_BY_NPM_DEPENDENCY`
 
+### SCIP index data
+
+For SCIP-based analysis, the following node types must exist in the graph:
+
+- `SemanticCodeIndexInternalType`:  internal types with `DEPENDS_ON` edges to external types
+- `SemanticCodeIndexExternalType`:  external types with a non-empty `module` property
+- `SemanticCodeIndexModule`:  internal modules containing internal types via `CONTAINS`
+- `SemanticCodeIndexArtifact`:  artifacts with `isExternal` property set; internal artifacts have `isExternal: false`
+
+These are created by the [scip-index-import](../scip-index-import/) domain. SCIP queries are skipped gracefully when no SCIP data is present: empty CSV files are removed by the cleanup step, and empty Markdown includes fall back to `empty.md`.
+
 ### General enrichment
 
-- `name` and `extension` properties on `File` nodes — set by [cypher/General_Enrichment/](../../cypher/General_Enrichment/).
+- `name` and `extension` properties on `File` nodes:  set by [cypher/General_Enrichment/](../../cypher/General_Enrichment/).
 
 ## What This Domain Produces
 
@@ -69,10 +83,11 @@ One CSV file per Cypher query covering:
 
 ### SVG charts (`reports/external-dependencies/`)
 
-Python-generated charts from [externalDependencyCharts.py](./externalDependencyCharts.py):
+Python-generated charts from [externalDependencyCharts.py](./externalDependencyCharts.py) and [externalScipDependencyCharts.py](./externalScipDependencyCharts.py):
 
 - **Java**: pie charts for most-used and most-spread packages (by types and by packages, with drill-down into "others"), stacked bar charts for per-artifact breakdown, scatter plots for aggregated usage patterns
 - **TypeScript**: pie charts for modules and namespaces (usage and spread, with drill-down)
+- **SCIP**: pie charts for most-used and most-spread external artifacts (by types and by modules), stacked bar chart for per-artifact breakdown, scatter plot for aggregated usage patterns
 
 ### Markdown summary (`reports/external-dependencies/external_dependencies_report.md`)
 

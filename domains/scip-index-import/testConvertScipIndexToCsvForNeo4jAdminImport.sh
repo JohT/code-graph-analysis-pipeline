@@ -1147,6 +1147,69 @@ assert_contains "relationship edge has count 1 (admin)" ",1" "${rel_dep_edge}"
 echo ""
 
 # ---------------------------------------------------------------------------
+# Fixture: internal type referencing an external type whose symbol has pkg_id "."
+# (no groupId/version set). Package must be derived from the descriptor path.
+# Models the real-world pattern seen in aggregated SCIP indices.
+# ---------------------------------------------------------------------------
+
+function create_external_pkg_dot_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/Service.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Service#",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "semanticdb maven . . org/slf4j/Logger#",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Service#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: external type with pkg_id "." creates a node and an edge (admin)
+# Regression test: edges to these types were dropped by the "ref_pkg_id != ." filter
+# ---------------------------------------------------------------------------
+
+echo "Test: external type with pkg_id '.' creates node and edge (admin)"
+ext_dot_indices_dir="${tmp_test_dir}/ext_dot_indices"
+ext_dot_import_dir="${tmp_test_dir}/ext_dot_import"
+mkdir -p "${ext_dot_indices_dir}"
+
+create_external_pkg_dot_scip_json > "${ext_dot_indices_dir}/ext_dot.scip.json"
+
+run_script_with_env "${ext_dot_indices_dir}" "${ext_dot_import_dir}"
+assert_exit_code "exits 0 for pkg_id '.' fixture (admin)" "0" "${exit_code}"
+
+ext_dot_nodes=$(cat "${ext_dot_import_dir}/scip_type_nodes_admin.csv")
+assert_contains "external Logger node created despite pkg_id '.'" \
+    "org/slf4j/Logger#" "${ext_dot_nodes}"
+logger_row=$(echo "${ext_dot_nodes}" | grep "org/slf4j/Logger#" | head -1)
+assert_contains "Logger packageId derived from descriptor, not '.'" \
+    '"org/slf4j"' "${logger_row}"
+
+ext_dot_edges=$(cat "${ext_dot_import_dir}/scip_type_edges_admin.csv")
+assert_contains "edge from Service to Logger exists" \
+    "com/example/Service#" "${ext_dot_edges}"
+assert_contains "Logger is target of edge despite pkg_id '.'" \
+    "org/slf4j/Logger#" "${ext_dot_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 

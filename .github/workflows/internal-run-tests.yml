@@ -7,7 +7,7 @@ on:
     # Only watch changes in scripts, json files containing test data and this workflow for push events
     paths: 
       - '**/*.sh'
-      - '**/test*.*'
+      - '**/test*.json'
       - '.github/workflows/internal-run-tests.yml'
   pull_request:
     branches:
@@ -15,7 +15,7 @@ on:
     # Only watch changes in scripts, json files containing test data and this workflow for push events
     paths: 
       - '**/*.sh'
-      - '**/test*.*'
+      - '**/test*.json'
       - '.github/workflows/internal-run-tests.yml'
 
 jobs:
