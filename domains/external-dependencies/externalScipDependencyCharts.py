@@ -421,6 +421,18 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     spread_data = load_query_results(
         os.path.join(queries_directory, "External_artifact_usage_spread_for_Scip.cypher"), verbose, driver
     )
+    overall_excluding_tests_data = load_query_results(
+        os.path.join(queries_directory, "External_artifact_usage_overall_excluding_tests_for_Scip.cypher"), verbose, driver
+    )
+    spread_excluding_tests_data = load_query_results(
+        os.path.join(queries_directory, "External_artifact_usage_spread_excluding_tests_for_Scip.cypher"), verbose, driver
+    )
+    overall_normalized_data = load_query_results(
+        os.path.join(queries_directory, "External_artifact_usage_overall_normalized_for_Scip.cypher"), verbose, driver
+    )
+    spread_normalized_data = load_query_results(
+        os.path.join(queries_directory, "External_artifact_usage_spread_normalized_for_Scip.cypher"), verbose, driver
+    )
     per_artifact_data = load_query_results(
         os.path.join(queries_directory, "External_artifact_usage_per_internal_artifact_for_Scip.cypher"), verbose, driver
     )
@@ -465,6 +477,90 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
             value_column="sumNumberOfModules",
             name_column="externalArtifactName",
             chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_by_modules",
+            primary_threshold_percent=0.5,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+
+    # ── Excluding-tests: top external artifacts ────────────────────────────────
+    if not overall_excluding_tests_data.empty:
+        save_pie_chart_pair(
+            source_data=overall_excluding_tests_data,
+            value_column="numberOfInternalCallerTypes",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_excluding_tests_by_types",
+            primary_threshold_percent=0.7,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+        save_pie_chart_pair(
+            source_data=overall_excluding_tests_data,
+            value_column="numberOfInternalCallerModules",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_excluding_tests_by_modules",
+            primary_threshold_percent=0.7,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+
+    # ── Excluding-tests: most spread external artifacts ────────────────────────
+    if not spread_excluding_tests_data.empty:
+        save_pie_chart_pair(
+            source_data=spread_excluding_tests_data,
+            value_column="sumNumberOfTypes",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_excluding_tests_by_types",
+            primary_threshold_percent=0.5,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+        save_pie_chart_pair(
+            source_data=spread_excluding_tests_data,
+            value_column="sumNumberOfModules",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_excluding_tests_by_modules",
+            primary_threshold_percent=0.5,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+
+    # ── Normalized: top external artifacts ────────────────────────────────────
+    if not overall_normalized_data.empty:
+        save_pie_chart_pair(
+            source_data=overall_normalized_data,
+            value_column="numberOfInternalCallerTypes",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_normalized_by_types",
+            primary_threshold_percent=0.7,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+        save_pie_chart_pair(
+            source_data=overall_normalized_data,
+            value_column="numberOfInternalCallerModules",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_normalized_by_modules",
+            primary_threshold_percent=0.7,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+
+    # ── Normalized: most spread external artifacts ─────────────────────────────
+    if not spread_normalized_data.empty:
+        save_pie_chart_pair(
+            source_data=spread_normalized_data,
+            value_column="sumNumberOfTypes",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_normalized_by_types",
+            primary_threshold_percent=0.5,
+            report_directory=report_directory,
+            verbose=verbose,
+        )
+        save_pie_chart_pair(
+            source_data=spread_normalized_data,
+            value_column="sumNumberOfModules",
+            name_column="externalArtifactName",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_normalized_by_modules",
             primary_threshold_percent=0.5,
             report_directory=report_directory,
             verbose=verbose,

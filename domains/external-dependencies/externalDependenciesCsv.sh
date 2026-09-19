@@ -161,6 +161,18 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usag
 execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_spread_for_Scip.cypher" \
     > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_spread_for_Scip.csv"
 
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_overall_excluding_tests_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_overall_excluding_tests_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_spread_excluding_tests_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_spread_excluding_tests_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_overall_normalized_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_overall_normalized_for_Scip.csv"
+
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_spread_normalized_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_spread_normalized_for_Scip.csv"
+
 execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_artifact_for_Scip.cypher" \
     > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_artifact_for_Scip.csv"
 

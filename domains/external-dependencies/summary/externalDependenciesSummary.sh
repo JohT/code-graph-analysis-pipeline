@@ -187,6 +187,26 @@ assemble_external_dependencies_report() {
         --output-markdown-table \
         > "${report_include_directory}/External_artifact_usage_spread_for_Scip.md"
 
+    # -- SCIP: most used external artifacts (excluding tests) --------------
+    execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_overall_excluding_tests_for_Scip.cypher" \
+        --output-markdown-table \
+        > "${report_include_directory}/External_artifact_usage_overall_excluding_tests_for_Scip.md"
+
+    # -- SCIP: most spread external artifacts (excluding tests) ------------
+    execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_spread_excluding_tests_for_Scip.cypher" \
+        --output-markdown-table \
+        > "${report_include_directory}/External_artifact_usage_spread_excluding_tests_for_Scip.md"
+
+    # -- SCIP: most used external artifacts (normalized names) -------------
+    execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_overall_normalized_for_Scip.cypher" \
+        --output-markdown-table \
+        > "${report_include_directory}/External_artifact_usage_overall_normalized_for_Scip.md"
+
+    # -- SCIP: most spread external artifacts (normalized names) -----------
+    execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_spread_normalized_for_Scip.cypher" \
+        --output-markdown-table \
+        > "${report_include_directory}/External_artifact_usage_spread_normalized_for_Scip.md"
+
     # -- SCIP: external artifact usage per internal artifact (top) ---------
     execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_artifact_sorted_top_for_Scip.cypher" \
         --output-markdown-table \
@@ -205,6 +225,18 @@ assemble_external_dependencies_report() {
         include_svgs_matching "Scip_Top_external_artifacts_by_modules_others_drilldown.svg"
         include_svgs_matching "Scip_Most_spread_artifacts_by_types_above_threshold.svg"
         include_svgs_matching "Scip_Most_spread_artifacts_by_modules_above_threshold.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_excluding_tests_by_types_above_threshold.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_excluding_tests_by_types_others_drilldown.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_excluding_tests_by_modules_above_threshold.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_excluding_tests_by_modules_others_drilldown.svg"
+        include_svgs_matching "Scip_Most_spread_artifacts_excluding_tests_by_types_above_threshold.svg"
+        include_svgs_matching "Scip_Most_spread_artifacts_excluding_tests_by_modules_above_threshold.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_normalized_by_types_above_threshold.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_normalized_by_types_others_drilldown.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_normalized_by_modules_above_threshold.svg"
+        include_svgs_matching "Scip_Top_external_artifacts_normalized_by_modules_others_drilldown.svg"
+        include_svgs_matching "Scip_Most_spread_artifacts_normalized_by_types_above_threshold.svg"
+        include_svgs_matching "Scip_Most_spread_artifacts_normalized_by_modules_above_threshold.svg"
         include_svgs_matching "Scip_External_artifact_usage_per_artifact_stacked.svg"
         include_svgs_matching "Scip_External_artifact_usage_max_internal_modules_percent.svg"
     } > "${report_include_directory}/ScipExternalDependencyCharts.md"

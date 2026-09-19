@@ -117,11 +117,29 @@ External artifacts ranked by the number of distinct internal caller modules.
 
 <!-- include:External_artifact_usage_overall_for_Scip.md|empty.md -->
 
+#### 5.1.1 Most Used External Artifacts — Excluding Tests
+
+<!-- include:External_artifact_usage_overall_excluding_tests_for_Scip.md|empty.md -->
+
+#### 5.1.2 Most Used External Artifacts — Normalized Names
+
+Groups by `packageId` (slashes replaced with dots) instead of `module`. Resolves ambiguous single-segment names such as `core` → `reactor.core`.
+
+<!-- include:External_artifact_usage_overall_normalized_for_Scip.md|empty.md -->
+
 ### 5.2 Most Spread External Artifacts
 
 External artifacts referenced from the highest number of distinct internal artifacts. High spread is a candidate for an Anti-Corruption Layer.
 
 <!-- include:External_artifact_usage_spread_for_Scip.md|empty.md -->
+
+#### 5.2.1 Most Spread External Artifacts — Excluding Tests
+
+<!-- include:External_artifact_usage_spread_excluding_tests_for_Scip.md|empty.md -->
+
+#### 5.2.2 Most Spread External Artifacts — Normalized Names
+
+<!-- include:External_artifact_usage_spread_normalized_for_Scip.md|empty.md -->
 
 ### 5.3 External Artifact Usage per Internal Artifact (Top)
 
