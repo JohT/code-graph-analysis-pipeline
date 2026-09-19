@@ -22,7 +22,7 @@ from typing import LiteralString, cast
 import pandas as pd
 
 import matplotlib
-matplotlib.use('Agg')  # Non-interactive backend — required for headless script execution
+matplotlib.use('Agg')  # Non-interactive backend - required for headless script execution
 import matplotlib.pyplot as plot
 
 from neo4j import GraphDatabase, Driver
@@ -421,7 +421,7 @@ def save_pie_chart_pair(
     )
     save_pie_chart(
         grouped_data=drilldown_grouped,
-        title=f"{chart_name_prefix} — others drill-down (<{primary_threshold_percent}%)",
+        title=f"{chart_name_prefix} - others drill-down (<{primary_threshold_percent}%)",
         file_path=chart_file_path(f"{chart_name_prefix}_others_drilldown", report_directory, verbose),
     )
 
@@ -563,7 +563,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
         )
         save_stacked_bar_chart(
             pivot_data=second_level_pivot,
-            title="External package usage per artifact — second-level grouping (top 15)",
+            title="External package usage per artifact - second-level grouping (top 15)",
             xlabel="artifact",
             ylabel="number of internal packages",
             file_path=chart_file_path(
@@ -579,7 +579,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
             y_column="maxNumberOfPackagesPercentage",
             size_column="artifactPackages",
             color_column="stdNumberOfPackagesPercentage",
-            title="External package usage — max internal packages %",
+            title="External package usage - max internal packages %",
             xlabel="external package count",
             ylabel="max percentage of internal packages",
             file_path=chart_file_path(
@@ -597,7 +597,7 @@ def generate_java_charts(queries_directory: str, report_directory: str, verbose:
             y_column="medNumberOfPackagesPercentage",
             size_column="artifactPackages",
             color_column="stdNumberOfPackagesPercentage",
-            title="External package usage — median internal packages %",
+            title="External package usage - median internal packages %",
             xlabel="external package count",
             ylabel="median percentage of internal packages",
             file_path=chart_file_path(

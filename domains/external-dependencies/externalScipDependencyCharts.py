@@ -22,7 +22,7 @@ from typing import LiteralString, cast
 import pandas as pd
 
 import matplotlib
-matplotlib.use('Agg')  # Non-interactive backend — required for headless script execution
+matplotlib.use('Agg')  # Non-interactive backend - required for headless script execution
 import matplotlib.pyplot as plot
 
 from neo4j import GraphDatabase, Driver
@@ -403,7 +403,7 @@ def save_pie_chart_pair(
     )
     save_pie_chart(
         grouped_data=drilldown_grouped,
-        title=f"{chart_name_prefix} \u2014 others drill-down (<{primary_threshold_percent}%)",
+        title=f"{chart_name_prefix} - others drill-down (<{primary_threshold_percent}%)",
         file_path=chart_file_path(f"{chart_name_prefix}_others_drilldown", report_directory, verbose),
     )
 
