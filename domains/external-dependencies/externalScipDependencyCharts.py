@@ -22,7 +22,7 @@ from typing import LiteralString, cast
 import pandas as pd
 
 import matplotlib
-matplotlib.use('Agg')  # Non-interactive backend — required for headless script execution
+matplotlib.use('Agg')  # Non-interactive backend - required for headless script execution
 import matplotlib.pyplot as plot
 
 from neo4j import GraphDatabase, Driver

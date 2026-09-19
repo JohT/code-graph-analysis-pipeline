@@ -1,6 +1,6 @@
 # External Dependencies Domain
 
-This directory contains the implementation and resources for analysing external dependencies within the Code Graph Analysis Pipeline. It follows the vertical-slice domain pattern: all Cypher queries, Python chart scripts, and report templates needed for this analysis live here.
+This directory contains the implementation and resources for analyzing external dependencies within the Code Graph Analysis Pipeline. It follows the vertical-slice domain pattern: all Cypher queries, Python chart scripts, and report templates needed for this analysis live here.
 
 ## Entry Points
 
@@ -33,10 +33,10 @@ This domain requires the following to be in place before running. These are prov
 
 The following labels must exist on `Type` nodes before external dependency analysis can run. They are created by Cypher queries in [cypher/Types/](../../cypher/Types/):
 
-- `PrimitiveType` — primitive types like `int`, `boolean`
-- `Void` — void return type
-- `JavaType` — built-in Java standard library types (e.g. `java.lang.*`, `java.util.*`)
-- `ResolvedDuplicateType` — deduplicated types that appear in multiple jars
+- `PrimitiveType`:  primitive types like `int`, `boolean`
+- `Void`:  void return type
+- `JavaType`:  built-in Java standard library types (e.g. `java.lang.*`, `java.util.*`)
+- `ResolvedDuplicateType`:  deduplicated types that appear in multiple jars
 
 Without these labels, `Label_external_types_and_annotations.cypher` cannot correctly distinguish external types from internal and built-in ones.
 
@@ -44,8 +44,8 @@ Without these labels, `Label_external_types_and_annotations.cypher` cannot corre
 
 The following properties must exist on `DEPENDS_ON` relationships between `Package` nodes. They are set by Cypher queries in [cypher/DependsOn_Relationship_Weights/](../../cypher/DependsOn_Relationship_Weights/):
 
-- `weight` — sum of type-level dependency weights between two packages
-- `weightInterfaces` — subset of `weight` attributable to interface dependencies
+- `weight`:  sum of type-level dependency weights between two packages
+- `weightInterfaces`:  subset of `weight` attributable to interface dependencies
 
 ### TypeScript enrichment
 
@@ -60,16 +60,16 @@ For TypeScript projects, the following must be completed by [cypher/Typescript_E
 
 For SCIP-based analysis, the following node types must exist in the graph:
 
-- `SemanticCodeIndexInternalType` — internal types with `DEPENDS_ON` edges to external types
-- `SemanticCodeIndexExternalType` — external types with a non-empty `module` property
-- `SemanticCodeIndexModule` — internal modules containing internal types via `CONTAINS`
-- `SemanticCodeIndexArtifact` — artifacts with `isExternal` property set; internal artifacts have `isExternal: false`
+- `SemanticCodeIndexInternalType`:  internal types with `DEPENDS_ON` edges to external types
+- `SemanticCodeIndexExternalType`:  external types with a non-empty `module` property
+- `SemanticCodeIndexModule`:  internal modules containing internal types via `CONTAINS`
+- `SemanticCodeIndexArtifact`:  artifacts with `isExternal` property set; internal artifacts have `isExternal: false`
 
 These are created by the [scip-index-import](../scip-index-import/) domain. SCIP queries are skipped gracefully when no SCIP data is present: empty CSV files are removed by the cleanup step, and empty Markdown includes fall back to `empty.md`.
 
 ### General enrichment
 
-- `name` and `extension` properties on `File` nodes — set by [cypher/General_Enrichment/](../../cypher/General_Enrichment/).
+- `name` and `extension` properties on `File` nodes:  set by [cypher/General_Enrichment/](../../cypher/General_Enrichment/).
 
 ## What This Domain Produces
 
