@@ -78,6 +78,12 @@ time python "${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/externalDependencyCharts.py" \
     --report_directory "${FULL_REPORT_DIRECTORY}" \
     ${verboseMode}
 
+# -- SCIP Charts -----------------------------------------------------------
+echo "externalDependenciesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Generating SCIP charts..."
+time python "${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/externalScipDependencyCharts.py" \
+    --report_directory "${FULL_REPORT_DIRECTORY}" \
+    ${verboseMode}
+
 # Clean-up after report generation. Empty reports will be deleted.
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 

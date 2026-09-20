@@ -8,6 +8,7 @@ on:
     paths: 
       - '**/*.sh'
       - '**/test*.*'
+      - '!**/test.py'
       - '.github/workflows/internal-run-tests.yml'
   pull_request:
     branches:
@@ -16,6 +17,7 @@ on:
     paths: 
       - '**/*.sh'
       - '**/test*.*'
+      - '!**/test.py'
       - '.github/workflows/internal-run-tests.yml'
 
 jobs:
