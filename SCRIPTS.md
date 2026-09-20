@@ -133,6 +133,7 @@ Script | Directory | Description
 [VisualizationReports.sh](./scripts/reports/compilations/VisualizationReports.sh) | compilations | Runs all Visualization reports.
 [resetAndScan.sh](./scripts/resetAndScan.sh) | scripts | Deletes all data in the Neo4j graph database and rescans the downloaded artifacts to create a new graph.
 [resetAndScanChanged.sh](./scripts/resetAndScanChanged.sh) | scripts | Executes "resetAndScan.sh" only if "detectChangedFiles.sh" returns detected changes.
+[runPythonTests.sh](./scripts/runPythonTests.sh) | scripts | Runs all Python unit tests (pytest). Discovers test*.py files in domains directory.
 [runTests.sh](./scripts/runTests.sh) | scripts | Runs all test scripts (no Python and Chromium required).
 [scanTypescript.sh](./scripts/scanTypescript.sh) | scripts | Executes the npm package @jqassistant/ts-lc using npx to scan the Typescript projects in the source directory and create an intermediate json data file for the jQAssistant Typescript plugin.
 [setupJQAssistant.sh](./scripts/setupJQAssistant.sh) | scripts | Installs (download and unzip) jQAssistant (https://jqassistant.github.io/jqassistant/current).
