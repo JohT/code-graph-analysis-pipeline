@@ -3,6 +3,7 @@
 
    MATCH (codeUnit)
    WHERE $projection_node_label IN labels(codeUnit)
+     AND codeUnit.testMarkerInteger = 0
      AND codeUnit.centralityBetweenness               IS NOT NULL
      AND codeUnit.centralityArticleRank               IS NOT NULL
      AND codeUnit.incomingDependencies                IS NOT NULL
