@@ -14,7 +14,7 @@
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
    WHERE degree                         <= degreeThreshold
-     AND codeUnit.centralityBetweenness <= betweennessThreshold
+     AND codeUnit.centralityBetweenness >= betweennessThreshold
   RETURN DISTINCT 
          coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
         ,codeUnit.name                                AS shortCodeUnitName
