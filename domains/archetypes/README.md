@@ -33,3 +33,21 @@ The following scripts serve as entry points for various archetype tasks and repo
 The archetypes domain uses the same `archetypeAuthorityRank`, `archetypeBottleneckRank`, `archetypeHubRank` properties as the `anomaly-detection` domain. When both domains run, the `anomaly-detection` domain skips Authority/Bottleneck/Hub labeling if archetypes already set those properties (skip-if-exists pattern).
 
 `anomaly-detection` exclusively owns `Mark4TopAnomalyBridge`/`anomalyBridgeRank` and `Mark4TopAnomalyOutlier`/`anomalyOutlierRank` (ML-dependent archetypes).
+
+## SCIP Support
+
+Archetype classification supports SCIP-indexed codebases at three abstraction levels:
+
+| Level | Node Label | Weight Property |
+|-------|-----------|----------------|
+| Internal type | `SemanticCodeIndexInternalType` | `referenceCount` |
+| Module | `SemanticCodeIndexModule` | `referenceCount` |
+| Artifact | `SemanticCodeIndexArtifact` | `referenceCount` |
+
+Report directories follow the `SCIP_<NodeLabel>` naming convention, for example `reports/archetypes/SCIP_SemanticCodeIndexModule/`.
+
+Abstractness for SCIP nodes uses the `isAbstract` boolean property (set during SCIP import). Abstract types contribute 1.0; all others contribute 0.0. For module and artifact levels, abstractness is the ratio of abstract types to total contained types.
+
+SCIP artifacts include external (third-party) dependencies. External artifacts with incoming dependencies appear in the artifact-level analysis and classify as Authority archetypes when widely referenced.
+
+Treemap charts are generated for the internal-type level using `SemanticCodeIndexInternalType.file` paths. The implementation is in [scipTreemapVisualizations.py](./scipTreemapVisualizations.py).

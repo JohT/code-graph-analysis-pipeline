@@ -3,6 +3,7 @@
 
    MATCH (codeUnit)
    WHERE $projection_node_label IN labels(codeUnit)
+     AND codeUnit.testMarkerInteger = 0
      AND codeUnit.centralityBetweenness               IS NOT NULL
      AND codeUnit.incomingDependencies                IS NOT NULL
      AND codeUnit.outgoingDependencies                IS NOT NULL
@@ -13,7 +14,7 @@
   UNWIND codeUnits AS codeUnit
     WITH *, codeUnit.incomingDependencies + codeUnit.outgoingDependencies AS degree
    WHERE degree                         <= degreeThreshold
-     AND codeUnit.centralityBetweenness <= betweennessThreshold
+     AND codeUnit.centralityBetweenness >= betweennessThreshold
   RETURN DISTINCT 
          coalesce(codeUnit.fqn, codeUnit.globalFqn, codeUnit.fileName, codeUnit.signature, codeUnit.name) AS codeUnitName
         ,codeUnit.name                                AS shortCodeUnitName

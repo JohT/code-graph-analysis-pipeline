@@ -213,6 +213,9 @@ archetypes_graph_visualization "${QUERY_NODE}=Artifact" "${QUERY_LANGUAGE}=Java"
 archetypes_graph_visualization "${QUERY_NODE}=Package" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight25PercentInterfaces"
 archetypes_graph_visualization "${QUERY_NODE}=Type" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight"
 archetypes_graph_visualization "${QUERY_NODE}=Module" "${QUERY_LANGUAGE}=Typescript" "${QUERY_WEIGHT}=lowCouplingElement25PercentWeight"
+archetypes_graph_visualization "${QUERY_NODE}=SemanticCodeIndexInternalType" "${QUERY_LANGUAGE}=SCIP" "${QUERY_WEIGHT}=referenceCount"
+archetypes_graph_visualization "${QUERY_NODE}=SemanticCodeIndexModule" "${QUERY_LANGUAGE}=SCIP" "${QUERY_WEIGHT}=referenceCount"
+archetypes_graph_visualization "${QUERY_NODE}=SemanticCodeIndexArtifact" "${QUERY_LANGUAGE}=SCIP" "${QUERY_WEIGHT}=referenceCount"
 
 # ---------------------------------------------------------------
 

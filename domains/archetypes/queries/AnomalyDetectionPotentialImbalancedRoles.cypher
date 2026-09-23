@@ -2,6 +2,7 @@
 
    MATCH (codeUnit)
    WHERE $projection_node_label IN labels(codeUnit)
+     AND codeUnit.testMarkerInteger = 0
      AND codeUnit.centralityPageRank    IS NOT NULL
      AND codeUnit.centralityArticleRank IS NOT NULL
     WITH collect(codeUnit) AS codeUnits
