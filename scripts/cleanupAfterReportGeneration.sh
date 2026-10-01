@@ -20,20 +20,23 @@ report_directory=$1
 echo "cleanupReports: report_directory=${report_directory}"
 
 # Find all comma separated values (CSV) files in the report directory
-# and delete the ones that contain only one line (header) or less.
+# and delete the ones that contain only a header (no data rows).
+# Use awk to count actual lines/records, which is more reliable than wc -l 
+# (wc counts newlines, which can be off by one if the file lacks a trailing newline).
 find "${report_directory}" -type f -name "*.csv" | sort | while read -r report_file; do
-    number_of_lines=$(wc -l < "${report_file}" | awk '{print $1}')
-    if [[ "${number_of_lines}" -le 1 ]]; then
+    number_of_lines=$(awk 'END {print NR}' "${report_file}")
+    if [[ "${number_of_lines}" -lt 2 ]]; then
         echo "cleanupReports: deleting empty (${number_of_lines} lines) report file ${report_file}"
         rm -f "${report_file}"
     fi
 done
 
 # Find all Markdown (md) files in the report directory
-# and delete the ones that contain less than 3 lines.
+# and delete the ones that contain less than 3 lines (minimal useful content).
+# Use awk to count actual lines, which is more reliable than wc -l.
 find "${report_directory}" -type f -name "*.md" | sort | while read -r report_file; do
-    number_of_lines=$(wc -l < "${report_file}" | awk '{print $1}')
-    if [[ "${number_of_lines}" -le 2 ]]; then
+    number_of_lines=$(awk 'END {print NR}' "${report_file}")
+    if [[ "${number_of_lines}" -lt 3 ]]; then
         echo "cleanupReports: deleting empty (${number_of_lines} lines) report file ${report_file}"
         rm -f "${report_file}"
     fi
