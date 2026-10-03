@@ -66,10 +66,7 @@ archetypes_deep_dive_report() {
     # Collect dynamic Markdown includes
     execute_cypher "${ARCHETYPES_SUMMARY_DIR}/ArchetypeDeepDiveArchetypes.cypher" "${@}" --output-markdown-table > "${detail_report_include_directory}/DeepDiveArchetypes.md"
 
-    # Remove empty Markdown includes
-    source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${detail_report_include_directory}"
-
-    # Collect static Markdown includes (after cleanup to not remove one-liner)
+    # Collect static Markdown includes (must be created before cleanup, which may remove empty directories)
     echo "### 2.${report_number} ${language} ${nodeLabel}" > "${detail_report_include_directory}/DeepDiveSectionTitle.md"
     echo "" > "${detail_report_include_directory}/empty.md"
     cp -f "${ARCHETYPES_SUMMARY_DIR}/report_no_archetype_data.template.md" "${detail_report_include_directory}/report_no_archetype_data.template.md"
@@ -177,6 +174,9 @@ archetypes_report "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_LANGUAGE}=Java"
 archetypes_report "${ALGORITHM_NODE}=Package" "${ALGORITHM_LANGUAGE}=Java"
 archetypes_report "${ALGORITHM_NODE}=Type" "${ALGORITHM_LANGUAGE}=Java"
 archetypes_report "${ALGORITHM_NODE}=Module" "${ALGORITHM_LANGUAGE}=Typescript"
+archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_LANGUAGE}=SCIP"
+archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_LANGUAGE}=SCIP"
+archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_LANGUAGE}=SCIP"
 
 # ---------------------------------------------------------------
 
