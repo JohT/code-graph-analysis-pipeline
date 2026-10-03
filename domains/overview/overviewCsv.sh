@@ -99,6 +99,7 @@ execute_cypher "${OVERVIEW_QUERIES_DIR}/Node_labels_and_their_relationships.cyph
 # For SCIP
 execute_cypher "${OVERVIEW_QUERIES_DIR}/Overview_size_for_Scip.cypher" > "${FULL_REPORT_DIRECTORY}/Overview_size_for_Scip.csv"
 execute_cypher "${OVERVIEW_QUERIES_DIR}/Number_of_types_per_project_for_Scip.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_types_per_project_for_Scip.csv"
+execute_cypher "${OVERVIEW_QUERIES_DIR}/Number_of_types_per_module_for_Scip.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_types_per_module_for_Scip.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 # SC1091: sourced file is a pipeline-provided utility resolved at runtime via a variable path
