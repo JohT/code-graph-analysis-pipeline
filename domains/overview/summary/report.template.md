@@ -12,6 +12,7 @@ High-level summary of graph database contents: general graph structure (node lab
 1. [General](#2-general)
 1. [Java](#3-java)
 1. [TypeScript](#4-typescript)
+1. [SCIP](#5-scip)
 
 ---
 
@@ -95,3 +96,17 @@ Overview of scanned TypeScript modules: number of exported language elements per
 ### 4.2 TypeScript overview charts
 
 <!-- include:OverviewTypescriptCharts.md|empty.md -->
+
+---
+
+## 5. SCIP
+
+### 5.1 Artifact size
+
+Overview of SCIP-indexed code: number of artifacts, modules, internal types, external types, and total reference count.
+
+<!-- include:ScipOverviewSize.md|report_no_data.template.md -->
+
+### 5.2 SCIP overview charts
+
+<!-- include:OverviewScipCharts.md|empty.md -->
