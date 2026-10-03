@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Executes "Overview" Cypher queries to generate CSV reports for node labels, relationship types,
-# Java artifact type composition, package counts, TypeScript module elements, and method metrics.
+# Java artifact type composition, package counts, TypeScript module elements, method metrics, and SCIP type counts.
 # Results are written to reports/overview/.
 # Dynamically triggered by "CsvReports.sh".
 
@@ -95,6 +95,10 @@ execute_cypher "${OVERVIEW_QUERIES_DIR}/Relationship_type_count.cypher" > "${FUL
 execute_cypher "${OVERVIEW_QUERIES_DIR}/Dependency_node_labels.cypher" > "${FULL_REPORT_DIRECTORY}/Dependency_node_labels.csv"
 
 execute_cypher "${OVERVIEW_QUERIES_DIR}/Node_labels_and_their_relationships.cypher" > "${FULL_REPORT_DIRECTORY}/Node_labels_and_their_relationships.csv"
+
+# For SCIP
+execute_cypher "${OVERVIEW_QUERIES_DIR}/Overview_size_for_Scip.cypher" > "${FULL_REPORT_DIRECTORY}/Overview_size_for_Scip.csv"
+execute_cypher "${OVERVIEW_QUERIES_DIR}/Number_of_types_per_project_for_Scip.cypher" > "${FULL_REPORT_DIRECTORY}/Number_of_types_per_project_for_Scip.csv"
 
 # Clean-up after report generation. Empty reports will be deleted.
 # SC1091: sourced file is a pipeline-provided utility resolved at runtime via a variable path

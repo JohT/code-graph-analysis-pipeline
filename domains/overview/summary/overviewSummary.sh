@@ -2,7 +2,7 @@
 
 # Creates a Markdown report summarising overview metrics: node label and relationship type
 # distributions, general graph density, Java artifact type composition and package counts,
-# and TypeScript module element composition.
+# TypeScript module element composition, and SCIP internal type counts.
 # It requires an already running Neo4j graph database with scanned code data.
 # The results will be written into the sub directory reports/overview.
 # Dynamically triggered by "MarkdownReports.sh" via "overviewMarkdown.sh".
@@ -194,6 +194,19 @@ assemble_overview_report() {
     {
         include_svgs_matching "${FULL_REPORT_DIRECTORY}" "Overview_Typescript_*.svg"
     } > "${report_include_directory}/OverviewTypescriptCharts.md"
+
+    # ── SCIP: size overview ────────────────────────────────────────────────────
+
+    {
+        cypher_table "${OVERVIEW_QUERIES_DIR}/Overview_size_for_Scip.cypher"
+        csv_link "Overview_size_for_Scip.csv"
+    } > "${report_include_directory}/ScipOverviewSize.md"
+
+    # ── SCIP: SVG charts ───────────────────────────────────────────────────────
+
+    {
+        include_svgs_matching "${FULL_REPORT_DIRECTORY}" "Overview_Scip_*.svg"
+    } > "${report_include_directory}/OverviewScipCharts.md"
 
     # -- Remove empty Markdown includes ------------------------------------
     # SC1091: sourced file is a pipeline-provided utility resolved at runtime via a variable path

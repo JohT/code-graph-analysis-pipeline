@@ -22,6 +22,8 @@
 #   Overview_Typescript_Interface_Elements_Per_Module_Normalized.svg
 #   Overview_Typescript_Variable_Elements_Per_Module_Normalized.svg
 #   Overview_Typescript_Function_Elements_Per_Module_Normalized.svg
+#   Overview_Scip_Types_Per_Project_Stacked.svg
+#   Overview_Scip_{language}_Types_Per_Project_Normalized.svg (one per language present in data)
 #
 # Derived CSV files produced:
 #   Overview_General_Graph_Density.csv
@@ -29,6 +31,8 @@
 #   Java_Types_Per_Artifact_Grouped_Normalized.csv
 #   Typescript_Elements_Per_Module_Grouped.csv
 #   Typescript_Elements_Per_Module_Grouped_Normalized.csv
+#   Scip_Types_Per_Project_Grouped.csv
+#   Scip_Types_Per_Project_Grouped_Normalized.csv
 #
 # Input Parameters:
 #  --report_directory   path to the directory where output files will be written
@@ -719,6 +723,92 @@ def generate_typescript_charts(
         )
 
 
+# ── SCIP charts ───────────────────────────────────────────────────────────────
+
+def generate_scip_charts(
+    driver: Driver,
+    queries_directory: Path,
+    report_directory: Path,
+    verbose: bool,
+) -> None:
+    """Generate SCIP overview SVG charts and derived pivot CSV files.
+
+    Produces a stacked bar chart for type composition by language per project and
+    normalized per-language bar charts. Skips all charts silently if no SCIP data is present.
+
+    Args:
+        driver: Connected Neo4j driver instance.
+        queries_directory: Path to the directory containing .cypher query files.
+        report_directory: Path to the directory where output files will be written.
+        verbose: Whether to log progress.
+    """
+    if verbose:
+        print(f"{SCRIPT_NAME}: Generating SCIP charts...")
+
+    types_per_project = query_cypher_to_dataframe(
+        driver,
+        read_cypher_file(queries_directory / "Number_of_types_per_project_for_Scip.cypher"),
+    )
+
+    if types_per_project.empty:
+        if verbose:
+            print(f"{SCRIPT_NAME}: No SCIP type data found — skipping SCIP charts.")
+        return
+
+    # ── Pivot: types per project by language ─────────────────────────────────
+
+    types_per_project_grouped: pd.DataFrame = types_per_project.pivot(
+        index="projectName",
+        columns="language",
+        values="numberOfTypes",
+    )
+    types_per_project_grouped.fillna(0, inplace=True)
+    types_per_project_grouped["total"] = types_per_project_grouped.sum(axis=1)
+    types_per_project_grouped.sort_values(by="total", ascending=False, inplace=True)
+    types_per_project_grouped.drop("total", axis=1, inplace=True)
+    column_totals = types_per_project_grouped.sum()
+    types_per_project_grouped = types_per_project_grouped[
+        column_totals.sort_values(ascending=False).index
+    ]
+    types_per_project_grouped = types_per_project_grouped.astype(int)
+    types_per_project_grouped.to_csv(report_directory / "Scip_Types_Per_Project_Grouped.csv")
+    if verbose:
+        print(f"{SCRIPT_NAME}: Saved Scip_Types_Per_Project_Grouped.csv")
+
+    # ── Stacked bar: top 30 projects ─────────────────────────────────────────
+
+    plot_stacked_bar_chart(
+        data_frame=types_per_project_grouped.head(TOP_THIRTY),
+        title="Top 30 types per project",
+        x_label="Project",
+        y_label="Types",
+        file_path=report_directory / "Overview_Scip_Types_Per_Project_Stacked.svg",
+    )
+
+    # ── Normalized: type composition per project by language ─────────────────
+
+    types_per_project_normalized: pd.DataFrame = types_per_project_grouped.div(
+        types_per_project_grouped.sum(axis=1), axis=0
+    ).multiply(100)
+    types_per_project_normalized.to_csv(
+        report_directory / "Scip_Types_Per_Project_Grouped_Normalized.csv"
+    )
+    if verbose:
+        print(f"{SCRIPT_NAME}: Saved Scip_Types_Per_Project_Grouped_Normalized.csv")
+
+    for language in types_per_project_normalized.columns:
+        sorted_data = types_per_project_normalized.sort_values(
+            by=language, ascending=False
+        )
+        plot_stacked_bar_chart(
+            data_frame=sorted_data.head(TOP_THIRTY),
+            title=f"{language} types [%] per project",
+            x_label="Project",
+            y_label="Types %",
+            file_path=report_directory / f"Overview_Scip_{language}_Types_Per_Project_Normalized.svg",
+        )
+
+
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -735,6 +825,7 @@ def main() -> None:
         generate_general_charts(driver, queries_directory, parameters.report_directory, parameters.verbose)
         generate_java_charts(driver, queries_directory, parameters.report_directory, parameters.verbose)
         generate_typescript_charts(driver, queries_directory, parameters.report_directory, parameters.verbose)
+        generate_scip_charts(driver, queries_directory, parameters.report_directory, parameters.verbose)
     finally:
         driver.close()
 
