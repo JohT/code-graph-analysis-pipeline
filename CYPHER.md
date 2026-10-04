@@ -621,7 +621,10 @@ Script | Directory | Description
 | [Number_of_elements_per_module_for_Typescript.cypher](./domains/overview/queries/overview/Number_of_elements_per_module_for_Typescript.cypher) | overview | Number of elements per module for Typescript |
 | [Number_of_packages_per_artifact.cypher](./domains/overview/queries/overview/Number_of_packages_per_artifact.cypher) | overview | Number of packages per artifact. Requires "Add_file_name_and_extension.cypher". |
 | [Number_of_types_per_artifact.cypher](./domains/overview/queries/overview/Number_of_types_per_artifact.cypher) | overview | Number of types per artifact. Requires "Add_file_name_and_extension.cypher". |
+| [Number_of_types_per_module_for_Scip.cypher](./domains/overview/queries/overview/Number_of_types_per_module_for_Scip.cypher) | overview | Number of internal SCIP types per module grouped by language. |
+| [Number_of_types_per_project_for_Scip.cypher](./domains/overview/queries/overview/Number_of_types_per_project_for_Scip.cypher) | overview | Number of internal SCIP types per project grouped by language. |
 | [Overview_size.cypher](./domains/overview/queries/overview/Overview_size.cypher) | overview | Overview size |
+| [Overview_size_for_Scip.cypher](./domains/overview/queries/overview/Overview_size_for_Scip.cypher) | overview | Overview size for SCIP. Counts total graph nodes, relationships, SCIP artifacts, modules, internal types, external types, and total reference count. |
 | [Overview_size_for_Typescript.cypher](./domains/overview/queries/overview/Overview_size_for_Typescript.cypher) | overview | Overview size for Typescript |
 | [Relationship_type_count.cypher](./domains/overview/queries/overview/Relationship_type_count.cypher) | overview | Relationship count for each type separate. Sums up to the total number of relationships (100%). |
 | [Words_for_Wordcloud.cypher](./domains/overview/queries/overview/Words_for_Wordcloud.cypher) | overview | Words for Wordcloud |
