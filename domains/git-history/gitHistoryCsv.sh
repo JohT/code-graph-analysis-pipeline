@@ -18,6 +18,7 @@ set -o errexit -o pipefail
 
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"}
 
 ## Get this "domains/git-history" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.
@@ -40,22 +41,30 @@ REPORT_NAME="git-history"
 FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
-echo "gitHistoryCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing git history..."
+echo "gitHistoryCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing git history (mode=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT})..."
+
+# Select query variant suffix: _csv.cypher files target Git:Log:* nodes (CSV-imported schema).
+# Plugin and aggregated modes use the plugin-schema queries without a suffix.
+if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "full" ]; then
+    CSV_QUERY_SUFFIX="_csv"
+else
+    CSV_QUERY_SUFFIX=""
+fi
 
 # ── Detailed file commit statistics ──────────────────────────────────────────
 
-execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_with_commit_statistics_by_author.cypher" \
+execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_with_commit_statistics_by_author${CSV_QUERY_SUFFIX}.cypher" \
     > "${FULL_REPORT_DIRECTORY}/List_git_files_with_commit_statistics_by_author.csv"
 
 execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file.cypher" \
     > "${FULL_REPORT_DIRECTORY}/List_git_files_that_were_changed_together_with_another_file.csv"
 
-execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_file_directories_with_commit_statistics.cypher" \
+execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_file_directories_with_commit_statistics${CSV_QUERY_SUFFIX}.cypher" \
     > "${FULL_REPORT_DIRECTORY}/List_git_file_directories_with_commit_statistics.csv"
 
 # ── Files per commit distribution ────────────────────────────────────────────
 
-execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_per_commit_distribution.cypher" \
+execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_per_commit_distribution${CSV_QUERY_SUFFIX}.cypher" \
     > "${FULL_REPORT_DIRECTORY}/List_git_files_per_commit_distribution.csv"
 
 # ── Pairwise changed files ────────────────────────────────────────────────────
@@ -95,7 +104,7 @@ execute_cypher "${STATISTICS_CYPHER_DIR}/List_unresolved_git_files.cypher" \
 
 # ── Wordcloud data ────────────────────────────────────────────────────────────
 
-execute_cypher "${STATISTICS_CYPHER_DIR}/Words_for_git_author_Wordcloud_with_frequency.cypher" \
+execute_cypher "${STATISTICS_CYPHER_DIR}/Words_for_git_author_Wordcloud_with_frequency${CSV_QUERY_SUFFIX}.cypher" \
     > "${FULL_REPORT_DIRECTORY}/Words_for_git_author_Wordcloud_with_frequency.csv"
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────

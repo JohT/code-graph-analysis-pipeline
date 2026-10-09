@@ -7,7 +7,8 @@
 # Note: This script needs the path to source directory that contains one or more git repositories. It defaults to SOURCE_DIRECTORY ("source"). 
 # Note: Import will be skipped without an error if the source directory doesn't any git repositories.
 # Note: This script needs git to be installed.
-# Note: IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="plugin" is default and recommended. The other options "aggregated" and "full" are not actively maintained anymore.
+# Note: IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="plugin" is default and recommended (uses jQAssistant git plugin).
+# Options "aggregated" and "full" will become important in future for SCIP index-based analysis without jQAssistant.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -122,10 +123,10 @@ importGitLog() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_parent.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
   
-  echo "importGit: Importing full git log data into the Graph..."
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing full git log data into the Graph..."
   time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_csv_data.cypher" "${@}"
   
-  echo "importGit: Creating relationships for parent commits..."
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating relationships for parent commits..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_HAS_PARENT_relationships_to_commits.cypher"
 }
 
@@ -179,6 +180,9 @@ postGitLogImport() {
   echo "importGit: Add updateCommitCount property to file nodes and code nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_file_update_commits.cypher"
 
+  echo "importGit: Setting file creation and last modification dates for CSV log files..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_git_log_file_dates.cypher"
+
   echo "importGit: Creating relationships to file nodes that were changed together (CSV log schema)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher"
 }
@@ -208,7 +212,9 @@ postGitPluginImport() {
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
-  echo "importGit: Add updateCommitCount property to code file nodes via RESOLVES_TO..."
+  # Runs a second time: first run (before commonPostGitImport) set updateCommitCount on Git:File nodes so
+  # CHANGED_TOGETHER_WITH could read it. This run propagates updateCommitCount to code files via RESOLVES_TO.
+  echo "importGit: Propagate updateCommitCount to code file nodes via RESOLVES_TO..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
 }
 
@@ -247,14 +253,21 @@ if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
         (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
         importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
-        postAggregatedGitLogImport 
     else
-    # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full" (default)
+    # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full"
         (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
         importGitLog "git_repository_absolute_directory_name=${full_repository_path}"
-        postGitLogImport 
     fi
   done
+  # Post-import enrichment runs once after all repositories are imported.
+  # Running per-repository would create cross-repository co-change artifacts and would be O(n*N) instead of O(N).
+  if [ "${existing_data_has_been_deleted}" = true ]; then
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
+      postAggregatedGitLogImport
+    else
+      postGitLogImport
+    fi
+  fi
 else
   echo "importGit: Skipped git import because of IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}"
 fi
