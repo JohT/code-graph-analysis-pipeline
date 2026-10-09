@@ -22,6 +22,7 @@ applyTo: "**/*.cypher"
 
 - Files: `Snake_Case_Description.cypher`
 - Node labels: `PascalCase`
+- Label expressions: use colon (`:`) syntax by default, e.g., `:Git:Log:File`. Use ampersand (`&`) only when combining operators like OR (`|`), e.g., `:Label1&!Label2|Label3`. Use parentheses to group expressions when necessary, e.g., `:(:Label1&!Label2)|:Label3`.
 - Relationship types: `UPPER_SNAKE_CASE`
 - Properties: `camelCase`
 - No backtick-quoted identifiers — use clean label/property names
