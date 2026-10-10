@@ -155,15 +155,6 @@ commonPostGitImport() {
   execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_CHANGED_TOGETHER_WITH_properties.cypher"
-
-  dataVerificationResult=$( execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_create_date.cypher")
-  if ! is_csv_column_greater_zero "${dataVerificationResult}" "numberOfMissingCreateDateEntries"; then
-      # Warning: The git file creation date must not be missing. However, this is not important enough to stop the analysis.
-      #          Therefore, it will only be a warning and subsequent queries will use a default date in these cases.
-      echo -e "${COLOR_YELLOW}importGit: Data verification warning: Git:File nodes with missing createdAtEpoch property detected! Affected number of nodes:${COLOR_DEFAULT}"
-      echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
-      # Since this is now only a warning, execution will be continued.
-  fi
 }
 
 postGitLogImport() {
@@ -185,6 +176,9 @@ postGitLogImport() {
 
   echo "importGit: Creating relationships to file nodes that were changed together (CSV log schema)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher"
+
+  # Verify file creation dates are now set (runs after date enrichment query)
+  verify_git_file_creation_dates "after date enrichment"
 }
 
 postGitPluginImport() {
@@ -216,6 +210,9 @@ postGitPluginImport() {
   # CHANGED_TOGETHER_WITH could read it. This run propagates updateCommitCount to code files via RESOLVES_TO.
   echo "importGit: Propagate updateCommitCount to code file nodes via RESOLVES_TO..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
+
+  # Verify file creation dates after all plugin-provided data and enrichment
+  verify_git_file_creation_dates "plugin import"
 }
 
 postAggregatedGitLogImport() {
@@ -224,6 +221,9 @@ postAggregatedGitLogImport() {
   
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
+
+  # Verify file creation dates after all aggregated data and enrichment
+  verify_git_file_creation_dates "aggregated import"
 }
 
 # Create import directory in case it doesn't exist.
