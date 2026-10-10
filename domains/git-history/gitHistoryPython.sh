@@ -58,6 +58,11 @@ done
 
 echo "gitHistoryPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting git history chart generation..."
 
+# Report directory
+REPORT_NAME="git-history"
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
+mkdir -p "${FULL_REPORT_DIRECTORY}"
+
 # If the primary CSV is missing, generate CSVs now so this report type is self-contained.
 # When running '--report All', CsvReports.sh already ran, so this is a no-op in that case.
 PRIMARY_CSV="${FULL_REPORT_DIRECTORY}/List_git_files_with_commit_statistics_by_author.csv"
@@ -65,11 +70,6 @@ if [ ! -f "${PRIMARY_CSV}" ]; then
     echo "gitHistoryPython: Primary CSV not found — running gitHistoryCsv.sh first to generate CSV data."
     source "${GIT_HISTORY_SCRIPT_DIR}/gitHistoryCsv.sh"
 fi
-
-# Report directory
-REPORT_NAME="git-history"
-FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_NAME}"
-mkdir -p "${FULL_REPORT_DIRECTORY}"
 
 time python "${GIT_HISTORY_SCRIPT_DIR}/gitHistoryCharts.py" \
     --report_directory "${FULL_REPORT_DIRECTORY}" \

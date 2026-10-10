@@ -61,7 +61,6 @@ digraph ScriptDependencies {
         findPathsToScan [label="findPathsToScan.sh", fillcolor="#90EE90"];
         detectChangedFiles [label="detectChangedFiles.sh", fillcolor="#98FB98"];
         resetAndScan [label="resetAndScan.sh", fillcolor="#90EE90"];
-        importGit [label="importGit.sh", fillcolor="#9ACD32"];
     }
     
     // Prepare phase - subgraph
@@ -76,6 +75,8 @@ digraph ScriptDependencies {
         
         prepareAnalysis [label="prepareAnalysis.sh", fillcolor="#FFB6C1"];
         importScipIndex [label="importScipIndexData.sh\n(SCIP type graph)", fillcolor="#FFCAB6"];
+        importGitIfChanged [label="importGitIfChanged.sh\n(git history, change detection)", fillcolor="#FFCAB6"];
+        importGit [label="importGit.sh\n(git history import)", fillcolor="#FFD9B6"];
         executeQueryFunctions [label="executeQueryFunctions.sh", fillcolor="#FFE4C4"];
         executeQuery [label="executeQuery.sh", fillcolor="#FFDAB9"];
         parseCsvFunctions [label="parseCsvFunctions.sh", fillcolor="#FFE4C4"];
@@ -134,6 +135,7 @@ digraph ScriptDependencies {
     analyze -> setupJQAssistant [color="#4169E1", penwidth=2];
     analyze -> startNeo4j [color="#4169E1", penwidth=2];
     analyze -> resetAndScanChanged [color="#228B22", penwidth=2];
+    analyze -> importGitIfChanged [label="if source/\nexists", style="dashed", color="#FF8C00"];
     analyze -> prepareAnalysis [color="#FF8C00", penwidth=2];
     analyze -> reportCompilation [color="#8B008B", penwidth=2];
     analyze -> stopNeo4j [color="#FF6B9D", penwidth=2];
@@ -149,10 +151,9 @@ digraph ScriptDependencies {
     
     scanTypescript -> detectChangedFiles [style="dashed"];
     
-    resetAndScan -> importGit;
-    
     // Prepare phase edges
     prepareAnalysis -> importScipIndex [label="if indices/\nfound", style="dashed", color="#FF8C00"];
+    importGitIfChanged -> importGit;
     prepareAnalysis -> executeQueryFunctions;
     prepareAnalysis -> parseCsvFunctions;
     

@@ -102,7 +102,7 @@ The CSV `full` mode queries adapt to the CSV schema:
 
 This differs from the plugin schema (`Git:Commit`, `Git:File`, `[:CONTAINS_CHANGE]->[:UPDATES]`, `git_commit.sha`, `git_file.relativePath`). The `commonPostGitImport` function then adds `RESOLVES_TO` relationships and runs validation.
 
-The CSV `full` mode is used automatically when `--skip-jqassistant` is set in `analyze.sh` and a source directory with `.git` is present (default `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` from `prepareAnalysis.sh`).
+`importGitIfChanged.sh` is invoked by `analyze.sh` whenever `source/` exists. It uses SHA-based change detection (`source/gitImportChangeDetection.sha`) to skip redundant re-imports. On graph reset, `resetAndScan.sh` deletes this file to force re-import on the next run.
 
 ## Output
 
