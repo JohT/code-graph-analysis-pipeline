@@ -52,12 +52,17 @@ The following relationships must exist (created by `import/importGit.sh`):
 
 ## 4. Required Properties
 
-| Property | Node | Set By |
-|---|---|---|
-| `numberOfGitCommits` | `File` (Java/TypeScript) | `Set_number_of_git_log_commits.cypher` or `Set_number_of_git_plugin_commits.cypher` |
-| `updateCommitCount` | `Git:File` | `Set_number_of_git_plugin_update_commits.cypher` |
-| `isMergeCommit` | `Git:Commit` | `Set_commit_classification_properties.cypher` |
-| `isAutomatedCommit` | `Git:Commit` | `Set_commit_classification_properties.cypher` |
+| Property | Node | Set By | CSV Mode Only |
+|---|---|---|---|
+| `numberOfGitCommits` | `File` (Java/TypeScript) | `Set_number_of_git_log_commits.cypher` or `Set_number_of_git_plugin_commits.cypher` | No |
+| `updateCommitCount` | `Git:File` or `Git:Log:File` | `Set_number_of_git_plugin_update_commits.cypher` or `Set_number_of_git_log_file_update_commits.cypher` | No |
+| `isMergeCommit` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
+| `isAutomatedCommit` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
+| `isBotAuthor` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
+| `changeType` | `CONTAINS_CHANGED` relationship | `Import_git_log_csv_data.cypher` | **Yes** |
+| `createdAtEpoch` | `Git:Log:File` | `Set_git_log_file_dates.cypher` | **Yes** |
+| `lastModificationAtEpoch` | `Git:Log:File` | `Set_git_log_file_dates.cypher` | **Yes** |
+| `deletedAt` | `Git:Log:File` (for D-type changes) | `Import_git_log_csv_data.cypher` | **Yes** |
 
 ---
 

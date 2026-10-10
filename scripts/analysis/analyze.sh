@@ -46,7 +46,7 @@
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
 
-# Requires domains/neo4j-management/setupNeo4j.sh,setupJQAssistant.sh,domains/neo4j-management/startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,domains/neo4j-management/stopNeo4j.sh,compilations/*.sh,profiles/*.sh
+# Requires domains/neo4j-management/setupNeo4j.sh,setupJQAssistant.sh,domains/neo4j-management/startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,domains/neo4j-management/stopNeo4j.sh,compilations/*.sh,profiles/*.sh,domains/git-history/import/importGitIfChanged.sh
 # Optional: --skip-jqassistant skips setupJQAssistant.sh and resetAndScanChanged.sh; exports SKIP_JQASSISTANT=true
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
@@ -391,6 +391,19 @@ if [ -n "${scip_index_file}" ]; then
     else
         echo "${LOG_GROUP_START}Import SCIP Index Data"
         source "${DOMAINS_DIRECTORY}/scip-index-import/importScipIndexData.sh"
+        echo "${LOG_GROUP_END}"
+    fi
+fi
+
+# Import git history data when source/ exists.
+# Note: git-history import is a cross-cutting concern that runs automatically when source/ exists,
+# unless explicitly excluded via ANALYSIS_DOMAINS_TO_SKIP. It is independent of --domain selection.
+if [ -d "${SOURCE_DIRECTORY}" ]; then
+    if [[ ",${ANALYSIS_DOMAINS_TO_SKIP}," == *",git-history,"* ]]; then
+        echo "analyze: Skipping git history import (excluded via ANALYSIS_DOMAINS_TO_SKIP)."
+    else
+        echo "${LOG_GROUP_START}Import Git History"
+        source "${DOMAINS_DIRECTORY}/git-history/import/importGitIfChanged.sh"
         echo "${LOG_GROUP_END}"
     fi
 fi

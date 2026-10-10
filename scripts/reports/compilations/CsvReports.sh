@@ -55,7 +55,7 @@ for directory in "${analysisReportScriptDirectories[@]}"; do
     fi
 
     # Run all CSV report scripts for the selected directory.
-    find "${directory}" -type f -name "*Csv.sh" | sort | while read -r report_script_file; do
+    find "${directory}" -maxdepth 1 -type f -name "*Csv.sh" | sort | while read -r report_script_file; do
         report_script_filename=$(basename -- "${report_script_file}");
         report_script_filename="${report_script_filename%.*}" # Remove file extension
 

@@ -7,8 +7,8 @@
       ,collect(git_file)                                     AS git_files
 UNWIND git_files AS git_file
   WITH *
-      ,datetime.fromepochMillis(coalesce(git_file.createdAtEpoch, medianCreatedAtEpoch))                                            AS fileCreatedAtTimestamp
-      ,datetime.fromepochMillis(coalesce(git_file.lastModificationAtEpoch, git_file.createdAtEpoch, medianLastModificationAtEpoch)) AS fileLastModificationAtTimestamp
+      ,datetime.fromepochMillis(coalesce(git_file.createdAtEpoch, medianCreatedAtEpoch, 0))                                            AS fileCreatedAtTimestamp
+      ,datetime.fromepochMillis(coalesce(git_file.lastModificationAtEpoch, git_file.createdAtEpoch, medianLastModificationAtEpoch, 0)) AS fileLastModificationAtTimestamp
  MATCH (git_repository:Git&Repository)-[:HAS_FILE]->(git_file)
  MATCH (git_commit:Git&Commit)-[:CONTAINS_CHANGE]->(git_change:Git&Change)-->(old_files_included:Git&File&!Repository)-[:HAS_NEW_NAME*0..3]->(git_file)
 RETURN git_repository.name + '/' + git_file.relativePath AS filePath

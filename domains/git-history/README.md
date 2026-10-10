@@ -31,7 +31,7 @@ The analyzed codebase may have no git history at all. All entry points handle th
 
 ## Folder Structure
 
-```
+```text
 domains/git-history/
 ├── README.md                              # This file
 ├── PREREQUISITES.md                       # Detailed prerequisite documentation
@@ -40,16 +40,19 @@ domains/git-history/
 ├── gitHistoryPython.sh                    # Entry point: Python charts
 ├── gitHistoryMarkdown.sh                  # Entry point: Markdown summary
 ├── gitHistoryCharts.py                    # Chart generator: treemap, bar, histogram → SVG
+├── testCreateGitLogCsv.sh                 # Unit tests: CSV generation (26 test cases)
+├── testImportGitIfChanged.sh              # Unit tests: git import change detection (no Neo4j required)
 ├── explore/                               # Jupyter notebooks for interactive exploration
 │   ├── GitHistoryGeneralExploration.ipynb # General exploration (treemaps, charts, wordcloud)
 │   └── GitHistoryCorrelationExploration.ipynb # Correlation analysis exploration
 ├── import/                                # Git data import scripts
-│   ├── importGit.sh                       # Git data import orchestrator
-│   ├── createGitLogCsv.sh                 # Full git log → CSV
+│   ├── importGitIfChanged.sh              # Git import entry point: change detection, delegates to importGit.sh
+│   ├── importGit.sh                       # Git data import orchestrator (CSV and plugin modes)
+│   ├── createGitLogCsv.sh                 # Full git log → CSV (with rename/copy/merge tracking)
 │   └── createAggregatedGitLogCsv.sh       # Aggregated git log → CSV
 ├── queries/
-│   ├── enrichment/                        # 23 Cypher queries: import, indexes, relationships, properties
-│   ├── statistics/                        # 14 Cypher queries: listing and querying for reports
+│   ├── enrichment/                        # 24 Cypher queries: import, indexes, relationships, properties (includes Set_git_log_file_dates)
+│   ├── statistics/                        # 15 Cypher queries: listing and querying for reports (4 CSV variants)
 │   └── validation/                        # 5 Cypher queries: verification and validation
 └── summary/
     ├── gitHistorySummary.sh               # Markdown assembly logic
@@ -75,31 +78,38 @@ This domain requires the following to be in place before running. See [PREREQUIS
 The `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` environment variable controls how git data is imported:
 
 | Mode | Description |
-|------|-------------|
+| ------ | ------------- |
 | `plugin` (default) | jQAssistant git plugin — recommended; schema: `(Git:Commit)-[:CONTAINS_CHANGE]->(Git:Change)-[:UPDATES]->(Git:File)`, property: `relativePath` |
-| `full` | CSV git log with every commit — schema: `(Git:Log:Commit)-[:CONTAINS_CHANGED]->(Git:Log:File)`, property: `fileName` |
+| `full` | CSV git log with every commit — schema: `(Git:Log:Commit)-[:CONTAINS_CHANGED {changeType}]->(Git:Log:File)`, properties: `fileName`, `createdAtEpoch`, `lastModificationAtEpoch`; renames tracked via `[:HAS_NEW_NAME]` relationships |
 | `aggregated` | Pre-aggregated CSV git log — no commit-level granularity; `CHANGED_TOGETHER_WITH` cannot be computed |
 | `none` | Skip git import entirely |
 
 ### CSV `full` Mode Enrichment (`postGitLogImport`)
 
-When `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (CSV mode), the following enrichment steps run in `importGit.sh`:
+When `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (CSV mode), the following enrichment steps run in `importGit.sh` **after all repositories are imported** (outside the per-repo loop to eliminate cross-repo artifacts):
 
-1. `Set_number_of_git_log_commits.cypher` — sets `numberOfGitCommits` on matching code file nodes.
-2. `Set_commit_classification_properties.cypher` — sets `isMergeCommit`, `isAutomatedCommit` on `Git:Log:Commit` nodes.
+1. `Set_commit_classification_properties.cypher` — sets `isMergeCommit`, `isAutomatedCommit`, `isBotAuthor` on `Git:Log:Commit` nodes (deferred from CSV generation for context-aware filtering).
+2. `Set_number_of_git_log_commits.cypher` — sets `numberOfGitCommits` on matching code file nodes.
 3. `Set_number_of_git_log_file_update_commits.cypher` — sets `updateCommitCount` on `Git:Log:File` and resolved code file nodes.
-4. `Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher` — computes pairwise co-change metrics (confidence, lift, Jaccard, support) and creates `CHANGED_TOGETHER_WITH` relationships between `Git:Log:File` nodes.
+4. `Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher` — computes pairwise co-change metrics (confidence, lift, Jaccard, support) and creates `CHANGED_TOGETHER_WITH` relationships between `Git:Log:File` nodes (excludes merge commits to prevent spurious cross-branch relationships).
+5. `Set_git_log_file_dates.cypher` — sets `createdAtEpoch` (min A-type commit timestamp, ms) and `lastModificationAtEpoch` (max commit timestamp, ms) on `Git:Log:File` nodes for time-range filtering and reporting.
 
-The CSV `full` mode queries adapt to the CSV schema (`Git:Log:Commit`, `[:CONTAINS_CHANGED]`, `git_commit.hash`) rather than the plugin schema (`Git:Commit`, `[:CONTAINS_CHANGE]->[:UPDATES]`, `git_commit.sha`). The `commonPostGitImport` function then adds `RESOLVES_TO` relationships and runs validation.
+The CSV `full` mode queries adapt to the CSV schema:
 
-The CSV `full` mode is used automatically when `--skip-jqassistant` is set in `analyze.sh` and a source directory with `.git` is present (default `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` from `prepareAnalysis.sh`).
+- Nodes: `Git:Log:Commit`, `Git:Log:File`
+- Relationships: `[:CONTAINS_CHANGED]` (with `changeType` property: A/M/D/R/C; `[:HAS_NEW_NAME]` for renames)
+- Properties: `git_commit.hash` (not `.sha`); `git_file.fileName`, `createdAtEpoch`, `lastModificationAtEpoch`
+
+This differs from the plugin schema (`Git:Commit`, `Git:File`, `[:CONTAINS_CHANGE]->[:UPDATES]`, `git_commit.sha`, `git_file.relativePath`). The `commonPostGitImport` function then adds `RESOLVES_TO` relationships and runs validation.
+
+`importGitIfChanged.sh` is invoked by `analyze.sh` whenever `source/` exists. It uses SHA-based change detection (`source/gitImportChangeDetection.sha`) to skip redundant re-imports. On graph reset, `resetAndScan.sh` deletes this file to force re-import on the next run.
 
 ## Output
 
 All output is written to `reports/git-history/` relative to the working directory.
 
 | File | Description |
-|------|-------------|
+| ---- | ----------- |
 | `List_git_files_with_commit_statistics_by_author.csv` | Per-file commit statistics by author |
 | `List_git_files_that_were_changed_together_with_another_file.csv` | Files with co-change partners |
 | `List_git_file_directories_with_commit_statistics.csv` | Directory-level commit statistics |

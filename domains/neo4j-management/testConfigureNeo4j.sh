@@ -149,7 +149,7 @@ info "Starting tests...."
 
 # Create testing resources
 temporaryTestDirectory=${TEST_TMPDIR:-$(mktemp -d 2>/dev/null || mktemp -d -t "temporaryTestDirectory_${SCRIPT_NAME}")}
-if [ -n "${TEST_TMPDIR}" ]; then
+if [ -n "${TEST_TMPDIR:-}" ]; then
   mkdir -p "${temporaryTestDirectory}"
 fi
 # Normalize to absolute path to avoid relative-path duplication when cd'ing into it

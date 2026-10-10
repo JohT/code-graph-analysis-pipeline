@@ -8,8 +8,6 @@
 # Command line options:
 #   This script takes one parameter that contains the comma-separated list of paths to scan
 
-# Requires importGit.sh
-
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
 
@@ -28,14 +26,14 @@ TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"tools"} # Get the tools directory (defaults 
 SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # Repository directory containing the shell scripts
 echo "resetAndScan: SCRIPTS_DIR=${SCRIPTS_DIR}"
 
-DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY:-"${SCRIPTS_DIR}/../domains"} # Domains directory containing domain-specific analysis scripts
-echo "resetAndScan: DOMAINS_DIRECTORY=${DOMAINS_DIRECTORY}"
+SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Source directory containing git repositories
 
 # Internal constants
 JQASSISTANT_DIRECTORY="${TOOLS_DIRECTORY}/${JQASSISTANT_CLI_ARTIFACT}-${JQASSISTANT_CLI_VERSION}"
 JQASSISTANT_BIN="${JQASSISTANT_DIRECTORY}/bin"
 JQASSISTANT_CONFIG_TEMPLATE_PATH="${SCRIPTS_DIR}/configuration/${JQASSISTANT_CONFIG_TEMPLATE}"
 SCIP_INDEX_CHANGE_DETECTION_HASH_FILE="${INDICES_DIRECTORY}/scipIndexChangeDetection.sha"
+GIT_IMPORT_CHANGE_DETECTION_HASH_FILE="${SOURCE_DIRECTORY}/gitImportChangeDetection.sha"
 
 # Clean up SCIP index change detection file so re-import is forced after graph reset
 # TODO: This uses internal knowledge of "domains/scip-index-import" and its change detection mechanism. 
@@ -44,6 +42,12 @@ SCIP_INDEX_CHANGE_DETECTION_HASH_FILE="${INDICES_DIRECTORY}/scipIndexChangeDetec
 if [ -f "${SCIP_INDEX_CHANGE_DETECTION_HASH_FILE}" ]; then
     rm "${SCIP_INDEX_CHANGE_DETECTION_HASH_FILE}"
     echo "resetAndScan: Cleaned up SCIP index change detection file to force re-import after graph reset."
+fi
+
+# Clean up git import change detection file so importGitIfChanged.sh re-imports after graph reset.
+if [ -f "${GIT_IMPORT_CHANGE_DETECTION_HASH_FILE}" ]; then
+    rm "${GIT_IMPORT_CHANGE_DETECTION_HASH_FILE}"
+    echo "resetAndScan: Cleaned up git import change detection file to force re-import after graph reset."
 fi
 
 # Parse the single parameter that contains the comma-separated file and directory names to scan.
@@ -98,8 +102,3 @@ echo "resetAndScan: Analyzing using jQAssistant CLI version ${JQASSISTANT_CLI_VE
 
 "${JQASSISTANT_BIN}"/jqassistant.sh analyze
 
-# Scan all git repositories within the "source" (default) folder and import their git log (history) if configured.
-# Uses domain-local importGit.sh which resolves Cypher queries from domains/git-history/queries/enrichment/
-# TODO: This sources the git-history domain (domains/git-history/import/importGit.sh). The dependency direction (core → domain) should be revisited
-#       in a future cleanup task to determine the canonical location for importGit.sh.
-time source "${DOMAINS_DIRECTORY}/git-history/import/importGit.sh"

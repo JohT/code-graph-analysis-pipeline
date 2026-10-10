@@ -1,23 +1,23 @@
-// List git file directories and their statistics
+// List git file directories and their statistics. Uses the CSV-imported git log schema (Git:Log:Commit, Git:Log:File). Requires "Set_git_log_file_dates.cypher".
 
- MATCH (git_repository:Git&Repository)-[:HAS_FILE]->(git_file:Git&File&!Repository)
- WHERE git_file.deletedAt IS NULL // filter out deleted files
- ORDER BY git_file.relativePath
+ MATCH (git_repository:Git:Repository)-[:HAS_FILE]->(git_file:Git:Log:File)
+ WHERE git_file.deletedAt IS NULL
+ ORDER BY coalesce(git_file.relativePath, git_file.fileName)
   WITH *
       ,datetime.fromepochMillis(coalesce(git_file.createdAtEpoch, 0))                                AS fileCreatedAtTimestamp
       ,datetime.fromepochMillis(coalesce(git_file.lastModificationAtEpoch, git_file.createdAtEpoch, 0)) AS fileLastModificationAtTimestamp
-  WITH *, git_repository.name + '/' + git_file.relativePath AS filePath
+  WITH *, git_repository.name + '/' + coalesce(git_file.relativePath, git_file.fileName) AS filePath
   WITH *, split(filePath, '/')                              AS pathElements
   WITH *, pathElements[-1]                                  AS fileName
- MATCH (git_commit:Git&Commit)-[:CONTAINS_CHANGE]->(git_change:Git&Change)-->(old_files_included:Git&File&!Repository)-[:HAS_NEW_NAME*0..3]->(git_file)
+ MATCH (git_commit:Git:Log:Commit)-[:CONTAINS_CHANGED]->(file_in_commit:Git:Log:File)-[:HAS_NEW_NAME*0..3]->(git_file)
   WITH pathElements
       ,fileCreatedAtTimestamp
       ,fileLastModificationAtTimestamp
       ,fileName
       ,filePath                                         AS fileRelativePath
-      ,split(git_commit.author, ' <')[0]                AS author
-      ,max(git_commit.sha)                              AS maxCommitSha
-      ,collect(DISTINCT git_commit.sha)                 AS commitHashes
+      ,git_commit.author                                AS author
+      ,max(git_commit.hash)                             AS maxCommitSha
+      ,collect(DISTINCT git_commit.hash)                AS commitHashes
       ,date(max(git_commit.date))                       AS lastCommitDate
 UNWIND pathElements AS pathElement
   WITH *
@@ -32,7 +32,7 @@ UNWIND pathElements AS pathElement
       ,size(split(directory, '/'))                AS directoryPathLength
       ,author
       ,collect(DISTINCT fileRelativePath)         AS files
-      ,max(date(fileCreatedAtTimestamp) )         AS lastCreationDate
+      ,max(date(fileCreatedAtTimestamp))          AS lastCreationDate
       ,max(date(fileLastModificationAtTimestamp)) AS lastModificationDate
       ,apoc.coll.toSet(apoc.coll.flatten(collect(commitHashes))) AS commitHashes
       ,max(maxCommitSha)                          AS maxCommitSha
