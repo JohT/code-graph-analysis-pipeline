@@ -135,10 +135,11 @@ function init_test_repo() {
 
 function run_script_in_repo() {
     local repo_dir="${1}"
-    local csv_file="${2}"
+    local csv_log_file="${2}"
+    local csv_commits_file="${3}"
     # source inside a subshell so 'return' statements exit cleanly without affecting this script
     # shellcheck disable=SC1090
-    (cd "${repo_dir}" && source "${SCRIPT}" "${csv_file}")
+    (cd "${repo_dir}" && source "${SCRIPT}" "${csv_log_file}" "${csv_commits_file}")
 }
 
 # ---------------------------------------------------------------------------
@@ -160,18 +161,22 @@ echo ""
 
 echo "--- CSV header ---"
 REPO="${TEMP_DIR}/test_header"
-CSV="${TEMP_DIR}/header.csv"
+CSV_LOG="${TEMP_DIR}/header_log.csv"
+CSV_COMMITS="${TEMP_DIR}/header_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 echo "file" > "${REPO}/a.txt"
 git -C "${REPO}" add a.txt
 git -C "${REPO}" commit --quiet -m "add a"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-assert_equals "header matches schema" \
-    "hash,parent,author,email,timestamp,timestamp_unix,message,filename,change_type,old_filename" \
-    "$(head -1 "${CSV}")"
+assert_equals "gitLogCommits.csv header matches schema" \
+    "hash,parent,author,email,timestamp_unix,message" \
+    "$(head -1 "${CSV_COMMITS}")"
+assert_equals "gitLog.csv header matches schema" \
+    "hash,filename,change_type,old_filename" \
+    "$(head -1 "${CSV_LOG}")"
 
 # ---------------------------------------------------------------------------
 # Test: add, modify, delete produce correct change_type values
@@ -179,7 +184,8 @@ assert_equals "header matches schema" \
 
 echo "--- Change types A/M/D ---"
 REPO="${TEMP_DIR}/test_amd"
-CSV="${TEMP_DIR}/amd.csv"
+CSV_LOG="${TEMP_DIR}/amd_log.csv"
+CSV_COMMITS="${TEMP_DIR}/amd_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
@@ -194,13 +200,13 @@ git -C "${REPO}" commit --quiet -m "modify"
 git -C "${REPO}" rm --quiet file.txt
 git -C "${REPO}" commit --quiet -m "delete"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-CSV_CONTENT=$(cat "${CSV}")
+CSV_CONTENT=$(cat "${CSV_LOG}")
 assert_contains "A-type row present" '"A"' "${CSV_CONTENT}"
 assert_contains "M-type row present" '"M"' "${CSV_CONTENT}"
 assert_contains "D-type row present" '"D"' "${CSV_CONTENT}"
-assert_csv_row_count "three data rows (one per change)" 3 "${CSV}"
+assert_csv_row_count "three data rows (one per change)" 3 "${CSV_LOG}"
 
 # ---------------------------------------------------------------------------
 # Test: rename produces R-type row with filename=new and old_filename=old
@@ -208,7 +214,8 @@ assert_csv_row_count "three data rows (one per change)" 3 "${CSV}"
 
 echo "--- Rename (R-type) ---"
 REPO="${TEMP_DIR}/test_rename"
-CSV="${TEMP_DIR}/rename.csv"
+CSV_LOG="${TEMP_DIR}/rename_log.csv"
+CSV_COMMITS="${TEMP_DIR}/rename_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
@@ -219,9 +226,9 @@ git -C "${REPO}" commit --quiet -m "add old"
 git -C "${REPO}" mv old.txt new.txt
 git -C "${REPO}" commit --quiet -m "rename"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-CSV_CONTENT=$(cat "${CSV}")
+CSV_CONTENT=$(cat "${CSV_LOG}")
 assert_contains "R-type row present" '"R"' "${CSV_CONTENT}"
 assert_contains "new filename in filename column" '"new.txt"' "${CSV_CONTENT}"
 assert_contains "old filename in old_filename column" '"old.txt"' "${CSV_CONTENT}"
@@ -239,7 +246,8 @@ assert_contains "rename row has correct column order" '"new.txt","R","old.txt"' 
 
 echo "--- Merge commits not filtered, parent hashes ---"
 REPO="${TEMP_DIR}/test_merge"
-CSV="${TEMP_DIR}/merge.csv"
+CSV_LOG="${TEMP_DIR}/merge_log.csv"
+CSV_COMMITS="${TEMP_DIR}/merge_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
@@ -262,9 +270,9 @@ git -C "${REPO}" commit --quiet -m "second"
 SECOND_HASH=$(git -C "${REPO}" rev-parse HEAD)
 git -C "${REPO}" merge --quiet --no-ff feature -m "merge feature"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-CSV_CONTENT=$(cat "${CSV}")
+CSV_CONTENT=$(cat "${CSV_COMMITS}")
 
 # --no-merges must not be present in the script
 assert_not_contains "--no-merges not in script" "--no-merges" "$(cat "${SCRIPT}")"
@@ -275,11 +283,11 @@ assert_contains "feature commit appears in CSV" "${FEATURE_HASH}" "${CSV_CONTENT
 assert_contains "second commit appears in CSV" "${SECOND_HASH}" "${CSV_CONTENT}"
 
 # Parent hashes are correctly captured for commits with a single parent
-SECOND_ROW=$(grep "^${SECOND_HASH}," "${CSV}")
+SECOND_ROW=$(grep "^${SECOND_HASH}," "${CSV_COMMITS}")
 SECOND_PARENT=$(echo "${SECOND_ROW}" | cut -d',' -f2)
 assert_equals "second commit has first commit as parent" "${FIRST_HASH}" "${SECOND_PARENT}"
 
-FEATURE_ROW=$(grep "^${FEATURE_HASH}," "${CSV}")
+FEATURE_ROW=$(grep "^${FEATURE_HASH}," "${CSV_COMMITS}")
 FEATURE_PARENT=$(echo "${FEATURE_ROW}" | cut -d',' -f2)
 assert_equals "feature commit has first commit as parent" "${FIRST_HASH}" "${FEATURE_PARENT}"
 
@@ -289,7 +297,8 @@ assert_equals "feature commit has first commit as parent" "${FIRST_HASH}" "${FEA
 
 echo "--- Bot author not filtered ---"
 REPO="${TEMP_DIR}/test_bot"
-CSV="${TEMP_DIR}/bot.csv"
+CSV_LOG="${TEMP_DIR}/bot_log.csv"
+CSV_COMMITS="${TEMP_DIR}/bot_commits.csv"
 mkdir -p "${REPO}"
 git -C "${REPO}" init --quiet
 git -C "${REPO}" config user.email "bot@github.com"
@@ -299,9 +308,9 @@ echo "dep" > "${REPO}/deps.txt"
 git -C "${REPO}" add deps.txt
 git -C "${REPO}" commit --quiet -m "bump dependency"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-assert_contains "bot author row present in CSV" '"dependabot[bot]"' "$(cat "${CSV}")"
+assert_contains "bot author row present in CSV" '"dependabot[bot]"' "$(cat "${CSV_COMMITS}")"
 
 # ---------------------------------------------------------------------------
 # Test: multiple files in one commit produce one CSV row per file
@@ -309,7 +318,8 @@ assert_contains "bot author row present in CSV" '"dependabot[bot]"' "$(cat "${CS
 
 echo "--- Multiple files per commit ---"
 REPO="${TEMP_DIR}/test_multifile"
-CSV="${TEMP_DIR}/multifile.csv"
+CSV_LOG="${TEMP_DIR}/multifile_log.csv"
+CSV_COMMITS="${TEMP_DIR}/multifile_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
@@ -319,9 +329,9 @@ echo "c" > "${REPO}/c.txt"
 git -C "${REPO}" add a.txt b.txt c.txt
 git -C "${REPO}" commit --quiet -m "add three"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-assert_csv_row_count "three rows for three files in one commit" 3 "${CSV}"
+assert_csv_row_count "three rows for three files in one commit" 3 "${CSV_LOG}"
 
 # ---------------------------------------------------------------------------
 # Test: comma in commit message is properly CSV-quoted
@@ -329,7 +339,8 @@ assert_csv_row_count "three rows for three files in one commit" 3 "${CSV}"
 
 echo "--- Comma in commit message ---"
 REPO="${TEMP_DIR}/test_comma"
-CSV="${TEMP_DIR}/comma.csv"
+CSV_LOG="${TEMP_DIR}/comma_log.csv"
+CSV_COMMITS="${TEMP_DIR}/comma_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
@@ -337,9 +348,9 @@ echo "x" > "${REPO}/x.txt"
 git -C "${REPO}" add x.txt
 git -C "${REPO}" commit --quiet -m "fix: add x, remove y"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-assert_contains "message with comma quoted" '"fix: add x, remove y"' "$(cat "${CSV}")"
+assert_contains "message with comma quoted" '"fix: add x, remove y"' "$(cat "${CSV_COMMITS}")"
 
 # ---------------------------------------------------------------------------
 # Test: double quotes in commit message are escaped as ""
@@ -347,7 +358,8 @@ assert_contains "message with comma quoted" '"fix: add x, remove y"' "$(cat "${C
 
 echo "--- Double quotes in commit message ---"
 REPO="${TEMP_DIR}/test_quotes"
-CSV="${TEMP_DIR}/quotes.csv"
+CSV_LOG="${TEMP_DIR}/quotes_log.csv"
+CSV_COMMITS="${TEMP_DIR}/quotes_commits.csv"
 mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
@@ -355,9 +367,9 @@ echo "y" > "${REPO}/y.txt"
 git -C "${REPO}" add y.txt
 git -C "${REPO}" commit --quiet -m 'add "quoted" word'
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-assert_contains "double quotes escaped as double-double-quotes" '"add ""quoted"" word"' "$(cat "${CSV}")"
+assert_contains "double quotes escaped as double-double-quotes" '"add ""quoted"" word"' "$(cat "${CSV_COMMITS}")"
 
 # ---------------------------------------------------------------------------
 # Test: empty repository (no commits) produces only the header line
@@ -365,15 +377,18 @@ assert_contains "double quotes escaped as double-double-quotes" '"add ""quoted""
 
 echo "--- Empty repository ---"
 REPO="${TEMP_DIR}/test_empty"
-CSV="${TEMP_DIR}/empty.csv"
+CSV_LOG="${TEMP_DIR}/empty_log.csv"
+CSV_COMMITS="${TEMP_DIR}/empty_commits.csv"
 mkdir -p "${REPO}"
 git -C "${REPO}" init --quiet
 
 EMPTY_EXIT=0
-run_script_in_repo "${REPO}" "${CSV}" || EMPTY_EXIT=$?
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}" || EMPTY_EXIT=$?
 assert_exit_code "empty repo exits without error" 0 "${EMPTY_EXIT}"
-assert_file_exists "CSV file created for empty repo" "${CSV}"
-assert_line_count "empty repo CSV has only header (1 line)" 1 "${CSV}"
+assert_file_exists "gitLog.csv file created for empty repo" "${CSV_LOG}"
+assert_file_exists "gitLogCommits.csv file created for empty repo" "${CSV_COMMITS}"
+assert_line_count "empty repo gitLog.csv has only header (1 line)" 1 "${CSV_LOG}"
+assert_line_count "empty repo gitLogCommits.csv has only header (1 line)" 1 "${CSV_COMMITS}"
 
 # ---------------------------------------------------------------------------
 # Test: missing output path exits without error
@@ -385,8 +400,8 @@ mkdir -p "${REPO}"
 init_test_repo "${REPO}"
 
 NOPATH_EXIT=0
-run_script_in_repo "${REPO}" "" || NOPATH_EXIT=$?
-assert_exit_code "missing output path exits without error" 0 "${NOPATH_EXIT}"
+run_script_in_repo "${REPO}" "" "" || NOPATH_EXIT=$?
+assert_exit_code "missing output paths exits without error" 0 "${NOPATH_EXIT}"
 
 # ---------------------------------------------------------------------------
 # Test: running outside a git repository exits without error
@@ -394,11 +409,12 @@ assert_exit_code "missing output path exits without error" 0 "${NOPATH_EXIT}"
 
 echo "--- Non-git directory ---"
 NONGIT="${TEMP_DIR}/test_nongit"
-CSV="${TEMP_DIR}/nongit.csv"
+CSV_LOG="${TEMP_DIR}/nongit_log.csv"
+CSV_COMMITS="${TEMP_DIR}/nongit_commits.csv"
 mkdir -p "${NONGIT}"
 
 NONGIT_EXIT=0
-run_script_in_repo "${NONGIT}" "${CSV}" || NONGIT_EXIT=$?
+run_script_in_repo "${NONGIT}" "${CSV_LOG}" "${CSV_COMMITS}" || NONGIT_EXIT=$?
 assert_exit_code "non-git directory exits without error" 0 "${NONGIT_EXIT}"
 
 # ---------------------------------------------------------------------------
@@ -407,7 +423,8 @@ assert_exit_code "non-git directory exits without error" 0 "${NONGIT_EXIT}"
 
 echo "--- Author email ---"
 REPO="${TEMP_DIR}/test_email"
-CSV="${TEMP_DIR}/email.csv"
+CSV_LOG="${TEMP_DIR}/email_log.csv"
+CSV_COMMITS="${TEMP_DIR}/email_commits.csv"
 mkdir -p "${REPO}"
 git -C "${REPO}" init --quiet
 git -C "${REPO}" config user.email "alice@example.com"
@@ -417,10 +434,10 @@ echo "z" > "${REPO}/z.txt"
 git -C "${REPO}" add z.txt
 git -C "${REPO}" commit --quiet -m "add z"
 
-run_script_in_repo "${REPO}" "${CSV}"
+run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-assert_contains "author email in CSV" '"alice@example.com"' "$(cat "${CSV}")"
-assert_contains "author name in CSV"  '"Alice"' "$(cat "${CSV}")"
+assert_contains "author email in CSV" '"alice@example.com"' "$(cat "${CSV_COMMITS}")"
+assert_contains "author name in CSV"  '"Alice"' "$(cat "${CSV_COMMITS}")"
 
 # ---------------------------------------------------------------------------
 # Summary

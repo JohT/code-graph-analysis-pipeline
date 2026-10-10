@@ -59,10 +59,10 @@ The following relationships must exist (created by `import/importGit.sh`):
 | `isMergeCommit` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
 | `isAutomatedCommit` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
 | `isBotAuthor` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
-| `changeType` | `CONTAINS_CHANGED` relationship | `Import_git_log_csv_data.cypher` | **Yes** |
+| `changeType` | `CONTAINS_CHANGED` relationship | `Import_git_log_relationships_csv_data_pass2b.cypher` | **Yes** |
 | `createdAtEpoch` | `Git:Log:File` | `Set_git_log_file_dates.cypher` | **Yes** |
 | `lastModificationAtEpoch` | `Git:Log:File` | `Set_git_log_file_dates.cypher` | **Yes** |
-| `deletedAt` | `Git:Log:File` (for D-type changes) | `Import_git_log_csv_data.cypher` | **Yes** |
+| `deletedAt` | `Git:Log:File` (for D-type changes) | `Import_git_log_relationships_csv_data_pass2b.cypher` | **Yes** |
 
 ---
 
