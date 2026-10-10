@@ -41,11 +41,13 @@ domains/git-history/
 ├── gitHistoryMarkdown.sh                  # Entry point: Markdown summary
 ├── gitHistoryCharts.py                    # Chart generator: treemap, bar, histogram → SVG
 ├── testCreateGitLogCsv.sh                 # Unit tests: CSV generation (26 test cases)
+├── testImportGitIfChanged.sh              # Unit tests: git import change detection (no Neo4j required)
 ├── explore/                               # Jupyter notebooks for interactive exploration
 │   ├── GitHistoryGeneralExploration.ipynb # General exploration (treemaps, charts, wordcloud)
 │   └── GitHistoryCorrelationExploration.ipynb # Correlation analysis exploration
 ├── import/                                # Git data import scripts
-│   ├── importGit.sh                       # Git data import orchestrator
+│   ├── importGitIfChanged.sh              # Git import entry point: change detection, delegates to importGit.sh
+│   ├── importGit.sh                       # Git data import orchestrator (CSV and plugin modes)
 │   ├── createGitLogCsv.sh                 # Full git log → CSV (with rename/copy/merge tracking)
 │   └── createAggregatedGitLogCsv.sh       # Aggregated git log → CSV
 ├── queries/
@@ -100,7 +102,7 @@ The CSV `full` mode queries adapt to the CSV schema:
 
 This differs from the plugin schema (`Git:Commit`, `Git:File`, `[:CONTAINS_CHANGE]->[:UPDATES]`, `git_commit.sha`, `git_file.relativePath`). The `commonPostGitImport` function then adds `RESOLVES_TO` relationships and runs validation.
 
-The CSV `full` mode is used automatically when `--skip-jqassistant` is set in `analyze.sh` and a source directory with `.git` is present (default `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` from `prepareAnalysis.sh`).
+`importGitIfChanged.sh` is invoked by `analyze.sh` whenever `source/` exists. It uses SHA-based change detection (`source/gitImportChangeDetection.sha`) to skip redundant re-imports. On graph reset, `resetAndScan.sh` deletes this file to force re-import on the next run.
 
 ## Output
 
