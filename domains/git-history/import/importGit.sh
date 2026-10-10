@@ -2,7 +2,7 @@
 
 # Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT.
 
-# Requires executeQueryFunctions.sh, createGitLogCsv.sh, createAggregatedGitLogCsv
+# Requires executeQueryFunctions.sh, createGitLogData.sh, createAggregatedGitLogData
 
 # Note: This script needs the path to source directory that contains one or more git repositories. It defaults to SOURCE_DIRECTORY ("source"). 
 # Note: Import will be skipped without an error if the source directory doesn't any git repositories.
@@ -251,11 +251,11 @@ if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT
 
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
-        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
+        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogData.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
         importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
     else
     # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full"
-        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
+        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogData.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
         importGitLog "git_repository_absolute_directory_name=${full_repository_path}"
     fi
   done

@@ -40,16 +40,18 @@ domains/git-history/
 ├── gitHistoryPython.sh                    # Entry point: Python charts
 ├── gitHistoryMarkdown.sh                  # Entry point: Markdown summary
 ├── gitHistoryCharts.py                    # Chart generator: treemap, bar, histogram → SVG
-├── testCreateGitLogCsv.sh                 # Unit tests: CSV generation (26 test cases)
+├── testCreateGitLogData.sh                # Unit tests: CSV generation (26 test cases)
+├── testImportGitIfChanged.sh              # Unit tests: git import change detection (no Neo4j required)
 ├── explore/                               # Jupyter notebooks for interactive exploration
 │   ├── GitHistoryGeneralExploration.ipynb # General exploration (treemaps, charts, wordcloud)
 │   └── GitHistoryCorrelationExploration.ipynb # Correlation analysis exploration
 ├── import/                                # Git data import scripts
-│   ├── importGit.sh                       # Git data import orchestrator
-│   ├── createGitLogCsv.sh                 # Full git log → CSV (with rename/copy/merge tracking)
-│   └── createAggregatedGitLogCsv.sh       # Aggregated git log → CSV
+│   ├── importGitIfChanged.sh              # Git import entry point: change detection, delegates to importGit.sh
+│   ├── importGit.sh                       # Git data import orchestrator (CSV and plugin modes)
+│   ├── createGitLogData.sh                # Full git log → CSV (with rename/copy/merge tracking)
+│   └── createAggregatedGitLogData.sh      # Aggregated git log → CSV
 ├── queries/
-│   ├── enrichment/                        # 24 Cypher queries: import, indexes, relationships, properties (includes Set_git_log_file_dates)
+│   ├── enrichment/                        # 30 Cypher queries: import, indexes, relationships, properties (includes Set_git_log_file_dates)
 │   ├── statistics/                        # 15 Cypher queries: listing and querying for reports (4 CSV variants)
 │   └── validation/                        # 5 Cypher queries: verification and validation
 └── summary/

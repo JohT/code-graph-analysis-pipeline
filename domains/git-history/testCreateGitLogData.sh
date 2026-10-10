@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Tests createGitLogCsv.sh: CSV header, change types (A/M/D/R), merge commit inclusion,
+# Tests createGitLogData.sh: CSV header, change types (A/M/D/R), merge commit inclusion,
 # bot-author pass-through, multiple files per commit, message escaping, empty repository.
 # Does not require Neo4j. Each test case creates an isolated temporary git repository.
 
@@ -11,7 +11,7 @@ IFS=$'\n\t'
 ## Get this "domains/git-history" directory if not already set
 GIT_HISTORY_TEST_DIR=${GIT_HISTORY_TEST_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null && pwd -P )}
 
-SCRIPT="${GIT_HISTORY_TEST_DIR}/import/createGitLogCsv.sh"
+SCRIPT="${GIT_HISTORY_TEST_DIR}/import/createGitLogData.sh"
 
 PASS_COUNT=0
 FAIL_COUNT=0
@@ -151,7 +151,7 @@ TEMP_DIR=$(mktemp -d)
 trap "rm -rf '${TEMP_DIR}'" EXIT
 
 echo ""
-echo "=== testCreateGitLogCsv.sh ==="
+echo "=== testCreateGitLogData.sh ==="
 echo ""
 
 # ---------------------------------------------------------------------------
