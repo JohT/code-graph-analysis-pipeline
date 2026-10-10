@@ -13,18 +13,18 @@ CSV_OUTPUT_FILE_PATH=${1:-}
 
 # Check if the current directory is a git repository
 if [ ! -d "./.git" ]; then
-  echo "createAggregatedGitLogCsv: The current directory ${PWD} is not a git repository."
+  echo "createAggregatedGitLogData: The current directory ${PWD} is not a git repository."
   return 0
 fi
 
 # Check if the repository is actually a git repository
 if [ -z "${CSV_OUTPUT_FILE_PATH}" ]; then
-  echo "createAggregatedGitLogCsv: Missing CSV output file path parameter."
+  echo "createAggregatedGitLogData: Missing CSV output file path parameter."
   return 0
 fi
 
 # ----- Create a CSV file with git log data containing all commits and their changed files
-echo "createAggregatedGitLogCsv: Creating ${CSV_OUTPUT_FILE_PATH} from git log..."
+echo "createAggregatedGitLogData: Creating ${CSV_OUTPUT_FILE_PATH} from git log..."
 
 # Prints the header line of the CSV file with the names of the columns.
 echo "filename,year,month,author,email,commits" > "${CSV_OUTPUT_FILE_PATH}"
@@ -68,4 +68,4 @@ sed -E 's/^ *([0-9]+) (.+)/\2,\1/g' \
 
 csv_file_size=$(wc -c "${CSV_OUTPUT_FILE_PATH}" | awk '{print $1}')
 csv_lines=$(wc -l "${CSV_OUTPUT_FILE_PATH}" | awk '{print $1}')
-echo "createAggregatedGitLogCsv: File ${CSV_OUTPUT_FILE_PATH} with ${csv_file_size} bytes and ${csv_lines} lines created."
+echo "createAggregatedGitLogData: File ${CSV_OUTPUT_FILE_PATH} with ${csv_file_size} bytes and ${csv_lines} lines created."

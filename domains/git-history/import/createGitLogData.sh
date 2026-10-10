@@ -17,22 +17,22 @@ IFS=$'\n\t'
 CSV_OUTPUT_FILE_PATH=${1:-}
 
 if [ ! -d "./.git" ]; then
-  echo "createGitLogCsv: The current directory ${PWD} is not a git repository."
+  echo "createGitLogData: The current directory ${PWD} is not a git repository."
   return 0
 fi
 
 if [ -z "${CSV_OUTPUT_FILE_PATH}" ]; then
-  echo "createGitLogCsv: Missing CSV output file path parameter."
+  echo "createGitLogData: Missing CSV output file path parameter."
   return 0
 fi
 
-echo "createGitLogCsv: Creating ${CSV_OUTPUT_FILE_PATH} from git log..."
+echo "createGitLogData: Creating ${CSV_OUTPUT_FILE_PATH} from git log..."
 
 echo "hash,parent,author,email,timestamp,timestamp_unix,message,filename,change_type,old_filename" > "${CSV_OUTPUT_FILE_PATH}"
 
 # Skip git log if the repository has no commits yet (git log would exit with code 128)
 if ! git rev-parse --verify HEAD > /dev/null 2>&1; then
-  echo "createGitLogCsv: Repository ${PWD} has no commits. CSV contains only the header."
+  echo "createGitLogData: Repository ${PWD} has no commits. CSV contains only the header."
   return 0
 fi
 
@@ -77,4 +77,4 @@ NF && !/^ / {
 
 csv_file_size=$(wc -c "${CSV_OUTPUT_FILE_PATH}" | awk '{print $1}')
 csv_lines=$(wc -l "${CSV_OUTPUT_FILE_PATH}" | awk '{print $1}')
-echo "createGitLogCsv: File ${CSV_OUTPUT_FILE_PATH} with ${csv_file_size} bytes and ${csv_lines} lines created."
+echo "createGitLogData: File ${CSV_OUTPUT_FILE_PATH} with ${csv_file_size} bytes and ${csv_lines} lines created."
