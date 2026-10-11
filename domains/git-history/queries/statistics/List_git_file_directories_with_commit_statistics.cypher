@@ -5,7 +5,7 @@
  ORDER BY git_file.relativePath
   WITH *
       ,datetime.fromepochMillis(coalesce(git_file.createdAtEpoch, 0))                                AS fileCreatedAtTimestamp
-      ,datetime.fromepochMillis(coalesce(git_file.lastModificationAtEpoch, git_file.createdAtEpoch)) AS fileLastModificationAtTimestamp
+      ,datetime.fromepochMillis(coalesce(git_file.lastModificationAtEpoch, git_file.createdAtEpoch, 0)) AS fileLastModificationAtTimestamp
   WITH *, git_repository.name + '/' + git_file.relativePath AS filePath
   WITH *, split(filePath, '/')                              AS pathElements
   WITH *, pathElements[-1]                                  AS fileName

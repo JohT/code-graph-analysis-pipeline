@@ -29,6 +29,8 @@ Options: `"none"`, `"aggregated"`, `"full"`, `"plugin"` (default).
 - **`aggregated`**: Aggregated git log CSV import via `createAggregatedGitLogCsv.sh`.
 - **`none`**: Skip git import.
 
+**Note:** When `analyze.sh --skip-jqassistant` is used, this variable is automatically set to `full` (unless explicitly overridden), since the `plugin` mode requires jQAssistant.
+
 The domain's `import/importGit.sh` script orchestrates this import.
 
 > **Note:** The analyzed codebase may have no git history at all.
@@ -52,12 +54,17 @@ The following relationships must exist (created by `import/importGit.sh`):
 
 ## 4. Required Properties
 
-| Property | Node | Set By |
-|---|---|---|
-| `numberOfGitCommits` | `File` (Java/TypeScript) | `Set_number_of_git_log_commits.cypher` or `Set_number_of_git_plugin_commits.cypher` |
-| `updateCommitCount` | `Git:File` | `Set_number_of_git_plugin_update_commits.cypher` |
-| `isMergeCommit` | `Git:Commit` | `Set_commit_classification_properties.cypher` |
-| `isAutomatedCommit` | `Git:Commit` | `Set_commit_classification_properties.cypher` |
+| Property | Node | Set By | CSV Mode Only |
+|---|---|---|---|
+| `numberOfGitCommits` | `File` (Java/TypeScript) | `Set_number_of_git_log_commits.cypher` or `Set_number_of_git_plugin_commits.cypher` | No |
+| `updateCommitCount` | `Git:File` or `Git:Log:File` | `Set_number_of_git_plugin_update_commits.cypher` or `Set_number_of_git_log_file_update_commits.cypher` | No |
+| `isMergeCommit` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
+| `isAutomatedCommit` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
+| `isBotAuthor` | `Git:Commit` or `Git:Log:Commit` | `Set_commit_classification_properties.cypher` | No |
+| `changeType` | `CONTAINS_CHANGED` relationship | `Import_git_log_relationships_csv_data_pass2b.cypher` | **Yes** |
+| `createdAtEpoch` | `Git:Log:File` | `Set_git_log_file_dates.cypher` | **Yes** |
+| `lastModificationAtEpoch` | `Git:Log:File` | `Set_git_log_file_dates.cypher` | **Yes** |
+| `deletedAt` | `Git:Log:File` (for D-type changes) | `Import_git_log_relationships_csv_data_pass2b.cypher` | **Yes** |
 
 ---
 

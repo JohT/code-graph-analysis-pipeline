@@ -3,9 +3,8 @@
 MATCH (firstGitFile:Git&File&!Repository)-[gitChange:CHANGED_TOGETHER_WITH]-(secondGitFile:Git&File&!Repository)
 WHERE elementId(firstGitFile) < elementId(secondGitFile)
 MATCH (gitRepository:Git&Repository)-[:HAS_FILE]->(firstGitFile)
-UNWIND gitChange.updateCommitHashes AS commitHash
-  WITH gitRepository.name + '/' + firstGitFile.relativePath AS filePath
-      ,count(DISTINCT commitHash)                           AS commitCount
+  WITH gitRepository.name + '/' + coalesce(firstGitFile.relativePath, firstGitFile.fileName) AS filePath
+      ,sum(gitChange.updateCommitCount)                     AS commitCount
       ,sum(firstGitFile.updateCommitCount)                  AS fileUpdateCount
       ,max(gitChange.updateCommitLift)                      AS maxLift
       ,avg(gitChange.updateCommitLift)                      AS avgLift

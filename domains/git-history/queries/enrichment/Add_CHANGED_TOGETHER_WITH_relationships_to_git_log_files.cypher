@@ -3,12 +3,14 @@
 // Determine global file count, global file count threshold (filter out refactoring commits) and global update commits
 MATCH (git_commit_global:Git:Log:Commit)-[:CONTAINS_CHANGED]->(git_file_global:Git:Log:File)
 WHERE git_commit_global.isManualCommit
+  AND NOT git_commit_global.isMergeCommit
  WITH git_commit_global, count(DISTINCT git_file_global) AS commitFileCount
  WITH percentileDisc(commitFileCount, 0.95) AS globalFileCountThreshold
      ,count(git_commit_global)              AS globalUpdateCommitCount
 // Main section
 MATCH (git_commit:Git:Log:Commit)-[:CONTAINS_CHANGED]->(git_file:Git:Log:File)
 WHERE git_commit.isManualCommit
+  AND NOT git_commit.isMergeCommit
 MATCH (git_repository:Git&Repository)-[:HAS_FILE]->(git_file)
 // Order files to assure, that pairs of distinct files are grouped together (fileA, fileB) without (fileB, fileA)
 ORDER BY git_commit.hash, git_file.fileName
@@ -29,8 +31,7 @@ UNWIND fileCombinations AS fileCombination
   WITH globalFileCountThreshold
       ,globalUpdateCommitCount
       ,fileCombination
-      ,count(DISTINCT commitHash)      AS updateCommitCount
-      ,collect(DISTINCT commitHash)    AS updateCommitHashes
+      ,count(DISTINCT commitHash) AS updateCommitCount
 // Filter out file pairs that weren't changed very often together
 WHERE updateCommitCount > 2
  WITH *
@@ -51,7 +52,6 @@ WHERE updateCommitCount > 2
      ,firstFileUpdateSupport * secondFileUpdateSupport AS expectedCoUpdateSupport
  WITH firstFile
      ,secondFile
-     ,updateCommitHashes
      ,updateCommitCount
      // Out of all the times the less frequently changed file was touched, how often did it co-occur with the other file?
      ,toFloat(updateCommitCount) / minUpdateCommitCount    AS updateCommitMinConfidence
@@ -62,10 +62,9 @@ WHERE updateCommitCount > 2
      // Jaccard Similarity: Of all commits involving either file, how many involved both?
      ,toFloat(updateCommitCount) / (firstFile.updateCommitCount + secondFile.updateCommitCount - updateCommitCount) AS updateCommitJaccardSimilarity
 // Create the new relationship "CHANGED_TOGETHER_WITH" and set the property "updateCommitCount" on it
- CALL (firstFile, secondFile, updateCommitCount, updateCommitHashes, updateCommitMinConfidence, updateCommitSupport, updateCommitLift, updateCommitJaccardSimilarity) {
+ CALL (firstFile, secondFile, updateCommitCount, updateCommitMinConfidence, updateCommitSupport, updateCommitLift, updateCommitJaccardSimilarity) {
        MERGE (firstFile)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondFile)
          SET pairwiseChange.updateCommitCount             = toInteger(updateCommitCount)
-            ,pairwiseChange.updateCommitHashes            = updateCommitHashes
             ,pairwiseChange.updateCommitMinConfidence     = updateCommitMinConfidence
             ,pairwiseChange.updateCommitSupport           = updateCommitSupport
             ,pairwiseChange.updateCommitLift              = updateCommitLift

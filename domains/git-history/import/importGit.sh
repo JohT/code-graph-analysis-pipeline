@@ -2,12 +2,13 @@
 
 # Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT.
 
-# Requires executeQueryFunctions.sh, createGitLogCsv.sh, createAggregatedGitLogCsv
+# Requires executeQueryFunctions.sh, createGitLogData.sh, createAggregatedGitLogData
 
 # Note: This script needs the path to source directory that contains one or more git repositories. It defaults to SOURCE_DIRECTORY ("source"). 
 # Note: Import will be skipped without an error if the source directory doesn't any git repositories.
 # Note: This script needs git to be installed.
-# Note: IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="plugin" is default and recommended. The other options "aggregated" and "full" are not actively maintained anymore.
+# Note: IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="plugin" is default and recommended (uses jQAssistant git plugin).
+# Options "aggregated" and "full" will become important in future for SCIP index-based analysis without jQAssistant.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail
@@ -15,7 +16,7 @@ set -o errexit -o pipefail
 # Overrideable Defaults
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
 IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"import"}
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin" or "full" if `--skip-jqassistant` is used.
 
 # Local constants
 COLOR_YELLOW='\033[0;33m'
@@ -71,9 +72,100 @@ echo "importGit: GIT_LOG_VALIDATION_CYPHER_DIR=${GIT_LOG_VALIDATION_CYPHER_DIR}"
 # Define functions (like execute_cypher and execute_cypher_summarized) to execute cypher queries from within a given file
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define functions (like get_csv_column_value and is_csv_column_greater_zero) to parse CSV format strings from Cypher query results.
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
 deleteExistingGitData() {
   echo "importGit: Deleting already imported git data..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Delete_git_log_data.cypher"
+}
+
+# Verifies that all commits from Pass 1 were successfully imported by comparing expected count vs database delta.
+# Parameters: 1) expected number of commits from Pass 1 import result, 2) baseline commit count before import (default: 0)
+# Uses delta (actual - baseline) to support multi-repo imports where the global count accumulates across repos.
+# Exits with error code 1 if delta doesn't match expected (fail-fast on partial import)
+verify_pass1_commit_count() {
+  local expected_commits="${1:-}"
+  local baseline_commits="${2:-0}"
+  if [ -z "${expected_commits}" ]; then
+    echo "importGit: Error: verify_pass1_commit_count() requires expected commit count argument" >&2
+    return 1
+  fi
+
+  echo "importGit: Verifying Pass 1 imported ${expected_commits} commits..."
+
+  local actual_result
+  actual_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_git_log_commits.cypher")
+
+  local actual_commits
+  actual_commits=$(get_csv_column_value "${actual_result}" "commitCount")
+  local imported_commits=$(( actual_commits - baseline_commits ))
+
+  if [ "${imported_commits}" -ne "${expected_commits}" ]; then
+    echo "importGit: Error: Pass 1 incomplete. Expected ${expected_commits} commits, found ${imported_commits} newly imported (global: ${actual_commits}, baseline: ${baseline_commits}). Aborting." >&2
+    return 1
+  fi
+}
+
+verify_pass2a_file_count() {
+  echo "importGit: Checking that Git:Log:File nodes were created..."
+
+  local actual_result
+  actual_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_git_log_files.cypher")
+
+  local actual_files
+  actual_files=$(get_csv_column_value "${actual_result}" "fileCount")
+
+  if [ "${actual_files}" -le 0 ]; then
+    echo "importGit: Error: Pass 2a failed to create any file nodes. Found ${actual_files} files in database. Aborting." >&2
+    return 1
+  fi
+  
+  echo "importGit: Pass 2a verified - ${actual_files} Git:Log:File nodes in database."
+}
+
+# Parameters: 1) expected relationship count from Pass 2b import result, 2) baseline relationship count before import (default: 0)
+# Uses delta (actual - baseline) to support multi-repo imports where the global count accumulates across repos.
+verify_pass2b_relationships() {
+  local expected_relationships="${1:-}"
+  local baseline_relationships="${2:-0}"
+  if [ -z "${expected_relationships}" ]; then
+    echo "importGit: Error: verify_pass2b_relationships() requires expected relationship count argument" >&2
+    return 1
+  fi
+
+  echo "importGit: Verifying Pass 2b created ${expected_relationships} CONTAINS_CHANGED relationships..."
+
+  local actual_result
+  actual_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_git_log_relationships.cypher")
+
+  local actual_relationships
+  actual_relationships=$(get_csv_column_value "${actual_result}" "relationshipCount")
+  local created_relationships=$(( actual_relationships - baseline_relationships ))
+
+  if [ "${created_relationships}" -ne "${expected_relationships}" ]; then
+    echo "importGit: Error: Pass 2b incomplete. Expected ${expected_relationships} relationships, found ${created_relationships} newly created (global: ${actual_relationships}, baseline: ${baseline_relationships}). Aborting." >&2
+    return 1
+  fi
+}
+
+# Verifies that Git:File nodes have createdAtEpoch property set. Logs a non-fatal warning if missing.
+# Optional parameter: context message (defaults to generic message)
+verify_git_file_creation_dates() {
+  local context_message="${1:-}"
+  
+  echo "importGit: Verifying git file creation dates...${context_message:+ ($context_message)}"
+  
+  local dataVerificationResult
+  dataVerificationResult=$( execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_create_date.cypher")
+  
+  if is_csv_column_greater_zero "${dataVerificationResult}" "numberOfMissingCreateDateEntries"; then
+      # Warning: The git file creation date must not be missing. However, this is not important enough to stop the analysis.
+      #          Therefore, it will only be a warning and subsequent queries will use a default date in these cases.
+      echo -e "${COLOR_YELLOW}importGit: Data verification warning: Git:File nodes with missing createdAtEpoch property detected! Affected number of nodes:${COLOR_DEFAULT}"
+      echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
+      # Since this is now only a warning, execution will be continued.
+  fi
 }
 
 # Creates one (Git:Repository) node with information about the repository.  
@@ -121,11 +213,54 @@ importGitLog() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_hash.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_commit_parent.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
-  
-  echo "importGit: Importing full git log data into the Graph..."
-  time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_csv_data.cypher" "${@}"
-  
-  echo "importGit: Creating relationships for parent commits..."
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Pass 1: Importing git commit and author nodes from gitLogCommits.csv..."
+  local baseline_commit_result
+  baseline_commit_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_git_log_commits.cypher")
+  local baseline_commits
+  baseline_commits=$(get_csv_column_value "${baseline_commit_result}" "commitCount")
+  local pass1_result
+  pass1_result=$(time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_nodes_csv_data.cypher")
+
+  local expected_commits
+  expected_commits=$(get_csv_column_value "${pass1_result}" "numberOfCommits")
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Verifying Pass 1 imported ${expected_commits} commits..."
+  if ! verify_pass1_commit_count "${expected_commits}" "${baseline_commits}"; then
+      exit 1
+  fi
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Pass 2a: Creating git file nodes from gitLog.csv..."
+  time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_files_csv_data.cypher" "${@}"
+
+  # Verify Pass 2a by checking database count (simpler than calculating from CSV)
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Verifying Pass 2a created file nodes..."
+  if ! verify_pass2a_file_count; then
+      exit 1
+  fi
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Pass 2b: Creating commit-file relationships from gitLog.csv..."
+  local baseline_relationship_result
+  baseline_relationship_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_git_log_relationships.cypher")
+  local baseline_relationships
+  baseline_relationships=$(get_csv_column_value "${baseline_relationship_result}" "relationshipCount")
+  local pass2b_result
+  pass2b_result=$(time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_git_log_relationships_csv_data_pass2b.cypher" "${@}")
+
+  local expected_relationships
+  expected_relationships=$(get_csv_column_value "${pass2b_result}" "relationshipsCreated")
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Verifying Pass 2b created ${expected_relationships} relationships..."
+  if ! verify_pass2b_relationships "${expected_relationships}" "${baseline_relationships}"; then
+      exit 1
+  fi
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Pass 3: Creating repository-level relationships..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Create_git_log_repo_commit_relationships.cypher" "${@}"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Create_git_log_repo_author_relationships.cypher" "${@}"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Create_git_log_repo_file_relationships.cypher" "${@}"
+
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating relationships for parent commits..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_HAS_PARENT_relationships_to_commits.cypher"
 }
 
@@ -154,15 +289,6 @@ commonPostGitImport() {
   execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_to_code_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_code_to_git_file_unambiguous.cypher"
   execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_CHANGED_TOGETHER_WITH_properties.cypher"
-
-  dataVerificationResult=$( execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Verify_git_missing_create_date.cypher")
-  if ! is_csv_column_greater_zero "${dataVerificationResult}" "numberOfMissingCreateDateEntries"; then
-      # Warning: The git file creation date must not be missing. However, this is not important enough to stop the analysis.
-      #          Therefore, it will only be a warning and subsequent queries will use a default date in these cases.
-      echo -e "${COLOR_YELLOW}importGit: Data verification warning: Git:File nodes with missing createdAtEpoch property detected! Affected number of nodes:${COLOR_DEFAULT}"
-      echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
-      # Since this is now only a warning, execution will be continued.
-  fi
 }
 
 postGitLogImport() {
@@ -179,8 +305,14 @@ postGitLogImport() {
   echo "importGit: Add updateCommitCount property to file nodes and code nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_log_file_update_commits.cypher"
 
+  echo "importGit: Setting file creation and last modification dates for CSV log files..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_git_log_file_dates.cypher"
+
   echo "importGit: Creating relationships to file nodes that were changed together (CSV log schema)..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_log_files.cypher"
+
+  # Verify file creation dates are now set (runs after date enrichment query)
+  verify_git_file_creation_dates "after date enrichment"
 }
 
 postGitPluginImport() {
@@ -208,8 +340,13 @@ postGitPluginImport() {
 
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_commits.cypher"
-  echo "importGit: Add updateCommitCount property to code file nodes via RESOLVES_TO..."
+  # Runs a second time: first run (before commonPostGitImport) set updateCommitCount on Git:File nodes so
+  # CHANGED_TOGETHER_WITH could read it. This run propagates updateCommitCount to code files via RESOLVES_TO.
+  echo "importGit: Propagate updateCommitCount to code file nodes via RESOLVES_TO..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_git_plugin_update_commits.cypher"
+
+  # Verify file creation dates after all plugin-provided data and enrichment
+  verify_git_file_creation_dates "plugin import"
 }
 
 postAggregatedGitLogImport() {
@@ -218,6 +355,9 @@ postAggregatedGitLogImport() {
   
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
+
+  # Verify file creation dates after all aggregated data and enrichment
+  verify_git_file_creation_dates "aggregated import"
 }
 
 # Create import directory in case it doesn't exist.
@@ -245,16 +385,23 @@ if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT
 
     if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
-        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
+        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogData.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
         importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
-        postAggregatedGitLogImport 
     else
-    # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full" (default)
-        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogCsv.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv")
+    # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full"
+        (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogData.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLogCommits.csv")
         importGitLog "git_repository_absolute_directory_name=${full_repository_path}"
-        postGitLogImport 
     fi
   done
+  # Post-import enrichment runs once after all repositories are imported.
+  # Running per-repository would create cross-repository co-change artifacts and would be O(n*N) instead of O(N).
+  if [ "${existing_data_has_been_deleted}" = true ]; then
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
+      postAggregatedGitLogImport
+    else
+      postGitLogImport
+    fi
+  fi
 else
   echo "importGit: Skipped git import because of IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}"
 fi

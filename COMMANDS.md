@@ -102,7 +102,7 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--keep-running` skips the Neo4j stop step at the end of the script. Neo4j keeps running after analysis completes. Useful when running reports repeatedly (e.g. during development) to avoid the overhead of stopping and restarting Neo4j each time. Note: `--explore` implies `--keep-running`; combining both is redundant.
 
-- `--skip-jqassistant` skips jQAssistant download, setup, and scan. Designed for SCIP index analysis (already jQA-free) combined with CSV git history, where no Java/TypeScript artifact scanning is needed. Exports `SKIP_JQASSISTANT=true` for downstream scripts. When set, `setupJQAssistant.sh` and `resetAndScanChanged.sh` are not executed.
+- `--skip-jqassistant` skips jQAssistant download, setup, and scan. Designed for SCIP index analysis (already jQA-free) combined with CSV git history, where no Java/TypeScript artifact scanning is needed. Exports `SKIP_JQASSISTANT=true` for downstream scripts. When set, `setupJQAssistant.sh` and `resetAndScanChanged.sh` are not executed. Also automatically sets `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (unless explicitly overridden), since the jQAssistant git plugin is unavailable when jQAssistant is skipped.
 
 - `--domain anomaly-detection` selects a single analysis domain (a subdirectory of [domains/](./domains/)) to run reports for, following a vertical-slice approach. When set, only that domain's report scripts run; core reports from `scripts/reports/` and other domains are skipped. The domain option composes with `--report` to further narrow down which reports are generated, e.g. `--domain anomaly-detection --report Csv`. When not specified, all domains and reports run unchanged. The selected domain name is passed to report compilation scripts via the environment variable `ANALYSIS_DOMAIN`. Available domains can be found in the [domains/](./domains/) directory.
 
@@ -373,7 +373,7 @@ The optional parameter `--source directory-path-to-the-source-folder-containing-
 
 #### Environment Variable
 
-- `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` supports the values `none`, `aggregated`, `full` and `plugin` (default). With it, you can switch off git import (`none`), import aggregated data for a smaller memory footprint (`aggregated`), import all commits with git log in a simple way (`full`) or let a plugin take care of git data (`plugin`= `""`=default) .
+- `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` supports the values `none`, `aggregated`, `full` and `plugin` (default). With it, you can switch off git import (`none`), import aggregated data for a smaller memory footprint (`aggregated`), import all commits with git log in a simple way (`full`) or let a plugin take care of git data (`plugin`= `""`=default). **Note:** When `--skip-jqassistant` is used, this variable is automatically set to `full` (unless explicitly overridden), since the jQAssistant git plugin requires jQAssistant to be available.
 
 #### Resolving git files to code files
 
