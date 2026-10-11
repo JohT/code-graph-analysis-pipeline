@@ -24,10 +24,10 @@ ARCHETYPES_GRAPHS_DIR | ${ARCHETYPES_SCRIPT_DIR}/graphs | Contains everything (s
 CYCLIC_DEPENDENCIES_SUMMARY_DIR | ${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for cyclic dependencies
 EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries | 
 EXTERNAL_DEPENDENCIES_SUMMARY_DIR | ${EXTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, queries, templates) to create the Markdown summary report for external dependencies
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin | 
 GIT_HISTORY_SUMMARY_DIR | ${GIT_HISTORY_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
 SOURCE_DIRECTORY | source | Get the source repository directory (defaults to "source")
 IMPORT_DIRECTORY | import | 
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT | plugin | Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
 PROJECTION_CYPHER_DIR | ${GRAPH_ALGORITHMS_SCRIPT_DIR}/../../cypher/Dependencies_Projection | 
 GRAPH_ALGORITHMS_SUMMARY_DIR | ${GRAPH_ALGORITHMS_SCRIPT_DIR}/summary | 
 INTERNAL_DEPENDENCIES_SUMMARY_DIR | ${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/summary | Contains everything (scripts, templates) to create the Markdown summary report
