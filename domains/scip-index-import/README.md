@@ -189,6 +189,36 @@ Each anonymous class node gets:
 - A `DEPENDS_ON` edge to every type it implements (derived from `relationships[].is_implementation`)
 - A `BELONGS_TO` edge to the project node (admin import only)
 
+## Git Integration
+
+SCIP File nodes created during import are automatically linked to Git history when both SCIP indices and git logs are present in the same analysis.
+
+### How It Works
+
+1. **SCIP File Node Creation**: `Create_SCIP_File_Nodes.cypher` extracts unique file paths from type nodes and creates `:SCIP:File` nodes (one per unique source file path across all internal types)
+2. **Source File Linking**: `Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher` creates `SOURCE_FILE` edges from types to their source files
+3. **Git Resolution**: `Add_RESOLVES_TO_relationships_to_git_files_for_SCIP.cypher` (executed by git-history domain) matches SCIP file paths to Git file nodes via `RESOLVES_TO` edges
+
+### Data Model
+
+```
+Git:Repository
+  -[:HAS_FILE]-> Git:File (from git log)
+                  -[:RESOLVES_TO]-> SCIP:File
+                                    <-[:SOURCE_FILE]- SemanticCodeIndexInternalType
+```
+
+### Use Cases
+
+- **Enrichment**: Link SCIP type dependencies to git commit history
+- **Change Analysis**: Track which source files changed together (git) and their type dependencies (SCIP)
+- **Blame & Impact**: Combine git author/commit metadata with SCIP dependency graphs
+- **Verification**: Validate that git repo files match SCIP-analyzed source structure
+
+### Language Independence
+
+The SCIP file integration is **language-agnostic** — same query handles all SCIP-supported languages (Java, TypeScript, Go, Rust, C++, Python, Ruby, C#). No per-language variants needed; matching is based on relative file paths only.
+
 ## Folder Structure
 ├── README.md                              # This file
 ├── importScipIndexData.sh                 # Entry point: orchestrates CSV conversion + import
@@ -205,7 +235,9 @@ Each anonymous class node gets:
     │   ├── Import_SCIP_Type_Internal_Nodes.cypher
     │   ├── Import_SCIP_Type_External_Nodes.cypher
     │   └── Import_SCIP_Type_Edges.cypher
-    ├── structure/                         # Phase 2: module/artifact nodes and dependencies
+    ├── structure/                         # Phase 2: file, module, artifact nodes and dependencies
+    │   ├── Create_SCIP_File_Nodes.cypher
+    │   ├── Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher
     │   ├── Create_SCIP_Module_Nodes_For_Internal_Types.cypher
     │   ├── Create_SCIP_Artifact_Nodes.cypher
     │   ├── Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher
@@ -252,6 +284,8 @@ Build module and artifact hierarchy, plus dependency relationships.
 
 | Query | Purpose |
 |-------|---------|
+| [Create_SCIP_File_Nodes.cypher](./queries/structure/Create_SCIP_File_Nodes.cypher) | Create `SCIP:File` nodes — one per unique source file path across all internal types (language-agnostic) |
+| [Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher](./queries/structure/Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher) | `SemanticCodeIndexInternalType -[:SOURCE_FILE]-> SCIP:File` — enables direct traversal from type to source file |
 | [Create_SCIP_Module_Nodes_For_Internal_Types.cypher](./queries/structure/Create_SCIP_Module_Nodes_For_Internal_Types.cypher) | Create `SemanticCodeIndexModule` nodes — one per unique source directory |
 | [Create_SCIP_Artifact_Nodes.cypher](./queries/structure/Create_SCIP_Artifact_Nodes.cypher) | Create `SemanticCodeIndexArtifact` nodes — one per unique module+version combination |
 | [Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexModule -[:CONTAINS]-> SemanticCodeIndexInternalType` |
