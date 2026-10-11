@@ -29,6 +29,8 @@ Options: `"none"`, `"aggregated"`, `"full"`, `"plugin"` (default).
 - **`aggregated`**: Aggregated git log CSV import via `createAggregatedGitLogCsv.sh`.
 - **`none`**: Skip git import.
 
+**Note:** When `analyze.sh --skip-jqassistant` is used, this variable is automatically set to `full` (unless explicitly overridden), since the `plugin` mode requires jQAssistant.
+
 The domain's `import/importGit.sh` script orchestrates this import.
 
 > **Note:** The analyzed codebase may have no git history at all.

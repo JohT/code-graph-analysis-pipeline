@@ -84,6 +84,8 @@ The `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` environment variable controls how
 | `aggregated` | Pre-aggregated CSV git log — no commit-level granularity; `CHANGED_TOGETHER_WITH` cannot be computed |
 | `none` | Skip git import entirely |
 
+**Note:** When `analyze.sh --skip-jqassistant` is used, `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` is automatically set to `full` (unless explicitly overridden), since the `plugin` mode requires jQAssistant to be available.
+
 ### CSV `full` Mode Enrichment (`postGitLogImport`)
 
 When `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (CSV mode), the following enrichment steps run in `importGit.sh` **after all repositories are imported** (outside the per-repo loop to eliminate cross-repo artifacts):

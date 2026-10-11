@@ -24,6 +24,8 @@
 #       When activated, jQAssistant download, setup, and scan are skipped entirely.
 #       RECOMMENDED for SCIP index analysis (already jQA-free). Combine with CSV git history from the source/ directory.
 #       Use only when you have *.scip.json files in indices/ and do not need Java/TypeScript artifact scanning.
+#       Also automatically sets IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="full" (unless explicitly overridden),
+#       since the jQAssistant plugin is unavailable when jQAssistant is skipped.
 
 # Note: The argument "--explore" is optional. It is a switch that is deactivated by default.
 #       It activates "explore" mode where no reports are executed and Neo4j keeps running (skip stop step).
@@ -46,8 +48,11 @@
 #       when it comes to subsequent executions.
 #       Existing downloads, installations, scans and processes will be detected.
 
+# Note: The argument "--skip-jqassistant" is optional.
+#       When provided, it skips the setupJQAssistant.sh and resetAndScanChanged.sh scripts.
+#       Exports the environment variable SKIP_JQASSISTANT=true.
+
 # Requires domains/neo4j-management/setupNeo4j.sh,setupJQAssistant.sh,domains/neo4j-management/startNeo4j.sh,resetAndScanChanged.sh,prepareAnalysis.sh,domains/neo4j-management/stopNeo4j.sh,compilations/*.sh,profiles/*.sh,domains/git-history/import/importGitIfChanged.sh
-# Optional: --skip-jqassistant skips setupJQAssistant.sh and resetAndScanChanged.sh; exports SKIP_JQASSISTANT=true
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exist on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -83,6 +88,7 @@ usage() {
   echo "  --skip-jqassistant        (RECOMMENDED for SCIP) Skip jQAssistant download, setup, and scan."
   echo "                            Use for SCIP index analysis (*.scip.json in indices/) without Java/TypeScript artifacts."
   echo "                            Exports SKIP_JQASSISTANT=true for downstream scripts."
+  echo "                            Also sets IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full unless explicitly overridden."
   echo "  --explore                 Skip report generation and keep Neo4j running for manual exploration."
   echo "  --keep-running            Keep Neo4j running after the analysis completes."
   echo "  --help                    Print this usage information and exit."
@@ -351,6 +357,16 @@ echo "${LOG_GROUP_END}"
 # Export skip flag for downstream scripts
 export SKIP_JQASSISTANT="${skipJQAssistant}"
 echo "analyze: SKIP_JQASSISTANT=${SKIP_JQASSISTANT}"
+
+# When --skip-jqassistant is set, default git import method to "full" (not "plugin").
+# The "plugin" method requires jQAssistant, which is unavailable when jQAssistant is skipped.
+# This is only applied if IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT is not already explicitly set in the environment.
+if ${skipJQAssistant}; then
+  if [ -z "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" ]; then
+    export IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="full"
+    echo "analyze: IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full (automatically set because --skip-jqassistant is used)"
+  fi
+fi
 
 # Setup Tools
 echo "${LOG_GROUP_START}Setup Tools"

@@ -11,7 +11,7 @@ IFS=$'\n\t'
 
 # Overrideable Defaults
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Source directory containing git repositories
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"}  # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin" or "full" if `--skip-jqassistant` is used.
 
 ## Get this "import" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.

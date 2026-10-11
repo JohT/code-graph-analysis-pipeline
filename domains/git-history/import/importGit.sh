@@ -16,7 +16,7 @@ set -o errexit -o pipefail
 # Overrideable Defaults
 SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository directory (defaults to "source")
 IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"import"}
-IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin".
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin" or "full" if `--skip-jqassistant` is used.
 
 # Local constants
 COLOR_YELLOW='\033[0;33m'
