@@ -80,7 +80,7 @@ The `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` environment variable controls how
 | Mode | Description |
 | ------ | ------------- |
 | `plugin` (default) | jQAssistant git plugin — recommended; schema: `(Git:Commit)-[:CONTAINS_CHANGE]->(Git:Change)-[:UPDATES]->(Git:File)`, property: `relativePath` |
-| `full` | CSV git log with every commit — schema: `(Git:Log:Commit)-[:CONTAINS_CHANGED {changeType}]->(Git:Log:File)`, properties: `fileName`, `createdAtEpoch`, `lastModificationAtEpoch`; renames tracked via `[:HAS_NEW_NAME]` relationships |
+| `full` | CSV git log with every commit and merge commit changes — schema: `(Git:Log:Commit)-[:CONTAINS_CHANGED {changeType}]->(Git:Log:File)`, properties: `fileName`, `createdAtEpoch`, `lastModificationAtEpoch`; renames tracked via `[:HAS_NEW_NAME]` relationships; merge commits included with changes relative to each parent (captures conflict resolutions via `-m` flag) |
 | `aggregated` | Pre-aggregated CSV git log — no commit-level granularity; `CHANGED_TOGETHER_WITH` cannot be computed |
 | `none` | Skip git import entirely |
 

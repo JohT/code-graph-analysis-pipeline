@@ -5,7 +5,9 @@
 # 2. gitLog.csv        — schema: hash,filename,change_type,old_filename (one row per file change)
 # change_type values: A (added), M (modified), D (deleted), R (renamed), C (copied)
 # For renames: filename = new path, old_filename = old path. For all other types: old_filename is empty.
-# Merge commits are included. Bot-author filtering is handled in Cypher after import.
+# Merge commits are included: files changed relative to each parent are captured (with -m flag).
+# For clean merges (no file changes relative to all parents), no rows are produced.
+# Bot-author filtering is handled in Cypher after import.
 
 # Note: This script must be executed (via source) within a git repository directory.
 # Note: Requires two positional parameters: path to gitLog.csv output, path to gitLogCommits.csv output.
@@ -48,9 +50,10 @@ fi
 # - Lines starting with a space are commit metadata, delimited by ,,, to avoid conflicts with field content.
 # - %H: commit hash, %P: parent hash(es) space-separated, %an: author name, %ae: author email,
 #   %aI: ISO 8601 date (kept for field count), %ct: Unix timestamp, %s: commit subject.
+# - -m flag: show changes relative to each parent (important for merge commits and conflict resolutions).
 # - awk: on the first file status line per commit, print one commit row (skipping commits with no file changes).
 #   has_files flag prevents duplicate rows for commits touching multiple files.
-git log --pretty=format:' %H,,,%P,,,%an,,,%ae,,,%aI,,,%ct,,,%s' --name-status | \
+git log -m --pretty=format:' %H,,,%P,,,%an,,,%ae,,,%aI,,,%ct,,,%s' --name-status | \
 awk 'BEGIN { FS="\t"; COMMA=","; QUOTE="\"" }
 /^ / {
     split($0, a, ",,,")
@@ -64,7 +67,7 @@ awk 'BEGIN { FS="\t"; COMMA=","; QUOTE="\"" }
 }
 NF && !/^ / {
     if (!has_files) { print commit; has_files = 1 }
-}' >> "${CSV_COMMITS_OUTPUT_FILE_PATH}"
+}' | sort -u >> "${CSV_COMMITS_OUTPUT_FILE_PATH}"
 
 # git log format for gitLog.csv:
 # - Lines starting with a space are commit lines: only the hash is extracted (no other metadata needed).
@@ -73,7 +76,9 @@ NF && !/^ / {
 #   For R-type: filename = $3 (new path), old_filename = $2 (old path)
 #   For C-type (copy): filename = $3 (new path), old_filename = empty
 #   For all other types: filename = $2, old_filename = empty
-git log --pretty=format:' %H' --name-status | \
+# - -m flag: for merge commits, this produces multiple sets of file changes (one per parent).
+#   The same merge commit hash may appear multiple times with different files (multi-parent diffs).
+git log -m --pretty=format:' %H' --name-status | \
 awk 'BEGIN { FS="\t"; COMMA=","; QUOTE="\"" }
 /^ / {
     current_hash = substr($0, 2)

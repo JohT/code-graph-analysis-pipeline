@@ -237,14 +237,12 @@ assert_contains "old filename in old_filename column" '"old.txt"' "${CSV_CONTENT
 assert_contains "rename row has correct column order" '"new.txt","R","old.txt"' "${CSV_CONTENT}"
 
 # ---------------------------------------------------------------------------
-# Test: merge commits are not filtered; parent hashes captured correctly
-# Note: git log --name-status combined diff is empty for clean merges (no
-# file changes relative to all parents simultaneously). This is expected
-# behavior. We verify the script does not use --no-merges, and that parent
-# hashes are correctly written for regular commits in a repo with merges.
+# Test: merge commits are included with file changes captured via -m flag
+# Note: With -m flag, merge commits produce file changes relative to each parent
+# (important for detecting conflict resolutions and multi-parent changes).
 # ---------------------------------------------------------------------------
 
-echo "--- Merge commits not filtered, parent hashes ---"
+echo "--- Merge commits included with file changes ---"
 REPO="${TEMP_DIR}/test_merge"
 CSV_LOG="${TEMP_DIR}/merge_log.csv"
 CSV_COMMITS="${TEMP_DIR}/merge_commits.csv"
@@ -269,18 +267,29 @@ git -C "${REPO}" add c.txt
 git -C "${REPO}" commit --quiet -m "second"
 SECOND_HASH=$(git -C "${REPO}" rev-parse HEAD)
 git -C "${REPO}" merge --quiet --no-ff feature -m "merge feature"
+MERGE_HASH=$(git -C "${REPO}" rev-parse HEAD)
 
 run_script_in_repo "${REPO}" "${CSV_LOG}" "${CSV_COMMITS}"
 
-CSV_CONTENT=$(cat "${CSV_COMMITS}")
+CSV_COMMITS_CONTENT=$(cat "${CSV_COMMITS}")
+CSV_LOG_CONTENT=$(cat "${CSV_LOG}")
 
 # --no-merges must not be present in the script
 assert_not_contains "--no-merges not in script" "--no-merges" "$(cat "${SCRIPT}")"
 
+# -m flag must be present to capture merge commit changes
+assert_contains "-m flag in script for merge changes" " -m " "$(cat "${SCRIPT}")"
+
 # Regular commits must appear in the CSV
-assert_contains "first commit appears in CSV" "${FIRST_HASH}" "${CSV_CONTENT}"
-assert_contains "feature commit appears in CSV" "${FEATURE_HASH}" "${CSV_CONTENT}"
-assert_contains "second commit appears in CSV" "${SECOND_HASH}" "${CSV_CONTENT}"
+assert_contains "first commit appears in CSV" "${FIRST_HASH}" "${CSV_COMMITS_CONTENT}"
+assert_contains "feature commit appears in CSV" "${FEATURE_HASH}" "${CSV_COMMITS_CONTENT}"
+assert_contains "second commit appears in CSV" "${SECOND_HASH}" "${CSV_COMMITS_CONTENT}"
+
+# Merge commit must appear in gitLogCommits.csv (it has file changes via -m)
+assert_contains "merge commit appears in gitLogCommits" "${MERGE_HASH}" "${CSV_COMMITS_CONTENT}"
+
+# Merge commit file changes must appear in gitLog.csv (one entry per file changed relative to parents)
+assert_contains "merge commit appears in gitLog with b.txt" "${MERGE_HASH}" "${CSV_LOG_CONTENT}"
 
 # Parent hashes are correctly captured for commits with a single parent
 SECOND_ROW=$(grep "^${SECOND_HASH}," "${CSV_COMMITS}")
