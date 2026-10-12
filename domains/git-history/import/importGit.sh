@@ -18,12 +18,29 @@ SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-"source"} # Get the source repository direc
 IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"import"}
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Select how to import git log data. Options: "none", "aggregated", "full" and "plugin". Default="plugin" or "full" if `--skip-jqassistant` is used.
 
-# Local constants
-COLOR_YELLOW='\033[0;33m'
-COLOR_DEFAULT='\033[0m'
-
 # Default and initial values for command line options
 source="${SOURCE_DIRECTORY}"
+
+logInfo() {
+    local infoMessage="${1}"
+    local COLOR_INFO='\033[0;30m' # dark grey
+    local COLOR_DEFAULT='\033[0m'
+    echo -e "${COLOR_INFO}importGit: Info: ${infoMessage}${COLOR_DEFAULT}"
+}
+
+logWarning() {
+    local warningMessage="${1}"
+    local COLOR_WARNING='\033[0;33m' # yellow
+    local COLOR_DEFAULT='\033[0m'
+    echo -e "${COLOR_WARNING}importGit: Warning: ${warningMessage}${COLOR_DEFAULT}" >&2
+}
+
+logError() {
+    local errorMessage="${1}"
+    local COLOR_ERROR='\033[0;31m' # red
+    local COLOR_DEFAULT='\033[0m'
+    echo -e "${COLOR_ERROR}importGit: Error: ${errorMessage}${COLOR_DEFAULT}" >&2
+}
 
 # Read  command line options
 USAGE="importGit: Usage: $0 [--source <directory containing git repositories>(default=source)]"
@@ -34,40 +51,49 @@ while [ "$#" -gt "0" ]; do
       source="$2"
       # Check if the explicitly given source is a valid directory
       if [ ! -d "${source}" ] ; then
-        echo "importGit: Error: The given source <${source}> is not a directory" >&2
+        logError "The given source <${source}> is not a directory"
         echo "${USAGE}" >&2
         exit 1
       fi
       shift
       ;;
     *)
-      echo "importGit: Error: Unknown option: ${key}"
+      logError "Unknown option: ${key}"
       echo "${USAGE}" >&2
       exit 1
   esac
   shift
 done
 
-echo "importGit: source directory to look for git repositories=${source}"
+# Validate IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT to have a supported value (none, plugin, full, aggregated)
+if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" != "none" ] && \
+   [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" != "plugin" ] && \
+   [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" != "full" ] && \
+   [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-}" != "aggregated" ]; then
+    logError "IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT has an unsupported value: ${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}. Pick one of: none, plugin, full, aggregated."
+    exit 1
+fi
+
+logInfo "source directory to look for git repositories=${source}"
 
 ## Get this "scripts" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
 GIT_HISTORY_IMPORT_DIR=${GIT_HISTORY_IMPORT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )} # This "import" directory
-echo "importGit: GIT_HISTORY_IMPORT_DIR=${GIT_HISTORY_IMPORT_DIR}"
+logInfo "GIT_HISTORY_IMPORT_DIR=${GIT_HISTORY_IMPORT_DIR}"
 
 # Get the central "scripts" directory by navigating three levels up from this domain's import directory.
 SCRIPTS_DIR=${SCRIPTS_DIR:-"${GIT_HISTORY_IMPORT_DIR}/../../../scripts"}
-echo "importGit: SCRIPTS_DIR=${SCRIPTS_DIR}"
+logInfo "SCRIPTS_DIR=${SCRIPTS_DIR}"
 
 # Cypher enrichment queries are in this domain's queries/enrichment directory.
 GIT_LOG_CYPHER_DIR="${GIT_HISTORY_IMPORT_DIR}/../queries/enrichment"
-echo "importGit: GIT_LOG_CYPHER_DIR=${GIT_LOG_CYPHER_DIR}"
+logInfo "GIT_LOG_CYPHER_DIR=${GIT_LOG_CYPHER_DIR}"
 
 # Cypher validation queries are in this domain's queries/validation directory.
 GIT_LOG_VALIDATION_CYPHER_DIR="${GIT_HISTORY_IMPORT_DIR}/../queries/validation"
-echo "importGit: GIT_LOG_VALIDATION_CYPHER_DIR=${GIT_LOG_VALIDATION_CYPHER_DIR}"
+logInfo "GIT_LOG_VALIDATION_CYPHER_DIR=${GIT_LOG_VALIDATION_CYPHER_DIR}"
 
 # Define functions (like execute_cypher and execute_cypher_summarized) to execute cypher queries from within a given file
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -88,7 +114,7 @@ verify_pass1_commit_count() {
   local expected_commits="${1:-}"
   local baseline_commits="${2:-0}"
   if [ -z "${expected_commits}" ]; then
-    echo "importGit: Error: verify_pass1_commit_count() requires expected commit count argument" >&2
+    logError "verify_pass1_commit_count() requires expected commit count argument"
     return 1
   fi
 
@@ -102,7 +128,7 @@ verify_pass1_commit_count() {
   local imported_commits=$(( actual_commits - baseline_commits ))
 
   if [ "${imported_commits}" -ne "${expected_commits}" ]; then
-    echo "importGit: Error: Pass 1 incomplete. Expected ${expected_commits} commits, found ${imported_commits} newly imported (global: ${actual_commits}, baseline: ${baseline_commits}). Aborting." >&2
+    logError "Pass 1 incomplete. Expected ${expected_commits} commits, found ${imported_commits} newly imported (global: ${actual_commits}, baseline: ${baseline_commits}). Aborting."
     return 1
   fi
 }
@@ -117,7 +143,7 @@ verify_pass2a_file_count() {
   actual_files=$(get_csv_column_value "${actual_result}" "fileCount")
 
   if [ "${actual_files}" -le 0 ]; then
-    echo "importGit: Error: Pass 2a failed to create any file nodes. Found ${actual_files} files in database. Aborting." >&2
+    logError "Pass 2a failed to create any file nodes. Found ${actual_files} files in database. Aborting."
     return 1
   fi
   
@@ -130,7 +156,7 @@ verify_pass2b_relationships() {
   local expected_relationships="${1:-}"
   local baseline_relationships="${2:-0}"
   if [ -z "${expected_relationships}" ]; then
-    echo "importGit: Error: verify_pass2b_relationships() requires expected relationship count argument" >&2
+    logError "verify_pass2b_relationships() requires expected relationship count argument"
     return 1
   fi
 
@@ -144,7 +170,7 @@ verify_pass2b_relationships() {
   local created_relationships=$(( actual_relationships - baseline_relationships ))
 
   if [ "${created_relationships}" -ne "${expected_relationships}" ]; then
-    echo "importGit: Error: Pass 2b incomplete. Expected ${expected_relationships} relationships, found ${created_relationships} newly created (global: ${actual_relationships}, baseline: ${baseline_relationships}). Aborting." >&2
+    logError "Pass 2b incomplete. Expected ${expected_relationships} relationships, found ${created_relationships} newly created (global: ${actual_relationships}, baseline: ${baseline_relationships}). Aborting."
     return 1
   fi
 }
@@ -162,8 +188,7 @@ verify_git_file_creation_dates() {
   if is_csv_column_greater_zero "${dataVerificationResult}" "numberOfMissingCreateDateEntries"; then
       # Warning: The git file creation date must not be missing. However, this is not important enough to stop the analysis.
       #          Therefore, it will only be a warning and subsequent queries will use a default date in these cases.
-      echo -e "${COLOR_YELLOW}importGit: Data verification warning: Git:File nodes with missing createdAtEpoch property detected! Affected number of nodes:${COLOR_DEFAULT}"
-      echo -e "${COLOR_YELLOW}${dataVerificationResult}${COLOR_DEFAULT}"
+      logWarning "Git:File nodes with missing createdAtEpoch property detected! Affected number of nodes: $(get_csv_column_value "${dataVerificationResult}" "numberOfMissingCreateDateEntries")"
       # Since this is now only a warning, execution will be continued.
   fi
 }
@@ -173,11 +198,11 @@ verify_git_file_creation_dates() {
 create_git_repository_node() {
     local full_local_repository_path="${1:-}"
     if [ -z "${full_local_repository_path}" ]; then
-        echo "importGit: Error: create_git_repository_node() requires a repository path argument" >&2
+        logError "create_git_repository_node() requires a repository path argument"
         return 1
     fi
     if [ ! -d "${full_local_repository_path}" ]; then
-        echo "importGit: Error: Repository directory does not exist: ${full_local_repository_path}" >&2
+        logError "Repository directory does not exist: ${full_local_repository_path}"
         return 1
     fi
     echo "importGit:   - full_local_repository_path=${full_local_repository_path}"
