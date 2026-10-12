@@ -30,10 +30,13 @@ Script | Directory | Description
 [gitHistoryCsv.sh](./domains/git-history/gitHistoryCsv.sh) | git-history | Executes GitLog Cypher statistics queries to produce git history CSV reports.
 [gitHistoryMarkdown.sh](./domains/git-history/gitHistoryMarkdown.sh) | git-history | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [gitHistoryPython.sh](./domains/git-history/gitHistoryPython.sh) | git-history | Generates git history charts as SVG files using Python.
-[createAggregatedGitLogCsv.sh](./domains/git-history/import/createAggregatedGitLogCsv.sh) | import | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed.
-[createGitLogCsv.sh](./domains/git-history/import/createGitLogCsv.sh) | import | Uses git log to create a comma separated values (CSV) file containing all commits, their author, email address, date and all the file names that were changed with it.
+[createAggregatedGitLogData.sh](./domains/git-history/import/createAggregatedGitLogData.sh) | import | Uses git log to create a comma separated values (CSV) file containing aggregated changes, their author name and email address, year and month for all the files that were changed.
+[createGitLogData.sh](./domains/git-history/import/createGitLogData.sh) | import | Uses git log to create two CSV files for multi-pass import:
 [importGit.sh](./domains/git-history/import/importGit.sh) | import | Coordinates the import of git data from the given --source directory where one ore more git repositories are located and the value of the environment variable IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT.
+[importGitIfChanged.sh](./domains/git-history/import/importGitIfChanged.sh) | import | Runs importGit.sh only when source/ contents changed since the last successful import, using SHA-based change detection.
 [gitHistorySummary.sh](./domains/git-history/summary/gitHistorySummary.sh) | summary | Creates a Markdown report summarising all git history analysis results.
+[testCreateGitLogData.sh](./domains/git-history/testCreateGitLogData.sh) | git-history | Tests createGitLogData.sh: CSV header, change types (A/M/D/R), merge commit inclusion,
+[testImportGitIfChanged.sh](./domains/git-history/testImportGitIfChanged.sh) | git-history | Tests importGitIfChanged.sh: skip conditions, change detection, --dry-run, and SHA file lifecycle.
 [centralityCsv.sh](./domains/graph-algorithms/centralityCsv.sh) | graph-algorithms | Applies centrality algorithms using the Neo4j Graph Data Science Library and writes CSV reports.
 [communityCsv.sh](./domains/graph-algorithms/communityCsv.sh) | graph-algorithms | Detects communities using the Neo4j Graph Data Science Library and writes CSV reports.
 [graphAlgorithmsMarkdown.sh](./domains/graph-algorithms/graphAlgorithmsMarkdown.sh) | graph-algorithms | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
