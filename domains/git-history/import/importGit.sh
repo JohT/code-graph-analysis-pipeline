@@ -278,6 +278,7 @@ commonPostGitImport() {
   echo "importGit: Creating relationships to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_RESOLVES_TO_relationships_to_git_files_for_SCIP.cypher"
 
   echo "importGit: Creating relationships to file nodes that where changed together..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_git_files.cypher"

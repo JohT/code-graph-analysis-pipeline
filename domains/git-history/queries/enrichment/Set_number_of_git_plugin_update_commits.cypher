@@ -6,6 +6,7 @@ WHERE git_file.deletedAt IS NULL
   SET git_file.updateCommitCount = updateCommitCount
  WITH git_file, updateCommitCount
 MATCH (code_file:File&!Git)<-[:RESOLVES_TO]-(git_file)
-  SET code_file.updateCommitCount = updateCommitCount
+WITH code_file, sum(git_file.updateCommitCount) AS totalUpdateCommitCount
+  SET code_file.updateCommitCount = totalUpdateCommitCount
 RETURN count(DISTINCT code_file)                      AS codeFileUpdates
       ,collect(DISTINCT code_file.name)[0..4]         AS codeFileExample

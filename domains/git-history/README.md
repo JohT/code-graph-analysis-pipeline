@@ -66,7 +66,10 @@ This domain requires the following to be in place before running. See [PREREQUIS
 
 - Neo4j running with scanned artifacts loaded
 - Git history imported (`IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` env var controls the mode)
-- `Git:File` ↔ `RESOLVES_TO` ↔ code file relationships
+- `Git:File` ↔ `RESOLVES_TO` ↔ code file relationships:
+  - `Add_RESOLVES_TO_relationships_to_git_files_for_Java.cypher` — matches Java code files from jQAssistant
+  - `Add_RESOLVES_TO_relationships_to_git_files_for_Typescript.cypher` — matches TypeScript code files from jQAssistant
+  - `Add_RESOLVES_TO_relationships_to_git_files_for_SCIP.cypher` — matches SCIP file nodes (all languages: Java, TypeScript, Go, Rust, C++, Python, Ruby, C#)
 - `CHANGED_TOGETHER_WITH` relationships between git files and resolved code files
 - `numberOfGitCommits` property on code `File` nodes
 - `updateCommitCount` property on `Git:File` nodes
