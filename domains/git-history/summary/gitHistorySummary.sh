@@ -16,6 +16,7 @@ set -o errexit -o pipefail
 # Overrideable Constants (defaults also defined in sub scripts)
 REPORTS_DIRECTORY=${REPORTS_DIRECTORY:-"reports"}
 MARKDOWN_INCLUDES_DIRECTORY=${MARKDOWN_INCLUDES_DIRECTORY:-"includes"} # Subdirectory that contains Markdown files to be included by the Markdown template for the report.
+IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT:-"plugin"} # Required to select the correct query variant for the git data import mode
 
 ## Get this "domains/git-history/summary" directory if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.
@@ -33,6 +34,13 @@ GIT_HISTORY_STATISTICS_CYPHER_DIR="${GIT_HISTORY_SUMMARY_DIR}/../queries/statist
 
 # Define functions to execute a cypher query from within a given file (first and only argument) like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
+
+logInfo() {
+    local infoMessage="${1}"
+    local COLOR_INFO='\033[0;30m' # dark grey
+    local COLOR_DEFAULT='\033[0m'
+    echo -e "${COLOR_INFO}gitHistorySummary: Info: $(date +'%Y-%m-%d %H:%M:%S') ${infoMessage}${COLOR_DEFAULT}" >&2
+}
 
 # ── Front matter ──────────────────────────────────────────────────────────────
 
@@ -93,6 +101,7 @@ limit_markdown_table() {
 # Runs a Cypher query and outputs a limited Markdown table to stdout.
 # Arguments: <cypher_file> [cypher_params...]
 cypher_table() {
+    logInfo "Querying ${1##*/}"
     execute_cypher "$@" --output-markdown-table | limit_markdown_table
 }
 
@@ -114,6 +123,12 @@ assemble_git_history_report() {
     local report_include_directory="${FULL_REPORT_DIRECTORY}/${MARKDOWN_INCLUDES_DIRECTORY}"
     mkdir -p "${report_include_directory}"
 
+    # Determine query suffix based on import mode (matches logic in gitHistoryCsv.sh)
+    local QUERY_SUFFIX=""
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
+        QUERY_SUFFIX="_aggregated"
+    fi
+
     # -- Write front matter ------------------------------------------------
     git_history_front_matter > "${report_include_directory}/GitHistoryReportFrontMatter.md"
 
@@ -127,7 +142,7 @@ assemble_git_history_report() {
     # ── Directory commit statistics ────────────────────────────────────────
 
     {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_file_directories_with_commit_statistics.cypher"
+        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_file_directories_with_commit_statistics${QUERY_SUFFIX}.cypher"
         csv_link "List_git_file_directories_with_commit_statistics.csv"
     } > "${report_include_directory}/List_git_file_directories_with_commit_statistics.md"
 
@@ -138,24 +153,28 @@ assemble_git_history_report() {
     # ── Co-changed files ──────────────────────────────────────────────────
 
     {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together.cypher"
+        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together${QUERY_SUFFIX}.cypher"
         csv_link "List_git_files_that_were_changed_together.csv"
     } > "${report_include_directory}/List_git_files_that_were_changed_together.md"
 
-    {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_all_in_one.cypher"
-        csv_link "List_git_files_that_were_changed_together_all_in_one.csv"
-    } > "${report_include_directory}/List_git_files_that_were_changed_together_all_in_one.md"
+    # Skip expensive all_in_one queries for aggregated mode - they compute relationships on-the-fly
+    # using Git:Commit nodes that don't exist in aggregated mode, making them slow and returning empty results
+    if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" != "aggregated" ]; then
+        {
+            cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_all_in_one.cypher"
+            csv_link "List_git_files_that_were_changed_together_all_in_one.csv"
+        } > "${report_include_directory}/List_git_files_that_were_changed_together_all_in_one.md"
+
+        {
+            cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file_all_in_one.cypher"
+            csv_link "List_git_files_that_were_changed_together_with_another_file_all_in_one.csv"
+        } > "${report_include_directory}/List_git_files_that_were_changed_together_with_another_file_all_in_one.md"
+    fi
 
     {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file.cypher"
+        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file${QUERY_SUFFIX}.cypher"
         csv_link "List_git_files_that_were_changed_together_with_another_file.csv"
     } > "${report_include_directory}/List_git_files_that_were_changed_together_with_another_file.md"
-
-    {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file_all_in_one.cypher"
-        csv_link "List_git_files_that_were_changed_together_with_another_file_all_in_one.csv"
-    } > "${report_include_directory}/List_git_files_that_were_changed_together_with_another_file_all_in_one.md"
 
     {
         include_svgs_matching "${FULL_REPORT_DIRECTORY}" "CoChangedFiles_*.svg"
@@ -164,7 +183,7 @@ assemble_git_history_report() {
     # ── File change distribution ───────────────────────────────────────────
 
     {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_per_commit_distribution.cypher"
+        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_per_commit_distribution${QUERY_SUFFIX}.cypher"
         csv_link "List_git_files_per_commit_distribution.csv"
     } > "${report_include_directory}/List_git_files_per_commit_distribution.md"
 
@@ -197,7 +216,7 @@ assemble_git_history_report() {
     # ── Files by author ────────────────────────────────────────────────────
 
     {
-        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_with_commit_statistics_by_author.cypher"
+        cypher_table "${GIT_HISTORY_STATISTICS_CYPHER_DIR}/List_git_files_with_commit_statistics_by_author${QUERY_SUFFIX}.cypher"
         csv_link "List_git_files_with_commit_statistics_by_author.csv"
     } > "${report_include_directory}/List_git_files_with_commit_statistics_by_author.md"
 

@@ -289,14 +289,51 @@ importGitLog() {
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_HAS_PARENT_relationships_to_commits.cypher"
 }
 
+verify_aggregated_import_authors() {
+  echo "importGit: Checking that Git:Log:Author nodes were created..."
+
+  local actual_result
+  actual_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_aggregated_git_log_authors.cypher")
+
+  local actual_authors
+  actual_authors=$(get_csv_column_value "${actual_result}" "authorCount")
+
+  if [ "${actual_authors}" -le 0 ]; then
+    logError "Aggregated import created no author nodes. Found ${actual_authors} authors in database. Aborting."
+    return 1
+  fi
+
+  echo "importGit: Aggregated import verified - ${actual_authors} Git:Log:Author nodes in database."
+}
+
+verify_aggregated_import_change_spans() {
+  echo "importGit: Checking that Git:Log:ChangeSpan nodes were created..."
+
+  local actual_result
+  actual_result=$(execute_cypher "${GIT_LOG_VALIDATION_CYPHER_DIR}/Query_count_aggregated_git_log_change_spans.cypher")
+
+  local actual_spans
+  actual_spans=$(get_csv_column_value "${actual_result}" "changeSpanCount")
+
+  if [ "${actual_spans}" -le 0 ]; then
+    logError "Aggregated import created no change span nodes. Found ${actual_spans} change spans in database. Aborting."
+    return 1
+  fi
+
+  echo "importGit: Aggregated import verified - ${actual_spans} Git:Log:ChangeSpan nodes in database."
+}
+
 importAggregatedGitLog() {
-  echo "importGit: Preparing import by creating indexes for the aggregated git log..."
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Preparing import by creating indexes for the aggregated git log..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_author_name.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_author_email.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_change_span_year.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_change_span_month.cypher"
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Index_file_name.cypher"
 
-  echo "importGit: Importing aggregated git log data into the Graph..."
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing aggregated git log data into the Graph..."
   time execute_cypher "${GIT_LOG_CYPHER_DIR}/Import_aggregated_git_log_csv_data.cypher" "${@}"
+  echo "importGit: $(date +'%Y-%m-%dT%H:%M:%S%z') Aggregated import complete."
 }
 
 commonPostGitImport() {
@@ -376,11 +413,19 @@ postGitPluginImport() {
 }
 
 postAggregatedGitLogImport() {
-  # RESOLVES_TO relationships must be created first, as they are needed by subsequent queries
+  # RESOLVES_TO relationships must be created before the number-of-commits and update-count queries
   commonPostGitImport
-  
+
+  # updateCommitCount (change span count per file) must be set before CHANGED_TOGETHER_WITH reads it
+  echo "importGit: Add updateCommitCount property to aggregated git file nodes and code files..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_log_file_update_commits.cypher"
+
   echo "importGit: Add numberOfGitCommits property to nodes with matching file names..."
   execute_cypher "${GIT_LOG_CYPHER_DIR}/Set_number_of_aggregated_git_commits.cypher"
+
+  echo "importGit: Creating CHANGED_TOGETHER_WITH relationships for aggregated git files..."
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_aggregated_git_files.cypher"
+  execute_cypher "${GIT_LOG_CYPHER_DIR}/Add_CHANGED_TOGETHER_WITH_relationships_to_code_files.cypher"
 
   # Verify file creation dates after all aggregated data and enrichment
   verify_git_file_creation_dates "aggregated import"
@@ -413,6 +458,15 @@ if [ ! "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "none" ] && [ ! "${IMPORT
     # Import pre-aggregated git log data (no single commits) when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "aggregated"
         (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createAggregatedGitLogData.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/aggregatedGitLog.csv")
         importAggregatedGitLog "git_repository_absolute_directory_name=${full_repository_path}"
+        if ! verify_pass2a_file_count; then
+          exit 1
+        fi
+        if ! verify_aggregated_import_authors; then
+          exit 1
+        fi
+        if ! verify_aggregated_import_change_spans; then
+          exit 1
+        fi
     else
     # Import git log data with every commit when IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT = "full"
         (cd "${repository}" && source "${GIT_HISTORY_IMPORT_DIR}/createGitLogData.sh" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLog.csv" "${NEO4J_FULL_IMPORT_DIRECTORY}/gitLogCommits.csv")
