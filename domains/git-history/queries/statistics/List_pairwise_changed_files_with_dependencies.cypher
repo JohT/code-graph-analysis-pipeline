@@ -22,3 +22,4 @@ RETURN dependencyWeight
       // ,count(*)                    AS occurrences
       // ,collect(firstFileName + ' -> ' + secondFileName)[0..3] AS examples
 ORDER BY dependencyWeight, commitCount
+LIMIT 1000
