@@ -84,7 +84,7 @@ The `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` environment variable controls how
 | ------ | ------------- |
 | `plugin` (default) | jQAssistant git plugin — recommended; schema: `(Git:Commit)-[:CONTAINS_CHANGE]->(Git:Change)-[:UPDATES]->(Git:File)`, property: `relativePath` |
 | `full` | CSV git log with every commit and merge commit changes — schema: `(Git:Log:Commit)-[:CONTAINS_CHANGED {changeType}]->(Git:Log:File)`, properties: `fileName`, `createdAtEpoch`, `lastModificationAtEpoch`; renames tracked via `[:HAS_NEW_NAME]` relationships; merge commits included with changes relative to each parent (captures conflict resolutions via `-m` flag) |
-| `aggregated` | Pre-aggregated CSV git log — no commit-level granularity; `CHANGED_TOGETHER_WITH` cannot be computed |
+| `aggregated` | Pre-aggregated CSV git log — no commit-level granularity; schema: `(Git:Log:Author)-[:AUTHORED]->(Git:Log:ChangeSpan {authorName, authorEmail, year, month})-[:CONTAINS_CHANGED {commits}]->(Git:Log:File)` where one ChangeSpan represents one author's activity in one month; `createdAtEpoch`/`lastModificationAtEpoch` are not available (exact commit timestamps require individual commit data) |
 | `none` | Skip git import entirely |
 
 **Note:** When `analyze.sh --skip-jqassistant` is used, `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` is automatically set to `full` (unless explicitly overridden), since the `plugin` mode requires jQAssistant to be available.
@@ -106,6 +106,25 @@ The CSV `full` mode queries adapt to the CSV schema:
 - Properties: `git_commit.hash` (not `.sha`); `git_file.fileName`, `createdAtEpoch`, `lastModificationAtEpoch`
 
 This differs from the plugin schema (`Git:Commit`, `Git:File`, `[:CONTAINS_CHANGE]->[:UPDATES]`, `git_commit.sha`, `git_file.relativePath`). The `commonPostGitImport` function then adds `RESOLVES_TO` relationships and runs validation.
+
+### Aggregated Mode Enrichment (`postAggregatedGitLogImport`)
+
+When `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=aggregated`, the following enrichment steps run after all repositories are imported:
+
+1. `Set_number_of_aggregated_git_log_file_update_commits.cypher` — sets `updateCommitCount` (number of change spans containing the file) on `Git:Log:File` and resolved code file nodes. Must run before `CHANGED_TOGETHER_WITH` is computed, because the metrics use this property.
+2. `commonPostGitImport` — adds `RESOLVES_TO` relationships and runs co-change validation queries.
+3. `Set_number_of_aggregated_git_commits.cypher` — sets `numberOfGitCommits` (sum of `commits` from all CONTAINS_CHANGED relationships) on resolved code file nodes.
+4. `Add_CHANGED_TOGETHER_WITH_relationships_to_aggregated_git_files.cypher` — computes pairwise co-change metrics using ChangeSpan nodes as the co-change unit (one per author per month). Two files are "changed together" if they share a ChangeSpan.
+5. `Add_CHANGED_TOGETHER_WITH_relationships_to_code_files.cypher` — propagates `CHANGED_TOGETHER_WITH` from git files to resolved code files.
+
+#### Aggregated Mode Limitations
+
+The aggregated schema stores monthly summaries, not individual commits. The following features are not available and the corresponding reports will be empty or absent:
+
+- **File creation and modification dates** (`createdAtEpoch`, `lastModificationAtEpoch`): not set. Exact timestamps require individual commit data. Date columns in the statistics CSV are approximated to the first day of the earliest or latest change span month.
+- **Commit classification** (`isMergeCommit`, `isAutomatedCommit`): not available. The aggregated CSV already excludes merge commits (`--no-merges`), so no classification is needed.
+- **Files per commit distribution**: the aggregated variant shows files per change span (author-month) rather than files per individual commit.
+- **Rename tracking** (`[:HAS_NEW_NAME]` relationships): not available. Renamed files appear as two separate entries in the aggregated schema.
 
 `importGitIfChanged.sh` is invoked by `analyze.sh` whenever `source/` exists. It uses SHA-based change detection (`source/gitImportChangeDetection.sha`) to skip redundant re-imports. On graph reset, `resetAndScan.sh` deletes this file to force re-import on the next run.
 

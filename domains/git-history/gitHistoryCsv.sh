@@ -44,9 +44,12 @@ mkdir -p "${FULL_REPORT_DIRECTORY}"
 echo "gitHistoryCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Processing git history (mode=${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT})..."
 
 # Select query variant suffix: _csv.cypher files target Git:Log:* nodes (CSV-imported schema).
-# Plugin and aggregated modes use the plugin-schema queries without a suffix.
+# _aggregated.cypher files target the aggregated schema (Git:Log:ChangeSpan, no individual commits).
+# Plugin mode uses the plugin-schema queries without a suffix.
 if [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "full" ]; then
     CSV_QUERY_SUFFIX="_csv"
+elif [ "${IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT}" = "aggregated" ]; then
+    CSV_QUERY_SUFFIX="_aggregated"
 else
     CSV_QUERY_SUFFIX=""
 fi
@@ -56,7 +59,7 @@ fi
 execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_with_commit_statistics_by_author${CSV_QUERY_SUFFIX}.cypher" \
     > "${FULL_REPORT_DIRECTORY}/List_git_files_with_commit_statistics_by_author.csv"
 
-execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file.cypher" \
+execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_files_that_were_changed_together_with_another_file${CSV_QUERY_SUFFIX}.cypher" \
     > "${FULL_REPORT_DIRECTORY}/List_git_files_that_were_changed_together_with_another_file.csv"
 
 execute_cypher "${STATISTICS_CYPHER_DIR}/List_git_file_directories_with_commit_statistics${CSV_QUERY_SUFFIX}.cypher" \

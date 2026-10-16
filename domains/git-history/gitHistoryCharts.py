@@ -192,6 +192,9 @@ def add_directory_column(input_dataframe: pd.DataFrame, file_path_column: str, d
         input_dataframe[file_path_column].str.split("/").apply(convert_path_elements_to_directories),
     )
     input_dataframe = input_dataframe.explode(directory_column)
+    # Normalize the index and materialize the dataframe to ensure all subsequent operations work correctly.
+    # explode() creates a non-standard index which can cause issues with groupby().aggregate() operations.
+    input_dataframe = input_dataframe.reset_index(drop=True).copy()
     return input_dataframe
 
 
@@ -255,6 +258,8 @@ def prepare_directory_commit_statistics(commit_statistics_data: pd.DataFrame) ->
 
     Returns: (git_files_with_commit_statistics, git_file_authors, git_file_extensions)
     """
+    has_commit_hashes = "commitHashes" in commit_statistics_data.columns
+
     # Derive author rankings
     git_file_authors = (
         commit_statistics_data[["author", "commitCount"]]
@@ -288,6 +293,7 @@ def prepare_directory_commit_statistics(commit_statistics_data: pd.DataFrame) ->
     # Explode directories
     git_files_with_commit_statistics = add_directory_column(git_files_with_commit_statistics, "filePath", "directoryPath")
 
+    # Define common aggregation columns for both modes
     common_named_aggregation = dict(
         daysSinceLastCommit=pd.NamedAgg(column="daysSinceLastCommit", aggfunc="min"),
         daysSinceLastCreation=pd.NamedAgg(column="daysSinceLastCreation", aggfunc="min"),
@@ -298,19 +304,46 @@ def prepare_directory_commit_statistics(commit_statistics_data: pd.DataFrame) ->
         maxCommitSha=pd.NamedAgg(column="maxCommitSha", aggfunc="max"),
     )
 
-    # Group by directory + author
-    git_files_with_commit_statistics = git_files_with_commit_statistics.groupby(["directoryPath", "author"]).aggregate(
-        filePaths=pd.NamedAgg(column="filePath", aggfunc=np.unique),
-        firstFile=pd.NamedAgg(column="filePath", aggfunc="first"),
-        fileExtensions=pd.NamedAgg(column="fileExtension", aggfunc=collect_as_array),
-        commitHashes=pd.NamedAgg(column="commitHashes", aggfunc=get_flattened_unique_values),
-        intermediateCommitCount=pd.NamedAgg(column="commitHashes", aggfunc="count"),
-        **common_named_aggregation,
-    )
-    git_files_with_commit_statistics = git_files_with_commit_statistics.sort_values(by=["directoryPath", "intermediateCommitCount"], ascending=[True, False])
-    git_files_with_commit_statistics = git_files_with_commit_statistics.reset_index()
+    # For aggregated mode, we don't need to group further - the query already provides aggregated data
+    if not has_commit_hashes:
+        # Aggregated mode: data is already pre-aggregated per (file, author), just rename columns for consistency
+        git_files_with_commit_statistics = git_files_with_commit_statistics.rename(columns={
+            "filePath": "firstFile",
+            "commitCount": "intermediateCommitCount",
+        })
+        git_files_with_commit_statistics.insert(
+            git_files_with_commit_statistics.columns.get_loc("firstFile"),
+            "filePaths",
+            git_files_with_commit_statistics["firstFile"].apply(lambda x: np.array([x]))
+        )
+        git_files_with_commit_statistics.insert(
+            git_files_with_commit_statistics.columns.get_loc("fileExtension"),
+            "fileExtensions",
+            git_files_with_commit_statistics["fileExtension"].apply(lambda x: np.array([x]))
+        )
+        git_files_with_commit_statistics = git_files_with_commit_statistics.sort_values(by=["directoryPath", "intermediateCommitCount"], ascending=[True, False])
+        git_files_with_commit_statistics = git_files_with_commit_statistics.reset_index(drop=True)
+    else:
+        # Full / plugin mode: need to deduplicate and group
+        # Full / plugin mode: deduplicate commit hashes across file rows in the same directory
+        author_aggregation = dict(
+            filePaths=pd.NamedAgg(column="filePath", aggfunc=np.unique),
+            firstFile=pd.NamedAgg(column="filePath", aggfunc="first"),
+            fileExtensions=pd.NamedAgg(column="fileExtension", aggfunc=collect_as_array),
+            commitHashes=pd.NamedAgg(column="commitHashes", aggfunc=get_flattened_unique_values),
+            intermediateCommitCount=pd.NamedAgg(column="commitHashes", aggfunc="count"),
+            **common_named_aggregation,
+        )
+        # pandas 2.3+ requires ** unpacking for dict→aggregate() to treat dict keys as output names (NamedAgg pattern)
+        git_files_with_commit_statistics = git_files_with_commit_statistics.groupby(["directoryPath", "author"]).aggregate(**author_aggregation)
+        git_files_with_commit_statistics = git_files_with_commit_statistics.sort_values(by=["directoryPath", "intermediateCommitCount"], ascending=[True, False])
+        git_files_with_commit_statistics = git_files_with_commit_statistics.reset_index()
 
     # Group by directory only
+    if has_commit_hashes:
+        directory_commit_count_aggregation: dict = dict(commitCount=pd.NamedAgg(column="commitHashes", aggfunc=count_unique_aggregated_values))
+    else:
+        directory_commit_count_aggregation = dict(commitCount=pd.NamedAgg(column="intermediateCommitCount", aggfunc="sum"))
     git_files_with_commit_statistics = git_files_with_commit_statistics.groupby("directoryPath").aggregate(
         fileCount=pd.NamedAgg(column="filePaths", aggfunc=count_unique_aggregated_values),
         firstFile=pd.NamedAgg(column="firstFile", aggfunc="first"),
@@ -318,7 +351,7 @@ def prepare_directory_commit_statistics(commit_statistics_data: pd.DataFrame) ->
         authorCount=pd.NamedAgg(column="author", aggfunc="nunique"),
         mainAuthor=pd.NamedAgg(column="author", aggfunc="first"),
         secondAuthor=pd.NamedAgg(column="author", aggfunc=second_entry),
-        commitCount=pd.NamedAgg(column="commitHashes", aggfunc=count_unique_aggregated_values),
+        **directory_commit_count_aggregation,
         **common_named_aggregation,
     )
     git_files_with_commit_statistics = git_files_with_commit_statistics.reset_index()

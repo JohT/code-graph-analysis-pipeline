@@ -1,4 +1,4 @@
-// List pairs of files that were changed together. Requires Add_CHANGED_TOGETHER_WITH_relationships_to_git_files.cypher to run first.
+// List pairs of files that were changed together. Top 1000 by lift to keep output manageable. Requires Add_CHANGED_TOGETHER_WITH_relationships_to_git_files.cypher to run first.
 
 MATCH (firstFile:Git:File)-[pairwiseChange:CHANGED_TOGETHER_WITH]-(secondFile:Git:File)
 WHERE firstFile.extension < secondFile.extension
@@ -20,3 +20,5 @@ RETURN firstFileName
       ,pairwiseChange.updateCommitSupport                     AS updateCommitSupport
       ,pairwiseChange.updateCommitLift                        AS updateCommitLift
       ,pairwiseChange.updateCommitJaccardSimilarity           AS updateCommitJaccardSimilarity
+ORDER BY updateCommitLift DESC
+LIMIT 1000
