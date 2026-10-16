@@ -36,6 +36,7 @@ Script | Directory | Description
 [importGitIfChanged.sh](./domains/git-history/import/importGitIfChanged.sh) | import | Runs importGit.sh only when source/ contents changed since the last successful import, using SHA-based change detection.
 [gitHistorySummary.sh](./domains/git-history/summary/gitHistorySummary.sh) | summary | Creates a Markdown report summarising all git history analysis results.
 [testCreateGitLogData.sh](./domains/git-history/testCreateGitLogData.sh) | git-history | Tests createGitLogData.sh: CSV header, change types (A/M/D/R), merge commit inclusion,
+[testImportAggregated.sh](./domains/git-history/testImportAggregated.sh) | git-history | Tests aggregated git log import: validation CSV parsing, query file existence, and gitHistoryCsv.sh suffix logic.
 [testImportGitIfChanged.sh](./domains/git-history/testImportGitIfChanged.sh) | git-history | Tests importGitIfChanged.sh: skip conditions, change detection, --dry-run, and SHA file lifecycle.
 [centralityCsv.sh](./domains/graph-algorithms/centralityCsv.sh) | graph-algorithms | Applies centrality algorithms using the Neo4j Graph Data Science Library and writes CSV reports.
 [communityCsv.sh](./domains/graph-algorithms/communityCsv.sh) | graph-algorithms | Detects communities using the Neo4j Graph Data Science Library and writes CSV reports.
