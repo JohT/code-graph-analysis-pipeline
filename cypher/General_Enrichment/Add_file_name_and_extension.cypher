@@ -11,7 +11,13 @@
       ,coalesce(nullif(last(split(fileNameWithoutPath, '.')), fileNameWithoutPath), '') AS fileExtension
   WITH *
       //,rtrim(fileNameWithoutPath, '.' + fileExtension) AS fileNameWithoutPathAndExtensionOld //rtrim seems to have an issue
-      ,substring(fileNameWithoutPath, 0, size(fileNameWithoutPath) - size(fileExtension) - 1) AS fileNameWithoutPathAndExtension
+      ,CASE 
+          // If there is no extension, keep the original name (fixes the old trailing-character bug)
+          WHEN fileExtension = '' THEN fileNameWithoutPath
+          // Ensure the string is long enough to safely strip the extension and dot
+          WHEN size(fileNameWithoutPath) > size(fileExtension) THEN substring(fileNameWithoutPath, 0, size(fileNameWithoutPath) - size(fileExtension) - 1)
+          ELSE fileNameWithoutPath 
+       END AS fileNameWithoutPathAndExtension
   WITH *
       ,CASE WHEN file:Directory OR file:ServiceLoader THEN fileNameWithoutPath ELSE fileNameWithoutPathAndExtension END AS name
       ,CASE WHEN file:Directory OR file:ServiceLoader THEN '' ELSE fileExtension  END AS fileExtension
