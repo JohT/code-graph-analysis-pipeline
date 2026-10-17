@@ -14,7 +14,7 @@ set -o errexit -o pipefail -o nounset
 IFS=$'\n\t'
 
 # Overrideable defaults
-SCIP_VERSION=${SCIP_VERSION:-"0.9.0"}
+SCIP_VERSION=${SCIP_VERSION:-"0.10.0"}
 
 # Use analysis workspace TOOLS_DIRECTORY/scip-cli as default
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"./tools"}
