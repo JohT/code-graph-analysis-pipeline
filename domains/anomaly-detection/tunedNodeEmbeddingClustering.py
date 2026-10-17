@@ -293,7 +293,8 @@ def tuned_hierarchical_density_based_spatial_clustering(embeddings: numpy_typing
             **base_clustering_parameter,
             # Restrict node count dependent parameters to the max overall node count for small graphs using "min"
             min_cluster_size=trial.suggest_int("min_cluster_size", 4, min(max_node_count, 50)),
-            min_samples=trial.suggest_int("min_samples", 2, min(max_node_count, 30))
+            min_samples=trial.suggest_int("min_samples", 2, min(max_node_count, 30)),
+            copy=False
         )
         labels = clusterer.fit_predict(embeddings)
         return adjusted_mutual_info_score_with_soft_ramp_noise_penalty(labels, reference_community_ids)
@@ -313,7 +314,7 @@ def tuned_hierarchical_density_based_spatial_clustering(embeddings: numpy_typing
         output_detailed_optuna_tuning_results(study, 'HDBSCAN')
 
     # Run the clustering again with the best parameters
-    cluster_algorithm = HDBSCAN(**base_clustering_parameter, **study.best_params, n_jobs=-1, store_centers='medoid')
+    cluster_algorithm = HDBSCAN(**base_clustering_parameter, **study.best_params, n_jobs=-1, store_centers='medoid', copy=False)
     best_model = cluster_algorithm.fit(embeddings)
 
     return TunedClusteringResult(best_model.labels_, best_model.probabilities_, best_model.medoids_)
@@ -529,7 +530,8 @@ class HierarchicalDensityClusteringScores:
             min_samples=2,
             min_cluster_size=5,
             allow_single_cluster=False,
-            n_jobs=-1
+            n_jobs=-1,
+            copy=False
         )
         embeddings = np.array(embedding_column.tolist())
         clustering_result = hierarchical_density_based_spatial_clustering.fit(embeddings)
