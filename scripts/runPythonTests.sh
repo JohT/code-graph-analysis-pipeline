@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 # Runs all Python unit tests (pytest). Discovers test*.py files in domains directory.
+# Automatically excludes integration tests (test*Integration.py) which require external dependencies.
 # Requires pytest, pandas, matplotlib to be installed.
+#
+# To run integration tests separately (requires plotly, scikit-learn, optuna):
+#   pytest domains/**/*Integration.py
 
 set -o errexit -o pipefail -o nounset
 IFS=$'\n\t'
@@ -16,6 +20,11 @@ command -v pytest >/dev/null || { echo "pytest not found. Install with: pip inst
 
 test_files=()
 while IFS= read -r test_file; do
+    # Skip integration tests by default (they require extra dependencies)
+    # These can be run separately with: pytest domains/**/*Integration.py
+    if [[ "${test_file}" == *"Integration.py" ]]; then
+        continue
+    fi
     test_files+=("${test_file}")
 done < <(find "${DOMAINS_DIRECTORY}" -type f -name 'test*.py' | sort)
 

@@ -118,6 +118,12 @@ anomaly_detection_features() {
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_JavaType.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_TypeScriptModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipInternalType.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipArtifact.cypher" "${@}"
     # Determines strongly connected components if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Write.cypher" "${@}"
@@ -254,6 +260,15 @@ anomaly_detection_treemap_charts_markdown_reference() {
     echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished treemap charts markdown reference generation..."
 }
 
+# Visualize SCIP anomaly detection results with treemap charts using SemanticCodeIndexInternalType.file paths.
+anomaly_detection_scip_treemap_charts() {
+    local language
+    language=$( extractQueryParameter "projection_language" "${@}" )
+
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Visualizing ${language} SCIP anomaly detection results as treemaps..."
+    time "${ANOMALY_DETECTION_SCRIPT_DIR}/scipTreemapAnomalyDetection.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
+}
+
 # Visualize results with treemap charts.
 # 
 # Required Parameters:
@@ -327,6 +342,33 @@ if is_sufficient_data_available "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=
   fi
 fi
 
+# -- SCIP InternalType Anomaly Detection -----------------------
+
+if is_sufficient_data_available "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=scip-type-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+      anomaly_detection_scip_treemap_charts "${ALGORITHM_LANGUAGE}=SCIP"
+  fi
+fi
+
+# -- SCIP Module Anomaly Detection --------------------------------
+
+if is_sufficient_data_available "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_WEIGHT}=referenceCount"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-module-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=scip-module-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=scip-module-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+  fi
+fi
+
+# -- SCIP Artifact Anomaly Detection ------------------------------
+
+if is_sufficient_data_available "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_WEIGHT}=referenceCount"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=scip-artifact-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+  fi
+fi
 # -- Markdown summary  ---------------------------
 
 anomaly_detection_treemap_charts_markdown_reference

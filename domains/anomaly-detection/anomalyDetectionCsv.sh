@@ -71,6 +71,12 @@ anomaly_detection_features() {
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_JavaType.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_TypeScriptModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipInternalType.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipModule.cypher" "${@}"
+    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
+                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipArtifact.cypher" "${@}"
     # Determines strongly connected components if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Write.cypher" "${@}"
@@ -178,6 +184,27 @@ fi
 if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"; then
     createDirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-embedding-directed" "${PROJECTION_NODE}=Module" "${PROJECTION_WEIGHT}=lowCouplingElement25PercentWeight" "${PROJECTION_LANGUAGE}=Typescript"
     anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+fi
+
+# -- SCIP InternalType Anomaly Detection -----------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=scip-type-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+fi
+
+# -- SCIP Module Anomaly Detection -------------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-module-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-module-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexModule" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=scip-module-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+fi
+
+# -- SCIP Artifact Anomaly Detection ----------------------------
+
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-artifact-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexArtifact" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=scip-artifact-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # ---------------------------------------------------------------
