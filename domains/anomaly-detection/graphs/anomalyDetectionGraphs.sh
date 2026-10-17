@@ -223,6 +223,9 @@ anomaly_detection_graph_visualization "${QUERY_NODE}=Artifact" "${QUERY_LANGUAGE
 anomaly_detection_graph_visualization "${QUERY_NODE}=Package" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight25PercentInterfaces"
 anomaly_detection_graph_visualization "${QUERY_NODE}=Type" "${QUERY_LANGUAGE}=Java" "${QUERY_WEIGHT}=weight"
 anomaly_detection_graph_visualization "${QUERY_NODE}=Module" "${QUERY_LANGUAGE}=Typescript" "${QUERY_WEIGHT}=lowCouplingElement25PercentWeight"
+anomaly_detection_graph_visualization "${QUERY_NODE}=SemanticCodeIndexInternalType" "${QUERY_LANGUAGE}=SCIP" "${QUERY_WEIGHT}=referenceCount"
+anomaly_detection_graph_visualization "${QUERY_NODE}=SemanticCodeIndexModule" "${QUERY_LANGUAGE}=SCIP" "${QUERY_WEIGHT}=referenceCount"
+anomaly_detection_graph_visualization "${QUERY_NODE}=SemanticCodeIndexArtifact" "${QUERY_LANGUAGE}=SCIP" "${QUERY_WEIGHT}=referenceCount"
 
 # ---------------------------------------------------------------
 
