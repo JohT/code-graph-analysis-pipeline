@@ -271,7 +271,7 @@
         "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
-        "python:\\s*(?<currentValue>\\d+\\.\\d+)\\s*(?:$|#)"
+        "python:\\s*(?<currentValue>\\d+\\.\\d+)"
       ],
       "depNameTemplate": "python",
       "datasourceTemplate": "docker"
@@ -284,7 +284,7 @@
         "(^|\\/)action\\.ya?ml$"
       ],
       "matchStrings": [
-        "python-version:\\s*['\\\"]?(?<currentValue>\\d+\\.\\d+)['\\\"]?\\s*(?:$|#)"
+        "python-version:\\s*['\\\"]?(?<currentValue>\\d+\\.\\d+)['\\\"]?"
       ],
       "depNameTemplate": "python",
       "datasourceTemplate": "docker"
@@ -294,7 +294,7 @@
       "customType": "regex",
       "fileMatch": ["(^|/)conda-environment\\.yml$"],
       "matchStrings": [
-        "\\s*-\\s+python=(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*(?:$|#)"
+        "\\s*-\\s+python=(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ],
       "depNameTemplate": "python",
       "datasourceTemplate": "conda"
