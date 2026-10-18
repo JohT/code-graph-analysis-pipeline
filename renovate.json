@@ -66,6 +66,12 @@
       "description": "Only use stable versions for Python package managers",
       "matchManagers": ["uv", "pip_setup", "poetry", "pipenv"],
       "ignoreUnstable": true
+    },
+    {
+      "description": "Keep Python versions in sync across workflow matrix, workflow inputs, and conda environment",
+      "matchDatasources": ["docker", "conda"],
+      "matchDepNames": ["python"],
+      "groupName": "workflow-and-conda-python-version"
     }
   ],
   "customManagers": [
@@ -256,6 +262,42 @@
       ],
       "datasourceTemplate": "pypi",
       "versioningTemplate": "pep440"
+    },
+    {
+      "description": "Update Python version in GitHub workflow matrix variables",
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "python:\\s*(?<currentValue>\\d+\\.\\d+)\\s*(?:$|#)"
+      ],
+      "depNameTemplate": "python",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "description": "Update Python version in GitHub workflow step inputs (setup-python, setup-uv)",
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "python-version:\\s*['\\\"]?(?<currentValue>\\d+\\.\\d+)['\\\"]?\\s*(?:$|#)"
+      ],
+      "depNameTemplate": "python",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "description": "Update Python version in conda-environment.yml",
+      "customType": "regex",
+      "fileMatch": ["(^|/)conda-environment\\.yml$"],
+      "matchStrings": [
+        "\\s*-\\s+python=(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*(?:$|#)"
+      ],
+      "depNameTemplate": "python",
+      "datasourceTemplate": "conda"
     }
   ]
 }
