@@ -69,7 +69,7 @@
     },
     {
       "description": "Keep Python versions in sync across workflow matrix, workflow inputs, and conda environment",
-      "matchDatasources": ["docker", "conda"],
+      "matchDatasources": ["python-version", "conda"],
       "matchDepNames": ["python"],
       "groupName": "workflow-and-conda-python-version"
     }
@@ -274,7 +274,8 @@
         "python:\\s*(?<currentValue>\\d+\\.\\d+)"
       ],
       "depNameTemplate": "python",
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "python-version",
+      "versioningTemplate": "python"
     },
     {
       "description": "Update Python version in GitHub workflow step inputs (setup-python, setup-uv)",
@@ -287,7 +288,8 @@
         "python-version:\\s*['\\\"]?(?<currentValue>\\d+\\.\\d+)['\\\"]?"
       ],
       "depNameTemplate": "python",
-      "datasourceTemplate": "docker"
+      "datasourceTemplate": "python-version",
+      "versioningTemplate": "python"
     },
     {
       "description": "Update Python version in conda-environment.yml",
@@ -297,7 +299,8 @@
         "\\s*-\\s+python=(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ],
       "depNameTemplate": "python",
-      "datasourceTemplate": "conda"
+      "datasourceTemplate": "conda",
+      "versioningTemplate": "python"
     }
   ]
 }
