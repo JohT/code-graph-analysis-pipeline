@@ -355,7 +355,7 @@ jobs:
       # Upload successful analysis-results as the main output artifact
       - name: (Code Analysis Results) Archive successful analysis-results
         if: success() && !contains(inputs.analysis-arguments, '--explore')
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/reports/*
@@ -365,7 +365,7 @@ jobs:
       # Upload logs if analysis results had been skipped ("--explore" analysis option)
       - name: (Code Analysis Results) Archive successful analysis-results
         if: success() && contains(inputs.analysis-arguments, '--explore')
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: ${{ steps.set-analysis-results-artifact-name.outputs.uploaded-analysis-results-artifact-name }}
           path: ./temp/${{ inputs.analysis-name }}/runtime/*
@@ -376,7 +376,7 @@ jobs:
       # Upload logs and unfinished analysis-results in case of an error for troubleshooting
       - name: (Code Analysis Results) Archive failed run with logs and unfinished analysis-results
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: code-analysis-logs-${{ env.ENVIRONMENT_INFO }}
           path: |
