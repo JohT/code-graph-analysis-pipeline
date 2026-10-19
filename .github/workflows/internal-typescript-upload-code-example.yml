@@ -104,7 +104,7 @@ jobs:
         ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 
     - name: (Prepare Code to Analyze) Generate ARTIFACT_UPLOAD_ID
-      run: echo "ARTIFACT_UPLOAD_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 10)" >> $GITHUB_ENV
+      run: echo "ARTIFACT_UPLOAD_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom 2>/dev/null | head -c 10)" >> $GITHUB_ENV
  
     - name: (Prepare Code to Analyze) Set sources-upload-name
       id: set-sources-upload-name
