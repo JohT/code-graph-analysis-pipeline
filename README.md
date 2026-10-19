@@ -319,6 +319,13 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
   ./../../domains/neo4j-management/useNeo4jHighMemoryProfile.sh
   ```
 
+- Why is the java domain automatically disabled when using `--skip-jqassistant` without `--domain`?  
+  👉 The java domain currently has no SCIP index-based reports and relies exclusively on jQAssistant for code analysis. Without jQAssistant, the domain has no meaningful output. To run the java domain anyway despite skipping jQAssistant, explicitly select it with `--domain java`:
+
+  ```shell
+  ./../../scripts/analysis/analyze.sh --skip-jqassistant --domain java
+  ```
+
 ## 🕸 Web References
 
 - [code-graph-analysis-examples](https://github.com/JohT/code-graph-analysis-examples)

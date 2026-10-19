@@ -131,6 +131,7 @@ mkdir -p "${temporaryArtifactsDirectory}"
 temporaryDomainsDirectory="${temporaryTestDirectory}/domains"
 mkdir -p "${temporaryDomainsDirectory}/valid-test-domain"
 mkdir -p "${temporaryDomainsDirectory}/another-test-domain"
+mkdir -p "${temporaryDomainsDirectory}/java"
 
 # Create a minimal scripts directory structure to satisfy all file-existence checks in analyze.sh.
 temporaryMinimalScriptsDirectory="${temporaryTestDirectory}/scripts"
@@ -292,17 +293,50 @@ fi
 # -------- Test case 14 --------
 test_case_number=14
 echo ""
-info "${test_case_number}.) --skip-jqassistant alone should be accepted (exit 0) and set SKIP_JQASSISTANT=true."
+info "${test_case_number}.) --skip-jqassistant alone should be accepted (exit 0), set SKIP_JQASSISTANT=true, and auto-disable java domain."
 
 analyzeExpectingSuccessUnderTest --skip-jqassistant
 if ! grep -q "SKIP_JQASSISTANT=true" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
   fail "${test_case_number}.) Test failed: Expected SKIP_JQASSISTANT=true in log output."
 fi
+if ! grep -q "ANALYSIS_DOMAINS_TO_SKIP=.*java" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected java domain to be auto-disabled in ANALYSIS_DOMAINS_TO_SKIP."
+fi
 
 # -------- Test case 15 --------
 test_case_number=15
 echo ""
-info "${test_case_number}.) --skip-jqassistant combined with --domain should be accepted (exit 0)."
+info "${test_case_number}.) --skip-jqassistant combined with --domain java should NOT auto-disable java domain."
+
+analyzeExpectingSuccessUnderTest --skip-jqassistant --domain java --explore
+if ! grep -q "SKIP_JQASSISTANT=true" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected SKIP_JQASSISTANT=true in log output."
+fi
+if ! grep -q "ANALYSIS_DOMAIN=java" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected ANALYSIS_DOMAIN=java in log output."
+fi
+if grep -q "Automatically disabled 'java' domain" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: java domain should NOT be auto-disabled when explicitly selected via --domain java."
+fi
+
+# -------- Test case 16 --------
+test_case_number=16
+echo ""
+info "${test_case_number}.) --skip-jqassistant combined with --exclude-domain java should not create duplicate java entries."
+
+analyzeExpectingSuccessUnderTest --skip-jqassistant --exclude-domain java --explore
+if ! grep -q "SKIP_JQASSISTANT=true" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Expected SKIP_JQASSISTANT=true in log output."
+fi
+# Verify no duplicate 'java' entries (e.g., 'java,java')
+if grep -q "ANALYSIS_DOMAINS_TO_SKIP=.*java.*java" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
+  fail "${test_case_number}.) Test failed: Found duplicate 'java' entries in ANALYSIS_DOMAINS_TO_SKIP."
+fi
+
+# -------- Test case 17 --------
+test_case_number=17
+echo ""
+info "${test_case_number}.) --skip-jqassistant combined with --domain valid-test-domain should be accepted (exit 0)."
 
 analyzeExpectingSuccessUnderTest --skip-jqassistant --domain "valid-test-domain" --explore
 if ! grep -q "SKIP_JQASSISTANT=true" "${temporaryTestDirectory}/${SCRIPT_NAME}-${test_case_number}.log" 2>/dev/null; then
@@ -312,8 +346,8 @@ if ! grep -q "ANALYSIS_DOMAIN=valid-test-domain" "${temporaryTestDirectory}/${SC
   fail "${test_case_number}.) Test failed: Expected ANALYSIS_DOMAIN=valid-test-domain in log output."
 fi
 
-# -------- Test case 16 --------
-test_case_number=16
+# -------- Test case 18 --------
+test_case_number=18
 echo ""
 info "${test_case_number}.) --help output should document --skip-jqassistant."
 
