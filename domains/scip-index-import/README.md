@@ -189,6 +189,58 @@ Each anonymous class node gets:
 - A `DEPENDS_ON` edge to every type it implements (derived from `relationships[].is_implementation`)
 - A `BELONGS_TO` edge to the project node (admin import only)
 
+## Annotation-Only Files (e.g. `package-info.java`)
+
+Some source files contain no type definitions but reference types via annotations or imports: Java's `package-info.java` is the most common example. These files have no internal symbols in the SCIP occurrence list (no `symbol_roles: 1` entries).
+
+When such a file contains type references (either external or internal):
+
+1. **With external type references**: Creates a `__file__ <path>` node using package metadata from a sibling file in the same directory (if one exists), and generates `DEPENDS_ON` edges to the referenced external types.
+
+2. **With internal type references**: Creates a `__file__ <path>` node using package metadata extracted from the referenced internal type itself, and generates `DEPENDS_ON` edges to those internal types.
+
+3. **Isolated (no sibling metadata)**: If the file is the only file in its directory and has only external type references, no node or edges are created (no metadata source available).
+
+The pipeline always uses the most specific metadata source available:
+- **First priority**: Definition symbols within the file (role=1)
+- **Second priority**: Internal type references within the file (role=0 with internal package IDs)
+- **Third priority**: Sibling files in the same directory (for external type references)
+
+| Field | Value |
+|-------|-------|
+| `typeName` | `File` |
+| `symbol` / `id` | `__file__ <relative_path>` |
+| `packageId` | Extracted from definition symbols, internal references, or sibling files |
+| `isAbstract` | `false` |
+
+This behavior applies to any file without internal type definitions, not only `package-info.java`.
+
+## Cross-Module `is_implementation` Relationships (Multi-Module SCIP)
+
+When multiple per-module SCIP indices are processed (one per Maven module), a class in module B may implement an interface from module A. In per-module SCIP, the implementing class carries an `is_implementation` relationship pointing to the interface with the resolved module version (e.g., `5.1.1`), while the interface's definition in its home module uses a placeholder (e.g., `${revision}`).
+
+The pipeline handles this in two steps:
+
+1. **Relationship target nodes**: For each `is_implementation` target that is not defined in the current SCIP file (cross-module), the pipeline creates an external type node. This covers JDK super-types (e.g., `java/io/Serializable#`), external library interfaces, and project types from other modules that are inherited but never explicitly referenced as occurrences.
+
+2. **Relationship edges**: `DEPENDS_ON` edges are created for all `is_implementation` relationships, including cross-module targets. The edge references the external node created in step 1.
+
+This ensures that inheritance and interface-implementation edges are captured in the graph even when the SCIP indices span multiple modules with differing version strings.
+
+### Shadow External Type Nodes
+
+As a side effect, cross-module references (from both occurrences and `is_implementation` relationships) create **shadow ExternalType nodes** alongside the InternalType nodes from the defining module. For example, `DescribableComponent` appears both as:
+- `maven/org.axonframework/axon-common ${revision} org/.../DescribableComponent#` — InternalType (from common module)
+- `maven/org.axonframework/axon-common 5.1.1 org/.../DescribableComponent#` — ExternalType shadow (from consuming module)
+
+Edges from consuming modules point to the ExternalType shadow, which excludes them from queries that filter on `SemanticCodeIndexInternalType` for both source and target.
+
+To resolve this, run the two enrichment queries in order after import:
+1. `Redirect_SCIP_Shadow_Type_Edges_To_Internal.cypher` — redirects edges from shadow to InternalType
+2. `Delete_SCIP_Shadow_External_Types.cypher` — removes the now-orphaned shadow nodes
+
+These queries match ExternalType and InternalType nodes by their **type descriptor** (the fully-qualified path, e.g., `org/axonframework/common/infra/DescribableComponent#`), which is unique within a project.
+
 ## Git Integration
 
 SCIP File nodes created during import are automatically linked to Git history when both SCIP indices and git logs are present in the same analysis.

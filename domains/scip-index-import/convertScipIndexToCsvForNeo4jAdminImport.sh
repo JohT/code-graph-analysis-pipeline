@@ -207,7 +207,19 @@ function build_symbol_information_index() {
             select((.symbol | split(" ") | length) >= 5) |
             .symbol | split(" ") | .[2]
         ] | unique,
-        
+
+        directory_to_package_tokens: (
+            [.documents[] |
+             .relative_path as $file |
+             ($file | split("/") | .[:-1] | join("/")) as $dir |
+             .occurrences[] |
+             select((.symbol_roles // 0) % 2 == 1) |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             { key: $dir, value: (.symbol | split(" ") | .[0:4]) }
+            ] | reduce .[] as $kv ({}; .[$kv.key] //= $kv.value)
+        ),
+
         anonymous_classes: [
             ([.documents[].symbols[]? | select(.symbol != null) | select(.kind == 26 or .kind == 66 or .kind == 67 or .kind == 80) | select(.enclosing_symbol != null and (.enclosing_symbol | startswith("local"))) | .enclosing_symbol] | unique) as $local_classes_with_methods |
             .documents[] as $doc |
@@ -313,11 +325,25 @@ function extract_type_nodes_admin() {
                   $s
                  ] | first) as $first_internal_symbol |
 
+                ($index[0].directory_to_package_tokens[($file | split("/") | .[:-1] | join("/"))]) as $dir_pkg_tokens |
+
+                ([.occurrences[] |
+                  select((.symbol_roles // 0) % 2 == 0) |
+                  select(.symbol | startswith("local ") | not) |
+                  select((.symbol | split(" ") | length) >= 5) |
+                  select(is_type_descriptor(.symbol)) |
+                  select(is_type_parameter_descriptor(.symbol) | not) |
+                  .symbol as $s |
+                  ($s | split(" ") | .[2]) as $pkg_id |
+                  select(($internal_pkg_ids | index($pkg_id)) != null) |
+                  $s
+                 ] | first) as $first_internal_ref_symbol |
+
                 select(($defined_type_symbols | length) == 0) |
                 select(($referenced_type_symbols | length) > 0) |
-                select($first_internal_symbol != null) |
+                select($first_internal_symbol != null or $dir_pkg_tokens != null or $first_internal_ref_symbol != null) |
 
-                ($first_internal_symbol | split(" ")) as $tokens |
+                (if $first_internal_symbol != null then ($first_internal_symbol | split(" ")) elif $first_internal_ref_symbol != null then ($first_internal_ref_symbol | split(" ")) else $dir_pkg_tokens end) as $tokens |
                 $tokens[1] as $manager |
                 $tokens[2] as $pkg_id |
                 $tokens[3] as $version |
@@ -327,8 +353,8 @@ function extract_type_nodes_admin() {
                     id:             ("__file__ " + $file),
                     fqn:            ("__file__ " + $file),
                     name:           ($file | split("/") | last),
-                    language:       scheme_to_language(scheme($first_internal_symbol)),
-                    scheme:         scheme($first_internal_symbol),
+                    language:       scheme_to_language($tokens[0]),
+                    scheme:         $tokens[0],
                     typeName:       "File",
                     file:           $file,
                     packageId:      $pkg_id,
@@ -419,6 +445,68 @@ function extract_external_type_nodes_admin() {
 }
 
 # ---------------------------------------------------------------------------
+# Pass 2b — Create external nodes for is_implementation relationship targets
+# that do not appear as reference occurrences (and therefore have no external
+# node from extract_external_type_nodes_admin). Covers: JDK super-types,
+# external library interfaces, and cross-module project types that are
+# inherited or implemented but never referenced in occurrences.
+# ---------------------------------------------------------------------------
+
+function extract_relationship_target_nodes_admin() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+
+        ($index[0].symbol_to_file) as $sym_to_file |
+
+        [
+            .documents[] |
+            .relative_path as $source_file |
+            (.symbols // [])[] |
+            select(.symbol != null) |
+            .symbol as $source_symbol |
+            select(is_base_type_descriptor($source_symbol)) |
+            select(is_type_parameter_descriptor($source_symbol) | not) |
+            select($sym_to_file[$source_symbol] == $source_file) |
+            (.relationships // [])[] |
+            select(.is_implementation == true) |
+            .symbol |
+            select(is_base_type_descriptor(.)) |
+            select(is_type_parameter_descriptor(.) | not) |
+            select($sym_to_file[.] == null)
+        ] |
+        unique[] |
+
+        . as $symbol |
+        ($symbol | split(" ")) as $tokens |
+        $tokens[1] as $manager |
+        $tokens[2] as $pkg_id_from_symbol |
+        $tokens[3] as $version |
+        $tokens[4] as $descriptor |
+
+        ($descriptor | split("/")[0:2] | join("/")) as $pkg_from_descriptor |
+        (if $pkg_id_from_symbol == "." then $pkg_from_descriptor else $pkg_id_from_symbol end) as $pkg_id |
+
+        select($pkg_id != ".") |
+
+        ($index[0].symbol_to_kind[$symbol] // null)         as $kind     |
+        ($index[0].symbol_to_signature_text[$symbol] // "") as $sig_text |
+        ($index[0].symbol_to_doc_first_line[$symbol] // "") as $doc_line |
+        code_unit_type($kind; $sig_text; $doc_line)       as $cu_type  |
+
+        ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+        [short_symbol($symbol), short_symbol($symbol),
+         ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
+         scheme_to_language(scheme($symbol)), scheme($symbol),
+         $cu_type, "", $pkg_id, $manager, $version, $module_name,
+         (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
+         "false",
+         "SCIP;SemanticCodeIndexExternalType"] | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
 # Pass 3 — Extract DEPENDS_ON edges for admin import (no header)
 # Edge CSV columns: :START_ID(ScipNode),:END_ID(ScipNode),:TYPE,referenceCount:int
 # ---------------------------------------------------------------------------
@@ -461,8 +549,10 @@ function extract_depends_on_edges_admin() {
                     select(
                         ($target_file != null)
                         or ($target_file == null
-                              and ($internal_pkg_ids | index($ref_pkg_id)) == null
-                              and $ref_pkg_id != ".")
+                              and (
+                                  (($internal_pkg_ids | index($ref_pkg_id)) != null)
+                                  or (($internal_pkg_ids | index($ref_pkg_id)) == null and $ref_pkg_id != ".")
+                              ))
                     ) |
                     { target: ($norm | split(" ") | .[2:5] | join(" ")), count: length }
                 )
@@ -476,9 +566,20 @@ function extract_depends_on_edges_admin() {
               $s
              ] | first) as $first_internal_symbol |
 
+            # Also check for internal type references (role=0 with internal pkg_id)
+            ([$valid_occurrences[] |
+              select(.role == 0) |
+              .symbol as $s |
+              ($s | split(" ") | .[2]) as $pkg_id |
+              select(($internal_pkg_ids | index($pkg_id)) != null) |
+              $s
+             ] | first) as $first_internal_ref_symbol |
+
+            ($index[0].directory_to_package_tokens[($source_file | split("/") | .[:-1] | join("/"))] != null) as $has_dir_pkg |
+
             (if ($source_type_symbols | length) > 0 then
                  ($source_type_symbols | map(short_symbol(.)))
-             elif ($valid_ref_groups | length) > 0 and $first_internal_symbol != null then
+             elif ($valid_ref_groups | length) > 0 and ($first_internal_symbol != null or $first_internal_ref_symbol != null or $has_dir_pkg) then
                  [("__file__ " + $source_file)]
              else
                  []
@@ -528,7 +629,6 @@ function extract_relationship_edges_admin() {
         select(is_type_parameter_descriptor($target_symbol) | not) |
 
         $sym_to_file[$target_symbol] as $target_file |
-        select($target_file != null) |
         select($target_file != $source_file) |
 
         (short_symbol($source_symbol)) as $src |
@@ -800,7 +900,12 @@ function process_single_index_admin() {
     extract_external_type_nodes_admin "${symbol_index_file}" "${input_file}" >> "${nodes_temp}" 2>&1
     local nodes_after_external=$(wc -l < "${nodes_temp}" 2>/dev/null || echo "0")
     debug_log "Total nodes after external: ${nodes_after_external} lines"
-    
+
+    debug_log "Extracting relationship target nodes..."
+    extract_relationship_target_nodes_admin "${symbol_index_file}" "${input_file}" >> "${nodes_temp}" 2>&1
+    local nodes_after_rel_targets=$(wc -l < "${nodes_temp}" 2>/dev/null || echo "0")
+    debug_log "Total nodes after relationship targets: ${nodes_after_rel_targets} lines"
+
     debug_log "Extracting anonymous class nodes..."
     extract_anonymous_class_nodes_admin "${symbol_index_file}" >> "${nodes_temp}" 2>&1
     local nodes_final=$(wc -l < "${nodes_temp}" 2>/dev/null || echo "0")
