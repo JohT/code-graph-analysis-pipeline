@@ -200,7 +200,7 @@ domains/java/
 - [ ] `analyze.sh --domain java --report Csv --keep-running` — verify `reports/java/` has 11 CSVs from `javaCsv.sh` + 5 from `artifactDependenciesCsv.sh`
 - [ ] `analyze.sh --domain java --report Python --keep-running` — verify ~14 SVGs in `reports/java/`
 - [ ] `analyze.sh --domain java --report Markdown --keep-running` — verify `reports/java/java_report.md` renders all sections
-- [ ] `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json domains/java/README.md domains/java/PREREQUISITES.md`
+- [ ] `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json domains/java/README.md domains/java/PREREQUISITES.md`
 - [ ] Verify `explore/MethodMetricsJavaExploration.ipynb` has `ValidateAlwaysFalse` in notebook metadata
 
 ---

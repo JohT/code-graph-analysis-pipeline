@@ -123,7 +123,7 @@ analyze.sh --domain anomaly-detection --report Python --keep-running
 
 - Shell: `shellcheck <script.sh>`
 - Python: Pylance type checking
-- Markdown links: `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json <file.md>`
+- Markdown links: `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json <file.md>`
 
 ---
 

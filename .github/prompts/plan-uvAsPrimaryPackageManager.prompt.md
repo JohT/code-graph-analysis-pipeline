@@ -84,7 +84,7 @@ uv becomes the primary (default) Python package manager using `pyproject.toml` +
 2. `uv lock --check` — lockfile is consistent with `pyproject.toml`
 3. `uv run python -c "import ipykernel, pandas, sklearn, umap, shap, neo4j, plotly, optuna"` — all imports succeed
 4. `shellcheck scripts/activateUvEnvironment.sh scripts/activateCondaEnvironment.sh` — no warnings
-5. `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json README.md COMMANDS.md ENVIRONMENT_VARIABLES.md` — no broken links
+5. `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json README.md COMMANDS.md ENVIRONMENT_VARIABLES.md` — no broken links
 6. CI: `internal-check-python-uv-support.yml` passes
 7. CI: `internal-check-conda-support.yml` passes
 8. CI: `public-analyze-code-graph.yml` smoke-tested with default (uv) and with `python-package-manager: conda`

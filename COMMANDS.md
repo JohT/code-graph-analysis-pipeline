@@ -102,7 +102,7 @@ The [analyze.sh](./scripts/analysis/analyze.sh) command comes with these command
 
 - `--keep-running` skips the Neo4j stop step at the end of the script. Neo4j keeps running after analysis completes. Useful when running reports repeatedly (e.g. during development) to avoid the overhead of stopping and restarting Neo4j each time. Note: `--explore` implies `--keep-running`; combining both is redundant.
 
-- `--skip-jqassistant` skips jQAssistant download, setup, and scan. Designed for SCIP index analysis (already jQA-free) combined with CSV git history, where no Java/TypeScript artifact scanning is needed. Exports `SKIP_JQASSISTANT=true` for downstream scripts. When set, `setupJQAssistant.sh` and `resetAndScanChanged.sh` are not executed. Also automatically sets `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (unless explicitly overridden), since the jQAssistant git plugin is unavailable when jQAssistant is skipped.
+- `--skip-jqassistant` skips jQAssistant download, setup, and scan. Designed for SCIP index analysis (already jQA-free) combined with CSV git history, where no Java/TypeScript artifact scanning is needed. Exports `SKIP_JQASSISTANT=true` for downstream scripts. When set, `setupJQAssistant.sh` and `resetAndScanChanged.sh` are not executed. Also automatically sets `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (unless explicitly overridden), since the jQAssistant git plugin is unavailable when jQAssistant is skipped. Additionally, when no specific domain is selected via `--domain`, the `java` domain is automatically disabled by default because the java domain currently has no SCIP index-based reports and would be non-functional without jQAssistant. To run the java domain anyway, use `--domain java` explicitly.
 
 - `--domain anomaly-detection` selects a single analysis domain (a subdirectory of [domains/](./domains/)) to run reports for, following a vertical-slice approach. When set, only that domain's report scripts run; core reports from `scripts/reports/` and other domains are skipped. The domain option composes with `--report` to further narrow down which reports are generated, e.g. `--domain anomaly-detection --report Csv`. When not specified, all domains and reports run unchanged. The selected domain name is passed to report compilation scripts via the environment variable `ANALYSIS_DOMAIN`. Available domains can be found in the [domains/](./domains/) directory.
 
@@ -221,7 +221,7 @@ Change into the [scripts](./scripts/) directory e.g. with `cd scripts` and then 
 The following command shows how to use [markdown-link-check](https://github.com/tcort/markdown-link-check) to for example check the links in the [README.md](./README.md) file:
 
 ```script
-npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md CHANGELOG.md
+npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json README.md COMMANDS.md GETTING_STARTED.md INTEGRATION.md CHANGELOG.md
 ```
 
 ## Manual Setup

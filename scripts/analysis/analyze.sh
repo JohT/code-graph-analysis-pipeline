@@ -89,6 +89,8 @@ usage() {
   echo "                            Use for SCIP index analysis (*.scip.json in indices/) without Java/TypeScript artifacts."
   echo "                            Exports SKIP_JQASSISTANT=true for downstream scripts."
   echo "                            Also sets IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full unless explicitly overridden."
+  echo "                            When no --domain is specified, 'java' domain is disabled (requires jQAssistant)."
+  echo "                            Override with --domain java to run java analysis anyway."
   echo "  --explore                 Skip report generation and keep Neo4j running for manual exploration."
   echo "  --keep-running            Keep Neo4j running after the analysis completes."
   echo "  --help                    Print this usage information and exit."
@@ -306,6 +308,20 @@ elif [ -n "${ANALYSIS_DOMAIN}" ]; then
   resolvedExcludedDomains=""
 else
   resolvedExcludedDomains="anomaly-detection,node-embeddings,graph-algorithms"
+fi
+
+# When --skip-jqassistant is set without a specific domain, disable java domain by default.
+# Rationale: java domain currently has no SCIP-based reports, so it's not useful without jQAssistant.
+if ${skipJQAssistant} && [ -z "${ANALYSIS_DOMAIN}" ]; then
+  # Guard against duplicate 'java' entry (e.g., when combined with --exclude-domain java)
+  if [[ ",${resolvedExcludedDomains}," != *",java,"* ]]; then
+    if [ -z "${resolvedExcludedDomains}" ]; then
+      resolvedExcludedDomains="java"
+    else
+      resolvedExcludedDomains="${resolvedExcludedDomains},java"
+    fi
+    echo "analyze: Automatically disabled 'java' domain (--skip-jqassistant is set and no specific domain is selected)"
+  fi
 fi
 
 # Validate excluded domain names (explicit --exclude-domain only). Fail-fast like --domain does.

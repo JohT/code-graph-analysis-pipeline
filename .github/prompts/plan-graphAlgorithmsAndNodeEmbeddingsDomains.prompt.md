@@ -287,7 +287,7 @@ Key requirements:
 - [ ] 10.3 Pylance: open `nodeEmbeddingsCharts.py` in VS Code — zero errors in Problems panel
 - [ ] 10.4 Inspect `domains/graph-algorithms/queries/similarity/Set_Parameters.cypher` — confirm similarity metric is Jaccard; update summary template label if different
 - [ ] 10.5 Cross-verify written property names in adapted scripts match property names in statistics queries
-- [ ] 10.6 `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json domains/graph-algorithms/README.md domains/node-embeddings/README.md`
+- [ ] 10.6 `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json domains/graph-algorithms/README.md domains/node-embeddings/README.md`
 - [ ] 10.7 Confirm `"code_graph_analysis_pipeline_data_validation": "ValidateAlwaysFalse"` in both explore notebooks' top-level metadata
 - [ ] 10.8 `analyze.sh --domain graph-algorithms --report Csv --keep-running`
 - [ ] 10.9 `analyze.sh --domain graph-algorithms --report Markdown --keep-running`

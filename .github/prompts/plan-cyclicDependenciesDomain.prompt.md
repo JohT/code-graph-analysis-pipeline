@@ -133,4 +133,4 @@ In `domains/internal-dependencies/README.md`:
 6. Verify `reports/cyclic-dependencies/` directory created with CSV files
 7. Verify `reports/cyclic-dependencies/cyclic_dependencies_report.md` generated
 8. Verify `internal-dependencies` report no longer contains Section 2 (cyclic)
-9. `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json domains/cyclic-dependencies/README.md`
+9. `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json domains/cyclic-dependencies/README.md`

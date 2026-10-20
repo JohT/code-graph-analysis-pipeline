@@ -106,7 +106,7 @@ Remove all automated Jupyter notebook execution, rendering (nbconvert), and PDF 
 **Verification**
 1. `shellcheck scripts/activateCondaEnvironment.sh scripts/reports/compilations/AllReports.sh scripts/analysis/analyze.sh` — no errors
 2. Confirm `conda-environment.yml` and `requirements.txt` still have matching packages (python-dependencies.instructions.md sync rule)
-3. `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json COMMANDS.md README.md GETTING_STARTED.md AGENTS.md` — no broken links
+3. `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json COMMANDS.md README.md GETTING_STARTED.md AGENTS.md` — no broken links
 4. Grep for `nbconvert|JupyterReports|executeJupyterNotebook|ENABLE_JUPYTER_NOTEBOOK_PDF_GENERATION|JUPYTER_NOTEBOOK_DIRECTORY` across non-CHANGELOG `.sh`, `.yml`, `.md` files — no remaining operational references
 5. Confirm `analyze.sh` usage string no longer lists `Jupyter` as a report type option
 
