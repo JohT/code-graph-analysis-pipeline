@@ -221,7 +221,7 @@ Test cases (13 total):
    - `language`, `isTest`, `isAbstract` properties populated on sampled nodes
 5. **LOAD CSV fallback** (populated DB or `neo4j-admin` absent): `analyze.sh --skip-jqassistant --domain scip-index-import --keep-running` → fast path skipped silently, LOAD CSV runs normally
 6. **Repeat-run idempotency**: run twice → second run skips admin import (hash unchanged)
-7. `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json domains/scip-index-import/README.md`
+7. `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json domains/scip-index-import/README.md`
 
 ---
 

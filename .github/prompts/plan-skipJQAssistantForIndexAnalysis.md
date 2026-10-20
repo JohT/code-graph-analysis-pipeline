@@ -152,7 +152,7 @@ CSV `full` mode creates: `(Git:Log:Commit)-[:CONTAINS_CHANGED]->(Git:Log:File)` 
 4. Markdown link check on any modified docs
 5. Manual end-to-end: `analyze.sh --skip-jqassistant --domain git-history --report Csv --keep-running` from an analysis workspace containing SCIP indices + source with git
 6. Validate CI workflow YAML syntax (GitHub Actions workflow linter or `act` locally)
-7. `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json COMMANDS.md GETTING_STARTED.md domains/git-history/README.md INTEGRATION.md`
+7. `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json COMMANDS.md GETTING_STARTED.md domains/git-history/README.md INTEGRATION.md`
 
 ---
 

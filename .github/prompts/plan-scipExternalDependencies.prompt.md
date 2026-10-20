@@ -301,7 +301,7 @@ This allows jQAssistant analysis (Java/TypeScript without SCIP) to proceed norma
 1. `shellcheck domains/external-dependencies/externalDependenciesCsv.sh`
 2. `shellcheck domains/external-dependencies/externalDependenciesPython.sh`
 3. Pylance on `externalScipDependencyCharts.py` (strict mode)
-4. `npx --yes markdown-link-check --quiet --progress --config=markdown-lint-check-config.json domains/external-dependencies/README.md`
+4. `npx --yes markdown-link-check --quiet --progress --config=markdown-link-check-config.json domains/external-dependencies/README.md`
 
 ### Unit Tests (no external dependencies)
 
