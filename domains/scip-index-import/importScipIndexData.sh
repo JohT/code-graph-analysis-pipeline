@@ -101,6 +101,12 @@ else
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Type_Edges.cypher"
 fi
 
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Redirecting SCIP shadow type edges to internal types..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Redirect_SCIP_Shadow_Type_Edges_To_Internal.cypher"
+
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Deleting SCIP shadow external types..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Delete_SCIP_Shadow_External_Types.cypher"
+
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP project short name..."
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Project_Short_Name.cypher"
 
