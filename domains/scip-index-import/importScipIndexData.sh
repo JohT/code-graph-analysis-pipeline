@@ -41,6 +41,33 @@ IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"./import"}
 # Define functions to execute a cypher query from within a given file like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
+# Define functions to parse CSV format strings from Cypher query results
+source "${SCRIPTS_DIR}/parseCsvFunctions.sh"
+
+# Logging functions for import status and warnings
+logWarning() {
+    local warningMessage="${1}"
+    local COLOR_WARNING='\033[0;33m' # yellow
+    local COLOR_DEFAULT='\033[0m'
+    echo -e "${COLOR_WARNING}importScipIndexData: Warning: ${warningMessage}${COLOR_DEFAULT}" >&2
+}
+
+# Verifies that SCIP type symbols don't contain unresolved placeholders like ${...}. These indicate version mismatches between defining and consuming modules during multi-module SCIP merges. Logs a non-fatal warning if found.
+verify_scip_placeholder_symbols() {
+    echo "importScipIndexData: Verifying SCIP type symbols for unresolved placeholders..."
+
+    local dataVerificationResult
+    dataVerificationResult=$( execute_cypher "${IMPORT_QUERIES_DIR}/Verify_SCIP_Placeholder_Symbols.cypher")
+
+    if is_csv_column_greater_zero "${dataVerificationResult}" "nodeCount"; then
+        # Warning: Unresolved placeholders indicate multi-module SCIP merges with version mismatches.
+        #          Does not affect analysis. Logged as informational only.
+        local nodeCount
+        nodeCount=$(get_csv_column_value "${dataVerificationResult}" "nodeCount")
+        logWarning "SCIP type symbols with unresolved build placeholders (e.g., \${revision}, \${project.version}) detected in ${nodeCount} nodes. This indicates version mismatches in multi-module SCIP merges. Analysis is not affected. To resolve, verify your SCIP merge configuration and module version consistency."
+    fi
+}
+
 # Check if indices have changed since last import
 is_scip_index_change_detected() {
     local change_detection_return_code
@@ -106,6 +133,8 @@ execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Redirect_SCIP_Shadow_Type_E
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Deleting SCIP shadow external types..."
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Delete_SCIP_Shadow_External_Types.cypher"
+
+verify_scip_placeholder_symbols
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP project short name..."
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Project_Short_Name.cypher"
