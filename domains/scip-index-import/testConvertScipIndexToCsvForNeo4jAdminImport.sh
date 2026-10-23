@@ -492,6 +492,7 @@ assert_contains "node header has typeName"             '"typeName"'          "${
 assert_contains "node header has isTest:boolean"       "isTest:boolean"       "${nodes_header}"
 assert_contains "node header has isAbstract:boolean"   "isAbstract:boolean"   "${nodes_header}"
 assert_contains "node header has fqn"                  '"fqn"'               "${nodes_header}"
+assert_contains "node header has descriptor"           '"descriptor"'        "${nodes_header}"
 echo ""
 
 # ---------------------------------------------------------------------------
@@ -596,6 +597,16 @@ echo ""
 echo "Test 9: external type isTest:boolean=false"
 string_row=$(echo "${nodes_content}" | grep "java/lang/String#" | head -1)
 assert_contains "external String node has isTest:boolean=false" '"false"' "${string_row}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test 9b: descriptor property — internal and external nodes carry their SCIP descriptor
+# ---------------------------------------------------------------------------
+
+echo "Test 9b: descriptor property"
+foo_row=$(echo "${nodes_content}" | grep "com/example/Foo#" | head -1)
+assert_contains "internal Foo node has descriptor com/example/Foo#" '"com/example/Foo#"' "${foo_row}"
+assert_contains "external String node has descriptor java/lang/String#" '"java/lang/String#"' "${string_row}"
 echo ""
 
 # ---------------------------------------------------------------------------

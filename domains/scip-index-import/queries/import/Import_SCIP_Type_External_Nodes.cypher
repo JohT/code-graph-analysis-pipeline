@@ -23,6 +23,7 @@ SET node.fqn            = row.symbol,
     node.packageManager = row.package_manager,
     node.version        = row.version,
     node.module         = row.module,
+    node.descriptor     = row.descriptor,
     node.isAbstract     = (row.is_abstract = 'true') OR (row.display_name = 'package-info.java'),
     node.isTest         = false
 RETURN count(*) AS writtenRelationships

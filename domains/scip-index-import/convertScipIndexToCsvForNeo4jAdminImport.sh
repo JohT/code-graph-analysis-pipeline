@@ -4,6 +4,10 @@
 # Produces scip_type_nodes_admin.csv and scip_type_edges_admin.csv for use with "neo4j-admin database import full".
 # Unlike convertScipIndexToCsvForNeo4jImport.sh, computes language and isTest in jq and uses neo4j-admin CSV format.
 # Requires jq.
+#
+# Pre-computes 'descriptor' property (last space-separated token of SCIP symbol, e.g. "com/example/Foo#").
+# Avoids runtime split(symbol, ' ')[-1] in Cypher queries. Works across all languages (Java FQN, Go/Python with backticks)
+# because SCIP symbol format "<scheme> <manager> <package> <version> <descriptor>" is standard.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -288,6 +292,7 @@ function extract_type_nodes_admin() {
                     packageManager: $manager,
                     version:        $version,
                     module:         $module_name,
+                    descriptor:     $descriptor,
                     isAbstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
                     isTest:         (if is_test($file) then "true" else "false" end),
                     label:          "SCIP;SemanticCodeIndexInternalType"
@@ -361,6 +366,7 @@ function extract_type_nodes_admin() {
                     packageManager: $manager,
                     version:        $version,
                     module:         $module_name,
+                    descriptor:     "",
                     isAbstract:     "false",
                     isTest:         (if is_test($file) then "true" else "false" end),
                     label:          "SCIP;SemanticCodeIndexInternalType"
@@ -370,8 +376,8 @@ function extract_type_nodes_admin() {
         unique_by(.id) |
         sort_by(.file, .name) |
 
-        (["symbol:ID(ScipNode)","fqn","name","language","scheme","typeName","file","packageId","packageManager","version","module","isAbstract:boolean","isTest:boolean",":LABEL"]),
-        (.[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .isAbstract, .isTest, .label])
+        (["symbol:ID(ScipNode)","fqn","name","language","scheme","typeName","file","packageId","packageManager","version","module","descriptor","isAbstract:boolean","isTest:boolean",":LABEL"]),
+        (.[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .descriptor, .isAbstract, .isTest, .label])
         | @csv
         ' "${input_file}"
 }
@@ -432,6 +438,7 @@ function extract_external_type_nodes_admin() {
                 packageManager: $manager,
                 version:        $version,
                 module:         $module_name,
+                descriptor:     $descriptor,
                 isAbstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
                 isTest:         "false",
                 label:          "SCIP;SemanticCodeIndexExternalType"
@@ -439,7 +446,7 @@ function extract_external_type_nodes_admin() {
         ] |
         unique_by(.id) |
         sort_by(.packageId, .name) |
-        .[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .isAbstract, .isTest, .label]
+        .[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .descriptor, .isAbstract, .isTest, .label]
         | @csv
         ' "${input_file}"
 }
@@ -499,7 +506,7 @@ function extract_relationship_target_nodes_admin() {
         [short_symbol($symbol), short_symbol($symbol),
          ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
          scheme_to_language(scheme($symbol)), scheme($symbol),
-         $cu_type, "", $pkg_id, $manager, $version, $module_name,
+         $cu_type, "", $pkg_id, $manager, $version, $module_name, $descriptor,
          (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
          "false",
          "SCIP;SemanticCodeIndexExternalType"] | @csv
@@ -773,13 +780,14 @@ function extract_anonymous_class_nodes_admin() {
                 packageManager: .manager,
                 version:        .version,
                 module:         ((.pkg_id // "") | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end),
+                descriptor:     "",
                 isAbstract:     "false",
                 isTest:         (if is_test(.file) then "true" else "false" end),
                 label:          "SCIP;SemanticCodeIndexAnonymousType;SemanticCodeIndexInternalType"
             }
         ] |
         unique_by(.id) |
-        .[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .isAbstract, .isTest, .label]
+        .[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .descriptor, .isAbstract, .isTest, .label]
         | @csv
     '
 }

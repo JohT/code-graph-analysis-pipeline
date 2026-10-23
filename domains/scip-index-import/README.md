@@ -418,6 +418,7 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 | `isTest` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
 | `testMarkerInteger` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
 | `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
+| `descriptor` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType` | Pre-computed SCIP descriptor — the last space-separated token of the type's `symbol` (e.g. `com/example/Foo#`). Empty string for `File` and `AnonymousClass` nodes. Avoids `split(symbol, ' ')[-1]` at query time and enables indexing. |
 | `incomingDependencies` | `SCIPType` | Number of types that depend on this type |
 | `outgoingDependencies` | `SCIPType` | Number of types this type depends on |
 | `incomingDependencies` | `SCIPModule` | **COUNT** of type-level DEPENDS_ON edges into types in this module (aggregated from type level) |

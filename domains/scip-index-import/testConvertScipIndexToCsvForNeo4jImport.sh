@@ -439,9 +439,16 @@ nodes_content=$(cat "${nodes_csv}")
 assert_contains "nodes CSV has correct header" \
     '"symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract"' \
     "${nodes_content}"
+assert_contains "nodes CSV header has descriptor column" '"descriptor"' "$(head -1 "${nodes_csv}")"
 
 assert_contains "internal type Foo appears as a node" "com/example/Foo#" "${nodes_content}"
 assert_contains "external type String appears as an external node" "java/lang/String#" "${nodes_content}"
+
+# descriptor column carries the raw SCIP descriptor (last space-separated token of the symbol)
+foo_row=$(echo "${nodes_content}" | grep "com/example/Foo#" | head -1)
+string_row=$(echo "${nodes_content}" | grep "java/lang/String#" | head -1)
+assert_contains "internal Foo node has descriptor com/example/Foo#" '"com/example/Foo#"' "${foo_row}"
+assert_contains "external String node has descriptor java/lang/String#" '"java/lang/String#"' "${string_row}"
 
 edges_content=$(cat "${edges_csv}")
 assert_contains "edges CSV has correct header" \

@@ -4,6 +4,10 @@
 # Supports multiple index files: node symbols are deduplicated; edge reference counts are summed.
 # Writes scip_type_nodes.csv and scip_type_edges.csv to IMPORT_DIRECTORY.
 # Requires jq.
+#
+# Pre-computes 'descriptor' property (last space-separated token of SCIP symbol, e.g. "com/example/Foo#").
+# Avoids runtime split(symbol, ' ')[-1] in Cypher queries. Works across all languages (Java FQN, Go/Python with backticks)
+# because SCIP symbol format "<scheme> <manager> <package> <version> <descriptor>" is standard.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -276,7 +280,8 @@ function extract_type_nodes() {
                     version:         $version,
                     module:          $module_name,
                     is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
-                    project_root:    $project_root
+                    project_root:    $project_root,
+                    descriptor:      $descriptor
                 }
             ]
             +
@@ -346,15 +351,16 @@ function extract_type_nodes() {
                     version:         $version,
                     module:          $module_name,
                     is_abstract:     "false",
-                    project_root:    $project_root
+                    project_root:    $project_root,
+                    descriptor:      ""
                 }
             ]
         ) |
         unique_by(.symbol) |
         sort_by(.file, .display_name) |
 
-        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root"]),
-        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root])
+        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root","descriptor"]),
+        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor])
         | @csv
         ' "${input_file}"
 }
@@ -421,12 +427,13 @@ function extract_external_type_nodes() {
                 version:         $version,
                 module:          $module_name,
                 is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
-                project_root:    $project_root
+                project_root:    $project_root,
+                descriptor:      $descriptor
             }
         ] |
         unique_by(.symbol) |
         sort_by(.package_id, .display_name) |
-        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor]
         | @csv
         ' "${input_file}"
 }
@@ -493,7 +500,7 @@ function extract_relationship_target_nodes() {
          ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
          scheme($symbol), $cu_type, "", $pkg_id, $manager, $version, $module_name,
          (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
-         $project_root] | @csv
+         $project_root, $descriptor] | @csv
         ' "${input_file}"
 }
 
@@ -678,11 +685,12 @@ function extract_anonymous_class_nodes() {
                 version:         .version,
                 module:          ((.pkg_id // "") | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end),
                 is_abstract:     "false",
-                project_root:    ($index[0].project_root // "")
+                project_root:    ($index[0].project_root // ""),
+                descriptor:      ""
             }
         ] |
         unique_by(.symbol) |
-        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor]
         | @csv
     '
 }
