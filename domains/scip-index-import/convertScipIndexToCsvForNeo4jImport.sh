@@ -4,6 +4,10 @@
 # Supports multiple index files: node symbols are deduplicated; edge reference counts are summed.
 # Writes scip_type_nodes.csv and scip_type_edges.csv to IMPORT_DIRECTORY.
 # Requires jq.
+#
+# Pre-computes 'descriptor' property (last space-separated token of SCIP symbol, e.g. "com/example/Foo#").
+# Avoids runtime split(symbol, ' ')[-1] in Cypher queries. Works across all languages (Java FQN, Go/Python with backticks)
+# because SCIP symbol format "<scheme> <manager> <package> <version> <descriptor>" is standard.
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -181,6 +185,18 @@ function build_symbol_information_index() {
             .symbol | split(" ") | .[2]
         ] | unique,
 
+        directory_to_package_tokens: (
+            [.documents[] |
+             .relative_path as $file |
+             ($file | split("/") | .[:-1] | join("/")) as $dir |
+             .occurrences[] |
+             select((.symbol_roles // 0) % 2 == 1) |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             { key: $dir, value: (.symbol | split(" ") | .[0:4]) }
+            ] | reduce .[] as $kv ({}; .[$kv.key] //= $kv.value)
+        ),
+
         project_root: (
             (.metadata.project_root // "unknown") as $project_root_raw |
             if ($project_root_raw | test("file://")) then
@@ -264,7 +280,8 @@ function extract_type_nodes() {
                     version:         $version,
                     module:          $module_name,
                     is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
-                    project_root:    $project_root
+                    project_root:    $project_root,
+                    descriptor:      $descriptor
                 }
             ]
             +
@@ -299,11 +316,25 @@ function extract_type_nodes() {
                   $s
                  ] | first) as $first_internal_symbol |
 
+                ($index[0].directory_to_package_tokens[($file | split("/") | .[:-1] | join("/"))]) as $dir_pkg_tokens |
+
+                ([.occurrences[] |
+                  select((.symbol_roles // 0) % 2 == 0) |
+                  select(.symbol | startswith("local ") | not) |
+                  select((.symbol | split(" ") | length) >= 5) |
+                  select(is_type_descriptor(.symbol)) |
+                  select(is_type_parameter_descriptor(.symbol) | not) |
+                  .symbol as $s |
+                  ($s | split(" ") | .[2]) as $pkg_id |
+                  select(($internal_pkg_ids | index($pkg_id)) != null) |
+                  $s
+                 ] | first) as $first_internal_ref_symbol |
+
                 select(($defined_type_symbols | length) == 0) |
                 select(($referenced_type_symbols | length) > 0) |
-                select($first_internal_symbol != null) |
+                select($first_internal_symbol != null or $dir_pkg_tokens != null or $first_internal_ref_symbol != null) |
 
-                ($first_internal_symbol | split(" ")) as $tokens |
+                (if $first_internal_symbol != null then ($first_internal_symbol | split(" ")) elif $first_internal_ref_symbol != null then ($first_internal_ref_symbol | split(" ")) else $dir_pkg_tokens end) as $tokens |
                 $tokens[1] as $manager |
                 $tokens[2] as $pkg_id |
                 $tokens[3] as $version |
@@ -312,7 +343,7 @@ function extract_type_nodes() {
                 {
                     symbol:          ("__file__ " + $file),
                     display_name:    ($file | split("/") | last),
-                    scheme:          scheme($first_internal_symbol),
+                    scheme:          $tokens[0],
                     type_name:       "File",
                     file:            $file,
                     package_id:      $pkg_id,
@@ -320,15 +351,16 @@ function extract_type_nodes() {
                     version:         $version,
                     module:          $module_name,
                     is_abstract:     "false",
-                    project_root:    $project_root
+                    project_root:    $project_root,
+                    descriptor:      ""
                 }
             ]
         ) |
         unique_by(.symbol) |
         sort_by(.file, .display_name) |
 
-        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root"]),
-        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root])
+        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root","descriptor"]),
+        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor])
         | @csv
         ' "${input_file}"
 }
@@ -395,13 +427,80 @@ function extract_external_type_nodes() {
                 version:         $version,
                 module:          $module_name,
                 is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
-                project_root:    $project_root
+                project_root:    $project_root,
+                descriptor:      $descriptor
             }
         ] |
         unique_by(.symbol) |
         sort_by(.package_id, .display_name) |
-        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor]
         | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 2b — Create external nodes for is_implementation relationship targets
+# that do not appear as reference occurrences (non-admin/LOAD CSV variant).
+# ---------------------------------------------------------------------------
+
+function extract_relationship_target_nodes() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+
+        ($index[0].symbol_to_file) as $sym_to_file |
+        (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+            | gsub("/$"; "")
+        ) as $project_root |
+
+        [
+            .documents[] |
+            .relative_path as $source_file |
+            (.symbols // [])[] |
+            select(.symbol != null) |
+            .symbol as $source_symbol |
+            select(is_base_type_descriptor($source_symbol)) |
+            select(is_type_parameter_descriptor($source_symbol) | not) |
+            select($sym_to_file[$source_symbol] == $source_file) |
+            (.relationships // [])[] |
+            select(.is_implementation == true) |
+            .symbol |
+            select(is_base_type_descriptor(.)) |
+            select(is_type_parameter_descriptor(.) | not) |
+            select($sym_to_file[.] == null)
+        ] |
+        unique[] |
+
+        . as $symbol |
+        ($symbol | split(" ")) as $tokens |
+        $tokens[1] as $manager |
+        $tokens[2] as $pkg_id_from_symbol |
+        $tokens[3] as $version |
+        $tokens[4] as $descriptor |
+
+        ($descriptor | split("/")[0:2] | join("/")) as $pkg_from_descriptor |
+        (if $pkg_id_from_symbol == "." then $pkg_from_descriptor else $pkg_id_from_symbol end) as $pkg_id |
+
+        select($pkg_id != ".") |
+
+        ($index[0].symbol_to_kind[$symbol] // null)         as $kind     |
+        ($index[0].symbol_to_signature_text[$symbol] // "") as $sig_text |
+        ($index[0].symbol_to_doc_first_line[$symbol] // "") as $doc_line |
+        code_unit_type($kind; $sig_text; $doc_line)       as $cu_type  |
+
+        ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+        [short_symbol($symbol),
+         ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
+         scheme($symbol), $cu_type, "", $pkg_id, $manager, $version, $module_name,
+         (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
+         $project_root, $descriptor] | @csv
         ' "${input_file}"
 }
 
@@ -447,8 +546,10 @@ function extract_depends_on_edges() {
                     select(
                         ($target_file != null)
                         or ($target_file == null
-                              and ($internal_pkg_ids | index($ref_pkg_id)) == null
-                              and $ref_pkg_id != ".")
+                              and (
+                                  (($internal_pkg_ids | index($ref_pkg_id)) != null)
+                                  or (($internal_pkg_ids | index($ref_pkg_id)) == null and $ref_pkg_id != ".")
+                              ))
                     ) |
                     { target: ($norm | split(" ") | .[2:5] | join(" ")), count: length }
                 )
@@ -462,9 +563,20 @@ function extract_depends_on_edges() {
               $s
              ] | first) as $first_internal_symbol |
 
+            # Also check for internal type references (role=0 with internal pkg_id)
+            ([$valid_occurrences[] |
+              select(.role == 0) |
+              .symbol as $s |
+              ($s | split(" ") | .[2]) as $pkg_id |
+              select(($internal_pkg_ids | index($pkg_id)) != null) |
+              $s
+             ] | first) as $first_internal_ref_symbol |
+
+            ($index[0].directory_to_package_tokens[($source_file | split("/") | .[:-1] | join("/"))] != null) as $has_dir_pkg |
+
             (if ($source_type_symbols | length) > 0 then
                  ($source_type_symbols | map(short_symbol(.)))
-             elif ($valid_ref_groups | length) > 0 and $first_internal_symbol != null then
+             elif ($valid_ref_groups | length) > 0 and ($first_internal_symbol != null or $first_internal_ref_symbol != null or $has_dir_pkg) then
                  [("__file__ " + $source_file)]
              else
                  []
@@ -514,7 +626,6 @@ function extract_relationship_edges() {
         select(is_type_parameter_descriptor($target_symbol) | not) |
 
         $sym_to_file[$target_symbol] as $target_file |
-        select($target_file != null) |
         select($target_file != $source_file) |
 
         (short_symbol($source_symbol)) as $src |
@@ -574,11 +685,12 @@ function extract_anonymous_class_nodes() {
                 version:         .version,
                 module:          ((.pkg_id // "") | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end),
                 is_abstract:     "false",
-                project_root:    ($index[0].project_root // "")
+                project_root:    ($index[0].project_root // ""),
+                descriptor:      ""
             }
         ] |
         unique_by(.symbol) |
-        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root]
+        .[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor]
         | @csv
     '
 }
@@ -625,6 +737,7 @@ function process_single_index() {
     fi
     # External nodes never emit a header
     extract_external_type_nodes "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
+    extract_relationship_target_nodes "${symbol_index_file}" "${input_file}" >> "${nodes_temp}"
     
     extract_anonymous_class_nodes "${symbol_index_file}" >> "${nodes_temp}"
 

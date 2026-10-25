@@ -439,9 +439,16 @@ nodes_content=$(cat "${nodes_csv}")
 assert_contains "nodes CSV has correct header" \
     '"symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract"' \
     "${nodes_content}"
+assert_contains "nodes CSV header has descriptor column" '"descriptor"' "$(head -1 "${nodes_csv}")"
 
 assert_contains "internal type Foo appears as a node" "com/example/Foo#" "${nodes_content}"
 assert_contains "external type String appears as an external node" "java/lang/String#" "${nodes_content}"
+
+# descriptor column carries the raw SCIP descriptor (last space-separated token of the symbol)
+foo_row=$(echo "${nodes_content}" | grep "com/example/Foo#" | head -1)
+string_row=$(echo "${nodes_content}" | grep "java/lang/String#" | head -1)
+assert_contains "internal Foo node has descriptor com/example/Foo#" '"com/example/Foo#"' "${foo_row}"
+assert_contains "external String node has descriptor java/lang/String#" '"java/lang/String#"' "${string_row}"
 
 edges_content=$(cat "${edges_csv}")
 assert_contains "edges CSV has correct header" \
@@ -986,6 +993,125 @@ assert_contains "relationship edge has count 1" ",1" "${rel_dep_edge}"
 echo ""
 
 # ---------------------------------------------------------------------------
+# Fixture: cross-module is_implementation relationship (two separate SCIP files)
+# Models the real-world case: class in module B implements interface from module A.
+# ---------------------------------------------------------------------------
+
+function create_cross_module_relationship_module_a_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/api/MyInterface.java",
+      "occurrences": [
+        {"symbol": "semanticdb maven maven/com.example/module-a 1.0 com/example/api/MyInterface#", "symbol_roles": 1}
+      ],
+      "symbols": [
+        {"symbol": "semanticdb maven maven/com.example/module-a 1.0 com/example/api/MyInterface#", "kind": 21}
+      ]
+    }
+  ]
+}
+EOF
+}
+
+function create_cross_module_relationship_module_b_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/impl/MyImpl.java",
+      "occurrences": [
+        {"symbol": "semanticdb maven maven/com.example/module-b 2.0 com/example/impl/MyImpl#", "symbol_roles": 1},
+        {"symbol": "semanticdb maven maven/com.example/module-a 1.0 com/example/api/MyInterface#", "symbol_roles": 0}
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/module-b 2.0 com/example/impl/MyImpl#",
+          "kind": 7,
+          "relationships": [
+            {"symbol": "semanticdb maven maven/com.example/module-a 1.0 com/example/api/MyInterface#", "is_implementation": true}
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+function create_cross_module_relationship_relationship_only_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/impl/MyImpl.java",
+      "occurrences": [
+        {"symbol": "semanticdb maven maven/com.example/module-b 2.0 com/example/impl/MyImpl#", "symbol_roles": 1}
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/module-b 2.0 com/example/impl/MyImpl#",
+          "kind": 7,
+          "relationships": [
+            {"symbol": "semanticdb maven jdk 21 java/io/Serializable#", "is_implementation": true}
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: cross-module is_implementation creates edge to interface in other module
+# ---------------------------------------------------------------------------
+
+echo "Test: cross-module is_implementation creates edge to interface in other module"
+xmod_rel_indices_dir="${tmp_test_dir}/xmod_rel_indices"
+xmod_rel_import_dir="${tmp_test_dir}/xmod_rel_import"
+mkdir -p "${xmod_rel_indices_dir}"
+
+create_cross_module_relationship_module_a_scip_json > "${xmod_rel_indices_dir}/module_a.scip.json"
+create_cross_module_relationship_module_b_scip_json > "${xmod_rel_indices_dir}/module_b.scip.json"
+
+run_script_with_env "${xmod_rel_indices_dir}" "${xmod_rel_import_dir}"
+assert_exit_code "exits 0 for cross-module relationship fixture" "0" "${exit_code}"
+
+xmod_rel_edges=$(cat "${xmod_rel_import_dir}/scip_type_edges.csv")
+assert_contains "DEPENDS_ON edge from MyImpl to cross-module MyInterface" \
+    "maven/com.example/module-b 2.0 com/example/impl/MyImpl#" "${xmod_rel_edges}"
+assert_contains "cross-module MyInterface is the target" \
+    "maven/com.example/module-a 1.0 com/example/api/MyInterface#" "${xmod_rel_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: relationship-only target (no occurrence) creates node and edge
+# ---------------------------------------------------------------------------
+
+echo "Test: relationship-only cross-module target creates node and edge"
+rel_only_indices_dir="${tmp_test_dir}/rel_only_indices"
+rel_only_import_dir="${tmp_test_dir}/rel_only_import"
+mkdir -p "${rel_only_indices_dir}"
+
+create_cross_module_relationship_relationship_only_scip_json > "${rel_only_indices_dir}/rel_only.scip.json"
+
+run_script_with_env "${rel_only_indices_dir}" "${rel_only_import_dir}"
+assert_exit_code "exits 0 for relationship-only target fixture" "0" "${exit_code}"
+
+rel_only_nodes=$(cat "${rel_only_import_dir}/scip_type_nodes.csv")
+assert_contains "external node created for relationship-only JDK target" \
+    "jdk 21 java/io/Serializable#" "${rel_only_nodes}"
+
+rel_only_edges=$(cat "${rel_only_import_dir}/scip_type_edges.csv")
+assert_contains "DEPENDS_ON edge from MyImpl to relationship-only JDK type" \
+    "maven/com.example/module-b 2.0 com/example/impl/MyImpl#" "${rel_only_edges}"
+assert_contains "Serializable is the target of relationship-only edge" \
+    "jdk 21 java/io/Serializable#" "${rel_only_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Fixture: internal type referencing an external type whose symbol has pkg_id "."
 # (no groupId/version set). Package must be derived from the descriptor path.
 # ---------------------------------------------------------------------------
@@ -1045,6 +1171,294 @@ assert_contains "edge from Service to Logger exists" \
     "com/example/Service#" "${ext_dot_edges}"
 assert_contains "Logger is target of edge despite pkg_id '.'" \
     "org/slf4j/Logger#" "${ext_dot_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Fixture: file with only external type references in a directory that also
+# contains a file with internal definitions. Models package-info.java files
+# annotated with external annotations (e.g. @NullMarked) that reference no
+# internal types. The sibling file provides directory-level package metadata.
+# ---------------------------------------------------------------------------
+
+function create_external_only_refs_with_sibling_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/package-info.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven com.external/lib 2.0 com/external/NullMarked#",
+          "symbol_roles": 0
+        }
+      ]
+    },
+    {
+      "relative_path": "src/main/java/com/example/MyClass.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/MyClass#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/MyClass#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Fixture: file with only external type references isolated in its own directory
+# (no sibling file with internal definitions). No __file__ node or edge should
+# be created because directory-level package metadata is unavailable.
+# ---------------------------------------------------------------------------
+
+function create_external_only_refs_isolated_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/isolated/annotations-only.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven com.external/lib 2.0 com/external/NullMarked#",
+          "symbol_roles": 0
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: file with only external refs + sibling creates __file__ node and edge
+# Covers files like package-info.java that have no internal type definitions.
+# ---------------------------------------------------------------------------
+
+echo "Test: file with only external refs + sibling creates __file__ node and edge"
+ext_sibling_indices_dir="${tmp_test_dir}/ext_sibling_indices"
+ext_sibling_import_dir="${tmp_test_dir}/ext_sibling_import"
+mkdir -p "${ext_sibling_indices_dir}"
+
+create_external_only_refs_with_sibling_scip_json > "${ext_sibling_indices_dir}/ext_sibling.scip.json"
+
+run_script_with_env "${ext_sibling_indices_dir}" "${ext_sibling_import_dir}"
+assert_exit_code "exits 0 for external-only-refs-with-sibling fixture" "0" "${exit_code}"
+
+ext_sibling_nodes=$(cat "${ext_sibling_import_dir}/scip_type_nodes.csv")
+assert_contains "__file__ node created for file with only external refs" \
+    "__file__ src/main/java/com/example/package-info.java" "${ext_sibling_nodes}"
+
+file_node_row=$(echo "${ext_sibling_nodes}" | grep "__file__ src/main/java/com/example/package-info.java" | head -1)
+assert_contains "__file__ node type_name is File" '"File"' "${file_node_row}"
+assert_contains "__file__ node package_id from sibling" '"maven/com.example/app"' "${file_node_row}"
+assert_contains "__file__ node scheme from sibling" '"semanticdb"' "${file_node_row}"
+
+ext_sibling_edges=$(cat "${ext_sibling_import_dir}/scip_type_edges.csv")
+assert_contains "DEPENDS_ON edge from __file__ package-info to external type" \
+    "__file__ src/main/java/com/example/package-info.java" "${ext_sibling_edges}"
+assert_contains "NullMarked is the target of the edge" \
+    "com/external/NullMarked#" "${ext_sibling_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: file with only external refs isolated (no sibling) creates no node or
+# edge — no directory-level package metadata available.
+# ---------------------------------------------------------------------------
+
+echo "Test: file with only external refs isolated (no sibling) creates no node or edge"
+ext_isolated_indices_dir="${tmp_test_dir}/ext_isolated_indices"
+ext_isolated_import_dir="${tmp_test_dir}/ext_isolated_import"
+mkdir -p "${ext_isolated_indices_dir}"
+
+create_external_only_refs_isolated_scip_json > "${ext_isolated_indices_dir}/ext_isolated.scip.json"
+
+run_script_with_env "${ext_isolated_indices_dir}" "${ext_isolated_import_dir}"
+assert_exit_code "exits 0 for external-only-refs-isolated fixture" "0" "${exit_code}"
+
+ext_isolated_nodes=$(cat "${ext_isolated_import_dir}/scip_type_nodes.csv")
+assert_not_contains "no __file__ node for isolated external-only file" \
+    "annotations-only.java" "${ext_isolated_nodes}"
+
+ext_isolated_edges=$(cat "${ext_isolated_import_dir}/scip_type_edges.csv")
+assert_not_contains "no edge from isolated external-only file" \
+    "annotations-only.java" "${ext_isolated_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Fixture: file with only internal type references, with sibling providing package info
+# (e.g., package-info.java referencing @Deprecated or other internal annotations)
+# Should create __file__ node using coordinates from the internal type reference itself
+# ---------------------------------------------------------------------------
+
+function create_internal_only_refs_with_sibling_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/org/axonframework/common/package-info.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#",
+          "symbol_roles": 0
+        },
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/AxonException#",
+          "symbol_roles": 0
+        }
+      ]
+    },
+    {
+      "relative_path": "src/main/java/org/axonframework/common/DescribableComponent.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#",
+          "kind": 7
+        }
+      ]
+    },
+    {
+      "relative_path": "src/main/java/org/axonframework/common/AxonException.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/AxonException#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/AxonException#",
+          "kind": 7
+        }
+      ]
+    },
+    {
+      "relative_path": "src/main/java/org/axonframework/common/SomeClass.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/SomeClass#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/SomeClass#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Fixture: file with only internal type references, isolated (no sibling)
+# Even though it has internal refs, without another source of package info,
+# we can extract from the internal type reference itself
+# ---------------------------------------------------------------------------
+
+function create_internal_only_refs_isolated_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/isolated/AnnotationOnly.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#",
+          "symbol_roles": 0
+        }
+      ]
+    },
+    {
+      "relative_path": "src/isolated/DescribableComponent.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: file with only internal refs + sibling creates __file__ node and edge
+# Internal references have full module coordinates, so __file__ can be created
+# ---------------------------------------------------------------------------
+
+echo "Test: file with only internal refs + sibling creates __file__ node and edge"
+int_sibling_indices_dir="${tmp_test_dir}/int_sibling_indices"
+int_sibling_import_dir="${tmp_test_dir}/int_sibling_import"
+mkdir -p "${int_sibling_indices_dir}"
+
+create_internal_only_refs_with_sibling_scip_json > "${int_sibling_indices_dir}/int_sibling.scip.json"
+
+run_script_with_env "${int_sibling_indices_dir}" "${int_sibling_import_dir}"
+assert_exit_code "exits 0 for internal-only-refs-with-sibling fixture" "0" "${exit_code}"
+
+int_sibling_nodes=$(cat "${int_sibling_import_dir}/scip_type_nodes.csv")
+assert_contains "__file__ node created for file with only internal refs" \
+    "__file__ src/main/java/org/axonframework/common/package-info.java" "${int_sibling_nodes}"
+
+int_file_node_row=$(echo "${int_sibling_nodes}" | grep "__file__ src/main/java/org/axonframework/common/package-info.java" | head -1)
+assert_contains "__file__ node type_name is File for internal refs" '"File"' "${int_file_node_row}"
+assert_contains "__file__ node package_id from internal ref" '"maven/org.axonframework/axon-common"' "${int_file_node_row}"
+
+int_sibling_edges=$(cat "${int_sibling_import_dir}/scip_type_edges.csv")
+assert_contains "DEPENDS_ON edge from __file__ package-info to internal type" \
+    "__file__ src/main/java/org/axonframework/common/package-info.java" "${int_sibling_edges}"
+assert_contains "DescribableComponent is the target" \
+    "maven/org.axonframework/axon-common 5.1.1 org/axonframework/common/DescribableComponent#" "${int_sibling_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: file with only internal refs isolated creates __file__ node and edge
+# Should extract full coordinates from the internal type reference itself
+# ---------------------------------------------------------------------------
+
+echo "Test: file with only internal refs isolated creates __file__ node and edge"
+int_isolated_indices_dir="${tmp_test_dir}/int_isolated_indices"
+int_isolated_import_dir="${tmp_test_dir}/int_isolated_import"
+mkdir -p "${int_isolated_indices_dir}"
+
+create_internal_only_refs_isolated_scip_json > "${int_isolated_indices_dir}/int_isolated.scip.json"
+
+run_script_with_env "${int_isolated_indices_dir}" "${int_isolated_import_dir}"
+assert_exit_code "exits 0 for internal-only-refs-isolated fixture" "0" "${exit_code}"
+
+int_isolated_nodes=$(cat "${int_isolated_import_dir}/scip_type_nodes.csv")
+assert_contains "__file__ node created for isolated internal refs" \
+    "__file__ src/isolated/AnnotationOnly.java" "${int_isolated_nodes}"
+
+int_isolated_file_node_row=$(echo "${int_isolated_nodes}" | grep "__file__ src/isolated/AnnotationOnly.java" | head -1)
+assert_contains "__file__ node package_id from isolated internal ref" '"maven/org.axonframework/axon-common"' "${int_isolated_file_node_row}"
+
+int_isolated_edges=$(cat "${int_isolated_import_dir}/scip_type_edges.csv")
+assert_contains "DEPENDS_ON edge from isolated __file__ to internal type" \
+    "__file__ src/isolated/AnnotationOnly.java" "${int_isolated_edges}"
 echo ""
 
 # ---------------------------------------------------------------------------

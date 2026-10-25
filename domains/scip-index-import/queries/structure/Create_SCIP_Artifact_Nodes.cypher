@@ -5,8 +5,14 @@ MATCH (t:SemanticCodeIndexInternalType|SemanticCodeIndexExternalType)
              ,t.version         AS version
              ,t.packageManager  AS packageManager
              ,t.packageId       AS packageId
+  WITH module
+     ,version
+     ,packageManager
+     ,packageId
+     ,split(split(module, '/')[-1], '#')[0] AS shortName
 MERGE (a:SCIP:SemanticCodeIndexArtifact {fqn: module + ' ' + version})
-  SET a.name           = module
+  SET a.name           = shortName
+     ,a.fullName       = module
      ,a.version        = version
      ,a.packageManager = packageManager
      ,a.fileName       = packageId
