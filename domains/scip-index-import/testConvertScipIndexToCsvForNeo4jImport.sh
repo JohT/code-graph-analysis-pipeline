@@ -1462,6 +1462,160 @@ assert_contains "DEPENDS_ON edge from isolated __file__ to internal type" \
 echo ""
 
 # ---------------------------------------------------------------------------
+# Fixture: type defined only in the symbols section (truncated occurrence)
+# Models the real-world case where a SCIP indexer emits a truncated occurrence
+# format (no symbol_roles, pkg_id = ".") for a type it defines, but the type's
+# full symbol appears correctly in the document's symbols section. The type must
+# still be extracted as an internal type node (non-empty file column).
+# ---------------------------------------------------------------------------
+
+function create_symbols_section_only_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/Handler.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Handler#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/Handler#",
+          "kind": 7
+        }
+      ]
+    },
+    {
+      "relative_path": "src/main/java/com/example/core/CoreService.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven . . com/example/core/CoreService#"
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/app 1.0 com/example/core/CoreService#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: type with symbols-section-only definition is extracted as internal type
+# The occurrence for CoreService uses the truncated ". ." format with no symbol_roles,
+# so occurrence-based extraction misses it. Fix 1 (symbols section extraction) must
+# produce an internal type node with a non-empty file path.
+# ---------------------------------------------------------------------------
+
+echo "Test: symbols-section-only type is extracted as internal type (non-empty file)"
+sym_section_indices_dir="${tmp_test_dir}/sym_section_indices"
+sym_section_import_dir="${tmp_test_dir}/sym_section_import"
+mkdir -p "${sym_section_indices_dir}"
+
+create_symbols_section_only_scip_json > "${sym_section_indices_dir}/sym_section.scip.json"
+
+run_script_with_env "${sym_section_indices_dir}" "${sym_section_import_dir}"
+assert_exit_code "exits 0 for symbols-section-only fixture" "0" "${exit_code}"
+
+sym_section_nodes=$(cat "${sym_section_import_dir}/scip_type_nodes.csv")
+assert_contains "CoreService node extracted from symbols section" \
+    "com/example/core/CoreService#" "${sym_section_nodes}"
+
+core_service_row=$(echo "${sym_section_nodes}" | grep "com/example/core/CoreService#" | grep -v "__file__" | head -1)
+assert_contains "CoreService has non-empty file path (internal type)" \
+    "src/main/java/com/example/core/CoreService.java" "${core_service_row}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Fixtures: multi-index merge where external-type row from early-sorted index
+# should be overridden by internal-type row from late-sorted index.
+# The consumer module (aaa_) sorts before the service module (bbb_), so without
+# Fix 2 the empty-file row from aaa_ wins and Service gets imported as external.
+# ---------------------------------------------------------------------------
+
+function create_multi_index_consumer_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/consumer/Consumer.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/consumer 1.0 com/example/consumer/Consumer#",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "semanticdb maven maven/com.example/service 1.0 com/example/service/Service#",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/consumer 1.0 com/example/consumer/Consumer#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+function create_multi_index_service_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "src/main/java/com/example/service/Service.java",
+      "occurrences": [
+        {
+          "symbol": "semanticdb maven maven/com.example/service 1.0 com/example/service/Service#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "semanticdb maven maven/com.example/service 1.0 com/example/service/Service#",
+          "kind": 7
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: non-empty file path wins over empty file path in multi-index merge
+# ---------------------------------------------------------------------------
+
+echo "Test: non-empty file path wins over empty file path in multi-index merge"
+multi_idx_indices_dir="${tmp_test_dir}/multi_idx_indices"
+multi_idx_import_dir="${tmp_test_dir}/multi_idx_import"
+mkdir -p "${multi_idx_indices_dir}"
+
+create_multi_index_consumer_scip_json > "${multi_idx_indices_dir}/aaa_consumer.scip.json"
+create_multi_index_service_scip_json  > "${multi_idx_indices_dir}/bbb_service.scip.json"
+
+run_script_with_env "${multi_idx_indices_dir}" "${multi_idx_import_dir}"
+assert_exit_code "exits 0 for multi-index merge fixture" "0" "${exit_code}"
+
+multi_idx_nodes=$(cat "${multi_idx_import_dir}/scip_type_nodes.csv")
+service_row=$(echo "${multi_idx_nodes}" | grep "com/example/service/Service#" | head -1)
+assert_contains "Service has non-empty file path after merge (internal type)" \
+    "src/main/java/com/example/service/Service.java" "${service_row}"
+assert_no_duplicate_nodes "no duplicate nodes after multi-index merge" \
+    "${multi_idx_import_dir}/scip_type_nodes.csv"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 
