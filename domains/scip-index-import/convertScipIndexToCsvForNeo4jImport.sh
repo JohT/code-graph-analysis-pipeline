@@ -5,6 +5,11 @@
 # Writes scip_type_nodes.csv and scip_type_edges.csv to IMPORT_DIRECTORY.
 # Requires jq.
 #
+# Multi-module projects: types defined only in the symbols section (no definition occurrence) are extracted
+# as internal types using the file path of the document that declares them. When the same symbol appears in
+# multiple indices with and without a file path, the row with the non-empty file path wins deduplication so
+# that the Cypher import (WHERE file <> '') correctly classifies the type as an internal type.
+#
 # Pre-computes 'descriptor' property (last space-separated token of SCIP symbol, e.g. "com/example/Foo#").
 # Avoids runtime split(symbol, ' ')[-1] in Cypher queries. Works across all languages (Java FQN, Go/Python with backticks)
 # because SCIP symbol format "<scheme> <manager> <package> <version> <descriptor>" is standard.
@@ -355,6 +360,56 @@ function extract_type_nodes() {
                     descriptor:      ""
                 }
             ]
+        +
+        # Extract internal type nodes from the symbols section.
+        # Catches types whose occurrence entries use truncated symbol format (no symbol_roles),
+        # which happens for cross-module types in multi-module projects (e.g. a sub-package
+        # whose files only have imports as occurrences). Without this path those types would
+        # never appear as internal type nodes and would be imported as external types.
+        [
+            .documents[] |
+            .relative_path as $file |
+            .symbols[]? |
+
+            select(.symbol != null) |
+            select(.symbol | startswith("local ") | not) |
+            select((.symbol | split(" ") | length) >= 5) |
+
+            .symbol as $symbol |
+
+            select(is_base_type_descriptor($symbol)) |
+            select(is_type_parameter_descriptor($symbol) | not) |
+
+            ($symbol | split(" ")) as $tokens |
+            $tokens[1] as $manager    |
+            $tokens[2] as $pkg_id     |
+            $tokens[3] as $version    |
+            $tokens[4] as $descriptor |
+
+            select(($internal_pkg_ids | index($pkg_id)) != null) |
+
+            ($index[0].symbol_to_kind[$symbol] // null)          as $kind      |
+            ($index[0].symbol_to_signature_text[$symbol] // "")  as $sig_text  |
+            ($index[0].symbol_to_doc_first_line[$symbol] // "")  as $doc_line  |
+            code_unit_type($kind; $sig_text; $doc_line)        as $cu_type   |
+
+            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+            {
+                symbol:          short_symbol($symbol),
+                display_name:    ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
+                scheme:          scheme($symbol),
+                type_name:       $cu_type,
+                file:            $file,
+                package_id:      $pkg_id,
+                package_manager: $manager,
+                version:         $version,
+                module:          $module_name,
+                is_abstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
+                project_root:    $project_root,
+                descriptor:      $descriptor
+            }
+        ]
         ) |
         unique_by(.symbol) |
         sort_by(.file, .display_name) |
@@ -761,8 +816,12 @@ function merge_node_csvs() {
         node_files+=("${node_file}")
     done < <(find "${tmp_dir}" -maxdepth 1 -name "*_nodes.csv" | sort)
 
-    # Concatenate all rows (header already handled per file), then deduplicate by symbol (first column)
-    # awk: parse CSV first field (unquoted or quoted), keep first occurrence per symbol
+    # Concatenate all rows (header already handled per file), then deduplicate by symbol (first column).
+    # Rows with a non-empty file path (internal type sources) take priority over rows with an empty
+    # file path (external type sources) for the same symbol. In a multi-module project, a type is
+    # referenced with no file path in earlier-sorting modules that consume it, but defined with a
+    # correct file path in the later-sorting module that owns it. Preferring non-empty file ensures
+    # the Cypher import treats the type as an internal type (file <> '' condition).
     cat "${node_files[@]}" | awk -F',' '
         NR == 1 { print; next }
         {
@@ -770,7 +829,20 @@ function merge_node_csvs() {
             symbol = $1
             gsub(/^"/, "", symbol)
             gsub(/"$/, "", symbol)
-            if (!seen[symbol]++) { print }
+            file = $5
+            gsub(/^"/, "", file)
+            gsub(/"$/, "", file)
+            if (!seen[symbol]) {
+                seen[symbol] = $0
+                file_seen[symbol] = file
+                order[++n] = symbol
+            } else if (file_seen[symbol] == "" && file != "") {
+                seen[symbol] = $0
+                file_seen[symbol] = file
+            }
+        }
+        END {
+            for (i = 1; i <= n; i++) { print seen[order[i]] }
         }
     ' > "${output_file}"
 }

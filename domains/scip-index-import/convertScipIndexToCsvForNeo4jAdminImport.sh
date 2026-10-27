@@ -5,6 +5,11 @@
 # Unlike convertScipIndexToCsvForNeo4jImport.sh, computes language and isTest in jq and uses neo4j-admin CSV format.
 # Requires jq.
 #
+# Multi-module projects: types defined only in the symbols section (no definition occurrence) are extracted
+# as SemanticCodeIndexInternalType nodes using the file path of the document that declares them. When the
+# same symbol appears in multiple indices as both InternalType and ExternalType, InternalType wins
+# deduplication so that cross-module types are never incorrectly labelled as external.
+#
 # Pre-computes 'descriptor' property (last space-separated token of SCIP symbol, e.g. "com/example/Foo#").
 # Avoids runtime split(symbol, ' ')[-1] in Cypher queries. Works across all languages (Java FQN, Go/Python with backticks)
 # because SCIP symbol format "<scheme> <manager> <package> <version> <descriptor>" is standard.
@@ -372,6 +377,60 @@ function extract_type_nodes_admin() {
                     label:          "SCIP;SemanticCodeIndexInternalType"
                 }
             ]
+        +
+        # Extract InternalType nodes from the symbols section.
+        # Catches types whose occurrence entries use truncated symbol format (no symbol_roles),
+        # which happens for cross-module types in multi-module projects (e.g. a sub-package
+        # whose files only have imports as occurrences). Without this path those types would
+        # never appear as InternalType and would be overridden by ExternalType entries from
+        # other modules that reference them.
+        [
+            .documents[] |
+            .relative_path as $file |
+            .symbols[]? |
+
+            select(.symbol != null) |
+            select(.symbol | startswith("local ") | not) |
+            select((.symbol | split(" ") | length) >= 5) |
+
+            .symbol as $symbol |
+
+            select(is_base_type_descriptor($symbol)) |
+            select(is_type_parameter_descriptor($symbol) | not) |
+
+            ($symbol | split(" ")) as $tokens |
+            $tokens[1] as $manager    |
+            $tokens[2] as $pkg_id     |
+            $tokens[3] as $version    |
+            $tokens[4] as $descriptor |
+
+            select(($internal_pkg_ids | index($pkg_id)) != null) |
+
+            ($index[0].symbol_to_kind[$symbol] // null)          as $kind      |
+            ($index[0].symbol_to_signature_text[$symbol] // "")  as $sig_text  |
+            ($index[0].symbol_to_doc_first_line[$symbol] // "")  as $doc_line  |
+            code_unit_type($kind; $sig_text; $doc_line)        as $cu_type   |
+
+            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+            {
+                id:             short_symbol($symbol),
+                fqn:            short_symbol($symbol),
+                name:           ($descriptor | gsub("#$"; "") | split("/") | last | gsub("`"; "")),
+                language:       scheme_to_language(scheme($symbol)),
+                scheme:         scheme($symbol),
+                typeName:       $cu_type,
+                file:           $file,
+                packageId:      $pkg_id,
+                packageManager: $manager,
+                version:        $version,
+                module:         $module_name,
+                descriptor:     $descriptor,
+                isAbstract:     (if $cu_type == "Interface" or $cu_type == "AbstractClass" or $cu_type == "TypeAlias" then "true" else "false" end),
+                isTest:         (if is_test($file) then "true" else "false" end),
+                label:          "SCIP;SemanticCodeIndexInternalType"
+            }
+        ]
         ) |
         unique_by(.id) |
         sort_by(.file, .name) |
@@ -961,15 +1020,26 @@ function merge_node_csvs_admin() {
         node_files+=("${node_file}")
     done < <(find "${tmp_dir}" -maxdepth 1 -name "*_admin_nodes.csv" | sort)
 
-    # Concatenate all rows (header already handled per file), then deduplicate by symbol (first column)
-    # awk: parse CSV first field (unquoted or quoted), keep first occurrence per symbol
+    # Concatenate all rows (header already handled per file), then deduplicate by symbol (first column).
+    # InternalType rows take priority over ExternalType rows for the same symbol: a type defined
+    # in one module's index appears as InternalType there and as ExternalType in other modules'
+    # indices that reference it. When indices sort alphabetically such that the referencing
+    # module comes first, the ExternalType would otherwise win with a naive first-seen strategy.
     cat "${node_files[@]}" | awk -F',' '
         NR == 1 { print; next }
         {
             symbol = $1
             gsub(/^"/, "", symbol)
             gsub(/"$/, "", symbol)
-            if (!seen[symbol]++) { print }
+            if (!seen[symbol]) {
+                seen[symbol] = $0
+                order[++n] = symbol
+            } else if (seen[symbol] !~ /SemanticCodeIndexInternalType/ && $0 ~ /SemanticCodeIndexInternalType/) {
+                seen[symbol] = $0
+            }
+        }
+        END {
+            for (i = 1; i <= n; i++) { print seen[order[i]] }
         }
     ' > "${output_file}"
 }
