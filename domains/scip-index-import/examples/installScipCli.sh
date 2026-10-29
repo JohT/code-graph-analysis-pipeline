@@ -4,8 +4,8 @@
 # The scip CLI is required to convert binary SCIP index files to JSON format:
 #   scip print --json index.scip > index.scip.json
 # Supports macOS (arm64, x86_64) and Linux (arm64, x86_64).
-# This script is meant to be run from within an analysis workspace directory (temp/<name-of-project>).
-# For usage from other locations, set BIN_DIR explicitly.
+# This script is meant to be run from within an analysis workspace directory (temp/<name-of-project>)
+# or from the repository root. For usage from other locations, set BIN_DIR explicitly.
 
 # Requires download.sh.
 
@@ -22,8 +22,8 @@ BIN_DIR=${BIN_DIR:-"${TOOLS_DIRECTORY}/scip-cli"}
 
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
-## Get the "scripts" directory relative to this domain script
-SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." >/dev/null && pwd -P )/scripts}
+## Get the "scripts" directory relative to this examples script (3 levels up: examples/ → scip-index-import/ → domains/ → repo root)
+SCRIPTS_DIR=${SCRIPTS_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." >/dev/null && pwd -P )/scripts}
 
 # Shared downloads directory for caching across analysis workspaces (consistent with scripts/download.sh default)
 SHARED_DOWNLOADS_DIRECTORY=${SHARED_DOWNLOADS_DIRECTORY:-"$(dirname "$(pwd)")/downloads"}

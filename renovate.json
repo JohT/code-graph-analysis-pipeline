@@ -205,7 +205,7 @@
       "description": "Update SCIP_VERSION constant in shell scripts within scip-index-import domain",
       "customType": "regex",
       "fileMatch": [
-        "^domains/scip-index-import/[^/]*\\.sh$"
+        "^domains/scip-index-import/examples/[^/]*\\.sh$"
       ],
       "matchStrings": [
         "SCIP_VERSION=\\$\\{SCIP_VERSION:-\\\"?(?<currentValue>.*?)\\\"?\\}"
