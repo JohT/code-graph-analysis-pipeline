@@ -1,0 +1,140 @@
+name: SCIP Index Java Code Example - Smoke Test non-standard use-case
+
+on:
+  push:
+    branches:
+      - main
+    # Ignore changes in documentation, general configuration and reports for push events
+    paths-ignore: 
+      - '**/*.md'
+      - '**/*.txt'
+      - '!requirements.txt'
+      - '**/*.css'
+      - '**/*.html'
+      - '**/*.js'
+      - '**/*.gv'
+      - '**/*.svg'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'renovate.json'
+      - 'renovate-presets/**'
+      - 'changelogTemplate.mustache'
+      - '**.code-workspace'
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/internal-scip-java-code-example.yml'
+      - 'domains/anomaly-detection/documentation/renderArchitecture.sh'
+      - 'scripts/analysis/renderDocumentationGraphs.sh'
+  pull_request:
+    branches:
+      - main
+    # Ignore changes in documentation, general configuration and reports for pull request events
+    paths-ignore: 
+      - '**/*.md'
+      - '**/*.txt'
+      - '!requirements.txt'
+      - '**/*.css'
+      - '**/*.html'
+      - '**/*.js'
+      - '**/*.gv'
+      - '**/*.svg'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'renovate.json'
+      - 'renovate-presets/**'
+      - 'changelogTemplate.mustache'
+      - '**.code-workspace'
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/internal-scip-java-code-example.yml'
+      - 'domains/anomaly-detection/documentation/renderArchitecture.sh'
+      - 'scripts/analysis/renderDocumentationGraphs.sh'
+
+jobs:
+
+  prepare-scip-index:
+    runs-on: ubuntu-latest
+    outputs:
+      analysis-name: ${{ steps.set-analysis-name.outputs.analysis-name }}
+      indices-upload-name: ${{ steps.set-indices-upload-name.outputs.indices-upload-name }}
+      source-repository-branch: ${{ env.AXON_FRAMEWORK_VERSION }}
+
+    env:
+      PROJECT_NAME: AxonFramework
+      # Version variables below are covered by renovate.json configuration
+      AXON_FRAMEWORK_VERSION: 5.1.1
+      SCIP_VERSION: 0.10.0
+      SCIP_JAVA_VERSION: 0.12.3
+
+    steps:
+      - name: (Prepare SCIP Index) Checkout GIT repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set output variable 'analysis-name'
+        id: set-analysis-name
+        run: echo "analysis-name=${{ env.PROJECT_NAME }}-scip-${{ env.AXON_FRAMEWORK_VERSION }}" >> "$GITHUB_OUTPUT"
+
+      - name: Set source path variable
+        run: echo "SOURCE_PATH=temp/${{ steps.set-analysis-name.outputs.analysis-name }}/source/AxonFramework" >> "$GITHUB_ENV"
+
+      - name: Setup temp directory if missing
+        run: mkdir -p ./temp
+
+      - name: Setup Cache for "temp/downloads" folder
+        uses: actions/cache@v6
+        with:
+          path: ./temp/downloads
+          key:
+            ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
+
+      - name: (Prepare SCIP Index) Clone AxonFramework ${{ env.AXON_FRAMEWORK_VERSION }}
+        run: |
+          mkdir -p "${{ env.SOURCE_PATH }}"
+          git clone \
+            --branch axon-${{ env.AXON_FRAMEWORK_VERSION }} \
+            --single-branch \
+            https://github.com/AxonFramework/AxonFramework.git \
+            "${{ env.SOURCE_PATH }}"
+
+      - name: (Prepare SCIP Index) Setup Java 21 with Maven cache
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: (Prepare SCIP Index) Install scip CLI
+        run: ./domains/scip-index-import/examples/installScipCli.sh
+
+      - name: (Prepare SCIP Index) Install scip-java
+        run: ./domains/scip-index-import/examples/installScipJava.sh
+
+      - name: (Prepare SCIP Index) Create SCIP indices for AxonFramework modules
+        env:
+          PROJECT_ROOT: ${{ env.SOURCE_PATH }}
+        run: ./domains/scip-index-import/examples/createAxonFrameworkScipIndices.sh
+
+      - name: (Prepare SCIP Index) Generate ARTIFACT_UPLOAD_ID
+        run: echo "ARTIFACT_UPLOAD_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom 2>/dev/null | head -c 10)" >> $GITHUB_ENV
+
+      - name: Set output variable 'indices-upload-name'
+        id: set-indices-upload-name
+        run: echo "indices-upload-name=${{ steps.set-analysis-name.outputs.analysis-name }}-scip-indices-${{ env.ARTIFACT_UPLOAD_ID }}" >> "$GITHUB_OUTPUT"
+
+      - name: (Prepare SCIP Index) Upload SCIP JSON indices as artifact
+        if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: ${{ steps.set-indices-upload-name.outputs.indices-upload-name }}
+          path: ${{ env.SOURCE_PATH }}/target/scip-indices-per-module/*.scip.json
+
+
+  analyze-code-graph:
+    needs: [prepare-scip-index]
+    uses: ./.github/workflows/public-analyze-code-graph.yml
+    with:
+      analysis-name: ${{ needs.prepare-scip-index.outputs.analysis-name }}
+      indices-upload-name: ${{ needs.prepare-scip-index.outputs.indices-upload-name }}
+      source-repository: https://github.com/AxonFramework/AxonFramework.git
+      source-repository-branch: axon-${{ needs.prepare-scip-index.outputs.source-repository-branch }}
+      run-all-domains: true
+      # Smoke test: Pure SCIP-based Java analysis without jQAssistant, only CSV reports.
+      analysis-arguments: "--skip-jqassistant --report Csv"

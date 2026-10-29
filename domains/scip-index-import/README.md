@@ -25,7 +25,7 @@ To run it manually: place `.scip.json` files in `indices/` and execute `importSc
 
 | Script | Purpose |
 |--------|---------|
-| [installScipCli.sh](./installScipCli.sh) | Downloads and installs the scip CLI binary (optional if scip is already globally available) |
+| [examples/installScipCli.sh](./examples/installScipCli.sh) | Downloads and installs the scip CLI binary (optional if scip is already globally available) |
 | [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline (sourced by `analyze.sh`) |
 | [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to `scip_type_nodes.csv` and `scip_type_edges.csv` |
 
@@ -47,14 +47,14 @@ Required tools for conversion (outside pipeline): `jq` (included in `convertScip
 
 ### Installing the scip CLI
 
-The `scip` CLI is required to convert binary `.scip` files to JSON format. Use the `installScipCli.sh` script:
+The `scip` CLI is required to convert binary `.scip` files to JSON format. Use the `installScipCli.sh` script in `examples/`:
 
 ```shell
 # From analysis workspace (temp/<project-name>/):
-./../../domains/scip-index-import/installScipCli.sh
+./../../domains/scip-index-import/examples/installScipCli.sh
 
 # Or from repository root:
-domains/scip-index-import/installScipCli.sh --bin-dir /path/to/bin
+domains/scip-index-import/examples/installScipCli.sh --bin-dir /path/to/bin
 ```
 
 **Features:**
@@ -62,6 +62,22 @@ domains/scip-index-import/installScipCli.sh --bin-dir /path/to/bin
 - Checks if `scip` is already available globally before downloading
 - Installs to analysis workspace `./tools/scip-cli/` by default
 - Supports version pinning: `SCIP_VERSION=0.8.0 installScipCli.sh`
+
+## Examples Directory
+
+The `examples/` subdirectory contains helper scripts for generating SCIP indices outside the pipeline — for use in CI or locally before running `analyze.sh`.
+
+| Script | Purpose |
+|--------|---------|
+| [examples/installScipCli.sh](./examples/installScipCli.sh) | Downloads and installs the scip CLI binary |
+| [examples/installScipJava.sh](./examples/installScipJava.sh) | Installs scip-java 0.12.3 via Coursier (requires Java 11+, curl) |
+| [examples/createScipIndexFunctionsForJava.sh](./examples/createScipIndexFunctionsForJava.sh) | Sourced library: `index_module` and `resolve_placeholders_in_json` functions for Maven multi-module projects (use module directory names, e.g., "common", not artifact IDs like "axon-common") |
+| [examples/createAxonFrameworkScipIndices.sh](./examples/createAxonFrameworkScipIndices.sh) | Creates per-module SCIP indices for AxonFramework (5 modules) |
+| [examples/testInstallScipJava.sh](./examples/testInstallScipJava.sh) | Unit tests for `installScipJava.sh` |
+
+**scip-java version note:** `installScipJava.sh` pins to 0.12.3 (`com.sourcegraph:scip-java_2.13`).
+The Coursier bootstrap requires `--main com.sourcegraph.scip_java.ScipJava` to create an executable wrapper (package name differs in newer versions).
+Version 0.13.x uses a different artifact (`org.scip-code:scip-java`) with a different package name (`org.scip_code.scip_java`) and introduced a Coursier bash wrapper bug on Linux — do not upgrade `SCIP_JAVA_VERSION` without verifying compatibility.
 
 ## Environment Variables
 
@@ -279,6 +295,12 @@ The SCIP file integration is **language-agnostic** — same query handles all SC
 ├── convertScipIndexToCsvForNeo4jAdminImport.sh # Converts *.scip.json → admin import CSV format
 ├── testConvertScipIndexToCsvForNeo4jImport.sh # Tests for convertScipIndexToCsvForNeo4jImport.sh
 ├── testConvertScipIndexToCsvForNeo4jAdminImport.sh # Tests for convertScipIndexToCsvForNeo4jAdminImport.sh
+├── examples/                              # Helper scripts for generating SCIP indices outside the pipeline
+│   ├── installScipCli.sh                  # Downloads and installs the scip CLI binary
+│   ├── installScipJava.sh                 # Installs scip-java via Coursier (Java Maven projects)
+│   ├── createScipIndexFunctionsForJava.sh # Sourced library: index_module, resolve_placeholders_in_json
+│   ├── createAxonFrameworkScipIndices.sh  # Creates per-module SCIP indices for AxonFramework
+│   └── testInstallScipJava.sh             # Unit tests for installScipJava.sh
 └── queries/
     ├── import/                            # Phase 1: setup and import
     │   ├── Cleanup_All_SCIP_Nodes.cypher
