@@ -2,18 +2,65 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
-## Unreleased
+## v5.0.0 - Multi-language SCIP support and reactivated git log import
+
+### ✨ Highlights
+
+* **SCIP multi-language analysis** — The [Semantic Code Intelligence Protocol (SCIP)](https://scip-code.org) is now fully integrated across all analysis domains. Analyze **Python, C++, Go, Rust, TypeScript, and Java** source code using pre-built `.scip.json` index files, without jQAssistant. All domains support SCIP data: anomaly detection, archetypes, cyclic/external/internal dependencies, and overview. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/613 and subsequent PRs.
+* **`--skip-jqassistant` for pure SCIP analysis** — Skip jQAssistant entirely for SCIP-only workflows. The java domain is automatically excluded, and git history is imported via `git log` CSV export. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/627, https://github.com/JohT/code-graph-analysis-pipeline/pull/670.
+* **Git log import reactivated and improved** — Full (`full`) and aggregated (`aggregated`) `git log` CSV imports are re-enabled and enhanced. This is the default git data source for SCIP workflows. SCIP source files are now linked to Git history nodes for combined analysis. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/661, https://github.com/JohT/code-graph-analysis-pipeline/pull/662, https://github.com/JohT/code-graph-analysis-pipeline/pull/663.
+
+### 🚀 Features
+
+#### SCIP Multi-language Analysis
+
+* **SCIP index import domain** (`domains/scip-index-import/`) — New domain that converts `.scip.json` index files to Neo4j import CSVs and enriches the graph. Supports Go, Java, TypeScript, Rust, C++, Ruby, Python, C#. Triggered automatically by `analyze.sh` when `indices/*.scip.json` files exist. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/613
+* **SCIP support in internal dependencies** — Path finding, topological sort, and dependency analysis extended for SCIP index data. Anonymous inner classes detected automatically. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/631
+* **SCIP support in cyclic dependencies** — Cyclic dependency detection now works with SCIP index data. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/649
+* **SCIP support in external dependencies** — External dependency analysis now works with SCIP index data. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/650
+* **SCIP support in archetypes** — Authority, bottleneck, and hub archetype detection now works with SCIP index data. Exploration notebook added. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/653
+* **SCIP support in overview** — Overview domain reports now work with SCIP index data. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/658
+* **SCIP support in anomaly detection** — Anomaly detection domain now works with SCIP index data. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/664
+* **SCIP file nodes linked to Git history** — SCIP-indexed source files are linked to Git history nodes, enabling combined code structure and evolution analysis. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/662
+* **SCIP shadow type cleanup** — Enrichment queries added to clean up shadow type nodes and fix missing connections when multiple SCIP indices are combined. Version mismatch detection added. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/671
+* **SCIP Java pipeline demo and smoke test** — End-to-end GitHub Actions pipeline for Java SCIP analysis without jQAssistant, used as an internal smoke test and demo. `installScipCli.sh` moved to `domains/scip-index-import/examples/`. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/675
+
+#### Git History
+
+* **Full git log import re-enabled and enhanced** — Full git log CSV import (`IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full`) re-enabled and set as the default for `--skip-jqassistant` workflows. Enhanced with enrichment queries and improved performance. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/661
+* **Aggregated git log import reactivated** — Monthly-grouped git log import (`aggregated`) re-enabled with improved query performance and logging. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/663
+
+#### Analysis
+
+* **Topological sort and path finding via strongly connected components** — Strongly connected component (SCC) detection now untangles cycles before topological sort and longest-path calculations, producing correct results for cyclic graphs. Path finding output column names changed — see [MIGRATION.md](./MIGRATION.md). by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/630
+* **`--skip-jqassistant` automatically excludes java domain** — The java domain has no SCIP-based reports and is excluded when `--skip-jqassistant` is set without an explicit `--domain` selection. Override with `--domain java`. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/670
 
 ### 🐛 Bug Fixes
 
-* **SCIP inner type dependencies fixed** — Inner type references (e.g., `Cache#EntryListener#`) are now correctly preserved instead of being collapsed to their enclosing type. Applies across all SCIP-supported languages. Regression tests added.
-* **SCIP sibling inner class dependencies fixed** - Dependencies between inner types defined in the same file (e.g., `WorkPackage$BatchProcessingEntry` depending on `WorkPackage$ProcessingEntry`) are now captured. Previously, the same-file filter in edge extraction dropped all same-file references. Regression tests added.
-* **SCIP inheritance and implementation dependencies captured** - The conversion script now processes `symbols[].relationships` with `is_implementation: true` to capture type dependencies from interface inheritance and class implementations that are not recorded as explicit symbol occurrences (e.g., transitive interface supertypes). Regression tests added.
+* **SCIP inner type dependencies fixed** — Inner type references (e.g., `Cache#EntryListener#`) are now correctly preserved instead of being collapsed to their enclosing type. Applies across all SCIP-supported languages. Regression tests added. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/643
+* **SCIP sibling inner class dependencies fixed** — Dependencies between inner types in the same file (e.g., `WorkPackage$BatchProcessingEntry` depending on `WorkPackage$ProcessingEntry`) are now captured. Regression tests added. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/643
+* **SCIP inheritance and implementation dependencies captured** — The conversion script now processes `symbols[].relationships` with `is_implementation: true` to capture type dependencies from interface inheritance and class implementations. Regression tests added. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/643
+* **SCIP dependency property enrichment fixed** — Fixed incorrect incoming/outgoing dependency counts for SCIP index data. Added weighted dependency counts. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/643
+* **SCIP cross-module internal type detection fixed** — Fixed internal type detection for types using truncated symbol format (no `symbol_roles` in occurrence entries). Regression tests and documentation added. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/674
 
 ### 📋 Known Limitations - Documented
 
 * **Generic type parameters and type annotations** — SCIP indexers do not capture type references in generic type parameters or complex type annotations (e.g., `<T extends ProcessingContext>`). See [SCIP.md Known Limitations](SCIP.md#generic-type-parameters-and-type-annotations) for details.
 * **Additional SCIP limitations identified** — Static factory method return types, lambda inferred parameter types, type inference (ternary/`var`), and field types used only as method arguments are not captured as dependencies by SCIP indexers. See [SCIP.md Known Limitations](SCIP.md#static-factory-method-return-types) for details.
+
+### ⚠️ Breaking Changes
+
+See [MIGRATION.md](./MIGRATION.md) for full migration steps.
+
+* **Path finding query output columns changed** — `Path_Finding_5_*.csv` and `Path_Finding_6_*.csv`: `sourceProject` renamed to `source.projectName`, `sourceScan` column removed. Strongly connected component detection added.
+* **Node Embeddings FastRP report filename corrected** — `*_Label_Random_Projection.csv` renamed to `*_Fast_Random_Projection.csv`.
+* **New `CHANGED_TOGETHER_WITH` relationships from git log** — Full git log import now creates `(:File)-[:CHANGED_TOGETHER_WITH]->(:File)` relationships.
+
+## v4.0.2 Add projectName property to code unit nodes
+
+### 🎨 Improvements
+
+* **`projectName` property enriched on code unit nodes** — Java and TypeScript code unit nodes now receive a `projectName` property during enrichment, simplifying Cypher queries. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/622
 
 ## v4.0.1 Improve charts to look more similar to previous Jupyter notebook charts and add pipeline to validate Jupyter notebooks
 

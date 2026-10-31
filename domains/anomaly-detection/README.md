@@ -21,9 +21,6 @@ The following scripts serve as entry points for various anomaly detection tasks 
 - [explore](./explore/): Jupyter notebooks for interactive, exploratory anomaly detection analysis.
   - [AnomalyDetectionScipExploration.ipynb](./explore/AnomalyDetectionScipExploration.ipynb): SCIP-specific anomaly detection exploration.
 - [features](./features/): Cypher queries to extract features and run graph algorithms relevant for anomaly detection.
-  - [AnomalyDetectionFeature_Abstractness_ScipInternalType.cypher](./features/AnomalyDetectionFeature_Abstractness_ScipInternalType.cypher): Abstractness for `SemanticCodeIndexInternalType`.
-  - [AnomalyDetectionFeature_Abstractness_ScipModule.cypher](./features/AnomalyDetectionFeature_Abstractness_ScipModule.cypher): Abstractness for `SemanticCodeIndexModule`.
-  - [AnomalyDetectionFeature_Abstractness_ScipArtifact.cypher](./features/AnomalyDetectionFeature_Abstractness_ScipArtifact.cypher): Abstractness for `SemanticCodeIndexArtifact`.
 - [graphs](./graphs/): Cypher queries and GraphViz templates for Graph visualizations (Bridge/Outlier tree maps).
 - [labels](./labels/): Cypher queries to label nodes as Bridge (structural vulnerability) or Outlier (structural anomaly).
 - [queries](./queries/): Cypher queries to identify structural patterns (not anomalies).

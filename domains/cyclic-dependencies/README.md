@@ -31,17 +31,6 @@ domains/cyclic-dependencies/
 │   ├── CyclicDependenciesTypescriptExploration.ipynb # Interactive TypeScript cyclic dependency analysis
 │   └── CyclicDependenciesScipExploration.ipynb       # Interactive SCIP cyclic dependency analysis
 ├── queries/                               # 11 Cypher queries (cycle analysis, flat)
-│   ├── Cyclic_Dependencies.cypher
-│   ├── Cyclic_Dependencies_Breakdown.cypher
-│   ├── Cyclic_Dependencies_Breakdown_Backward_Only.cypher
-│   ├── Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.cypher
-│   ├── Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.cypher
-│   ├── Cyclic_Dependencies_Breakdown_for_Typescript.cypher
-│   ├── Cyclic_Dependencies_Breakdown_for_SCIP_Module.cypher
-│   ├── Cyclic_Dependencies_between_Artifacts_as_unwinded_List.cypher
-│   ├── Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.cypher
-│   ├── Cyclic_Dependencies_for_Typescript.cypher
-│   └── Cyclic_Dependencies_for_SCIP_Module.cypher
 └── summary/
     ├── cyclicDependenciesSummary.sh           # Markdown assembly logic
     ├── report.template.md                     # Main report template

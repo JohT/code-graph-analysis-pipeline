@@ -303,38 +303,9 @@ The SCIP file integration is **language-agnostic** — same query handles all SC
 │   └── testInstallScipJava.sh             # Unit tests for installScipJava.sh
 └── queries/
     ├── import/                            # Phase 1: setup and import
-    │   ├── Cleanup_All_SCIP_Nodes.cypher
-    │   ├── Create_SCIP_Internal_Type_Constraint.cypher
-    │   ├── Create_SCIP_External_Type_Constraint.cypher
-    │   ├── Import_SCIP_Type_Internal_Nodes.cypher
-    │   ├── Import_SCIP_Type_External_Nodes.cypher
-    │   └── Import_SCIP_Type_Edges.cypher
     ├── structure/                         # Phase 2: file, module, artifact nodes and dependencies
-    │   ├── Create_SCIP_File_Nodes.cypher
-    │   ├── Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher
-    │   ├── Create_SCIP_Module_Nodes_For_Internal_Types.cypher
-    │   ├── Create_SCIP_Artifact_Nodes.cypher
-    │   ├── Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher
-    │   ├── Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher
-    │   ├── Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher
-    │   ├── Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher
-    │   ├── Link_SCIP_Module_DEPENDS_ON_SCIP_Module.cypher
-    │   └── Link_SCIP_Artifact_DEPENDS_ON_SCIP_Artifact.cypher
     ├── enrichment/                        # Phase 3: dependency counts and properties
-    │   ├── Set_Incoming_SCIP_Type_Dependencies.cypher
-    │   ├── Set_Outgoing_SCIP_Type_Dependencies.cypher
-    │   ├── Set_SCIP_Type_Test_Marker_Integer.cypher
-    │   ├── Set_SCIP_Type_Project_Name.cypher
-    │   ├── Set_SCIP_Module_Is_Test_And_Marker_Integer.cypher
-    │   ├── Set_Incoming_SCIP_Module_Dependencies.cypher
-    │   ├── Set_Outgoing_SCIP_Module_Dependencies.cypher
-    │   ├── Set_SCIP_Artifact_Is_Test_And_Marker_Integer.cypher
-    │   ├── Set_SCIP_Artifact_Is_External.cypher
-    │   ├── Set_Incoming_SCIP_Artifact_Dependencies.cypher
-    │   └── Set_Outgoing_SCIP_Artifact_Dependencies.cypher
     └── analysis/                          # Investigation and analytics queries
-        ├── Cyclic_SCIP_Type_Dependencies.cypher
-        └── External_SCIP_Type_Package_Usage_Overall.cypher
 ```
 
 ## Import Phases

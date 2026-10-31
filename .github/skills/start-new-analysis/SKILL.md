@@ -1,6 +1,6 @@
 ---
 name: start-new-analysis
-description: Use when user wants to start a new code analysis, analyze Java or TypeScript project, set up a new analysis workspace, or run code-graph-analysis-pipeline for the first time on a project.
+description: Use when user wants to start a new code analysis, analyze Java, TypeScript, or multi-language (SCIP) project, set up a new analysis workspace, or run code-graph-analysis-pipeline for the first time on a project.
 ---
 
 # Start New Analysis
@@ -19,9 +19,10 @@ Ask: "Analyze pre-built example or custom project?"
 |--------|---------|
 | AxonFramework | Java event-sourcing library |
 | ReactRouter | TypeScript UI routing library |
-| Custom | Any Java or TypeScript project |
+| ReactRouterScip | TypeScript via SCIP index (no jQAssistant) |
+| Custom | Any project (Java, TypeScript, or multi-language via SCIP) |
 
-If **AxonFramework** or **ReactRouter**: skip Steps 4–6, go straight to Step 2 → 3 → [Example Script](#example-scripts).
+If **AxonFramework**, **ReactRouter**, or **ReactRouterScip**: skip Steps 4–6, go straight to Step 2 → 3 → [Example Script](#example-scripts).
 If **Custom**: follow all steps.
 
 ---
@@ -67,7 +68,6 @@ Read output and advise report type:
 | ❌ on required deps (java, git, curl, jq…) | Fix missing deps first — analysis will fail |
 | ✅ required, but ❌/⚠️ on Python env (conda/venv) or python/pip | `--report Csv` |
 | ✅ required + ✅ Python env + ✅ python/pip | `--report Python` (no PDF) or full (no flag) |
-| ✅ all including jupyter | `--report Jupyter` (adds PDF, needs Chromium) |
 | ✅ npx/npm or dot | add `--report Visualization` or run full |
 
 Tell user recommended `--report` flag, reason. Confirm before proceeding.
@@ -87,6 +87,13 @@ Example: `./scripts/examples/analyzeAxonFramework.sh 5.0.3 --report Csv`
 ./scripts/examples/analyzeReactRouter.sh [<version>] --report <flag>
 ```
 Example: `./scripts/examples/analyzeReactRouter.sh 7.5.0 --report Csv`
+
+**ReactRouterScip** (TypeScript via SCIP index, no jQAssistant) — ask for optional version (omit = latest):
+```shell
+./scripts/examples/analyzeReactRouterScip.sh [<version>] --report Csv
+```
+Example: `./scripts/examples/analyzeReactRouterScip.sh 7.5.0 --report Csv`
+Uses `--skip-jqassistant`. Git history via `git log`. `--report Csv` recommended.
 
 Both scripts: auto-detect latest if omitted, call `init.sh`, download artifacts, run `analyze.sh`. No further steps — skip to [Step 7](#step-7--start-analysis).
 
@@ -155,6 +162,19 @@ cd source/<project-name> && npm install   # or: pnpm install / yarn install
 cd ../..
 ```
 
+### SCIP Index (multi-language: Python, C++, Go, Rust, TypeScript, Java)
+
+The pipeline imports pre-built `.scip.json` index files. Generate them **outside** this pipeline using a SCIP indexer for your language. See `SCIP.md` in project root for details. The pipeline does not install SCIP indexers.
+
+Place `.scip.json` files in the `indices/` directory (from `temp/<name>`):
+```shell
+mkdir -p indices
+cp /path/to/*.scip.json ./indices/
+```
+
+Use `--skip-jqassistant` in Step 7 — jQAssistant is not needed for SCIP-only workflows.
+Non-Java projects (no `.jar` artifacts) should also skip jQAssistant.
+
 ---
 
 ## Step 6 — Git History (Custom Only, Optional)
@@ -169,15 +189,17 @@ git clone <repo-url> ./source/<project-name>
 git clone --bare <repo-url> ./source/<project-name>.git
 ```
 
-Default import mode: `plugin` (jQAssistant handles automatically — recommended).
+Default import mode: `plugin` (jQAssistant handles automatically — recommended for Java/TypeScript, not for SCIP).
 Override with env var if needed:
 
 | `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT` | Effect |
 |--------------------------------------------|--------|
-| `plugin` | default, recommended |
+| `plugin` | default, recommended for Java/TypeScript via jQAssistant |
 | `none` | skip git import |
 | `aggregated` | monthly summary, smaller dataset |
-| `full` | all commits |
+| `full` | all commits via `git log` CSV — default for `--skip-jqassistant`, ideal for SCIP/non-Java projects |
+
+> **SCIP/non-Java:** When `--skip-jqassistant` is set, `full` mode is used automatically unless overridden.
 
 ```shell
 export IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=none   # example: disable
@@ -196,7 +218,6 @@ Use recommended `--report` from Step 3b. Run from `temp/<name>`:
 |------|----------|----------|
 | `--report Csv` | nothing extra | data only, fastest |
 | `--report Python` | Python + Conda/venv | charts, no PDF |
-| `--report Jupyter` | + Chromium | charts + PDF |
 | `--report Visualization` | GraphViz or npx | graph images |
 | `--explore` | nothing | manual Neo4j exploration only |
 
@@ -205,3 +226,4 @@ After analysis: `http://localhost:7474/browser` — user: `neo4j`, password from
 **Optional flags:**
 - `--keep-running` — Neo4j stays up after analysis (useful for rerunning reports)
 - `--domain <name>` — single domain only (e.g. `anomaly-detection`, `git-history`)
+- `--skip-jqassistant` — skip jQAssistant for SCIP-only or non-Java analysis. Sets git import to `full` mode, excludes java domain.

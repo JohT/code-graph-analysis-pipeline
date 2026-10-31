@@ -10,6 +10,7 @@
         - [Start an analysis with CSV reports only](#start-an-analysis-with-csv-reports-only)
         - [Start an analysis with Python reports only](#start-an-analysis-with-python-reports-only)
         - [Start an analysis without importing git log data](#start-an-analysis-without-importing-git-log-data)
+        - [Analyze SCIP index files multi-language, without jQAssistant](#analyze-scip-index-files-multi-language-without-jqassistant)
         - [Only run setup and explore the Graph manually](#only-run-setup-and-explore-the-graph-manually)
         - [Only run the reports of one specific domain](#only-run-the-reports-of-one-specific-domain)
         - [Only run the CSV reports of one specific domain](#only-run-the-csv-reports-of-one-specific-domain)
@@ -140,6 +141,16 @@ To speed up analysis and get a smaller data footprint you can switch of git log 
 ```shell
 IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT="none" ./../../scripts/analysis/analyze.sh
 ```
+
+#### Analyze SCIP index files (multi-language, without jQAssistant)
+
+To analyze pre-built [SCIP](https://scip-code.org) index files (`.scip.json`) for Python, C++, Go, Rust, TypeScript, Java, or other languages, place the `.scip.json` files in the `indices/` directory of your analysis workspace and run with `--skip-jqassistant`:
+
+```shell
+./../../scripts/analysis/analyze.sh --skip-jqassistant
+```
+
+`--skip-jqassistant` skips jQAssistant download, setup, and scan. It automatically sets `IMPORT_GIT_LOG_DATA_IF_SOURCE_IS_PRESENT=full` (git log CSV import, unless overridden) and excludes the java domain. Place a git-cloned repository in `source/` for git history analysis.
 
 #### Only run setup and explore the Graph manually
 
