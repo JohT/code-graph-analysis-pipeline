@@ -13,10 +13,7 @@ The following scripts are discovered and invoked automatically by the central co
 ## Folder Structure
 
 - [explore](./explore/): Original Jupyter notebooks for interactive, exploratory analysis. Marked with `code_graph_analysis_pipeline_data_validation: ValidateAlwaysFalse` so they are not automatically executed by the pipeline.
-- [queries](./queries/): All Cypher queries for identifying and quantifying external dependencies. These are self-contained copies from [cypher/External_Dependencies/](../../cypher/External_Dependencies/).
-  - Java queries: `External_package_usage_*.cypher`, `External_second_level_package_usage_*.cypher`, `Label_external_types_and_annotations.cypher`
-  - TypeScript queries: `External_module_usage_*.cypher`, `External_namespace_usage_*.cypher`
-  - SCIP queries: `External_artifact_usage_*_for_Scip.cypher`
+- [queries](./queries/): All Cypher queries for identifying and quantifying external dependencies. These are self-contained copies from [cypher/External_Dependencies/](../../cypher/External_Dependencies/). Covers Java, TypeScript, and SCIP external dependency patterns.
 - [summary](./summary/): Markdown template and assembly script for the summary report.
 
 ## Prerequisites

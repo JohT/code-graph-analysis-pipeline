@@ -15,9 +15,9 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 ## :sparkles: Features
 
 - Analyze static code structure as a graph
-- Supports Java Code Analysis
-- Supports Typescript Code Analysis (experimental)
-- Supports multi-language analysis via [SCIP](https://scip.dev) (Go, Rust, C++, Ruby, Python, C# + more) — see [SCIP.md](SCIP.md)
+- Supports Java Code Analysis via jQAssistant
+- Supports Typescript Code Analysis via jQAssistant (experimental)
+- Supports multi-language analysis via [SCIP](https://scip-code.org) (Python, C++, Go, Rust, C#, TypeScript, Java, and more) — see [SCIP.md](SCIP.md)
 - Fully automated [pipeline for Java](./.github/workflows/internal-java-code-analysis.yml) from tool installation to report generation
 - Fully automated [pipeline for Typescript](./.github/workflows/internal-typescript-code-analysis.yml) from tool installation to report generation
 - Fully automated [local run](./GETTING_STARTED.md)
@@ -33,10 +33,11 @@ Curious? Explore the examples at [code-graph-analysis-examples](https://github.c
 - Comprehensive list of [Cypher queries](./CYPHER.md)
 - Example analysis for [AxonFramework](https://github.com/AxonFramework/AxonFramework)
 - Example analysis for [react-router](https://github.com/remix-run/react-router)
-- Example SCIP-based analysis via [analyzeReactRouterScip.sh](./scripts/examples/analyzeReactRouterScip.sh)
+- Example SCIP-based TypeScript code analysis via [analyzeReactRouterScip.sh](./scripts/examples/analyzeReactRouterScip.sh)
 
 ### :newspaper: News
 
+- October 2026: Version 5.0.0 introduces multi-language support via [SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol). Analyze Python, C++, Go, Rust, TypeScript, and Java using pre-built SCIP index files. See [CHANGELOG.md](./CHANGELOG.md).
 - May 2026: Version 4.0.0 introduces **independently-runnable analysis domains**. Select specific domains via `--domain` or exclude with `--exclude-domain`. No more monolithic execution. See [MIGRATION.md](./MIGRATION.md) for details.
 - November 2025: Removed deprecated (since version 2.x) "graph-visualization" node package
 - November 2025: Treemap charts for anomalies and archetypes
@@ -182,7 +183,8 @@ The [Code Structure Analysis Pipeline](./.github/workflows/internal-java-code-an
 - Download artifacts and optionally source code that contain the code to be analyzed [scripts/downloader](./scripts/downloader)
 - Setup [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Setup [jQAssistant](https://jqassistant.github.io/jqassistant/current) for Java and [Typescript](https://github.com/jqassistant-plugin/jqassistant-typescript-plugin) analysis ([analysis.sh](./scripts/analysis/analyze.sh))
-- Setup [SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) for multi-language type graph import ([SCIP.md](./SCIP.md))
+- Pre-built [SCIP](https://scip-code.org) (Semantic Code Intelligence Protocol) index files (`.scip.json`) are imported for multi-language analysis. The pipeline does not install or run SCIP indexers itself. See [SCIP.md](./SCIP.md) for how to generate index files for your language.
+- [scip-java](https://github.com/sourcegraph/scip-java) — used only in an internal Java smoke test and demo ([internal-scip-index-code-example.yml](./.github/workflows/internal-scip-index-code-example.yml)). Not installed for general analysis.
 - Start [Neo4j](https://neo4j.com) Graph Database ([analysis.sh](./scripts/analysis/analyze.sh))
 - Generate CSV Reports [scripts/reports](./scripts/reports) using the command line JSON parser [jq](https://jqlang.github.io/jq)
 - Uses [Neo4j Graph Data Science](https://neo4j.com/product/graph-data-science) for community detection, centrality, similarity, node embeddings and topological sort ([analysis.sh](./scripts/analysis/analyze.sh))
