@@ -60,7 +60,7 @@ jobs:
     env:
       PROJECT_NAME: AxonFramework
       # Version variables below are covered by renovate.json configuration
-      AXON_FRAMEWORK_VERSION: 5.1.1
+      AXON_FRAMEWORK_VERSION: 5.4.1
       SCIP_VERSION: 0.10.0
       SCIP_JAVA_VERSION: 0.12.3
 
