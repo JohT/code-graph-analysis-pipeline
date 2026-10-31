@@ -205,13 +205,40 @@
       "description": "Update SCIP_VERSION constant in shell scripts within scip-index-import domain",
       "customType": "regex",
       "fileMatch": [
-        "^domains/scip-index-import/[^/]*\\.sh$"
+        "^domains/scip-index-import/examples/[^/]*\\.sh$"
       ],
       "matchStrings": [
         "SCIP_VERSION=\\$\\{SCIP_VERSION:-\\\"?(?<currentValue>.*?)\\\"?\\}"
       ],
       "depNameTemplate": "scip-code/scip",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "description": "Update SCIP_JAVA_VERSION in scip-java install script",
+      "customType": "regex",
+      "fileMatch": [
+        "^domains/scip-index-import/examples/[^/]*\\.sh$"
+      ],
+      "matchStrings": [
+        "SCIP_JAVA_VERSION=\\$\\{SCIP_JAVA_VERSION:-\\\"?(?<currentValue>.*?)\\\"?\\}"
+      ],
+      "depNameTemplate": "scip-code/scip-java",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
+    },
+    {
+      "description": "Update SCIP_JAVA_VERSION environment variable in GitHub Actions workflows",
+      "customType": "regex",
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)\\/[^/]+\\.ya?ml$",
+        "(^|\\/)action\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "SCIP_JAVA_VERSION:\\s+?(?<currentValue>.*?)\\s+"
+      ],
+      "depNameTemplate": "scip-code/scip-java",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     },
     {
       "description": "Update npx command package versions",

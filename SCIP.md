@@ -36,7 +36,7 @@ The pipeline creates `:SCIP:SemanticCodeIndexInternalType` and `:SCIP:SemanticCo
 # 1. Install the scip CLI (used to convert binary SCIP to JSON)
 #    Download from: https://github.com/scip-code/scip/releases
 #    Or use the helper script from the domain (installs to analysis workspace by default):
-domains/scip-index-import/installScipCli.sh
+domains/scip-index-import/examples/installScipCli.sh
 
 # 2. Install a language-specific SCIP indexer
 #    TypeScript example:
@@ -71,6 +71,40 @@ export NEO4J_INITIAL_PASSWORD=your-password
 ```
 
 This script downloads react-router, generates a SCIP index, converts it to JSON, and runs the full pipeline.
+
+### Java Full Example (experimental)
+
+The repository ships with scripts to index AxonFramework using scip-java (pure SCIP, no jQAssistant):
+
+```shell
+# 1. Install the scip CLI
+domains/scip-index-import/examples/installScipCli.sh
+
+# 2. Install scip-java (requires Java 11+ and curl)
+domains/scip-index-import/examples/installScipJava.sh
+
+# 3. Clone AxonFramework source (or point PROJECT_ROOT at an existing clone)
+git clone --branch axon-5.1.1 --single-branch \
+  https://github.com/AxonFramework/AxonFramework.git ./axonframework-source
+
+# 4. Generate per-module SCIP indices (outputs to axonframework-source/target/scip-indices-per-module/)
+export PROJECT_ROOT="$(pwd)/axonframework-source"
+domains/scip-index-import/examples/createAxonFrameworkScipIndices.sh
+
+# 5. Copy indices to your analysis workspace
+cp axonframework-source/target/scip-indices-per-module/*.scip.json \
+   temp/my-axon-analysis/indices/
+
+# 6. Run the pipeline
+cd temp/my-axon-analysis
+./../../scripts/analysis/analyze.sh --skip-jqassistant
+```
+
+See [`.github/workflows/internal-scip-java-code-example.yml`](.github/workflows/internal-scip-java-code-example.yml) for the CI workflow that runs this end-to-end.
+
+**Note on scip-java versions:** Version 0.12.3 uses the `com.sourcegraph:scip-java_2.13` Coursier artifact.
+Version 0.13.x changed to `org.scip-code:scip-java` and introduced a Coursier bash wrapper bug on Linux.
+Do not upgrade `SCIP_JAVA_VERSION` without verifying the bug is resolved.
 
 ## Multiple Index Files
 
@@ -303,7 +337,7 @@ analyze: Error: INDICES_DIRECTORY 'indices' contains unsupported files (only *.s
 scip: command not found
 ```
 
-→ Download the scip CLI binary from [github.com/scip-code/scip/releases](https://github.com/scip-code/scip/releases) or run `domains/scip-index-import/installScipCli.sh`.
+→ Download the scip CLI binary from [github.com/scip-code/scip/releases](https://github.com/scip-code/scip/releases) or run `domains/scip-index-import/examples/installScipCli.sh`.
 
 ## Skipping SCIP Import
 

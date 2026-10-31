@@ -8,7 +8,7 @@
 # Note: This script is meant to be started in the root directory of this repository.
 # Note: Requires Node.js 18+, npm, curl, jq, and the scip CLI (installed automatically).
 
-# Requires: init.sh, downloadReactRouter.sh, domains/scip-index-import/installScipCli.sh, createScipIndexTypescript.sh, analyze.sh
+# Requires: init.sh, downloadReactRouter.sh, domains/scip-index-import/examples/installScipCli.sh, createScipIndexTypescript.sh, analyze.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail -o nounset
@@ -103,7 +103,7 @@ echo "${SCRIPT_NAME}: Installing JavaScript dependencies for react-router ${proj
 ./../../scripts/installJavaScriptDependencies.sh
 
 # Install scip CLI if not already present (needed to convert binary → JSON)
-./../../domains/scip-index-import/installScipCli.sh
+./../../domains/scip-index-import/examples/installScipCli.sh
 
 # Generate SCIP index — pass --pnpm-workspaces since react-router uses a pnpm workspace
 "${EXAMPLE_SCRIPTS_DIR}/createScipIndexTypescript.sh" "${SOURCE_SUB_DIRECTORY}" --pnpm-workspaces

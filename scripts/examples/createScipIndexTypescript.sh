@@ -6,8 +6,6 @@
 # This script is meant to be executed within an analysis workspace directory (temp/<name-of-analysis>).
 # See analyzeReactRouterScip.sh for a complete example with setup.
 
-# Requires domains/scip-index-import/installScipCli.sh
-
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
 set -o errexit -o pipefail -o nounset
 IFS=$'\n\t'
@@ -99,7 +97,7 @@ function check_node() {
 function check_scip_cli() {
     if [ ! -x "${SCIP_BINARY}" ]; then
         echo "${SCRIPT_NAME}: Error: scip CLI not found at '${SCIP_BINARY}'." >&2
-        echo "${SCRIPT_NAME}: Install it first: domains/scip-index-import/installScipCli.sh" >&2
+        echo "${SCRIPT_NAME}: Install it first: domains/scip-index-import/examples/installScipCli.sh" >&2
         exit 1
     fi
     local version

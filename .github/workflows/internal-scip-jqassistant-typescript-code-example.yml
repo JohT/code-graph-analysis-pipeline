@@ -118,7 +118,7 @@ jobs:
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
       - name: (Prepare SCIP Index) Install scip CLI
-        run: ./domains/scip-index-import/installScipCli.sh
+        run: ./domains/scip-index-import/examples/installScipCli.sh
 
       - name: (Prepare SCIP Index) Generate SCIP index with scip-typescript using createScipIndexTypescript script
         run: |
