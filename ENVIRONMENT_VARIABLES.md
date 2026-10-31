@@ -51,8 +51,12 @@ NEO4J_GDS_PLUGIN_EDITION | open | Graph Data Science (GDS) Plugin Edition: "open
 NODE_EMBEDDINGS_SUMMARY_DIR | ${NODE_EMBEDDINGS_SCRIPT_DIR}/summary | 
 OVERVIEW_SUMMARY_DIR | ${OVERVIEW_SCRIPT_DIR}/summary | 
 INDICES_DIRECTORY | ./indices | 
+SCIP_JAVA | ${PIPELINE_ROOT}/tools/scip-java/scip-java | 
+SCIP | ${PIPELINE_ROOT}/tools/scip-cli/scip | 
+OUTPUT_DIR | ${PROJECT_ROOT}/target/scip-indices-per-module | 
 SCIP_VERSION | 0.10.0 | 
 BIN_DIR | ${TOOLS_DIRECTORY}/scip-cli | 
+SCIP_JAVA_VERSION | 0.12.3 | 
 ARTIFACTS_DIRECTORY | artifacts | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 PYTHON_PACKAGE_MANAGER | uv | Python package manager to use. Options: "uv" (default), "conda". Use "conda" to activate the Conda environment.
