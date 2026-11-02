@@ -178,6 +178,12 @@ archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM
 archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_LANGUAGE}=SCIP"
 archetypes_report "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_LANGUAGE}=SCIP"
 
+# Clean up any empty detail report directories (from abstraction levels without data)
+# This removes empty directories like Java_Artifact, Java_Package, Typescript_Module, etc.
+# when they were created but contain no actual report files.
+# Must be done before finalize_report() to keep the report structure clean.
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
+
 # ---------------------------------------------------------------
 
 archetypes_finalize_report

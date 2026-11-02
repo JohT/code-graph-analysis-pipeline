@@ -1616,6 +1616,94 @@ assert_no_duplicate_nodes "no duplicate nodes after multi-index merge" \
 echo ""
 
 # ---------------------------------------------------------------------------
+# Fixture: TypeScript-style file with a type alias alongside a module-level
+# function. The function's body references Navigator#, but the type alias has
+# no body and does not depend on Navigator. Occurrence-based edges must NOT be
+# attributed to the type alias when module-level functions are present.
+# ---------------------------------------------------------------------------
+
+function create_module_level_function_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "lib/navigation.ts",
+      "occurrences": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`navigation.ts`/ExternalPolicy#",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`navigation.ts`/getUrl().",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`navigation.ts`/getUrl().(nav)",
+          "symbol_roles": 1
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`context.ts`/Navigator#",
+          "symbol_roles": 0
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`context.ts`/Navigator#",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`navigation.ts`/ExternalPolicy#",
+          "kind": 55
+        }
+      ]
+    },
+    {
+      "relative_path": "lib/context.ts",
+      "occurrences": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`context.ts`/Navigator#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`context.ts`/Navigator#",
+          "kind": 21
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: type alias with module-level function — no spurious occurrence-based edges
+# ---------------------------------------------------------------------------
+
+echo "Test: type alias with module-level function creates no occurrence-based edges"
+mod_func_indices_dir="${tmp_test_dir}/mod_func_indices"
+mod_func_import_dir="${tmp_test_dir}/mod_func_import"
+mkdir -p "${mod_func_indices_dir}"
+create_module_level_function_scip_json > "${mod_func_indices_dir}/mod_func.scip.json"
+
+run_script_with_env "${mod_func_indices_dir}" "${mod_func_import_dir}"
+assert_exit_code "exits 0 for module-level-function fixture" "0" "${exit_code}"
+
+mod_func_nodes=$(cat "${mod_func_import_dir}/scip_type_nodes.csv")
+assert_contains "ExternalPolicy# type node exists" \
+    'ExternalPolicy#' "${mod_func_nodes}"
+assert_contains "Navigator# type node exists" \
+    'Navigator#' "${mod_func_nodes}"
+
+# Navigator references in navigation.ts come from the module-level function getUrl(),
+# not from the type alias ExternalPolicy. No edge should be created.
+edge_count=$(tail -n +2 "${mod_func_import_dir}/scip_type_edges.csv" | wc -l | tr -d ' ')
+assert_equals "no occurrence-based edges when module-level functions are present" \
+    "0" "${edge_count}"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 

@@ -89,6 +89,11 @@ JQ_ADMIN_FUNCTIONS='
     def is_type_parameter_descriptor(symbol):
         descriptor(symbol) | endswith("]");
 
+    # True when the descriptor has "()" with no "#" before it: a module-level
+    # function (e.g. lib/nav.ts/fn().) rather than a class method (com/Foo#m().).
+    def is_module_level_function_descriptor(sym):
+        descriptor(sym) | test("^[^#]*\\(\\)");
+
     def normalize_descriptor(symbol):
         descriptor(symbol) | split("#")[0] + "#";
 
@@ -643,9 +648,20 @@ function extract_depends_on_edges_admin() {
 
             ($index[0].directory_to_package_tokens[($source_file | split("/") | .[:-1] | join("/"))] != null) as $has_dir_pkg |
 
-            (if ($source_type_symbols | length) > 0 then
+            # Documents that define module-level functions (e.g. TypeScript, Python, Go)
+            # own some of the role=0 references; those cannot safely be attributed to any
+            # type definition in the same file.  Class methods always include "#" before
+            # "()" in their descriptor, so they do not trigger this flag.
+            (any(.occurrences[];
+                 ((.symbol_roles // 0) % 2 == 1) and
+                 (.symbol | startswith("local ") | not) and
+                 ((.symbol | split(" ") | length) >= 5) and
+                 is_module_level_function_descriptor(.symbol)
+                )) as $has_module_level_functions |
+
+            (if ($source_type_symbols | length) > 0 and ($has_module_level_functions | not) then
                  ($source_type_symbols | map(short_symbol(.)))
-             elif ($valid_ref_groups | length) > 0 and ($first_internal_symbol != null or $first_internal_ref_symbol != null or $has_dir_pkg) then
+             elif ($source_type_symbols | length) == 0 and ($valid_ref_groups | length) > 0 and ($first_internal_symbol != null or $first_internal_ref_symbol != null or $has_dir_pkg) then
                  [("__file__ " + $source_file)]
              else
                  []
