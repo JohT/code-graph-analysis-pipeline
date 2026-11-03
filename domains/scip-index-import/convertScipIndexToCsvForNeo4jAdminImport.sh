@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Converts SCIP JSON index files (*.scip.json) in INDICES_DIRECTORY to neo4j-admin import CSVs in IMPORT_DIRECTORY.
-# Produces scip_type_nodes_admin.csv and scip_type_edges_admin.csv for use with "neo4j-admin database import full".
+# Produces scip_type_nodes_admin.csv, scip_type_edges_admin.csv, scip_function_nodes_admin.csv, and
+# scip_function_edges_admin.csv for use with "neo4j-admin database import full".
 # Unlike convertScipIndexToCsvForNeo4jImport.sh, computes language and isTest in jq and uses neo4j-admin CSV format.
 # Requires jq.
 #
@@ -93,6 +94,12 @@ JQ_ADMIN_FUNCTIONS='
     # function (e.g. lib/nav.ts/fn().) rather than a class method (com/Foo#m().).
     def is_module_level_function_descriptor(sym):
         descriptor(sym) | test("^[^#]*\\(\\)");
+
+    # True when the descriptor is a pure function definition: ends with "()."
+    # Distinguishes function declarations from their parameters ("().(x)") and
+    # type parameters ("().[T]"), which also match is_module_level_function_descriptor.
+    def is_function_definition_descriptor(sym):
+        descriptor(sym) | test("\\(\\)\\.$");
 
     def normalize_descriptor(symbol):
         descriptor(symbol) | split("#")[0] + "#";
@@ -721,8 +728,129 @@ function extract_relationship_edges_admin() {
 }
 
 # ---------------------------------------------------------------------------
-# Process a single .scip.json file to temporary per-file CSVs
+# Pass 4a — Extract internal function nodes for admin import
+# Always emits header; caller strips it for files after the first.
+# Node CSV format: symbol:ID(ScipNode),fqn,name,language,scheme,typeName,file,
+#                  packageId,packageManager,version,module,descriptor,isAbstract:boolean,isTest:boolean,:LABEL
 # ---------------------------------------------------------------------------
+
+function extract_function_nodes_admin() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+
+        ($index[0].internal_package_ids) as $internal_pkg_ids |
+
+        [
+            .documents[] |
+            .relative_path as $file |
+            .symbols[]? |
+
+            select(.symbol != null) |
+            select(.symbol | startswith("local ") | not) |
+            select((.symbol | split(" ") | length) >= 5) |
+
+            .symbol as $symbol |
+
+            select(is_module_level_function_descriptor($symbol)) |
+            select(is_function_definition_descriptor($symbol)) |
+
+            ($symbol | split(" ")) as $tokens |
+            $tokens[1] as $manager    |
+            $tokens[2] as $pkg_id     |
+            $tokens[3] as $version    |
+            $tokens[4] as $descriptor_val |
+
+            select(($internal_pkg_ids | index($pkg_id)) != null) |
+
+            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+            {
+                id:             short_symbol($symbol),
+                fqn:            short_symbol($symbol),
+                name:           ($descriptor_val | split("/") | last | rtrimstr("().") | gsub("`"; "")),
+                language:       scheme_to_language(scheme($symbol)),
+                scheme:         scheme($symbol),
+                typeName:       "Function",
+                file:           $file,
+                packageId:      $pkg_id,
+                packageManager: $manager,
+                version:        $version,
+                module:         $module_name,
+                descriptor:     $descriptor_val,
+                isAbstract:     "false",
+                isTest:         (if is_test($file) then "true" else "false" end),
+                label:          "SCIP;SemanticCodeIndexFunction"
+            }
+        ] |
+        unique_by(.id) |
+        sort_by(.file, .name) |
+
+        (["symbol:ID(ScipNode)","fqn","name","language","scheme","typeName","file","packageId","packageManager","version","module","descriptor","isAbstract:boolean","isTest:boolean",":LABEL"]),
+        (.[] | [.id, .fqn, .name, .language, .scheme, .typeName, .file, .packageId, .packageManager, .version, .module, .descriptor, .isAbstract, .isTest, .label])
+        | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 4b — Extract function dependency edges for admin import (no header)
+# Edge CSV columns: :START_ID(ScipNode),:END_ID(ScipNode),:TYPE,referenceCount:int,via
+# ---------------------------------------------------------------------------
+
+function extract_function_edges_admin() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_ADMIN_FUNCTIONS}"'
+
+        .documents[] |
+        .relative_path as $source_file |
+
+        (
+            [.occurrences[] |
+             select((.symbol_roles // 0) % 2 == 1) |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             select(is_module_level_function_descriptor(.symbol)) |
+             select(is_function_definition_descriptor(.symbol)) |
+             {symbol: .symbol, line: .range[0]}
+            ] | sort_by(.line) | unique_by(.symbol)
+        ) as $func_defs |
+
+        select(($func_defs | length) > 0) |
+
+        [.occurrences[] |
+         select((.symbol_roles // 0) % 2 == 0) |
+         select(.symbol | startswith("local ") | not) |
+         select((.symbol | split(" ") | length) >= 5) |
+         .range[0] as $occ_line |
+         .symbol as $occ_symbol |
+
+         ([$func_defs[] | select(.line <= $occ_line)] | last) as $owning_func |
+         select($owning_func != null) |
+
+         (descriptor($occ_symbol)) as $tgt_desc |
+         (
+           if ($tgt_desc | endswith("#")) then
+               {edge_type: "uses_type", target: short_symbol($occ_symbol)}
+           elif ($tgt_desc | test("^[^#]*\\(\\)\\.$")) then
+               {edge_type: "calls_function", target: short_symbol($occ_symbol)}
+           elif ($tgt_desc | contains("#")) then
+               {edge_type: "calls_method", target: (normalize_symbol($occ_symbol) | split(" ") | .[2:5] | join(" "))}
+           else null
+           end
+         ) as $edge_info |
+         select($edge_info != null) |
+
+         {from: short_symbol($owning_func.symbol), to: $edge_info.target, edge_type: $edge_info.edge_type}
+        ] |
+
+        group_by([.from, .to, .edge_type]) |
+        .[] |
+        select(.[0].from != .[0].to) |
+        {from: .[0].from, to: .[0].to, edge_type: .[0].edge_type, count: length} |
+        [.from, .to, "DEPENDS_ON", (.count | tostring), .edge_type] | @csv
+        ' "${input_file}"
+}
 
 # ---------------------------------------------------------------------------
 # Extract SCIP project metadata from one input file for admin import
@@ -908,6 +1036,8 @@ function process_single_index_admin() {
     local edges_temp="${3}"
     local links_temp="${4}"
     local emit_header="${5}"  # "true" to include header, "false" to skip
+    local func_nodes_temp="${6}"
+    local func_edges_temp="${7}"
 
     echo "convertScipIndexToCsvForNeo4jAdminImport: Processing '${input_file}'..."
 
@@ -1018,7 +1148,21 @@ function process_single_index_admin() {
     extract_anonymous_class_project_links_admin "${symbol_index_file}" "${input_file}" >> "${links_temp}" 2>&1
     local links_final=$(wc -l < "${links_temp}" 2>/dev/null || echo "0")
     debug_log "Total project links: ${links_final} lines"
-    
+
+    debug_log "Extracting function nodes (emit_header=${emit_header})..."
+    if [ "${emit_header}" = "true" ]; then
+        extract_function_nodes_admin "${symbol_index_file}" "${input_file}" > "${func_nodes_temp}" 2>&1
+    else
+        extract_function_nodes_admin "${symbol_index_file}" "${input_file}" 2>&1 | tail -n +2 > "${func_nodes_temp}"
+    fi
+    local func_nodes_count=$(wc -l < "${func_nodes_temp}" 2>/dev/null || echo "0")
+    debug_log "Function nodes written: ${func_nodes_count} lines"
+
+    debug_log "Extracting function edges..."
+    extract_function_edges_admin "${symbol_index_file}" "${input_file}" > "${func_edges_temp}" 2>&1
+    local func_edges_count=$(wc -l < "${func_edges_temp}" 2>/dev/null || echo "0")
+    debug_log "Function edges written: ${func_edges_count} lines"
+
     debug_log "Successfully completed processing of '${input_file}'"
 }
 
@@ -1144,7 +1288,88 @@ function merge_project_csvs_admin() {
 }
 
 # ---------------------------------------------------------------------------
-# Validate that all edge node references exist in the nodes CSV
+# Merge per-file function node CSVs (admin format): deduplicate by symbol
+# ---------------------------------------------------------------------------
+
+function merge_function_node_csvs_admin() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local func_node_files=()
+    while IFS= read -r func_node_file; do
+        func_node_files+=("${func_node_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_admin_func_nodes.tmp" | sort)
+
+    if [ ${#func_node_files[@]} -eq 0 ]; then
+        echo '"symbol:ID(ScipNode)","fqn","name","language","scheme","typeName","file","packageId","packageManager","version","module","descriptor","isAbstract:boolean","isTest:boolean",":LABEL"' > "${output_file}"
+        return
+    fi
+
+    cat "${func_node_files[@]}" | awk -F',' '
+        NR == 1 { print; next }
+        {
+            symbol = $1
+            gsub(/^"/, "", symbol)
+            gsub(/"$/, "", symbol)
+            if (!seen[symbol]) {
+                seen[symbol] = $0
+                order[++n] = symbol
+            }
+        }
+        END {
+            for (i = 1; i <= n; i++) { print seen[order[i]] }
+        }
+    ' > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Merge per-file function edge CSVs (admin format): sum referenceCount for
+# (source, target, via) triples
+# ---------------------------------------------------------------------------
+
+function merge_function_edge_csvs_admin() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local func_edge_files=()
+    while IFS= read -r func_edge_file; do
+        func_edge_files+=("${func_edge_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_admin_func_edges.tmp" | sort)
+
+    {
+        echo ':START_ID(ScipNode),:END_ID(ScipNode),:TYPE,referenceCount:int,via'
+        if [ ${#func_edge_files[@]} -gt 0 ]; then
+            cat "${func_edge_files[@]}" | awk -F',' '
+                {
+                    source = $1
+                    target = $2
+                    type   = $3
+                    count  = $4
+                    via    = $5
+                    gsub(/"/, "", count)
+                    key = source SUBSEP target SUBSEP via
+                    counts[key] += count
+                    if (!(key in sources)) {
+                        sources[key] = source
+                        targets[key] = target
+                        types[key]   = type
+                        vias[key]    = via
+                        order[NR]    = key
+                    }
+                }
+                END {
+                    for (i = 1; i <= NR; i++) {
+                        k = order[i]
+                        if (k in sources) {
+                            print sources[k] "," targets[k] "," types[k] "," counts[k] "," vias[k]
+                            delete sources[k]
+                        }
+                    }
+                }
+            '
+        fi
+    } > "${output_file}"
+}
 # Input: nodes CSV file and edges CSV file
 # Returns: 0 if valid, 1 if missing nodes found; prints detailed error message
 # ---------------------------------------------------------------------------
@@ -1269,10 +1494,12 @@ while IFS= read -r index_file; do
     edges_temp="${tmp_dir}/${file_stem}_admin_edges.csv"
     projects_temp="${tmp_dir}/${file_stem}_admin_projects.csv"
     links_temp="${tmp_dir}/${file_stem}_admin_links.csv"
+    func_nodes_temp="${tmp_dir}/${file_stem}_admin_func_nodes.tmp"
+    func_edges_temp="${tmp_dir}/${file_stem}_admin_func_edges.tmp"
 
     debug_log "Calling process_single_index_admin with file_stem=${file_stem}"
     _exit_code=0
-    process_single_index_admin "${index_file}" "${nodes_temp}" "${edges_temp}" "${links_temp}" "${first_file}" || { _exit_code=$?; }
+    process_single_index_admin "${index_file}" "${nodes_temp}" "${edges_temp}" "${links_temp}" "${first_file}" "${func_nodes_temp}" "${func_edges_temp}" || { _exit_code=$?; }
     if [ "${_exit_code}" -ne 0 ]; then
         echo "ERROR: process_single_index_admin failed with exit code ${_exit_code}" >&2
         exit "${_exit_code}"
@@ -1291,6 +1518,8 @@ nodes_output="${IMPORT_DIRECTORY}/scip_type_nodes_admin.csv"
 edges_output="${IMPORT_DIRECTORY}/scip_type_edges_admin.csv"
 projects_output="${IMPORT_DIRECTORY}/scip_projects_admin.csv"
 links_output="${IMPORT_DIRECTORY}/scip_type_project_links_admin.csv"
+func_nodes_output="${IMPORT_DIRECTORY}/scip_function_nodes_admin.csv"
+func_edges_output="${IMPORT_DIRECTORY}/scip_function_edges_admin.csv"
 
 echo "convertScipIndexToCsvForNeo4jAdminImport: Merging node CSVs → '${nodes_output}'..."
 merge_node_csvs_admin "${tmp_dir}" "${nodes_output}"
@@ -1304,6 +1533,12 @@ merge_project_csvs_admin "${tmp_dir}" "${projects_output}"
 echo "convertScipIndexToCsvForNeo4jAdminImport: Merging BELONGS_TO link CSVs → '${links_output}'..."
 merge_belongs_to_links_admin "${tmp_dir}" "${links_output}"
 
+echo "convertScipIndexToCsvForNeo4jAdminImport: Merging function node CSVs → '${func_nodes_output}'..."
+merge_function_node_csvs_admin "${tmp_dir}" "${func_nodes_output}"
+
+echo "convertScipIndexToCsvForNeo4jAdminImport: Merging function edge CSVs → '${func_edges_output}'..."
+merge_function_edge_csvs_admin "${tmp_dir}" "${func_edges_output}"
+
 # Validate that all edge references point to existing nodes
 echo "convertScipIndexToCsvForNeo4jAdminImport: Validating edge-node references..."
 if ! validate_edge_node_references "${nodes_output}" "${edges_output}"; then
@@ -1315,4 +1550,6 @@ node_count=$(( $(wc -l < "${nodes_output}") - 1 ))
 project_count=$(( $(wc -l < "${projects_output}") - 1 ))
 edge_count=$(( $(wc -l < "${edges_output}") - 1 ))
 link_count=$(( $(wc -l < "${links_output}") - 1 ))
-echo "convertScipIndexToCsvForNeo4jAdminImport: Done. ${node_count} node(s), ${project_count} project(s), ${edge_count} edge(s), ${link_count} link(s)."
+func_node_count=$(( $(wc -l < "${func_nodes_output}") - 1 ))
+func_edge_count=$(( $(wc -l < "${func_edges_output}") - 1 ))
+echo "convertScipIndexToCsvForNeo4jAdminImport: Done. ${node_count} type node(s), ${project_count} project(s), ${edge_count} type edge(s), ${link_count} link(s), ${func_node_count} function node(s), ${func_edge_count} function edge(s)."
