@@ -1,7 +1,7 @@
-// Cyclic Dependencies Breakdown Backward Only for SCIP Semantic Index Modules.
+// Cyclic Dependencies Breakdown Backward Only for SCIP Semantic Index Modules. Includes both types and functions via SemanticCodeIndexInternalSymbol.
 
-MATCH (module:SemanticCodeIndexModule)-[:CONTAINS]->(forwardSource:SemanticCodeIndexInternalType)-[:DEPENDS_ON]->(forwardTarget:SemanticCodeIndexInternalType)<-[:CONTAINS]-(dependentModule:SemanticCodeIndexModule)
-MATCH (dependentModule)-[:CONTAINS]->(backwardSource:SemanticCodeIndexInternalType)-[:DEPENDS_ON]->(backwardTarget:SemanticCodeIndexInternalType)<-[:CONTAINS]-(module)
+MATCH (module:SemanticCodeIndexModule)-[:CONTAINS]->(forwardSource:SemanticCodeIndexInternalSymbol)-[:DEPENDS_ON]->(forwardTarget:SemanticCodeIndexInternalSymbol)<-[:CONTAINS]-(dependentModule:SemanticCodeIndexModule)
+MATCH (dependentModule)-[:CONTAINS]->(backwardSource:SemanticCodeIndexInternalSymbol)-[:DEPENDS_ON]->(backwardTarget:SemanticCodeIndexInternalSymbol)<-[:CONTAINS]-(module)
 WHERE module.fqn <> dependentModule.fqn
  WITH module.projectName                                                            AS projectName
      ,module.fqn                                                                    AS moduleName
