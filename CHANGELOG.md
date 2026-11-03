@@ -2,6 +2,14 @@
 
 This document describes the changes to the Code Graph Analysis Pipeline. The changes are grouped by version and date. The latest version is at the top.
 
+## v5.0.1 - Bug fixes for SCIP processing and report generation
+
+### 🐛 Bug Fixes
+
+* **SCIP module-level function detection** - Added support for detecting module-level functions in SCIP JSON processing. The conversion script now correctly identifies and handles functions defined at module scope (e.g., standalone Python functions) in both admin and non-admin import scripts. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/676
+* **Remove empty anomaly-detection report directories** - Fixed issue where analyzing small projects creates empty anomaly-detection report directories (e.g., `Java_Artifact`, `Java_Package`, `Typescript_Module`, `SCIP_SemanticCodeIndexArtifact`). Added cleanup pass after detail reports complete to remove empty abstraction-level directories while preserving parent directory for summary report. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/677
+* **Remove empty archetype report directories** - Fixed issue where analyzing small projects without certain code types creates empty archetype report directories. Added final cleanup pass on report directory after all detail reports complete but before finalization, removing all empty abstraction-level directories. by @JohT in https://github.com/JohT/code-graph-analysis-pipeline/pull/678
+
 ## v5.0.0 - Multi-language SCIP support and reactivated git log import
 
 ### ✨ Highlights
