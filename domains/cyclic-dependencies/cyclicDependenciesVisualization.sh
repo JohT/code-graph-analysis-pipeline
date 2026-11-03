@@ -62,21 +62,22 @@ CYCLE_TEMPLATE_FILE="${CYCLIC_DEPENDENCIES_GRAPHS_DIR}/cycle.template.gv"
 
 # ── Graph generation functions ────────────────────────────────────────────────
 
-# Reads the cycle breakdown CSV, filters by the given package/module pair,
-# and writes the inner DOT body (two clusters and all forward/backward edges) to stdout.
-#
-# CSV columns when using awk -F '"' (double-quote as field separator, produced by jq @csv):
-#   $4  = packageName / moduleName
-#   $8  = dependentPackageName / dependentModulePathName
-#   $10 = dependency ("TypeA->TypeB" for forward, "TypeC<-TypeD" for backward)
-# Numeric columns (forwardToBackwardBalance, numberForward, numberBackward) are unquoted in @csv
-# and appear inside $9/$11 between the quoted string fields.
-# Column positions are derived from the RETURN clause order in the Cypher breakdown queries.
+# Extracts nodes and edges from the cycle breakdown CSV.
+# Outputs node definitions with full styling (one per line).
+# Edge definitions appear at the end (one per line).
+# Does NOT output cluster structure (that's in the template).
 #
 # Parameters:
-#   $1  package_name           — left-side code unit to filter by
-#   $2  dependent_package_name — right-side code unit to filter by
-#   $3  breakdown_csv          — path to the breakdown CSV file
+#   $1  package_name
+#   $2  dependent_package_name
+#   $3  breakdown_csv
+# Output: Three sections marked with special lines:
+#   ===PKG_NODES===
+#   "node_name" [attributes];
+#   ===DEP_NODES===
+#   "node_name" [attributes];
+#   ===EDGES===
+#   "src" -> "tgt" [attributes];
 generate_dot_body() {
     local package_name="${1}"
     local dependent_package_name="${2}"
@@ -88,11 +89,9 @@ generate_dot_body() {
             gsub(/\r/, "", dep)
             if (index(dep, "->") > 0) {
                 split(dep, parts, "->")
-                src = parts[1]
-                tgt = parts[2]
-                pkg_nodes[src] = 1
-                dep_nodes[tgt] = 1
-                forward_edges[src, tgt] = 1
+                pkg_nodes[parts[1]] = 1
+                dep_nodes[parts[2]] = 1
+                forward_edges[parts[1], parts[2]] = 1
             } else if (index(dep, "<-") > 0) {
                 split(dep, parts, "<-")
                 backward_tgt = parts[1]
@@ -103,64 +102,48 @@ generate_dot_body() {
             }
         }
         END {
-            # Count array elements (POSIX awk compatible; length(array) is not POSIX)
             pkg_count = 0
             for (n in pkg_nodes) pkg_count++
             dep_count = 0
             for (n in dep_nodes) dep_count++
             if (pkg_count + dep_count == 0) exit 0
-            # Detect nodes whose simple name exists in both clusters.
-            # GraphViz (fdp) cannot place a single node in two clusters simultaneously,
-            # so these are disambiguated with a "_pkg" / "_dep" suffix while keeping
-            # the original name as the visible label.
-            # This typically happens when two packages each contain a type with the
-            # same simple name and one depends on the other.
+            
             for (n in pkg_nodes) if (n in dep_nodes) ambiguous[n] = 1
-            print "    subgraph cluster_package {"
-            print "        label=\"" pkg "\";"
-            print "        style=\"filled\";"
-            print "        fillcolor=\"lightblue\";"
+            
+            print "===PKG_NODES==="
             for (n in pkg_nodes) {
-                if (n in ambiguous) print "        \"" n "_pkg\" [label=\"" n "\"];"
-                else print "        \"" n "\";"
+                node_name = (n in ambiguous) ? n "_pkg" : n
+                print "\"" node_name "\" [label=\"" n "\"; fillcolor=\"#B3E5FC\"; color=\"#0277BD\"; penwidth=\"1.5\"];"
             }
-            print "    }"
-            print ""
-            print "    subgraph cluster_dependent {"
-            print "        label=\"" dep_pkg "\";"
-            print "        style=\"filled\";"
-            print "        fillcolor=\"peachpuff\";"
+            print "===DEP_NODES==="
             for (n in dep_nodes) {
-                if (n in ambiguous) print "        \"" n "_dep\" [label=\"" n "\"];"
-                else print "        \"" n "\";"
+                node_name = (n in ambiguous) ? n "_dep" : n
+                print "\"" node_name "\" [label=\"" n "\"; fillcolor=\"#F3E5F5\"; color=\"#8E24AA\"; penwidth=\"1.5\"];"
             }
-            print "    }"
-            print ""
+            print "===EDGES==="
             for (edge in forward_edges) {
                 split(edge, parts, SUBSEP)
                 src = (parts[1] in ambiguous) ? parts[1] "_pkg" : parts[1]
                 tgt = (parts[2] in ambiguous) ? parts[2] "_dep" : parts[2]
-                print "    \"" src "\" -> \"" tgt "\" [color=\"#6699CC\"; penwidth=\"0.5\"];"
+                print "\"" src "\" -> \"" tgt "\" [color=\"#90CAF9\"; penwidth=\"0.7\"];"
             }
             for (edge in backward_edges) {
                 split(edge, parts, SUBSEP)
                 src = (parts[1] in ambiguous) ? parts[1] "_dep" : parts[1]
                 tgt = (parts[2] in ambiguous) ? parts[2] "_pkg" : parts[2]
-                print "    \"" src "\" -> \"" tgt "\" [color=\"red\"; penwidth=\"2.5\"; style=\"dashed\";];"
+                print "\"" src "\" -> \"" tgt "\" [color=\"#E91E63\"; penwidth=\"2.5\"; style=\"dashed\";];"
             }
         }
     ' "${breakdown_csv}"
 }
 
-# Generates a DOT file for a single cycle pair by combining the template settings
-# with the cluster and edge content from the breakdown CSV.
-# Writes nothing and returns 0 (no error) if no matching data is found in the CSV.
+# Generates a complete .gv file by combining template with extracted cycle data.
 #
 # Parameters:
-#   $1  package_name           — left-side code unit (packageName / moduleName)
-#   $2  dependent_package_name — right-side code unit (dependentPackageName / dependentModulePathName)
-#   $3  breakdown_csv          — path to the breakdown CSV file
-#   $4  output_gv              — path for the output .gv file to create
+#   $1  package_name
+#   $2  dependent_package_name
+#   $3  breakdown_csv
+#   $4  output_gv
 generate_cycle_graph() {
     local package_name="${1}"
     local dependent_package_name="${2}"
@@ -169,24 +152,53 @@ generate_cycle_graph() {
 
     echo "cyclicDependenciesVisualization: $(date +'%Y-%m-%dT%H:%M:%S%z') Generating graph for ${package_name} <-> ${dependent_package_name}..."
 
-    local template_content
-    template_content=$(sed -n '/\/\/Begin-Template/,/\/\/End-Template/{//!p;}' "${CYCLE_TEMPLATE_FILE}")
+    # Extract nodes and edges from CSV
+    local data
+    data=$(generate_dot_body "${package_name}" "${dependent_package_name}" "${breakdown_csv}")
 
-    local graph_body
-    graph_body=$(generate_dot_body "${package_name}" "${dependent_package_name}" "${breakdown_csv}")
-
-    if [[ -z "${graph_body}" ]]; then
+    if [[ -z "${data}" ]]; then
         echo "cyclicDependenciesVisualization: No dependency data found for ${package_name} <-> ${dependent_package_name}. Skipping."
         return 0
     fi
 
+    # Create temp files for sections
+    local pkg_nodes_file dep_nodes_file edges_file
+    pkg_nodes_file=$(mktemp)
+    dep_nodes_file=$(mktemp)
+    edges_file=$(mktemp)
+    trap "rm -f '$pkg_nodes_file' '$dep_nodes_file' '$edges_file'" RETURN
+
+    # Extract and save sections
+    sed -n '/^===PKG_NODES===/,/^===/{ /^===/!p; }' <<< "$data" > "$pkg_nodes_file"
+    sed -n '/^===DEP_NODES===/,/^===/{ /^===/!p; }' <<< "$data" > "$dep_nodes_file"
+    sed -n '/^===EDGES===/,$ { /^===EDGES===/!p; }' <<< "$data" > "$edges_file"
+
+    # Build output file using template + sections
     {
-        echo "strict digraph cycle {"
-        echo "${template_content}"
-        echo ""
-        echo "${graph_body}"
-        echo "}"
-    } > "${output_gv}"
+        # Read template and substitute labels
+        sed "s|{{PACKAGE_LABEL}}|$package_name|g; s|{{DEPENDENT_LABEL}}|$dependent_package_name|g" \
+            "${CYCLE_TEMPLATE_FILE}" | \
+        while IFS= read -r line; do
+            # Trim leading/trailing whitespace for pattern matching
+            trimmed="${line#"${line%%[! ]*}"}"
+            trimmed="${trimmed%"${trimmed##*[! ]}"}"
+            
+            case "$trimmed" in
+                "{{PACKAGE_NODES}}")
+                    cat "$pkg_nodes_file"
+                    ;;
+                "{{DEPENDENT_NODES}}")
+                    cat "$dep_nodes_file"
+                    ;;
+                "{{EDGES}}")
+                    cat "$edges_file"
+                    ;;
+                *)
+                    echo "$line"
+                    ;;
+            esac
+        done
+    } > "$output_gv"
 }
 
 # Appends an SVG image reference to the markdown reference file in the given output directory.
