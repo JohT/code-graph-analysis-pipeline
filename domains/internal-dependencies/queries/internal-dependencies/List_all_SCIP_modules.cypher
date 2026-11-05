@@ -2,12 +2,15 @@
 
 MATCH (m:SemanticCodeIndexModule)
 OPTIONAL MATCH (m)-[:CONTAINS]->(t:SemanticCodeIndexInternalType)
+OPTIONAL MATCH (m)-[:CONTAINS]->(f:SemanticCodeIndexFunction)
  WITH m
      ,count(DISTINCT t.fqn) AS numberOfTypes
+     ,count(DISTINCT f.fqn) AS numberOfFunctions
 RETURN m.projectName        AS projectName
       ,m.fqn                AS moduleFqn
       ,m.name               AS moduleName
       ,numberOfTypes
+      ,numberOfFunctions
       ,m.incomingDependencies AS incomingDependencies
       ,m.outgoingDependencies AS outgoingDependencies
       ,m.isTest               AS isTest
