@@ -1,4 +1,4 @@
-// Overview size for SCIP. Counts total graph nodes, relationships, SCIP artifacts, modules, internal types, external types, and total reference count.
+// Overview size for SCIP. Counts total graph nodes, relationships, SCIP artifacts, modules, internal types, functions, external types, and total reference count.
 
  MATCH (n)
   WITH COUNT(n) AS nodeCount
@@ -20,19 +20,28 @@
       ,artifactCount
       ,moduleCount
       ,count(DISTINCT t) AS internalTypeCount
+ OPTIONAL MATCH (f:SemanticCodeIndexFunction)
+  WITH nodeCount
+      ,relationshipCount
+      ,artifactCount
+      ,moduleCount
+      ,internalTypeCount
+      ,count(DISTINCT f) AS functionCount
  OPTIONAL MATCH (e:SemanticCodeIndexExternalType)
   WITH nodeCount
       ,relationshipCount
       ,artifactCount
       ,moduleCount
       ,internalTypeCount
+      ,functionCount
       ,count(DISTINCT e) AS externalTypeCount
- OPTIONAL MATCH (i:SemanticCodeIndexInternalType)-[d:DEPENDS_ON]->()
+ OPTIONAL MATCH (s:SemanticCodeIndexInternalSymbol)-[d:DEPENDS_ON]->()
   WITH nodeCount
       ,relationshipCount
       ,artifactCount
       ,moduleCount
       ,internalTypeCount
+      ,functionCount
       ,externalTypeCount
       ,sum(d.referenceCount) AS totalReferenceCount
 RETURN nodeCount
@@ -40,5 +49,6 @@ RETURN nodeCount
       ,artifactCount
       ,moduleCount
       ,internalTypeCount
+      ,functionCount
       ,externalTypeCount
       ,totalReferenceCount
