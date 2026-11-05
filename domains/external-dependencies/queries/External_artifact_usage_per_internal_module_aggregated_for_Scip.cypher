@@ -2,7 +2,7 @@
 
 MATCH (a:SemanticCodeIndexArtifact {isExternal: false})-[:CONTAINS]->(m:SemanticCodeIndexModule)
   WITH a, count(DISTINCT m) AS artifactModules
-MATCH (a)-[:CONTAINS]->(m2:SemanticCodeIndexModule)-[:CONTAINS]->(i:SemanticCodeIndexInternalType)-[:DEPENDS_ON]->(e:SemanticCodeIndexExternalType)
+MATCH (a)-[:CONTAINS]->(m2:SemanticCodeIndexModule)-[:CONTAINS]->(i:SemanticCodeIndexInternalSymbol)-[:DEPENDS_ON]->(e:SemanticCodeIndexExternalType)
   WITH a
       ,artifactModules
       ,e.module                   AS externalArtifactName
