@@ -392,18 +392,18 @@ def get_coloring_pairs() -> list[ColorPair]:
 # ----------------------------------------
 
 def query_data(driver: Driver) -> pd.DataFrame:
-    """Query anomalous SemanticCodeIndexInternalType nodes with Bridge/Outlier ranks."""
+    """Query anomalous SemanticCodeIndexInternalSymbol (SemanticCodeIndexInternalType & SemanticCodeIndexFunction) nodes with Bridge/Outlier ranks."""
     query: LiteralString = """
-        MATCH (anomalyScoreStats:SemanticCodeIndexInternalType)
+        MATCH (anomalyScoreStats:SemanticCodeIndexInternalSymbol)
         WHERE anomalyScoreStats.anomalyScore < 0
         ORDER BY anomalyScoreStats.anomalyScore ASCENDING
         LIMIT 150
          WITH collect(anomalyScoreStats.anomalyScore)[-1] AS anomalyScoreThreshold
-        MATCH (anomalyRankStats:SemanticCodeIndexInternalType)
+        MATCH (anomalyRankStats:SemanticCodeIndexInternalSymbol)
          WITH anomalyScoreThreshold
              ,max(anomalyRankStats.anomalyBridgeRank)  AS maxAnomalyBridgeRank
              ,max(anomalyRankStats.anomalyOutlierRank) AS maxAnomalyOutlierRank
-        MATCH (anomalous:SemanticCodeIndexInternalType)
+        MATCH (anomalous:SemanticCodeIndexInternalSymbol)
         WHERE (anomalous.anomalyScore < anomalyScoreThreshold
            OR  anomalous.anomalyOutlierRank IS NOT NULL
            OR  anomalous.anomalyBridgeRank  IS NOT NULL)

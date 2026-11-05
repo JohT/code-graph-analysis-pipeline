@@ -208,7 +208,7 @@ anomaly_detection_report "${ALGORITHM_NODE}=Artifact" "${ALGORITHM_LANGUAGE}=Jav
 anomaly_detection_report "${ALGORITHM_NODE}=Package" "${ALGORITHM_LANGUAGE}=Java"
 anomaly_detection_report "${ALGORITHM_NODE}=Type" "${ALGORITHM_LANGUAGE}=Java"
 anomaly_detection_report "${ALGORITHM_NODE}=Module" "${ALGORITHM_LANGUAGE}=Typescript"
-anomaly_detection_report "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_LANGUAGE}=SCIP"
+anomaly_detection_report "${ALGORITHM_NODE}=SemanticCodeIndexInternalSymbol" "${ALGORITHM_LANGUAGE}=SCIP"
 anomaly_detection_report "${ALGORITHM_NODE}=SemanticCodeIndexModule" "${ALGORITHM_LANGUAGE}=SCIP"
 anomaly_detection_report "${ALGORITHM_NODE}=SemanticCodeIndexArtifact" "${ALGORITHM_LANGUAGE}=SCIP"
 

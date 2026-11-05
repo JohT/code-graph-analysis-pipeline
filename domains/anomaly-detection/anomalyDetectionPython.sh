@@ -260,7 +260,7 @@ anomaly_detection_treemap_charts_markdown_reference() {
     echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished treemap charts markdown reference generation..."
 }
 
-# Visualize SCIP anomaly detection results with treemap charts using SemanticCodeIndexInternalType.file paths.
+# Visualize SCIP anomaly detection results with treemap charts using SemanticCodeIndexInternalSymbol.file paths.
 anomaly_detection_scip_treemap_charts() {
     local language
     language=$( extractQueryParameter "projection_language" "${@}" )
@@ -342,12 +342,12 @@ if is_sufficient_data_available "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=
   fi
 fi
 
-# -- SCIP InternalType Anomaly Detection -----------------------
+# -- SCIP InternalSymbol Anomaly Detection -----------------------
 
-if is_sufficient_data_available "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount"; then
-  if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
-      createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
-      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=scip-type-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if is_sufficient_data_available "${ALGORITHM_NODE}=SemanticCodeIndexInternalSymbol" "${ALGORITHM_WEIGHT}=referenceCount"; then
+  if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+      createDirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+      anomaly_detection_python_reports "${ALGORITHM_PROJECTION}=scip-symbol-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexInternalSymbol" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
       anomaly_detection_scip_treemap_charts "${ALGORITHM_LANGUAGE}=SCIP"
   fi
 fi
