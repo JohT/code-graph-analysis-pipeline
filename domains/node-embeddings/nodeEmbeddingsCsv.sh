@@ -338,17 +338,17 @@ if createUndirectedDependencyProjection "${MODULE_PROJECTION}" "${MODULE_NODE}" 
     runNodeEmbeddingsForLayer "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_DIMENSIONS}" "${MODULE_DIMENSIONS_HASHGNN}"
 fi
 
-# ── SCIP Internal Type Node Embeddings ────────────────────────────────────────
+# ── SCIP Internal Symbol Node Embeddings ────────────────────────────────────────
 
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
-SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-embeddings"
-SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
-SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
-SCIP_TYPE_DIMENSIONS="dependencies_projection_embedding_dimension=64"
-SCIP_TYPE_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"
+SCIP_SYMBOL_PROJECTION="dependencies_projection=scip-symbol-embeddings"
+SCIP_SYMBOL_NODE="dependencies_projection_node=SemanticCodeIndexInternalSymbol"
+SCIP_SYMBOL_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_SYMBOL_DIMENSIONS="dependencies_projection_embedding_dimension=64"
+SCIP_SYMBOL_DIMENSIONS_HASHGNN="dependencies_projection_embedding_dimension=128"
 
-if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    runNodeEmbeddingsForLayer "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}" "${SCIP_TYPE_DIMENSIONS}" "${SCIP_TYPE_DIMENSIONS_HASHGNN}"
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+    runNodeEmbeddingsForLayer "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}" "${SCIP_SYMBOL_DIMENSIONS}" "${SCIP_SYMBOL_DIMENSIONS_HASHGNN}"
 fi
 
 # ── SCIP Module Node Embeddings ───────────────────────────────────────────────────
