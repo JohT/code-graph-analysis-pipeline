@@ -4,6 +4,44 @@ This document describes breaking changes introduced in each major version and ho
 
 ---
 
+## Migration to v6.0.0
+
+v6 supports functions in SCIP indices, which introduces breaking changes to SCIP projections. Functions are now included in the `SemanticCodeIndexInternalSymbol` label, replacing the previous `SemanticCodeIndexInternalType` label used by reports.
+
+---
+
+### 10. SCIP projections now include functions (SemanticCodeIndexInternalType → SemanticCodeIndexInternalSymbol)
+
+**What changed (Commit [INSERT_HASH], PR [INSERT_PR]):**
+
+All SCIP-based projection analysis (graph algorithms, anomaly detection, node embeddings, internal dependencies) now use `SemanticCodeIndexInternalSymbol` instead of `SemanticCodeIndexInternalType`. This unified label covers both types and functions, enabling complete dependency analysis for languages that support module-level functions (TypeScript, Go, Python, Rust).
+
+| Domain | Old Report Directory | New Report Directory | Old Projection Name | New Projection Name |
+|--------|---|---|---|---|
+| graph-algorithms (centrality) | `SCIP_Semantic_Index_Type/centrality` | `SCIP_Semantic_Index_Symbol/centrality` | `scip-type-centrality` | `scip-symbol-centrality` |
+| graph-algorithms (community) | `SCIP_Semantic_Index_Type/communities` | `SCIP_Semantic_Index_Symbol/communities` | `scip-type-community` | `scip-symbol-community` |
+| graph-algorithms (similarity) | `SCIP_Semantic_Index_Type/similarity` | `SCIP_Semantic_Index_Symbol/similarity` | `scip-type-similarity` | `scip-symbol-similarity` |
+| internal-dependencies | `SCIP_Semantic_Index_Type` | `SCIP_Semantic_Index_Symbol` | `scip-type-topology` | `scip-symbol-topology` |
+| anomaly-detection | (same directory) | (same directory) | `scip-type-anomaly-detection` | `scip-symbol-anomaly-detection` |
+| archetypes | (same directory) | (same directory) | `scip-type-archetypes` | `scip-symbol-archetypes` |
+| node-embeddings | (same directory) | (same directory) | `scip-type-embeddings` | `scip-symbol-embeddings` |
+
+**Why this matters:**
+
+Previously, 243 types in the react-router TypeScript codebase received zero PageRank and were invisible to centrality, community detection, and similarity algorithms — even though they were called by functions. Functions are now included, providing a complete graph for accurate analysis of dependencies and code structure. For Java projects analyzed with SCIP, the symbol projection equals the type projection (Java methods are class-level, not module-level functions), so analysis results remain consistent.
+
+**Migration steps:**
+
+1. **Update custom scripts or downstream consumers:** If you reference the old report directories (e.g., `SCIP_Semantic_Index_Type/`) or projection names (e.g., `scip-type-centrality`), update them to use the new names (`SCIP_Semantic_Index_Symbol/`, `scip-symbol-centrality`).
+
+2. **Update analysis workspace paths:** If your workspace has previously generated reports in the old directories, they will no longer be updated. You can either:
+   - Delete the old directories manually to free up disk space
+   - Rename them if you want to keep the old results for comparison
+
+3. **Verify graph completeness:** Run centrality and community detection reports on TypeScript/Go/Python/Rust projects. You should now see all types included in the analysis, with functions contributing to dependency counts and centrality metrics.
+
+---
+
 ## Migrating to v5.0.0
 
 v5 introduces several breaking changes, particularly around path-finding queries, report naming conventions, SCIP index support enhancements, and Python version requirements. The sections below describe each breaking change and the steps to migrate.

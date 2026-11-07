@@ -7,6 +7,7 @@
 # --url             Git clone URL (optional, default = skip clone)
 # --version         Version of the project
 # --tag             Tag to switch to after "git clone" (optional, default = version)
+# --depth           Depth for shallow clone (optional, default = full clone)
 # --project         Name of the project/repository (optional, default = clone url file name without .git extension)
 
 # Note: This script is meant to be started within the temporary analysis directory (e.g. "temp/AnalysisName/")
@@ -26,9 +27,11 @@ usage() {
   echo "          [ --tag <git-tag-for-that-version> (default=version) \\]"
   echo "          [ --url <git-clone-url> (default=skip clone)] \\"
   echo "          [ --project <name-of-the-project> (default=url file name) \\]"
+  echo "          [ --depth <shallow-clone-depth> (default=full clone) \\]"
   echo "Example: $0 \\"
   echo "           --url https://github.com/ant-design/ant-design.git \\"
-  echo "           --version 5.19.3"
+  echo "           --version 5.19.3 \\"
+  echo "           --depth 1"
   exit 1
 }
 
@@ -37,6 +40,7 @@ cloneUrl=""
 projectName=""
 projectVersion=""
 projectTag=""
+projectDepth=""
 
 # Parse command line options
 while [[ $# -gt 0 ]]; do
@@ -58,6 +62,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --tag)
       projectTag="${value}"
+      shift
+      ;;
+    --depth)
+      projectDepth="${value}"
       shift
       ;;
     *)
@@ -103,6 +111,7 @@ echo "downloadTypescriptProject: cloneUrl:       ${cloneUrl}"
 echo "downloadTypescriptProject: projectName:    ${projectName}"
 echo "downloadTypescriptProject: projectVersion: ${projectVersion}"
 echo "downloadTypescriptProject: projectTag:     ${projectTag}"
+echo "downloadTypescriptProject: projectDepth:   ${projectDepth}"
 
 # Create runtime logs directory if it hasn't existed yet
 mkdir -p ./runtime/logs
@@ -113,9 +122,14 @@ fullSourceDirectory="${SOURCE_DIRECTORY}/${fullProjectName}"
 
 if [ ! -d "${fullSourceDirectory}" ]; then # source doesn't exist
   if [ -n "${cloneUrl}" ]; then # only clone if url is specified and source doesn't exist 
-    echo "downloadTypescriptProject: Cloning ${cloneUrl} with version ${projectVersion}..."
     # A full clone is done since not only the source is scanned, but also the git log/history.
-    git clone --branch "${projectTag}" --single-branch "${cloneUrl}" "${fullSourceDirectory}"
+    if [ -n "${projectDepth}" ]; then
+      echo "downloadTypescriptProject: Shallow cloning ${cloneUrl} with version ${projectVersion} and depth ${projectDepth}..."
+      git clone --branch "${projectTag}" --single-branch --depth "${projectDepth}" "${cloneUrl}" "${fullSourceDirectory}"
+    else
+      echo "downloadTypescriptProject: Cloning ${cloneUrl} with version ${projectVersion}..."
+      git clone --branch "${projectTag}" --single-branch "${cloneUrl}" "${fullSourceDirectory}"
+    fi
   else
     # Source doesn't exist and no clone URL is specified.
     echo "downloadTypescriptProject: Error: Source directory ${fullSourceDirectory} for project ${projectName} not found."

@@ -2,7 +2,8 @@
 
 # Converts SCIP JSON index files (*.scip.json) in INDICES_DIRECTORY to Neo4j import CSVs in IMPORT_DIRECTORY.
 # Supports multiple index files: node symbols are deduplicated; edge reference counts are summed.
-# Writes scip_type_nodes.csv and scip_type_edges.csv to IMPORT_DIRECTORY.
+# Writes scip_type_nodes.csv, scip_type_edges.csv, scip_function_nodes.csv, scip_function_edges.csv,
+# and scip_projects.csv to IMPORT_DIRECTORY.
 # Requires jq.
 #
 # Multi-module projects: types defined only in the symbols section (no definition occurrence) are extracted
@@ -86,6 +87,12 @@ JQ_SHARED_FUNCTIONS='
     # function (e.g. lib/nav.ts/fn().) rather than a class method (com/Foo#m().).
     def is_module_level_function_descriptor(sym):
         descriptor(sym) | test("^[^#]*\\(\\)");
+
+    # True when the descriptor is a pure function definition: ends with "()."
+    # Distinguishes function declarations from their parameters ("().(x)") and
+    # type parameters ("().[T]"), which also match is_module_level_function_descriptor.
+    def is_function_definition_descriptor(sym):
+        descriptor(sym) | test("\\(\\)\\.$");
 
     def normalize_descriptor(symbol):
         descriptor(symbol) | split("#")[0] + "#";
@@ -707,9 +714,143 @@ function extract_relationship_edges() {
 }
 
 # ---------------------------------------------------------------------------
-# Extract SCIP project metadata from one input file (header on first call only)
-# Extracts project_root and tool_info from metadata; creates unique project node per index
+# Pass 4a — Extract internal function nodes from one input file
+# Emits CSV header on first call; subsequent calls must skip the header.
+# CSV format matches scip_type_nodes.csv for compatible Cypher import queries.
+# Only extracts module-level function definitions (kind=17, no "#" before "()").
 # ---------------------------------------------------------------------------
+
+function extract_function_nodes() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+
+        ($index[0].internal_package_ids) as $internal_pkg_ids |
+        (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+            | gsub("/$"; "")
+        ) as $project_root |
+
+        [
+            .documents[] |
+            .relative_path as $file |
+            .symbols[]? |
+
+            select(.symbol != null) |
+            select(.symbol | startswith("local ") | not) |
+            select((.symbol | split(" ") | length) >= 5) |
+
+            .symbol as $symbol |
+
+            select(is_module_level_function_descriptor($symbol)) |
+            select(is_function_definition_descriptor($symbol)) |
+
+            ($symbol | split(" ")) as $tokens |
+            $tokens[1] as $manager    |
+            $tokens[2] as $pkg_id     |
+            $tokens[3] as $version    |
+            $tokens[4] as $descriptor_val |
+
+            select(($internal_pkg_ids | index($pkg_id)) != null) |
+
+            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+            {
+                symbol:          short_symbol($symbol),
+                display_name:    ($descriptor_val | split("/") | last | rtrimstr("().") | gsub("`"; "")),
+                scheme:          scheme($symbol),
+                type_name:       "Function",
+                file:            $file,
+                package_id:      $pkg_id,
+                package_manager: $manager,
+                version:         $version,
+                module:          $module_name,
+                is_abstract:     "false",
+                project_root:    $project_root,
+                descriptor:      $descriptor_val
+            }
+        ] |
+        unique_by(.symbol) |
+        sort_by(.file, .display_name) |
+
+        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root","descriptor"]),
+        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor])
+        | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 4b — Extract function dependency edges from one input file (no header)
+# Attributes role=0 occurrences to their owning function using sorted function
+# definition lines as body range boundaries (enclosing_range is null in practice).
+# Edge types: uses_type (base type ref), calls_function (module-level call),
+#             calls_method (method/field access, target normalized to base type).
+# ---------------------------------------------------------------------------
+
+function extract_function_edges() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+
+        .documents[] |
+        .relative_path as $source_file |
+
+        # Collect module-level function definition occurrences sorted by line.
+        # Used as body range boundaries: function i owns occurrences from its
+        # start line up to (but not including) function i+1 start line.
+        (
+            [.occurrences[] |
+             select((.symbol_roles // 0) % 2 == 1) |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             select(is_module_level_function_descriptor(.symbol)) |
+             select(is_function_definition_descriptor(.symbol)) |
+             {symbol: .symbol, line: .range[0]}
+            ] | sort_by(.line) | unique_by(.symbol)
+        ) as $func_defs |
+
+        select(($func_defs | length) > 0) |
+
+        # For each role=0 occurrence, find the owning function and classify the edge.
+        [.occurrences[] |
+         select((.symbol_roles // 0) % 2 == 0) |
+         select(.symbol | startswith("local ") | not) |
+         select((.symbol | split(" ") | length) >= 5) |
+         .range[0] as $occ_line |
+         .symbol as $occ_symbol |
+
+         # The owning function is the last function defined at or before this line.
+         ([$func_defs[] | select(.line <= $occ_line)] | last) as $owning_func |
+         select($owning_func != null) |
+
+         (descriptor($occ_symbol)) as $tgt_desc |
+         (
+           if ($tgt_desc | endswith("#")) then
+               {edge_type: "uses_type", target: short_symbol($occ_symbol)}
+           elif ($tgt_desc | test("^[^#]*\\(\\)\\.$")) then
+               {edge_type: "calls_function", target: short_symbol($occ_symbol)}
+           elif ($tgt_desc | contains("#")) then
+               {edge_type: "calls_method", target: (normalize_symbol($occ_symbol) | split(" ") | .[2:5] | join(" "))}
+           else null
+           end
+         ) as $edge_info |
+         select($edge_info != null) |
+
+         {from: short_symbol($owning_func.symbol), to: $edge_info.target, edge_type: $edge_info.edge_type}
+        ] |
+
+        group_by([.from, .to, .edge_type]) |
+        .[] |
+        select(.[0].from != .[0].to) |
+        {from: .[0].from, to: .[0].to, edge_type: .[0].edge_type, count: length} |
+        [.from, .to, .edge_type, (.count | tostring)] | @csv
+        ' "${input_file}"
+}
 
 function extract_project_metadata() {
     local input_file="${1}"
@@ -788,6 +929,8 @@ function process_single_index() {
     local nodes_temp="${2}"
     local edges_temp="${3}"
     local emit_header="${4}"  # "true" to include header, "false" to skip
+    local func_nodes_temp="${5}"
+    local func_edges_temp="${6}"
 
     echo "convertScipIndexToCsv: Processing '${input_file}'..."
 
@@ -815,6 +958,13 @@ function process_single_index() {
     extract_depends_on_edges "${symbol_index_file}" "${input_file}" > "${edges_temp}"
     extract_relationship_edges "${symbol_index_file}" "${input_file}" >> "${edges_temp}"
     extract_anonymous_class_edges "${symbol_index_file}" >> "${edges_temp}"
+
+    if [ "${emit_header}" = "true" ]; then
+        extract_function_nodes "${symbol_index_file}" "${input_file}" > "${func_nodes_temp}"
+    else
+        extract_function_nodes "${symbol_index_file}" "${input_file}" | tail -n +2 > "${func_nodes_temp}"
+    fi
+    extract_function_edges "${symbol_index_file}" "${input_file}" > "${func_edges_temp}"
 }
 
 # ---------------------------------------------------------------------------
@@ -826,7 +976,6 @@ function merge_node_csvs() {
     local tmp_dir="${1}"
     local output_file="${2}"
 
-    # Collect node files in sorted order for deterministic output
     local node_files=()
     while IFS= read -r node_file; do
         node_files+=("${node_file}")
@@ -945,6 +1094,96 @@ function merge_project_csvs() {
 }
 
 # ---------------------------------------------------------------------------
+# Merge per-file function node CSVs: deduplicate by symbol (first column).
+# Rows with a non-empty file path take priority over rows with an empty one.
+# ---------------------------------------------------------------------------
+
+function merge_function_node_csvs() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local func_node_files=()
+    while IFS= read -r func_node_file; do
+        func_node_files+=("${func_node_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_func_nodes.tmp" | sort)
+
+    if [ ${#func_node_files[@]} -eq 0 ]; then
+        echo '"symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root","descriptor"' > "${output_file}"
+        return
+    fi
+
+    cat "${func_node_files[@]}" | awk -F',' '
+        NR == 1 { print; next }
+        {
+            symbol = $1
+            gsub(/^"/, "", symbol)
+            gsub(/"$/, "", symbol)
+            file = $5
+            gsub(/^"/, "", file)
+            gsub(/"$/, "", file)
+            if (!seen[symbol]) {
+                seen[symbol] = $0
+                file_seen[symbol] = file
+                order[++n] = symbol
+            } else if (file_seen[symbol] == "" && file != "") {
+                seen[symbol] = $0
+                file_seen[symbol] = file
+            }
+        }
+        END {
+            for (i = 1; i <= n; i++) { print seen[order[i]] }
+        }
+    ' > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Merge per-file function edge CSVs: sum reference_count for
+# (source_symbol, target_symbol, edge_type) triples
+# ---------------------------------------------------------------------------
+
+function merge_function_edge_csvs() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local func_edge_files=()
+    while IFS= read -r func_edge_file; do
+        func_edge_files+=("${func_edge_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_func_edges.tmp" | sort)
+
+    {
+        echo '"source_symbol","target_symbol","edge_type","reference_count"'
+        if [ ${#func_edge_files[@]} -gt 0 ]; then
+            cat "${func_edge_files[@]}" | awk -F',' '
+                {
+                    source    = $1
+                    target    = $2
+                    edge_type = $3
+                    count     = $4
+                    gsub(/"/, "", count)
+                    key = source SUBSEP target SUBSEP edge_type
+                    counts[key] += count
+                    if (!(key in sources)) {
+                        sources[key]    = source
+                        targets[key]    = target
+                        edge_types[key] = edge_type
+                        order[NR]       = key
+                    }
+                }
+                END {
+                    for (i = 1; i <= NR; i++) {
+                        k = order[i]
+                        if (k in sources) {
+                            print sources[k] "," targets[k] "," edge_types[k] "," counts[k]
+                            delete sources[k]
+                        }
+                    }
+                }
+            '
+        fi
+    } > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -965,8 +1204,11 @@ while IFS= read -r index_file; do
     nodes_temp="${tmp_dir}/${file_stem}_nodes.csv"
     edges_temp="${tmp_dir}/${file_stem}_edges.csv"
     projects_temp="${tmp_dir}/${file_stem}_projects.csv"
+    # Use .tmp extension to avoid glob collision with *_nodes.csv and *_edges.csv patterns
+    func_nodes_temp="${tmp_dir}/${file_stem}_func_nodes.tmp"
+    func_edges_temp="${tmp_dir}/${file_stem}_func_edges.tmp"
     
-    process_single_index "${index_file}" "${nodes_temp}" "${edges_temp}" "${first_file}"
+    process_single_index "${index_file}" "${nodes_temp}" "${edges_temp}" "${first_file}" "${func_nodes_temp}" "${func_edges_temp}"
     extract_project_metadata "${index_file}" "${first_file}" >> "${projects_temp}"
     
     first_file=false
@@ -975,6 +1217,8 @@ done < <(find "${INDICES_DIRECTORY}" -maxdepth 1 -name "*.scip.json" -type f | s
 nodes_output="${IMPORT_DIRECTORY}/scip_type_nodes.csv"
 edges_output="${IMPORT_DIRECTORY}/scip_type_edges.csv"
 projects_output="${IMPORT_DIRECTORY}/scip_projects.csv"
+func_nodes_output="${IMPORT_DIRECTORY}/scip_function_nodes.csv"
+func_edges_output="${IMPORT_DIRECTORY}/scip_function_edges.csv"
 
 echo "convertScipIndexToCsv: Merging node CSVs → '${nodes_output}'..."
 merge_node_csvs "${tmp_dir}" "${nodes_output}"
@@ -985,7 +1229,15 @@ merge_edge_csvs "${tmp_dir}" "${edges_output}"
 echo "convertScipIndexToCsv: Merging project metadata CSVs → '${projects_output}'..."
 merge_project_csvs "${tmp_dir}" "${projects_output}"
 
+echo "convertScipIndexToCsv: Merging function node CSVs → '${func_nodes_output}'..."
+merge_function_node_csvs "${tmp_dir}" "${func_nodes_output}"
+
+echo "convertScipIndexToCsv: Merging function edge CSVs → '${func_edges_output}'..."
+merge_function_edge_csvs "${tmp_dir}" "${func_edges_output}"
+
 node_count=$(( $(wc -l < "${nodes_output}") - 1 ))
 edge_count=$(( $(wc -l < "${edges_output}") - 1 ))
 project_count=$(( $(wc -l < "${projects_output}") - 1 ))
-echo "convertScipIndexToCsv: Done. ${node_count} node(s), ${edge_count} edge(s), ${project_count} project(s)."
+func_node_count=$(( $(wc -l < "${func_nodes_output}") - 1 ))
+func_edge_count=$(( $(wc -l < "${func_edges_output}") - 1 ))
+echo "convertScipIndexToCsv: Done. ${node_count} type node(s), ${edge_count} type edge(s), ${project_count} project(s), ${func_node_count} function node(s), ${func_edge_count} function edge(s)."

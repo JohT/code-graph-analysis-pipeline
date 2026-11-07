@@ -219,11 +219,11 @@ if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-ar
     archetypes_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-archetypes" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript"
 fi
 
-# -- SCIP InternalType Archetypes ---------------------------
+# -- SCIP InternalSymbol Archetypes ---------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
-    archetypes_csv_reports "${ALGORITHM_PROJECTION}=scip-type-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetypes_csv_reports "${ALGORITHM_PROJECTION}=scip-symbol-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexInternalSymbol" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
 fi
 
 # -- SCIP Module Archetypes ---------------------------------

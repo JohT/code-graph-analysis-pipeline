@@ -198,7 +198,7 @@ archetypes_treemap_charts_markdown_reference() {
     echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Finished treemap charts markdown reference generation..."
 }
 
-# Visualize SCIP archetype results with treemap charts using SemanticCodeIndexInternalType.file paths.
+# Visualize SCIP archetype results with treemap charts using SemanticCodeIndexInternalSymbol.file paths.
 scip_archetypes_treemap_charts() {
     echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Visualizing SCIP archetypes as treemaps..."
     time "${ARCHETYPES_SCRIPT_DIR}/scipTreemapVisualizations.py" "${@}" "--report_directory" "${FULL_REPORT_DIRECTORY}" ${verboseMode}
@@ -265,11 +265,11 @@ if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-ar
     archetypes_treemap_charts "${ALGORITHM_LANGUAGE}=Typescript"
 fi
 
-# -- SCIP InternalType Archetypes ---------------------------
+# -- SCIP InternalSymbol Archetypes ---------------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
-    archetype_python_reports "${ALGORITHM_PROJECTION}=scip-type-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-archetypes" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-archetypes-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    archetype_python_reports "${ALGORITHM_PROJECTION}=scip-symbol-archetypes" "${ALGORITHM_NODE}=SemanticCodeIndexInternalSymbol" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP"
     scip_archetypes_treemap_charts "${ALGORITHM_LANGUAGE}=SCIP"
 fi
 

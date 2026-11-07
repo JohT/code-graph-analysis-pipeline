@@ -153,16 +153,16 @@ if createDirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTION}
     time similarity "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}"
 fi
 
-# ── SCIP Internal Type Similarity ─────────────────────────────────────────────
-FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Type/similarity"
+# ── SCIP Internal Symbol Similarity ─────────────────────────────────────────────
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Symbol/similarity"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
-SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-similarity"
-SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
-SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_SYMBOL_PROJECTION="dependencies_projection=scip-symbol-similarity"
+SCIP_SYMBOL_NODE="dependencies_projection_node=SemanticCodeIndexInternalSymbol"
+SCIP_SYMBOL_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
-if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    time similarity "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+    time similarity "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"
 fi
 
 # ── SCIP Module Similarity ─────────────────────────────────────────────

@@ -14,7 +14,7 @@ IFS=$'\n\t'
 
 # Function to display script usage
 usage() {
-  echo "Usage: $0 --url https://my.download.url [--filename download-file-name-without-path.ext] (default=url filename) [--sha256-url https://checksum.url]"
+  echo "Usage: $0 --url https://my.download.url [--filename download-file-name-without-path.ext] (default=url filename) [--sha256-url https://checksum.url]" >&2
   exit 1
 }
 
@@ -40,7 +40,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     *)
-      echo "download: Error: Unknown option: ${key}"
+      echo "download: Error: Unknown option: ${key}" >&2
       usage
       ;;
   esac
@@ -62,23 +62,38 @@ if [ ! -d "${SHARED_DOWNLOADS_DIRECTORY}" ] ; then
   mkdir -p "${SHARED_DOWNLOADS_DIRECTORY}"
 fi
 
+fail() {
+    local errorMessage="${1}"
+    local COLOR_ERROR='\033[0;31m' # red
+    local COLOR_DEFAULT='\033[0m'
+    echo -e "${COLOR_ERROR}download: Error: ${errorMessage}${COLOR_DEFAULT}" >&2
+    exit 1
+}
+
+assert_internet_connection() {
+    # Using netcat (nc) with a 2-second timeout
+    if ! nc -z -w 2 1.1.1.1 53 >/dev/null 2>&1; then
+        fail "No internet connection. Downloading Neo4j & Plugins requires an internet connection."
+    fi
+}
+
 # Download the file if it doesn't exist in the shared downloads directory 
 if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" ] ; then
+    assert_internet_connection
+    
     echo "download: Downloading ${filename} from ${downloadUrl} into ${SHARED_DOWNLOADS_DIRECTORY}"
 
     # Check if the URL is valid
     # The check is deferred and not done in the input validation block at the beginning.
     # This is because the check needs a network connection which shouldn't be required when the file had already been downloaded.
     if ! curl --head --fail "${downloadUrl}" >/dev/null 2>&1; then
-      echo "download: Error: Invalid URL: ${downloadUrl}"
-      exit 1
+      fail "Invalid URL: ${downloadUrl}"
     fi
 
     # Download the file
     if ! curl -L --fail-with-body -o "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" "${downloadUrl}"; then
-        echo "download: Error: Failed to download ${filename}"
         rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}"
-        exit 1
+        fail "Failed to download ${filename}"
     fi
 
     # Verify SHA256 checksum if --sha256-url was provided (only on fresh download, not on cache hit)
@@ -92,17 +107,16 @@ if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" ] ; then
             elif command -v sha256sum >/dev/null 2>&1; then
                 actual_sha256=$(sha256sum "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" | awk '{print $1}')
             else
-                echo "download: Warning: SHA256 verification tool (shasum/sha256sum) not found. Skipping."
+                echo "download: Warning: SHA256 verification tool (shasum/sha256sum) not found. Skipping." >&2
                 actual_sha256="${expected_sha256}"
             fi
             if [ "${actual_sha256}" != "${expected_sha256}" ]; then
                 rm -f "${sha256_tmp}" "${SHARED_DOWNLOADS_DIRECTORY}/${filename}"
-                echo "download: Error: SHA256 mismatch for ${filename}. Removing cached file."
-                exit 1
+                fail "SHA256 mismatch for ${filename}. Removing cached file."
             fi
             echo "download: SHA256 verified."
         else
-            echo "download: Warning: Could not download SHA256 checksum. Skipping verification."
+            echo "download: Warning: Could not download SHA256 checksum. Skipping verification." >&2
         fi
         rm -f "${sha256_tmp}"
     fi
@@ -113,13 +127,11 @@ fi
 # Check downloaded file size to be at least 600 bytes or otherwise delete the invalid file
 downloaded_file_size=$(wc -c "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" | awk '{print $1}')
 if [ "${downloaded_file_size}" -le 600 ]; then
-    echo "download: Error: Failed to download ${filename}: Filesize: ${downloaded_file_size} < 600 bytes"
     rm -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}"
-    exit 1
+    fail "Failed to download ${filename}: Filesize: ${downloaded_file_size} < 600 bytes"
 fi
 
 # Fail if download failed
 if [ ! -f "${SHARED_DOWNLOADS_DIRECTORY}/${filename}" ] ; then
-    echo "download: Error: Failed to download ${filename}"
-    exit 1
+    fail "Failed to download ${filename}"
 fi

@@ -1704,6 +1704,192 @@ assert_equals "no occurrence-based edges when module-level functions are present
 echo ""
 
 # ---------------------------------------------------------------------------
+# Fixture: TypeScript file with two module-level functions.
+# functionA() (defined at line 5) calls externalHelper() from another file and
+# uses type MyType. functionB() (defined at line 15) uses MyType too.
+# Tests function node extraction, edge attribution to the correct function via
+# sorted line ranges, and absence of parameter/type-parameter nodes.
+# ---------------------------------------------------------------------------
+
+function create_function_extraction_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "lib/logic.ts",
+      "occurrences": [
+        {
+          "range": [5, 9, 18],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/functionA().",
+          "symbol_roles": 1
+        },
+        {
+          "range": [6, 13, 18],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/functionA().(input)",
+          "symbol_roles": 1
+        },
+        {
+          "range": [7, 2, 14],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyType#",
+          "symbol_roles": 0
+        },
+        {
+          "range": [8, 2, 20],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`helpers.ts`/externalHelper().",
+          "symbol_roles": 0
+        },
+        {
+          "range": [15, 9, 19],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/functionB().",
+          "symbol_roles": 1
+        },
+        {
+          "range": [16, 2, 14],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyType#",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/functionA().",
+          "kind": 17
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/functionB().",
+          "kind": 17
+        }
+      ]
+    },
+    {
+      "relative_path": "lib/types.ts",
+      "occurrences": [
+        {
+          "range": [1, 7, 13],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyType#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyType#",
+          "kind": 21
+        }
+      ]
+    },
+    {
+      "relative_path": "lib/helpers.ts",
+      "occurrences": [
+        {
+          "range": [1, 9, 23],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`helpers.ts`/externalHelper().",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`helpers.ts`/externalHelper().",
+          "kind": 17
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Test: function node extraction
+# ---------------------------------------------------------------------------
+
+echo "Test: function nodes extracted from module-level function symbols"
+func_indices_dir="${tmp_test_dir}/func_indices"
+func_import_dir="${tmp_test_dir}/func_import"
+mkdir -p "${func_indices_dir}"
+create_function_extraction_scip_json > "${func_indices_dir}/func_test.scip.json"
+
+run_script_with_env "${func_indices_dir}" "${func_import_dir}"
+assert_exit_code "exits 0 for function extraction fixture" "0" "${exit_code}"
+
+func_nodes=$(cat "${func_import_dir}/scip_function_nodes.csv")
+func_edges=$(cat "${func_import_dir}/scip_function_edges.csv")
+
+assert_contains "function node CSV has header" \
+    '"symbol","display_name"' "${func_nodes}"
+assert_contains "functionA node extracted" \
+    'functionA' "${func_nodes}"
+assert_contains "functionB node extracted" \
+    'functionB' "${func_nodes}"
+assert_contains "externalHelper node extracted" \
+    'externalHelper' "${func_nodes}"
+assert_not_contains "parameter (input) is not a function node" \
+    'functionA().(input)' "${func_nodes}"
+assert_contains "functionA has type_name Function" \
+    '"Function"' "${func_nodes}"
+assert_contains "functionA has correct file path" \
+    'lib/logic.ts' "${func_nodes}"
+
+func_node_count=$(tail -n +2 "${func_import_dir}/scip_function_nodes.csv" | wc -l | tr -d ' ')
+assert_equals "three function nodes extracted (functionA, functionB, externalHelper)" \
+    "3" "${func_node_count}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: function edge extraction and attribution via sorted line ranges
+# ---------------------------------------------------------------------------
+
+echo "Test: function edges attributed to owning function via sorted line ranges"
+assert_contains "function edge CSV has header" \
+    '"source_symbol","target_symbol","edge_type","reference_count"' "${func_edges}"
+
+# functionA (line 5) should own occurrences at lines 7 and 8
+assert_contains "functionA uses_type MyType" \
+    'functionA().' "${func_edges}"
+assert_contains "functionA calls_function externalHelper" \
+    'externalHelper().' "${func_edges}"
+
+# functionB should not call functionA (it's at a later line)
+func_b_edges=$(echo "${func_edges}" | grep 'functionB()\.' || true)
+assert_not_contains "functionB does not call functionA" \
+    'functionA().' "${func_b_edges}"
+
+# functionB (line 15) should own the occurrence at line 16
+func_b_edges=$(echo "${func_edges}" | grep 'functionB')
+assert_contains "functionB has at least one edge" \
+    'functionB' "${func_edges}"
+
+# MyType should appear as uses_type edge
+assert_contains "MyType referenced as uses_type" \
+    '"uses_type"' "${func_edges}"
+
+# externalHelper should appear as calls_function edge
+assert_contains "externalHelper referenced as calls_function" \
+    '"calls_function"' "${func_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: function CSV files produced even when no functions present
+# ---------------------------------------------------------------------------
+
+echo "Test: function CSV files produced for Java-style file with no module-level functions"
+run_script_with_env "${tmp_test_dir}/indices_java" "${tmp_test_dir}/java_func_import" || true
+# Use the minimal Java SCIP created earlier in the test
+java_indices_dir="${tmp_test_dir}/java_func_indices"
+java_func_import_dir="${tmp_test_dir}/java_func_import_dir"
+mkdir -p "${java_indices_dir}"
+create_minimal_java_scip_json > "${java_indices_dir}/java.scip.json"
+run_script_with_env "${java_indices_dir}" "${java_func_import_dir}"
+assert_exit_code "exits 0 for Java fixture (no functions)" "0" "${exit_code}"
+assert_file_exists "scip_function_nodes.csv produced" "${java_func_import_dir}/scip_function_nodes.csv"
+assert_file_exists "scip_function_edges.csv produced" "${java_func_import_dir}/scip_function_edges.csv"
+java_func_count=$(tail -n +2 "${java_func_import_dir}/scip_function_nodes.csv" | wc -l | tr -d ' ')
+assert_equals "zero function nodes for Java-only file" \
+    "0" "${java_func_count}"
+java_func_edge_count=$(tail -n +2 "${java_func_import_dir}/scip_function_edges.csv" | wc -l | tr -d ' ')
+assert_equals "zero function edges for Java-only file" \
+    "0" "${java_func_edge_count}"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 

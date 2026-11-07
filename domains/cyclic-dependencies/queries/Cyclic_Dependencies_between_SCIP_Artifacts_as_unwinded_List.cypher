@@ -1,7 +1,7 @@
-// Cyclic Dependencies between SCIP Semantic Index Artifacts as unwinded List.
+// Cyclic Dependencies between SCIP Semantic Index Artifacts as unwinded List. Includes both types and functions via SemanticCodeIndexInternalSymbol.
 
-MATCH (module:SemanticCodeIndexModule)-[:CONTAINS]->(forwardSource:SemanticCodeIndexInternalType)-[:DEPENDS_ON]->(forwardTarget:SemanticCodeIndexInternalType)<-[:CONTAINS]-(dependentModule:SemanticCodeIndexModule)
-MATCH (dependentModule)-[:CONTAINS]->(backwardSource:SemanticCodeIndexInternalType)-[:DEPENDS_ON]->(backwardTarget:SemanticCodeIndexInternalType)<-[:CONTAINS]-(module)
+MATCH (module:SemanticCodeIndexModule)-[:CONTAINS]->(forwardSource:SemanticCodeIndexInternalSymbol)-[:DEPENDS_ON]->(forwardTarget:SemanticCodeIndexInternalSymbol)<-[:CONTAINS]-(dependentModule:SemanticCodeIndexModule)
+MATCH (dependentModule)-[:CONTAINS]->(backwardSource:SemanticCodeIndexInternalSymbol)-[:DEPENDS_ON]->(backwardTarget:SemanticCodeIndexInternalSymbol)<-[:CONTAINS]-(module)
 MATCH (artifact:SemanticCodeIndexArtifact)-[:CONTAINS]->(module)
 MATCH (dependentArtifact:SemanticCodeIndexArtifact)-[:CONTAINS]->(dependentModule)
 WHERE artifact <> dependentArtifact

@@ -1,18 +1,18 @@
-// Set outgoing SCIP module dependencies aggregated from type-level DEPENDS_ON relationships.
-// outgoingDependencies = COUNT of type-level edges from types in this module.
+// Set outgoing SCIP module dependencies aggregated from symbol-level DEPENDS_ON relationships.
+// outgoingDependencies = COUNT of symbol-level edges from symbols (types and functions) in this module.
 // outgoingDependenciesWeight = SUM of referenceCount (magnitude of those edges).
-// outgoingDependentModules = COUNT DISTINCT of modules that contain types depended on by this module's types.
+// outgoingDependentModules = COUNT DISTINCT of modules that contain symbols depended on by this module's symbols.
 // outgoingDependentArtifacts = COUNT DISTINCT of artifacts that contain those dependent modules.
 
    MATCH (m:SemanticCodeIndexModule)
-OPTIONAL MATCH (m)-[:CONTAINS]->(it:SemanticCodeIndexInternalType)-[typeDependency:DEPENDS_ON]->(et)<-[:CONTAINS]-(targetModule:SemanticCodeIndexModule)<-[:CONTAINS]-(targetArtifact:SemanticCodeIndexArtifact)
+OPTIONAL MATCH (m)-[:CONTAINS]->(it:SemanticCodeIndexInternalSymbol)-[symbolDependency:DEPENDS_ON]->(et)<-[:CONTAINS]-(targetModule:SemanticCodeIndexModule)<-[:CONTAINS]-(targetArtifact:SemanticCodeIndexArtifact)
    WHERE m <> targetModule
     WITH m
-        ,count(typeDependency)              AS outgoingDependencies
-        ,sum(typeDependency.referenceCount) AS outgoingDependenciesWeight
-        ,count(DISTINCT et)                 AS distinctTargetTypes
-        ,count(DISTINCT targetModule)       AS distinctTargetModules
-        ,count(DISTINCT targetArtifact)     AS distinctTargetArtifacts
+        ,count(symbolDependency)              AS outgoingDependencies
+        ,sum(symbolDependency.referenceCount) AS outgoingDependenciesWeight
+        ,count(DISTINCT et)                   AS distinctTargetSymbols
+        ,count(DISTINCT targetModule)         AS distinctTargetModules
+        ,count(DISTINCT targetArtifact)       AS distinctTargetArtifacts
      SET m.outgoingDependencies        = outgoingDependencies
         ,m.outgoingDependenciesWeight  = outgoingDependenciesWeight
         ,m.outgoingDependentModules    = distinctTargetModules
@@ -20,6 +20,6 @@ OPTIONAL MATCH (m)-[:CONTAINS]->(it:SemanticCodeIndexInternalType)-[typeDependen
   RETURN m.fqn AS module
         ,outgoingDependencies
         ,outgoingDependenciesWeight
-        ,distinctTargetTypes
+        ,distinctTargetSymbols
         ,distinctTargetModules
         ,distinctTargetArtifacts
