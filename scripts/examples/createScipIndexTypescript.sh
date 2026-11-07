@@ -108,7 +108,7 @@ function check_scip_cli() {
 function generate_scip_index() {
     echo "${SCRIPT_NAME}: Running scip-typescript to generate index.scip..."
     cd "${PROJECT_DIR}"
-    if ! npx --yes @sourcegraph/scip-typescript@v0.4.0 index --infer-tsconfig "${@}"; then
+    if ! npx --yes @sourcegraph/scip-typescript@v0.4.0 index "${@}"; then
         echo "${SCRIPT_NAME}: Error: scip-typescript indexing failed." >&2
         exit 1
     fi
