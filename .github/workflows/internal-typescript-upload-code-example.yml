@@ -85,7 +85,6 @@ jobs:
       run: |
         mkdir -p ${{ steps.set-analysis-name.outputs.analysis-name }}
         cd ${{ steps.set-analysis-name.outputs.analysis-name }}
-        echo "Working directory: $( pwd -P )"
         ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_6_VERSION }}
 
     - name: (Prepare Code to Analyze) Setup pnpm for react-router

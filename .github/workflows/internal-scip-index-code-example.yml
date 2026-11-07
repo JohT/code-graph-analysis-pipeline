@@ -1,4 +1,4 @@
-name: SCIP Index Code Example for Graph Analysis - Smoke Test (main use case)
+name: SCIP Index Typescript Code Example - Smoke Test (main use case)
 
 on:
   push:
@@ -84,15 +84,14 @@ jobs:
           key:
             ${{ runner.os }}-${{ hashFiles('**/*.sh') }}
 
-      - name: Download react-router ${{ env.REACT_ROUTER_VERSION }} with git history
-        # Use --depth 200 for enough history to compute meaningful CHANGED_TOGETHER_WITH coupling stats.
-        # Clone directly here instead of using downloadReactRouter.sh because the downloader script
-        # does not support shallow clones (--depth) and we need git history for the CSV git log import.
+      - name: Download react-router ${{ env.REACT_ROUTER_VERSION }} with shallow (200) git history
+        working-directory: temp
+        # Use shallow clone depth 200 for enough history to compute meaningful CHANGED_TOGETHER_WITH coupling stats,
+        # while still keeping the clone relatively lightweight and the analysis efficient.
         run: |
-          mkdir -p ${{ env.SOURCE_PATH }}
-          git clone --depth 200 --branch "react-router@${{ env.REACT_ROUTER_VERSION }}" \
-            https://github.com/remix-run/react-router.git \
-            "${{ env.SOURCE_PATH }}"
+          mkdir -p ${{ steps.set-analysis-name.outputs.analysis-name }}
+          cd ${{ steps.set-analysis-name.outputs.analysis-name }}
+          ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }} 200
 
       - name: (Prepare SCIP + Git) Detect node version file .nvmrc in react-router
         working-directory: ${{ env.SOURCE_PATH }}
