@@ -8,11 +8,13 @@
   "ignoreUnstable": false,
   "packageRules": [
     {
-      "description": "Neo4j and APOC update settings",
-      "groupName": "Neo4j and APOC to {{newVersion}}",
+      "description": "Neo4j, APOC, and Graph Data Science updates grouped together",
+      "groupName": "Neo4j ecosystem {{newMajor}}.{{newMinor}}",
       "matchPackageNames": [
         "neo4j/neo4j",
-        "neo4j/apoc"
+        "neo4j/apoc",
+        "neo4j/graph-data-science",
+        "JohT/open-graph-data-science-packaging"
       ],
       "matchDatasources": [
         "github-tags",
@@ -20,6 +22,7 @@
       ],
       "versioning": "loose",
       "minimumReleaseAge": "5 days",
+      "separateMultipleMinor": false,
       "commitMessageExtra": ""
     },
     {
