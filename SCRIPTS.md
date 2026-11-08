@@ -23,6 +23,7 @@ Script | Directory | Description
 [cyclicDependenciesMarkdown.sh](./domains/cyclic-dependencies/cyclicDependenciesMarkdown.sh) | cyclic-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [cyclicDependenciesVisualization.sh](./domains/cyclic-dependencies/cyclicDependenciesVisualization.sh) | cyclic-dependencies | Generates GraphViz SVG graph visualizations for the top cyclic dependency cycle groups.
 [cyclicDependenciesSummary.sh](./domains/cyclic-dependencies/summary/cyclicDependenciesSummary.sh) | summary | Creates a Markdown report summarising all cyclic dependency analysis results for Java packages, Java artifacts, TypeScript modules, and SCIP Semantic Index modules and artifacts.
+[testCyclicDependenciesVisualization.sh](./domains/cyclic-dependencies/testCyclicDependenciesVisualization.sh) | cyclic-dependencies | Tests cyclicDependenciesVisualization.sh generate_dot_body function:
 [externalDependenciesCsv.sh](./domains/external-dependencies/externalDependenciesCsv.sh) | external-dependencies | Executes Cypher queries to generate external dependency CSV reports.
 [externalDependenciesMarkdown.sh](./domains/external-dependencies/externalDependenciesMarkdown.sh) | external-dependencies | This script is dynamically triggered by "MarkdownReports.sh" when report "All" or "Markdown" are enabled.
 [externalDependenciesPython.sh](./domains/external-dependencies/externalDependenciesPython.sh) | external-dependencies | Generates external dependency charts as SVG files using Python.
@@ -79,7 +80,7 @@ Script | Directory | Description
 [installScipCli.sh](./domains/scip-index-import/examples/installScipCli.sh) | examples | Downloads the scip CLI binary to BIN_DIR (default: TOOLS_DIRECTORY/scip-cli within analysis workspace).
 [installScipJava.sh](./domains/scip-index-import/examples/installScipJava.sh) | examples | Installs the scip-java CLI binary to BIN_DIR (default: ./tools/scip-java within analysis workspace).
 [testInstallScipJava.sh](./domains/scip-index-import/examples/testInstallScipJava.sh) | examples | Unit tests for installScipJava.sh.
-[importScipIndexData.sh](./domains/scip-index-import/importScipIndexData.sh) | scip-index-import | Imports SCIP type-graph CSV data into Neo4j and enriches it for projection compatibility.
+[importScipIndexData.sh](./domains/scip-index-import/importScipIndexData.sh) | scip-index-import | Imports SCIP type-graph and function-graph CSV data into Neo4j and enriches it for projection compatibility.
 [importScipIndexDataWithAdminImport.sh](./domains/scip-index-import/importScipIndexDataWithAdminImport.sh) | scip-index-import | Pre-start bulk SCIP import via "neo4j-admin database import full" before Neo4j starts.
 [testConvertScipIndexToCsvForNeo4jAdminImport.sh](./domains/scip-index-import/testConvertScipIndexToCsvForNeo4jAdminImport.sh) | scip-index-import | Tests convertScipIndexToCsvForNeo4jAdminImport.sh: validation, CSV columns, multi-file merge, admin-specific fields, anonymous inner classes.
 [testConvertScipIndexToCsvForNeo4jImport.sh](./domains/scip-index-import/testConvertScipIndexToCsvForNeo4jImport.sh) | scip-index-import | Tests convertScipIndexToCsvForNeo4jImport.sh: validation, CSV columns, multi-file merge, anonymous inner classes.
