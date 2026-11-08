@@ -26,6 +26,13 @@
       "commitMessageExtra": ""
     },
     {
+      "description": "Group all GitHub Actions updates",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "GitHub Actions"
+    },
+    {
       "description": "jQAssistant Typescript Plugin",
       "groupName": "jQAssistant TypeScript Plugin",
       "matchSourceUrls": [
