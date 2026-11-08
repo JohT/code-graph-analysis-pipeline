@@ -125,7 +125,8 @@
       "fileMatch": [
         "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
-        "^scripts/[^/]*\\.sh$"
+        "^scripts/[^/]*\\.sh$",
+        "^domains/neo4j-management/[^/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -139,7 +140,8 @@
       "fileMatch": [
         "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
-        "^scripts/[^/]*\\.sh$"
+        "^scripts/[^/]*\\.sh$",
+        "^domains/neo4j-management/[^/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_APOC_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -153,7 +155,8 @@
       "fileMatch": [
         "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
-        "^scripts/[^/]*\\.sh$"
+        "^scripts/[^/]*\\.sh$",
+        "^domains/neo4j-management/[^/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
@@ -167,7 +170,8 @@
       "fileMatch": [
         "^scripts/profiles/Neo4j-latest.*\\.sh$",
         "^scripts/profiles/Default\\.sh$",
-        "^scripts/[^/]*\\.sh$"
+        "^scripts/[^/]*\\.sh$",
+        "^domains/neo4j-management/[^/]*\\.sh$"
       ],
       "matchStrings": [
         "NEO4J_OPEN_GDS_PLUGIN_VERSION:-\\\"?(?<currentValue>.*?)\\\""
