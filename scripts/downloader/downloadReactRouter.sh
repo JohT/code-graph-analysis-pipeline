@@ -12,12 +12,14 @@
 set -o errexit -o errtrace -o pipefail
 
 # Read the first input argument containing the version(s) of the artifact(s)
-if [ "$#" -ne 1 ]; then
-  echo "downloadAntDesign: Error: Usage: $0 <version>" >&2
+if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]; then
+  echo "downloadReactRouter: Error: Usage: $0 <version> [<shallow-clone-depth>]" >&2
   exit 1
 fi
-projectVersion="${1}"
-echo "downloadAntDesign: projectVersion=${projectVersion}"
+
+projectVersion="${1:-}"
+projectShallowCloneDepth="${2:-}"
+echo "downloadReactRouter: projectVersion=<${projectVersion}>, projectShallowCloneDepth=<${projectShallowCloneDepth}>"
 
 ## Get the directory of this script if not already set
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution. 
@@ -29,4 +31,5 @@ echo "downloadReactRouter: DOWNLOADER_SCRIPTS_DIR=${DOWNLOADER_SCRIPTS_DIR}"
 source "${DOWNLOADER_SCRIPTS_DIR}/downloadTypescriptProject.sh" \
   --url https://github.com/remix-run/react-router.git \
   --version "${projectVersion}" \
-  --tag "react-router@${projectVersion}"
+  --tag "react-router@${projectVersion}" \
+  --depth "${projectShallowCloneDepth}"

@@ -57,10 +57,12 @@ For TypeScript projects, the following must be completed by [cypher/Typescript_E
 
 For SCIP-based analysis, the following node types must exist in the graph:
 
-- `SemanticCodeIndexInternalType`:  internal types with `DEPENDS_ON` edges to external types
-- `SemanticCodeIndexExternalType`:  external types with a non-empty `module` property
-- `SemanticCodeIndexModule`:  internal modules containing internal types via `CONTAINS`
-- `SemanticCodeIndexArtifact`:  artifacts with `isExternal` property set; internal artifacts have `isExternal: false`
+- `SemanticCodeIndexInternalType`: internal types with `DEPENDS_ON` edges to external types
+- `SemanticCodeIndexFunction`: internal functions with `DEPENDS_ON` edges to external types
+- `SemanticCodeIndexInternalSymbol`: unified label on both internal types and functions
+- `SemanticCodeIndexExternalType`: external types with a non-empty `module` property
+- `SemanticCodeIndexModule`: internal modules containing internal types and functions via `CONTAINS`
+- `SemanticCodeIndexArtifact`: artifacts with `isExternal` property set; internal artifacts have `isExternal: false`
 
 These are created by the [scip-index-import](../scip-index-import/) domain. SCIP queries are skipped gracefully when no SCIP data is present: empty CSV files are removed by the cleanup step, and empty Markdown includes fall back to `empty.md`.
 
@@ -84,7 +86,7 @@ Python-generated charts from [externalDependencyCharts.py](./externalDependencyC
 
 - **Java**: pie charts for most-used and most-spread packages (by types and by packages, with drill-down into "others"), stacked bar charts for per-artifact breakdown, scatter plots for aggregated usage patterns
 - **TypeScript**: pie charts for modules and namespaces (usage and spread, with drill-down)
-- **SCIP**: pie charts for most-used and most-spread external artifacts (by types and by modules), stacked bar chart for per-artifact breakdown, scatter plot for aggregated usage patterns
+- **SCIP**: pie charts for most-used and most-spread external artifacts (by internal symbols and by modules), stacked bar chart for per-artifact breakdown, scatter plot for aggregated usage patterns
 
 ### Markdown summary (`reports/external-dependencies/external_dependencies_report.md`)
 

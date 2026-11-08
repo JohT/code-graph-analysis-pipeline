@@ -574,22 +574,22 @@ if createUndirectedDependencyProjection "${MODULE_LANGUAGE}" "${MODULE_PROJECTIO
     listCommunityDetectionResults "${MODULE_PROJECTION}" "${MODULE_NODE}" "${MODULE_WEIGHT}" "${MODULE_GAMMA}" "${MODULE_KCUT}"
 fi
 
-# ── SCIP Internal Type Community Detection ────────────────────────────────────
-FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Type/communities"
+# ── SCIP Internal Symbol Community Detection ────────────────────────────────────
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Symbol/communities"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
-SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-community"
-SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
-SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
-SCIP_TYPE_GAMMA="dependencies_leiden_gamma=5.00"
-SCIP_TYPE_KCUT="dependencies_maxkcut=100"
+SCIP_SYMBOL_PROJECTION="dependencies_projection=scip-symbol-community"
+SCIP_SYMBOL_NODE="dependencies_projection_node=SemanticCodeIndexInternalSymbol"
+SCIP_SYMBOL_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_SYMBOL_GAMMA="dependencies_leiden_gamma=5.00"
+SCIP_SYMBOL_KCUT="dependencies_maxkcut=100"
 
-if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    detectCommunities "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}" "${SCIP_TYPE_GAMMA}" "${SCIP_TYPE_KCUT}"
-    if createDirectedDependencyProjection "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-        detectDirectedCommunities "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+    detectCommunities "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}" "${SCIP_SYMBOL_GAMMA}" "${SCIP_SYMBOL_KCUT}"
+    if createDirectedDependencyProjection "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+        detectDirectedCommunities "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"
     fi
-    listCommunityDetectionResults "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}" "${SCIP_TYPE_GAMMA}" "${SCIP_TYPE_KCUT}"
+    listCommunityDetectionResults "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}" "${SCIP_SYMBOL_GAMMA}" "${SCIP_SYMBOL_KCUT}"
 fi
 
 # ── SCIP Module Community Detection ──────────────────────────────────────────────────

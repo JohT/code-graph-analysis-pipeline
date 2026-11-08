@@ -50,8 +50,8 @@ This domain requires the following to be in place before running. These are prov
 For SCIP Semantic Index analysis, additionally:
 
 - SCIP index imported via the [`scip-index-import`](../scip-index-import/README.md) domain
-- `SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`, and `SemanticCodeIndexInternalType` nodes present
-- `DEPENDS_ON` relationships between `SemanticCodeIndexInternalType` nodes
+- `SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`, `SemanticCodeIndexInternalType`, and `SemanticCodeIndexFunction` nodes present
+- `DEPENDS_ON` relationships between `SemanticCodeIndexInternalSymbol` nodes (types and functions)
 
 ## Execution Order
 

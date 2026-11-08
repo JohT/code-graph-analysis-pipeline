@@ -185,8 +185,8 @@ execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usag
 execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_module_aggregated_for_Scip.cypher" \
     > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_module_aggregated_for_Scip.csv"
 
-execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_type_for_Scip.cypher" \
-    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_type_for_Scip.csv"
+execute_cypher "${EXTERNAL_DEPENDENCIES_QUERY_CYPHER_DIR}/External_artifact_usage_per_internal_symbol_for_Scip.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/External_artifact_usage_per_internal_symbol_for_Scip.csv"
 
 # --------------------------------------------------------------------------
 

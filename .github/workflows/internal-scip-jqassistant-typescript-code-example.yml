@@ -1,4 +1,4 @@
-name: SCIP Index + jQAssistant TypeScript Code Example - Smoke Test
+name: SCIP Index + jQAssistant TypeScript Code Example - Smoke Test (edge use case)
 
 on:
   push:
@@ -86,10 +86,12 @@ jobs:
 
       - name: Download react-router ${{ env.REACT_ROUTER_VERSION }}
         working-directory: temp
+        # Use shallow clone depth 200 for enough history to compute meaningful CHANGED_TOGETHER_WITH coupling stats,
+        # while still keeping the clone relatively lightweight and the analysis efficient.
         run: |
           mkdir -p ${{ steps.set-analysis-name.outputs.analysis-name }}
           cd ${{ steps.set-analysis-name.outputs.analysis-name }}
-          ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }}
+          ./../../scripts/downloader/downloadReactRouter.sh ${{ env.REACT_ROUTER_VERSION }} 200
 
       - name: (Prepare SCIP Index) Detect node version file .nvmrc in react-router
         working-directory: ${{ env.SOURCE_PATH }}

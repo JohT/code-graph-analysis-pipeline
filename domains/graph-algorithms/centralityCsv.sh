@@ -466,22 +466,22 @@ if createUndirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_PROJECTION_UNDI
     runUndirectedCentralityAlgorithms "${NPM_PROJECTION_UNDIRECTED}" "${NPM_NODE}"
 fi
 
-# ── SCIP Internal Type Centrality ─────────────────────────────────────────────
+# ── SCIP Internal Symbol Centrality ─────────────────────────────────────────────
 
-FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Type/centrality"
+FULL_REPORT_DIRECTORY="${REPORTS_DIRECTORY}/${REPORT_PARENT}/SCIP_Semantic_Index_Symbol/centrality"
 mkdir -p "${FULL_REPORT_DIRECTORY}"
 
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
-SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-centrality"
-SCIP_TYPE_PROJECTION_UNDIRECTED="dependencies_projection=scip-type-centrality-undirected"
-SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
-SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_SYMBOL_PROJECTION="dependencies_projection=scip-symbol-centrality"
+SCIP_SYMBOL_PROJECTION_UNDIRECTED="dependencies_projection=scip-symbol-centrality-undirected"
+SCIP_SYMBOL_NODE="dependencies_projection_node=SemanticCodeIndexInternalSymbol"
+SCIP_SYMBOL_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
-if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    runCentralityAlgorithms "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+    runCentralityAlgorithms "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"
 fi
-if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION_UNDIRECTED}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    runUndirectedCentralityAlgorithms "${SCIP_TYPE_PROJECTION_UNDIRECTED}" "${SCIP_TYPE_NODE}"
+if createUndirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_SYMBOL_PROJECTION_UNDIRECTED}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+    runUndirectedCentralityAlgorithms "${SCIP_SYMBOL_PROJECTION_UNDIRECTED}" "${SCIP_SYMBOL_NODE}"
 fi
 
 # ── SCIP Module Centrality ─────────────────────────────────────────────────────

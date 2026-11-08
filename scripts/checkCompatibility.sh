@@ -153,6 +153,12 @@ if isFailed "${icon}"; then
     exit 1
 fi
 
+# Check optional common dependencies
+icon=$(oneOf "nc")
+echo ""
+echo "${icon} Optional common dependencies:"
+checkOptionalCommand "nc" "Netcat (https://nc110.sourceforge.io/) for checking network connectivity"
+
 # Check dependencies for Typescript project analysis:
 icon=$(allOf "npx" "npm")
 echo ""

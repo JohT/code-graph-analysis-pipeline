@@ -382,6 +382,7 @@ jobs:
           path: |
             ./temp/**/runtime/*
             ./temp/**/reports/*
+            ./temp/**/import/*
 
       # Upload Database Export
       # Only possible after an export with "./../../scripts/analysis/analyze.sh --report DatabaseCsvExport"

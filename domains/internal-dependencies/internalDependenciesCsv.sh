@@ -362,18 +362,18 @@ if createDirectedDependencyProjection "${NPM_LANGUAGE}" "${NPM_DEV_PROJECTION}" 
     time runLongestPathOnStronglyConnectedComponents "${NPM_DEV_PROJECTION}" "${NPM_DEV_NODE}" "${NPM_DEV_WEIGHT}"
 fi
 
-# -- SCIP Internal Type Topological Sort ----------------------------------
+# -- SCIP Internal Symbol Topological Sort ----------------------------------
 
-CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Type"
+CURRENT_LEVEL_DIR="${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Symbol"
 mkdir -p "${CURRENT_LEVEL_DIR}"
 SCIP_LANGUAGE="dependencies_projection_language=SCIP_Semantic_Index"
-SCIP_TYPE_PROJECTION="dependencies_projection=scip-type-topology"
-SCIP_TYPE_NODE="dependencies_projection_node=SemanticCodeIndexInternalType"
-SCIP_TYPE_WEIGHT="dependencies_projection_weight_property=referenceCount"
+SCIP_SYMBOL_PROJECTION="dependencies_projection=scip-symbol-topology"
+SCIP_SYMBOL_NODE="dependencies_projection_node=SemanticCodeIndexInternalSymbol"
+SCIP_SYMBOL_WEIGHT="dependencies_projection_weight_property=referenceCount"
 
-if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"; then
-    time runTopologicalSortOnStronglyConnectedComponents "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
-    time runLongestPathOnStronglyConnectedComponents "${SCIP_TYPE_PROJECTION}" "${SCIP_TYPE_NODE}" "${SCIP_TYPE_WEIGHT}"
+if createDirectedDependencyProjection "${SCIP_LANGUAGE}" "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"; then
+    time runTopologicalSortOnStronglyConnectedComponents "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"
+    time runLongestPathOnStronglyConnectedComponents "${SCIP_SYMBOL_PROJECTION}" "${SCIP_SYMBOL_NODE}" "${SCIP_SYMBOL_WEIGHT}"
 fi
 
 # -- SCIP Module Topological Sort + Longest Path ---------------------------
@@ -504,7 +504,7 @@ source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/NPM_DevPackage"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
-source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Type"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Symbol"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}"
 
 echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

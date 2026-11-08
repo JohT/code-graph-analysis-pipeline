@@ -417,16 +417,16 @@ def get_coloring_pairs() -> List[Tuple[Tuple[int, int, int], Tuple[int, int, int
 # ----------------------------------------
 
 def query_data() -> pd.DataFrame:
-    """Query SemanticCodeIndexInternalType nodes with archetype ranks, using the file property for treemap layout."""
+    """Query  SemanticCodeIndexInternalSymbol (SemanticCodeIndexInternalType & SemanticCodeIndexFunction) nodes with archetype ranks, using the file property for treemap layout."""
     query: LiteralString = """
-        MATCH (stats:SemanticCodeIndexInternalType)
+        MATCH (stats:SemanticCodeIndexInternalSymbol)
         WHERE stats.archetypeAuthorityRank  IS NOT NULL
            OR stats.archetypeBottleneckRank IS NOT NULL
            OR stats.archetypeHubRank        IS NOT NULL
          WITH max(stats.archetypeAuthorityRank)  AS maxAuthorityRank
              ,max(stats.archetypeBottleneckRank) AS maxBottleneckRank
              ,max(stats.archetypeHubRank)        AS maxHubRank
-        MATCH (n:SemanticCodeIndexInternalType)
+        MATCH (n:SemanticCodeIndexInternalSymbol)
         WHERE n.archetypeAuthorityRank  IS NOT NULL
            OR n.archetypeBottleneckRank IS NOT NULL
            OR n.archetypeHubRank        IS NOT NULL

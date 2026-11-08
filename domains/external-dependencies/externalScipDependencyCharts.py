@@ -459,9 +459,9 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     if not overall_data.empty:
         save_pie_chart_pair(
             source_data=overall_data,
-            value_column="numberOfInternalCallerTypes",
+            value_column="numberOfInternalCallerSymbols",
             name_column="externalArtifactName",
-            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_by_types",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_by_symbols",
             primary_threshold_percent=0.7,
             report_directory=report_directory,
             verbose=verbose,
@@ -480,9 +480,9 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     if not spread_data.empty:
         save_pie_chart_pair(
             source_data=spread_data,
-            value_column="sumNumberOfTypes",
+            value_column="sumNumberOfSymbols",
             name_column="externalArtifactName",
-            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_by_types",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_by_symbols",
             primary_threshold_percent=0.5,
             report_directory=report_directory,
             verbose=verbose,
@@ -501,9 +501,9 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     if not overall_excluding_tests_data.empty:
         save_pie_chart_pair(
             source_data=overall_excluding_tests_data,
-            value_column="numberOfInternalCallerTypes",
+            value_column="numberOfInternalCallerSymbols",
             name_column="externalArtifactName",
-            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_excluding_tests_by_types",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_excluding_tests_by_symbols",
             primary_threshold_percent=0.7,
             report_directory=report_directory,
             verbose=verbose,
@@ -522,9 +522,9 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     if not spread_excluding_tests_data.empty:
         save_pie_chart_pair(
             source_data=spread_excluding_tests_data,
-            value_column="sumNumberOfTypes",
+            value_column="sumNumberOfSymbols",
             name_column="externalArtifactName",
-            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_excluding_tests_by_types",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_excluding_tests_by_symbols",
             primary_threshold_percent=0.5,
             report_directory=report_directory,
             verbose=verbose,
@@ -543,9 +543,9 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     if not overall_normalized_data.empty:
         save_pie_chart_pair(
             source_data=overall_normalized_data,
-            value_column="numberOfInternalCallerTypes",
+            value_column="numberOfInternalCallerSymbols",
             name_column="externalArtifactName",
-            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_normalized_by_types",
+            chart_name_prefix=f"{CHART_PREFIX}Top_external_artifacts_normalized_by_symbols",
             primary_threshold_percent=0.7,
             report_directory=report_directory,
             verbose=verbose,
@@ -564,9 +564,9 @@ def generate_scip_charts(queries_directory: str, report_directory: str, verbose:
     if not spread_normalized_data.empty:
         save_pie_chart_pair(
             source_data=spread_normalized_data,
-            value_column="sumNumberOfTypes",
+            value_column="sumNumberOfSymbols",
             name_column="externalArtifactName",
-            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_normalized_by_types",
+            chart_name_prefix=f"{CHART_PREFIX}Most_spread_artifacts_normalized_by_symbols",
             primary_threshold_percent=0.5,
             report_directory=report_directory,
             verbose=verbose,

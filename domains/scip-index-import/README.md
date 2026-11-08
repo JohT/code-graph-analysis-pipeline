@@ -1,7 +1,7 @@
 # SCIP Index Import Domain
 
 Converts SCIP JSON index files to Neo4j import CSVs, imports them into Neo4j, and enriches the graph for analysis.
-[SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) provides a language-agnostic type dependency graph.
+[SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) provides a language-agnostic code dependency graph of types and module-level functions.
 
 Supported languages: Go, Java, TypeScript, Rust, C++, Ruby, Python, C#.
 
@@ -27,7 +27,7 @@ To run it manually: place `.scip.json` files in `indices/` and execute `importSc
 |--------|---------|
 | [examples/installScipCli.sh](./examples/installScipCli.sh) | Downloads and installs the scip CLI binary (optional if scip is already globally available) |
 | [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline (sourced by `analyze.sh`) |
-| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to `scip_type_nodes.csv` and `scip_type_edges.csv` |
+| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to type CSVs (`scip_type_nodes.csv`, `scip_type_edges.csv`) and function CSVs (`scip_function_nodes.csv`, `scip_function_edges.csv`) |
 
 ## Input
 
@@ -287,102 +287,17 @@ Git:Repository
 
 The SCIP file integration is **language-agnostic** — same query handles all SCIP-supported languages (Java, TypeScript, Go, Rust, C++, Python, Ruby, C#). No per-language variants needed; matching is based on relative file paths only.
 
-## Folder Structure
-├── README.md                              # This file
-├── importScipIndexData.sh                 # Entry point: orchestrates CSV conversion + import
-├── importScipIndexDataWithAdminImport.sh  # Pre-start fast import via neo4j-admin (sourced by analyze.sh)
-├── convertScipIndexToCsvForNeo4jImport.sh # Converts *.scip.json → scip_type_nodes.csv + scip_type_edges.csv (LOAD CSV)
-├── convertScipIndexToCsvForNeo4jAdminImport.sh # Converts *.scip.json → admin import CSV format
-├── testConvertScipIndexToCsvForNeo4jImport.sh # Tests for convertScipIndexToCsvForNeo4jImport.sh
-├── testConvertScipIndexToCsvForNeo4jAdminImport.sh # Tests for convertScipIndexToCsvForNeo4jAdminImport.sh
-├── examples/                              # Helper scripts for generating SCIP indices outside the pipeline
-│   ├── installScipCli.sh                  # Downloads and installs the scip CLI binary
-│   ├── installScipJava.sh                 # Installs scip-java via Coursier (Java Maven projects)
-│   ├── createScipIndexFunctionsForJava.sh # Sourced library: index_module, resolve_placeholders_in_json
-│   ├── createAxonFrameworkScipIndices.sh  # Creates per-module SCIP indices for AxonFramework
-│   └── testInstallScipJava.sh             # Unit tests for installScipJava.sh
-└── queries/
-    ├── import/                            # Phase 1: setup and import
-    ├── structure/                         # Phase 2: file, module, artifact nodes and dependencies
-    ├── enrichment/                        # Phase 3: dependency counts and properties
-    └── analysis/                          # Investigation and analytics queries
-```
-
 ## Import Phases
 
-`importScipIndexData.sh` runs queries organized into four functional folders in `queries/`:
+`importScipIndexData.sh` runs in four phases via `queries/`:
 
-### 1. Import (`queries/import/`)
+**1. Import** — Cleans existing SCIP nodes, creates uniqueness constraints, then imports type nodes, external type nodes, function nodes, and their `DEPENDS_ON` edges from CSV.
 
-| Query | Purpose |
-|-------|---------|
-| [Cleanup_All_SCIP_Nodes.cypher](./queries/import/Cleanup_All_SCIP_Nodes.cypher) | Delete all existing SCIP-labeled nodes (types, modules, artifacts, projects) — ensures clean slate before re-import |
-| [Create_SCIP_Internal_Type_Constraint.cypher](./queries/import/Create_SCIP_Internal_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexInternalType.symbol` |
-| [Create_SCIP_External_Type_Constraint.cypher](./queries/import/Create_SCIP_External_Type_Constraint.cypher) | Create uniqueness constraint on `SemanticCodeIndexExternalType.symbol` |
-| [Import_SCIP_Type_Internal_Nodes.cypher](./queries/import/Import_SCIP_Type_Internal_Nodes.cypher) | Import internal types (own source files); sets `isTest` from file path patterns |
-| [Import_SCIP_Type_External_Nodes.cypher](./queries/import/Import_SCIP_Type_External_Nodes.cypher) | Import external types (library dependencies) |
-| [Import_SCIP_Type_Edges.cypher](./queries/import/Import_SCIP_Type_Edges.cypher) | Import `DEPENDS_ON` relationships between types |
+**2. Structure** — Creates `SCIP:File`, `SemanticCodeIndexModule`, and `SemanticCodeIndexArtifact` nodes; builds `CONTAINS` hierarchies and `DEPENDS_ON` links at module and artifact level. Module dependencies aggregate from both type-level and function-level edges.
 
-### 2. Structure (`queries/structure/`)
+**3. Enrichment** — Sets dependency count properties, test markers, project names, and the `:SemanticCodeIndexInternalSymbol` unified label on all internal types and functions.
 
-Build module and artifact hierarchy, plus dependency relationships.
-
-| Query | Purpose |
-|-------|---------|
-| [Create_SCIP_File_Nodes.cypher](./queries/structure/Create_SCIP_File_Nodes.cypher) | Create `SCIP:File` nodes — one per unique source file path across all internal types (language-agnostic) |
-| [Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher](./queries/structure/Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher) | `SemanticCodeIndexInternalType -[:SOURCE_FILE]-> SCIP:File` — enables direct traversal from type to source file |
-| [Create_SCIP_Module_Nodes_For_Internal_Types.cypher](./queries/structure/Create_SCIP_Module_Nodes_For_Internal_Types.cypher) | Create `SemanticCodeIndexModule` nodes — one per unique source directory |
-| [Create_SCIP_Artifact_Nodes.cypher](./queries/structure/Create_SCIP_Artifact_Nodes.cypher) | Create `SemanticCodeIndexArtifact` nodes — one per unique module+version combination |
-| [Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexModule -[:CONTAINS]-> SemanticCodeIndexInternalType` |
-| [Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> SemanticCodeIndexModule` |
-| [Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> SemanticCodeIndexExternalType` |
-| [Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher](./queries/structure/Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher) | `SemanticCodeIndexArtifact -[:CONTAINS]-> SemanticCodeIndexInternalType` — direct artifact-to-type link (optimization for projections) |
-| [Link_SCIP_Module_DEPENDS_ON_SCIP_Module.cypher](./queries/structure/Link_SCIP_Module_DEPENDS_ON_SCIP_Module.cypher) | `SemanticCodeIndexModule -[:DEPENDS_ON]-> SemanticCodeIndexModule` — aggregated from type dependencies |
-| [Link_SCIP_Artifact_DEPENDS_ON_SCIP_Artifact.cypher](./queries/structure/Link_SCIP_Artifact_DEPENDS_ON_SCIP_Artifact.cypher) | `SemanticCodeIndexArtifact -[:DEPENDS_ON]-> SemanticCodeIndexArtifact` — aggregated from module dependencies |
-
-### 3. Enrichment (`queries/enrichment/`)
-
-Set dependency counts and derived properties on nodes.
-
-**Type Enrichment:**
-
-| Query | Purpose |
-|-------|---------|
-| [Set_Incoming_SCIP_Type_Dependencies.cypher](./queries/enrichment/Set_Incoming_SCIP_Type_Dependencies.cypher) | Set `incomingDependencies` and `incomingDependenciesWeight` on each type |
-| [Set_Outgoing_SCIP_Type_Dependencies.cypher](./queries/enrichment/Set_Outgoing_SCIP_Type_Dependencies.cypher) | Set `outgoingDependencies` and `outgoingDependenciesWeight` on each type |
-| [Set_SCIP_Type_Test_Marker_Integer.cypher](./queries/enrichment/Set_SCIP_Type_Test_Marker_Integer.cypher) | Set `testMarkerInteger` (0/1) from `isTest` on all types |
-| [Set_SCIP_Type_Project_Name.cypher](./queries/enrichment/Set_SCIP_Type_Project_Name.cypher) | Set `projectName` from `module` on all types |
-
-**Module Enrichment:**
-
-| Query | Purpose |
-|-------|---------|
-| [Set_SCIP_Module_Is_Test_And_Marker_Integer.cypher](./queries/enrichment/Set_SCIP_Module_Is_Test_And_Marker_Integer.cypher) | Set `isTest` and `testMarkerInteger` on modules — true if any contained type is a test |
-| [Set_Incoming_SCIP_Module_Dependencies.cypher](./queries/enrichment/Set_Incoming_SCIP_Module_Dependencies.cypher) | Set `incomingDependencies` (COUNT), `incomingDependenciesWeight` (SUM), `incomingDependentModules`, and `incomingDependentArtifacts` on modules (includes all sources: test and non-test) |
-| [Set_Outgoing_SCIP_Module_Dependencies.cypher](./queries/enrichment/Set_Outgoing_SCIP_Module_Dependencies.cypher) | Set `outgoingDependencies` (COUNT), `outgoingDependenciesWeight` (SUM), `outgoingDependentModules`, and `outgoingDependentArtifacts` on modules (includes all targets: test and non-test) |
-
-**Artifact Enrichment:**
-
-| Query | Purpose |
-|-------|---------|
-| [Set_SCIP_Artifact_Is_Test_And_Marker_Integer.cypher](./queries/enrichment/Set_SCIP_Artifact_Is_Test_And_Marker_Integer.cypher) | Set `isTest` and `testMarkerInteger` on artifacts — true if any contained internal type is a test |
-| [Set_SCIP_Artifact_Is_External.cypher](./queries/enrichment/Set_SCIP_Artifact_Is_External.cypher) | Set `isExternal` on artifacts — true if contains only external types |
-| [Set_Incoming_SCIP_Artifact_Dependencies.cypher](./queries/enrichment/Set_Incoming_SCIP_Artifact_Dependencies.cypher) | Set `incomingDependencies` and `incomingDependenciesWeight` on artifacts |
-| [Set_Outgoing_SCIP_Artifact_Dependencies.cypher](./queries/enrichment/Set_Outgoing_SCIP_Artifact_Dependencies.cypher) | Set `outgoingDependencies` and `outgoingDependenciesWeight` on artifacts |
-
-### 4. Analysis (`queries/analysis/`)
-
-Investigation queries for SCIP data (used by other domains):
-
-- [Cyclic_SCIP_Type_Dependencies.cypher](./queries/analysis/Cyclic_SCIP_Type_Dependencies.cypher) — Cyclic module dependencies
-- [External_SCIP_Type_Package_Usage_Overall.cypher](./queries/analysis/External_SCIP_Type_Package_Usage_Overall.cypher) — External package usage patterns
-
-### 5. Dependency Metrics
-
-Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_Enrichment/):
-
-- `Set_Dependency_Degree.cypher` — combined in/out degree per node
-- `Set_Dependency_Degree_Rank.cypher` — percentile rank of dependency degree
+**4. Dependency Metrics** (shared `cypher/Dependency_Enrichment/`) — Sets dependency degree and percentile rank.
 
 ## Graph Model
 
@@ -390,7 +305,9 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 
 | Label | Description |
 |-------|-------------|
-| `SCIP:SemanticCodeIndexInternalType` | Type from own source code; has `isTest`, `testMarkerInteger`, `file` |
+| `SCIP:SemanticCodeIndexInternalType` | Type from own source code; has `isTest`, `file`, `descriptor` |
+| `SCIP:SemanticCodeIndexFunction` | Module-level function from own source code; has `isTest`, `file`, `descriptor` |
+| `SemanticCodeIndexInternalSymbol` | Unified label on `SemanticCodeIndexInternalType` and `SemanticCodeIndexFunction` — use for queries spanning both |
 | `SCIP:SemanticCodeIndexExternalType` | Type from an external library; `isTest = false` |
 | `SCIP:SemanticCodeIndexModule` | Source directory; has `isTest`, `testMarkerInteger` |
 | `SCIP:SemanticCodeIndexArtifact` | Module + version package; groups types and modules |
@@ -399,8 +316,9 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 
 | Relationship | From → To | Description |
 |--------------|-----------|-------------|
-| `DEPENDS_ON` | `SemanticCodeIndexInternalType|SemanticCodeIndexExternalType → SemanticCodeIndexInternalType|SemanticCodeIndexExternalType` | Type-level dependency with `referenceCount` |
-| `CONTAINS` | `SemanticCodeIndexModule → SemanticCodeIndexInternalType` | Module contains its source types |
+| `DEPENDS_ON` | `SemanticCodeIndexInternalType|SemanticCodeIndexExternalType → SemanticCodeIndexInternalType|SemanticCodeIndexExternalType` | Type-level dependency; `referenceCount` |
+| `DEPENDS_ON` | `SemanticCodeIndexFunction → SemanticCodeIndexInternalSymbol|SemanticCodeIndexExternalType` | Function-level dependency; `referenceCount`, `via` (`uses_type`, `calls_function`, `calls_method`) |
+| `CONTAINS` | `SemanticCodeIndexModule → SemanticCodeIndexInternalSymbol` | Module contains its source types and functions |
 | `CONTAINS` | `SemanticCodeIndexArtifact → SemanticCodeIndexModule` | Artifact contains its modules |
 | `CONTAINS` | `SemanticCodeIndexArtifact → SemanticCodeIndexExternalType` | Artifact contains its external types |
 
@@ -408,15 +326,15 @@ Shared queries from [`cypher/Dependency_Enrichment/`](../../cypher/Dependency_En
 
 | Property | Nodes | Description |
 |----------|-------|-------------|
-| `isTest` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
-| `testMarkerInteger` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
-| `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
-| `descriptor` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexExternalType` | Pre-computed SCIP descriptor — the last space-separated token of the type's `symbol` (e.g. `com/example/Foo#`). Empty string for `File` and `AnonymousClass` nodes. Avoids `split(symbol, ' ')[-1]` at query time and enables indexing. |
+| `isTest` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
+| `testMarkerInteger` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexExternalType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
+| `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
+| `descriptor` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexExternalType` | Pre-computed SCIP descriptor — last space-separated token of `symbol` (e.g. `com/example/Foo#`, `lib/nav.ts/getRoute().`). Empty for `File` and `AnonymousClass` nodes. Enables indexed lookup. |
 | `incomingDependencies` | `SCIPType` | Number of types that depend on this type |
 | `outgoingDependencies` | `SCIPType` | Number of types this type depends on |
-| `incomingDependencies` | `SCIPModule` | **COUNT** of type-level DEPENDS_ON edges into types in this module (aggregated from type level) |
+| `incomingDependencies` | `SCIPModule` | **COUNT** of symbol-level DEPENDS_ON edges into symbols (types and functions) in this module |
 | `incomingDependenciesWeight` | `SCIPModule` | **SUM** of `referenceCount` from those edges (edge magnitude) |
-| `outgoingDependencies` | `SCIPModule` | **COUNT** of type-level DEPENDS_ON edges from types in this module |
+| `outgoingDependencies` | `SCIPModule` | **COUNT** of symbol-level DEPENDS_ON edges from symbols (types and functions) in this module |
 | `outgoingDependenciesWeight` | `SCIPModule` | **SUM** of `referenceCount` from those edges |
 
 ### Module Dependency Semantics

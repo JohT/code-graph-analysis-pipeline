@@ -186,11 +186,11 @@ if createUndirectedDependencyProjection "${PROJECTION_NAME}=typescript-module-em
     anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=typescript-module-embedding" "${ALGORITHM_NODE}=Module" "${ALGORITHM_WEIGHT}=lowCouplingElement25PercentWeight" "${ALGORITHM_LANGUAGE}=Typescript" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
-# -- SCIP InternalType Anomaly Detection -----------------------
+# -- SCIP InternalSymbol Anomaly Detection -----------------------
 
-if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
-    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-type-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalType" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
-    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=scip-type-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexInternalType" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
+if createUndirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-anomaly-detection" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"; then
+    createDirectedDependencyProjection "${PROJECTION_NAME}=scip-symbol-anomaly-detection-directed" "${PROJECTION_NODE}=SemanticCodeIndexInternalSymbol" "${PROJECTION_WEIGHT}=referenceCount" "${PROJECTION_LANGUAGE}=SCIP"
+    anomaly_detection_csv_reports "${ALGORITHM_PROJECTION}=scip-symbol-anomaly-detection" "${ALGORITHM_NODE}=SemanticCodeIndexInternalSymbol" "${ALGORITHM_WEIGHT}=referenceCount" "${ALGORITHM_LANGUAGE}=SCIP" "${COMMUNITY_PROPERTY}" "${EMBEDDING_PROPERTY}"
 fi
 
 # -- SCIP Module Anomaly Detection -------------------------------

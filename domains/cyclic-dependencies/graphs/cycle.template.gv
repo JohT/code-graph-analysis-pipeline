@@ -1,34 +1,38 @@
-// This is a GraphViz dot template file for the visualization of cyclic dependency graphs.
-// Forward dependencies (blue solid arrows) show the dominant cycle direction.
-// Backward dependencies (red dashed arrows) are the candidates to remove to break the cycle.
-// Package or module clusters group type nodes by their containing code unit.
-// The main part of the template is marked by the comments "Begin-Template" and "End-Template".
-// It also contains a simple example graph.
-//
-strict digraph cycle_template {
-    //Begin-Template
+strict digraph cycle {
     graph [layout = "fdp"; start = "7"; splines = "curved"; pad = "0.8,0.4"; outputorder = "edgesfirst";];
-    graph [fontname = "Helvetica,Arial,sans-serif"; labelloc = "t";];
-    node [fontname = "Helvetica,Arial,sans-serif"; style = "filled"; fillcolor = "white";];
-    node [fontsize = 11; margin = "0.05,0.05";];
-    edge [fontsize = 9; arrowsize = "0.6";];
-    //End-Template
+    graph [fontname = "Arial"; labelloc = "t"; bgcolor = "#F0F4F8";];
+    node [fontname = "Arial"; style = "filled"; fontcolor = "#1A1A1A"; fontsize = 10; margin = "0.08,0.06";];
+    edge [fontsize = 8; arrowsize = "0.5"; color = "#B0BEC5"; arrowcolor = "#B0BEC5";];
 
     subgraph cluster_package {
-        label = "com.example.package";
-        style = "filled";
-        fillcolor = "lightblue";
-        "TypeA";
-        "TypeB";
+        label = "{{PACKAGE_LABEL}}";
+        style = "filled,rounded";
+        fillcolor = "#E8F4F8";
+        color = "#01579B";
+        penwidth = "2.5";
+        labeljust = "c";
+        fontname = "Arial";
+        fontsize = 16;
+        fontcolor = "#01579B";
+        labelfontname = "Arial";
+        labelfontsize = 16;
+        {{PACKAGE_NODES}}
     }
 
     subgraph cluster_dependent {
-        label = "com.example.dependent";
-        style = "filled";
-        fillcolor = "peachpuff";
-        "TypeC";
+        label = "{{DEPENDENT_LABEL}}";
+        style = "filled,rounded";
+        fillcolor = "#F8E8F4";
+        color = "#6A1B9A";
+        penwidth = "2.5";
+        labeljust = "c";
+        fontname = "Arial";
+        fontsize = 16;
+        fontcolor = "#6A1B9A";
+        labelfontname = "Arial";
+        labelfontsize = 16;
+        {{DEPENDENT_NODES}}
     }
 
-    "TypeA" -> "TypeC" [color = "#6699CC"; penwidth = "0.5"];
-    "TypeC" -> "TypeB" [color = "red"; penwidth = "2.5"; style = "dashed";];
+    {{EDGES}}
 }
