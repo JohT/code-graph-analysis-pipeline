@@ -133,7 +133,8 @@ def parse_input_parameters() -> Parameters:
 def get_graph_database_driver() -> Driver:
     driver = GraphDatabase.driver(
         uri="bolt://localhost:7687",
-        auth=("neo4j", os.environ.get("NEO4J_INITIAL_PASSWORD"))
+        auth=("neo4j", os.environ.get("NEO4J_INITIAL_PASSWORD")), # type: ignore
+        notifications_disabled_classifications=["UNRECOGNIZED"]
     )
     driver.verify_connectivity()
     print("anomalyDetectionFeaturePlots: Successfully connected to Neo4j")
