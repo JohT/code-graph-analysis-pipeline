@@ -1,4 +1,4 @@
-// Set outgoing SCIP module dependencies aggregated from symbol-level DEPENDS_ON relationships. Requires "Add_SemanticCodeIndexInternalSymbol_Label.cypher".
+// Set outgoing SCIP module dependencies aggregated from symbol-level DEPENDS_ON relationships.
 // outgoingDependencies = COUNT of symbol-level edges from symbols (types and functions) in this module.
 // outgoingDependenciesWeight = SUM of referenceCount (magnitude of those edges).
 // outgoingDependentModules = COUNT DISTINCT of modules that contain symbols depended on by this module's symbols.

@@ -161,44 +161,29 @@ verify_scip_placeholder_symbols
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP project short name..."
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Project_Short_Name.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP type project name..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Type_Project_Name.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP external type project name..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_External_Type_Project_Name.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP function project name..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Function_Project_Name.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP external type test marker integers..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_External_Type_Test_Marker_Integer.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP type dependencies..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Type_Dependencies.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP symbol dependencies..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Symbol_Dependencies.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP type dependencies..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Type_Dependencies.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP symbol dependencies..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Symbol_Dependencies.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting incoming SCIP function dependencies..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Incoming_SCIP_Function_Dependencies.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP symbol test marker integers..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Symbol_Test_Marker_Integer.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting outgoing SCIP function dependencies..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_Outgoing_SCIP_Function_Dependencies.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP type test marker integers..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Type_Test_Marker_Integer.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP function test marker integers..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Function_Test_Marker_Integer.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Adding SemanticCodeIndexInternalSymbol label to types and functions..."
-execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Add_SemanticCodeIndexInternalSymbol_Label.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP symbol project name..."
+execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Symbol_Project_Name.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP file nodes..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_File_Nodes.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP types to their source files..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP functions to their source files..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Function_SOURCE_FILE_SCIP_File.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP variables to their source files..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Variable_SOURCE_FILE_SCIP_File.cypher"
+execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Symbol_SOURCE_FILE_SCIP_File.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP module nodes..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Module_Nodes_For_Internal_Types.cypher"
@@ -206,14 +191,8 @@ execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Module_Nodes_For
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP artifact nodes..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Artifact_Nodes.cypher"
 
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP modules to their contained internal types..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP modules to their contained functions..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SCIP_Function.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP modules to their contained variables..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SCIP_Variable.cypher"
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP modules to all of their contained internal symbols..."
+execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SCIP_InternalSymbol.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP artifacts to their contained modules..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher"
@@ -222,19 +201,13 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP artifacts
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_CONTAINS_SCIP_ExternalType.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP artifacts directly to their contained internal types..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP artifacts directly to their contained functions..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_CONTAINS_SCIP_Function.cypher"
+execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_CONTAINS_SCIP_InternalSymbol.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP projects to their contained artifacts..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Project_CONTAINS_SCIP_Artifact.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating module-level dependencies from type dependencies..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_DEPENDS_ON_SCIP_Module.cypher"
-
-echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Extending module-level dependencies from function dependencies..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_DEPENDS_ON_SCIP_Module_Via_Functions.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating artifact-level dependencies from module dependencies..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_DEPENDS_ON_SCIP_Artifact.cypher"

@@ -264,7 +264,7 @@ SCIP File nodes created during import are automatically linked to Git history wh
 ### How It Works
 
 1. **SCIP File Node Creation**: `Create_SCIP_File_Nodes.cypher` extracts unique file paths from type nodes and creates `:SCIP:File` nodes (one per unique source file path across all internal types)
-2. **Source File Linking**: `Link_SCIP_Type_SOURCE_FILE_SCIP_File.cypher` creates `SOURCE_FILE` edges from types to their source files
+2. **Source File Linking**: `Link_SCIP_Symbol_SOURCE_FILE_SCIP_File.cypher` creates `SOURCE_FILE` edges from types to their source files
 3. **Git Resolution**: `Add_RESOLVES_TO_relationships_to_git_files_for_SCIP.cypher` (executed by git-history domain) matches SCIP file paths to Git file nodes via `RESOLVES_TO` edges
 
 ### Data Model

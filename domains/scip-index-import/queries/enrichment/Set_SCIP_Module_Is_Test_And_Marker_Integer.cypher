@@ -1,7 +1,7 @@
-// Set isTest and testMarkerInteger on SemanticCodeIndexModule nodes based on whether any contained SemanticCodeIndexInternalType is a test. Requires "Link_SCIP_Module_CONTAINS_SCIP_InternalType.cypher".
+// Set isTest and testMarkerInteger on SemanticCodeIndexModule nodes based on whether any contained SemanticCodeIndexInternalType is a test. Requires "Link_SCIP_Module_CONTAINS_SCIP_InternalSymbol.cypher".
 
 MATCH (m:SemanticCodeIndexModule)
-OPTIONAL MATCH (m)-[:CONTAINS]->(t:SemanticCodeIndexInternalType)
+OPTIONAL MATCH (m)-[:CONTAINS]->(t:SemanticCodeIndexInternalSymbol)
  WITH m, true IN collect(t.isTest) AS hasTestType
   SET m.isTest            = hasTestType,
       m.testMarkerInteger = CASE WHEN hasTestType THEN 1 ELSE 0 END
