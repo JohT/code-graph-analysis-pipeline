@@ -4,6 +4,45 @@ This document describes breaking changes introduced in each major version and ho
 
 ---
 
+## Migration to v7.0.0
+
+v7 adds support for module-level variables and constants in SCIP indices, enriching the symbol dependency graph with variable initialization dependencies. Variables are now included in the `SemanticCodeIndexInternalSymbol` label alongside types and functions.
+
+---
+
+### 1. SCIP variable extraction (new feature — optional)
+
+**What changed:**
+
+SCIP indices can now include module-level variables (kind 8 symbols) and their initialization dependencies. Variables are extracted and imported with:
+
+- **New nodes:** `:SCIP:SemanticCodeIndexVariable:SemanticCodeIndexInternalSymbol` — module-level variables and constants from source code
+- **New edge types:** 
+  - `initializes_with_function` — variable initialized by calling a function
+  - `initializes_with_type` — variable initialized with a type (type conversion, constructor)
+  - `initializes_with_variable` — variable initialized by reading another variable
+
+Variables contribute to:
+- `SemanticCodeIndexInternalSymbol` unified label (same as types and functions)
+- Module dependency counts (`incomingDependencies`, `outgoingDependencies`) via their `DEPENDS_ON` edges
+- Overview statistics (`variableCount`)
+
+**Why this matters:**
+
+Module-level variables are often configuration, default values, or shared constants that influence code behavior. Extracting their initialization dependencies reveals which functions and types are bootstrap dependencies for your system. For example, a `DEFAULT_CONFIG` variable initialized from `loadConfig()` now shows this critical path.
+
+**Migration steps:**
+
+1. **No action required for existing pipelines:** Variable extraction is automatic if your SCIP indices contain variables (kind 8 symbols). If they don't, the pipeline continues to work unchanged.
+
+2. **Verify variable counts:** Run the pipeline on a TypeScript/Go/Python/Rust project. Check the overview statistics — you should now see a separate `variableCount` column showing the number of extracted module-level variables.
+
+3. **Update custom queries:** If you have custom Cypher queries that filter `SemanticCodeIndexInternalSymbol`, they now include variables in addition to types and functions. Verify that any group-by or aggregation logic still makes sense with this expanded symbol set.
+
+4. **Check initialization dependencies:** Variables from high-entropy modules or test files will have `isTest = true` and participate in test module dependency analysis same as functions.
+
+---
+
 ## Migration to v6.0.0
 
 v6 supports functions in SCIP indices, which introduces breaking changes to SCIP projections. Functions are now included in the `SemanticCodeIndexInternalSymbol` label, replacing the previous `SemanticCodeIndexInternalType` label used by reports.

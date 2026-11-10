@@ -1798,6 +1798,100 @@ EOF
 }
 
 # ---------------------------------------------------------------------------
+# Fixture: variable extraction test SCIP index
+# ---------------------------------------------------------------------------
+
+function create_variable_extraction_scip_json() {
+    cat << 'EOF'
+{
+  "documents": [
+    {
+      "relative_path": "lib/constants.ts",
+      "occurrences": [
+        {
+          "range": [3, 6, 18],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/myContext.",
+          "symbol_roles": 1
+        },
+        {
+          "range": [4, 2, 28],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/createContext().",
+          "symbol_roles": 0
+        },
+        {
+          "range": [7, 6, 20],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/DEFAULT_NAME.",
+          "symbol_roles": 1
+        },
+        {
+          "range": [8, 2, 18],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyConfig#",
+          "symbol_roles": 0
+        },
+        {
+          "range": [12, 6, 17],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/config.",
+          "symbol_roles": 1
+        },
+        {
+          "range": [13, 2, 20],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/DEFAULT_NAME.",
+          "symbol_roles": 0
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/myContext.",
+          "kind": 8
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/DEFAULT_NAME.",
+          "kind": 8
+        },
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`constants.ts`/config.",
+          "kind": 8
+        }
+      ]
+    },
+    {
+      "relative_path": "lib/logic.ts",
+      "occurrences": [
+        {
+          "range": [1, 9, 23],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/createContext().",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`logic.ts`/createContext().",
+          "kind": 17
+        }
+      ]
+    },
+    {
+      "relative_path": "lib/types.ts",
+      "occurrences": [
+        {
+          "range": [1, 7, 17],
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyConfig#",
+          "symbol_roles": 1
+        }
+      ],
+      "symbols": [
+        {
+          "symbol": "scip-typescript npm myapp 1.0 lib/`types.ts`/MyConfig#",
+          "kind": 21
+        }
+      ]
+    }
+  ]
+}
+EOF
+}
+
+# ---------------------------------------------------------------------------
 # Test: function node extraction
 # ---------------------------------------------------------------------------
 
@@ -1864,6 +1958,71 @@ assert_contains "MyType referenced as uses_type" \
 # externalHelper should appear as calls_function edge
 assert_contains "externalHelper referenced as calls_function" \
     '"calls_function"' "${func_edges}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: variable node and edge extraction
+# ---------------------------------------------------------------------------
+
+echo "Test: variable nodes and edges extracted from file-level variable symbols"
+var_indices_dir="${tmp_test_dir}/var_indices"
+var_import_dir="${tmp_test_dir}/var_import"
+mkdir -p "${var_indices_dir}"
+create_variable_extraction_scip_json > "${var_indices_dir}/var_test.scip.json"
+
+run_script_with_env "${var_indices_dir}" "${var_import_dir}"
+assert_exit_code "exits 0 for variable extraction fixture" "0" "${exit_code}"
+
+var_nodes=$(cat "${var_import_dir}/scip_variable_nodes.csv")
+var_edges=$(cat "${var_import_dir}/scip_variable_edges.csv")
+
+assert_contains "variable node CSV has header" \
+    '"symbol","display_name"' "${var_nodes}"
+assert_contains "myContext variable node extracted" \
+    'myContext' "${var_nodes}"
+assert_contains "DEFAULT_NAME variable node extracted" \
+    'DEFAULT_NAME' "${var_nodes}"
+assert_contains "config variable node extracted" \
+    'config' "${var_nodes}"
+assert_contains "myContext has type_name Variable" \
+    '"Variable"' "${var_nodes}"
+assert_contains "myContext has correct file path" \
+    'lib/constants.ts' "${var_nodes}"
+
+var_node_count=$(tail -n +2 "${var_import_dir}/scip_variable_nodes.csv" | wc -l | tr -d ' ')
+assert_equals "three variable nodes extracted (myContext, DEFAULT_NAME, config)" \
+    "3" "${var_node_count}"
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test: variable edge extraction and attribution
+# ---------------------------------------------------------------------------
+
+echo "Test: variable edges attributed to owning variable"
+assert_contains "variable edge CSV has header" \
+    '"source_symbol","target_symbol","edge_type","reference_count"' "${var_edges}"
+
+# myContext (line 3) should own occurrence at line 4 (function call)
+assert_contains "myContext initializes_with_function createContext" \
+    'myContext' "${var_edges}"
+assert_contains "edge type is initializes_with_function" \
+    'initializes_with_function' "${var_edges}"
+
+# DEFAULT_NAME (line 6) should own occurrence at line 7 (type reference)
+assert_contains "DEFAULT_NAME initializes_with_type MyConfig" \
+    'DEFAULT_NAME' "${var_edges}"
+assert_contains "edge type is initializes_with_type" \
+    'initializes_with_type' "${var_edges}"
+
+# config (line 10) should own occurrence at line 11 (variable reference)
+assert_contains "config initializes_with_variable DEFAULT_NAME" \
+    'config' "${var_edges}"
+assert_contains "edge type is initializes_with_variable" \
+    'initializes_with_variable' "${var_edges}"
+
+var_edge_count=$(tail -n +2 "${var_import_dir}/scip_variable_edges.csv" | wc -l | tr -d ' ')
+assert_equals "three variable edges extracted" \
+    "3" "${var_edge_count}"
 echo ""
 
 # ---------------------------------------------------------------------------

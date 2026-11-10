@@ -1,7 +1,7 @@
 # SCIP Index Import Domain
 
 Converts SCIP JSON index files to Neo4j import CSVs, imports them into Neo4j, and enriches the graph for analysis.
-[SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) provides a language-agnostic code dependency graph of types and module-level functions.
+[SCIP](https://github.com/sourcegraph/scip) (Semantic Code Intelligence Protocol) provides a language-agnostic code dependency graph of types, module-level functions, and variables.
 
 Supported languages: Go, Java, TypeScript, Rust, C++, Ruby, Python, C#.
 
@@ -27,7 +27,7 @@ To run it manually: place `.scip.json` files in `indices/` and execute `importSc
 |--------|---------|
 | [examples/installScipCli.sh](./examples/installScipCli.sh) | Downloads and installs the scip CLI binary (optional if scip is already globally available) |
 | [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline (sourced by `analyze.sh`) |
-| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to type CSVs (`scip_type_nodes.csv`, `scip_type_edges.csv`) and function CSVs (`scip_function_nodes.csv`, `scip_function_edges.csv`) |
+| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to type CSVs (`scip_type_nodes.csv`, `scip_type_edges.csv`), function CSVs (`scip_function_nodes.csv`, `scip_function_edges.csv`), and variable CSVs (`scip_variable_nodes.csv`, `scip_variable_edges.csv`) |
 
 ## Input
 
@@ -291,11 +291,11 @@ The SCIP file integration is **language-agnostic** — same query handles all SC
 
 `importScipIndexData.sh` runs in four phases via `queries/`:
 
-**1. Import** — Cleans existing SCIP nodes, creates uniqueness constraints, then imports type nodes, external type nodes, function nodes, and their `DEPENDS_ON` edges from CSV.
+**1. Import** — Cleans existing SCIP nodes, creates uniqueness constraints, then imports type nodes, external type nodes, function nodes, variable nodes, and their `DEPENDS_ON` edges from CSV.
 
-**2. Structure** — Creates `SCIP:File`, `SemanticCodeIndexModule`, and `SemanticCodeIndexArtifact` nodes; builds `CONTAINS` hierarchies and `DEPENDS_ON` links at module and artifact level. Module dependencies aggregate from both type-level and function-level edges.
+**2. Structure** — Creates `SCIP:File`, `SemanticCodeIndexModule`, and `SemanticCodeIndexArtifact` nodes; builds `CONTAINS` hierarchies and `DEPENDS_ON` links at module and artifact level. Module dependencies aggregate from type-level, function-level, and variable-level edges.
 
-**3. Enrichment** — Sets dependency count properties, test markers, project names, and the `:SemanticCodeIndexInternalSymbol` unified label on all internal types and functions.
+**3. Enrichment** — Sets dependency count properties, test markers, project names, and the `:SemanticCodeIndexInternalSymbol` unified label on all internal types, functions, and variables.
 
 **4. Dependency Metrics** (shared `cypher/Dependency_Enrichment/`) — Sets dependency degree and percentile rank.
 
@@ -307,7 +307,8 @@ The SCIP file integration is **language-agnostic** — same query handles all SC
 |-------|-------------|
 | `SCIP:SemanticCodeIndexInternalType` | Type from own source code; has `isTest`, `file`, `descriptor` |
 | `SCIP:SemanticCodeIndexFunction` | Module-level function from own source code; has `isTest`, `file`, `descriptor` |
-| `SemanticCodeIndexInternalSymbol` | Unified label on `SemanticCodeIndexInternalType` and `SemanticCodeIndexFunction` — use for queries spanning both |
+| `SCIP:SemanticCodeIndexVariable` | Module-level variable or constant from own source code; has `isTest`, `file`, `descriptor` |
+| `SemanticCodeIndexInternalSymbol` | Unified label on `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, and `SemanticCodeIndexVariable` — use for queries spanning all three |
 | `SCIP:SemanticCodeIndexExternalType` | Type from an external library; `isTest = false` |
 | `SCIP:SemanticCodeIndexModule` | Source directory; has `isTest`, `testMarkerInteger` |
 | `SCIP:SemanticCodeIndexArtifact` | Module + version package; groups types and modules |
@@ -318,7 +319,8 @@ The SCIP file integration is **language-agnostic** — same query handles all SC
 |--------------|-----------|-------------|
 | `DEPENDS_ON` | `SemanticCodeIndexInternalType|SemanticCodeIndexExternalType → SemanticCodeIndexInternalType|SemanticCodeIndexExternalType` | Type-level dependency; `referenceCount` |
 | `DEPENDS_ON` | `SemanticCodeIndexFunction → SemanticCodeIndexInternalSymbol|SemanticCodeIndexExternalType` | Function-level dependency; `referenceCount`, `via` (`uses_type`, `calls_function`, `calls_method`) |
-| `CONTAINS` | `SemanticCodeIndexModule → SemanticCodeIndexInternalSymbol` | Module contains its source types and functions |
+| `DEPENDS_ON` | `SemanticCodeIndexVariable → SemanticCodeIndexInternalSymbol|SemanticCodeIndexExternalType` | Variable initialization dependency; `referenceCount`, `via` (`initializes_with_type`, `initializes_with_function`, `initializes_with_variable`) |
+| `CONTAINS` | `SemanticCodeIndexModule → SemanticCodeIndexInternalSymbol` | Module contains its source types, functions, and variables |
 | `CONTAINS` | `SemanticCodeIndexArtifact → SemanticCodeIndexModule` | Artifact contains its modules |
 | `CONTAINS` | `SemanticCodeIndexArtifact → SemanticCodeIndexExternalType` | Artifact contains its external types |
 
@@ -326,15 +328,15 @@ The SCIP file integration is **language-agnostic** — same query handles all SC
 
 | Property | Nodes | Description |
 |----------|-------|-------------|
-| `isTest` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
-| `testMarkerInteger` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexExternalType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
-| `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
-| `descriptor` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexExternalType` | Pre-computed SCIP descriptor — last space-separated token of `symbol` (e.g. `com/example/Foo#`, `lib/nav.ts/getRoute().`). Empty for `File` and `AnonymousClass` nodes. Enables indexed lookup. |
+| `isTest` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexVariable`, `SemanticCodeIndexModule` | `true` if the node is part of test code |
+| `testMarkerInteger` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexVariable`, `SemanticCodeIndexExternalType`, `SemanticCodeIndexModule` | `1` if `isTest`, `0` otherwise — used for graph projections |
+| `language` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexVariable`, `SemanticCodeIndexExternalType` | Detected language (e.g. `Java`, `TypeScript`, `Go`) |
+| `descriptor` | `SemanticCodeIndexInternalType`, `SemanticCodeIndexFunction`, `SemanticCodeIndexVariable`, `SemanticCodeIndexExternalType` | Pre-computed SCIP descriptor — last space-separated token of `symbol` (e.g. `com/example/Foo#`, `lib/nav.ts/getRoute().`, `lib/constants.ts/CONFIG.`). Empty for `File` and `AnonymousClass` nodes. Enables indexed lookup. |
 | `incomingDependencies` | `SCIPType` | Number of types that depend on this type |
 | `outgoingDependencies` | `SCIPType` | Number of types this type depends on |
-| `incomingDependencies` | `SCIPModule` | **COUNT** of symbol-level DEPENDS_ON edges into symbols (types and functions) in this module |
+| `incomingDependencies` | `SCIPModule` | **COUNT** of symbol-level DEPENDS_ON edges into symbols (types, functions, and variables) in this module |
 | `incomingDependenciesWeight` | `SCIPModule` | **SUM** of `referenceCount` from those edges (edge magnitude) |
-| `outgoingDependencies` | `SCIPModule` | **COUNT** of symbol-level DEPENDS_ON edges from symbols (types and functions) in this module |
+| `outgoingDependencies` | `SCIPModule` | **COUNT** of symbol-level DEPENDS_ON edges from symbols (types, functions, and variables) in this module |
 | `outgoingDependenciesWeight` | `SCIPModule` | **SUM** of `referenceCount` from those edges |
 
 ### Module Dependency Semantics

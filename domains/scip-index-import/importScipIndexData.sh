@@ -103,6 +103,7 @@ if [[ "${SCIP_ADMIN_IMPORT_DONE:-false}" == "true" ]]; then
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Project_Constraint.cypher"
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Function_Constraint.cypher"
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Variable_Constraint.cypher"
 else
     # LOAD CSV path: convert, clean up, apply constraints, then import nodes and edges
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV..."
@@ -121,6 +122,9 @@ else
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP function uniqueness constraint..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Function_Constraint.cypher"
 
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP variable uniqueness constraint..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Variable_Constraint.cypher"
+
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP project nodes..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Project_Nodes.cypher"
 
@@ -138,6 +142,12 @@ else
 
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP function dependency edges..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Function_Edges.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP variable nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Variable_Nodes.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP variable dependency edges..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Variable_Edges.cypher"
 fi
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Redirecting SCIP shadow type edges to internal types..."
@@ -187,6 +197,9 @@ execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Type_SOURCE_FILE_S
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP functions to their source files..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Function_SOURCE_FILE_SCIP_File.cypher"
 
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP variables to their source files..."
+execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Variable_SOURCE_FILE_SCIP_File.cypher"
+
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP module nodes..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Module_Nodes_For_Internal_Types.cypher"
 
@@ -198,6 +211,9 @@ execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SC
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP modules to their contained functions..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SCIP_Function.cypher"
+
+echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP modules to their contained variables..."
+execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Module_CONTAINS_SCIP_Variable.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Linking SCIP artifacts to their contained modules..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher"
