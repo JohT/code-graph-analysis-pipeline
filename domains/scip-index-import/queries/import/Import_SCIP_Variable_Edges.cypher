@@ -2,7 +2,7 @@
 
 LOAD CSV WITH HEADERS FROM 'file:///scip_variable_edges.csv' AS row
 MATCH (source:SemanticCodeIndexVariable {symbol: row.source_symbol})
-MATCH (target:SemanticCodeIndexVariable|SemanticCodeIndexFunction|SemanticCodeIndexInternalType|SemanticCodeIndexExternalType {symbol: row.target_symbol})
+MATCH (target:SemanticCodeIndexInternalSymbol|SemanticCodeIndexExternalType {symbol: row.target_symbol})
 MERGE (source)-[relationship:DEPENDS_ON]->(target)
 SET relationship.referenceCount = toInteger(row.reference_count),
     relationship.via            = row.edge_type
