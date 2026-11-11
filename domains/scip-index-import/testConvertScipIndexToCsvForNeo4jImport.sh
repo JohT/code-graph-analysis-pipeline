@@ -2048,6 +2048,25 @@ assert_equals "zero function edges for Java-only file" \
 echo ""
 
 # ---------------------------------------------------------------------------
+# Test: field CSV files produced
+# ---------------------------------------------------------------------------
+
+echo "Test: field CSV files produced (even when no actual fields present in test data)"
+field_indices_dir="${tmp_test_dir}/field_indices"
+field_import_dir="${tmp_test_dir}/field_import"
+mkdir -p "${field_indices_dir}"
+create_minimal_java_scip_json > "${field_indices_dir}/field_test.scip.json"
+run_script_with_env "${field_indices_dir}" "${field_import_dir}"
+assert_exit_code "exits 0 for field extraction" "0" "${exit_code}"
+assert_file_exists "scip_field_nodes.csv produced" "${field_import_dir}/scip_field_nodes.csv"
+assert_file_exists "scip_field_edges.csv produced" "${field_import_dir}/scip_field_edges.csv"
+field_nodes_csv=$(cat "${field_import_dir}/scip_field_nodes.csv")
+assert_contains "field node CSV has correct header" \
+    '"symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root","descriptor"' \
+    "${field_nodes_csv}"
+echo ""
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 

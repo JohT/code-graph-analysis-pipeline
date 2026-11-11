@@ -104,6 +104,7 @@ if [[ "${SCIP_ADMIN_IMPORT_DONE:-false}" == "true" ]]; then
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Project_Constraint.cypher"
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Function_Constraint.cypher"
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Variable_Constraint.cypher"
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Field_Constraint.cypher"
 else
     # LOAD CSV path: convert, clean up, apply constraints, then import nodes and edges
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV..."
@@ -124,6 +125,9 @@ else
 
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP variable uniqueness constraint..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Variable_Constraint.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP field uniqueness constraint..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Field_Constraint.cypher"
 
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP project nodes..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Project_Nodes.cypher"
@@ -148,6 +152,12 @@ else
 
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP variable dependency edges..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Variable_Edges.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP field nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Field_Nodes.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP field dependency edges..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Field_Edges.cypher"
 fi
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Redirecting SCIP shadow type edges to internal types..."

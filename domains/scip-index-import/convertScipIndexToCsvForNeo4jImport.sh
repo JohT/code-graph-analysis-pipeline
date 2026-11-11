@@ -164,6 +164,24 @@ JQ_SHARED_FUNCTIONS='
     # Distinguishes variable declarations from type parameters like "().[T]".
     def is_base_variable_descriptor(sym):
         descriptor(sym) | endswith(".");
+
+    # True when descriptor is a class/interface field (has # followed by field name and .).
+    # Example: "com/example/MyClass#myField." (matches)
+    # Counter-example: "com/example/MyClass#Method()." (no match, contains ())
+    # Counter-example: "com/example/myVariable." (no match, no #)
+    def is_field_descriptor(sym):
+        descriptor(sym) | test("#[^#()]+\\.$");
+
+    # True when descriptor is a pure field definition: has # and ends with "." exactly (not ()).
+    # Distinguishes field declarations from method declarations or type parameters.
+    def is_base_field_descriptor(sym):
+        descriptor(sym) | test("#[^#()]+\\.$");
+
+    # True when field is public or protected (filters out private fields).
+    # Checks signature documentation or source code markers.
+    def is_public_protected_field(sig_text; doc_line):
+        ((sig_text // "") | test("(public|protected)")) or
+        ((doc_line // "") | test("(public|protected)"));
 '
 
 # ---------------------------------------------------------------------------
@@ -996,6 +1014,152 @@ function extract_variable_edges() {
         ' "${input_file}"
 }
 
+# ---------------------------------------------------------------------------
+# Pass 4c — Extract class/interface field nodes from one input file (with header)
+# Emits CSV header on first call; subsequent calls must skip the header.
+# Filters to public/protected fields only (excludes private).
+# Extracts both kind 61 (TypeScript/Python) and kind 79 (Java) field symbols.
+# ---------------------------------------------------------------------------
+
+function extract_field_nodes() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+
+        ($index[0].internal_package_ids) as $internal_pkg_ids |
+        (
+            (.metadata.project_root // "unknown") as $project_root_raw |
+            if ($project_root_raw | test("file://")) then
+                ($project_root_raw | gsub("^file://"; ""))
+            else
+                $project_root_raw
+            end
+            | gsub("/$"; "")
+        ) as $project_root |
+
+        [
+            .documents[] |
+            .relative_path as $file |
+            .symbols[]? |
+
+            select(.symbol != null) |
+            select(.symbol | startswith("local ") | not) |
+            select((.symbol | split(" ") | length) >= 5) |
+
+            .symbol as $symbol |
+
+            # Extract fields from multiple kinds (language-specific):
+            # - kind 61: TypeScript/Python type parameters, test fixtures (if they have field-like descriptors)
+            # - kind 79: Java fields, constants, static members
+            select(.kind == 61 or .kind == 79) |
+            select(is_base_field_descriptor($symbol)) |
+
+            ($symbol | split(" ")) as $tokens |
+            $tokens[1] as $manager    |
+            $tokens[2] as $pkg_id     |
+            $tokens[3] as $version    |
+            $tokens[4] as $descriptor_val |
+
+            select(($internal_pkg_ids | index($pkg_id)) != null) |
+
+            ($index[0].symbol_to_signature_text[$symbol] // "") as $sig_text |
+            ($index[0].symbol_to_doc_first_line[$symbol] // "") as $doc_line |
+
+            select(is_public_protected_field($sig_text; $doc_line) or
+                   (($sig_text | length) == 0 and ($doc_line | length) == 0)) |
+
+            ($descriptor_val | split("#") | .[0]) as $class_descriptor |
+            ($pkg_id | if test("^[a-z]+/") then sub("^[a-z]+/"; "") else . end) as $module_name |
+
+            {
+                symbol:          short_symbol($symbol),
+                display_name:    ($descriptor_val | gsub("#"; "/") | gsub("\\.$"; "") | split("/") | last | gsub("`"; "")),
+                scheme:          scheme($symbol),
+                type_name:       "Field",
+                file:            $file,
+                package_id:      $pkg_id,
+                package_manager: $manager,
+                version:         $version,
+                module:          $module_name,
+                is_abstract:     "false",
+                project_root:    $project_root,
+                descriptor:      $descriptor_val
+            }
+        ] |
+        unique_by(.symbol) |
+        sort_by(.file, .display_name) |
+
+        (["symbol","display_name","scheme","type_name","file","package_id","package_manager","version","module","is_abstract","project_root","descriptor"]),
+        (.[] | [.symbol, .display_name, .scheme, .type_name, .file, .package_id, .package_manager, .version, .module, .is_abstract, .project_root, .descriptor])
+        | @csv
+        ' "${input_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Pass 4d — Extract field initialization edges from one input file (no header)
+# Attributes role=0 (reference) occurrences to the containing field definition.
+# Edge types: initializes_with_function, initializes_with_type, initializes_with_field
+# ---------------------------------------------------------------------------
+
+function extract_field_edges() {
+    local symbol_index_file="${1}"
+    local input_file="${2}"
+    jq -r --slurpfile index "${symbol_index_file}" "${JQ_SHARED_FUNCTIONS}"'
+
+        .documents[] |
+        .relative_path as $source_file |
+
+        # Collect field definitions (role=1, kind 61 or 79) sorted by line.
+        (
+            [.occurrences[] |
+             select((.symbol_roles // 0) % 2 == 1) |
+             select(.symbol | startswith("local ") | not) |
+             select((.symbol | split(" ") | length) >= 5) |
+             select(is_base_field_descriptor(.symbol)) |
+             {symbol: .symbol, line: .range[0]}
+            ] | sort_by(.line) | unique_by(.symbol)
+        ) as $field_defs |
+
+        select(($field_defs | length) > 0) |
+
+        # For each role=0 occurrence, find owning field and classify the edge.
+        [.occurrences[] |
+         select((.symbol_roles // 0) % 2 == 0) |
+         select(.symbol | startswith("local ") | not) |
+         select((.symbol | split(" ") | length) >= 5) |
+         .range[0] as $occ_line |
+         .symbol as $occ_symbol |
+
+         # The owning field is the last field defined at or before this line, within a 2-line window.
+         ([$field_defs[] | select(.line <= $occ_line) | select($occ_line <= (.line + 2))] | last) as $owning_field |
+         select($owning_field != null) |
+
+         (descriptor($occ_symbol)) as $tgt_desc |
+         (
+           if ($tgt_desc | endswith("#")) then
+               {edge_type: "initializes_with_type", target: short_symbol($occ_symbol)}
+           elif ($tgt_desc | test("^[^#]*\\(\\)\\.$")) then
+               {edge_type: "initializes_with_function", target: short_symbol($occ_symbol)}
+           elif is_field_descriptor($occ_symbol) then
+               {edge_type: "initializes_with_field", target: short_symbol($occ_symbol)}
+           elif is_variable_descriptor($occ_symbol) then
+               {edge_type: "initializes_with_variable", target: short_symbol($occ_symbol)}
+           else null
+           end
+         ) as $edge_info |
+         select($edge_info != null) |
+
+         {from: short_symbol($owning_field.symbol), to: $edge_info.target, edge_type: $edge_info.edge_type}
+        ] |
+
+        group_by([.from, .to, .edge_type]) |
+        .[] |
+        select(.[0].from != .[0].to) |
+        {from: .[0].from, to: .[0].to, edge_type: .[0].edge_type, count: length} |
+        [.from, .to, .edge_type, (.count | tostring)] | @csv
+        ' "${input_file}"
+}
+
 function extract_project_metadata() {
 
     local input_file="${1}"
@@ -1025,6 +1189,7 @@ function extract_project_metadata() {
         ] | @csv
     ' "${input_file}"
 }
+
 
 function extract_anonymous_class_nodes() {
     local symbol_index_file="${1}"
@@ -1078,6 +1243,8 @@ function process_single_index() {
     local func_edges_temp="${6}"
     local var_nodes_temp="${7}"
     local var_edges_temp="${8}"
+    local field_nodes_temp="${9}"
+    local field_edges_temp="${10}"
 
     echo "convertScipIndexToCsv: Processing '${input_file}'..."
 
@@ -1119,6 +1286,13 @@ function process_single_index() {
         extract_variable_nodes "${symbol_index_file}" "${input_file}" | tail -n +2 > "${var_nodes_temp}"
     fi
     extract_variable_edges "${symbol_index_file}" "${input_file}" > "${var_edges_temp}"
+
+    if [ "${emit_header}" = "true" ]; then
+        extract_field_nodes "${symbol_index_file}" "${input_file}" > "${field_nodes_temp}"
+    else
+        extract_field_nodes "${symbol_index_file}" "${input_file}" | tail -n +2 > "${field_nodes_temp}"
+    fi
+    extract_field_edges "${symbol_index_file}" "${input_file}" > "${field_edges_temp}"
 }
 
 
@@ -1424,6 +1598,92 @@ function merge_variable_edge_csvs() {
     } > "${output_file}"
 }
 
+# ---------------------------------------------------------------------------
+# Merge per-file field node CSVs: deduplicate by symbol (first column)
+# Input: directory containing *_field_nodes.tmp files (header in first file only)
+# ---------------------------------------------------------------------------
+
+function merge_field_node_csvs() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local field_node_files=()
+    while IFS= read -r field_node_file; do
+        field_node_files+=("${field_node_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_field_nodes.tmp" | sort)
+
+    cat "${field_node_files[@]}" 2>/dev/null | awk -F',' '
+        NR == 1 { print; next }
+        {
+            # Extract the symbol field (first CSV column, may be quoted)
+            symbol = $1
+            gsub(/^"/, "", symbol)
+            gsub(/"$/, "", symbol)
+            file = $5
+            gsub(/^"/, "", file)
+            gsub(/"$/, "", file)
+            if (!seen[symbol]) {
+                seen[symbol] = $0
+                file_seen[symbol] = file
+                order[++n] = symbol
+            } else if (file_seen[symbol] == "" && file != "") {
+                seen[symbol] = $0
+                file_seen[symbol] = file
+            }
+        }
+        END {
+            for (i = 1; i <= n; i++) { print seen[order[i]] }
+        }
+    ' > "${output_file}"
+}
+
+# ---------------------------------------------------------------------------
+# Merge per-file field edge CSVs: sum reference_count for
+# (source_symbol, target_symbol, edge_type) triples
+# ---------------------------------------------------------------------------
+
+function merge_field_edge_csvs() {
+    local tmp_dir="${1}"
+    local output_file="${2}"
+
+    local field_edge_files=()
+    while IFS= read -r field_edge_file; do
+        field_edge_files+=("${field_edge_file}")
+    done < <(find "${tmp_dir}" -maxdepth 1 -name "*_field_edges.tmp" | sort)
+
+    {
+        echo '"source_symbol","target_symbol","edge_type","reference_count"'
+        if [ ${#field_edge_files[@]} -gt 0 ]; then
+            cat "${field_edge_files[@]}" | awk -F',' '
+                {
+                    source    = $1
+                    target    = $2
+                    edge_type = $3
+                    count     = $4
+                    gsub(/"/, "", count)
+                    key = source SUBSEP target SUBSEP edge_type
+                    counts[key] += count
+                    if (!(key in sources)) {
+                        sources[key]    = source
+                        targets[key]    = target
+                        edge_types[key] = edge_type
+                        order[NR]       = key
+                    }
+                }
+                END {
+                    for (i = 1; i <= NR; i++) {
+                        k = order[i]
+                        if (k in sources) {
+                            print sources[k] "," targets[k] "," edge_types[k] "," counts[k]
+                            delete sources[k]
+                        }
+                    }
+                }
+            '
+        fi
+    } > "${output_file}"
+}
+
 
 # ---------------------------------------------------------------------------
 # Main
@@ -1451,8 +1711,10 @@ while IFS= read -r index_file; do
     func_edges_temp="${tmp_dir}/${file_stem}_func_edges.tmp"
     var_nodes_temp="${tmp_dir}/${file_stem}_var_nodes.tmp"
     var_edges_temp="${tmp_dir}/${file_stem}_var_edges.tmp"
+    field_nodes_temp="${tmp_dir}/${file_stem}_field_nodes.tmp"
+    field_edges_temp="${tmp_dir}/${file_stem}_field_edges.tmp"
     
-    process_single_index "${index_file}" "${nodes_temp}" "${edges_temp}" "${first_file}" "${func_nodes_temp}" "${func_edges_temp}" "${var_nodes_temp}" "${var_edges_temp}"
+    process_single_index "${index_file}" "${nodes_temp}" "${edges_temp}" "${first_file}" "${func_nodes_temp}" "${func_edges_temp}" "${var_nodes_temp}" "${var_edges_temp}" "${field_nodes_temp}" "${field_edges_temp}"
     extract_project_metadata "${index_file}" "${first_file}" >> "${projects_temp}"
     
     first_file=false
@@ -1465,6 +1727,8 @@ func_nodes_output="${IMPORT_DIRECTORY}/scip_function_nodes.csv"
 func_edges_output="${IMPORT_DIRECTORY}/scip_function_edges.csv"
 var_nodes_output="${IMPORT_DIRECTORY}/scip_variable_nodes.csv"
 var_edges_output="${IMPORT_DIRECTORY}/scip_variable_edges.csv"
+field_nodes_output="${IMPORT_DIRECTORY}/scip_field_nodes.csv"
+field_edges_output="${IMPORT_DIRECTORY}/scip_field_edges.csv"
 
 echo "convertScipIndexToCsv: Merging node CSVs → '${nodes_output}'..."
 merge_node_csvs "${tmp_dir}" "${nodes_output}"
@@ -1487,6 +1751,12 @@ merge_variable_node_csvs "${tmp_dir}" "${var_nodes_output}"
 echo "convertScipIndexToCsv: Merging variable edge CSVs → '${var_edges_output}'..."
 merge_variable_edge_csvs "${tmp_dir}" "${var_edges_output}"
 
+echo "convertScipIndexToCsv: Merging field node CSVs → '${field_nodes_output}'..."
+merge_field_node_csvs "${tmp_dir}" "${field_nodes_output}"
+
+echo "convertScipIndexToCsv: Merging field edge CSVs → '${field_edges_output}'..."
+merge_field_edge_csvs "${tmp_dir}" "${field_edges_output}"
+
 node_count=$(( $(wc -l < "${nodes_output}") - 1 ))
 edge_count=$(( $(wc -l < "${edges_output}") - 1 ))
 project_count=$(( $(wc -l < "${projects_output}") - 1 ))
@@ -1494,4 +1764,7 @@ func_node_count=$(( $(wc -l < "${func_nodes_output}") - 1 ))
 func_edge_count=$(( $(wc -l < "${func_edges_output}") - 1 ))
 var_node_count=$(( $(wc -l < "${var_nodes_output}") - 1 ))
 var_edge_count=$(( $(wc -l < "${var_edges_output}") - 1 ))
-echo "convertScipIndexToCsv: Done. ${node_count} type node(s), ${edge_count} type edge(s), ${project_count} project(s), ${func_node_count} function node(s), ${func_edge_count} function edge(s), ${var_node_count} variable node(s), ${var_edge_count} variable edge(s)."
+field_node_count=$(( $(wc -l < "${field_nodes_output}") - 1 ))
+field_edge_count=$(( $(wc -l < "${field_edges_output}") - 1 ))
+echo "convertScipIndexToCsv: Done. ${node_count} type node(s), ${edge_count} type edge(s), ${project_count} project(s), ${func_node_count} function node(s), ${func_edge_count} function edge(s), ${var_node_count} variable node(s), ${var_edge_count} variable edge(s), ${field_node_count} field node(s), ${field_edge_count} field edge(s)."
+
