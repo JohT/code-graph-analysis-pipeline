@@ -4,42 +4,74 @@ This document describes breaking changes introduced in each major version and ho
 
 ---
 
-## Migration to v7.0.0
+## Migration to v6.0.0 (upcoming)
 
-v7 adds support for module-level variables and constants in SCIP indices, enriching the symbol dependency graph with variable initialization dependencies. Variables are now included in the `SemanticCodeIndexInternalSymbol` label alongside types and functions.
+Version 6 adds support for module-level variables, constants, and class/interface fields in SCIP indices. Both features enrich the symbol dependency graph with initialization and field dependencies. Variables and fields are now included in the `SemanticCodeIndexInternalSymbol` label alongside types and functions.
 
 ---
 
-### 1. SCIP variable extraction (new feature — optional)
+### 1. SCIP variable extraction (new feature, optional)
 
 **What changed:**
 
 SCIP indices can now include module-level variables (kind 8 symbols) and their initialization dependencies. Variables are extracted and imported with:
 
 - **New nodes:** `:SCIP:SemanticCodeIndexVariable:SemanticCodeIndexInternalSymbol` — module-level variables and constants from source code
-- **New edge types:** 
+- **New edge types:**
   - `initializes_with_function` — variable initialized by calling a function
   - `initializes_with_type` — variable initialized with a type (type conversion, constructor)
   - `initializes_with_variable` — variable initialized by reading another variable
 
 Variables contribute to:
+
 - `SemanticCodeIndexInternalSymbol` unified label (same as types and functions)
 - Module dependency counts (`incomingDependencies`, `outgoingDependencies`) via their `DEPENDS_ON` edges
 - Overview statistics (`variableCount`)
 
 **Why this matters:**
 
-Module-level variables are often configuration, default values, or shared constants that influence code behavior. Extracting their initialization dependencies reveals which functions and types are bootstrap dependencies for your system. For example, a `DEFAULT_CONFIG` variable initialized from `loadConfig()` now shows this critical path.
+Module-level variables often represent configuration, default values, or shared constants that influence code behavior. Extracting their initialization dependencies reveals which functions and types are bootstrap dependencies for your system. For example, a `DEFAULT_CONFIG` variable initialized from `loadConfig()` now shows this critical path.
 
 **Migration steps:**
 
-1. **No action required for existing pipelines:** Variable extraction is automatic if your SCIP indices contain variables (kind 8 symbols). If they don't, the pipeline continues to work unchanged.
+1. **No action required for existing pipelines.** Variable extraction is automatic if your SCIP indices contain variables (kind 8 symbols). If they do not, the pipeline continues to work unchanged.
 
-2. **Verify variable counts:** Run the pipeline on a TypeScript/Go/Python/Rust project. Check the overview statistics — you should now see a separate `variableCount` column showing the number of extracted module-level variables.
+2. **Verify variable counts.** Run the pipeline on a TypeScript, Go, Python, or Rust project. Check the overview statistics. You should now see a separate `variableCount` column showing the number of extracted module-level variables.
 
-3. **Update custom queries:** If you have custom Cypher queries that filter `SemanticCodeIndexInternalSymbol`, they now include variables in addition to types and functions. Verify that any group-by or aggregation logic still makes sense with this expanded symbol set.
+3. **Update custom queries.** If you have custom Cypher queries that filter `SemanticCodeIndexInternalSymbol`, they now include variables in addition to types and functions. Verify that any group by or aggregation logic still makes sense with this expanded symbol set.
 
-4. **Check initialization dependencies:** Variables from high-entropy modules or test files will have `isTest = true` and participate in test module dependency analysis same as functions.
+4. **Check initialization dependencies.** Variables from high entropy modules or test files will have `isTest = true` and participate in test module dependency analysis same as functions.
+
+---
+
+### 2. SCIP field extraction (new feature, optional)
+
+**What changed:**
+
+SCIP indices can now include class and interface fields (kind 6 symbols) and their dependencies. Fields are extracted and imported with:
+
+- **New nodes:** `:SCIP:SemanticCodeIndexField:SemanticCodeIndexInternalSymbol` — class members, static fields, and constants from source code
+- **New edge types:**
+  - `uses_field` — code references or accesses a field
+  - `field_typed_with` — field declared with a type
+
+Fields contribute to:
+
+- `SemanticCodeIndexInternalSymbol` unified label (same as types, functions, and variables)
+- Module dependency counts (`incomingDependencies`, `outgoingDependencies`) via their `DEPENDS_ON` edges
+- Overview statistics (`fieldCount`)
+
+**Why this matters:**
+
+Fields represent the data structures in your codebase. Tracking field types and how they are accessed reveals data dependencies and helps identify modules with complex or tight coupling through shared state.
+
+**Migration steps:**
+
+1. **No action required for existing pipelines.** Field extraction is automatic if your SCIP indices contain fields. If they do not, the pipeline continues to work unchanged.
+
+2. **Verify field counts.** Run the pipeline on a project. Check the overview statistics. You should now see a separate `fieldCount` column showing the number of extracted class and interface fields.
+
+3. **Update custom queries.** If you have custom Cypher queries that filter `SemanticCodeIndexInternalSymbol`, they now include fields in addition to types, functions, and variables. Verify that any group by or aggregation logic still makes sense with this expanded symbol set.
 
 ---
 
