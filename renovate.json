@@ -6,6 +6,18 @@
     "schedule:earlyMondays"
   ],
   "ignoreUnstable": false,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "packageRules": [
+      {
+        "description": "Group all security updates for uv",
+        "matchManagers": ["pep621"],
+        "matchDatasources": ["pypi"],
+        "groupName": "uv security updates",
+        "groupSlug": "uv-security"
+      }
+    ]
+  },
   "packageRules": [
     {
       "description": "Neo4j, APOC, and Graph Data Science updates grouped together",
@@ -74,7 +86,7 @@
     },
     {
       "description": "Only use stable versions for Python package managers",
-      "matchManagers": ["uv", "pip_setup", "poetry", "pipenv"],
+      "matchManagers": ["pep621", "pip_setup", "poetry", "pipenv"],
       "ignoreUnstable": true
     },
     {
