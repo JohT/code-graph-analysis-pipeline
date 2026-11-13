@@ -56,7 +56,7 @@ SCIP | ${PIPELINE_ROOT}/tools/scip-cli/scip |
 OUTPUT_DIR | ${PROJECT_ROOT}/target/scip-indices-per-module | 
 SCIP_VERSION | 0.10.0 | 
 BIN_DIR | ${TOOLS_DIRECTORY}/scip-cli | 
-SCIP_JAVA_VERSION | 0.12.3 | 
+SCIP_JAVA_VERSION | 0.14.2 | 
 ARTIFACTS_DIRECTORY | artifacts | 
 PREPARE_CONDA_ENVIRONMENT | true | Wether to prepare a Python environment with Conda if needed (default, "true") or use an already prepared Conda environment ("false")
 PYTHON_PACKAGE_MANAGER | uv | Python package manager to use. Options: "uv" (default), "conda". Use "conda" to activate the Conda environment.
