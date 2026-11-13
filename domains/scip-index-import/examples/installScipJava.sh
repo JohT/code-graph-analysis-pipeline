@@ -15,7 +15,7 @@ set -o errexit -o pipefail -o nounset
 IFS=$'\n\t'
 
 # Upgrade requires verifying Coursier bash wrapper compatibility (see domains/scip-index-import/examples/ README).
-SCIP_JAVA_VERSION=${SCIP_JAVA_VERSION:-"0.12.3"}
+SCIP_JAVA_VERSION=${SCIP_JAVA_VERSION:-"0.14.2"}
 
 TOOLS_DIRECTORY=${TOOLS_DIRECTORY:-"./tools"}
 BIN_DIR=${BIN_DIR:-"${TOOLS_DIRECTORY}/scip-java"}
@@ -103,7 +103,7 @@ function install_scip_java() {
         "https://github.com/coursier/launchers/raw/master/coursier" \
         --output "${coursier_launcher}"
 
-    local artifact="com.sourcegraph:scip-java_2.13:${SCIP_JAVA_VERSION}"
+    local artifact="org.scip-code:scip-java:${SCIP_JAVA_VERSION}"
     mkdir -p "${BIN_DIR}"
     echo "${SCRIPT_NAME}: Bootstrapping scip-java ${SCIP_JAVA_VERSION} from ${artifact}..."
     java -jar "${coursier_launcher}" bootstrap \
@@ -111,7 +111,7 @@ function install_scip_java() {
         "${artifact}" \
         --output "${scip_java_bin}" \
         --standalone \
-        --main com.sourcegraph.scip_java.ScipJava
+        --main org.scip_code.scip_java.ScipJava
 
     chmod +x "${scip_java_bin}"
     echo "${SCRIPT_NAME}: scip-java ${SCIP_JAVA_VERSION} installed → ${scip_java_bin}"
