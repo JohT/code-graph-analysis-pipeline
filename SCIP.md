@@ -21,7 +21,7 @@ The pipeline supports multi-language static code analysis via [SCIP](https://git
 2. You place the `.scip.json` file(s) in the `indices/` directory of your analysis workspace.
 3. `analyze.sh` detects the files automatically and imports them into Neo4j before running reports.
 
-The pipeline creates `:SCIP:SemanticCodeIndexInternalType`, `:SCIP:SemanticCodeIndexFunction`, and `:SCIP:SemanticCodeIndexExternalType` nodes with `DEPENDS_ON` relationships. Module-level functions (TypeScript, Go, Python) are extracted as `:SCIP:SemanticCodeIndexFunction` nodes alongside types and contribute to the same module dependency graph. Both types and functions share the `:SemanticCodeIndexInternalSymbol` unified label, compatible with archetype, cyclic dependency, and external dependency analyses.
+The pipeline creates `:SCIP:SemanticCodeIndexInternalType`, `:SCIP:SemanticCodeIndexFunction`, `:SCIP:SemanticCodeIndexVariable`, `:SCIP:SemanticCodeIndexField`, and `:SCIP:SemanticCodeIndexExternalType` nodes with `DEPENDS_ON` relationships. Module-level functions (TypeScript, Go, Python), module-level variables and constants, and class or interface fields are extracted as `:SCIP:SemanticCodeIndexFunction`, `:SCIP:SemanticCodeIndexVariable`, and `:SCIP:SemanticCodeIndexField` nodes alongside types and contribute to the same module dependency graph. Types, functions, variables, and fields share the `:SemanticCodeIndexInternalSymbol` unified label, compatible with archetype, cyclic dependency, and external dependency analyses.
 
 ## User Workflow
 

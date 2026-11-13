@@ -2,7 +2,7 @@
 
 LOAD CSV WITH HEADERS FROM 'file:///scip_function_nodes.csv' AS row
 WITH row WHERE row.file <> ''
-MERGE (node:SCIP:SemanticCodeIndexFunction {symbol: row.symbol})
+MERGE (node:SCIP:SemanticCodeIndexFunction:SemanticCodeIndexInternalSymbol {symbol: row.symbol})
 SET node.fqn            = row.symbol,
     node.name           = row.display_name,
     node.scheme         = row.scheme,

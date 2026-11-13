@@ -114,7 +114,8 @@ def get_file_path(name: str, parameters: Parameters, extension: str = 'svg') -> 
 def get_graph_database_driver() -> Driver:
     driver = GraphDatabase.driver(
         uri="bolt://localhost:7687",
-        auth=("neo4j", os.environ.get("NEO4J_INITIAL_PASSWORD"))
+        auth=("neo4j", os.environ.get("NEO4J_INITIAL_PASSWORD")), # type: ignore
+        notifications_disabled_classifications=["UNRECOGNIZED"]
     )
     driver.verify_connectivity()
     return driver

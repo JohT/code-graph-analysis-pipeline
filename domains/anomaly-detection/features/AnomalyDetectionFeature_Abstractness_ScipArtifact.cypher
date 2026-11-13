@@ -1,4 +1,4 @@
-// Calculate and set abstractness for SCIP artifacts and return a 0.1 ranged bin distribution. Requires "Link_SCIP_Artifact_CONTAINS_SCIP_InternalType.cypher".
+// Calculate and set abstractness for SCIP artifacts and return a 0.1 ranged bin distribution. Requires "Link_SCIP_Artifact_CONTAINS_SCIP_InternalSymbol.cypher".
 
 MATCH (a:SemanticCodeIndexArtifact)
  WITH a
