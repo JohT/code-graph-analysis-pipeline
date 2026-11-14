@@ -115,6 +115,7 @@ JQ_CROSS_FILE_FUNCTIONS='
         elif kind == 17 then "Function"
         elif kind == 18 then "Getter"
         elif kind == 21 then "Interface"
+        elif kind == 25 then "Macro"
         elif kind == 26 then "Method"
         elif kind == 35 then "Package"
         elif kind == 41 then "Property"
@@ -123,8 +124,8 @@ JQ_CROSS_FILE_FUNCTIONS='
         elif kind == 55 then "TypeAlias"
         elif kind == 61 then
             if is_base_field_descriptor(sym) then "Field" else "TypeAlias" end
-        elif kind == 66 then "Method"
-        elif kind == 67 then "Method"
+        elif kind == 66 then "AbstractMethod"
+        elif kind == 67 then "AbstractMethod"
         elif kind == 79 then "Field"
         elif kind == 80 then "Method"
         elif kind == null then null_kind_fallback(sig_text; doc_first_line)

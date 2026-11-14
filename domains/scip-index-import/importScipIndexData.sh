@@ -146,16 +146,9 @@ if [[ "${SCIP_ADMIN_IMPORT_DONE:-false}" == "true" ]]; then
         execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Cross_File_External_Symbol_Constraint.cypher"
         execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Project_Constraint.cypher"
         # Kind-specific labels must be applied before shadow-type handling runs below
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Function_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Symbol_Type_Label.cypher"
         execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Internal_Type_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Variable_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Field_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Constructor_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_EnumMember_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_File_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Getter_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Property_Label.cypher"
-        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_TypeAlias_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Internal_Executable_Label.cypher"
         execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_External_Type_Label.cypher"
     else
         # kind-level mode
@@ -198,15 +191,9 @@ elif [ "${SCIP_IMPORT_MODE}" = "cross-file" ]; then
 
     # Kind-specific labels must be applied before shadow-type handling runs below
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Adding cross-file kind-specific labels..."
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Function_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Symbol_Type_Label.cypher"
     execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Internal_Type_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Variable_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Field_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Constructor_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_EnumMember_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Getter_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Property_Label.cypher"
-    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_TypeAlias_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Internal_Executable_Label.cypher"
     execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_External_Type_Label.cypher"
 else
     # Kind-level LOAD CSV path (default): convert, clean up, apply constraints, then import nodes and edges
@@ -270,6 +257,12 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Deleting SCIP shadow e
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Delete_SCIP_Shadow_External_Types.cypher"
 
 verify_scip_placeholder_symbols
+
+# Add executable labels for kind-level imports (only needed in legacy kind-level mode)
+if [ "${SCIP_IMPORT_MODE}" = "kind-level" ]; then
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Adding internal executable label to kind-level function symbols..."
+    execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Kind_Level_Internal_Executable_Label.cypher"
+fi
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting SCIP project short name..."
 execute_cypher_summarized "${ENRICHMENT_QUERIES_DIR}/Set_SCIP_Project_Short_Name.cypher"

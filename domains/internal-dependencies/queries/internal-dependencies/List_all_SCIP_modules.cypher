@@ -2,7 +2,7 @@
 
 MATCH (m:SemanticCodeIndexModule)
 OPTIONAL MATCH (m)-[:CONTAINS]->(t:SemanticCodeIndexInternalType)
-OPTIONAL MATCH (m)-[:CONTAINS]->(f:SemanticCodeIndexFunction)
+OPTIONAL MATCH (m)-[:CONTAINS]->(f:SemanticCodeIndexInternalExecutable)
  WITH m
      ,count(DISTINCT t.fqn) AS numberOfTypes
      ,count(DISTINCT f.fqn) AS numberOfFunctions
