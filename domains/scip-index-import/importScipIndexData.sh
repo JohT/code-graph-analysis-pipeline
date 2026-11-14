@@ -155,6 +155,9 @@ elif [ "${SCIP_IMPORT_MODE}" = "cross-file" ]; then
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP cross-file external symbol nodes..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Cross_File_External_Symbol_Nodes.cypher"
 
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP symbol index..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Symbol_Index.cypher"
+
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP cross-file symbol edges..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Cross_File_Symbol_Edges.cypher"
 
