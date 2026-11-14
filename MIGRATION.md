@@ -8,6 +8,27 @@ This document describes breaking changes introduced in each major version and ho
 
 Version 6 adds support for module-level variables, constants, and class/interface fields in SCIP indices. Both features enrich the symbol dependency graph with initialization and field dependencies. Variables and fields are now included in the `SemanticCodeIndexInternalSymbol` label alongside types and functions.
 
+Version 6 also introduces `SCIP_IMPORT_MODE=cross-file`, a new opt-in extraction strategy described below.
+
+---
+
+### 4. SCIP cross-file import mode (new opt-in feature)
+
+**What changed:** A new extraction strategy `SCIP_IMPORT_MODE=cross-file` is available. This mode uses occurrence-based cross-file reference detection instead of hardcoded kind-number filtering. All symbol kinds that cross file boundaries are captured automatically.
+
+**Who is affected:** Only users who explicitly set `SCIP_IMPORT_MODE=cross-file`. The default `kind-level` behavior is unchanged.
+
+**Node label difference:** In `cross-file` mode, external nodes are imported with label `:SemanticCodeIndexExternalSymbol` instead of `:SemanticCodeIndexExternalType`. The `:SemanticCodeIndexExternalType` label is added during enrichment for external symbols of type kinds. If you run queries directly after import and before enrichment, replace `:SemanticCodeIndexExternalType` with `:SemanticCodeIndexExternalSymbol`.
+
+**Migration steps:**
+
+1. If `SCIP_IMPORT_MODE` is not set or is `kind-level`, no action is required.
+2. To enable `cross-file` mode, set the environment variable before running `analyze.sh`:
+   ```shell
+   SCIP_IMPORT_MODE=cross-file analyze.sh --keep-running
+   ```
+3. Queries using `:SemanticCodeIndexInternalSymbol`, `:SemanticCodeIndexInternalType`, `:SemanticCodeIndexExternalType`, or `:DEPENDS_ON` work in both modes after the full enrichment pipeline runs.
+
 ---
 
 ### 1. SCIP variable extraction (new feature, optional)

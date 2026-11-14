@@ -40,6 +40,11 @@ NEO4J_INSTALLATION_DIRECTORY="${TOOLS_DIRECTORY}/${NEO4J_INSTALLATION_NAME}"
 # Hash file for change detection — same path as used by importScipIndexData.sh
 SCIP_INDEX_CHANGE_DETECTION_HASH_FILE="${INDICES_DIRECTORY}/scipIndexChangeDetection.sha"
 
+# Controls which SCIP extraction strategy to use — must match importScipIndexData.sh.
+# kind-level: uses kind-level admin CSV format (default).
+# cross-file: uses occurrence-based cross-file admin CSV format.
+SCIP_IMPORT_MODE=${SCIP_IMPORT_MODE:-"kind-level"}
+
 # Source operatingSystemFunctions.sh for ifWindows(); compute scriptExtension after sourcing
 # shellcheck disable=SC1091
 source "${SCRIPTS_DIR}/operatingSystemFunctions.sh"
@@ -99,40 +104,56 @@ function try_admin_import() {
 
     # Convert SCIP index files to neo4j-admin import CSVs
     echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to admin import CSV..."
-    if ! ( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_ADMIN_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jAdminImport.sh" ); then
-        echo "importScipIndexDataWithAdminImport: CSV conversion failed. Falling back to LOAD CSV." >&2
-        return 0
+    if [ "${SCIP_IMPORT_MODE}" = "cross-file" ]; then
+        if ! ( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_ADMIN_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jAdminCrossFileImport.sh" ); then
+            echo "importScipIndexDataWithAdminImport: CSV conversion failed. Falling back to LOAD CSV." >&2
+            return 0
+        fi
+    else
+        if ! ( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_ADMIN_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jAdminImport.sh" ); then
+            echo "importScipIndexDataWithAdminImport: CSV conversion failed. Falling back to LOAD CSV." >&2
+            return 0
+        fi
     fi
 
     # Resolve IMPORT_DIRECTORY to absolute path (neo4j-admin requires absolute file paths)
     local absolute_import_dir
     absolute_import_dir=$( CDPATH=. cd -- "${IMPORT_DIRECTORY}" && pwd -P )
-    local nodes_csv="${absolute_import_dir}/scip_type_nodes_admin.csv"
-    local edges_csv="${absolute_import_dir}/scip_type_edges_admin.csv"
-    local projects_csv="${absolute_import_dir}/scip_projects_admin.csv"
-    local links_csv="${absolute_import_dir}/scip_type_project_links_admin.csv"
-    local func_nodes_csv="${absolute_import_dir}/scip_function_nodes_admin.csv"
-    local func_edges_csv="${absolute_import_dir}/scip_function_edges_admin.csv"
 
     # Ensure logs directory exists before neo4j-admin writes its report
     mkdir -p "${RUNTIME_DIRECTORY}/logs"
 
-    # Build neo4j-admin command with absolute file paths using array
-    # Arrays preserve argument boundaries and prevent word splitting issues
+    # Build neo4j-admin command with absolute file paths using array.
+    # Arrays preserve argument boundaries and prevent word splitting issues.
     local -a neo4j_admin_cmd_args
-    neo4j_admin_cmd_args=(
-        "database"
-        "import"
-        "full"
-        "--nodes=${nodes_csv}"
-        "--nodes=${projects_csv}"
-        "--nodes=${func_nodes_csv}"
-        "--relationships=${edges_csv}"
-        "--relationships=${links_csv}"
-        "--relationships=${func_edges_csv}"
-        "--report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report"
-        "neo4j"
-    )
+    if [ "${SCIP_IMPORT_MODE}" = "cross-file" ]; then
+        neo4j_admin_cmd_args=(
+            "database"
+            "import"
+            "full"
+            "--nodes=${absolute_import_dir}/scip_symbol_nodes_admin.csv"
+            "--nodes=${absolute_import_dir}/scip_external_symbol_nodes_admin.csv"
+            "--nodes=${absolute_import_dir}/scip_projects_admin.csv"
+            "--relationships=${absolute_import_dir}/scip_symbol_edges_admin.csv"
+            "--relationships=${absolute_import_dir}/scip_symbol_project_links_admin.csv"
+            "--report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report"
+            "neo4j"
+        )
+    else
+        neo4j_admin_cmd_args=(
+            "database"
+            "import"
+            "full"
+            "--nodes=${absolute_import_dir}/scip_type_nodes_admin.csv"
+            "--nodes=${absolute_import_dir}/scip_projects_admin.csv"
+            "--nodes=${absolute_import_dir}/scip_function_nodes_admin.csv"
+            "--relationships=${absolute_import_dir}/scip_type_edges_admin.csv"
+            "--relationships=${absolute_import_dir}/scip_type_project_links_admin.csv"
+            "--relationships=${absolute_import_dir}/scip_function_edges_admin.csv"
+            "--report-file=${RUNTIME_DIRECTORY}/logs/scip_admin_import.report"
+            "neo4j"
+        )
+    fi
 
     # Run neo4j-admin database import full
     echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Running neo4j-admin database import full..."

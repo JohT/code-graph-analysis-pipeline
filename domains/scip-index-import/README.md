@@ -26,8 +26,10 @@ To run it manually: place `.scip.json` files in `indices/` and execute `importSc
 | Script | Purpose |
 |--------|---------|
 | [examples/installScipCli.sh](./examples/installScipCli.sh) | Downloads and installs the scip CLI binary (optional if scip is already globally available) |
-| [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline (sourced by `analyze.sh`) |
-| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Converts `*.scip.json` files to type CSVs (`scip_type_nodes.csv`, `scip_type_edges.csv`), function CSVs (`scip_function_nodes.csv`, `scip_function_edges.csv`), variable CSVs (`scip_variable_nodes.csv`, `scip_variable_edges.csv`), and field CSVs (`scip_field_nodes.csv`, `scip_field_edges.csv`) |
+| [importScipIndexData.sh](./importScipIndexData.sh) | Full import and enrichment pipeline (sourced by `analyze.sh`). Branches on `SCIP_IMPORT_MODE`. |
+| [convertScipIndexToCsvForNeo4jImport.sh](./convertScipIndexToCsvForNeo4jImport.sh) | Kind-level mode: converts `*.scip.json` files to type CSVs (`scip_type_nodes.csv`, `scip_type_edges.csv`), function CSVs (`scip_function_nodes.csv`, `scip_function_edges.csv`), variable CSVs (`scip_variable_nodes.csv`, `scip_variable_edges.csv`), and field CSVs (`scip_field_nodes.csv`, `scip_field_edges.csv`) |
+| [convertScipIndexToCsvForNeo4jCrossFileImport.sh](./convertScipIndexToCsvForNeo4jCrossFileImport.sh) | Cross-file mode: converts `*.scip.json` files using occurrence-based filtering to `scip_symbol_nodes.csv`, `scip_external_symbol_nodes.csv`, `scip_symbol_edges.csv`, and `scip_projects.csv` |
+| [convertScipIndexToCsvForNeo4jAdminCrossFileImport.sh](./convertScipIndexToCsvForNeo4jAdminCrossFileImport.sh) | Cross-file mode admin format: wraps `convertScipIndexToCsvForNeo4jCrossFileImport.sh` and transforms output to `neo4j-admin database import full` format |
 
 ## Input
 

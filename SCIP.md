@@ -23,6 +23,10 @@ The pipeline supports multi-language static code analysis via [SCIP](https://git
 
 The pipeline creates `:SCIP:SemanticCodeIndexInternalType`, `:SCIP:SemanticCodeIndexFunction`, `:SCIP:SemanticCodeIndexVariable`, `:SCIP:SemanticCodeIndexField`, and `:SCIP:SemanticCodeIndexExternalType` nodes with `DEPENDS_ON` relationships. Module-level functions (TypeScript, Go, Python), module-level variables and constants, and class or interface fields are extracted as `:SCIP:SemanticCodeIndexFunction`, `:SCIP:SemanticCodeIndexVariable`, and `:SCIP:SemanticCodeIndexField` nodes alongside types and contribute to the same module dependency graph. Types, functions, variables, and fields share the `:SemanticCodeIndexInternalSymbol` unified label, compatible with archetype, cyclic dependency, and external dependency analyses.
 
+## Symbol Classification
+
+The pipeline classifies SCIP symbols by their Kind number and maps each to a Neo4j label. This enables fine-grained analysis of different symbol categories (constructors, properties, getters, etc.) across all supported languages. For a complete reference of SCIP Kind numbers, names, and their Neo4j label mappings, see [domains/scip-index-import/SCIP_KIND_MAPPING_REFERENCE.md](domains/scip-index-import/SCIP_KIND_MAPPING_REFERENCE.md).
+
 ## User Workflow
 
 ### Prerequisites
@@ -121,9 +125,39 @@ The pipeline merges them automatically: node symbols are deduplicated; edge refe
 
 ## Environment Variables
 
-| Variable           | Default    | Description                                           |
-|--------------------|------------|-------------------------------------------------------|
-| `INDICES_DIRECTORY`| `indices`  | Directory containing `*.scip.json` files for import   |
+| Variable            | Default      | Description                                                                                   |
+|---------------------|--------------|-----------------------------------------------------------------------------------------------|
+| `INDICES_DIRECTORY` | `indices`    | Directory containing `*.scip.json` files for import                                           |
+| `SCIP_IMPORT_MODE`  | `kind-level` | Extraction strategy. `kind-level` filters by SCIP kind numbers. `cross-file` captures all symbol kinds that cross file boundaries (see below). |
+
+## Import Modes
+
+The pipeline supports two extraction strategies, controlled by `SCIP_IMPORT_MODE`.
+
+### kind-level (default)
+
+Filters symbols by hardcoded SCIP kind numbers (7=Class, 17=Function, 21=Interface, etc.). Produces separate node files for types, functions, variables, and fields. Use this mode for all current analyses.
+
+### cross-file
+
+Filters symbols by occurrence-based cross-file reference detection. A symbol is included only if it is referenced from at least one file other than its definition file. All symbol kinds are captured automatically. No manual kind-number mapping is needed when new languages or kinds are added.
+
+Enable cross-file mode by setting the environment variable before running `analyze.sh`:
+
+```shell
+SCIP_IMPORT_MODE=cross-file analyze.sh --keep-running
+```
+
+What changes in cross-file mode:
+
+- Internal symbols use `:SemanticCodeIndexInternalSymbol` as the primary label at import time. Kind-specific labels (`:SemanticCodeIndexInternalType`, `:SemanticCodeIndexFunction`, etc.) are added during enrichment.
+- External symbols use `:SemanticCodeIndexExternalSymbol` as the primary label at import time. `:SemanticCodeIndexExternalType` is added during enrichment.
+- Output CSVs: `scip_symbol_nodes.csv`, `scip_external_symbol_nodes.csv`, `scip_symbol_edges.csv` instead of the kind-split files.
+- Symbols that are only used within a single file are excluded. This reduces noise from private helper functions that have no external callers.
+
+Queries using `:SemanticCodeIndexInternalSymbol`, `:SemanticCodeIndexInternalType`, `:SemanticCodeIndexExternalType`, or `:DEPENDS_ON` work in both modes after the full enrichment pipeline runs.
+
+For a complete reference of SCIP kind mappings to Neo4j labels, see [domains/scip-index-import/SCIP_KIND_MAPPING_REFERENCE.md](domains/scip-index-import/SCIP_KIND_MAPPING_REFERENCE.md).
 
 ## Validation
 
