@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-# Imports SCIP type-graph and function-graph CSV data into Neo4j and enriches it for projection compatibility.
-# Creates SemanticCodeIndexInternalType, SemanticCodeIndexExternalType, SemanticCodeIndexFunction,
-# SemanticCodeIndexArtifact, and SemanticCodeIndexModule nodes.
-# Also creates structural CONTAINS links between artifacts, modules, types, and functions.
+# Imports SCIP CSV data into Neo4j and enriches it for projection compatibility.
+# Supports two import modes controlled by SCIP_IMPORT_MODE:
+#   cross-file (default): imports scip_symbol_nodes.csv (all cross-file internal symbols),
+#     scip_external_symbol_nodes.csv, and scip_symbol_edges.csv.
+#     Filters by occurrence-based cross-file reference detection, not by kind numbers.
+#   kind-level: legacy mode; imports scip_type_nodes.csv, scip_function_nodes.csv, scip_variable_nodes.csv,
+#     scip_field_nodes.csv and their corresponding edge CSVs. Filters by SCIP kind numbers.
+# Both modes create SemanticCodeIndexArtifact and SemanticCodeIndexModule nodes and structural CONTAINS links.
 # Skips import and enrichment if indices/ hasn't changed since last successful import (change detection via hash file).
-# Assumes scip_type_nodes.csv, scip_type_edges.csv, scip_function_nodes.csv, and scip_function_edges.csv
-# are already placed in the Neo4j import directory.
 # Requires executeQueryFunctions.sh, detectChangedFiles.sh
 
 # Fail on any error ("-e" = exit on first error, "-o pipefail" exit on errors within piped commands)
@@ -40,6 +42,11 @@ SCIP_INDEX_CHANGE_DETECTION_HASH_FILE="${INDICES_DIRECTORY}/scipIndexChangeDetec
 # Directory for Neo4j CSV import files (defaults to ./import in working directory)
 IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"./import"}
 
+# Controls which SCIP extraction strategy to use.
+# cross-file: filters by occurrence-based cross-file reference detection (default, recommended).
+# kind-level: legacy mode; filters symbols by SCIP kind numbers (use for compatibility with existing analyses).
+SCIP_IMPORT_MODE=${SCIP_IMPORT_MODE:-"cross-file"}
+
 # Define functions to execute a cypher query from within a given file like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
@@ -68,6 +75,41 @@ verify_scip_placeholder_symbols() {
         nodeCount=$(get_csv_column_value "${dataVerificationResult}" "nodeCount")
         logWarning "SCIP type symbols with unresolved build placeholders (e.g., \${revision}, \${project.version}) detected in ${nodeCount} nodes. This indicates version mismatches in multi-module SCIP merges. Analysis is not affected. To resolve, verify your SCIP merge configuration and module version consistency."
     fi
+}
+
+# Verifies that every SemanticCodeIndexInternalSymbol has all required properties.
+# Required properties: name, fqn, file, module, kind, symbolType, descriptor, projectName, isTest, isAbstract, packageId, scheme, language.
+# Fails fast with clear error message if any incomplete symbols are found.
+verify_scip_internal_symbol_completeness() {
+    echo "importScipIndexData: Verifying that all SemanticCodeIndexInternalSymbol nodes have required properties..."
+
+    local dataVerificationResult
+    dataVerificationResult=$( execute_cypher "${IMPORT_QUERIES_DIR}/Verify_SCIP_Internal_Symbol_Completeness.cypher")
+
+    # Parse the verification result which returns: propertyName, coverage (percentage), symbolExamples
+    # If coverage < 100 for any property, report it as an error
+    local missingPropertiesFound
+    missingPropertiesFound=$( echo "${dataVerificationResult}" | tail -n +2 | wc -l )
+
+    if [ "${missingPropertiesFound}" -gt 0 ]; then
+        echo "importScipIndexData: ERROR: Found properties with < 100% coverage:" >&2
+        echo "${dataVerificationResult}" | tail -n +2 | while IFS=',' read -r propertyName coverage symbolExamples; do
+            propertyName="${propertyName#\"}"
+            propertyName="${propertyName%\"}"
+            coverage="${coverage#\"}"
+            coverage="${coverage%\"}"
+            echo "  - $propertyName: ${coverage}% coverage" >&2
+            echo "    Example symbols missing this property: ${symbolExamples}" >&2
+        done >&2
+        echo "" >&2
+        echo "This typically indicates:" >&2
+        echo "  1. Import CSV was not generated correctly (missing columns)" >&2
+        echo "  2. Admin CSV transformation dropped required properties" >&2
+        echo "  3. Enrichment queries did not run or failed silently" >&2
+        return 1
+    fi
+
+    echo "importScipIndexData: ✓ All SemanticCodeIndexInternalSymbol nodes have required properties"
 }
 
 # Check if indices have changed since last import
@@ -99,15 +141,76 @@ fi
 # Constraints are still required before enrichment queries can run.
 if [[ "${SCIP_ADMIN_IMPORT_DONE:-false}" == "true" ]]; then
     echo "importScipIndexData: Admin import completed. Running constraints and enrichment only."
-    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Internal_Type_Constraint.cypher"
-    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
+    if [ "${SCIP_IMPORT_MODE}" = "cross-file" ]; then
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Cross_File_Internal_Symbol_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Cross_File_External_Symbol_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Project_Constraint.cypher"
+        # Kind-specific labels must be applied before shadow-type handling runs below
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Function_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Internal_Type_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Variable_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Field_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Constructor_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_EnumMember_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_File_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Getter_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Property_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_TypeAlias_Label.cypher"
+        execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_External_Type_Label.cypher"
+    else
+        # kind-level mode
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Internal_Type_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_External_Type_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Project_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Function_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Variable_Constraint.cypher"
+        execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Field_Constraint.cypher"
+    fi
+elif [ "${SCIP_IMPORT_MODE}" = "cross-file" ]; then
+    # Cross-file LOAD CSV path: convert using occurrence-based filtering, then import
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV (cross-file mode)..."
+    ( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_INDEX_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jCrossFileImport.sh" )
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Cleaning up existing SCIP nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Cleanup_All_SCIP_Nodes.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP cross-file symbol uniqueness constraints..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Cross_File_Internal_Symbol_Constraint.cypher"
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Cross_File_External_Symbol_Constraint.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP project uniqueness constraint..."
     execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Project_Constraint.cypher"
-    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Function_Constraint.cypher"
-    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Variable_Constraint.cypher"
-    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Field_Constraint.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP project nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Project_Nodes.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP cross-file internal symbol nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Cross_File_Internal_Symbol_Nodes.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP cross-file external symbol nodes..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Cross_File_External_Symbol_Nodes.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP symbol index..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Create_SCIP_Symbol_Index.cypher"
+
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Importing SCIP cross-file symbol edges..."
+    execute_cypher "${IMPORT_QUERIES_DIR}/Import_SCIP_Cross_File_Symbol_Edges.cypher"
+
+    # Kind-specific labels must be applied before shadow-type handling runs below
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Adding cross-file kind-specific labels..."
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Function_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Internal_Type_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Variable_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Field_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Constructor_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_EnumMember_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Getter_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_Property_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_TypeAlias_Label.cypher"
+    execute_cypher "${ENRICHMENT_QUERIES_DIR}/Add_SCIP_Cross_File_External_Type_Label.cypher"
 else
-    # LOAD CSV path: convert, clean up, apply constraints, then import nodes and edges
-    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV..."
+    # Kind-level LOAD CSV path (default): convert, clean up, apply constraints, then import nodes and edges
+    echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Converting SCIP index files to CSV (kind-level mode)..."
     ( INDICES_DIRECTORY="${INDICES_DIRECTORY}" IMPORT_DIRECTORY="${IMPORT_DIRECTORY}" bash "${SCIP_INDEX_IMPORT_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jImport.sh" )
 
     echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Cleaning up existing SCIP nodes..."
@@ -254,6 +357,9 @@ execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_De
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency degree rank..."
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
+
+# Verify completeness of all SemanticCodeIndexInternalSymbol nodes before finishing
+verify_scip_internal_symbol_completeness
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') SCIP index import complete."
 
