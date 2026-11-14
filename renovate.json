@@ -94,6 +94,12 @@
       "matchDatasources": ["python-version", "conda"],
       "matchDepNames": ["python"],
       "groupName": "workflow-and-conda-python-version"
+    },
+    {
+      "description": "Group SCIP updates",
+      "matchDatasources": ["github-releases"],
+      "matchDepNames": ["scip-code/scip", "scip-code/scip-java"],
+      "groupName": "scip-indexing-updates"
     }
   ],
   "customManagers": [
