@@ -1,6 +1,6 @@
 // Create :SCIP:File nodes from unique file paths in SCIP internal type nodes. Language-agnostic. Requires "Import_SCIP_Type_Internal_Nodes.cypher".
 
-MATCH (t:SCIP:SemanticCodeIndexInternalType)
+MATCH (t:SCIP:SemanticCodeIndexInternalSymbol)
 WHERE t.file IS NOT NULL
  WITH DISTINCT t.file AS filePath
      ,last(split(t.file, '/')) AS fileName
