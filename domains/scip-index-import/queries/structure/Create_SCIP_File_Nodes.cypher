@@ -8,5 +8,5 @@ WHERE t.file IS NOT NULL
       ,coalesce(nullif(last(split(fileName, '.')), fileName), '') AS fileExtension
   WITH *
       ,substring(fileName, 0, size(fileName) - size(fileExtension) - 1) AS name
-MERGE (f:SCIP:File {fileName: fileName, relativePath: filePath, name: name})
+MERGE (f:SCIP:File:SemanticCodeIndexInternalFile {fileName: fileName, relativePath: filePath, name: name})
 RETURN count(*) AS writtenNodes
