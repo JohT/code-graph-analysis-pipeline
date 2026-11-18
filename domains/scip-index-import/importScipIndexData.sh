@@ -295,7 +295,7 @@ echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating file-level de
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Link_SCIP_File_DEPENDS_ON_SCIP_File.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP module nodes..."
-execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Module_Nodes_For_Internal_Types.cypher"
+execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Module_Nodes_For_Internal_Symbols.cypher"
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Creating SCIP artifact nodes..."
 execute_cypher_summarized "${STRUCTURE_QUERIES_DIR}/Create_SCIP_Artifact_Nodes.cypher"
