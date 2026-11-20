@@ -1,4 +1,4 @@
-// Link SemanticCodeIndexModule nodes to their contained SemanticCodeIndexInternalSymbol nodes via CONTAINS. Requires "Create_SCIP_Module_Nodes_For_Internal_Types.cypher" and "Import_SCIP_Type_Internal_Nodes.cypher".
+// Link SemanticCodeIndexModule nodes to their contained SemanticCodeIndexInternalSymbol nodes via CONTAINS. Requires "Create_SCIP_Module_Nodes_For_Internal_Symbols.cypher" and "Import_SCIP_Type_Internal_Nodes.cypher".
 
 MATCH (t:SCIP:SemanticCodeIndexInternalSymbol)
  WITH t

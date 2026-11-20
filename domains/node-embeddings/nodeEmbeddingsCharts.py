@@ -270,7 +270,10 @@ def apply_umap(embeddings_data: pd.DataFrame, verbose: bool) -> pd.DataFrame:
     # Add small jitter to avoid UMAP spectral initialization issues with small/uniform datasets
     embedding_matrix = embedding_matrix + np.random.RandomState(42).normal(0, 1e-6, embedding_matrix.shape)
     n_neighbors = min(15, len(embedding_matrix) - 1)
-    reducer = umap.UMAP(n_components=2, n_neighbors=n_neighbors, random_state=42, n_jobs=1)
+    # For very small datasets (< 10 points), use random initialization to avoid spectral layout failure
+    # when k >= N in sparse matrix eigenvalue decomposition
+    init_transform = 'random' if len(embedding_matrix) < 10 else 'spectral'
+    reducer = umap.UMAP(n_components=2, n_neighbors=n_neighbors, random_state=42, n_jobs=1, init=init_transform)
     coordinates = reducer.fit_transform(embedding_matrix)
     coordinates = np.asarray(coordinates) # Convert to dense numpy array
     result = embeddings_data.copy()

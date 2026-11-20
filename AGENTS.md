@@ -8,7 +8,7 @@ Java + experimental TypeScript.
 
 ## Project Structure
 
-```
+```text
 ├── scripts/analysis/analyze.sh      # Main entry point for end-to-end analysis
 ├── domains/                         # Vertical-slice domains (self-contained analysis areas)
 │   └── <domain-name>/               # One dir per domain — see domains/ for current list
@@ -27,14 +27,14 @@ Each domain: vertical slice with own entry points, queries, scripts, templates. 
 ## Key Docs
 
 | Document | Purpose |
-|----------|---------|
+| -------- | ------- |
 | [README.md](./README.md) | Overview, features, prerequisites |
 | [GETTING_STARTED.md](./GETTING_STARTED.md) | Quick-start |
 | [COMMANDS.md](./COMMANDS.md) | All CLI commands, `analyze.sh` options |
 | [INTEGRATION.md](./INTEGRATION.md) | CI/CD (GitHub Actions) |
-| [SCRIPTS.md](./SCRIPTS.md) | Generated script reference |
-| [CYPHER.md](./CYPHER.md) | Generated Cypher query reference |
-| [ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) | All env vars with defaults |
+| [SCRIPTS.md](./SCRIPTS.md) | Auto-generated script reference |
+| [CYPHER.md](./CYPHER.md) | Auto-generated Cypher query reference |
+| [ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) | All env vars with defaults auto generated |
 
 Writing or editing documentation? See [documentation conventions](./.github/instructions/documentation.instructions.md).
 
@@ -68,7 +68,7 @@ Neo4j required. Use [.github/skills/neo4j-management/SKILL.md](./.github/skills/
 Filename pattern in [scripts/reports/compilations/](./scripts/reports/compilations/):
 
 | Pattern | Report type |
-|---------|------------|
+| ------- | ----------- |
 | `*Csv.sh` | CSV from Cypher queries |
 | `*Python.sh` | Python SVG charts |
 | `*Visualization.sh` | GraphViz visualizations |
@@ -81,7 +81,7 @@ Filename pattern in [scripts/reports/compilations/](./scripts/reports/compilatio
 Instruction files auto-applied per file type:
 
 | File type | Instruction file |
-|-----------|-----------------|
+| --------- | ---------------- |
 | `*.sh` | [.github/instructions/shell-scripts.instructions.md](./.github/instructions/shell-scripts.instructions.md) |
 | `*.py`, `*.ipynb` | [.github/instructions/python.instructions.md](./.github/instructions/python.instructions.md) |
 | `*.cypher` | [.github/instructions/cypher-queries.instructions.md](./.github/instructions/cypher-queries.instructions.md) |
@@ -104,6 +104,7 @@ Instruction files auto-applied per file type:
 ### Public Reusable Workflow
 
 `public-analyze-code-graph.yml` external-facing. Used by other projects via `workflow_call`. Treat like public API:
+
 - No breaking changes (no removal/rename of inputs or outputs)
 - New params: `required: false` with safe defaults only
 - Descriptions self-contained — external users have no repo context
@@ -135,6 +136,8 @@ analyze.sh --domain anomaly-detection --report Python --keep-running
 - **Graceful degradation** — domains handle missing data (e.g. no git history) with fallbacks
 - **Cross-platform** — macOS, Linux, Windows (Git Bash/WSL)
 - **Fail-fast** — clear errors on missing dependencies, misconfigurations, unsupported environments
+- **Self-documenting** — documentation and instructions are kept up-to-date and auto-generated where applicable
+- **Avoid abbreviations** — use clear and descriptive names for files, variables, and functions and in documentation
 
 ## Before Proposing Changes
 
@@ -142,4 +145,5 @@ analyze.sh --domain anomaly-detection --report Python --keep-running
 - Read domain READMEs + linked docs
 - Check [COMMANDS.md](./COMMANDS.md) CLI options
 - Check [ENVIRONMENT_VARIABLES.md](./ENVIRONMENT_VARIABLES.md) config
-- Use plan prompts in [.github/prompts/](./.github/prompts/) for domain context
+- Use plan prompts in [.github/prompts/](./.github/prompts/) for domain context (might be outdated)
+- IMPORTANT: Never create new Markdown (.md), analysis, summary, or index files in the workspace unless explicitly asked in the prompt. Output all explanations and summaries directly in the chat response.

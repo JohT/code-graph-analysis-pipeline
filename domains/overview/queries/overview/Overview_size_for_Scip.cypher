@@ -20,7 +20,7 @@
       ,artifactCount
       ,moduleCount
       ,count(DISTINCT t) AS internalTypeCount
- OPTIONAL MATCH (f:SemanticCodeIndexFunction)
+ OPTIONAL MATCH (f:SemanticCodeIndexInternalExecutable)
   WITH nodeCount
       ,relationshipCount
       ,artifactCount

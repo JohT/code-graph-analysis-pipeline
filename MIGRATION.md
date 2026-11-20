@@ -8,6 +8,29 @@ This document describes breaking changes introduced in each major version and ho
 
 Version 6 adds support for module-level variables, constants, and class/interface fields in SCIP indices. Both features enrich the symbol dependency graph with initialization and field dependencies. Variables and fields are now included in the `SemanticCodeIndexInternalSymbol` label alongside types and functions.
 
+Version 6 also promotes `SCIP_IMPORT_MODE=cross-file` as the default extraction strategy, making it the recommended approach for new analyses.
+
+---
+
+### 4. SCIP cross-file import mode (now default)
+
+**What changed:** The default SCIP extraction strategy is now `SCIP_IMPORT_MODE=cross-file`. This mode uses occurrence-based cross-file reference detection instead of hardcoded kind-number filtering. All symbol kinds that cross file boundaries are captured automatically. The legacy `kind-level` mode remains available for compatibility.
+
+**Who is affected:** All users. If you have been explicitly setting `SCIP_IMPORT_MODE=kind-level`, your analyses will now use `cross-file` mode by default. If you explicitly set `SCIP_IMPORT_MODE=cross-file`, no action is needed.
+
+**Node label difference:** In `cross-file` mode, external nodes are imported with label `:SemanticCodeIndexExternalSymbol` instead of `:SemanticCodeIndexExternalType`. The `:SemanticCodeIndexExternalType` label is added during enrichment for external symbols of type kinds. If you run queries directly after import and before enrichment, replace `:SemanticCodeIndexExternalType` with `:SemanticCodeIndexExternalSymbol`.
+
+**Migration steps:**
+
+1. **Most users:** No action required. The pipeline automatically uses `cross-file` mode. Run `analyze.sh` as normal.
+
+2. **To use legacy kind-level mode:** If you need the old behavior for compatibility, explicitly set the environment variable before running `analyze.sh`:
+   ```shell
+   SCIP_IMPORT_MODE=kind-level analyze.sh --keep-running
+   ```
+
+3. **Verify compatibility:** After running the pipeline with the new default, verify that reports generate as expected. Queries using `:SemanticCodeIndexInternalSymbol`, `:SemanticCodeIndexInternalType`, `:SemanticCodeIndexExternalType`, or `:DEPENDS_ON` work in both modes after the full enrichment pipeline runs.
+
 ---
 
 ### 1. SCIP variable extraction (new feature, optional)

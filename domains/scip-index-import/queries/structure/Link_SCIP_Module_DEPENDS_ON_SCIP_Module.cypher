@@ -1,4 +1,4 @@
-// Link SemanticCodeIndexModules nodes to the containing SemanticCodeIndexModules modules they depend via DEPENDS_ON. Requires "Create_SCIP_Module_Nodes_For_Internal_Types.cypher", "Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher", "Import_SCIP_Type_Internal_Nodes.cypher" and "Import_SCIP_Type_External_Nodes.cypher".
+// Link SemanticCodeIndexModules nodes to the containing SemanticCodeIndexModules modules they depend via DEPENDS_ON. Requires "Create_SCIP_Module_Nodes_For_Internal_Symbols.cypher", "Link_SCIP_Artifact_CONTAINS_SCIP_Module.cypher", "Import_SCIP_Type_Internal_Nodes.cypher" and "Import_SCIP_Type_External_Nodes.cypher".
 
  MATCH (sourceModule:SCIP&SemanticCodeIndexModule)-[:CONTAINS]->(sourceType:SemanticCodeIndexInternalSymbol|SemanticCodeIndexExternalType)
  MATCH (sourceType)-[typeDependency:DEPENDS_ON]->(dependentType:SemanticCodeIndexInternalSymbol|SemanticCodeIndexExternalType)
