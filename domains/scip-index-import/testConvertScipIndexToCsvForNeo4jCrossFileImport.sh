@@ -697,6 +697,102 @@ assert_contains 'Fix #3: admin external header has "name"' '"name"' "${admin_ext
 echo ""
 
 # ---------------------------------------------------------------------------
+# Test group 9: Internal-external deduplication
+# This test ensures that when a symbol is both internal (defined in source)
+# and external (referenced externally), it appears only as internal, not as a duplicate.
+# ---------------------------------------------------------------------------
+
+echo "Test group 9: Internal-external deduplication"
+
+dedup_indices="${tmp_test_dir}/dedup_indices"
+dedup_import="${tmp_test_dir}/dedup_import"
+mkdir -p "${dedup_indices}"
+
+# Create SCIP with:
+# - Foo class (internal, cross-file definitions and calls from multiple files)
+# - Some external references that might create duplicates
+cat > "${dedup_indices}/module.scip.json" << 'SCIP_JSON'
+{
+  "metadata": {"version": "0.3.0"},
+  "documents": [
+    {
+      "relative_path": "src/Foo.java",
+      "language": "Java",
+      "occurrences": [
+        {
+          "range": [0, 0, 0, 1],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Foo",
+          "symbol_roles": 1
+        },
+        {
+          "range": [1, 0, 1, 7],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Foo#",
+          "symbol_roles": 1,
+          "enclosing_range": [1, 0, 50, 0]
+        },
+        {
+          "range": [2, 0, 2, 25],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Foo#process().",
+          "symbol_roles": 1,
+          "enclosing_range": [2, 0, 10, 0]
+        }
+      ]
+    },
+    {
+      "relative_path": "src/Client.java",
+      "language": "Java",
+      "occurrences": [
+        {
+          "range": [0, 0, 0, 1],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Client",
+          "symbol_roles": 1
+        },
+        {
+          "range": [1, 0, 1, 7],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Client#",
+          "symbol_roles": 1,
+          "enclosing_range": [1, 0, 20, 0]
+        },
+        {
+          "range": [2, 0, 2, 25],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Foo#",
+          "symbol_roles": 2,
+          "enclosing_range": [2, 0, 5, 0]
+        },
+        {
+          "range": [3, 0, 3, 25],
+          "symbol": "semanticdb maven org.example/common 1.0 org/example/Foo#process().",
+          "symbol_roles": 2,
+          "enclosing_range": [3, 0, 6, 0]
+        }
+      ]
+    }
+  ],
+  "external_symbols": []
+}
+SCIP_JSON
+
+run_script_with_env "${dedup_indices}" "${dedup_import}"
+assert_exit_code "deduplication test exits 0" "0" "${exit_code}"
+
+# Foo# should appear in internal nodes (it's defined and cross-file referenced)
+internal_foo_count=$(grep -c "org/example/Foo#\"" "${dedup_import}/scip_symbol_nodes.csv" | head -1 || echo 0)
+assert_equals "Foo# appears in internal nodes" "1" "${internal_foo_count}"
+
+# Foo# should NOT appear in external nodes after deduplication
+external_foo_class=$(grep "^\"semanticdb maven org.example/common 1.0 org/example/Foo#\"" "${dedup_import}/scip_external_symbol_nodes.csv" || echo "")
+assert_equals "Foo# NOT in external nodes (deduped)" "" "${external_foo_class}"
+
+# In admin format, same deduplication should apply
+run_admin_script_with_env "${dedup_indices}" "${dedup_import}"
+admin_foo_internal=$(grep "org/example/Foo#" "${dedup_import}/scip_symbol_nodes_admin.csv" || echo "")
+admin_foo_external=$(grep "^\"semanticdb maven org.example/common 1.0 org/example/Foo#\"" "${dedup_import}/scip_external_symbol_nodes_admin.csv" || echo "")
+assert_contains "admin: Foo# in internal nodes" "Foo" "${admin_foo_internal}"
+assert_equals "admin: Foo# NOT duplicated in external" "" "${admin_foo_external}"
+
+echo ""
+
+# ---------------------------------------------------------------------------
 # Results
 # ---------------------------------------------------------------------------
 
