@@ -84,8 +84,25 @@ generate_dot_body() {
     local breakdown_csv="${3}"
 
     awk -F '"' -v pkg="${package_name}" -v dep_pkg="${dependent_package_name}" '
-        NR > 1 && $4 == pkg && $8 == dep_pkg {
-            dep = $10
+        NR == 1 {
+            for (i = 1; i <= NF; i++) {
+                col = $i
+                if (col ~ /^(moduleName|dependentModuleName|directoryName|dependentDirectoryName)$/ || col ~ /directory/) {
+                    if (col ~ /^dependent/ || col ~ /dependent/) {
+                        dep_col_idx = i
+                    } else {
+                        pkg_col_idx = i
+                    }
+                } else if (col ~ /^(dependency|dependenc)/) {
+                    dep_field_idx = i
+                }
+            }
+            if (pkg_col_idx == 0) pkg_col_idx = 4
+            if (dep_col_idx == 0) dep_col_idx = 8
+            if (dep_field_idx == 0) dep_field_idx = 10
+        }
+        NR > 1 && $pkg_col_idx == pkg && $dep_col_idx == dep_pkg {
+            dep = $dep_field_idx
             gsub(/\r/, "", dep)
             if (index(dep, "->") > 0) {
                 split(dep, parts, "->")
@@ -283,14 +300,28 @@ process_language_cycle_graphs() {
             continue
         fi
 
-        source "${VISUALIZATION_SCRIPTS_DIR}/renderGraphVizSVG.sh" "${output_gv}"
+        ( source "${VISUALIZATION_SCRIPTS_DIR}/renderGraphVizSVG.sh" "${output_gv}" ) || true
 
         mkdir -p "${output_dir}/${GRAPHVIZ_SUBDIRECTORY_NAME}"
-        mv -f "${output_gv}" "${output_dir}/${GRAPHVIZ_SUBDIRECTORY_NAME}/"
+        mv -f "${output_gv}" "${output_dir}/${GRAPHVIZ_SUBDIRECTORY_NAME}/" || true
 
         update_markdown_references "${svg_prefix}" "${pair_index}" "${output_dir}" "${package_name}" "${dependent_package_name}" "${relative_dir}"
 
-    done < <(awk -F '"' 'NR > 1 && NF >= 8 { print $4 "\t" $8 }' "${source_csv}" | head -n "${CYCLIC_DEPENDENCIES_TOP_N_GRAPHS}")
+    done < <(awk -F '"' 'NR == 1 {
+        for (i = 1; i <= NF; i++) {
+            col = $i
+            if (col ~ /^(moduleName|dependentModuleName|directoryName|dependentDirectoryName|packageName|dependentPackageName)$/ || col ~ /name/) {
+                if (col ~ /^dependent/ || col ~ /dependent/) {
+                    dep_col_idx = i
+                } else {
+                    pkg_col_idx = i
+                }
+            }
+        }
+        if (pkg_col_idx == 0) pkg_col_idx = 4
+        if (dep_col_idx == 0) dep_col_idx = 8
+    }
+    NR > 1 && NF >= 4 { print $pkg_col_idx "\t" $dep_col_idx }' "${source_csv}" | head -n "${CYCLIC_DEPENDENCIES_TOP_N_GRAPHS}")
 }
 
 # ── Java Package Cyclic Dependencies ─────────────────────────────────────────
@@ -322,5 +353,15 @@ process_language_cycle_graphs \
     "ScipModuleCyclicDependencies" \
     "SCIP_Semantic_Index_Module/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}" \
     "SCIP Semantic Index Module"
+
+# ── SCIP Semantic Index Directory Cyclic Dependencies ────────────────────────
+
+process_language_cycle_graphs \
+    "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/Cyclic_Dependencies_for_SCIP_Directory.csv" \
+    "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/Cyclic_Dependencies_Breakdown_for_SCIP_Directory.csv" \
+    "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}" \
+    "ScipDirectoryCyclicDependencies" \
+    "SCIP_Semantic_Index_Directory/${GRAPH_VISUALIZATIONS_DIRECTORY_NAME}" \
+    "SCIP Semantic Index Directory"
 
 echo "cyclicDependenciesVisualization: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."

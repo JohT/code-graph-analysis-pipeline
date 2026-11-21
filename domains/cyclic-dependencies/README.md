@@ -8,6 +8,7 @@ This domain is focused exclusively on cyclic dependency detection and prioritisa
 - **Java Artifact Cyclic Dependencies**: Cyclic dependencies at the artifact (JAR) level — the coarsest and most critical abstraction.
 - **TypeScript Module Cyclic Dependencies**: Cycle groups among TypeScript modules, with the same prioritisation metrics as the Java package view.
 - **SCIP Semantic Index Module Cyclic Dependencies**: Cycle groups among SCIP Semantic Index modules (directory-level), with the same prioritisation metrics.
+- **SCIP Semantic Index Directory Cyclic Dependencies**: Cyclic dependencies between directories and their contained files in SCIP Semantic Index.
 - **SCIP Semantic Index Artifact Cyclic Dependencies**: Cyclic dependencies at the SCIP artifact level — coarsest abstraction for SCIP-indexed codebases.
 
 > **Broader internal dependency analysis** (interface segregation, widely used types, path finding, topological sort) is in the [`internal-dependencies`](../internal-dependencies/README.md) domain.
@@ -30,7 +31,7 @@ domains/cyclic-dependencies/
 │   ├── CyclicDependenciesJavaExploration.ipynb       # Interactive Java cyclic dependency analysis
 │   ├── CyclicDependenciesTypescriptExploration.ipynb # Interactive TypeScript cyclic dependency analysis
 │   └── CyclicDependenciesScipExploration.ipynb       # Interactive SCIP cyclic dependency analysis
-├── queries/                               # 11 Cypher queries (cycle analysis, flat)
+├── queries/                               # 14 Cypher queries (cycle analysis, flat)
 └── summary/
     ├── cyclicDependenciesSummary.sh           # Markdown assembly logic
     ├── report.template.md                     # Main report template
@@ -50,8 +51,9 @@ This domain requires the following to be in place before running. These are prov
 For SCIP Semantic Index analysis, additionally:
 
 - SCIP index imported via the [`scip-index-import`](../scip-index-import/README.md) domain
-- `SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`, `SemanticCodeIndexInternalType`, and `SemanticCodeIndexFunction` nodes present
+- `SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`, `SemanticCodeIndexInternalType`, `SemanticCodeIndexInternalFile`, and `SemanticCodeIndexFunction` nodes present
 - `DEPENDS_ON` relationships between `SemanticCodeIndexInternalSymbol` nodes (types and functions)
+- File nodes with `directory` property populated
 
 ## Execution Order
 
@@ -78,6 +80,10 @@ reports/cyclic-dependencies/
 │   ├── Cyclic_Dependencies_for_SCIP_Module.csv
 │   ├── Cyclic_Dependencies_Breakdown_for_SCIP_Module.csv
 │   └── Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.csv
+├── SCIP_Semantic_Index_Directory/
+│   ├── Cyclic_Dependencies_for_SCIP_Directory.csv
+│   ├── Cyclic_Dependencies_Breakdown_for_SCIP_Directory.csv
+│   └── Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.csv
 ├── SCIP_Semantic_Index_Artifact/
 │   └── Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.csv
 └── cyclic_dependencies_report.md

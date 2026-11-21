@@ -104,17 +104,41 @@ Backward SCIP module dependencies — highest-value cycle breakers.
 
 <!-- include:Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.md|report_no_scip_data.template.md -->
 
-### 4.4 SCIP Artifact Cyclic Dependencies
-
-SCIP artifact-level cycles — coarsest and most critical abstraction.
-
-<!-- include:Cyclic_Dependencies_between_SCIP_Artifacts.md|report_no_scip_data.template.md -->
-
-### 4.5 SCIP Module Cyclic Dependencies (Graph Visualizations)
+### 4.4 SCIP Module Cyclic Dependencies (Graph Visualizations)
 
 Top SCIP module cycle pairs visualized as graphs. Blue solid arrows: forward dependencies. Red dashed arrows: backward dependencies (removal candidates). Nodes are grouped by module.
 
 <!-- include:GraphVisualizationsScipModuleReference.md|empty.md -->
+
+### 4.5 SCIP Directory Cyclic Dependencies (Overview)
+
+SCIP Semantic Index directory cycles — cyclic dependencies between directories and their contained files. Sorted by `forwardToBackwardBalance` descending (easiest fixes first).
+
+<!-- include:Cyclic_Dependencies_for_SCIP_Directory.md|report_no_scip_data.template.md -->
+
+### 4.6 SCIP Directory Cyclic Dependencies (Breakdown)
+
+Individual SCIP directory dependency pairs per cycle group: concrete files involved.
+
+<!-- include:Cyclic_Dependencies_Breakdown_for_SCIP_Directory.md|report_no_scip_data.template.md -->
+
+### 4.7 SCIP Directory Cyclic Dependencies (Backward Only)
+
+Backward SCIP directory dependencies — highest-value cycle breakers. Removal targets to untangle directory-level cycles.
+
+<!-- include:Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.md|report_no_scip_data.template.md -->
+
+### 4.8 SCIP Directory Cyclic Dependencies (Graph Visualizations)
+
+Top SCIP directory cycle pairs visualized as graphs. Blue solid arrows: forward dependencies. Red dashed arrows: backward dependencies (removal candidates). Nodes are grouped by directory.
+
+<!-- include:GraphVisualizationsScipDirectoryReference.md|empty.md -->
+
+### 4.9 SCIP Artifact Cyclic Dependencies
+
+SCIP artifact-level cycles — coarsest and most critical abstraction.
+
+<!-- include:Cyclic_Dependencies_between_SCIP_Artifacts.md|report_no_scip_data.template.md -->
 
 ---
 
@@ -129,4 +153,5 @@ Top SCIP module cycle pairs visualized as graphs. Blue solid arrows: forward dep
 | **forward dependency** | Dependency in cycle group majority direction. |
 | **backward dependency** | Dependency against majority flow — highest-value removal candidate. |
 | **SCIP module** | Directory-level code unit in a SCIP Semantic Index (`SemanticCodeIndexModule`). Equivalent to a Java package. |
+| **SCIP directory** | File-level grouping within a SCIP Semantic Index based on file system paths (`SemanticCodeIndexInternalFile` with `directory` property). |
 | **SCIP artifact** | Package-level code unit in a SCIP Semantic Index (`SemanticCodeIndexArtifact`). Equivalent to a Java artifact (JAR). |
