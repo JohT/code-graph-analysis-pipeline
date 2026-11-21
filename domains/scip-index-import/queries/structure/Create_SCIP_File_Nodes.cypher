@@ -3,7 +3,10 @@
 MATCH (t:SCIP:SemanticCodeIndexInternalSymbol)
 WHERE t.file IS NOT NULL
  WITH DISTINCT t.file AS filePath
-     ,last(split(t.file, '/')) AS fileName
+ WITH *
+     ,split(filePath, '/')    AS filePathElements
+  WITH *
+      ,last(filePathElements) AS fileName
   WITH *
       ,coalesce(nullif(last(split(fileName, '.')), fileName), '') AS fileExtension
   WITH *
