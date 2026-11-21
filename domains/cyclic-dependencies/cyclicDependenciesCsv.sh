@@ -40,6 +40,7 @@ mkdir -p "${FULL_REPORT_DIRECTORY}/Java_Artifact"
 mkdir -p "${FULL_REPORT_DIRECTORY}/Java_Package"
 mkdir -p "${FULL_REPORT_DIRECTORY}/Typescript_Module"
 mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory"
 mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 
 # ── Java Cyclic Dependencies ──────────────────────────────────────────────────
@@ -81,11 +82,20 @@ execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_SCIP
     > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_Breakdown_for_SCIP_Module.csv"
 execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.cypher" \
     > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.csv"
+
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_for_SCIP_Directory.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/Cyclic_Dependencies_for_SCIP_Directory.csv"
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_SCIP_Directory.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/Cyclic_Dependencies_Breakdown_for_SCIP_Directory.csv"
+execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.cypher" \
+    > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.csv"
+
 execute_cypher "${CYCLIC_DEPS_CYPHER_DIR}/Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.cypher" \
     > "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact/Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.csv"
 
 # Clean up empty CSV files (when no SCIP data exists)
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
+source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory"
 source "${SCRIPTS_DIR}/cleanupAfterReportGeneration.sh" "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
 
 echo "cyclicDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Successfully finished."
