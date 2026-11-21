@@ -147,6 +147,21 @@ assemble_cyclic_dependencies_report() {
         "${report_include_directory}/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.md"
 
     execute_limited_table \
+        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_for_SCIP_Directory.cypher" \
+        "SCIP_Semantic_Index_Directory/Cyclic_Dependencies_for_SCIP_Directory.csv" \
+        "${report_include_directory}/Cyclic_Dependencies_for_SCIP_Directory.md"
+
+    execute_limited_table \
+        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_for_SCIP_Directory.cypher" \
+        "SCIP_Semantic_Index_Directory/Cyclic_Dependencies_Breakdown_for_SCIP_Directory.csv" \
+        "${report_include_directory}/Cyclic_Dependencies_Breakdown_for_SCIP_Directory.md"
+
+    execute_limited_table \
+        "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.cypher" \
+        "SCIP_Semantic_Index_Directory/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.csv" \
+        "${report_include_directory}/Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Directory.md"
+
+    execute_limited_table \
         "${CYCLIC_DEPS_QUERY_CYPHER_DIR}/Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.cypher" \
         "SCIP_Semantic_Index_Artifact/Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.csv" \
         "${report_include_directory}/Cyclic_Dependencies_between_SCIP_Artifacts.md"
@@ -178,6 +193,8 @@ assemble_cyclic_dependencies_report() {
         "${report_include_directory}/GraphVisualizationsTypescriptModuleReference.md" 2>/dev/null || true
     cp -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module/Graph_Visualizations/GraphVisualizationsReferenceForSummary.md" \
         "${report_include_directory}/GraphVisualizationsScipModuleReference.md" 2>/dev/null || true
+    cp -f "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory/Graph_Visualizations/GraphVisualizationsReferenceForSummary.md" \
+        "${report_include_directory}/GraphVisualizationsScipDirectoryReference.md" 2>/dev/null || true
 
     # -- Assemble final report from template --------------------------------
     cp -f "${CYCLIC_DEPENDENCIES_SUMMARY_DIR}/report.template.md" "${FULL_REPORT_DIRECTORY}/report.template.md"
