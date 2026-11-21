@@ -22,9 +22,13 @@ WHERE (size(forwardDependencies) > size(backwardDependencies)
   AND  directoryName >= dependentDirectoryName))
 RETURN directoryName
       ,dependentDirectoryName
+      ,((directoryName STARTS WITH dependentDirectoryName) OR (dependentDirectoryName STARTS WITH directoryName)) AS parentChildCycle
       ,toFloat(ABS(numberOfForwardDependencies - numberOfBackwardDependencies)) / numberOfAllCyclicDependencies AS forwardToBackwardBalance
       ,numberOfForwardDependencies  AS numberForward
       ,numberOfBackwardDependencies AS numberBackward
       ,forwardDependencies[0..9]    AS someForwardDependencies
       ,backwardDependencies
-ORDER BY forwardToBackwardBalance DESC, directoryName ASC
+ORDER BY round(forwardToBackwardBalance, 1, 'DOWN') DESC // easiest to remove first in bins of 0.1 like 0.9, 0.8, 0.7, ...
+        ,parentChildCycle // parent-child cycles last (less critical) per bin
+        ,forwardToBackwardBalance DESC // within each bin, sort by actual balance descending
+        ,directoryName ASC // in the rare case of identical balance and parent-child status, sort by directory name

@@ -17,6 +17,24 @@ This domain is focused exclusively on cyclic dependency detection and prioritiza
 
 > **Broader internal dependency analysis** (interface segregation, widely used types, path finding, topological sort) is in the [`internal-dependencies`](../internal-dependencies/README.md) domain.
 
+## Prioritization Strategy
+
+Cycles are ranked by **effort-to-resolution (easiest first)**, combining three factors:
+
+1. **Forward-to-Backward Balance** (primary): Cycles where most dependencies flow in one direction are easier to fix by removing just a few reverse dependencies. Cycles are binned by balance rounding down to 0.1 (0.9, 0.8, 0.7, etc.), so cycles with balance 0.95 and 0.91 sort into the same 0.9 bin—keeping similar-difficulty cycles together.
+
+2. **Parent-Child Relationship** (per bin): Non-parent-child cycles appear first within each bin because they represent true cross-module coupling, while parent-child cycles (e.g., `com.foo` ↔ `com.foo.bar`) indicate simpler hierarchical dependencies that are often acceptable architectural patterns.
+
+3. **Exact Balance** (tiebreaker within bin): Within the same bin and parent-child status, cycles with higher exact balance sort first.
+
+4. **Name** (final tiebreaker): Deterministic order for identical cycles.
+
+**Example ordering** for a bin of balance 0.8:
+
+- Cycles with 0.85–0.89 balance and no parent-child relationship first
+- Then cycles with 0.85–0.89 balance and parent-child relationship
+- Then cycles with 0.80–0.84 balance (non-parent-child, then parent-child)
+
 ## Entry Points
 
 The following scripts are discovered and invoked automatically by the central compilation scripts in [scripts/reports/compilations/](../../scripts/reports/compilations/). They are found by filename pattern.

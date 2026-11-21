@@ -27,9 +27,13 @@ RETURN artifactName
       ,packageName
       ,dependentArtifactName
       ,dependentPackageName
+      ,((packageName STARTS WITH dependentPackageName) OR (dependentPackageName STARTS WITH packageName)) AS parentChildCycle
       ,toFloat(ABS(numberOfForwardDependencies - numberOfBackwardDependencies)) / numberOfAllCyclicDependencies AS forwardToBackwardBalance
       ,numberOfForwardDependencies  AS numberForward
       ,numberOfBackwardDependencies AS numberBackward
       ,forwardDependencies[0..9]    AS someForwardDependencies
       ,backwardDependencies
-ORDER BY forwardToBackwardBalance DESC, packageName ASC
+ORDER BY round(forwardToBackwardBalance, 1, 'DOWN') DESC // easiest to remove first in bins of 0.1 like 0.9, 0.8, 0.7, ...
+        ,parentChildCycle // parent-child cycles last (less critical) per bin
+        ,forwardToBackwardBalance DESC // within each bin, sort by actual balance descending
+        ,packageName ASC // in the rare case of identical balance and parent-child status, sort by package name

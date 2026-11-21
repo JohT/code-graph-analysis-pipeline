@@ -30,7 +30,11 @@ RETURN artifact.name          AS artifactName
       ,module.fqn             AS moduleName
       ,dependentModule.fqn    AS dependentModuleName
       ,dependency
+      ,((module.fqn STARTS WITH dependentModule.fqn) OR (dependentModule.fqn STARTS WITH module.fqn)) AS parentChildCycle
       ,toFloat(ABS(numberOfForwardDependencies - numberOfBackwardDependencies)) / numberOfAllCyclicDependencies AS forwardToBackwardBalance
       ,numberOfForwardDependencies  AS numberForward
       ,numberOfBackwardDependencies AS numberBackward
-ORDER BY forwardToBackwardBalance DESC, moduleName ASC
+ORDER BY round(forwardToBackwardBalance, 1, 'DOWN') DESC // easiest to remove first in bins of 0.1 like 0.9, 0.8, 0.7, ...
+        ,parentChildCycle // parent-child cycles last (less critical) per bin
+        ,forwardToBackwardBalance DESC // within each bin, sort by actual balance descending
+        ,moduleName ASC // in the rare case of identical balance and parent-child status, sort by module name
