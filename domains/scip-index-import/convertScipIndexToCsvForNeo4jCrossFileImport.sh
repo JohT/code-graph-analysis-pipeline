@@ -886,6 +886,47 @@ function merge_external_symbol_node_csvs() {
 }
 
 # ---------------------------------------------------------------------------
+# Remove external nodes that are also defined as internal nodes.
+# This prevents duplicate ID errors during Neo4j import when a symbol
+# is both defined internally (cross-file) and appears as external reference.
+# ---------------------------------------------------------------------------
+
+function deduplicate_external_vs_internal() {
+    local internal_nodes="${1}"
+    local external_nodes="${2}"
+    local output_file="${3}"
+
+    local temp_internal=$(mktemp)
+    
+    # Extract internal symbol IDs
+    tail -n +2 "${internal_nodes}" | awk -F',' '{print $1}' | tr -d '"' > "${temp_internal}"
+    
+    # Filter external nodes: keep only those not in internal
+    {
+        head -1 "${external_nodes}"  # Keep header
+        tail -n +2 "${external_nodes}" | awk -F',' -v int_file="${temp_internal}" '
+            BEGIN {
+                while ((getline line < int_file) > 0) {
+                    gsub(/^"/, "", line)
+                    gsub(/"$/, "", line)
+                    is_internal[line] = 1
+                }
+            }
+            {
+                symbol = $1
+                gsub(/^"/, "", symbol)
+                gsub(/"$/, "", symbol)
+                if (!(symbol in is_internal)) {
+                    print
+                }
+            }
+        '
+    } > "${output_file}"
+    
+    rm -f "${temp_internal}"
+}
+
+# ---------------------------------------------------------------------------
 # Merge per-file edge CSVs: sum reference_count for
 # (from, to, edge_type) triples.
 # ---------------------------------------------------------------------------
@@ -1000,6 +1041,10 @@ merge_symbol_node_csvs "${tmp_dir}" "${symbol_nodes_output}"
 
 echo "convertScipIndexToCsvForNeo4jCrossFileImport: Merging external symbol node CSVs -> '${external_nodes_output}'..."
 merge_external_symbol_node_csvs "${tmp_dir}" "${external_nodes_output}"
+
+echo "convertScipIndexToCsvForNeo4jCrossFileImport: Deduplicating external nodes (removing symbols also defined as internal)..."
+deduplicate_external_vs_internal "${symbol_nodes_output}" "${external_nodes_output}" "${external_nodes_output}.deduplicated"
+mv "${external_nodes_output}.deduplicated" "${external_nodes_output}"
 
 echo "convertScipIndexToCsvForNeo4jCrossFileImport: Merging edge CSVs -> '${edges_output}'..."
 merge_symbol_edge_csvs "${tmp_dir}" "${edges_output}"

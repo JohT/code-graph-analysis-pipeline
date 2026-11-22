@@ -30,7 +30,11 @@ RETURN artifact.fileName          AS artifactName
       ,package.fqn                AS packageName
       ,dependentPackage.fqn       AS dependentPackageName
       ,dependency
+      ,((package.fqn STARTS WITH dependentPackage.fqn) OR (dependentPackage.fqn STARTS WITH package.fqn)) AS parentChildCycle
       ,toFloat(ABS(numberOfForwardDependencies - numberOfBackwardDependencies)) / numberOfAllCyclicDependencies AS forwardToBackwardBalance
       ,numberOfForwardDependencies  AS numberForward
       ,numberOfBackwardDependencies AS numberBackward
-ORDER BY forwardToBackwardBalance DESC, packageName ASC
+ORDER BY round(forwardToBackwardBalance, 1, 'DOWN') DESC // easiest to remove first in bins of 0.1 like 0.9, 0.8, 0.7, ...
+        ,parentChildCycle // parent-child cycles last (less critical) per bin
+        ,forwardToBackwardBalance DESC // within each bin, sort by actual balance descending
+        ,packageName ASC // in the rare case of identical balance and parent-child status, sort by package name

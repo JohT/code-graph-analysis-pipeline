@@ -1,16 +1,39 @@
 # Cyclic Dependencies Domain
 
-This directory contains the implementation and resources for analysing **cyclic dependencies** within the Code Graph Analysis Pipeline. It follows the vertical-slice domain pattern: all Cypher queries, shell scripts, and report templates needed for this analysis live here.
+## Why This Matters
 
-This domain is focused exclusively on cyclic dependency detection and prioritisation across all abstraction levels:
+Cyclic dependencies (A → B → A) create tight coupling between code units, increase complexity, make testing difficult, and prevent modular decomposition. Breaking cycles reduces maintenance burden, improves testability, and clarifies the architecture. This domain identifies cycles across abstraction levels and ranks them by removal effort, enabling prioritized refactoring.
 
-- **Java Package Cyclic Dependencies**: Mutual dependency cycles between Java packages — with metrics to prioritise which backward dependencies to remove.
-- **Java Artifact Cyclic Dependencies**: Cyclic dependencies at the artifact (JAR) level — the coarsest and most critical abstraction.
-- **TypeScript Module Cyclic Dependencies**: Cycle groups among TypeScript modules, with the same prioritisation metrics as the Java package view.
-- **SCIP Semantic Index Module Cyclic Dependencies**: Cycle groups among SCIP Semantic Index modules (directory-level), with the same prioritisation metrics.
-- **SCIP Semantic Index Artifact Cyclic Dependencies**: Cyclic dependencies at the SCIP artifact level — coarsest abstraction for SCIP-indexed codebases.
+## Overview
+
+This domain is focused exclusively on cyclic dependency detection and prioritization across all abstraction levels:
+
+- **Java Package Cyclic Dependencies**: Mutual dependency cycles between Java packages - with metrics to prioritize which backward dependencies to remove.
+- **Java Artifact Cyclic Dependencies**: Cyclic dependencies at the artifact (JAR) level - the coarsest and most critical abstraction.
+- **TypeScript Module Cyclic Dependencies**: Cycle groups among TypeScript modules, with the same prioritization metrics as the Java package view.
+- **SCIP Semantic Index Module Cyclic Dependencies**: Cycle groups among SCIP Semantic Index modules (directory-level), with the same prioritization metrics.
+- **SCIP Semantic Index Directory Cyclic Dependencies**: Cyclic dependencies between directories and their contained files in SCIP Semantic Index.
+- **SCIP Semantic Index Artifact Cyclic Dependencies**: Cyclic dependencies at the SCIP artifact level - coarsest abstraction for SCIP-indexed codebases.
 
 > **Broader internal dependency analysis** (interface segregation, widely used types, path finding, topological sort) is in the [`internal-dependencies`](../internal-dependencies/README.md) domain.
+
+## Prioritization Strategy
+
+Cycles are ranked by **effort-to-resolution (easiest first)**, combining three factors:
+
+1. **Forward-to-Backward Balance** (primary): Cycles where most dependencies flow in one direction are easier to fix by removing just a few reverse dependencies. Cycles are binned by balance rounding down to 0.1 (0.9, 0.8, 0.7, etc.), so cycles with balance 0.95 and 0.91 sort into the same 0.9 bin—keeping similar-difficulty cycles together.
+
+2. **Parent-Child Relationship** (per bin): Non-parent-child cycles appear first within each bin because they represent true cross-module coupling, while parent-child cycles (e.g., `com.foo` ↔ `com.foo.bar`) indicate simpler hierarchical dependencies that are often acceptable architectural patterns.
+
+3. **Exact Balance** (tiebreaker within bin): Within the same bin and parent-child status, cycles with higher exact balance sort first.
+
+4. **Name** (final tiebreaker): Deterministic order for identical cycles.
+
+**Example ordering** for a bin of balance 0.8:
+
+- Cycles with 0.85–0.89 balance and no parent-child relationship first
+- Then cycles with 0.85–0.89 balance and parent-child relationship
+- Then cycles with 0.80–0.84 balance (non-parent-child, then parent-child)
 
 ## Entry Points
 
@@ -18,67 +41,38 @@ The following scripts are discovered and invoked automatically by the central co
 
 - [cyclicDependenciesCsv.sh](./cyclicDependenciesCsv.sh): Entry point for CSV reports based on Cypher queries. Discovered by `CsvReports.sh` (`*Csv.sh` pattern).
 - [cyclicDependenciesMarkdown.sh](./cyclicDependenciesMarkdown.sh): Entry point for the Markdown summary report. Discovered by `MarkdownReports.sh` (`*Markdown.sh` pattern).
-
-## Folder Structure
-
-```
-domains/cyclic-dependencies/
-├── README.md                              # This file
-├── cyclicDependenciesCsv.sh               # Entry point: CSV reports
-├── cyclicDependenciesMarkdown.sh          # Entry point: Markdown summary
-├── explore/
-│   ├── CyclicDependenciesJavaExploration.ipynb       # Interactive Java cyclic dependency analysis
-│   ├── CyclicDependenciesTypescriptExploration.ipynb # Interactive TypeScript cyclic dependency analysis
-│   └── CyclicDependenciesScipExploration.ipynb       # Interactive SCIP cyclic dependency analysis
-├── queries/                               # 11 Cypher queries (cycle analysis, flat)
-└── summary/
-    ├── cyclicDependenciesSummary.sh           # Markdown assembly logic
-    ├── report.template.md                     # Main report template
-    ├── report_no_cycles_data.template.md      # Fallback: no cyclic dependencies found
-    ├── report_no_typescript_data.template.md  # Fallback: no TypeScript detected
-    └── report_no_scip_data.template.md        # Fallback: no SCIP data detected
-```
+- [cyclicDependenciesVisualization.sh](./cyclicDependenciesVisualization.sh): Entry point for visualizing cyclic dependencies. Discovered by `VisualizationReports.sh` (`*Visualization.sh` pattern).
 
 ## Prerequisites
 
 This domain requires the following to be in place before running. These are provided by the central pipeline and are **not** set up by this domain.
 
 - Neo4j running with scanned artifacts loaded
-- `DEPENDS_ON` relationships between `Type`, `Package`, and `Artifact` nodes
 - `scripts/prepareAnalysis.sh` executed prior to this domain
+
+For Java and TypeScript analysis, additionally:
+
+- `DEPENDS_ON` relationships between `Type`, `Package`, and `Artifact` nodes
 
 For SCIP Semantic Index analysis, additionally:
 
 - SCIP index imported via the [`scip-index-import`](../scip-index-import/README.md) domain
-- `SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`, `SemanticCodeIndexInternalType`, and `SemanticCodeIndexFunction` nodes present
+- `SemanticCodeIndexModule`, `SemanticCodeIndexArtifact`, `SemanticCodeIndexInternalType`, `SemanticCodeIndexInternalFile`, and `SemanticCodeIndexFunction` nodes present
 - `DEPENDS_ON` relationships between `SemanticCodeIndexInternalSymbol` nodes (types and functions)
+- File nodes with `directory` property populated
 
 ## Execution Order
 
-1. **`cyclicDependenciesCsv.sh`** — runs Cypher queries, writes CSV files
-2. **`cyclicDependenciesMarkdown.sh`** — assembles the final Markdown report
+1. **`cyclicDependenciesCsv.sh`** - runs Cypher queries, writes CSV files
+2. **`cyclicDependenciesMarkdown.sh`** - assembles the final Markdown report
 
 ## What This Domain Produces
 
-All output goes into `reports/cyclic-dependencies/`, organised by abstraction level:
+Output into `reports/cyclic-dependencies/`:
 
-```
-reports/cyclic-dependencies/
-├── Java_Package/
-│   ├── Cyclic_Dependencies.csv
-│   ├── Cyclic_Dependencies_Breakdown.csv
-│   └── Cyclic_Dependencies_Breakdown_Backward_Only.csv
-├── Java_Artifact/
-│   └── CyclicArtifactDependenciesUnwinded.csv
-├── Typescript_Module/
-│   ├── Cyclic_Dependencies_for_Typescript.csv
-│   ├── Cyclic_Dependencies_Breakdown_for_Typescript.csv
-│   └── Cyclic_Dependencies_Breakdown_Backward_Only_for_Typescript.csv
-├── SCIP_Semantic_Index_Module/
-│   ├── Cyclic_Dependencies_for_SCIP_Module.csv
-│   ├── Cyclic_Dependencies_Breakdown_for_SCIP_Module.csv
-│   └── Cyclic_Dependencies_Breakdown_Backward_Only_for_SCIP_Module.csv
-├── SCIP_Semantic_Index_Artifact/
-│   └── Cyclic_Dependencies_between_SCIP_Artifacts_as_unwinded_List.csv
-└── cyclic_dependencies_report.md
-```
+- **CSV data**: Cyclic dependency detection at applicable abstraction levels (varies by data present: Java packages/artifacts, TypeScript modules, SCIP modules/directories/artifacts)
+  - Overview tables: cycle groups with prioritization metrics
+  - Breakdown: individual dependency pairs within cycles
+  - Backward-only: removal candidates per cycle
+- **Graph visualizations**: SVG diagrams of top cycle pairs (forward/backward dependencies highlighted)
+- **`cyclic_dependencies_report.md`**: Assembled summary with cycle definitions, prioritization guidance, and conditional sections per abstraction level detected
