@@ -1,11 +1,11 @@
-// Calculates and writes the Weakly Connected Components to determine archetypes.
+// Calculates and writes the Weakly Connected Components
 
 CALL gds.wcc.write(
- $projection_name + '-cleaned', {
+ $dependencies_projection + '-cleaned', {
     writeProperty: 'communityWeaklyConnectedComponentId',
     consecutiveIds: true
 })
- YIELD componentCount, nodePropertiesWritten, preProcessingMillis, computeMillis, postProcessingMillis, writeMillis, componentDistribution
+YIELD componentCount, nodePropertiesWritten, preProcessingMillis, computeMillis, postProcessingMillis, writeMillis, componentDistribution
 RETURN componentCount, nodePropertiesWritten, preProcessingMillis, computeMillis, postProcessingMillis, writeMillis
       ,componentDistribution.min
       ,componentDistribution.mean

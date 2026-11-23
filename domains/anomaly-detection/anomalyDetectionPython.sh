@@ -30,6 +30,9 @@ ANOMALY_DETECTION_FEATURE_CYPHER_DIR=${ANOMALY_DETECTION_FEATURE_CYPHER_DIR:-"${
 ANOMALY_DETECTION_QUERY_CYPHER_DIR=${ANOMALY_DETECTION_QUERY_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/queries"}
 ANOMALY_DETECTION_LABEL_CYPHER_DIR=${ANOMALY_DETECTION_LABEL_CYPHER_DIR:-"${ANOMALY_DETECTION_SCRIPT_DIR}/labels"}
 
+# Centralized Connected Components (Strongly Connected and Weakly Connected) Cypher queries
+CONNECTED_COMPONENTS_CYPHER_DIR="${ANOMALY_DETECTION_SCRIPT_DIR}/../../cypher/Connected_Components"
+
 # Function to display script usage
 usage() {
   echo -e "${COLOR_ERROR}" >&2
@@ -82,19 +85,33 @@ is_sufficient_data_available() {
     fi
 }
 
-# Query or recalculate features.
-# 
+# Run centrality and clustering feature collection on the undirected projection.
+# SCC (Strongly Connected Components) requires a directed projection and is handled separately.
+#
 # Required Parameters:
 # - projection_name=...
-#   Name prefix for the in-memory projection name. Example: "package-anomaly-detection"
+#   Base name of the in-memory projection (without -directed suffix). Example: "package-anomaly-detection"
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
-anomaly_detection_features() {
+
+# Verify that a projection is DIRECTED before SCC calculation. SCC requires a directed projection.
+verify_projection_directed() {
+    local projection="$1"
+    local result
+    result=$( execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/Projection_Check_Directionality.cypher" "dependencies_projection=${projection}" )
+    if [ -z "${result}" ] || [ "${result}" = "projection_name,direction" ]; then
+        echo "anomalyDetectionPython: Error: projection '${projection}' is not DIRECTED. SCC requires a directed projection." >&2
+        exit 1
+    fi
+}
+
+anomaly_detection_features_undirected() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
-    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for ${nodeLabel} nodes..."
+    
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting centrality/clustering features for ${nodeLabel} nodes (undirected projection)..."
 
     # Determine the Betweenness centrality (with the directed graph projection) if not already done
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Betweenness-Exists.cypher" \
@@ -124,22 +141,71 @@ anomaly_detection_features() {
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipModule.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-Abstractness-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature_Abstractness_ScipArtifact.cypher" "${@}"
-    # Determines strongly connected components if not already done
-    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-Write.cypher" "${@}"
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-CreateNode.cypher" "${@}"
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-StronglyConnectedComponents-CreateDependency.cypher" "${@}"
-    # Determines weakly connected components if not already done
-    execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-Exists.cypher" \
-                                         "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-Write.cypher" "${@}"
-    execute_cypher "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-WeaklyConnectedComponents-CreateNode.cypher" "${@}"
+}
+
+# Run connected component analysis (SCC/WCC) on the directed projection.
+# Strongly Connected Components (SCC) requires a directed graph.
+#
+# Required Parameters:
+# - projection_name=...
+#   Base name for the directed projection (with -directed suffix added). Example: "package-anomaly-detection-directed"
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+anomaly_detection_connected_components() {
+    local projectionName
+    projectionName=$( extractQueryParameter "projection_name" "${@}" )
+    local projectionNodeLabel
+    projectionNodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    local projectionWeightProperty
+    projectionWeightProperty=$( extractQueryParameter "projection_weight_property" "${@}" )
+    
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Calculating connected components for directed projection (${projectionName})..."
+
+    verify_projection_directed "${projectionName}"
+
+    # Determines strongly connected components if not already done (using centralized queries)
+    # Note: SCC requires a directed projection, so we use the -directed variant here
+    execute_cypher_queries_until_results "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Exists.cypher" \
+                                         "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Write.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateNode.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateDependency.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    # Determines weakly connected components if not already done (using centralized queries)
+    execute_cypher_queries_until_results "${CONNECTED_COMPONENTS_CYPHER_DIR}/WeaklyConnectedComponent_Exists.cypher" \
+                                         "${CONNECTED_COMPONENTS_CYPHER_DIR}/WeaklyConnectedComponent_Write.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/WeaklyConnectedComponent_CreateNode.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
     # Determines topological sort max distance from source for strongly connected components if not already done
+    # Note: This uses the same projection as the other connected component queries
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Delete-Projection.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Projection.cypher" "${@}"
     execute_cypher_queries_until_results "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ANOMALY_DETECTION_FEATURE_CYPHER_DIR}/AnomalyDetectionFeature-TopologicalSortComponents-Write.cypher" "${@}"
+}
+
+# Query or recalculate features.
+# Runs both centrality/clustering features (undirected) and connected components (directed) in sequence.
+# 
+# Required Parameters:
+# - projection_name=...
+#   Name prefix for the in-memory projection name. Example: "package-anomaly-detection"
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+anomaly_detection_features() {
+    local projectionName
+    projectionName=$( extractQueryParameter "projection_name" "${@}" )
+    
+    echo "anomalyDetectionPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for nodes..."
+
+    # Run feature extraction on the undirected projection
+    anomaly_detection_features_undirected "${@}"
+    
+    # Run connected components on the directed projection
+    anomaly_detection_connected_components "projection_name=${projectionName}-directed" "${@}"
 }
 
 # Execute the Python scripts for anomaly detection.

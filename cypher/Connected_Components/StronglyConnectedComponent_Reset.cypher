@@ -1,5 +1,5 @@
-// Delete all SCC-related data: StronglyConnectedComponent nodes, relationships, and properties. For manual testing/reset only.
-// Parameterized by node label ($dependencies_projection_node).
+// Delete all SCC-related data: StronglyConnectedComponent nodes, relationships, and properties.
+// For manual testing/reset only. Parameterized by node label ($dependencies_projection_node).
 
 // Count nodes to be reset
 WITH 0 AS totalBefore

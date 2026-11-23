@@ -1,18 +1,20 @@
-// Create nodes for strongly connected components and connect them to their members. Includes complexity-based classification. Parameterized by node label ($dependencies_projection_node). Requires "Cyclic_Dependencies_SCC_Write.cypher". Only processes components with 3+ members.
+// Create nodes for strongly connected components and connect them to their members.
+// All components (including single-member) are created to ensure cycle-free graph structure.
+// Requires "StronglyConnectedComponent_Write.cypher".
 
-// 1) Select all code units that belong to a strongly connected component and sort by dependency degree for naming
+// 1) Select all code units that belong to a strongly connected component
+//    and sort by degree (in + out dependencies) for representative naming
 MATCH (codeUnit)
 WHERE $dependencies_projection_node IN labels(codeUnit)
   AND codeUnit.communityStronglyConnectedComponentId IS NOT NULL
-WITH codeUnit
-    ,COUNT { (codeUnit)-[:DEPENDS_ON]-() } AS totalDegree
+WITH codeUnit,
+     COUNT{ (codeUnit)-[:DEPENDS_ON]-() } AS totalDegree
 ORDER BY totalDegree DESC
 
-// 2) Group code units by component id and calculate metrics
+// 2) Group code units by strongly connected component id
 WITH codeUnit.communityStronglyConnectedComponentId AS componentId
     ,collect(codeUnit) AS members
     ,count(codeUnit) AS componentSize
-WHERE componentSize >= 3
 
 // 3) Calculate density: edge_count / (node_count * (node_count - 1))
 WITH componentId

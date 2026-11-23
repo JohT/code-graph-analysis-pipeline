@@ -1,4 +1,4 @@
-// Create inter-component dependency edges connecting strongly connected components. Parameterized by node label ($dependencies_projection_node). Requires "Cyclic_Dependencies_SCC_CreateNode.cypher".
+// Create edges between strongly connected components. Requires "StronglyConnectedComponent_CreateNode.cypher".
 
 // 1) Find all DEPENDS_ON edges between members of different components
 MATCH (sourceCodeUnit)-[codeUnitDependency:DEPENDS_ON]->(targetCodeUnit)

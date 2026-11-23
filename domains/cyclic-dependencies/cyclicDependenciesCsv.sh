@@ -28,7 +28,9 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/../../scripts"}
 
 # Cypher query directory within this domain (flat — the domain IS cyclic-dependencies)
 CYCLIC_DEPENDENCIES_CYPHER_DIR="${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/queries"
-CYCLIC_DEPENDENCIES_FEATURES_CYPHER_DIR="${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/features"
+
+# Centralized Connected Components (Strongly Connected and Weakly Connected) Cypher queries
+CONNECTED_COMPONENTS_CYPHER_DIR="${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/../../cypher/Connected_Components"
 
 # Define functions to execute a cypher query from within a given file like "execute_cypher"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
@@ -63,7 +65,7 @@ runStronglyConnectedComponents() {
 
     # Check if gds.scc.write function is available
     local scc_available; scc_available=$(
-        execute_cypher "${CYCLIC_DEPENDENCIES_FEATURES_CYPHER_DIR}/Cyclic_Dependencies_SCC_CheckAvailable.cypher" 2>/dev/null | grep -c "gds.scc.write" || true
+        execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CheckAvailable.cypher" 2>/dev/null | grep -c "gds.scc.write" || true
     )
     
     if [ "${scc_available}" -ne "1" ]; then
@@ -75,11 +77,11 @@ runStronglyConnectedComponents() {
 
     # Write SCC properties to nodes using the projection created by createDirectedDependencyProjection
     execute_cypher_queries_until_results \
-        "${CYCLIC_DEPENDENCIES_FEATURES_CYPHER_DIR}/Cyclic_Dependencies_SCC_Exists.cypher" \
-        "${CYCLIC_DEPENDENCIES_FEATURES_CYPHER_DIR}/Cyclic_Dependencies_SCC_Write.cypher" \
+        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Exists.cypher" \
+        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Write.cypher" \
         "${@}"
-    execute_cypher "${CYCLIC_DEPENDENCIES_FEATURES_CYPHER_DIR}/Cyclic_Dependencies_SCC_CreateNode.cypher" "${@}"
-    execute_cypher "${CYCLIC_DEPENDENCIES_FEATURES_CYPHER_DIR}/Cyclic_Dependencies_SCC_CreateDependency.cypher" "${@}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateNode.cypher" "${@}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateDependency.cypher" "${@}"
 
     # Extract CSV reports to the same directory as cyclic dependency results
     execute_cypher \
