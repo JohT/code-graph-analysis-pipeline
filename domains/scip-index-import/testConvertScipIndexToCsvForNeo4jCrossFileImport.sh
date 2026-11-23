@@ -423,23 +423,23 @@ nodes_header=$(head -1 "${cross_file_import}/scip_symbol_nodes.csv")
 assert_contains "symbol_nodes header has symbol"           '"symbol"'           "${nodes_header}"
 assert_contains "symbol_nodes header has language"         '"language"'         "${nodes_header}"
 assert_contains "symbol_nodes header has kind"             '"kind"'             "${nodes_header}"
-assert_contains "symbol_nodes header has symbol_type"      '"symbol_type"'      "${nodes_header}"
+assert_contains "symbol_nodes header has symbol_type"      '"symbolType"'      "${nodes_header}"
 assert_contains "symbol_nodes header has file"             '"file"'             "${nodes_header}"
-assert_contains "symbol_nodes header has is_abstract"      '"is_abstract"'      "${nodes_header}"
-assert_contains "symbol_nodes header has is_test"          '"is_test"'          "${nodes_header}"
+assert_contains "symbol_nodes header has is_abstract"      '"isAbstract"'      "${nodes_header}"
+assert_contains "symbol_nodes header has is_test"          '"isTest"'          "${nodes_header}"
 assert_contains "symbol_nodes header has project_root"     '"project_root"'     "${nodes_header}"
 assert_contains "symbol_nodes header has descriptor"       '"descriptor"'       "${nodes_header}"
 
 ext_header=$(head -1 "${cross_file_import}/scip_external_symbol_nodes.csv")
 assert_contains "external_nodes header has symbol"      '"symbol"'      "${ext_header}"
 assert_contains "external_nodes header has kind"        '"kind"'        "${ext_header}"
-assert_contains "external_nodes header has symbol_type" '"symbol_type"' "${ext_header}"
+assert_contains "external_nodes header has symbol_type" '"symbolType"' "${ext_header}"
 
 edges_header=$(head -1 "${cross_file_import}/scip_symbol_edges.csv")
 assert_contains "edges header has from"             '"from"'             "${edges_header}"
 assert_contains "edges header has to"               '"to"'               "${edges_header}"
-assert_contains "edges header has edge_type"        '"edge_type"'        "${edges_header}"
-assert_contains "edges header has reference_count"  '"reference_count"'  "${edges_header}"
+assert_contains "edges header has edge_type"        '"edgeType"'        "${edges_header}"
+assert_contains "edges header has reference_count"  '"referenceCount"'  "${edges_header}"
 echo ""
 
 # ---------------------------------------------------------------------------
@@ -546,14 +546,29 @@ assert_file_exists "creates scip_symbol_project_links_admin.csv"  "${admin_impor
 admin_nodes_header=$(head -1 "${admin_import}/scip_symbol_nodes_admin.csv")
 assert_contains "admin nodes header has symbol:ID(ScipNode)"  "symbol:ID(ScipNode)"  "${admin_nodes_header}"
 assert_contains "admin nodes header has :LABEL"               ":LABEL"               "${admin_nodes_header}"
-assert_contains "admin nodes header has is_abstract:boolean"  "is_abstract:boolean"  "${admin_nodes_header}"
-assert_contains "admin nodes header has is_test:boolean"      "is_test:boolean"       "${admin_nodes_header}"
+assert_contains "admin nodes header has isAbstract:boolean"   "isAbstract:boolean"   "${admin_nodes_header}"
+assert_contains "admin nodes header has isTest:boolean"       "isTest:boolean"        "${admin_nodes_header}"
 
 admin_edges_header=$(head -1 "${admin_import}/scip_symbol_edges_admin.csv")
 assert_contains "admin edges header has :START_ID(ScipNode)" ":START_ID(ScipNode)" "${admin_edges_header}"
 assert_contains "admin edges header has :END_ID(ScipNode)"   ":END_ID(ScipNode)"   "${admin_edges_header}"
 assert_contains "admin edges header has :TYPE"               ":TYPE"               "${admin_edges_header}"
-assert_contains "admin edges header has reference_count:int" "reference_count:int" "${admin_edges_header}"
+assert_contains "admin edges header has referenceCount:int" "referenceCount:int" "${admin_edges_header}"
+assert_contains "admin edges header has edgeType:string" "edgeType:string" "${admin_edges_header}"
+
+admin_nodes_header=$(head -1 "${admin_import}/scip_symbol_nodes_admin.csv")
+assert_contains "admin nodes header has name:string"       "name:string"       "${admin_nodes_header}"
+assert_contains "admin nodes header has symbolType:string"  "symbolType:string"  "${admin_nodes_header}"
+assert_contains "admin nodes header has packageId:string"    "packageId:string"    "${admin_nodes_header}"
+assert_contains "admin nodes header has packageManager:string" "packageManager:string" "${admin_nodes_header}"
+assert_contains "admin nodes header has isAbstract:boolean" "isAbstract:boolean" "${admin_nodes_header}"
+assert_contains "admin nodes header has isTest:boolean"         "isTest:boolean"         "${admin_nodes_header}"
+
+admin_ext_nodes_header=$(head -1 "${admin_import}/scip_external_symbol_nodes_admin.csv")
+assert_contains "admin external nodes header has name:string"       "name:string"       "${admin_ext_nodes_header}"
+assert_contains "admin external nodes header has symbolType:string"  "symbolType:string"  "${admin_ext_nodes_header}"
+assert_contains "admin external nodes header has packageId:string"    "packageId:string"    "${admin_ext_nodes_header}"
+assert_contains "admin external nodes header has packageManager:string" "packageManager:string" "${admin_ext_nodes_header}"
 
 admin_projects_header=$(head -1 "${admin_import}/scip_projects_admin.csv")
 assert_contains "admin projects header has fqn:ID(ScipNode)" "fqn:ID(ScipNode)" "${admin_projects_header}"
@@ -686,13 +701,30 @@ assert_not_contains "Fix #1: no edges to localFunc (single-file)" "localFunc" "$
 assert_contains "Fix #2: Promise# included as cross-file external" "Promise#" "${fix_nodes}"
 assert_contains "Fix #2: edge to Promise# with full descriptor" "Promise#" "${fix_edges}"
 
-# Fix #3: Admin CSV headers should include "name"
+# Fix #3: Admin CSV headers now use direct camelCase column names
+# (no property-renaming syntax needed since base CSV now outputs camelCase)
 run_admin_script_with_env "${fix_indices}" "${fix_import}"
 assert_exit_code "admin wrapper exits 0" "0" "${exit_code}"
 admin_internal_header=$(head -1 "${fix_import}/scip_symbol_nodes_admin.csv")
 admin_external_header=$(head -1 "${fix_import}/scip_external_symbol_nodes_admin.csv")
-assert_contains 'Fix #3: admin internal header has "name"' '"name"' "${admin_internal_header}"
-assert_contains 'Fix #3: admin external header has "name"' '"name"' "${admin_external_header}"
+admin_edges_header=$(head -1 "${fix_import}/scip_symbol_edges_admin.csv")
+
+# Admin headers should use camelCase column names with neo4j-admin types
+assert_contains 'Fix #3: admin internal header has name:string' 'name:string' "${admin_internal_header}"
+assert_contains 'Fix #3: admin internal header has symbolType:string' 'symbolType:string' "${admin_internal_header}"
+assert_contains 'Fix #3: admin internal header has packageId:string' 'packageId:string' "${admin_internal_header}"
+assert_contains 'Fix #3: admin internal header has packageManager:string' 'packageManager:string' "${admin_internal_header}"
+assert_contains 'Fix #3: admin internal header has isAbstract:boolean' 'isAbstract:boolean' "${admin_internal_header}"
+assert_contains 'Fix #3: admin internal header has isTest:boolean' 'isTest:boolean' "${admin_internal_header}"
+
+assert_contains 'Fix #3: admin external header has name:string' 'name:string' "${admin_external_header}"
+assert_contains 'Fix #3: admin external header has symbolType:string' 'symbolType:string' "${admin_external_header}"
+assert_contains 'Fix #3: admin external header has packageId:string' 'packageId:string' "${admin_external_header}"
+assert_contains 'Fix #3: admin external header has packageManager:string' 'packageManager:string' "${admin_external_header}"
+
+# Edge headers should have camelCase property names
+assert_contains 'Fix #3: admin edges header has referenceCount:int' 'referenceCount:int' "${admin_edges_header}"
+assert_contains 'Fix #3: admin edges header has edgeType:string' 'edgeType:string' "${admin_edges_header}"
 
 echo ""
 
@@ -789,6 +821,85 @@ admin_foo_internal=$(grep "org/example/Foo#" "${dedup_import}/scip_symbol_nodes_
 admin_foo_external=$(grep "^\"semanticdb maven org.example/common 1.0 org/example/Foo#\"" "${dedup_import}/scip_external_symbol_nodes_admin.csv" || echo "")
 assert_contains "admin: Foo# in internal nodes" "Foo" "${admin_foo_internal}"
 assert_equals "admin: Foo# NOT duplicated in external" "" "${admin_foo_external}"
+
+echo ""
+
+# ---------------------------------------------------------------------------
+# Test group 10: referenceCount property naming consistency
+# Verify that the CSV column name is properly converted from reference_count
+# (canonical format) to referenceCount:int (admin format), and that this
+# matches the Neo4j property name used in Cypher queries.
+# ---------------------------------------------------------------------------
+
+echo "Test group 10: referenceCount property naming consistency"
+
+refcount_indices="${tmp_test_dir}/refcount_indices"
+refcount_import="${tmp_test_dir}/refcount_import"
+mkdir -p "${refcount_indices}"
+
+# Create a simple two-file SCIP with explicit reference count
+cat > "${refcount_indices}/refcount.scip.json" << 'SCIP_JSON'
+{
+  "metadata": {"version": "0.3.0"},
+  "documents": [
+    {
+      "relative_path": "src/FileA.java",
+      "language": "Java",
+      "occurrences": [
+        {
+          "range": [0, 0, 0, 1],
+          "symbol": "semanticdb maven test/test 1.0 FileA#",
+          "symbol_roles": 1
+        },
+        {
+          "range": [1, 0, 1, 7],
+          "symbol": "semanticdb maven test/test 1.0 FileB#",
+          "symbol_roles": 0
+        }
+      ]
+    },
+    {
+      "relative_path": "src/FileB.java",
+      "language": "Java",
+      "occurrences": [
+        {
+          "range": [0, 0, 0, 1],
+          "symbol": "semanticdb maven test/test 1.0 FileB#",
+          "symbol_roles": 1
+        }
+      ]
+    }
+  ]
+}
+SCIP_JSON
+
+# Run the cross-file conversion
+run_script_with_env "${refcount_indices}" "${refcount_import}"
+assert_exit_code "referenceCount test: conversion succeeds" "0" "${exit_code}"
+
+# Check canonical CSV has referenceCount (camelCase)
+canonical_edges="${refcount_import}/scip_symbol_edges.csv"
+if [ -f "${canonical_edges}" ]; then
+    canonical_header=$(head -1 "${canonical_edges}")
+    assert_contains "canonical CSV has referenceCount column" '"referenceCount"' "${canonical_header}"
+fi
+
+# Also run admin wrapper to generate admin format
+run_admin_script_with_env "${refcount_indices}" "${refcount_import}"
+assert_exit_code "referenceCount test: admin conversion succeeds" "0" "${exit_code}"
+
+# Check admin CSV has referenceCount:int (camelCase with type)
+admin_edges="${refcount_import}/scip_symbol_edges_admin.csv"
+if [ -f "${admin_edges}" ]; then
+    admin_header=$(head -1 "${admin_edges}")
+    assert_contains "admin CSV header has referenceCount:int" "referenceCount:int" "${admin_header}"
+    
+    # Verify reference count value is preserved
+    edge_data=$(tail -n +2 "${admin_edges}")
+    if [ -n "${edge_data}" ]; then
+        assert_contains "admin CSV edge has non-zero reference count" "1" "${edge_data}"
+    fi
+fi
 
 echo ""
 

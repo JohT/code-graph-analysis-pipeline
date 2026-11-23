@@ -20,7 +20,7 @@ IMPORT_DIRECTORY=${IMPORT_DIRECTORY:-"./import"}
 # Even if $BASH_SOURCE is made for Bourne-like shells it is also supported by others and therefore here the preferred solution.
 # CDPATH reduces the scope of the cd command to potentially prevent unintended directory changes.
 # This way non-standard tools like readlink aren't needed.
-CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR=${CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR=${CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" > /dev/null && pwd -P )}
 echo "convertScipIndexToCsvForNeo4jAdminCrossFileImport: CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR=${CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR}"
 
 readonly CROSS_FILE_SCRIPT="${CONVERT_SCIP_ADMIN_CROSS_FILE_SCRIPT_DIR}/convertScipIndexToCsvForNeo4jCrossFileImport.sh"
@@ -64,28 +64,35 @@ function transform_symbol_nodes_to_admin() {
 
     awk -F',' 'BEGIN { OFS="," }
     NR == 1 {
-        # Rename headers and append :LABEL
-        # Input:  symbol,display_name,scheme,language,kind,symbol_type,file,...,is_abstract,is_test,project_root,descriptor
-        # Output: symbol:ID(ScipNode),display_name,scheme,language,kind:int,symbol_type,file,...,is_abstract:boolean,is_test:boolean,project_root,descriptor,:LABEL
-        gsub(/^"?symbol"?/, "\"symbol:ID(ScipNode)\"")
-        gsub(/^"?is_abstract"?/, "\"is_abstract:boolean\"")  # handled below by column index
-        sub(/"symbol"/, "\"symbol:ID(ScipNode)\"")
-        # Rewrite specific column headers
+        # Rename headers with neo4j-admin types
+        # Input:  symbol,name,scheme,language,kind,symbolType,file,packageId,packageManager,version,module,isAbstract,isTest,project_root,descriptor
+        # Output: symbol:ID(ScipNode),name:string,scheme:string,language:string,kind:int,symbolType:string,file:string,packageId:string,packageManager:string,version:string,module:string,isAbstract:boolean,isTest:boolean,project_root:string,descriptor:string,:LABEL
+        
         for (i = 1; i <= NF; i++) {
             col = $i
             gsub(/^"/, "", col)
             gsub(/"$/, "", col)
-            if      (col == "symbol")      $i = "\"symbol:ID(ScipNode)\""
-            else if (col == "display_name") $i = "\"name\""
-            else if (col == "kind")        $i = "\"kind:int\""
-            else if (col == "is_abstract") $i = "\"is_abstract:boolean\""
-            else if (col == "is_test")     $i = "\"is_test:boolean\""
+            if      (col == "symbol")       $i = "\"symbol:ID(ScipNode)\""
+            else if (col == "name")         $i = "\"name:string\""
+            else if (col == "scheme")       $i = "\"scheme:string\""
+            else if (col == "language")     $i = "\"language:string\""
+            else if (col == "kind")         $i = "\"kind:int\""
+            else if (col == "symbolType")   $i = "\"symbolType:string\""
+            else if (col == "file")         $i = "\"file:string\""
+            else if (col == "packageId")    $i = "\"packageId:string\""
+            else if (col == "packageManager") $i = "\"packageManager:string\""
+            else if (col == "version")      $i = "\"version:string\""
+            else if (col == "module")       $i = "\"module:string\""
+            else if (col == "isAbstract")   $i = "\"isAbstract:boolean\""
+            else if (col == "isTest")       $i = "\"isTest:boolean\""
+            else if (col == "project_root") $i = "\"project_root:string\""
+            else if (col == "descriptor")   $i = "\"descriptor:string\""
         }
         print $0 ",\":LABEL\""
         next
     }
     {
-        # Extract symbol_type (column 6, 1-based)
+        # Extract symbolType (column 6, 1-based)
         sym_type = $6
         gsub(/^"/, "", sym_type)
         gsub(/"$/, "", sym_type)
@@ -130,13 +137,25 @@ function transform_external_symbol_nodes_to_admin() {
 
     awk -F',' 'BEGIN { OFS="," }
     NR == 1 {
+        # Rename headers with neo4j-admin types
+        # Input:  symbol,name,scheme,language,kind,symbolType,packageId,packageManager,version,module,descriptor
+        # Output: symbol:ID(ScipNode),name:string,scheme:string,language:string,kind:int,symbolType:string,packageId:string,packageManager:string,version:string,module:string,descriptor:string,:LABEL
+        
         for (i = 1; i <= NF; i++) {
             col = $i
             gsub(/^"/, "", col)
             gsub(/"$/, "", col)
-            if (col == "symbol")      $i = "\"symbol:ID(ScipNode)\""
-            else if (col == "display_name") $i = "\"name\""
-            else if (col == "kind")   $i = "\"kind:int\""
+            if (col == "symbol")            $i = "\"symbol:ID(ScipNode)\""
+            else if (col == "name")         $i = "\"name:string\""
+            else if (col == "scheme")       $i = "\"scheme:string\""
+            else if (col == "language")     $i = "\"language:string\""
+            else if (col == "kind")         $i = "\"kind:int\""
+            else if (col == "symbolType")   $i = "\"symbolType:string\""
+            else if (col == "packageId")    $i = "\"packageId:string\""
+            else if (col == "packageManager") $i = "\"packageManager:string\""
+            else if (col == "version")      $i = "\"version:string\""
+            else if (col == "module")       $i = "\"module:string\""
+            else if (col == "descriptor")   $i = "\"descriptor:string\""
         }
         print $0 ",\":LABEL\""
         next
@@ -170,7 +189,7 @@ function transform_external_symbol_nodes_to_admin() {
 # Column changes:
 #   from           -> :START_ID(ScipNode)
 #   to             -> :END_ID(ScipNode)
-#   reference_count -> reference_count:int
+#   reference_count -> referenceCount:int
 #   (new column)   -> :TYPE = DEPENDS_ON (relationship type)
 #   edge_type      -> edge_type (kept as property)
 # ---------------------------------------------------------------------------
@@ -181,17 +200,17 @@ function transform_edges_to_admin() {
 
     awk -F',' 'BEGIN { OFS="," }
     NR == 1 {
-        # from,to,edge_type,reference_count
-        # -> :START_ID(ScipNode),:END_ID(ScipNode),:TYPE,reference_count:int,edge_type
-        print "\":START_ID(ScipNode)\",\":END_ID(ScipNode)\",\":TYPE\",\"reference_count:int\",\"edge_type\""
+        # from,to,edgeType,referenceCount
+        # -> :START_ID(ScipNode),:END_ID(ScipNode),:TYPE,referenceCount:int,edgeType:string
+        print "\":START_ID(ScipNode)\",\":END_ID(ScipNode)\",\":TYPE\",\"referenceCount:int\",\"edgeType:string\""
         next
     }
     {
-        from           = $1
-        to             = $2
-        edge_type      = $3
-        reference_count = $4
-        print from "," to ",\"DEPENDS_ON\"," reference_count "," edge_type
+        from            = $1
+        to              = $2
+        edgeType        = $3
+        referenceCount  = $4
+        print from "," to ",\"DEPENDS_ON\"," referenceCount "," edgeType
     }' "${input_file}" > "${output_file}"
 }
 
@@ -214,7 +233,7 @@ function transform_projects_to_admin() {
 
     awk -F',' 'BEGIN { OFS="," }
     NR == 1 {
-        print "\"fqn:ID(ScipNode)\",\"projectRoot\",\"toolName\",\"toolVersion\",\":LABEL\""
+        print "\"fqn:ID(ScipNode)\",\"projectRoot:string\",\"toolName:string\",\"toolVersion:string\",\":LABEL\""
         next
     }
     {

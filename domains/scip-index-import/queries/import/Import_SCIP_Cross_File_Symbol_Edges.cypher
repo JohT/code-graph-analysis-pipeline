@@ -11,7 +11,7 @@ CALL { WITH row
     MATCH (target:SCIP {symbol: row.to})
     
     // CREATE relationship (not MERGE) since scip_symbol_edges.csv is pre-deduplicated by converter
-    CREATE (source)-[r:DEPENDS_ON {referenceCount: toInteger(row.reference_count),
-                                    edgeType: row.edge_type}]->(target)
+    CREATE (source)-[r:DEPENDS_ON {referenceCount: toInteger(row.referenceCount),
+                                    edgeType: row.edgeType}]->(target)
 } IN TRANSACTIONS OF 500 ROWS
 RETURN count(*) AS writtenRelationships

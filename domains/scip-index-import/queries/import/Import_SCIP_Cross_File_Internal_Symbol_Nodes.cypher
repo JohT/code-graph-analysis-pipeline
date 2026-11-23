@@ -6,19 +6,19 @@ LOAD CSV WITH HEADERS FROM 'file:///scip_symbol_nodes.csv' AS row
 WITH row WHERE row.file <> ''
 MERGE (node:SCIP:SemanticCodeIndexInternalSymbol {symbol: row.symbol})
 SET node.fqn            = row.symbol,
-    node.name           = row.display_name,
+    node.name           = row.name,
     node.scheme         = row.scheme,
     node.language       = row.language,
     node.kind           = toInteger(row.kind),
-    node.symbolType     = row.symbol_type,
-    node.typeName       = row.symbol_type,
+    node.symbolType     = row.symbolType,
+    node.typeName       = row.symbolType,
     node.file           = row.file,
-    node.packageId      = row.package_id,
-    node.packageManager = row.package_manager,
+    node.packageId      = row.packageId,
+    node.packageManager = row.packageManager,
     node.version        = row.version,
     node.module         = row.module,
-    node.isAbstract     = (row.is_abstract = 'true'),
-    node.isTest         = (row.is_test = 'true'),
+    node.isAbstract     = (row.isAbstract = 'true'),
+    node.isTest         = (row.isTest = 'true'),
     node.descriptor     = row.descriptor
 WITH node, row.project_root AS projectRoot
 MATCH (p:SCIP:SemanticCodeIndexProject {fqn: projectRoot})
