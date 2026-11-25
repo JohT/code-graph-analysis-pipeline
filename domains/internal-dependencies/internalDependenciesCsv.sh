@@ -35,6 +35,9 @@ SCC_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/strongly-connected-c
 OBJECT_ORIENTED_DESIGN_METRICS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/object-oriented-design-metrics"
 VISIBILITY_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/queries/visibility"
 
+# Centralized Connected Components (Strongly Connected and Weakly Connected) Cypher queries
+CONNECTED_COMPONENTS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_SCRIPT_DIR}/../../cypher/Connected_Components"
+
 # Define functions to execute a cypher query from within a given file like "execute_cypher" and "execute_cypher_queries_until_results"
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
@@ -240,11 +243,11 @@ echo "internalDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Starting topologic
 # - dependencies_projection_weight_property=... Weight property name
 runStronglyConnectedComponents() {
     execute_cypher_queries_until_results \
-        "${SCC_CYPHER_DIR}/SCC_Exists.cypher" \
-        "${SCC_CYPHER_DIR}/SCC_Write.cypher" \
+        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Exists.cypher" \
+        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Write.cypher" \
         "${@}"
-    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateNode.cypher" "${@}"
-    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateDependency.cypher" "${@}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateNode.cypher" "${@}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateDependency.cypher" "${@}"
 }
 
 # STEP 2: Drop and recreate the in-memory -components projection from StronglyConnectedComponent nodes.

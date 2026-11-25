@@ -29,6 +29,9 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${ARCHETYPES_SCRIPT_DIR}/../../scripts"} # Repositor
 ARCHETYPES_FEATURE_CYPHER_DIR=${ARCHETYPES_FEATURE_CYPHER_DIR:-"${ARCHETYPES_SCRIPT_DIR}/features"}
 ARCHETYPES_LABEL_CYPHER_DIR=${ARCHETYPES_LABEL_CYPHER_DIR:-"${ARCHETYPES_SCRIPT_DIR}/labels"}
 
+# Centralized Connected Components (Strongly Connected and Weakly Connected) Cypher queries
+CONNECTED_COMPONENTS_CYPHER_DIR="${ARCHETYPES_SCRIPT_DIR}/../../cypher/Connected_Components"
+
 # Function to display script usage
 usage() {
   echo -e "${COLOR_ERROR}" >&2
@@ -62,19 +65,33 @@ source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 # Define functions to create and delete Graph Projections like "createUndirectedDependencyProjection"
 source "${SCRIPTS_DIR}/projectionFunctions.sh"
 
-# Query or recalculate features (skip if already computed via Exists checks).
+# Run centrality and clustering feature collection on the undirected projection.
+# SCC (Strongly Connected Components) requires a directed projection and is handled separately.
 #
 # Required Parameters:
 # - projection_name=...
-#   Name prefix for the in-memory projection name. Example: "package-archetypes"
+#   Base name of the in-memory projection (without -directed suffix). Example: "package-archetypes"
 # - projection_node_label=...
 #   Label of the nodes that will be used for the projection. Example: "Package"
 # - projection_weight_property=...
 #   Name of the node property that contains the dependency weight. Example: "weight"
-archetype_features() {
+
+# Verify that a projection is DIRECTED before SCC calculation. SCC requires a directed projection.
+verify_projection_directed() {
+    local projection="$1"
+    local result
+    result=$( execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/Projection_Check_Directionality.cypher" "dependencies_projection=${projection}" )
+    if [ -z "${result}" ] || [ "${result}" = "projection_name,direction" ]; then
+        echo "archetypesPython: Error: projection '${projection}' is not DIRECTED. SCC requires a directed projection." >&2
+        exit 1
+    fi
+}
+
+archetype_features_undirected() {
     local nodeLabel
     nodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
-    echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for ${nodeLabel} nodes..."
+    
+    echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting centrality/clustering features for ${nodeLabel} nodes (undirected projection)..."
 
     # Determine the Betweenness centrality (with the directed graph projection) if not already done
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Betweenness-Exists.cypher" \
@@ -104,22 +121,71 @@ archetype_features() {
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipModule.cypher" "${@}"
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-Abstractness-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature_Abstractness_ScipArtifact.cypher" "${@}"
-    # Determines strongly connected components if not already done
-    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-Exists.cypher" \
-                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-Write.cypher" "${@}"
-    execute_cypher "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-CreateNode.cypher" "${@}"
-    execute_cypher "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-StronglyConnectedComponents-CreateDependency.cypher" "${@}"
-    # Determines weakly connected components if not already done
-    execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-WeaklyConnectedComponents-Exists.cypher" \
-                                         "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-WeaklyConnectedComponents-Write.cypher" "${@}"
-    execute_cypher "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-WeaklyConnectedComponents-CreateNode.cypher" "${@}"
+}
+
+# Run connected component analysis (SCC/WCC) on the directed projection.
+# Strongly Connected Components (SCC) requires a directed graph.
+#
+# Required Parameters:
+# - projection_name=...
+#   Base name for the directed projection (with -directed suffix added). Example: "package-archetypes-directed"
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+archetype_features_connected_components() {
+    local projectionName
+    projectionName=$( extractQueryParameter "projection_name" "${@}" )
+    local projectionNodeLabel
+    projectionNodeLabel=$( extractQueryParameter "projection_node_label" "${@}" )
+    local projectionWeightProperty
+    projectionWeightProperty=$( extractQueryParameter "projection_weight_property" "${@}" )
+    
+    echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Calculating connected components for directed projection (${projectionName})..."
+
+    verify_projection_directed "${projectionName}"
+
+    # Determines strongly connected components if not already done (using centralized queries)
+    # Note: SCC requires a directed projection, so we use the -directed variant here
+    execute_cypher_queries_until_results "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Exists.cypher" \
+                                         "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Write.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateNode.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateDependency.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    # Determines weakly connected components if not already done (using centralized queries)
+    execute_cypher_queries_until_results "${CONNECTED_COMPONENTS_CYPHER_DIR}/WeaklyConnectedComponent_Exists.cypher" \
+                                         "${CONNECTED_COMPONENTS_CYPHER_DIR}/WeaklyConnectedComponent_Write.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/WeaklyConnectedComponent_CreateNode.cypher" "dependencies_projection=${projectionName}" "dependencies_projection_node=${projectionNodeLabel}" "dependencies_projection_weight_property=${projectionWeightProperty}"
     # Determines topological sort max distance from source for strongly connected components if not already done
+    # Note: This uses the same projection as the other connected component queries
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-TopologicalSortComponents-Delete-Projection.cypher" "${@}"
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-TopologicalSortComponents-Projection.cypher" "${@}"
     execute_cypher_queries_until_results "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-TopologicalSortComponents-Exists.cypher" \
                                          "${ARCHETYPES_FEATURE_CYPHER_DIR}/ArchetypeFeature-TopologicalSortComponents-Write.cypher" "${@}"
+}
+
+# Query or recalculate features.
+# Runs both centrality/clustering features (undirected) and connected components (directed) in sequence.
+# 
+# Required Parameters:
+# - projection_name=...
+#   Name prefix for the in-memory projection name. Example: "package-archetypes"
+# - projection_node_label=...
+#   Label of the nodes that will be used for the projection. Example: "Package"
+# - projection_weight_property=...
+#   Name of the node property that contains the dependency weight. Example: "weight"
+archetype_features() {
+    local projectionName
+    projectionName=$( extractQueryParameter "projection_name" "${@}" )
+    
+    echo "archetypesPython: $(date +'%Y-%m-%dT%H:%M:%S%z') Collecting features for nodes..."
+
+    # Run feature extraction on the undirected projection
+    archetype_features_undirected "${@}"
+    
+    # Run connected components on the directed projection
+    archetype_features_connected_components "projection_name=${projectionName}-directed" "${@}"
 }
 
 # Label code units with top archetypes (skip if already labeled via Exists checks).

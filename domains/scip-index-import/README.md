@@ -364,3 +364,24 @@ Both representations are valid; they just capture dependencies at different gran
 `isTest` is set on `SCIPInternalType` nodes during import by matching file path patterns (`/test/`, `/tests/`, `/spec/`, `__tests__`, `_test.go`, `.test.`, `.spec.`, Windows equivalents).
 
 `isTest` on `SCIPModule` nodes is derived from its contained types: a module is a test module if **any** of its `SCIPInternalType` nodes has `isTest = true`.
+
+## Important Properties
+
+SCIP import creates the following Neo4j properties used by enrichment and analysis queries:
+
+**Symbol Node Properties:**
+
+| Property | Type | Purpose |
+| -------- | ---- | ------- |
+| `symbolType` | string | Symbol classification (Class, Function, Variable, Field, etc.) |
+| `packageId` | string | External package identifier for dependency resolution |
+| `packageManager` | string | Package manager (Maven, npm, etc.) |
+| `isAbstract` | boolean | Marks abstract classes and interfaces |
+| `isTest` | boolean | Marks test code for filtering/analysis |
+
+**Edge Properties:**
+
+| Property | Type | Purpose |
+| -------- | ---- | ------- |
+| `edgeType` | string | Relationship classification (uses_type, calls_function, etc.) |
+| `referenceCount` | int | Edge weight for weighted graph analysis |

@@ -421,18 +421,18 @@ function extract_internal_symbol_nodes() {
 
                 {
                     symbol:          short_symbol($symbol),
-                    display_name:    display_name_from_descriptor($symbol),
+                    name:    display_name_from_descriptor($symbol),
                     scheme:          scheme($symbol),
                     language:        scheme_to_language(scheme($symbol)),
                     kind:            ($kind | if . == null then "" else tostring end),
-                    symbol_type:     $sym_type,
+                    symbolType:     $sym_type,
                     file:            $file,
-                    package_id:      $pkg_id,
-                    package_manager: $manager,
+                    packageId:      $pkg_id,
+                    packageManager: $manager,
                     version:         $version,
                     module:          $module_name,
-                    is_abstract:     (if $sym_type == "Interface" or $sym_type == "AbstractClass" or $sym_type == "TypeAlias" then "true" else "false" end),
-                    is_test:         (if is_test($file) then "true" else "false" end),
+                    isAbstract:     (if $sym_type == "Interface" or $sym_type == "AbstractClass" or $sym_type == "TypeAlias" then "true" else "false" end),
+                    isTest:         (if is_test($file) then "true" else "false" end),
                     project_root:    $project_root,
                     descriptor:      $desc
                 }
@@ -468,18 +468,18 @@ function extract_internal_symbol_nodes() {
 
                 {
                     symbol:          short_symbol($symbol),
-                    display_name:    display_name_from_descriptor($symbol),
+                    name:    display_name_from_descriptor($symbol),
                     scheme:          scheme($symbol),
                     language:        scheme_to_language(scheme($symbol)),
                     kind:            ($kind | if . == null then "" else tostring end),
-                    symbol_type:     $sym_type,
+                    symbolType:     $sym_type,
                     file:            $file,
-                    package_id:      $pkg_id,
-                    package_manager: $manager,
+                    packageId:      $pkg_id,
+                    packageManager: $manager,
                     version:         $version,
                     module:          $module_name,
-                    is_abstract:     (if $sym_type == "Interface" or $sym_type == "AbstractClass" or $sym_type == "TypeAlias" then "true" else "false" end),
-                    is_test:         (if is_test($file) then "true" else "false" end),
+                    isAbstract:     (if $sym_type == "Interface" or $sym_type == "AbstractClass" or $sym_type == "TypeAlias" then "true" else "false" end),
+                    isTest:         (if is_test($file) then "true" else "false" end),
                     project_root:    $project_root,
                     descriptor:      $desc
                 }
@@ -545,28 +545,28 @@ function extract_internal_symbol_nodes() {
 
                 {
                     symbol:          ("__file__ " + $file),
-                    display_name:    ($file | split("/") | last),
+                    name:    ($file | split("/") | last),
                     scheme:          $tokens[0],
                     language:        scheme_to_language($tokens[0]),
                     kind:            "",
-                    symbol_type:     "File",
+                    symbolType:     "File",
                     file:            $file,
-                    package_id:      $pkg_id,
-                    package_manager: $manager,
+                    packageId:      $pkg_id,
+                    packageManager: $manager,
                     version:         $version,
                     module:          $module_name,
-                    is_abstract:     "false",
-                    is_test:         (if is_test($file) then "true" else "false" end),
+                    isAbstract:     "false",
+                    isTest:         (if is_test($file) then "true" else "false" end),
                     project_root:    $project_root,
                     descriptor:      ""
                 }
             ]
         ) |
         unique_by(.symbol) |
-        sort_by(.file, .display_name) |
+        sort_by(.file, .name) |
 
-        (["symbol","display_name","scheme","language","kind","symbol_type","file","package_id","package_manager","version","module","is_abstract","is_test","project_root","descriptor"]),
-        (.[] | [.symbol, .display_name, .scheme, .language, .kind, .symbol_type, .file, .package_id, .package_manager, .version, .module, .is_abstract, .is_test, .project_root, .descriptor])
+        (["symbol","name","scheme","language","kind","symbolType","file","packageId","packageManager","version","module","isAbstract","isTest","project_root","descriptor"]),
+        (.[] | [.symbol, .name, .scheme, .language, .kind, .symbolType, .file, .packageId, .packageManager, .version, .module, .isAbstract, .isTest, .project_root, .descriptor])
         | @csv
     ' "${input_file}"
 }
@@ -614,21 +614,21 @@ function extract_external_symbol_nodes() {
 
             {
                 symbol:          short_symbol($symbol),
-                display_name:    display_name_from_descriptor($symbol),
+                name:    display_name_from_descriptor($symbol),
                 scheme:          scheme($symbol),
                 language:        scheme_to_language(scheme($symbol)),
                 kind:            ($kind | if . == null then "" else tostring end),
-                symbol_type:     $sym_type,
-                package_id:      $pkg_id,
-                package_manager: $manager,
+                symbolType:     $sym_type,
+                packageId:      $pkg_id,
+                packageManager: $manager,
                 version:         $version,
                 module:          $module_name,
                 descriptor:      $desc
             }
         ] |
         unique_by(.symbol) |
-        sort_by(.package_id, .display_name) |
-        .[] | [.symbol, .display_name, .scheme, .language, .kind, .symbol_type, .package_id, .package_manager, .version, .module, .descriptor]
+        sort_by(.packageId, .name) |
+        .[] | [.symbol, .name, .scheme, .language, .kind, .symbolType, .packageId, .packageManager, .version, .module, .descriptor]
         | @csv
     ' "${input_file}"
 }
@@ -743,13 +743,13 @@ function extract_symbol_edges() {
          select($source_symbol != null) |
          select($source_symbol != $target) |
 
-         {from: $source_symbol, to: $target, edge_type: $etype}
+         {from: $source_symbol, to: $target, edgeType: $etype}
         ] |
 
-        group_by([.from, .to, .edge_type]) |
+        group_by([.from, .to, .edgeType]) |
         .[] |
-        {from: .[0].from, to: .[0].to, edge_type: .[0].edge_type, count: length} |
-        [.from, .to, .edge_type, (.count | tostring)] | @csv
+        {from: .[0].from, to: .[0].to, edgeType: .[0].edgeType, count: length} |
+        [.from, .to, .edgeType, (.count | tostring)] | @csv
     ' "${input_file}"
 }
 
@@ -871,7 +871,7 @@ function merge_external_symbol_node_csvs() {
     done < <(find "${tmp_dir}" -maxdepth 1 -name "*_external_nodes.csv" | sort)
 
     {
-        echo '"symbol","display_name","scheme","language","kind","symbol_type","package_id","package_manager","version","module","descriptor"'
+        echo '"symbol","name","scheme","language","kind","symbolType","packageId","packageManager","version","module","descriptor"'
         if [ ${#external_node_files[@]} -gt 0 ]; then
             cat "${external_node_files[@]}" | awk -F',' '
                 {
@@ -927,8 +927,8 @@ function deduplicate_external_vs_internal() {
 }
 
 # ---------------------------------------------------------------------------
-# Merge per-file edge CSVs: sum reference_count for
-# (from, to, edge_type) triples.
+# Merge per-file edge CSVs: sum referenceCount for
+# (from, to, edgeType) triples.
 # ---------------------------------------------------------------------------
 
 function merge_symbol_edge_csvs() {
@@ -941,21 +941,21 @@ function merge_symbol_edge_csvs() {
     done < <(find "${tmp_dir}" -maxdepth 1 -name "*_edges.csv" | sort)
 
     {
-        echo '"from","to","edge_type","reference_count"'
+        echo '"from","to","edgeType","referenceCount"'
         if [ ${#edge_files[@]} -gt 0 ]; then
             cat "${edge_files[@]}" | awk -F',' '
                 {
                     from      = $1
                     to        = $2
-                    edge_type = $3
+                    edgeType  = $3
                     count     = $4
                     gsub(/"/, "", count)
-                    key = from SUBSEP to SUBSEP edge_type
+                    key = from SUBSEP to SUBSEP edgeType
                     counts[key] += count
                     if (!(key in froms)) {
                         froms[key]      = from
                         tos[key]        = to
-                        edge_types[key] = edge_type
+                        edgeTypes[key]  = edgeType
                         order[NR]       = key
                     }
                 }
@@ -963,7 +963,7 @@ function merge_symbol_edge_csvs() {
                     for (i = 1; i <= NR; i++) {
                         k = order[i]
                         if (k in froms) {
-                            print froms[k] "," tos[k] "," edge_types[k] "," counts[k]
+                            print froms[k] "," tos[k] "," edgeTypes[k] "," counts[k]
                             delete froms[k]
                         }
                     }

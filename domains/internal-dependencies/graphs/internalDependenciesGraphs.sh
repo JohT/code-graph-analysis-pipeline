@@ -39,6 +39,9 @@ PATH_FINDING_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/path-fin
 TOPOLOGICAL_SORT_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/topological-sort"
 SCC_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../queries/strongly-connected-components"
 
+# Centralized Connected Components (Strongly Connected and Weakly Connected) Cypher queries
+CONNECTED_COMPONENTS_CYPHER_DIR="${INTERNAL_DEPENDENCIES_GRAPHS_DIR}/../../../cypher/Connected_Components"
+
 # Define functions to execute cypher queries from within a given file
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
@@ -57,12 +60,12 @@ source "${SCRIPTS_DIR}/projectionFunctions.sh"
 setupStronglyConnectedComponentsForSccVisualization() {
     # Create SCC nodes (idempotent: skips SCC detection if already computed by CSV phase)
     execute_cypher_queries_until_results \
-        "${SCC_CYPHER_DIR}/SCC_Exists.cypher" \
-        "${SCC_CYPHER_DIR}/SCC_Write.cypher" \
+        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Exists.cypher" \
+        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Write.cypher" \
         "${@}"
     # Create component nodes and component-level dependencies (idempotent MERGE operations)
-    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateNode.cypher" "${@}"
-    execute_cypher "${SCC_CYPHER_DIR}/SCC_CreateDependency.cypher" "${@}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateNode.cypher" "${@}"
+    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateDependency.cypher" "${@}"
     # Always recreate the -components projection: the CSV phase uses a different projection name
     # so this projection is not in GDS memory. The delete is a safe no-op if not present.
     execute_cypher "${SCC_CYPHER_DIR}/SCC_TopologicalSort_Delete_Projection.cypher" "${@}"

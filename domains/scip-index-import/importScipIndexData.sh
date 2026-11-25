@@ -112,6 +112,52 @@ verify_scip_internal_symbol_completeness() {
     echo "importScipIndexData: ✓ All SemanticCodeIndexInternalSymbol nodes have required properties"
 }
 
+# Verifies that DEPENDS_ON edges between SCIP symbols have correct property names and complete data.
+# Checks for:
+#   - referenceCount property (NOT reference_count with underscore) with 100% coverage
+#   - edgeType property (NOT edge_type with underscore) with 100% coverage
+# This verification ensures consistency between canonical CSV import (LOAD CSV) and admin import formats.
+# Both should create edges with identical property names (referenceCount, edgeType).
+verify_scip_symbol_edge_properties() {
+    echo "importScipIndexData: Verifying that all SCIP symbol DEPENDS_ON edges have required properties..."
+
+    local dataVerificationResult
+    dataVerificationResult=$( execute_cypher "${IMPORT_QUERIES_DIR}/Verify_SCIP_Cross_File_Symbol_Edge_Properties.cypher")
+
+    # Parse the verification result which returns: status, total_edges, edges_with_referenceCount, 
+    # referenceCount_coverage_percent, edges_with_edgeType, edgeType_coverage_percent
+    local status
+    status=$( echo "${dataVerificationResult}" | grep -v '^status,' | head -1 | awk -F',' '{print $1}' | tr -d '"' )
+    
+    if [[ "${status}" == *"ERROR"* ]]; then
+        echo "importScipIndexData: ERROR: ${status}" >&2
+        echo "This typically indicates:" >&2
+        echo "  1. CSV column headers missing property name mappings (=camelCase syntax)" >&2
+        echo "  2. Admin CSV transformation did not rename columns correctly" >&2
+        return 1
+    elif [[ "${status}" == "No DEPENDS_ON edges found" ]]; then
+        echo "importScipIndexData: ⚠ No DEPENDS_ON edges found. This is expected only for single-file analyses."
+    else
+        # Parse and validate coverage percentages
+        local ref_count_coverage edge_type_coverage total_edges
+        ref_count_coverage=$( echo "${dataVerificationResult}" | grep -v '^status,' | head -1 | awk -F',' '{print $4}' | tr -d '"' )
+        edge_type_coverage=$( echo "${dataVerificationResult}" | grep -v '^status,' | head -1 | awk -F',' '{print $6}' | tr -d '"' )
+        total_edges=$( echo "${dataVerificationResult}" | grep -v '^status,' | head -1 | awk -F',' '{print $2}' | tr -d '"' )
+        
+        if (( $(echo "${ref_count_coverage} < 100" | bc -l) )); then
+            echo "importScipIndexData: ERROR: referenceCount property coverage is ${ref_count_coverage}% (expected 100%)" >&2
+            return 1
+        fi
+        
+        if (( $(echo "${edge_type_coverage} < 100" | bc -l) )); then
+            echo "importScipIndexData: ERROR: edgeType property coverage is ${edge_type_coverage}% (expected 100%)" >&2
+            return 1
+        fi
+        
+        echo "importScipIndexData: ✓ All SCIP symbol DEPENDS_ON edges (${total_edges}) have required properties (referenceCount, edgeType)"
+    fi
+}
+
 # Check if indices have changed since last import
 is_scip_index_change_detected() {
     local change_detection_return_code
@@ -369,8 +415,9 @@ execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_De
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') Setting dependency degree rank..."
 execute_cypher_summarized "${DEPENDENCY_ENRICHMENT_CYPHER_DIR}/Set_Dependency_Degree_Rank.cypher"
 
-# Verify completeness of all SemanticCodeIndexInternalSymbol nodes before finishing
+# Verify completeness of all SemanticCodeIndexInternalSymbol nodes and edge properties
 verify_scip_internal_symbol_completeness
+verify_scip_symbol_edge_properties
 
 echo "importScipIndexData: $(date +'%Y-%m-%dT%H:%M:%S%z') SCIP index import complete."
 

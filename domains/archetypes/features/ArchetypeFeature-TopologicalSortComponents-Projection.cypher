@@ -1,4 +1,4 @@
-// Creates a projection of the strongly connected components graph for the given member type. Requires: "ArchetypeFeature-StronglyConnectedComponents-CreateDependency.cypher"
+// Creates a projection of the strongly connected components graph for the given member type. Requires: "StronglyConnectedComponent_CreateDependency.cypher" (centralized in cypher/Connected_Components/)
 
    MATCH (sourceComponent:StronglyConnectedComponent)
    WHERE $projection_node_label + 'Members' IN labels(sourceComponent)

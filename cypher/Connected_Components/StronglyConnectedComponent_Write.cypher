@@ -1,4 +1,7 @@
 // Calculates and writes the Strongly Connected Components
+// IMPORTANT: This query expects the dependencies projection to be named {dependencies_projection}-cleaned.
+// The "-cleaned" suffix is created by the standard createDirectedDependencyProjection() shell function.
+// Altering projection naming convention will break SCC analysis.
 
 CALL gds.scc.write(
  $dependencies_projection + '-cleaned', {
