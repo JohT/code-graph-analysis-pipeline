@@ -44,6 +44,7 @@ COLOR_DEFAULT='\033[0m'
 
 ## Get this domain directory if not already set
 NEO4J_MANAGEMENT_DIR=${NEO4J_MANAGEMENT_DIR:-$( CDPATH=. cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P )}
+NEO4J_VERSION=${NEO4J_VERSION:-"2026.10.2"}
 
 tearDown() {
   rm -rf "${temporaryTestDirectory}"
@@ -206,7 +207,7 @@ mkdir -p "${temporaryTestDirectory}/tools"
 mkdir -p "${temporaryTestDirectory}/downloads"
 
 # Provide minimal neo4j installation dir expected by the script
-NEO4J_INSTALLATION_NAME="neo4j-community-2026.07.0"
+NEO4J_INSTALLATION_NAME="neo4j-community-${NEO4J_VERSION}"
   mkdir -p "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf"
   create_base_neo4j_configuration "${temporaryTestDirectory}/tools/${NEO4J_INSTALLATION_NAME}/conf/neo4j.conf"
 
