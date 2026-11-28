@@ -15,6 +15,7 @@ This domain is focused exclusively on cyclic dependency detection and prioritiza
 - **SCIP Semantic Index Directory Cyclic Dependencies**: Cyclic dependencies between directories and their contained files in SCIP Semantic Index.
 - **SCIP Semantic Index Artifact Cyclic Dependencies**: Cyclic dependencies at the SCIP artifact level - coarsest abstraction for SCIP-indexed codebases.
 - **Strongly Connected Component (SCC) Analysis**: Groups cycles into larger components (3+ members) with complexity classification based on size, density, cumulative weight, and architectural impact. Requires Neo4j Graph Data Science library.
+- **Minimum Feedback Arc Set Analysis**: For the top 5 Strongly Connected Components of Java Packages and SCIP Modules, computes the smallest set of edges to remove to break all cycles. Produces actionable CSV reports with detail-level edges (types/symbols) and SVG visualizations. Requires Neo4j Graph Data Science library.
 
 > **Broader internal dependency analysis** (interface segregation, widely used types, path finding, topological sort) is in the [`internal-dependencies`](../internal-dependencies/README.md) domain.
 
@@ -57,8 +58,25 @@ When Neo4j Graph Data Science library is available, the domain automatically det
 
 ## Execution Order
 
-1. **`cyclicDependenciesCsv.sh`** - runs Cypher queries including optional SCC analysis (if GDS available), writes CSV files
+1. **`cyclicDependenciesCsv.sh`** - runs Cypher queries including optional Strongly Connected Component analysis (if GDS available), writes CSV files
 2. **`cyclicDependenciesMarkdown.sh`** - assembles the final Markdown report
+
+## Minimum Feedback Arc Set Analysis
+
+For each of the top 5 Strongly Connected Components of **Java Packages** and **SCIP Semantic Index Modules**, this analysis computes the smallest set of edges to remove to make the component acyclic — directly answering: *which dependencies must be refactored?*
+
+**Algorithm**: Eades, Lin, Smyth (1993) greedy heuristic adapted with log-dampened weights and a re-insertion pass. Exact solutions are NP-hard; this heuristic provides a good approximation efficiently. Implemented in pure Python with no library dependency.
+
+**Pattern classification**: Each feedback arc is classified by structural pattern to guide the refactoring strategy:
+
+| Pattern | Signal | Recommended Action |
+|---|---|---|
+| Directory Locality | Modules share the same parent directory | Often intentional; consider documenting |
+| Asymmetric Dependency | One direction carries ≥ 60% of the total weight | Cut the lighter direction; straightforward |
+| Hub Module | One module appears in many feedback arcs | Extract an interface from the hub |
+| Balanced Coupling | Forward and backward weights are similar | Requires a new abstraction layer |
+
+**Detail edges**: For each feedback arc (e.g., Module A → Module B must be removed), the actual low-level dependencies are queried — the individual Java Types or SCIP symbols that contribute to the arc. This makes the analysis immediately actionable by showing exactly which methods or classes to decouple.
 
 ## Entry Points
 
@@ -67,6 +85,8 @@ The following scripts are discovered and invoked automatically by the central co
 - [cyclicDependenciesCsv.sh](./cyclicDependenciesCsv.sh): Entry point for CSV reports based on Cypher queries. Discovered by `CsvReports.sh` (`*Csv.sh` pattern).
 - [cyclicDependenciesMarkdown.sh](./cyclicDependenciesMarkdown.sh): Entry point for the Markdown summary report. Discovered by `MarkdownReports.sh` (`*Markdown.sh` pattern).
 - [cyclicDependenciesVisualization.sh](./cyclicDependenciesVisualization.sh): Entry point for visualizing cyclic dependencies. Discovered by `VisualizationReports.sh` (`*Visualization.sh` pattern).
+- [cyclicDependenciesMinimumFeedbackArcSetPython.sh](./cyclicDependenciesMinimumFeedbackArcSetPython.sh): Entry point for Minimum Feedback Arc Set CSV reports and adjacency matrix heatmaps. Discovered by `PythonReports.sh` (`*Python.sh` pattern). Automatically ensures Strongly Connected Component data exists in Neo4j.
+- [cyclicDependenciesMinimumFeedbackArcSetVisualization.sh](./cyclicDependenciesMinimumFeedbackArcSetVisualization.sh): Entry point for rendering Minimum Feedback Arc Set GraphViz DOT files to SVG. Discovered by `VisualizationReports.sh` (`*Visualization.sh` pattern). Requires the Python report to have run first.
 
 ## Prerequisites
 
@@ -91,6 +111,12 @@ For Strongly Connected Component (SCC) analysis, additionally:
 - Neo4j Graph Data Science library with `gds.scc.write` procedure available
 - Directed dependency graph projection named `cyclic-dependencies-directed` (created by SCC feature queries)
 
+For Minimum Feedback Arc Set analysis, additionally:
+
+- Strongly Connected Component analysis must have been run (automatically triggered by the Python entry point when missing)
+- For Java Package detail edges: `DEPENDS_ON` relationships between `Type` nodes via `Package` containment
+- For SCIP Module detail edges: `DEPENDS_ON` relationships between `SemanticCodeIndexInternalSymbol` nodes via `SemanticCodeIndexModule` containment
+
 ## What This Domain Produces
 
 Output into `reports/cyclic-dependencies/`:
@@ -99,8 +125,15 @@ Output into `reports/cyclic-dependencies/`:
   - Overview tables: cycle groups with prioritization metrics
   - Breakdown: individual dependency pairs within cycles
   - Backward-only: removal candidates per cycle
-  - **SCC Analysis** (when GDS available, only for 3+ member components):
-    - SCC Overview: component metrics including complexity classification
-    - SCC Members: mapping of code units to their SCC
+  - **Strongly Connected Component Analysis** (when GDS available, only for 3+ member components):
+    - Strongly Connected Component Overview: component metrics including complexity classification
+    - Strongly Connected Component Members: mapping of code units to their component
+  - **Minimum Feedback Arc Set Analysis** (when GDS available, top 5 components per node type):
+    - `Minimum_Feedback_Arc_Set_Overview.csv`: component summary with edge counts and dominant pattern
+    - `Minimum_Feedback_Arc_Set_Edges.csv`: all edges classified as DAG (keep) or feedback arc (remove), with pattern and recommendation
+    - `Minimum_Feedback_Arc_Set_Detail_Edges.csv`: type/symbol-level detail edges within each feedback arc
 - **Graph visualizations**: SVG diagrams of top cycle pairs (forward/backward dependencies highlighted)
+- **Minimum Feedback Arc Set visualizations** (when GDS available):
+  - Adjacency matrix heatmap per component (blue = keep, red = remove)
+  - Hierarchical DAG SVG per component with solid kept edges and dashed red feedback arcs; detail symbols/types shown inline for small arcs
 - **`cyclic_dependencies_report.md`**: Assembled summary with cycle definitions, prioritization guidance, and conditional sections per abstraction level detected
