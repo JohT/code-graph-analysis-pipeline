@@ -156,14 +156,28 @@ function try_admin_import() {
     fi
 
     # Run neo4j-admin database import full
+    # TODO: Challenge neo4j admin done here instead of in neo4j-management scripts
     echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Running neo4j-admin database import full..."
     if ! NEO4J_HOME="${NEO4J_INSTALLATION_DIRECTORY}" "${neo4j_admin_bin}" "${neo4j_admin_cmd_args[@]}"; then
         echo "importScipIndexDataWithAdminImport: neo4j-admin import failed. Falling back to LOAD CSV." >&2
         return 0
     fi
 
-    echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Admin import completed. Constraints and enrichment will run post-start."
+    echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Admin import completed. Initializing Neo4j password..."
+    
+    # Set Neo4j initial password and clear expiration flag after admin import creates the database
+    # TODO: Challenge coupling to neo4j-management scripts: consider decoupling password setup from this import script
+    local neo4j_setup_password_script="${SCIP_ADMIN_IMPORT_SCRIPT_DIR}/../../domains/neo4j-management/setupNeo4jInitialPassword.sh"
+    if ! NEO4J_EDITION="${NEO4J_EDITION}" NEO4J_VERSION="${NEO4J_VERSION}" TOOLS_DIRECTORY="${TOOLS_DIRECTORY}" NEO4J_HTTP_PORT="${NEO4J_HTTP_PORT}" CLEAR_PASSWORD_EXPIRATION=1 bash "${neo4j_setup_password_script}"; then
+        echo "importScipIndexDataWithAdminImport: Failed to initialize Neo4j password. Falling back to LOAD CSV." >&2
+        return 0
+    fi
+    
+    echo "importScipIndexDataWithAdminImport: $(date +'%Y-%m-%dT%H:%M:%S%z') Neo4j password initialized. Constraints and enrichment will run post-start."
+    
+    # Signal to importScipIndexData.sh that admin import succeeded and CSV loading should be skipped
     export SCIP_ADMIN_IMPORT_DONE=true
+    return 0
 }
 
 # Wrap in || true: any unhandled failure falls back to LOAD CSV rather than aborting analyze.sh

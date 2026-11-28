@@ -29,14 +29,20 @@ SCRIPTS_DIR=${SCRIPTS_DIR:-"${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/../../scripts"}
 # Cypher query directory within this domain (flat — the domain IS cyclic-dependencies)
 CYCLIC_DEPENDENCIES_CYPHER_DIR="${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/queries"
 
-# Centralized Connected Components (Strongly Connected and Weakly Connected) Cypher queries
-CONNECTED_COMPONENTS_CYPHER_DIR="${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/../../cypher/Connected_Components"
-
 # Define functions to execute a cypher query from within a given file like "execute_cypher"
+# SC1091: sourced file is a pipeline-provided utility resolved at runtime via a variable path
+# shellcheck disable=SC1091
 source "${SCRIPTS_DIR}/executeQueryFunctions.sh"
 
 # Define functions to create and delete Graph Projections like "createDirectedDependencyProjection"
+# SC1091: sourced file is a pipeline-provided utility resolved at runtime via a variable path
+# shellcheck disable=SC1091
 source "${SCRIPTS_DIR}/projectionFunctions.sh"
+
+# Source runStronglyConnectedComponents function (also sets CONNECTED_COMPONENTS_CYPHER_DIR)
+# SC1091: sourced file is a domain-local script resolved at runtime via a variable path
+# shellcheck disable=SC1091
+source "${CYCLIC_DEPENDENCIES_SCRIPT_DIR}/cyclicDependenciesStronglyConnectedComponents.sh"
 
 # Create main report directory and abstraction-level subdirectories
 REPORT_NAME="cyclic-dependencies"
@@ -48,54 +54,6 @@ mkdir -p "${FULL_REPORT_DIRECTORY}/Typescript_Module"
 mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Module"
 mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Directory"
 mkdir -p "${FULL_REPORT_DIRECTORY}/SCIP_Semantic_Index_Artifact"
-
-# Detect and write Strongly Connected Components to the graph database.
-# Idempotent: skips detection if communityStronglyConnectedComponentId is already written.
-# StronglyConnectedComponent nodes and inter-component edges use MERGE, so they are always safe to call.
-# Skips if GDS SCC function is not available; logs warning and continues.
-# SCC CSV results are written to the same folder as cyclic dependency results (passed as parameter).
-#
-# Required Parameters:
-# - dependencies_projection=...            Name of the in-memory graph projection for GDS
-# - dependencies_projection_node=...       Node label to analyze (e.g., "Package", "Module")
-# - dependencies_projection_weight_property=... Weight property name
-# - scc_report_directory=...               Report directory (folder) for CSV output
-runStronglyConnectedComponents() {
-    local scc_report_directory; scc_report_directory=$( extractQueryParameter "scc_report_directory" "${@}" )
-
-    # Check if gds.scc.write function is available
-    local scc_available; scc_available=$(
-        execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CheckAvailable.cypher" 2>/dev/null | grep -c "gds.scc.write" || true
-    )
-    
-    if [ "${scc_available}" -ne "1" ]; then
-        echo "cyclicDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') WARNING: GDS SCC function not available. Skipping strongly connected component analysis."
-        return 0
-    fi
-
-    echo "cyclicDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') Running SCC analysis..."
-
-    # Write SCC properties to nodes using the projection created by createDirectedDependencyProjection
-    execute_cypher_queries_until_results \
-        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Exists.cypher" \
-        "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_Write.cypher" \
-        "${@}"
-    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateNode.cypher" "${@}"
-    execute_cypher "${CONNECTED_COMPONENTS_CYPHER_DIR}/StronglyConnectedComponent_CreateDependency.cypher" "${@}"
-
-    # Extract CSV reports to the same directory as cyclic dependency results
-    execute_cypher \
-        "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_SCC_Overview.cypher" \
-        "${@}" \
-        > "${scc_report_directory}/Cyclic_Dependencies_SCC_Overview.csv"
-
-    execute_cypher \
-        "${CYCLIC_DEPENDENCIES_CYPHER_DIR}/Cyclic_Dependencies_SCC_Members.cypher" \
-        "${@}" \
-        > "${scc_report_directory}/Cyclic_Dependencies_SCC_Members.csv"
-
-    echo "cyclicDependenciesCsv: $(date +'%Y-%m-%dT%H:%M:%S%z') SCC analysis completed."
-}
 
 # ── Java Cyclic Dependencies ──────────────────────────────────────────────────
 
